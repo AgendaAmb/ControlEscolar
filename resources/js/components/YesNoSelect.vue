@@ -2,14 +2,13 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label v-bind:for="id">{{ label }}</label>
-            <div class="form-group ">
-                <select id="inputPertenecesUASLP" class="form-control" v-model="Value" required v-on:change="valueChanged()">
-                    <option disabled value="">Opción</option>
-                    <option>Si</option>
-                    <option>No</option>
-                </select>
-            </div>
+            <select id="inputPertenecesUASLP" class="form-control" v-model="Value" required v-on:change="valueChanged()">
+                <option disabled value="">Opción</option>
+                <option>Si</option>
+                <option>No</option>
+            </select>
         </div>
+        <slot></slot>
     </div>
 </template>
 

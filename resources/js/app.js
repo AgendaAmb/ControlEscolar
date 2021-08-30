@@ -26,6 +26,7 @@ Vue.component('countries', require('./components/Country.vue').default);
 Vue.component('country-state', require('./components/CountryState.vue').default);
 Vue.component('yes-no-select', require('./components/YesNoSelect.vue').default);
 Vue.component('modal-registro', require('./components/ModalRegistro.vue').default);
+Vue.component('gender', require('./components/Gender.vue').default);
 
 
 /**
@@ -36,4 +37,88 @@ Vue.component('modal-registro', require('./components/ModalRegistro.vue').defaul
 
 const app = new Vue({
     el: '#app',
+    data: {
+        PerteneceUASLP: '',
+        emailR: '',
+        Nombres: '',
+        ApellidoP: '',
+        ApellidoM: '',
+        Edad: '',
+        Genero:'',
+        Facultad: '',
+        Password: '',
+        PasswordR: '',
+        PaisNacimiento: '',
+        PaisResidencia: '',
+        EstadoNacimiento: '',
+        CP: '',
+        isDiscapacidad: '',
+        GEtnico: '',
+        spinnerVisible:false,
+        Errores:[{
+            Mensaje:" Lo sentimos tu RPE/Clave unica ó correo Institucional no se encuentra.",
+            Visible:false
+        },{
+            Mensaje:"Las contraseñas no coinciden",
+            Visible:false
+        }],
+        Countries:[],
+    },
+    computed: {
+        estadoNacimiento: {
+            get: function() {
+              return this.EstadoNacimiento;
+            },
+            set: function(value) {
+               this.EstadoNacimiento = value
+            }
+        },
+    },
+    methods: {
+        perteneceUASLPChanged(value){
+            this.PerteneceUASLP = value;
+        },
+
+        uaslpUser: function(){
+            this.spinnerVisible = true;
+
+            if(this.emailR!=''){
+                var data = {
+                    "username":this.emailR
+                }
+            }
+
+            axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user',data)
+            .then(response => (
+                this.spinnerVisible=false,
+                this.Nombres = response['data']['data']['name'],
+                this.ApellidoM= response['data']['data']['last_surname'],
+                this.ApellidoP= response['data']['data']['first_surname'],
+                this.PaisNacimiento ="México",
+                this.Facultad=response['data']['data']['Dependencia'],
+                this.userInfo=response['data']['data'],
+                this.EmailR=response['data']['data']['email'],
+                this.Errores[0].Visible = false
+               
+
+            ).catch((err) => {
+                this.spinnerVisible=false,
+                this.Errores[0].Visible=true;
+                this.apellidoM='';
+                this.apellidoP='';
+                this.nombres='';
+            }));
+        },
+
+        VerificarContraseña:function(){
+            this.Errores[1].Visible= this.password !== this.passwordR;
+        },
+    },
+    mounted: function () {
+          this.$nextTick(function () {
+
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries')
+            .then(response => this.countries = response.data);
+        });
+    },
 });
