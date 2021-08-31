@@ -1,7 +1,7 @@
 <template>
     <div class="form-group col-md-6 was-validated">
         <label for="Pais"> {{ label }} </label>
-        <select id="Pais" class="form-control" v-model="Pais" @change="$emit('update:changed', Pais)" name="Pais">
+        <select v-bind:id="id" class="form-control" v-model="Pais" @change="$emit('update:changed', Pais)" v-bind:name="id">
           <option disabled value="" selected>País</option>
           <option v-for="country in countries" :key="country.id" :value="country.name">{{ country.name }}</option>
         </select>
@@ -11,7 +11,7 @@
 <script>
 export default {
     name: 'countries',
-    props: ['label'],
+    props: ['label', 'id'],
     mounted: function () {
 
         // Recupera el listado de países.
