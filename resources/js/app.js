@@ -27,6 +27,7 @@ Vue.component('country-state', require('./components/CountryState.vue').default)
 Vue.component('yes-no-select', require('./components/YesNoSelect.vue').default);
 Vue.component('modal-registro', require('./components/ModalRegistro.vue').default);
 Vue.component('gender', require('./components/Gender.vue').default);
+Vue.component('form-input', require('./components/FormInput.vue').default);
 
 
 /**
@@ -52,6 +53,7 @@ const app = new Vue({
         PaisResidencia: '',
         EstadoNacimiento: '',
         CP: '',
+        Curp:'',
         isDiscapacidad: '',
         GEtnico: '',
         spinnerVisible:false,
@@ -99,7 +101,6 @@ const app = new Vue({
                 this.userInfo=response['data']['data'],
                 this.EmailR=response['data']['data']['email'],
                 this.Errores[0].Visible = false
-               
 
             ).catch((err) => {
                 this.spinnerVisible=false,

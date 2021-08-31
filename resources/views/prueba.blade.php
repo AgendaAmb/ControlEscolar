@@ -15,13 +15,14 @@
 
 <modal-registro>
     <yes-no-select @changed="perteneceUASLPChanged" id="PerteneceUASLP" label="¿Perteneces a la UASLP?">
-        <div class="form-group col-10 was-validated" v-if="PerteneceUASLP === 'Si'">
-            <label for="email">Ingresa tu RPE/clave única de alumno ó correo Institucional</label>
-            <input type="text" class="form-control" id="emailR" v-model="emailR" name="email" required>
-        </div>
+        <form-input id="emailR" input_type="text" clase="form-group col-10" 
+                    v-if="PerteneceUASLP === 'Si'" :changed.sync="emailR">
+            Ingresa tu RPE/clave única de alumno ó correo Institucional
+        </form-input>
+       
         <input type="hidden" name="Dependencia" v-model="Facultad" v-if="PerteneceUASLP === 'Si'">
+        
         <div class="form-group col-md-2 col-sm-2 col-2" v-if="PerteneceUASLP === 'Si'">
-
             <a class="btn btn btn-outline-light mt-md-2 mt-md-4" v-on:click="uaslpUser"
                 data-toggle="tooltip" data-placement="right" title="Buscar mi información"
                 v-if="!spinnerVisible"><i class="fas fa-search"></i></a>
@@ -31,20 +32,20 @@
             </button>
         </div>
 
-        <div class="form-group col-md-12 was-validated" v-if="PerteneceUASLP === 'No'">
-            <label for="email">Ingresa un correo electrónico</label>
-            <input type="email" class="form-control" id="emailR" name="email" required>
-        </div>
-        <div class="form-group col-md-6 was-validated" v-if="PerteneceUASLP === 'No'">
-            <label for="Password">Contraseña</label>
-            <input type="Password" class="form-control" id="Password" name="Password" required
-                v-model="Password" v-on:change="VerificarContraseña()" minlength="8">
-        </div>
-        <div class="form-group col-md-6 was-validated" v-if="PerteneceUASLP === 'No'">
-            <label for="PasswordR">Repite tu Contraseña</label>
-            <input type="Password" class="form-control" id="PasswordR" name="PasswordR" required
-                v-model="PasswordR" v-on:change="VerificarContraseña()" minlength="8">
-        </div>
+        <form-input id="emailR" input_type="email" clase="form-group col-md-12" 
+                    v-if="PerteneceUASLP === 'No'" :changed.sync="emailR">
+            Ingresa un correo electrónico
+        </form-input>
+
+        <form-input id="Password" input_type="password" clase="form-group col-md-6" 
+                    v-if="PerteneceUASLP === 'No'" :changed.sync="Password">
+            Contraseña
+        </form-input>
+
+        <form-input id="PasswordR" input_type="password" clase="form-group col-md-6" 
+                    v-if="PerteneceUASLP === 'No'" :changed.sync="PasswordR">
+            Repite tu Contraseña
+        </form-input>
 
         <span class="text-danger" role="alert" v-if="Errores[1].Visible">
             @{{Errores[1].Mensaje}}
@@ -54,10 +55,10 @@
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
 
-        <div class="form-group col-md-12  was-validated" v-if="PaisNacimiento === 'México'">
-            <label for="CURP ">CURP</label>
-            <input type="text" class="form-control" id="CURP" required style="text-transform: uppercase;" maxlength="18" name="CURP">
-        </div>
+        <form-input id="Curp" input_type="text" clase="form-group col-md-12" 
+                    v-if="PaisNacimiento === 'México'" :changed.sync="Curp" :input-style="">
+            CURP
+        </form-input>
 
         <div class="form-group col-md-12 was-validated">
             <label for="nombres">Nombre(s)</label>
