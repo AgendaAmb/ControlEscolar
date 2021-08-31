@@ -82,8 +82,8 @@
         </div>
 
         <gender :changed.sync="Genero" ></gender>
-        <countries label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
-        <countries label="País de nacimiento" v-bind:countries="Countries" :changed.sync="PaisNacimiento"></countries>
+        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
+        <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" :changed.sync="PaisNacimiento"></countries>
         <country-state label="Estado de nacimiento"></country-state>
         
         <div class="form-group col-md-6 was-validated">

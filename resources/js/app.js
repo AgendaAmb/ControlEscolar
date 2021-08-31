@@ -61,6 +61,9 @@ const app = new Vue({
         },{
             Mensaje:"Las contraseñas no coinciden",
             Visible:false
+        },{
+            Mensaje:"El curp no es válido",
+            Visible:false
         }],
         Countries:[],
     },
@@ -98,16 +101,17 @@ const app = new Vue({
                 this.Facultad=response['data']['data']['Dependencia'],
                 this.userInfo=response['data']['data'],
                 this.EmailR=response['data']['data']['email'],
-                this.Errores[0].Visible = false
-               
+                this.Errores[0].Visible = false,
 
-            ).catch((err) => {
+                $('#PaisResidencia').val('México')
+
+            )).catch((err) => {
                 this.spinnerVisible=false,
                 this.Errores[0].Visible=true;
                 this.apellidoM='';
                 this.apellidoP='';
                 this.nombres='';
-            }));
+            });
         },
 
         VerificarContraseña:function(){
@@ -118,7 +122,10 @@ const app = new Vue({
           this.$nextTick(function () {
 
             axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries')
-            .then(response => this.countries = response.data);
+            .then(response => 
+                
+                this.countries = response.data
+            );
         });
     },
 });

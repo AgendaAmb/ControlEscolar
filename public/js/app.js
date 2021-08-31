@@ -1885,7 +1885,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'countries',
-  props: ['label'],
+  props: ['label', 'id'],
   mounted: function mounted() {
     // Recupera el listado de países.
     this.$nextTick(function () {
@@ -2204,6 +2204,9 @@ var app = new Vue({
     }, {
       Mensaje: "Las contraseñas no coinciden",
       Visible: false
+    }, {
+      Mensaje: "El curp no es válido",
+      Visible: false
     }],
     Countries: []
   },
@@ -2233,12 +2236,12 @@ var app = new Vue({
       }
 
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user', data).then(function (response) {
-        return (_this.spinnerVisible = false, _this.Nombres = response['data']['data']['name'], _this.ApellidoM = response['data']['data']['last_surname'], _this.ApellidoP = response['data']['data']['first_surname'], _this.PaisNacimiento = "México", _this.Facultad = response['data']['data']['Dependencia'], _this.userInfo = response['data']['data'], _this.EmailR = response['data']['data']['email'], _this.Errores[0].Visible = false)["catch"](function (err) {
-          _this.spinnerVisible = false, _this.Errores[0].Visible = true;
-          _this.apellidoM = '';
-          _this.apellidoP = '';
-          _this.nombres = '';
-        });
+        return _this.spinnerVisible = false, _this.Nombres = response['data']['data']['name'], _this.ApellidoM = response['data']['data']['last_surname'], _this.ApellidoP = response['data']['data']['first_surname'], _this.PaisNacimiento = "México", _this.Facultad = response['data']['data']['Dependencia'], _this.userInfo = response['data']['data'], _this.EmailR = response['data']['data']['email'], _this.Errores[0].Visible = false, $('#PaisResidencia').val('México');
+      })["catch"](function (err) {
+        _this.spinnerVisible = false, _this.Errores[0].Visible = true;
+        _this.apellidoM = '';
+        _this.apellidoP = '';
+        _this.nombres = '';
       });
     },
     VerificarContraseña: function VerificarContraseña() {
@@ -38251,7 +38254,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { id: "Pais", name: "Pais" },
+        attrs: { id: _vm.id, name: _vm.id },
         on: {
           change: [
             function($event) {
