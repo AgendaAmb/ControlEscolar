@@ -52,6 +52,7 @@ const app = new Vue({
         PaisNacimiento: '',
         PaisResidencia: '',
         EstadoNacimiento: '',
+        TienesCurp: '',
         CP: '',
         Curp:'',
         isDiscapacidad: '',
@@ -103,13 +104,9 @@ const app = new Vue({
                 this.Facultad=response['data']['data']['Dependencia'],
                 this.userInfo=response['data']['data'],
                 this.EmailR=response['data']['data']['email'],
-<<<<<<< HEAD
-                this.Errores[0].Visible = false
-=======
                 this.Errores[0].Visible = false,
 
                 $('#PaisResidencia').val('México')
->>>>>>> 6949f33bfd622296e9139b0e8130690b299adaf8
 
             )).catch((err) => {
                 this.spinnerVisible=false,
@@ -134,4 +131,10 @@ const app = new Vue({
             );
         });
     },
+});
+
+const appliance = new Vue({
+    el: '#',
+    data: {}
+
 });

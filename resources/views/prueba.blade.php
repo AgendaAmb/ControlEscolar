@@ -15,18 +15,19 @@
 
 <modal-registro>
     <yes-no-select @changed="perteneceUASLPChanged" id="PerteneceUASLP" label="¿Perteneces a la UASLP?">
-        <form-input id="emailR" input_type="text" clase="form-group col-10" 
+        <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
+        <form-input id="emailR" input_type="text" clase="form-group col-3" 
                     v-if="PerteneceUASLP === 'Si'" :changed.sync="emailR">
             Ingresa tu RPE/clave única de alumno ó correo Institucional
         </form-input>
        
         <input type="hidden" name="Dependencia" v-model="Facultad" v-if="PerteneceUASLP === 'Si'">
         
-        <div class="form-group col-md-2 col-sm-2 col-2" v-if="PerteneceUASLP === 'Si'">
-            <a class="btn btn btn-outline-light mt-md-2 mt-md-4" v-on:click="uaslpUser"
+        <div class="form-group col-2" v-if="PerteneceUASLP === 'Si'">
+            <a class="btn btn btn-outline-light search-button" v-on:click="uaslpUser"
                 data-toggle="tooltip" data-placement="right" title="Buscar mi información"
                 v-if="!spinnerVisible"><i class="fas fa-search"></i></a>
-            <button class="btn btn-light mt-md-2 mt-md-4" type="button" disabled v-if="spinnerVisible">
+            <button class="btn btn-light" type="button" disabled v-if="spinnerVisible">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span class="sr-only">Cargando...</span>
             </button>
@@ -56,33 +57,39 @@
     <div class="form-row">
 
         <form-input id="Curp" input_type="text" clase="form-group col-md-12" 
-                    v-if="PaisNacimiento === 'México'" :changed.sync="Curp" :input-style="">
-            CURP
+                    v-if="PaisNacimiento === 'México'" :changed.sync="Curp" :input-style="'text-transform: uppercase;'">
+            CURP:
         </form-input>
 
-        <div class="form-group col-md-12 was-validated">
-            <label for="nombres">Nombre(s)</label>
-            <input type="text" class="form-control" id="Nombres" v-model="Nombres" required name="Nombres"
-                style="text-transform: capitalize;">
-        </div>
+        <form-input id="Nombres" input_type="text" clase="form-group col-md-4" :changed.sync="Nombres">
+            Nombre(s):
+        </form-input>
 
-        <div class="form-group col-md-6 was-validated">
-            <label for="ApellidoP">Apellido paterno</label>
-            <input type="text" class="form-control" id="ApellidoP" v-model="ApellidoP" required
-                    name="ApellidoP" style="text-transform: capitalize;">
-        </div>
-        <div class="form-group col-md-6  was-validated">
-            <label for="ApellidoM">Apellido materno</label>
-            <input type="text" class="form-control" id="ApellidoM" v-model="ApellidoM" required
-                    name="ApellidoM" style="text-transform: capitalize;">
-        </div>
+        <form-input id="ApellidoP" input_type="text" clase="form-group col-md-4" :changed.sync="ApellidoP">
+            Apellido Paterno
+        </form-input>
 
-        <div class="form-group col-md-3">
-            <label for="Edad">Edad</label>
-            <input type="number" name="Edad" id="Edad" v-model="Edad" class="form-control" min="1" max="100" required>
-        </div>
+        <form-input id="ApellidoM" input_type="text" clase="form-group col-md-4" :changed.sync="ApellidoM">
+            Apellido Materno
+        </form-input>
+
+        <yes-no-select id="TienesCurp" label="¿Tienes Curp?" :changed.sync="TienesCurp">
+        </yes-no-select>
+
+
+
+
+
+
+
+
+
+        <form-input id="Edad" input_type="number" clase="form-group col-md-4" :changed.sync="Edad">
+            Edad
+        </form-input>
 
         <gender :changed.sync="Genero" ></gender>
+
         <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
         <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" :changed.sync="PaisNacimiento"></countries>
         <country-state label="Estado de nacimiento"></country-state>

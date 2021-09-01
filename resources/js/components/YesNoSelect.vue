@@ -2,7 +2,7 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label v-bind:for="id">{{ label }}</label>
-            <select id="inputPertenecesUASLP" class="form-control" v-model="Value" required v-on:change="valueChanged()">
+            <select id="inputPertenecesUASLP" class="form-control" v-model="Value" required v-on:change="$emit('changed', Value)">
                 <option disabled value="">Opción</option>
                 <option>Si</option>
                 <option>No</option>
@@ -30,11 +30,6 @@ export default {
                 this.value = value;
             }
         }
-    },
-    methods: {
-        valueChanged(){
-            this.$emit('changed', this.value);
-        } 
     }
 };
 </script>

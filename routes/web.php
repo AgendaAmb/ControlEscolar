@@ -18,4 +18,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/', 'prueba')->name('prueba');
+Route::view('/', 'prueba')->name('programasAcademicos');
+Route::view('/solicitudAspirante', 'solicitud-aspirante')->name('solicitudAspirante');

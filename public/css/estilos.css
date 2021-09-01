@@ -13,6 +13,12 @@
     font-display: auto;
 }
 
+.search-button
+{
+    position: absolute;
+    bottom: 0;
+}
+
 body
 {
     max-width: 1600px;
