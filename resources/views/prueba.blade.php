@@ -14,7 +14,7 @@
 </div>
 
 <modal-registro>
-    <yes-no-select @changed="perteneceUASLPChanged" id="PerteneceUASLP" label="¿Perteneces a la UASLP?">
+    <yes-no-select @changed="perteneceUASLPChanged" id="PerteneceUASLP" label="¿Perteneces a la UASLP?" clase="form-group col-md-3">
         <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
         <form-input id="emailR" input_type="text" clase="form-group col-3" 
                     v-if="PerteneceUASLP === 'Si'" :changed.sync="emailR">
@@ -56,11 +56,6 @@
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
 
-        <form-input id="Curp" input_type="text" clase="form-group col-md-12" 
-                    v-if="PaisNacimiento === 'México'" :changed.sync="Curp" :input-style="'text-transform: uppercase;'">
-            CURP:
-        </form-input>
-
         <form-input id="Nombres" input_type="text" clase="form-group col-md-4" :changed.sync="Nombres">
             Nombre(s):
         </form-input>
@@ -73,16 +68,7 @@
             Apellido Materno
         </form-input>
 
-        <yes-no-select id="TienesCurp" label="¿Tienes Curp?" :changed.sync="TienesCurp">
-        </yes-no-select>
-
-
-
-
-
-
-
-
+        {{--  
 
         <form-input id="Edad" input_type="number" clase="form-group col-md-4" :changed.sync="Edad">
             Edad
@@ -137,8 +123,25 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 
             </div>
-        </div>
+        </div>--}}
     </div>
+    <yes-no-select id="TienesCurp" label="¿Tienes Curp?" @changed="tienesCurpChanged" clase="form-group col-md-3">
+        <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
+        <form-input id="CURP" input_type="text" clase="form-group col-md-5" v-if="TienesCurp === 'Si'" :changed.sync="CURP">
+            Ingresa tu Curp:
+        </form-input>
+
+    </yes-no-select>
+    <div class="form-row">
+        <gender :changed.sync="Genero" ></gender>
+    </div>
+
+    <yes-no-select @changed="isDiscapacidadChanged" id="isDiscapacidad" label="¿Tienes alguna discapacidad?" clase="form-group col-md-4">
+        <form-input id="Discapacidad" input_type="text" clase="form-group col-md-4" v-if="isDiscapacidad === 'Si'" :changed.sync="Discapacidad">
+            ¿Cuál?
+        </form-input>
+    </yes-no-select>
+
 </modal-registro>
 
 @endsection

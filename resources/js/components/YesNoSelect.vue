@@ -1,6 +1,6 @@
 <template>
     <div class="form-row">
-        <div class="form-group col-md-3">
+        <div v-bind:class="clase">
             <label v-bind:for="id">{{ label }}</label>
             <select id="inputPertenecesUASLP" class="form-control" v-model="Value" required v-on:change="$emit('changed', Value)">
                 <option disabled value="">Opción</option>
@@ -15,7 +15,7 @@
 <script>
 export default {
     name: 'yes-no-select',
-    props: ['id', 'label'],
+    props: ['id', 'label', 'clase'],
     data() {
         return {
             Value: '',

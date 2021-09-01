@@ -2160,7 +2160,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'yes-no-select',
-  props: ['id', 'label'],
+  props: ['id', 'label', 'clase'],
   data: function data() {
     return {
       Value: ''
@@ -2174,11 +2174,6 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.value = value;
       }
-    }
-  },
-  methods: {
-    valueChanged: function valueChanged() {
-      this.$emit('changed', this.value);
     }
   }
 });
@@ -2239,9 +2234,11 @@ var app = new Vue({
     PaisNacimiento: '',
     PaisResidencia: '',
     EstadoNacimiento: '',
+    TienesCurp: '',
     CP: '',
-    Curp: '',
+    CURP: '',
     isDiscapacidad: '',
+    Discapacidad: '',
     GEtnico: '',
     spinnerVisible: false,
     Errores: [{
@@ -2269,6 +2266,12 @@ var app = new Vue({
   methods: {
     perteneceUASLPChanged: function perteneceUASLPChanged(value) {
       this.PerteneceUASLP = value;
+    },
+    tienesCurpChanged: function tienesCurpChanged(value) {
+      this.TienesCurp = value;
+    },
+    isDiscapacidadChanged: function isDiscapacidadChanged(value) {
+      this.isDiscapacidad = value;
     },
     uaslpUser: function uaslpUser() {
       var _this = this;
@@ -38840,7 +38843,7 @@ var render = function() {
     "div",
     { staticClass: "form-row" },
     [
-      _c("div", { staticClass: "form-group col-md-3" }, [
+      _c("div", { class: _vm.clase }, [
         _c("label", { attrs: { for: _vm.id } }, [_vm._v(_vm._s(_vm.label))]),
         _vm._v(" "),
         _c(
@@ -38872,7 +38875,7 @@ var render = function() {
                     : $$selectedVal[0]
                 },
                 function($event) {
-                  return _vm.valueChanged()
+                  return _vm.$emit("changed", _vm.Value)
                 }
               ]
             }

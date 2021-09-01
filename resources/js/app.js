@@ -54,8 +54,9 @@ const app = new Vue({
         EstadoNacimiento: '',
         TienesCurp: '',
         CP: '',
-        Curp:'',
+        CURP:'',
         isDiscapacidad: '',
+        Discapacidad: '',
         GEtnico: '',
         spinnerVisible:false,
         Errores:[{
@@ -83,6 +84,14 @@ const app = new Vue({
     methods: {
         perteneceUASLPChanged(value){
             this.PerteneceUASLP = value;
+        },
+
+        tienesCurpChanged(value){
+            this.TienesCurp = value;
+        },
+
+        isDiscapacidadChanged(value){
+            this.isDiscapacidad = value;
         },
 
         uaslpUser: function(){
@@ -131,10 +140,4 @@ const app = new Vue({
             );
         });
     },
-});
-
-const appliance = new Vue({
-    el: '#',
-    data: {}
-
 });
