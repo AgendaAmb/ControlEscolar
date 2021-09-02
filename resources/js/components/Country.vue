@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group col-md-6 was-validated">
+    <div class="form-group col-md-4 was-validated">
         <label for="Pais"> {{ label }} </label>
         <select v-bind:id="id" class="form-control" v-model="Pais" @change="$emit('update:changed', Pais)" v-bind:name="id">
             <option disabled value="" selected>País</option>

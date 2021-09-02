@@ -82,9 +82,6 @@ const app = new Vue({
         },
     },
     methods: {
-        perteneceUASLPChanged(value){
-            this.PerteneceUASLP = value;
-        },
 
         tienesCurpChanged(value){
             this.TienesCurp = value;

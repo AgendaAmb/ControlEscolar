@@ -4,8 +4,8 @@
             <slot></slot>
         </label>
         <input v-bind:type="input_type" class="form-control" 
-                v-bind:id="id" v-model="Input" v-bind:name="id" 
-                v-bind:style="input_style" @change="$emit('update:changed', Input)" required>
+                v-bind:id="id" v-model="input" v-bind:name="id" 
+                v-bind:style="input_style" @change="$emit('update:changed', input)" required>
     </div>
 </template>
 

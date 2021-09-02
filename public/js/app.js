@@ -2264,9 +2264,6 @@ var app = new Vue({
     }
   },
   methods: {
-    perteneceUASLPChanged: function perteneceUASLPChanged(value) {
-      this.PerteneceUASLP = value;
-    },
     tienesCurpChanged: function tienesCurpChanged(value) {
       this.TienesCurp = value;
     },
@@ -38358,7 +38355,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group col-md-6 was-validated" }, [
+  return _c("div", { staticClass: "form-group col-md-4 was-validated" }, [
     _c("label", { attrs: { for: "Pais" } }, [
       _vm._v(" " + _vm._s(_vm.label) + " ")
     ]),
@@ -38437,7 +38434,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group col-md-6 was-validated" }, [
+  return _c("div", { staticClass: "form-group col-md-4 was-validated" }, [
     _c("label", { attrs: { for: "State" } }, [
       _vm._v(" " + _vm._s(_vm.label) + " ")
     ]),
@@ -38525,39 +38522,39 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.Input,
-              expression: "Input"
+              value: _vm.input,
+              expression: "input"
             }
           ],
           staticClass: "form-control",
           style: _vm.input_style,
           attrs: { id: _vm.id, name: _vm.id, required: "", type: "checkbox" },
           domProps: {
-            checked: Array.isArray(_vm.Input)
-              ? _vm._i(_vm.Input, null) > -1
-              : _vm.Input
+            checked: Array.isArray(_vm.input)
+              ? _vm._i(_vm.input, null) > -1
+              : _vm.input
           },
           on: {
             change: [
               function($event) {
-                var $$a = _vm.Input,
+                var $$a = _vm.input,
                   $$el = $event.target,
                   $$c = $$el.checked ? true : false
                 if (Array.isArray($$a)) {
                   var $$v = null,
                     $$i = _vm._i($$a, $$v)
                   if ($$el.checked) {
-                    $$i < 0 && (_vm.Input = $$a.concat([$$v]))
+                    $$i < 0 && (_vm.input = $$a.concat([$$v]))
                   } else {
                     $$i > -1 &&
-                      (_vm.Input = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                      (_vm.input = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
                   }
                 } else {
-                  _vm.Input = $$c
+                  _vm.input = $$c
                 }
               },
               function($event) {
-                return _vm.$emit("update:changed", _vm.Input)
+                return _vm.$emit("update:changed", _vm.input)
               }
             ]
           }
@@ -38568,21 +38565,21 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.Input,
-              expression: "Input"
+              value: _vm.input,
+              expression: "input"
             }
           ],
           staticClass: "form-control",
           style: _vm.input_style,
           attrs: { id: _vm.id, name: _vm.id, required: "", type: "radio" },
-          domProps: { checked: _vm._q(_vm.Input, null) },
+          domProps: { checked: _vm._q(_vm.input, null) },
           on: {
             change: [
               function($event) {
-                _vm.Input = null
+                _vm.input = null
               },
               function($event) {
-                return _vm.$emit("update:changed", _vm.Input)
+                return _vm.$emit("update:changed", _vm.input)
               }
             ]
           }
@@ -38592,8 +38589,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.Input,
-              expression: "Input"
+              value: _vm.input,
+              expression: "input"
             }
           ],
           staticClass: "form-control",
@@ -38604,16 +38601,16 @@ var render = function() {
             required: "",
             type: _vm.input_type
           },
-          domProps: { value: _vm.Input },
+          domProps: { value: _vm.input },
           on: {
             change: function($event) {
-              return _vm.$emit("update:changed", _vm.Input)
+              return _vm.$emit("update:changed", _vm.input)
             },
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.Input = $event.target.value
+              _vm.input = $event.target.value
             }
           }
         })
@@ -38642,7 +38639,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group col-md-3 was-validated" }, [
+  return _c("div", { staticClass: "form-group col-md-2 was-validated" }, [
     _c("label", { attrs: { for: "Genero" } }, [_vm._v("Género")]),
     _vm._v(" "),
     _c(

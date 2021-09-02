@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group col-md-3 was-validated">
+    <div class="form-group col-md-2 was-validated">
         <label for="Genero">Género</label>
         <select id="Genero" class="form-control" v-model="Genero" required name="Genero" @change="$emit('update:changed', Genero)">
             <option disabled value="">Género</option>

@@ -14,9 +14,9 @@
 </div>
 
 <modal-registro>
-    <yes-no-select @changed="perteneceUASLPChanged" id="PerteneceUASLP" label="¿Perteneces a la UASLP?" clase="form-group col-md-3">
+    <yes-no-select v-on:changed="PerteneceUASLP = $event" id="PerteneceUASLP" label="¿Perteneces a la UASLP?" clase="form-group col-md-3">
         <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
-        <form-input id="emailR" input_type="text" clase="form-group col-3" 
+        <form-input id="emailR" input_type="text" clase="form-group col-4" 
                     v-if="PerteneceUASLP === 'Si'" :changed.sync="emailR">
             Ingresa tu RPE/clave única de alumno ó correo Institucional
         </form-input>
@@ -28,7 +28,7 @@
                 data-toggle="tooltip" data-placement="right" title="Buscar mi información"
                 v-if="!spinnerVisible"><i class="fas fa-search"></i></a>
             <button class="btn btn-light" type="button" disabled v-if="spinnerVisible">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="spinner-border spinner-border-sm search-button" role="status" aria-hidden="true"></span>
                 <span class="sr-only">Cargando...</span>
             </button>
         </div>
@@ -56,57 +56,59 @@
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
 
-        <form-input id="Nombres" input_type="text" clase="form-group col-md-4" :changed.sync="Nombres">
+        <form-input id="Nombres" input_type="text" clase="form-group col-md-12" 
+                    :changed.sync="Nombres">
             Nombre(s):
         </form-input>
 
-        <form-input id="ApellidoP" input_type="text" clase="form-group col-md-4" :changed.sync="ApellidoP">
+        <form-input id="ApellidoP" input_type="text" clase="form-group col-md-6" :changed.sync="ApellidoP">
             Apellido Paterno
         </form-input>
 
-        <form-input id="ApellidoM" input_type="text" clase="form-group col-md-4" :changed.sync="ApellidoM">
+        <form-input id="ApellidoM" input_type="text" clase="form-group col-md-6" :changed.sync="ApellidoM">
             Apellido Materno
         </form-input>
-
-        {{--  
-
-        <form-input id="Edad" input_type="number" clase="form-group col-md-4" :changed.sync="Edad">
+    </div>
+    <div class="form-row">
+        <form-input id="Edad" input_type="number" clase="form-group col-md-2" v-on:changed="Edad = $event">
             Edad
         </form-input>
+        <gender :changed.sync="Genero"></gender>
+        
+    </div>
+    <yes-no-select id="TienesCurp" label="¿Tienes Curp?" @changed="tienesCurpChanged" clase="form-group col-md-4">
+        <form-input id="CURP" input_type="text" clase="form-group col-md-4" v-if="TienesCurp === 'Si'" :changed.sync="CURP">
+            Ingresa tu Curp:
+        </form-input>
 
-        <gender :changed.sync="Genero" ></gender>
-
-        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
+    </yes-no-select>
+    <div class="form-row">
         <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" :changed.sync="PaisNacimiento"></countries>
         <country-state label="Estado de nacimiento"></country-state>
+        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
         
-        <div class="form-group col-md-6 was-validated">
+
+        <div class="form-group col-md-4 was-validated">
             <label for="inputCity">Teléfono de contacto</label>
             <input type="tel" class="form-control" id="Tel" required name="Tel" autocomplete="Tel">
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-4">
             <label for="CP">Codigo Postal</label>
             <input type="number" class="form-control" id="CP" required name="CP" v-model="CP">
         </div>
-        <div class="col-4">
-            <label for="isDiscapacidad">¿Tienes alguna
-                discapacidad?</label>
-            <select id="isDiscapacidad" class="form-control" v-model="isDiscapacidad" required
-                name="isDiscapacidad">
-                <option disabled value="">Opción</option>
-                <option value="Si" id="Si">Si</option>
-                <option value="No" id="No">No</option>
-            </select>
-        </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <label for="GEtnico">Grupo étnico</label>
             <input type="text" name="GEtnico" class="form-control" id="GEtnico" v-model="GEtnico"
                 placeholder="Grupo étnico (Zapoteco, Pame, etc)">
         </div>
-        <div class="col-md-4" v-if="isDiscapacidad=='Si'">
-            <label for="Discapacidad">De ser afirmativivo,¿Cúal?</label>
-            <input type="text" class="form-control" id="Discapacidad" required name="Discapacidad" v-model="Discapacidad">
-        </div>
+    </div>
+
+    <yes-no-select @changed="isDiscapacidadChanged" id="isDiscapacidad" label="¿Tienes alguna discapacidad?" clase="form-group col-md-4">
+        <form-input id="Discapacidad" input_type="text" clase="form-group col-md-4" v-if="isDiscapacidad === 'Si'" :changed.sync="Discapacidad">
+            ¿Cuál?
+        </form-input>
+    </yes-no-select>
+    <div class="form-row">
         <div class="form-group col-12 my-4">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck" required>
@@ -123,24 +125,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 
             </div>
-        </div>--}}
+        </div>
     </div>
-    <yes-no-select id="TienesCurp" label="¿Tienes Curp?" @changed="tienesCurpChanged" clase="form-group col-md-3">
-        <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
-        <form-input id="CURP" input_type="text" clase="form-group col-md-5" v-if="TienesCurp === 'Si'" :changed.sync="CURP">
-            Ingresa tu Curp:
-        </form-input>
-
-    </yes-no-select>
-    <div class="form-row">
-        <gender :changed.sync="Genero" ></gender>
-    </div>
-
-    <yes-no-select @changed="isDiscapacidadChanged" id="isDiscapacidad" label="¿Tienes alguna discapacidad?" clase="form-group col-md-4">
-        <form-input id="Discapacidad" input_type="text" clase="form-group col-md-4" v-if="isDiscapacidad === 'Si'" :changed.sync="Discapacidad">
-            ¿Cuál?
-        </form-input>
-    </yes-no-select>
 
 </modal-registro>
 
