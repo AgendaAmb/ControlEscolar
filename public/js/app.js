@@ -2000,21 +2000,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'form-input',
-  props: ['id', 'clase', 'input_type', 'input_style'],
-  data: function data() {
-    return {
-      Input: ''
-    };
-  },
-  computed: {
-    input: {
-      get: function get() {
-        return this.Input;
-      },
-      set: function set(value) {
-        this.Input = value;
-      }
-    }
+  props: {
+    id: String,
+    clase: String,
+    input_type: String,
+    input_style: String,
+    input: String
   }
 });
 
@@ -38554,7 +38545,7 @@ var render = function() {
                 }
               },
               function($event) {
-                return _vm.$emit("update:changed", _vm.input)
+                return _vm.$emit("update:input", _vm.input)
               }
             ]
           }
@@ -38579,7 +38570,7 @@ var render = function() {
                 _vm.input = null
               },
               function($event) {
-                return _vm.$emit("update:changed", _vm.input)
+                return _vm.$emit("update:input", _vm.input)
               }
             ]
           }
@@ -38604,7 +38595,7 @@ var render = function() {
           domProps: { value: _vm.input },
           on: {
             change: function($event) {
-              return _vm.$emit("update:changed", _vm.input)
+              return _vm.$emit("update:input", _vm.input)
             },
             input: function($event) {
               if ($event.target.composing) {
@@ -38761,7 +38752,7 @@ var render = function() {
     {
       staticClass: "modal fade ",
       attrs: {
-        id: "Registro",
+        id: "app",
         tabindex: "-1",
         "aria-labelledby": "exampleModalLabel",
         "aria-hidden": "true"

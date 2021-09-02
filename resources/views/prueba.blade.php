@@ -57,7 +57,7 @@
     <div class="form-row">
 
         <form-input id="Nombres" input_type="text" clase="form-group col-md-12" 
-                    :changed.sync="Nombres">
+                    :Input.sync="Nombres" >
             Nombre(s):
         </form-input>
 
