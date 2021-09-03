@@ -88,20 +88,24 @@
     <div class="form-group col-12">
         <label for="tituloObtenido"> Grado de estudios (como se muestra en el documento probatorio): </label>
         <input id="tituloObtenido" name="tituloObtenido" type="text" class="form-control ">
-    
     </div>        
-    
+
     <countries id="PaisEstudios" clase="form-group col-md-6 was-validated" label="País donde realizaste tus estudios"></countries>
        
     <div class="form-group col-12 col-md-6">
         <label for="universidad"> Universidad de procedencia: </label>
-    </div>        
+    </div>     
+
     <div class="form-group col-12 col-md-6">
         <label for="FechaAprobacion"> Fecha de aprobación de tu examen profesional </label>
         <input id="FechaAprobacion" name="FechaAprobacion" type="date" class="form-control ">
-    
     </div>    
-    <div class="form-group col-12 my-0"></div>
+
+    <div class="form-group col-12 col-md-6">
+        <label for="cvu"> Número de CVU: </label>
+        <input id="cvu" name="cvu" type="text" class="form-control ">
+    </div>  
+
     <div class="form-group col-12 col-md-6">
         <label for="calificacionMinima"> Calificación mínima aprobatoria: </label>
         <input id="calificacionMinima" name="calificacionMinima" type="text" class="form-control ">
@@ -145,13 +149,31 @@
         <label for="puntajeExamen"> Puntaje obtenido </label>
         <input id="puntajeExamen" name="puntajeExamen" type="text" class="form-control ">
     </div>
-    <hr class="col-12">
+    <hr class="col-md-12" style="background-color: #0598BC; height:1px;">
+</div>
+    
+<div class="row mt-5 mb-0">
+    <h4 class="col-md-9"><strong> Información personal </strong></h4>
 </div>
 
-<required-document v-for="document in personal_documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
-<required-document v-for="document in academic_documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
-<required-document v-for="document in entrance_documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
-<required-document v-for="document in curricular_documents" :name="document.name" :label="document.label" :example="document.example"></required-document>    
+<required-document v-for="document in personal_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row mt-5 mb-0">
+    <h4 class="col-md-9"><strong> Información académica </strong></h4>
+</div>
+
+<required-document v-for="document in academic_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row mt-5 mb-0">
+    <h4 class="col-md-9"><strong>  Formatos de ingreso </strong></h4>
+</div>
+
+<required-document v-for="document in entrance_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row mt-5 mb-0">
+    <h4 class="col-md-9"><strong> Documentos curriculares </strong></h4>
+</div>
+<required-document v-for="document in curricular_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>    
 @endsection
 
 

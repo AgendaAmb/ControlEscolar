@@ -143,12 +143,30 @@
         <label for="puntajeExamen"> Puntaje obtenido </label>
         <input id="puntajeExamen" name="puntajeExamen" type="text" class="form-control ">
     </div>
-    <hr class="col-12">
+    <hr class="col-md-12" style="background-color: #0598BC; height:1px;">
+</div>
+
+<div class="row">
+    <h4 class="col-md-9 my-4"> Información personal </h4>
 </div>
 
 <required-document v-for="document in personal_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row">
+    <h4 class="col-md-9 my-4"> Información académica </h4>
+</div>
+
 <required-document v-for="document in academic_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row">
+    <h4 class="col-md-9 my-4"> Formatos de ingreso </h4>
+</div>
+
 <required-document v-for="document in entrance_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+
+<div class="row">
+    <h4 class="col-md-9 my-4"> Documentos curriculares </h4>
+</div>
 <required-document v-for="document in curricular_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>    
 @endsection
 
