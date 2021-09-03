@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('headerPicture')
+<img class="img-fluid mt-4" src="{{ asset('storage/headers/DOCTORADO-SUPERIOR.png') }}" width="600px">
+@endsection
+
 @section('main')
 <div class="row justify-content-center">
     <div class="form-group col-md-12 text-center">
@@ -111,15 +115,15 @@ const app = new Vue({
                 label: 'Pasaporte_añodesolicitud_iniciales',
                 example: 'Pasaporte_2021_CJG'
             },{
-                name:"Título de licenciatura",
-                label: 'TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'TitLicenciatula_2021_CJG'
+                name:"Título de maestría o acta de examen",
+                label: 'TítuloMat_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: 'TítuloMat_2021_CJG'
             },{
-                name:"Certificado de materias de la licenciatura",
-                label: 'CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'CertfLic_2021_CJG'
+                name:"Certificado de materias de la maestría",
+                label: 'CertMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: 'CertfMast_2021_CJG'
             },{
-                name:"Cédula de la licenciatura (aplica solo para estudios realizados en México)",
+                name:"Cédula de la maestría (aplica solo para estudios realizados en México)",
                 label: 'Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
                 example: 'Cédula_2021_CJG'
             },{
@@ -139,9 +143,13 @@ const app = new Vue({
                 label: 'Intencion_añodesolicitud_iniciales',
                 example: 'Intencion_2021_CJG'
             },{
-                name:"Currículum Vítae con los documentos probatorios (formato líbre)",
-                label: 'CV_añodesolicitud_iniciales',
-                example: 'CV_2021_CJG'
+                name:"Carta de intención de un profesor del núcleo básico del PMPCA",
+                label: 'Intencion_añodesolicitud_iniciales',
+                example: 'Intencion_2021_CJG'
+            },{
+                name:"Propuesta de proyecto avalada por el profesor postulante",
+                label: 'Proyecto_iniciales',
+                example: 'Proyecto_CJG'
             },{
                 name:"Carta de recomendación",
                 label: 'Recomendación_01_añodesolicitud_iniciales',

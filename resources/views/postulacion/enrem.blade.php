@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('headerPicture')
+<img class="img-fluid mt-4" src="{{ asset('storage/headers/ENREM-SUPERIOR.png') }}" width="600px">
+@endsection
+
 @section('main')
 <div class="row justify-content-center">
     <div class="form-group col-md-12 text-center">

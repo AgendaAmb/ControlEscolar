@@ -29,9 +29,9 @@
                 <slot name="download_document_image"></slot>
             </a>
             <a class="d-block my-3 text-dark text-decoration-none">   
-                <slot name="upload_document_image"></slot>
+                <img src="https://ambiental.uaslp.mx/controlescolar/imagenes/seleccionar.png" width="100px" height="45px">
             </a>
-            <a href="#" class="my-3 px-4 btn btn-danger"> Eliminar </a>  
+            <a href="#" class="my-3 px-4 btn btn-danger" v-if="is_admin === true"> Eliminar </a>  
             <p v-if="document_name !== null"><small><strong> {{document_name}} </strong></small></p>
         </div>
     </div>
@@ -39,7 +39,7 @@
 
 <script>
     export default {
-        props: ['name','label','example','view_document_url', 'download_document_url', 'document_name'],
+        props: ['name','label','example','view_document_url', 'download_document_url', 'document_name', 'is_admin'],
         mounted() {
             console.log('Se ha añadido el documento requerido')
         }
