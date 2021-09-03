@@ -217,10 +217,10 @@ body
     color: white;
 }
 
-.tablaEntrevistas-body {
+.tablaEntrevistas-body tr td {
     background-color: gainsboro;
     color: black;
-    border-color: grey;
+    border: 1px solid grey;
 }
 
 

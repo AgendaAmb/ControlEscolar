@@ -28,7 +28,7 @@
             </thead>
             <tbody class="tablaEntrevistas-body">
                 <tr>
-                    <th scope="row">2</th>
+                    <td scope="row">2</td>
                     <td> Aspirante </td>
                     <td> Thornton </td>
                     <td> </td>
@@ -40,7 +40,7 @@
                     <td> </td>
                 </tr>
                 <tr>
-                    <th scope="row">3</th>
+                    <td scope="row">3</td>
                     <td> Larry</td>
                     <td> the Bird</td>
                     <td> </td>
