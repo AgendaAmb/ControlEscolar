@@ -90,10 +90,9 @@
         <input id="tituloObtenido" name="tituloObtenido" type="text" class="form-control ">
     
     </div>        
-    <div class="form-group col-12 col-md-6">
-        <label for="paisEstudio"> País donde realizaste tus estudios: </label>
-
-    </div>        
+    
+    <countries id="PaisEstudios" clase="form-group col-md-6 was-validated" label="País donde realizaste tus estudios"></countries>
+       
     <div class="form-group col-12 col-md-6">
         <label for="universidad"> Universidad de procedencia: </label>
     </div>        

@@ -81,9 +81,9 @@
 
     </yes-no-select>
     <div class="form-row">
-        <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" v-on:updated="cambiaPaisNacimiento"></countries>
-        <country-state label="Estado de nacimiento" v-bind:states="States" v-on:updated="cambiaEstadoNacimiento"></country-state>
-        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" v-on:updated="cambiaPaisResidencia"></countries>
+        <countries id="PaisNacimiento" clase="form-group col-md-4 was-validated" label="País de nacimiento" v-bind:countries="Countries" v-on:updated="cambiaPaisNacimiento"></countries>
+        <country-state label="Estado de nacimiento"clase="form-group col-md-4 was-validated" v-bind:states="States" v-on:updated="cambiaEstadoNacimiento"></country-state>
+        <countries id="PaisResidencia" clase="form-group col-md-4 was-validated" label="País de residencia" v-bind:countries="Countries" v-on:updated="cambiaPaisResidencia"></countries>
         
         <form-input id="Tel" input_type="tel" clase="form-group col-md-4 was-validated" :input.sync="Tel">
             Teléfono de contacto

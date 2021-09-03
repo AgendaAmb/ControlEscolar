@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group col-md-4 was-validated">
+    <div v-bind:class="clase">
         <label for="Pais"> {{ label }} </label>
         <select v-bind:id="id" class="form-control" v-model="Pais"  v-bind:name="id"  @change="updateIndex($event.target.selectedIndex)">
             <option disabled value="" selected>País</option>
@@ -11,7 +11,7 @@
 <script>
 export default {
     name: 'countries',
-    props: ['label', 'id', 'Countries'],
+    props: ['label', 'id', 'clase', 'Countries'],
     data: function(){
         return {
             Pais: '',

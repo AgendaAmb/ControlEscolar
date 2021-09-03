@@ -1885,7 +1885,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'countries',
-  props: ['label', 'id', 'Countries'],
+  props: ['label', 'id', 'clase', 'Countries'],
   data: function data() {
     return {
       Pais: '',
@@ -1944,7 +1944,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'country-state',
-  props: ['label', 'States'],
+  props: ['label', 'States', 'clase'],
   data: function data() {
     return {
       State: '',
@@ -38398,7 +38398,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group col-md-4 was-validated" }, [
+  return _c("div", { class: _vm.clase }, [
     _c("label", { attrs: { for: "Pais" } }, [
       _vm._v(" " + _vm._s(_vm.label) + " ")
     ]),
@@ -38477,7 +38477,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group col-md-4 was-validated" }, [
+  return _c("div", { class: _vm.clase }, [
     _c("label", { attrs: { for: "State" } }, [
       _vm._v(" " + _vm._s(_vm.label) + " ")
     ]),
