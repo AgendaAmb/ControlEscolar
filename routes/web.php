@@ -23,3 +23,7 @@ Route::view('/solicitud/maestria', 'postulacion.maestria-ciencias-ambientales')-
 Route::view('/solicitud/doctorado', 'postulacion.doctorado-ciencias-ambientales')->name('doctorado');
 Route::view('/solicitud/enrem', 'postulacion.enrem')->name('enrem');
 Route::view('/solicitud/imarec', 'postulacion.imarec')->name('imarec');
+
+
+
+Route::view('/entrevistas', 'entrevistas.index')->name('entrevistas.index');
