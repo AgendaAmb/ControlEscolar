@@ -139,13 +139,21 @@ const app = new Vue({
                 label: 'Spanish_iniciales',
                 example: 'English_CJG'
             },{
-                name:"Carta de intención de un profesor del núcleo básico del PMPCA",
-                label: 'Intencion_añodesolicitud_iniciales',
-                example: 'Intencion_2021_CJG'
+                name:"Proof of German Proficiency",
+                label: 'German_iniciales',
+                example: 'German_CJG'
             },{
                 name:"Currículum Vítae con los documentos probatorios (formato líbre)",
                 label: 'CV_añodesolicitud_iniciales',
                 example: 'CV_2021_CJG'
+            },{
+                name:"Certificate(s) of Employment/Internship",
+                label: 'ProofExperience_iniciales',
+                example: 'ProofExperience_CJG'
+            },{
+                name:"Confirmation of employment",
+                label: 'ConfirmationEmp_iniciales',
+                example: 'ConfirmationEmp_CJG'
             },{
                 name:"Carta de recomendación",
                 label: 'Recomendación_01_añodesolicitud_iniciales',
