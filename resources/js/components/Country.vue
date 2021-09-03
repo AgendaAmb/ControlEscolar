@@ -1,7 +1,7 @@
 <template>
     <div class="form-group col-md-4 was-validated">
         <label for="Pais"> {{ label }} </label>
-        <select v-bind:id="id" class="form-control" v-model="Pais" @change="$emit('update:changed', Pais)" v-bind:name="id">
+        <select v-bind:id="id" class="form-control" v-model="Pais"  v-bind:name="id"  @change="updateIndex($event.target.selectedIndex)">
             <option disabled value="" selected>País</option>
             <option v-for="country in countries" :key="country.id" :value="country.name">{{ country.name }}</option>
         </select>
@@ -11,21 +11,12 @@
 <script>
 export default {
     name: 'countries',
-    props: ['label', 'id'],
-    mounted: function () {
-
-        // Recupera el listado de países.
-        this.$nextTick(function () {
-      
-            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries')
-            .then(response => this.countries = response.data);
-        });
-    },
-    data() {
+    props: ['label', 'id', 'Countries'],
+    data: function(){
         return {
-            Pais: this.Pais,
-            Countries: [],
-        }
+            Pais: '',
+            SelectedIndex: 0,
+        };
     },
     computed: {
         pais: {
@@ -34,6 +25,7 @@ export default {
             },
             set: function(value) {
                 this.Pais = value;
+                this.$emit('updated', this.SelectedIndex);
             }
         },
         countries: {
@@ -45,5 +37,11 @@ export default {
             }
         }
     },
+    methods: {
+        updateIndex(index){
+            this.SelectedIndex = index - 1;
+            this.pais = this.Pais;
+        }
+    }
 };
 </script>

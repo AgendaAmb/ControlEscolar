@@ -35,8 +35,8 @@ Vue.component('form-input', require('./components/FormInput.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 const app = new Vue({
+    
     el: '#app',
     data: {
         PerteneceUASLP: '',
@@ -49,16 +49,21 @@ const app = new Vue({
         Facultad: '',
         Password: '',
         PasswordR: '',
+        IdPaisNacimiento: '',
         PaisNacimiento: '',
+        IdPaisResidencia: '',
         PaisResidencia: '',
+        IdEstadoNacimiento: '',
         EstadoNacimiento: '',
         TienesCurp: '',
         CP: '',
+        Tel: '',
         CURP:'',
         isDiscapacidad: '',
         Discapacidad: '',
         GEtnico: '',
         spinnerVisible:false,
+        Countries: '',
         Errores:[{
             Mensaje:" Lo sentimos tu RPE/Clave unica ó correo Institucional no se encuentra.",
             Visible:false
@@ -70,16 +75,7 @@ const app = new Vue({
             Visible:false
         }],
         Countries:[],
-    },
-    computed: {
-        estadoNacimiento: {
-            get: function() {
-              return this.EstadoNacimiento;
-            },
-            set: function(value) {
-               this.EstadoNacimiento = value
-            }
-        },
+        States:[],
     },
     methods: {
 
@@ -91,6 +87,28 @@ const app = new Vue({
             this.isDiscapacidad = value;
         },
 
+        cambiaPaisNacimiento(index){
+
+            if (index === -1) return;
+            
+            this.PaisNacimiento = this.Countries[index].name;
+            this.IdPaisNacimiento = this.Countries[index].id;
+
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/'+ this.IdPaisNacimiento + '/states')
+            .then(response => {
+                
+                this.States = response.data;
+            }).catch((err) => {
+            });
+        },
+        cambiaEstadoNacimiento(index){
+            this.EstadoNacimiento = this.States[index].name;
+            this.IdEstadoNacimiento = this.States[index].id;
+        },
+        cambiaPaisResidencia(index){
+            this.PaisResidencia = this.Countries[index].name;
+            this.IdPaisResidencia = this.Countries[index].id;
+        },
         uaslpUser: function(){
             this.spinnerVisible = true;
 
@@ -101,25 +119,27 @@ const app = new Vue({
             }
 
             axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user',data)
-            .then(response => (
-                this.spinnerVisible=false,
-                this.Nombres = response['data']['data']['name'],
-                this.ApellidoM= response['data']['data']['last_surname'],
-                this.ApellidoP= response['data']['data']['first_surname'],
-                this.PaisNacimiento ="México",
-                this.Facultad=response['data']['data']['Dependencia'],
-                this.userInfo=response['data']['data'],
-                this.EmailR=response['data']['data']['email'],
-                this.Errores[0].Visible = false,
+            .then(response => {
+                this.spinnerVisible = false;
+                this.Nombres = response['data']['data']['name'];
+                this.ApellidoP = response['data']['data']['first_surname'];
+                this.ApellidoM = response['data']['data']['last_surname'];
+                this.Facultad = response['data']['data']['Dependencia'];
+                this.userInfo = response['data']['data'];
+                this.EmailR = response['data']['data']['email'];
+                this.Errores[0].Visible = false;
 
-                $('#PaisResidencia').val('México')
+                $('#PaisNacimiento').val('México');
+                $('#PaisResidencia').val('México');
 
-            )).catch((err) => {
-                this.spinnerVisible=false,
-                this.Errores[0].Visible=true;
-                this.apellidoM='';
-                this.apellidoP='';
-                this.nombres='';
+                this.cambiaPaisNacimiento($('#PaisNacimiento').prop('selectedIndex') - 1);
+
+            }).catch((err) => {
+                this.spinnerVisible = false,
+                this.Errores[0].Visible = true;
+                this.apellidoM = '';
+                this.apellidoP = '';
+                this.nombres = '';
             });
         },
 
@@ -128,13 +148,15 @@ const app = new Vue({
         },
     },
     mounted: function () {
-          this.$nextTick(function () {
+        
+        this.$nextTick(function () {
 
             axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries')
-            .then(response => 
+            .then(response => {
                 
-                this.countries = response.data
-            );
+                this.Countries = response.data;
+                this.cambiaPaisNacimiento(-1);
+            });
         });
     },
 });

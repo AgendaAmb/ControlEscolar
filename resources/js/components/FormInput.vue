@@ -5,19 +5,29 @@
         </label>
         <input v-bind:type="input_type" class="form-control" 
                 v-bind:id="id" v-model="input" v-bind:name="id" 
-                v-bind:style="input_style" @change="$emit('update:input', input)" required>
+                v-bind:style="input_style">
     </div>
 </template>
 
 <script>
 export default {
     name: 'form-input',
-    props: {
-        id: String,
-        clase: String,
-        input_type : String,
-        input_style : String,
-        input : String,
+    props: ['id','input_type','input_style','clase', 'Input'],
+    model: {
+        prop: 'Input',
+        event: 'update:input'
+    },
+    computed: {
+        input: {
+            get: function() {
+                return this.Input;
+            }, 
+            
+            set: function(val) {
+                this.$emit('update:input', val);
+            }
+        }
+
     },
 };
 </script>

@@ -16,8 +16,9 @@
 <modal-registro>
     <yes-no-select v-on:changed="PerteneceUASLP = $event" id="PerteneceUASLP" label="¿Perteneces a la UASLP?" clase="form-group col-md-3">
         <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
-        <form-input id="emailR" input_type="text" clase="form-group col-4" 
-                    v-if="PerteneceUASLP === 'Si'" :changed.sync="emailR">
+
+
+        <form-input id="emailR" input_type="text" clase="form-group col-4" v-if="PerteneceUASLP === 'Si'" :input.sync="emailR">
             Ingresa tu RPE/clave única de alumno ó correo Institucional
         </form-input>
        
@@ -33,13 +34,11 @@
             </button>
         </div>
 
-        <form-input id="emailR" input_type="email" clase="form-group col-md-12" 
-                    v-if="PerteneceUASLP === 'No'" :changed.sync="emailR">
+        <form-input id="emailR" input_type="email" clase="form-group col-md-12" v-if="PerteneceUASLP === 'No'" :input.sync="emailR">
             Ingresa un correo electrónico
         </form-input>
 
-        <form-input id="Password" input_type="password" clase="form-group col-md-6" 
-                    v-if="PerteneceUASLP === 'No'" :changed.sync="Password">
+        <form-input id="Password" input_type="password" clase="form-group col-md-6" v-if="PerteneceUASLP === 'No'" :input.sync="Password">
             Contraseña
         </form-input>
 
@@ -56,55 +55,51 @@
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
 
-        <form-input id="Nombres" input_type="text" clase="form-group col-md-12" 
-                    :Input.sync="Nombres" >
+        <form-input id="Nombres" input_type="text" clase="form-group col-md-12" :input.sync="Nombres" :input="Nombres">
             Nombre(s):
         </form-input>
 
-        <form-input id="ApellidoP" input_type="text" clase="form-group col-md-6" :changed.sync="ApellidoP">
+        <form-input id="ApellidoP" input_type="text" clase="form-group col-md-6":input.sync="ApellidoP">
             Apellido Paterno
         </form-input>
 
-        <form-input id="ApellidoM" input_type="text" clase="form-group col-md-6" :changed.sync="ApellidoM">
+        <form-input id="ApellidoM" input_type="text" clase="form-group col-md-6" :input.sync="ApellidoM">
             Apellido Materno
         </form-input>
     </div>
     <div class="form-row">
-        <form-input id="Edad" input_type="number" clase="form-group col-md-2" v-on:changed="Edad = $event">
+        <form-input id="Edad" input_type="number" clase="form-group col-md-2" :input.sync="Edad">
             Edad
         </form-input>
         <gender :changed.sync="Genero"></gender>
         
     </div>
     <yes-no-select id="TienesCurp" label="¿Tienes Curp?" @changed="tienesCurpChanged" clase="form-group col-md-4">
-        <form-input id="CURP" input_type="text" clase="form-group col-md-4" v-if="TienesCurp === 'Si'" :changed.sync="CURP">
+        <form-input id="CURP" input_type="text" clase="form-group col-md-4" v-if="TienesCurp === 'Si'" :input.sync="CURP">
             Ingresa tu Curp:
         </form-input>
 
     </yes-no-select>
     <div class="form-row">
-        <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" :changed.sync="PaisNacimiento"></countries>
-        <country-state label="Estado de nacimiento"></country-state>
-        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" :changed.sync="PaisResidencia"></countries>
+        <countries id="PaisNacimiento" label="País de nacimiento" v-bind:countries="Countries" v-on:updated="cambiaPaisNacimiento"></countries>
+        <country-state label="Estado de nacimiento" v-bind:states="States" v-on:updated="cambiaEstadoNacimiento"></country-state>
+        <countries id="PaisResidencia" label="País de residencia" v-bind:countries="Countries" v-on:updated="cambiaPaisResidencia"></countries>
         
+        <form-input id="Tel" input_type="tel" clase="form-group col-md-4 was-validated" :input.sync="Tel">
+            Teléfono de contacto
+        </form-input>
+        
+        <form-input id="CP" input_type="number" clase="form-group col-md-4 was-validated" :input.sync="CP">
+            Codigo Postal
+        </form-input>
 
-        <div class="form-group col-md-4 was-validated">
-            <label for="inputCity">Teléfono de contacto</label>
-            <input type="tel" class="form-control" id="Tel" required name="Tel" autocomplete="Tel">
-        </div>
-        <div class="col-md-4">
-            <label for="CP">Codigo Postal</label>
-            <input type="number" class="form-control" id="CP" required name="CP" v-model="CP">
-        </div>
-        <div class="col-md-4">
-            <label for="GEtnico">Grupo étnico</label>
-            <input type="text" name="GEtnico" class="form-control" id="GEtnico" v-model="GEtnico"
-                placeholder="Grupo étnico (Zapoteco, Pame, etc)">
-        </div>
+        <form-input id="GEtnico" input_type="text" clase="form-group col-md-4 was-validated" :input.sync="GEtnico">
+            Grupo étnico
+        </form-input>
     </div>
 
     <yes-no-select @changed="isDiscapacidadChanged" id="isDiscapacidad" label="¿Tienes alguna discapacidad?" clase="form-group col-md-4">
-        <form-input id="Discapacidad" input_type="text" clase="form-group col-md-4" v-if="isDiscapacidad === 'Si'" :changed.sync="Discapacidad">
+        <form-input id="Discapacidad" input_type="text" clase="form-group col-md-4" v-if="isDiscapacidad === 'Si'" :input.sync="Discapacidad">
             ¿Cuál?
         </form-input>
     </yes-no-select>
@@ -129,5 +124,4 @@
     </div>
 
 </modal-registro>
-
 @endsection

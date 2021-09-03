@@ -1,7 +1,7 @@
 <template>
     <div class="form-group col-md-4 was-validated">
         <label for="State"> {{ label }} </label>
-        <select id="State" class="form-control" v-model="State" v-on:change="$emit('changed', this.state)" name="State">
+        <select id="State" class="form-control" v-model="State" @change="updateIndex($event.target.selectedIndex)" name="State">
           <option disabled value="" selected>Estado</option>
           <option v-for="state in states" :key="state.id" :value="state.name">{{ state.name }}</option>
         </select>
@@ -11,11 +11,11 @@
 <script>
 export default {
     name: 'country-state',
-    props: ['label'],
+    props: ['label','States'],
     data() {
         return {
-            State: this.State,
-            States: [],
+            State: '',
+            SelectedIndex: 0,
         }
     },
     computed: {
@@ -25,6 +25,7 @@ export default {
             },
             set: function(value) {
                 this.State = value;
+                this.$emit('updated', this.SelectedIndex);
             }
         },
         states: {
@@ -36,5 +37,11 @@ export default {
             }
         },
     },
+    methods: {
+        updateIndex(index){
+            this.SelectedIndex = index - 1;
+            this.state = this.State;
+        }
+    }
 };
 </script>

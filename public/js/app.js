@@ -1885,21 +1885,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'countries',
-  props: ['label', 'id'],
-  mounted: function mounted() {
-    // Recupera el listado de países.
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries').then(function (response) {
-        return _this.countries = response.data;
-      });
-    });
-  },
+  props: ['label', 'id', 'Countries'],
   data: function data() {
     return {
-      Pais: this.Pais,
-      Countries: []
+      Pais: '',
+      SelectedIndex: 0
     };
   },
   computed: {
@@ -1909,6 +1899,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(value) {
         this.Pais = value;
+        this.$emit('updated', this.SelectedIndex);
       }
     },
     countries: {
@@ -1918,6 +1909,12 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.Countries = value;
       }
+    }
+  },
+  methods: {
+    updateIndex: function updateIndex(index) {
+      this.SelectedIndex = index - 1;
+      this.pais = this.Pais;
     }
   }
 });
@@ -1947,11 +1944,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'country-state',
-  props: ['label'],
+  props: ['label', 'States'],
   data: function data() {
     return {
-      State: this.State,
-      States: []
+      State: '',
+      SelectedIndex: 0
     };
   },
   computed: {
@@ -1961,6 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(value) {
         this.State = value;
+        this.$emit('updated', this.SelectedIndex);
       }
     },
     states: {
@@ -1970,6 +1968,12 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.States = value;
       }
+    }
+  },
+  methods: {
+    updateIndex: function updateIndex(index) {
+      this.SelectedIndex = index - 1;
+      this.state = this.State;
     }
   }
 });
@@ -2000,12 +2004,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'form-input',
-  props: {
-    id: String,
-    clase: String,
-    input_type: String,
-    input_style: String,
-    input: String
+  props: ['id', 'input_type', 'input_style', 'clase', 'Input'],
+  model: {
+    prop: 'Input',
+    event: 'update:input'
+  },
+  computed: {
+    input: {
+      get: function get() {
+        return this.Input;
+      },
+      set: function set(val) {
+        this.$emit('update:input', val);
+      }
+    }
   }
 });
 
@@ -2177,6 +2189,10 @@ __webpack_require__.r(__webpack_exports__);
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
+var _data;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -2211,7 +2227,7 @@ Vue.component('form-input', __webpack_require__(/*! ./components/FormInput.vue *
 
 var app = new Vue({
   el: '#app',
-  data: {
+  data: (_data = {
     PerteneceUASLP: '',
     emailR: '',
     Nombres: '',
@@ -2222,16 +2238,21 @@ var app = new Vue({
     Facultad: '',
     Password: '',
     PasswordR: '',
+    IdPaisNacimiento: '',
     PaisNacimiento: '',
+    IdPaisResidencia: '',
     PaisResidencia: '',
+    IdEstadoNacimiento: '',
     EstadoNacimiento: '',
     TienesCurp: '',
     CP: '',
+    Tel: '',
     CURP: '',
     isDiscapacidad: '',
     Discapacidad: '',
     GEtnico: '',
     spinnerVisible: false,
+    Countries: '',
     Errores: [{
       Mensaje: " Lo sentimos tu RPE/Clave unica ó correo Institucional no se encuentra.",
       Visible: false
@@ -2241,19 +2262,8 @@ var app = new Vue({
     }, {
       Mensaje: "El curp no es válido",
       Visible: false
-    }],
-    Countries: []
-  },
-  computed: {
-    estadoNacimiento: {
-      get: function get() {
-        return this.EstadoNacimiento;
-      },
-      set: function set(value) {
-        this.EstadoNacimiento = value;
-      }
-    }
-  },
+    }]
+  }, _defineProperty(_data, "Countries", []), _defineProperty(_data, "States", []), _data),
   methods: {
     tienesCurpChanged: function tienesCurpChanged(value) {
       this.TienesCurp = value;
@@ -2261,8 +2271,26 @@ var app = new Vue({
     isDiscapacidadChanged: function isDiscapacidadChanged(value) {
       this.isDiscapacidad = value;
     },
-    uaslpUser: function uaslpUser() {
+    cambiaPaisNacimiento: function cambiaPaisNacimiento(index) {
       var _this = this;
+
+      if (index === -1) return;
+      this.PaisNacimiento = this.Countries[index].name;
+      this.IdPaisNacimiento = this.Countries[index].id;
+      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/' + this.IdPaisNacimiento + '/states').then(function (response) {
+        _this.States = response.data;
+      })["catch"](function (err) {});
+    },
+    cambiaEstadoNacimiento: function cambiaEstadoNacimiento(index) {
+      this.EstadoNacimiento = this.States[index].name;
+      this.IdEstadoNacimiento = this.States[index].id;
+    },
+    cambiaPaisResidencia: function cambiaPaisResidencia(index) {
+      this.PaisResidencia = this.Countries[index].name;
+      this.IdPaisResidencia = this.Countries[index].id;
+    },
+    uaslpUser: function uaslpUser() {
+      var _this2 = this;
 
       this.spinnerVisible = true;
 
@@ -2273,12 +2301,23 @@ var app = new Vue({
       }
 
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user', data).then(function (response) {
-        return _this.spinnerVisible = false, _this.Nombres = response['data']['data']['name'], _this.ApellidoM = response['data']['data']['last_surname'], _this.ApellidoP = response['data']['data']['first_surname'], _this.PaisNacimiento = "México", _this.Facultad = response['data']['data']['Dependencia'], _this.userInfo = response['data']['data'], _this.EmailR = response['data']['data']['email'], _this.Errores[0].Visible = false, $('#PaisResidencia').val('México');
+        _this2.spinnerVisible = false;
+        _this2.Nombres = response['data']['data']['name'];
+        _this2.ApellidoP = response['data']['data']['first_surname'];
+        _this2.ApellidoM = response['data']['data']['last_surname'];
+        _this2.Facultad = response['data']['data']['Dependencia'];
+        _this2.userInfo = response['data']['data'];
+        _this2.EmailR = response['data']['data']['email'];
+        _this2.Errores[0].Visible = false;
+        $('#PaisNacimiento').val('México');
+        $('#PaisResidencia').val('México');
+
+        _this2.cambiaPaisNacimiento($('#PaisNacimiento').prop('selectedIndex') - 1);
       })["catch"](function (err) {
-        _this.spinnerVisible = false, _this.Errores[0].Visible = true;
-        _this.apellidoM = '';
-        _this.apellidoP = '';
-        _this.nombres = '';
+        _this2.spinnerVisible = false, _this2.Errores[0].Visible = true;
+        _this2.apellidoM = '';
+        _this2.apellidoP = '';
+        _this2.nombres = '';
       });
     },
     VerificarContraseña: function VerificarContraseña() {
@@ -2287,10 +2326,12 @@ var app = new Vue({
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries').then(function (response) {
-        return _this2.countries = response.data;
+        _this3.Countries = response.data;
+
+        _this3.cambiaPaisNacimiento(-1);
       });
     });
   }
@@ -38380,7 +38421,7 @@ var render = function() {
                 : $$selectedVal[0]
             },
             function($event) {
-              return _vm.$emit("update:changed", _vm.Pais)
+              return _vm.updateIndex($event.target.selectedIndex)
             }
           ]
         }
@@ -38459,7 +38500,7 @@ var render = function() {
                 : $$selectedVal[0]
             },
             function($event) {
-              return _vm.$emit("changed", this.state)
+              return _vm.updateIndex($event.target.selectedIndex)
             }
           ]
         }
@@ -38519,35 +38560,30 @@ var render = function() {
           ],
           staticClass: "form-control",
           style: _vm.input_style,
-          attrs: { id: _vm.id, name: _vm.id, required: "", type: "checkbox" },
+          attrs: { id: _vm.id, name: _vm.id, type: "checkbox" },
           domProps: {
             checked: Array.isArray(_vm.input)
               ? _vm._i(_vm.input, null) > -1
               : _vm.input
           },
           on: {
-            change: [
-              function($event) {
-                var $$a = _vm.input,
-                  $$el = $event.target,
-                  $$c = $$el.checked ? true : false
-                if (Array.isArray($$a)) {
-                  var $$v = null,
-                    $$i = _vm._i($$a, $$v)
-                  if ($$el.checked) {
-                    $$i < 0 && (_vm.input = $$a.concat([$$v]))
-                  } else {
-                    $$i > -1 &&
-                      (_vm.input = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
-                  }
+            change: function($event) {
+              var $$a = _vm.input,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.input = $$a.concat([$$v]))
                 } else {
-                  _vm.input = $$c
+                  $$i > -1 &&
+                    (_vm.input = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
                 }
-              },
-              function($event) {
-                return _vm.$emit("update:input", _vm.input)
+              } else {
+                _vm.input = $$c
               }
-            ]
+            }
           }
         })
       : _vm.input_type === "radio"
@@ -38562,17 +38598,12 @@ var render = function() {
           ],
           staticClass: "form-control",
           style: _vm.input_style,
-          attrs: { id: _vm.id, name: _vm.id, required: "", type: "radio" },
+          attrs: { id: _vm.id, name: _vm.id, type: "radio" },
           domProps: { checked: _vm._q(_vm.input, null) },
           on: {
-            change: [
-              function($event) {
-                _vm.input = null
-              },
-              function($event) {
-                return _vm.$emit("update:input", _vm.input)
-              }
-            ]
+            change: function($event) {
+              _vm.input = null
+            }
           }
         })
       : _c("input", {
@@ -38586,17 +38617,9 @@ var render = function() {
           ],
           staticClass: "form-control",
           style: _vm.input_style,
-          attrs: {
-            id: _vm.id,
-            name: _vm.id,
-            required: "",
-            type: _vm.input_type
-          },
+          attrs: { id: _vm.id, name: _vm.id, type: _vm.input_type },
           domProps: { value: _vm.input },
           on: {
-            change: function($event) {
-              return _vm.$emit("update:input", _vm.input)
-            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -38752,7 +38775,7 @@ var render = function() {
     {
       staticClass: "modal fade ",
       attrs: {
-        id: "app",
+        id: "Registro",
         tabindex: "-1",
         "aria-labelledby": "exampleModalLabel",
         "aria-hidden": "true"
