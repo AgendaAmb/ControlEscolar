@@ -30,7 +30,7 @@
                 @show
             </a>
         </academic-program-header>
-        <main id="fondoRayas" class="container-fluid"> 
+        <main id="fondoRayas" @section('container-class') class="container-fluid" @show> 
             @yield('main') 
         </main>
     </div>

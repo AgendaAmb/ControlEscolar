@@ -4,6 +4,10 @@
 <img class="img-fluid mt-4" src="{{ asset('storage/headers/ENREM-SUPERIOR.png') }}" width="600px">
 @endsection
 
+@section('container-class')
+{{ 'class="container"' }}
+@endsection
+
 @section('main')
 <div class="row justify-content-center">
     <div class="form-group col-md-12 text-center">
@@ -154,22 +158,29 @@
 
 <required-document v-for="document in personal_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
 
+
+<hr class="col-md-10">
 <div class="row mt-5 mb-0">
     <h4 class="col-md-9"><strong> Información académica </strong></h4>
 </div>
 
 <required-document v-for="document in academic_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
 
+<hr class="col-md-10">
 <div class="row mt-5 mb-0">
     <h4 class="col-md-9"><strong>  Formatos de ingreso </strong></h4>
 </div>
 
 <required-document v-for="document in entrance_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
 
+<hr class="col-md-10">
 <div class="row mt-5 mb-0">
     <h4 class="col-md-9"><strong> Documentos curriculares </strong></h4>
 </div>
 <required-document v-for="document in curricular_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>    
+
+
+<hr class="col-md-10">
 @endsection
 
 
