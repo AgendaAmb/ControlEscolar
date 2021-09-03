@@ -1,27 +1,24 @@
 @extends('layouts.app')
 
 @section('headerPicture')
-<img class="img-fluid mt-4" src="{{ asset('storage/headers/ENREM-SUPERIOR.png') }}" width="600px">
+<img class="img-fluid mt-4" src="{{ asset('storage/headers/logod.png') }}" width="600px">
 @endsection
 
 @section('main')
 <div class="row my-5">
     <div class="col-12">
-        <table class="table table-borderless text-center">
-            <thead class="thead-dark table-borderless">
+        <table class="table table-bordered text-center">
+            <thead class="tablaEntrevistas-header">
                 <tr>
-                    <th scope="col"> No. de expediente </th>
-                    <th scope="col"> Nombre del aspirante </th>
-                    <th scope="col"> Carta de intención otorgada por </th>
-                    <th scope="col" colspan="2"> Fecha de entrevista </th>
-                    <th scope="col" colspan="5"> Profesores </th>
+                    <th class="align-middle" scope="col" rowspan="2"> No. de expediente </th>
+                    <th class="align-middle" scope="col" rowspan="2"> Nombre del aspirante </th>
+                    <th class="align-middle" scope="col" rowspan="2"> Carta de intención otorgada por </th>
+                    <th class="align-middle" scope="col" colspan="2" style="border: none;"> Fecha de entrevista </th>
+                    <th class="align-middle" scope="col" colspan="5" style="border-bottom: none"> Profesores </th>
                 </tr>
                 <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"> Día </th>
-                    <th scope="col"> Hora </th>
+                    <th scope="col" style="border: none;"> Día </th>
+                    <th scope="col" style="border: none;"> Hora </th>
                     <th scope="col"> Evaluación </th>
                     <th scope="col"> Prevención </th>
                     <th scope="col"> Recursos Naturales </th>
@@ -29,19 +26,31 @@
                     <th scope="col"> Salud Ambiental </th>
                 </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th scope="row">2</th>
-                <td> Aspirante </td>
-                <td> Thornton </td>
-                <td> @fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td> Larry</td>
-                <td> the Bird</td>
-                <td> @twitter</td>
-            </tr>
+            <tbody class="tablaEntrevistas-body">
+                <tr>
+                    <th scope="row">2</th>
+                    <td> Aspirante </td>
+                    <td> Thornton </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td> Larry</td>
+                    <td> the Bird</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
             </tbody>
         </table>
     </div>

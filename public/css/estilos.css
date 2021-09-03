@@ -212,6 +212,17 @@ body
   padding: 0%;
 }
 
+.tablaEntrevistas-header {
+    background-color: #1E73B4;
+    color: white;
+}
+
+.tablaEntrevistas-body {
+    background-color: gainsboro;
+    color: black;
+    border-color: grey;
+}
+
 
 @media only screen and (min-width: 200px) and (max-width: 575px){
    
