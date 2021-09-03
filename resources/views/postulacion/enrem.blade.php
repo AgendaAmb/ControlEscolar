@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="mt-5 row text-center justify-content-center">
+<div class="mt-5 row justify-content-center">
     <div class="form-group col-md-12"> 
         <h4 class="mt-4"> Datos Personales </h4>
     </div>
@@ -82,8 +82,77 @@
             
     </div>
 </div>
+<div class="row">
+    <hr class="col-md-12" style="background-color: #0598BC; height:1px;">
+    <h4 class="col-md-9 my-4"> Datos Solicitud </h4>
+    <div class="form-group col-12">
+        <label for="tituloObtenido"> Grado de estudios (como se muestra en el documento probatorio): </label>
+        <input id="tituloObtenido" name="tituloObtenido" type="text" class="form-control ">
+    
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="paisEstudio"> País donde realizaste tus estudios: </label>
+
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="universidad"> Universidad de procedencia: </label>
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="FechaAprobacion"> Fecha de aprobación de tu examen profesional </label>
+        <input id="FechaAprobacion" name="FechaAprobacion" type="date" class="form-control ">
+    
+    </div>    
+    <div class="form-group col-12 my-0"></div>
+    <div class="form-group col-12 col-md-6">
+        <label for="calificacionMinima"> Calificación mínima aprobatoria: </label>
+        <input id="calificacionMinima" name="calificacionMinima" type="text" class="form-control ">
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="calificacionMaxima"> Calificación máxima aprobatoria: </label>
+        <input id="calificacionMaxima" name="calificacionMaxima" type="text" class="form-control ">
+    </div>    
+    <div class="form-group col-12 col-md-6">
+        <label for="promedio"> Promedio obtenido: </label>
+        <input id="promedio" name="promedio" type="text" class="form-control ">
+    </div>        
+        
+    <div class="form-group col-12 col-md-6">
+        <label for="PuntajeEXANI"> Puntaje EXANI III: </label>
+        <input id="PuntajeEXANI" name="PuntajeEXANI" type="text" class="form-control ">
+    </div>
+    <div class="col-12"></div>
+
+    <div class="form-group col-12 col-md-6">
+        <label for="examenIngles"> Examen de inglés: </label>
+    
+        <select id="examenIngles" name="examenIngles" class="d-block form-control ">
+            <option value="" selected="true"> Escoge el examen de inglés que presentaste </option>
+            <option value="3"> Cambridge </option>
+            <option value="2"> IELTS </option>
+            <option value="1"> TOEFL </option>
+        </select>
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="tipoExamenIngles"> Tipo de examen de inglés: </label>
+        <select id="tipoExamenIngles" name="tipoExamenIngles" class="d-block form-control ">
+            <option value="" selected="true"> Escoge el tipo de examen </option>
+        </select>
+    </div>    
+    <div class="form-group col-12 col-md-6">
+        <label for="FechaExamenIngles"> Fecha de aplicación de tu examen de inglés </label>
+        <input id="FechaExamenIngles" name="FechaExamenIngles" type="date" class="form-control ">
+    </div>   
+    <div class="form-group col-12 col-md-6">
+        <label for="puntajeExamen"> Puntaje obtenido </label>
+        <input id="puntajeExamen" name="puntajeExamen" type="text" class="form-control ">
+    </div>
     <hr class="col-12">
-    <required-document v-for="document in documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
+</div>
+    
+<required-document v-for="document in personal_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+<required-document v-for="document in academic_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+<required-document v-for="document in entrance_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>
+<required-document v-for="document in curricular_documents" :key="document.name" :name="document.name" :label="document.label" :example="document.example"></required-document>    
 @endsection
 
 @push('vuejs')
@@ -98,7 +167,7 @@ const app = new Vue({
     
     el: '#app',
     data: {
-        documents: [{
+        personal_documents: [{
                 name:"1.- Birth Certificate",
                 label: "01_BirthCert_iniciales",
                 example: '01_BirthCert_CJG'
@@ -114,7 +183,9 @@ const app = new Vue({
                 name:"4.- Passport",
                 label: '04_Pasaporte_añodesolicitud_iniciales',
                 example: '04_Pasaporte_2021_CJG'
-            },{
+        }],
+
+        academic_documents: [{
                 name:"5.- High School Certificate",
                 label: '05_HighSchool_iniciales',
                 example: '05_HighSchool_2021_CJG'
@@ -134,8 +205,14 @@ const app = new Vue({
                 name:"8.- Professional License",
                 label: '08A_ProfessionalLicense_iniciales',
                 example: '08A_ProfessionalLicense_CJG'
+        }],
+
+        entrance_documents:[{
+                name:"9.- ENREM Application Form",
+                label: '09A_Application_iniciales',
+                example: '09A_Application_CJG'
             },{
-                name:"9.- DAAD Application Form",
+                name:"9A.- DAAD Application Form",
                 label: '09A_DAAD_iniciales',
                 example: '09A_DAAD_CJG'
             },{
@@ -151,6 +228,12 @@ const app = new Vue({
                 label: '13C_German_iniciales',
                 example: '13C_German_CJG'
             },{
+                name:"15.- Project idea",
+                label: '15_ProjectIdea_iniciales',
+                example: '15_ProjectIdea_CJG'
+        }],
+
+        curricular_documents: [{
                 name:"16.- Currículum Vítae con los documentos probatorios (formato líbre)",
                 label: '16_CV_añodesolicitud_iniciales',
                 example: '16_CV_2021_CJG'
@@ -170,8 +253,7 @@ const app = new Vue({
                 name:"18B.- Recommendation Letter",
                 label: '18B_Recommendation_02_añodesolicitud_iniciales',
                 example: '18B_Recommendation_02_2021_CJG'
-            },
-        ],
+        }],
     },
 });
 </script>
