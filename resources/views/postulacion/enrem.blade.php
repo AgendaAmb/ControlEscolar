@@ -99,65 +99,77 @@ const app = new Vue({
     el: '#app',
     data: {
         documents: [{
-                name:"Birth Certificate",
-                label: "BirthCert_iniciales",
-                example: 'BirthCert_CJG'
+                name:"1.- Birth Certificate",
+                label: "01_BirthCert_iniciales",
+                example: '01_BirthCert_CJG'
             },{
-                name:"CURP",
-                label: 'CURP_añodesolicitud_iniciales',
-                example: 'CURP_2021_CJG'
+                name:"2.- CURP",
+                label: '02_CURP_añodesolicitud_iniciales',
+                example: '02_CURP_2021_CJG'
             },{
-                name:"INE",
-                label: 'INE_añodesolicitud_iniciales',
-                example: 'INE_2021_CJG'
+                name:"3.- INE",
+                label: '03_INE_añodesolicitud_iniciales',
+                example: '03_INE_2021_CJG'
             },{
-                name:"Passport",
-                label: 'Pasaporte_añodesolicitud_iniciales',
-                example: 'Pasaporte_2021_CJG'
+                name:"4.- Passport",
+                label: '04_Pasaporte_añodesolicitud_iniciales',
+                example: '04_Pasaporte_2021_CJG'
             },{
-                name:"High School Certificate",
-                label: 'HighSchool_iniciales',
-                example: 'HighSchool_2021_CJG'
+                name:"5.- High School Certificate",
+                label: '05_HighSchool_iniciales',
+                example: '05_HighSchool_2021_CJG'
             },{
-                name:"Bachelor Degree",
-                label: 'DegreeBachelor_iniciales',
-                example: 'DegreeBachelor_CJG'
+                name:"5A.- Bachelor Degree",
+                label: '05A_DegreeBachelor_iniciales',
+                example: '05A_DegreeBachelor_CJG'
             },{
-                name:"Professional License",
-                label: 'ProfessionalLicense_iniciales',
-                example: 'ProfessionalLicense_CJG'
+                name:"6.- Bachelor Transcript",
+                label: '06A_TranscriptBachelor_iniciales',
+                example: '06A_TranscriptBachelor_CJG'
             },{
-                name:"DAAD Application Form",
-                label: 'DAAD_iniciales',
-                example: 'DAAD_CJG'
+                name:"7.- Final Grade Average of Bachelor Degree",
+                label: '07A_PromBachelor_iniciales',
+                example: '07A_PromBachelor_CJG'
             },{
-                name:"Proof of English Proficiency",
-                label: 'English_iniciales',
-                example: 'English_CJG'
+                name:"8.- Professional License",
+                label: '08A_ProfessionalLicense_iniciales',
+                example: '08A_ProfessionalLicense_CJG'
             },{
-                name:"Proof of Spanish Proficiency",
-                label: 'Spanish_iniciales',
-                example: 'English_CJG'
+                name:"9.- DAAD Application Form",
+                label: '09A_DAAD_iniciales',
+                example: '09A_DAAD_CJG'
             },{
-                name:"Proof of German Proficiency",
-                label: 'German_iniciales',
-                example: 'German_CJG'
+                name:"13A.- Proof of English Proficiency",
+                label: '13A_English_iniciales',
+                example: '13A_English_CJG'
             },{
-                name:"Currículum Vítae con los documentos probatorios (formato líbre)",
-                label: 'CV_añodesolicitud_iniciales',
-                example: 'CV_2021_CJG'
+                name:"13B.- Proof of Spanish Proficiency",
+                label: '13B_Spanish_iniciales',
+                example: '13B_English_CJG'
             },{
-                name:"Certificate(s) of Employment/Internship",
-                label: 'ProofExperience_iniciales',
-                example: 'ProofExperience_CJG'
+                name:"13C.- Proof of German Proficiency",
+                label: '13C_German_iniciales',
+                example: '13C_German_CJG'
             },{
-                name:"Confirmation of employment",
-                label: 'ConfirmationEmp_iniciales',
-                example: 'ConfirmationEmp_CJG'
+                name:"16.- Currículum Vítae con los documentos probatorios (formato líbre)",
+                label: '16_CV_añodesolicitud_iniciales',
+                example: '16_CV_2021_CJG'
             },{
-                name:"Carta de recomendación",
-                label: 'Recomendación_01_añodesolicitud_iniciales',
-                example: 'Recomendación_01_2021_CJG'
+                name:"17A.- Certificate(s) of Employment/Internship",
+                label: '17A_ProofExperience_iniciales',
+                example: '17A_ProofExperience_CJG'
+            },{
+                name:"17B.- Confirmation of employment",
+                label: '17B_ConfirmationEmp_iniciales',
+                example: '17B_ConfirmationEmp_CJG'
+            },{
+                name:"18A.- Recommendation Letter",
+                label: '18A_Recommendation_01_añodesolicitud_iniciales',
+                example: '18A_Recommendation_01_2021_CJG'
+            },{
+                name:"18B.- Recommendation Letter",
+                label: '18B_Recommendation_02_añodesolicitud_iniciales',
+                example: '18B_Recommendation_02_2021_CJG'
             },
         ],
     },

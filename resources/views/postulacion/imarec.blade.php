@@ -82,8 +82,47 @@
             
     </div>
 </div>
+<div class="row">
+    <hr class="col-md-12" style="background-color: #0598BC; height:1px;">
+    <h4 class="col-md-9 my-4"> Datos Solicitud </h4>
+    <div class="form-group col-12">
+        <label for="tituloObtenido"> Grado de estudios (como se muestra en el documento probatorio): </label>
+        <input id="tituloObtenido" name="tituloObtenido" type="text" class="form-control ">
+    
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="paisEstudio"> País donde realizaste tus estudios: </label>
+
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="universidad"> Universidad de procedencia: </label>
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="FechaAprobacion"> Fecha de aprobación de tu examen profesional </label>
+        <input id="FechaAprobacion" name="FechaAprobacion" type="date" class="form-control ">
+    
+    </div>    
+    <div class="form-group col-12 my-0"></div>
+    <div class="form-group col-12 col-md-6">
+        <label for="calificacionMinima"> Calificación mínima aprobatoria: </label>
+        <input id="calificacionMinima" name="calificacionMinima" type="text" class="form-control ">
+    </div>        
+    <div class="form-group col-12 col-md-6">
+        <label for="calificacionMaxima"> Calificación máxima aprobatoria: </label>
+        <input id="calificacionMaxima" name="calificacionMaxima" type="text" class="form-control ">
+    </div>    
+    <div class="form-group col-12 col-md-6">
+        <label for="promedio"> Promedio obtenido: </label>
+        <input id="promedio" name="promedio" type="text" class="form-control ">
+    </div>        
+        
+    <div class="form-group col-12 col-md-6">
+        <label for="PuntajeEXANI"> Puntaje EXANI III: </label>
+        <input id="PuntajeEXANI" name="PuntajeEXANI" type="text" class="form-control ">
+    </div>
     <hr class="col-12">
-    <required-document v-for="document in documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
+</div>
+<required-document v-for="document in documents" :name="document.name" :label="document.label" :example="document.example"></required-document>
 @endsection
 
 @push('vuejs')
@@ -99,57 +138,65 @@ const app = new Vue({
     el: '#app',
     data: {
         documents: [{
-                name:"Acta de nacimiento",
-                label: "ActaNac_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
-                example: 'ActaNac_2021_CJG'
+                name:"1.- Acta de nacimiento",
+                label: "01_ActaNac_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+                example: '01_ActaNac_2021_CJG'
             },{
-                name:"CURP en Ampliación tamaño carta",
-                label: 'CURP_añodesolicitud_iniciales',
-                example: 'CURP_2021_CJG'
+                name:"2.- CURP en Ampliación tamaño carta",
+                label: '02_CURP_añodesolicitud_iniciales',
+                example: '02_CURP_2021_CJG'
             },{
-                name:"Credencial de elector INE en ampliación tamaño carta",
-                label: 'INE_añodesolicitud_iniciales',
-                example: 'INE_2021_CJG'
+                name:"3.- Credencial de elector INE en ampliación tamaño carta",
+                label: '03_INE_añodesolicitud_iniciales',
+                example: '03_INE_2021_CJG'
             },{
-                name:"Primera página del pasaporte",
-                label: 'Pasaporte_añodesolicitud_iniciales',
-                example: 'Pasaporte_2021_CJG'
+                name:"4.- Primera página del pasaporte",
+                label: '04_Pasaporte_añodesolicitud_iniciales',
+                example: '04_Pasaporte_2021_CJG'
             },{
-                name:"Título de licenciatura",
-                label: 'TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'TitLicenciatula_2021_CJG'
+                name:"5.- Título de licenciatura",
+                label: '05A_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: '05A_TitLicenciatula_2021_CJG'
             },{
-                name:"Certificado de materias de la licenciatura",
-                label: 'CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'CertfLic_2021_CJG'
+                name:"6.- Certificado de materias de la licenciatura",
+                label: '06A_CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: '06A_CertfLic_2021_CJG'
             },{
-                name:"Cédula de la licenciatura (aplica solo para estudios realizados en México)",
-                label: 'Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Cédula_2021_CJG'
+                name:"7.- Cédula de la licenciatura (aplica solo para estudios realizados en México)",
+                label: '07A_Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: '07A_Cédula_2021_CJG'
             },{
-                name:"Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
-                label: 'EXANIIII_añodesolicitud_iniciales',
-                example: 'EXANIIII_2021_CJG'
+                name:"12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
+                label: '12_EXANIIII_añodesolicitud_iniciales',
+                example: '12_EXANIIII_2021_CJG'
             },{
-                name:"Certificado de idioma inglés vigente",
-                label: 'Inglés_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Inglés_2021_CJG'
+                name:"13A.- Certificado de idioma inglés vigente",
+                label: '13A_Inglés_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: '13A_Inglés_2021_CJG'
             },{
-                name:"Certificado de idioma español",
-                label: 'Español_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Español_2021_CJG'
+                name:"13B.-Certificado de idioma español",
+                label: '13B_Español_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+                example: '13B_Español_2021_CJG'
             },{
-                name:"Carta de intención de un profesor del núcleo básico del PMPCA",
-                label: 'Intencion_añodesolicitud_iniciales',
-                example: 'Intencion_2021_CJG'
+                name:"14.- Carta de intención de un profesor del núcleo básico del PMPCA",
+                label: '14_Intencion_añodesolicitud_iniciales',
+                example: '14_Intencion_2021_CJG'
             },{
-                name:"Currículum Vítae con los documentos probatorios (formato líbre)",
-                label: 'CV_añodesolicitud_iniciales',
-                example: 'CV_2021_CJG'
+                name:"15.- Propuesta de proyecto avalada por el profesor postulante",
+                label: '15_Proyecto_iniciales',
+                example: '15_Proyecto_CJG'
             },{
-                name:"Carta de recomendación",
-                label: 'Recomendación_01_añodesolicitud_iniciales',
-                example: 'Recomendación_01_2021_CJG'
+                name:"16.- Currículum Vítae con los documentos probatorios (formato líbre)",
+                label: '16_CV_añodesolicitud_iniciales',
+                example: '16_CV_2021_CJG'
+            },{
+                name:"18A.- Carta de recomendación",
+                label: '18A_Recomendación_01_añodesolicitud_iniciales',
+                example: '18A_Recomendación_01_2021_CJG'
+            },{
+                name:"18B.- Carta de recomendación",
+                label: '18B_Recomendación_02_añodesolicitud_iniciales',
+                example: '18B_Recomendación_02_2021_CJG'
             },
         ],
     },
