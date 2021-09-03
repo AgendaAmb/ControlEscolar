@@ -99,45 +99,45 @@ const app = new Vue({
     el: '#app',
     data: {
         documents: [{
-                name:"Acta de nacimiento",
-                label: "ActaNac_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
-                example: 'ActaNac_2021_CJG'
+                name:"Birth Certificate",
+                label: "BirthCert_iniciales",
+                example: 'BirthCert_CJG'
             },{
-                name:"CURP en Ampliación tamaño carta",
+                name:"CURP",
                 label: 'CURP_añodesolicitud_iniciales',
                 example: 'CURP_2021_CJG'
             },{
-                name:"Credencial de elector INE en ampliación tamaño carta",
+                name:"INE",
                 label: 'INE_añodesolicitud_iniciales',
                 example: 'INE_2021_CJG'
             },{
-                name:"Primera página del pasaporte",
+                name:"Passport",
                 label: 'Pasaporte_añodesolicitud_iniciales',
                 example: 'Pasaporte_2021_CJG'
             },{
-                name:"Título de licenciatura",
-                label: 'TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'TitLicenciatula_2021_CJG'
+                name:"High School Certificate",
+                label: 'HighSchool_iniciales',
+                example: 'HighSchool_2021_CJG'
             },{
-                name:"Certificado de materias de la licenciatura",
-                label: 'CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'CertfLic_2021_CJG'
+                name:"Bachelor Degree",
+                label: 'DegreeBachelor_iniciales',
+                example: 'DegreeBachelor_CJG'
             },{
-                name:"Cédula de la licenciatura (aplica solo para estudios realizados en México)",
-                label: 'Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Cédula_2021_CJG'
+                name:"Professional License",
+                label: 'ProfessionalLicense_iniciales',
+                example: 'ProfessionalLicense_CJG'
             },{
-                name:"Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
-                label: 'EXANIIII_añodesolicitud_iniciales',
-                example: 'EXANIIII_2021_CJG'
+                name:"DAAD Application Form",
+                label: 'DAAD_iniciales',
+                example: 'DAAD_CJG'
             },{
-                name:"Certificado de idioma inglés vigente",
-                label: 'Inglés_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Inglés_2021_CJG'
+                name:"Proof of English Proficiency",
+                label: 'English_iniciales',
+                example: 'English_CJG'
             },{
-                name:"Certificado de idioma español",
-                label: 'Español_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-                example: 'Español_2021_CJG'
+                name:"Proof of Spanish Proficiency",
+                label: 'Spanish_iniciales',
+                example: 'English_CJG'
             },{
                 name:"Carta de intención de un profesor del núcleo básico del PMPCA",
                 label: 'Intencion_añodesolicitud_iniciales',
