@@ -15,37 +15,62 @@ class="container"
 
     <template v-slot:datos_solicitud>
        
-        <form-input id="tituloObtenido" clase="form-group col-12"> Grado de estudios (como se muestra en el documento probatorio): </form-input> 
-        <form-select id="PaisEstudios" clase="form-group col-md-6" v-bind:options="Countries" v-on:updated="cambiaPaisEstudios"> 
+        <form-input id="tituloObtenido" clase="form-group col-12"> 
+            Grado de estudios (como se muestra en el documento probatorio): 
+        </form-input> 
+
+        <form-select id="PaisEstudios" clase="form-group col-md-6" v-bind:options="Countries" 
+                    v-on:update:selected_index="cambiaPaisEstudios"> 
             País donde realizaste tus estudios 
         </form-select>
 
-        <form-select id="UniversidadProcedencia" clase="form-group col-md-6" v-bind:options="CountryUniversities" v-on:updated="cambiaUniversidadProcedencia"> 
+        <form-select id="UniversidadProcedencia" clase="form-group col-md-6" v-bind:options="CountryUniversities" 
+                    v-on:update:selected_index="cambiaUniversidadProcedencia"> 
             Universidad de procedencia
         </form-select>
 
         
-        <form-input id="FechaAprobacion" clase="form-group col-md-6" input_type="date"> Fecha de aprobación de tu examen profesional: </form-input>
+        <form-input id="FechaAprobacion" clase="form-group col-md-6" input_type="date"> 
+            Fecha de aprobación de tu examen profesional: 
+        </form-input>
+        
         <div class="form-group col-12 my-0"></div>
 
-        <form-input id="calificacionMinima" clase="form-group col-md-6"> Calificación mínima aprobatoria: </form-input>
-        <form-input id="calificacionMaxima" clase="form-group col-md-6"> Calificación máxima aprobatoria: </form-input>
-        <form-input id="promedio" clase="form-group col-md-6"> Promedio obtenido: </form-input>
-        <form-input id="PuntajeEXANI" clase="form-group col-md-6"> Puntaje EXANI III: </form-input>
+        <form-input id="calificacionMinima" clase="form-group col-md-6"> 
+            Calificación mínima aprobatoria: 
+        </form-input>
+
+        <form-input id="calificacionMaxima" clase="form-group col-md-6"> 
+            Calificación máxima aprobatoria: 
+        </form-input>
+
+        <form-input id="promedio" clase="form-group col-md-6"> 
+            Promedio obtenido: 
+        </form-input>
+
+        <form-input id="PuntajeEXANI" clase="form-group col-md-6"> 
+            Puntaje EXANI III: 
+        </form-input>
             
         <div class="col-12"></div>
 
-        <form-select id="ExamenIngles" clase="form-group col-md-6" v-bind:options="EnglishExams" v-on:updated="cambiaExamenIngles"> 
+        <form-select id="ExamenIngles" clase="form-group col-md-6" v-bind:options="EnglishExams" 
+                        v-on:update:selected_index="cambiaExamenIngles"> 
             Examen de inglés:
         </form-select>
 
-        <form-select id="TipoExamenIngles" clase="form-group col-md-6" v-bind:options="EnglishExamTypes" v-on:updated="cambiaTipoExamenIngles"> 
+        <form-select id="TipoExamenIngles" clase="form-group col-md-6" v-bind:options="EnglishExamTypes" 
+                        v-on:update:selected_index="cambiaTipoExamenIngles"> 
             Tipo de examen de inglés
         </form-select>
-      
 
-        <form-input id="fechaExamenIngles" clase="form-group col-md-6" input_type="date"> Fecha de aplicación de tu examen de inglés: </form-input>
-        <form-input id="puntajeExamenIngles" clase="form-group col-md-6" input_type="text"> Puntaje obtenido: </form-input>
+        <form-input id="fechaExamenIngles" clase="form-group col-md-6" input_type="date"> 
+            Fecha de aplicación de tu examen de inglés: 
+        </form-input>
+
+        <form-input id="puntajeExamenIngles" clase="form-group col-md-6" input_type="text"> 
+            Puntaje obtenido: 
+        </form-input>
 
     </template>
 
@@ -167,7 +192,26 @@ const app = new Vue({
         EnglishExamTypes: [],
         TipoExamenIngles: '',
         IdTipoExamenIngles: '',
+    }, 
+    mounted: function() {
+
+        this.$nextTick(function () {
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
+            .then(response => {
+                
+                this.Countries = response.data;
+                
+            });
+
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
+            .then(response => {
+                
+                this.EnglishExams = response.data;
+            });
+        });
+
     },
+
     methods: {
         cambiaPaisEstudios(index){
             if (index === -1) return;

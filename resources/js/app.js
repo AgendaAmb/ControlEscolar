@@ -5,11 +5,8 @@
  */
 
 require('./bootstrap');
-import Vuex from 'vuex';
 
 window.Vue = require('vue').default;
-Vue.use(Vuex);
-
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,4 +31,5 @@ Vue.component('form-select', require('./components/FormSelect.vue').default);
 Vue.component('required-document', require('./components/RequiredDocument.vue').default);
 Vue.component('student-appliance', require('./components/Appliance.vue').default);
 Vue.component('appliant-data', require('./components/Appliant.vue').default);
-
+Vue.component('scheduler', require('./components/calendar/Scheduler.vue').default);
+Vue.component('calendar', require('./components/calendar/Calendar.vue').default);

@@ -1,102 +1,76 @@
-<template>
-    <div class="mt-5 row justify-content-left">
-        <div class="form-group col-md-12"> 
-            <h4 class="mt-4"> Datos Personales </h4>
-        </div>
-
-        <slot></slot>
-
-        <hr class="col-md-12" :style="color">
-        <h4 class="col-md-9 my-4"> Datos Solicitud </h4>
-
-        <slot name="datos_solicitud"></slot>
-        <hr class="col-md-12" :style="color">
-
-        <div class="col-12">
-            <div class="row mt-5 mb-0">
-                <h4 class="col-md-9"><strong> Información personal  </strong></h4>
-            </div>
-
-            <slot name="personal_documents"></slot>
-        </div>
-        <hr class="col-md-10">
-
-        <div class="col-12">
-            <div class="row mt-5 mb-0">
-                <h4 class="col-md-9"><strong> Información académica  </strong></h4>
-            </div>
-
-            <slot name="academic_documents"></slot>
-        </div>
-        <hr class="col-md-10">
-
-        <div class="col-12">
-            <div class="row mt-5 mb-0">
-                <h4 class="col-md-9"><strong> Formatos de ingreso </strong></h4>
-            </div>
-            
-            <slot name="entrance_documents"></slot>
-        </div>
-        <hr class="col-md-10">
-
-        <div class="col-12">
-            <div class="row mt-5 mb-0">
-                <h4 class="col-md-9"><strong> Documentos curriculares </strong></h4>
-            </div>
-            
-            <slot name="curricular_documents"></slot>
-        </div>
-        <hr class="col-md-10">
-    </div>
-</template>
-
 <script>
     export default {
         name: 'student-appliance',
         props: [ 'color' ],
-        data: function () {
-            return {
-                countries: [],
-                english_exams: []
-            }
-        },
-        computed: {
-            Countries: {
-                get: function() {
-                    return this.countries;
-                },
-                set: function(val){
-                    this.countries = val;
-                }
-            },
-            EnglishExams: {
-                get: function() {
-                    return this.english_exams;
-                },
-                set: function(val){
-                    this.english_exams = val;
-                }
-            }
-        },
-        mounted() {
+        functional: true,
 
-            this.$nextTick(function () {
+        // Crea el componente como instancia funcional
+        render(createElement, {data, listeners, slots}) {
+            
+            return createElement("div", { class: "mt-5 row justify-content-left" }, [
+                createElement('div', { class:'form-group col-12' }, [
+                    createElement('h4', { class:'mt-4' }, [
+                        'Datos Personales'
+                    ])
+                ]),
 
-                axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
-                .then(response => {
+                slots().default,
+                createElement('hr', { class:'col-12', style: data.color}),
+                createElement('h4', { class:'col-md-9 my-4' }, [
+                    'Datos Solicitud'
+                ]), 
+
+                slots().datos_solicitud,
+                createElement('hr', { class:'col-12', style: data.color}),
+
+                createElement('div', { class:'form-group col-12' }, [
+                    createElement('div', { class:'row' }, [
+                        createElement('h4', { class:'col-md-9 my-4' }, [
+                            'Información personal'
+                        ])
+
+
+                    ]),
+                    slots().personal_documents,
+
+                ]),
+
+                createElement('div', { class:'form-group col-12' }, [
+                    createElement('div', { class:'row' }, [
+                        createElement('h4', { class:'col-md-9 my-4' }, [
+                            'Información académica'
+                        ])
+
+
+                    ]),
+                    slots().academic_documents,
                     
-                    this.Countries = response.data;
-                    
-                });
+                ]),
 
-                axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
-                .then(response => {
-                    
-                    this.EnglishExams = response.data;
-                });
-            });
+                createElement('div', { class:'form-group col-12' }, [
+                    createElement('div', { class:'row' }, [
+                        createElement('h4', { class:'col-md-9 my-4' }, [
+                            'Formatos de ingreso'
+                        ])
 
-            console.log('Component mounted.');
+
+                    ]),
+                    slots().entrance_documents,
+                    
+                ]),
+
+                createElement('div', { class:'form-group col-12' }, [
+                    createElement('div', { class:'row' }, [
+                        createElement('h4', { class:'col-md-9 my-4' }, [
+                            'Documentos curriculares'
+                        ])
+
+
+                    ]),
+                    slots().curricular_documents,
+                    
+                ]),
+            ]);
         }
     }
 </script>

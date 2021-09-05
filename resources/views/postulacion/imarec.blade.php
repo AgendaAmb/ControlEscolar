@@ -156,7 +156,26 @@ const app = new Vue({
         EnglishExamTypes: [],
         TipoExamenIngles: '',
         IdTipoExamenIngles: '',
+    }, 
+    mounted: function() {
+
+        this.$nextTick(function () {
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
+            .then(response => {
+                
+                this.Countries = response.data;
+                
+            });
+
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
+            .then(response => {
+                
+                this.EnglishExams = response.data;
+            });
+        });
+
     },
+
     methods: {
         cambiaPaisEstudios(index){
             if (index === -1) return;

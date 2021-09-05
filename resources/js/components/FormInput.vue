@@ -12,10 +12,11 @@
 <script>
 export default {
     name: 'form-input',
-    props: ['id','input_type','input_style','clase', 'Input', 'readonly'],
-    model: {
-        prop: 'Input',
-        event: 'update:input'
+    props: ['id','input_type','input_style','clase', 'readonly'],
+    data: function() {
+        return {
+            Input: '',
+        }
     },
     computed: {
         input: {
@@ -24,6 +25,7 @@ export default {
             }, 
             
             set: function(val) {
+                this.Input = val;
                 this.$emit('update:input', val);
             }
         }

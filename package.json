@@ -26,6 +26,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "dhtmlx-scheduler": "^5.3.12",
+        "vue-event-calendar": "^1.5.2",
         "vue-select": "^3.13.0",
         "vuex": "^3.6.2"
     }
