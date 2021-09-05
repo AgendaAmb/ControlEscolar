@@ -5,8 +5,10 @@
  */
 
 require('./bootstrap');
+import Vuex from 'vuex';
 
 window.Vue = require('vue').default;
+Vue.use(Vuex);
 
 
 /**
@@ -28,5 +30,8 @@ Vue.component('yes-no-select', require('./components/YesNoSelect.vue').default);
 Vue.component('modal-registro', require('./components/ModalRegistro.vue').default);
 Vue.component('gender', require('./components/Gender.vue').default);
 Vue.component('form-input', require('./components/FormInput.vue').default);
+Vue.component('form-select', require('./components/FormSelect.vue').default);
 Vue.component('required-document', require('./components/RequiredDocument.vue').default);
+Vue.component('student-appliance', require('./components/Appliance.vue').default);
+Vue.component('appliant-data', require('./components/Appliant.vue').default);
 

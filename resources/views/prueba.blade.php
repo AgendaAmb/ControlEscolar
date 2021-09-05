@@ -192,13 +192,7 @@ const app = new Vue({
             
             this.PaisNacimiento = this.Countries[index].name;
             this.IdPaisNacimiento = this.Countries[index].id;
-
-            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/'+ this.IdPaisNacimiento + '/states')
-            .then(response => {
-                
-                this.States = response.data;
-            }).catch((err) => {
-            });
+            this.States = this.Countries[index].states;
         },
         cambiaEstadoNacimiento(index){
             this.EstadoNacimiento = this.States[index].name;
@@ -250,7 +244,7 @@ const app = new Vue({
         
         this.$nextTick(function () {
 
-            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries')
+            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states')
             .then(response => {
                 
                 this.Countries = response.data;

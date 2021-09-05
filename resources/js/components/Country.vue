@@ -1,6 +1,6 @@
 <template>
     <div v-bind:class="clase">
-        <label for="Pais"> {{ label }} </label>
+        <label v-bind:for="id"> {{ label }} </label>
         <select v-bind:id="id" class="form-control" v-model="Pais"  v-bind:name="id"  @change="updateIndex($event.target.selectedIndex)">
             <option disabled value="" selected>País</option>
             <option v-for="country in countries" :key="country.id" :value="country.name">{{ country.name }}</option>
