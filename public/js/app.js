@@ -2392,25 +2392,37 @@ __webpack_require__.r(__webpack_exports__);
     }, [createElement('div', {
       "class": 'row'
     }, [createElement('h4', {
-      "class": 'col-md-9 my-4'
+      "class": 'col-md-9 my-4',
+      style: {
+        fontSize: '20px'
+      }
     }, [createElement('strong', 'Información personal')])]), slots().personal_documents]), createElement('div', {
       "class": 'form-group col-12'
     }, [createElement('div', {
       "class": 'row'
     }, [createElement('h4', {
-      "class": 'col-md-9 my-4'
+      "class": 'col-md-9 my-4',
+      style: {
+        fontSize: '20px'
+      }
     }, [createElement('strong', 'Información académica')])]), slots().academic_documents]), createElement('div', {
       "class": 'form-group col-12'
     }, [createElement('div', {
       "class": 'row'
     }, [createElement('h4', {
-      "class": 'col-md-9 my-4'
+      "class": 'col-md-9 my-4',
+      style: {
+        fontSize: '20px'
+      }
     }, [createElement('strong', 'Formatos de ingreso')])]), slots().entrance_documents]), createElement('div', {
       "class": 'form-group col-12'
     }, [createElement('div', {
       "class": 'row'
     }, [createElement('h4', {
-      "class": 'col-md-9 my-4'
+      "class": 'col-md-9 my-4',
+      style: {
+        fontSize: '20px'
+      }
     }, [createElement('strong', 'Documentos curriculares')])]), slots().curricular_documents])]);
   }
 });

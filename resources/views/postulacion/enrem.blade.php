@@ -4,9 +4,7 @@
 <img class="img-fluid mt-4" src="{{ asset('storage/headers/ENREM-SUPERIOR.png') }}" width="600px">
 @endsection
 
-@section('container-class')
-class="container"
-@endsection
+@section('container-class', 'class=container')
 
 @section('main')
 <student-appliance color="#FECC50">

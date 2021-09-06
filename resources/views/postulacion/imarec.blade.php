@@ -4,12 +4,10 @@
 <img class="img-fluid mt-4" src="{{ asset('storage/headers/IMAREC-SUPERIOR.png') }}" width="600px">
 @endsection
 
-@section('container-class')
-class="container"
-@endsection
+@section('container-class', 'class=container')
 
 @section('main')
-<student-appliance :color="#FECC50">
+<student-appliance color="#FECC50">
 
     @include('layouts.partials.appliant-data')
 
