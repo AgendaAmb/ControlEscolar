@@ -2519,8 +2519,8 @@ __webpack_require__.r(__webpack_exports__);
       events: [{
         id: 1,
         start_date: "2020-01-20 6:00",
-        end_date: "2020-01-20 10:00",
-        text: "Postulante:" + "<br><br>María Eugenia Almendárez García" + "<br><br>Profesor que otorgó la carta de intención: <br><br>"
+        end_date: "2020-01-20 14:00",
+        text: "Postulante: <br><br>" + "María Eugenia Almendárez García <br><br>" + "Profesor que otorgó la carta de intención: <br><br>" + "Juan Rulfo <br><br>" + "Áreas académicas:" + '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="d-inline">' + '<circle cx="10" cy="20" r="10" fill="red"/>' + '<circle cx="30" cy="20" r="10" fill="green"/>' + '<circle cx="50" cy="20" r="10" fill="blue"/>' + '<circle cx="70" cy="20" r="10" fill="yellow"/>' + '<circle cx="90" cy="20" r="10" fill="orange"/>' + '</svg>'
       }, {
         id: 2,
         start_date: "2020-01-23 6:00",
