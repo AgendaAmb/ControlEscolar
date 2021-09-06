@@ -24,8 +24,10 @@ export default {
         {
           id: 1,
           start_date: "2020-01-20 6:00",
-          end_date: "2020-01-20 15:00",
-          text: "Event 1",
+          end_date: "2020-01-20 10:00",
+          text: "Postulante:" +
+                "<br><br>María Eugenia Almendárez García" + 
+                "<br><br>Profesor que otorgó la carta de intención: <br><br>",
         },
         {
           id: 2,
