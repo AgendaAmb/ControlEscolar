@@ -138,7 +138,22 @@ const app = new Vue({
                 name:"15.- Propuesta de proyecto avalada por el profesor postulante",
                 label: '15_Proyecto_iniciales',
                 example: '15_Proyecto_CJG'
-        }], 
+        }],
+         
+        curricular_documents: [{
+                name:"16.- Currículum Vítae con los documentos probatorios (formato líbre)",
+                label: '16_CV_añodesolicitud_iniciales',
+                example: '16_CV_2021_CJG'
+            },{
+                name:"18A.- Carta de recomendación",
+                label: '18A_Recomendación_01_añodesolicitud_iniciales',
+                example: '18A_Recomendación_01_2021_CJG'
+            },{
+                name:"18B.- Carta de recomendación",
+                label: '18B_Recomendación_02_añodesolicitud_iniciales',
+                example: '18B_Recomendación_02_2021_CJG'
+            },
+        ], 
         
         Countries: [],
         CountryUniversities:[],
