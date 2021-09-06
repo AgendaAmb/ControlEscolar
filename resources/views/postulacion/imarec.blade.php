@@ -9,7 +9,7 @@ class="container"
 @endsection
 
 @section('main')
-<student-appliance>
+<student-appliance :color="#FECC50">
 
     @include('layouts.partials.appliant-data')
 

@@ -9,10 +9,7 @@ class="container"
 @endsection
 
 @section('main')
-<student-appliance ref="appliance" :countries.sync="Countries" 
-                :english_exams.sync="EnglishExams" 
-                :country_universities.sync="CountryUniversities" 
-                :english_exam_types.sync="EnglishExamTypes"> 
+<student-appliance :color="#FECC50"> 
 
     @include('layouts.partials.appliant-data')
 

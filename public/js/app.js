@@ -2374,19 +2374,19 @@ __webpack_require__.r(__webpack_exports__);
       "class": 'form-group col-12'
     }, [createElement('h4', {
       "class": 'mt-4'
-    }, ['Datos Personales'])]), slots()["default"], createElement('hr', {
+    }, [createElement('strong', 'Datos Personales')])]), slots()["default"], createElement('hr', {
       "class": 'col-12',
-      style: data.color
+      style: 'color: ' + data.color
     }), createElement('h4', {
       "class": 'col-md-9 my-4'
     }, [createElement('strong', 'Datos Solicitud')]), slots().datos_solicitud, createElement('hr', {
       "class": 'col-12',
-      style: data.color
+      style: 'color: ' + data.color
     }), createElement('h4', {
       "class": 'col-md-9 my-4'
     }, [createElement('strong', 'Experiencia laboral')]), slots().experiencia_laboral, createElement('hr', {
       "class": 'col-12',
-      style: data.color
+      style: 'color: ' + data.color
     }), createElement('div', {
       "class": 'form-group col-12'
     }, [createElement('div', {
