@@ -47,8 +47,8 @@
             Repite tu Contraseña
         </form-input>
 
-        <span class="text-danger" role="alert" v-if="Errores[1].Visible">
-            @{{Errores[1].Mensaje}}
+        <span class="text-danger" role="alert" v-if="'EmailR' in Errores">
+            @{{Errores['EmailR']}}
         </span>
     </yes-no-select>
 
@@ -81,9 +81,17 @@
 
     </yes-no-select>
     <div class="form-row">
-        <countries id="PaisNacimiento" clase="form-group col-md-4 was-validated" label="País de nacimiento" v-bind:countries="Countries" v-on:updated="cambiaPaisNacimiento"></countries>
-        <country-state label="Estado de nacimiento"clase="form-group col-md-4 was-validated" v-bind:states="States" v-on:updated="cambiaEstadoNacimiento"></country-state>
-        <countries id="PaisResidencia" clase="form-group col-md-4 was-validated" label="País de residencia" v-bind:countries="Countries" v-on:updated="cambiaPaisResidencia"></countries>
+        <form-select id="PaisNacimiento" clase="form-group col-md-4 was-validated" v-bind:options="Countries" v-on:update:selected_index="cambiaPaisNacimiento">
+            País de nacimiento
+        </form-select>
+
+        <form-select id="EstadoNacimiento" clase="form-group col-md-4 was-validated" v-bind:options="States" v-on:update:selected_index="cambiaEstadoNacimiento">
+            Estado de nacimiento
+        </form-select>
+        
+        <form-select id="PaisResidencia" clase="form-group col-md-4 was-validated" v-bind:options="Countries" v-on:update:selected_index="cambiaPaisResidencia">
+            País de residencia
+        </form-select>
         
         <form-input id="Tel" input_type="tel" clase="form-group col-md-4 was-validated" :input.sync="Tel">
             Teléfono de contacto
@@ -163,16 +171,7 @@ const app = new Vue({
         GEtnico: '',
         spinnerVisible:false,
         Countries: '',
-        Errores:[{
-            Mensaje:" Lo sentimos tu RPE/Clave unica ó correo Institucional no se encuentra.",
-            Visible:false
-        },{
-            Mensaje:"Las contraseñas no coinciden",
-            Visible:false
-        },{
-            Mensaje:"El curp no es válido",
-            Visible:false
-        }],
+        Errores:{},
         Countries:[],
         States:[],
     },
@@ -203,6 +202,8 @@ const app = new Vue({
             this.IdPaisResidencia = this.Countries[index].id;
         },
         uaslpUser: function(){
+            delete this.Errores['EmailR'];
+
             this.spinnerVisible = true;
 
             if(this.emailR!=''){
@@ -220,7 +221,6 @@ const app = new Vue({
                 this.Facultad = response['data']['data']['Dependencia'];
                 this.userInfo = response['data']['data'];
                 this.EmailR = response['data']['data']['email'];
-                this.Errores[0].Visible = false;
 
                 $('#PaisNacimiento').val('México');
                 $('#PaisResidencia').val('México');
@@ -229,15 +229,16 @@ const app = new Vue({
 
             }).catch((err) => {
                 this.spinnerVisible = false,
-                this.Errores[0].Visible = true;
                 this.apellidoM = '';
                 this.apellidoP = '';
                 this.nombres = '';
+
+                this.Errores['EmailR'] = 'Lo sentimos, no hemos encontrado tu RPE/Clave única.';
             });
         },
 
         VerificarContraseña:function(){
-            this.Errores[1].Visible= this.password !== this.passwordR;
+            //this.Errores['Password'] = this.password !== this.passwordR;
         },
     },
     mounted: function () {

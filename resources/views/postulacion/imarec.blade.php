@@ -53,6 +53,14 @@ class="container"
 
     </template>
 
+    <template v-slot:experiencia_laboral>
+        <work-experience></work-experience>
+
+        <div class="col-12 my-4">
+            <button type="button" class="btn btn-primary"> Añadir </button>
+        </div>
+    </template>
+
     @include('layouts.partials.required-documents')
 
 </student-appliance>

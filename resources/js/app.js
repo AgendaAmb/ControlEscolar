@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+Vue.config.productionTip = false;
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,8 +29,9 @@ Vue.component('modal-registro', require('./components/ModalRegistro.vue').defaul
 Vue.component('gender', require('./components/Gender.vue').default);
 Vue.component('form-input', require('./components/FormInput.vue').default);
 Vue.component('form-select', require('./components/FormSelect.vue').default);
-Vue.component('required-document', require('./components/RequiredDocument.vue').default);
-Vue.component('student-appliance', require('./components/Appliance.vue').default);
-Vue.component('appliant-data', require('./components/Appliant.vue').default);
+Vue.component('required-document', require('./components/appliance/RequiredDocument.vue').default);
+Vue.component('student-appliance', require('./components/appliance/StudentAppliance.vue').default);
+Vue.component('appliant-data', require('./components/appliance/Appliant.vue').default);
+Vue.component('work-experience', require('./components/appliance/WorkExperience.vue').default);
 Vue.component('scheduler', require('./components/calendar/Scheduler.vue').default);
 Vue.component('calendar', require('./components/calendar/Calendar.vue').default);

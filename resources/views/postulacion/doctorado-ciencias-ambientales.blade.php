@@ -5,7 +5,7 @@
 @endsection
 
 @section('container-class')
-{{ 'class="container"' }}
+class="container"
 @endsection
 
 @section('main')
@@ -60,6 +60,14 @@
         <form-input id="fechaExamenIngles" clase="form-group col-md-6" input_type="date"> Fecha de aplicación de tu examen de inglés: </form-input>
         <form-input id="puntajeExamenIngles" clase="form-group col-md-6" input_type="text"> Puntaje obtenido: </form-input>
 
+    </template>
+
+    <template v-slot:experiencia_laboral>
+        <work-experience></work-experience>
+
+        <div class="col-12 my-4">
+            <button type="button" class="btn btn-primary"> Añadir </button>
+        </div>
     </template>
 
     @include('layouts.partials.required-documents')

@@ -17,16 +17,22 @@
                 slots().default,
                 createElement('hr', { class:'col-12', style: data.color}),
                 createElement('h4', { class:'col-md-9 my-4' }, [
-                    'Datos Solicitud'
+                    createElement('strong', 'Datos Solicitud')
                 ]), 
 
                 slots().datos_solicitud,
                 createElement('hr', { class:'col-12', style: data.color}),
 
+                createElement('h4', { class:'col-md-9 my-4' }, [
+                    createElement('strong', 'Experiencia laboral')
+                ]), 
+                slots().experiencia_laboral,
+                createElement('hr', { class:'col-12', style: data.color}),
+
                 createElement('div', { class:'form-group col-12' }, [
                     createElement('div', { class:'row' }, [
                         createElement('h4', { class:'col-md-9 my-4' }, [
-                            'Información personal'
+                            createElement('strong', 'Información personal')
                         ])
 
 
@@ -38,7 +44,7 @@
                 createElement('div', { class:'form-group col-12' }, [
                     createElement('div', { class:'row' }, [
                         createElement('h4', { class:'col-md-9 my-4' }, [
-                            'Información académica'
+                            createElement('strong', 'Información académica')
                         ])
 
 
@@ -50,7 +56,7 @@
                 createElement('div', { class:'form-group col-12' }, [
                     createElement('div', { class:'row' }, [
                         createElement('h4', { class:'col-md-9 my-4' }, [
-                            'Formatos de ingreso'
+                            createElement('strong', 'Formatos de ingreso')
                         ])
 
 
@@ -62,7 +68,7 @@
                 createElement('div', { class:'form-group col-12' }, [
                     createElement('div', { class:'row' }, [
                         createElement('h4', { class:'col-md-9 my-4' }, [
-                            'Documentos curriculares'
+                            createElement('strong', 'Documentos curriculares')
                         ])
 
 
