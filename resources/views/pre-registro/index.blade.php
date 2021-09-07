@@ -13,23 +13,36 @@
     <x-academic-program-card src="{{ asset('storage/academic-programs/imarec-01.png') }}" />
 </div>
 
-<modal-registro @submit="RegistraUsuario">
+<x-modal-registro v-on:submit.prevent="RegistraUsuario">
+    
     <div class="form-row">
         <x-form-select id="PerteneceUASLP" class="form-group col-md-3" 
             v-for="option in [{ id: 'PerteneceUASLP_si', name:'Si' }, { id: 'PerteneceUASLP_no', name:'No' }]"> 
-            
-            ¿Perteneces a la UASLP?
         
+            <x-slot name="slot"> ¿Perteneces a la UASLP? </x-slot>
+            <x-slot name="error">
+                <div v-if="'PerteneceUASLP' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['PerteneceUASLP'][0] }} 
+                </div>
+            </x-slot>
         </x-form-select>
+    </div>
 
-        <input type="hidden" name="Dependencia" v-model="Facultad" v-if="PerteneceUASLP === 'Si'">
-        <div v-if="PerteneceUASLP === 'Si'" class="form-group col-12"></div>
+    <div class="form-row" v-if="PerteneceUASLP === 'Si'">
+        <input type="hidden" name="Dependencia" v-model="Facultad">
+        <div class="form-group col-12"></div>
 
-        <x-form-input id="emailR" type="text" class="form-group col-4" 
-                    v-if="PerteneceUASLP === 'Si'"> Ingresa tu RPE/clave única de alumno ó correo Institucional </x-form-input>
+        <x-form-input id="EmailR" type="text" class="form-group col-4"> 
+            <x-slot name="slot"> Ingresa tu RPE/clave única de alumno ó correo Institucional </x-slot>
+            <x-slot name="error">
+                <div v-if="'EmailR' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['EmailR'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
        
         
-        <div class="form-group col-2" v-if="PerteneceUASLP === 'Si'">
+        <div class="form-group col-2">
             <a class="btn btn btn-outline-light search-button" v-on:click="uaslpUser"
                 data-toggle="tooltip" data-placement="right" title="Buscar mi información"
                 v-if="!spinnerVisible"><i class="fas fa-search"></i></a>
@@ -39,58 +52,238 @@
             </button>
         </div>
 
-        <x-form-input id="emailR" type="email" class="form-group col-md-12" 
-                    v-if="PerteneceUASLP === 'No'"> Ingresa un correo electrónico </x-form-input>
-
-        <x-form-input id="Password" type="password" class="form-group col-md-6" 
-                    v-if="PerteneceUASLP === 'No'"> Contraseña </x-form-input>
-
-        <x-form-input id="PasswordR" type="password" class="form-group col-md-6" 
-                    v-if="PerteneceUASLP === 'No'"> Repite tu Contraseña </x-form-input>
+        
 
         <span class="text-danger" role="alert" v-if="'EmailR' in Errores">
             @{{Errores['EmailR']}}
         </span>
     </div>
+    <div class="form-row" v-if="PerteneceUASLP === 'No'">
+        <x-form-input id="EmailR" type="email" class="form-group col-md-12"> 
+            <x-slot name="slot"> Ingresa un correo electrónico </x-slot>
+            <x-slot name="error">
+                <div v-if="'EmailR' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['EmailR'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+
+        <x-form-input id="Password" type="password" class="form-group col-md-6"> 
+            <x-slot name="slot"> Contraseña </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'Password' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Password'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+
+        <x-form-input id="PasswordR" type="password" class="form-group col-md-6"> 
+            <x-slot name="slot"> Repite tu Contraseña </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'PasswordR' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['PasswordR'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+    </div>
+
 
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
-        <x-form-input id="Nombres" type="text" class="form-group col-md-12"> Nombre(s): </x-form-input>
-        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"> Apellido Paterno </x-form-input>
-        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6"> Apellido Materno </x-form-input>
+        <x-form-input id="Nombres" type="text" class="form-group col-md-12"> 
+            <x-slot name="slot"> Nombre(s): </x-slot>
+        
+            <x-slot name="error">
+                <div v-if="'Nombres' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Nombres'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+
+
+        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"> 
+            <x-slot name="slot"> Apellido Paterno </x-slot>
+        
+            <x-slot name="error">
+                <div v-if="'ApellidoP' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['ApellidoP'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+
+        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6"> 
+            <x-slot name="slot"> Apellido Materno </x-slot>
+        
+            <x-slot name="error">
+                <div v-if="'ApellidoM' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['ApellidoM'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
     </div>
     <div class="form-row">
-        <x-form-input id="Edad" type="number" class="form-group col-md-2"> Edad </x-form-input>
-        <gender :changed.sync="Genero"></gender>
+        <x-form-input id="Edad" type="number" class="form-group col-md-2"> 
+            <x-slot name="slot"> Edad </x-slot>
         
-    </div>
-    <yes-no-select id="TienesCurp" label="¿Tienes Curp?" @changed="tienesCurpChanged" clase="form-group col-md-4">
-        <x-form-input id="CURP" type="text" clase="form-group col-md-4" 
-                    v-if="TienesCurp === 'Si'"> Ingresa tu Curp: </x-form-input>
+            <x-slot name="error">
+                <div v-if="'ApellidoM' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['ApellidoM'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
 
-    </yes-no-select>
+        <x-form-select id="Genero" class="form-group col-md-3" 
+            v-for="option in [{ 
+                id: 'M', 
+                name:'Masculino' 
+            },{ 
+                id: 'F', 
+                name:'Femenino' 
+            },{ 
+                id: 'O', 
+                name:'Otros' 
+            },{ 
+                id: 'N', 
+                name:'No especificar' 
+            }]"> 
+        
+            <x-slot name="slot"> Genero </x-slot>
+            <x-slot name="error">
+                <div v-if="'Genero' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Genero'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-select>
+
+        <x-form-input id="OtroGenero" type="text" class="form-group col-md-2" v-if="Genero === 'Otros'"> 
+            <x-slot name="slot"> ¿Cuál? </x-slot>
+        
+            <x-slot name="error">
+                <div v-if="'OtroGenero' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['OtroGenero'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+    </div>
+
+    <div class="form-row">
+        <x-form-select id="TienesCurp" class="form-group col-md-3" 
+            v-for="option in [{ id: 'TienesCurp_si', name:'Si' }, { id: 'TienesCurp_no', name:'No' }]"> 
+        
+            <x-slot name="slot"> ¿TienesCurp? </x-slot>
+            <x-slot name="error">
+                <div v-if="'TienesCurp' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['TienesCurp'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-select>
+
+        <x-form-input id="Curp" type="text" class="form-group col-md-5"  v-if="TienesCurp === 'Si'"> 
+            <x-slot name="slot"> Ingresa tu Curp: </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'Curp' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Curp'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+    </div>
+
     <div class="form-row">
 
-        <x-form-select id="PaisNacimiento" class="form-group col-md-4" v-for="option in Countries" 
-            v-on:update="cambiaPaisNacimiento"> País de nacimiento </x-form-select>
+        <x-form-select id="PaisNacimiento" 
+                class="form-group col-md-4" 
+                v-for="option in Countries" 
+                v-on:change="cambiaPaisNacimiento($event.target.selectedIndex)"> 
 
-        <x-form-select id="EstadoNacimiento" class="form-group col-md-4" v-for="option in States" 
-            v-on:update="cambiaEstadoNacimiento"> Estado de nacimiento </x-form-select>
+            <x-slot name="slot"> País de nacimiento </x-slot> 
+            <x-slot name="error">
+                <div v-if="'PaisNacimiento' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['PaisNacimiento'][0] }} 
+                </div>
+            </x-slot> 
+        </x-form-select>
+
+        <x-form-select id="EstadoNacimiento" 
+                class="form-group col-md-4" 
+                v-for="option in States" 
+                v-on:change="cambiaEstadoNacimiento($event.target.selectedIndex)"> 
+
+            <x-slot name="slot"> Estado de nacimiento </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'EstadoNacimiento' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['EstadoNacimiento'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-select>
         
-        <x-form-select id="PaisResidencia" class="form-group col-md-4" v-for="option in Countries" 
-            v-on:update="cambiaPaisResidencia"> País de residencia </x-form-select>
+        <x-form-select id="PaisResidencia" 
+            class="form-group col-md-4" 
+            v-for="option in Countries" 
+            v-on:update="cambiaPaisResidencia($event.target.selectedIndex)"> 
+            
+            <x-slot name="slot"> País de residencia </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'PaisResidencia' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['PaisResidencia'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-select>
         
-        <x-form-input id="Tel" type="tel" class="form-group col-md-4"> Teléfono de contacto </x-form-input>
-        <x-form-input id="CP" type="number" class="form-group col-md-4"> Codigo Postal </x-form-input>
-        <x-form-input id="GEtnico" type="text" class="form-group col-md-4"> Grupo étnico </x-form-input>
+        <x-form-input id="Tel" type="tel" class="form-group col-md-4"> 
+            <x-slot name="slot"> Teléfono de contacto </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'Tel' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Tel'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+        
+        <x-form-input id="Cp" type="number" class="form-group col-md-4"> 
+            <x-slot name="slot"> Codigo Postal </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'Cp' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Cp'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+        
+        <x-form-input id="GEtnico" type="text" class="form-group col-md-4"> 
+            <x-slot name="slot"> Grupo étnico </x-slot>
+
+            <x-slot name="error">
+                <div v-if="'GEtnico' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['GEtnico'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
     </div>
 
-    <yes-no-select @changed="isDiscapacidadChanged" id="isDiscapacidad" label="¿Tienes alguna discapacidad?" clase="form-group col-md-4">
-        <x-form-input id="Discapacidad" type="text" class="form-group col-md-4" 
-            v-if="isDiscapacidad === 'Si'"> ¿Cuál? </x-form-input>
+    <div class="form-row">
+        <x-form-select id="IsDiscapacidad" class="form-group col-md-3" 
+                v-for="option in [{ id: 'IsDiscapacidad_si', name:'Si' }, 
+                { id: 'IsDiscapacidad_no', name:'No' }]"> 
+            
+            ¿Tienes alguna discapacidad?
+        </x-form-select>
 
+        <x-form-input id="Discapacidad" type="text" class="form-group col-md-4"  v-if="IsDiscapacidad === 'Si'"> 
+            <x-slot name="slot"> ¿Cuál? </x-slot>
+            
+            <x-slot name="error">
+                <div v-if="'Discapacidad' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['Discapacidad'][0] }} 
+                </div>
+            </x-slot>
+        </x-form-input>
+    </div>
 
-    </yes-no-select>
     <div class="form-row">
         <div class="form-group col-12 my-4">
             <div class="form-check">
@@ -110,21 +303,16 @@
             </div>
         </div>
     </div>
-</modal-registro>
+</x-modal-registro>
 @endsection
 
 @push('vuejs')
 <script>
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
  const app =  new Vue({
+    el: '#app',
     data: {
         PerteneceUASLP: '',
-        emailR: '',
+        EmailR: '',
         Nombres: '',
         ApellidoP: '',
         ApellidoM: '',
@@ -140,18 +328,18 @@
         IdEstadoNacimiento: '',
         EstadoNacimiento: '',
         TienesCurp: '',
-        CP: '',
+        Cp: '',
         Tel: '',
-        CURP:'',
-        isDiscapacidad: '',
+        Curp:'',
+        IsDiscapacidad: '',
         Discapacidad: '',
         GEtnico: '',
         spinnerVisible:false,
         Countries: '',
         Errores:{},
         Countries:[],
-        States:[]
-        
+        States:[],
+        OtroGenero: '',
     },
     methods: {
 
@@ -159,8 +347,8 @@
             this.TienesCurp = value;
         },
 
-        isDiscapacidadChanged(value){
-            this.isDiscapacidad = value;
+        IsDiscapacidadChanged(value){
+            this.IsDiscapacidad = value;
         },
 
         cambiaPaisNacimiento(index){
@@ -175,6 +363,7 @@
 
         cambiaPaisNacimiento(index){
 
+            console.log(index);
             if (index === -1) return;
             
             this.PaisNacimiento = this.Countries[index].name;
@@ -194,9 +383,9 @@
 
             this.spinnerVisible = true;
 
-            if(this.emailR!=''){
+            if(this.EmailR!=''){
                 var data = {
-                    "username":this.emailR
+                    "username":this.EmailR
                 }
             }
 
@@ -233,20 +422,24 @@
         RegistraUsuario: function(){
             
             let form_data = {
+                PerteneceUASLP: this.PerteneceUASLP,
+                EmailR: this.EmailR,
                 Nombres: this.Nombres,
                 ApellidoP: this.ApellidoP,
                 ApellidoM: this.ApellidoM,
-                CURP: this.CURP,
-                Tel: this.Tel,
+                Curp: this.Curp,
                 Edad: this.Edad,
                 Genero: this.Genero,
-                email: this.emailR,
-                password: this.Password,
-                passwordR: this.PasswordR,
+                OtroGenero :this.OtroGenero,
+                TienesCurp: this.TienesCurp,
+                Password: this.Password,
+                PasswordR: this.PasswordR,
                 PaisNacimiento: this.PaisNacimiento,
+                EstadoNacimiento: this.EstadoNacimiento,
                 PaisResidencia: this.PaisResidencia,
-                EstadoNacimiento: this.EstadoNaAcademicProgramCarddoNacimiento,
-                IsDiscapacidad: this.isDiscapacidad,
+                Tel: this.Tel,
+                Cp: this.Cp,
+                IsDiscapacidad: this.IsDiscapacidad,
                 Discapacidad: this.Discapacidad,
             };
 
@@ -258,11 +451,13 @@
                 headers: {
                     'Accept' : 'application/json'
                 }
-            }).then(response => {})
-            
-            .catch((err) => {
+            }).then(response => {
+
+                alert('Te has registrado exitosamente. Serás redirigido a Agenda Ambiental');
+            }).catch((err) => {
 
                 this.Errores = err.response.data['errors'];
+                console.log(this.Errores);
             });
         }
     },
@@ -278,7 +473,6 @@
             });
         });
     },
-    el: '#app'
 });
 </script>
 @endpush

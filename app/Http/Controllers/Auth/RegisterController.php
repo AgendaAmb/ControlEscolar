@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -42,32 +44,92 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Handle a registration request for the application.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function validator(array $data)
+    public function register(RegisterRequest $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        # Nuevo usuario del sistema.
+        $user = $this->create($request->all());
+
+
+        dd(1);
+        /*
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());*/
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return mixed
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        
     }
+
+    /**
+     * Creates the user model.
+     *
+     * @param  array  $new_user_data
+     * @return array
+     */
+    /*
+    private function createUser(array $new_user_data)
+    {
+        # Tipo de usuario, en base al DA
+        switch ($new_user_data['DirectorioActivo'])
+        {
+            case 'ALUMNOS':
+
+                $id = $new_user_data['ClaveUASLP'];
+                unset($new_user_data['DirectorioActivo']);
+                unset($new_user_data['ClaveUASLP']);
+                $user = Student::updateOrCreate([ 'id' => $id ],  $new_user_data);
+                $guard = 'students';
+
+                break;
+
+            case 'UASLP':
+
+                $id = $new_user_data['ClaveUASLP'];
+                unset($new_user_data['DirectorioActivo']);
+                unset($new_user_data['ClaveUASLP']);
+                $user = Worker::updateOrCreate([ 'id' => $id ],  $new_user_data);
+                $guard = 'workers';
+
+                if ($new_user_data['email'] === 'eugenia.almendarez@uaslp.mx')
+                    $user->assignRole('administrator');
+                else if ($new_user_data['email'] === 'laura.rodriguez@uaslp.mx')
+                    $user->assignRole('coordinator');
+                break;
+
+            default:
+
+                # El usuario externo no pertenece a ninguna facultad
+                unset($new_user_data['dependency']);
+                unset($new_user_data['DirectorioActivo']);
+                unset($new_user_data['ClaveUASLP']);
+                unset($new_user_data['CorreoAlterno']);
+                $user = Extern::create($new_user_data);
+                $guard = 'web';
+
+                break;
+        }
+
+        return [ $user, $guard ];
+    }*/
 }

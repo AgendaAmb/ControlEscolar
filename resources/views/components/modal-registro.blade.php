@@ -8,7 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form> {{ $slot }} </form>
+                <form v-on:submit.prevent="{{ $attributes->get('v-on:submit.prevent') }}"> 
+                    {{ $slot }} 
+                </form>
             </div>
         </div>
     </div>

@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
     {
         # Valida el correo de la uaslp.
         $response = Http::post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user', [
-            'username' => $this->email ?? null
+            'username' => $this->EmailR ?? null
         ]);
 
         # Guarda los datos recuperados del directorio activo en la solicitud.
@@ -40,7 +40,7 @@ class RegisterRequest extends FormRequest
                 'CURP' => $this->CURP !== null ? Str::upper($this->CURP) : null,
                 'DirectorioActivo' => $response_data['DirectorioActivo'],
                 'ClaveUASLP' => $response_data['ClaveUASLP'],
-                'email' => Str::lower($this->email),
+                'EmailR' => Str::lower($this->EmailR),
                 'Nombres' => Str::upper($response_data['name']),
                 'ApellidoP' => Str::upper($response_data['first_surname']),
                 'ApellidoM' => $response_data['last_surname'] !== null ? Str::upper($response_data['last_surname']) : null,
@@ -69,27 +69,34 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'PerteneceUASLP' => ['required', 'in:Si,No'],
+            'EmailR' => [ 'required', 'string', 'email', 'max:255' ],
+            'Password' => [ Rule::requiredIf($this->DirectorioActivo === null) ],
+            'PasswordR' => [ Rule::requiredIf($this->DirectorioActivo === null), 'same:password' ],
             'Nombres' => [ 'required', 'string', 'max:255' ],
             'ApellidoP' => [ 'required', 'string', 'max:255' ],
             'ApellidoM' => [ 'nullable' ],
-            'email' => [ 'required', 'string', 'email', 'max:255', 'unique:externs,email', 'unique:students,email', 'unique:workers,email' ],
-            'password' => [ Rule::requiredIf($this->DirectorioActivo === null) ],
-            'passwordR' => [ Rule::requiredIf($this->DirectorioActivo === null), 'same:password' ],
-            'Pais' => [ 'required' ],
-            'Tel' => [ 'required', 'numeric' ],
-            'CURP' => [
-                'nullable',
-                'required_if:Pais,México','size:18',
-                'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/i',
-                'unique:externs,curp',
-                'unique:students,curp',
-                'unique:workers,curp',
-            ],
             'Edad' => ['required','numeric'],
-            'LugarResidencia' => ['required'],
-            'Genero' => ['required','in:Masculino,Femenino,Otro,NoEspecificar'],
-            'OtroGenero' => ['nullable','required_if:Genero,Otro'],
-            //'CorreoAlterno' => ['required'],
+            'Genero' => ['required', 'in:Masculino,Femenino,Otros,No especificar'],
+            'OtroGenero' => ['nullable','required_if:Genero,Otros'],
+            'TienesCurp' => ['required', 'in:Si,No'],
+            'Curp' => [
+                'nullable',
+                'required_if:TienesCurp,Si',
+                'size:18',
+                'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/i',
+                //'unique:externs,curp',
+                //'unique:students,curp',
+                //'unique:workers,curp',
+            ],
+            
+            'PaisNacimiento' => [ 'required' ],
+            'EstadoNacimiento' => ['required'],
+            'PaisResidencia' => ['required'],
+            'Tel' => [ 'required', 'numeric' ],
+            'Cp' => ['required','numeric'],
+            'IsDiscapacidad' => ['required', 'in:Si,No'],
+            'Discapacidad' => ['nullable','required_if:IsDiscapacidad,Si']
         ];
     }
 }
