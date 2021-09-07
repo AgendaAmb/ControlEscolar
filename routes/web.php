@@ -18,7 +18,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/', 'prueba')->name('programasAcademicos');
+Route::view('/', 'pre-registro.index')->name('programasAcademicos');
 Route::view('/solicitud/maestria', 'postulacion.maestria-ciencias-ambientales')->name('maestria');
 Route::view('/solicitud/doctorado', 'postulacion.doctorado-ciencias-ambientales')->name('doctorado');
 Route::view('/solicitud/enrem', 'postulacion.enrem')->name('enrem');
