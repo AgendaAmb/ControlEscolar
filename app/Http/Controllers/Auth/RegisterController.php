@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 
 class RegisterController extends Controller
@@ -78,7 +76,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+        # Determina si el usuario fue registrado con éxito.
+        $res = MiPortalService::registerNewUserService($data);
+
+        if ($res === false)
+            dd('falló');
+
+        dd('todo cool');
     }
 
     /**
