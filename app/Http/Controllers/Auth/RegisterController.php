@@ -6,8 +6,9 @@ use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -76,13 +77,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        # Determina si el usuario fue registrado con éxito.
-        $res = MiPortalService::registerNewUserService($data);
+        try {
+            # Determina si el usuario fue registrado con éxito.
+            $res = MiPortalService::registerNewUserService($data);
 
-        if ($res === false)
+            dd('todo cool');
+        }catch (ValidationException $e){
+            dump($e->errors());
             dd('falló');
-
-        dd('todo cool');
+        }
     }
 
     /**

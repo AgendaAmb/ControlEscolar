@@ -72,7 +72,7 @@ class RegisterRequest extends FormRequest
             'PerteneceUASLP' => ['required', 'in:Si,No'],
             'EmailR' => [ 'required', 'string', 'email', 'max:255' ],
             'Password' => [ Rule::requiredIf($this->DirectorioActivo === null) ],
-            'PasswordR' => [ Rule::requiredIf($this->DirectorioActivo === null), 'same:password' ],
+            'PasswordR' => [ Rule::requiredIf($this->DirectorioActivo === null), 'same:Password' ],
             'Nombres' => [ 'required', 'string', 'max:255' ],
             'ApellidoP' => [ 'required', 'string', 'max:255' ],
             'ApellidoM' => [ 'nullable' ],
