@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Exception;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
@@ -53,20 +55,11 @@ class RegisterController extends Controller
         # Nuevo usuario del sistema.
         $user = $this->create($request->all());
 
-
-        dd(1);
-        /*
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
-
-        return $request->wantsJson()
-                    ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());*/
+        # Envía un evento, para registrar al usuario en el sistema.
+        event(new Registered($user));
+        
+        # Devuelve una respuesta de éxito.
+        return new JsonResponse([], 201);
     }
 
     /**
@@ -77,66 +70,39 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        try {
-            # Determina si el usuario fue registrado con éxito.
-            $res = MiPortalService::registerNewUserService($data);
+        try 
+        {
+            # Registra al usuario.
+            $registered_user = MiPortalService::registerNewUserService($data);
 
-            dd('todo cool');
-        }catch (ValidationException $e){
-            dump($e->errors());
-            dd('falló');
+            $user = User::create([
+                'id' => $registered_user['id'],
+                'type' => $registered_user['user_id']
+            ]);
+
+            return $user;
+        } 
+
+        # El usuario no fue registrado
+        catch (ValidationException $e) 
+        {
+            $errors = [
+                'EmailR' => $e->errors()['email'] ?? null,
+                'Nombres' => $e->errors()['Nombres'] ?? null,
+                'Genero' => $e->errors()['Genero'] ?? null,
+                'ApellidoP' => $e->errors()['ApellidoP'] ?? null,
+                'ApellidoM' => $e->errors()['ApellidoM'] ?? null,
+                'Password' => $e->errors()['password'] ?? null,
+                'PasswordR' => $e->errors()['passwordR'] ?? null,
+                'PaisNacimiento' => $e->errors()['Pais'] ?? null,
+                'Tel' => $e->errors()['Tel'] ?? null,
+                'Curp' => $e->errors()['CURP'] ?? null,
+                'Edad' => $e->errors()['Edad'] ?? null,
+                'PaisResidencia' => $e->errors()['LugarResidencia'] ?? null
+            ];
+
+            $errors = array_filter($errors, fn($val) => $val !== null);
+            throw ValidationException::withMessages($errors); 
         }
     }
-
-    /**
-     * Creates the user model.
-     *
-     * @param  array  $new_user_data
-     * @return array
-     */
-    /*
-    private function createUser(array $new_user_data)
-    {
-        # Tipo de usuario, en base al DA
-        switch ($new_user_data['DirectorioActivo'])
-        {
-            case 'ALUMNOS':
-
-                $id = $new_user_data['ClaveUASLP'];
-                unset($new_user_data['DirectorioActivo']);
-                unset($new_user_data['ClaveUASLP']);
-                $user = Student::updateOrCreate([ 'id' => $id ],  $new_user_data);
-                $guard = 'students';
-
-                break;
-
-            case 'UASLP':
-
-                $id = $new_user_data['ClaveUASLP'];
-                unset($new_user_data['DirectorioActivo']);
-                unset($new_user_data['ClaveUASLP']);
-                $user = Worker::updateOrCreate([ 'id' => $id ],  $new_user_data);
-                $guard = 'workers';
-
-                if ($new_user_data['email'] === 'eugenia.almendarez@uaslp.mx')
-                    $user->assignRole('administrator');
-                else if ($new_user_data['email'] === 'laura.rodriguez@uaslp.mx')
-                    $user->assignRole('coordinator');
-                break;
-
-            default:
-
-                # El usuario externo no pertenece a ninguna facultad
-                unset($new_user_data['dependency']);
-                unset($new_user_data['DirectorioActivo']);
-                unset($new_user_data['ClaveUASLP']);
-                unset($new_user_data['CorreoAlterno']);
-                $user = Extern::create($new_user_data);
-                $guard = 'web';
-
-                break;
-        }
-
-        return [ $user, $guard ];
-    }*/
 }

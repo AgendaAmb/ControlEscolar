@@ -40,4 +40,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Available gender choices.
+     *
+     * @var array
+     */
+    public const GENDER_CHOICES = [
+        'Masculino' => 'Masculino',
+        'Femenino' => 'Femenino',
+        'Otros' => 'Otro',
+        'No especificar' => 'NoEspecificar'
+    ];
 }
