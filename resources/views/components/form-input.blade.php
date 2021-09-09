@@ -14,7 +14,16 @@
             id="{{ $attributes->get('id') }}" 
             name="{{ $attributes->get('id') }}" 
             v-model="{{ $attributes->get('id') }}" 
-            style="{{ $attributes->get('style') }}" >
+            style="{{ $attributes->get('style') }}" 
+            
+            @if($attributes->has(':readonly')) 
+            :readonly="{{ $attributes->get(':readonly') }}"
+            @endif
+            
+            @if($attributes->has('readonly')) 
+            readonly="{{ $attributes->get('readonly') }}"
+            @endif
+            >
 
     <input v-if="'{{ $attributes->get('id') }}' in Errores" 
             type="{{ $attributes->get('type') }}" 
@@ -22,7 +31,16 @@
             id="{{ $attributes->get('id') }}" 
             name="{{ $attributes->get('id') }}" 
             v-model="{{ $attributes->get('id') }}" 
-            style="{{ $attributes->get('style') }}" > 
+            style="{{ $attributes->get('style') }}" 
+            
+            @if($attributes->has(':readonly')) 
+            :readonly="{{ $attributes->get(':readonly') }}"
+            @endif
+            
+            @if($attributes->has('readonly')) 
+            readonly="{{ $attributes->get('readonly') }}"
+            @endif
+            > 
 
     {{ $error }}
 </div>

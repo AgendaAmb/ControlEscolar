@@ -52,8 +52,6 @@
             </button>
         </div>
 
-        
-
         <span class="text-danger" role="alert" v-if="'EmailR' in Errores">
             @{{Errores['EmailR']}}
         </span>
@@ -92,7 +90,9 @@
 
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
-        <x-form-input id="Nombres" type="text" class="form-group col-md-12"> 
+        <x-form-input id="Nombres" type="text" class="form-group col-md-12" 
+                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
+
             <x-slot name="slot"> Nombre(s): </x-slot>
         
             <x-slot name="error">
@@ -103,8 +103,10 @@
         </x-form-input>
 
 
-        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"> 
-            <x-slot name="slot"> Apellido Paterno </x-slot>
+        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"
+                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
+
+            <x-slot name="slot"> Apellido paterno </x-slot>
         
             <x-slot name="error">
                 <div v-if="'ApellidoP' in Errores" class="invalid-feedback"> 
@@ -113,8 +115,10 @@
             </x-slot>
         </x-form-input>
 
-        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6"> 
-            <x-slot name="slot"> Apellido Materno </x-slot>
+        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6"
+                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
+                    
+            <x-slot name="slot"> Apellido materno </x-slot>
         
             <x-slot name="error">
                 <div v-if="'ApellidoM' in Errores" class="invalid-feedback"> 
@@ -149,7 +153,7 @@
                 name:'No especificar' 
             }]"> 
         
-            <x-slot name="slot"> Genero </x-slot>
+            <x-slot name="slot"> Género </x-slot>
             <x-slot name="error">
                 <div v-if="'Genero' in Errores" class="invalid-feedback"> 
                     @{{ Errores['Genero'][0] }} 
@@ -172,7 +176,7 @@
         <x-form-select id="TienesCurp" class="form-group col-md-3" 
             v-for="option in [{ id: 'TienesCurp_si', name:'Si' }, { id: 'TienesCurp_no', name:'No' }]"> 
         
-            <x-slot name="slot"> ¿TienesCurp? </x-slot>
+            <x-slot name="slot"> ¿Tienes CURP? </x-slot>
             <x-slot name="error">
                 <div v-if="'TienesCurp' in Errores" class="invalid-feedback"> 
                     @{{ Errores['TienesCurp'][0] }} 
@@ -245,7 +249,7 @@
         </x-form-input>
         
         <x-form-input id="Cp" type="number" class="form-group col-md-4"> 
-            <x-slot name="slot"> Codigo Postal </x-slot>
+            <x-slot name="slot"> Código postal </x-slot>
 
             <x-slot name="error">
                 <div v-if="'Cp' in Errores" class="invalid-feedback"> 
@@ -289,7 +293,7 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="gridCheck" required>
                 <label class="form-check-label" for="gridCheck">
-                    Al enviar la información confirmo que he leido y acepto el <a
+                    Al enviar la información confirmo que he leído y acepto el <a
                         href="http://transparencia.uaslp.mx/avisodeprivacidad" style="color: #fecc56;;"> aviso
                         de privacidad.</a>
                 </label>
