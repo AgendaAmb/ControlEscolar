@@ -15,7 +15,9 @@ class CreateArchivesTable extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('academic_program_id')->constrained('academic_programs')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
 
             $table->primary(['id','type']);
             $table->string('marital_state')->nullable();
+            $table->softDeletes();
         });
     }
 

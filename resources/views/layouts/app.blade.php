@@ -22,18 +22,15 @@
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <academic-program-header>
-            <a href="https://ambiental.uaslp.mx">
-                @section('headerPicture')
-                <img class="img-fluid mt-4" src="{{ asset('storage/headers/logod.png') }}">
-                @show
-            </a>
-        </academic-program-header>
-        <main id="fondoRayas" @section('container-class') class="container-fluid" @show> 
-            @yield('main') 
-        </main>
-    </div>
+    <x-academic-program-header>
+        <a href="https://ambiental.uaslp.mx">
+            @section('headerPicture') <img class="img-fluid mt-4" src="{{ asset('storage/headers/logod.png') }}"> @show
+        </a>
+    </x-academic-program-header>
+    <main id="app" @section('container-class') class="container-fluid" @show> 
+        @yield('main') 
+    </main>
+    @stack('variables')
     @stack('vuejs')
 </body>
 </html>

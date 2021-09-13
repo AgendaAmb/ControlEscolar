@@ -20,11 +20,7 @@
             v-for="option in [{ id: 'PerteneceUASLP_si', name:'Si' }, { id: 'PerteneceUASLP_no', name:'No' }]"> 
         
             <x-slot name="slot"> ¿Perteneces a la UASLP? </x-slot>
-            <x-slot name="error">
-                <div v-if="'PerteneceUASLP' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['PerteneceUASLP'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'PerteneceUASLP' in Errores">  @{{ Errores['PerteneceUASLP'][0] }} </x-slot>
         </x-form-select>
     </div>
 
@@ -34,11 +30,7 @@
 
         <x-form-input id="EmailR" type="text" class="form-group col-4"> 
             <x-slot name="slot"> Ingresa tu RPE/clave única de alumno ó correo Institucional </x-slot>
-            <x-slot name="error">
-                <div v-if="'EmailR' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['EmailR'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'EmailR' in Errores"> @{{ Errores['EmailR'][0] }} </x-slot>
         </x-form-input>
        
         
@@ -59,83 +51,42 @@
     <div class="form-row" v-if="PerteneceUASLP === 'No'">
         <x-form-input id="EmailR" type="email" class="form-group col-md-12"> 
             <x-slot name="slot"> Ingresa un correo electrónico </x-slot>
-            <x-slot name="error">
-                <div v-if="'EmailR' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['EmailR'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'EmailR' in Errores">  @{{ Errores['EmailR'][0] }} </x-slot>
         </x-form-input>
 
         <x-form-input id="Password" type="password" class="form-group col-md-6"> 
             <x-slot name="slot"> Contraseña </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'Password' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Password'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Password' in Errores"> @{{ Errores['Password'][0] }} </x-slot>
         </x-form-input>
 
         <x-form-input id="PasswordR" type="password" class="form-group col-md-6"> 
             <x-slot name="slot"> Repite tu Contraseña </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'PasswordR' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['PasswordR'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'PasswordR' in Errores"> @{{ Errores['PasswordR'][0] }} </x-slot>
         </x-form-input>
     </div>
 
 
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
     <div class="form-row">
-        <x-form-input id="Nombres" type="text" class="form-group col-md-12" 
-                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
-
+        <x-form-input id="Nombres" type="text" class="form-group col-md-12" ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
             <x-slot name="slot"> Nombre(s): </x-slot>
-        
-            <x-slot name="error">
-                <div v-if="'Nombres' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Nombres'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Nombres' in Errores"> @{{ Errores['Nombres'][0] }} </x-slot>
         </x-form-input>
 
-
-        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"
-                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
-
+        <x-form-input id="ApellidoP" type="text" class="form-group col-md-6"  ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
             <x-slot name="slot"> Apellido paterno </x-slot>
-        
-            <x-slot name="error">
-                <div v-if="'ApellidoP' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['ApellidoP'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'ApellidoP' in Errores"> @{{ Errores['ApellidoP'][0] }} </x-slot>
         </x-form-input>
 
-        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6"
-                    ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
-                    
+        <x-form-input id="ApellidoM" type="text" class="form-group col-md-6" ::readonly="PerteneceUASLP === 'Si' ? true : false"> 
             <x-slot name="slot"> Apellido materno </x-slot>
-        
-            <x-slot name="error">
-                <div v-if="'ApellidoM' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['ApellidoM'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'ApellidoM' in Errores"> @{{ Errores['ApellidoM'][0] }} </x-slot>
         </x-form-input>
     </div>
     <div class="form-row">
         <x-form-input id="Edad" type="number" class="form-group col-md-2"> 
             <x-slot name="slot"> Edad </x-slot>
-        
-            <x-slot name="error">
-                <div v-if="'ApellidoM' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['ApellidoM'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'ApellidoM' in Errores"> @{{ Errores['ApellidoM'][0] }} </x-slot>
         </x-form-input>
 
         <x-form-select id="Genero" class="form-group col-md-3" 
@@ -154,21 +105,12 @@
             }]"> 
         
             <x-slot name="slot"> Género </x-slot>
-            <x-slot name="error">
-                <div v-if="'Genero' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Genero'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Genero' in Errores"> @{{ Errores['Genero'][0] }} </x-slot>
         </x-form-select>
 
         <x-form-input id="OtroGenero" type="text" class="form-group col-md-2" v-if="Genero === 'Otros'"> 
             <x-slot name="slot"> ¿Cuál? </x-slot>
-        
-            <x-slot name="error">
-                <div v-if="'OtroGenero' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['OtroGenero'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'OtroGenero' in Errores"> @{{ Errores['OtroGenero'][0] }} </x-slot>
         </x-form-input>
     </div>
 
@@ -250,22 +192,12 @@
         
         <x-form-input id="Cp" type="number" class="form-group col-md-4"> 
             <x-slot name="slot"> Código postal </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'Cp' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Cp'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Cp' in Errores">  @{{ Errores['Cp'][0] }} </x-slot>
         </x-form-input>
         
         <x-form-input id="GEtnico" type="text" class="form-group col-md-4"> 
             <x-slot name="slot"> Grupo étnico </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'GEtnico' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['GEtnico'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'GEtnico' in Errores"> @{{ Errores['GEtnico'][0] }} </x-slot>
         </x-form-input>
     </div>
 
@@ -279,12 +211,7 @@
 
         <x-form-input id="Discapacidad" type="text" class="form-group col-md-4"  v-if="IsDiscapacidad === 'Si'"> 
             <x-slot name="slot"> ¿Cuál? </x-slot>
-            
-            <x-slot name="error">
-                <div v-if="'Discapacidad' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Discapacidad'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Discapacidad' in Errores"> @{{ Errores['Discapacidad'][0] }} </x-slot>
         </x-form-input>
     </div>
 

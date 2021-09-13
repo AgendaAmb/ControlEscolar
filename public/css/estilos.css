@@ -84,6 +84,14 @@ body
     margin-top: 25px;
 }
 
+.botonArchivo
+{
+    cursor: pointer; 
+    width: 142px; 
+    height: 63px;
+    transform: scale(0.70) translate(40px);
+}
+
 .contenedor
 {
     max-width: 900px;
@@ -235,6 +243,11 @@ body
         color: #005faf;
         border-top: 4px solid #005faf;
         border-left: 0px solid #005faf;
+    }
+
+    .botonArchivo
+    {
+        transform: scale(0.70) translate(-40px);
     }
 
 }

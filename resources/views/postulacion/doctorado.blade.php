@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
 @section('headerPicture')
-<img class="img-fluid mt-4" src="{{ asset('storage/headers/IMAREC-SUPERIOR.png') }}" width="600px">
+<img class="img-fluid mt-4" src="{{ asset('storage/headers/DOCTORADO-SUPERIOR.png') }}" width="600px">
 @endsection
 
 @section('container-class', 'class=container')
-@section('main')
 
-<x-student-appliance style="background-color:#0598bc; height: 1px;" action="{{ route('solicitud.actualizaSolicitud') }}" v-on:submit.prevent="actualizaSolicitud">    
-    <x-slot name="profile_picture"></x-slot>
+@section('main')
+<x-student-appliance style="background-color:#FECC50; height: 1px;" action="{{ route('solicitud.actualizaSolicitud') }}" v-on:submit.prevent="actualizaSolicitud">
+    <x-slot name="profile_picture">
+
+    </x-slot>
     <x-slot name="identidad_usuario">
         <x-form-input id="curp" type="text" class="col-12 mt-3" readonly> CURP: </x-form-input>
         <x-form-input id="name" type="text" class="col-12 mt-3" readonly> Nombre(s): </x-form-input>
@@ -29,7 +31,11 @@
     <x-slot name="datos_solicitud">
         <x-form-input id="tituloObtenido" class="form-group col-12"> 
             <x-slot name="slot"> Grado de estudios (como se muestra en el documento probatorio): </x-slot>
-            <x-slot name="error" v-if="'tituloObtenido' in Errores"> @{{ Errores['tituloObtenido'][0] }} </x-slot> 
+            <x-slot name="error">
+                <div v-if="'tituloObtenido' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['tituloObtenido'][0] }} 
+                </div>
+            </x-slot> 
         </x-form-input> 
 
         <x-form-select id="PaisEstudios" class="form-group col-md-6" 
@@ -64,6 +70,15 @@
                 </div>
             </x-slot> 
         </x-form-input> 
+
+        <x-form-input id="CVU" class="form-group col-md-6"> 
+            <x-slot name="slot">  Número de CVU: </x-slot>
+            <x-slot name="error">
+                <div v-if="'CVU' in Errores" class="invalid-feedback"> 
+                    @{{ Errores['CVU'][0] }} 
+                </div>
+            </x-slot> 
+        </x-form-input>
         
         <div class="form-group col-12 my-0"></div>
 
@@ -119,10 +134,7 @@
 
     <x-slot name="informacion_personal">
         <x-required-document v-for="document in personal_documents">
-            <x-slot name="viewFile" v-if="document.id in TemporalDocuments"></x-slot>
-            <x-slot name="selectFile" v-on:change="cargarArchivo($event, document)">
-
-            </x-slot>
+            <x-slot name="selectFile" v-on:change="cargarArchivo($event, document)"></x-slot>
         </x-required-document>
     </x-slot>
 

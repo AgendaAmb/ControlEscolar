@@ -1,0 +1,1 @@
+<div {{ $attributes }} class="invalid-feedback" > {{ $slot }} </div>
