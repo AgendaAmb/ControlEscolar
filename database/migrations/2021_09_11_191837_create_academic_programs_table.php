@@ -79,6 +79,28 @@ class CreateAcademicProgramsTable extends Migration
             [ 'required_document_id' => 20, 'academic_program_id' => 2 ],
             [ 'required_document_id' => 21, 'academic_program_id' => 2 ],
 
+            # ENREM.
+            [ 'required_document_id' => 22, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 23, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 24, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 25, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 26, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 27, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 28, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 29, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 30, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 31, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 32, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 33, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 34, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 35, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 36, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 37, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 38, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 39, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 40, 'academic_program_id' => 3 ],
+            [ 'required_document_id' => 41, 'academic_program_id' => 3 ],
+
             # Maestría en ciencias ambientales
             [ 'required_document_id' => 1, 'academic_program_id' => 4 ],
             [ 'required_document_id' => 2, 'academic_program_id' => 4 ],

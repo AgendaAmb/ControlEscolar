@@ -86,7 +86,7 @@
     <div class="form-row">
         <x-form-input id="Edad" type="number" class="form-group col-md-2"> 
             <x-slot name="slot"> Edad </x-slot>
-            <x-slot name="error" v-if="'ApellidoM' in Errores"> @{{ Errores['ApellidoM'][0] }} </x-slot>
+            <x-slot name="error" v-if="'Edad' in Errores"> @{{ Errores['Edad'][0] }} </x-slot>
         </x-form-input>
 
         <x-form-select id="Genero" class="form-group col-md-3" 
@@ -119,75 +119,37 @@
             v-for="option in [{ id: 'TienesCurp_si', name:'Si' }, { id: 'TienesCurp_no', name:'No' }]"> 
         
             <x-slot name="slot"> ¿Tienes CURP? </x-slot>
-            <x-slot name="error">
-                <div v-if="'TienesCurp' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['TienesCurp'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'TienesCurp' in Errores"> @{{ Errores['TienesCurp'][0] }}</x-slot>
         </x-form-select>
 
         <x-form-input id="Curp" type="text" class="form-group col-md-5"  v-if="TienesCurp === 'Si'"> 
             <x-slot name="slot"> Ingresa tu Curp: </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'Curp' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Curp'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Curp' in Errores">@{{ Errores['Curp'][0] }} </x-slot>
         </x-form-input>
     </div>
 
     <div class="form-row">
-
-        <x-form-select id="PaisNacimiento" 
-                class="form-group col-md-4" 
-                v-for="option in Countries" 
-                v-on:change="cambiaPaisNacimiento($event.target.selectedIndex)"> 
-
+        <x-form-select id="PaisNacimiento" class="form-group col-md-4" v-for="option in Countries" v-on:change="cambiaPaisNacimiento($event.target.selectedIndex)"> 
             <x-slot name="slot"> País de nacimiento </x-slot> 
-            <x-slot name="error">
-                <div v-if="'PaisNacimiento' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['PaisNacimiento'][0] }} 
-                </div>
-            </x-slot> 
+            <x-slot name="error" v-if="'PaisNacimiento' in Errores"> @{{ Errores['PaisNacimiento'][0] }} </x-slot> 
         </x-form-select>
 
-        <x-form-select id="EstadoNacimiento" 
-                class="form-group col-md-4" 
-                v-for="option in States" 
-                v-on:change="cambiaEstadoNacimiento($event.target.selectedIndex)"> 
+        <x-form-select id="EstadoNacimiento" class="form-group col-md-4" v-for="option in States" v-on:change="cambiaEstadoNacimiento($event.target.selectedIndex)"> 
 
             <x-slot name="slot"> Estado de nacimiento </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'EstadoNacimiento' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['EstadoNacimiento'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'EstadoNacimiento' in Errores"> @{{ Errores['EstadoNacimiento'][0] }} </x-slot>
         </x-form-select>
         
-        <x-form-select id="PaisResidencia" 
-            class="form-group col-md-4" 
-            v-for="option in Countries" 
-            v-on:update="cambiaPaisResidencia($event.target.selectedIndex)"> 
+        <x-form-select id="PaisResidencia" class="form-group col-md-4" 
+            v-for="option in Countries" v-on:update="cambiaPaisResidencia($event.target.selectedIndex)"> 
             
             <x-slot name="slot"> País de residencia </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'PaisResidencia' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['PaisResidencia'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'PaisResidencia' in Errores"> @{{ Errores['PaisResidencia'][0] }} </x-slot>
         </x-form-select>
         
         <x-form-input id="Tel" type="tel" class="form-group col-md-4"> 
             <x-slot name="slot"> Teléfono de contacto </x-slot>
-
-            <x-slot name="error">
-                <div v-if="'Tel' in Errores" class="invalid-feedback"> 
-                    @{{ Errores['Tel'][0] }} 
-                </div>
-            </x-slot>
+            <x-slot name="error" v-if="'Tel' in Errores">  @{{ Errores['Tel'][0] }} </x-slot>
         </x-form-input>
         
         <x-form-input id="Cp" type="number" class="form-group col-md-4"> 

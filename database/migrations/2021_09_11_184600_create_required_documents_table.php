@@ -239,7 +239,187 @@ class CreateRequiredDocumentsTable extends Migration
                 'example' => '18B_Recomendación_02_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => true,
-            ]
+            ],
+
+            [
+                'name' =>"1.- Birth Certificate",
+                'type' => 'personal',
+                'label' => "01_BirthCert_iniciales",
+                'example' => '01_BirthCert_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"2.- CURP",
+                'type' => 'personal',
+                'label' => '02_CURP_añodesolicitud_iniciales',
+                'example' => '02_CURP_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"3.- INE",
+                'type' => 'personal',
+                'label' => '03_INE_añodesolicitud_iniciales',
+                'example' => '03_INE_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"4.- Passport",
+                'type' => 'personal',
+                'label' => '04_Pasaporte_añodesolicitud_iniciales',
+                'example' => '04_Pasaporte_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"5.- High School Certificate",
+                'type' => 'academic',
+                'label' => '05_HighSchool_iniciales',
+                'example' => '05_HighSchool_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"5A.- Bachelor Degree",
+                'type' => 'academic',
+                'label' => '05A_DegreeBachelor_iniciales',
+                'example' => '05A_DegreeBachelor_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"6.- Bachelor Transcript",
+                'type' => 'academic',
+                'label' => '06A_TranscriptBachelor_iniciales',
+                'example' => '06A_TranscriptBachelor_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"7.- Final Grade Average of Bachelor Degree",
+                'type' => 'academic',
+                'label' => '07A_PromBachelor_iniciales',
+                'example' => '07A_PromBachelor_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"8.- Professional License",
+                'type' => 'academic',
+                'label' => '08A_ProfessionalLicense_iniciales',
+                'example' => '08A_ProfessionalLicense_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"9.- ENREM Application Form",
+                'type' => 'entrance',
+                'label' => '09A_Application_iniciales',
+                'example' => '09A_Application_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"9A.- DAAD Application Form",
+                'type' => 'entrance',
+                'label' => '09A_DAAD_iniciales',
+                'example' => '09A_DAAD_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"13A.- Proof of English Proficiency",
+                'type' => 'entrance',
+                'label' => '13A_English_iniciales',
+                'example' => '13A_English_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"13B.- Proof of Spanish Proficiency",
+                'type' => 'entrance',
+                'label' => '13B_Spanish_iniciales',
+                'example' => '13B_English_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"13C.- Proof of German Proficiency",
+                'type' => 'entrance',
+                'label' => '13C_German_iniciales',
+                'example' => '13C_German_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"15.- Project idea",
+                'type' => 'entrance',
+                'label' => '15_ProjectIdea_iniciales',
+                'example' => '15_ProjectIdea_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"16.- Currículum Vítae",
+                'type' => 'curricular',
+                'label' => '16_CV_añodesolicitud_iniciales',
+                'example' => '16_CV_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"17A.- Certificate(s) of Employment/Internship",
+                'type' => 'curricular',
+                'label' => '17A_ProofExperience_iniciales',
+                'example' => '17A_ProofExperience_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"17B.- Confirmation of employment",
+                'type' => 'curricular',
+                'label' => '17B_ConfirmationEmp_iniciales',
+                'example' => '17B_ConfirmationEmp_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            [
+                'name' =>"18A.- Recommendation Letter",
+                'type' => 'curricular',
+                'label' => '18A_Recommendation_01_añodesolicitud_iniciales',
+                'example' => '18A_Recommendation_01_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => true,
+            ],
+            
+            [
+                'name' =>"18B.- Recommendation Letter",
+                'type' => 'curricular',
+                'label' => '18B_Recommendation_02_añodesolicitud_iniciales',
+                'example' => '18B_Recommendation_02_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => true,
+            ],
         ]);
     }
 

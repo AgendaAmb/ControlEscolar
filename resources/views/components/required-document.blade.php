@@ -4,12 +4,20 @@
     'selectFile',
 ])
 
-@if($attributes->get('v-for') !== null) 
-<div class="row mb-3" v-for="{{ $attributes->get('v-for') }}">
-@else
-<div class="row mb-3">
-@endif
+@php
 
+$component_attributes = $attributes->filter(function($value, $key) { 
+    return collect(['class','v-for'])->contains($key) === true;
+});
+
+$select_file_attributes = $attributes->filter(function($value, $key) { 
+    return collect(['v-on:change','v-bind:id', 'v-if'])->contains($key) === true;
+});
+
+@endphp
+
+
+<div {{ $component_attributes }}>
     <div class="col-sm-9 my-3">
         <div class="row">
             <div class="col-md-8">
@@ -22,49 +30,24 @@
                     <strong> Ejemplo: </strong>
                     @{{document.example}}
                 </h6>
+
+                <input type="file" 
+                    v-bind:id="{{ $attributes->get('v-bind:id') }}" 
+                    v-bind:name="{{ $attributes->get('v-bind:id') }}" 
+                    v-on:change="{{ $attributes->get('v-on:change') }}"
+                    style="display: none" 
+                    accept="application/pdf"/>
             </div>
         </div>
     </div>
 
-    @if($selectFile !== null && $selectFile->attributes->get('v-if') !== null)
-    <div class="col-sm-3 text-sm-right my-auto" v-if="{{ $selectFile->attributes->get('v-if') }}">
-    @else
     <div class="col-sm-3 text-sm-right my-auto">
-    @endif
-
-        @isset($selectFile)
-        <input type="file" v-bind:id="'document[' + document.id + ']'" v-bind:name="'document[' + document.id + ']'" style="display: none" accept="application/pdf" {{ $selectFile->attributes }}>
-        @else
-        <input type="file" v-bind:id="'document[' + document.id + ']'" v-bind:name="'document[' + document.id + ']'" style="display: none" accept="application/pdf">
-        @endisset
-
-        @isset($viewFile)
-        <div class="d-block" v-if="document.id in TemporalDocuments || document.documents.length > 0">
-            {{-- Si el documento está en los archivos temporales --}}
-            <a v-if="document.id in TemporalDocuments" 
-                v-bind:id="'view_document[' + document.id + ']'"
-                :href="TemporalDocuments[document.id]" 
-                style="display: none"
-                target="_blank">
-            </a>
-            <label v-bind:for="'view_document[' + document.id + ']'"
-                    style="background-image: url({{ asset('storage/archive-buttons/ver.png') }});"  
-                    class="botonArchivo my-0">
-            </label>
-        </div>   
+        @isset($viewFile) 
+        <div class="d-block" {{ $viewFile->attributes }} > {{ $viewFile }} </div>  
         @endisset
 
         @isset($selectFile)
-        <div class="d-block">
-            <label v-bind:for="'document[' + document.id + ']'" style="background-image: url({{ asset('storage/archive-buttons/seleccionar.png') }});" class="botonArchivo my-0">
-            </label>
-            
-            <p class="mt-n2" v-bind:id="'document'+document.id+'_text'">
-                <small>
-                    <strong> Formato .pdf </strong>
-                </small>
-            </p>
-        </div>
+        <div class="d-block" {{ $selectFile->attributes }}> {{ $selectFile }} </div>
         @endisset
     </div>
 </div>
