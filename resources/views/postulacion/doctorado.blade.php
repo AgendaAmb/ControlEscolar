@@ -15,10 +15,10 @@
     <x-slot name="datos_titulacion"> @include('postulacion.datos-titulacion') </x-slot>
     <x-slot name="datos_ingles"> @include('postulacion.datos-ingles') </x-slot>
 
-    {{--  
-    <x-slot name="experiencia_laboral"> 
-        <x-working-experience v-for="ExperienciaLaboral in ExperienciasLaborales"></x-working-experience>
-    </x-slot>--}}
+    
+    <x-slot name="grados_academicos"> 
+        <x-grado-academico></x-grado-academico>
+    </x-slot>
 
     @include('postulacion.required-documents')
 </x-student-appliance>

@@ -7,6 +7,7 @@
     'informacion_academica' => null,
     'formatos_ingreso' => null,
     'documentos_curriculares' => null,
+    'grados_academicos' => null,
 ])
 
 <form @if($attributes->has('v-on:submit.prevent'))
@@ -69,18 +70,19 @@
         <div class="col-12"> {{ $formatos_ingreso }} </div>
         @endisset
 
+        @isset($grados_academicos)
         <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
+        <h4 class="col-md-9 my-4"><strong> Grados académicos </strong></h4>
+        
+        <div class="col-12"> {{ $grados_academicos }} </div>
+        @endisset
+
+
+        {{--
+
 
         @isset($documentos_curriculares)
-        <h4 class="col-md-9 my-4"><strong> Experiencia laboral y Documentos curriculares </strong></h4>
-
-        @isset($experiencia_laboral)
-        <div class="col-12">
-            <div class="row">
-                {{ $experiencia_laboral }}
-            </div>
-        </div>
-        @endisset
+        <h4 class="col-md-9 my-4"><strong> Documentos curriculares </strong></h4>
         
         <div class="col-12"> 
             {{ $documentos_curriculares }} 
@@ -88,6 +90,6 @@
             <button type="submit" class="d-block my-3 btn btn-primary"> Guardar </button>
         </div>
         @endisset
-
+--}}
     </div>
 </form>

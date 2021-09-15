@@ -43,7 +43,7 @@ $select_file_attributes = $attributes->filter(function($value, $key) {
 
     <div class="col-sm-3 text-sm-right my-auto">
         @isset($viewFile) 
-        <div class="d-block" {{ $viewFile->attributes }} > {{ $viewFile }} </div>  
+        {{ $viewFile }}
         @endisset
 
         @isset($selectFile)
