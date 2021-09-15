@@ -2,7 +2,6 @@
     'profile_picture' => null,
     'identidad_usuario' => null,
     'datos_personales' => null,
-    'datos_solicitud' => null,
     'experiencia_laboral' => null,
     'informacion_personal' => null,
     'informacion_academica' => null,
@@ -29,25 +28,22 @@
             </div>
         </div>
 
-        @isset($datos_solicitud)
+        @isset($datos_universitarios)
         <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
         <h4 class="col-md-9 my-4"><strong> Datos Solicitud </strong></h4>
         
 
         <div class="col-12">
             <div class="row">
-                {{ $datos_solicitud }}
+                {{ $datos_universitarios }}
+                <div class="form-group col-12 my-0"></div>
             </div>
-        </div>
-        @endisset
-
-        @isset($experiencia_laboral)
-        <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
-
-        <h4 class="col-md-9 my-4"><strong> Experiencia laboral  </strong></h4>
-        <div class="col-12">
             <div class="row">
-                {{ $experiencia_laboral }}
+                {{ $datos_titulacion }}
+                <div class="form-group col-12 my-0"></div>
+            </div>
+            <div class="row">
+                {{ $datos_ingles }}
             </div>
         </div>
         @endisset
@@ -75,12 +71,23 @@
 
         <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
 
-        <h4 class="col-md-9 my-4"><strong> Documentos curriculares  </strong></h4>
+        @isset($documentos_curriculares)
+        <h4 class="col-md-9 my-4"><strong> Experiencia laboral y Documentos curriculares </strong></h4>
+
+        @isset($experiencia_laboral)
+        <div class="col-12">
+            <div class="row">
+                {{ $experiencia_laboral }}
+            </div>
+        </div>
+        @endisset
+        
         <div class="col-12"> 
             {{ $documentos_curriculares }} 
         
             <button type="submit" class="d-block my-3 btn btn-primary"> Guardar </button>
         </div>
+        @endisset
 
     </div>
 </form>

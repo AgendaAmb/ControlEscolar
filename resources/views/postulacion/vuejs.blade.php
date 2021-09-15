@@ -23,6 +23,7 @@ const app = new Vue({
         surname:'',
         fechaNacimiento:'',
         genero:'',
+        estadoCivil: '',
         paisNacimiento:'',
         edoNacimiento:'',
         paisResidencia:'',
@@ -30,6 +31,7 @@ const app = new Vue({
         email:'',
         emailAlt:'',
         tituloObtenido:'',
+        cedulaProfesional: '',
         PaisEstudios:'',
         IdPaisEstudios: '',
         UniversidadProcedencia:'',
@@ -58,6 +60,15 @@ const app = new Vue({
         Errores: [],
         Documents:{},
         TemporalDocuments: {},
+        ExperienciasLaborales: [{
+            FechaInicio: '',
+            FechaFin: '',
+            TipoAprobacion: '',
+            Puesto: '',
+            Organizacion: '',
+            Pais: '',
+            Descripcion: ''
+        }],
     }, 
     
     mounted: function() {
