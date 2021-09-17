@@ -75,12 +75,12 @@
                     <input type="text" v-model="Promedio" class="form-control">
                 </div> 
 
-                <div class="form-group col-6 col-sm-4"> 
+                <div v-if="PaisEstudios !== 'México'" class="form-group col-6 col-sm-4"> 
                     <label> Calificación mínima: </label>
                     <input type="text" v-model="CalMin" class="form-control">
                 </div> 
 
-                <div class="form-group col-6 col-sm-4"> 
+                <div v-if="PaisEstudios !== 'México'" class="form-group col-6 col-sm-4"> 
                     <label> Calificación máxima: </label>
                     <input type="text" v-model="CalMax" class="form-control">
                 </div> 
@@ -105,18 +105,17 @@
                     </select>
                 </div>
 
-
                 <div class="form-group col-6 col-sm-4"> 
                     <label> Promedio obtenido: </label>
                     <input type="text" v-model="Promedio" class="form-control">
                 </div> 
 
-                <div class="form-group col-6 col-sm-4"> 
+                <div v-if="PaisEstudios !== 'México'" class="form-group col-6 col-sm-4"> 
                     <label> Calificación mínima: </label>
                     <input type="text" v-model="CalMin" class="form-control">
                 </div> 
 
-                <div class="form-group col-6 col-sm-4"> 
+                <div v-if="PaisEstudios !== 'México'" class="form-group col-6 col-sm-4"> 
                     <label> Calificación máxima: </label>
                     <input type="text" v-model="CalMax" class="form-control">
                 </div> 
@@ -161,15 +160,17 @@
                     <p class="my-0 d-block"><strong> Ejemplo: </strong>08A_Cédula_2021_CJG  </p>
                 </div>
                 <div class="form-group col-lg-12 my-auto"> 
+                    <a v-if="doccedula !== null && doccedula.url !== null" class="d-inline-block verArchivo my-3" :href="doccedula.url" target="_blank"></a>
+                    
                     <label class="cargarArchivo my-3"> 
-                        <input type="file" class="form-control d-none">
+                        <input type="file" class="form-control d-none" @change="cargaCedulaProfesional">
                     </label>
                 </div>
             </div> 
         </div>
         <div class="form-group col-12 my-5"> 
-            <button type="button" class="btn btn-primary"> Guardar </button>
-            <button type="button" class="btn btn-danger"> Cancelar </button>
+            <button type="button" class="btn btn-primary" > Guardar </button>
+            <button type="button" class="btn btn-danger" @click="$emit('cancelainsertar', id)"> Cancelar </button>
         </div>
     </div>
 </template>
@@ -177,6 +178,14 @@
 <style scoped>
 .cargarArchivo {
     background: url(/controlescolar/storage/archive-buttons/seleccionar.png);
+    background-size: 90px 40px;
+    background-repeat: no-repeat;
+    width: 90px;
+    height: 40px;
+}
+
+.verArchivo {
+    background: url(/controlescolar/storage/archive-buttons/ver.png);
     background-size: 90px 40px;
     background-repeat: no-repeat;
     width: 90px;
@@ -211,6 +220,9 @@ export default {
             promedio: '',
             calmin: '',
             calmax: '',
+            doccedula: null,
+            docconstancia: null,
+            docpromedio: null,
             universidades: [],
 
             escolaridades: [
@@ -350,12 +362,39 @@ export default {
                 this.universidades = value;
             }
         },
+
+        DocCedula: {
+            get: function() {
+                return this.doccedula;
+            },
+            set: function(value) {
+                this.doccedula = value;
+                this.$emit('update:doccedula', value);
+            }
+        },
         
     },
     methods: {
         escogePais(evento) {
             this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
-        } 
+        },
+
+        cargaCedulaProfesional(e){
+            console.log('typescript');
+
+            this.$nextTick(function() {
+                let reader = new FileReader();
+
+                reader.onload = (event) => {
+                    this.DocCedula = {
+                        documento: e.target.files[0],
+                        url: event.target.result
+                    };
+                };
+
+                reader.readAsDataURL(e.target.files[0]);
+            });
+        }
     }
 }
 </script>

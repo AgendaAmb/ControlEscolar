@@ -2160,6 +2160,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'grado-academico',
   props: {
@@ -2184,6 +2193,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       promedio: '',
       calmin: '',
       calmax: '',
+      doccedula: null,
+      docconstancia: null,
+      docpromedio: null,
       universidades: [],
       escolaridades: ['Licenciatura', 'Maestría', 'Doctorado'],
       estatusEstudios: ['Créditos terminados', 'Grado obtenido', 'Título o grado en proceso']
@@ -2301,10 +2313,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     set: function set(value) {
       this.universidades = value;
     }
+  }), _defineProperty(_computed, "DocCedula", {
+    get: function get() {
+      return this.doccedula;
+    },
+    set: function set(value) {
+      this.doccedula = value;
+      this.$emit('update:doccedula', value);
+    }
   }), _computed),
   methods: {
     escogePais: function escogePais(evento) {
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
+    },
+    cargaCedulaProfesional: function cargaCedulaProfesional(e) {
+      console.log('typescript');
+      this.$nextTick(function () {
+        var _this = this;
+
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          _this.DocCedula = {
+            documento: e.target.files[0],
+            url: event.target.result
+          };
+        };
+
+        reader.readAsDataURL(e.target.files[0]);
+      });
     }
   }
 });
@@ -6998,7 +7035,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-5cf7dad2] {\n    background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\n    background-size: 90px 40px;\n    background-repeat: no-repeat;\n    width: 90px;\n    height: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-5cf7dad2] {\n    background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\n    background-size: 90px 40px;\n    background-repeat: no-repeat;\n    width: 90px;\n    height: 40px;\n}\n.verArchivo[data-v-5cf7dad2] {\n    background: url(/controlescolar/storage/archive-buttons/ver.png);\n    background-size: 90px 40px;\n    background-repeat: no-repeat;\n    width: 90px;\n    height: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39939,57 +39976,61 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
-              _c("label", [_vm._v(" Calificación mínima: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.CalMin,
-                    expression: "CalMin"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.CalMin },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _vm.PaisEstudios !== "México"
+              ? _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
+                  _c("label", [_vm._v(" Calificación mínima: ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.CalMin,
+                        expression: "CalMin"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.CalMin },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.CalMin = $event.target.value
+                      }
                     }
-                    _vm.CalMin = $event.target.value
-                  }
-                }
-              })
-            ]),
+                  })
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
-              _c("label", [_vm._v(" Calificación máxima: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.CalMax,
-                    expression: "CalMax"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.CalMax },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _vm.PaisEstudios !== "México"
+              ? _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
+                  _c("label", [_vm._v(" Calificación máxima: ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.CalMax,
+                        expression: "CalMax"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.CalMax },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.CalMax = $event.target.value
+                      }
                     }
-                    _vm.CalMax = $event.target.value
-                  }
-                }
-              })
-            ])
+                  })
+                ])
+              : _vm._e()
           ])
         : _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "form-group col-sm-6" }, [
@@ -40123,57 +40164,61 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
-              _c("label", [_vm._v(" Calificación mínima: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.CalMin,
-                    expression: "CalMin"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.CalMin },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _vm.PaisEstudios !== "México"
+              ? _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
+                  _c("label", [_vm._v(" Calificación mínima: ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.CalMin,
+                        expression: "CalMin"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.CalMin },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.CalMin = $event.target.value
+                      }
                     }
-                    _vm.CalMin = $event.target.value
-                  }
-                }
-              })
-            ]),
+                  })
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
-              _c("label", [_vm._v(" Calificación máxima: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.CalMax,
-                    expression: "CalMax"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.CalMax },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _vm.PaisEstudios !== "México"
+              ? _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
+                  _c("label", [_vm._v(" Calificación máxima: ")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.CalMax,
+                        expression: "CalMax"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.CalMax },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.CalMax = $event.target.value
+                      }
                     }
-                    _vm.CalMax = $event.target.value
-                  }
-                }
-              })
-            ])
+                  })
+                ])
+              : _vm._e()
           ])
     ]),
     _vm._v(" "),
@@ -40183,9 +40228,50 @@ var render = function() {
     _vm._v(" "),
     _vm._m(1),
     _vm._v(" "),
-    _vm._m(2),
+    _c("div", { staticClass: "form-group col-xl-4 my-auto" }, [
+      _c("div", { staticClass: "row my-2" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-lg-12 my-auto" }, [
+          _vm.doccedula !== null && _vm.doccedula.url !== null
+            ? _c("a", {
+                staticClass: "d-inline-block verArchivo my-3",
+                attrs: { href: _vm.doccedula.url, target: "_blank" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _c("label", { staticClass: "cargarArchivo my-3" }, [
+            _c("input", {
+              staticClass: "form-control d-none",
+              attrs: { type: "file" },
+              on: { change: _vm.cargaCedulaProfesional }
+            })
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
-    _vm._m(3)
+    _c("div", { staticClass: "form-group col-12 my-5" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "button" } },
+        [_vm._v(" Guardar ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.$emit("cancelainsertar", _vm.id)
+            }
+          }
+        },
+        [_vm._v(" Cancelar ")]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -40259,51 +40345,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-xl-4 my-auto" }, [
-      _c("div", { staticClass: "row my-2" }, [
-        _c("div", { staticClass: "form-group col-lg-12" }, [
-          _c("h5", { staticClass: "mt-4 d-block" }, [
-            _c("strong", [_vm._v(" 8A.- Cédula profesional escaneada ")])
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-            _c("strong", [_vm._v(" Etiqueta: ")]),
-            _vm._v("08A_Cédula_Año_iniciales(Apellidos,Nombres) ")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "my-0 d-block" }, [
-            _c("strong", [_vm._v(" Ejemplo: ")]),
-            _vm._v("08A_Cédula_2021_CJG  ")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-lg-12 my-auto" }, [
-          _c("label", { staticClass: "cargarArchivo my-3" }, [
-            _c("input", {
-              staticClass: "form-control d-none",
-              attrs: { type: "file" }
-            })
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-12 my-5" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v(" Guardar ")]
-      ),
+    return _c("div", { staticClass: "form-group col-lg-12" }, [
+      _c("h5", { staticClass: "mt-4 d-block" }, [
+        _c("strong", [_vm._v(" 8A.- Cédula profesional escaneada ")])
+      ]),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-danger", attrs: { type: "button" } },
-        [_vm._v(" Cancelar ")]
-      )
+      _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+        _c("strong", [_vm._v(" Etiqueta: ")]),
+        _vm._v("08A_Cédula_Año_iniciales(Apellidos,Nombres) ")
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "my-0 d-block" }, [
+        _c("strong", [_vm._v(" Ejemplo: ")]),
+        _vm._v("08A_Cédula_2021_CJG  ")
+      ])
     ])
   }
 ]

@@ -16,13 +16,12 @@
     <x-slot name="datos_universitarios"> 
         <div class="col-12" v-if="GradosAcademicos.length > 0">
             <grado-academico v-for="(GradoAcademico, i) in GradosAcademicos"
-            :key="i + 1"
-            :id="GradoAcademico.id"
-            :paises="Countries"
+            :key="i + 1" :id="i + 1" :paises="Countries"
             :escolaridad.sync="GradoAcademico.escolaridad"
             :titulo.sync="GradoAcademico.titulo"
             :paisestudios.sync="GradoAcademico.paisestudios"
-            :universidad.sync="GradoAcademico.universidad">
+            :universidad.sync="GradoAcademico.universidad"
+            v-on:cancelainsertar="quitaDatoAcademico">
             </grado-academico> 
         </div>
         <div class="col-12" v-else>

@@ -30,6 +30,7 @@ const app = new Vue({
         telContacto:'',
         email:'',
         emailAlt:'',
+        /*
         tituloObtenido:'',
         cedulaProfesional: '',
         PaisEstudios:'',
@@ -40,7 +41,7 @@ const app = new Vue({
         calificacionMinima: '',
         calificacionMaxima: '',
         promedio: '',
-        PuntajeEXANI: '',
+        PuntajeEXANI: '',*/
         ExamenIngles: '',
         IdExamenIngles: '',
         TipoExamenIngles: '',
@@ -48,27 +49,29 @@ const app = new Vue({
         fechaExamenIngles: '',
         puntajeExamenIngles: '',
 
+        /*
         personal_documents: personalDocuments,
         academic_documents: academicDocuments,
         entrance_documents: entranceDocuments,
-        curricular_documents: curricularDocuments, 
+        curricular_documents: curricularDocuments, */
 
         Countries: [],
         CountryUniversities:[],
         EnglishExams: [],
         EnglishExamTypes: [],
         Errores: [],
-        Documents:{},
-        TemporalDocuments: {},
+        //Documents:{},
+        //TemporalDocuments: {},
         GradosAcademicos: [],
     }, 
     
     mounted: function() {
 
+        /*
         this.personal_documents.forEach((document) => Vue.set(this.TemporalDocuments, document.id, null));
         this.academic_documents.forEach((document) => Vue.set(this.TemporalDocuments, document.id, null));
         this.entrance_documents.forEach((document) => Vue.set(this.TemporalDocuments, document.id, null));
-        this.curricular_documents.forEach((document) => Vue.set(this.TemporalDocuments, document.id, null));
+        this.curricular_documents.forEach((document) => Vue.set(this.TemporalDocuments, document.id, null));*/
 
         this.$nextTick(function () {
             axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
@@ -143,6 +146,10 @@ const app = new Vue({
                 calmin: '',
                 calmax: '',
             });
+        },
+
+        quitaDatoAcademico(id) {
+            this.$delete(this.radosAcademicos, id - 1);
         },
 
         actualizaSolicitud(e, document) {
