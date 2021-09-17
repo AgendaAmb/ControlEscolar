@@ -85,6 +85,7 @@ const app = new Vue({
                 this.EnglishExams = response.data;
             });
 
+            this.nuevoDatoAcademico(null);
         });
     },
     methods: {

@@ -2165,10 +2165,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'grado-academico',
   props: {
@@ -2198,7 +2194,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       docpromedio: null,
       universidades: [],
       escolaridades: ['Licenciatura', 'Maestría', 'Doctorado'],
-      estatusEstudios: ['Créditos terminados', 'Grado obtenido', 'Título o grado en proceso']
+      estatusEstudios: ['Pasante', 'Grado obtenido', 'Título o grado en proceso']
     };
   },
   computed: (_computed = {
@@ -39747,9 +39743,9 @@ var render = function() {
                 }
               })
             ])
-          : _vm.Estatus === "Créditos terminados"
+          : _vm.Estatus === "Pasante"
           ? _c("div", { staticClass: "form-group col-12" }, [
-              _c("label", [_vm._v(" Fecha de finalización de créditos: ")]),
+              _c("label", [_vm._v(" Fecha de obtención de pasantía: ")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -39775,7 +39771,7 @@ var render = function() {
             ])
           : _vm.Estatus === "Título o grado en proceso"
           ? _c("div", { staticClass: "form-group col-12" }, [
-              _c("label", [_vm._v(" Fecha de obtención de pasantía: ")]),
+              _c("label", [_vm._v(" Fecha de presentación de examen: ")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -40249,28 +40245,6 @@ var render = function() {
           ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-12 my-5" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v(" Guardar ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              return _vm.$emit("cancelainsertar", _vm.id)
-            }
-          }
-        },
-        [_vm._v(" Cancelar ")]
-      )
     ])
   ])
 }
@@ -40283,17 +40257,17 @@ var staticRenderFns = [
       _c("div", { staticClass: "row my-2" }, [
         _c("div", { staticClass: "form-group col-lg-12" }, [
           _c("h5", { staticClass: "mt-4 d-block" }, [
-            _c("strong", [_vm._v(" 7A.- Constancia de promedio ")])
+            _c("strong", [_vm._v(" 6.- Constancia de promedio ")])
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
             _c("strong", [_vm._v(" Etiqueta: ")]),
-            _vm._v(" 07A_Promedio_Año_iniciales(Apellidos,Nombres)  ")
+            _vm._v(" 06_Promedio_Año_iniciales(Apellidos,Nombres)  ")
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "my-0 d-block" }, [
             _c("strong", [_vm._v(" Ejemplo: ")]),
-            _vm._v(" 07A_Promedio_2021_CJG  ")
+            _vm._v(" 07_Promedio_2021_CJG  ")
           ])
         ]),
         _vm._v(" "),
@@ -40316,17 +40290,17 @@ var staticRenderFns = [
       _c("div", { staticClass: "row my-2" }, [
         _c("div", { staticClass: "form-group col-lg-12" }, [
           _c("h5", { staticClass: "mt-4 d-block" }, [
-            _c("strong", [_vm._v(" 7B.- Certificado de promedio ")])
+            _c("strong", [_vm._v(" 7.- Certificado de promedio ")])
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
             _c("strong", [_vm._v(" Etiqueta: ")]),
-            _vm._v("  07B_Promedio_Año_iniciales(Apellidos,Nombres)   ")
+            _vm._v("  07_Certf_Año_iniciales(Apellidos,Nombres)   ")
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "my-0 d-block" }, [
             _c("strong", [_vm._v(" Ejemplo: ")]),
-            _vm._v("  07B_Promedio_2021_CJG   ")
+            _vm._v("  07_Certf_2021_CJG   ")
           ])
         ]),
         _vm._v(" "),
@@ -40347,17 +40321,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-lg-12" }, [
       _c("h5", { staticClass: "mt-4 d-block" }, [
-        _c("strong", [_vm._v(" 8A.- Cédula profesional escaneada ")])
+        _c("strong", [_vm._v(" 8.- Cédula profesional escaneada ")])
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
         _c("strong", [_vm._v(" Etiqueta: ")]),
-        _vm._v("08A_Cédula_Año_iniciales(Apellidos,Nombres) ")
+        _vm._v("08_Cédula_Año_iniciales(Apellidos,Nombres) ")
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "my-0 d-block" }, [
         _c("strong", [_vm._v(" Ejemplo: ")]),
-        _vm._v("08A_Cédula_2021_CJG  ")
+        _vm._v("08_Cédula_2021_CJG  ")
       ])
     ])
   }

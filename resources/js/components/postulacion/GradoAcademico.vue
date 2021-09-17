@@ -32,12 +32,12 @@
                     <label> Fecha de titulación: </label>
                     <input type="date" v-model="FechaObtencion" class="form-control">
                 </div> 
-                <div class="form-group col-12" v-else-if="Estatus === 'Créditos terminados'"> 
-                    <label> Fecha de finalización de créditos: </label>
+                <div class="form-group col-12" v-else-if="Estatus === 'Pasante'"> 
+                    <label> Fecha de obtención de pasantía: </label>
                     <input type="date" v-model="FechaObtencion" class="form-control">
                 </div> 
                 <div class="form-group col-12" v-else-if="Estatus === 'Título o grado en proceso'"> 
-                    <label> Fecha de obtención de pasantía: </label>
+                    <label> Fecha de presentación de examen: </label>
                     <input type="date" v-model="FechaObtencion" class="form-control">
                 </div> 
             </div>
@@ -126,9 +126,9 @@
         <div class="form-group col-xl-4 my-auto"> 
             <div class="row my-2">
                 <div class="form-group col-lg-12"> 
-                    <h5 class="mt-4 d-block"><strong> 7A.- Constancia de promedio </strong></h5>
-                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> 07A_Promedio_Año_iniciales(Apellidos,Nombres)  </p>
-                    <p class="my-0 d-block"><strong> Ejemplo: </strong> 07A_Promedio_2021_CJG  </p>
+                    <h5 class="mt-4 d-block"><strong> 6.- Constancia de promedio </strong></h5>
+                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> 06_Promedio_Año_iniciales(Apellidos,Nombres)  </p>
+                    <p class="my-0 d-block"><strong> Ejemplo: </strong> 07_Promedio_2021_CJG  </p>
                 </div>
                 <div class="form-group col-lg-12 my-auto"> 
                     <label class="cargarArchivo my-3"> 
@@ -140,9 +140,9 @@
         <div class="form-group col-xl-4 my-auto"> 
             <div class="row my-2">
                 <div class="form-group col-lg-12"> 
-                    <h5 class="mt-4 d-block"><strong> 7B.- Certificado de promedio </strong></h5>
-                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong>  07B_Promedio_Año_iniciales(Apellidos,Nombres)   </p>
-                    <p class="my-0 d-block"><strong> Ejemplo: </strong>  07B_Promedio_2021_CJG   </p>
+                    <h5 class="mt-4 d-block"><strong> 7.- Certificado de promedio </strong></h5>
+                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong>  07_Certf_Año_iniciales(Apellidos,Nombres)   </p>
+                    <p class="my-0 d-block"><strong> Ejemplo: </strong>  07_Certf_2021_CJG   </p>
                 </div>
                 <div class="form-group col-lg-12 my-auto"> 
                     <label class="cargarArchivo my-3"> 
@@ -155,9 +155,9 @@
         <div class="form-group col-xl-4 my-auto"> 
             <div class="row my-2">
                 <div class="form-group col-lg-12"> 
-                    <h5 class="mt-4 d-block"><strong> 8A.- Cédula profesional escaneada </strong></h5>
-                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong>08A_Cédula_Año_iniciales(Apellidos,Nombres) </p>
-                    <p class="my-0 d-block"><strong> Ejemplo: </strong>08A_Cédula_2021_CJG  </p>
+                    <h5 class="mt-4 d-block"><strong> 8.- Cédula profesional escaneada </strong></h5>
+                    <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong>08_Cédula_Año_iniciales(Apellidos,Nombres) </p>
+                    <p class="my-0 d-block"><strong> Ejemplo: </strong>08_Cédula_2021_CJG  </p>
                 </div>
                 <div class="form-group col-lg-12 my-auto"> 
                     <a v-if="doccedula !== null && doccedula.url !== null" class="d-inline-block verArchivo my-3" :href="doccedula.url" target="_blank"></a>
@@ -167,10 +167,6 @@
                     </label>
                 </div>
             </div> 
-        </div>
-        <div class="form-group col-12 my-5"> 
-            <button type="button" class="btn btn-primary" > Guardar </button>
-            <button type="button" class="btn btn-danger" @click="$emit('cancelainsertar', id)"> Cancelar </button>
         </div>
     </div>
 </template>
@@ -231,7 +227,7 @@ export default {
                 'Doctorado'
             ],
             estatusEstudios: [
-                'Créditos terminados',
+                'Pasante',
                 'Grado obtenido',
                 'Título o grado en proceso'
             ],
