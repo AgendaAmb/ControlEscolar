@@ -128,7 +128,7 @@
                 <div class="form-group col-lg-12"> 
                     <h5 class="mt-4 d-block"><strong> 6.- Constancia de promedio </strong></h5>
                     <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> 06_Promedio_Año_iniciales(Apellidos,Nombres)  </p>
-                    <p class="my-0 d-block"><strong> Ejemplo: </strong> 07_Promedio_2021_CJG  </p>
+                    <p class="my-0 d-block"><strong> Ejemplo: </strong> 06_Promedio_2021_CJG  </p>
                 </div>
                 <div class="form-group col-lg-12 my-auto"> 
                     <label class="cargarArchivo my-3"> 

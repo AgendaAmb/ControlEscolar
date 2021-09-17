@@ -40267,7 +40267,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "my-0 d-block" }, [
             _c("strong", [_vm._v(" Ejemplo: ")]),
-            _vm._v(" 07_Promedio_2021_CJG  ")
+            _vm._v(" 06_Promedio_2021_CJG  ")
           ])
         ]),
         _vm._v(" "),
