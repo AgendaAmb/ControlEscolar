@@ -11,14 +11,31 @@
     <x-slot name="profile_picture"></x-slot>
     <x-slot name="identidad_usuario"> @include('postulacion.identidad-usuario') </x-slot>
     <x-slot name="datos_personales"> @include('postulacion.datos-personales') </x-slot>
-    <x-slot name="datos_universitarios"> @include('postulacion.datos-universitarios') </x-slot>
-    <x-slot name="datos_titulacion"> @include('postulacion.datos-titulacion') </x-slot>
-    <x-slot name="datos_ingles"> @include('postulacion.datos-ingles') </x-slot>
 
-    
-    <x-slot name="grados_academicos"> 
-        <x-grado-academico></x-grado-academico>
+
+    <x-slot name="datos_universitarios"> 
+        <div class="col-12" v-if="GradosAcademicos.length > 0">
+            <grado-academico v-for="(GradoAcademico, i) in GradosAcademicos"
+            :key="i + 1"
+            :id="GradoAcademico.id"
+            :paises="Countries"
+            :escolaridad.sync="GradoAcademico.escolaridad"
+            :titulo.sync="GradoAcademico.titulo"
+            :paisestudios.sync="GradoAcademico.paisestudios"
+            :universidad.sync="GradoAcademico.universidad">
+            </grado-academico> 
+        </div>
+        <div class="col-12" v-else>
+            <h5 class="d-block"><strong> Aún no se ha subido información. </strong></h5>
+        </div>
+        <div class="col-12 my-3">
+            <button type="button" class="btn btn-success" v-on:click="nuevoDatoAcademico"> Agregar </button>
+        </div>
     </x-slot>
+    <x-slot name="dominio_idioma"> 
+
+    </x-slot>
+
 
     @include('postulacion.required-documents')
 </x-student-appliance>

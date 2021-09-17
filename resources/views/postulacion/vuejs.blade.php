@@ -60,15 +60,7 @@ const app = new Vue({
         Errores: [],
         Documents:{},
         TemporalDocuments: {},
-        ExperienciasLaborales: [{
-            FechaInicio: '',
-            FechaFin: '',
-            TipoAprobacion: '',
-            Puesto: '',
-            Organizacion: '',
-            Pais: '',
-            Descripcion: ''
-        }],
+        GradosAcademicos: [],
     }, 
     
     mounted: function() {
@@ -81,9 +73,7 @@ const app = new Vue({
         this.$nextTick(function () {
             axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
             .then(response => {
-                
                 this.Countries = response.data;
-                
             });
 
             axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
@@ -93,7 +83,6 @@ const app = new Vue({
             });
 
         });
-
     },
     methods: {
         cambiaPaisEstudios(index){
@@ -137,6 +126,23 @@ const app = new Vue({
 
             $('#view_document'+document.id+'_text small strong').change();
             $('#document'+document.id+'_text small strong').text(this.Documents[document.id].name);
+        },
+
+        nuevoDatoAcademico(e) {
+            this.GradosAcademicos.push({
+                id: this.GradosAcademicos.length + 1,
+                escolaridad: null,
+                titulo: '',
+                estatus: '',
+                cedula: '',
+                fechaobtencion: '',
+                paisestudios: '',
+                universidad: '',
+                modotitulacion: '',
+                promedio: '',
+                calmin: '',
+                calmax: '',
+            });
         },
 
         actualizaSolicitud(e, document) {
