@@ -34,9 +34,6 @@
     <x-slot name="dominio_idioma"> 
 
     </x-slot>
-
-
-    @include('postulacion.required-documents')
 </x-student-appliance>
 
 @endsection
