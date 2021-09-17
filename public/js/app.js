@@ -39934,12 +39934,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-8 my-4" }, [
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h5", { staticClass: "d-block" }, [_vm._v("Cédula profesional")]),
+        _c("h5", [_vm._v("Cédula profesional")]),
         _vm._v(" "),
-        _c("a", {
-          staticClass: "d-inline-block verArchivo",
-          attrs: { href: "#" }
-        })
+        _c("a", { staticClass: "verArchivo", attrs: { href: "#" } })
       ])
     ])
   }

@@ -19,8 +19,8 @@
 
     <div class="col-lg-8 my-4">
       <div class="d-flex justify-content-between">
-        <h5 class="d-block">Cédula profesional</h5>
-        <a class="d-inline-block verArchivo" href="#"></a>
+        <h5>Cédula profesional</h5>
+        <a class="verArchivo" href="#"></a>
       </div>
     </div><!--
     <div class="col-lg-3 my-4">
@@ -47,8 +47,8 @@
           <h5 class="d-inline-block">Certificado de promedio</h5>
           <a class="d-inline-block verArchivo" href="#"></a>
         </div>
-      </div>-->
     </div>
+      </div>-->
   </div>
 </template>
 
