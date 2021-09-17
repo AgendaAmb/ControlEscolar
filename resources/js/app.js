@@ -23,3 +23,4 @@ Vue.config.productionTip = false;
 Vue.component('scheduler', require('./components/calendar/Scheduler.vue').default);
 Vue.component('calendar', require('./components/calendar/Calendar.vue').default);
 Vue.component('grado-academico', require('./components/postulacion/GradoAcademico.vue').default);
+Vue.component('grado-academico-postulante', require('./components/carta-intencion/GradoAcademico.vue').default);

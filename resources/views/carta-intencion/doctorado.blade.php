@@ -14,21 +14,21 @@
 
     <x-slot name="datos_universitarios"> 
         <div class="col-12">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5 class="d-block my-4"><strong> 1.- </strong>  Licenciatura en picar piedra </h5>
-                    <h5 class="d-block my-2"><strong> País donde realizó sus estudios: </strong>  México</h5>
-                    <h5 class="d-block my-2"><strong> Universidad de procedencia: </strong>  La universidad de los picapiedra </h5>
-                    <h5 class="d-block my-2"><strong> Estatus: </strong>  Grado obtenido </h5>
-                    <h5 class="d-block my-2"><strong> Fecha de titulación: </strong>  15 de septiembre del 2021 </h5>
-                    <h5 class="d-block my-2"><strong> Promedio obtenido: </strong>  8.6 </h5>
-                </div>
+            <grado-academico-postulante v-for="GradoAcademico in GradosAcademicos"
+                :id="GradoAcademico.id"
+                :titulo="GradoAcademico.titulo"
+                :paisEstudios="GradoAcademico.paisEstudios"
+                :estatus="GradoAcademico.estatus"
+                :fechaTitulacion="GradoAcademico.fechaTitulacion"
+                :promedio="GradoAcademico.promedio"
+                :calMin="GradoAcademico.calMin"
+                :calMax="GradoAcademico.calMax"
+                :numCedula="GradoAcademico.numCedula"
+                :urlCedula="GradoAcademico.urlCedula"
+                :urlConstanciaPromedio="GradoAcademico.urlConstanciaPromedio"
+                :urlCertificadoPromedio="GradoAcademico.urlCertificadoPromedio">
 
-                <div class="col-md-8">
-                    
-                </div>
-            </div>
-            
+            </grado-academico-postulante>
         </div>
     </x-slot>
 </x-student-appliance>
