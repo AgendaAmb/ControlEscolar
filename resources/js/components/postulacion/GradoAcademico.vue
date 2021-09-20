@@ -172,8 +172,8 @@
     <div class="col-12"></div>
     <div class="form-group col-xl-4 my-auto">
       <div class="row my-2">
-        <div class="form-group col-lg-12">
-          <h5 class="mt-4 d-block">
+        <div class="form-group col-9 col-xl-12">
+          <h5 class="mt-4 d-lg-block">
             <strong> 6.- Constancia de promedio </strong>
           </h5>
           <p class="mt-3 mb-1 d-block">
@@ -184,7 +184,7 @@
             <strong> Ejemplo: </strong> 06_Promedio_2021_CJG
           </p>
         </div>
-        <div class="form-group col-lg-12 my-auto">
+        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
           <label class="cargarArchivo my-3">
             <input type="file" class="form-control d-none" />
           </label>
@@ -193,7 +193,7 @@
     </div>
     <div class="form-group col-xl-4 my-auto">
       <div class="row my-2">
-        <div class="form-group col-lg-12">
+        <div class="form-group col-9 col-xl-12">
           <h5 class="mt-4 d-block">
             <strong> 7.- Certificado de promedio </strong>
           </h5>
@@ -205,7 +205,7 @@
             <strong> Ejemplo: </strong> 07_Certf_2021_CJG
           </p>
         </div>
-        <div class="form-group col-lg-12 my-auto">
+        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
           <label class="cargarArchivo my-3">
             <input type="file" class="form-control d-none" />
           </label>
@@ -215,7 +215,7 @@
 
     <div class="form-group col-xl-4 my-auto">
       <div class="row my-2">
-        <div class="form-group col-lg-12">
+        <div class="form-group col-9 col-xl-12">
           <h5 class="mt-4 d-block">
             <strong> 8.- Cédula profesional escaneada </strong>
           </h5>
@@ -227,7 +227,7 @@
             <strong> Ejemplo: </strong>08_Cédula_2021_CJG
           </p>
         </div>
-        <div class="form-group col-lg-12 my-auto">
+        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
           <a
             v-if="doccedula !== null && doccedula.url !== null"
             class="d-inline-block verArchivo my-3"

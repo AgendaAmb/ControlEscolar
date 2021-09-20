@@ -31,8 +31,9 @@
             <button type="button" class="btn btn-success" v-on:click="nuevoDatoAcademico"> Agregar </button>
         </div>
     </x-slot>
-    <x-slot name="dominio_idioma"> 
 
+    <x-slot name="dominio_idioma"> 
+        <lengua-extranjera></lengua-extranjera>
     </x-slot>
 </x-student-appliance>
 
