@@ -23,5 +23,6 @@ Vue.config.productionTip = false;
 Vue.component('scheduler', require('./components/calendar/Scheduler.vue').default);
 Vue.component('calendar', require('./components/calendar/Calendar.vue').default);
 Vue.component('grado-academico', require('./components/postulacion/GradoAcademico.vue').default);
+Vue.component('documento-requerido', require('./components/postulacion/DocumentoRequerido.vue').default);
 Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
 Vue.component('grado-academico-postulante', require('./components/carta-intencion/GradoAcademico.vue').default);

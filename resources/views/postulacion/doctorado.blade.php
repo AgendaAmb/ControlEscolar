@@ -10,7 +10,28 @@
 <x-student-appliance style="background-color:#FECC50; height: 1px;" v-on:submit.prevent="actualizaSolicitud">    
     <x-slot name="profile_picture"></x-slot>
     <x-slot name="identidad_usuario"> @include('postulacion.identidad-usuario') </x-slot>
-    <x-slot name="datos_personales"> @include('postulacion.datos-personales') </x-slot>
+    
+    <x-slot name="datos_personales"> 
+        @include('postulacion.datos-personales') 
+        <documento-requerido :documento="{
+            nombre: '1.- Acta de nacimiento.',
+            etiqueta: '01_ActaNac_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+            ejemplo: '01_Promedio_2021_CJG'
+          }">
+        </documento-requerido>
+        <documento-requerido :documento="{
+            nombre: '2.- CURP en Ampliación tamaño carta.',
+            etiqueta: '02_CURP_añodesolicitud_iniciales',
+            ejemplo: '02_CURP_2021_CJG'
+          }">
+        </documento-requerido>
+        <documento-requerido :documento="{
+            nombre: '1.- Constancia de promedio',
+            etiqueta: '01_Promedio_Año_iniciales(Apellidos,Nombres)',
+            ejemplo: '01_Promedio_2021_CJG'
+          }">
+        </documento-requerido>
+    </x-slot>
 
 
     <x-slot name="datos_universitarios"> 

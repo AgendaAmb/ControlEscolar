@@ -25,6 +25,12 @@
             </div>
         </div>
 
+        @isset($documentos_personales)
+        <h2 class="col-md-9 my-4"><strong> Documentos personales </strong></h2>
+        
+        {{ $documentos_personales }}
+        @endisset
+
         @isset($datos_universitarios)
         <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
         <h2 class="col-md-9 my-4"><strong> Historial académico </strong></h2>

@@ -48,10 +48,7 @@
           <label> Fecha de obtención de pasantía: </label>
           <input type="date" v-model="FechaObtencion" class="form-control" />
         </div>
-        <div
-          class="form-group col-12"
-          v-else-if="Estatus === 'Título o grado en proceso'"
-        >
+        <div class="form-group col-12" v-else-if="Estatus === 'Título o grado en proceso'">
           <label> Fecha de presentación de examen: </label>
           <input type="date" v-model="FechaObtencion" class="form-control" />
         </div>
@@ -169,105 +166,17 @@
       </div>
     </div>
 
-    <div class="col-12"></div>
-    <div class="form-group col-xl-4 my-auto">
-      <div class="row my-2">
-        <div class="form-group col-9 col-xl-12">
-          <h5 class="mt-4 d-lg-block">
-            <strong> 6.- Constancia de promedio </strong>
-          </h5>
-          <p class="mt-3 mb-1 d-block">
-            <strong> Etiqueta: </strong>
-            06_Promedio_Año_iniciales(Apellidos,Nombres)
-          </p>
-          <p class="my-0 d-block">
-            <strong> Ejemplo: </strong> 06_Promedio_2021_CJG
-          </p>
-        </div>
-        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
-          <label class="cargarArchivo my-3">
-            <input type="file" class="form-control d-none" />
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group col-xl-4 my-auto">
-      <div class="row my-2">
-        <div class="form-group col-9 col-xl-12">
-          <h5 class="mt-4 d-block">
-            <strong> 7.- Certificado de promedio </strong>
-          </h5>
-          <p class="mt-3 mb-1 d-block">
-            <strong> Etiqueta: </strong>
-            07_Certf_Año_iniciales(Apellidos,Nombres)
-          </p>
-          <p class="my-0 d-block">
-            <strong> Ejemplo: </strong> 07_Certf_2021_CJG
-          </p>
-        </div>
-        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
-          <label class="cargarArchivo my-3">
-            <input type="file" class="form-control d-none" />
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group col-xl-4 my-auto">
-      <div class="row my-2">
-        <div class="form-group col-9 col-xl-12">
-          <h5 class="mt-4 d-block">
-            <strong> 8.- Cédula profesional escaneada </strong>
-          </h5>
-          <p class="mt-3 mb-1 d-block">
-            <strong> Etiqueta: </strong
-            >08_Cédula_Año_iniciales(Apellidos,Nombres)
-          </p>
-          <p class="my-0 d-block">
-            <strong> Ejemplo: </strong>08_Cédula_2021_CJG
-          </p>
-        </div>
-        <div class="form-group col-3 col-xl-12 my-auto text-center text-xl-left">
-          <a
-            v-if="doccedula !== null && doccedula.url !== null"
-            class="d-inline-block verArchivo my-3"
-            :href="doccedula.url"
-            target="_blank"
-          ></a>
-
-          <label class="cargarArchivo my-3">
-            <input
-              type="file"
-              class="form-control d-none"
-              @change="cargaCedulaProfesional"
-            />
-          </label>
-        </div>
-      </div>
-    </div>
+    <documento-requerido :documento="docconstancia"></documento-requerido>
+    <documento-requerido :documento="docpromedio"></documento-requerido>
+    <documento-requerido :documento="doccedula"></documento-requerido>
+    
   </div>
 </template>
 
-<style scoped>
-.cargarArchivo {
-  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-
-.verArchivo {
-  background: url(/controlescolar/storage/archive-buttons/ver.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-</style>
-
 <script>
+import DocumentoRequerido from './DocumentoRequerido.vue';
 export default {
+  components: { DocumentoRequerido },
   name: "grado-academico",
 
   props: {
@@ -293,17 +202,25 @@ export default {
       promedio: "",
       calmin: "",
       calmax: "",
-      doccedula: null,
-      docconstancia: null,
-      docpromedio: null,
-      universidades: [],
+      docconstancia: {
+        nombre: "6.- Constancia de promedio",
+        etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "06_Promedio_2021_CJG"
+      },
+      docpromedio: {
+        nombre:"7.- Certificado de promedio",
+        etiqueta:"07_Certf_Año_iniciales(Apellidos,Nombres)",
+        ejemplo:"07_Certf_2021_CJG"
+      },
+      doccedula: {
+        nombre:"8.- Cédula profesional escaneada", 
+        etiqueta:"08_Cédula_Año_iniciales(Apellidos,Nombres)",
+        ejemplo:"08_Cédula_2021_CJG"
+      },
 
+      universidades: [],
       escolaridades: ["Licenciatura", "Maestría", "Doctorado"],
-      estatusEstudios: [
-        "Pasante",
-        "Grado obtenido",
-        "Título o grado en proceso",
-      ],
+      estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
     };
   },
 
@@ -441,28 +358,21 @@ export default {
         this.$emit("update:doccedula", value);
       },
     },
+
+    DocConstancia: {
+      get: function () {
+        return this.docconstancia;
+      },
+      set: function (value) {
+        this.docconstancia = value;
+        this.$emit("update:docconstancia", value);
+      },
+    },
   },
   methods: {
     escogePais(evento) {
       this.Universidades =
         this.paises[evento.target.selectedIndex - 1].universities;
-    },
-
-    cargaCedulaProfesional(e) {
-      console.log("typescript");
-
-      this.$nextTick(function () {
-        let reader = new FileReader();
-
-        reader.onload = (event) => {
-          this.DocCedula = {
-            documento: e.target.files[0],
-            url: event.target.result,
-          };
-        };
-
-        reader.readAsDataURL(e.target.files[0]);
-      });
     },
   },
 };
