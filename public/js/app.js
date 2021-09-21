@@ -1959,10 +1959,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2003,46 +2003,146 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "documento-requerido",
+  model: {
+    prop: 'documento',
+    event: 'change'
+  },
+  props: {
+    documento: Object
+  },
+  data: function data() {
+    return {
+      errores: []
+    };
+  },
+  methods: {
+    cargaDocumento: function cargaDocumento(e) {
+      this.$nextTick(function () {
+        var _this = this;
+
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          Vue.set(_this.documento, 'archivo', e.target.files[0]);
+          Vue.set(_this.documento, 'url', event.target.result);
+        };
+
+        reader.readAsDataURL(e.target.files[0]);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _carta_intencion_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../carta-intencion/DocumentoRequerido.vue */ "./resources/js/components/carta-intencion/DocumentoRequerido.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    DocumentoRequerido: _carta_intencion_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
   name: "grado-academico-postulante",
   props: {
     id: Number,
@@ -2338,6 +2438,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2366,6 +2467,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       promedio: "",
       calmin: "",
       calmax: "",
+      doctitulo: {
+        nombre: "5.- Título de licenciatura o acta de examen.",
+        etiqueta: "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+        ejemplo: "05A_TitLicenciatula_2021_CJG"
+      },
       docconstancia: {
         nombre: "6.- Constancia de promedio",
         etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
@@ -7384,6 +7490,30 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_dhtmlx_scheduler_codebase_dhtmlxscheduler_material_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-51d7f276] {\n  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n.verArchivo[data-v-51d7f276] {\n  background: url(/controlescolar/storage/archive-buttons/ver.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39320,6 +39450,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_51d7f276_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_51d7f276_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_51d7f276_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=style&index=0&id=5f2c19d0&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=style&index=0&id=5f2c19d0&scoped=true&lang=css& ***!
@@ -39771,6 +39931,47 @@ component.options.__file = "resources/js/components/calendar/Scheduler.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/carta-intencion/DocumentoRequerido.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/carta-intencion/DocumentoRequerido.vue ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true& */ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_style_index_0_id_51d7f276_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& */ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "51d7f276",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/carta-intencion/DocumentoRequerido.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/carta-intencion/GradoAcademico.vue":
 /*!********************************************************************!*\
   !*** ./resources/js/components/carta-intencion/GradoAcademico.vue ***!
@@ -39965,6 +40166,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=script&lang=js& ***!
@@ -40055,6 +40272,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_51d7f276_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=style&index=0&id=51d7f276&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=style&index=0&id=5f2c19d0&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************!*\
   !*** ./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=style&index=0&id=5f2c19d0&scoped=true&lang=css& ***!
@@ -40124,6 +40354,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Scheduler_vue_vue_type_template_id_ed4e58d6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Scheduler_vue_vue_type_template_id_ed4e58d6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Scheduler.vue?vue&type=template&id=ed4e58d6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/calendar/Scheduler.vue?vue&type=template&id=ed4e58d6&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true& ***!
+  \*******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_51d7f276_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true&");
 
 
 /***/ }),
@@ -40274,6 +40521,63 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/DocumentoRequerido.vue?vue&type=template&id=51d7f276&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-12" }, [
+    _c("div", { staticClass: "row my-3" }, [
+      _c("div", { staticClass: "form-group col-9 my-auto" }, [
+        _c("h5", { staticClass: "mt-4 d-block" }, [
+          _c("strong", [_vm._v(" " + _vm._s(_vm.documento.nombre) + " ")])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+          _c("strong", [_vm._v(" Etiqueta: ")]),
+          _vm._v(" " + _vm._s(_vm.documento.etiqueta) + " ")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "my-0 d-block" }, [
+          _c("strong", [_vm._v(" Ejemplo: ")]),
+          _vm._v(" " + _vm._s(_vm.documento.ejemplo) + " ")
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-3 my-auto" }, [
+      _c("a", {
+        staticClass: "verArchivo d-block my-2 mx-auto",
+        attrs: { href: "#" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=template&id=5f2c19d0&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/carta-intencion/GradoAcademico.vue?vue&type=template&id=5f2c19d0&scoped=true& ***!
@@ -40290,58 +40594,149 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row my-3" }, [
-    _c("div", { staticClass: "col-lg-4" }, [
-      _c("h5", { staticClass: "d-block my-4" }, [
-        _c("strong", [_vm._v(" " + _vm._s(_vm.id) + ".- ")]),
-        _vm._v(" " + _vm._s(_vm.titulo) + "\n    ")
-      ]),
-      _vm._v(" "),
-      _c("h5", { staticClass: "d-block my-2" }, [
-        _c("strong", [_vm._v(" País donde realizó sus estudios: ")]),
-        _vm._v(" " + _vm._s(_vm.paisEstudios) + "\n    ")
-      ]),
-      _vm._v(" "),
+  return _c(
+    "div",
+    { staticClass: "row my-3 justify-content-between" },
+    [
       _vm._m(0),
       _vm._v(" "),
-      _c("h5", { staticClass: "d-block my-2" }, [
-        _c("strong", [_vm._v(" Estatus: ")]),
-        _vm._v(_vm._s(_vm.estatus))
-      ]),
+      _vm._m(1),
       _vm._v(" "),
-      _c("h5", { staticClass: "d-block my-2" }, [
-        _c("strong", [_vm._v(" Fecha de titulación: ")]),
-        _vm._v(" " + _vm._s(_vm.fechaTitulacion) + "\n    ")
-      ]),
+      _c("documento-requerido", {
+        attrs: {
+          documento: {
+            nombre: "5.- Título de licenciatura o acta de examen.",
+            etiqueta:
+              "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+            ejemplo: "05A_TitLicenciatula_2021_CJG"
+          }
+        }
+      }),
       _vm._v(" "),
-      _c("h5", { staticClass: "d-block my-2" }, [
-        _c("strong", [_vm._v(" Promedio obtenido: ")]),
-        _vm._v(" " + _vm._s(_vm.promedio))
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(1)
-  ])
+      _c("documento-requerido", {
+        attrs: {
+          documento: {
+            nombre: "6.- Constancia de promedio",
+            etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
+            ejemplo: "06_Promedio_2021_CJG"
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("documento-requerido", {
+        attrs: {
+          documento: {
+            nombre: "7.- Certificado de promedio",
+            etiqueta: "07_Certf_Año_iniciales(Apellidos,Nombres)",
+            ejemplo: "07_Certf_2021_CJG"
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("documento-requerido", {
+        attrs: {
+          documento: {
+            nombre: "8.- Cédula profesional escaneada",
+            etiqueta: "08_Cédula_Año_iniciales(Apellidos,Nombres)",
+            ejemplo: "08_Cédula_2021_CJG"
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "d-block my-2" }, [
-      _c("strong", [_vm._v(" Universidad de procedencia: ")])
+    return _c("div", { staticClass: "d-none d-lg-block form-group col-8" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Grado obtenido: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" Licenciatura ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" País de estudios: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" México ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Universidad: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" Universidad Autónoma de San Luis Potosí ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Fecha de obtención de grado: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" 24/09/2021 ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Título obtenido: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" Ingeniero en computación ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Estatus: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" Graduado ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "d-inline-block my-0 font-weight-bold" }, [
+            _vm._v(" Promedio obtenido: ")
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "d-inline-block my-0 ml-2" }, [
+            _vm._v(" 8.2 ")
+          ])
+        ])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-8 my-4" }, [
-      _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("h5", [_vm._v("Cédula profesional")]),
-        _vm._v(" "),
-        _c("a", { staticClass: "verArchivo", attrs: { href: "#" } })
-      ])
+    return _c("div", { staticClass: "form-group col-3 my-auto" }, [
+      _c("img", {
+        staticClass: "d-block mx-auto",
+        attrs: {
+          width: "120px",
+          src: "/controlescolar/storage/emojis/graduated.png"
+        }
+      })
     ])
   }
 ]
@@ -40395,7 +40790,7 @@ var render = function() {
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("label", { staticClass: "cargarArchivo d-block mx-auto" }, [
+        _c("label", { staticClass: "cargarArchivo d-block ml-auto my-auto" }, [
           _c("input", {
             staticClass: "form-control d-none",
             attrs: { type: "file" },
@@ -41123,6 +41518,8 @@ var render = function() {
             ])
       ]),
       _vm._v(" "),
+      _c("documento-requerido", { attrs: { documento: _vm.doctitulo } }),
+      _vm._v(" "),
       _c("documento-requerido", { attrs: { documento: _vm.docconstancia } }),
       _vm._v(" "),
       _c("documento-requerido", { attrs: { documento: _vm.docpromedio } }),
@@ -41166,7 +41563,7 @@ var render = function() {
             staticClass: "d-block mx-auto",
             attrs: {
               width: "120px",
-              src: "/controlescolar/storage/academic-programs/alemania.png"
+              src: "/controlescolar/storage/emojis/alemania.png"
             }
           })
         : _vm.idioma === "Español"
@@ -41174,7 +41571,7 @@ var render = function() {
             staticClass: "d-block mx-auto",
             attrs: {
               width: "120px",
-              src: "/controlescolar/storage/academic-programs/mexico.png"
+              src: "/controlescolar/storage/emojis/mexico.png"
             }
           })
         : _vm.idioma === "Inglés"
@@ -41182,7 +41579,7 @@ var render = function() {
             staticClass: "d-block mx-auto",
             attrs: {
               width: "120px",
-              src: "/controlescolar/storage/academic-programs/inglaterra.png"
+              src: "/controlescolar/storage/emojis/inglaterra.png"
             }
           })
         : _vm.idioma === "Francés"

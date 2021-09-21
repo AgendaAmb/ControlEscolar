@@ -166,6 +166,7 @@
       </div>
     </div>
 
+    <documento-requerido :documento="doctitulo"></documento-requerido>
     <documento-requerido :documento="docconstancia"></documento-requerido>
     <documento-requerido :documento="docpromedio"></documento-requerido>
     <documento-requerido :documento="doccedula"></documento-requerido>
@@ -202,6 +203,11 @@ export default {
       promedio: "",
       calmin: "",
       calmax: "",
+      doctitulo: {
+        nombre: "5.- Título de licenciatura o acta de examen.",
+        etiqueta: "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+        ejemplo: "05A_TitLicenciatula_2021_CJG"
+      },
       docconstancia: {
         nombre: "6.- Constancia de promedio",
         etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",

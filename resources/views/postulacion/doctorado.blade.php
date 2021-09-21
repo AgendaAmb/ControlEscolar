@@ -26,9 +26,15 @@
           }">
         </documento-requerido>
         <documento-requerido :documento="{
-            nombre: '1.- Constancia de promedio',
-            etiqueta: '01_Promedio_Año_iniciales(Apellidos,Nombres)',
-            ejemplo: '01_Promedio_2021_CJG'
+            nombre: '3.- Credencial de elector INE en ampliación tamaño carta.',
+            etiqueta: '03_INE_añodesolicitud_iniciales',
+            ejemplo: '03_INE_2021_CJG'
+          }">
+        </documento-requerido>
+        <documento-requerido :documento="{
+            nombre: '4.- Primera página del pasaporte.',
+            etiqueta: '04_Pasaporte_añodesolicitud_iniciales',
+            ejemplo: '04_Pasaporte_2021_CJG'
           }">
         </documento-requerido>
     </x-slot>

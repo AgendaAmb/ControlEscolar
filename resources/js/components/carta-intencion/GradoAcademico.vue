@@ -1,54 +1,71 @@
 <template>
-  <div class="row my-3">
-    <div class="col-lg-4">
-      <h5 class="d-block my-4">
-        <strong> {{id}}.- </strong> {{titulo}}
-      </h5>
-      <h5 class="d-block my-2">
-        <strong> País donde realizó sus estudios: </strong> {{paisEstudios}}
-      </h5>
-      <h5 class="d-block my-2">
-        <strong> Universidad de procedencia: </strong> 
-      </h5>
-      <h5 class="d-block my-2"><strong> Estatus: </strong>{{estatus}}</h5>
-      <h5 class="d-block my-2">
-        <strong> Fecha de titulación: </strong> {{fechaTitulacion}}
-      </h5>
-      <h5 class="d-block my-2"><strong> Promedio obtenido: </strong> {{promedio}}</h5>
-    </div>
-
-    <div class="col-lg-8 my-4">
-      <div class="d-flex justify-content-between">
-        <h5>Cédula profesional</h5>
-        <a class="verArchivo" href="#"></a>
+  <div class="row my-3 justify-content-between">
+    <div class="d-none d-lg-block form-group col-8">
+      <div class="row">
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Grado obtenido: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> Licenciatura </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> País de estudios: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> México </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Universidad: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> Universidad Autónoma de San Luis Potosí </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Fecha de obtención de grado: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> 24/09/2021 </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Título obtenido: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> Ingeniero en computación </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Estatus: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> Graduado </h5>
+        </div>
+        <div class="form-group col-12">
+          <h5 class="d-inline-block my-0 font-weight-bold"> Promedio obtenido: </h5>
+          <h5 class="d-inline-block my-0 ml-2"> 8.2 </h5>
+        </div>
       </div>
-    </div><!--
-    <div class="col-lg-3 my-4">
-      <h5 class="d-block">Constancia de promedio</h5>
-      <a class="d-inline-block verArchivo" href="#"></a>
     </div>
-
-    <div class="col-lg-3 my-4">
-      <h5 class="d-block">Certificado de promedio</h5>
-      <a class="d-inline-block verArchivo" href="#"></a>
+    
+    <!-- Imagen del tipo de título -->
+    <div class="form-group col-3 my-auto">
+      <img class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/graduated.png">
     </div>
 
 
-      <div class="row my-4 d-block d-lg-none">
-        <div class="col-12 my-3 d-flex justify-content-between">
-          <h5 class="d-inline-block">Cédula profesional escaneada</h5>
-          <a class="d-inline-block verArchivo" href="#"></a>
-        </div>
-        <div class="col-12 my-3 d-flex justify-content-between">
-          <h5 class="d-inline-block">Constancia de promedio</h5>
-          <a class="d-inline-block verArchivo" href="#"></a>
-        </div>
-        <div class="col-12 my-3 d-flex justify-content-between">
-          <h5 class="d-inline-block">Certificado de promedio</h5>
-          <a class="d-inline-block verArchivo" href="#"></a>
-        </div>
-    </div>
-      </div>-->
+    <documento-requerido :documento="{
+        nombre: '5.- Título de licenciatura o acta de examen.',
+        etiqueta: '05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
+        ejemplo: '05A_TitLicenciatula_2021_CJG'
+    }">
+    </documento-requerido>
+
+    <documento-requerido :documento="{
+        nombre: '6.- Constancia de promedio',
+        etiqueta: '06_Promedio_Año_iniciales(Apellidos,Nombres)',
+        ejemplo: '06_Promedio_2021_CJG'
+      }">
+    </documento-requerido>
+
+    <documento-requerido :documento="{
+        nombre:'7.- Certificado de promedio',
+        etiqueta:'07_Certf_Año_iniciales(Apellidos,Nombres)',
+        ejemplo:'07_Certf_2021_CJG'
+      }">
+    </documento-requerido>
+
+    <documento-requerido :documento="{
+        nombre:'8.- Cédula profesional escaneada', 
+        etiqueta:'08_Cédula_Año_iniciales(Apellidos,Nombres)',
+        ejemplo:'08_Cédula_2021_CJG'
+      }">
+    </documento-requerido>
   </div>
 </template>
 
@@ -71,7 +88,9 @@
 </style>
 
 <script>
+import DocumentoRequerido from '../carta-intencion/DocumentoRequerido.vue';
 export default {
+  components: { DocumentoRequerido },
   name: "grado-academico-postulante",
 
   props: {
