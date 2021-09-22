@@ -10,7 +10,10 @@
 <x-student-appliance style="background-color:#FECC50; height: 1px;" action="{{ route('solicitud.actualizaSolicitud') }}" v-on:submit.prevent="actualizaSolicitud">
     <x-slot name="profile_picture"></x-slot>
     <x-slot name="identidad_usuario"> @include('postulacion.identidad-usuario') </x-slot>
-    <x-slot name="datos_personales"> @include('postulacion.datos-personales') </x-slot>
+    <x-slot name="datos_personales"> 
+        @include('postulacion.datos-personales') 
+        <informacion-postulante></informacion-postulante>
+    </x-slot>
 
     <x-slot name="datos_universitarios"> 
         <div class="col-12">
@@ -30,6 +33,10 @@
 
             </grado-academico-postulante>
         </div>
+    </x-slot>
+
+    <x-slot name="dominio_idioma"> 
+        foo
     </x-slot>
 </x-student-appliance>
 @endsection

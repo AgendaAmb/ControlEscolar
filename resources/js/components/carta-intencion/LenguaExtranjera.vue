@@ -88,7 +88,7 @@
 </style>
 
 <script>
-import DocumentoRequerido from '../carta-intencion/DocumentoRequerido.vue';
+import DocumentoRequerido from './DocumentoRequerido.vue';
 export default {
   components: { DocumentoRequerido },
   name: "grado-academico-postulante",

@@ -7,7 +7,7 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ documento.ejemplo }} </p>
       </div>
       <div class="form-group col-3 my-auto">
-        <a v-if="'archivo' in documento && documento.archivo !== null && documento.url !== null" class="verArchivo d-block my-2 mx-auto" :href="documento.url" target="_blank"></a>
+        <a v-if="'archivo' in documento && documento.archivo !== null && documento.url !== null" class="verArchivo d-block my-2 ml-auto" :href="documento.url" target="_blank"></a>
         <label class="cargarArchivo d-block ml-auto my-auto">
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>

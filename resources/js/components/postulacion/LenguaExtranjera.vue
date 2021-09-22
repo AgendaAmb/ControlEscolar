@@ -4,25 +4,24 @@
     
     <!-- Datos principales -->
     <div class="form-group col-4 my-auto">
-      <img v-if="idioma === 'Alemán'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/alemania.png">
-      <img v-else-if="idioma === 'Español'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/mexico.png">
-      <img v-else-if="idioma === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
-      <img v-else-if="idioma === 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/academic-programs/francia.png">
+      <img v-if="lenguaextranjera.idioma === 'Alemán'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/alemania.png">
+      <img v-else-if="lenguaextranjera.idioma === 'Español'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/mexico.png">
+      <img v-else-if="lenguaextranjera.idioma === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
+      <img v-else-if="lenguaextranjera.idioma === 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/academic-programs/francia.png">
     </div>
     <div class="form-group col-8 d-md-none">
       <div class="row justify-content-end">
         <div class="form-group col-11">
           <label> Idioma: </label>
-          <select v-model="idioma" class="form-control">
+          <select v-model="lenguaextranjera.idioma" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="idioma in idiomas" :key="idioma" :value="idioma"> {{ idioma }} </option>
           </select>
         </div>
 
-        <div class="form-group col-11">
-          <label> Institución que otorgó el certificado: </label>
-          <input type="text" v-model="institucion" class="form-control">
-        </div>
+        <input-solicitud clase="form-group col-11" v-model="lenguaextranjera.institucion"> 
+          Institución que otorgó el certificado:
+        </input-solicitud>
       </div>
     </div>
 
@@ -31,116 +30,73 @@
 
         <div class="form-group col-lg-6 d-none d-md-block">
           <label> Idioma: </label>
-          <select v-model="idioma" class="form-control">
+          <select v-model="lenguaextranjera.idioma" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="idioma in idiomas" :key="idioma" :value="idioma"> {{ idioma }} </option>
           </select>
         </div>
 
-        <div class="form-group col-lg-6 d-none d-md-block">
-          <label> Institución que otorgó el certificado: </label>
-          <input type="text" v-model="institucion" class="form-control">
-        </div>
+        <input-solicitud clase="form-group col-lg-6 d-none d-md-block" v-model="lenguaextranjera.institucion"> 
+          Institución que otorgó el certificado:
+        </input-solicitud>
 
-        <div v-if="idioma === 'Inglés'"  class="form-group col-md-6">
-          <label> ¿Qué examen de inglés presentaste? </label>
-          <input type="text" v-model="examenIngles" class="form-control">
-        </div>
+        <input-solicitud v-if="lenguaextranjera.idioma === 'Inglés'"   clase="form-group col-md-6" v-model="lenguaextranjera.examenIngles"> 
+          Qué examen de inglés presentaste?
+        </input-solicitud>
 
-        <div v-if="idioma === 'Inglés'"  class="form-group col-md-6">
-          <label> Escoge un tipo de examen </label>
-          <input type="text" v-model="tipoExamenIngles" class="form-control">
-        </div>
+        <input-solicitud v-if="lenguaextranjera.idioma === 'Inglés'"   clase="form-group col-md-6" v-model="lenguaextranjera.tipoExamenIngles"> 
+          Escoge un tipo de examen
+        </input-solicitud>
 
-        <div class="form-group col-md-6">
-          <label> Puntaje obtenido: </label>
-          <input type="text" v-model="puntuacion" class="form-control">
-        </div>
+        <input-solicitud clase="form-group col-md-6" v-model="lenguaextranjera.puntuacion"> 
+          Puntaje obtenido:
+        </input-solicitud>
 
-        <div class="form-group col-md-6">
-          <label> Fecha de aplicación: </label>
-          <input type="date" v-model="fechaAplicacion" class="form-control">
-        </div>
+        <input-solicitud tipo="date" clase="form-group col-md-6" v-model="lenguaextranjera.fechaAplicacion"> 
+          Fecha de aplicación: 
+        </input-solicitud>
 
-        <div class="form-group d-none d-lg-block col-lg-6">
-          <label> Vigencia desde: </label>
-          <input type="date" v-model="vigenciaDesde" class="form-control">
-        </div>
+        <input-solicitud tipo="date" clase="form-group d-none d-lg-block col-lg-6" v-model="lenguaextranjera.vigenciaDesde"> 
+          Vigencia desde:
+        </input-solicitud>
 
-        <div class="form-group d-none d-lg-block col-lg-6">
-          <label> Vigencia hasta: </label>
-          <input type="date" v-model="vigenciaHasta" class="form-control">
-        </div>
+        <input-solicitud tipo="date" clase="form-group d-none d-lg-block col-lg-6" v-model="lenguaextranjera.vigenciaHasta"> 
+          Vigencia hasta:
+        </input-solicitud>
       </div>
     </div>
 
-    <div class="form-group d-lg-none col-md-6">
-      <label> Vigencia desde: </label>
-      <input type="date" v-model="vigenciaDesde" class="form-control">
-    </div>
+    <input-solicitud tipo="date" clase="form-group d-lg-none col-md-6" v-model="lenguaextranjera.vigenciaDesde"> 
+      Vigencia desde:
+    </input-solicitud>
 
-    <div class="form-group d-lg-none col-md-6">
-      <label> Vigencia hasta: </label>
-      <input type="date" v-model="vigenciaHasta" class="form-control">
-    </div>
+    <input-solicitud tipo="date" clase="form-group d-lg-none col-md-6" v-model="lenguaextranjera.vigenciaHasta"> 
+      Vigencia hasta:
+    </input-solicitud>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Grado de dominio: </label>
-      <input type="text" v-model="gradoDominio" class="form-control">
-    </div>
+    <input-solicitud clase="fform-group col-md-6 col-lg-3" v-model="lenguaextranjera.vigenciaDesde"> 
+      Grado de dominio:
+    </input-solicitud>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel conversacional: </label>
-      <input type="text" v-model="nivelConversacion" class="form-control">
-    </div>
+    <input-solicitud clase="form-group col-md-6 col-lg-3" v-model="lenguaextranjera.vigenciaHasta"> 
+      Nivel conversacional:
+    </input-solicitud>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel de lectura: </label>
-      <input type="text" v-model="nivelLectura" class="form-control">
-    </div>
+    <input-solicitud clase="form-group col-md-6 col-lg-3" v-model="lenguaextranjera.vigenciaDesde"> 
+      Nivel de lectura:
+    </input-solicitud>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel de escritura: </label>
-      <input type="text" v-model="nivelEscritura" class="form-control">
-    </div>
+    <input-solicitud clase="form-group col-md-6 col-lg-3" v-model="lenguaextranjera.vigenciaHasta"> 
+      Nivel de escritura:
+    </input-solicitud>
 
-    <div class="form-group col-9 my-auto">
-      <h5 class="mt-4 d-block font-weight-bold"> 13.- Certificado de idioma </h5>
-      <p class="mt-3 mb-1 d-block">
-        <strong> Etiqueta: </strong> 
-        13_Certf_Año_iniciales(Apellidos,Nombres)
-      </p>
-      <p class="my-0 d-block"> 
-        <strong> Ejemplo: </strong> 
-        13_Certf_2021_CJG
-      </p>
-    </div>
-    <div class="form-group col-3 my-auto">
-      <label class="cargarArchivo d-block mx-auto">
-        <input type="file" class="form-control d-none">
-      </label>
-    </div>
+    <documento-requerido :documento="lenguaextranjera.docprobatorio"></documento-requerido>
   </div>
 </template>
 
 
 <!-- Estilos del componente -->
 <style scoped>
-.cargarArchivo {
-  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-
-.verArchivo {
-  background: url(/controlescolar/storage/archive-buttons/ver.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
 
 .pais {
   background-size: auto;
@@ -155,25 +111,39 @@
 <!-- Fin estilos -->
 
 <script>
+import DocumentoRequerido from './DocumentoRequerido.vue';
+import InputSolicitud from './InputSolicitud.vue';
+
 export default {
   name: "lengua-extranjera",
+  components: { DocumentoRequerido, InputSolicitud },
 
   data() {
     return {
+      lenguaextranjera: {
+        institucion: '',
+        idioma: '',
+        examenIngles: '',
+        tipoExamenIngles: '',
+        otroIdioma: '',
+        fechaAplicacion: null,
+        vigenciaDesde: null,
+        vigenciaHasta: null,
+        puntuacion: 0,
+        docprobatorio: {
+          nombre:"13.- Certificado de idioma",
+          etiqueta:"13_Certf_Año_iniciales(Apellidos,Nombres) ",
+          ejemplo:"13_Certf_2021_CJG"
+        }
+      },
+
       id: '',
-      institucion: '',
-      idioma: '',
-      otroIdioma: '',
-      examenIngles: '',
-      tipoExamenIngles: '',
       gradoDominio: '',
       nivelConversacion: '',
       nivelLectura: '',
       nivelEscritura: '',
       certificacion: '',
       fechaAplicacion: null,
-      vigenciaDesde: null,
-      vigenciaHasta: null,
       puntuacion: 0,
 
       idiomas: [

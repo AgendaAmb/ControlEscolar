@@ -7,7 +7,7 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ documento.ejemplo }} </p>
       </div>
       <div class="form-group col-3 my-auto">
-        <a class="verArchivo d-block my-2 mx-auto" href="#"></a>
+        <a class="verArchivo d-block my-2 ml-auto" href="#"></a>
       </div>
     </div>
   </div>
