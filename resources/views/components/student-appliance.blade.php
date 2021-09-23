@@ -34,9 +34,16 @@
 
         @isset($experiencia_laboral)
         <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
-        <h2 class="col-md-9 my-4"><strong> Experiencia laboral </strong></h2>
+        <h2 class="col-md-9 my-4"><strong> Trayectoria profesional </strong></h2>
 
         <div class="col-12"> {{ $experiencia_laboral }} </div>
+        @endisset
+
+        @isset($produccion_cientifica)
+        <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
+        <h2 class="col-md-9 my-4"><strong> Producción científica </strong></h2>
+
+        <div class="col-12"> {{ $produccion_cientifica }} </div>
         @endisset
     </div>
 </form>

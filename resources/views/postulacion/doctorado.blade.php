@@ -39,6 +39,9 @@
     <x-slot name="experiencia_laboral"> 
         <experiencia-laboral></experiencia-laboral>
     </x-slot>
+
+    <x-slot name="produccion_cientifica"> 
+    </x-slot>
 </x-student-appliance>
 
 @endsection

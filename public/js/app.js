@@ -2514,14 +2514,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 var PuestoLaboral =
 /**
  * Construye el objeto, que representa el puesto laboral.
@@ -2543,6 +2535,7 @@ function PuestoLaboral() {
   var fechaFin = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Date;
   var areaConocimiento = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
   var campo = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : '';
+  var logros = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
 
   _classCallCheck(this, PuestoLaboral);
 
@@ -2554,6 +2547,17 @@ function PuestoLaboral() {
   this.fechaFin = fechaFin;
   this.areaConocimiento = areaConocimiento;
   this.campo = campo;
+  this.logros = logros;
+  this.probatorioEmpleo = {
+    nombre: '17A.- Certificate(s) of Employment/Internship',
+    etiqueta: '17A_ProofExperience_iniciales',
+    ejemplo: '17A_ProofExperience_CJG'
+  };
+  this.certificadoEmpleo = {
+    nombre: '17B.- Confirmation of employment',
+    etiqueta: '17B_ConfirmationEmp_iniciales',
+    ejemplo: '17B_ConfirmationEmp_CJG'
+  };
 };
 
 
@@ -41621,178 +41625,220 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("h4", { staticClass: "form-group col-12 my-5" }, [
-      _vm._v(" 1.- Agregar puesto")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-md-6 my-auto" }, [
-      _c("h5", { staticClass: "d-block my-3" }, [
-        _vm._v(" En este puesto me desempeñé como: ")
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _c("h4", { staticClass: "form-group col-12 my-5" }, [
+        _vm._v(" 1.- Agregar puesto")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.puestoLaboral.tipoPuesto,
-              expression: "puestoLaboral.tipoPuesto"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "radio", value: "Catedrático" },
-          domProps: {
-            checked: _vm._q(_vm.puestoLaboral.tipoPuesto, "Catedrático")
-          },
-          on: {
-            change: function($event) {
-              return _vm.$set(_vm.puestoLaboral, "tipoPuesto", "Catedrático")
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", { staticClass: "form-check-label" }, [
-          _vm._v("\n        Catedrático\n      ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.puestoLaboral.tipoPuesto,
-              expression: "puestoLaboral.tipoPuesto"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "radio", value: "Investigador" },
-          domProps: {
-            checked: _vm._q(_vm.puestoLaboral.tipoPuesto, "Investigador")
-          },
-          on: {
-            change: function($event) {
-              return _vm.$set(_vm.puestoLaboral, "tipoPuesto", "Investigador")
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", { staticClass: "form-check-label" }, [
-          _vm._v("\n        Investigador\n      ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-check" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.puestoLaboral.tipoPuesto,
-              expression: "puestoLaboral.tipoPuesto"
-            }
-          ],
-          staticClass: "form-check-input",
-          attrs: { type: "radio", value: "Otro" },
-          domProps: { checked: _vm._q(_vm.puestoLaboral.tipoPuesto, "Otro") },
-          on: {
-            change: function($event) {
-              return _vm.$set(_vm.puestoLaboral, "tipoPuesto", "Otro")
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("label", { staticClass: "form-check-label" }, [
-          _vm._v("\n        Otro\n      ")
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12 my-4" }, [
       _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "input-solicitud",
-            {
-              attrs: { tipo: "date", clase: "form-group col-md-6" },
-              model: {
-                value: _vm.puestoLaboral.fechaInicio,
-                callback: function($$v) {
-                  _vm.$set(_vm.puestoLaboral, "fechaInicio", $$v)
-                },
-                expression: "puestoLaboral.fechaInicio"
-              }
+        "input-solicitud",
+        {
+          attrs: { clase: "form-group col-md-6" },
+          model: {
+            value: _vm.puestoLaboral.empresa,
+            callback: function($$v) {
+              _vm.$set(_vm.puestoLaboral, "empresa", $$v)
             },
-            [_vm._v(" Desde: ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "input-solicitud",
-            {
-              attrs: { tipo: "date", clase: "form-group col-md-6" },
-              model: {
-                value: _vm.puestoLaboral.fechaFin,
-                callback: function($$v) {
-                  _vm.$set(_vm.puestoLaboral, "fechaFin", $$v)
-                },
-                expression: "puestoLaboral.fechaFin"
-              }
-            },
-            [_vm._v(" Hasta: ")]
-          )
-        ],
-        1
+            expression: "puestoLaboral.empresa"
+          }
+        },
+        [_vm._v(" Institución / Empresa: ")]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row" },
-        [
-          _c(
-            "input-solicitud",
-            {
-              attrs: { clase: "form-group col-md-6" },
-              model: {
-                value: _vm.puestoLaboral.areaConocimiento,
-                callback: function($$v) {
-                  _vm.$set(_vm.puestoLaboral, "areaConocimiento", $$v)
-                },
-                expression: "puestoLaboral.areaConocimiento"
+      _c("div", { staticClass: "form-group col-md-6" }, [
+        _c("label", [_vm._v(" En este puesto me desempeñé como: ")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.puestoLaboral.tipoPuesto,
+                expression: "puestoLaboral.tipoPuesto"
               }
-            },
-            [_vm._v(" Área de conocimiento: ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "input-solicitud",
-            {
-              attrs: { clase: "form-group col-md-6" },
-              model: {
-                value: _vm.puestoLaboral.campo,
-                callback: function($$v) {
-                  _vm.$set(_vm.puestoLaboral, "campo", $$v)
-                },
-                expression: "puestoLaboral.campo"
+            ],
+            staticClass: "form-control",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.puestoLaboral,
+                  "tipoPuesto",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
               }
-            },
-            [_vm._v(" Campo: ")]
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _vm._m(2)
-  ])
+            }
+          },
+          [
+            _c("option", { attrs: { value: "", selected: "" } }, [
+              _vm._v("Escoge una opción")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Catedrático" } }, [
+              _vm._v(" Catedrático ")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Investigador" } }, [
+              _vm._v(" Investigador ")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 my-4" }, [
+        _c(
+          "div",
+          { staticClass: "row" },
+          [
+            _c(
+              "input-solicitud",
+              {
+                attrs: { tipo: "date", clase: "form-group col-md-6" },
+                model: {
+                  value: _vm.puestoLaboral.fechaInicio,
+                  callback: function($$v) {
+                    _vm.$set(_vm.puestoLaboral, "fechaInicio", $$v)
+                  },
+                  expression: "puestoLaboral.fechaInicio"
+                }
+              },
+              [_vm._v(" Desde: ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "input-solicitud",
+              {
+                attrs: { tipo: "date", clase: "form-group col-md-6" },
+                model: {
+                  value: _vm.puestoLaboral.fechaFin,
+                  callback: function($$v) {
+                    _vm.$set(_vm.puestoLaboral, "fechaFin", $$v)
+                  },
+                  expression: "puestoLaboral.fechaFin"
+                }
+              },
+              [_vm._v(" Hasta: ")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row" },
+          [
+            _c(
+              "input-solicitud",
+              {
+                attrs: { clase: "form-group col-md-6" },
+                model: {
+                  value: _vm.puestoLaboral.areaConocimiento,
+                  callback: function($$v) {
+                    _vm.$set(_vm.puestoLaboral, "areaConocimiento", $$v)
+                  },
+                  expression: "puestoLaboral.areaConocimiento"
+                }
+              },
+              [_vm._v(" Área de conocimiento: ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "input-solicitud",
+              {
+                attrs: { clase: "form-group col-md-6" },
+                model: {
+                  value: _vm.puestoLaboral.campo,
+                  callback: function($$v) {
+                    _vm.$set(_vm.puestoLaboral, "campo", $$v)
+                  },
+                  expression: "puestoLaboral.campo"
+                }
+              },
+              [_vm._v(" Campo: ")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.puestoLaboral.nombrePuesto,
+              expression: "puestoLaboral.nombrePuesto"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "exampleFormControlTextarea1", rows: "5" },
+          domProps: { value: _vm.puestoLaboral.nombrePuesto },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.puestoLaboral, "nombrePuesto", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.puestoLaboral.logros,
+              expression: "puestoLaboral.logros"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { id: "exampleFormControlTextarea1", rows: "5" },
+          domProps: { value: _vm.puestoLaboral.logros },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.puestoLaboral, "logros", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("documento-requerido", {
+        attrs: { documento: _vm.puestoLaboral.probatorioEmpleo }
+      }),
+      _vm._v(" "),
+      _c("documento-requerido", {
+        attrs: { documento: _vm.puestoLaboral.certificadoEmpleo }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -41807,27 +41853,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group my-3 col-md-8" }, [
-      _c("h5", [_c("strong", [_vm._v(" Nombre del puesto: ")])]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "exampleFormControlTextarea1", rows: "5" }
-      })
-    ])
+    return _c("h5", [_c("strong", [_vm._v(" Nombre del puesto: ")])])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group my-3 col-md-8" }, [
-      _c("h5", [_c("strong", [_vm._v(" Logros: ")])]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { id: "exampleFormControlTextarea1", rows: "5" }
-      })
-    ])
+    return _c("h5", [_c("strong", [_vm._v(" Logros: ")])])
   }
 ]
 render._withStripped = true
