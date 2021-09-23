@@ -2998,6 +2998,133 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
+/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var ProduccionCientifica =
+/**
+ * Construye el objeto, que representa el puesto laboral.
+ * 
+ * @param string tipoPuesto
+ * @param string tipoPuesto
+ * @param string tipoPuesto
+ * @param Date tipoPuesto
+ * @param Date fechaFin
+ * @param string areaConocimiento
+ * @param string campo
+ */
+function ProduccionCientifica() {
+  var tipo = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var titulo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var nombre = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  var fecha = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var año = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var numCapitulo = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+  var institucion = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+
+  _classCallCheck(this, ProduccionCientifica);
+
+  this.tipo = tipo;
+  this.titulo = titulo;
+  this.nombre = nombre;
+  this.fecha = fecha;
+  this.año = año;
+  this.numCapitulo = numCapitulo;
+  this.institucion = null;
+};
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "produccion-cientifica",
+  components: {
+    DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    InputSolicitud: _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      produccionCientifica: new ProduccionCientifica()
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3030,6 +3157,7 @@ Vue.component('datos-personales', __webpack_require__(/*! ./components/postulaci
 Vue.component('documento-requerido', __webpack_require__(/*! ./components/postulacion/DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue").default);
 Vue.component('lengua-extranjera', __webpack_require__(/*! ./components/postulacion/LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue").default);
 Vue.component('experiencia-laboral', __webpack_require__(/*! ./components/postulacion/ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue").default);
+Vue.component('produccion-cientifica', __webpack_require__(/*! ./components/postulacion/ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue").default);
 Vue.component('grado-academico-postulante', __webpack_require__(/*! ./components/carta-intencion/GradoAcademico.vue */ "./resources/js/components/carta-intencion/GradoAcademico.vue").default);
 Vue.component('informacion-postulante', __webpack_require__(/*! ./components/carta-intencion/InformacionPostulante.vue */ "./resources/js/components/carta-intencion/InformacionPostulante.vue").default);
 Vue.component('lengua-extranjera-postulante', __webpack_require__(/*! ./components/carta-intencion/LenguaExtranjera.vue */ "./resources/js/components/carta-intencion/LenguaExtranjera.vue").default);
@@ -40564,6 +40692,45 @@ component.options.__file = "resources/js/components/postulacion/LenguaExtranjera
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
+/* harmony import */ var _ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/postulacion/ProduccionCientifica.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/calendar/Calendar.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/calendar/Calendar.vue?vue&type=script&lang=js& ***!
@@ -40753,6 +40920,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -41047,6 +41230,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
 
 
 /***/ }),
@@ -43061,6 +43261,455 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("h4", { staticClass: "form-group col-12 my-5" }, [
+      _vm._v(" 1.- Nueva publicación ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-4" }, [
+      _c("label", [_vm._v(" Tipo de publicación: ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.produccionCientifica.tipo,
+              expression: "produccionCientifica.tipo"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.produccionCientifica,
+                "tipo",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Escoge una opción")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Publicación de artículos" } }, [
+            _vm._v(" Publicación de artículos ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Publicación de libros" } }, [
+            _vm._v(" Publicación de libros ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Capítulos publicados" } }, [
+            _vm._v(" Capítulos publicados ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Reportes técnicos" } }, [
+            _vm._v(" Reportes técnicos ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Memorias" } }, [
+            _vm._v(" Memorias ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Documentos de trabajo" } }, [
+            _vm._v(" Documentos de trabajo ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Reseñas" } }, [_vm._v(" Reseñas ")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-12" }, [
+      _vm.produccionCientifica.tipo === "Publicación de artículos"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título del artículo: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.nombre,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "nombre", $$v)
+                    },
+                    expression: "produccionCientifica.nombre"
+                  }
+                },
+                [_vm._v(" Nombre de la revista: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Publicación de libros"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-6" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título del libro: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-6" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Capítulos publicados"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título del capítulo: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.numCapitulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "numCapitulo", $$v)
+                    },
+                    expression: "produccionCientifica.numCapitulo"
+                  }
+                },
+                [_vm._v(" No. del capítulo: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Reportes técnicos"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.institucion,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "institucion", $$v)
+                    },
+                    expression: "produccionCientifica.institucion"
+                  }
+                },
+                [_vm._v(" Institución a la que se presenta el reporte: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Memorias"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título de la memoria: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.nombre,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "nombre", $$v)
+                    },
+                    expression: "produccionCientifica.nombre"
+                  }
+                },
+                [_vm._v(" Título de la publicación: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Documentos de trabajo"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título del documento de trabajo: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.nombre,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "nombre", $$v)
+                    },
+                    expression: "produccionCientifica.nombre"
+                  }
+                },
+                [_vm._v(" Título de la publicación: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm.produccionCientifica.tipo === "Reseñas"
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.titulo,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "titulo", $$v)
+                    },
+                    expression: "produccionCientifica.titulo"
+                  }
+                },
+                [_vm._v(" Título de la reseña: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.nombre,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "nombre", $$v)
+                    },
+                    expression: "produccionCientifica.nombre"
+                  }
+                },
+                [_vm._v(" Título de la publicación: ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "input-solicitud",
+                {
+                  attrs: { clase: "form-group col-md-4" },
+                  model: {
+                    value: _vm.produccionCientifica.año,
+                    callback: function($$v) {
+                      _vm.$set(_vm.produccionCientifica, "año", $$v)
+                    },
+                    expression: "produccionCientifica.año"
+                  }
+                },
+                [_vm._v(" Año de publicación: ")]
+              )
+            ],
+            1
+          )
+        : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

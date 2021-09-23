@@ -41,6 +41,7 @@
     </x-slot>
 
     <x-slot name="produccion_cientifica"> 
+        <produccion-cientifica></produccion-cientifica>
     </x-slot>
 </x-student-appliance>
 
