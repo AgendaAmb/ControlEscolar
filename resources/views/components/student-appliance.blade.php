@@ -1,15 +1,3 @@
-@props([
-    'profile_picture' => null,
-    'identidad_usuario' => null,
-    'datos_personales' => null,
-    'experiencia_laboral' => null,
-    'informacion_personal' => null,
-    'informacion_academica' => null,
-    'formatos_ingreso' => null,
-    'documentos_curriculares' => null,
-    'grados_academicos' => null,
-])
-
 <form @if($attributes->has('v-on:submit.prevent')) v-on:submit.prevent="{{ $attributes->get('v-on:submit.prevent') }}" @endif>
     @csrf
     <div class="mt-5 form-row justify-content-left">
@@ -44,5 +32,11 @@
         <div class="col-12"> {{ $dominio_idioma }} </div>
         @endisset
 
+        @isset($experiencia_laboral)
+        <hr class="col-md-12" @if($attributes->has('style')) style="{{ $attributes->get('style') }}" @endif>
+        <h2 class="col-md-9 my-4"><strong> Experiencia laboral </strong></h2>
+
+        <div class="col-12"> {{ $experiencia_laboral }} </div>
+        @endisset
     </div>
 </form>

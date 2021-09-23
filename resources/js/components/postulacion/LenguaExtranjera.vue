@@ -143,8 +143,6 @@ export default {
       nivelLectura: '',
       nivelEscritura: '',
       certificacion: '',
-      fechaAplicacion: null,
-      puntuacion: 0,
 
       idiomas: [
         'Español',

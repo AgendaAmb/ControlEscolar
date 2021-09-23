@@ -36,7 +36,7 @@
     </x-slot>
 
     <x-slot name="dominio_idioma"> 
-        foo
+        <lengua-extranjera-postulante></lengua-extranjera-postulante>
     </x-slot>
 </x-student-appliance>
 @endsection

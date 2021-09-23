@@ -26,5 +26,7 @@ Vue.component('grado-academico', require('./components/postulacion/GradoAcademic
 Vue.component('datos-personales', require('./components/postulacion/DatosPersonales.vue').default);
 Vue.component('documento-requerido', require('./components/postulacion/DocumentoRequerido.vue').default);
 Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
+Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);
 Vue.component('grado-academico-postulante', require('./components/carta-intencion/GradoAcademico.vue').default);
 Vue.component('informacion-postulante', require('./components/carta-intencion/InformacionPostulante.vue').default);
+Vue.component('lengua-extranjera-postulante', require('./components/carta-intencion/LenguaExtranjera.vue').default);

@@ -35,6 +35,10 @@
     <x-slot name="dominio_idioma"> 
         <lengua-extranjera></lengua-extranjera>
     </x-slot>
+
+    <x-slot name="experiencia_laboral"> 
+        <experiencia-laboral></experiencia-laboral>
+    </x-slot>
 </x-student-appliance>
 
 @endsection
