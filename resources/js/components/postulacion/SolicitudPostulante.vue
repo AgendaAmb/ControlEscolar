@@ -6,7 +6,7 @@
     <hr class="col-md-12" style="background-color:#FECC50; height: 1px;">
     <h2 class="col-md-9 my-4"><strong> Historial académico </strong></h2>
     <div class="col-12">
-      <grado-academico></grado-academico>
+      <grado-academico :gradoacademico="gradoacademico"></grado-academico>
     </div>
 
     <hr class="col-md-12" style="background-color:#FECC50; height: 1px;">
@@ -32,6 +32,7 @@
 
 <script>
 import DatosPostulante from '../../clases/DatosPostulante';
+import GradoPostulante from '../../clases/GradoPostulante';
 import IdiomaPostulante from '../../clases/IdiomaPostulante';
 import DatosPersonales from './DatosPersonales.vue';
 import GradoAcademico from './GradoAcademico.vue';
@@ -46,6 +47,7 @@ export default {
       errores: [],
       informacionpersonal: new DatosPostulante(),
       lenguaextranjera: new IdiomaPostulante(),
+      gradoacademico: new GradoPostulante(),
     };
   },
 

@@ -2625,7 +2625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _clases_DocumentoPostulacion__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/DocumentoPostulacion */ "./resources/js/clases/DocumentoPostulacion.js");
+/* harmony import */ var _clases_GradoPostulante_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/GradoPostulante.js */ "./resources/js/clases/GradoPostulante.js");
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
 /* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
 //
@@ -2769,40 +2769,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     id: {
       type: Number
+    },
+    gradoacademico: {
+      type: _clases_GradoPostulante_js__WEBPACK_IMPORTED_MODULE_0__.default
     }
   },
   data: function data() {
     return {
-      gradoacademico: {
-        escolaridad: '',
-        titulo: '',
-        estatus: '',
-        cedula: '',
-        fechaobtencion: '',
-        calmin: '',
-        calmax: '',
-        promedio: '',
-        doctitulo: _clases_DocumentoPostulacion__WEBPACK_IMPORTED_MODULE_0__.default.create({
-          nombre: "5.- Título de licenciatura o acta de examen.",
-          etiqueta: "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
-          ejemplo: "05A_TitLicenciatula_2021_CJG"
-        }),
-        docconstancia: _clases_DocumentoPostulacion__WEBPACK_IMPORTED_MODULE_0__.default.create({
-          nombre: "6.- Constancia de promedio",
-          etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
-          ejemplo: "06_Promedio_2021_CJG"
-        }),
-        docpromedio: _clases_DocumentoPostulacion__WEBPACK_IMPORTED_MODULE_0__.default.create({
-          nombre: "7.- Certificado de promedio",
-          etiqueta: "07_Certf_Año_iniciales(Apellidos,Nombres)",
-          ejemplo: "07_Certf_2021_CJG"
-        }),
-        doccedula: _clases_DocumentoPostulacion__WEBPACK_IMPORTED_MODULE_0__.default.create({
-          nombre: "8.- Cédula profesional escaneada",
-          etiqueta: "08_Cédula_Año_iniciales(Apellidos,Nombres)",
-          ejemplo: "08_Cédula_2021_CJG"
-        })
-      },
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría", "Doctorado"],
       estatusEstudios: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
@@ -3158,10 +3131,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _clases_DatosPostulante__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/DatosPostulante */ "./resources/js/clases/DatosPostulante.js");
-/* harmony import */ var _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../clases/IdiomaPostulante */ "./resources/js/clases/IdiomaPostulante.js");
-/* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/components/postulacion/DatosPersonales.vue");
-/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
-/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
+/* harmony import */ var _clases_GradoPostulante__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../clases/GradoPostulante */ "./resources/js/clases/GradoPostulante.js");
+/* harmony import */ var _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../clases/IdiomaPostulante */ "./resources/js/clases/IdiomaPostulante.js");
+/* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/components/postulacion/DatosPersonales.vue");
+/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
+/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
 //
 //
 //
@@ -3194,6 +3168,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -3201,16 +3176,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    DatosPersonales: _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    GradoAcademico: _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_4__.default
+    DatosPersonales: _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    GradoAcademico: _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default
   },
   name: "solicitud-postulante",
   data: function data() {
     return {
       errores: [],
       informacionpersonal: new _clases_DatosPostulante__WEBPACK_IMPORTED_MODULE_0__.default(),
-      lenguaextranjera: new _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_1__.default()
+      lenguaextranjera: new _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_2__.default(),
+      gradoacademico: new _clases_GradoPostulante__WEBPACK_IMPORTED_MODULE_1__.default()
     };
   }
 });
@@ -3399,6 +3375,202 @@ var DocumentoPostulacion = /*#__PURE__*/function () {
   }]);
 
   return DocumentoPostulacion;
+}();
+
+
+
+/***/ }),
+
+/***/ "./resources/js/clases/GradoPostulante.js":
+/*!************************************************!*\
+  !*** ./resources/js/clases/GradoPostulante.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ GradoPostulante)
+/* harmony export */ });
+/* harmony import */ var _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoPostulacion.js */ "./resources/js/clases/DocumentoPostulacion.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get"); return _classApplyDescriptorGet(receiver, descriptor); }
+
+function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to " + action + " private field on non-instance"); } return privateMap.get(receiver); }
+
+function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
+
+
+
+var _docTituloLic = /*#__PURE__*/new WeakMap();
+
+var _docTituloMast = /*#__PURE__*/new WeakMap();
+
+var _docCertificadoLic = /*#__PURE__*/new WeakMap();
+
+var _docCertificadoMast = /*#__PURE__*/new WeakMap();
+
+var _docConstanciaLic = /*#__PURE__*/new WeakMap();
+
+var _docConstanciaMast = /*#__PURE__*/new WeakMap();
+
+var _docCedulaLic = /*#__PURE__*/new WeakMap();
+
+var _docCedulaMast = /*#__PURE__*/new WeakMap();
+
+var GradoPostulante = /*#__PURE__*/function () {
+  function GradoPostulante() {
+    _classCallCheck(this, GradoPostulante);
+
+    _defineProperty(this, "escolaridad", '');
+
+    _defineProperty(this, "titulo", '');
+
+    _defineProperty(this, "estatus", '');
+
+    _defineProperty(this, "cedula", '');
+
+    _defineProperty(this, "fechaobtencion", '');
+
+    _defineProperty(this, "calmin", '');
+
+    _defineProperty(this, "calmax", '');
+
+    _defineProperty(this, "promedio", '');
+
+    _docTituloLic.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "5A.- Título de licenciatura o acta de examen.",
+        etiqueta: "05A_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+        ejemplo: "05A_TitLicenciatula_2021_CJG"
+      })
+    });
+
+    _docTituloMast.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "5B.- Título de la maestría o acta de examen.",
+        etiqueta: "05B_TitMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+        ejemplo: "05B_TitMast_2021_CJG"
+      })
+    });
+
+    _docCertificadoLic.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "6A.- Certificado de promedio de la licenciatura",
+        etiqueta: "06A_Certf_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "06A_Certf_2021_CJG"
+      })
+    });
+
+    _docCertificadoMast.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "6B.- Certificado de promedio de la maestría",
+        etiqueta: "06B_Certf_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "06B_Certf_2021_CJG"
+      })
+    });
+
+    _docConstanciaLic.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "7A.- Constancia de promedio de la licenciatura",
+        etiqueta: "07A_PromedioLic_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "07A_Promedio_2021_CJG"
+      })
+    });
+
+    _docConstanciaMast.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "7B.- Constancia de promedio de la maestría",
+        etiqueta: "07B_Promedio_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "07B_Promedio_2021_CJG"
+      })
+    });
+
+    _docCedulaLic.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "8A.- Cédula profesional de la licenciatura",
+        etiqueta: "08A_Cédula_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "08A_Cédula_2021_CJG"
+      })
+    });
+
+    _docCedulaMast.set(this, {
+      writable: true,
+      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+        nombre: "8B.- Cédula profesional de la maestría",
+        etiqueta: "08B_Cédula_Año_iniciales(Apellidos,Nombres)",
+        ejemplo: "08B_Cédula_2021_CJG"
+      })
+    });
+  }
+
+  _createClass(GradoPostulante, [{
+    key: "doctitulo",
+    get:
+    /**
+     * Obtiene el documento, correspondiente al título de estudios, en 
+     * base al tipo de título escogido. 
+     */
+    function get() {
+      if (this.escolaridad === 'Maestría') return _classPrivateFieldGet(this, _docTituloMast);
+      return _classPrivateFieldGet(this, _docTituloLic);
+    }
+    /**
+     * Obtiene el documento, correspondiente al título de estudios, en 
+     * base al tipo de título escogido. 
+     */
+
+  }, {
+    key: "doccertificado",
+    get: function get() {
+      if (this.escolaridad === 'Maestría') return _classPrivateFieldGet(this, _docCertificadoMast);
+      return _classPrivateFieldGet(this, _docCertificadoLic);
+    }
+    /**
+     * Obtiene el documento, correspondiente a la constancia de promedio, 
+     * en base al tipo de título escogido.
+     */
+
+  }, {
+    key: "docconstancia",
+    get: function get() {
+      if (this.escolaridad === 'Maestría') {
+        return _classPrivateFieldGet(this, _docConstanciaMast);
+      }
+
+      return _classPrivateFieldGet(this, _docConstanciaLic);
+    }
+    /**
+     * Obtiene el documento, correspondiente a la cédula profesional, 
+     * en base al tipo de título escogido.
+     */
+
+  }, {
+    key: "doccedula",
+    get: function get() {
+      if (this.escolaridad === 'Maestría') {
+        return _classPrivateFieldGet(this, _docCedulaMast);
+      }
+
+      return _classPrivateFieldGet(this, _docCedulaLic);
+    }
+  }]);
+
+  return GradoPostulante;
 }();
 
 
@@ -43175,11 +43347,11 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.docconstancia }
+        attrs: { documento: _vm.gradoacademico.doccertificado }
       }),
       _vm._v(" "),
       _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.docpromedio }
+        attrs: { documento: _vm.gradoacademico.docconstancia }
       }),
       _vm._v(" "),
       _c("documento-requerido", {
@@ -44217,7 +44389,14 @@ var render = function() {
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [_c("grado-academico")], 1),
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _c("grado-academico", { attrs: { gradoacademico: _vm.gradoacademico } })
+      ],
+      1
+    ),
     _vm._v(" "),
     _c("hr", {
       staticClass: "col-md-12",

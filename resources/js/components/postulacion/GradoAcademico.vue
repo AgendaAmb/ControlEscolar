@@ -117,15 +117,15 @@
     </div>
 
     <documento-requerido :documento="gradoacademico.doctitulo"></documento-requerido>
+    <documento-requerido :documento="gradoacademico.doccertificado"></documento-requerido>
     <documento-requerido :documento="gradoacademico.docconstancia"></documento-requerido>
-    <documento-requerido :documento="gradoacademico.docpromedio"></documento-requerido>
     <documento-requerido :documento="gradoacademico.doccedula"></documento-requerido>
     
   </div>
 </template>
 
 <script>
-import DocumentoPostulacion from '../../clases/DocumentoPostulacion';
+import GradoPostulante from '../../clases/GradoPostulante.js';
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
 
@@ -140,40 +140,13 @@ export default {
     id: {
       type: Number,
     },
+    gradoacademico: {
+      type: GradoPostulante
+    }
   },
 
   data: function () {
     return {
-      gradoacademico: {
-        escolaridad: '',
-        titulo: '',
-        estatus: '',
-        cedula: '',
-        fechaobtencion: '',
-        calmin: '',
-        calmax: '',
-        promedio: '',
-        doctitulo: DocumentoPostulacion.create({
-          nombre: "5.- Título de licenciatura o acta de examen.",
-          etiqueta: "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
-          ejemplo: "05A_TitLicenciatula_2021_CJG"
-        }),
-        docconstancia: DocumentoPostulacion.create({
-          nombre: "6.- Constancia de promedio",
-          etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
-          ejemplo: "06_Promedio_2021_CJG"
-        }),
-        docpromedio: DocumentoPostulacion.create({
-          nombre:"7.- Certificado de promedio",
-          etiqueta:"07_Certf_Año_iniciales(Apellidos,Nombres)",
-          ejemplo:"07_Certf_2021_CJG"
-        }),
-        doccedula: DocumentoPostulacion.create({
-          nombre:"8.- Cédula profesional", 
-          etiqueta:"08_Cédula_Año_iniciales(Apellidos,Nombres)",
-          ejemplo:"08_Cédula_2021_CJG"
-        }),
-      },
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría", "Doctorado"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],

@@ -43,6 +43,9 @@ export default class GradoPostulante {
     });
 
 
+    /**
+     * Constancias de promedio de la licenciatura o la maestría.
+     */
     #docConstanciaLic = DocumentoPostulacion.create({
         nombre: "7A.- Constancia de promedio de la licenciatura",
         etiqueta: "07A_PromedioLic_Año_iniciales(Apellidos,Nombres)",
@@ -50,27 +53,27 @@ export default class GradoPostulante {
     });
 
     #docConstanciaMast = DocumentoPostulacion.create({
-        nombre: "7B.- Constancia de promedio",
+        nombre: "7B.- Constancia de promedio de la maestría",
         etiqueta: "07B_Promedio_Año_iniciales(Apellidos,Nombres)",
         ejemplo: "07B_Promedio_2021_CJG"
     });
-        
-    
 
-    doccedula = DocumentoPostulacion.create({
-        nombre:"8.- Cédula profesional", 
-        etiqueta:"08_Cédula_Año_iniciales(Apellidos,Nombres)",
-        ejemplo:"08_Cédula_2021_CJG"
+    /**
+     * Cédula profesional de la licenciatura o maestría.
+     */
+    #docCedulaLic = DocumentoPostulacion.create({
+        nombre:"8A.- Cédula profesional de la licenciatura", 
+        etiqueta:"08A_Cédula_Año_iniciales(Apellidos,Nombres)",
+        ejemplo:"08A_Cédula_2021_CJG"
+    });
+
+    #docCedulaMast = DocumentoPostulacion.create({
+        nombre:"8B.- Cédula profesional de la maestría", 
+        etiqueta:"08B_Cédula_Año_iniciales(Apellidos,Nombres)",
+        ejemplo:"08B_Cédula_2021_CJG"
     });
 
 
-
-
-
-
-
-
-    
     /**
      * Obtiene el documento, correspondiente al título de estudios, en 
      * base al tipo de título escogido. 
@@ -88,9 +91,9 @@ export default class GradoPostulante {
      */
      get doccertificado(){
         if (this.escolaridad === 'Maestría') 
-            return this.#docCertificadoLic;
+            return this.#docCertificadoMast;
 
-        return this.#docCertificadoMast;
+        return this.#docCertificadoLic;
     }
 
     /**
@@ -103,5 +106,18 @@ export default class GradoPostulante {
         }
 
         return this.#docConstanciaLic;
+    }
+
+
+    /**
+     * Obtiene el documento, correspondiente a la cédula profesional, 
+     * en base al tipo de título escogido.
+     */
+     get doccedula(){
+        if (this.escolaridad === 'Maestría') {
+            return this.#docCedulaMast;
+        }
+
+        return this.#docCedulaLic;
     }
 }
