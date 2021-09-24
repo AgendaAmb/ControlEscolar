@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h4 class="form-group col-12 my-5"> 1.- Nueva publicación </h4>
+    <h4 class="form-group col-12 my-1"> </h4>
     <div class="form-group col-md-4">
       <label> Tipo de publicación: </label>
         <select v-model="produccionCientifica.tipo" class="form-control">

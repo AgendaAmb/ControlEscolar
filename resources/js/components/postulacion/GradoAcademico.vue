@@ -11,9 +11,15 @@
       </select>
     </div>
 
-    <input-solicitud clase="form-group col-sm-6 col-md-8" v-model="gradoacademico.titulo"> Titulo: </input-solicitud>
+    <input-solicitud 
+      v-if="gradoacademico.escolaridad !== ''"
+      v-model="gradoacademico.titulo"
+      clase="form-group col-sm-6 col-md-8" 
+    > 
+      Titulo: 
+    </input-solicitud>
 
-    <div class="form-group col-md-4">
+    <div v-if="gradoacademico.escolaridad !== ''" class="form-group col-md-4">
       <div class="row">
         <div class="form-group col-12">
           <label> Estatus: </label>
@@ -43,7 +49,7 @@
       </div>
     </div>
 
-    <div class="form-group col-md-8">
+    <div v-if="gradoacademico.escolaridad !== ''" class="form-group col-md-8">
       <div class="row" v-if="gradoacademico.estatus === 'Grado obtenido'">
         <div class="form-group col-lg-4">
           <label> País donde realizaste tus estudios: </label>
@@ -116,10 +122,11 @@
       </div>
     </div>
 
-    <documento-requerido :documento="gradoacademico.doctitulo"></documento-requerido>
-    <documento-requerido :documento="gradoacademico.doccertificado"></documento-requerido>
-    <documento-requerido :documento="gradoacademico.docconstancia"></documento-requerido>
-    <documento-requerido :documento="gradoacademico.doccedula"></documento-requerido>
+
+    <documento-requerido v-for="documento in gradoacademico.documentos" 
+      :key="documento.nombre"
+      :documento="documento">
+    </documento-requerido>
     
   </div>
 </template>
@@ -140,15 +147,13 @@ export default {
     id: {
       type: Number,
     },
-    gradoacademico: {
-      type: GradoPostulante
-    }
+    gradoacademico: GradoPostulante
   },
 
   data: function () {
     return {
       universidades: [],
-      escolaridades: ["Licenciatura", "Maestría", "Doctorado"],
+      escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
     };
   },

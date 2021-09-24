@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h4 class="form-group col-12 my-5"> 1.- Agregar puesto</h4>
+    <h4 class="form-group col-12 my-2"> </h4>
     <input-solicitud clase="form-group col-md-6" v-model="puestoLaboral.empresa"> Institución / Empresa: </input-solicitud>
     <div class="form-group col-md-6">
       <label> En este puesto me desempeñé como: </label>

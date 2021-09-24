@@ -1,7 +1,5 @@
 <template>
-  <div class="form-row my-3">
-    <h2 class="col-md-9 my-4"><strong> Datos Personales </strong></h2>
-
+  <div class="form-row my-4">
     <div class="col-12">
       <div class="row">
         <div class="col-md-5 col-lg-6 col-xl-3 my-2"></div>

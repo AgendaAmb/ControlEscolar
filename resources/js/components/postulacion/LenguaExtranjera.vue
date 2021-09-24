@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <h4 class="form-group col-12 my-5"> 1.- Nuevo idioma</h4>
+    <h4 class="form-group col-12 my-2"> </h4>
     
     <!-- Datos principales -->
     <div class="form-group col-4 my-auto">

@@ -2322,6 +2322,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "capital-humano"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DatosPersonales.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DatosPersonales.vue?vue&type=script&lang=js& ***!
@@ -2335,8 +2372,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _clases_DatosPostulante_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/DatosPostulante.js */ "./resources/js/clases/DatosPostulante.js");
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-//
-//
 //
 //
 //
@@ -2754,6 +2789,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2770,14 +2812,12 @@ __webpack_require__.r(__webpack_exports__);
     id: {
       type: Number
     },
-    gradoacademico: {
-      type: _clases_GradoPostulante_js__WEBPACK_IMPORTED_MODULE_0__.default
-    }
+    gradoacademico: _clases_GradoPostulante_js__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return {
       universidades: [],
-      escolaridades: ["Licenciatura", "Maestría", "Doctorado"],
+      escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
     };
   },
@@ -3119,6 +3159,38 @@ function ProduccionCientifica() {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _clases_RequisitoIngreso_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/RequisitoIngreso.js */ "./resources/js/clases/RequisitoIngreso.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "requisitos-ingreso",
+  props: {
+    requisitosIngreso: _clases_RequisitoIngreso_js__WEBPACK_IMPORTED_MODULE_0__.default
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
@@ -3133,9 +3205,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _clases_DatosPostulante__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/DatosPostulante */ "./resources/js/clases/DatosPostulante.js");
 /* harmony import */ var _clases_GradoPostulante__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../clases/GradoPostulante */ "./resources/js/clases/GradoPostulante.js");
 /* harmony import */ var _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../clases/IdiomaPostulante */ "./resources/js/clases/IdiomaPostulante.js");
-/* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/components/postulacion/DatosPersonales.vue");
-/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
-/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
+/* harmony import */ var _clases_RequisitoIngreso__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../clases/RequisitoIngreso */ "./resources/js/clases/RequisitoIngreso.js");
+/* harmony import */ var _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CapitalHumano.vue */ "./resources/js/components/postulacion/CapitalHumano.vue");
+/* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/components/postulacion/DatosPersonales.vue");
+/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
+/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
+/* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/components/postulacion/RequisitosIngreso.vue");
 //
 //
 //
@@ -3168,6 +3243,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
@@ -3176,9 +3272,11 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    DatosPersonales: _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    GradoAcademico: _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default
+    DatosPersonales: _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    GradoAcademico: _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+    RequisitosIngreso: _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__.default,
+    CapitalHumano: _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_4__.default
   },
   name: "solicitud-postulante",
   data: function data() {
@@ -3186,7 +3284,8 @@ __webpack_require__.r(__webpack_exports__);
       errores: [],
       informacionpersonal: new _clases_DatosPostulante__WEBPACK_IMPORTED_MODULE_0__.default(),
       lenguaextranjera: new _clases_IdiomaPostulante__WEBPACK_IMPORTED_MODULE_2__.default(),
-      gradoacademico: new _clases_GradoPostulante__WEBPACK_IMPORTED_MODULE_1__.default()
+      gradoacademico: new _clases_GradoPostulante__WEBPACK_IMPORTED_MODULE_1__.default(),
+      requisitosIngreso: new _clases_RequisitoIngreso__WEBPACK_IMPORTED_MODULE_3__.default()
     };
   }
 });
@@ -3401,29 +3500,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classPrivateFieldGet(receiver, privateMap) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get"); return _classApplyDescriptorGet(receiver, descriptor); }
 
-function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to " + action + " private field on non-instance"); } return privateMap.get(receiver); }
-
-function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { return descriptor.get.call(receiver); } return descriptor.value; }
-
-
-
-var _docTituloLic = /*#__PURE__*/new WeakMap();
-
-var _docTituloMast = /*#__PURE__*/new WeakMap();
-
-var _docCertificadoLic = /*#__PURE__*/new WeakMap();
-
-var _docCertificadoMast = /*#__PURE__*/new WeakMap();
-
-var _docConstanciaLic = /*#__PURE__*/new WeakMap();
-
-var _docConstanciaMast = /*#__PURE__*/new WeakMap();
-
-var _docCedulaLic = /*#__PURE__*/new WeakMap();
-
-var _docCedulaMast = /*#__PURE__*/new WeakMap();
 
 var GradoPostulante = /*#__PURE__*/function () {
   function GradoPostulante() {
@@ -3445,128 +3522,61 @@ var GradoPostulante = /*#__PURE__*/function () {
 
     _defineProperty(this, "promedio", '');
 
-    _docTituloLic.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+    _defineProperty(this, "docsLicenciatura", [
+    /*DocumentoPostulacion.create({
         nombre: "5A.- Título de licenciatura o acta de examen.",
         etiqueta: "05A_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
         ejemplo: "05A_TitLicenciatula_2021_CJG"
-      })
-    });
+    }),
+    DocumentoPostulacion.create({
+        nombre:"6A.- Certificado de promedio de la licenciatura",
+        etiqueta:"06A_Certf_Año_iniciales(Apellidos,Nombres)",
+        ejemplo:"06A_Certf_2021_CJG"
+    }),*/
+    _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "7A.- Constancia de promedio de la licenciatura",
+      etiqueta: "07A_PromedioLic_Año_iniciales(Apellidos,Nombres)",
+      ejemplo: "07A_Promedio_2021_CJG"
+    }), _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "8A.- Cédula profesional de la licenciatura",
+      etiqueta: "08A_Cédula_Año_iniciales(Apellidos,Nombres)",
+      ejemplo: "08A_Cédula_2021_CJG"
+    })]);
 
-    _docTituloMast.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "5B.- Título de la maestría o acta de examen.",
-        etiqueta: "05B_TitMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
-        ejemplo: "05B_TitMast_2021_CJG"
-      })
-    });
-
-    _docCertificadoLic.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "6A.- Certificado de promedio de la licenciatura",
-        etiqueta: "06A_Certf_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "06A_Certf_2021_CJG"
-      })
-    });
-
-    _docCertificadoMast.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "6B.- Certificado de promedio de la maestría",
-        etiqueta: "06B_Certf_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "06B_Certf_2021_CJG"
-      })
-    });
-
-    _docConstanciaLic.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "7A.- Constancia de promedio de la licenciatura",
-        etiqueta: "07A_PromedioLic_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "07A_Promedio_2021_CJG"
-      })
-    });
-
-    _docConstanciaMast.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "7B.- Constancia de promedio de la maestría",
-        etiqueta: "07B_Promedio_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "07B_Promedio_2021_CJG"
-      })
-    });
-
-    _docCedulaLic.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "8A.- Cédula profesional de la licenciatura",
-        etiqueta: "08A_Cédula_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "08A_Cédula_2021_CJG"
-      })
-    });
-
-    _docCedulaMast.set(this, {
-      writable: true,
-      value: _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
-        nombre: "8B.- Cédula profesional de la maestría",
-        etiqueta: "08B_Cédula_Año_iniciales(Apellidos,Nombres)",
-        ejemplo: "08B_Cédula_2021_CJG"
-      })
-    });
+    _defineProperty(this, "docsMaestria", [_DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "5B.- Título de la maestría o acta de examen.",
+      etiqueta: "05B_TitMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
+      ejemplo: "05B_TitMast_2021_CJG"
+    }), _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "6B.- Certificado de promedio de la maestría",
+      etiqueta: "06B_Certf_Año_iniciales(Apellidos,Nombres)",
+      ejemplo: "06B_Certf_2021_CJG"
+    }), _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "7B.- Constancia de promedio de la maestría",
+      etiqueta: "07B_Promedio_Año_iniciales(Apellidos,Nombres)",
+      ejemplo: "07B_Promedio_2021_CJG"
+    }), _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+      nombre: "8B.- Cédula profesional de la maestría",
+      etiqueta: "08B_Cédula_Año_iniciales(Apellidos,Nombres)",
+      ejemplo: "08B_Cédula_2021_CJG"
+    })]);
   }
 
   _createClass(GradoPostulante, [{
-    key: "doctitulo",
+    key: "documentos",
     get:
     /**
      * Obtiene el documento, correspondiente al título de estudios, en 
      * base al tipo de título escogido. 
      */
     function get() {
-      if (this.escolaridad === 'Maestría') return _classPrivateFieldGet(this, _docTituloMast);
-      return _classPrivateFieldGet(this, _docTituloLic);
-    }
-    /**
-     * Obtiene el documento, correspondiente al título de estudios, en 
-     * base al tipo de título escogido. 
-     */
-
-  }, {
-    key: "doccertificado",
-    get: function get() {
-      if (this.escolaridad === 'Maestría') return _classPrivateFieldGet(this, _docCertificadoMast);
-      return _classPrivateFieldGet(this, _docCertificadoLic);
-    }
-    /**
-     * Obtiene el documento, correspondiente a la constancia de promedio, 
-     * en base al tipo de título escogido.
-     */
-
-  }, {
-    key: "docconstancia",
-    get: function get() {
       if (this.escolaridad === 'Maestría') {
-        return _classPrivateFieldGet(this, _docConstanciaMast);
+        return this.docsMaestria;
+      } else if (this.escolaridad === 'Licenciatura') {
+        return this.docsLicenciatura;
       }
 
-      return _classPrivateFieldGet(this, _docConstanciaLic);
-    }
-    /**
-     * Obtiene el documento, correspondiente a la cédula profesional, 
-     * en base al tipo de título escogido.
-     */
-
-  }, {
-    key: "doccedula",
-    get: function get() {
-      if (this.escolaridad === 'Maestría') {
-        return _classPrivateFieldGet(this, _docCedulaMast);
-      }
-
-      return _classPrivateFieldGet(this, _docCedulaLic);
+      return [];
     }
   }]);
 
@@ -3623,6 +3633,42 @@ var IdiomaPostulante = function IdiomaPostulante() {
   this.vigenciaDesde = vigenciaDesde;
   this.vigenciaHasta = vigenciaHasta;
   this.puntuacion = puntuacion;
+};
+
+
+
+/***/ }),
+
+/***/ "./resources/js/clases/RequisitoIngreso.js":
+/*!*************************************************!*\
+  !*** ./resources/js/clases/RequisitoIngreso.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RequisitoIngreso)
+/* harmony export */ });
+/* harmony import */ var _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoPostulacion.js */ "./resources/js/clases/DocumentoPostulacion.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var RequisitoIngreso = function RequisitoIngreso() {
+  _classCallCheck(this, RequisitoIngreso);
+
+  _defineProperty(this, "documentos", [_DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+    nombre: "12.- EXANI III (No aplica para estudiantes extranjeros)",
+    etiqueta: "12_Exani_Año_iniciales(Apellidos,Nombres)",
+    ejemplo: "12_Exani_2021_CJG"
+  }), _DocumentoPostulacion_js__WEBPACK_IMPORTED_MODULE_0__.default.create({
+    nombre: "19.- Propuesta de proyecto",
+    etiqueta: "19_Proyecto_Año_iniciales(Apellidos,Nombres)",
+    ejemplo: "19_Proyecto_2021_CJG"
+  })]);
 };
 
 
@@ -40875,6 +40921,45 @@ component.options.__file = "resources/js/components/carta-intencion/LenguaExtran
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/CapitalHumano.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/postulacion/CapitalHumano.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=template&id=e8130d62& */ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&");
+/* harmony import */ var _CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/postulacion/CapitalHumano.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/DatosPersonales.vue":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/postulacion/DatosPersonales.vue ***!
@@ -41152,6 +41237,45 @@ component.options.__file = "resources/js/components/postulacion/ProduccionCienti
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/postulacion/RequisitosIngreso.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/SolicitudPostulante.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/postulacion/SolicitudPostulante.vue ***!
@@ -41287,6 +41411,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/DatosPersonales.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/postulacion/DatosPersonales.vue?vue&type=script&lang=js& ***!
@@ -41396,6 +41536,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -41608,6 +41764,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=template&id=e8130d62& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/DatosPersonales.vue?vue&type=template&id=36b3f1a4&":
 /*!************************************************************************************************!*\
   !*** ./resources/js/components/postulacion/DatosPersonales.vue?vue&type=template&id=36b3f1a4& ***!
@@ -41723,6 +41896,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
 
 
 /***/ }),
@@ -42194,6 +42384,56 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c("label", [_vm._v(" Nombre del curso: ")]),
+        _vm._v(" "),
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c("label", [_vm._v(" Fecha: ")]),
+        _vm._v(" "),
+        _c("input", { staticClass: "form-control", attrs: { type: "date" } })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c("label", [_vm._v(" Nivel de escolaridad: ")]),
+        _vm._v(" "),
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DatosPersonales.vue?vue&type=template&id=36b3f1a4&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DatosPersonales.vue?vue&type=template&id=36b3f1a4& ***!
@@ -42212,11 +42452,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "form-row my-3" },
+    { staticClass: "form-row my-4" },
     [
       _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
       _vm._v(" "),
       _c("documento-requerido", {
         attrs: { documento: _vm.informacionpersonal.docActaNacimiento }
@@ -42238,14 +42476,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "col-md-9 my-4" }, [
-      _c("strong", [_vm._v(" Datos Personales ")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -42477,9 +42707,7 @@ var render = function() {
     "div",
     { staticClass: "row" },
     [
-      _c("h4", { staticClass: "form-group col-12 my-5" }, [
-        _vm._v(" 1.- Agregar puesto")
-      ]),
+      _c("h4", { staticClass: "form-group col-12 my-2" }),
       _vm._v(" "),
       _c(
         "input-solicitud",
@@ -42778,173 +43006,31 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { clase: "form-group col-sm-6 col-md-8" },
-          model: {
-            value: _vm.gradoacademico.titulo,
-            callback: function($$v) {
-              _vm.$set(_vm.gradoacademico, "titulo", $$v)
-            },
-            expression: "gradoacademico.titulo"
-          }
-        },
-        [_vm._v(" Titulo: ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c("div", { staticClass: "form-group col-12" }, [
-              _c("label", [_vm._v(" Estatus: ")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.gradoacademico.estatus,
-                      expression: "gradoacademico.estatus"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.gradoacademico,
-                        "estatus",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
+      _vm.gradoacademico.escolaridad !== ""
+        ? _c(
+            "input-solicitud",
+            {
+              attrs: { clase: "form-group col-sm-6 col-md-8" },
+              model: {
+                value: _vm.gradoacademico.titulo,
+                callback: function($$v) {
+                  _vm.$set(_vm.gradoacademico, "titulo", $$v)
                 },
-                [
-                  _c("option", { attrs: { value: "", selected: "" } }, [
-                    _vm._v("Escoge una opción")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.estatusEstudios, function(estatusEstudio) {
-                    return _c(
-                      "option",
-                      {
-                        key: estatusEstudio,
-                        domProps: { value: estatusEstudio }
-                      },
-                      [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(estatusEstudio) +
-                            "\n          "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _vm.gradoacademico.estatus === "Grado obtenido"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-6" },
-                    model: {
-                      value: _vm.gradoacademico.cedula,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "cedula", $$v)
-                      },
-                      expression: "gradoacademico.cedula"
-                    }
-                  },
-                  [_vm._v(" \n        Cédula profesional: \n      ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.gradoacademico.estatus === "Grado obtenido"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { tipo: "date", clase: "form-group col-6" },
-                    model: {
-                      value: _vm.gradoacademico.fechaobtencion,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
-                      },
-                      expression: "gradoacademico.fechaobtencion"
-                    }
-                  },
-                  [_vm._v(" \n        Fecha de titulación: \n      ")]
-                )
-              : _vm.gradoacademico.estatus === "Pasante"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { tipo: "date", clase: "form-group col-12" },
-                    model: {
-                      value: _vm.gradoacademico.fechaobtencion,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
-                      },
-                      expression: "gradoacademico.fechaobtencion"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      " \n        Fecha de obtención de pasantía: \n      "
-                    )
-                  ]
-                )
-              : _vm.gradoacademico.estatus === "Título o grado en proceso"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { tipo: "date", clase: "form-group col-12" },
-                    model: {
-                      value: _vm.gradoacademico.fechaobtencion,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
-                      },
-                      expression: "gradoacademico.fechaobtencion"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      " \n        Fecha de presentación de examen:\n      "
-                    )
-                  ]
-                )
-              : _vm._e()
-          ],
-          1
-        )
-      ]),
+                expression: "gradoacademico.titulo"
+              }
+            },
+            [_vm._v(" \n    Titulo: \n  ")]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-8" }, [
-        _vm.gradoacademico.estatus === "Grado obtenido"
-          ? _c(
+      _vm.gradoacademico.escolaridad !== ""
+        ? _c("div", { staticClass: "form-group col-md-4" }, [
+            _c(
               "div",
               { staticClass: "row" },
               [
-                _c("div", { staticClass: "form-group col-lg-4" }, [
-                  _c("label", [
-                    _vm._v(" País donde realizaste tus estudios: ")
-                  ]),
+                _c("div", { staticClass: "form-group col-12" }, [
+                  _c("label", [_vm._v(" Estatus: ")]),
                   _vm._v(" "),
                   _c(
                     "select",
@@ -42953,72 +43039,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.gradoacademico.paisestudios,
-                          expression: "gradoacademico.paisestudios"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.gradoacademico,
-                              "paisestudios",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          },
-                          _vm.escogePais
-                        ]
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Escoge una opción")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.paises, function(PaisEstudio) {
-                        return _c(
-                          "option",
-                          {
-                            key: PaisEstudio.id,
-                            domProps: { value: PaisEstudio.name }
-                          },
-                          [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(PaisEstudio.name) +
-                                "\n          "
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
-                  _c("label", [_vm._v(" Universidad de estudios: ")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.gradoacademico.universidad,
-                          expression: "gradoacademico.universidad"
+                          value: _vm.gradoacademico.estatus,
+                          expression: "gradoacademico.estatus"
                         }
                       ],
                       staticClass: "form-control",
@@ -43034,7 +43056,7 @@ var render = function() {
                             })
                           _vm.$set(
                             _vm.gradoacademico,
-                            "universidad",
+                            "estatus",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
@@ -43047,17 +43069,17 @@ var render = function() {
                         _vm._v("Escoge una opción")
                       ]),
                       _vm._v(" "),
-                      _vm._l(_vm.Universidades, function(Universidad) {
+                      _vm._l(_vm.estatusEstudios, function(estatusEstudio) {
                         return _c(
                           "option",
                           {
-                            key: Universidad.id,
-                            domProps: { value: Universidad.name }
+                            key: estatusEstudio,
+                            domProps: { value: estatusEstudio }
                           },
                           [
                             _vm._v(
                               "\n            " +
-                                _vm._s(Universidad.name) +
+                                _vm._s(estatusEstudio) +
                                 "\n          "
                             )
                           ]
@@ -43068,66 +43090,458 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
-                  _c("label", [_vm._v(" Modo de titulación: ")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.gradoacademico.modotitulacion,
-                          expression: "gradoacademico.modotitulacion"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.gradoacademico,
-                            "modotitulacion",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Escoge una opción")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-6 col-sm-4" },
-                    model: {
-                      value: _vm.gradoacademico.promedio,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "promedio", $$v)
-                      },
-                      expression: "gradoacademico.promedio"
-                    }
-                  },
-                  [_vm._v(" Promedio obtenido: ")]
-                ),
-                _vm._v(" "),
-                _vm.gradoacademico.paisestudios !== "México"
+                _vm.gradoacademico.estatus === "Grado obtenido"
                   ? _c(
+                      "input-solicitud",
+                      {
+                        attrs: { clase: "form-group col-6" },
+                        model: {
+                          value: _vm.gradoacademico.cedula,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "cedula", $$v)
+                          },
+                          expression: "gradoacademico.cedula"
+                        }
+                      },
+                      [_vm._v(" \n        Cédula profesional: \n      ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.gradoacademico.estatus === "Grado obtenido"
+                  ? _c(
+                      "input-solicitud",
+                      {
+                        attrs: { tipo: "date", clase: "form-group col-6" },
+                        model: {
+                          value: _vm.gradoacademico.fechaobtencion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
+                          },
+                          expression: "gradoacademico.fechaobtencion"
+                        }
+                      },
+                      [_vm._v(" \n        Fecha de titulación: \n      ")]
+                    )
+                  : _vm.gradoacademico.estatus === "Pasante"
+                  ? _c(
+                      "input-solicitud",
+                      {
+                        attrs: { tipo: "date", clase: "form-group col-12" },
+                        model: {
+                          value: _vm.gradoacademico.fechaobtencion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
+                          },
+                          expression: "gradoacademico.fechaobtencion"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " \n        Fecha de obtención de pasantía: \n      "
+                        )
+                      ]
+                    )
+                  : _vm.gradoacademico.estatus === "Título o grado en proceso"
+                  ? _c(
+                      "input-solicitud",
+                      {
+                        attrs: { tipo: "date", clase: "form-group col-12" },
+                        model: {
+                          value: _vm.gradoacademico.fechaobtencion,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "fechaobtencion", $$v)
+                          },
+                          expression: "gradoacademico.fechaobtencion"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          " \n        Fecha de presentación de examen:\n      "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.gradoacademico.escolaridad !== ""
+        ? _c("div", { staticClass: "form-group col-md-8" }, [
+            _vm.gradoacademico.estatus === "Grado obtenido"
+              ? _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _c("div", { staticClass: "form-group col-lg-4" }, [
+                      _c("label", [
+                        _vm._v(" País donde realizaste tus estudios: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gradoacademico.paisestudios,
+                              expression: "gradoacademico.paisestudios"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.gradoacademico,
+                                  "paisestudios",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              _vm.escogePais
+                            ]
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", selected: "" } }, [
+                            _vm._v("Escoge una opción")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.paises, function(PaisEstudio) {
+                            return _c(
+                              "option",
+                              {
+                                key: PaisEstudio.id,
+                                domProps: { value: PaisEstudio.name }
+                              },
+                              [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(PaisEstudio.name) +
+                                    "\n          "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
+                      _c("label", [_vm._v(" Universidad de estudios: ")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gradoacademico.universidad,
+                              expression: "gradoacademico.universidad"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.gradoacademico,
+                                "universidad",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", selected: "" } }, [
+                            _vm._v("Escoge una opción")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.Universidades, function(Universidad) {
+                            return _c(
+                              "option",
+                              {
+                                key: Universidad.id,
+                                domProps: { value: Universidad.name }
+                              },
+                              [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(Universidad.name) +
+                                    "\n          "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-6 col-sm-4" }, [
+                      _c("label", [_vm._v(" Modo de titulación: ")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gradoacademico.modotitulacion,
+                              expression: "gradoacademico.modotitulacion"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.gradoacademico,
+                                "modotitulacion",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", selected: "" } }, [
+                            _vm._v("Escoge una opción")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "input-solicitud",
+                      {
+                        attrs: { clase: "form-group col-6 col-sm-4" },
+                        model: {
+                          value: _vm.gradoacademico.promedio,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "promedio", $$v)
+                          },
+                          expression: "gradoacademico.promedio"
+                        }
+                      },
+                      [_vm._v(" Promedio obtenido: ")]
+                    ),
+                    _vm._v(" "),
+                    _vm.gradoacademico.paisestudios !== "México"
+                      ? _c(
+                          "input-solicitud",
+                          {
+                            attrs: { clase: "form-group col-6 col-sm-4" },
+                            model: {
+                              value: _vm.gradoacademico.calmin,
+                              callback: function($$v) {
+                                _vm.$set(_vm.gradoacademico, "calmin", $$v)
+                              },
+                              expression: "gradoacademico.calmin"
+                            }
+                          },
+                          [_vm._v(" Calificación mínima: ")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.gradoacademico.paisestudios !== "México"
+                      ? _c(
+                          "input-solicitud",
+                          {
+                            attrs: { clase: "form-group col-6 col-sm-4" },
+                            model: {
+                              value: _vm.gradoacademico.calmax,
+                              callback: function($$v) {
+                                _vm.$set(_vm.gradoacademico, "calmax", $$v)
+                              },
+                              expression: "gradoacademico.calmax"
+                            }
+                          },
+                          [_vm._v(" Calificación máxima: ")]
+                        )
+                      : _vm._e()
+                  ],
+                  1
+                )
+              : _c(
+                  "div",
+                  { staticClass: "row" },
+                  [
+                    _c("div", { staticClass: "form-group col-sm-6" }, [
+                      _c("label", [
+                        _vm._v(" País donde realizaste tus estudios: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gradoacademico.paisestudios,
+                              expression: "gradoacademico.paisestudios"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.gradoacademico,
+                                  "paisestudios",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              _vm.escogePais
+                            ]
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", selected: "" } }, [
+                            _vm._v("Escoge una opción")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.paises, function(PaisEstudio) {
+                            return _c(
+                              "option",
+                              {
+                                key: PaisEstudio.id,
+                                domProps: { value: PaisEstudio.name }
+                              },
+                              [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(PaisEstudio.name) +
+                                    "\n          "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-6" }, [
+                      _c("label", [_vm._v(" Universidad de estudios: ")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gradoacademico.universidad,
+                              expression: "gradoacademico.universidad"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.gradoacademico,
+                                "universidad",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", selected: "" } }, [
+                            _vm._v("Escoge una opción")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.Universidades, function(Universidad) {
+                            return _c(
+                              "option",
+                              {
+                                key: Universidad.id,
+                                domProps: { value: Universidad.name }
+                              },
+                              [
+                                _vm._v(
+                                  "\n          " +
+                                    _vm._s(Universidad.name) +
+                                    "\n          "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "input-solicitud",
+                      {
+                        attrs: { clase: "form-group col-6 col-sm-4" },
+                        model: {
+                          value: _vm.gradoacademico.promedio,
+                          callback: function($$v) {
+                            _vm.$set(_vm.gradoacademico, "promedio", $$v)
+                          },
+                          expression: "gradoacademico.promedio"
+                        }
+                      },
+                      [_vm._v(" \n        Promedio obtenido: \n      ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
                       "input-solicitud",
                       {
                         attrs: { clase: "form-group col-6 col-sm-4" },
@@ -43139,12 +43553,10 @@ var render = function() {
                           expression: "gradoacademico.calmin"
                         }
                       },
-                      [_vm._v(" Calificación mínima: ")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.gradoacademico.paisestudios !== "México"
-                  ? _c(
+                      [_vm._v(" \n        Calificación mínima: \n      ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
                       "input-solicitud",
                       {
                         attrs: { clase: "form-group col-6 col-sm-4" },
@@ -43156,209 +43568,22 @@ var render = function() {
                           expression: "gradoacademico.calmax"
                         }
                       },
-                      [_vm._v(" Calificación máxima: ")]
+                      [_vm._v(" \n        Calificación máxima: \n      ")]
                     )
-                  : _vm._e()
-              ],
-              1
-            )
-          : _c(
-              "div",
-              { staticClass: "row" },
-              [
-                _c("div", { staticClass: "form-group col-sm-6" }, [
-                  _c("label", [
-                    _vm._v(" País donde realizaste tus estudios: ")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.gradoacademico.paisestudios,
-                          expression: "gradoacademico.paisestudios"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: [
-                          function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.gradoacademico,
-                              "paisestudios",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          },
-                          _vm.escogePais
-                        ]
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Escoge una opción")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.paises, function(PaisEstudio) {
-                        return _c(
-                          "option",
-                          {
-                            key: PaisEstudio.id,
-                            domProps: { value: PaisEstudio.name }
-                          },
-                          [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(PaisEstudio.name) +
-                                "\n          "
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group col-6" }, [
-                  _c("label", [_vm._v(" Universidad de estudios: ")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.gradoacademico.universidad,
-                          expression: "gradoacademico.universidad"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.gradoacademico,
-                            "universidad",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v("Escoge una opción")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.Universidades, function(Universidad) {
-                        return _c(
-                          "option",
-                          {
-                            key: Universidad.id,
-                            domProps: { value: Universidad.name }
-                          },
-                          [
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(Universidad.name) +
-                                "\n          "
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-6 col-sm-4" },
-                    model: {
-                      value: _vm.gradoacademico.promedio,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "promedio", $$v)
-                      },
-                      expression: "gradoacademico.promedio"
-                    }
-                  },
-                  [_vm._v(" \n        Promedio obtenido: \n      ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-6 col-sm-4" },
-                    model: {
-                      value: _vm.gradoacademico.calmin,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "calmin", $$v)
-                      },
-                      expression: "gradoacademico.calmin"
-                    }
-                  },
-                  [_vm._v(" \n        Calificación mínima: \n      ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-6 col-sm-4" },
-                    model: {
-                      value: _vm.gradoacademico.calmax,
-                      callback: function($$v) {
-                        _vm.$set(_vm.gradoacademico, "calmax", $$v)
-                      },
-                      expression: "gradoacademico.calmax"
-                    }
-                  },
-                  [_vm._v(" \n        Calificación máxima: \n      ")]
+                  ],
+                  1
                 )
-              ],
-              1
-            )
-      ]),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.doctitulo }
-      }),
-      _vm._v(" "),
-      _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.doccertificado }
-      }),
-      _vm._v(" "),
-      _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.docconstancia }
-      }),
-      _vm._v(" "),
-      _c("documento-requerido", {
-        attrs: { documento: _vm.gradoacademico.doccedula }
+      _vm._l(_vm.gradoacademico.documentos, function(documento) {
+        return _c("documento-requerido", {
+          key: documento.nombre,
+          attrs: { documento: documento }
+        })
       })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -43493,9 +43718,7 @@ var render = function() {
     "div",
     { staticClass: "row" },
     [
-      _c("h4", { staticClass: "form-group col-12 my-5" }, [
-        _vm._v(" 1.- Nuevo idioma")
-      ]),
+      _c("h4", { staticClass: "form-group col-12 my-2" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-4 my-auto" }, [
         _vm.lenguaextranjera.idioma === "Alemán"
@@ -43922,9 +44145,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("h4", { staticClass: "form-group col-12 my-5" }, [
-      _vm._v(" 1.- Nueva publicación ")
-    ]),
+    _c("h4", { staticClass: "form-group col-12 my-1" }),
     _vm._v(" "),
     _c("div", { staticClass: "form-group col-md-4" }, [
       _c("label", [_vm._v(" Tipo de publicación: ")]),
@@ -44354,6 +44575,41 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    _vm._l(_vm.requisitosIngreso.documentos, function(documento) {
+      return _c("documento-requerido", {
+        key: documento.nombre,
+        attrs: { documento: documento }
+      })
+    }),
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704& ***!
@@ -44375,64 +44631,136 @@ var render = function() {
       "div",
       { staticClass: "col-12" },
       [
+        _vm._m(0),
+        _vm._v(" "),
         _c("datos-personales", {
           attrs: { informacionpersonal: _vm.informacionpersonal }
+        }),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
         })
       ],
       1
     ),
     _vm._v(" "),
-    _c("hr", {
-      staticClass: "col-md-12",
-      staticStyle: { "background-color": "#FECC50", height: "1px" }
-    }),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "col-12" },
       [
-        _c("grado-academico", { attrs: { gradoacademico: _vm.gradoacademico } })
+        _vm._m(1),
+        _vm._v(" "),
+        _c("grado-academico", {
+          attrs: { gradoacademico: _vm.gradoacademico }
+        }),
+        _vm._v(" "),
+        _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
+          _vm._v(" Agregar ")
+        ]),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block my-4",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
+        })
       ],
       1
     ),
     _vm._v(" "),
-    _c("hr", {
-      staticClass: "col-md-12",
-      staticStyle: { "background-color": "#FECC50", height: "1px" }
-    }),
-    _vm._v(" "),
-    _vm._m(1),
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("requisitos-ingreso", {
+          attrs: { requisitosIngreso: _vm.requisitosIngreso }
+        }),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block my-4",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
+        })
+      ],
+      1
+    ),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "col-12" },
       [
+        _vm._m(3),
+        _vm._v(" "),
         _c("lengua-extranjera", {
           attrs: { lenguaextranjera: _vm.lenguaextranjera }
+        }),
+        _vm._v(" "),
+        _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
+          _vm._v(" Agregar ")
+        ]),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block my-4",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
         })
       ],
       1
     ),
     _vm._v(" "),
-    _c("hr", {
-      staticClass: "col-md-12",
-      staticStyle: { "background-color": "#FECC50", height: "1px" }
-    }),
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _vm._m(4),
+        _vm._v(" "),
+        _c("experiencia-laboral"),
+        _vm._v(" "),
+        _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
+          _vm._v(" Agregar ")
+        ]),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block my-4",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
+        })
+      ],
+      1
+    ),
     _vm._v(" "),
-    _vm._m(2),
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _vm._m(5),
+        _vm._v(" "),
+        _c("produccion-cientifica"),
+        _vm._v(" "),
+        _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
+          _vm._v(" Agregar ")
+        ]),
+        _vm._v(" "),
+        _c("hr", {
+          staticClass: "d-block my-4",
+          staticStyle: { "background-color": "#FECC50", height: "1px" }
+        })
+      ],
+      1
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [_c("experiencia-laboral")], 1),
-    _vm._v(" "),
-    _c("hr", {
-      staticClass: "col-md-12",
-      staticStyle: { "background-color": "#FECC50", height: "1px" }
-    }),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [_c("produccion-cientifica")], 1)
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _vm._m(6),
+        _vm._v(" "),
+        _c("capital-humano"),
+        _vm._v(" "),
+        _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
+          _vm._v(" Agregar ")
+        ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -44440,7 +44768,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "col-md-9 my-4" }, [
+    return _c("h2", { staticClass: "d-block my-5" }, [
+      _c("strong", [_vm._v(" Datos Personales ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "d-block my-4" }, [
       _c("strong", [_vm._v(" Historial académico ")])
     ])
   },
@@ -44448,7 +44784,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "col-md-9 my-4" }, [
+    return _c("h2", { staticClass: "d-block my-4" }, [
+      _c("strong", [_vm._v(" Requisitos de ingreso ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "d-block my-4" }, [
       _c("strong", [_vm._v(" Dominio de idiomas ")])
     ])
   },
@@ -44456,7 +44800,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "col-md-9 my-4" }, [
+    return _c("h2", { staticClass: "d-block my-4" }, [
       _c("strong", [_vm._v(" Trayectoria profesional ")])
     ])
   },
@@ -44464,8 +44808,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "col-md-9 my-4" }, [
+    return _c("h2", { staticClass: "d-block my-4" }, [
       _c("strong", [_vm._v(" Producción científica ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", { staticClass: "d-block my-4" }, [
+      _c("strong", [_vm._v(" Capital humano (cursos impartidos) ")])
     ])
   }
 ]
