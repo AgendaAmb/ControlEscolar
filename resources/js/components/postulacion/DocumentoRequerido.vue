@@ -3,6 +3,8 @@
     <div class="row my-3">
       <div class="form-group col-9 my-auto">
         <h5 class="mt-4 d-block"><strong> {{ documento.nombre }} </strong></h5>
+        <p v-if="'observaciones' in documento && documento.observaciones !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="documento.observaciones"></span></strong></p>
+
         <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ documento.etiqueta }} </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ documento.ejemplo }} </p>
       </div>
@@ -35,6 +37,7 @@
 </style>
 
 <script>
+import DocumentoPostulacion from '../../clases/DocumentoPostulacion';
 export default {
   name: "documento-requerido",
 
@@ -44,7 +47,7 @@ export default {
   },
   
   props: {
-    documento: Object,
+    documento: DocumentoPostulacion,
   },
 
   data() {

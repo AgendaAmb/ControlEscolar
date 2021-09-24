@@ -7,43 +7,10 @@
 @section('container-class', 'class=container')
 @section('main')
 
-<x-student-appliance style="background-color:#FECC50; height: 1px;" v-on:submit.prevent="actualizaSolicitud">    
-    <x-slot name="profile_picture"></x-slot>
-    <x-slot name="identidad_usuario"> @include('postulacion.identidad-usuario') </x-slot>
-    
-    <x-slot name="datos_personales"> 
-        @include('postulacion.datos-personales') 
-        <datos-personales></datos-personales>
-    </x-slot>
 
 
-    <x-slot name="datos_universitarios"> 
-        <div class="col-12" v-if="GradosAcademicos.length > 0">
-            <grado-academico v-for="(GradoAcademico, i) in GradosAcademicos" 
-                :key="i + 1" :id="i + 1" 
-                :paises="Countries" >
-            </grado-academico> 
-        </div>
-        <div class="col-12" v-else>
-            <h5 class="d-block"><strong> Aún no se ha subido información. </strong></h5>
-        </div>
-        <div class="col-12 my-3">
-            <button type="button" class="btn btn-success" v-on:click="nuevoDatoAcademico"> Agregar </button>
-        </div>
-    </x-slot>
+<solicitud-postulante></solicitud-postulante>
 
-    <x-slot name="dominio_idioma"> 
-        <lengua-extranjera></lengua-extranjera>
-    </x-slot>
-
-    <x-slot name="experiencia_laboral"> 
-        <experiencia-laboral></experiencia-laboral>
-    </x-slot>
-
-    <x-slot name="produccion_cientifica"> 
-        <produccion-cientifica></produccion-cientifica>
-    </x-slot>
-</x-student-appliance>
 
 @endsection
 @include('postulacion.vuejs')

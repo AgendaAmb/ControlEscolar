@@ -32,9 +32,6 @@
       <h5><strong> Logros: </strong></h5>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" v-model="puestoLaboral.logros"></textarea>
     </div>
-
-    <documento-requerido :documento="puestoLaboral.probatorioEmpleo"></documento-requerido>
-    <documento-requerido :documento="puestoLaboral.certificadoEmpleo"></documento-requerido>
   </div>
 </template>
 
@@ -74,18 +71,6 @@ class PuestoLaboral
     this.areaConocimiento = areaConocimiento;
     this.campo = campo;
     this.logros = logros;
-
-    this.probatorioEmpleo = {
-      nombre: '17A.- Certificate(s) of Employment/Internship',          
-      etiqueta: '17A_ProofExperience_iniciales',
-      ejemplo: '17A_ProofExperience_CJG'
-    };
-
-    this.certificadoEmpleo = {
-      nombre: '17B.- Confirmation of employment',          
-      etiqueta: '17B_ConfirmationEmp_iniciales',
-      ejemplo: '17B_ConfirmationEmp_CJG'
-    };
   }
 }
 

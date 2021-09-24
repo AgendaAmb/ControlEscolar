@@ -32,6 +32,8 @@
 </style>
 
 <script>
+import DocumentoPostulacion from '../../clases/DocumentoPostulacion.js';
+
 export default {
   name: "documento-requerido",
 
@@ -41,7 +43,7 @@ export default {
   },
   
   props: {
-    documento: Object,
+    documento: DocumentoPostulacion,
   },
 
   data() {

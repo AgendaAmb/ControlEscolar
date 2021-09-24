@@ -1,6 +1,5 @@
 <template>
   <div class="row my-3">
-    <h4 class="form-group col-12 my-5">{{ id }}.- {{ gradoacademico.universidad }}</h4>
     <div class="form-group col-sm-6 col-md-4">
       <label> Nivel de escolaridad: </label>
 
@@ -126,6 +125,7 @@
 </template>
 
 <script>
+import DocumentoPostulacion from '../../clases/DocumentoPostulacion';
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
 
@@ -153,26 +153,26 @@ export default {
         calmin: '',
         calmax: '',
         promedio: '',
-        doctitulo: {
+        doctitulo: DocumentoPostulacion.create({
           nombre: "5.- Título de licenciatura o acta de examen.",
           etiqueta: "05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)",
           ejemplo: "05A_TitLicenciatula_2021_CJG"
-        },
-        docconstancia: {
+        }),
+        docconstancia: DocumentoPostulacion.create({
           nombre: "6.- Constancia de promedio",
           etiqueta: "06_Promedio_Año_iniciales(Apellidos,Nombres)",
           ejemplo: "06_Promedio_2021_CJG"
-        },
-        docpromedio: {
+        }),
+        docpromedio: DocumentoPostulacion.create({
           nombre:"7.- Certificado de promedio",
           etiqueta:"07_Certf_Año_iniciales(Apellidos,Nombres)",
           ejemplo:"07_Certf_2021_CJG"
-        },
-        doccedula: {
-          nombre:"8.- Cédula profesional escaneada", 
+        }),
+        doccedula: DocumentoPostulacion.create({
+          nombre:"8.- Cédula profesional", 
           etiqueta:"08_Cédula_Año_iniciales(Apellidos,Nombres)",
           ejemplo:"08_Cédula_2021_CJG"
-        },
+        }),
       },
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría", "Doctorado"],

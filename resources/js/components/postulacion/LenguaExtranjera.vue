@@ -7,7 +7,7 @@
       <img v-if="lenguaextranjera.idioma === 'Alemán'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/alemania.png">
       <img v-else-if="lenguaextranjera.idioma === 'Español'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/mexico.png">
       <img v-else-if="lenguaextranjera.idioma === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
-      <img v-else-if="lenguaextranjera.idioma === 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/academic-programs/francia.png">
+      <img v-else-if="lenguaextranjera.idioma === 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/francia.png">
     </div>
     <div class="form-group col-8 d-md-none">
       <div class="row justify-content-end">
@@ -111,39 +111,19 @@
 <!-- Fin estilos -->
 
 <script>
+import IdiomaPostulante from '../../clases/IdiomaPostulante.js';
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
 
 export default {
   name: "lengua-extranjera",
+  props: { 
+    lenguaextranjera: new IdiomaPostulante(),
+  },
   components: { DocumentoRequerido, InputSolicitud },
 
   data() {
     return {
-      lenguaextranjera: {
-        institucion: '',
-        idioma: '',
-        examenIngles: '',
-        tipoExamenIngles: '',
-        otroIdioma: '',
-        fechaAplicacion: null,
-        vigenciaDesde: null,
-        vigenciaHasta: null,
-        puntuacion: 0,
-        docprobatorio: {
-          nombre:"13.- Certificado de idioma",
-          etiqueta:"13_Certf_Año_iniciales(Apellidos,Nombres) ",
-          ejemplo:"13_Certf_2021_CJG"
-        }
-      },
-
-      id: '',
-      gradoDominio: '',
-      nivelConversacion: '',
-      nivelLectura: '',
-      nivelEscritura: '',
-      certificacion: '',
-
       idiomas: [
         'Español',
         'Inglés',
