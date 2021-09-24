@@ -1,6 +1,6 @@
 import DocumentoPostulacion from "./DocumentoPostulacion.js";
 
-export default class RequisitoIngreso {
+export default class RequisitosIngresoModel {
 
     /**
      * Documentos de ingreso.

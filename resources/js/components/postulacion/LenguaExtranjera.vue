@@ -111,14 +111,14 @@
 <!-- Fin estilos -->
 
 <script>
-import IdiomaPostulante from '../../clases/IdiomaPostulante.js';
+import LenguaExtranjera from '../../clases/LenguaExtranjera.js';
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
 
 export default {
   name: "lengua-extranjera",
   props: { 
-    lenguaextranjera: new IdiomaPostulante(),
+    lenguaextranjera: new LenguaExtranjera(),
   },
   components: { DocumentoRequerido, InputSolicitud },
 

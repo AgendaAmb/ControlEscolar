@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import GradoPostulante from '../../clases/GradoPostulante.js';
+import GradoAcademicoModel from '../../clases/GradoAcademico.js';
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
 
@@ -147,7 +147,7 @@ export default {
     id: {
       type: Number,
     },
-    gradoacademico: GradoPostulante
+    gradoacademico: GradoAcademicoModel
   },
 
   data: function () {

@@ -9,13 +9,13 @@
 
 
 <script>
-import RequisitoIngreso from '../../clases/RequisitoIngreso.js';
+import RequisitosIngresoModel from '../../clases/RequisitosIngreso.js';
 
 export default {
   name: "requisitos-ingreso",
 
   props: {
-    requisitosIngreso: RequisitoIngreso,
+    requisitosIngreso: RequisitosIngresoModel,
   }
 };
 </script>

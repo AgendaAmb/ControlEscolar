@@ -1,12 +1,6 @@
 import DocumentoPostulacion from "./DocumentoPostulacion.js";
 
-export default class IdiomaPostulante {
-
-    docprobatorio = DocumentoPostulacion.create({
-        nombre: '13.- Certificado de idioma',
-        etiqueta: '13_Certf_Año_iniciales(Apellidos,Nombres) ',
-        ejemplo: '13_Certf_2021_CJG '
-    });
+export default class LenguaExtranjeraModel {
 
     constructor(
         institucion = '', 
@@ -17,7 +11,12 @@ export default class IdiomaPostulante {
         fechaAplicacion = null,
         vigenciaDesde = null,
         vigenciaHasta = null,
-        puntuacion = 0){
+        puntuacion = 0,
+        docprobatorio = {
+            nombre: '13.- Certificado de idioma',
+            etiqueta: '13_Certf_Año_iniciales(Apellidos,Nombres) ',
+            ejemplo: '13_Certf_2021_CJG '
+        }){
 
         this.institucion = institucion;
         this.idioma = idioma;
@@ -28,5 +27,6 @@ export default class IdiomaPostulante {
         this.vigenciaDesde = vigenciaDesde;
         this.vigenciaHasta = vigenciaHasta;
         this.puntuacion = puntuacion;
+        this.docprobatorio = Object.create(new DocumentoPostulacion(), docprobatorio);
     }
 }

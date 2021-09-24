@@ -1,15 +1,28 @@
 import DocumentoPostulacion from "./DocumentoPostulacion.js";
 
-export default class GradoPostulante {
+export default class GradoAcademicoModel {
 
-    escolaridad = '';
-    titulo = '';
-    estatus = '';
-    cedula = '';
-    fechaobtencion = '';
-    calmin = '';
-    calmax = '';
-    promedio = '';
+    constructor(
+        escolaridad = '',
+        titulo = '',
+        estatus = '',
+        cedula = '',
+        fechaobtencion = '',
+        calmin = '',
+        calmax = '',
+        promedio = '',
+        documentos = []
+    ){
+        this.escolaridad = escolaridad;
+        this.titulo = titulo;
+        this.estatus = estatus;
+        this.cedula = cedula;
+        this.fechaobtencion = fechaobtencion;
+        this.calmin = calmin;
+        this.calmax = calmax;
+        this.promedio = promedio;
+        this.documentos = documentos;
+    }
 
     /**
      * Documentos de la licenciatura.
@@ -24,7 +37,7 @@ export default class GradoPostulante {
             nombre:"6A.- Certificado de promedio de la licenciatura",
             etiqueta:"06A_Certf_Año_iniciales(Apellidos,Nombres)",
             ejemplo:"06A_Certf_2021_CJG"
-        }),*/
+        }),
         DocumentoPostulacion.create({
             nombre: "7A.- Constancia de promedio de la licenciatura",
             etiqueta: "07A_PromedioLic_Año_iniciales(Apellidos,Nombres)",
@@ -34,12 +47,12 @@ export default class GradoPostulante {
             nombre:"8A.- Cédula profesional de la licenciatura", 
             etiqueta:"08A_Cédula_Año_iniciales(Apellidos,Nombres)",
             ejemplo:"08A_Cédula_2021_CJG"
-        })
+        })*/
     ];
 
     /**
      * Documentos de la maestría
-     */
+     *//*
     docsMaestria = [
         DocumentoPostulacion.create({
             nombre: "5B.- Título de la maestría o acta de examen.",
@@ -61,14 +74,13 @@ export default class GradoPostulante {
             etiqueta:"08B_Cédula_Año_iniciales(Apellidos,Nombres)",
             ejemplo:"08B_Cédula_2021_CJG"
         })
-    ];
-
-
+    ];*/
 
     /**
      * Obtiene el documento, correspondiente al título de estudios, en 
      * base al tipo de título escogido. 
      */
+    /*
     get documentos(){
         if (this.escolaridad === 'Maestría') {
             return this.docsMaestria;
@@ -78,5 +90,6 @@ export default class GradoPostulante {
         }
 
         return [];
-    }
+    }*/
+
 }

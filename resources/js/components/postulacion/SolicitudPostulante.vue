@@ -50,11 +50,11 @@
 
 <script>
 import DatosPostulante from '../../clases/DatosPostulante';
-import GradoPostulante from '../../clases/GradoPostulante';
-import IdiomaPostulante from '../../clases/IdiomaPostulante';
-import RequisitoIngreso from '../../clases/RequisitoIngreso';
+import GradoAcademicoModel from '../../clases/GradoAcademico';
+import LenguaExtranjeraModel from '../../clases/LenguaExtranjera';
+import RequisitosIngresoModel from '../../clases/RequisitosIngreso';
 import CapitalHumano from './CapitalHumano.vue';
-import DatosPersonales from './DatosPersonales.vue';
+import DatosPersonales from './Postulante.vue';
 import GradoAcademico from './GradoAcademico.vue';
 import LenguaExtranjera from './LenguaExtranjera.vue';
 import RequisitosIngreso from './RequisitosIngreso.vue';
@@ -67,9 +67,9 @@ export default {
     return {
       errores: [],
       informacionpersonal: new DatosPostulante(),
-      lenguaextranjera: new IdiomaPostulante(),
-      gradoacademico: new GradoPostulante(),
-      requisitosIngreso: new RequisitoIngreso(),
+      lenguaextranjera: new LenguaExtranjeraModel(),
+      gradoacademico: new GradoAcademicoModel(),
+      requisitosIngreso: new RequisitosIngresoModel(),
     };
   },
 
