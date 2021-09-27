@@ -15,7 +15,7 @@ export default class LenguaExtranjeraModel {
         docprobatorio = {
             nombre: '13.- Certificado de idioma',
             etiqueta: '13_Certf_Año_iniciales(Apellidos,Nombres) ',
-            ejemplo: '13_Certf_2021_CJG '
+            ejemplo: '13_Certf_2021_CJG ',
         }){
 
         this.institucion = institucion;
@@ -27,6 +27,6 @@ export default class LenguaExtranjeraModel {
         this.vigenciaDesde = vigenciaDesde;
         this.vigenciaHasta = vigenciaHasta;
         this.puntuacion = puntuacion;
-        this.docprobatorio = Object.create(new DocumentoPostulacion(), docprobatorio);
+        this.docprobatorio = docprobatorio;
     }
 }

@@ -2,14 +2,14 @@
   <div class="col-12">
     <div class="row my-3">
       <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block"><strong> {{ documento.nombre }} </strong></h5>
-        <p v-if="'observaciones' in documento && documento.observaciones !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="documento.observaciones"></span></strong></p>
+        <h5 class="mt-4 d-block"><strong> {{ name }} </strong></h5>
+        <p v-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
 
-        <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ documento.etiqueta }} </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ documento.ejemplo }} </p>
+        <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
+        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
       </div>
-      <div class="form-group col-3 my-auto">
-        <a v-if="'archivo' in documento && documento.archivo !== null && documento.url !== null" class="verArchivo d-block my-2 ml-auto" :href="documento.url" target="_blank"></a>
+      <div class="form-group col-3 my-auto"> 
+        <a v-if="url !== null && url !== undefined" class="verArchivo d-block my-2 ml-auto" :href="url" target="_blank"></a>
         <label class="cargarArchivo d-block ml-auto my-auto">
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
@@ -37,35 +37,89 @@
 </style>
 
 <script>
-import DocumentoPostulacion from '../../clases/DocumentoPostulacion';
 export default {
   name: "documento-requerido",
 
-  model: {
-    prop: 'documento',
-    event: 'change',
-  },
-  
   props: {
-    documento: DocumentoPostulacion,
+    name: {
+      type: String
+    },
+
+    notes: {
+      type: String
+    },
+
+    label: {
+      type: String
+    },
+
+    example: {
+      type: String
+    },
+
+    archivo: {
+      type: File      
+    },
+     
+    url: {
+      type: String
+    }
   },
 
   data() {
     return {
-      errores: []
+      errores: {},
     };
   },
 
-  
+  computed: {
+    Archivo:{ 
+      get () {
+        return this.archivo;
+      },
+      set (newValue){
+        this.$emit('update:archivo', newValue);
+      }
+    },
+    Url: {
+      get () {
+        return this.url;
+      },
+      set (newValue){
+        this.$emit('update:url', newValue);
+      }
+    },
+    Errores: {
+      get () {
+        return this.errores;
+      },
+      set (newValue){
+        this.errores = newValue;
+        this.$emit('update:errores', newValue);
+      }
+    }
+  },
+
   methods: {
     cargaDocumento(e) {
+      
+      var name = e.target.files[0].name;
+      this.Errores = {};
+
+      if (!name.endsWith('.pdf')) {
+        this.Errores = { 
+          archivo:'Extensión inválida'
+        };
+        return false;
+      }
+
 
       this.$nextTick(function () {
         let reader = new FileReader();
 
         reader.onload = (event) => {
-          Vue.set(this.documento, 'archivo', e.target.files[0]);
-          Vue.set(this.documento, 'url', event.target.result);
+          this.Archivo = e.target.files[0];
+          this.Url = event.target.result;
         };
 
         reader.readAsDataURL(e.target.files[0]);

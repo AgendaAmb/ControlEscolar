@@ -19,6 +19,11 @@ class CreateArchivesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('archive_required_document', function (Blueprint $table){
+            $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
+            $table->foreignId('required_document_id')->constrained('required_documents')->onDelete('cascade');
+        });
     }
 
     /**
@@ -28,6 +33,7 @@ class CreateArchivesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('archives_required_document');
         Schema::dropIfExists('archives');
     }
 }

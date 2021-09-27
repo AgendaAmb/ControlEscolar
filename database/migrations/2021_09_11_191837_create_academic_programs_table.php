@@ -18,6 +18,7 @@ class CreateAcademicProgramsTable extends Migration
             $table->id();
             $table->string('name', 70);
             $table->string('alias', 30);
+            $table->string('type');
 
             $table->index('name');
             $table->index('alias');
@@ -25,19 +26,22 @@ class CreateAcademicProgramsTable extends Migration
             $table->softDeletes();
         });
 
+        
+        
+
         Schema::create('academic_program_required_document', function (Blueprint $table) {
             $table->foreignId('academic_program_id')->constrained()->onDelete('cascade');
             $table->foreignId('required_document_id')->constrained()->onDelete('cascade');
         });
 
         DB::table('academic_programs')->insert([
-            ['name' => 'Maestría en ciencias ambientales', 'alias' => 'maestria'],
-            ['name' => 'Doctorado en ciencias ambientales', 'alias' => 'doctorado'],
-            ['name' => 'Maestría en ciencias ambientales, doble titulación', 'alias' => 'enrem'],
-            ['name' => 'Maestría Interdisciplinaria en ciudades sostenibles', 'alias' => 'imarec'],
+            ['name' => 'Maestría en ciencias ambientales', 'alias' => 'maestria', 'type' => 'maestría'],
+            ['name' => 'Doctorado en ciencias ambientales', 'alias' => 'doctorado', 'type' => 'doctorado'],
+            ['name' => 'Maestría en ciencias ambientales, doble titulación', 'alias' => 'enrem', 'type' => 'maestría'],
+            ['name' => 'Maestría Interdisciplinaria en ciudades sostenibles', 'alias' => 'imarec', 'type' => 'maestría'],
         ]);
 
-        
+        /*
         DB::table('academic_program_required_document')->insert([
 
             # Maestría en ciencias ambientales
@@ -118,7 +122,7 @@ class CreateAcademicProgramsTable extends Migration
             [ 'required_document_id' => 19, 'academic_program_id' => 4 ],
             [ 'required_document_id' => 20, 'academic_program_id' => 4 ],
             [ 'required_document_id' => 21, 'academic_program_id' => 4 ],
-        ]);
+        ]);*/
     }
 
     /**
@@ -128,7 +132,7 @@ class CreateAcademicProgramsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('academic_program_required_document');
+        //Schema::dropIfExists('academic_program_required_document');
         Schema::dropIfExists('academic_programs');
     }
 }

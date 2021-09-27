@@ -8,14 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class AcademicProgram extends Model
 {
     use HasFactory;
-    
-    /**
-     * Obtiene los documentos requeridos del programa académico.
-     *
-     * @return void
-     */
-    public function requiredDocuments()
-    {
-        return $this->belongsToMany(RequiredDocument::class);
-    }
 }

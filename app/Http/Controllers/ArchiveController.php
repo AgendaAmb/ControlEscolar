@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateArchiveRequest;
 use App\Models\AcademicProgram;
+use App\Models\RequiredDocument;
 use Illuminate\Http\Request;
 
 class ArchiveController extends Controller
@@ -26,16 +27,15 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $academicProgramName)
     {
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-
-        return view(
-            'postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName]
         
-        )->with('academic_program', $academic_program
-        )->with('personal_documents', $academic_program->requiredDocuments()->type('personal')->get()
-        )->with('academic_documents', $academic_program->requiredDocuments()->type('academic')->get()
-        )->with('entrance_documents', $academic_program->requiredDocuments()->type('entrance')->get()
+        return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
+        ->with('academic_program', $academic_program)
+        ->with('personal_documents', RequiredDocument::type('personal')->get())
+        ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())
+        ->with('master_documents', RequiredDocument::type('academic-mast')->get()
+        )/*->with('entrance_documents', $academic_program->requiredDocuments()->type('entrance')->get()
         )->with('curricular_documents', $academic_program->requiredDocuments()->type('curricular')->get()
-        );
+        )*/;
     }
 
     /**
