@@ -41701,7 +41701,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "form-group col-md-4" }, [
-      _c("label", [_vm._v(" Número de CVU: ")]),
+      _c("label", [_vm._v(" Número de CVU CONACYT: ")]),
       _vm._v(" "),
       _c("input", { staticClass: "form-control", attrs: { type: "text" } })
     ])

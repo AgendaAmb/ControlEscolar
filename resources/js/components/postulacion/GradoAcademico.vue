@@ -93,7 +93,7 @@
       -->
       <div class="row" v-if="escolaridad === 'Maestría'" >
         <div class="form-group col-md-4">
-          <label> Número de CVU: </label>
+          <label> Número de CVU CONACYT: </label>
           <input type="text" class="form-control">
         </div>
 
