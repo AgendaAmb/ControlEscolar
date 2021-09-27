@@ -1,7 +1,7 @@
 @font-face
 {
     font-family:'Myraid light';
-    src: url(/TiposDeLetra/MyriadPro-Light.otf) format('opentype');
+    src: url(./MyriadPro-Light.otf) format('opentype');
     font-display: auto;
 }
 
@@ -9,7 +9,7 @@
 @font-face
 {
     font-family:'Myraid Pro Bold';
-    src: url(/TiposDeLetra/MyriadPro-Bold.otf) format('opentype');
+    src: url(./MyriadPro-Bold.otf) format('opentype');
     font-display: auto;
 }
 

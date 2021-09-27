@@ -48,7 +48,7 @@ class ArchiveController extends Controller
     {
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
         
-        return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
+        return view('carta-intencion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
         ->with('academic_program', $academic_program)
         ->with('personal_documents', RequiredDocument::type('personal')->get())
         ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())

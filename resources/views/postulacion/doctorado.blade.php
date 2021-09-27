@@ -26,6 +26,11 @@
     </template>
 
     <template v-slot:requisitosingreso>
+        <div class="col-12">
+            <label> ¿Por qué deseas ingresar al programa de @{{academicProgram.name}} </label>
+            <textarea class="form-control" rows="8">
+            </textarea>
+        </div>
         <documento-requerido v-for="documento in EntranceDocuments" 
             :key="documento.name"
             :archivo.sync="documento.archivo" :url.sync="documento.url" 

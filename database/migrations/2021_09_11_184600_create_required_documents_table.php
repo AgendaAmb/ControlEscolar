@@ -187,6 +187,17 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
+                'name' =>"18.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)",
+                'type' => 'entrance',
+                'label' => '18_EXANIIII_añodesolicitud_iniciales',                
+                'notes' => 'Favor de descargar, <a href="#"> dando clic aquí</a>',
+                'example' => '18_CartaCompromiso_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+            
+            # Todos
+            [
                 'name' =>"13.- Certificado de idioma vigente.",
                 'type' => 'language',
                 'label' => '13_Idioma_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                

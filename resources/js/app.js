@@ -35,6 +35,12 @@ Vue.component('documento-requerido', require('./components/postulacion/Documento
 Vue.component('capital-humano', require('./components/postulacion/CapitalHumano.vue').default);
 Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
 
+/**
+ * Componentes para la carta de intención.
+ */
+ Vue.component('ci-solicitud-postulante', require('./components/carta-intencion/SolicitudPostulante.vue').default);
+
+
 
 /*Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
 Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);
