@@ -46,7 +46,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'name' =>"2.- CURP expedido por la RENAPO. ",
                 'type' => 'personal',
                 'label' => '02_CURP_añodesolicitud_iniciales',
-                'notes' => 'Debe de contener el sello de expedición.<br> Puedes generarlo, dando clic a <a href="https://www.gob.mx/curp/" target="_blank"> este vínculo </a>',
+                'notes' => 'CURP Certificada y verificada por el registro civil.<br> Puedes generarlo, dando clic a <a href="https://www.gob.mx/curp/" target="_blank"> este vínculo </a>',
                 'example' => '02_CURP_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
