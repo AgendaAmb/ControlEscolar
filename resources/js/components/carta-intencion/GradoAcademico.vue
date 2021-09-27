@@ -1,120 +1,148 @@
 <template>
-  <div class="row my-3 justify-content-left">
-    <div class="d-none d-lg-block form-group col-7">
+  <div class="row my-3">
+    <div class="form-group col-12">
+
+      <!-- 
+        Datos generales del estatus de estudio.
+        Grado, título, etc.
+      -->
+      <div  class="row">
+        <div class="form-group col-md-6 col-lg-4">
+          <label> Nivel de escolaridad: </label>
+          <input v-model="escolaridad" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group col-md-6 col-lg-4">
+          <label> Título obtenido: </label>
+          <input v-model="titulo" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="d-none d-lg-block form-group col-lg-4">
+          <label> Estatus: </label> 
+          <input v-model="estatus" type="text" class="form-control" readonly>
+        </div>
+      </div>
+
+      <!-- 
+        País de estudios y universidad 
+      -->
       <div class="row">
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Grado obtenido: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> Licenciatura </h5>
+        <div class="form-group col-lg-6">
+          <label> País donde realizaste tus estudios: </label>
+          <input type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> País de estudios: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> México </h5>
+
+        <div class="form-group col-lg-6">
+          <label> Universidad de estudios: </label>
+          <input type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Universidad: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> Universidad Autónoma de San Luis Potosí </h5>
+
+        <div class="d-block d-lg-none form-group col-md-6">
+          <label> Estatus: </label>
+          <input v-model="estatus" type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Fecha de obtención de grado: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> 24/09/2021 </h5>
+      </div>
+      
+      <!-- 
+        Datos de obtención de grado/pasantía.
+      -->
+      <div class="row" v-if="estatus !== ''" >
+        <div v-if="estatus === 'Grado obtenido'" class="form-group col-md-6">
+          <label> Fecha de titulación: </label>
+          <input type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Título obtenido: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> Ingeniero en computación </h5>
+
+        <div v-if="estatus === 'Pasante'" class="form-group col-md-6">
+          <label> Fecha de obtención de pasantía: </label>
+          <input type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Estatus: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> Graduado </h5>
+
+        <div v-if="estatus === 'Título o grado en proceso'" class="form-group col-md-6">
+          <label> Fecha de presentación de examen: </label>
+          <input type="text" class="form-control" readonly>
         </div>
-        <div class="form-group col-12">
-          <h5 class="d-inline-block my-0 font-weight-bold"> Promedio obtenido: </h5>
-          <h5 class="d-inline-block my-0 ml-2"> 8.2 </h5>
+      </div>
+      <!-- 
+        Pedir CVU, solo en maestría
+      -->
+      <div class="row" v-if="escolaridad === 'Maestría'" >
+        <div class="form-group col-md-4">
+          <label> Número de CVU CONACYT: </label>
+          <input type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label> ¿Cuentas con una carta de reconocimiento? </label>
+          <input type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
+          <input type="text" class="form-control" readonly>
+        </div>
+      </div>
+
+
+
+      <!-- 
+        Promedio del postulante
+      -->
+      <div class="row">
+        <div class="form-group col-md-6 col-lg-4">
+          <label> Promedio obtenido: </label>
+          <input v-model="promedio" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group col-md-6 col-lg-4">
+          <label> Calificación mínima: </label>
+          <input v-model="calmin" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="form-group col-md-6 col-lg-4">
+          <label> Calificación máxima: </label>
+          <input v-model="calmax" type="text" class="form-control" readonly>
         </div>
       </div>
     </div>
-    
-    <!-- Imagen del tipo de título -->
-    <div class="form-group col-4 mb-auto">
-      <img class="d-block mr-auto" width="120px" src="/controlescolar/storage/emojis/graduated.png">
-    </div>
 
-
-    <documento-requerido :documento="{
-        nombre: '5.- Título de licenciatura o acta de examen.',
-        etiqueta: '05_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',
-        ejemplo: '05A_TitLicenciatula_2021_CJG'
-    }">
-    </documento-requerido>
-
-    <documento-requerido :documento="{
-        nombre: '6.- Constancia de promedio',
-        etiqueta: '06_Promedio_Año_iniciales(Apellidos,Nombres)',
-        ejemplo: '06_Promedio_2021_CJG'
-      }">
-    </documento-requerido>
-
-    <documento-requerido :documento="{
-        nombre:'7.- Certificado de promedio',
-        etiqueta:'07_Certf_Año_iniciales(Apellidos,Nombres)',
-        ejemplo:'07_Certf_2021_CJG'
-      }">
-    </documento-requerido>
-
-    <documento-requerido :documento="{
-        nombre:'8.- Cédula profesional escaneada', 
-        etiqueta:'08_Cédula_Año_iniciales(Apellidos,Nombres)',
-        ejemplo:'08_Cédula_2021_CJG'
-      }">
-    </documento-requerido>
+    <documento-postulante v-for="documento in documentos" 
+      :key="documento.name"
+      :errores.sync = "documento.errores"
+      v-bind="documento">
+    </documento-postulante>
   </div>
 </template>
 
-<style scoped>
-.cargarArchivo {
-  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-
-.verArchivo {
-  background: url(/controlescolar/storage/archive-buttons/ver.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-</style>
-
 <script>
-import DocumentoRequerido from '../carta-intencion/DocumentoRequerido.vue';
+import DocumentoPostulante from './DocumentoPostulante.vue';
+
 export default {
-  components: { DocumentoRequerido },
-  name: "grado-academico-postulante",
+  components: { DocumentoPostulante },
+  name: "ci-grado-academico",
 
   props: {
-    id: Number,
+    id: {
+      type: Number,
+    },
+    escolaridad: String,
     titulo: String,
-    paisEstudios: String,
-    estatus: String,
-    fechaTitulacion: String,
-    promedio: Number,
-    calMin: Number,
-    calMax: Number,
-    numCedula: String,
-    urlCedula: String,
-    urlConstanciaPromedio: String,
-    urlCertificadoPromedio: String,
+    cedula: String,
+    modoTitulacion: String,
+    documentos: Array
   },
 
   data: function () {
     return {
+      estatus: '',
+      fechaobtencion: '',
+      promedio: '',
+      calmin: '',
+      calmax: '',
+      paisestudios: '',
+      universidad: '',
+      escolaridades: ["Licenciatura", "Maestría"],
+      estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
     };
-  },
-
-  computed: {
-    
   },
 };
 </script>

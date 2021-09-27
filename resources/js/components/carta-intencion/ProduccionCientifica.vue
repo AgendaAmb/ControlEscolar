@@ -3,16 +3,7 @@
     <h4 class="form-group col-12 my-1"> </h4>
     <div class="form-group col-md-4">
       <label> Tipo de publicación: </label>
-        <select v-model="tipo" class="form-control">
-          <option value="" selected>Escoge una opción</option>
-          <option value="Publicación de artículos"> Publicación de artículos </option>
-          <option value="Publicación de libros"> Publicación de libros </option>
-          <option value="Capítulos publicados"> Capítulos publicados </option>
-          <option value="Reportes técnicos"> Reportes técnicos </option>
-          <option value="Memorias"> Memorias </option>
-          <option value="Documentos de trabajo"> Documentos de trabajo </option>
-          <option value="Reseñas"> Reseñas </option>
-      </select>
+      <input type="text" v-model="tipo" class="form-control" readonly>
     </div>
 
     <div class="form-group col-md-12">
@@ -63,11 +54,11 @@
 
 <script>
 
-import DocumentoRequerido from './DocumentoRequerido.vue';
-import InputSolicitud from './InputSolicitud.vue';
+import DocumentoRequerido from '../postulacion/DocumentoRequerido.vue';
+import InputSolicitud from '../postulacion/InputSolicitud.vue';
 
 export default {
-  name: "ci-produccion-cientifica",
+  name: "produccion-cientifica",
   components: { DocumentoRequerido, InputSolicitud },
 
   data() {

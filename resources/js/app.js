@@ -38,9 +38,13 @@ Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtra
 /**
  * Componentes para la carta de intención.
  */
- Vue.component('ci-solicitud-postulante', require('./components/carta-intencion/SolicitudPostulante.vue').default);
-
-
+Vue.component('ci-solicitud-postulante', require('./components/carta-intencion/SolicitudPostulante.vue').default);
+Vue.component('ci-postulante', require('./components/carta-intencion/Postulante.vue').default);
+Vue.component('ci-grado-academico', require('./components/carta-intencion/GradoAcademico.vue').default);
+Vue.component('ci-documento-requerido', require('./components/carta-intencion/DocumentoPostulante.vue').default);
+Vue.component('ci-lengua-extranjera', require('./components/carta-intencion/LenguaExtranjera.vue').default);
+Vue.component('ci-produccion-cientifica', require('./components/carta-intencion/ProduccionCientifica.vue').default);
+Vue.component('ci-capital-humano', require('./components/carta-intencion/CapitalHumano.vue').default);
 
 /*Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
 Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);

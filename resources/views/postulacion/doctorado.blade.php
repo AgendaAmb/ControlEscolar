@@ -1,9 +1,9 @@
 <script> 
-const docsPersonales = @json($personal_documents); 
-const academicProgram = @json($academic_program);
-const docsLicenciatura = @json($bachelor_documents);
-const docsMaestria = @json($master_documents);
-const entranceDocuments = @json($entrance_documents);
+const personal_documents = @json($personal_documents); 
+const academic_program = @json($academic_program);
+const bachelor_documents = @json($bachelor_documents);
+const master_documents) = @json($master_documents);
+const entrance_documents = @json($entrance_documents);
 </script>
 
 @extends('layouts.app')

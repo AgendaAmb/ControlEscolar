@@ -7,10 +7,51 @@
 
 @section('container-class', 'class=container')
 @section('main')
+<ci-solicitud-postulante>
+    <template v-slot:postulante>
+        <ci-postulante :postulante="postulante"
+            :documentos="postulante.documentos"
+            :documentos.sync="postulante.documentos">
+        </ci-postulante>
+    </template>
 
+    <template v-slot:historialacademico >
+        <ci-grado-academico v-for="grado in gradosAcademicos"
+            v-bind:key="grado.cedula"
+            v-bind="grado"
+            :escolaridad.sync="grado.escolaridad"
+            :documentos="grado.documentos"> 
+        </ci-grado-academico>
+    </template>
+
+    <template v-slot:requisitosingreso>
+        <div class="col-12">
+            <label> Explica los motivos, por los cuales deseas aplicar al programa académico de @{{academicProgram.name}} </label>
+            <textarea class="form-control" rows="8" readonly></textarea>
+        </div>
+
+        <ci-documento-requerido v-for="documento in EntranceDocuments" :key="documento.name"
+            :archivo.sync="documento.archivo" :url.sync="documento.url" 
+            :errores.sync = "documento.errores"
+            v-bind="documento">
+        </ci-documento-requerido>
+    </template>
+
+
+    <template v-slot:dominioidiomas>
+        <ci-lengua-extranjera></ci-lengua-extranjera>
+    </template>
+
+    <template v-slot:prodcientifica>
+        <ci-produccion-cientifica></ci-produccion-cientifica>
+    </template>
+
+    <template v-slot:caphumano>
+        <ci-capital-humano></ci-capital-humano>
+    </template>
+</ci-solicitud-postulante>
 @endsection
 
-{{--
 
 @push('vuejs')
 <script>
@@ -26,13 +67,19 @@ const app = new Vue({
         academicProgram: @json($academic_program),
         docsLicenciatura: @json($bachelor_documents),
         docsMaestria: @json($master_documents),
-        Countries: [],
-        CountryUniversities:[],
         EntranceDocuments:@json($entrance_documents),
-        EnglishExams: [],
-        EnglishExamTypes: [],
         Errores: [],
-        gradosAcademicos: [],
+        gradosAcademicos: [{
+            escolaridad: '',
+            titulo: '',
+            estatus: '',
+            cedula: '',
+            fechaobtencion: '',
+            calmin: '',
+            calmax: '',
+            promedio: '',
+            documentos: [],
+        }],
 
         postulante: {
             curp:'MEOM970906HSPNRG06',
@@ -54,44 +101,15 @@ const app = new Vue({
     
     mounted: function() {
         this.$nextTick(function () {
-            axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
-            .then(response => {
-                this.Countries = response.data;
-            });
-
-            axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
-            .then(response => {
-                
-                this.EnglishExams = response.data;
-            });
-
-            this.nuevoGradoAcademico();
-        });
-    },
-    methods: {
-        nuevoGradoAcademico(){
-
-            var gradoAcademico = {
-                escolaridad: '',
-                titulo: '',
-                estatus: '',
-                cedula: '',
-                fechaobtencion: '',
-                calmin: '',
-                calmax: '',
-                promedio: '',
-                documentos: [],
-            };
-
             if (this.academicProgram.type === 'maestría'){
-                gradoAcademico.documentos = this.docsLicenciatura;
+                this.gradosAcademicos[0].documentos = this.docsLicenciatura;
             }
             else if (this.academicProgram.type === 'doctorado'){
-                gradoAcademico.documentos = this.docsMaestria;
+                this.gradosAcademicos[0].documentos = this.docsMaestria;
             }
-
-            this.gradosAcademicos.push(gradoAcademico);
-        },/*
+        });
+    },
+    methods: {/*
 
         actualizaSolicitud(e, document) {
             
@@ -144,4 +162,3 @@ const app = new Vue({
 });
 </script>
 @endpush
---}}
