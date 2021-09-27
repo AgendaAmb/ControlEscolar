@@ -1,4 +1,11 @@
-<script> const docsPersonales = @json($personal_documents); </script>
+<script> 
+const docsPersonales = @json($personal_documents); 
+const academicProgram = @json($academic_program);
+const docsLicenciatura = @json($bachelor_documents);
+const docsMaestria = @json($master_documents);
+const entranceDocuments = @json($entrance_documents);
+</script>
+
 @extends('layouts.app')
 
 @section('headerPicture')
@@ -77,19 +84,19 @@ const app = new Vue({
         gradosAcademicos: [],
 
         postulante: {
-            curp:'MEOM970906HSPNRG06',
-            nombres:'MIGUEL ÁNGEL',
-            apPaterno:'MÉNDEZ',
-            apMaterno:'ORTA',
-            fechaNacimiento:'1997-09-06',
-            genero:'Masculino',
-            estado:'Soltero(a)',
-            paisNacimiento:'México',
-            estadoNacimiento:'San Luis Potosí',
-            paisResidencia:'México',
-            telefonoContacto:'44411139929',
-            correoContacto:'miguel.menor09@gmail.com',
-            correoAlterno:'jackieorta@live.com.mx',
+            curp:'',
+            nombres:'',
+            apPaterno:'',
+            apMaterno:'',
+            fechaNacimiento:'',
+            genero:'',
+            estado:'',
+            paisNacimiento:'',
+            estadoNacimiento:'',
+            paisResidencia:'',
+            telefonoContacto:'',
+            correoContacto:'',
+            correoAlterno:'',
             documentos: @json($personal_documents),
         }
     }, 
