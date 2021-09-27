@@ -27,9 +27,8 @@
 
     <template v-slot:requisitosingreso>
         <div class="col-12">
-            <label> ¿Por qué deseas ingresar al programa de @{{academicProgram.name}} </label>
-            <textarea class="form-control" rows="8">
-            </textarea>
+            <label> Explica los motivos, por los cuales deseas aplicar al programa académico de @{{academicProgram.name}} </label>
+            <textarea class="form-control" rows="8"></textarea>
         </div>
         <documento-requerido v-for="documento in EntranceDocuments" 
             :key="documento.name"

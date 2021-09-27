@@ -2330,6 +2330,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -41541,6 +41571,16 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
+        _vm.escolaridad === "Maestría"
+          ? _c("div", { staticClass: "row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2)
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
             _c("label", [_vm._v(" Promedio obtenido: ")]),
@@ -41655,7 +41695,54 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-4" }, [
+      _c("label", [_vm._v(" Número de CVU: ")]),
+      _vm._v(" "),
+      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-4" }, [
+      _c("label", [_vm._v(" ¿Cuentas con una carta de reconocimiento? ")]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control" }, [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v(" Escoge una opción")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-md-4" }, [
+      _c("label", [_vm._v(" ¿Cuentas con tu firma electrónica del CONACYT? ")]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control" }, [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v(" Escoge una opción")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

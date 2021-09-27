@@ -89,6 +89,36 @@
         </div>
       </div>
       <!-- 
+        Pedir CVU, solo en maestría
+      -->
+      <div class="row" v-if="escolaridad === 'Maestría'" >
+        <div class="form-group col-md-4">
+          <label> Número de CVU: </label>
+          <input type="text" class="form-control">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label> ¿Cuentas con una carta de reconocimiento? </label>
+          <select class="form-control">
+            <option value="" selected> Escoge una opción</option>
+            <option value="Si"> Si</option>
+            <option value="No"> No </option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
+          <select class="form-control">
+            <option value="" selected> Escoge una opción</option>
+            <option value="Si"> Si</option>
+            <option value="No"> No </option>
+          </select>
+        </div>
+      </div>
+
+
+
+      <!-- 
         Promedio del postulante
       -->
       <div class="row">
