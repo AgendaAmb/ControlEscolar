@@ -14,39 +14,29 @@
       <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
     </div>
 
-<!--
-    <div class="col-12">
-      <h2 class="d-block my-4"><strong> Requisitos de ingreso </strong></h2>
-      <requisitos-ingreso :requisitosIngreso="requisitosIngreso"></requisitos-ingreso>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
-    </div>
+    <h2 class="col-12 my-4"><strong> Requisitos de ingreso </strong></h2>  
+    <slot name="requisitosingreso"></slot>
+    <hr class="col-12 my-4" style="background-color:#FECC50; height: 1px;">
 
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Dominio de idiomas </strong></h2>
-      <lengua-extranjera :lenguaextranjera="lenguaextranjera"></lengua-extranjera>
-      <button class="d-block my-3 btn btn-success"> Agregar </button>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
-    </div>
-
-    <div class="col-12">
-      <h2 class="d-block my-4"><strong> Trayectoria profesional </strong></h2>
-      <experiencia-laboral></experiencia-laboral>
+      <slot name="dominioidiomas"></slot>
       <button class="d-block my-3 btn btn-success"> Agregar </button>
       <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
     </div>
 
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Producción científica </strong></h2>
-      <produccion-cientifica></produccion-cientifica>
+      <slot name="prodcientifica"></slot>
       <button class="d-block my-3 btn btn-success"> Agregar </button>
       <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
     </div>
 
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Capital humano (cursos impartidos) </strong></h2>
-      <capital-humano></capital-humano>
+      <slot name="caphumano"></slot>
       <button class="d-block my-3 btn btn-success"> Agregar </button>
-    </div>-->
+    </div>
   </div>
 </template>
 

@@ -46,7 +46,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'name' =>"2.- CURP expedido por la RENAPO. ",
                 'type' => 'personal',
                 'label' => '02_CURP_añodesolicitud_iniciales',
-                'notes' => 'Observaciones: Puedes generarlo, dando clic a <a href="https://www.gob.mx/curp/" target="_blank"> este vínculo </a>',
+                'notes' => 'Debe de contener el sello de expedición.<br> Puedes generarlo, dando clic a <a href="https://www.gob.mx/curp/" target="_blank"> este vínculo </a>',
                 'example' => '02_CURP_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
@@ -176,22 +176,22 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros).",
+                'name' =>"12.- EXANI III (no aplica a estudiantes extranjeros).",
                 'type' => 'entrance',
-                'label' => '12B_EXANIIII_añodesolicitud_iniciales',                
+                'label' => '12_EXANIIII_añodesolicitud_iniciales',                
                 'notes' => null,
-                'example' => '12B_EXANIIII_2021_CJG',
+                'example' => '12_EXANIIII_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
             
             # Todos
             [
-                'name' =>"13A.- Certificado de idioma inglés vigente.",
-                'type' => 'entrance',
-                'label' => '13A_Inglés_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
+                'name' =>"13.- Certificado de idioma vigente.",
+                'type' => 'language',
+                'label' => '13_Idioma_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
-                'example' => '13A_Inglés_2021_CJG',
+                'example' => '13_Idioma_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
@@ -199,7 +199,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Todos
             [
                 'name' =>"13B.-Certificado de idioma español.",
-                'type' => 'entrance',
+                'type' => 'language',
                 'label' => '13B_Español_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '13B_Español_2021_CJG',
@@ -220,22 +220,11 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"15.- Propuesta de proyecto avalada por el profesor postulante.",
+                'name' =>"19.- Propuesta de proyecto.",
                 'type' => 'entrance',
-                'label' => '15_Proyecto_iniciales',                
+                'label' => '19_Proyecto_iniciales',                
                 'notes' => null,
-                'example' => '15_Proyecto_CJG',
-                'intention_letter' => false,
-                'recommendation_letter' => false,
-            ],
-            
-            # Todos
-            [
-                'name' =>"16.- Currículum Vítae con los documentos probatorios (formato líbre).",
-                'type' => 'curricular',
-                'label' => '16_CV_añodesolicitud_iniciales',                
-                'notes' => null,
-                'example' => '16_CV_2021_CJG',
+                'example' => '19_Proyecto_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
@@ -300,7 +289,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'example' => '04_Pasaporte_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
-            ],*/
+            ],
             
             [
                 'name' =>"5.- High School Certificate",
@@ -460,7 +449,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'example' => '18B_Recommendation_02_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => true,
-            ],
+            ],*/
         ]);
     }
 

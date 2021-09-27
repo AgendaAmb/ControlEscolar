@@ -20,8 +20,31 @@
         <grado-academico v-for="grado in gradosAcademicos"
             v-bind:key="grado.cedula"
             v-bind="grado"
+            :escolaridad.sync="grado.escolaridad"
             :paises="Countries"> 
         </grado-academico>
+    </template>
+
+    <template v-slot:requisitosingreso>
+        <documento-requerido v-for="documento in EntranceDocuments" 
+            :key="documento.name"
+            :archivo.sync="documento.archivo" :url.sync="documento.url" 
+            :errores.sync = "documento.errores"
+            v-bind="documento"
+            :documento="documento">
+        </documento-requerido>
+    </template>
+
+    <template v-slot:dominioidiomas>
+        <lengua-extranjera></lengua-extranjera>
+    </template>
+
+    <template v-slot:prodcientifica>
+        <produccion-cientifica></produccion-cientifica>
+    </template>
+
+    <template v-slot:caphumano>
+        <capital-humano></capital-humano>
     </template>
 </solicitud-postulante>
 
@@ -43,6 +66,7 @@ const app = new Vue({
         docsMaestria: @json($master_documents),
         Countries: [],
         CountryUniversities:[],
+        EntranceDocuments:@json($entrance_documents),
         EnglishExams: [],
         EnglishExamTypes: [],
         Errores: [],
@@ -87,9 +111,9 @@ const app = new Vue({
 
             var gradoAcademico = {
                 escolaridad: '',
-                titulo: 'fff',
+                titulo: '',
                 estatus: '',
-                cedula: '222',
+                cedula: '',
                 fechaobtencion: '',
                 calmin: '',
                 calmax: '',
@@ -105,71 +129,7 @@ const app = new Vue({
             }
 
             this.gradosAcademicos.push(gradoAcademico);
-        },
-        /*
-        cambiaPaisEstudios(index){
-            if (index === -1) return;
-
-            this.PaisEstudios = this.Countries[index].name;
-            this.IdPaisEstudios = this.Countries[index].id;
-            this.CountryUniversities = this.Countries[index].universities;
-        },
-        cambiaUniversidadProcedencia(index){
-            if (index === -1) return;
-
-            this.UniversidadProcedencia = this.CountryUniversities[index].name;
-            this.IdUniversidadProcedencia = this.CountryUniversities[index].id;
-        },
-        cambiaExamenIngles(index){
-            if (index === -1) return;
-
-            this.ExamenIngles = this.EnglishExams[index].name;
-            this.IdExamenIngles = this.EnglishExams[index].id;
-            this.EnglishExamTypes = this.EnglishExams[index].english_exam_types;
-        },
-        cambiaTipoExamenIngles(index){
-            if (index === -1) return;
-
-            this.TipoExamenIngles = this.EnglishExamTypes[index].name;
-            this.IdTipoExamenIngles = this.EnglishExamTypes[index].id;
-        },
-
-        cargarArchivo(e, document) {
-            this.Documents[document.id] = '';
-            this.Documents[document.id] = e.target.files[0];
-
-            let reader = new FileReader();
-
-            reader.onload = (event) => {
-                this.TemporalDocuments[document.id] = event.target.result;
-            };
-
-            reader.readAsDataURL(e.target.files[0]);
-
-            $('#view_document'+document.id+'_text small strong').change();
-            $('#document'+document.id+'_text small strong').text(this.Documents[document.id].name);
-        },
-
-        nuevoDatoAcademico(e) {
-            this.GradosAcademicos.push({
-                id: this.GradosAcademicos.length + 1,
-                escolaridad: null,
-                titulo: '',
-                estatus: '',
-                cedula: '',
-                fechaobtencion: '',
-                paisestudios: '',
-                universidad: '',
-                modotitulacion: '',
-                promedio: '',
-                calmin: '',
-                calmax: '',
-            });
-        },
-
-        quitaDatoAcademico(id) {
-            this.$delete(this.radosAcademicos, id - 1);
-        },
+        },/*
 
         actualizaSolicitud(e, document) {
             

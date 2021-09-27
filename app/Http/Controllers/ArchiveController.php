@@ -32,10 +32,11 @@ class ArchiveController extends Controller
         ->with('academic_program', $academic_program)
         ->with('personal_documents', RequiredDocument::type('personal')->get())
         ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())
-        ->with('master_documents', RequiredDocument::type('academic-mast')->get()
-        )/*->with('entrance_documents', $academic_program->requiredDocuments()->type('entrance')->get()
-        )->with('curricular_documents', $academic_program->requiredDocuments()->type('curricular')->get()
-        )*/;
+        ->with('master_documents', RequiredDocument::type('academic-mast')->get())
+        ->with('entrance_documents', RequiredDocument::type('entrance')
+        ->where('intention_letter', false)
+        ->where('recommendation_letter', false)
+        ->get());
     }
 
     /**
@@ -46,16 +47,16 @@ class ArchiveController extends Controller
     public function subirCartaIntencion(Request $request, $academicProgramName)
     {
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-
-        return view(
-            'carta-intencion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName]
-
-        )->with('academic_program', $academic_program
-        )->with('personal_documents', $academic_program->requiredDocuments()->type('personal')->get()
-        )->with('academic_documents', $academic_program->requiredDocuments()->type('academic')->get()
-        )->with('entrance_documents', $academic_program->requiredDocuments()->type('entrance')->get()
-        )->with('curricular_documents', $academic_program->requiredDocuments()->type('curricular')->get()
-        );
+        
+        return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
+        ->with('academic_program', $academic_program)
+        ->with('personal_documents', RequiredDocument::type('personal')->get())
+        ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())
+        ->with('master_documents', RequiredDocument::type('academic-mast')->get())
+        ->with('entrance_documents', RequiredDocument::type('entrance')
+        ->where('intention_letter', false)
+        ->where('recommendation_letter', false)
+        ->get());
     }
 
     /**

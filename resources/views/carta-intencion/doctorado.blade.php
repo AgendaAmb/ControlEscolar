@@ -7,6 +7,7 @@
 @section('container-class', 'class=container')
 
 @section('main')
+<!--
 <x-student-appliance style="background-color:#FECC50; height: 1px;" action="{{ route('solicitud.actualizaSolicitud') }}" v-on:submit.prevent="actualizaSolicitud">
     <x-slot name="profile_picture"></x-slot>
     <x-slot name="identidad_usuario"> @include('postulacion.identidad-usuario') </x-slot>
@@ -38,7 +39,7 @@
     <x-slot name="dominio_idioma"> 
         <lengua-extranjera-postulante></lengua-extranjera-postulante>
     </x-slot>
-</x-student-appliance>
+</x-student-appliance>-->
 @endsection
 
 

@@ -3,7 +3,7 @@
     <h4 class="form-group col-12 my-1"> </h4>
     <div class="form-group col-md-4">
       <label> Tipo de publicación: </label>
-        <select v-model="produccionCientifica.tipo" class="form-control">
+        <select v-model="tipo" class="form-control">
           <option value="" selected>Escoge una opción</option>
           <option value="Publicación de artículos"> Publicación de artículos </option>
           <option value="Publicación de libros"> Publicación de libros </option>
@@ -16,45 +16,45 @@
     </div>
 
     <div class="form-group col-md-12">
-      <div v-if="produccionCientifica.tipo === 'Publicación de artículos'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título del artículo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.nombre"> Nombre de la revista: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-if="tipo === 'Publicación de artículos'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del artículo: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Nombre de la revista: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Publicación de libros'" class="row">
-        <input-solicitud clase="form-group col-md-6" v-model="produccionCientifica.titulo"> Título del libro: </input-solicitud>
-        <input-solicitud clase="form-group col-md-6" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Publicación de libros'" class="row">
+        <input-solicitud clase="form-group col-md-6" v-model="titulo"> Título del libro: </input-solicitud>
+        <input-solicitud clase="form-group col-md-6" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Capítulos publicados'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título del capítulo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.numCapitulo"> No. del capítulo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Capítulos publicados'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del capítulo: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="numCapitulo"> No. del capítulo: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Reportes técnicos'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.institucion"> Institución a la que se presenta el reporte: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Reportes técnicos'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="institucion"> Institución a la que se presenta el reporte: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Memorias'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título de la memoria: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Memorias'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título de la memoria: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Documentos de trabajo'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título del documento de trabajo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Documentos de trabajo'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del documento de trabajo: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
 
-      <div v-else-if="produccionCientifica.tipo === 'Reseñas'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.titulo"> Título de la reseña: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="produccionCientifica.año"> Año de publicación: </input-solicitud>
+      <div v-else-if="tipo === 'Reseñas'" class="row">
+        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título de la reseña: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
+        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
       </div>
     </div>
   </div>
@@ -62,30 +62,6 @@
 
 
 <script>
-class ProduccionCientifica
-{
-  /**
-   * Construye el objeto, que representa el puesto laboral.
-   * 
-   * @param string tipoPuesto
-   * @param string tipoPuesto
-   * @param string tipoPuesto
-   * @param Date tipoPuesto
-   * @param Date fechaFin
-   * @param string areaConocimiento
-   * @param string campo
-   */
-  constructor(tipo = '', titulo = '', nombre = '', fecha = null, año = '', numCapitulo = null, institucion = null)
-  {
-    this.tipo = tipo;
-    this.titulo = titulo;
-    this.nombre = nombre;
-    this.fecha = fecha;
-    this.año = año;
-    this.numCapitulo = numCapitulo;
-    this.institucion = null;
-  }
-}
 
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
@@ -96,8 +72,11 @@ export default {
 
   data() {
     return {
-      produccionCientifica: new ProduccionCientifica(),
-
+      tipo: '',
+      nombre: '',
+      titulo: '',
+      capLibro: '',
+      año: ''
     };
   }
 };
