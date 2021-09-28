@@ -90,7 +90,7 @@ class RegisterRequest extends FormRequest
                 //'unique:workers,curp',
             ],
             
-            //'Hola',
+            // Hola maru. Te anexo otro comentario :v
             'PaisNacimiento' => [ 'required' ],
             'EstadoNacimiento' => ['required'],
             'PaisResidencia' => ['required'],
