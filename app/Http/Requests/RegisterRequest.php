@@ -90,7 +90,7 @@ class RegisterRequest extends FormRequest
                 //'unique:workers,curp',
             ],
             
-            // Hola Miguel
+            // Que pasa si lo hacemos al mismo tiempo
             'PaisNacimiento' => [ 'required' ],
             'EstadoNacimiento' => ['required'],
             'PaisResidencia' => ['required'],
