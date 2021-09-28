@@ -90,8 +90,12 @@ class RegisterRequest extends FormRequest
                 //'unique:workers,curp',
             ],
             
+<<<<<<< HEAD
             // Hola Miguel
             // Prueba de sabotaje
+=======
+            // Que pasa si lo hacemos al mismo tiempo
+>>>>>>> 52a238497f9665046bcc694057acbbc82e07bf2a
             'PaisNacimiento' => [ 'required' ],
             'EstadoNacimiento' => ['required'],
             'PaisResidencia' => ['required'],
