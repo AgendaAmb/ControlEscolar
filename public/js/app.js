@@ -2060,7 +2060,7 @@ __webpack_require__.r(__webpack_exports__);
     archivo: {
       type: File
     },
-    url: {
+    location: {
       type: String
     }
   },
@@ -2078,12 +2078,12 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:archivo', newValue);
       }
     },
-    Url: {
+    Location: {
       get: function get() {
-        return this.url;
+        return this.location;
       },
       set: function set(newValue) {
-        this.$emit('update:url', newValue);
+        this.$emit('update:location', newValue);
       }
     },
     Errores: {
@@ -2520,6 +2520,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2780,6 +2781,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -2801,13 +2809,14 @@ __webpack_require__.r(__webpack_exports__);
     archivo: {
       type: File
     },
-    url: {
+    location: {
       type: String
     }
   },
   data: function data() {
     return {
-      errores: {}
+      errores: {},
+      datosValidos: {}
     };
   },
   computed: {
@@ -2819,12 +2828,12 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:archivo', newValue);
       }
     },
-    Url: {
+    Location: {
       get: function get() {
-        return this.url;
+        return this.location;
       },
       set: function set(newValue) {
-        this.$emit('update:url', newValue);
+        this.$emit('update:location', newValue);
       }
     },
     Errores: {
@@ -2839,44 +2848,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cargaDocumento: function cargaDocumento(e) {
-      var _this = this;
-
       var name = e.target.files[0].name;
       this.Errores = {};
 
       if (!name.endsWith('.pdf')) {
         this.Errores = {
-          archivo: 'Extensión inválida'
+          file: 'El archivo debe de contener formato pdf.'
         };
         return false;
       }
 
-      var formData = new FormData();
-      formData.append('requiredDocumentId', this.id);
-      formData.append('file', e.target.files[0]);
-      axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoRequerido',
-        data: formData,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {})["catch"](function (err) {
-        _this.Errores = err.response.data['errors'];
-        console.log(_this.Errores);
-      });
-      /*
-            this.$nextTick(function () {
-              let reader = new FileReader();
-      
-              reader.onload = (event) => {
-                this.Archivo = e.target.files[0];
-                this.Url = event.target.result;
-              };
-      
-              reader.readAsDataURL(e.target.files[0]);
-            });*/
+      this.$emit('enviaDocumento', this, e.target.files[0]);
     }
   }
 });
@@ -3313,6 +3295,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3320,6 +3304,19 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     InputSolicitud: _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  props: {
+    documentos: Array
+  },
+  computed: {
+    Documentos: {
+      get: function get() {
+        return this.documentos;
+      },
+      set: function set(newVal) {
+        this.$emit('update:documentos', newVal);
+      }
+    }
   },
   data: function data() {
     return {
@@ -3334,6 +3331,32 @@ __webpack_require__.r(__webpack_exports__);
       puntuacion: 0,
       idiomas: ['Español', 'Inglés', 'Francés', 'Alemán', 'Otro']
     };
+  },
+  methods: {
+    cargaDocumento: function cargaDocumento(requiredDocument, file) {
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;
+      })["catch"](function (error) {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = {
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+        };
+      });
+    }
   }
 });
 
@@ -3351,6 +3374,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
+//
+//
 //
 //
 //
@@ -3441,6 +3466,32 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(newVal) {
         this.$emit('update:documentos', newVal);
       }
+    }
+  },
+  methods: {
+    cargaDocumento: function cargaDocumento(requiredDocument, file) {
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;
+      })["catch"](function (error) {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = {
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+        };
+      });
     }
   }
 });
@@ -43447,15 +43498,15 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                url: documento.url,
+                location: documento.location,
                 errores: documento.errores
               },
               on: {
                 "update:archivo": function($event) {
                   return _vm.$set(documento, "archivo", $event)
                 },
-                "update:url": function($event) {
-                  return _vm.$set(documento, "url", $event)
+                "update:location": function($event) {
+                  return _vm.$set(documento, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
@@ -44206,10 +44257,10 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-3 my-auto" }, [
-        _vm.url !== null && _vm.url !== undefined
+        _vm.location !== null && _vm.location !== undefined
           ? _c("a", {
               staticClass: "verArchivo d-block my-2 ml-auto",
-              attrs: { href: _vm.url, target: "_blank" }
+              attrs: { href: _vm.location, target: "_blank" }
             })
           : _vm._e(),
         _vm._v(" "),
@@ -44219,7 +44270,23 @@ var render = function() {
             attrs: { type: "file" },
             on: { change: _vm.cargaDocumento }
           })
-        ])
+        ]),
+        _vm._v(" "),
+        "file" in _vm.Errores
+          ? _c("div", { staticClass: "invalid-feedback d-block text-right" }, [
+              _c("p", { staticClass: "h6" }, [
+                _vm._v(_vm._s(_vm.Errores.file) + " ")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        "file" in _vm.datosValidos
+          ? _c("div", { staticClass: "valid-feedback d-block text-right" }, [
+              _c("p", { staticClass: "h6" }, [
+                _vm._v(_vm._s(_vm.datosValidos.file) + " ")
+              ])
+            ])
+          : _vm._e()
       ])
     ])
   ])
@@ -44752,15 +44819,15 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                url: documento.url,
+                location: documento.location,
                 errores: documento.errores
               },
               on: {
                 "update:archivo": function($event) {
                   return _vm.$set(documento, "archivo", $event)
                 },
-                "update:url": function($event) {
-                  return _vm.$set(documento, "url", $event)
+                "update:location": function($event) {
+                  return _vm.$set(documento, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
@@ -45344,21 +45411,38 @@ var render = function() {
         [_vm._v(" \n    Nivel de escritura:\n  ")]
       ),
       _vm._v(" "),
-      _c(
-        "documento-requerido",
-        _vm._b(
-          {},
+      _vm._l(_vm.Documentos, function(documento) {
+        return _c(
           "documento-requerido",
-          {
-            name: "13.- Certificado de idioma",
-            label: "13_Certf_Año_iniciales(Apellidos,Nombres) ",
-            example: "13_Certf_2021_CJG "
-          },
-          false
+          _vm._b(
+            {
+              key: documento.name,
+              attrs: {
+                archivo: documento.archivo,
+                location: documento.location,
+                errores: documento.errores
+              },
+              on: {
+                "update:archivo": function($event) {
+                  return _vm.$set(documento, "archivo", $event)
+                },
+                "update:location": function($event) {
+                  return _vm.$set(documento, "location", $event)
+                },
+                "update:errores": function($event) {
+                  return _vm.$set(documento, "errores", $event)
+                },
+                enviaDocumento: _vm.cargaDocumento
+              }
+            },
+            "documento-requerido",
+            documento,
+            false
+          )
         )
-      )
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -45716,19 +45800,20 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                url: documento.url,
+                location: documento.location,
                 errores: documento.errores
               },
               on: {
                 "update:archivo": function($event) {
                   return _vm.$set(documento, "archivo", $event)
                 },
-                "update:url": function($event) {
-                  return _vm.$set(documento, "url", $event)
+                "update:location": function($event) {
+                  return _vm.$set(documento, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
-                }
+                },
+                enviaDocumento: _vm.cargaDocumento
               }
             },
             "documento-requerido",

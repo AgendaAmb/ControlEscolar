@@ -2,7 +2,8 @@
 const personal_documents = @json($personal_documents); 
 const academic_program = @json($academic_program);
 const bachelor_documents = @json($bachelor_documents);
-const master_documents) = @json($master_documents);
+const master_documents = @json($master_documents);
+const language_documents = @json($language_documents); 
 const entrance_documents = @json($entrance_documents);
 </script>
 
@@ -42,9 +43,10 @@ const entrance_documents = @json($entrance_documents);
                 <label> Explica los motivos, por los cuales deseas aplicar al programa académico de @{{academicProgram.name}} </label>
                 <textarea class="form-control" rows="8"></textarea>
             </div>
-            <documento-requerido v-for="documento in @json($entrance_documents)" 
+            <documento-requerido v-for="documento in docsIngreso" 
                 :key="documento.name"
-                :archivo.sync="documento.archivo" :url.sync="documento.url" 
+                :archivo.sync="documento.archivo" 
+                :location.sync="documento.location" 
                 :errores.sync = "documento.errores"
                 v-bind="documento"
                 :documento="documento">
@@ -80,6 +82,7 @@ const app = new Vue({
     data: {
         academicProgram: @json($academic_program),
         docsLicenciatura: @json($bachelor_documents),
+        docsIngreso: @json($entrance_documents),
         docsMaestria: @json($master_documents),
         Countries: [],
         CountryUniversities:[],

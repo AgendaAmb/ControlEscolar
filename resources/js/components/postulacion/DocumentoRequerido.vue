@@ -9,11 +9,18 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
       </div>
       <div class="form-group col-3 my-auto"> 
-        <a v-if="url !== null && url !== undefined" class="verArchivo d-block my-2 ml-auto" :href="url" target="_blank"></a>
+        <a v-if="location !== null && location !== undefined" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
         <label class="cargarArchivo d-block ml-auto my-auto">
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
-      </div>
+        <div v-if="'file' in Errores" class="invalid-feedback d-block text-right"> 
+          <p class="h6">{{ Errores.file }} </p>
+        </div>
+
+        <div v-if="'file' in datosValidos" class="valid-feedback d-block text-right"> 
+          <p class="h6">{{ datosValidos.file }} </p>
+        </div>
+      </div>    
     </div>
   </div>
 </template>
@@ -64,7 +71,7 @@ export default {
       type: File      
     },
      
-    url: {
+    location: {
       type: String
     }
   },
@@ -72,6 +79,7 @@ export default {
   data() {
     return {
       errores: {},
+      datosValidos: {}
     };
   },
 
@@ -84,12 +92,12 @@ export default {
         this.$emit('update:archivo', newValue);
       }
     },
-    Url: {
+    Location: {
       get () {
-        return this.url;
+        return this.location;
       },
       set (newValue){
-        this.$emit('update:url', newValue);
+        this.$emit('update:location', newValue);
       }
     },
     Errores: {
@@ -109,45 +117,15 @@ export default {
       var name = e.target.files[0].name;
       this.Errores = {};
 
+
       if (!name.endsWith('.pdf')) {
         this.Errores = { 
-          archivo:'Extensión inválida'
+          file:'El archivo debe de contener formato pdf.'
         };
         return false;
       }
 
-      var formData = new FormData();
-      formData.append('requiredDocumentId', this.id);
-      formData.append('file', e.target.files[0]);
-
-      axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoRequerido',
-        data: formData,
-        headers: {
-          'Accept' : 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
-
-                
-      }).catch((err) => {
-
-        this.Errores = err.response.data['errors'];
-        console.log(this.Errores);
-      });
-
-/*
-      this.$nextTick(function () {
-        let reader = new FileReader();
-
-        reader.onload = (event) => {
-          this.Archivo = e.target.files[0];
-          this.Url = event.target.result;
-        };
-
-        reader.readAsDataURL(e.target.files[0]);
-      });*/
+      this.$emit('enviaDocumento', this, e.target.files[0]);
     },
   },
 };

@@ -63,7 +63,8 @@
     </div>
 
     <documento-postulante v-for="documento in Documentos" :key="documento.name"
-      :archivo.sync="documento.archivo" :url.sync="documento.url" 
+      :archivo.sync="documento.archivo" 
+      :location.sync="documento.location" 
       :errores.sync = "documento.errores"
       v-bind="documento">
     </documento-postulante>

@@ -51,7 +51,7 @@ export default {
       type: File      
     },
      
-    url: {
+    location: {
       type: String
     }
   },
@@ -71,12 +71,12 @@ export default {
         this.$emit('update:archivo', newValue);
       }
     },
-    Url: {
+    Location: {
       get () {
-        return this.url;
+        return this.location;
       },
       set (newValue){
-        this.$emit('update:url', newValue);
+        this.$emit('update:location', newValue);
       }
     },
     Errores: {

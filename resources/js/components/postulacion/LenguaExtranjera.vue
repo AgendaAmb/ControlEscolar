@@ -90,11 +90,13 @@
       Nivel de escritura:
     </input-solicitud>
 
-    <documento-requerido v-bind="{
-            name: '13.- Certificado de idioma',
-            label: '13_Certf_Año_iniciales(Apellidos,Nombres) ',
-            example: '13_Certf_2021_CJG ',
-    }"></documento-requerido>
+    <documento-requerido v-for="documento in Documentos" :key="documento.name"
+      :archivo.sync="documento.archivo" 
+      :location.sync="documento.location" 
+      :errores.sync = "documento.errores"
+      @enviaDocumento = "cargaDocumento" 
+      v-bind="documento">
+    </documento-requerido>
   </div>
 </template>
 
@@ -121,6 +123,20 @@ import InputSolicitud from './InputSolicitud.vue';
 export default {
   name: "lengua-extranjera",
   components: { DocumentoRequerido, InputSolicitud },
+  props: {
+    documentos: Array
+  },
+
+  computed: {
+    Documentos: {
+      get(){
+        return this.documentos;
+      },
+      set(newVal){
+        this.$emit('update:documentos', newVal);
+      }
+    }
+  },
 
   data() {
     return {
@@ -142,6 +158,35 @@ export default {
         'Otro'
       ]
     };
+  },
+  methods:{
+    cargaDocumento(requiredDocument, file) {
+      
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;        
+        
+      }).catch(error => {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };
+      });
+    },
   }
 };
 </script>

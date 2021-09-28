@@ -26,7 +26,7 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     Route::get('/{academicProgram}', [ArchiveController::class,'postulacion'])->name('postulacion'); 
 
     # Actualiza la solicitud del aspirante
-    Route::post('/guardaDocumentoRequerido', [ArchiveController::class, 'guardaDocumentoRequerido'])->name('guardaDocumentoRequerido'); 
+    Route::post('/guardaDocumentoPersonal', [ArchiveController::class, 'guardaDocumentoPersonal'])->name('guardaDocumentoRequerido'); 
 
     # Actualiza la solicitud del aspirante
     Route::post('/', [ArchiveController::class, 'actualizaSolicitud'])->name('actualizaSolicitud'); 

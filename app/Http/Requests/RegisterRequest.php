@@ -85,17 +85,10 @@ class RegisterRequest extends FormRequest
                 'required_if:TienesCurp,Si',
                 'size:18',
                 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/i',
-                //'unique:externs,curp',
-                //'unique:students,curp',
-                //'unique:workers,curp',
             ],
             
-<<<<<<< HEAD
             // Hola Miguel
             // Prueba de sabotaje
-=======
-            // Que pasa si lo hacemos al mismo tiempo
->>>>>>> 52a238497f9665046bcc694057acbbc82e07bf2a
             'PaisNacimiento' => [ 'required' ],
             'EstadoNacimiento' => ['required'],
             'PaisResidencia' => ['required'],

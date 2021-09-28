@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewRequiredDocumentFileRequest;
 use App\Models\AcademicProgram;
 use App\Models\Archive;
-use App\Models\ArchiveRequiredDocument;
 use App\Models\RequiredDocument;
+use App\Repositories\RequiredDocumentRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Monolog\Handler\NewRelicHandler;
 
 class ArchiveController extends Controller
 {
+    /**
+     * Repositorio de documentos requeridos.
+     * 
+     * @var RequiredDocumentRepository
+     */
+    private $req_docs_repo;
+
     /**
      * Vistas de los programas académicos
      */
@@ -24,29 +31,30 @@ class ArchiveController extends Controller
     ];
 
     /**
+     * Crea el controlador.
+     */
+    public function __construct()
+    {
+        $this->req_docs_repo = new RequiredDocumentRepository;
+    }
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function postulacion(Request $request, $academicProgramName)
     {
-        $foo = RequiredDocument::addSelect([
-            'location' => ArchiveRequiredDocument::select()
-        ])->type('personal');
-
-
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-       
+        $required_documents = $this->req_docs_repo->allFrom(Archive::find(1));
         
         return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
         ->with('academic_program', $academic_program)
-        ->with('personal_documents', RequiredDocument::type('personal')->get())
-        ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())
-        ->with('master_documents', RequiredDocument::type('academic-mast')->get())
-        ->with('entrance_documents', RequiredDocument::type('entrance')
-        ->where('intention_letter', false)
-        ->where('recommendation_letter', false)
-        ->get());
+        ->with('personal_documents', $required_documents[0])
+        ->with('bachelor_documents', $required_documents[1])
+        ->with('master_documents', $required_documents[2])
+        ->with('language_documents', $required_documents[3])
+        ->with('entrance_documents', $required_documents[4]);
     }
 
     /**
@@ -104,7 +112,7 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function guardaDocumentoRequerido(Request $request)
+    public function guardaDocumentoPersonal(NewRequiredDocumentFileRequest $request)
     {
         # Por ahora todo irá a una misma solicitud...
         $archive = Archive::find(1);
@@ -112,7 +120,7 @@ class ArchiveController extends Controller
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/'.$archive->id, 
-            $request->requiredDocumentId
+            $request->requiredDocumentId.'.pdf'
         );
 
         $archive->requiredDocuments()->detach($request->requiredDocumentId);
@@ -126,36 +134,5 @@ class ArchiveController extends Controller
             ->where('id', $request->requiredDocumentId)
             ->first()
         );
-    }
-    
-    
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function actualizaSolicitud(Request $request)
-    {
-        dd($request->all());
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function otorgaCartaIntencion(Request $request)
-    {
-        dd(1);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function otorgaCartaRecomendacion(Request $request)
-    {
-        dd(1);
     }
 }

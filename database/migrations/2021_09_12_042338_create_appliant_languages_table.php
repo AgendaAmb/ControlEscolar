@@ -16,10 +16,30 @@ class CreateAppliantLanguagesTable extends Migration
         Schema::create('appliant_languages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
-            $table->string('name');
+            $table->string('language')->nullable();
+            $table->string('institution')->nullable();
+            $table->integer('score')->nullable();
+            $table->date('presented_at')->nullable();
+            $table->date('valid_from')->nullable();
+            $table->date('valid_to')->nullable();
+            $table->string('language_domain')->nullable();
+            $table->string('conversational_level')->nullable();
+            $table->string('reading_level')->nullable();
+            $table->string('writing_level')->nullable();
             $table->softDeletes();
         });
 
+        Schema::create('appliant_language_required_document', function (Blueprint $table) {
+            $table->foreignId('appliant_language_id')
+                ->constrained('appliant_languages')
+                ->onDelete('cascade');
+            
+            $table->foreignId('required_document_id')
+                ->constrained('required_documents')
+                ->onDelete('cascade');
+
+            $table->primary(['appliant_language_id', 'required_document_id'], 'pk_appliantLanguageReqDocument');
+        });
     }
 
     /**
@@ -29,6 +49,7 @@ class CreateAppliantLanguagesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('appliant_language_required_document');
         Schema::dropIfExists('appliant_languages');
     }
 }

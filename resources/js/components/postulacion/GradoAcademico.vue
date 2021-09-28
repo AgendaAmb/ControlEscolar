@@ -143,7 +143,7 @@
       v-for="documento in Documentos" 
       :key="documento.name"
       :archivo.sync="documento.archivo" 
-      :url.sync="documento.url" 
+      :location.sync="documento.location" 
       :errores.sync = "documento.errores"
       v-bind="documento">
     </documento-requerido>

@@ -33,6 +33,19 @@ class RequiredDocument extends Model
     }
 
     /**
+     * Obtiene los documentos que solo los postulantes
+     * pueden subir.
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public static function scopeAppliantDocuments($query)
+    {
+        return $query->where('intention_letter', false)
+            ->where('recommendation_letter', false);
+    }
+
+    /**
      * Obtiene los expedientes, asociados al documento requerido.
      *
      * @return void

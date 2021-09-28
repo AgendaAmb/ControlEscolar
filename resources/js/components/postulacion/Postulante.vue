@@ -63,8 +63,10 @@
     </div>
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
-      :archivo.sync="documento.archivo" :url.sync="documento.url" 
+      :archivo.sync="documento.archivo" 
+      :location.sync="documento.location" 
       :errores.sync = "documento.errores"
+      @enviaDocumento = "cargaDocumento" 
       v-bind="documento">
     </documento-requerido>
   </div>
@@ -91,5 +93,35 @@ export default {
       }
     }
   },
+
+  methods:{
+    cargaDocumento(requiredDocument, file) {
+      
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;        
+        
+      }).catch(error => {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };
+      });
+    },
+  }
 };
 </script>

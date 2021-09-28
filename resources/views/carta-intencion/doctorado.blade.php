@@ -31,7 +31,8 @@
         </div>
 
         <ci-documento-requerido v-for="documento in EntranceDocuments" :key="documento.name"
-            :archivo.sync="documento.archivo" :url.sync="documento.url" 
+            :archivo.sync="documento.archivo" 
+            :location.sync="documento.location" 
             :errores.sync = "documento.errores"
             v-bind="documento">
         </ci-documento-requerido>
