@@ -91,6 +91,7 @@ class RegisterRequest extends FormRequest
             ],
             
             // Hola Miguel
+            // Prueba de sabotaje
             'PaisNacimiento' => [ 'required' ],
             'EstadoNacimiento' => ['required'],
             'PaisResidencia' => ['required'],
