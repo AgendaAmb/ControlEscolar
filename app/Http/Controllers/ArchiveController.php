@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateArchiveRequest;
 use App\Models\AcademicProgram;
+use App\Models\Archive;
+use App\Models\ArchiveRequiredDocument;
 use App\Models\RequiredDocument;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ArchiveController extends Controller
 {
@@ -26,7 +30,13 @@ class ArchiveController extends Controller
      */
     public function postulacion(Request $request, $academicProgramName)
     {
+        $foo = RequiredDocument::addSelect([
+            'location' => ArchiveRequiredDocument::select()
+        ])->type('personal');
+
+
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
+       
         
         return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
         ->with('academic_program', $academic_program)
@@ -89,15 +99,44 @@ class ArchiveController extends Controller
         );
     }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function guardaDocumentoRequerido(Request $request)
+    {
+        # Por ahora todo irá a una misma solicitud...
+        $archive = Archive::find(1);
+
+        # Archivo de la solicitud
+        $ruta = $request->file('file')->storeAs(
+            'archives/'.$archive->id, 
+            $request->requiredDocumentId
+        );
+
+        $archive->requiredDocuments()->detach($request->requiredDocumentId);
+        $archive->requiredDocuments()->attach($request->requiredDocumentId, [
+            'location' => $ruta
+        ]);
+
+        return new JsonResponse(
+            $archive->requiredDocuments()
+            ->select('required_documents.*','archive_required_document.location as location')
+            ->where('id', $request->requiredDocumentId)
+            ->first()
+        );
+    }
+    
     
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function actualizaSolicitud(UpdateArchiveRequest $request)
+    public function actualizaSolicitud(Request $request)
     {
-        dd(1);
+        dd($request->all());
     }
 
     /**

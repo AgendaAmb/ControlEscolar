@@ -26,14 +26,6 @@ class CreateAcademicProgramsTable extends Migration
             $table->softDeletes();
         });
 
-        
-        
-
-        Schema::create('academic_program_required_document', function (Blueprint $table) {
-            $table->foreignId('academic_program_id')->constrained()->onDelete('cascade');
-            $table->foreignId('required_document_id')->constrained()->onDelete('cascade');
-        });
-
         DB::table('academic_programs')->insert([
             ['name' => 'Maestría en ciencias ambientales', 'alias' => 'maestria', 'type' => 'maestría'],
             ['name' => 'Doctorado en ciencias ambientales', 'alias' => 'doctorado', 'type' => 'doctorado'],

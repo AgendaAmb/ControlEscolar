@@ -14,50 +14,56 @@ const entrance_documents = @json($entrance_documents);
 
 @section('container-class', 'class=container')
 @section('main')
-
-<solicitud-postulante>
-    <template v-slot:postulante>
-        <postulante :postulante="postulante"
-            :documentos="postulante.documentos"
-            :documentos.sync="postulante.documentos">
-        </postulante>
-    </template>
-
-    <template v-slot:historialacademico >
-        <grado-academico v-for="grado in gradosAcademicos"
-            v-bind:key="grado.cedula"
-            v-bind="grado"
-            :escolaridad.sync="grado.escolaridad"
-            :paises="Countries"> 
-        </grado-academico>
-    </template>
-
-    <template v-slot:requisitosingreso>
-        <div class="col-12">
-            <label> Explica los motivos, por los cuales deseas aplicar al programa académico de @{{academicProgram.name}} </label>
-            <textarea class="form-control" rows="8"></textarea>
+<form v-on:submit.prevent="actualizaSolicitud"> 
+    <div class="form-row">
+        <div class="form-group col-12">
+            <button class="btn btn-primary" type="submit"> Guardar</button>
         </div>
-        <documento-requerido v-for="documento in EntranceDocuments" 
-            :key="documento.name"
-            :archivo.sync="documento.archivo" :url.sync="documento.url" 
-            :errores.sync = "documento.errores"
-            v-bind="documento"
-            :documento="documento">
-        </documento-requerido>
-    </template>
+    </div>
+    <solicitud-postulante>
+        <template v-slot:postulante>
+            <postulante :postulante="postulante"
+                :documentos="postulante.documentos"
+                :documentos.sync="postulante.documentos">
+            </postulante>
+        </template>
 
-    <template v-slot:dominioidiomas>
-        <lengua-extranjera></lengua-extranjera>
-    </template>
+        <template v-slot:historialacademico >
+            <grado-academico v-for="grado in gradosAcademicos"
+                v-bind:key="grado.cedula"
+                v-bind="grado"
+                :escolaridad.sync="grado.escolaridad"
+                :paises="Countries"> 
+            </grado-academico>
+        </template>
 
-    <template v-slot:prodcientifica>
-        <produccion-cientifica></produccion-cientifica>
-    </template>
+        <template v-slot:requisitosingreso>
+            <div class="col-12">
+                <label> Explica los motivos, por los cuales deseas aplicar al programa académico de @{{academicProgram.name}} </label>
+                <textarea class="form-control" rows="8"></textarea>
+            </div>
+            <documento-requerido v-for="documento in @json($entrance_documents)" 
+                :key="documento.name"
+                :archivo.sync="documento.archivo" :url.sync="documento.url" 
+                :errores.sync = "documento.errores"
+                v-bind="documento"
+                :documento="documento">
+            </documento-requerido>
+        </template>
 
-    <template v-slot:caphumano>
-        <capital-humano></capital-humano>
-    </template>
-</solicitud-postulante>
+        <template v-slot:dominioidiomas>
+            <lengua-extranjera></lengua-extranjera>
+        </template>
+
+        <template v-slot:prodcientifica>
+            <produccion-cientifica></produccion-cientifica>
+        </template>
+
+        <template v-slot:caphumano>
+            <capital-humano></capital-humano>
+        </template>
+    </solicitud-postulante>
+</form>
 
 
 @endsection
@@ -77,7 +83,6 @@ const app = new Vue({
         docsMaestria: @json($master_documents),
         Countries: [],
         CountryUniversities:[],
-        EntranceDocuments:@json($entrance_documents),
         EnglishExams: [],
         EnglishExamTypes: [],
         Errores: [],
@@ -140,39 +145,29 @@ const app = new Vue({
             }
 
             this.gradosAcademicos.push(gradoAcademico);
-        },/*
+        },
 
-        actualizaSolicitud(e, document) {
-            
+        actualizaSolicitud(e) {
+            return false;
+            /*
             const formData = new FormData();
-            
-            formData.append('tituloObtenido', this.tituloObtenido),
-            formData.append('PaisEstudios', this.PaisEstudios),
-            formData.append('academicProgram', this.AcademicProgram.id),
-            formData.append('IdPaisEstudios', this.IdPaisEstudios),
-            formData.append('UniversidadProcedencia', this.UniversidadProcedencia),
-            formData.append('IdUniversidadProcedencia', this.IdUniversidadProcedencia),
-            formData.append('FechaAprobacion', this.FechaAprobacion),
-            formData.append('calificacionMinima', this.calificacionMinima),
-            formData.append('calificacionMaxima', this.calificacionMaxima),
-            formData.append('promedio', this.promedio),
-            formData.append('PuntajeEXANI', this.PuntajeEXANI),
-            formData.append('ExamenIngles', this.ExamenIngles),
-            formData.append('IdExamenIngles', this.IdExamenIngles),
-            formData.append('TipoExamenIngles', this.TipoExamenIngles),
-            formData.append('IdTipoExamenIngles', this.IdTipoExamenIngles),
-            formData.append('fechaExamenIngles', this.fechaExamenIngles),
-            formData.append('puntajeExamenIngles', this.puntajeExamenIngles);
-            formData.append('Documents', JSON.stringify(this.Documents));
-
-            Object.keys(this.Documents).forEach((key) => {
-                formData.append('Documents[' + key + ']', this.Documents[key]);
-            });
-
             formData.append('_method', 'post');
 
+            this.postulante.documentos.filter((documento) => {
+                return documento.archivo !== null && documento.archivo !== undefined;
+            }).forEach((documento) => {
+                formData.append('postulante[documentos][' + documento.id + ']', documento.archivo);
+            });
+
+
+            this.gradosAcademicos.forEach((grado) => {
+                Object.keys(grado).forEach((key) => {
+                    formData.append('postulante[grados][][' + key + ']', grado[key]);
+                });
+            });
+            
+
             axios({
-                
                 method: 'post',
                 url: '/controlescolar/solicitud',
                 data: formData,
@@ -187,8 +182,8 @@ const app = new Vue({
 
                 this.Errores = err.response.data['errors'];
                 console.log(this.Errores);
-            });
-        }*/
+            });*/
+        }
     }
 });
 </script>

@@ -2783,6 +2783,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
+    id: {
+      type: Number
+    },
     name: {
       type: String
     },
@@ -2836,6 +2839,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cargaDocumento: function cargaDocumento(e) {
+      var _this = this;
+
       var name = e.target.files[0].name;
       this.Errores = {};
 
@@ -2846,18 +2851,32 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
-      this.$nextTick(function () {
-        var _this = this;
-
-        var reader = new FileReader();
-
-        reader.onload = function (event) {
-          _this.Archivo = e.target.files[0];
-          _this.Url = event.target.result;
-        };
-
-        reader.readAsDataURL(e.target.files[0]);
+      var formData = new FormData();
+      formData.append('requiredDocumentId', this.id);
+      formData.append('file', e.target.files[0]);
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoRequerido',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {})["catch"](function (err) {
+        _this.Errores = err.response.data['errors'];
+        console.log(_this.Errores);
       });
+      /*
+            this.$nextTick(function () {
+              let reader = new FileReader();
+      
+              reader.onload = (event) => {
+                this.Archivo = e.target.files[0];
+                this.Url = event.target.result;
+              };
+      
+              reader.readAsDataURL(e.target.files[0]);
+            });*/
     }
   }
 });

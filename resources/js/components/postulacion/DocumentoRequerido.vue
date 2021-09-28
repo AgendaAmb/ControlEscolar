@@ -41,6 +41,9 @@ export default {
   name: "documento-requerido",
 
   props: {
+    id: {
+      type: Number,
+    },
     name: {
       type: String
     },
@@ -113,7 +116,28 @@ export default {
         return false;
       }
 
+      var formData = new FormData();
+      formData.append('requiredDocumentId', this.id);
+      formData.append('file', e.target.files[0]);
 
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoRequerido',
+        data: formData,
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+
+                
+      }).catch((err) => {
+
+        this.Errores = err.response.data['errors'];
+        console.log(this.Errores);
+      });
+
+/*
       this.$nextTick(function () {
         let reader = new FileReader();
 
@@ -123,7 +147,7 @@ export default {
         };
 
         reader.readAsDataURL(e.target.files[0]);
-      });
+      });*/
     },
   },
 };

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateAppliantLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('appliant_languages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
-            $table->foreignId('required_document_id')->constrained('required_documents')->onDelete('cascade');
             $table->string('name');
-            $table->string('path');
             $table->softDeletes();
         });
 
@@ -31,6 +29,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('appliant_languages');
     }
 }
