@@ -26,6 +26,13 @@
     </div>
 
     <div class="col-12">
+      <h2 class="d-block my-4"><strong> Experiencia laboral </strong></h2>
+      <slot name="experiencialaboral"></slot>
+      <button class="d-block my-3 btn btn-success"> Agregar </button>
+      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
+    </div>
+
+    <div class="col-12">
       <h2 class="d-block my-4"><strong> Producción científica </strong></h2>
       <slot name="prodcientifica"></slot>
       <button class="d-block my-3 btn btn-success"> Agregar </button>

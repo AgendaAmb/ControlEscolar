@@ -16,11 +16,6 @@ const entrance_documents = @json($entrance_documents);
 @section('container-class', 'class=container')
 @section('main')
 <form v-on:submit.prevent="actualizaSolicitud"> 
-    <div class="form-row">
-        <div class="form-group col-12">
-            <button class="btn btn-primary" type="submit"> Guardar</button>
-        </div>
-    </div>
     <solicitud-postulante>
         <template v-slot:postulante>
             <postulante :postulante="postulante"
@@ -51,6 +46,10 @@ const entrance_documents = @json($entrance_documents);
                 v-bind="documento"
                 :documento="documento">
             </documento-requerido>
+        </template>
+
+        <template v-slot:experiencialaboral>
+            <experiencia-laboral></experiencia-laboral>
         </template>
 
         <template v-slot:dominioidiomas>
