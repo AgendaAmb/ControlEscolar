@@ -25,6 +25,15 @@ Vue.component('calendar', require('./components/calendar/Calendar.vue').default)
 
 
 /**
+ * Componentes para el pre-registro.
+ */
+ Vue.component('pre-registro', require('./components/pre-registro/PreRegistro.vue').default);
+ Vue.component('crear-cuenta', require('./components/pre-registro/CrearCuenta.vue').default);
+ Vue.component('cuenta-uaslp', require('./components/pre-registro/CuentaUaslp.vue').default);
+ Vue.component('cuenta-externo', require('./components/pre-registro/CuentaExterno.vue').default);
+ Vue.component('datos-personales', require('./components/pre-registro/DatosPersonales.vue').default);
+
+/**
  * Componentes para la vista de postulación.
  */
 Vue.component('solicitud-postulante', require('./components/postulacion/SolicitudPostulante.vue').default);

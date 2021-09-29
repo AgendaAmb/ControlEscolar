@@ -13,57 +13,31 @@
     <x-academic-program-card src="{{ asset('storage/academic-programs/imarec-01.png') }}" />
 </div>
 
+<pre-registro>
+    <crear-cuenta :pertenece-uaslp.sync="PerteneceUASLP">
+        <cuenta-uaslp v-if="PerteneceUASLP === 'Si'"
+            :facultad.sync="Facultad"
+            :email-r.sync="EmailR">
+        </cuenta-uaslp>
+
+        <cuenta-externo v-if="PerteneceUASLP === 'No'"
+            :email-r.sync="EmailR"
+            :email-alterno.sync="EmailAlterno"
+            :password.sync="Password"
+            :password-r.sync="PasswordR">
+        </cuenta-uaslp>
+    </crear-cuenta>
+
+    <datos-personales v-if="PerteneceUASLP !== ''"
+        :nombres.sync="Nombres"
+        :ap-paterno.sync="ApellidoP"
+        :ap-Materno.sync="ApellidoM">
+
+    </datos-personales>
+</pre-registro>
+{{--  
 <x-modal-registro v-on:submit.prevent="RegistraUsuario">
-    
-    <div class="form-row">
-        <x-form-select id="PerteneceUASLP" class="form-group col-md-3" 
-            v-for="option in [{ id: 'PerteneceUASLP_si', name:'Si' }, { id: 'PerteneceUASLP_no', name:'No' }]"> 
-        
-            <x-slot name="slot"> ¿Perteneces a la UASLP? </x-slot>
-            <x-slot name="error" v-if="'PerteneceUASLP' in Errores">  @{{ Errores['PerteneceUASLP'][0] }} </x-slot>
-        </x-form-select>
-    </div>
-
-    <div class="form-row" v-if="PerteneceUASLP === 'Si'">
-        <input type="hidden" name="Dependencia" v-model="Facultad">
-        <div class="form-group col-12"></div>
-
-        <x-form-input id="EmailR" type="text" class="form-group col-4"> 
-            <x-slot name="slot"> Ingresa tu RPE/clave única de alumno ó correo Institucional </x-slot>
-            <x-slot name="error" v-if="'EmailR' in Errores"> @{{ Errores['EmailR'][0] }} </x-slot>
-        </x-form-input>
-       
-        
-        <div class="form-group col-2">
-            <a class="btn btn btn-outline-light search-button" v-on:click="uaslpUser"
-                data-toggle="tooltip" data-placement="right" title="Buscar mi información"
-                v-if="!spinnerVisible"><i class="fas fa-search"></i></a>
-            <button class="btn btn-light" type="button" disabled v-if="spinnerVisible">
-                <span class="spinner-border spinner-border-sm search-button" role="status" aria-hidden="true"></span>
-                <span class="sr-only">Cargando...</span>
-            </button>
-        </div>
-
-        <span class="text-danger" role="alert" v-if="'EmailR' in Errores">
-            @{{Errores['EmailR']}}
-        </span>
-    </div>
-    <div class="form-row" v-if="PerteneceUASLP === 'No'">
-        <x-form-input id="EmailR" type="email" class="form-group col-md-12"> 
-            <x-slot name="slot"> Ingresa un correo electrónico </x-slot>
-            <x-slot name="error" v-if="'EmailR' in Errores">  @{{ Errores['EmailR'][0] }} </x-slot>
-        </x-form-input>
-
-        <x-form-input id="Password" type="password" class="form-group col-md-6"> 
-            <x-slot name="slot"> Contraseña </x-slot>
-            <x-slot name="error" v-if="'Password' in Errores"> @{{ Errores['Password'][0] }} </x-slot>
-        </x-form-input>
-
-        <x-form-input id="PasswordR" type="password" class="form-group col-md-6"> 
-            <x-slot name="slot"> Repite tu Contraseña </x-slot>
-            <x-slot name="error" v-if="'PasswordR' in Errores"> @{{ Errores['PasswordR'][0] }} </x-slot>
-        </x-form-input>
-    </div>
+   
 
 
     <h5 class="modal-title" id="exampleModalLabel">Datos Personales</h5>
@@ -196,7 +170,7 @@
             </div>
         </div>
     </div>
-</x-modal-registro>
+</x-modal-registro>--}}
 @endsection
 
 @push('vuejs')
@@ -206,6 +180,7 @@
     data: {
         PerteneceUASLP: '',
         EmailR: '',
+        EmailAlterno: '',
         Nombres: '',
         ApellidoP: '',
         ApellidoM: '',
