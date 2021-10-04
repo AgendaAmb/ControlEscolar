@@ -18,6 +18,9 @@ class CreateArchivesTable extends Migration
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('academic_program_id')->constrained('academic_programs')->onDelete('cascade');
+            $table->integer('status');
+            $table->string('comments')->nullable();
+            $table->string('motivation')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,11 +33,7 @@ class CreateArchivesTable extends Migration
             $table->primary(['archive_id', 'required_document_id'], 'pk_archive_required_document');
         });
 
-        DB::table('archives')->insert([
-            'academic_program_id' => 2,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+        
     }
 
     /**

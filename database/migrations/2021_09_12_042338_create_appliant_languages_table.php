@@ -26,6 +26,7 @@ class CreateAppliantLanguagesTable extends Migration
             $table->string('conversational_level')->nullable();
             $table->string('reading_level')->nullable();
             $table->string('writing_level')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
 
@@ -38,6 +39,7 @@ class CreateAppliantLanguagesTable extends Migration
                 ->constrained('required_documents')
                 ->onDelete('cascade');
 
+            $table->string('location')->nullable();
             $table->primary(['appliant_language_id', 'required_document_id'], 'pk_appliantLanguageReqDocument');
         });
     }

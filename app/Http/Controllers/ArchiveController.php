@@ -49,6 +49,7 @@ class ArchiveController extends Controller
         $required_documents = $this->req_docs_repo->allFrom(Archive::find(1));
         
         return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
+        ->with('archive', Archive::find(1))
         ->with('academic_program', $academic_program)
         ->with('personal_documents', $required_documents[0])
         ->with('bachelor_documents', $required_documents[1])

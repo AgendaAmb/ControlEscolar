@@ -16,22 +16,25 @@
     </div>
 
     <div class="form-group col-md-12">
-      <div v-if="tipo === 'Publicación de artículos'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del artículo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Nombre de la revista: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <publicacion-articulo v-if="tipo === 'Publicación de artículos'"
+        :titulo-articulo.sync="titulo"
+        :nombre-revista.sync="nombre"
+        :ano-publicacion.sync="año"
+        :autores.sync="autores">
+      </publicacion-articulo>
 
-      <div v-else-if="tipo === 'Publicación de libros'" class="row">
-        <input-solicitud clase="form-group col-md-6" v-model="titulo"> Título del libro: </input-solicitud>
-        <input-solicitud clase="form-group col-md-6" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <publicacion-capitulo v-else-if="tipo === 'Capítulos publicados'"
+        :titulo-capitulo.sync="titulo"
+        :nombre-articulo.sync="nombre"
+        :ano-publicacion.sync="año"
+        :autores.sync="autores">
+      </publicacion-capitulo>
 
-      <div v-else-if="tipo === 'Capítulos publicados'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del capítulo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="numCapitulo"> No. del capítulo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <publicacion-libro v-else-if="tipo === 'Publicación de libros'"
+        :titulo-libro.sync="titulo"
+        :ano-publicacion.sync="año"
+        :autores.sync="autores">
+      </publicacion-libro>
 
       <div v-else-if="tipo === 'Reportes técnicos'" class="row">
         <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título: </input-solicitud>
@@ -65,10 +68,19 @@
 
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
+import PublicacionArticulo from './produccion-cientifica/PublicacionArticulo.vue';
+import PublicacionCapitulo from './produccion-cientifica/PublicacionCapitulo.vue';
+import PublicacionLibro from './produccion-cientifica/PublicacionLibro.vue';
 
 export default {
-  name: "ci-produccion-cientifica",
-  components: { DocumentoRequerido, InputSolicitud },
+  name: "produccion-cientifica",
+  components: { 
+    DocumentoRequerido, 
+    InputSolicitud, 
+    PublicacionArticulo, 
+    PublicacionCapitulo,
+    PublicacionLibro
+  },
 
   data() {
     return {
@@ -76,7 +88,9 @@ export default {
       nombre: '',
       titulo: '',
       capLibro: '',
-      año: ''
+      autores: [],
+      año: '',
+      institucion: '',
     };
   }
 };

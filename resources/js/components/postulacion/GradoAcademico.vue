@@ -10,7 +10,7 @@
         <div class="form-group col-md-6 col-lg-4">
           <label> Nivel de escolaridad: </label>
 
-          <select v-model="Escolaridad" class="form-control">
+          <select v-model="DegreeType" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
               {{ escolaridad }}
@@ -20,7 +20,7 @@
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Título obtenido: </label>
-          <input v-model="titulo" type="text" class="form-control">
+          <input v-model="Degree" type="text" class="form-control">
         </div>
 
         <div class="d-none d-lg-block form-group col-lg-4">
@@ -50,7 +50,7 @@
 
         <div class="form-group col-lg-6">
           <label> Universidad de estudios: </label>
-          <select v-model="universidad" class="form-control">
+          <select v-model="University" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="Universidad in Universidades" :key="Universidad.id" :value="Universidad.name">
               {{ Universidad.name }}
@@ -74,6 +74,11 @@
       -->
       <div class="row" v-if="estatus !== ''" >
         <div v-if="estatus === 'Grado obtenido'" class="form-group col-md-6">
+          <label> Número de cédula: </label>
+          <input v-model="Cedula" type="text" class="form-control">
+        </div>
+
+        <div v-if="estatus === 'Grado obtenido'" class="form-group col-md-6">
           <label> Fecha de titulación: </label>
           <input v-model="fechaobtencion" type="date" class="form-control">
         </div>
@@ -91,7 +96,7 @@
       <!-- 
         Pedir CVU, solo en maestría
       -->
-      <div class="row" v-if="escolaridad === 'Maestría'" >
+      <div class="row" v-if="degree_type === 'Maestría'" >
         <div class="form-group col-md-4">
           <label> Número de CVU CONACYT: </label>
           <input type="text" class="form-control">
@@ -140,7 +145,7 @@
     </div>
 
     <documento-requerido 
-      v-for="documento in Documentos" 
+      v-for="documento in RequiredDocuments" 
       :key="documento.name"
       :archivo.sync="documento.archivo" 
       :location.sync="documento.location" 
@@ -162,14 +167,30 @@ export default {
     paises: {
       type: Array,
     },
+
+    // id del grado.
     id: {
       type: Number,
     },
-    escolaridad: String,
-    titulo: String,
+
+    // Título del grado académico.
+    degree: String,
+
+    // Tipo de grado académico
+    degree_type: String,
+
+    // Cédula profesional.
     cedula: String,
-    modoTitulacion: String,
-    documentos: Array,
+
+    // País en donde el estudiante realizó sus estudios.
+    country: String,
+
+    // Universidad en donde el postulante realizó sus estudios.
+    university: String,
+
+    // Modo de titulación.
+    titration_mode: String,
+    required_documents: Array,
   },
 
   data: function () {
@@ -180,7 +201,6 @@ export default {
       calmin: '',
       calmax: '',
       paisestudios: '',
-      universidad: '',
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
@@ -197,12 +217,12 @@ export default {
       },
     },
 
-    Titulo: {
+    Degree: {
       get(){
-        return this.titulo;
+        return this.degree;
       },
       set(newVal){
-        this.$emit('update:titulo',newVal);
+        this.$emit('update:degree',newVal);
       }
     },
 
@@ -215,26 +235,30 @@ export default {
       }
     },
 
-    Escolaridad: {
+    DegreeType: {
       get(){
-        return this.escolaridad;
+        return this.degree_type;
       },
       set(newVal){
-        this.$emit('update:escolaridad',newVal);
+        this.$emit('update:degreeType',newVal);
       }
     },
 
-    Documentos: {
+    University: {
       get(){
-        if (this.Escolaridad === 'Maestría')
-          return this.documentos.filter(doc => doc.type === 'academic-mast');
-        else if (this.Escolaridad === 'Licenciatura')
-          return this.documentos.filter(doc => doc.type === 'academic-lic');
-
-        return [];
+        return this.university;
       },
       set(newVal){
-        this.$emit('update:Documentos',newVal);
+        this.$emit('update:university',newVal);
+      }
+    },
+
+    RequiredDocuments: {
+      get(){
+        return this.required_documents;
+      },
+      set(newVal){
+        this.$emit('update:requiredDocuments',newVal);
       }
     }
   },

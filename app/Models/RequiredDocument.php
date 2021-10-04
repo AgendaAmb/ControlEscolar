@@ -46,6 +46,63 @@ class RequiredDocument extends Model
     }
 
     /**
+     * Obtiene el id de los documentos personales.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function personalDocumentsId()
+    {
+        return self::where('type', 'personal')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos personales.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function entranceDocumentsId()
+    {
+        return self::where('type', 'entrance')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos personales.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function bachelorDocumentsId()
+    {
+        return self::where('type', 'academic-lic')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos de maestría.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function masterDocumentsId()
+    {
+        return self::where('type', 'academic-mast')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos para comprobación de
+     * lenguas extranjeras.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function languageDocumentsId()
+    {
+        return self::where('type', 'language')->pluck('id');
+    }
+
+
+    /**
      * Obtiene los expedientes, asociados al documento requerido.
      *
      * @return void

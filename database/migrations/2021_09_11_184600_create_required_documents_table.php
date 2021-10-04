@@ -208,6 +208,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Todos
+            /*
             [
                 'name' =>"13B.-Certificado de idioma español.",
                 'type' => 'language',
@@ -216,7 +217,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'example' => '13B_Español_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
-            ],
+            ],*/
             
             # Todos
             [

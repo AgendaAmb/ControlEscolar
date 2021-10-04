@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\AcademicDegree;
+use App\Models\AppliantLanguage;
+use App\Models\Archive;
+use App\Observers\AcademicDegreeObserver;
+use App\Observers\AppliantLanguageObserver;
+use App\Observers\ArchiveObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +33,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Archive::observe(ArchiveObserver::class);
+        AcademicDegree::observe(AcademicDegreeObserver::class);
+        AppliantLanguage::observe(AppliantLanguageObserver::class);
     }
 }

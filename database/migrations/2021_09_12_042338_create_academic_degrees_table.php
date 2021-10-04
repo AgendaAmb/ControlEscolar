@@ -16,15 +16,25 @@ class CreateAcademicDegreesTable extends Migration
         Schema::create('academic_degrees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
-            $table->string('type')->nullable();
+            $table->string('cedula')->nullable();
+            $table->string('degree')->nullable();
+            $table->string('degree_type')->nullable();
+
+            // Estado de titulación.
             $table->string('status')->nullable();
+            $table->string('titration_mode')->nullable();
             $table->string('country')->nullable();
             $table->string('university')->nullable();
+
+            // Datos del cvu.
             $table->integer('cvu')->nullable();
             $table->string('knowledge_card')->nullable();
-            $table->float('average');
-            $table->float('min_avg');
-            $table->float('max_avg');
+
+            // Datos del promedio.
+            $table->float('average')->nullable();
+            $table->float('min_avg')->nullable();
+            $table->float('max_avg')->nullable();
+            $table->timestamps();
             $table->softDeletes();
         });
 
@@ -37,6 +47,7 @@ class CreateAcademicDegreesTable extends Migration
                 ->constrained('required_documents')
                 ->onDelete('cascade');
 
+            $table->string('location')->nullable();
             $table->primary(['academic_degree_id', 'required_document_id'], 'pk_academicDegreeReqDocument');
         });
     }
