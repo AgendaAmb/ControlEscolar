@@ -10,7 +10,6 @@
     <div class="col-12">
       <h2 class="d-block my-5 font-weight-bold"> Historial académico </h2>
       <slot name="historialacademico"></slot>
-      <button class="d-block my-3 btn btn-success"> Agregar </button>
       <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
     </div>
 

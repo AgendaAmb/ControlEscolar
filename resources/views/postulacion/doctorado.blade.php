@@ -1,12 +1,6 @@
 <script> 
 const archive = @json($archive); 
-/*
-const personal_documents = @json($personal_documents); 
 const academic_program = @json($academic_program);
-const bachelor_documents = @json($bachelor_documents);
-const master_documents = @json($master_documents);
-const language_documents = @json($language_documents); 
-const entrance_documents = @json($entrance_documents);*/
 </script>
 
 @extends('layouts.app')
@@ -31,11 +25,18 @@ const entrance_documents = @json($entrance_documents);*/
             <grado-academico v-for="grado in archive.academic_degrees"
                 v-bind="grado"
                 v-bind:key="grado.id"
+                :cvu.sync="grado.cvu"
+                :knowledge_card.sync="grado.knowledge_card"
                 :cedula.sync="grado.cedula"
+                :status.sync="grado.status"
                 :degree.sync="grado.degree"
+                :average.sync="grado.average"
+                :min_avg.sync="grado.min_avg"
+                :max_avg.sync="grado.max_avg"
+                :country.sync="grado.country"
                 :university.sync="grado.university"
-                :degree-type.sync="grado.degree_type"
-                :required-documents.sync="grado.required_documents"
+                :degree_type.sync="grado.degree_type"
+                :required_documents.sync="grado.required_documents"
                 :paises="Countries"> 
             </grado-academico>
         </template>
@@ -45,7 +46,6 @@ const entrance_documents = @json($entrance_documents);*/
                 <label> Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz </label>
                 <textarea class="form-control" rows="8"></textarea>
             </div>
-            <!--
             <documento-requerido v-for="documento in archive" 
                 :key="documento.name"
                 :archivo.sync="documento.archivo" 
@@ -90,11 +90,6 @@ const app = new Vue({
     el: '#app',
     data: {
         archive: archive,
-        /*
-        academicProgram: archive.academicProgram,
-        docsLicenciatura: @json($bachelor_documents),
-        docsIngreso: @json($entrance_documents),
-        docsMaestria: @json($master_documents),*/
         Countries: [],
         CountryUniversities:[],
         EnglishExams: [],

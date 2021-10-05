@@ -28,8 +28,8 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     # Actualiza la solicitud del aspirante
     Route::post('/guardaDocumentoPersonal', [ArchiveController::class, 'guardaDocumentoPersonal'])->name('guardaDocumentoRequerido'); 
 
-    # Actualiza la solicitud del aspirante
-    Route::post('/', [ArchiveController::class, 'actualizaSolicitud'])->name('actualizaSolicitud'); 
+    # Actualiza los datos académicos del postulante.
+    Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
 });
 
 # Rutas para las cartas de intención.

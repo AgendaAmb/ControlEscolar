@@ -3141,6 +3141,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3150,35 +3154,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   name: "grado-academico",
   props: {
-    paises: {
-      type: Array
-    },
+    // Países que el postulante puede escoger.
+    paises: Array,
     // id del grado.
-    id: {
-      type: Number
-    },
+    id: Number,
+    // id del expediente.
+    archive_id: Number,
     // Título del grado académico.
     degree: String,
     // Tipo de grado académico
     degree_type: String,
     // Cédula profesional.
-    cedula: String,
+    cedula: Number,
     // País en donde el estudiante realizó sus estudios.
     country: String,
     // Universidad en donde el postulante realizó sus estudios.
     university: String,
     // Modo de titulación.
     titration_mode: String,
+    // Número de CVU de CONACyT.
+    cvu: Number,
+    // Estatus académico.
+    status: String,
+    // Promedio obtenido.
+    average: Number,
+    // Promedio obtenido.
+    min_avg: Number,
+    // Promedio obtenido.
+    max_avg: Number,
+    // Promedio obtenido.
+    knowledge_card: String,
+    // Documentos requeridos en el programa académico.
     required_documents: Array
   },
   data: function data() {
     return {
-      estatus: '',
       fechaobtencion: '',
-      promedio: '',
-      calmin: '',
-      calmax: '',
-      paisestudios: '',
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
@@ -3191,6 +3202,14 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(value) {
         this.universidades = value;
+      }
+    },
+    CVU: {
+      get: function get() {
+        return this.cvu;
+      },
+      set: function set(newVal) {
+        this.$emit('update:cvu', newVal);
       }
     },
     Degree: {
@@ -3214,7 +3233,15 @@ __webpack_require__.r(__webpack_exports__);
         return this.degree_type;
       },
       set: function set(newVal) {
-        this.$emit('update:degreeType', newVal);
+        this.$emit('update:degree_type', newVal);
+      }
+    },
+    Country: {
+      get: function get() {
+        return this.country;
+      },
+      set: function set(newVal) {
+        this.$emit('update:country', newVal);
       }
     },
     University: {
@@ -3225,18 +3252,115 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:university', newVal);
       }
     },
+    Status: {
+      get: function get() {
+        return this.status;
+      },
+      set: function set(newVal) {
+        this.$emit('update:status', newVal);
+      }
+    },
     RequiredDocuments: {
       get: function get() {
         return this.required_documents;
       },
       set: function set(newVal) {
-        this.$emit('update:requiredDocuments', newVal);
+        this.$emit('update:required_documents', newVal);
+      }
+    },
+    KnowledgeCard: {
+      get: function get() {
+        return this.knowledge_card;
+      },
+      set: function set(newVal) {
+        this.$emit('update:knowledge_card', newVal);
+      }
+    },
+    Average: {
+      get: function get() {
+        return this.average;
+      },
+      set: function set(newVal) {
+        this.$emit('update:average', newVal);
+      }
+    },
+    MinAvg: {
+      get: function get() {
+        return this.min_avg;
+      },
+      set: function set(newVal) {
+        this.$emit('update:min_avg', newVal);
+      }
+    },
+    MaxAvg: {
+      get: function get() {
+        return this.max_avg;
+      },
+      set: function set(newVal) {
+        this.$emit('update:max_avg', newVal);
       }
     }
   },
   methods: {
     escogePais: function escogePais(evento) {
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
+    },
+    actualizaHistorialAcademico: function actualizaHistorialAcademico(evento) {
+      var _this = this;
+
+      axios.post('/controlescolar/solicitud/updateAcademicDegree', {
+        id: this.id,
+        archive_id: this.archive_id,
+        degree: this.degree,
+        degree_type: this.degree_type,
+        cvu: this.cvu,
+        cedula: this.cedula,
+        country: this.country,
+        university: this.university,
+        status: this.status,
+        average: this.average,
+        min_avg: this.min_avg,
+        max_avg: this.max_avg,
+        knowledge_card: this.knowledge_card
+      }).then(function (response) {
+        _this.id = response.data.id;
+        _this.archive_id = response.data.archive_id;
+        _this.degree = response.data.degree;
+        _this.degree_type = response.data.degree_type;
+        _this.cvu = response.data.cvu;
+        _this.cedula = response.data.cedula;
+        _this.country = response.data.country;
+        _this.university = response.data.university;
+        _this.status = response.data.status;
+        _this.average = response.data.average;
+        _this.min_avg = response.data.min_avg;
+        _this.max_avg = response.data.max_avg;
+        _this.knowledge_card = response.data.knowledge_card;
+      })["catch"](function (error) {});
+    },
+    cargaDocumento: function cargaDocumento(requiredDocument, file) {
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;
+      })["catch"](function (error) {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = {
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+        };
+      });
     }
   }
 });
@@ -3742,7 +3866,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -46207,8 +46330,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.estatus,
-                    expression: "estatus"
+                    value: _vm.Status,
+                    expression: "Status"
                   }
                 ],
                 staticClass: "form-control",
@@ -46222,7 +46345,7 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.estatus = $event.target.multiple
+                    _vm.Status = $event.target.multiple
                       ? $$selectedVal
                       : $$selectedVal[0]
                   }
@@ -46266,8 +46389,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.paisestudios,
-                    expression: "paisestudios"
+                    value: _vm.Country,
+                    expression: "Country"
                   }
                 ],
                 staticClass: "form-control",
@@ -46282,7 +46405,7 @@ var render = function() {
                           var val = "_value" in o ? o._value : o.value
                           return val
                         })
-                      _vm.paisestudios = $event.target.multiple
+                      _vm.Country = $event.target.multiple
                         ? $$selectedVal
                         : $$selectedVal[0]
                     },
@@ -46383,8 +46506,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.estatus,
-                    expression: "estatus"
+                    value: _vm.Status,
+                    expression: "Status"
                   }
                 ],
                 staticClass: "form-control",
@@ -46398,7 +46521,7 @@ var render = function() {
                         var val = "_value" in o ? o._value : o.value
                         return val
                       })
-                    _vm.estatus = $event.target.multiple
+                    _vm.Status = $event.target.multiple
                       ? $$selectedVal
                       : $$selectedVal[0]
                   }
@@ -46431,9 +46554,9 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm.estatus !== ""
+        _vm.Status !== ""
           ? _c("div", { staticClass: "row" }, [
-              _vm.estatus === "Grado obtenido"
+              _vm.Status === "Grado obtenido"
                 ? _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("label", [_vm._v(" Número de cédula: ")]),
                     _vm._v(" "),
@@ -46441,27 +46564,31 @@ var render = function() {
                       directives: [
                         {
                           name: "model",
-                          rawName: "v-model",
+                          rawName: "v-model.number",
                           value: _vm.Cedula,
-                          expression: "Cedula"
+                          expression: "Cedula",
+                          modifiers: { number: true }
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text" },
+                      attrs: { type: "number" },
                       domProps: { value: _vm.Cedula },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.Cedula = $event.target.value
+                          _vm.Cedula = _vm._n($event.target.value)
+                        },
+                        blur: function($event) {
+                          return _vm.$forceUpdate()
                         }
                       }
                     })
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.estatus === "Grado obtenido"
+              _vm.Status === "Grado obtenido"
                 ? _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("label", [_vm._v(" Fecha de titulación: ")]),
                     _vm._v(" "),
@@ -46489,7 +46616,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.estatus === "Pasante"
+              _vm.Status === "Pasante"
                 ? _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("label", [_vm._v(" Fecha de obtención de pasantía: ")]),
                     _vm._v(" "),
@@ -46517,7 +46644,7 @@ var render = function() {
                   ])
                 : _vm._e(),
               _vm._v(" "),
-              _vm.estatus === "Título o grado en proceso"
+              _vm.Status === "Título o grado en proceso"
                 ? _c("div", { staticClass: "form-group col-md-6" }, [
                     _c("label", [_vm._v(" Fecha de presentación de examen: ")]),
                     _vm._v(" "),
@@ -46549,11 +46676,82 @@ var render = function() {
         _vm._v(" "),
         _vm.degree_type === "Maestría"
           ? _c("div", { staticClass: "row" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", [_vm._v(" Número de CVU CONACYT: ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.CVU,
+                      expression: "CVU",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.CVU },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.CVU = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", [
+                  _vm._v(" ¿Cuentas con una carta de reconocimiento? ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.KnowledgeCard,
+                        expression: "KnowledgeCard"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.KnowledgeCard = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "", selected: "" } }, [
+                      _vm._v(" Escoge una opción")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+                  ]
+                )
+              ]),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(0)
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -46565,20 +46763,24 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
-                  value: _vm.promedio,
-                  expression: "promedio"
+                  rawName: "v-model.number",
+                  value: _vm.Average,
+                  expression: "Average",
+                  modifiers: { number: true }
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.promedio },
+              attrs: { type: "number" },
+              domProps: { value: _vm.Average },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.promedio = $event.target.value
+                  _vm.Average = _vm._n($event.target.value)
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             })
@@ -46591,20 +46793,24 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
-                  value: _vm.calmin,
-                  expression: "calmin"
+                  rawName: "v-model.number",
+                  value: _vm.MinAvg,
+                  expression: "MinAvg",
+                  modifiers: { number: true }
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.calmin },
+              attrs: { type: "number" },
+              domProps: { value: _vm.MinAvg },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.calmin = $event.target.value
+                  _vm.MinAvg = _vm._n($event.target.value)
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             })
@@ -46617,20 +46823,24 @@ var render = function() {
               directives: [
                 {
                   name: "model",
-                  rawName: "v-model",
-                  value: _vm.calmax,
-                  expression: "calmax"
+                  rawName: "v-model.number",
+                  value: _vm.MaxAvg,
+                  expression: "MaxAvg",
+                  modifiers: { number: true }
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.calmax },
+              attrs: { type: "number" },
+              domProps: { value: _vm.MaxAvg },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.calmax = $event.target.value
+                  _vm.MaxAvg = _vm._n($event.target.value)
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
                 }
               }
             })
@@ -46658,7 +46868,8 @@ var render = function() {
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
-                }
+                },
+                enviaDocumento: _vm.cargaDocumento
               }
             },
             "documento-requerido",
@@ -46666,40 +46877,25 @@ var render = function() {
             false
           )
         )
-      })
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 my-3" }, [
+        _c("button", { staticClass: "btn btn-success" }, [_vm._v(" Agregar ")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "mx-2 btn btn-primary",
+            on: { click: _vm.actualizaHistorialAcademico }
+          },
+          [_vm._v(" Guardar ")]
+        )
+      ])
     ],
     2
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-4" }, [
-      _c("label", [_vm._v(" Número de CVU CONACYT: ")]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-4" }, [
-      _c("label", [_vm._v(" ¿Cuentas con una carta de reconocimiento? ")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control" }, [
-        _c("option", { attrs: { value: "", selected: "" } }, [
-          _vm._v(" Escoge una opción")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -48132,10 +48328,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._t("historialacademico"),
-          _vm._v(" "),
-          _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
-            _vm._v(" Agregar ")
-          ]),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",

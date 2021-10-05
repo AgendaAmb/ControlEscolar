@@ -3,23 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewRequiredDocumentFileRequest;
+use App\Http\Requests\UpdateAcademicDegreeRequest;
+use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
 use App\Models\Archive;
-use App\Models\RequiredDocument;
-use App\Repositories\RequiredDocumentRepository;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Monolog\Handler\NewRelicHandler;
+use Illuminate\Http\Request; 
 
 class ArchiveController extends Controller
 {
-    /**
-     * Repositorio de documentos requeridos.
-     * 
-     * @var RequiredDocumentRepository
-     */
-    private $req_docs_repo;
-
     /**
      * Vistas de los programas académicos
      */
@@ -31,14 +23,6 @@ class ArchiveController extends Controller
     ];
 
     /**
-     * Crea el controlador.
-     */
-    public function __construct()
-    {
-        $this->req_docs_repo = new RequiredDocumentRepository;
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -46,66 +30,10 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $academicProgramName)
     {
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-        $required_documents = $this->req_docs_repo->allFrom(Archive::find(1));
-        
+
         return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
         ->with('archive', Archive::find(1))
-        ->with('academic_program', $academic_program)
-        ->with('personal_documents', $required_documents[0])
-        ->with('bachelor_documents', $required_documents[1])
-        ->with('master_documents', $required_documents[2])
-        ->with('language_documents', $required_documents[3])
-        ->with('entrance_documents', $required_documents[4]);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function subirCartaIntencion(Request $request, $academicProgramName)
-    {
-        $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-        
-        return view('carta-intencion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
-        ->with('academic_program', $academic_program)
-        ->with('personal_documents', RequiredDocument::type('personal')->get())
-        ->with('bachelor_documents', RequiredDocument::type('academic-lic')->get())
-        ->with('master_documents', RequiredDocument::type('academic-mast')->get())
-        ->with('entrance_documents', RequiredDocument::type('entrance')
-        ->where('intention_letter', false)
-        ->where('recommendation_letter', false)
-        ->get());
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function subirCartaRecomendacion(Request $request, $academicProgramName)
-    {
-        $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-
-        # Solo se pueden otorgar las cartas de intención, si otra 
-        # persona todavía no se la otorga al postulante.
-        $curricular_documents = $academic_program
-            ->requiredDocuments()
-            ->type('curricular')
-            ->where('recommendation_letter', true)
-            ->doesntHave('documents')
-            ->limit(1)
-            ->get();
-
-        return view(
-            'carta-recomendacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName]
-
-        )->with('academic_program', $academic_program
-        )->with('personal_documents', []
-        )->with('academic_documents', []
-        )->with('entrance_documents', []
-        )->with('curricular_documents', $curricular_documents
-        );
+        ->with('academic_program', $academic_program);
     }
 
     /**
@@ -125,9 +53,7 @@ class ArchiveController extends Controller
         );
 
         $archive->requiredDocuments()->detach($request->requiredDocumentId);
-        $archive->requiredDocuments()->attach($request->requiredDocumentId, [
-            'location' => $ruta
-        ]);
+        $archive->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
 
         return new JsonResponse(
             $archive->requiredDocuments()
@@ -135,5 +61,40 @@ class ArchiveController extends Controller
             ->where('id', $request->requiredDocumentId)
             ->first()
         );
+    }
+
+
+    /**
+     * Actualiza los datos académicos del postulante.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateAcademicDegree(UpdateAcademicDegreeRequest $request)
+    {
+        AcademicDegree::where('id', $request->id)->update($request->safe()->toArray());
+
+        return new JsonResponse(AcademicDegree::find($request->id));
+    }
+
+    /**
+     * Actualiza un documento requerido, para el grado académico
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateAcademicDegreeRequiredDocument(Request $request)
+    {
+        $academic_degree = AcademicDegree::find('id', $request->id);
+
+        # Archivo de la solicitud
+        $ruta = $request->file('file')->storeAs(
+            'archives/'.$request->archive_id.'/academicDocuments', 
+            $request->id.'.pdf'
+        );
+
+        # Asocia los documentos requeridos.
+        $academic_degree->requiredDocuments()->detach($request->requiredDocumentId);
+        $academic_degree->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+
+        return new JsonResponse(AcademicDegree::find($request->id));
     }
 }

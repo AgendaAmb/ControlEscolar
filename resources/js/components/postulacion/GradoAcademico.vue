@@ -25,7 +25,7 @@
 
         <div class="d-none d-lg-block form-group col-lg-4">
           <label> Estatus: </label>
-          <select v-model="estatus" class="form-control">
+          <select v-model="Status" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="estatusEstudio in estatusEstudios" :key="estatusEstudio" :value="estatusEstudio">
               {{ estatusEstudio }}
@@ -40,7 +40,7 @@
       <div class="row">
         <div class="form-group col-lg-6">
           <label> País donde realizaste tus estudios: </label>
-          <select v-model="paisestudios" class="form-control" @change="escogePais">
+          <select v-model="Country" class="form-control" @change="escogePais">
             <option value="" selected>Escoge una opción</option>
             <option v-for="PaisEstudio in paises" :key="PaisEstudio.id" :value="PaisEstudio.name">
               {{ PaisEstudio.name }}
@@ -60,7 +60,7 @@
 
         <div class="d-block d-lg-none form-group col-md-6">
           <label> Estatus: </label>
-          <select v-model="estatus" class="form-control">
+          <select v-model="Status" class="form-control">
             <option value="" selected>Escoge una opción</option>
             <option v-for="estatusEstudio in estatusEstudios" :key="estatusEstudio" :value="estatusEstudio">
               {{ estatusEstudio }}
@@ -72,23 +72,23 @@
       <!-- 
         Datos de obtención de grado/pasantía.
       -->
-      <div class="row" v-if="estatus !== ''" >
-        <div v-if="estatus === 'Grado obtenido'" class="form-group col-md-6">
+      <div class="row" v-if="Status !== ''" >
+        <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
           <label> Número de cédula: </label>
-          <input v-model="Cedula" type="text" class="form-control">
+          <input v-model.number="Cedula" type="number" class="form-control">
         </div>
 
-        <div v-if="estatus === 'Grado obtenido'" class="form-group col-md-6">
+        <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
           <label> Fecha de titulación: </label>
           <input v-model="fechaobtencion" type="date" class="form-control">
         </div>
 
-        <div v-if="estatus === 'Pasante'" class="form-group col-md-6">
+        <div v-if="Status === 'Pasante'" class="form-group col-md-6">
           <label> Fecha de obtención de pasantía: </label>
           <input v-model="fechaobtencion" type="date" class="form-control">
         </div>
 
-        <div v-if="estatus === 'Título o grado en proceso'" class="form-group col-md-6">
+        <div v-if="Status === 'Título o grado en proceso'" class="form-group col-md-6">
           <label> Fecha de presentación de examen: </label>
           <input v-model="fechaobtencion" type="date" class="form-control">
         </div>
@@ -99,12 +99,12 @@
       <div class="row" v-if="degree_type === 'Maestría'" >
         <div class="form-group col-md-4">
           <label> Número de CVU CONACYT: </label>
-          <input type="text" class="form-control">
+          <input v-model.number="CVU" type="number" class="form-control">
         </div>
 
         <div class="form-group col-md-4">
           <label> ¿Cuentas con una carta de reconocimiento? </label>
-          <select class="form-control">
+          <select v-model="KnowledgeCard" class="form-control">
             <option value="" selected> Escoge una opción</option>
             <option value="Si"> Si</option>
             <option value="No"> No </option>
@@ -121,25 +121,23 @@
         </div>
       </div>
 
-
-
       <!-- 
         Promedio del postulante
       -->
       <div class="row">
         <div class="form-group col-md-6 col-lg-4">
           <label> Promedio obtenido: </label>
-          <input v-model="promedio" type="text" class="form-control">
+          <input v-model.number="Average" type="number" class="form-control">
         </div>
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Calificación mínima: </label>
-          <input v-model="calmin" type="text" class="form-control">
+          <input v-model.number="MinAvg" type="number" class="form-control">
         </div>
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Calificación máxima: </label>
-          <input v-model="calmax" type="text" class="form-control">
+          <input v-model.number="MaxAvg" type="number" class="form-control">
         </div>
       </div>
     </div>
@@ -150,8 +148,14 @@
       :archivo.sync="documento.archivo" 
       :location.sync="documento.location" 
       :errores.sync = "documento.errores"
-      v-bind="documento">
+      v-bind="documento"
+      @enviaDocumento = "cargaDocumento" >
     </documento-requerido>
+
+    <div class="col-12 my-3">
+      <button class="btn btn-success"> Agregar </button>
+      <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary"> Guardar </button>
+    </div>
   </div>
 </template>
 
@@ -164,14 +168,15 @@ export default {
   name: "grado-academico",
 
   props: {
-    paises: {
-      type: Array,
-    },
+
+    // Países que el postulante puede escoger.
+    paises: Array,
 
     // id del grado.
-    id: {
-      type: Number,
-    },
+    id: Number,
+
+    // id del expediente.
+    archive_id: Number,
 
     // Título del grado académico.
     degree: String,
@@ -180,7 +185,7 @@ export default {
     degree_type: String,
 
     // Cédula profesional.
-    cedula: String,
+    cedula: Number,
 
     // País en donde el estudiante realizó sus estudios.
     country: String,
@@ -190,17 +195,32 @@ export default {
 
     // Modo de titulación.
     titration_mode: String,
+
+    // Número de CVU de CONACyT.
+    cvu: Number,
+
+    // Estatus académico.
+    status: String,
+
+    // Promedio obtenido.
+    average: Number,
+
+    // Promedio obtenido.
+    min_avg: Number,
+
+    // Promedio obtenido.
+    max_avg: Number,
+
+    // Promedio obtenido.
+    knowledge_card: String,
+
+    // Documentos requeridos en el programa académico.
     required_documents: Array,
   },
 
   data: function () {
     return {
-      estatus: '',
       fechaobtencion: '',
-      promedio: '',
-      calmin: '',
-      calmax: '',
-      paisestudios: '',
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
@@ -215,6 +235,15 @@ export default {
       set: function (value) {
         this.universidades = value;
       },
+    },
+
+    CVU: {
+      get(){
+        return this.cvu;
+      },
+      set(newVal){
+        this.$emit('update:cvu',newVal);
+      }
     },
 
     Degree: {
@@ -240,7 +269,16 @@ export default {
         return this.degree_type;
       },
       set(newVal){
-        this.$emit('update:degreeType',newVal);
+        this.$emit('update:degree_type',newVal);
+      }
+    },
+
+    Country: {
+      get(){
+        return this.country;
+      },
+      set(newVal){
+        this.$emit('update:country',newVal);
       }
     },
 
@@ -253,19 +291,129 @@ export default {
       }
     },
 
+    Status: {
+      get(){
+        return this.status;
+      },
+      set(newVal){
+        this.$emit('update:status',newVal);
+      }
+    },
+
     RequiredDocuments: {
       get(){
         return this.required_documents;
       },
       set(newVal){
-        this.$emit('update:requiredDocuments',newVal);
+        this.$emit('update:required_documents',newVal);
       }
-    }
+    },
+
+    KnowledgeCard: {
+      get(){
+        return this.knowledge_card;
+      },
+      set(newVal){
+        this.$emit('update:knowledge_card',newVal);
+      }
+    },
+
+    Average: {
+      get(){
+        return this.average;
+      },
+      set(newVal){
+        this.$emit('update:average',newVal);
+      }
+    },
+
+    MinAvg: {
+      get(){
+        return this.min_avg;
+      },
+      set(newVal){
+        this.$emit('update:min_avg',newVal);
+      }
+    },
+
+    MaxAvg: {
+      get(){
+        return this.max_avg;
+      },
+      set(newVal){
+        this.$emit('update:max_avg',newVal);
+      }
+    },
   },
   methods: {
     escogePais(evento) {
       this.Universidades =
         this.paises[evento.target.selectedIndex - 1].universities;
+    },
+
+    actualizaHistorialAcademico(evento){
+      axios.post('/controlescolar/solicitud/updateAcademicDegree', {
+        
+        id: this.id,
+        archive_id: this.archive_id,
+        degree: this.degree,
+        degree_type: this.degree_type,
+        cvu: this.cvu,
+        cedula: this.cedula,
+        country: this.country,
+        university: this.university,
+        status: this.status,
+        average: this.average,
+        min_avg: this.min_avg,
+        max_avg: this.max_avg,
+        knowledge_card: this.knowledge_card,
+
+      }).then(response => {
+        this.id = response.data.id;
+        this.archive_id = response.data.archive_id;
+        this.degree = response.data.degree;
+        this.degree_type = response.data.degree_type;
+        this.cvu = response.data.cvu;
+        this.cedula = response.data.cedula;
+        this.country = response.data.country;
+        this.university = response.data.university;
+        this.status = response.data.status;
+        this.average = response.data.average;
+        this.min_avg = response.data.min_avg;
+        this.max_avg = response.data.max_avg;
+        this.knowledge_card = response.data.knowledge_card;
+
+      }).catch(error => {
+
+      });
+    },
+
+    cargaDocumento(requiredDocument, file) {
+      
+      var formData = new FormData();
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        data: formData,
+        headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(response => {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;        
+        
+      }).catch(error => {
+        console.log(error);
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };
+      });
     },
   },
 };
