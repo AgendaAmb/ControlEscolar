@@ -19,6 +19,16 @@ class RequiredDocument extends Model
         'intention_letter',
         'recommendation_letter',
     ];
+
+    /**
+     * Eager loaded relationships.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'intention_letter' => 'boolean',
+        'recommendation_letter' => 'boolean',
+    ];
     
     /**
      * Obten los documentos requeridos por tipo.

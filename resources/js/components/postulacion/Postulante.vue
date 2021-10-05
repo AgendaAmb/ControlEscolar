@@ -64,7 +64,7 @@
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
       :archivo.sync="documento.archivo" 
-      :location.sync="documento.location" 
+      :location.sync="documento.pivot.location" 
       :errores.sync = "documento.errores"
       @enviaDocumento = "cargaDocumento" 
       v-bind="documento">
@@ -77,6 +77,7 @@ import DocumentoRequerido from "./DocumentoRequerido.vue";
 
 export default {
   props: {
+    archive_id: Number,
     postulante: Object,
     documentos: Array,
   },
@@ -98,12 +99,13 @@ export default {
     cargaDocumento(requiredDocument, file) {
       
       var formData = new FormData();
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateArchivePersonalDocument',
         data: formData,
         headers: {
           'Accept' : 'application/json',
@@ -114,7 +116,6 @@ export default {
         requiredDocument.Location = response.data.location;        
         
       }).catch(error => {
-        console.log(error);
         var errores = error.response.data['errors'];
         requiredDocument.Errores = { 
           file: 'file' in errores ? errores.file[0] : null,

@@ -38,6 +38,7 @@ Vue.component('calendar', require('./components/calendar/Calendar.vue').default)
  */
 Vue.component('solicitud-postulante', require('./components/postulacion/SolicitudPostulante.vue').default);
 Vue.component('postulante', require('./components/postulacion/Postulante.vue').default);
+Vue.component('requisitos-ingreso', require('./components/postulacion/RequisitosIngreso.vue').default);
 Vue.component('grado-academico', require('./components/postulacion/GradoAcademico.vue').default);
 Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);
 Vue.component('produccion-cientifica', require('./components/postulacion/ProduccionCientifica.vue').default);

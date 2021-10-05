@@ -34,6 +34,9 @@ class CreateAcademicDegreesTable extends Migration
             $table->float('average')->nullable();
             $table->float('min_avg')->nullable();
             $table->float('max_avg')->nullable();
+
+            // Datos de control
+            $table->string('state')->default('Incompleto');
             $table->timestamps();
             $table->softDeletes();
         });

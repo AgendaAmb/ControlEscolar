@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Models\AcademicDegree;
 use App\Models\Archive;
 use App\Models\RequiredDocument;
 
@@ -16,7 +15,7 @@ class ArchiveObserver
      */
     public function created(Archive $archive)
     {
-        $archive->academicDegrees()->createMany([[]]);
+        $archive->academicDegrees()->createMany([['state'=>'Incompleto']]);
         $archive->appliantLanguages()->createMany([[]]);
         $archive->appliantWorkingExperiences()->createMany([[]]);
         $archive->personalDocuments()->attach(RequiredDocument::personalDocumentsId());

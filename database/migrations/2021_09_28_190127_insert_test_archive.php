@@ -19,7 +19,7 @@ class InsertTestArchive extends Migration
         Archive::create([
             'academic_program_id' => 2,
             'status' => 0,
-            'comments' => ''
+            'comments' => '',
         ]);
     }
 

@@ -32,9 +32,9 @@ class Archive extends Model
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
     ];
-
+    
     /**
-     * Obtiene los documentos requeridos del expediente.
+     * Obtiene los documentos personales requeridos del expediente.
      *
      * @return BelongsToMany
      */

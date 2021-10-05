@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewRequiredDocumentFileRequest;
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
@@ -30,39 +29,81 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $academicProgramName)
     {
         $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
+        $archive = Archive::with(['entranceDocuments' => function($query){
+
+            return $query->where('intention_letter', false)->where('recommendation_letter', false);
+        }])->firstWhere('id', 1);
 
         return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
-        ->with('archive', Archive::find(1))
+        ->with('archive', $archive)
         ->with('academic_program', $academic_program);
     }
 
     /**
-     * Show the application dashboard.
+     * Actualiza un documento requerido, para el grado académico
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function guardaDocumentoPersonal(NewRequiredDocumentFileRequest $request)
+    public function updateMotivation(Request $request)
     {
-        # Por ahora todo irá a una misma solicitud...
-        $archive = Archive::find(1);
+        Archive::where('id', $request->archive_id)->update(['motivation'=>$request->motivation]);
+
+        return new JsonResponse(AcademicDegree::find($request->archive_id)->motivation);
+    }
+
+    /**
+     * Actualiza un documento requerido, para el grado académico
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateArchivePersonalDocument(Request $request)
+    {
+        $archive = Archive::find($request->archive_id);
 
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
-            'archives/'.$archive->id, 
+            'archives/'.$request->archive_id.'/personalDocuments', 
             $request->requiredDocumentId.'.pdf'
         );
 
-        $archive->requiredDocuments()->detach($request->requiredDocumentId);
-        $archive->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+        # Asocia los documentos requeridos.
+        $archive->personalDocuments()->detach($request->requiredDocumentId);
+        $archive->personalDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
 
         return new JsonResponse(
-            $archive->requiredDocuments()
+            $archive->personalDocuments()
             ->select('required_documents.*','archive_required_document.location as location')
             ->where('id', $request->requiredDocumentId)
             ->first()
         );
     }
 
+    /**
+     * Actualiza un documento requerido, para el grado académico
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateArchiveEntranceDocument(Request $request)
+    {
+        $archive = Archive::find($request->archive_id);
+
+        # Archivo de la solicitud
+        $ruta = $request->file('file')->storeAs(
+            'archives/'.$request->archive_id.'/entranceDocuments', 
+            $request->requiredDocumentId.'.pdf'
+        );
+
+        # Asocia los documentos requeridos.
+        $archive->entranceDocuments()->detach($request->requiredDocumentId);
+        $archive->entranceDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+
+        return new JsonResponse(
+            $archive->entranceDocuments()
+            ->select('required_documents.*','archive_required_document.location as location')
+            ->where('id', $request->requiredDocumentId)
+            ->first()
+        );
+    }
 
     /**
      * Actualiza los datos académicos del postulante.
@@ -88,7 +129,7 @@ class ArchiveController extends Controller
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/'.$request->archive_id.'/academicDocuments', 
-            $request->id.'.pdf'
+            $request->requiredDocumentId.'.pdf'
         );
 
         # Asocia los documentos requeridos.

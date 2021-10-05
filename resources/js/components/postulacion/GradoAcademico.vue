@@ -127,17 +127,26 @@
       <div class="row">
         <div class="form-group col-md-6 col-lg-4">
           <label> Promedio obtenido: </label>
-          <input v-model.number="Average" type="number" class="form-control">
+          <input v-if="'average' in errores" v-model.number="Average" type="number" class="form-control is-invalid">
+          <input v-else v-model.number="Average" type="number" class="form-control">
+
+          <div v-if="'average' in errores" class="invalid-feedback">{{errores.average}}</div>
         </div>
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Calificación mínima: </label>
-          <input v-model.number="MinAvg" type="number" class="form-control">
+          <input v-if="'min_avg' in errores" v-model.number="MinAvg" type="number" class="form-control is-invalid">
+          <input v-else v-model.number="MinAvg" type="number" class="form-control">
+
+          <div v-if="'min_avg' in errores" class="invalid-feedback">{{errores.min_avg}}</div>
         </div>
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Calificación máxima: </label>
-          <input v-model.number="MaxAvg" type="number" class="form-control">
+          <input v-if="'max_avg' in errores" v-model.number="MaxAvg" type="number" class="form-control is-invalid">
+          <input v-else v-model.number="MaxAvg" type="number" class="form-control">
+
+          <div v-if="'max_avg' in errores" class="invalid-feedback">{{errores.max_avg}}</div>
         </div>
       </div>
     </div>
@@ -153,7 +162,7 @@
     </documento-requerido>
 
     <div class="col-12 my-3">
-      <button class="btn btn-success"> Agregar </button>
+      <button @click="agregaHistorialAcademico" class="btn btn-success"> Agregar </button>
       <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary"> Guardar </button>
     </div>
   </div>
@@ -202,6 +211,15 @@ export default {
     // Estatus académico.
     status: String,
 
+    // Estado de los datos del grado académico.
+    state: { 
+      type: String,
+      
+      validator(value){
+        return ['Incompleto','Completo'].indexOf(value) !== -1;
+      }
+    },
+
     // Promedio obtenido.
     average: Number,
 
@@ -221,6 +239,7 @@ export default {
   data: function () {
     return {
       fechaobtencion: '',
+      errores: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
@@ -300,6 +319,15 @@ export default {
       }
     },
 
+    State: {
+      get(){
+        return this.state;
+      },
+      set(newVal){
+        this.$emit('update:state',newVal);
+      }
+    },
+
     RequiredDocuments: {
       get(){
         return this.required_documents;
@@ -323,6 +351,15 @@ export default {
         return this.average;
       },
       set(newVal){
+
+        delete this.errores['average'];
+
+        if (isNaN(newVal) || newVal.length === 0){
+          this.errores['average'] = 'La calificación mínima solo puede ser numérica';
+          this.$emit('update:average', 0);
+          return;
+        }
+
         this.$emit('update:average',newVal);
       }
     },
@@ -332,6 +369,15 @@ export default {
         return this.min_avg;
       },
       set(newVal){
+
+        delete this.errores['min_avg'];
+
+        if (isNaN(newVal) || newVal.length === 0){
+          this.errores['min_avg'] = 'La calificación mínima solo puede ser numérica';
+          this.$emit('update:min_avg', 0);
+          return;
+        }
+
         this.$emit('update:min_avg',newVal);
       }
     },
@@ -341,6 +387,15 @@ export default {
         return this.max_avg;
       },
       set(newVal){
+
+        delete this.errores['max_avg'];
+
+        if (isNaN(newVal) || newVal.length === 0){
+          this.errores['max_avg'] = 'La calificación máxima solo puede ser numérica';
+          this.$emit('update:max_avg', 0);
+          return;
+        }
+
         this.$emit('update:max_avg',newVal);
       }
     },
@@ -351,7 +406,15 @@ export default {
         this.paises[evento.target.selectedIndex - 1].universities;
     },
 
+    agregaHistorialAcademico(evento) {
+      this.enviaHistorialAcademico(evento, 'Completo');
+    },
+
     actualizaHistorialAcademico(evento){
+      this.enviaHistorialAcademico(evento, 'Incompleto');
+    },
+
+    enviaHistorialAcademico(evento, state){
       axios.post('/controlescolar/solicitud/updateAcademicDegree', {
         
         id: this.id,
@@ -363,6 +426,7 @@ export default {
         country: this.country,
         university: this.university,
         status: this.status,
+        state: state,
         average: this.average,
         min_avg: this.min_avg,
         max_avg: this.max_avg,
@@ -371,20 +435,29 @@ export default {
       }).then(response => {
         this.id = response.data.id;
         this.archive_id = response.data.archive_id;
-        this.degree = response.data.degree;
-        this.degree_type = response.data.degree_type;
-        this.cvu = response.data.cvu;
-        this.cedula = response.data.cedula;
-        this.country = response.data.country;
-        this.university = response.data.university;
-        this.status = response.data.status;
-        this.average = response.data.average;
-        this.min_avg = response.data.min_avg;
-        this.max_avg = response.data.max_avg;
-        this.knowledge_card = response.data.knowledge_card;
+        this.Degree = response.data.degree;
+        this.DegreeType = response.data.degree_type;
+        this.CVU = response.data.cvu;
+        this.Cedula = response.data.cedula;
+        this.Country = response.data.country;
+        this.University = response.data.university;
+        this.Status = response.data.status;
+        this.State = response.data.state;
+        this.Average = response.data.average;
+        this.MinAvg = response.data.min_avg;
+        this.MaxAvg = response.data.max_avg;
+        this.KnowledgeCard = response.data.knowledge_card;
 
       }).catch(error => {
+        this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
 
+        console.log(errores);
+        /*
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };*/
       });
     },
 
@@ -396,7 +469,7 @@ export default {
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateAcademicDegreeRequiredDocument',
         data: formData,
         headers: {
           'Accept' : 'application/json',
@@ -407,7 +480,6 @@ export default {
         requiredDocument.Location = response.data.location;        
         
       }).catch(error => {
-        console.log(error);
         var errores = error.response.data['errors'];
         requiredDocument.Errores = { 
           file: 'file' in errores ? errores.file[0] : null,

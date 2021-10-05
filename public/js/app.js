@@ -3145,6 +3145,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3176,6 +3185,13 @@ __webpack_require__.r(__webpack_exports__);
     cvu: Number,
     // Estatus académico.
     status: String,
+    // Estado de los datos del grado académico.
+    state: {
+      type: String,
+      validator: function validator(value) {
+        return ['Incompleto', 'Completo'].indexOf(value) !== -1;
+      }
+    },
     // Promedio obtenido.
     average: Number,
     // Promedio obtenido.
@@ -3190,6 +3206,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fechaobtencion: '',
+      errores: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
@@ -3260,6 +3277,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:status', newVal);
       }
     },
+    State: {
+      get: function get() {
+        return this.state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:state', newVal);
+      }
+    },
     RequiredDocuments: {
       get: function get() {
         return this.required_documents;
@@ -3281,6 +3306,14 @@ __webpack_require__.r(__webpack_exports__);
         return this.average;
       },
       set: function set(newVal) {
+        delete this.errores['average'];
+
+        if (isNaN(newVal) || newVal.length === 0) {
+          this.errores['average'] = 'La calificación mínima solo puede ser numérica';
+          this.$emit('update:average', 0);
+          return;
+        }
+
         this.$emit('update:average', newVal);
       }
     },
@@ -3289,6 +3322,14 @@ __webpack_require__.r(__webpack_exports__);
         return this.min_avg;
       },
       set: function set(newVal) {
+        delete this.errores['min_avg'];
+
+        if (isNaN(newVal) || newVal.length === 0) {
+          this.errores['min_avg'] = 'La calificación mínima solo puede ser numérica';
+          this.$emit('update:min_avg', 0);
+          return;
+        }
+
         this.$emit('update:min_avg', newVal);
       }
     },
@@ -3297,6 +3338,14 @@ __webpack_require__.r(__webpack_exports__);
         return this.max_avg;
       },
       set: function set(newVal) {
+        delete this.errores['max_avg'];
+
+        if (isNaN(newVal) || newVal.length === 0) {
+          this.errores['max_avg'] = 'La calificación máxima solo puede ser numérica';
+          this.$emit('update:max_avg', 0);
+          return;
+        }
+
         this.$emit('update:max_avg', newVal);
       }
     }
@@ -3305,7 +3354,13 @@ __webpack_require__.r(__webpack_exports__);
     escogePais: function escogePais(evento) {
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
     },
+    agregaHistorialAcademico: function agregaHistorialAcademico(evento) {
+      this.enviaHistorialAcademico(evento, 'Completo');
+    },
     actualizaHistorialAcademico: function actualizaHistorialAcademico(evento) {
+      this.enviaHistorialAcademico(evento, 'Incompleto');
+    },
+    enviaHistorialAcademico: function enviaHistorialAcademico(evento, state) {
       var _this = this;
 
       axios.post('/controlescolar/solicitud/updateAcademicDegree', {
@@ -3318,6 +3373,7 @@ __webpack_require__.r(__webpack_exports__);
         country: this.country,
         university: this.university,
         status: this.status,
+        state: state,
         average: this.average,
         min_avg: this.min_avg,
         max_avg: this.max_avg,
@@ -3325,18 +3381,28 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.id = response.data.id;
         _this.archive_id = response.data.archive_id;
-        _this.degree = response.data.degree;
-        _this.degree_type = response.data.degree_type;
-        _this.cvu = response.data.cvu;
-        _this.cedula = response.data.cedula;
-        _this.country = response.data.country;
-        _this.university = response.data.university;
-        _this.status = response.data.status;
-        _this.average = response.data.average;
-        _this.min_avg = response.data.min_avg;
-        _this.max_avg = response.data.max_avg;
-        _this.knowledge_card = response.data.knowledge_card;
-      })["catch"](function (error) {});
+        _this.Degree = response.data.degree;
+        _this.DegreeType = response.data.degree_type;
+        _this.CVU = response.data.cvu;
+        _this.Cedula = response.data.cedula;
+        _this.Country = response.data.country;
+        _this.University = response.data.university;
+        _this.Status = response.data.status;
+        _this.State = response.data.state;
+        _this.Average = response.data.average;
+        _this.MinAvg = response.data.min_avg;
+        _this.MaxAvg = response.data.max_avg;
+        _this.KnowledgeCard = response.data.knowledge_card;
+      })["catch"](function (error) {
+        _this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+        console.log(errores);
+        /*
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };*/
+      });
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
@@ -3344,7 +3410,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('file', file);
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateAcademicDegreeRequiredDocument',
         data: formData,
         headers: {
           'Accept': 'application/json',
@@ -3354,7 +3420,6 @@ __webpack_require__.r(__webpack_exports__);
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
         requiredDocument.Location = response.data.location;
       })["catch"](function (error) {
-        console.log(error);
         var errores = error.response.data['errors'];
         requiredDocument.Errores = {
           file: 'file' in errores ? errores.file[0] : null,
@@ -3697,6 +3762,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    archive_id: Number,
     postulante: Object,
     documentos: Array
   },
@@ -3717,11 +3783,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateArchivePersonalDocument',
         data: formData,
         headers: {
           'Accept': 'application/json',
@@ -3731,7 +3798,6 @@ __webpack_require__.r(__webpack_exports__);
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
         requiredDocument.Location = response.data.location;
       })["catch"](function (error) {
-        console.log(error);
         var errores = error.response.data['errors'];
         requiredDocument.Errores = {
           file: 'file' in errores ? errores.file[0] : null,
@@ -3850,6 +3916,106 @@ __webpack_require__.r(__webpack_exports__);
       año: '',
       institucion: ''
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    archive_id: Number,
+    motivation: String,
+    documentos: Array
+  },
+  components: {
+    DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  name: "requisitos-ingreso",
+  computed: {
+    Motivation: {
+      get: function get() {
+        return this.motivation;
+      },
+      set: function set(newVal) {
+        this.$emit('update:motivation', newVal);
+      }
+    },
+    Documentos: {
+      get: function get() {
+        return this.documentos;
+      },
+      set: function set(newVal) {
+        this.$emit('update:documentos', newVal);
+      }
+    }
+  },
+  methods: {
+    actualizaExposicionMotivos: function actualizaExposicionMotivos(evento) {
+      axios.post('/controlescolar/solicitud/updateMotivation', {
+        archive_id: this.archive_id,
+        motivation: this.motivation
+      }).then(function (response) {})["catch"](function (error) {});
+    },
+    cargaDocumento: function cargaDocumento(requiredDocument, file) {
+      var formData = new FormData();
+      formData.append('archive_id', this.archive_id);
+      formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append('file', file);
+      axios({
+        method: 'post',
+        url: '/controlescolar/solicitud/updateArchiveEntranceDocument',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.Location = response.data.location;
+      })["catch"](function (error) {
+        var errores = error.response.data['errors'];
+        requiredDocument.Errores = {
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+        };
+      });
+    }
   }
 });
 
@@ -4657,6 +4823,7 @@ Vue.component('datos-personales', __webpack_require__(/*! ./components/pre-regis
 
 Vue.component('solicitud-postulante', __webpack_require__(/*! ./components/postulacion/SolicitudPostulante.vue */ "./resources/js/components/postulacion/SolicitudPostulante.vue").default);
 Vue.component('postulante', __webpack_require__(/*! ./components/postulacion/Postulante.vue */ "./resources/js/components/postulacion/Postulante.vue").default);
+Vue.component('requisitos-ingreso', __webpack_require__(/*! ./components/postulacion/RequisitosIngreso.vue */ "./resources/js/components/postulacion/RequisitosIngreso.vue").default);
 Vue.component('grado-academico', __webpack_require__(/*! ./components/postulacion/GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue").default);
 Vue.component('experiencia-laboral', __webpack_require__(/*! ./components/postulacion/ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue").default);
 Vue.component('produccion-cientifica', __webpack_require__(/*! ./components/postulacion/ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue").default);
@@ -42379,6 +42546,45 @@ component.options.__file = "resources/js/components/postulacion/ProduccionCienti
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/postulacion/RequisitosIngreso.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/SolicitudPostulante.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/postulacion/SolicitudPostulante.vue ***!
@@ -43039,6 +43245,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
@@ -43546,6 +43768,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
 
 
 /***/ }),
@@ -46759,91 +46998,187 @@ var render = function() {
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
             _c("label", [_vm._v(" Promedio obtenido: ")]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model.number",
-                  value: _vm.Average,
-                  expression: "Average",
-                  modifiers: { number: true }
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.Average },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            "average" in _vm.errores
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.Average,
+                      expression: "Average",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control is-invalid",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.Average },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.Average = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
                   }
-                  _vm.Average = _vm._n($event.target.value)
-                },
-                blur: function($event) {
-                  return _vm.$forceUpdate()
-                }
-              }
-            })
+                })
+              : _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.Average,
+                      expression: "Average",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.Average },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.Average = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+            _vm._v(" "),
+            "average" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.average))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
             _c("label", [_vm._v(" Calificación mínima: ")]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model.number",
-                  value: _vm.MinAvg,
-                  expression: "MinAvg",
-                  modifiers: { number: true }
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.MinAvg },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            "min_avg" in _vm.errores
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.MinAvg,
+                      expression: "MinAvg",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control is-invalid",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.MinAvg },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.MinAvg = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
                   }
-                  _vm.MinAvg = _vm._n($event.target.value)
-                },
-                blur: function($event) {
-                  return _vm.$forceUpdate()
-                }
-              }
-            })
+                })
+              : _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.MinAvg,
+                      expression: "MinAvg",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.MinAvg },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.MinAvg = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+            _vm._v(" "),
+            "min_avg" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.min_avg))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
             _c("label", [_vm._v(" Calificación máxima: ")]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model.number",
-                  value: _vm.MaxAvg,
-                  expression: "MaxAvg",
-                  modifiers: { number: true }
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.MaxAvg },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            "max_avg" in _vm.errores
+              ? _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.MaxAvg,
+                      expression: "MaxAvg",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control is-invalid",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.MaxAvg },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.MaxAvg = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
                   }
-                  _vm.MaxAvg = _vm._n($event.target.value)
-                },
-                blur: function($event) {
-                  return _vm.$forceUpdate()
-                }
-              }
-            })
+                })
+              : _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.number",
+                      value: _vm.MaxAvg,
+                      expression: "MaxAvg",
+                      modifiers: { number: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.MaxAvg },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.MaxAvg = _vm._n($event.target.value)
+                    },
+                    blur: function($event) {
+                      return _vm.$forceUpdate()
+                    }
+                  }
+                }),
+            _vm._v(" "),
+            "max_avg" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.max_avg))
+                ])
+              : _vm._e()
           ])
         ])
       ]),
@@ -46880,7 +47215,14 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "col-12 my-3" }, [
-        _c("button", { staticClass: "btn btn-success" }, [_vm._v(" Agregar ")]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            on: { click: _vm.agregaHistorialAcademico }
+          },
+          [_vm._v(" Agregar ")]
+        ),
         _vm._v(" "),
         _c(
           "button",
@@ -47823,7 +48165,7 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                location: documento.location,
+                location: documento.pivot.location,
                 errores: documento.errores
               },
               on: {
@@ -47831,7 +48173,7 @@ var render = function() {
                   return _vm.$set(documento, "archivo", $event)
                 },
                 "update:location": function($event) {
-                  return _vm.$set(documento, "location", $event)
+                  return _vm.$set(documento.pivot, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
@@ -48271,6 +48613,110 @@ var render = function() {
           : _vm._e()
       ],
       1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-12" }, [
+    _c(
+      "div",
+      { staticClass: "form-row my-4" },
+      [
+        _c("div", { staticClass: "col-12" }, [
+          _c("label", [
+            _vm._v(
+              " Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz "
+            )
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Motivation,
+                expression: "Motivation"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { rows: "8" },
+            domProps: { value: _vm.Motivation },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Motivation = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 my-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              on: { click: _vm.actualizaExposicionMotivos }
+            },
+            [_vm._v(" Guardar exposición de motivos ")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.Documentos, function(documento) {
+          return _c(
+            "documento-requerido",
+            _vm._b(
+              {
+                key: documento.name,
+                attrs: {
+                  archivo: documento.archivo,
+                  location: documento.pivot.location,
+                  errores: documento.errores
+                },
+                on: {
+                  "update:archivo": function($event) {
+                    return _vm.$set(documento, "archivo", $event)
+                  },
+                  "update:location": function($event) {
+                    return _vm.$set(documento.pivot, "location", $event)
+                  },
+                  "update:errores": function($event) {
+                    return _vm.$set(documento, "errores", $event)
+                  },
+                  enviaDocumento: _vm.cargaDocumento
+                }
+              },
+              "documento-requerido",
+              documento,
+              false
+            )
+          )
+        })
+      ],
+      2
     )
   ])
 }

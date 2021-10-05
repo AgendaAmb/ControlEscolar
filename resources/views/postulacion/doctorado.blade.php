@@ -1,5 +1,5 @@
 <script> 
-const archive = @json($archive); 
+const appliantArchive = @json($archive); 
 const academic_program = @json($academic_program);
 </script>
 
@@ -15,6 +15,7 @@ const academic_program = @json($academic_program);
     <solicitud-postulante>
         <template v-slot:postulante>
             <postulante :postulante="postulante"
+                :archive_id="archive.id"
                 :documentos="archive.personal_documents"
                 :documentos.sync="archive.personal_documents">
             </postulante>
@@ -25,6 +26,7 @@ const academic_program = @json($academic_program);
             <grado-academico v-for="grado in archive.academic_degrees"
                 v-bind="grado"
                 v-bind:key="grado.id"
+                :state.sync="grado.state"
                 :cvu.sync="grado.cvu"
                 :knowledge_card.sync="grado.knowledge_card"
                 :cedula.sync="grado.cedula"
@@ -40,8 +42,16 @@ const academic_program = @json($academic_program);
                 :paises="Countries"> 
             </grado-academico>
         </template>
- <!--
-        <template v-slot:requisitosingreso>
+
+        <template v-slot:requisitosingreso> 
+            <requisitos-ingreso
+                :archive_id="archive.id"
+                :motivation.sync="archive.motivation"
+                :documentos.sync="archive.entrance_documents"
+            >
+            </requisitos-ingreso>
+            
+            <!--
             <div class="col-12">
                 <label> Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz </label>
                 <textarea class="form-control" rows="8"></textarea>
@@ -53,8 +63,8 @@ const academic_program = @json($academic_program);
                 :errores.sync = "documento.errores"
                 v-bind="documento"
                 :documento="documento">
-            </documento-requerido>
-        </template>-->
+            </documento-requerido>-->
+        </template>
 
         
         <template v-slot:experiencialaboral>
@@ -89,7 +99,7 @@ const academic_program = @json($academic_program);
 const app = new Vue({
     el: '#app',
     data: {
-        archive: archive,
+        archive: appliantArchive,
         Countries: [],
         CountryUniversities:[],
         EnglishExams: [],
