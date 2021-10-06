@@ -2941,6 +2941,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2961,6 +2977,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     InputSolicitud: _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  data: function data() {
+    return {
+      errores: {}
+    };
   },
   computed: (_computed = {
     State: {
@@ -3052,6 +3073,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     enviaExperienciaLaboral: function enviaExperienciaLaboral(evento, estado) {
       var _this = this;
 
+      this.errores = {};
       axios.post('/controlescolar/solicitud/updateWorkingExperience', {
         id: this.id,
         archive_id: this.archive_id,
@@ -3076,8 +3098,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
-        console.log(errores);
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
       });
+    },
+    estaEnError: function estaEnError(key) {
+      return key in this.errores;
+    },
+    classObjectFor: function classObjectFor(key) {
+      return {
+        'form-control': true,
+        'is-invalid': this.estaEnError(key)
+      };
     }
   }
 });
@@ -3097,6 +3130,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
 /* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3320,6 +3363,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fechaobtencion: '',
       errores: {},
+      datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
@@ -3476,6 +3520,7 @@ __webpack_require__.r(__webpack_exports__);
     enviaHistorialAcademico: function enviaHistorialAcademico(evento, state) {
       var _this = this;
 
+      this.errores = {};
       axios.post('/controlescolar/solicitud/updateAcademicDegree', {
         id: this.id,
         archive_id: this.archive_id,
@@ -3492,29 +3537,19 @@ __webpack_require__.r(__webpack_exports__);
         max_avg: this.max_avg,
         knowledge_card: this.knowledge_card
       }).then(function (response) {
-        _this.id = response.data.id;
-        _this.archive_id = response.data.archive_id;
-        _this.Degree = response.data.degree;
-        _this.DegreeType = response.data.degree_type;
-        _this.CVU = response.data.cvu;
-        _this.Cedula = response.data.cedula;
-        _this.Country = response.data.country;
-        _this.University = response.data.university;
-        _this.Status = response.data.status;
-        _this.State = response.data.state;
-        _this.Average = response.data.average;
-        _this.MinAvg = response.data.min_avg;
-        _this.MaxAvg = response.data.max_avg;
-        _this.KnowledgeCard = response.data.knowledge_card;
+        Object.keys(response.data).forEach(function (dataKey) {
+          var event = 'update:' + dataKey;
+
+          _this.$emit(event, response.data[dataKey]);
+
+          Vue.set(_this.datosValidos, key, 'Campo guardado exitosamente.');
+        });
       })["catch"](function (error) {
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
-        console.log(errores);
-        /*
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };*/
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
       });
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
@@ -3541,6 +3576,14 @@ __webpack_require__.r(__webpack_exports__);
           id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
         };
       });
+    },
+    estaEnError: function estaEnError(key) {
+      return key in this.errores;
+    },
+    objectForError: function objectForError(key) {
+      return {
+        'is-invalid': this.estaEnError(key)
+      };
     }
   }
 });
@@ -3605,6 +3648,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
 /* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3984,17 +4048,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
-        Vue.set(_this.errores, 'valid_from', errores.valid_from[0]);
-        Vue.set(_this.errores, 'valid_to', errores.valid_to[0]);
-        Vue.set(_this.errores, 'language_domain', errores.language_domain[0]);
-        Vue.set(_this.errores, 'conversational_level', errores.conversational_level[0]);
-        Vue.set(_this.errores, 'reading_level', errores.reading_level[0]);
-        Vue.set(_this.errores, 'writing_level', errores.writing_level[0]);
-        /*
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };*/
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
       });
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
@@ -4322,6 +4378,11 @@ __webpack_require__.r(__webpack_exports__);
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   name: "requisitos-ingreso",
+  data: function data() {
+    return {
+      errores: {}
+    };
+  },
   computed: {
     Motivation: {
       get: function get() {
@@ -4349,7 +4410,12 @@ __webpack_require__.r(__webpack_exports__);
         motivation: this.motivation
       }).then(function (response) {
         _this.Motivation = response.data.motivation;
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        var errores = error.response.data['errors'];
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
+      });
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
@@ -46598,7 +46664,7 @@ var render = function() {
             expression: "Institution"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.classObjectFor("institution"),
         attrs: { type: "text" },
         domProps: { value: _vm.Institution },
         on: {
@@ -46609,7 +46675,13 @@ var render = function() {
             _vm.Institution = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.estaEnError("institution")
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.institution))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group col-md-6" }, [
@@ -46626,7 +46698,7 @@ var render = function() {
               expression: "WorkingPosition"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.classObjectFor("working_position"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -46658,7 +46730,13 @@ var render = function() {
           _vm._v(" "),
           _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.estaEnError("working_position")
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.working_position))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _vm._m(0),
@@ -46677,7 +46755,7 @@ var render = function() {
                 expression: "From"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.classObjectFor("from"),
             attrs: { type: "date" },
             domProps: { value: _vm.From },
             on: {
@@ -46688,7 +46766,13 @@ var render = function() {
                 _vm.From = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.estaEnError("from")
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.from))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-6" }, [
@@ -46703,7 +46787,7 @@ var render = function() {
                 expression: "To"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.classObjectFor("to"),
             attrs: { type: "date" },
             domProps: { value: _vm.To },
             on: {
@@ -46714,7 +46798,13 @@ var render = function() {
                 _vm.To = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.estaEnError("to")
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.to))
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -46731,7 +46821,7 @@ var render = function() {
                 expression: "KnowledgeArea"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.classObjectFor("knowledge_area"),
             attrs: { type: "text" },
             domProps: { value: _vm.KnowledgeArea },
             on: {
@@ -46742,7 +46832,13 @@ var render = function() {
                 _vm.KnowledgeArea = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.estaEnError("knowledge_area")
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.knowledge_area))
+              ])
+            : _vm._e()
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-6" }, [
@@ -46757,7 +46853,7 @@ var render = function() {
                 expression: "Field"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.classObjectFor("field"),
             attrs: { type: "text" },
             domProps: { value: _vm.Field },
             on: {
@@ -46768,7 +46864,13 @@ var render = function() {
                 _vm.Field = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _vm.estaEnError("field")
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.field))
+              ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -46785,7 +46887,7 @@ var render = function() {
             expression: "WorkingPositionDescription"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.classObjectFor("working_position_description"),
         attrs: { rows: "5" },
         domProps: { value: _vm.WorkingPositionDescription },
         on: {
@@ -46796,7 +46898,13 @@ var render = function() {
             _vm.WorkingPositionDescription = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.estaEnError("working_position_description")
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.working_position_description))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
@@ -46811,7 +46919,7 @@ var render = function() {
             expression: "Achievements"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.classObjectFor("achievements"),
         attrs: { rows: "5" },
         domProps: { value: _vm.Achievements },
         on: {
@@ -46822,7 +46930,13 @@ var render = function() {
             _vm.Achievements = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.estaEnError("achievements")
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.achievements))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 my-3" }, [
@@ -46911,6 +47025,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: _vm.objectForError("degree_type"),
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -46945,7 +47060,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _vm.estaEnError("degree_type")
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.degree_type))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
@@ -46961,6 +47082,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: _vm.objectForError("degree"),
               attrs: { type: "text" },
               domProps: { value: _vm.Degree },
               on: {
@@ -46971,7 +47093,13 @@ var render = function() {
                   _vm.Degree = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.estaEnError("degree")
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.degree_type))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "d-none d-lg-block form-group col-lg-4" }, [
@@ -46989,6 +47117,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: _vm.objectForError("status"),
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -47028,7 +47157,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _vm.estaEnError("status")
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.status))
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -47048,6 +47183,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: _vm.objectForError("country"),
                 on: {
                   change: [
                     function($event) {
@@ -47090,7 +47226,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _vm.estaEnError("country")
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.country))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-lg-6" }, [
@@ -47108,6 +47250,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: _vm.objectForError("university"),
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -47147,7 +47290,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _vm.estaEnError("university")
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.university))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "d-block d-lg-none form-group col-md-6" }, [
@@ -47858,6 +48007,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": "language" in _vm.errores },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -47888,7 +48038,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            "language" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.language))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-11" }, [
@@ -47904,6 +48060,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "institution" in _vm.errores },
               attrs: { type: "text" },
               domProps: { value: _vm.Institution },
               on: {
@@ -47914,7 +48071,13 @@ var render = function() {
                   _vm.Institution = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "institution" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.institution))
+                ])
+              : _vm._e()
           ])
         ])
       ]),
@@ -47936,6 +48099,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": "language" in _vm.errores },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -47966,7 +48130,13 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            "language" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.language))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
@@ -47982,6 +48152,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "institution" in _vm.errores },
               attrs: { type: "text" },
               domProps: { value: _vm.Institution },
               on: {
@@ -47992,7 +48163,13 @@ var render = function() {
                   _vm.Institution = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "institution" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.institution))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm.Language === "Inglés"
@@ -48031,6 +48208,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "score" in _vm.errores },
               attrs: { type: "number" },
               domProps: { value: _vm.Score },
               on: {
@@ -48044,7 +48222,13 @@ var render = function() {
                   return _vm.$forceUpdate()
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "score" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.score))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-6" }, [
@@ -48060,6 +48244,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "presented_at" in _vm.errores },
               attrs: { type: "date" },
               domProps: { value: _vm.PresentedAt },
               on: {
@@ -48070,7 +48255,13 @@ var render = function() {
                   _vm.PresentedAt = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "presented_at" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.presented_at))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
@@ -48132,9 +48323,9 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            "valid_from" in _vm.errores
+            "valid_to" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errores.valid_from))
+                  _vm._v(_vm._s(_vm.errores.valid_to))
                 ])
               : _vm._e()
           ])
@@ -48286,7 +48477,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          class: { "is-invalid": "writing_level" in _vm.errores },
+          class: { "is-invalid": "reading_level" in _vm.errores },
           attrs: { type: "text" },
           domProps: { value: _vm.ReadingLevel },
           on: {
@@ -48299,9 +48490,9 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        "writing_level" in _vm.errores
+        "reading_level" in _vm.errores
           ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(_vm._s(_vm.errores.writing_level))
+              _vm._v(_vm._s(_vm.errores.reading_level))
             ])
           : _vm._e()
       ]),

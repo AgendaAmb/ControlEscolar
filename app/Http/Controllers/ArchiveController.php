@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Http\Requests\UpdateAppliantLanguageRequest;
+use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
@@ -200,5 +201,23 @@ class ArchiveController extends Controller
             ->where('id', $request->requiredDocumentId)
             ->first()
         );
+    }
+
+    /**
+     * Actualiza la lengua extranjera de un postulante.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateSientificProduction(UpdateScientificProductionRequest $request)
+    {
+        
+
+        /*
+        return new JsonResponse(
+            $appliant_language->requiredDocuments()
+            ->select('required_documents.*','appliant_language_required_document.location as location')
+            ->where('id', $request->requiredDocumentId)
+            ->first()
+        );*/
     }
 }

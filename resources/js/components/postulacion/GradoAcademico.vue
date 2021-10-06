@@ -10,27 +10,33 @@
         <div class="form-group col-md-6 col-lg-4">
           <label> Nivel de escolaridad: </label>
 
-          <select v-model="DegreeType" class="form-control">
+          <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
             <option value="" selected>Escoge una opción</option>
             <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
               {{ escolaridad }}
             </option>
           </select>
+
+          <div v-if="estaEnError('degree_type')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
 
         <div class="form-group col-md-6 col-lg-4">
           <label> Título obtenido: </label>
-          <input v-model="Degree" type="text" class="form-control">
+          <input v-model="Degree" type="text" class="form-control" :class="objectForError('degree')">
+
+          <div v-if="estaEnError('degree')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
 
         <div class="d-none d-lg-block form-group col-lg-4">
           <label> Estatus: </label>
-          <select v-model="Status" class="form-control">
+          <select v-model="Status" class="form-control" :class="objectForError('status')">
             <option value="" selected>Escoge una opción</option>
             <option v-for="estatusEstudio in estatusEstudios" :key="estatusEstudio" :value="estatusEstudio">
               {{ estatusEstudio }}
             </option>
           </select>
+
+          <div v-if="estaEnError('status')" class="invalid-feedback">{{ errores.status }}</div>
         </div>
       </div>
 
@@ -40,22 +46,26 @@
       <div class="row">
         <div class="form-group col-lg-6">
           <label> País donde realizaste tus estudios: </label>
-          <select v-model="Country" class="form-control" @change="escogePais">
+          <select v-model="Country" class="form-control" @change="escogePais" :class="objectForError('country')">
             <option value="" selected>Escoge una opción</option>
             <option v-for="PaisEstudio in paises" :key="PaisEstudio.id" :value="PaisEstudio.name">
               {{ PaisEstudio.name }}
             </option>
           </select>
+
+          <div v-if="estaEnError('country')" class="invalid-feedback">{{ errores.country }}</div>
         </div>
 
         <div class="form-group col-lg-6">
           <label> Universidad de estudios: </label>
-          <select v-model="University" class="form-control">
+          <select v-model="University" class="form-control" :class="objectForError('university')">
             <option value="" selected>Escoge una opción</option>
             <option v-for="Universidad in Universidades" :key="Universidad.id" :value="Universidad.name">
               {{ Universidad.name }}
             </option>
           </select>
+
+          <div v-if="estaEnError('university')" class="invalid-feedback">{{ errores.university }}</div>
         </div>
 
         <div class="d-block d-lg-none form-group col-md-6">
@@ -240,6 +250,7 @@ export default {
     return {
       fechaobtencion: '',
       errores: {},
+      datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
@@ -415,6 +426,8 @@ export default {
     },
 
     enviaHistorialAcademico(evento, state){
+      this.errores = {};
+
       axios.post('/controlescolar/solicitud/updateAcademicDegree', {
         
         id: this.id,
@@ -433,31 +446,20 @@ export default {
         knowledge_card: this.knowledge_card,
 
       }).then(response => {
-        this.id = response.data.id;
-        this.archive_id = response.data.archive_id;
-        this.Degree = response.data.degree;
-        this.DegreeType = response.data.degree_type;
-        this.CVU = response.data.cvu;
-        this.Cedula = response.data.cedula;
-        this.Country = response.data.country;
-        this.University = response.data.university;
-        this.Status = response.data.status;
-        this.State = response.data.state;
-        this.Average = response.data.average;
-        this.MinAvg = response.data.min_avg;
-        this.MaxAvg = response.data.max_avg;
-        this.KnowledgeCard = response.data.knowledge_card;
+
+        Object.keys(response.data).forEach(dataKey => {
+          var event = 'update:' + dataKey;
+          this.$emit(event, response.data[dataKey]);
+          Vue.set(this.datosValidos, key, 'Campo guardado exitosamente.');
+        });
 
       }).catch(error => {
         this.State = 'Incompleto';
         var errores = error.response.data['errors'];
 
-        console.log(errores);
-        /*
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };*/
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
       });
     },
 
@@ -489,6 +491,16 @@ export default {
         };
       });
     },
+
+    estaEnError(key){
+      return key in this.errores;
+    },
+
+    objectForError(key){
+      return {
+        'is-invalid': this.estaEnError(key)
+      };
+    }
   },
 };
 </script>

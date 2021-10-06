@@ -33,6 +33,11 @@ export default {
   components: { DocumentoRequerido },
   name: "requisitos-ingreso",
 
+  data(){
+    return {
+      errores: {}
+    }
+  },
   computed: {
     Motivation: {
       get(){
@@ -62,6 +67,11 @@ export default {
       }).then(response => {
         this.Motivation = response.data.motivation;
       }).catch(error => {
+        var errores = error.response.data['errors'];
+
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
       });
     },
 

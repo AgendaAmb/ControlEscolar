@@ -108,7 +108,10 @@ class Archive extends Model
      */
     public function scientificProductions(): HasMany
     {
-        return $this->hasMany(ScientificProduction::class);
+        return $this->hasMany(ScientificProduction::class)
+            ->leftJoin('articles', 'scientific_productions.id', 'articles.scientific_production_id')
+            ->leftJoin('published_chapters', 'scientific_productions.id', 'published_chapters.scientific_production_id')
+            ->leftJoin('technical_reports', 'scientific_productions.id', 'technical_reports.scientific_production_id');
     }
 
 

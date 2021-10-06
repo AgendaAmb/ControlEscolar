@@ -24,15 +24,21 @@
       <div class="row justify-content-end">
         <div class="form-group col-11">
           <label> Idioma: </label>
-          <select v-model="Language" class="form-control">
+          <select v-model="Language" class="form-control" :class="{'is-invalid': 'language' in errores}">
             <option value="" selected>Escoge una opción</option>
             <option v-for="idioma in idiomas" :key="idioma" :value="idioma"> {{ idioma }} </option>
           </select>
+
+          <div v-if="'language' in errores" class="invalid-feedback">{{errores.language}}</div>
         </div>
 
         <div class="form-group col-11">
           <label> Institución que otorgó el certificado: </label>
-          <input v-model="Institution" type="text" class="form-control">
+          <input v-model="Institution" type="text" 
+            class="form-control" 
+            :class="{ 'is-invalid': ('institution' in errores) }">
+
+          <div v-if="'institution' in errores" class="invalid-feedback">{{errores.institution}}</div>
         </div>
       </div>
     </div>
@@ -44,15 +50,21 @@
       <div class="row justify-content-end">
         <div class="form-group col-lg-6 d-none d-md-block">
           <label> Idioma: </label>
-          <select v-model="Language" class="form-control">
+          <select v-model="Language" class="form-control" :class="{'is-invalid': 'language' in errores}">
             <option value="" selected>Escoge una opción</option>
             <option v-for="idioma in idiomas" :key="idioma" :value="idioma"> {{ idioma }} </option>
           </select>
+
+          <div v-if="'language' in errores" class="invalid-feedback">{{errores.language}}</div>
         </div>
 
         <div class="form-group col-lg-6 d-none d-md-block">
           <label> Institución que otorgó el certificado: </label>
-          <input v-model="Institution" type="text" class="form-control">
+          <input v-model="Institution" type="text" 
+            class="form-control" 
+            :class="{ 'is-invalid': ('institution' in errores) }">
+
+            <div v-if="'institution' in errores" class="invalid-feedback">{{errores.institution}}</div>
         </div>
 
         <div v-if="Language === 'Inglés'" class="form-group col-md-6">
@@ -67,12 +79,21 @@
 
         <div class="form-group col-md-6">
           <label> Puntaje obtenido: </label>
-          <input v-model.number="Score" type="number" class="form-control">
+          <input v-model.number="Score" type="number" 
+            class="form-control" 
+            :class="{ 'is-invalid': ('score' in errores) }">
+
+            <div v-if="'score' in errores" class="invalid-feedback">{{errores.score}}</div>
         </div>
 
         <div class="form-group col-md-6">
           <label> Fecha de aplicación:  </label>
-          <input v-model="PresentedAt" type="date" class="form-control">
+          <input v-model="PresentedAt" 
+            type="date" 
+            class="form-control" 
+            :class="{ 'is-invalid': ('presented_at' in errores) }">
+
+          <div v-if="'presented_at' in errores" class="invalid-feedback">{{errores.presented_at}}</div>
         </div>
 
         <div class="form-group d-none d-lg-block col-lg-6">
@@ -89,8 +110,8 @@
           <input v-model="ValidTo" 
             type="date" 
             class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }">
-            
-          <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
+
+          <div v-if="'valid_to' in errores" class="invalid-feedback">{{errores.valid_to}}</div>
         </div>
       </div>
     </div>
@@ -135,9 +156,9 @@
       <label> Nivel de lectura: </label>
       <input v-model="ReadingLevel" 
         type="text" 
-        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }">
+        class="form-control" :class="{ 'is-invalid': ('reading_level' in errores) }">
 
-      <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
+      <div v-if="'reading_level' in errores" class="invalid-feedback">{{errores.reading_level}}</div>
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
@@ -404,17 +425,9 @@ export default {
         this.State = 'Incompleto';
         var errores = error.response.data['errors'];
 
-        Vue.set(this.errores, 'valid_from', errores.valid_from[0]);
-        Vue.set(this.errores, 'valid_to', errores.valid_to[0]);
-        Vue.set(this.errores, 'language_domain', errores.language_domain[0]);
-        Vue.set(this.errores, 'conversational_level',  errores.conversational_level[0]);
-        Vue.set(this.errores, 'reading_level', errores.reading_level[0]);
-        Vue.set(this.errores, 'writing_level', errores.writing_level[0]);
-        /*
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };*/
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
       });
     },
 
