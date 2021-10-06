@@ -20,7 +20,6 @@
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Dominio de idiomas </strong></h2>
       <slot name="dominioidiomas"></slot>
-      <button class="d-block my-3 btn btn-success"> Agregar </button>
       <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
     </div>
 

@@ -77,54 +77,89 @@
 
         <div class="form-group d-none d-lg-block col-lg-6">
           <label> Vigencia desde: </label>
-          <input v-model="ValidFrom" type="date" class="form-control">
+          <input v-model="ValidFrom" 
+            type="date" 
+            class="form-control" :class="{ 'is-invalid': ('valid_from' in errores) }">
+
+          <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
         </div>
 
         <div class="form-group d-none d-lg-block col-lg-6">
           <label> Hasta: </label>
-          <input v-model="ValidTo" type="date" class="form-control">
+          <input v-model="ValidTo" 
+            type="date" 
+            class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }">
+            
+          <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
         </div>
       </div>
     </div>
 
     <div class="form-group d-lg-none col-md-6">
       <label> Vigencia desde: </label>
-      <input v-model="ValidFrom" type="date" class="form-control">
+      <input v-model="ValidFrom" 
+        type="date" 
+        class="form-control" :class="{ 'is-invalid': ('valid_from' in errores) }">
+
+      <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
     </div>
 
     <div class="form-group d-lg-none col-md-6">
       <label> Hasta: </label>
-      <input v-model="ValidTo" type="date" class="form-control">
+      <input v-model="ValidTo" 
+        type="date" 
+        class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }" >
+
+      <div v-if="'valid_to' in errores" class="invalid-feedback">{{errores.valid_to}}</div>
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Grado de dominio: </label>
-      <input v-model="LanguageDomain" type="text" class="form-control">
+      <input v-model="LanguageDomain" 
+        type="text" 
+        class="form-control" :class="{ 'is-invalid': ('language_domain' in errores) }">
+
+      <div v-if="'language_domain' in errores" class="invalid-feedback">{{errores.language_domain}}</div>
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Nivel conversacional: </label>
-      <input v-model="ConversationalLevel" type="text" class="form-control">
+      <input v-model="ConversationalLevel" 
+        type="text" 
+        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }">
+
+      <div v-if="'conversational_level' in errores" class="invalid-feedback">{{errores.conversational_level}}</div>
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Nivel de lectura: </label>
-      <input v-model="ReadingLevel" type="text" class="form-control">
+      <input v-model="ReadingLevel" 
+        type="text" 
+        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }">
+
+      <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Nivel de escritura: </label>
-      <input v-model="WritingLevel" type="text" class="form-control">
+      <input v-model="WritingLevel" 
+        type="text" 
+        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }">
+      <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
     </div>
-
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
       :archivo.sync="documento.archivo" 
-      :location.sync="documento.location" 
+      :location.sync="documento.pivot.location" 
       :errores.sync = "documento.errores"
       @enviaDocumento = "cargaDocumento" 
       v-bind="documento">
     </documento-requerido>
+
+    <div class="col-12 my-3">
+      <button @click="agregaLenguaExtranjera" class="btn btn-success"> Agregar </button>
+      <button @click="actualizaLenguaExtranjera" class="mx-2 btn btn-primary"> Guardar </button>
+    </div>
   </div>
 </template>
 
@@ -157,6 +192,9 @@ export default {
 
     // Id del expediente.
     archive_id: Number,
+
+    // Estado del idioma.
+    state: String,
 
     // Lengua extranjera.
     language: String,
@@ -192,7 +230,42 @@ export default {
     documentos: Array
   },
 
+  data() {
+    return {
+      errores: {},
+      mensajesExito: {},
+      idiomas: [
+        'Español',
+        'Inglés',
+        'Francés',
+        'Alemán',
+        'Otro'
+      ],
+      clases: {
+        state: 'form-control',
+        language: 'form-control',
+        institution: 'form-control',
+        score: 'form-control',
+        presented_at: 'form-control',
+        valid_from: 'form-control',
+        valid_to: 'form-control',
+        language_domain: 'form-control',
+        conversational_level: 'form-control',
+        reading_level: 'form-control',
+        writing_level: 'form-control'
+      }
+    };
+  },
+
   computed: {
+    State: {
+      get(){
+        return this.state;
+      },
+      set(newVal){
+        this.$emit('update:state', newVal);
+      }
+    },
     Language: {
       get(){
         return this.language;
@@ -283,29 +356,79 @@ export default {
       }
     }
   },
-
-  data() {
-    return {
-
-      idiomas: [
-        'Español',
-        'Inglés',
-        'Francés',
-        'Alemán',
-        'Otro'
-      ]
-    };
-  },
   methods:{
+
+    agregaLenguaExtranjera(evento) {
+      this.enviaLenguaExtranjera(evento, 'Completo');
+    },
+
+    actualizaLenguaExtranjera(evento){
+      this.enviaLenguaExtranjera(evento, 'Incompleto');
+    },
+
+    enviaLenguaExtranjera(evento, estado){
+      this.errores = {};
+
+      axios.post('/controlescolar/solicitud/updateAppliantLanguage', {
+        
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        institution: this.institution,
+        score: this.score,
+        presented_at: this.presented_at,
+        valid_from: this.valid_from,
+        valid_to: this.valid_to,
+        language_domain: this.language_domain,
+        conversational_level: this.conversational_level,
+        reading_level: this.reading_level,
+        writing_level: this.writing_level
+
+      }).then(response => {
+        this.id = response.data.id;
+        this.archive_id = response.data.archive_id;
+        this.State = response.data.state;
+        this.Language = response.data.language;
+        this.Institution = response.data.Institution;
+        this.Score = response.data.score;
+        this.PresentedAt = response.data.presented_at;
+        this.ValidFrom = response.data.valid_from;
+        this.ValidTo = response.data.valid_from;
+        this.LanguageDomain = response.data.language_domain;
+        this.ConversationalLevel = response.data.conversational_level;
+        this.ReadingLevel = response.data.reading_level;
+        this.WritingLevel = response.data.writing_level;
+ 
+      }).catch(error => {
+        this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+
+        Vue.set(this.errores, 'valid_from', errores.valid_from[0]);
+        Vue.set(this.errores, 'valid_to', errores.valid_to[0]);
+        Vue.set(this.errores, 'language_domain', errores.language_domain[0]);
+        Vue.set(this.errores, 'conversational_level',  errores.conversational_level[0]);
+        Vue.set(this.errores, 'reading_level', errores.reading_level[0]);
+        Vue.set(this.errores, 'writing_level', errores.writing_level[0]);
+        /*
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };*/
+      });
+    },
+
     cargaDocumento(requiredDocument, file) {
       
       var formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateAppliantLanguageRequiredDocument',
         data: formData,
         headers: {
           'Accept' : 'application/json',

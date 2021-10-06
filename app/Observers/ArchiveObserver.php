@@ -27,7 +27,10 @@ class ArchiveObserver
             ['state'=>'Incompleto']
         ]);
 
-        $archive->appliantLanguages()->createMany([[]]);
+        $archive->appliantLanguages()->createMany([
+            ['state'=>'Incompleto']
+        ]);
+
         $archive->personalDocuments()->attach(RequiredDocument::personalDocumentsId());
         $archive->personalDocuments()->attach(RequiredDocument::entranceDocumentsId());
     }

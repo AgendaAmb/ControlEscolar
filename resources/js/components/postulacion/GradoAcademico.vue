@@ -464,6 +464,8 @@ export default {
     cargaDocumento(requiredDocument, file) {
       
       var formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
 

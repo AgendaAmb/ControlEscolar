@@ -3519,6 +3519,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
       axios({
@@ -3749,6 +3751,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3762,6 +3799,8 @@ __webpack_require__.r(__webpack_exports__);
     id: Number,
     // Id del expediente.
     archive_id: Number,
+    // Estado del idioma.
+    state: String,
     // Lengua extranjera.
     language: String,
     // Institución que otorgó el certificado.
@@ -3785,7 +3824,35 @@ __webpack_require__.r(__webpack_exports__);
     // Documentos probatorios.
     documentos: Array
   },
+  data: function data() {
+    return {
+      errores: {},
+      mensajesExito: {},
+      idiomas: ['Español', 'Inglés', 'Francés', 'Alemán', 'Otro'],
+      clases: {
+        state: 'form-control',
+        language: 'form-control',
+        institution: 'form-control',
+        score: 'form-control',
+        presented_at: 'form-control',
+        valid_from: 'form-control',
+        valid_to: 'form-control',
+        language_domain: 'form-control',
+        conversational_level: 'form-control',
+        reading_level: 'form-control',
+        writing_level: 'form-control'
+      }
+    };
+  },
   computed: {
+    State: {
+      get: function get() {
+        return this.state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:state', newVal);
+      }
+    },
     Language: {
       get: function get() {
         return this.language;
@@ -3875,19 +3942,70 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  data: function data() {
-    return {
-      idiomas: ['Español', 'Inglés', 'Francés', 'Alemán', 'Otro']
-    };
-  },
   methods: {
+    agregaLenguaExtranjera: function agregaLenguaExtranjera(evento) {
+      this.enviaLenguaExtranjera(evento, 'Completo');
+    },
+    actualizaLenguaExtranjera: function actualizaLenguaExtranjera(evento) {
+      this.enviaLenguaExtranjera(evento, 'Incompleto');
+    },
+    enviaLenguaExtranjera: function enviaLenguaExtranjera(evento, estado) {
+      var _this = this;
+
+      this.errores = {};
+      axios.post('/controlescolar/solicitud/updateAppliantLanguage', {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        institution: this.institution,
+        score: this.score,
+        presented_at: this.presented_at,
+        valid_from: this.valid_from,
+        valid_to: this.valid_to,
+        language_domain: this.language_domain,
+        conversational_level: this.conversational_level,
+        reading_level: this.reading_level,
+        writing_level: this.writing_level
+      }).then(function (response) {
+        _this.id = response.data.id;
+        _this.archive_id = response.data.archive_id;
+        _this.State = response.data.state;
+        _this.Language = response.data.language;
+        _this.Institution = response.data.Institution;
+        _this.Score = response.data.score;
+        _this.PresentedAt = response.data.presented_at;
+        _this.ValidFrom = response.data.valid_from;
+        _this.ValidTo = response.data.valid_from;
+        _this.LanguageDomain = response.data.language_domain;
+        _this.ConversationalLevel = response.data.conversational_level;
+        _this.ReadingLevel = response.data.reading_level;
+        _this.WritingLevel = response.data.writing_level;
+      })["catch"](function (error) {
+        _this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+        Vue.set(_this.errores, 'valid_from', errores.valid_from[0]);
+        Vue.set(_this.errores, 'valid_to', errores.valid_to[0]);
+        Vue.set(_this.errores, 'language_domain', errores.language_domain[0]);
+        Vue.set(_this.errores, 'conversational_level', errores.conversational_level[0]);
+        Vue.set(_this.errores, 'reading_level', errores.reading_level[0]);
+        Vue.set(_this.errores, 'writing_level', errores.writing_level[0]);
+        /*
+        requiredDocument.Errores = { 
+          file: 'file' in errores ? errores.file[0] : null,
+          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
+        };*/
+      });
+    },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
+      formData.append('id', this.id);
+      formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/guardaDocumentoPersonal',
+        url: '/controlescolar/solicitud/updateAppliantLanguageRequiredDocument',
         data: formData,
         headers: {
           'Accept': 'application/json',
@@ -4273,7 +4391,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -47969,6 +48086,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "valid_from" in _vm.errores },
               attrs: { type: "date" },
               domProps: { value: _vm.ValidFrom },
               on: {
@@ -47979,7 +48097,13 @@ var render = function() {
                   _vm.ValidFrom = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "valid_from" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.valid_from))
+                ])
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
@@ -47995,6 +48119,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              class: { "is-invalid": "valid_to" in _vm.errores },
               attrs: { type: "date" },
               domProps: { value: _vm.ValidTo },
               on: {
@@ -48005,7 +48130,13 @@ var render = function() {
                   _vm.ValidTo = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "valid_from" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errores.valid_from))
+                ])
+              : _vm._e()
           ])
         ])
       ]),
@@ -48023,6 +48154,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "valid_from" in _vm.errores },
           attrs: { type: "date" },
           domProps: { value: _vm.ValidFrom },
           on: {
@@ -48033,7 +48165,13 @@ var render = function() {
               _vm.ValidFrom = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "valid_from" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.valid_from))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
@@ -48049,6 +48187,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "valid_to" in _vm.errores },
           attrs: { type: "date" },
           domProps: { value: _vm.ValidTo },
           on: {
@@ -48059,7 +48198,13 @@ var render = function() {
               _vm.ValidTo = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "valid_to" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.valid_to))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
@@ -48075,6 +48220,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "language_domain" in _vm.errores },
           attrs: { type: "text" },
           domProps: { value: _vm.LanguageDomain },
           on: {
@@ -48085,7 +48231,13 @@ var render = function() {
               _vm.LanguageDomain = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "language_domain" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.language_domain))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
@@ -48101,6 +48253,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "writing_level" in _vm.errores },
           attrs: { type: "text" },
           domProps: { value: _vm.ConversationalLevel },
           on: {
@@ -48111,7 +48264,13 @@ var render = function() {
               _vm.ConversationalLevel = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "conversational_level" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.conversational_level))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
@@ -48127,6 +48286,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "writing_level" in _vm.errores },
           attrs: { type: "text" },
           domProps: { value: _vm.ReadingLevel },
           on: {
@@ -48137,7 +48297,13 @@ var render = function() {
               _vm.ReadingLevel = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "writing_level" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.writing_level))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
@@ -48153,6 +48319,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
+          class: { "is-invalid": "writing_level" in _vm.errores },
           attrs: { type: "text" },
           domProps: { value: _vm.WritingLevel },
           on: {
@@ -48163,7 +48330,13 @@ var render = function() {
               _vm.WritingLevel = $event.target.value
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        "writing_level" in _vm.errores
+          ? _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(_vm._s(_vm.errores.writing_level))
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _vm._l(_vm.Documentos, function(documento) {
@@ -48174,7 +48347,7 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                location: documento.location,
+                location: documento.pivot.location,
                 errores: documento.errores
               },
               on: {
@@ -48182,7 +48355,7 @@ var render = function() {
                   return _vm.$set(documento, "archivo", $event)
                 },
                 "update:location": function($event) {
-                  return _vm.$set(documento, "location", $event)
+                  return _vm.$set(documento.pivot, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)
@@ -48195,7 +48368,27 @@ var render = function() {
             false
           )
         )
-      })
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 my-3" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            on: { click: _vm.agregaLenguaExtranjera }
+          },
+          [_vm._v(" Agregar ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "mx-2 btn btn-primary",
+            on: { click: _vm.actualizaLenguaExtranjera }
+          },
+          [_vm._v(" Guardar ")]
+        )
+      ])
     ],
     2
   )
@@ -49189,10 +49382,6 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _vm._t("dominioidiomas"),
-          _vm._v(" "),
-          _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
-            _vm._v(" Agregar ")
-          ]),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",

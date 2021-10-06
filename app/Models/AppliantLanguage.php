@@ -23,6 +23,13 @@ class AppliantLanguage extends Model
     ];
     
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var string[]
+     */
+    protected $guarded = [];
+
+    /**
      * Obtiene los documentos requeridos del expediente.
      *
      * @return BelongsToMany

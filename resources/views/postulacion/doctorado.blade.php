@@ -45,7 +45,9 @@ const academic_program = @json($academic_program);
 
         <template v-slot:dominioidiomas>
             <lengua-extranjera v-for="language in archive.appliant_languages"
+                v-bind="language"
                 v-bind:key="language.id"
+                :state.sync="language.state"
                 :language.sync="language.language"
                 :institution.sync="language.institution"
                 :score.sync="language.score"

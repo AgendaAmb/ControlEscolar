@@ -32,30 +32,9 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
     Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
     Route::post('/updateWorkingExperience', [ArchiveController::class, 'updateWorkingExperience']);
-
-
-
+    Route::post('/updateAppliantLanguage', [ArchiveController::class, 'updateAppliantLanguage']);
+    Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*

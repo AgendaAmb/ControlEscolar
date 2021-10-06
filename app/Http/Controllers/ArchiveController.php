@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAcademicDegreeRequest;
+use App\Http\Requests\UpdateAppliantLanguageRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
+use App\Models\AppliantLanguage;
 use App\Models\Archive;
 use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
@@ -128,7 +130,7 @@ class ArchiveController extends Controller
      */
     public function updateAcademicDegreeRequiredDocument(Request $request)
     {
-        $academic_degree = AcademicDegree::find('id', $request->id);
+        $academic_degree = AcademicDegree::find($request->id);
 
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
@@ -140,7 +142,12 @@ class ArchiveController extends Controller
         $academic_degree->requiredDocuments()->detach($request->requiredDocumentId);
         $academic_degree->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
 
-        return new JsonResponse(AcademicDegree::find($request->id));
+        return new JsonResponse(
+            $academic_degree->requiredDocuments()
+            ->select('required_documents.*','academic_degree_required_document.location as location')
+            ->where('id', $request->requiredDocumentId)
+            ->first()
+        );
     }
 
     /**
@@ -156,12 +163,42 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Actualiza un documento requerido, para el grado académico
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateAppliantLanguage(UpdateAppliantLanguageRequest $request)
+    {
+        AppliantLanguage::where('id', $request->id)->update($request->safe()->toArray());
+
+        return new JsonResponse(AppliantLanguage::find($request->id));
+    }
+
+
+    /**
      * Actualiza la lengua extranjera de un postulante.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function updateAppliantLanguageRequiredDocument(Request $request)
     {
-        
+        $appliant_language = AppliantLanguage::find($request->id);
+
+        # Archivo de la solicitud
+        $ruta = $request->file('file')->storeAs(
+            'archives/'.$request->archive_id.'/appliantLanguage/'.$request->id, 
+            $request->requiredDocumentId.'.pdf'
+        );
+
+        # Asocia los documentos requeridos.
+        $appliant_language->requiredDocuments()->detach($request->requiredDocumentId);
+        $appliant_language->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+
+        return new JsonResponse(
+            $appliant_language->requiredDocuments()
+            ->select('required_documents.*','appliant_language_required_document.location as location')
+            ->where('id', $request->requiredDocumentId)
+            ->first()
+        );
     }
 }

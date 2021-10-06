@@ -26,6 +26,9 @@ class CreateAppliantLanguagesTable extends Migration
             $table->string('conversational_level')->nullable();
             $table->string('reading_level')->nullable();
             $table->string('writing_level')->nullable();
+
+            # Estados de control.
+            $table->string('state')->default('Incompleto');
             $table->timestamps();
             $table->softDeletes();
         });
