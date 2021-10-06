@@ -43,43 +43,45 @@ const academic_program = @json($academic_program);
             </grado-academico>
         </template>
 
+        <template v-slot:dominioidiomas>
+            <lengua-extranjera v-for="language in archive.appliant_languages"
+                v-bind:key="language.id"></lengua-extranjera>
+        </template>
+
         <template v-slot:requisitosingreso> 
             <requisitos-ingreso
                 :archive_id="archive.id"
                 :motivation.sync="archive.motivation"
-                :documentos.sync="archive.entrance_documents"
-            >
+                :documentos.sync="archive.entrance_documents">
             </requisitos-ingreso>
-            
-            <!--
-            <div class="col-12">
-                <label> Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz </label>
-                <textarea class="form-control" rows="8"></textarea>
-            </div>
-            <documento-requerido v-for="documento in archive" 
-                :key="documento.name"
-                :archivo.sync="documento.archivo" 
-                :location.sync="documento.location" 
-                :errores.sync = "documento.errores"
-                v-bind="documento"
-                :documento="documento">
-            </documento-requerido>-->
         </template>
 
         
         <template v-slot:experiencialaboral>
-            <experiencia-laboral></experiencia-laboral>
-        </template>
-
-        <!--
-        <template v-slot:dominioidiomas>
-            <lengua-extranjera></lengua-extranjera>
+            <experiencia-laboral v-for="experience in archive.appliant_working_experiences"
+                v-bind="experience"
+                v-bind:key="experience.id"
+                :state.sync="experience.state"
+                :institution.sync="experience.institution"
+                :working_position.sync="experience.working_position"
+                :from.sync="experience.from"
+                :to.sync="experience.to"
+                :knowledge_area.sync="experience.knowledge_area"
+                :field.sync="experience.field"
+                :working_position_description.sync="experience.working_position_description"
+                :achievements.sync="experience.achievements">
+        
+            </experiencia-laboral>
         </template>
 
         <template v-slot:prodcientifica>
             <produccion-cientifica></produccion-cientifica>
         </template>
 
+        
+
+        
+        <!--
         <template v-slot:caphumano>
             <capital-humano></capital-humano>
         </template>-->
@@ -136,72 +138,11 @@ const app = new Vue({
                 
                 this.EnglishExams = response.data;
             });
-
-            this.nuevoGradoAcademico();
         });
     },
     methods: {
-        nuevoGradoAcademico(){
-
-/*
-            var gradoAcademico = {
-                escolaridad: '',
-                titulo: '',
-                estatus: '',
-                cedula: '',
-                fechaobtencion: '',
-                calmin: '',
-                calmax: '',
-                promedio: '',
-                documentos: [],
-            };
-
-            if (this.academicProgram.type === 'maestría'){
-                gradoAcademico.documentos = this.docsLicenciatura;
-            }
-            else if (this.academicProgram.type === 'doctorado'){
-                gradoAcademico.documentos = this.docsMaestria;
-            }
-
-            this.gradosAcademicos.push(gradoAcademico);*/
-        },
-
-        actualizaSolicitud(e) {
+        actualizaSolicitud(){
             return false;
-            /*
-            const formData = new FormData();
-            formData.append('_method', 'post');
-
-            this.postulante.documentos.filter((documento) => {
-                return documento.archivo !== null && documento.archivo !== undefined;
-            }).forEach((documento) => {
-                formData.append('postulante[documentos][' + documento.id + ']', documento.archivo);
-            });
-
-
-            this.gradosAcademicos.forEach((grado) => {
-                Object.keys(grado).forEach((key) => {
-                    formData.append('postulante[grados][][' + key + ']', grado[key]);
-                });
-            });
-            
-
-            axios({
-                method: 'post',
-                url: '/controlescolar/solicitud',
-                data: formData,
-                headers: {
-                    'Accept' : 'application/json',
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-
-                
-            }).catch((err) => {
-
-                this.Errores = err.response.data['errors'];
-                console.log(this.Errores);
-            });*/
         }
     }
 });

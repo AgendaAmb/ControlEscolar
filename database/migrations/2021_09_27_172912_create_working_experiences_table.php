@@ -21,15 +21,22 @@ class CreateWorkingExperiencesTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            # Datos de la empresa.
             $table->string('institution')->nullable();
             $table->string('working_position')->nullable();
+
+            # Fecha de inicio y fin
             $table->date('from')->nullable();
             $table->date('to')->nullable();
             $table->string('knowledge_area')->nullable();
             $table->string('field')->nullable();
-            $table->string('working_position_name')->nullable();
-            $table->string('achievements')->nullable();
 
+            # Descripción del puesto y logros.
+            $table->text('working_position_description')->nullable();
+            $table->text('achievements')->nullable();
+
+            # Estados de control.
+            $table->string('state')->default('Incompleto');
             $table->timestamps();
             $table->softDeletes();
         });

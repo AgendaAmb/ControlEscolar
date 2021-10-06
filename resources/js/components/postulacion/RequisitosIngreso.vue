@@ -60,6 +60,7 @@ export default {
         archive_id:this.archive_id,
         motivation: this.motivation,
       }).then(response => {
+        this.Motivation = response.data.motivation;
       }).catch(error => {
       });
     },

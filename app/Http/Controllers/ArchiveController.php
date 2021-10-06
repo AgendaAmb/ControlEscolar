@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAcademicDegreeRequest;
+use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
 use App\Models\Archive;
+use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request; 
 
@@ -48,7 +50,9 @@ class ArchiveController extends Controller
     {
         Archive::where('id', $request->archive_id)->update(['motivation'=>$request->motivation]);
 
-        return new JsonResponse(AcademicDegree::find($request->archive_id)->motivation);
+        return new JsonResponse(
+            Archive::select('motivation')->firstWhere('id', $request->archive_id)
+        );
     }
 
     /**
@@ -137,5 +141,17 @@ class ArchiveController extends Controller
         $academic_degree->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
 
         return new JsonResponse(AcademicDegree::find($request->id));
+    }
+
+    /**
+     * Actualiza un documento requerido, para el grado académico
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateWorkingExperience(UpdateWorkingExperienceRequest $request)
+    {
+        WorkingExperience::where('id', $request->id)->update($request->safe()->toArray());
+
+        return new JsonResponse(WorkingExperience::find($request->id));
     }
 }

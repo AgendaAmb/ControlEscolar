@@ -2878,7 +2878,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
 /* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _computed;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //
 //
@@ -2918,54 +2920,165 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //
 //
 //
-var PuestoLaboral =
-/**
- * Construye el objeto, que representa el puesto laboral.
- * 
- * @param string tipoPuesto
- * @param string tipoPuesto
- * @param string tipoPuesto
- * @param Date tipoPuesto
- * @param Date fechaFin
- * @param string areaConocimiento
- * @param string campo
- */
-function PuestoLaboral() {
-  var tipoPuesto = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var empresa = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var nombrePuesto = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-  var descripcion = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  var fechaInicio = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Date;
-  var fechaFin = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Date;
-  var areaConocimiento = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
-  var campo = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : '';
-  var logros = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
-
-  _classCallCheck(this, PuestoLaboral);
-
-  this.tipoPuesto = tipoPuesto;
-  this.empresa = empresa;
-  this.nombrePuesto = nombrePuesto;
-  this.descripcion = descripcion;
-  this.fechaInicio = fechaInicio;
-  this.fechaFin = fechaFin;
-  this.areaConocimiento = areaConocimiento;
-  this.campo = campo;
-  this.logros = logros;
-};
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "experiencia-laboral",
+  props: {
+    id: Number,
+    archive_id: Number,
+    state: String,
+    institution: String,
+    working_position: String,
+    from: String,
+    to: String,
+    knowledge_area: String,
+    field: String,
+    working_position_description: String,
+    achievements: String
+  },
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     InputSolicitud: _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  data: function data() {
-    return {
-      puestoLaboral: new PuestoLaboral()
-    };
+  computed: (_computed = {
+    State: {
+      get: function get() {
+        return this.state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:state', newVal);
+      }
+    },
+    Institution: {
+      get: function get() {
+        return this.institution;
+      },
+      set: function set(newVal) {
+        this.$emit('update:institution', newVal);
+      }
+    },
+    WorkingPosition: {
+      get: function get() {
+        return this.working_position;
+      },
+      set: function set(newVal) {
+        this.$emit('update:working_position', newVal);
+      }
+    },
+    From: {
+      get: function get() {
+        return this.from;
+      },
+      set: function set(newVal) {
+        this.$emit('update:from', newVal);
+      }
+    },
+    To: {
+      get: function get() {
+        return this.to;
+      },
+      set: function set(newVal) {
+        this.$emit('update:to', newVal);
+      }
+    },
+    KnowledgeArea: {
+      get: function get() {
+        return this.knowledge_area;
+      },
+      set: function set(newVal) {
+        this.$emit('update:knowledge_area', newVal);
+      }
+    },
+    Field: {
+      get: function get() {
+        return this.field;
+      },
+      set: function set(newVal) {
+        this.$emit('update:field', newVal);
+      }
+    },
+    WorkingPositionDescription: {
+      get: function get() {
+        return this.working_position_description;
+      },
+      set: function set(newVal) {
+        this.$emit('update:working_position_description', newVal);
+      }
+    }
+  }, _defineProperty(_computed, "Field", {
+    get: function get() {
+      return this.field;
+    },
+    set: function set(newVal) {
+      this.$emit('update:field', newVal);
+    }
+  }), _defineProperty(_computed, "Achievements", {
+    get: function get() {
+      return this.achievements;
+    },
+    set: function set(newVal) {
+      this.$emit('update:achievements', newVal);
+    }
+  }), _computed),
+  methods: {
+    agregaExperienciaLaboral: function agregaExperienciaLaboral(evento) {
+      this.enviaExperienciaLaboral(evento, 'Completo');
+    },
+    guardaExperienciaLaboral: function guardaExperienciaLaboral(evento) {
+      this.enviaExperienciaLaboral(evento, 'Incompleto');
+    },
+    enviaExperienciaLaboral: function enviaExperienciaLaboral(evento, estado) {
+      var _this = this;
+
+      axios.post('/controlescolar/solicitud/updateWorkingExperience', {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        institution: this.institution,
+        working_position: this.working_position,
+        from: this.from,
+        to: this.to,
+        knowledge_area: this.knowledge_area,
+        field: this.field,
+        working_position_description: this.working_position_description,
+        achievements: this.achievements
+      }).then(function (response) {
+        _this.State = response.data.state;
+        _this.Institution = response.data.institution;
+        _this.WorkingPosition = response.data.working_position;
+        _this.From = response.data.from;
+        _this.To = response.data.to;
+        _this.KnowledgeArea = response.data.knowledge_area;
+        _this.Field = response.data.field;
+        _this.working_position = response.data.working_position;
+      })["catch"](function (error) {
+        _this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+        console.log(errores);
+      });
+    }
   }
 });
 
@@ -3608,6 +3721,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3617,9 +3751,72 @@ __webpack_require__.r(__webpack_exports__);
     InputSolicitud: _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   props: {
+    // Id.
+    id: Number,
+    // Id del expediente.
+    archive_id: Number,
+    // Lengua extranjera.
+    language: String,
+    // Institución que otorgó el certificado.
+    institution: String,
+    // Fecha de aplicación.
+    presented_at: String,
+    // Vigencia desde.
+    valid_from: String,
+    // Vigencia hasta.
+    valid_to: String,
+    // Dominio del idioma.
+    language_domain: String,
+    // Nivel conversacional.
+    conversational_level: String,
+    // Nivel de lectura.
+    reading_level: String,
+    // Nivel de escritura.
+    writing_level: String,
+    // Documentos probatorios.
     documentos: Array
   },
   computed: {
+    Language: {
+      get: function get() {
+        return this.language;
+      },
+      set: function set(newVal) {
+        this.$emit('update:language', newVal);
+      }
+    },
+    Institution: {
+      get: function get() {
+        return this.institution;
+      },
+      set: function set(newVal) {
+        this.$emit('update:institution', newVal);
+      }
+    },
+    PresentedAt: {
+      get: function get() {
+        return this.presented_at;
+      },
+      set: function set(newVal) {
+        this.$emit('update:presented_at', newVal);
+      }
+    },
+    ValidFrom: {
+      get: function get() {
+        return this.valid_from;
+      },
+      set: function set(newVal) {
+        this.$emit('update:valid_from', newVal);
+      }
+    },
+    ValidTo: {
+      get: function get() {
+        return this.valid_to;
+      },
+      set: function set(newVal) {
+        this.$emit('update:valid_to', newVal);
+      }
+    },
     Documentos: {
       get: function get() {
         return this.documentos;
@@ -3631,15 +3828,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      institucion: '',
-      idioma: '',
-      examenIngles: '',
-      tipoExamenIngles: '',
-      otroIdioma: '',
-      fechaAplicacion: null,
-      vigenciaDesde: null,
-      vigenciaHasta: null,
-      puntuacion: 0,
       idiomas: ['Español', 'Inglés', 'Francés', 'Alemán', 'Otro']
     };
   },
@@ -3987,10 +4175,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     actualizaExposicionMotivos: function actualizaExposicionMotivos(evento) {
+      var _this = this;
+
       axios.post('/controlescolar/solicitud/updateMotivation', {
         archive_id: this.archive_id,
         motivation: this.motivation
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {
+        _this.Motivation = response.data.motivation;
+      })["catch"](function (error) {});
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
@@ -4032,7 +4224,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -46226,210 +46417,268 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _c("h4", { staticClass: "form-group col-12 my-2" }),
+  return _c("div", { staticClass: "row" }, [
+    _c("h4", { staticClass: "form-group col-12 my-2" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v(" Institución / Empresa:  ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Institution,
+            expression: "Institution"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.Institution },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Institution = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-6" }, [
+      _c("label", [_vm._v(" En este puesto me desempeñé como: ")]),
       _vm._v(" "),
       _c(
-        "input-solicitud",
+        "select",
         {
-          attrs: { clase: "form-group col-md-6" },
-          model: {
-            value: _vm.puestoLaboral.empresa,
-            callback: function($$v) {
-              _vm.$set(_vm.puestoLaboral, "empresa", $$v)
-            },
-            expression: "puestoLaboral.empresa"
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.WorkingPosition,
+              expression: "WorkingPosition"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.WorkingPosition = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
           }
         },
-        [_vm._v(" Institución / Empresa: ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-6" }, [
-        _c("label", [_vm._v(" En este puesto me desempeñé como: ")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Escoge una opción")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Catedrático" } }, [
+            _vm._v(" Catedrático ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Investigador" } }, [
+            _vm._v(" Investigador ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 my-4" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Desde: ")]),
+          _vm._v(" "),
+          _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.puestoLaboral.tipoPuesto,
-                expression: "puestoLaboral.tipoPuesto"
+                value: _vm.From,
+                expression: "From"
               }
             ],
             staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.From },
             on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.puestoLaboral,
-                  "tipoPuesto",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.From = $event.target.value
               }
             }
-          },
-          [
-            _c("option", { attrs: { value: "", selected: "" } }, [
-              _vm._v("Escoge una opción")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "Catedrático" } }, [
-              _vm._v(" Catedrático ")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "Investigador" } }, [
-              _vm._v(" Investigador ")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12 my-4" }, [
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c(
-              "input-solicitud",
-              {
-                attrs: { tipo: "date", clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.puestoLaboral.fechaInicio,
-                  callback: function($$v) {
-                    _vm.$set(_vm.puestoLaboral, "fechaInicio", $$v)
-                  },
-                  expression: "puestoLaboral.fechaInicio"
-                }
-              },
-              [_vm._v(" Desde: ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { tipo: "date", clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.puestoLaboral.fechaFin,
-                  callback: function($$v) {
-                    _vm.$set(_vm.puestoLaboral, "fechaFin", $$v)
-                  },
-                  expression: "puestoLaboral.fechaFin"
-                }
-              },
-              [_vm._v(" Hasta: ")]
-            )
-          ],
-          1
-        ),
+          })
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "row" },
-          [
-            _c(
-              "input-solicitud",
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Hasta: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
               {
-                attrs: { clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.puestoLaboral.areaConocimiento,
-                  callback: function($$v) {
-                    _vm.$set(_vm.puestoLaboral, "areaConocimiento", $$v)
-                  },
-                  expression: "puestoLaboral.areaConocimiento"
-                }
-              },
-              [_vm._v(" Área de conocimiento: ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.puestoLaboral.campo,
-                  callback: function($$v) {
-                    _vm.$set(_vm.puestoLaboral, "campo", $$v)
-                  },
-                  expression: "puestoLaboral.campo"
-                }
-              },
-              [_vm._v(" Campo: ")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.puestoLaboral.nombrePuesto,
-              expression: "puestoLaboral.nombrePuesto"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "exampleFormControlTextarea1", rows: "5" },
-          domProps: { value: _vm.puestoLaboral.nombrePuesto },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+                name: "model",
+                rawName: "v-model",
+                value: _vm.To,
+                expression: "To"
               }
-              _vm.$set(_vm.puestoLaboral, "nombrePuesto", $event.target.value)
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.To },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.To = $event.target.value
+              }
             }
-          }
-        })
+          })
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.puestoLaboral.logros,
-              expression: "puestoLaboral.logros"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { id: "exampleFormControlTextarea1", rows: "5" },
-          domProps: { value: _vm.puestoLaboral.logros },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Área de conocimiento: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.KnowledgeArea,
+                expression: "KnowledgeArea"
               }
-              _vm.$set(_vm.puestoLaboral, "logros", $event.target.value)
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.KnowledgeArea },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.KnowledgeArea = $event.target.value
+              }
             }
-          }
-        })
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Campo: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Field,
+                expression: "Field"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.Field },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Field = $event.target.value
+              }
+            }
+          })
+        ])
       ])
-    ],
-    1
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.WorkingPositionDescription,
+            expression: "WorkingPositionDescription"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { rows: "5" },
+        domProps: { value: _vm.WorkingPositionDescription },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.WorkingPositionDescription = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group my-3 col-xl-6" }, [
+      _vm._m(2),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Achievements,
+            expression: "Achievements"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { rows: "5" },
+        domProps: { value: _vm.Achievements },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Achievements = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 my-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: { click: _vm.agregaExperienciaLaboral }
+        },
+        [_vm._v(" Agregar ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "mx-2 btn btn-primary",
+          on: { click: _vm.guardaExperienciaLaboral }
+        },
+        [_vm._v(" Guardar ")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -46444,7 +46693,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", [_c("strong", [_vm._v(" Nombre del puesto: ")])])
+    return _c("h5", [_c("strong", [_vm._v(" Descripción del puesto: ")])])
   },
   function() {
     var _vm = this
@@ -47384,431 +47633,431 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _c("h4", { staticClass: "form-group col-12 my-2" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-4 my-auto" }, [
-        _vm.idioma === "Alemán"
-          ? _c("img", {
-              staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/alemania.png"
-              }
-            })
-          : _vm.idioma === "Español"
-          ? _c("img", {
-              staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/mexico.png"
-              }
-            })
-          : _vm.idioma === "Inglés"
-          ? _c("img", {
-              staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/inglaterra.png"
-              }
-            })
-          : _vm.idioma === "Francés"
-          ? _c("img", {
-              staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/francia.png"
-              }
-            })
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-8 d-md-none" }, [
-        _c(
-          "div",
-          { staticClass: "row justify-content-end" },
-          [
-            _c("div", { staticClass: "form-group col-11" }, [
-              _c("label", [_vm._v(" Idioma: ")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.idioma,
-                      expression: "idioma"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.idioma = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "", selected: "" } }, [
-                    _vm._v("Escoge una opción")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.idiomas, function(idioma) {
-                    return _c(
-                      "option",
-                      { key: idioma, domProps: { value: idioma } },
-                      [_vm._v(" " + _vm._s(idioma) + " ")]
-                    )
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { clase: "form-group col-11" },
-                model: {
-                  value: _vm.institucion,
-                  callback: function($$v) {
-                    _vm.institucion = $$v
-                  },
-                  expression: "institucion"
-                }
-              },
-              [
-                _vm._v(
-                  " \n        Institución que otorgó el certificado:\n      "
-                )
-              ]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-8" }, [
-        _c(
-          "div",
-          { staticClass: "row justify-content-end" },
-          [
-            _c(
-              "div",
-              { staticClass: "form-group col-lg-6 d-none d-md-block" },
-              [
-                _c("label", [_vm._v(" Idioma: ")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.idioma,
-                        expression: "idioma"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.idioma = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "", selected: "" } }, [
-                      _vm._v("Escoge una opción")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.idiomas, function(idioma) {
-                      return _c(
-                        "option",
-                        { key: idioma, domProps: { value: idioma } },
-                        [_vm._v(" " + _vm._s(idioma) + " ")]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { clase: "form-group col-lg-6 d-none d-md-block" },
-                model: {
-                  value: _vm.institucion,
-                  callback: function($$v) {
-                    _vm.institucion = $$v
-                  },
-                  expression: "institucion"
-                }
-              },
-              [
-                _vm._v(
-                  " \n        Institución que otorgó el certificado:\n      "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm.idioma === "Inglés"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-md-6" },
-                    model: {
-                      value: _vm.examenIngles,
-                      callback: function($$v) {
-                        _vm.examenIngles = $$v
-                      },
-                      expression: "examenIngles"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      " \n        Qué examen de inglés presentaste?\n      "
-                    )
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.idioma === "Inglés"
-              ? _c(
-                  "input-solicitud",
-                  {
-                    attrs: { clase: "form-group col-md-6" },
-                    model: {
-                      value: _vm.tipoExamenIngles,
-                      callback: function($$v) {
-                        _vm.tipoExamenIngles = $$v
-                      },
-                      expression: "tipoExamenIngles"
-                    }
-                  },
-                  [_vm._v(" \n        Escoge un tipo de examen\n      ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.puntuacion,
-                  callback: function($$v) {
-                    _vm.puntuacion = $$v
-                  },
-                  expression: "puntuacion"
-                }
-              },
-              [_vm._v(" \n        Puntaje obtenido:\n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: { tipo: "date", clase: "form-group col-md-6" },
-                model: {
-                  value: _vm.fechaAplicacion,
-                  callback: function($$v) {
-                    _vm.fechaAplicacion = $$v
-                  },
-                  expression: "fechaAplicacion"
-                }
-              },
-              [_vm._v(" \n        Fecha de aplicación: \n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: {
-                  tipo: "date",
-                  clase: "form-group d-none d-lg-block col-lg-6"
-                },
-                model: {
-                  value: _vm.vigenciaDesde,
-                  callback: function($$v) {
-                    _vm.vigenciaDesde = $$v
-                  },
-                  expression: "vigenciaDesde"
-                }
-              },
-              [_vm._v(" \n        Vigencia desde:\n      ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "input-solicitud",
-              {
-                attrs: {
-                  tipo: "date",
-                  clase: "form-group d-none d-lg-block col-lg-6"
-                },
-                model: {
-                  value: _vm.vigenciaHasta,
-                  callback: function($$v) {
-                    _vm.vigenciaHasta = $$v
-                  },
-                  expression: "vigenciaHasta"
-                }
-              },
-              [_vm._v(" \n        Vigencia hasta:\n      ")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { tipo: "date", clase: "form-group d-lg-none col-md-6" },
-          model: {
-            value: _vm.vigenciaDesde,
-            callback: function($$v) {
-              _vm.vigenciaDesde = $$v
-            },
-            expression: "vigenciaDesde"
-          }
-        },
-        [_vm._v(" \n    Vigencia desde:\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { tipo: "date", clase: "form-group d-lg-none col-md-6" },
-          model: {
-            value: _vm.vigenciaHasta,
-            callback: function($$v) {
-              _vm.vigenciaHasta = $$v
-            },
-            expression: "vigenciaHasta"
-          }
-        },
-        [_vm._v(" \n    Vigencia hasta:\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { clase: "fform-group col-md-6 col-lg-3" },
-          model: {
-            value: _vm.vigenciaDesde,
-            callback: function($$v) {
-              _vm.vigenciaDesde = $$v
-            },
-            expression: "vigenciaDesde"
-          }
-        },
-        [_vm._v(" \n    Grado de dominio:\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { clase: "form-group col-md-6 col-lg-3" },
-          model: {
-            value: _vm.vigenciaHasta,
-            callback: function($$v) {
-              _vm.vigenciaHasta = $$v
-            },
-            expression: "vigenciaHasta"
-          }
-        },
-        [_vm._v(" \n    Nivel conversacional:\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { clase: "form-group col-md-6 col-lg-3" },
-          model: {
-            value: _vm.vigenciaDesde,
-            callback: function($$v) {
-              _vm.vigenciaDesde = $$v
-            },
-            expression: "vigenciaDesde"
-          }
-        },
-        [_vm._v(" \n    Nivel de lectura:\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "input-solicitud",
-        {
-          attrs: { clase: "form-group col-md-6 col-lg-3" },
-          model: {
-            value: _vm.vigenciaHasta,
-            callback: function($$v) {
-              _vm.vigenciaHasta = $$v
-            },
-            expression: "vigenciaHasta"
-          }
-        },
-        [_vm._v(" \n    Nivel de escritura:\n  ")]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.Documentos, function(documento) {
-        return _c(
-          "documento-requerido",
-          _vm._b(
+  return _c("div", { staticClass: "row" }, [
+    _c("h4", { staticClass: "form-group col-12 my-2" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-4 my-auto" }, [
+      _vm.idioma === "Alemán"
+        ? _c("img", {
+            staticClass: "d-block mx-auto",
+            attrs: {
+              width: "120px",
+              src: "/controlescolar/storage/emojis/alemania.png"
+            }
+          })
+        : _vm.idioma === "Español"
+        ? _c("img", {
+            staticClass: "d-block mx-auto",
+            attrs: {
+              width: "120px",
+              src: "/controlescolar/storage/emojis/mexico.png"
+            }
+          })
+        : _vm.idioma === "Inglés"
+        ? _c("img", {
+            staticClass: "d-block mx-auto",
+            attrs: {
+              width: "120px",
+              src: "/controlescolar/storage/emojis/inglaterra.png"
+            }
+          })
+        : _vm.idioma === "Francés"
+        ? _c("img", {
+            staticClass: "d-block mx-auto",
+            attrs: {
+              width: "120px",
+              src: "/controlescolar/storage/emojis/francia.png"
+            }
+          })
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-8 d-md-none" }, [
+      _c("div", { staticClass: "row justify-content-end" }, [
+        _c("div", { staticClass: "form-group col-11" }, [
+          _c("label", [_vm._v(" Idioma: ")]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              key: documento.name,
-              attrs: {
-                archivo: documento.archivo,
-                location: documento.location,
-                errores: documento.errores
-              },
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Language,
+                  expression: "Language"
+                }
+              ],
+              staticClass: "form-control",
               on: {
-                "update:archivo": function($event) {
-                  return _vm.$set(documento, "archivo", $event)
-                },
-                "update:location": function($event) {
-                  return _vm.$set(documento, "location", $event)
-                },
-                "update:errores": function($event) {
-                  return _vm.$set(documento, "errores", $event)
-                },
-                enviaDocumento: _vm.cargaDocumento
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.Language = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
             },
-            "documento-requerido",
-            documento,
-            false
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("Escoge una opción")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.idiomas, function(idioma) {
+                return _c(
+                  "option",
+                  { key: idioma, domProps: { value: idioma } },
+                  [_vm._v(" " + _vm._s(idioma) + " ")]
+                )
+              })
+            ],
+            2
           )
-        )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-11" }, [
+          _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Institution,
+                expression: "Institution"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.Institution },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Institution = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-8" }, [
+      _c("div", { staticClass: "row justify-content-end" }, [
+        _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
+          _c("label", [_vm._v(" Idioma: ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Language,
+                  expression: "Language"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.Language = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "", selected: "" } }, [
+                _vm._v("Escoge una opción")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.idiomas, function(idioma) {
+                return _c(
+                  "option",
+                  { key: idioma, domProps: { value: idioma } },
+                  [_vm._v(" " + _vm._s(idioma) + " ")]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
+          _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Institution,
+                expression: "Institution"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.Institution },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Institution = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm.Language === "Inglés"
+          ? _c("div", { staticClass: "form-group col-md-6" }, [
+              _c("label", [_vm._v(" ¿Qué examen de inglés presentaste? ")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text" }
+              })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.Language === "Inglés"
+          ? _c("div", { staticClass: "form-group col-md-6" }, [
+              _c("label", [_vm._v(" Escoge un tipo de examen ")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text" }
+              })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Puntaje obtenido: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Score,
+                expression: "Score"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.Score },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Score = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-6" }, [
+          _c("label", [_vm._v(" Fecha de aplicación:  ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.fechaAplicacion,
+                expression: "fechaAplicacion"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.fechaAplicacion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.fechaAplicacion = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
+          _c("label", [_vm._v(" Vigencia desde: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.vigenciaDesde,
+                expression: "vigenciaDesde"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.vigenciaDesde },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.vigenciaDesde = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
+          _c("label", [_vm._v(" Hasta: ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.vigenciaHasta,
+                expression: "vigenciaHasta"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.vigenciaHasta },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.vigenciaHasta = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
+      _c("label", [_vm._v(" Vigencia desde: ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.vigenciaDesde,
+            expression: "vigenciaDesde"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "date" },
+        domProps: { value: _vm.vigenciaDesde },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.vigenciaDesde = $event.target.value
+          }
+        }
       })
-    ],
-    2
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
+      _c("label", [_vm._v(" Hasta: ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.vigenciaHasta,
+            expression: "vigenciaHasta"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "date" },
+        domProps: { value: _vm.vigenciaHasta },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.vigenciaHasta = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+      _c("label", [_vm._v(" Grado de dominio: ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.language_domain,
+            expression: "language_domain"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.language_domain },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.language_domain = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+      _c("label", [_vm._v(" Nivel conversacional: ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.language_domain,
+            expression: "language_domain"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.language_domain },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.language_domain = $event.target.value
+          }
+        }
+      })
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48819,10 +49068,6 @@ var render = function() {
           _vm._m(2),
           _vm._v(" "),
           _vm._t("experiencialaboral"),
-          _vm._v(" "),
-          _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
-            _vm._v(" Agregar ")
-          ]),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",

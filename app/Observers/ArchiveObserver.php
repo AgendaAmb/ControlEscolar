@@ -15,9 +15,19 @@ class ArchiveObserver
      */
     public function created(Archive $archive)
     {
-        $archive->academicDegrees()->createMany([['state'=>'Incompleto']]);
+        $archive->academicDegrees()->createMany([
+            ['state'=>'Incompleto']
+        ]);
+        
+        $archive->appliantWorkingExperiences()->createMany([
+            ['state'=>'Incompleto']
+        ]);
+
+        $archive->scientificProductions()->createMany([
+            ['state'=>'Incompleto']
+        ]);
+
         $archive->appliantLanguages()->createMany([[]]);
-        $archive->appliantWorkingExperiences()->createMany([[]]);
         $archive->personalDocuments()->attach(RequiredDocument::personalDocumentsId());
         $archive->personalDocuments()->attach(RequiredDocument::entranceDocumentsId());
     }

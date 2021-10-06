@@ -7,10 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Archive extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var string[]
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * The attributes that aren't mass assignable.
@@ -31,6 +43,7 @@ class Archive extends Model
         'academicDegrees.requiredDocuments',
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
+        'scientificProductions'
     ];
     
     /**
@@ -87,6 +100,17 @@ class Archive extends Model
     {
         return $this->hasMany(WorkingExperience::class);
     }
+
+    /**
+     * Obtiene las producciones científicas del postulante.
+     *
+     * @return HasMany
+     */
+    public function scientificProductions(): HasMany
+    {
+        return $this->hasMany(ScientificProduction::class);
+    }
+
 
     /**
      * Obtiene el programa académico, al cual corresponde
