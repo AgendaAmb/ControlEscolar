@@ -45,7 +45,19 @@ const academic_program = @json($academic_program);
 
         <template v-slot:dominioidiomas>
             <lengua-extranjera v-for="language in archive.appliant_languages"
-                v-bind:key="language.id"></lengua-extranjera>
+                v-bind:key="language.id"
+                :language.sync="language.language"
+                :institution.sync="language.institution"
+                :score.sync="language.score"
+                :presented_at.sync="language.presented_at"
+                :valid_from.sync="language.valid_from"
+                :valid_to.sync="language.valid_to"
+                :language_domain.sync="language.language_domain"
+                :conversational_level.sync="language.conversational_level"
+                :reading_level.sync="language.reading_level"
+                :writing_level.sync="language.writing_level"
+                :documentos.sync="language.required_documents">
+            </lengua-extranjera>
         </template>
 
         <template v-slot:requisitosingreso> 
@@ -106,8 +118,6 @@ const app = new Vue({
         CountryUniversities:[],
         EnglishExams: [],
         EnglishExamTypes: [],
-        Errores: [],
-        gradosAcademicos: [],
 
         postulante: {
             curp:'',

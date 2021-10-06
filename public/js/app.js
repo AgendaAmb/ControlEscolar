@@ -3742,6 +3742,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3759,6 +3766,8 @@ __webpack_require__.r(__webpack_exports__);
     language: String,
     // Institución que otorgó el certificado.
     institution: String,
+    // Puntaje de examen.
+    score: Number,
     // Fecha de aplicación.
     presented_at: String,
     // Vigencia desde.
@@ -3793,6 +3802,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:institution', newVal);
       }
     },
+    Score: {
+      get: function get() {
+        return this.score;
+      },
+      set: function set(newVal) {
+        this.$emit('update:score', newVal);
+      }
+    },
     PresentedAt: {
       get: function get() {
         return this.presented_at;
@@ -3815,6 +3832,38 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(newVal) {
         this.$emit('update:valid_to', newVal);
+      }
+    },
+    LanguageDomain: {
+      get: function get() {
+        return this.language_domain;
+      },
+      set: function set(newVal) {
+        this.$emit('update:language_domain', newVal);
+      }
+    },
+    ConversationalLevel: {
+      get: function get() {
+        return this.conversational_level;
+      },
+      set: function set(newVal) {
+        this.$emit('update:conversational_level', newVal);
+      }
+    },
+    ReadingLevel: {
+      get: function get() {
+        return this.reading_level;
+      },
+      set: function set(newVal) {
+        this.$emit('update:reading_level', newVal);
+      }
+    },
+    WritingLevel: {
+      get: function get() {
+        return this.writing_level;
+      },
+      set: function set(newVal) {
+        this.$emit('update:writing_level', newVal);
       }
     },
     Documentos: {
@@ -47633,431 +47682,523 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("h4", { staticClass: "form-group col-12 my-2" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-4 my-auto" }, [
-      _vm.idioma === "Alemán"
-        ? _c("img", {
-            staticClass: "d-block mx-auto",
-            attrs: {
-              width: "120px",
-              src: "/controlescolar/storage/emojis/alemania.png"
-            }
-          })
-        : _vm.idioma === "Español"
-        ? _c("img", {
-            staticClass: "d-block mx-auto",
-            attrs: {
-              width: "120px",
-              src: "/controlescolar/storage/emojis/mexico.png"
-            }
-          })
-        : _vm.idioma === "Inglés"
-        ? _c("img", {
-            staticClass: "d-block mx-auto",
-            attrs: {
-              width: "120px",
-              src: "/controlescolar/storage/emojis/inglaterra.png"
-            }
-          })
-        : _vm.idioma === "Francés"
-        ? _c("img", {
-            staticClass: "d-block mx-auto",
-            attrs: {
-              width: "120px",
-              src: "/controlescolar/storage/emojis/francia.png"
-            }
-          })
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-8 d-md-none" }, [
-      _c("div", { staticClass: "row justify-content-end" }, [
-        _c("div", { staticClass: "form-group col-11" }, [
-          _c("label", [_vm._v(" Idioma: ")]),
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      _c("h4", { staticClass: "form-group col-12 my-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-4 my-auto" }, [
+        _vm.Language === "Alemán"
+          ? _c("img", {
+              staticClass: "d-block mx-auto",
+              attrs: {
+                width: "120px",
+                src: "/controlescolar/storage/emojis/alemania.png"
+              }
+            })
+          : _vm.Language === "Español"
+          ? _c("img", {
+              staticClass: "d-block mx-auto",
+              attrs: {
+                width: "120px",
+                src: "/controlescolar/storage/emojis/mexico.png"
+              }
+            })
+          : _vm.Language === "Inglés"
+          ? _c("img", {
+              staticClass: "d-block mx-auto",
+              attrs: {
+                width: "120px",
+                src: "/controlescolar/storage/emojis/inglaterra.png"
+              }
+            })
+          : _vm.Language === "Francés"
+          ? _c("img", {
+              staticClass: "d-block mx-auto",
+              attrs: {
+                width: "120px",
+                src: "/controlescolar/storage/emojis/francia.png"
+              }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-8 d-md-none" }, [
+        _c("div", { staticClass: "row justify-content-end" }, [
+          _c("div", { staticClass: "form-group col-11" }, [
+            _c("label", [_vm._v(" Idioma: ")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Language,
+                    expression: "Language"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.Language = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "", selected: "" } }, [
+                  _vm._v("Escoge una opción")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.idiomas, function(idioma) {
+                  return _c(
+                    "option",
+                    { key: idioma, domProps: { value: idioma } },
+                    [_vm._v(" " + _vm._s(idioma) + " ")]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
+          _c("div", { staticClass: "form-group col-11" }, [
+            _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.Language,
-                  expression: "Language"
+                  value: _vm.Institution,
+                  expression: "Institution"
                 }
               ],
               staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.Institution },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.Language = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Institution = $event.target.value
                 }
               }
-            },
-            [
-              _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("Escoge una opción")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.idiomas, function(idioma) {
-                return _c(
-                  "option",
-                  { key: idioma, domProps: { value: idioma } },
-                  [_vm._v(" " + _vm._s(idioma) + " ")]
-                )
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-11" }, [
-          _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.Institution,
-                expression: "Institution"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.Institution },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.Institution = $event.target.value
-              }
-            }
-          })
+            })
+          ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-md-8" }, [
-      _c("div", { staticClass: "row justify-content-end" }, [
-        _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
-          _c("label", [_vm._v(" Idioma: ")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-8" }, [
+        _c("div", { staticClass: "row justify-content-end" }, [
+          _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
+            _c("label", [_vm._v(" Idioma: ")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Language,
+                    expression: "Language"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.Language = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "", selected: "" } }, [
+                  _vm._v("Escoge una opción")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.idiomas, function(idioma) {
+                  return _c(
+                    "option",
+                    { key: idioma, domProps: { value: idioma } },
+                    [_vm._v(" " + _vm._s(idioma) + " ")]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
+          _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
+            _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.Language,
-                  expression: "Language"
+                  value: _vm.Institution,
+                  expression: "Institution"
                 }
               ],
               staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.Institution },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.Language = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Institution = $event.target.value
                 }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.Language === "Inglés"
+            ? _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", [_vm._v(" ¿Qué examen de inglés presentaste? ")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text" }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.Language === "Inglés"
+            ? _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", [_vm._v(" Escoge un tipo de examen ")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text" }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", [_vm._v(" Puntaje obtenido: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.number",
+                  value: _vm.Score,
+                  expression: "Score",
+                  modifiers: { number: true }
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number" },
+              domProps: { value: _vm.Score },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Score = _vm._n($event.target.value)
+                },
+                blur: function($event) {
+                  return _vm.$forceUpdate()
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-6" }, [
+            _c("label", [_vm._v(" Fecha de aplicación:  ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.PresentedAt,
+                  expression: "PresentedAt"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date" },
+              domProps: { value: _vm.PresentedAt },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.PresentedAt = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
+            _c("label", [_vm._v(" Vigencia desde: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ValidFrom,
+                  expression: "ValidFrom"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date" },
+              domProps: { value: _vm.ValidFrom },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.ValidFrom = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
+            _c("label", [_vm._v(" Hasta: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ValidTo,
+                  expression: "ValidTo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date" },
+              domProps: { value: _vm.ValidTo },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.ValidTo = $event.target.value
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
+        _c("label", [_vm._v(" Vigencia desde: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ValidFrom,
+              expression: "ValidFrom"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "date" },
+          domProps: { value: _vm.ValidFrom },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ValidFrom = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
+        _c("label", [_vm._v(" Hasta: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ValidTo,
+              expression: "ValidTo"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "date" },
+          domProps: { value: _vm.ValidTo },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ValidTo = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+        _c("label", [_vm._v(" Grado de dominio: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.LanguageDomain,
+              expression: "LanguageDomain"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.LanguageDomain },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.LanguageDomain = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+        _c("label", [_vm._v(" Nivel conversacional: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ConversationalLevel,
+              expression: "ConversationalLevel"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.ConversationalLevel },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ConversationalLevel = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+        _c("label", [_vm._v(" Nivel de lectura: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ReadingLevel,
+              expression: "ReadingLevel"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.ReadingLevel },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.ReadingLevel = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
+        _c("label", [_vm._v(" Nivel de escritura: ")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.WritingLevel,
+              expression: "WritingLevel"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.WritingLevel },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.WritingLevel = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.Documentos, function(documento) {
+        return _c(
+          "documento-requerido",
+          _vm._b(
+            {
+              key: documento.name,
+              attrs: {
+                archivo: documento.archivo,
+                location: documento.location,
+                errores: documento.errores
+              },
+              on: {
+                "update:archivo": function($event) {
+                  return _vm.$set(documento, "archivo", $event)
+                },
+                "update:location": function($event) {
+                  return _vm.$set(documento, "location", $event)
+                },
+                "update:errores": function($event) {
+                  return _vm.$set(documento, "errores", $event)
+                },
+                enviaDocumento: _vm.cargaDocumento
               }
             },
-            [
-              _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("Escoge una opción")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.idiomas, function(idioma) {
-                return _c(
-                  "option",
-                  { key: idioma, domProps: { value: idioma } },
-                  [_vm._v(" " + _vm._s(idioma) + " ")]
-                )
-              })
-            ],
-            2
+            "documento-requerido",
+            documento,
+            false
           )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-lg-6 d-none d-md-block" }, [
-          _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.Institution,
-                expression: "Institution"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.Institution },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.Institution = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm.Language === "Inglés"
-          ? _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", [_vm._v(" ¿Qué examen de inglés presentaste? ")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" }
-              })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.Language === "Inglés"
-          ? _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", [_vm._v(" Escoge un tipo de examen ")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" }
-              })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-6" }, [
-          _c("label", [_vm._v(" Puntaje obtenido: ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.Score,
-                expression: "Score"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.Score },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.Score = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-6" }, [
-          _c("label", [_vm._v(" Fecha de aplicación:  ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.fechaAplicacion,
-                expression: "fechaAplicacion"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.fechaAplicacion },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.fechaAplicacion = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
-          _c("label", [_vm._v(" Vigencia desde: ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.vigenciaDesde,
-                expression: "vigenciaDesde"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.vigenciaDesde },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.vigenciaDesde = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group d-none d-lg-block col-lg-6" }, [
-          _c("label", [_vm._v(" Hasta: ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.vigenciaHasta,
-                expression: "vigenciaHasta"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "date" },
-            domProps: { value: _vm.vigenciaHasta },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.vigenciaHasta = $event.target.value
-              }
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
-      _c("label", [_vm._v(" Vigencia desde: ")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.vigenciaDesde,
-            expression: "vigenciaDesde"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "date" },
-        domProps: { value: _vm.vigenciaDesde },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.vigenciaDesde = $event.target.value
-          }
-        }
+        )
       })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group d-lg-none col-md-6" }, [
-      _c("label", [_vm._v(" Hasta: ")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.vigenciaHasta,
-            expression: "vigenciaHasta"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "date" },
-        domProps: { value: _vm.vigenciaHasta },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.vigenciaHasta = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
-      _c("label", [_vm._v(" Grado de dominio: ")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.language_domain,
-            expression: "language_domain"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.language_domain },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.language_domain = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-md-6 col-lg-3" }, [
-      _c("label", [_vm._v(" Nivel conversacional: ")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.language_domain,
-            expression: "language_domain"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.language_domain },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.language_domain = $event.target.value
-          }
-        }
-      })
-    ])
-  ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

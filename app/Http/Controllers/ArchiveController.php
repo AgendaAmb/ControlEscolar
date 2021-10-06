@@ -154,4 +154,14 @@ class ArchiveController extends Controller
 
         return new JsonResponse(WorkingExperience::find($request->id));
     }
+
+    /**
+     * Actualiza la lengua extranjera de un postulante.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateAppliantLanguageRequiredDocument(Request $request)
+    {
+        
+    }
 }

@@ -21,7 +21,7 @@ class AppliantLanguage extends Model
         'updated_at',
         'deleted_at'
     ];
-
+    
     /**
      * Obtiene los documentos requeridos del expediente.
      *

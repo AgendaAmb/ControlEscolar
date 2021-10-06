@@ -4,10 +4,17 @@
     
     <!-- Datos principales -->
     <div class="form-group col-4 my-auto">
-      <img v-if="idioma === 'Alemán'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/alemania.png">
-      <img v-else-if="idioma === 'Español'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/mexico.png">
-      <img v-else-if="idioma === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
-      <img v-else-if="idioma === 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/francia.png">
+      <img v-if="Language === 'Alemán'" 
+        class="d-block mx-auto" 
+        width="120px" 
+        src="/controlescolar/storage/emojis/alemania.png">
+      
+      <img v-else-if="Language === 'Español'" 
+        class="d-block mx-auto" 
+        width="120px" 
+        src="/controlescolar/storage/emojis/mexico.png">
+      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
+      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/francia.png">
     </div>
 
     <!--
@@ -60,56 +67,56 @@
 
         <div class="form-group col-md-6">
           <label> Puntaje obtenido: </label>
-          <input v-model="Score" type="text" class="form-control">
+          <input v-model.number="Score" type="number" class="form-control">
         </div>
 
         <div class="form-group col-md-6">
           <label> Fecha de aplicación:  </label>
-          <input v-model="fechaAplicacion" type="date" class="form-control">
+          <input v-model="PresentedAt" type="date" class="form-control">
         </div>
 
         <div class="form-group d-none d-lg-block col-lg-6">
           <label> Vigencia desde: </label>
-          <input v-model="vigenciaDesde" type="date" class="form-control">
+          <input v-model="ValidFrom" type="date" class="form-control">
         </div>
 
         <div class="form-group d-none d-lg-block col-lg-6">
           <label> Hasta: </label>
-          <input v-model="vigenciaHasta" type="date" class="form-control">
+          <input v-model="ValidTo" type="date" class="form-control">
         </div>
       </div>
     </div>
 
     <div class="form-group d-lg-none col-md-6">
       <label> Vigencia desde: </label>
-      <input v-model="vigenciaDesde" type="date" class="form-control">
+      <input v-model="ValidFrom" type="date" class="form-control">
     </div>
 
     <div class="form-group d-lg-none col-md-6">
       <label> Hasta: </label>
-      <input v-model="vigenciaHasta" type="date" class="form-control">
+      <input v-model="ValidTo" type="date" class="form-control">
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Grado de dominio: </label>
-      <input v-model="language_domain" type="text" class="form-control">
+      <input v-model="LanguageDomain" type="text" class="form-control">
     </div>
 
     <div class="form-group col-md-6 col-lg-3">
       <label> Nivel conversacional: </label>
-      <input v-model="language_domain" type="text" class="form-control">
+      <input v-model="ConversationalLevel" type="text" class="form-control">
     </div>
 
+    <div class="form-group col-md-6 col-lg-3">
+      <label> Nivel de lectura: </label>
+      <input v-model="ReadingLevel" type="text" class="form-control">
+    </div>
 
-    <!--
+    <div class="form-group col-md-6 col-lg-3">
+      <label> Nivel de escritura: </label>
+      <input v-model="WritingLevel" type="text" class="form-control">
+    </div>
 
-    <input-solicitud clase="form-group col-md-6 col-lg-3" v-model="vigenciaDesde"> 
-      Nivel de lectura:
-    </input-solicitud>
-
-    <input-solicitud clase="form-group col-md-6 col-lg-3" v-model="vigenciaHasta"> 
-      Nivel de escritura:
-    </input-solicitud>
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
       :archivo.sync="documento.archivo" 
@@ -117,7 +124,7 @@
       :errores.sync = "documento.errores"
       @enviaDocumento = "cargaDocumento" 
       v-bind="documento">
-    </documento-requerido>-->
+    </documento-requerido>
   </div>
 </template>
 
@@ -156,6 +163,9 @@ export default {
 
     // Institución que otorgó el certificado.
     institution: String,
+
+    // Puntaje de examen.
+    score: Number,
 
     // Fecha de aplicación.
     presented_at: String,
@@ -199,6 +209,14 @@ export default {
         this.$emit('update:institution', newVal);
       }
     },
+    Score: {
+      get(){
+        return this.score;
+      },
+      set(newVal){
+        this.$emit('update:score', newVal);
+      }
+    },
     PresentedAt: {
       get(){
         return this.presented_at;
@@ -221,6 +239,38 @@ export default {
       },
       set(newVal){
         this.$emit('update:valid_to', newVal);
+      }
+    },
+    LanguageDomain: {
+      get(){
+        return this.language_domain
+      }, 
+      set(newVal){
+        this.$emit('update:language_domain', newVal);
+      }
+    },
+    ConversationalLevel: {
+      get(){
+        return this.conversational_level
+      }, 
+      set(newVal){
+        this.$emit('update:conversational_level', newVal);
+      }
+    },
+    ReadingLevel: {
+      get(){
+        return this.reading_level
+      }, 
+      set(newVal){
+        this.$emit('update:reading_level', newVal);
+      }
+    },
+    WritingLevel: {
+      get(){
+        return this.writing_level;
+      }, 
+      set(newVal){
+        this.$emit('update:writing_level', newVal);
       }
     },
 
