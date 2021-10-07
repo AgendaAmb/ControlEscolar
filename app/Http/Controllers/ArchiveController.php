@@ -220,7 +220,7 @@ class ArchiveController extends Controller
             DB::table($type)->delete($request->id);
         
         $upsert_array = [];
-        $identifiers = ['scientific_production_id', $request->id];
+        $identifiers = ['scientific_production_id' => $request->id];
 
         switch ($request->type)
         {
@@ -232,10 +232,11 @@ class ArchiveController extends Controller
         }
 
         # Actualiza los datos adicionales de la producción científica.
-        DB::table($request->type)->upsert($upsert_array, $identifiers);
+        if (count($upsert_array) > 0)
+            DB::table($request->type)->updateOrInsert($upsert_array, $identifiers);
 
         # Actualiza los datos generales de la producción científica.
-        ScientificProduction::where('id', $request->id)->update($request->only('state','title','publish_date'));
+        ScientificProduction::where('id', $request->id)->update($request->only('state','title','publish_date', 'type'));
         
         return new JsonResponse(
             ScientificProduction::leftJoin(
@@ -253,7 +254,7 @@ class ArchiveController extends Controller
             )->leftJoin(
                 'working_memories', 'working_memories.scientific_production_id', 'scientific_productions.id',
             
-            )
+            )->first()
         );
     }
 }
