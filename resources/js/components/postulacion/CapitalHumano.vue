@@ -14,6 +14,11 @@
       <label> Nivel de escolaridad: </label>
       <input type="text" class="form-control" v-model="ScolarshipLevel">
     </div>
+
+    <div class="col-12 my-3">
+      <button @click="agregaCapitalHumano" class="btn btn-success"> Agregar </button>
+      <button @click="actualizaCapitalHumano" class="mx-2 btn btn-primary"> Guardar </button>
+    </div>
   </div>
 </template>
 
@@ -42,6 +47,12 @@ export default {
     scolarship_level: String
   },
 
+  data(){
+    return {
+      errores: {}
+    };
+  },
+
   computed: {
     CourseName: {
       get(){
@@ -68,5 +79,41 @@ export default {
       }
     }
   },
+
+  methods: {
+    agregaCapitalHumano(evento){
+      this.enviaCapitalHumano(evento, 'Completo');
+    },
+    actualizaCapitalHumano(evento){
+      this.agregaCapitalHumano(evento, 'Incompleto');
+    },
+    enviaCapitalHumano(evento, estado){
+      this.errores = {};
+
+      axios.post('/controlescolar/solicitud/updateHumanCapital', {
+
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        course_name: this.course_name,
+        assisted_at: this.assisted_at,
+        scolarship_level: this.scolarship_level,
+
+      }).then(response => {
+        Object.keys(response.data).forEach(dataKey => {
+          var event = 'update:' + dataKey;
+          this.$emit(event, response.data[dataKey]);
+        });
+ 
+      }).catch(error => {
+        this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
+      });
+    }
+  }
 };
 </script>

@@ -2719,6 +2719,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "capital-humano",
   props: {
@@ -2734,6 +2739,11 @@ __webpack_require__.r(__webpack_exports__);
     assisted_at: String,
     // Nivel de escolaridad.
     scolarship_level: String
+  },
+  data: function data() {
+    return {
+      errores: {}
+    };
   },
   computed: {
     CourseName: {
@@ -2759,6 +2769,39 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(newVal) {
         this.$emit('update:scolarship_level', newVal);
       }
+    }
+  },
+  methods: {
+    agregaCapitalHumano: function agregaCapitalHumano(evento) {
+      this.enviaCapitalHumano(evento, 'Completo');
+    },
+    actualizaCapitalHumano: function actualizaCapitalHumano(evento) {
+      this.agregaCapitalHumano(evento, 'Incompleto');
+    },
+    enviaCapitalHumano: function enviaCapitalHumano(evento, estado) {
+      var _this = this;
+
+      this.errores = {};
+      axios.post('/controlescolar/solicitud/updateHumanCapital', {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        course_name: this.course_name,
+        assisted_at: this.assisted_at,
+        scolarship_level: this.scolarship_level
+      }).then(function (response) {
+        Object.keys(response.data).forEach(function (dataKey) {
+          var event = 'update:' + dataKey;
+
+          _this.$emit(event, response.data[dataKey]);
+        });
+      })["catch"](function (error) {
+        _this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
+      });
     }
   }
 });
@@ -4688,7 +4731,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
 //
 //
 //
@@ -47329,6 +47371,26 @@ var render = function() {
           }
         }
       })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 my-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: { click: _vm.agregaCapitalHumano }
+        },
+        [_vm._v(" Agregar ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "mx-2 btn btn-primary",
+          on: { click: _vm.actualizaCapitalHumano }
+        },
+        [_vm._v(" Guardar ")]
+      )
     ])
   ])
 }
@@ -50302,15 +50364,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-12" },
-        [
-          _vm._m(4),
-          _vm._v(" "),
-          _vm._t("caphumano"),
-          _vm._v(" "),
-          _c("button", { staticClass: "d-block my-3 btn btn-success" }, [
-            _vm._v(" Agregar ")
-          ])
-        ],
+        [_vm._m(4), _vm._v(" "), _vm._t("caphumano")],
         2
       )
     ],

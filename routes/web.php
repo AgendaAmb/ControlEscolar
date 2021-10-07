@@ -45,6 +45,9 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     Route::post('/updateScientificProduction', [ArchiveController::class, 'updateScientificProduction']);
     Route::post('/addScientificProductionAuthor', [ArchiveController::class, 'addScientificProductionAuthor']);
     Route::post('/updateScientificProductionAuthor', [ArchiveController::class, 'updateScientificProductionAuthor']);
+
+    # Capital humano.
+    Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
 });
 
 

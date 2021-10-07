@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Http\Requests\UpdateAppliantLanguageRequest;
+use App\Http\Requests\UpdateScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
@@ -12,6 +13,7 @@ use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
 use App\Models\Archive;
 use App\Models\Author;
+use App\Models\HumanCapital;
 use App\Models\ScientificProduction;
 use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
@@ -275,11 +277,21 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function updateScientificProductionAuthor(Request $request)
+    public function updateScientificProductionAuthor(UpdateScientificProductionAuthorRequest $request)
     {
         ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
         Author::where('id', $request->id)->update($request->only('scientific_production_id', 'name'));
 
         return new JsonResponse(Author::find($request->id));
+    }
+
+    /**
+     * Actualiza el capital humano de un postulante.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateHumanCapital(Request $request)
+    {
+        //HumanCapital::where();
     }
 }

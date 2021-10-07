@@ -38,7 +38,6 @@
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Capital humano (cursos impartidos) </strong></h2>
       <slot name="caphumano"></slot>
-      <button class="d-block my-3 btn btn-success"> Agregar </button>
     </div>
   </div>
 </template>
