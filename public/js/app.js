@@ -2776,7 +2776,7 @@ __webpack_require__.r(__webpack_exports__);
       this.enviaCapitalHumano(evento, 'Completo');
     },
     actualizaCapitalHumano: function actualizaCapitalHumano(evento) {
-      this.agregaCapitalHumano(evento, 'Incompleto');
+      this.enviaCapitalHumano(evento, 'Incompleto');
     },
     enviaCapitalHumano: function enviaCapitalHumano(evento, estado) {
       var _this = this;
@@ -3401,37 +3401,34 @@ __webpack_require__.r(__webpack_exports__);
     id: Number,
     // id del expediente.
     archive_id: Number,
+    // Cédula profesional.
+    cedula: Number,
     // Título del grado académico.
     degree: String,
     // Tipo de grado académico
     degree_type: String,
-    // Cédula profesional.
-    cedula: Number,
+    // Estatus académico.
+    status: String,
+    // Modo de titulación.
+    titration_mode: String,
     // País en donde el estudiante realizó sus estudios.
     country: String,
     // Universidad en donde el postulante realizó sus estudios.
     university: String,
-    // Modo de titulación.
-    titration_mode: String,
     // Número de CVU de CONACyT.
     cvu: Number,
-    // Estatus académico.
-    status: String,
+    // Promedio obtenido.
+    knowledge_card: String,
+    // Firma electrónica.
+    digital_signature: String,
     // Estado de los datos del grado académico.
-    state: {
-      type: String,
-      validator: function validator(value) {
-        return ['Incompleto', 'Completo'].indexOf(value) !== -1;
-      }
-    },
+    state: String,
     // Promedio obtenido.
     average: Number,
     // Promedio obtenido.
     min_avg: Number,
     // Promedio obtenido.
     max_avg: Number,
-    // Promedio obtenido.
-    knowledge_card: String,
     // Documentos requeridos en el programa académico.
     required_documents: Array
   },
@@ -3534,6 +3531,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:knowledge_card', newVal);
       }
     },
+    DigitalSignature: {
+      get: function get() {
+        return this.digital_signature;
+      },
+      set: function set(newVal) {
+        this.$emit('update:digital_signature', newVal);
+      }
+    },
     Average: {
       get: function get() {
         return this.average;
@@ -3611,7 +3616,8 @@ __webpack_require__.r(__webpack_exports__);
         average: this.average,
         min_avg: this.min_avg,
         max_avg: this.max_avg,
-        knowledge_card: this.knowledge_card
+        knowledge_card: this.knowledge_card,
+        digital_signature: this.digital_signature
       }).then(function (response) {
         Object.keys(response.data).forEach(function (dataKey) {
           var event = 'update:' + dataKey;
@@ -3620,6 +3626,7 @@ __webpack_require__.r(__webpack_exports__);
 
           Vue.set(_this.datosValidos, key, 'Campo guardado exitosamente.');
         });
+        if (response.data.state === 'Completo') _this.$emit('gradoAcademicoAgregado', _this);
       })["catch"](function (error) {
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
@@ -4731,6 +4738,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _Postulante_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Postulante.vue */ "./resources/js/components/postulacion/Postulante.vue");
+/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
+/* harmony import */ var _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CapitalHumano.vue */ "./resources/js/components/postulacion/CapitalHumano.vue");
+/* harmony import */ var _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue");
+/* harmony import */ var _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue");
+/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
 //
 //
 //
@@ -4775,8 +4788,144 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "solicitud-postulante"
+  name: "solicitud-postulante",
+  components: {
+    Postulante: _Postulante_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    GradoAcademico: _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    CapitalHumano: _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    ProduccionCientifica: _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    ExperienciaLaboral: _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default
+  },
+  props: {
+    // Id del expediente.
+    archive_id: Number,
+    // Documentos personales.
+    personal_documents: Array,
+    // Motivos de ingreso.
+    motivation: String,
+    // Documentos de ingreso.
+    entrance_documents: Array,
+    // Programa académico.
+    academic_program: Object,
+    // Grados académicos del postulante.
+    academic_degrees: Array,
+    // Lenguas extranjeras del postulante.
+    appliant_languages: Array,
+    // Experiencias laborales del postulante.
+    appliant_working_experiences: Array,
+    // Producciones científicas del postulante.
+    scientific_productions: Array,
+    // Capitales humanos del postulante.
+    human_capitals: Array,
+    // Postulante de la solicitud.
+    postulante: Object
+  },
+  data: function data() {
+    return {
+      Countries: [],
+      CountryUniversities: [],
+      EnglishExams: [],
+      EnglishExamTypes: []
+    };
+  },
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      var _this = this;
+
+      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities').then(function (response) {
+        _this.Countries = response.data;
+      });
+      axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams').then(function (response) {
+        _this.EnglishExams = response.data;
+      });
+    });
+  },
+  methods: {
+    gradoAcademicoAgregado: function gradoAcademicoAgregado(grado) {
+      var url = '/controlescolar/solicitud/' + archive.id + '/latestAcademicDegree';
+      axios.get(url).then(function (response) {
+        archive.academic_degrees.push(response.data);
+      })["catch"](function (error) {});
+    }
+  }
 });
 
 /***/ }),
@@ -48407,7 +48556,50 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", [
+                  _vm._v(" ¿Cuentas con tu firma electrónica del CONACYT? ")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.DigitalSignature,
+                        expression: "DigitalSignature"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.DigitalSignature = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "", selected: "" } }, [
+                      _vm._v(" Escoge una opción")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+                  ]
+                )
+              ])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -48654,26 +48846,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-md-4" }, [
-      _c("label", [_vm._v(" ¿Cuentas con tu firma electrónica del CONACYT? ")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control" }, [
-        _c("option", { attrs: { value: "", selected: "" } }, [
-          _vm._v(" Escoge una opción")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -50276,14 +50449,25 @@ var render = function() {
             _vm._v(" Datos Personales ")
           ]),
           _vm._v(" "),
-          _vm._t("postulante"),
+          _c("postulante", {
+            attrs: {
+              postulante: _vm.postulante,
+              archive_id: _vm.archive_id,
+              documentos: _vm.personal_documents
+            },
+            on: {
+              "update:documentos": function($event) {
+                _vm.personal_documents = $event
+              }
+            }
+          }),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block",
             staticStyle: { "background-color": "#FECC50", height: "1px" }
           })
         ],
-        2
+        1
       ),
       _vm._v(" "),
       _c(
@@ -50294,7 +50478,81 @@ var render = function() {
             _vm._v(" Historial académico ")
           ]),
           _vm._v(" "),
-          _vm._t("historialacademico"),
+          _vm._l(_vm.academic_degrees, function(grado) {
+            return _c(
+              "grado-academico",
+              _vm._b(
+                {
+                  key: grado.id,
+                  attrs: {
+                    state: grado.state,
+                    cvu: grado.cvu,
+                    knowledge_card: grado.knowledge_card,
+                    digital_signature: grado.digital_signature,
+                    cedula: grado.cedula,
+                    status: grado.status,
+                    degree: grado.degree,
+                    average: grado.average,
+                    min_avg: grado.min_avg,
+                    max_avg: grado.max_avg,
+                    country: grado.country,
+                    university: grado.university,
+                    degree_type: grado.degree_type,
+                    required_documents: grado.required_documents,
+                    paises: _vm.Countries
+                  },
+                  on: {
+                    "update:state": function($event) {
+                      return _vm.$set(grado, "state", $event)
+                    },
+                    "update:cvu": function($event) {
+                      return _vm.$set(grado, "cvu", $event)
+                    },
+                    "update:knowledge_card": function($event) {
+                      return _vm.$set(grado, "knowledge_card", $event)
+                    },
+                    "update:digital_signature": function($event) {
+                      return _vm.$set(grado, "digital_signature", $event)
+                    },
+                    "update:cedula": function($event) {
+                      return _vm.$set(grado, "cedula", $event)
+                    },
+                    "update:status": function($event) {
+                      return _vm.$set(grado, "status", $event)
+                    },
+                    "update:degree": function($event) {
+                      return _vm.$set(grado, "degree", $event)
+                    },
+                    "update:average": function($event) {
+                      return _vm.$set(grado, "average", $event)
+                    },
+                    "update:min_avg": function($event) {
+                      return _vm.$set(grado, "min_avg", $event)
+                    },
+                    "update:max_avg": function($event) {
+                      return _vm.$set(grado, "max_avg", $event)
+                    },
+                    "update:country": function($event) {
+                      return _vm.$set(grado, "country", $event)
+                    },
+                    "update:university": function($event) {
+                      return _vm.$set(grado, "university", $event)
+                    },
+                    "update:degree_type": function($event) {
+                      return _vm.$set(grado, "degree_type", $event)
+                    },
+                    "update:required_documents": function($event) {
+                      return _vm.$set(grado, "required_documents", $event)
+                    },
+                    gradoAcademicoAgregado: _vm.gradoAcademicoAgregado
+                  }
+                },
+                "grado-academico",
+                grado,
+                false
+              )
+            )
+          }),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",
@@ -50306,7 +50564,21 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _vm._t("requisitosingreso"),
+      _c("requisitos-ingreso", {
+        attrs: {
+          archive_id: _vm.archive_id,
+          motivation: _vm.motivation,
+          documentos: _vm.entrance_documents
+        },
+        on: {
+          "update:motivation": function($event) {
+            _vm.motivation = $event
+          },
+          "update:documentos": function($event) {
+            _vm.entrance_documents = $event
+          }
+        }
+      }),
       _vm._v(" "),
       _c("hr", {
         staticClass: "col-12 my-4",
@@ -50319,7 +50591,71 @@ var render = function() {
         [
           _vm._m(1),
           _vm._v(" "),
-          _vm._t("dominioidiomas"),
+          _vm._l(_vm.appliant_languages, function(language) {
+            return _c(
+              "lengua-extranjera",
+              _vm._b(
+                {
+                  key: language.id,
+                  attrs: {
+                    state: language.state,
+                    language: language.language,
+                    institution: language.institution,
+                    score: language.score,
+                    presented_at: language.presented_at,
+                    valid_from: language.valid_from,
+                    valid_to: language.valid_to,
+                    language_domain: language.language_domain,
+                    conversational_level: language.conversational_level,
+                    reading_level: language.reading_level,
+                    writing_level: language.writing_level,
+                    documentos: language.required_documents
+                  },
+                  on: {
+                    "update:state": function($event) {
+                      return _vm.$set(language, "state", $event)
+                    },
+                    "update:language": function($event) {
+                      return _vm.$set(language, "language", $event)
+                    },
+                    "update:institution": function($event) {
+                      return _vm.$set(language, "institution", $event)
+                    },
+                    "update:score": function($event) {
+                      return _vm.$set(language, "score", $event)
+                    },
+                    "update:presented_at": function($event) {
+                      return _vm.$set(language, "presented_at", $event)
+                    },
+                    "update:valid_from": function($event) {
+                      return _vm.$set(language, "valid_from", $event)
+                    },
+                    "update:valid_to": function($event) {
+                      return _vm.$set(language, "valid_to", $event)
+                    },
+                    "update:language_domain": function($event) {
+                      return _vm.$set(language, "language_domain", $event)
+                    },
+                    "update:conversational_level": function($event) {
+                      return _vm.$set(language, "conversational_level", $event)
+                    },
+                    "update:reading_level": function($event) {
+                      return _vm.$set(language, "reading_level", $event)
+                    },
+                    "update:writing_level": function($event) {
+                      return _vm.$set(language, "writing_level", $event)
+                    },
+                    "update:documentos": function($event) {
+                      return _vm.$set(language, "required_documents", $event)
+                    }
+                  }
+                },
+                "lengua-extranjera",
+                language,
+                false
+              )
+            )
+          }),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",
@@ -50335,7 +50671,64 @@ var render = function() {
         [
           _vm._m(2),
           _vm._v(" "),
-          _vm._t("experiencialaboral"),
+          _vm._l(_vm.appliant_working_experiences, function(experience) {
+            return _c(
+              "experiencia-laboral",
+              _vm._b(
+                {
+                  key: experience.id,
+                  attrs: {
+                    state: experience.state,
+                    institution: experience.institution,
+                    working_position: experience.working_position,
+                    from: experience.from,
+                    to: experience.to,
+                    knowledge_area: experience.knowledge_area,
+                    field: experience.field,
+                    working_position_description:
+                      experience.working_position_description,
+                    achievements: experience.achievements
+                  },
+                  on: {
+                    "update:state": function($event) {
+                      return _vm.$set(experience, "state", $event)
+                    },
+                    "update:institution": function($event) {
+                      return _vm.$set(experience, "institution", $event)
+                    },
+                    "update:working_position": function($event) {
+                      return _vm.$set(experience, "working_position", $event)
+                    },
+                    "update:from": function($event) {
+                      return _vm.$set(experience, "from", $event)
+                    },
+                    "update:to": function($event) {
+                      return _vm.$set(experience, "to", $event)
+                    },
+                    "update:knowledge_area": function($event) {
+                      return _vm.$set(experience, "knowledge_area", $event)
+                    },
+                    "update:field": function($event) {
+                      return _vm.$set(experience, "field", $event)
+                    },
+                    "update:working_position_description": function($event) {
+                      return _vm.$set(
+                        experience,
+                        "working_position_description",
+                        $event
+                      )
+                    },
+                    "update:achievements": function($event) {
+                      return _vm.$set(experience, "achievements", $event)
+                    }
+                  }
+                },
+                "experiencia-laboral",
+                experience,
+                false
+              )
+            )
+          }),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",
@@ -50351,7 +50744,55 @@ var render = function() {
         [
           _vm._m(3),
           _vm._v(" "),
-          _vm._t("prodcientifica"),
+          _vm._l(_vm.scientific_productions, function(production) {
+            return _c(
+              "produccion-cientifica",
+              _vm._b(
+                {
+                  key: production.id,
+                  attrs: {
+                    state: production.state,
+                    type: production.type,
+                    title: production.title,
+                    publish_date: production.publish_date,
+                    magazine_name: production.magazine_name,
+                    article_name: production.article_name,
+                    institution: production.institution,
+                    post_title: production.post_title
+                  },
+                  on: {
+                    "update:state": function($event) {
+                      return _vm.$set(production, "state", $event)
+                    },
+                    "update:type": function($event) {
+                      return _vm.$set(production, "type", $event)
+                    },
+                    "update:title": function($event) {
+                      return _vm.$set(production, "title", $event)
+                    },
+                    "update:publish_date": function($event) {
+                      return _vm.$set(production, "publish_date", $event)
+                    },
+                    "update:magazine_name": function($event) {
+                      return _vm.$set(production, "magazine_name", $event)
+                    },
+                    "update:article_name": function($event) {
+                      return _vm.$set(production, "article_name", $event)
+                    },
+                    "update:institution": function($event) {
+                      return _vm.$set(production, "institution", $event)
+                    },
+                    "update:post_title": function($event) {
+                      return _vm.$set(production, "post_title", $event)
+                    }
+                  }
+                },
+                "produccion-cientifica",
+                production,
+                false
+              )
+            )
+          }),
           _vm._v(" "),
           _c("hr", {
             staticClass: "d-block my-4",
@@ -50364,11 +50805,43 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-12" },
-        [_vm._m(4), _vm._v(" "), _vm._t("caphumano")],
+        [
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._l(_vm.human_capitals, function(humanCapital) {
+            return _c(
+              "capital-humano",
+              _vm._b(
+                {
+                  key: humanCapital.id,
+                  attrs: {
+                    course_name: humanCapital.course_name,
+                    assisted_at: humanCapital.assisted_at,
+                    scolarship_level: humanCapital.scolarship_level
+                  },
+                  on: {
+                    "update:course_name": function($event) {
+                      return _vm.$set(humanCapital, "course_name", $event)
+                    },
+                    "update:assisted_at": function($event) {
+                      return _vm.$set(humanCapital, "assisted_at", $event)
+                    },
+                    "update:scolarship_level": function($event) {
+                      return _vm.$set(humanCapital, "scolarship_level", $event)
+                    }
+                  }
+                },
+                "capital-humano",
+                humanCapital,
+                false
+              )
+            )
+          })
+        ],
         2
       )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = [

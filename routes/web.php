@@ -31,6 +31,7 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']); 
     
     # Grados académicos.
+    Route::get('/{archive}/latestAcademicDegree', [ArchiveController::class, 'latestAcademicDegree']);
     Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
     Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
     

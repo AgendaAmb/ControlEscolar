@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Archive extends Model
@@ -37,6 +38,7 @@ class Archive extends Model
      * @var string[]
      */
     protected $with = [
+        'academicAreas',
         'personalDocuments',
         'entranceDocuments',
         'academicProgram', 
@@ -46,6 +48,16 @@ class Archive extends Model
         'scientificProductions.authors',
         'humanCapitals'
     ];
+
+    /**
+     * Obtiene las áreas académicas de interés.
+     *
+     * @return BelongsToMany
+     */
+    public function academicAreas(): BelongsToMany
+    {
+        return $this->belongsToMany(AcademicArea::class);
+    }
     
     /**
      * Obtiene los documentos personales requeridos del expediente.
@@ -90,6 +102,16 @@ class Archive extends Model
     public function academicDegrees(): HasMany
     {
         return $this->hasMany(AcademicDegree::class);
+    }
+
+    /**
+     * Obtiene las lénguas extranjeras del postulante.
+     *
+     * @return HasOne
+     */
+    public function latestAcademicDegree(): HasOne
+    {
+        return $this->hasOne(AcademicDegree::class)->latestOfMany();
     }
 
     /**

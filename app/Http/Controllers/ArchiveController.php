@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Http\Requests\UpdateAppliantLanguageRequest;
+use App\Http\Requests\UpdateHumanCapitalRequest;
 use App\Http\Requests\UpdateScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
@@ -120,15 +121,27 @@ class ArchiveController extends Controller
     }
 
     /**
+     * Obtiene el grado académico más reciente.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function latestAcademicDegree(Request $request, Archive $archive)
+    {
+        return new JsonResponse($archive->latestAcademicDegree);
+    }
+
+    /**
      * Actualiza los datos académicos del postulante.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function updateAcademicDegree(UpdateAcademicDegreeRequest $request)
     {
-        AcademicDegree::where('id', $request->id)->update($request->safe()->toArray());
+        $academic_degree = AcademicDegree::find($request->id);
+        $academic_degree->fill($request->validated());
+        $academic_degree->save();
 
-        return new JsonResponse(AcademicDegree::find($request->id));
+        return new JsonResponse($academic_degree);
     }
 
     /**
@@ -243,7 +256,8 @@ class ArchiveController extends Controller
             DB::table($request->type)->updateOrInsert($upsert_array, $identifiers);
 
         # Actualiza los datos generales de la producción científica.
-        ScientificProduction::where('id', $request->id)->update($request->only('state','title','publish_date', 'type'));
+        ScientificProduction::where('id', $request->id)
+            ->update($request->safe()->only('state','title','publish_date', 'type'));
         
         return new JsonResponse(
             ScientificProduction::leftJoin(
@@ -269,7 +283,7 @@ class ArchiveController extends Controller
     {
         ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
 
-        return new JsonResponse(Author::create($request->only('scientific_production_id', 'name')));
+        return new JsonResponse(Author::create($request->safe()->only('scientific_production_id', 'name')));
     }
 
     /**
@@ -280,7 +294,8 @@ class ArchiveController extends Controller
     public function updateScientificProductionAuthor(UpdateScientificProductionAuthorRequest $request)
     {
         ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
-        Author::where('id', $request->id)->update($request->only('scientific_production_id', 'name'));
+        Author::where('id', $request->id)
+            ->update($request->safe()->only('scientific_production_id', 'name'));
 
         return new JsonResponse(Author::find($request->id));
     }
@@ -290,8 +305,10 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function updateHumanCapital(Request $request)
+    public function updateHumanCapital(UpdateHumanCapitalRequest $request)
     {
-        //HumanCapital::where();
+        HumanCapital::where('id', $request->id)->update($request->validated());
+
+        return new JsonResponse(HumanCapital::find($request->id));
     }
 }

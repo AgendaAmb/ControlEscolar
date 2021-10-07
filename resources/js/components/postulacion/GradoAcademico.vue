@@ -123,7 +123,7 @@
 
         <div class="form-group col-md-4">
           <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
-          <select class="form-control">
+          <select v-model="DigitalSignature" class="form-control">
             <option value="" selected> Escoge una opción</option>
             <option value="Si"> Si</option>
             <option value="No"> No </option>
@@ -197,14 +197,20 @@ export default {
     // id del expediente.
     archive_id: Number,
 
+    // Cédula profesional.
+    cedula: Number,
+
     // Título del grado académico.
     degree: String,
 
     // Tipo de grado académico
     degree_type: String,
 
-    // Cédula profesional.
-    cedula: Number,
+    // Estatus académico.
+    status: String,
+
+    // Modo de titulación.
+    titration_mode: String,
 
     // País en donde el estudiante realizó sus estudios.
     country: String,
@@ -212,23 +218,17 @@ export default {
     // Universidad en donde el postulante realizó sus estudios.
     university: String,
 
-    // Modo de titulación.
-    titration_mode: String,
-
     // Número de CVU de CONACyT.
     cvu: Number,
 
-    // Estatus académico.
-    status: String,
+    // Promedio obtenido.
+    knowledge_card: String,
+
+    // Firma electrónica.
+    digital_signature: String,
 
     // Estado de los datos del grado académico.
-    state: { 
-      type: String,
-      
-      validator(value){
-        return ['Incompleto','Completo'].indexOf(value) !== -1;
-      }
-    },
+    state: String,
 
     // Promedio obtenido.
     average: Number,
@@ -238,9 +238,6 @@ export default {
 
     // Promedio obtenido.
     max_avg: Number,
-
-    // Promedio obtenido.
-    knowledge_card: String,
 
     // Documentos requeridos en el programa académico.
     required_documents: Array,
@@ -357,6 +354,14 @@ export default {
       }
     },
 
+    DigitalSignature: {
+      get(){
+        return this.digital_signature;
+      },
+      set(newVal){
+        this.$emit('update:digital_signature', newVal);
+      }
+    },
     Average: {
       get(){
         return this.average;
@@ -444,6 +449,7 @@ export default {
         min_avg: this.min_avg,
         max_avg: this.max_avg,
         knowledge_card: this.knowledge_card,
+        digital_signature: this.digital_signature
 
       }).then(response => {
 
@@ -452,6 +458,9 @@ export default {
           this.$emit(event, response.data[dataKey]);
           Vue.set(this.datosValidos, key, 'Campo guardado exitosamente.');
         });
+
+        if (response.data.state === 'Completo')
+          this.$emit('gradoAcademicoAgregado', this);
 
       }).catch(error => {
         this.State = 'Incompleto';

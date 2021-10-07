@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAcademicDegreeRequest extends FormRequest
 {
@@ -29,15 +30,16 @@ class UpdateAcademicDegreeRequest extends FormRequest
             'state' => ['required', 'in:Incompleto,Completo'],
             'degree' => ['nullable', 'required_if:state,Completo'],
             'degree_type' => ['nullable', 'required_if:state,Completo', 'in:Licenciatura,Maestría', 'string'],
-            'cvu' => ['nullable', 'required_if:state,Completo', 'numeric'],
-            'cedula' => ['nullable', 'required_if:state,Completo', 'numeric'],
+            'cvu' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'numeric'],
+            'cedula' => ['nullable', Rule::requiredIf($this->status === 'Grado obtenido' && $this->state === 'Completo'), 'numeric'],
             'country' => ['nullable', 'required_if:state,Completo', 'string'],
             'university' => ['nullable', 'required_if:state,Completo', 'string'],
             'status' => ['nullable', 'required_if:state,Completo', 'in:Pasante,Grado obtenido,Título o grado en proceso', 'string'],
             'average' => ['nullable', 'required_if:state,Completo', 'numeric'],
             'min_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
             'max_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
-            'knowledge_card' => ['nullable', 'required_if:state,Completo', 'string'],
+            'knowledge_card' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
+            'digital_signature' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
         ];
     }
 }

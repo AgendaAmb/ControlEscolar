@@ -85,7 +85,7 @@ export default {
       this.enviaCapitalHumano(evento, 'Completo');
     },
     actualizaCapitalHumano(evento){
-      this.agregaCapitalHumano(evento, 'Incompleto');
+      this.enviaCapitalHumano(evento, 'Incompleto');
     },
     enviaCapitalHumano(evento, estado){
       this.errores = {};

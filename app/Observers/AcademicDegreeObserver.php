@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\AcademicDegree;
 use App\Models\RequiredDocument;
+use Illuminate\Support\Facades\Storage;
 
 class AcademicDegreeObserver
 {
@@ -37,7 +38,13 @@ class AcademicDegreeObserver
      */
     public function updated(AcademicDegree $academicDegree)
     {
-        //
+        # En caso de que el aspirante ya haya completado de llenar los
+        # datos, se le da la opción de agregar otro grado académico.
+        if ($academicDegree->state === 'Completo')
+        {
+            $archive = $academicDegree->archive;
+            $archive->academicDegrees()->createMany([['state'=>'Incompleto']]);
+        }
     }
 
     /**

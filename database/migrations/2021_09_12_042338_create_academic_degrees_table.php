@@ -29,6 +29,7 @@ class CreateAcademicDegreesTable extends Migration
             // Datos del cvu.
             $table->integer('cvu')->nullable();
             $table->string('knowledge_card')->nullable();
+            $table->string('digital_signature')->nullable();
 
             // Datos del promedio.
             $table->float('average')->nullable();
