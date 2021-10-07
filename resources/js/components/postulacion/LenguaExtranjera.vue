@@ -407,21 +407,16 @@ export default {
         writing_level: this.writing_level
 
       }).then(response => {
-        this.id = response.data.id;
-        this.archive_id = response.data.archive_id;
-        this.State = response.data.state;
-        this.Language = response.data.language;
-        this.Institution = response.data.Institution;
-        this.Score = response.data.score;
-        this.PresentedAt = response.data.presented_at;
-        this.ValidFrom = response.data.valid_from;
-        this.ValidTo = response.data.valid_from;
-        this.LanguageDomain = response.data.language_domain;
-        this.ConversationalLevel = response.data.conversational_level;
-        this.ReadingLevel = response.data.reading_level;
-        this.WritingLevel = response.data.writing_level;
- 
+        
+        // El resultado fue exitoso.
+        Object.keys(response.data).forEach(dataKey => {
+          var event = 'update:' + dataKey;
+          this.$emit(event, response.data[dataKey]);
+        });
+
       }).catch(error => {
+        
+        // La solicitud no fue procesada correctamente.
         this.State = 'Incompleto';
         var errores = error.response.data['errors'];
 

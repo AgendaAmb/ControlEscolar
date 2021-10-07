@@ -31,10 +31,10 @@ class UpdateScientificProductionRequest extends FormRequest
             'state' => ['required', 'in:Incompleto,Completo'],
             'title' => ['nullable', 'required_if:state,Completo','string'],
             'publish_date' => ['nullable', 'required_if:Completo,string'],
-            'post_title' => ['nullable', Rule::requiredIf($this->state === 'Completo' && ($this->type === 'working_documents' || $this->type === 'working_memories'))],
-            'institution' => ['nullable', Rule::requiredIf($this->state === 'Completo' && $this->type === 'technical_reports')],
-            'article_name' => ['nullable', Rule::requiredIf($this->state === 'Completo' && $this->type === 'published_chapters')],
-            'magazine_name' => ['nullable', Rule::requiredIf($this->state === 'Completo' && $this->type === 'articles')],
+            'post_title' => ['nullable', Rule::requiredIf($this->state === 'Completo' || $this->type === 'working_documents' || $this->type === 'working_memories')],
+            'institution' => ['nullable', Rule::requiredIf($this->state === 'Completo' || $this->type === 'technical_reports')],
+            'article_name' => ['nullable', Rule::requiredIf($this->state === 'Completo' || $this->type === 'published_chapters')],
+            'magazine_name' => ['nullable', Rule::requiredIf($this->state === 'Completo' || $this->type === 'articles')],
         ];
     }
 }

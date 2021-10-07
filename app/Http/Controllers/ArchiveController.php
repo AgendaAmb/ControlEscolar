@@ -10,9 +10,11 @@ use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
 use App\Models\Archive;
+use App\Models\ScientificProduction;
 use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArchiveController extends Controller
 {
@@ -208,16 +210,50 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function updateSientificProduction(UpdateScientificProductionRequest $request)
+    public function updateScientificProduction(UpdateScientificProductionRequest $request)
     {
+        $type = ScientificProduction::where('id', $request->id)->value('type');
         
+        # Determina si el tipo de producción científica cambió
+        # y borra la producción científica anterior.
+        if ($type!== null && $type !== $request->type)
+            DB::table($type)->delete($request->id);
+        
+        $upsert_array = [];
+        $identifiers = ['scientific_production_id', $request->id];
 
-        /*
+        switch ($request->type)
+        {
+            case 'articles': $upsert_array = ['magazine_name' => $request->magazine_name]; break;
+            case 'published_chapters': $upsert_array = ['article_name' => $request->article_name]; break;
+            case 'technical_reports': $upsert_array = ['institution' => $request->institution]; break;
+            case 'working_documents': $upsert_array = ['post_title' => $request->post_title]; break;
+            case 'working_memories': $upsert_array = ['post_title' => $request->post_title]; break;
+        }
+
+        # Actualiza los datos adicionales de la producción científica.
+        DB::table($request->type)->upsert($upsert_array, $identifiers);
+
+        # Actualiza los datos generales de la producción científica.
+        ScientificProduction::where('id', $request->id)->update($request->only('state','title','publish_date'));
+        
         return new JsonResponse(
-            $appliant_language->requiredDocuments()
-            ->select('required_documents.*','appliant_language_required_document.location as location')
-            ->where('id', $request->requiredDocumentId)
-            ->first()
-        );*/
+            ScientificProduction::leftJoin(
+                'articles', 'articles.scientific_production_id', 'scientific_productions.id',
+            
+            )->leftJoin(
+                'published_chapters', 'published_chapters.scientific_production_id', 'scientific_productions.id',
+            
+            )->leftJoin(
+                'technical_reports', 'technical_reports.scientific_production_id', 'scientific_productions.id',
+
+            )->leftJoin(
+                'working_documents', 'working_documents.scientific_production_id', 'scientific_productions.id',
+            
+            )->leftJoin(
+                'working_memories', 'working_memories.scientific_production_id', 'scientific_productions.id',
+            
+            )
+        );
     }
 }

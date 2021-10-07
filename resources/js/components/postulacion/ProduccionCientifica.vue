@@ -3,62 +3,64 @@
     <h4 class="form-group col-12 my-1"> </h4>
     <div class="form-group col-md-4">
       <label> Tipo de publicación: </label>
-        <select v-model="tipo" class="form-control">
-          <option value="" selected>Escoge una opción</option>
-          <option value="Publicación de artículos"> Publicación de artículos </option>
-          <option value="Publicación de libros"> Publicación de libros </option>
-          <option value="Capítulos publicados"> Capítulos publicados </option>
-          <option value="Reportes técnicos"> Reportes técnicos </option>
-          <option value="Memorias"> Memorias </option>
-          <option value="Documentos de trabajo"> Documentos de trabajo </option>
-          <option value="Reseñas"> Reseñas </option>
+        <select v-model="Type" class="form-control">
+          <option :value="null" selected>Escoge una opción</option>
+          <option value="articles"> Publicación de artículos </option>
+          <option value="published_books"> Publicación de libros </option>
+          <option value="published_chapters"> Capítulos publicados </option>
+          <option value="technical_reports"> Reportes técnicos </option>
+          <option value="working_memories"> Memorias de trabajo </option>
+          <option value="working_documents"> Documentos de trabajo </option>
+          <option value="reviews"> Reseñas </option>
       </select>
     </div>
 
     <div class="form-group col-md-12">
-      <publicacion-articulo v-if="tipo === 'Publicación de artículos'"
-        :titulo-articulo.sync="titulo"
-        :nombre-revista.sync="nombre"
-        :ano-publicacion.sync="año"
-        :autores.sync="autores">
+      <publicacion-articulo v-if="tipos[Type] === 'Publicación de artículos'"
+        :title.sync="Title"
+        :magazine_name.sync="MagazineName"
+        :publish_date.sync="PublishDate">
       </publicacion-articulo>
 
-      <publicacion-capitulo v-else-if="tipo === 'Capítulos publicados'"
-        :titulo-capitulo.sync="titulo"
-        :nombre-articulo.sync="nombre"
-        :ano-publicacion.sync="año"
-        :autores.sync="autores">
+      <publicacion-capitulo v-else-if="tipos[Type] === 'Capítulos publicados'"
+        :titulo-capitulo.sync="Title"
+        :nombre-articulo.sync="ArticleName"
+        :ano-publicacion.sync="PublishDate" >
       </publicacion-capitulo>
 
-      <publicacion-libro v-else-if="tipo === 'Publicación de libros'"
-        :titulo-libro.sync="titulo"
-        :ano-publicacion.sync="año"
-        :autores.sync="autores">
+      <publicacion-libro v-else-if="tipos[Type] === 'Publicación de libros'"
+        :titulo-libro.sync="Title"
+        :ano-publicacion.sync="PublishDate">
       </publicacion-libro>
 
-      <div v-else-if="tipo === 'Reportes técnicos'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="institucion"> Institución a la que se presenta el reporte: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <reporte-tecnico v-else-if="tipos[Type] === 'Reportes técnicos'"
+        :title.sync="Title"
+        :institulo.sync="Institution"
+        :publish_date.sync="PublishDate">
+      </reporte-tecnico>
 
-      <div v-else-if="tipo === 'Memorias'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título de la memoria: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <memoria-trabajo v-else-if="tipos[Type] === 'Memorias de trabajo'"
+        :title.sync="Title"
+        :post_title.sync="PostTitle"
+        :publish_date.sync="PublishDate">
+      </memoria-trabajo>
 
-      <div v-else-if="tipo === 'Documentos de trabajo'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título del documento de trabajo: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <documento-trabajo v-else-if="tipos[Type] === 'Documentos de trabajo'"
+        :title.sync="Title"
+        :post_title.sync="PostTitle"
+        :publish_date.sync="PublishDate">
+      </documento-trabajo>
 
-      <div v-else-if="tipo === 'Reseñas'" class="row">
-        <input-solicitud clase="form-group col-md-4" v-model="titulo"> Título de la reseña: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="nombre"> Título de la publicación: </input-solicitud>
-        <input-solicitud clase="form-group col-md-4" v-model="año"> Año de publicación: </input-solicitud>
-      </div>
+      <resenia v-else-if="tipos[Type] === 'Reseñas'"
+        :title.sync="Title"
+        :post_title.sync="PostTitle"
+        :publish_date.sync="PublishDate">
+      </resenia>
+    </div>
+
+    <div v-if="Type !== null" class="col-12 my-3">
+      <button @click="agregaProduccionCientifica" class="btn btn-success"> Agregar </button>
+      <button @click="actualizaProduccionCientifica" class="mx-2 btn btn-primary"> Guardar </button>
     </div>
   </div>
 </template>
@@ -68,9 +70,13 @@
 
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
+import DocumentoTrabajo from './produccion-cientifica/DocumentoTrabajo.vue';
+import MemoriaTrabajo from './produccion-cientifica/MemoriaTrabajo.vue';
 import PublicacionArticulo from './produccion-cientifica/PublicacionArticulo.vue';
 import PublicacionCapitulo from './produccion-cientifica/PublicacionCapitulo.vue';
 import PublicacionLibro from './produccion-cientifica/PublicacionLibro.vue';
+import ReporteTecnico from './produccion-cientifica/ReporteTecnico.vue';
+import Resenia from './produccion-cientifica/Resenia.vue';
 
 export default {
   name: "produccion-cientifica",
@@ -79,19 +85,168 @@ export default {
     InputSolicitud, 
     PublicacionArticulo, 
     PublicacionCapitulo,
-    PublicacionLibro
+    PublicacionLibro,
+    ReporteTecnico,
+    MemoriaTrabajo,
+    DocumentoTrabajo,
+    Resenia
+  },
+
+  props: {
+    // Id de la producción científica.
+    id: Number,
+
+    // Id del expediente.
+    archive_id: Number,
+
+    // Estado de control
+    state: String,
+
+    // Tipo de producción científica.
+    type: String,
+
+    // Título.
+    title: String,
+
+    // Fecha de publicación.
+    publish_date: String,
+
+    // Nombre de la revista.
+    magazine_name: String,
+
+    // Nombre de la revista.
+    article_name: String,
+
+    // Nombre de la institución.
+    institution: String,
+
+    // Nombre de la publicación.
+    post_title: String,
+  },
+
+  computed: {
+    State: {
+      get(){
+        return this.state;
+      },
+      set(newVal){
+        this.$emit("update:state", newVal);
+      }
+    },
+    Type: {
+      get(){
+        return this.type;
+      }, 
+      set(newVal){
+        this.$emit("update:type", newVal);
+      }
+    },
+    Title: {
+      get(){
+        return this.title;
+      }, 
+      set(newVal){
+        this.$emit("update:title", newVal);
+      }
+    },
+    PublishDate: {
+      get(){
+        return this.publish_date;
+      }, 
+      set(newVal){
+        this.$emit("update:publish_date", newVal);
+      }
+    },
+    MagazineName: {
+      get(){
+        return this.magazine_name;
+      }, 
+      set(newVal){
+        this.$emit("update:magazine_name", newVal);
+      }
+    },
+    ArticleName: {
+      get(){
+        return this.article_name;
+      }, 
+      set(newVal){
+        this.$emit("update:article_name", newVal);
+      }
+    },
+    Institution: {
+      get(){
+        return this.institution;
+      }, 
+      set(newVal){
+        this.$emit("update:institution", newVal);
+      }
+    },
+    PostTitle: {
+      get(){
+        return this.post_title;
+      }, 
+      set(newVal){
+        this.$emit("update:post_title", newVal);
+      }
+    }
   },
 
   data() {
     return {
-      tipo: '',
-      nombre: '',
-      titulo: '',
-      capLibro: '',
-      autores: [],
-      año: '',
-      institucion: '',
+      errores: {},
+      tipos: {
+        articles: 'Publicación de artículos',
+        published_books: 'Publicación de libros',
+        published_chapters: 'Capítulos publicados',
+        technical_reports: 'Reportes técnicos',
+        working_documents: 'Documentos de trabajo',
+        working_memories: 'Memorias de trabajo',
+        reviews: 'Reseñas',
+      }
     };
+  },
+
+  methods: {
+    agregaProduccionCientifica(evento) {
+      this.enviaProduccionCientifica(evento, 'Completo');
+    },
+
+    actualizaProduccionCientifica(evento){
+      this.enviaProduccionCientifica(evento, 'Incompleto');
+    },
+
+    enviaProduccionCientifica(evento, estado){
+      this.errores = {};
+
+      axios.post('/controlescolar/solicitud/updateScientificProduction', {
+        
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        type: this.type,
+        title: this.title,
+        publish_date: this.publish_date,
+        magazine_name: this.magazine_name,
+        article_name: this.article_name,
+        institution: this.institution,
+        post_title: this.post_title,
+
+      }).then(response => {
+        Object.keys(response.data).forEach(dataKey => {
+          var event = 'update:' + dataKey;
+          this.$emit(event, response.data[dataKey]);
+        });
+ 
+      }).catch(error => {
+        this.State = 'Incompleto';
+        var errores = error.response.data['errors'];
+
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
+      });
+    },
   }
 };
 </script>

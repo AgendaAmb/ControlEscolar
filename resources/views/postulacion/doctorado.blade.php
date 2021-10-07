@@ -84,12 +84,22 @@ const academic_program = @json($academic_program);
                 :field.sync="experience.field"
                 :working_position_description.sync="experience.working_position_description"
                 :achievements.sync="experience.achievements">
-        
             </experiencia-laboral>
         </template>
 
         <template v-slot:prodcientifica>
-            <produccion-cientifica></produccion-cientifica>
+            <produccion-cientifica v-for="production in archive.scientific_productions"
+                v-bind="production"
+                v-bind:key="production.id"
+                :state.sync="production.state"
+                :type.sync="production.type"
+                :title.sync="production.title"
+                :publish_date.sync="production.publish_date"
+                :magazine_name.sync="production.magazine_name"
+                :article_name.sync="production.article_name"
+                :institution.sync="production.institution"
+                :post_title.sync="production.post_title">
+            </produccion-cientifica>
         </template>
 
         

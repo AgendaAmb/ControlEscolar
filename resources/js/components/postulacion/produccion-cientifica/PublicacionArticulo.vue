@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label> Título del artículo: </label>
-      <input type="text" class="form-control" v-model="TituloArticulo">
+      <input type="text" class="form-control" v-model="ArticleName">
     </div>
 
     <div class="form-group col-md-6">
@@ -11,12 +11,12 @@
 
     <div class="form-group col-md-6">
       <label> Nombre de la revista: </label>
-      <input type="text" class="form-control" v-model="NombreRevista">
+      <input type="text" class="form-control" v-model="MagazineName">
     </div>
 
     <div class="form-group col-md-6">
-      <label> Año de publicación: </label>
-      <input type="text" class="form-control" v-model="AnoPublicacion">
+      <label> Fecha de publicación: </label>
+      <input type="date" class="form-control" v-model="PublishDate">
     </div>
   </div>
 </template>
@@ -28,43 +28,50 @@ export default {
   name: "publicacion-articulo",
   components: {AutorArticulo},
   props: {
-    tituloArticulo: String,
-    autores: Array,
-    nombreRevista: String,
-    anoPublicacion: String,
+    // Nombre del artículo
+    title: String,
+    
+    // Autores del artículo
+    authors: Array,
+
+    // Nombre de la revista.
+    magazine_name: String,
+
+    // Fecha de publicación.
+    publish_date: String,
   },
 
   computed: {
-    TituloArticulo: {
+    ArticleName: {
       get() {
-        return this.nombreArticulo;
+        return this.title;
       },
       set(newVal) {
-        this.$emit("update:nombreArticulo", newVal);
+        this.$emit("update:title", newVal);
       },
     },
-    Autores: {
+    Authors: {
       get() {
-        return this.autores;
+        return this.authors;
       },
       set() {
-        this.$emit("update:autores", newVal);
+        this.$emit("update:authors", newVal);
       },
     },
-    NombreRevista: {
+    MagazineName: {
       get() {
-        return this.nombreRevista;
+        return this.magazine_name;
       },
       set(newVal) {
-        this.$emit("update:nombreRevista", newVal);
+        this.$emit("update:magazine_name", newVal);
       },
     },
-    AnoPublicacion: {
+    PublishDate: {
       get() {
-        return this.anoPublicacion;
+        return this.publish_date;
       },
       set(newVal) {
-        this.$emit("update:anoPublicacion", newVal);
+        this.$emit("update:publish_date", newVal);
       },
     },
   },
