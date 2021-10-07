@@ -43,7 +43,7 @@ class Archive extends Model
         'academicDegrees.requiredDocuments',
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
-        'scientificProductions'
+        'scientificProductions.authors'
     ];
     
     /**

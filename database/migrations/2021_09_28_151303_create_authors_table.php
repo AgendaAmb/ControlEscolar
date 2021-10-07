@@ -14,10 +14,13 @@ class CreateAuthorsTable extends Migration
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('scientific_production_id')
                 ->constrained('scientific_productions')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->string('name');
         });
     }
 

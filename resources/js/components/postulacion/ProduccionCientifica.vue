@@ -20,6 +20,15 @@
         :title.sync="Title"
         :magazine_name.sync="MagazineName"
         :publish_date.sync="PublishDate">
+
+        <!-- Otros autores del artículos -->
+        <autor-articulo v-for="author in Authors"
+          v-bind="author"
+          v-bind:key="author.id"
+          :name.sync="author.name"
+          @agregaAutor="agregaAutor"
+          @actualizaAutor="actualizaAutor">
+        </autor-articulo>
       </publicacion-articulo>
 
       <publicacion-capitulo v-else-if="tipos[Type] === 'Capítulos publicados'"
@@ -70,6 +79,7 @@
 
 import DocumentoRequerido from './DocumentoRequerido.vue';
 import InputSolicitud from './InputSolicitud.vue';
+import AutorArticulo from './produccion-cientifica/AutorArticulo.vue';
 import DocumentoTrabajo from './produccion-cientifica/DocumentoTrabajo.vue';
 import MemoriaTrabajo from './produccion-cientifica/MemoriaTrabajo.vue';
 import PublicacionArticulo from './produccion-cientifica/PublicacionArticulo.vue';
@@ -89,6 +99,7 @@ export default {
     ReporteTecnico,
     MemoriaTrabajo,
     DocumentoTrabajo,
+    AutorArticulo,
     Resenia
   },
 
@@ -122,6 +133,9 @@ export default {
 
     // Nombre de la publicación.
     post_title: String,
+
+    // Autores de la producción científica.
+    authors: Array,
   },
 
   computed: {
@@ -188,6 +202,14 @@ export default {
       set(newVal){
         this.$emit("update:post_title", newVal);
       }
+    },
+    Authors: {
+      get(){
+        return this.authors;
+      }, 
+      set(newVal){
+        this.$emit("update:authors", newVal);
+      }
     }
   },
 
@@ -204,6 +226,14 @@ export default {
         reviews: 'Reseñas',
       }
     };
+  },
+
+  mounted(){
+    this.Authors.push({
+      id: -1,
+      scientific_production_id: this.id,
+      name: null
+    });
   },
 
   methods: {
@@ -247,6 +277,42 @@ export default {
         });
       });
     },
+
+    agregaAutor(nuevoAutor){
+
+       axios.post('/controlescolar/solicitud/addScientificProductionAuthor', {
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: nuevoAutor.Name
+      }).then(response => {
+      
+        Vue.set(this.Authors, this.Authors.length - 1, response.data)
+        this.Authors.push({
+          id: -1,
+          scientific_production_id: this.id,
+          name: null
+        });
+      }).catch(error => {
+      });
+    },
+
+    actualizaAutor(autor){
+
+       axios.post('/controlescolar/solicitud/updateScientificProductionAuthor', {
+        id: autor.id, 
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: autor.Name
+      }).then(response => {
+        Object.keys(response.data).forEach(dataKey => {
+          var event = 'update:' + dataKey;
+          autor.$emit(event, response.data[dataKey]);
+        });
+      }).catch(error => {
+      });
+    }
   }
 };
 </script>

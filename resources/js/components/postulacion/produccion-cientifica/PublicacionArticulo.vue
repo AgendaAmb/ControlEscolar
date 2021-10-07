@@ -6,7 +6,7 @@
     </div>
 
     <div class="form-group col-md-6">
-      <autor-articulo></autor-articulo>
+      <slot></slot>
     </div>
 
     <div class="form-group col-md-6">
@@ -31,9 +31,6 @@ export default {
     // Nombre del artículo
     title: String,
     
-    // Autores del artículo
-    authors: Array,
-
     // Nombre de la revista.
     magazine_name: String,
 
@@ -48,14 +45,6 @@ export default {
       },
       set(newVal) {
         this.$emit("update:title", newVal);
-      },
-    },
-    Authors: {
-      get() {
-        return this.authors;
-      },
-      set() {
-        this.$emit("update:authors", newVal);
       },
     },
     MagazineName: {

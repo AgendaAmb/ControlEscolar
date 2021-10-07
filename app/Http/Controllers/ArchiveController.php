@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Http\Requests\UpdateAppliantLanguageRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
@@ -10,6 +11,7 @@ use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
 use App\Models\Archive;
+use App\Models\Author;
 use App\Models\ScientificProduction;
 use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
@@ -218,7 +220,9 @@ class ArchiveController extends Controller
         # Determina si el tipo de producción científica cambió
         # y borra la producción científica anterior.
         if ($type!== null && $type !== $request->type && Schema::hasTable($type))
+        {
             DB::table($type)->where('scientific_production_id', $request->id)->delete();
+        }
         
         $upsert_array = [];
         $identifiers = ['scientific_production_id' => $request->id];
@@ -241,21 +245,41 @@ class ArchiveController extends Controller
         
         return new JsonResponse(
             ScientificProduction::leftJoin(
-                'articles', 'articles.scientific_production_id', 'scientific_productions.id',
-            
+                'articles', 'articles.scientific_production_id', 'scientific_productions.id'
             )->leftJoin(
-                'published_chapters', 'published_chapters.scientific_production_id', 'scientific_productions.id',
-            
+                'published_chapters', 'published_chapters.scientific_production_id', 'scientific_productions.id'
             )->leftJoin(
-                'technical_reports', 'technical_reports.scientific_production_id', 'scientific_productions.id',
-
+                'technical_reports', 'technical_reports.scientific_production_id', 'scientific_productions.id'
             )->leftJoin(
-                'working_documents', 'working_documents.scientific_production_id', 'scientific_productions.id',
-            
+                'working_documents', 'working_documents.scientific_production_id', 'scientific_productions.id'
             )->leftJoin(
-                'working_memories', 'working_memories.scientific_production_id', 'scientific_productions.id',
-            
+                'working_memories', 'working_memories.scientific_production_id', 'scientific_productions.id'
             )->first()
         );
+    }
+
+    /**
+     * Agrega un autor a la producción científica.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function addScientificProductionAuthor(AddScientificProductionAuthorRequest $request)
+    {
+        ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
+
+        return new JsonResponse(Author::create($request->only('scientific_production_id', 'name')));
+    }
+
+    /**
+     * Actualiza un autor de una producción científica.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateScientificProductionAuthor(Request $request)
+    {
+        ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
+        Author::where('id', $request->id)->update($request->only('scientific_production_id', 'name'));
+
+        return new JsonResponse(Author::find($request->id));
     }
 }

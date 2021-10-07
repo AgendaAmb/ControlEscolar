@@ -25,16 +25,26 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
     Route::get('/{academicProgram}', [ArchiveController::class,'postulacion'])->name('postulacion'); 
 
-    # Actualiza diferentes datos de la solicitud de un postulante.
+    # Requisitos de ingreso.
     Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']); 
     Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']); 
     Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']); 
+    
+    # Grados académicos.
     Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
     Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
+    
+    # Experiencia laboral.
     Route::post('/updateWorkingExperience', [ArchiveController::class, 'updateWorkingExperience']);
+
+    # Lenguas extranjeras del postulante.
     Route::post('/updateAppliantLanguage', [ArchiveController::class, 'updateAppliantLanguage']);
     Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
+
+    # Producciones científicas.
     Route::post('/updateScientificProduction', [ArchiveController::class, 'updateScientificProduction']);
+    Route::post('/addScientificProductionAuthor', [ArchiveController::class, 'addScientificProductionAuthor']);
+    Route::post('/updateScientificProductionAuthor', [ArchiveController::class, 'updateScientificProductionAuthor']);
 });
 
 

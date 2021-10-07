@@ -90,6 +90,14 @@ class ScientificProduction extends Model
     }
 
     /**
+     * Obtiene otros autores de la producción científica.
+     */
+    public function authors()
+    {
+        return $this->hasMany(Author::class);
+    }
+
+    /**
      * Obtiene los documentos requeridos del expediente.
      *
      * @return BelongsTo
