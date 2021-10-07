@@ -43,7 +43,8 @@ class Archive extends Model
         'academicDegrees.requiredDocuments',
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
-        'scientificProductions.authors'
+        'scientificProductions.authors',
+        'humanCapitals'
     ];
     
     /**
@@ -114,6 +115,15 @@ class Archive extends Model
             ->leftJoin('technical_reports', 'scientific_productions.id', 'technical_reports.scientific_production_id');
     }
 
+    /**
+     * Obtiene los capitales humanos del postulante.
+     *
+     * @return HasMany
+     */
+    public function humanCapitals(): HasMany
+    {
+        return $this->hasMany(HumanCapital::class);
+    }
 
     /**
      * Obtiene el programa académico, al cual corresponde

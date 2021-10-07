@@ -20,7 +20,6 @@ const academic_program = @json($academic_program);
                 :documentos.sync="archive.personal_documents">
             </postulante>
         </template>
-
        
         <template v-slot:historialacademico >
             <grado-academico v-for="grado in archive.academic_degrees"
@@ -69,7 +68,6 @@ const academic_program = @json($academic_program);
                 :documentos.sync="archive.entrance_documents">
             </requisitos-ingreso>
         </template>
-
         
         <template v-slot:experiencialaboral>
             <experiencia-laboral v-for="experience in archive.appliant_working_experiences"
@@ -102,13 +100,15 @@ const academic_program = @json($academic_program);
             </produccion-cientifica>
         </template>
 
-        
-
-        
-        <!--
         <template v-slot:caphumano>
-            <capital-humano></capital-humano>
-        </template>-->
+            <capital-humano v-for="humanCapital in archive.human_capitals"
+                v-bind="humanCapital"
+                v-bind:key="humanCapital.id"
+                :course_name.sync="humanCapital.course_name"
+                :assisted_at.sync="humanCapital.assisted_at"
+                :scolarship_level.sync="humanCapital.scolarship_level">
+            </capital-humano>
+        </template>
     </solicitud-postulante>
 </form>
 

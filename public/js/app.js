@@ -2699,7 +2699,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _clases_CapitalHumano_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../clases/CapitalHumano.js */ "./resources/js/clases/CapitalHumano.js");
 //
 //
 //
@@ -2720,13 +2719,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "capital-humano",
-  data: function data() {
-    return {
-      capitalHumano: new _clases_CapitalHumano_js__WEBPACK_IMPORTED_MODULE_0__.default()
-    };
+  props: {
+    // id del capital humano.
+    id: Number,
+    // id del expediente.
+    archive_id: Number,
+    // Estado de control.
+    state: String,
+    // Nombre del curso.
+    course_name: String,
+    // Fecha del curso.
+    assisted_at: String,
+    // Nivel de escolaridad.
+    scolarship_level: String
+  },
+  computed: {
+    CourseName: {
+      get: function get() {
+        return this.course_name;
+      },
+      set: function set(newVal) {
+        this.$emit('update:course_name', newVal);
+      }
+    },
+    AssistedAt: {
+      get: function get() {
+        return this.assisted_at;
+      },
+      set: function set(newVal) {
+        this.$emit('update:assisted_at', newVal);
+      }
+    },
+    ScolarshipLevel: {
+      get: function get() {
+        return this.scolarship_level;
+      },
+      set: function set(newVal) {
+        this.$emit('update:scolarship_level', newVal);
+      }
+    }
   }
 });
 
@@ -47228,19 +47261,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.capitalHumano.nombreCurso,
-            expression: "capitalHumano.nombreCurso"
+            value: _vm.CourseName,
+            expression: "CourseName"
           }
         ],
         staticClass: "form-control",
         attrs: { type: "text" },
-        domProps: { value: _vm.capitalHumano.nombreCurso },
+        domProps: { value: _vm.CourseName },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.capitalHumano, "nombreCurso", $event.target.value)
+            _vm.CourseName = $event.target.value
           }
         }
       })
@@ -47254,19 +47287,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.capitalHumano.fechaCurso,
-            expression: "capitalHumano.fechaCurso"
+            value: _vm.AssistedAt,
+            expression: "AssistedAt"
           }
         ],
         staticClass: "form-control",
         attrs: { type: "date" },
-        domProps: { value: _vm.capitalHumano.fechaCurso },
+        domProps: { value: _vm.AssistedAt },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.capitalHumano, "fechaCurso", $event.target.value)
+            _vm.AssistedAt = $event.target.value
           }
         }
       })
@@ -47280,19 +47313,19 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.capitalHumano.nivelEscolaridad,
-            expression: "capitalHumano.nivelEscolaridad"
+            value: _vm.ScolarshipLevel,
+            expression: "ScolarshipLevel"
           }
         ],
         staticClass: "form-control",
         attrs: { type: "text" },
-        domProps: { value: _vm.capitalHumano.nivelEscolaridad },
+        domProps: { value: _vm.ScolarshipLevel },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.$set(_vm.capitalHumano, "nivelEscolaridad", $event.target.value)
+            _vm.ScolarshipLevel = $event.target.value
           }
         }
       })

@@ -31,6 +31,10 @@ class ArchiveObserver
             ['state'=>'Incompleto']
         ]);
 
+        $archive->humanCapitals()->createMany([
+            ['state'=>'Incompleto']
+        ]);
+
         $archive->personalDocuments()->attach(RequiredDocument::personalDocumentsId());
         $archive->personalDocuments()->attach(RequiredDocument::entranceDocumentsId());
     }

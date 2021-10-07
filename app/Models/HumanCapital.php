@@ -5,17 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Author extends Model
+class HumanCapital extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var bool
+     * @var array
      */
-    public $timestamps = false;
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * The attributes that aren't mass assignable.
@@ -31,6 +36,6 @@ class Author extends Model
      */
     public function archive(): BelongsTo
     {
-        return $this->belongsTo(ScientificProduction::class);
+        return $this->belongsTo(Archive::class);
     }
 }
