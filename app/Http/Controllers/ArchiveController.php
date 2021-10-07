@@ -15,6 +15,7 @@ use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ArchiveController extends Controller
 {
@@ -216,8 +217,8 @@ class ArchiveController extends Controller
         
         # Determina si el tipo de producción científica cambió
         # y borra la producción científica anterior.
-        if ($type!== null && $type !== $request->type)
-            DB::table($type)->delete($request->id);
+        if ($type!== null && $type !== $request->type && Schema::hasTable($type))
+            DB::table($type)->where('scientific_production_id', $request->id)->delete();
         
         $upsert_array = [];
         $identifiers = ['scientific_production_id' => $request->id];

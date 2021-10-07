@@ -27,7 +27,7 @@ class UpdateScientificProductionRequest extends FormRequest
         return [
             'id' => ['required','exists:scientific_productions,id'],
             'archive_id' => ['required', 'exists:archives,id'],
-            'type' => ['required', 'in:articles,published_chapters,technical_reports,working_documents,working_memories'],
+            'type' => ['required', 'in:articles,published_books,published_chapters,technical_reports,working_documents,working_memories,reviews'],
             'state' => ['required', 'in:Incompleto,Completo'],
             'title' => ['nullable', 'required_if:state,Completo','string'],
             'publish_date' => ['nullable', 'required_if:Completo,string'],

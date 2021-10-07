@@ -39,7 +39,6 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
 
 /*
-
 # Rutas para las cartas de intención.
 Route::prefix('cartaIntencion')->name('cartaIntencion.')->group(function(){
 
