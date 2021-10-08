@@ -4898,6 +4898,36 @@ __webpack_require__.r(__webpack_exports__);
     // Postulante de la solicitud.
     postulante: Object
   },
+  computed: {
+    ColorStrip: {
+      get: function get() {
+        var color = "#FFFFFF";
+
+        switch (this.academic_program.alias) {
+          case 'maestria':
+            color = "#0598BC";
+            break;
+
+          case 'doctorado':
+            color = "#FECC50";
+            break;
+
+          case 'enrem':
+            color = "#118943";
+            break;
+
+          case 'imarec':
+            color = "#";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: '1px'
+        };
+      }
+    }
+  },
   data: function data() {
     return {
       Countries: [],
@@ -50462,10 +50492,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("hr", {
-            staticClass: "d-block",
-            staticStyle: { "background-color": "#FECC50", height: "1px" }
-          })
+          _c("hr", { staticClass: "d-block", style: _vm.ColorStrip })
         ],
         1
       ),
@@ -50554,10 +50581,7 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("hr", {
-            staticClass: "d-block my-4",
-            staticStyle: { "background-color": "#FECC50", height: "1px" }
-          })
+          _c("hr", { staticClass: "d-block my-4", style: _vm.ColorStrip })
         ],
         2
       ),
@@ -50580,10 +50604,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("hr", {
-        staticClass: "col-12 my-4",
-        staticStyle: { "background-color": "#FECC50", height: "1px" }
-      }),
+      _c("hr", { staticClass: "col-12 my-4", style: _vm.ColorStrip }),
       _vm._v(" "),
       _c(
         "div",
@@ -50657,10 +50678,7 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("hr", {
-            staticClass: "d-block my-4",
-            staticStyle: { "background-color": "#FECC50", height: "1px" }
-          })
+          _c("hr", { staticClass: "d-block my-4", style: _vm.ColorStrip })
         ],
         2
       ),
@@ -50730,10 +50748,7 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("hr", {
-            staticClass: "d-block my-4",
-            staticStyle: { "background-color": "#FECC50", height: "1px" }
-          })
+          _c("hr", { staticClass: "d-block my-4", style: _vm.ColorStrip })
         ],
         2
       ),
@@ -50794,10 +50809,7 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("hr", {
-            staticClass: "d-block my-4",
-            staticStyle: { "background-color": "#FECC50", height: "1px" }
-          })
+          _c("hr", { staticClass: "d-block my-4", style: _vm.ColorStrip })
         ],
         2
       ),

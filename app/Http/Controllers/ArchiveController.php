@@ -10,7 +10,6 @@ use App\Http\Requests\UpdateScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
-use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
 use App\Models\Archive;
 use App\Models\Author;
@@ -24,31 +23,23 @@ use Illuminate\Support\Facades\Schema;
 
 class ArchiveController extends Controller
 {
-    /**
-     * Vistas de los programas académicos
-     */
-    public const ACADEMIC_PROGRAM_VIEWS = [
-        'maestria' => 'maestria',
-        'doctorado' => 'doctorado',
-        'enrem' => 'enrem',
-        'imarec' => 'imarec',
-    ];
 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postulacion(Request $request, $academicProgramName)
+    public function postulacion(Request $request, $archive)
     {
-        $academic_program = AcademicProgram::firstWhere('alias', $academicProgramName);
-        $archive = Archive::with(['entranceDocuments' => function($query){
+        $archiveModel = Archive::with(['entranceDocuments' => function($query){
 
             return $query->where('intention_letter', false)->where('recommendation_letter', false);
-        }])->firstWhere('id', 1);
+        }])->firstWhere('id',  $archive);
 
-        return view('postulacion.'.self::ACADEMIC_PROGRAM_VIEWS[$academicProgramName])
-        ->with('archive', $archive)
+        $academic_program = $archiveModel->academicProgram;
+
+        return view('postulacion.show')
+        ->with('archive', $archiveModel)
         ->with('academic_program', $academic_program);
     }
 

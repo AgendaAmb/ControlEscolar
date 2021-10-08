@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InterviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,7 @@ Route::view('/', 'pre-registro.index')->name('programasAcademicos');
 # Rutas de las solicitudes académicas.
 Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
-    Route::get('/{academicProgram}', [ArchiveController::class,'postulacion'])->name('postulacion'); 
+    Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('postulacion'); 
 
     # Requisitos de ingreso.
     Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']); 
@@ -52,24 +53,5 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 
-/*
-# Rutas para las cartas de intención.
-Route::prefix('cartaIntencion')->name('cartaIntencion.')->group(function(){
-
-    Route::get('{academicProgram}', [ArchiveController::class,'subirCartaIntencion'])->name('subirCartaIntencion'); 
-
-    # Actualiza la solicitud del aspirante
-    Route::post('/', [ArchiveController::class, 'otorgaCartaIntencion'])->name('otorgaCartaIntencion'); 
-});
-
-# Rutas para las cartas de recomendación.
-Route::prefix('cartaRecomendacion')->name('cartaRecomendacion.')->group(function(){
-
-    Route::get('{academicProgram}', [ArchiveController::class,'subirCartaRecomendacion'])->name('subirCartaRecomendacion'); 
-
-    # Actualiza la solicitud del aspirante
-    Route::post('/', [ArchiveController::class, 'otorgaCartaRecomendacion'])->name('otorgaCartaRecomendacion'); 
-});
-
-*/
-Route::view('/entrevistas', 'entrevistas.index')->name('entrevistas.index');
+# Rutas para las entrevistas.
+Route::apiResource('interviews', InterviewController::class);

@@ -6,7 +6,7 @@
         :archive_id="archive_id"
         :documentos.sync="personal_documents">
       </postulante>
-      <hr class="d-block" style="background-color:#FECC50; height: 1px;">
+      <hr class="d-block" :style="ColorStrip">
     </div>
   
     
@@ -32,7 +32,7 @@
         :paises="Countries"
         @gradoAcademicoAgregado="gradoAcademicoAgregado"> 
       </grado-academico>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
+      <hr class="d-block my-4" :style="ColorStrip">
     </div>
 
     <h2 class="col-12 my-4"><strong> Requisitos de ingreso </strong></h2>  
@@ -41,7 +41,7 @@
       :motivation.sync="motivation"
       :documentos.sync="entrance_documents">
     </requisitos-ingreso>
-    <hr class="col-12 my-4" style="background-color:#FECC50; height: 1px;">
+    <hr class="col-12 my-4" :style="ColorStrip">
 
     <div class="col-12">
       <h2 class="d-block my-4"><strong> Dominio de idiomas </strong></h2>
@@ -61,7 +61,7 @@
         :writing_level.sync="language.writing_level"
         :documentos.sync="language.required_documents">
       </lengua-extranjera>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
+      <hr class="d-block my-4" :style="ColorStrip">
     </div>
 
     <div class="col-12">
@@ -79,7 +79,7 @@
         :working_position_description.sync="experience.working_position_description"
         :achievements.sync="experience.achievements">
       </experiencia-laboral>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
+      <hr class="d-block my-4" :style="ColorStrip">
     </div>
 
     <div class="col-12">
@@ -96,7 +96,7 @@
         :institution.sync="production.institution"
         :post_title.sync="production.post_title">
       </produccion-cientifica>
-      <hr class="d-block my-4" style="background-color:#FECC50; height: 1px;">
+      <hr class="d-block my-4" :style="ColorStrip">
     </div>
 
     <div class="col-12">
@@ -167,6 +167,28 @@ export default {
 
     // Postulante de la solicitud.
     postulante: Object
+  },
+
+  computed: {
+    ColorStrip: {
+      get(){
+
+        var color = "#FFFFFF";
+
+        switch(this.academic_program.alias)
+        {
+          case 'maestria': color = "#0598BC"; break;
+          case 'doctorado': color = "#FECC50"; break;
+          case 'enrem': color = "#118943"; break;
+          case 'imarec': color = "#"; break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: '1px'
+        };
+      }
+    }
   },
 
   data(){
