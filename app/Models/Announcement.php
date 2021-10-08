@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AcademicProgram extends Model
+class Announcement extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -21,10 +21,10 @@ class AcademicProgram extends Model
     /**
      * Obtiene los documentos requeridos del expediente.
      *
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function academicProgram(): HasMany
+    public function academicProgram(): BelongsTo
     {
-        return $this->hasMany(Announcement::class);
+        return $this->belongsTo(AcademicProgram::class);
     }
 }
