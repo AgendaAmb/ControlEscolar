@@ -19,6 +19,7 @@ class CreateAcademicProgramsTable extends Migration
             $table->string('name', 70);
             $table->string('alias', 30);
             $table->string('type');
+            $table->string('card_location');
 
             $table->index('name');
             $table->index('alias');
@@ -27,10 +28,27 @@ class CreateAcademicProgramsTable extends Migration
         });
 
         DB::table('academic_programs')->insert([
-            ['name' => 'Maestría en ciencias ambientales', 'alias' => 'maestria', 'type' => 'maestría'],
-            ['name' => 'Doctorado en ciencias ambientales', 'alias' => 'doctorado', 'type' => 'doctorado'],
-            ['name' => 'Maestría en ciencias ambientales, doble titulación', 'alias' => 'enrem', 'type' => 'maestría'],
-            ['name' => 'Maestría Interdisciplinaria en ciudades sostenibles', 'alias' => 'imarec', 'type' => 'maestría'],
+            [
+                'name' => 'Maestría en ciencias ambientales', 
+                'alias' => 'maestria', 
+                'type' => 'maestría',
+                'card_location' => asset('storage/academic-programs/maestria-nacional-01.png'),
+            ],[
+                'name' => 'Doctorado en ciencias ambientales', 
+                'alias' => 'doctorado', 
+                'type' => 'doctorado',
+                'card_location' => asset('storage/academic-programs/doctorado-01.png'),
+            ],[
+                'name' => 'Maestría en ciencias ambientales, doble titulación', 
+                'alias' => 'enrem', 
+                'type' => 'maestría',
+                'card_location' => asset('storage/academic-programs/maestria-internacional-01.png'),
+            ],[
+                'name' => 'Maestría Interdisciplinaria en ciudades sostenibles', 
+                'alias' => 'imarec', 
+                'type' => 'maestría',
+                'card_location' => asset('storage/academic-programs/imarec-01.png'),
+            ],
         ]);
 
         /*

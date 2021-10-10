@@ -5567,6 +5567,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'academic-program',
+  props: {
+    // Id del programa académico.
+    id: Number,
+    // Foto del programa académico.
+    photo: String
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=script&lang=js& ***!
@@ -5597,83 +5628,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "crear-cuenta",
   props: {
-    perteneceUaslp: String
-  },
-  computed: {
-    PerteneceUASLP: {
-      get: function get() {
-        return this.perteneceUaslp;
-      },
-      set: function set(newVal) {
-        this.$emit('update:perteneceUaslp', newVal);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "cuenta-externo",
-  props: {
-    emailR: String,
-    emailAlterno: String,
+    // El usuario pertenece a la UASLP.
+    pertenece_uaslp: String,
+    // Facultad de adscripción del usuario.
+    facultad: String,
+    // Usuario de la UASLP.
+    clave_uaslp: String,
+    // Email de registro.
+    email: String,
+    // Email de registro alterno.
+    email_alterno: String,
+    // Contraseña de registro.
     password: String,
-    passwordR: String
+    // Confirmación de la contraseña.
+    rpassword: String
+  },
+  data: function data() {
+    return {
+      claveUaslp: null
+    };
   },
   computed: {
-    EmailR: {
+    PerteneceUaslp: {
       get: function get() {
-        return this.emailR;
+        return this.pertenece_uaslp;
       },
       set: function set(newVal) {
-        this.$emit('update:emailR', newVal);
+        this.$emit('update:pertenece_uaslp', newVal);
+      }
+    },
+    Facultad: {
+      get: function get() {
+        return this.facultad;
+      },
+      set: function set(newVal) {
+        this.$emit('update:facultad', newVal);
+      }
+    },
+    ClaveUaslp: {
+      get: function get() {
+        return this.clave_uaslp;
+      },
+      set: function set(newVal) {
+        this.$emit('update:clave_uaslp', newVal);
+      }
+    },
+    Email: {
+      get: function get() {
+        return this.email;
+      },
+      set: function set(newVal) {
+        this.$emit('update:email', newVal);
       }
     },
     EmailAlterno: {
       get: function get() {
-        return this.emailAlterno;
+        return this.email_alterno;
       },
       set: function set(newVal) {
-        this.$emit('update:emailAlterno', newVal);
+        this.$emit('update:email_alterno', newVal);
       }
     },
     Password: {
@@ -5684,82 +5736,31 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:password', newVal);
       }
     },
-    PasswordR: {
+    RPassword: {
       get: function get() {
         return this.passwordR;
       },
       set: function set(newVal) {
-        this.$emit('update:passwordR', newVal);
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "cuenta-uaslp",
-  props: {
-    facultad: String,
-    emailR: String
-  },
-  data: function data() {
-    return {
-      spinnerVisible: false
-    };
-  },
-  computed: {
-    Facultad: {
-      get: function get() {
-        return this.facultad;
-      },
-      set: function set(newVal) {
-        this.$emit('update:facultad', newVal);
+        this.$emit('update:rpassword', newVal);
       }
     },
-    EmailR: {
+    EmailClass: {
       get: function get() {
-        return this.emailR;
-      },
-      set: function set(newVal) {
-        this.$emit('update:emailR', newVal);
+        return {
+          'form-group': true,
+          'col-lg-6': true,
+          'my-3': true,
+          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === 'Si' || this.PerteneceUaslp === null)
+        };
+      }
+    },
+    PasswordClass: {
+      get: function get() {
+        return {
+          'form-group': true,
+          'col-lg-6': true,
+          'd-none': this.PerteneceUaslp !== 'No'
+        };
       }
     }
   },
@@ -5768,13 +5769,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = {
-        "username": this.EmailR
+        "username": this.claveUaslp
       };
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user', data).then(function (response) {
         _this.spinnerVisible = false;
         var res = response['data']['data'];
-        _this.Facultad = res.Dependencia;
-        _this.EmailR = res.email;
 
         _this.$emit('uaslpUserUpdated', res);
       })["catch"](function (err) {
@@ -5864,65 +5863,500 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "datos-personales",
   props: {
-    nombres: String,
-    apPaterno: String,
-    apMaterno: String,
-    edad: String,
-    genero: String,
-    otroGenero: String
+    // CURP.
+    curp: String,
+    // No tengo curp.
+    no_curp: Boolean,
+    // Nombres.
+    name: String,
+    // Primer apellido.
+    first_surname: String,
+    // Segundo apellido.
+    last_surname: String,
+    // País de residencia.
+    residence_country: String,
+    // Género.
+    gender: String,
+    // Otro género.
+    other_gender: String,
+    // Estado civil.
+    civic_state: String,
+    // Otro estado civil.
+    other_civic_state: String,
+    // Fecha de nacimiento.
+    birth_date: String,
+    // Ocupación.
+    ocupation: String,
+    // País de nacimiento.
+    birth_country: String,
+    // Estado de nacimiento.
+    birth_state: String,
+    // Código postal.
+    zip_code: Number,
+    // Teléfono de contacto.
+    phone_number: Number,
+    // Etnia del postulante.
+    ethnicity: String,
+    // El postulante está discapacitado.
+    is_disabled: Boolean,
+    // Discapacidad del postulante.
+    disability: String,
+    // Países.
+    countries: Array,
+    // Readonly.
+    readonly: Boolean
+  },
+  data: function data() {
+    return {
+      states: []
+    };
   },
   computed: {
-    Nombres: {
+    Curp: {
       get: function get() {
-        return this.nombres;
+        return this.curp;
       },
       set: function set(newVal) {
-        this.$emit('update:nombres', newVal);
+        this.$emit('update:curp', newVal);
       }
     },
-    ApPaterno: {
+    NoCurp: {
       get: function get() {
-        return this.apPaterno;
+        return this.no_curp;
       },
       set: function set(newVal) {
-        this.$emit('update:apPaterno', newVal);
+        this.$emit('update:no_curp', newVal);
       }
     },
-    ApMaterno: {
+    Name: {
       get: function get() {
-        return this.apMaterno;
+        return this.name;
       },
       set: function set(newVal) {
-        this.$emit('update:apMaterno', newVal);
+        this.$emit('update:name', newVal);
       }
     },
-    Edad: {
+    FirstSurname: {
       get: function get() {
-        return this.edad;
+        return this.first_surname;
       },
       set: function set(newVal) {
-        this.$emit('update:edad', newVal);
+        this.$emit('update:first_surname', newVal);
       }
     },
-    Genero: {
+    LastSurname: {
       get: function get() {
-        return this.genero;
+        return this.last_surname;
       },
       set: function set(newVal) {
-        this.$emit('update:genero', newVal);
+        this.$emit('update:last_surname', newVal);
       }
     },
-    OtroGenero: {
+    BirthDate: {
       get: function get() {
-        return this.otroGenero;
+        return this.birth_date;
       },
       set: function set(newVal) {
-        this.$emit('update:otroGenero', newVal);
+        this.$emit('update:birth_date', newVal);
+      }
+    },
+    Ocupation: {
+      get: function get() {
+        return this.ocupation;
+      },
+      set: function set(newVal) {
+        this.$emit('update:ocupation', newVal);
+      }
+    },
+    Gender: {
+      get: function get() {
+        return this.gender;
+      },
+      set: function set(newVal) {
+        this.$emit('update:gender', newVal);
+      }
+    },
+    OtherGender: {
+      get: function get() {
+        return this.other_gender;
+      },
+      set: function set(newVal) {
+        this.$emit('update:other_gender', newVal);
+      }
+    },
+    CivicState: {
+      get: function get() {
+        return this.civic_state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:civic_state', newVal);
+      }
+    },
+    OtherCivicState: {
+      get: function get() {
+        return this.other_civic_state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:other_civic_state', newVal);
+      }
+    },
+    BirthCountry: {
+      get: function get() {
+        return this.birth_country;
+      },
+      set: function set(newVal) {
+        this.$emit('update:birth_country', newVal);
+      }
+    },
+    BirthState: {
+      get: function get() {
+        return this.birth_state;
+      },
+      set: function set(newVal) {
+        this.$emit('update:birth_state', newVal);
+      }
+    },
+    ResidenceCountry: {
+      get: function get() {
+        return this.residence_country;
+      },
+      set: function set(newVal) {
+        this.$emit('update:residence_country', newVal);
+      }
+    },
+    ZipCode: {
+      get: function get() {
+        return this.zip_code;
+      },
+      set: function set(newVal) {
+        this.$emit('update:zip_code', newVal);
+      }
+    },
+    PhoneNumber: {
+      get: function get() {
+        return this.phone_number;
+      },
+      set: function set(newVal) {
+        this.$emit('update:phone_number', newVal);
+      }
+    },
+    Ethnicity: {
+      get: function get() {
+        return this.ethnicity;
+      },
+      set: function set(newVal) {
+        this.$emit('update:ethnicity', newVal);
+      }
+    },
+    IsDisabled: {
+      get: function get() {
+        return this.is_disabled;
+      },
+      set: function set(newVal) {
+        this.$emit('update:is_disabled', newVal);
+      }
+    },
+    Disability: {
+      get: function get() {
+        return this.disability;
+      },
+      set: function set(newVal) {
+        this.$emit('update:disability', newVal);
       }
     }
+  },
+  methods: {
+    escogePais: function escogePais(evento) {
+      this.states = this.countries[evento.target.selectedIndex - 1].states;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CrearCuenta_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CrearCuenta.vue */ "./resources/js/components/pre-registro/CrearCuenta.vue");
+/* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/components/pre-registro/DatosPersonales.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    CrearCuenta: _CrearCuenta_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    DatosPersonales: _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  name: "pre-registro",
+  props: {
+    // Programa académico escogido,
+    academic_program: Object
+  },
+  data: function data() {
+    return {
+      countries: [],
+      clave_uaslp: null,
+      directorio_activo: null,
+      pertenece_uaslp: null,
+      facultad: null,
+      email: null,
+      email_alterno: null,
+      password: null,
+      rpassword: null,
+      curp: null,
+      no_curp: false,
+      name: null,
+      first_surname: null,
+      last_surname: null,
+      birth_date: null,
+      ocupation: null,
+      gender: null,
+      other_gender: null,
+      civic_state: null,
+      other_civic_state: null,
+      birth_country: null,
+      birth_state: null,
+      residence_country: null,
+      zip_code: null,
+      phone_number: null,
+      ethnicity: null,
+      is_disabled: false,
+      disability: null
+    };
+  },
+  computed: {
+    Readonly: {
+      get: function get() {
+        return this.pertenece_uaslp === 'Si';
+      }
+    },
+    AcademicProgram: {
+      get: function get() {
+        return this.academic_program;
+      },
+      set: function set(newValue) {
+        this.$emit('update:academic_program', newValue);
+      }
+    }
+  },
+  methods: {
+    uaslpUserUpdated: function uaslpUserUpdated(user) {
+      this.clave_uaslp = user.ClaveUASLP;
+      this.facultad = user.Dependencia;
+      this.directorio_activo = user.DirectorioActivo;
+      this.name = user.name;
+      this.first_surname = user.first_surname;
+      this.last_surname = user.last_surname;
+      this.email = user.email;
+      this.birth_country = 'México';
+      this.residence_country = 'México';
+    },
+    registraUsuario: function registraUsuario() {
+      var formData = new FormData();
+      formData.append('clave_uaslp', this.clave_uaslp);
+      formData.append('directorio_activo', this.directorio_activo);
+      formData.append('pertenece_uaslp', this.pertenece_uaslp);
+      formData.append('email', this.email);
+      formData.append('email_alterno', this.email_alterno);
+      formData.append('password', this.password);
+      formData.append('rpassword', this.rpassword);
+      formData.append('curp', this.curp);
+      formData.append('no_curp', this.no_curp);
+      formData.append('name', this.name);
+      formData.append('first_surname', this.first_surname);
+      formData.append('last_surname', this.last_surname);
+      formData.append('birth_date', this.birth_date);
+      formData.append('ocupation', this.ocupation);
+      formData.append('gender', this.gender);
+      formData.append('other_gender', this.other_gender);
+      formData.append('civic_state', this.civic_state);
+      formData.append('other_civic_state', this.other_civic_state);
+      formData.append('birth_country', this.birth_country);
+      formData.append('birth_state', this.birth_state);
+      formData.append('residence_country', this.residence_country);
+      formData.append('zip_code', this.zip_code);
+      formData.append('phone_number', this.phone_number);
+      formData.append('ethnicity', this.ethnicity);
+      formData.append('is_disabled', this.is_disabled);
+      formData.append('disability', this.disability);
+      axios({
+        method: 'post',
+        url: '/controlescolar/',
+        data: formData,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {})["catch"](function (error) {});
+    }
+  },
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      var _this = this;
+
+      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states').then(function (response) {
+        _this.countries = response.data;
+      });
+    });
   }
 });
 
@@ -5959,10 +6393,9 @@ Vue.component('calendar', __webpack_require__(/*! ./components/calendar/Calendar
  * Componentes para el pre-registro.
  */
 
+Vue.component('academic-program', __webpack_require__(/*! ./components/pre-registro/AcademicProgram.vue */ "./resources/js/components/pre-registro/AcademicProgram.vue").default);
 Vue.component('pre-registro', __webpack_require__(/*! ./components/pre-registro/PreRegistro.vue */ "./resources/js/components/pre-registro/PreRegistro.vue").default);
 Vue.component('crear-cuenta', __webpack_require__(/*! ./components/pre-registro/CrearCuenta.vue */ "./resources/js/components/pre-registro/CrearCuenta.vue").default);
-Vue.component('cuenta-uaslp', __webpack_require__(/*! ./components/pre-registro/CuentaUaslp.vue */ "./resources/js/components/pre-registro/CuentaUaslp.vue").default);
-Vue.component('cuenta-externo', __webpack_require__(/*! ./components/pre-registro/CuentaExterno.vue */ "./resources/js/components/pre-registro/CuentaExterno.vue").default);
 Vue.component('datos-personales', __webpack_require__(/*! ./components/pre-registro/DatosPersonales.vue */ "./resources/js/components/pre-registro/DatosPersonales.vue").default);
 /**
  * Componentes para la vista de postulación.
@@ -5988,12 +6421,6 @@ Vue.component('ci-documento-requerido', __webpack_require__(/*! ./components/car
 Vue.component('ci-lengua-extranjera', __webpack_require__(/*! ./components/carta-intencion/LenguaExtranjera.vue */ "./resources/js/components/carta-intencion/LenguaExtranjera.vue").default);
 Vue.component('ci-produccion-cientifica', __webpack_require__(/*! ./components/carta-intencion/ProduccionCientifica.vue */ "./resources/js/components/carta-intencion/ProduccionCientifica.vue").default);
 Vue.component('ci-capital-humano', __webpack_require__(/*! ./components/carta-intencion/CapitalHumano.vue */ "./resources/js/components/carta-intencion/CapitalHumano.vue").default);
-/*Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
-Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);
-Vue.component('produccion-cientifica', require('./components/postulacion/ProduccionCientifica.vue').default);
-Vue.component('grado-academico-postulante', require('./components/carta-intencion/GradoAcademico.vue').default);
-Vue.component('informacion-postulante', require('./components/carta-intencion/InformacionPostulante.vue').default);
-Vue.component('lengua-extranjera-postulante', require('./components/carta-intencion/LenguaExtranjera.vue').default);*/
 
 /***/ }),
 
@@ -44083,6 +44510,45 @@ component.options.__file = "resources/js/components/postulacion/produccion-cient
 
 /***/ }),
 
+/***/ "./resources/js/components/pre-registro/AcademicProgram.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/pre-registro/AcademicProgram.vue ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AcademicProgram.vue?vue&type=template&id=5a6331b6& */ "./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6&");
+/* harmony import */ var _AcademicProgram_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AcademicProgram.vue?vue&type=script&lang=js& */ "./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _AcademicProgram_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pre-registro/AcademicProgram.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/pre-registro/CrearCuenta.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/pre-registro/CrearCuenta.vue ***!
@@ -44118,84 +44584,6 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/pre-registro/CrearCuenta.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/pre-registro/CuentaExterno.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaExterno.vue ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CuentaExterno.vue?vue&type=template&id=6115fe40& */ "./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40&");
-/* harmony import */ var _CuentaExterno_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CuentaExterno.vue?vue&type=script&lang=js& */ "./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _CuentaExterno_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/pre-registro/CuentaExterno.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/pre-registro/CuentaUaslp.vue":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaUaslp.vue ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CuentaUaslp.vue?vue&type=template&id=4b8bbb7c& */ "./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c&");
-/* harmony import */ var _CuentaUaslp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CuentaUaslp.vue?vue&type=script&lang=js& */ "./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _CuentaUaslp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/pre-registro/CuentaUaslp.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -44251,15 +44639,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _PreRegistro_vue_vue_type_template_id_fd8433a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PreRegistro.vue?vue&type=template&id=fd8433a2& */ "./resources/js/components/pre-registro/PreRegistro.vue?vue&type=template&id=fd8433a2&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _PreRegistro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PreRegistro.vue?vue&type=script&lang=js& */ "./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__.default)(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _PreRegistro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
   _PreRegistro_vue_vue_type_template_id_fd8433a2___WEBPACK_IMPORTED_MODULE_0__.render,
   _PreRegistro_vue_vue_type_template_id_fd8433a2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -44708,6 +45098,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AcademicProgram_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AcademicProgram.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AcademicProgram_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************!*\
   !*** ./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=script&lang=js& ***!
@@ -44724,38 +45130,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaExterno_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CuentaExterno.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaExterno_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaUaslp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CuentaUaslp.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaUaslp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
 /***/ "./resources/js/components/pre-registro/DatosPersonales.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************!*\
   !*** ./resources/js/components/pre-registro/DatosPersonales.vue?vue&type=script&lang=js& ***!
@@ -44769,6 +45143,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatosPersonales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DatosPersonales.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/DatosPersonales.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatosPersonales_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreRegistro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PreRegistro.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/PreRegistro.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreRegistro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -45309,6 +45699,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcademicProgram_vue_vue_type_template_id_5a6331b6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AcademicProgram.vue?vue&type=template&id=5a6331b6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=template&id=b821bd30&":
 /*!*********************************************************************************************!*\
   !*** ./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=template&id=b821bd30& ***!
@@ -45322,40 +45729,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrearCuenta_vue_vue_type_template_id_b821bd30___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CrearCuenta_vue_vue_type_template_id_b821bd30___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CrearCuenta.vue?vue&type=template&id=b821bd30& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=template&id=b821bd30&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40& ***!
-  \***********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaExterno_vue_vue_type_template_id_6115fe40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CuentaExterno.vue?vue&type=template&id=6115fe40& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c& ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CuentaUaslp_vue_vue_type_template_id_4b8bbb7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CuentaUaslp.vue?vue&type=template&id=4b8bbb7c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c&");
 
 
 /***/ }),
@@ -51692,6 +52065,44 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/AcademicProgram.vue?vue&type=template&id=5a6331b6& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-12 col-lg-6 col-xl-5 my-3" }, [
+    _c(
+      "a",
+      {
+        attrs: { "data-toggle": "modal", "data-target": "#Registro" },
+        on: {
+          click: function($event) {
+            return _vm.$emit("click", _vm.id)
+          }
+        }
+      },
+      [_c("img", { attrs: { src: _vm.photo, width: "400px" } })]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=template&id=b821bd30&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CrearCuenta.vue?vue&type=template&id=b821bd30& ***!
@@ -51708,87 +52119,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-12" },
-      [
-        _c("div", { staticClass: "form-row" }, [
-          _c("div", { staticClass: "form-group col-8 col-md-6 col-lg-4" }, [
-            _c("label", [_vm._v(" ¿Perteneces a la UASLP? ")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.PerteneceUASLP,
-                    expression: "PerteneceUASLP"
-                  }
-                ],
-                staticClass: "form-control",
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.PerteneceUASLP = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "", selected: "" } }, [
-                  _vm._v("Escoge una opción")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si ")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._t("default")
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaExterno.vue?vue&type=template&id=6115fe40& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-row" }, [
-    _c("div", { staticClass: "form-group col-lg-6" }, [
+    _c("div", { staticClass: "form-group col-sm-6 col-lg-5 mb-3" }, [
+      _c("label", [_vm._v(" ¿Perteneces a la UASLP? ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.PerteneceUaslp,
+              expression: "PerteneceUaslp"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.PerteneceUaslp = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Escoge una opción")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }),
+    _vm._v(" "),
+    _vm.PerteneceUaslp === "Si"
+      ? _c(
+          "div",
+          { staticClass: "form-group col-11 col-sm-6 col-lg-5 my-auto" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Facultad,
+                  expression: "Facultad"
+                }
+              ],
+              attrs: { type: "hidden", name: "Dependencia" },
+              domProps: { value: _vm.Facultad },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Facultad = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", [
+              _vm._v(
+                " Ingresa tu RPE/clave única de alumno ó correo Institucional "
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.claveUaslp,
+                  expression: "claveUaslp"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "search" },
+              domProps: { value: _vm.claveUaslp },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.claveUaslp = $event.target.value
+                }
+              }
+            })
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.PerteneceUaslp === "Si"
+      ? _c("div", { staticClass: "col-1 mt-auto" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn btn btn-outline-light search-button position-relative",
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "right",
+                title: "Buscar mi información"
+              },
+              on: { click: _vm.uaslpUser }
+            },
+            [_c("i", { staticClass: "fas fa-search" })]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }),
+    _vm._v(" "),
+    _vm.PerteneceUaslp === "No"
+      ? _c("div", { staticClass: "form-group col-12" }, [
+          _c("h5", { staticClass: "modal-title mt-3" }, [
+            _vm._v("Crear cuenta ")
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { class: _vm.EmailClass }, [
       _c("label", [_vm._v(" Ingresa un correo electrónico ")]),
       _vm._v(" "),
       _c("input", {
@@ -51796,25 +52259,25 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.EmailR,
-            expression: "EmailR"
+            value: _vm.Email,
+            expression: "Email"
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.EmailR },
+        attrs: { type: "email", readonly: _vm.ClaveUaslp !== null },
+        domProps: { value: _vm.Email },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.EmailR = $event.target.value
+            _vm.Email = $event.target.value
           }
         }
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-6" }, [
+    _c("div", { class: _vm.EmailClass }, [
       _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
       _vm._v(" "),
       _c("input", {
@@ -51827,7 +52290,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text" },
+        attrs: { type: "email" },
         domProps: { value: _vm.EmailAlterno },
         on: {
           input: function($event) {
@@ -51840,7 +52303,7 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-6" }, [
+    _c("div", { class: _vm.PasswordClass }, [
       _c("label", [_vm._v(" Contraseña")]),
       _vm._v(" "),
       _c("input", {
@@ -51866,7 +52329,7 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-6" }, [
+    _c("div", { class: _vm.PasswordClass }, [
       _c("label", [_vm._v(" Repite tu Contraseña ")]),
       _vm._v(" "),
       _c("input", {
@@ -51874,134 +52337,22 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.PasswordR,
-            expression: "PasswordR"
+            value: _vm.RPassword,
+            expression: "RPassword"
           }
         ],
         staticClass: "form-control",
         attrs: { type: "password" },
-        domProps: { value: _vm.PasswordR },
+        domProps: { value: _vm.RPassword },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.PasswordR = $event.target.value
+            _vm.RPassword = $event.target.value
           }
         }
       })
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pre-registro/CuentaUaslp.vue?vue&type=template&id=4b8bbb7c& ***!
-  \************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-row" }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.Facultad,
-          expression: "Facultad"
-        }
-      ],
-      attrs: { type: "hidden", name: "Dependencia" },
-      domProps: { value: _vm.Facultad },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.Facultad = $event.target.value
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-12" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-4" }, [
-      _c("label", [
-        _vm._v(" Ingresa tu RPE/clave única de alumno ó correo Institucional ")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.EmailR,
-            expression: "EmailR"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text" },
-        domProps: { value: _vm.EmailR },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.EmailR = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-2" }, [
-      !_vm.spinnerVisible
-        ? _c(
-            "a",
-            {
-              staticClass: "btn btn btn-outline-light search-button",
-              attrs: {
-                "data-toggle": "tooltip",
-                "data-placement": "right",
-                title: "Buscar mi información"
-              },
-              on: { click: _vm.uaslpUser }
-            },
-            [_c("i", { staticClass: "fas fa-search" })]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.spinnerVisible
-        ? _c(
-            "button",
-            {
-              staticClass: "btn btn-light",
-              attrs: { type: "button", disabled: "" }
-            },
-            [
-              _c("span", {
-                staticClass: "spinner-border spinner-border-sm search-button",
-                attrs: { role: "status", "aria-hidden": "true" }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("Cargando...")])
-            ]
-          )
-        : _vm._e()
     ])
   ])
 }
@@ -52035,175 +52386,670 @@ var render = function() {
         staticClass: "form-group col-12 modal-title",
         attrs: { id: "exampleModalLabel" }
       },
-      [_vm._v("Datos Personales")]
+      [_vm._v(" Datos personales ")]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-7 col-xl-6" }, [
-      _c("div", { staticClass: "form-row my-3" }, [
-        _c("div", { staticClass: "form-group col-12" }, [
-          _c("label", [_vm._v(" Nombres ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.Nombres,
-                expression: "Nombres"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.Nombres },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+    _c("div", { staticClass: "form-group col-lg-6 mb-auto" }, [
+      _c("label", { staticClass: "d-block mt-3" }, [_vm._v(" CURP ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Curp,
+            expression: "Curp"
+          }
+        ],
+        staticClass: "d-block form-control mb-3",
+        attrs: { type: "text", readonly: _vm.NoCurp === true },
+        domProps: { value: _vm.Curp },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Curp = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-check" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.NoCurp,
+              expression: "NoCurp"
+            }
+          ],
+          staticClass: "form-check-input",
+          attrs: {
+            id: "curp",
+            type: "checkbox",
+            "true-value": true,
+            "false-value": false
+          },
+          domProps: {
+            checked: Array.isArray(_vm.NoCurp)
+              ? _vm._i(_vm.NoCurp, null) > -1
+              : _vm.NoCurp
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.NoCurp,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.NoCurp = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.NoCurp = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
                 }
-                _vm.Nombres = $event.target.value
+              } else {
+                _vm.NoCurp = $$c
               }
             }
-          })
-        ]),
+          }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6" }, [
-          _c("label", [_vm._v(" Apellido paterno ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.ApPaterno,
-                expression: "ApPaterno"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.ApPaterno },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.ApPaterno = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6" }, [
-          _c("label", [_vm._v(" Apellido materno ")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.ApMaterno,
-                expression: "ApMaterno"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.ApMaterno },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.ApMaterno = $event.target.value
-              }
-            }
-          })
-        ])
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "curp" } },
+          [_vm._v(" No tengo curp ")]
+        )
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-5 col-xl-6" }, [
-      _c("div", { staticClass: "form-row my-3" }, [
-        _c("div", { staticClass: "form-group col-6" }, [
-          _c("label", [_vm._v(" Edad ")]),
+    _c("div", { staticClass: "col-lg-12" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-12 mb-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Nombres ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Name,
+            expression: "Name"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", readonly: _vm.readonly },
+        domProps: { value: _vm.Name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Name = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-12" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6 mt-auto" }, [
+      _c("label", { staticClass: " mt-3" }, [_vm._v(" Apellido paterno ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.FirstSurname,
+            expression: "FirstSurname"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", readonly: _vm.readonly },
+        domProps: { value: _vm.FirstSurname },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.FirstSurname = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6 mt-auto" }, [
+      _c("label", { staticClass: "d-block mt-3" }, [
+        _vm._v(" Apellido materno ")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.LastSurname,
+            expression: "LastSurname"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", readonly: _vm.readonly },
+        domProps: { value: _vm.LastSurname },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.LastSurname = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Fecha de nacimiento ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.BirthDate,
+            expression: "BirthDate"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "date" },
+        domProps: { value: _vm.BirthDate },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.BirthDate = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Ocupación ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Ocupation,
+            expression: "Ocupation"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.Ocupation },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Ocupation = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
+      _c("label", [_vm._v(" Género ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.Gender,
+              expression: "Gender"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.Gender = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Escoge una opción")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Masculino" } }, [
+            _vm._v(" Masculino ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Femenino" } }, [
+            _vm._v(" Femenino ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "No especificar" } }, [
+            _vm._v(" No especificar ")
+          ])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
+      _c("label", [_vm._v(" Estado civil ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.CivicState,
+              expression: "CivicState"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.CivicState = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Escoge una opción")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Soltero" } }, [_vm._v(" Soltero ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Casado" } }, [_vm._v(" Casado ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Divorciado" } }, [
+            _vm._v(" Divorciado ")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Viudo" } }, [_vm._v(" Viudo ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm.Gender === "Otro"
+      ? _c("div", { staticClass: "col-lg-6 mt-3 mr-auto" }, [
+          _c("label", [_vm._v(" Coloca el otro género ")]),
+          _vm._v(" "),
+          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.CivicState === "Otro"
+      ? _c("div", { staticClass: "col-lg-6 mt-3 ml-auto" }, [
+          _c("label", [_vm._v(" Coloca el otro estado civil ")]),
           _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.Edad,
-                expression: "Edad"
+                value: _vm.OtherGender,
+                expression: "OtherGender"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number" },
-            domProps: { value: _vm.Edad },
+            attrs: { type: "text" },
+            domProps: { value: _vm.OtherGender },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.Edad = $event.target.value
+                _vm.OtherGender = $event.target.value
               }
             }
           })
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6" }, [
-          _c("label", [_vm._v(" Género ")]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" País de nacimiento ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.BirthCountry,
+              expression: "BirthCountry"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: [
+              function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.BirthCountry = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.escogePais
+            ]
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v(" Escoge un país ")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.countries, function(country) {
+            return _c(
+              "option",
+              { key: country.id, domProps: { value: country.name } },
+              [_vm._v(" " + _vm._s(country.name) + " ")]
+            )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Estado de nacimiento ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.BirthState,
+              expression: "BirthState"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.BirthState = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v(" Escoge un país ")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.states, function(state) {
+            return _c(
+              "option",
+              { key: state.id, domProps: { value: state.name } },
+              [_vm._v(" " + _vm._s(state.name) + " ")]
+            )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" País de residencia ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.ResidenceCountry,
+              expression: "ResidenceCountry"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.ResidenceCountry = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v(" Escoge un país ")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.countries, function(country) {
+            return _c(
+              "option",
+              { key: country.id, domProps: { value: country.name } },
+              [_vm._v(" " + _vm._s(country.name) + " ")]
+            )
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Código postal ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model.number",
+            value: _vm.ZipCode,
+            expression: "ZipCode",
+            modifiers: { number: true }
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "number" },
+        domProps: { value: _vm.ZipCode },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.ZipCode = _vm._n($event.target.value)
+          },
+          blur: function($event) {
+            return _vm.$forceUpdate()
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Teléfono de contacto ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model.number",
+            value: _vm.PhoneNumber,
+            expression: "PhoneNumber",
+            modifiers: { number: true }
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "number" },
+        domProps: { value: _vm.PhoneNumber },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.PhoneNumber = _vm._n($event.target.value)
+          },
+          blur: function($event) {
+            return _vm.$forceUpdate()
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" Etnia ")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.Ethnicity,
+            expression: "Ethnicity"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.Ethnicity },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.Ethnicity = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6 col-lg-3" }, [
+      _c("label", { staticClass: "mt-3" }, [
+        _vm._v(" ¿Tienes alguna discapacidad? ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.IsDisabled,
+              expression: "IsDisabled"
+            }
+          ],
+          staticClass: "form-control",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.IsDisabled = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { domProps: { value: true } }, [_vm._v(" Si ")]),
           _vm._v(" "),
           _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.Genero,
-                  expression: "Genero"
-                }
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.Genero = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "", selected: "" } }, [
-                _vm._v("Escoge una opción")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Masculino" } }, [
-                _vm._v(" Masculino ")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Femenino" } }, [
-                _vm._v(" Femenino ")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Otros" } }, [_vm._v(" Otros ")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "No especificar" } }, [
-                _vm._v(" No especificar ")
-              ])
-            ]
+            "option",
+            { attrs: { selected: "" }, domProps: { value: false } },
+            [_vm._v(" No ")]
           )
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm.IsDisabled === true
+      ? _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+          _c("label", { staticClass: "mt-3" }, [_vm._v(" ¿Cuál? ")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Disability,
+                expression: "Disability"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.Disability },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Disability = $event.target.value
+              }
+            }
+          })
         ])
-      ])
-    ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -52211,10 +53057,58 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-6" }, [
-      _c("label", [_vm._v(" Estado civil ")]),
+    return _c("div", { staticClass: "form-group col-12 my-4" }, [
+      _c("div", { staticClass: "form-check" }, [
+        _c("input", {
+          staticClass: "form-check-input",
+          attrs: { type: "checkbox", id: "gridCheck", required: "" }
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          { staticClass: "form-check-label", attrs: { for: "gridCheck" } },
+          [
+            _vm._v(
+              "\n        Al enviar la información confirmo que he leído y acepto el \n        "
+            ),
+            _c(
+              "a",
+              {
+                staticStyle: { color: "#fecc56" },
+                attrs: {
+                  href: "http://transparencia.uaslp.mx/avisodeprivacidad"
+                }
+              },
+              [_vm._v(" aviso de privacidad.")]
+            )
+          ]
+        )
+      ]),
       _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+      _c(
+        "div",
+        { staticClass: "modal-footer justify-content-start my-3 px-0" },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              staticStyle: { "background-color": "#0160AE" },
+              attrs: { id: "submit", type: "submit" }
+            },
+            [_vm._v("Registrar")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: { type: "button", "data-dismiss": "modal" }
+            },
+            [_vm._v("Cerrar")]
+          )
+        ]
+      )
     ])
   }
 ]
@@ -52260,10 +53154,174 @@ var render = function() {
             staticStyle: { "background-color": "#8b96a8" }
           },
           [
-            _vm._m(0),
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h2",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLabel" }
+                },
+                [_vm._v("Registro")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  },
+                  on: {
+                    click: function($event) {
+                      _vm.AcademicProgram = null
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("X")
+                  ])
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
-              _c("form", [_vm._t("default")], 2)
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.registraUsuario.apply(null, arguments)
+                    }
+                  }
+                },
+                [
+                  _c("crear-cuenta", {
+                    attrs: {
+                      pertenece_uaslp: _vm.pertenece_uaslp,
+                      clave_uaslp: _vm.clave_uaslp,
+                      facultad: _vm.facultad,
+                      email: _vm.email,
+                      email_alterno: _vm.email_alterno,
+                      password: _vm.password,
+                      rpassword: _vm.rpassword
+                    },
+                    on: {
+                      "update:pertenece_uaslp": function($event) {
+                        _vm.pertenece_uaslp = $event
+                      },
+                      "update:clave_uaslp": function($event) {
+                        _vm.clave_uaslp = $event
+                      },
+                      "update:facultad": function($event) {
+                        _vm.facultad = $event
+                      },
+                      "update:email": function($event) {
+                        _vm.email = $event
+                      },
+                      "update:email_alterno": function($event) {
+                        _vm.email_alterno = $event
+                      },
+                      "update:password": function($event) {
+                        _vm.password = $event
+                      },
+                      "update:rpassword": function($event) {
+                        _vm.rpassword = $event
+                      },
+                      uaslpUserUpdated: _vm.uaslpUserUpdated
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("datos-personales", {
+                    attrs: {
+                      readonly: _vm.Readonly,
+                      countries: _vm.countries,
+                      curp: _vm.curp,
+                      no_curp: _vm.no_curp,
+                      name: _vm.name,
+                      first_surname: _vm.first_surname,
+                      last_surname: _vm.last_surname,
+                      birth_date: _vm.birth_date,
+                      ocupation: _vm.ocupation,
+                      birth_country: _vm.birth_country,
+                      birth_state: _vm.birth_state,
+                      residence_country: _vm.residence_country,
+                      gender: _vm.gender,
+                      other_gender: _vm.other_gender,
+                      civic_state: _vm.civic_state,
+                      other_civic_state: _vm.other_civic_state,
+                      zip_code: _vm.zip_code,
+                      phone_number: _vm.phone_number,
+                      ethnicity: _vm.ethnicity,
+                      is_disabled: _vm.is_disabled,
+                      disability: _vm.disability
+                    },
+                    on: {
+                      "update:curp": function($event) {
+                        _vm.curp = $event
+                      },
+                      "update:no_curp": function($event) {
+                        _vm.no_curp = $event
+                      },
+                      "update:name": function($event) {
+                        _vm.name = $event
+                      },
+                      "update:first_surname": function($event) {
+                        _vm.first_surname = $event
+                      },
+                      "update:last_surname": function($event) {
+                        _vm.last_surname = $event
+                      },
+                      "update:birth_date": function($event) {
+                        _vm.birth_date = $event
+                      },
+                      "update:ocupation": function($event) {
+                        _vm.ocupation = $event
+                      },
+                      "update:birth_country": function($event) {
+                        _vm.birth_country = $event
+                      },
+                      "update:birth_state": function($event) {
+                        _vm.birth_state = $event
+                      },
+                      "update:residence_country": function($event) {
+                        _vm.residence_country = $event
+                      },
+                      "update:gender": function($event) {
+                        _vm.gender = $event
+                      },
+                      "update:other_gender": function($event) {
+                        _vm.other_gender = $event
+                      },
+                      "update:civic_state": function($event) {
+                        _vm.civic_state = $event
+                      },
+                      "update:other_civic_state": function($event) {
+                        _vm.other_civic_state = $event
+                      },
+                      "update:zip_code": function($event) {
+                        _vm.zip_code = $event
+                      },
+                      "update:phone_number": function($event) {
+                        _vm.phone_number = $event
+                      },
+                      "update:ethnicity": function($event) {
+                        _vm.ethnicity = $event
+                      },
+                      "update:is_disabled": function($event) {
+                        _vm.is_disabled = $event
+                      },
+                      "update:disability": function($event) {
+                        _vm.disability = $event
+                      }
+                    }
+                  })
+                ],
+                1
+              )
             ])
           ]
         )
@@ -52271,33 +53329,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h2",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Registro")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("X")])]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

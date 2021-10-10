@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Schema;
 
 class ArchiveController extends Controller
 {
-
     /**
      * Show the application dashboard.
      *
