@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
+use App\Http\Controllers\PreRegisterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::view('/', 'pre-registro.index')->name('programasAcademicos');
+# Rutas para el pre-registro.
+Route::name('pre-registro.')->group(function(){
+
+    Route::get('/', [PreRegisterController::class, 'index'])->name('index');
+    Route::post('/', [PreRegisterController::class, 'store'])->name('store');
+});
 
 # Rutas de las solicitudes académicas.
 Route::prefix('solicitud')->name('solicitud.')->group(function(){
