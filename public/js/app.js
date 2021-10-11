@@ -5921,7 +5921,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var data = {
-        "username": this.claveUaslp
+        "username": this.ClaveUaslp
       };
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user', data).then(function (response) {
         _this.spinnerVisible = false;
@@ -6342,7 +6342,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     escogePais: function escogePais(evento) {
-      this.states = this.countries[evento.target.selectedIndex - 1].states;
+      Vue.set(this, 'states', this.countries[evento.target.selectedIndex - 1].states);
     },
     inputClassFor: function inputClassFor(model) {
       return {

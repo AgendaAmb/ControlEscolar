@@ -31,9 +31,9 @@ class PreRegisterRequest extends FormRequest
 
         # Prepara los datos para sanitización :v
         $this->merge([
-            'name' => $casts[$this->name] ?? null, 
-            'first_surname' => $casts[$this->first_surname] ?? null, 
-            'last_surname' => $casts[$this->last_surname] ?? null, 
+            'name' => $casts[$this->name] ?? $this->name, 
+            'first_surname' => $casts[$this->first_surname] ?? $this->first_surname, 
+            'last_surname' => $casts[$this->last_surname] ?? $this->last_surname, 
             'pertenece_uaslp' => $casts[$this->pertenece_uaslp] ?? null, 
             'no_curp' => $casts[$this->no_curp] ?? null,
             'is_disabled' => $casts[$this->is_disabled] ?? null,
@@ -42,12 +42,17 @@ class PreRegisterRequest extends FormRequest
             'curp' => $casts[$this->curp] ?? $this->curp,
             'password' => $casts[$this->password] ?? $this->password,
             'rpassword' => $casts[$this->rpassword] ?? $this->rpassword,
-            'ocupation' => $casts[$this->ocupation] ?? null,
-            'other_gender' => $casts[$this->other_gender] ?? null,
-            'other_civic_state' => $casts[$this->other_civic_state] ?? null,
-            'birth_country' => $casts[$this->birth_country] ?? null,
-            'birth_state' => $casts[$this->birth_state] ?? null,
-            'residence_country' => $casts[$this->residence_country] ?? null,
+            'ocupation' => $casts[$this->ocupation] ?? $this->ocupation,
+            'other_gender' => $casts[$this->other_gender] ?? $this->other_gender,
+            'other_civic_state' => $casts[$this->other_civic_state] ?? $this->other_civic_state,
+            'birth_country' => $casts[$this->birth_country] ?? $this->birth_country,
+            'birth_state' => $casts[$this->birth_state] ?? $this->birth_state,
+            'residence_country' => $casts[$this->residence_country] ?? $this->residence_country,
+            'altern_email' => $this->email_alterno,
+            'middlename' => $this->first_surname,
+            'surname' => $this->last_surname,
+            'nationality' => $this->birth_country,
+            'residence' => $this->residence_country
         ]);
     }
 
@@ -74,9 +79,9 @@ class PreRegisterRequest extends FormRequest
             'last_surname' => ['nullable'],
             'birth_date' => ['required','date', 'before:'.Carbon::now()->toString(), ],
             'ocupation' => ['required', 'string', 'max:255'],
-            'gender' => [ 'required', 'string', 'in:Solterx,Casadx,Divorciadx,Viudx,Otro' ],
+            'gender' => [ 'required', 'string', 'in:Masculino,Femenino,Otro,No especificar' ],
             'other_gender' => ['nullable','required_if:gender,Otro'],
-            'civic_state' => [ 'required', 'string', 'in:Masculino,Femenino,Otro,No especificar' ],
+            'civic_state' => [ 'required', 'string', 'in:Soltero,Casado,Divorciado,Viudo,Otro,No especificar' ],
             'other_civic_state' => ['nullable','required_if:civic_state,Otro'],
             'birth_country' => ['required','string','max:255'],
             'birth_state' => ['required','string','max:255'],
@@ -85,7 +90,12 @@ class PreRegisterRequest extends FormRequest
             'phone_number' => ['required','numeric'],
             'is_disabled' => ['required', 'boolean'],
             'ethnicity' => ['required','string','max:255'],
-            'disability' => ['nullable','required_if:is_disabled,true']
+            'disability' => ['nullable','required_if:is_disabled,true'],
+            'altern_email' => ['required', 'same:email_alterno'],
+            'middlename' => ['required', 'same:first_surname'],
+            'surname' => ['required', 'same:last_surname'],
+            'nationality' => ['required', 'same:birth_country'],
+            'residence' => ['required', 'same:residence_country']
         ];
     }
 }

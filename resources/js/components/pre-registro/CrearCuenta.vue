@@ -185,7 +185,7 @@ export default {
   methods:{
     uaslpUser: function(){
       var data = {
-        "username":this.claveUaslp
+        "username":this.ClaveUaslp
       }
 
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user',data)

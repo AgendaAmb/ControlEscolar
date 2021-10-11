@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('type', 25);
 
             $table->primary(['id','type']);
+            $table->string('birth_state')->nullable();
             $table->string('marital_state')->nullable();
             $table->softDeletes();
         });

@@ -430,7 +430,7 @@ export default {
 
   methods: {
     escogePais(evento) {
-      this.states = this.countries[evento.target.selectedIndex - 1].states;
+      Vue.set(this, 'states', this.countries[evento.target.selectedIndex - 1].states);
     },
 
     inputClassFor(model){
