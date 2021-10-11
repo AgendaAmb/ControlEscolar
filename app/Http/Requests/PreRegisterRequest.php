@@ -22,25 +22,32 @@ class PreRegisterRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        # Cast de tipos de datos :v
+        $casts = [
+            'true' => true,
+            'false' => false,
+            'null' => null
+        ];
+
+        # Prepara los datos para sanitización :v
         $this->merge([
-            'pertenece_uaslp' => $this->no_curp === 'true' 
-                ? true : ($this->no_curp === 'false' 
-                ? false : null),
-
-            'no_curp' => $this->no_curp === 'true' 
-                ? true : ($this->no_curp === 'false' 
-                ? false : null),
-            
-            'is_disabled' => $this->is_disabled === 'true' 
-            ? true : ($this->is_disabled === 'false' 
-            ? false : null),
-
-            'clave_uaslp' => $this->clave_uaslp === 'null' ? null : $this->clave_uaslp,            
-            'directorio_activo' => $this->directorio_activo === 'null' ? null : $this->directorio_activo,
-            'curp' => $this->curp === 'null' ? null : $this->curp,
-            'password' => $this->password === 'null' ? null : $this->password,
-            'rpassword' => $this->rpassword === 'null' ? null : $this->rpassword,
-
+            'name' => $casts[$this->name] ?? null, 
+            'first_surname' => $casts[$this->first_surname] ?? null, 
+            'last_surname' => $casts[$this->last_surname] ?? null, 
+            'pertenece_uaslp' => $casts[$this->pertenece_uaslp] ?? null, 
+            'no_curp' => $casts[$this->no_curp] ?? null,
+            'is_disabled' => $casts[$this->is_disabled] ?? null,
+            'clave_uaslp' => $casts[$this->clave_uaslp] ?? $this->clave_uaslp,            
+            'directorio_activo' => $casts[$this->directorio_activo] ?? $this->directorio_activo,
+            'curp' => $casts[$this->curp] ?? $this->curp,
+            'password' => $casts[$this->password] ?? $this->password,
+            'rpassword' => $casts[$this->rpassword] ?? $this->rpassword,
+            'ocupation' => $casts[$this->ocupation] ?? null,
+            'other_gender' => $casts[$this->other_gender] ?? null,
+            'other_civic_state' => $casts[$this->other_civic_state] ?? null,
+            'birth_country' => $casts[$this->birth_country] ?? null,
+            'birth_state' => $casts[$this->birth_state] ?? null,
+            'residence_country' => $casts[$this->residence_country] ?? null,
         ]);
     }
 

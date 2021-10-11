@@ -39,5 +39,6 @@ class PreRegisterController extends Controller
     public function store(PreRegisterRequest $request)
     {
         $data = $request->validated();
+        dd($data);
     }
 }

@@ -2,63 +2,70 @@
   <div class="form-row my-3">
     <!-- Encabezado de datos personales -->
     <h5 class="form-group col-12 modal-title" id="exampleModalLabel"> Datos personales </h5>
-    <div class="form-group col-lg-6 mb-auto">
+    <div class="form-group col-lg-6">
       <!-- CURP -->
-      <label class="d-block mt-3"> CURP </label>
-      <input type="text" class="d-block form-control mb-3" v-model="Curp" :readonly="NoCurp === true">
+      <label class="mt-3"> CURP </label>
+      <input type="text" :class="inputClassFor('curp')" v-model="Curp" :readonly="NoCurp === true">
       <div class="form-check">
         <input id="curp" type="checkbox" class="form-check-input" v-model="NoCurp" :true-value="true" :false-value="false">
         <label for="curp" class="form-check-label"> No tengo curp </label>
       </div>
+      <div v-if="'curp' in errores" class="invalid-feedback">{{errores.curp}}</div>
     </div>
     <div class="col-lg-12"></div>
-    <div class="form-group col-12 mb-auto">
+    <div class="form-group col-12">
       <!-- Nombres -->
       <label class="mt-3"> Nombres </label>
-      <input type="text" class="form-control" v-model="Name" :readonly="readonly">
+      <input type="text" :class="inputClassFor('name')" v-model="Name" :readonly="readonly">
+      <div v-if="'name' in errores" class="invalid-feedback">{{errores.name}}</div>
     </div>
 
     <div class="col-lg-12"></div>
-    <div class="col-md-6 mt-auto">
+    <div class="col-md-6">
       <!-- Apellido paterno -->
       <label class=" mt-3"> Apellido paterno </label>
-      <input type="text" class="form-control" v-model="FirstSurname" :readonly="readonly">
+      <input type="text" :class="inputClassFor('first_surname')" v-model="FirstSurname" :readonly="readonly">
+      <div v-if="'first_surname' in errores" class="invalid-feedback">{{errores.first_surname}}</div>
     </div>
 
     <!-- Apellido materno -->
-    <div class="col-md-6 mt-auto">
+    <div class="col-md-6">
       <label class="d-block mt-3"> Apellido materno </label>
-      <input type="text" class="form-control" v-model="LastSurname" :readonly="readonly">
+      <input type="text" :class="inputClassFor('last_surname')" v-model="LastSurname" :readonly="readonly">
+      <div v-if="'last_surname' in errores" class="invalid-feedback">{{errores.last_surname}}</div>
     </div>
 
     <!-- Fecha de nacimiento -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> Fecha de nacimiento </label>
-      <input type="date" class="form-control" v-model="BirthDate">
+      <input type="date" :class="inputClassFor('birth_date')" v-model="BirthDate">
+      <div v-if="'birth_date' in errores" class="invalid-feedback">{{errores.birth_date}}</div>
     </div>
     
     <!-- Ocupación -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> Ocupación </label>
-      <input type="text" class="form-control" v-model="Ocupation">
+      <input type="text" :class="inputClassFor('ocupation')" v-model="Ocupation">
+      <div v-if="'ocupation' in errores" class="invalid-feedback">{{errores.ocupation}}</div>
     </div>
 
     <!-- Género -->
     <div class="col-lg-6 mt-3">
       <label> Género </label>
-      <select v-model="Gender" class="form-control">
+      <select v-model="Gender" :class="inputClassFor('gender')">
         <option value="" selected>Escoge una opción</option>
         <option value="Masculino"> Masculino </option>
         <option value="Femenino"> Femenino </option>
         <option value="Otro"> Otro </option>
         <option value="No especificar"> No especificar </option>
       </select>
+      <div v-if="'gender' in errores" class="invalid-feedback">{{errores.gender}}</div>
     </div>
 
     <!-- Estado civil -->
     <div class="col-lg-6 mt-3">
       <label> Estado civil </label>
-      <select v-model="CivicState" class="form-control">
+      <select v-model="CivicState" :class="inputClassFor('civic_state')">
         <option value="" selected>Escoge una opción</option>
         <option value="Soltero"> Soltero </option>
         <option value="Casado"> Casado </option>
@@ -66,80 +73,91 @@
         <option value="Viudo"> Viudo </option>
         <option value="Otro"> Otro </option>
       </select>
+      <div v-if="'civic_state' in errores" class="invalid-feedback">{{errores.civic_state}}</div>
     </div>
 
     <!-- Otro género -->
-    <div v-if="Gender === 'Otro'" class="col-lg-6 mt-3 mr-auto">
+    <div v-if="Gender === 'Otro'" class="col-lg-6 mt-3">
       <label> Coloca el otro género </label>
-      <input type="text" class="form-control">
+      <input type="text" :class="inputClassFor('other_gender')">
+      <div v-if="'gender' in errores" class="invalid-feedback">{{errores.gender}}</div>
     </div>
 
     <!-- Otro estado civil -->
-    <div v-if="CivicState === 'Otro'" class="col-lg-6 mt-3 ml-auto">
+    <div v-if="CivicState === 'Otro'" class="col-lg-6 mt-3">
       <label> Coloca el otro estado civil </label>
-      <input type="text" class="form-control" v-model="OtherGender">
+      <input type="text" :class="inputClassFor('other_civic_state')" v-model="OtherGender">
+      <div v-if="'other_gender' in errores" class="invalid-feedback">{{errores.other_gender}}</div>
     </div>
 
     <div class="col-12"></div>
 
     <!-- País de nacimiento -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> País de nacimiento </label>
-      <select v-model="BirthCountry" class="form-control" @change="escogePais">
+      <select v-model="BirthCountry" :class="inputClassFor('birth_country')" @change="escogePais">
         <option value="" selected> Escoge un país </option>
         <option v-for="country in countries" :key="country.id" :value="country.name"> {{country.name}} </option>
       </select>
+      <div v-if="'birth_country' in errores" class="invalid-feedback">{{errores.birth_country}}</div>
     </div>
 
     <!-- Estado de nacimiento -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> Estado de nacimiento </label>
-      <select v-model="BirthState" class="form-control">
+      <select v-model="BirthState" :class="inputClassFor('birth_state')">
         <option value="" selected> Escoge un país </option>
         <option v-for="state in states" :key="state.id" :value="state.name"> {{state.name}} </option>
       </select>
+      <div v-if="'birth_state' in errores" class="invalid-feedback">{{errores.birth_state}}</div>
     </div>
     
     <!-- País de residencia -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> País de residencia </label>
-      <select v-model="ResidenceCountry" class="form-control">
+      <select v-model="ResidenceCountry" :class="inputClassFor('residence_country')">
         <option value="" selected> Escoge un país </option>
         <option v-for="country in countries" :key="country.id" :value="country.name"> {{country.name}} </option>
       </select>
+      <div v-if="'residence_country' in errores" class="invalid-feedback">{{errores.residence_country}}</div>
     </div>
 
     <!-- Código postal -->
-    <div class="col-lg-6 mt-auto">
+    <div class="col-lg-6 mt-3">
       <label class="mt-3"> Código postal </label>
-      <input type="number" class="form-control" v-model.number="ZipCode">
+      <input type="number" :class="inputClassFor('zip_code')" v-model.number="ZipCode">
+      <div v-if="'zip_code' in errores" class="invalid-feedback">{{errores.zip_code}}</div>
     </div>
 
     <!-- Teléfono de contacto -->
-    <div class="col-md-6 col-lg-3 mt-auto">
+    <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> Teléfono de contacto </label>
-      <input type="number" class="form-control" v-model.number="PhoneNumber">
+      <input type="number" :class="inputClassFor('phone_number')" v-model.number="PhoneNumber">
+      <div v-if="'phone_number' in errores" class="invalid-feedback">{{errores.phone_number}}</div>
     </div>
     
     <!-- Etnia -->
-    <div class="col-md-6 col-lg-3 mt-auto">
+    <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> Etnia </label>
-      <input type="text" class="form-control" v-model="Ethnicity">
+      <input type="text" :class="inputClassFor('ethnicity')" v-model="Ethnicity">
+      <div v-if="'ethnicity' in errores" class="invalid-feedback">{{errores.ethnicity}}</div>
     </div>
 
     <!-- El postulante es discapacitado -->
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> ¿Tienes alguna discapacidad? </label>
-      <select v-model="IsDisabled" class="form-control">
+      <select v-model="IsDisabled" :class="inputClassFor('is_disabled')">
         <option :value="true"> Si </option>
         <option :value="false" selected> No </option>
       </select>
+      <div v-if="'is_disabled' in errores" class="invalid-feedback">{{errores.is_disabled}}</div>
     </div>
     
     <!-- Detalles de la discapacidad -->
-    <div v-if="IsDisabled === true" class="col-md-6 col-lg-3 mt-auto">
+    <div v-if="IsDisabled === true" class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> ¿Cuál? </label>
-      <input v-model="Disability" type="text" class="form-control">
+      <input v-model="Disability" type="text" :class="inputClassFor('disability')">
+      <div v-if="'disability' in errores" class="invalid-feedback">{{errores.disability}}</div>
     </div>
 
     <!-- Aviso de privacidad -->
@@ -226,6 +244,9 @@ export default {
 
     // Readonly.
     readonly: Boolean,
+
+    // Errores
+    errores: Object,
   },
 
   data() {
@@ -410,6 +431,13 @@ export default {
   methods: {
     escogePais(evento) {
       this.states = this.countries[evento.target.selectedIndex - 1].states;
+    },
+
+    inputClassFor(model){
+      return {
+        'form-control': true,
+        'is-invalid': model in this.errores
+      }
     }
   }
 };

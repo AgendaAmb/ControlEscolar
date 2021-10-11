@@ -2,22 +2,25 @@
   <div class="form-row">
     <div class="form-group col-sm-6 col-lg-5 mb-3">
       <label> ¿Perteneces a la UASLP? </label>
-      <select v-model="PerteneceUaslp" class="form-control">
+      <select v-model="PerteneceUaslp" :class="inputClassFor('pertenece_uaslp')">
         <option value="" selected>Escoge una opción</option>
-        <option value="Si"> Si </option>
-        <option value="No"> No </option>
+        <option :value="true"> Si </option>
+        <option :value="false"> No </option>
       </select>
+      <div v-if="'pertenece_uaslp' in errores" class="invalid-feedback"> {{ errores.pertenece_uaslp }} </div>
     </div>
     <div class="col-12"></div>
 
-    <div v-if="PerteneceUaslp === 'Si'" class="form-group col-11 col-sm-6 col-lg-5 my-auto">
+    <div v-if="PerteneceUaslp === true" class="form-group col-11 col-sm-6 col-lg-5 mb-auto">
       <input type="hidden" name="Dependencia" v-model="Facultad">
       <label> Ingresa tu RPE/clave única de alumno ó correo Institucional </label>
-      <input type="search" class="form-control" v-model="claveUaslp">
+      <input type="search" :class="inputClassFor('clave_uaslp')" v-model="ClaveUaslp">
+
+      <div v-if="'clave_uaslp' in errores" class="invalid-feedback"> {{ errores.clave_uaslp}} </div>
     </div>
 
-    <div v-if="PerteneceUaslp === 'Si'" class="col-1 mt-auto">
-      <a class="btn btn btn-outline-light search-button position-relative" 
+    <div v-if="PerteneceUaslp === true" class="col-1 mt-auto">
+      <a class="py-2 btn btn btn-outline-light search-button position-relative" 
         @click="uaslpUser"
         data-toggle="tooltip" 
         data-placement="right" 
@@ -27,28 +30,32 @@
     </div>
     <div class="col-12"></div>
 
-    <div v-if="PerteneceUaslp === 'No'" class="form-group col-12">
+    <div v-if="PerteneceUaslp === false" class="form-group col-12">
       <h5 class="modal-title mt-3" >Crear cuenta </h5>
     </div>
 
     <div :class="EmailClass">
       <label> Ingresa un correo electrónico </label>
-      <input type="email" class="form-control" v-model="Email" :readonly="ClaveUaslp !== null">
+      <input type="email" :class="inputClassFor('email')" v-model="Email" :readonly="ClaveUaslp !== null">
+      <div v-if="'email' in errores" class="invalid-feedback"> {{ errores.email}} </div>
     </div>
 
     <div :class="EmailClass">
       <label> Ingresa un correo de contacto alterno </label>
-      <input type="email" class="form-control" v-model="EmailAlterno">
+      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno">
+      <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
     <div :class="PasswordClass">
       <label> Contraseña</label>
-      <input type="password" class="form-control" v-model="Password">
+      <input type="password" :class="inputClassFor('password')" v-model="Password">
+      <div v-if="'password' in errores" class="invalid-feedback"> {{ errores.password}} </div>
     </div>
 
     <div :class="PasswordClass">
       <label> Repite tu Contraseña </label>
-      <input type="password" class="form-control" v-model="RPassword">
+      <input type="password" :class="inputClassFor('rpassword')" v-model="RPassword">
+      <div v-if="'rpassword' in errores" class="invalid-feedback"> {{ errores.rpassword}} </div>
     </div>
   </div>
 </template>
@@ -61,7 +68,7 @@ export default {
 
   props: {
     // El usuario pertenece a la UASLP.
-    pertenece_uaslp: String,
+    pertenece_uaslp: Boolean,
     
     // Facultad de adscripción del usuario.
     facultad: String,
@@ -80,6 +87,9 @@ export default {
 
     // Confirmación de la contraseña.
     rpassword: String,
+
+    // Errores.
+    errores: Object,
   },
 
   data() {
@@ -156,7 +166,7 @@ export default {
           'form-group': true,
           'col-lg-6': true,
           'my-3': true,
-          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === 'Si' || this.PerteneceUaslp === null)
+          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === true || this.PerteneceUaslp === null)
         };
       }
     },
@@ -166,7 +176,7 @@ export default {
         return {
           'form-group': true,
           'col-lg-6': true,
-          'd-none': this.PerteneceUaslp !== 'No'
+          'd-none': this.PerteneceUaslp !== false
         };
       }
     },
@@ -188,6 +198,13 @@ export default {
         this.spinnerVisible = false;
       });
     },
+
+    inputClassFor(model){
+      return {
+        'form-control': true,
+        'is-invalid': model in this.errores
+      }
+    }
   }
 };
 </script>

@@ -11,7 +11,8 @@
         <div class="modal-body">
           <form v-on:submit.prevent="registraUsuario">
             <!-- Datos para crear la cuenta -->
-            <crear-cuenta :pertenece_uaslp.sync="pertenece_uaslp"
+            <crear-cuenta :errores="errores"
+              :pertenece_uaslp.sync="pertenece_uaslp"
               :clave_uaslp.sync="clave_uaslp"
               :facultad.sync="facultad"
               :email.sync="email"
@@ -22,7 +23,7 @@
             </crear-cuenta>
 
             <!-- Datos generales -->
-            <datos-personales
+            <datos-personales :errores="errores"
               :readonly="Readonly"
               :countries="countries"
               :curp.sync="curp"
@@ -70,6 +71,7 @@ export default {
   data(){
     return {
       countries: [],
+      errores: {},
       clave_uaslp: null,
       directorio_activo: null,
       pertenece_uaslp: null,
@@ -131,7 +133,7 @@ export default {
     },
 
     registraUsuario(){
-
+      this.errores = {};
       var formData = new FormData();
       formData.append('clave_uaslp', this.clave_uaslp);
       formData.append('directorio_activo', this.directorio_activo);
@@ -171,7 +173,11 @@ export default {
       }).then(response => {        
         
       }).catch(error => {
+        var errores = error.response.data['errors'];
 
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
       });
     }
   },

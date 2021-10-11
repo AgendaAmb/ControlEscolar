@@ -5664,11 +5664,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "crear-cuenta",
   props: {
     // El usuario pertenece a la UASLP.
-    pertenece_uaslp: String,
+    pertenece_uaslp: Boolean,
     // Facultad de adscripción del usuario.
     facultad: String,
     // Usuario de la UASLP.
@@ -5680,7 +5687,9 @@ __webpack_require__.r(__webpack_exports__);
     // Contraseña de registro.
     password: String,
     // Confirmación de la contraseña.
-    rpassword: String
+    rpassword: String,
+    // Errores.
+    errores: Object
   },
   data: function data() {
     return {
@@ -5750,7 +5759,7 @@ __webpack_require__.r(__webpack_exports__);
           'form-group': true,
           'col-lg-6': true,
           'my-3': true,
-          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === 'Si' || this.PerteneceUaslp === null)
+          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === true || this.PerteneceUaslp === null)
         };
       }
     },
@@ -5759,7 +5768,7 @@ __webpack_require__.r(__webpack_exports__);
         return {
           'form-group': true,
           'col-lg-6': true,
-          'd-none': this.PerteneceUaslp !== 'No'
+          'd-none': this.PerteneceUaslp !== false
         };
       }
     }
@@ -5779,6 +5788,12 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this.spinnerVisible = false;
       });
+    },
+    inputClassFor: function inputClassFor(model) {
+      return {
+        'form-control': true,
+        'is-invalid': model in this.errores
+      };
     }
   }
 });
@@ -5796,6 +5811,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6001,7 +6034,9 @@ __webpack_require__.r(__webpack_exports__);
     // Países.
     countries: Array,
     // Readonly.
-    readonly: Boolean
+    readonly: Boolean,
+    // Errores
+    errores: Object
   },
   data: function data() {
     return {
@@ -6165,6 +6200,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     escogePais: function escogePais(evento) {
       this.states = this.countries[evento.target.selectedIndex - 1].states;
+    },
+    inputClassFor: function inputClassFor(model) {
+      return {
+        'form-control': true,
+        'is-invalid': model in this.errores
+      };
     }
   }
 });
@@ -6239,6 +6280,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6254,6 +6296,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       countries: [],
+      errores: {},
       clave_uaslp: null,
       directorio_activo: null,
       pertenece_uaslp: null,
@@ -6311,6 +6354,9 @@ __webpack_require__.r(__webpack_exports__);
       this.residence_country = 'México';
     },
     registraUsuario: function registraUsuario() {
+      var _this = this;
+
+      this.errores = {};
       var formData = new FormData();
       formData.append('clave_uaslp', this.clave_uaslp);
       formData.append('directorio_activo', this.directorio_activo);
@@ -6346,15 +6392,20 @@ __webpack_require__.r(__webpack_exports__);
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {})["catch"](function (error) {
+        var errores = error.response.data['errors'];
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this.errores, key, errores[key][0]);
+        });
+      });
     }
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states').then(function (response) {
-        _this.countries = response.data;
+        _this2.countries = response.data;
       });
     });
   }
@@ -52134,7 +52185,7 @@ var render = function() {
               expression: "PerteneceUaslp"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("pertenece_uaslp"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -52156,19 +52207,25 @@ var render = function() {
             _vm._v("Escoge una opción")
           ]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si ")]),
+          _c("option", { domProps: { value: true } }, [_vm._v(" Si ")]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "No" } }, [_vm._v(" No ")])
+          _c("option", { domProps: { value: false } }, [_vm._v(" No ")])
         ]
-      )
+      ),
+      _vm._v(" "),
+      "pertenece_uaslp" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(" " + _vm._s(_vm.errores.pertenece_uaslp) + " ")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12" }),
     _vm._v(" "),
-    _vm.PerteneceUaslp === "Si"
+    _vm.PerteneceUaslp === true
       ? _c(
           "div",
-          { staticClass: "form-group col-11 col-sm-6 col-lg-5 my-auto" },
+          { staticClass: "form-group col-11 col-sm-6 col-lg-5 mb-auto" },
           [
             _c("input", {
               directives: [
@@ -52202,33 +52259,39 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.claveUaslp,
-                  expression: "claveUaslp"
+                  value: _vm.ClaveUaslp,
+                  expression: "ClaveUaslp"
                 }
               ],
-              staticClass: "form-control",
+              class: _vm.inputClassFor("clave_uaslp"),
               attrs: { type: "search" },
-              domProps: { value: _vm.claveUaslp },
+              domProps: { value: _vm.ClaveUaslp },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.claveUaslp = $event.target.value
+                  _vm.ClaveUaslp = $event.target.value
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            "clave_uaslp" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.clave_uaslp) + " ")
+                ])
+              : _vm._e()
           ]
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.PerteneceUaslp === "Si"
+    _vm.PerteneceUaslp === true
       ? _c("div", { staticClass: "col-1 mt-auto" }, [
           _c(
             "a",
             {
               staticClass:
-                "btn btn btn-outline-light search-button position-relative",
+                "py-2 btn btn btn-outline-light search-button position-relative",
               attrs: {
                 "data-toggle": "tooltip",
                 "data-placement": "right",
@@ -52243,7 +52306,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-12" }),
     _vm._v(" "),
-    _vm.PerteneceUaslp === "No"
+    _vm.PerteneceUaslp === false
       ? _c("div", { staticClass: "form-group col-12" }, [
           _c("h5", { staticClass: "modal-title mt-3" }, [
             _vm._v("Crear cuenta ")
@@ -52263,7 +52326,7 @@ var render = function() {
             expression: "Email"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("email"),
         attrs: { type: "email", readonly: _vm.ClaveUaslp !== null },
         domProps: { value: _vm.Email },
         on: {
@@ -52274,7 +52337,13 @@ var render = function() {
             _vm.Email = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "email" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(" " + _vm._s(_vm.errores.email) + " ")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { class: _vm.EmailClass }, [
@@ -52289,7 +52358,7 @@ var render = function() {
             expression: "EmailAlterno"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("email_alterno"),
         attrs: { type: "email" },
         domProps: { value: _vm.EmailAlterno },
         on: {
@@ -52300,7 +52369,13 @@ var render = function() {
             _vm.EmailAlterno = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "email_alterno" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " ")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { class: _vm.PasswordClass }, [
@@ -52315,7 +52390,7 @@ var render = function() {
             expression: "Password"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("password"),
         attrs: { type: "password" },
         domProps: { value: _vm.Password },
         on: {
@@ -52326,7 +52401,13 @@ var render = function() {
             _vm.Password = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "password" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(" " + _vm._s(_vm.errores.password) + " ")
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { class: _vm.PasswordClass }, [
@@ -52341,7 +52422,7 @@ var render = function() {
             expression: "RPassword"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("rpassword"),
         attrs: { type: "password" },
         domProps: { value: _vm.RPassword },
         on: {
@@ -52352,7 +52433,13 @@ var render = function() {
             _vm.RPassword = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "rpassword" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(" " + _vm._s(_vm.errores.rpassword) + " ")
+          ])
+        : _vm._e()
     ])
   ])
 }
@@ -52389,8 +52476,8 @@ var render = function() {
       [_vm._v(" Datos personales ")]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-lg-6 mb-auto" }, [
-      _c("label", { staticClass: "d-block mt-3" }, [_vm._v(" CURP ")]),
+    _c("div", { staticClass: "form-group col-lg-6" }, [
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" CURP ")]),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -52401,7 +52488,7 @@ var render = function() {
             expression: "Curp"
           }
         ],
-        staticClass: "d-block form-control mb-3",
+        class: _vm.inputClassFor("curp"),
         attrs: { type: "text", readonly: _vm.NoCurp === true },
         domProps: { value: _vm.Curp },
         on: {
@@ -52462,12 +52549,18 @@ var render = function() {
           { staticClass: "form-check-label", attrs: { for: "curp" } },
           [_vm._v(" No tengo curp ")]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      "curp" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.curp))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-12" }),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group col-12 mb-auto" }, [
+    _c("div", { staticClass: "form-group col-12" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Nombres ")]),
       _vm._v(" "),
       _c("input", {
@@ -52479,7 +52572,7 @@ var render = function() {
             expression: "Name"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("name"),
         attrs: { type: "text", readonly: _vm.readonly },
         domProps: { value: _vm.Name },
         on: {
@@ -52490,12 +52583,18 @@ var render = function() {
             _vm.Name = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "name" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.name))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-12" }),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 mt-auto" }, [
+    _c("div", { staticClass: "col-md-6" }, [
       _c("label", { staticClass: " mt-3" }, [_vm._v(" Apellido paterno ")]),
       _vm._v(" "),
       _c("input", {
@@ -52507,7 +52606,7 @@ var render = function() {
             expression: "FirstSurname"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("first_surname"),
         attrs: { type: "text", readonly: _vm.readonly },
         domProps: { value: _vm.FirstSurname },
         on: {
@@ -52518,10 +52617,16 @@ var render = function() {
             _vm.FirstSurname = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "first_surname" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.first_surname))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 mt-auto" }, [
+    _c("div", { staticClass: "col-md-6" }, [
       _c("label", { staticClass: "d-block mt-3" }, [
         _vm._v(" Apellido materno ")
       ]),
@@ -52535,7 +52640,7 @@ var render = function() {
             expression: "LastSurname"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("last_surname"),
         attrs: { type: "text", readonly: _vm.readonly },
         domProps: { value: _vm.LastSurname },
         on: {
@@ -52546,10 +52651,16 @@ var render = function() {
             _vm.LastSurname = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "last_surname" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.last_surname))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Fecha de nacimiento ")]),
       _vm._v(" "),
       _c("input", {
@@ -52561,7 +52672,7 @@ var render = function() {
             expression: "BirthDate"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("birth_date"),
         attrs: { type: "date" },
         domProps: { value: _vm.BirthDate },
         on: {
@@ -52572,10 +52683,16 @@ var render = function() {
             _vm.BirthDate = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "birth_date" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.birth_date))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Ocupación ")]),
       _vm._v(" "),
       _c("input", {
@@ -52587,7 +52704,7 @@ var render = function() {
             expression: "Ocupation"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("ocupation"),
         attrs: { type: "text" },
         domProps: { value: _vm.Ocupation },
         on: {
@@ -52598,7 +52715,13 @@ var render = function() {
             _vm.Ocupation = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "ocupation" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.ocupation))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-6 mt-3" }, [
@@ -52615,7 +52738,7 @@ var render = function() {
               expression: "Gender"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("gender"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -52651,7 +52774,13 @@ var render = function() {
             _vm._v(" No especificar ")
           ])
         ]
-      )
+      ),
+      _vm._v(" "),
+      "gender" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.gender))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-6 mt-3" }, [
@@ -52668,7 +52797,7 @@ var render = function() {
               expression: "CivicState"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("civic_state"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -52702,19 +52831,34 @@ var render = function() {
           _vm._v(" "),
           _c("option", { attrs: { value: "Otro" } }, [_vm._v(" Otro ")])
         ]
-      )
+      ),
+      _vm._v(" "),
+      "civic_state" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.civic_state))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _vm.Gender === "Otro"
-      ? _c("div", { staticClass: "col-lg-6 mt-3 mr-auto" }, [
+      ? _c("div", { staticClass: "col-lg-6 mt-3" }, [
           _c("label", [_vm._v(" Coloca el otro género ")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            class: _vm.inputClassFor("other_gender"),
+            attrs: { type: "text" }
+          }),
+          _vm._v(" "),
+          "gender" in _vm.errores
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.gender))
+              ])
+            : _vm._e()
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.CivicState === "Otro"
-      ? _c("div", { staticClass: "col-lg-6 mt-3 ml-auto" }, [
+      ? _c("div", { staticClass: "col-lg-6 mt-3" }, [
           _c("label", [_vm._v(" Coloca el otro estado civil ")]),
           _vm._v(" "),
           _c("input", {
@@ -52726,7 +52870,7 @@ var render = function() {
                 expression: "OtherGender"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.inputClassFor("other_civic_state"),
             attrs: { type: "text" },
             domProps: { value: _vm.OtherGender },
             on: {
@@ -52737,13 +52881,19 @@ var render = function() {
                 _vm.OtherGender = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          "other_gender" in _vm.errores
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.other_gender))
+              ])
+            : _vm._e()
         ])
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "col-12" }),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" País de nacimiento ")]),
       _vm._v(" "),
       _c(
@@ -52757,7 +52907,7 @@ var render = function() {
               expression: "BirthCountry"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("birth_country"),
           on: {
             change: [
               function($event) {
@@ -52791,10 +52941,16 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      "birth_country" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.birth_country))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Estado de nacimiento ")]),
       _vm._v(" "),
       _c(
@@ -52808,7 +52964,7 @@ var render = function() {
               expression: "BirthState"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("birth_state"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -52839,10 +52995,16 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      "birth_state" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.birth_state))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" País de residencia ")]),
       _vm._v(" "),
       _c(
@@ -52856,7 +53018,7 @@ var render = function() {
               expression: "ResidenceCountry"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("residence_country"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -52887,10 +53049,16 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      "residence_country" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.residence_country))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-lg-6 mt-auto" }, [
+    _c("div", { staticClass: "col-lg-6 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Código postal ")]),
       _vm._v(" "),
       _c("input", {
@@ -52903,7 +53071,7 @@ var render = function() {
             modifiers: { number: true }
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("zip_code"),
         attrs: { type: "number" },
         domProps: { value: _vm.ZipCode },
         on: {
@@ -52917,10 +53085,16 @@ var render = function() {
             return _vm.$forceUpdate()
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "zip_code" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.zip_code))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+    _c("div", { staticClass: "col-md-6 col-lg-3 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Teléfono de contacto ")]),
       _vm._v(" "),
       _c("input", {
@@ -52933,7 +53107,7 @@ var render = function() {
             modifiers: { number: true }
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("phone_number"),
         attrs: { type: "number" },
         domProps: { value: _vm.PhoneNumber },
         on: {
@@ -52947,10 +53121,16 @@ var render = function() {
             return _vm.$forceUpdate()
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "phone_number" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.phone_number))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+    _c("div", { staticClass: "col-md-6 col-lg-3 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [_vm._v(" Etnia ")]),
       _vm._v(" "),
       _c("input", {
@@ -52962,7 +53142,7 @@ var render = function() {
             expression: "Ethnicity"
           }
         ],
-        staticClass: "form-control",
+        class: _vm.inputClassFor("ethnicity"),
         attrs: { type: "text" },
         domProps: { value: _vm.Ethnicity },
         on: {
@@ -52973,10 +53153,16 @@ var render = function() {
             _vm.Ethnicity = $event.target.value
           }
         }
-      })
+      }),
+      _vm._v(" "),
+      "ethnicity" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.ethnicity))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 col-lg-3" }, [
+    _c("div", { staticClass: "col-md-6 col-lg-3 mt-3" }, [
       _c("label", { staticClass: "mt-3" }, [
         _vm._v(" ¿Tienes alguna discapacidad? ")
       ]),
@@ -52992,7 +53178,7 @@ var render = function() {
               expression: "IsDisabled"
             }
           ],
-          staticClass: "form-control",
+          class: _vm.inputClassFor("is_disabled"),
           on: {
             change: function($event) {
               var $$selectedVal = Array.prototype.filter
@@ -53018,11 +53204,17 @@ var render = function() {
             [_vm._v(" No ")]
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      "is_disabled" in _vm.errores
+        ? _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v(_vm._s(_vm.errores.is_disabled))
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _vm.IsDisabled === true
-      ? _c("div", { staticClass: "col-md-6 col-lg-3 mt-auto" }, [
+      ? _c("div", { staticClass: "col-md-6 col-lg-3 mt-3" }, [
           _c("label", { staticClass: "mt-3" }, [_vm._v(" ¿Cuál? ")]),
           _vm._v(" "),
           _c("input", {
@@ -53034,7 +53226,7 @@ var render = function() {
                 expression: "Disability"
               }
             ],
-            staticClass: "form-control",
+            class: _vm.inputClassFor("disability"),
             attrs: { type: "text" },
             domProps: { value: _vm.Disability },
             on: {
@@ -53045,7 +53237,13 @@ var render = function() {
                 _vm.Disability = $event.target.value
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          "disability" in _vm.errores
+            ? _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v(_vm._s(_vm.errores.disability))
+              ])
+            : _vm._e()
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -53201,6 +53399,7 @@ var render = function() {
                 [
                   _c("crear-cuenta", {
                     attrs: {
+                      errores: _vm.errores,
                       pertenece_uaslp: _vm.pertenece_uaslp,
                       clave_uaslp: _vm.clave_uaslp,
                       facultad: _vm.facultad,
@@ -53237,6 +53436,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("datos-personales", {
                     attrs: {
+                      errores: _vm.errores,
                       readonly: _vm.Readonly,
                       countries: _vm.countries,
                       curp: _vm.curp,
