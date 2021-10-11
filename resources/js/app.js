@@ -36,6 +36,7 @@ Vue.component('calendar', require('./components/calendar/Calendar.vue').default)
 /**
  * Componentes para la vista de postulación.
  */
+Vue.component('expedientes', require('./components/postulacion/Expedientes.vue').default);
 Vue.component('solicitud-postulante', require('./components/postulacion/SolicitudPostulante.vue').default);
 Vue.component('postulante', require('./components/postulacion/Postulante.vue').default);
 Vue.component('requisitos-ingreso', require('./components/postulacion/RequisitosIngreso.vue').default);
@@ -56,10 +57,3 @@ Vue.component('ci-documento-requerido', require('./components/carta-intencion/Do
 Vue.component('ci-lengua-extranjera', require('./components/carta-intencion/LenguaExtranjera.vue').default);
 Vue.component('ci-produccion-cientifica', require('./components/carta-intencion/ProduccionCientifica.vue').default);
 Vue.component('ci-capital-humano', require('./components/carta-intencion/CapitalHumano.vue').default);
-
-/*Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
-Vue.component('experiencia-laboral', require('./components/postulacion/ExperienciaLaboral.vue').default);
-Vue.component('produccion-cientifica', require('./components/postulacion/ProduccionCientifica.vue').default);
-Vue.component('grado-academico-postulante', require('./components/carta-intencion/GradoAcademico.vue').default);
-Vue.component('informacion-postulante', require('./components/carta-intencion/InformacionPostulante.vue').default);
-Vue.component('lengua-extranjera-postulante', require('./components/carta-intencion/LenguaExtranjera.vue').default);*/

@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
 use App\Models\AcademicDegree;
+use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
 use App\Models\Archive;
 use App\Models\Author;
@@ -20,9 +21,52 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ArchiveController extends Controller
 {
+    /**
+     * Show the archives dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     * 
+     */
+    public function index(Request $request)
+    {
+        return view('postulacion.index')
+            ->with('user', $request->user())
+            ->with('academic_programs', AcademicProgram::all());
+    }
+
+    /**
+     * Obtiene los expedientes, vía api.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     * 
+     */
+    public function archives(Request $request)
+    {
+        $archives = QueryBuilder::for(Archive::class)
+            ->allowedFilters(['academic_program_id'])
+            ->select([
+                'archives.id as id', 
+                DB::raw("NULL as name"), 
+                'status',
+                DB::raw("concat('solicitud/', archives.id) as archive_location")
+            
+            ])->addSelect([
+                'academic_program' => AcademicProgram::select('name')
+                    ->whereColumn('academic_program_id', 'academic_programs.id')
+                    ->limit(1)
+            ])->without(
+                'personalDocuments','entranceDocuments',
+                'academicAreas','appliantLanguages',
+                'academicDegrees', 'appliantWorkingExperiences',
+                'scientificProductions', 'humanCapitals'
+            )->get();
+
+        return new JsonResponse($archives);
+    } 
 
     /**
      * Show the application dashboard.

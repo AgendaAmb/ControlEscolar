@@ -24,7 +24,9 @@ Route::view('/', 'pre-registro.index')->name('programasAcademicos');
 # Rutas de las solicitudes académicas.
 Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
-    Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('postulacion'); 
+    Route::get('/', [ArchiveController::class,'index'])->name('index');
+    Route::get('/archives', [ArchiveController::class,'archives'])->name('archives');
+    Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('show'); 
 
     # Requisitos de ingreso.
     Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']); 
