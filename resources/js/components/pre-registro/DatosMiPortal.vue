@@ -55,7 +55,7 @@ export default {
         "email":this.CorreoRegistro
       }
 
-      axios.post('/controlescolar/miPortalUser',data)
+      axios.post('/controlescolar/users/miPortalUser',data)
       .then(response => {
         this.spinnerVisible = false;
         var res = response['data'][0];

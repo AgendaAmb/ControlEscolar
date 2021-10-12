@@ -4,6 +4,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PreRegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +21,22 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+# Rutas para gestión de usuarios.
+Route::prefix('users')->name('users.')->group(function(){
+
+    # Usuarios del sistema.
+    Route::get('/', [UserController::class, 'index'])->name('index');
+   
+    # Obtener usuario de mi portal.
+    Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
+});
+
 # Rutas para el pre-registro.
 Route::name('pre-registro.')->group(function(){
+    
+    # Obtención de datos
     Route::get('/', [PreRegisterController::class, 'index'])->name('index');
     Route::post('/', [PreRegisterController::class, 'store'])->name('store');
-    Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
 });
 
 # Rutas de las solicitudes académicas.
@@ -60,7 +72,6 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
     # Capital humano.
     Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
 });
-
 
 # Rutas para las entrevistas.
 Route::name('entrevistas.')->group(function(){

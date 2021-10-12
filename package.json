@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "dhtmlx-scheduler": "^5.3.12",
+        "v-calendar": "^2.3.4",
+        "v-calendar-scheduler": "^0.7.4",
         "vue-event-calendar": "^1.5.2",
         "vue-select": "^3.13.0",
         "vuex": "^3.6.2"

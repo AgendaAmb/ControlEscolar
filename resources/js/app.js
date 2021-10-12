@@ -6,8 +6,36 @@
 
 require('./bootstrap');
 
+// Import VueScheduler
+import VueScheduler from "v-calendar-scheduler";
+
+// Import styles
+import "v-calendar-scheduler/lib/main.css";
+
+
 window.Vue = require('vue').default;
 Vue.config.productionTip = false;
+Vue.use(VueScheduler, {
+
+    locale: "es",
+    minDate: null,
+    maxDate: null,
+    labels: {
+        today: "Hoy",
+        back: "Atrás",
+        next: "Siguiente",
+        month: "Mes",
+        week: "Semana",
+        day: "Día",
+        all_day: "Todo el día",
+    },
+    initialDate: new Date(),
+    use12: true,
+    showTodayButton: true,
+    eventDisplay: null,
+},
+);
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,20 +48,17 @@ Vue.config.productionTip = false;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('scheduler', require('./components/calendar/Scheduler.vue').default);
-Vue.component('calendar', require('./components/calendar/Calendar.vue').default);
-
 
 /**
  * Componentes para el pre-registro.
  */
 Vue.component('academic-program', require('./components/pre-registro/AcademicProgram.vue').default);
- Vue.component('pre-registro', require('./components/pre-registro/PreRegistro.vue').default);
- Vue.component('crear-cuenta', require('./components/pre-registro/CrearCuenta.vue').default);
- Vue.component('datos-personales', require('./components/pre-registro/DatosPersonales.vue').default);
+Vue.component('pre-registro', require('./components/pre-registro/PreRegistro.vue').default);
+Vue.component('crear-cuenta', require('./components/pre-registro/CrearCuenta.vue').default);
+Vue.component('datos-personales', require('./components/pre-registro/DatosPersonales.vue').default);
 
 /**
- * Componentes para la vista de postulación.
+ * Componentes para la postulación.
  */
 Vue.component('expedientes', require('./components/postulacion/Expedientes.vue').default);
 Vue.component('solicitud-postulante', require('./components/postulacion/SolicitudPostulante.vue').default);
@@ -47,12 +72,6 @@ Vue.component('capital-humano', require('./components/postulacion/CapitalHumano.
 Vue.component('lengua-extranjera', require('./components/postulacion/LenguaExtranjera.vue').default);
 
 /**
- * Componentes para la carta de intención.
+ * Componentes para las entrevistas.
  */
-Vue.component('ci-solicitud-postulante', require('./components/carta-intencion/SolicitudPostulante.vue').default);
-Vue.component('ci-postulante', require('./components/carta-intencion/Postulante.vue').default);
-Vue.component('ci-grado-academico', require('./components/carta-intencion/GradoAcademico.vue').default);
-Vue.component('ci-documento-requerido', require('./components/carta-intencion/DocumentoPostulante.vue').default);
-Vue.component('ci-lengua-extranjera', require('./components/carta-intencion/LenguaExtranjera.vue').default);
-Vue.component('ci-produccion-cientifica', require('./components/carta-intencion/ProduccionCientifica.vue').default);
-Vue.component('ci-capital-humano', require('./components/carta-intencion/CapitalHumano.vue').default);
+Vue.component('calendario-entrevistas', require('./components/entrevistas/CalendarioEntrevistas.vue').default);

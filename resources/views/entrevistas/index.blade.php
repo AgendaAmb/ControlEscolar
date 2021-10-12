@@ -5,7 +5,7 @@
 @endsection
 
 @section('main')
-<calendar></calendar>
+<calendario-entrevistas></calendario-entrevistas>
 
 @endsection
 

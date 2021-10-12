@@ -60,7 +60,7 @@ class InterviewController extends Controller
     public function index(): JsonResponse
     {
         # Obtiene el listado de reuniones.
-        $response = $this->zoomService->zoomGet(self::USER_MEETINGS_URL);
+        $response = $this->zoomService->zoomGet(self::USER_MEETINGS_URL, ['page_size' => 300]);
         
         # Recolecta el resultado.
         $data = $response->collect();
@@ -78,6 +78,7 @@ class InterviewController extends Controller
     {
         $data = $request->validated();
         $data['type'] = self::MEETING_TYPE_SCHEDULE;
+        $data['timezone'] = 'America/Mexico_City';
 
         $response = $this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
     
@@ -111,6 +112,7 @@ class InterviewController extends Controller
     {
         $data = $request->validated();
         $data['type'] = self::MEETING_TYPE_SCHEDULE;
+        $data['timezone'] = 'America/Mexico_City';
 
         $response = $this->zoomService->zoomPatch(self::MEETINGS_URL.$id, $data);
     
