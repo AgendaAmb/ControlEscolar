@@ -7,6 +7,7 @@ use App\Http\Requests\PreRegisterRequest;
 use App\Models\AcademicProgram;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class PreRegisterController extends Controller
@@ -44,6 +45,27 @@ class PreRegisterController extends Controller
             ->with('academic_programs', $this->academic_programs);
     }
 
+    /**
+     * Devuelve la vista principal de solicitudes académicas.
+     */
+    public function miPortalUser(Request $request)
+    {
+        # Busca al usuario en el sistema de MiPortal.
+        $response = $this->service->miPortalGet('api/usuarios', ['filter[email]' => $request->email]);
+        $response_data = $response->collect();
+
+        # La solicitud no fue llevada a cabo correctamente.
+        if ($response->failed())
+            return new JsonResponse($response_data, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+
+        # No se encontraron coincidencias.
+        if ($response_data->count() === 0)
+            return new JsonResponse(['email' => 'Sin resultados'], JsonResponse::HTTP_NOT_FOUND);
+
+        # Devuelve los datos.
+        return new JsonResponse($response_data, JsonResponse::HTTP_OK);
+    }
+
 
     /**
      * Devuelve la vista principal de solicitudes académicas.
@@ -54,7 +76,7 @@ class PreRegisterController extends Controller
         $data = $request->validated();
         $data['module_id'] = env('MIPORTAL_MODULE_ID');
 
-        # ENvía la petición de registro de usuario al sistema principal.
+        # Envía la petición de registro de usuario al sistema principal.
         $response = $this->service->miPortalPost('api/users', $data);
         $response_data = $response->collect()->toArray();
         

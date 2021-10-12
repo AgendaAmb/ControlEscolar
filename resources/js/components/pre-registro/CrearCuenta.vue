@@ -1,36 +1,42 @@
 <template>
   <div class="form-row">
-    <div class="form-group col-sm-6 col-lg-5 mb-3">
-      <label> ¿Perteneces a la UASLP? </label>
-      <select v-model="PerteneceUaslp" :class="inputClassFor('pertenece_uaslp')">
-        <option value="" selected>Escoge una opción</option>
-        <option :value="true"> Si </option>
-        <option :value="false"> No </option>
-      </select>
-      <div v-if="'pertenece_uaslp' in errores" class="invalid-feedback"> {{ errores.pertenece_uaslp }} </div>
+    <!-- Pregunta al usuario si ya tiene alguna cuenta existente en el sistema. -->
+    <div class="form-group col-12 mb-3">
+      <h3 class="d-block mb-3"> ¿Eres miembro de la comunidad de Agenda Ambiental o perteneces a la UASLP? </h3>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA">
+        <label class="form-check-label"> Soy miembro de la comunidad de Agenda Ambiental </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP">
+        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno">
+        <label class="form-check-label"> Ninguno de los anteriores </label>
+      </div>
+      <div v-if="'tipo_usuario' in errores" class="invalid-feedback"> {{ errores.tipo_usuario }} </div>
     </div>
     <div class="col-12"></div>
 
-    <div v-if="PerteneceUaslp === true" class="form-group col-11 col-sm-6 col-lg-5 mb-auto">
-      <input type="hidden" name="Dependencia" v-model="Facultad">
-      <label> Ingresa tu RPE/clave única de alumno ó correo Institucional </label>
-      <input type="search" :class="inputClassFor('clave_uaslp')" v-model="ClaveUaslp">
-
-      <div v-if="'clave_uaslp' in errores" class="invalid-feedback"> {{ errores.clave_uaslp}} </div>
-    </div>
-
-    <div v-if="PerteneceUaslp === true" class="col-1 mt-auto">
-      <a class="py-2 btn btn btn-outline-light search-button position-relative" 
-        @click="uaslpUser"
-        data-toggle="tooltip" 
-        data-placement="right" 
-        title="Buscar mi información">
-        <i class="fas fa-search"></i>
-      </a>
-    </div>
+    <!-- El usuario es miembro de la comunidad de Agenda Ambiental. -->
+    <datos-mi-portal v-if="TipoUsuario === 'Comunidad AA'"
+      :errores="errores"
+      @miPortalUserUpdated="$emit('miPortalUserUpdated', $event)"
+      :correo_registro.sync="correo_registro">
+    </datos-mi-portal>
     <div class="col-12"></div>
 
-    <div v-if="PerteneceUaslp === false" class="form-group col-12">
+    <!-- El usuario es miembro de la UASLP, pero no de AA. -->
+    <datos-uaslp v-if="TipoUsuario === 'Comunidad UASLP'"
+      :errores="errores" 
+      :clave_uaslp.sync="ClaveUaslp" 
+      @uaslpUserUpdated="$emit('uaslpUserUpdated', $event)">
+    </datos-uaslp>
+    <div class="col-12"></div>
+
+    <!-- El usuario no es miembro de ninguno de los 2. -->
+    <div v-if="TipoUsuario === 'Ninguno'" class="form-group col-12">
       <h5 class="modal-title mt-3" >Crear cuenta </h5>
     </div>
 
@@ -42,7 +48,7 @@
 
     <div :class="EmailClass">
       <label> Ingresa un correo de contacto alterno </label>
-      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno">
+      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno" :readonly="TipoUsuario === 'Comunidad AA'">
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
@@ -61,12 +67,17 @@
 </template>
 
 <script>
-
+import DatosMiPortal from './DatosMiPortal.vue';
+import DatosUaslp from './DatosUaslp.vue';
 
 export default {
+  components: { DatosMiPortal, DatosUaslp },
   name: "crear-cuenta",
 
   props: {
+    // El usuario pertenece a la comunidad de agenda ambiental.
+    tipo_usuario: String,
+
     // El usuario pertenece a la UASLP.
     pertenece_uaslp: Boolean,
     
@@ -95,10 +106,20 @@ export default {
   data() {
     return {
       claveUaslp: null,
+      correo_registro: null,
     }
   },
 
   computed: {
+    TipoUsuario: {
+      get(){
+        return this.tipo_usuario;
+      },
+      set(newVal){
+        this.$emit('update:tipo_usuario', newVal);
+      }
+    },
+
     PerteneceUaslp: {
       get(){
         return this.pertenece_uaslp;
@@ -162,11 +183,15 @@ export default {
 
     EmailClass: {
       get(){
+        var usuarioRegistrado = this.TipoUsuario === 'Comunidad AA' && this.email === null 
+        usuarioRegistrado |= this.TipoUsuario === 'Comunidad UASLP' && this.email === null;
+        usuarioRegistrado |= this.TipoUsuario === null;
+
         return {
           'form-group': true,
           'col-lg-6': true,
-          'my-3': true,
-          'd-none': this.ClaveUaslp === null && (this.PerteneceUaslp === true || this.PerteneceUaslp === null)
+          'mt-3': this.TipoUsuario === 'Comunidad AA' || this.TipoUsuario === 'Comunidad UASLP',
+          'd-none': usuarioRegistrado || this.TipoUsuario === null
         };
       }
     },
@@ -176,29 +201,15 @@ export default {
         return {
           'form-group': true,
           'col-lg-6': true,
-          'd-none': this.PerteneceUaslp !== false
+          'd-none': this.TipoUsuario === 'Comunidad AA' 
+          || this.TipoUsuario === 'Comunidad UASLP'
+          || this.TipoUsuario === null
         };
       }
     },
   },
 
   methods:{
-    uaslpUser: function(){
-      var data = {
-        "username":this.ClaveUaslp
-      }
-
-      axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user',data)
-      .then(response => {
-        this.spinnerVisible = false;
-        var res = response['data']['data'];
-        this.$emit('uaslpUserUpdated', res);
-
-      }).catch((err) => { 
-        this.spinnerVisible = false;
-      });
-    },
-
     inputClassFor(model){
       return {
         'form-control': true,

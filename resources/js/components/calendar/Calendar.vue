@@ -74,6 +74,12 @@ export default {
       this.addMessage(message);
     },
   },
+
+  mounted() {
+    this.$nextTick(function() {
+      axios.ge
+    });
+  }
 };
 </script>
  

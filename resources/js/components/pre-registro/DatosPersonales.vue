@@ -5,7 +5,7 @@
     <div class="form-group col-lg-6">
       <!-- CURP -->
       <label class="mt-3"> CURP </label>
-      <input type="text" :class="inputClassFor('curp')" v-model="Curp" :readonly="NoCurp === true">
+      <input type="text" :class="inputClassFor('curp')" v-model="Curp" :readonly="NoCurp === true && Readonly">
       <div class="form-check">
         <input id="curp" type="checkbox" class="form-check-input" v-model="NoCurp" :true-value="true" :false-value="false">
         <label for="curp" class="form-check-label"> No tengo curp </label>
@@ -45,18 +45,18 @@
     <!-- Ocupación -->
     <div class="col-lg-6 mt-3">
       <label class="mt-3"> Ocupación </label>
-      <input type="text" :class="inputClassFor('ocupation')" v-model="Ocupation">
+      <input type="text" :class="inputClassFor('ocupation')" v-model="Ocupation" :readonly="Readonly">
       <div v-if="'ocupation' in errores" class="invalid-feedback">{{errores.ocupation}}</div>
     </div>
 
     <!-- Género -->
     <div class="col-lg-6 mt-3">
       <label> Género </label>
-      <select v-model="Gender" :class="inputClassFor('gender')">
+      <select v-model="Gender" :class="inputClassFor('gender')" :readonly="Readonly" :disabled="Readonly">
         <option value="" selected>Escoge una opción</option>
         <option value="Masculino"> Masculino </option>
         <option value="Femenino"> Femenino </option>
-        <option value="Otro"> Otro </option>
+        <option value="Otros"> Otro </option>
         <option value="No especificar"> No especificar </option>
       </select>
       <div v-if="'gender' in errores" class="invalid-feedback">{{errores.gender}}</div>
@@ -77,16 +77,16 @@
     </div>
 
     <!-- Otro género -->
-    <div v-if="Gender === 'Otro'" class="col-lg-6 mt-3">
+    <div v-if="Gender === 'Otros'" class="col-lg-6 mt-3">
       <label> Coloca el otro género </label>
-      <input type="text" :class="inputClassFor('other_gender')">
+      <input type="text" :class="inputClassFor('other_gender')" :readonly="Readonly"> 
       <div v-if="'gender' in errores" class="invalid-feedback">{{errores.gender}}</div>
     </div>
 
     <!-- Otro estado civil -->
     <div v-if="CivicState === 'Otro'" class="col-lg-6 mt-3">
       <label> Coloca el otro estado civil </label>
-      <input type="text" :class="inputClassFor('other_civic_state')" v-model="OtherGender">
+      <input type="text" :class="inputClassFor('other_civic_state')" v-model="OtherGender" :readonly="Readonly">
       <div v-if="'other_gender' in errores" class="invalid-feedback">{{errores.other_gender}}</div>
     </div>
 
@@ -95,7 +95,7 @@
     <!-- País de nacimiento -->
     <div class="col-lg-6 mt-3">
       <label class="mt-3"> País de nacimiento </label>
-      <select v-model="BirthCountry" :class="inputClassFor('birth_country')" @change="escogePais">
+      <select v-model="BirthCountry" :class="inputClassFor('birth_country')" @change="escogePais" :readonly="Readonly" :disabled="Readonly">
         <option value="" selected> Escoge un país </option>
         <option v-for="country in countries" :key="country.id" :value="country.name"> {{country.name}} </option>
       </select>
@@ -125,28 +125,28 @@
     <!-- Código postal -->
     <div class="col-lg-6 mt-3">
       <label class="mt-3"> Código postal </label>
-      <input type="number" :class="inputClassFor('zip_code')" v-model.number="ZipCode">
+      <input type="number" :class="inputClassFor('zip_code')" v-model.number="ZipCode" :readonly="Readonly">
       <div v-if="'zip_code' in errores" class="invalid-feedback">{{errores.zip_code}}</div>
     </div>
 
     <!-- Teléfono de contacto -->
     <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> Teléfono de contacto </label>
-      <input type="number" :class="inputClassFor('phone_number')" v-model.number="PhoneNumber">
+      <input type="number" :class="inputClassFor('phone_number')" v-model.number="PhoneNumber" :readonly="rReadonly">
       <div v-if="'phone_number' in errores" class="invalid-feedback">{{errores.phone_number}}</div>
     </div>
     
     <!-- Etnia -->
     <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> Etnia </label>
-      <input type="text" :class="inputClassFor('ethnicity')" v-model="Ethnicity">
+      <input type="text" :class="inputClassFor('ethnicity')" v-model="Ethnicity" :readonly="Readonly">
       <div v-if="'ethnicity' in errores" class="invalid-feedback">{{errores.ethnicity}}</div>
     </div>
 
     <!-- El postulante es discapacitado -->
     <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> ¿Tienes alguna discapacidad? </label>
-      <select v-model="IsDisabled" :class="inputClassFor('is_disabled')">
+      <select v-model="IsDisabled" :class="inputClassFor('is_disabled')" :readonly="Readonly" :disabled="Readonly">
         <option :value="true"> Si </option>
         <option :value="false" selected> No </option>
       </select>
@@ -156,7 +156,7 @@
     <!-- Detalles de la discapacidad -->
     <div v-if="IsDisabled === true" class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> ¿Cuál? </label>
-      <input v-model="Disability" type="text" :class="inputClassFor('disability')">
+      <input v-model="Disability" type="text" :class="inputClassFor('disability')" :readonly="Readonly">
       <div v-if="'disability' in errores" class="invalid-feedback">{{errores.disability}}</div>
     </div>
 
@@ -182,6 +182,9 @@ export default {
   name: "datos-personales",
 
   props: {
+    // Tipo usuario.
+    tipo_usuario: String,
+
     // CURP.
     curp: String,
 
@@ -424,6 +427,12 @@ export default {
       },
       set(newVal){
         this.$emit('update:disability', newVal);
+      }
+    },
+
+    Readonly: {
+      get(){
+        return this.readonly && this.tipo_usuario === 'Comunidad AA';
       }
     }
   },

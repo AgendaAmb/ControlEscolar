@@ -45,6 +45,6 @@ export default {
 };
 </script>
  
-<style>
+<style scoped>
 @import "~dhtmlx-scheduler/codebase/dhtmlxscheduler_material.css";
 </style>

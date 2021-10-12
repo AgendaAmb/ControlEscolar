@@ -22,14 +22,15 @@ Auth::routes();
 
 # Rutas para el pre-registro.
 Route::name('pre-registro.')->group(function(){
-
     Route::get('/', [PreRegisterController::class, 'index'])->name('index');
     Route::post('/', [PreRegisterController::class, 'store'])->name('store');
+    Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
 });
 
 # Rutas de las solicitudes académicas.
 Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
+    # Expedientes
     Route::get('/', [ArchiveController::class,'index'])->name('index');
     Route::get('/archives', [ArchiveController::class,'archives'])->name('archives');
     Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('show'); 
@@ -62,4 +63,11 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 
 
 # Rutas para las entrevistas.
-Route::apiResource('interviews', InterviewController::class);
+Route::name('entrevistas.')->group(function(){
+
+    # Calendario
+    Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
+
+    # Api de zoom.
+    Route::apiResource('interviews', InterviewController::class);
+});

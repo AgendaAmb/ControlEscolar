@@ -12,6 +12,7 @@
           <form v-on:submit.prevent="registraUsuario">
             <!-- Datos para crear la cuenta -->
             <crear-cuenta :errores="errores"
+              :tipo_usuario.sync="tipo_usuario"
               :pertenece_uaslp.sync="pertenece_uaslp"
               :clave_uaslp.sync="clave_uaslp"
               :facultad.sync="facultad"
@@ -19,11 +20,13 @@
               :email_alterno.sync="email_alterno"
               :password.sync="password"
               :rpassword.sync="rpassword"
-              @uaslpUserUpdated="uaslpUserUpdated">
+              @uaslpUserUpdated="uaslpUserUpdated"
+              @miPortalUserUpdated="miPortalUserUpdated">
             </crear-cuenta>
 
             <!-- Datos generales -->
             <datos-personales :errores="errores"
+              :tipo_usuario.sync="tipo_usuario"
               :readonly="Readonly"
               :countries="countries"
               :curp.sync="curp"
@@ -72,6 +75,7 @@ export default {
     return {
       countries: [],
       errores: {},
+      tipo_usuario: null,
       clave_uaslp: null,
       directorio_activo: null,
       pertenece_uaslp: null,
@@ -105,7 +109,7 @@ export default {
   computed: {
     Readonly: {
       get () {
-        return this.pertenece_uaslp === 'Si';
+        return this.tipo_usuario === 'Comunidad UASLP' || this.tipo_usuario === 'Comunidad AA';
       }
     },
 
@@ -121,8 +125,7 @@ export default {
 
   methods: {
     uaslpUserUpdated(user){
-      this.clave_uaslp = user.ClaveUASLP;
-      this.facultad = user.Dependencia;
+      this.facultad = user.dependency;
       this.directorio_activo = user.DirectorioActivo;
       this.name = user.name;
       this.first_surname = user.first_surname;
@@ -130,6 +133,23 @@ export default {
       this.email = user.email;
       this.birth_country = 'México';
       this.residence_country = 'México';
+    },
+
+    miPortalUserUpdated(user){
+      this.clave_uaslp = user.ClaveUASLP;
+      this.facultad = user.Dependencia;
+      this.name = user.name;
+      this.first_surname = user.middlename;
+      this.last_surname = user.surname;
+      this.email = user.email;
+      this.email_alterno = user.altern_email;
+      this.birth_country = user.nationality;
+      this.ocupation = user.ocupation;
+      this.curp = user.curp;
+      this.ocupation = user.ocupation;
+      this.gender = user.gender;
+      this.zip_code = Number(user.zip_code);
+      this.phone_number = Number(user.phone_number);
     },
 
     registraUsuario(){
