@@ -132,7 +132,7 @@
     <!-- Teléfono de contacto -->
     <div class="col-md-6 col-lg-3 mt-3">
       <label class="mt-3"> Teléfono de contacto </label>
-      <input type="number" :class="inputClassFor('phone_number')" v-model.number="PhoneNumber" :readonly="rReadonly">
+      <input type="number" :class="inputClassFor('phone_number')" v-model.number="PhoneNumber" :readonly="Readonly">
       <div v-if="'phone_number' in errores" class="invalid-feedback">{{errores.phone_number}}</div>
     </div>
     
