@@ -1,7 +1,6 @@
 <script>
 const academicPrograms = @json($academic_programs);
 </script>
-
 @extends('layouts.app')
 
 @section('main')
@@ -23,15 +22,6 @@ const academicPrograms = @json($academic_programs);
 <pre-registro :academic_program.sync="selected_academic_program"></pre-registro>
 @endsection
 
-@push('vuejs')
-<script>
- const app =  new Vue({
-    el: '#app',
-
-    data: {
-        academic_programs: academicPrograms,
-        selected_academic_program: null,
-    }
-});
-</script>
+@push('scripts')
+<script src="{{ asset('js/preregistro.js') }}" defer></script>
 @endpush

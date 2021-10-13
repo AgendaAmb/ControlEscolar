@@ -6,3 +6,9 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//  Import the default variables
+@import "~v-calendar-scheduler/scss/variables";
+
+//  Import the rest
+@import "~v-calendar-scheduler/scss/main";

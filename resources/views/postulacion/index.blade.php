@@ -31,3 +31,6 @@ const app = new Vue({
 </script>
 @endpush
 
+@push('scripts')
+<script src="{{ asset('js/postulacion.js') }}" defer></script>
+@endpush

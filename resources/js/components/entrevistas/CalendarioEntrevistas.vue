@@ -19,39 +19,32 @@ export default {
         title: "Programar una entrevista",
         createButtonLabel: "Agendar entrevista",
         enableTimeInputs: false,
+        enableDateInput: false,
+
         fields: [{
-            name: "dia_entrevista",
-            type: 'date',
-            label: "Día.",
+          fields: [{
+            name: "hora_inicio",
+            type: 'time',
+            label: "Hora de inicio.",
           },{
-            fields: [{
-              name: "hora_inicio",
-              type: 'time',
-              label: "Hora de inicio.",
-            },{
-              name: "hora_fin",
-              type: 'time',
-              label: "Hora de fin.",
-            }]
-        },
-          {
+            name: "hora_fin",
+            type: 'time',
+            label: "Hora de fin.",
+          }]
+        },{
             name: "name",
             label: "Nombre del postulante",
             readonly: true,
-          },
-          {
-            name: "email",
-            type: "email",
-            required: true,
-            label: "E-mail",
-            value: "email@example.com",
-          },
-          {
-            name: "observaciones",
-            type: "textarea",
-            label: "Observaciones",
-          },
-        ],
+        },{
+          name: "sala",
+          type: "text",
+          required: true,
+          label: "Número de sala",
+        },{
+          name: "observaciones",
+          type: "textarea",
+          label: "Observaciones",
+        }],
       },
     };
   },
@@ -84,8 +77,6 @@ export default {
           });
         })
         .catch((error) => {});
-
-        $('#date').remove();
     });
   },
 };
