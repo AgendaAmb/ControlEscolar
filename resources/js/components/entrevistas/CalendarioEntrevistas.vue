@@ -1,27 +1,34 @@
 <template>
   <div class="row my-5">
     <div class="col-12">
-      <vue-scheduler :events="events" :event-dialog-config="dialogConfig"></vue-scheduler>
+      <vue-scheduler :events="events" :event-dialog-config="InterviewDialog"></vue-scheduler>
+    </div>
+    <div class="col-12 mx-2">
+      <button class="my-3 v-cal-button" @click="abreModal"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
 
+<style scoped>
+div.col-12.mx-2 > button.my-3.v-cal-button{
+  margin-left: 10px;
+  border-radius: 5px;
+}
+</style>
+
 <script>
+import Periodo from './Periodo';
+
 export default {
   name: "calendario-entrevistas",
+  components: {Periodo},
 
   data() {
     return {
       users: [],
+      periods: [],
       events: [],
-
-      dialogConfig: {
-        title: "Programar una entrevista",
-        createButtonLabel: "Agendar entrevista",
-        enableTimeInputs: false,
-        enableDateInput: false,
-
-        fields: [{
+      interview_fields: [{
           fields: [{
             name: "hora_inicio",
             type: 'time',
@@ -44,9 +51,31 @@ export default {
           name: "observaciones",
           type: "textarea",
           label: "Observaciones",
-        }],
-      },
+      }],
     };
+  },
+
+  computed: {
+    InterviewDialog: {
+      get(){
+        return {
+          title: "Programar una entrevista",
+          createButtonLabel: "Agendar entrevista",
+          enableTimeInputs: false,
+          fields: this.interview_fields
+        };
+      }
+    },
+
+    PeriodDialog: {
+      get(){
+        return {
+          title: "Nuevo periodo",
+          createButtonLabel: "Crear periodo",
+          enableTimeInputs: false,
+        };
+      }
+    }
   },
 
   mounted() {
@@ -59,25 +88,21 @@ export default {
         .catch((error) => {});
 
       axios
-        .get("/controlescolar/interviews")
+        .get("/controlescolar/entrevistas/periods")
         .then((response) => {
-          var meetings = response.data.meetings;
-
-          meetings.forEach((meeting) => {
-            var start_date = new Date(Date.parse(meeting.start_time));
-            var end_date = new Date(
-              Date.parse(meeting.start_time) + meeting.duration * 60000
-            );
-
-            this.events.push({
-              id: meeting.id,
-              start_date: start_date.toString(),
-              end_date: end_date.toString(),
-            });
-          });
+          Vue.set(this, 'periods', response.data);
         })
         .catch((error) => {});
     });
   },
+
+  methods: {
+    abreModal(){
+      Periodo.show(this.PeriodDialog, []).$on('event-created', (event) => {
+        this.events.push(event._e);
+        this.$emit('event-created', event._e);
+      });
+    }
+  }
 };
 </script>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
+use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -74,11 +75,14 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 # Rutas para las entrevistas.
-Route::name('entrevistas.')->group(function(){
+Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
 
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
+    # Periodods.
+    Route::apiResource('periods', PeriodController::class);
+
     # Api de zoom.
-    Route::apiResource('interviews', InterviewController::class);
+    Route::apiResource('zoom', ZoomController::class);
 });
