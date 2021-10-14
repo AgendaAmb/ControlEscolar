@@ -7,7 +7,6 @@ use App\Models\AcademicArea;
 use App\Models\AcademicEntity;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,7 +26,7 @@ class AddProfessors implements ShouldQueue
     /**
      * Profesores del núcleo básico.
      *
-     * @var \App\Helpers\MiPortalService
+     * @var \Illuminate\Support\Collection
      */
     private $professors;
 
@@ -39,7 +38,7 @@ class AddProfessors implements ShouldQueue
     public function __construct()
     {
         $this->miPortalService = new MiPortalService;
-        $this->professors = [
+        $this->professors = collect([
             ['type'=>'workers', 'academic_area' => 'Recursos naturales renovables', 'academic_entity' => 'UASLP_INSTITUTO DE INVESTIGACIÓN DE ZONAS DESÉRTICAS','id'=>60575],
             ['type'=>'workers', 'academic_area' => 'Prevención y control', 'academic_entity' => 'UASLP_FACULTAD DE CIENCIAS QUÍMICAS','id'=>6358],
             ['type'=>'workers', 'academic_area' => 'Evaluación ambiental', 'academic_entity' => 'UASLP_FACULTAD DE INGENIERÍA','id'=>12457],
@@ -87,7 +86,7 @@ class AddProfessors implements ShouldQueue
             ['type'=>'workers', 'academic_area' => 'Gestión ambiental', 'academic_entity' => 'UASLP_FACULTAD DE CIENCIAS SOCIALES Y HUMANIDADES','id'=>16283],
             ['type'=>'workers', 'academic_area' => 'Recursos naturales renovables', 'academic_entity' => 'UASLP_INSTITUTO DE INVESTIGACIÓN DE ZONAS DESÉRTICAS','id'=>17115],
             ['type'=>'workers', 'academic_area' => 'Prevención y control', 'academic_entity' => 'UASLP_UNIDAD ACADÉMICA MULTIDISCIPLINARIA ZONA HUASTECA','id'=>12088]
-        ];
+        ]);
     }
 
     /**
@@ -97,29 +96,37 @@ class AddProfessors implements ShouldQueue
      */
     public function handle()
     {
-        foreach ($this->professors as $professor)
-        {
-            $miPortalResponse = $this->miPortalService->miPortalGet('api/usuarios', [
-                'filter[id]' => $professor['id'],
-                'filter[type]' => $professor['type']
-            ]);
+        $professors_id = collect($this->professors)->map(fn($v, $k) => $v['id'])->toArray();
+        $miPortalResponse = $this->miPortalService->miPortalGet('api/usuarios', [
+            'filter[id]' => $professors_id,
+            'filter[type]' => 'App\\Models\\Auth\\Worker'
+        ]);
 
-            if ($miPortalResponse->failed())
-            {
-                dump('Usuario no registrado en mi portal: '.$professor->id);
+        if ($miPortalResponse->failed())
+            return;
+
+        $professors = $miPortalResponse->collect()->toArray();
+
+        foreach ($professors as $mi_portal_professor)
+        {   
+            $professor = $this->professors->firstWhere('id', $mi_portal_professor['id']);
+
+            if ($professor === null)
                 continue;
-            }
-
-            
 
             $academic_area = AcademicArea::firstWhere('name', $professor['academic_area']);
             $academic_entity = AcademicEntity::firstWhere('name', $professor['academic_entity']);
 
             $professor_model = User::updateOrCreate(collect($professor)->only('id', 'type')->toArray());
-
             $professor_model->syncRoles(['profesor_nb']);
             $professor_model->academicAreas()->sync([$academic_area->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
             $professor_model->academicEntities()->sync([$academic_entity->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
+
+            $this->miPortalService->miPortalPost('api/usuarios/modulos', [
+                'module_id' => env('MIPORTAL_MODULE_ID'),
+                'user_id' => $mi_portal_professor['id'],
+                'user_type' => $professor['type'],
+            ]);
         }
     }
 }

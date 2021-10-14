@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\AddAppliants;
 use App\Jobs\AddProfessors as JobsAddProfessors;
 use Illuminate\Console\Command;
 
@@ -38,8 +39,8 @@ class AddProfessors extends Command
      */
     public function handle()
     {
-        JobsAddProfessors::dispatch();
-
+        AddAppliants::dispatch();
+        //JobsAddProfessors::dispatch();
         return 0;
     }
 }

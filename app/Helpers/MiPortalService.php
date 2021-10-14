@@ -128,7 +128,7 @@ class MiPortalService
     public function requestAuthorizationCodeToken($code)
     {
         # Solicita el token bearer
-        $token_response = Http::asForm()->post($this->url.'oauth/token', [
+        $token_response = Http::post($this->url.'oauth/token', [
             'grant_type' => 'authorization_code',
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
@@ -152,7 +152,7 @@ class MiPortalService
     private function requestClientToken()
     {
         # Solicita el token bearer
-        $token_response = Http::asForm()->post($this->url.'oauth/token', [
+        $token_response = Http::post($this->url.'oauth/token', [
             'grant_type' => 'client_credentials',
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
@@ -191,7 +191,7 @@ class MiPortalService
      */
     public function miPortalGet(string $path, array $query = []): Response
     {
-        $request = $this->miPortalRequest();
+        $request = $this->miPortalRequest()->asForm();
         return $request->get($this->url. $path, $query);
     }
     
