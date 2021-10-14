@@ -23,16 +23,22 @@ class CreateAcademicAreasTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('academic_area_archive', function (Blueprint $table) {
+        Schema::create('academic_area_user', function (Blueprint $table) {
             $table->foreignId('academic_area_id')
                 ->constrained('academic_areas')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignId('archive_id')
-                ->constrained('archives')
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+
+            $table->foreign(['user_id','user_type'])
+                ->references(['id','type'])
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->primary(['academic_area_id','user_id','user_type']);
         });
 
         DB::table('academic_areas')->insert([

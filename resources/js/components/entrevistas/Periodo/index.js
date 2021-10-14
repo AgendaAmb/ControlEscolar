@@ -17,7 +17,6 @@ export default {
             overrideInputClass: false,
             createButtonLabel: 'Create',
             //  -------------------------
-            date: null,
             startTime: null,
             endTime: null,
             enableTimeInputs: true,
@@ -25,14 +24,7 @@ export default {
 
         const propsData = Object.assign(defaultParam, params);
 
-        const defaultFields = [{
-                name: 'date',   //  Required
-                type: 'date',   //  def: 'text'
-                label: 'Date',  //  def: this.name
-                // showLabel: false,    //  def: true
-                required: true, //  def: false,
-                value: propsData.date,   //  def: null
-            }];
+        const defaultFields = [];
 
         if ( propsData.enableTimeInputs )
             defaultFields.splice(1, 0, {

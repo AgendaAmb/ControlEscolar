@@ -2,24 +2,12 @@
     <div :class="fieldClass">
         <template v-if="field.type === 'textarea'">
             <label :for="field.name" v-if="field.showLabel !== false">{{ fieldLabel }}</label>
-            <textarea
-                    @input="onInput"
-                    :id="field.name"
-                    :name="field.name"
-                    :value="newValue"
-                    :required="field.required"
-                    :placeholder="fieldLabel">
+            <textarea v-model="Value" :id="field.name" :name="field.name" :required="field.required" :placeholder="fieldLabel">
             </textarea>
         </template>
         <template v-else>
             <label :for="field.name" v-if="field.showLabel !== false">{{ fieldLabel }}</label>
-            <input
-                    @input="onInput"
-                    :value="newValue"
-                    :placeholder="fieldLabel"
-                    :type="field.type ? field.type : 'text'"
-                    :required="field.required"
-                    :id="field.name">
+            <input v-model="Value" :placeholder="fieldLabel" :type="field.type ? field.type : 'text'" :required="field.required" :id="field.name">
         </template>
     </div>
 </template>
@@ -35,44 +23,28 @@
                 required: true
             }
         },
-        data() {
-            return {
-                newValue: this.value,
-            }
-        },
         beforeMount() {
             //  Date workaround
             if ( this.field.type === 'date' && this.value ) {
-                this.newValue = moment(this.value).format().slice(0, 10);
+                this.Value = moment(this.value).format().slice(0, 10);
             }
 
             //  Time workaround
             if ( this.field.type === 'time' && this.value ) {
-                this.newValue = moment(this.value).format().slice(11, 16);
+                this.Value = moment(this.value).format().slice(11, 16);
             }
         },
-        methods: {
-            onInput(event) {
-                this.$nextTick(() => {
-                    this.newValue = event.target.value
-                });
-            }
-        },
-        watch: {
-            value(value) {
-                this.newValue = value;
-            },
-            newValue(value) {
-                let res = value;
 
-                if ( this.field.type === 'time' ) {
-                    res = moment(this.newValue, "HH:mm");
-                }
-
-                this.$emit('input', res);
-            }
-        },
         computed: {
+            Value: {
+                get(){
+                    return this.value;
+                },
+                set(newValue) {
+                    this.$emit('update:value', newValue);
+                }
+            },
+
             isCheckOrRadio() {
                 return this.field.type === 'radio' || this.field.type === 'checkbox';
             },
@@ -105,5 +77,13 @@
 </script>
 
 <style scoped>
-
+div.v-cal-input > input[type=number]{
+    transition: all 0.3s ease-in-out;
+    display: block;
+    font-family: inherit;
+    width: 100%;
+    border: 1px solid #E8E9EC;
+    border-radius: 4px;
+    padding: 10px 12px;
+}
 </style>

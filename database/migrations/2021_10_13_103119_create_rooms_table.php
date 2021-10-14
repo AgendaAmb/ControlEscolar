@@ -20,6 +20,9 @@ class CreateRoomsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            # Url de la reunión.
+            $table->string('url')->nullable();
+
             # Control de modelos.
             $table->softDeletes();
             $table->timestamps();

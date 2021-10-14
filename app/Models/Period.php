@@ -23,7 +23,18 @@ class Period extends Model
      *
      * @var string[]
      */
-    protected $with = ['rooms','interviews:users'];
+    protected $with = ['rooms','interviews.users'];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     /**
      * Obtiene las salas que pertenecen al periodo de la

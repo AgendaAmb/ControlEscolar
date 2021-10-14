@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->primary(['id','type']);
             $table->string('birth_state')->nullable();
             $table->string('marital_state')->nullable();
+
+            # Banderas y estados de control.
+            $table->timestamps();
             $table->softDeletes();
         });
     }

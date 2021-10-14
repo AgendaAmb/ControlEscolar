@@ -24,6 +24,6 @@ class Interview extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->where('type', $this->user_type);
     }
 }

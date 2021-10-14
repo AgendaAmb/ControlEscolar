@@ -23,6 +23,24 @@ class CreateAcademicEntitiesTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('academic_entity_user', function (Blueprint $table) {
+            $table->foreignId('academic_entity_id')
+                ->constrained('academic_entities')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+
+            $table->foreign(['user_id','user_type'])
+                ->references(['id','type'])
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->primary(['academic_entity_id','user_id','user_type'],'pk_acad_ent_user');
+        });
+
         DB::table('academic_entities')->insert([
             ['name' => 'UASLP_FACULTAD DE CIENCIAS QUÍMICAS'],
             ['name' => 'UASLP_FACULTAD DE INGENIERÍA'],
@@ -46,6 +64,7 @@ class CreateAcademicEntitiesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('academic_entity_user');
         Schema::dropIfExists('academic_entities');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -188,7 +189,7 @@ class MiPortalService
      * @param string $path
      * @param array $query
      */
-    public function miPortalGet(string $path, array $query = [])
+    public function miPortalGet(string $path, array $query = []): Response
     {
         $request = $this->miPortalRequest();
         return $request->get($this->url. $path, $query);
@@ -201,7 +202,7 @@ class MiPortalService
      * @param string $code
      * @param array $query
      */
-    public function miPortalOauth2Get(string $path, string $code, array $query = [])
+    public function miPortalOauth2Get(string $path, string $code, array $query = []): Response
     {
         $request = $this->miPortalOauth2Request($code);
         return $request->get($this->url. $path, $query);
@@ -213,7 +214,7 @@ class MiPortalService
      * @param string $path
      * @param array $query
      */
-    public function miPortalPost(string $path, array $body = [])
+    public function miPortalPost(string $path, array $body = []): Response
     {
         $request = $this->miPortalRequest();
         return $request->post($this->url. $path, $body);
@@ -225,7 +226,7 @@ class MiPortalService
      * @param string $path
      * @param array $query
      */
-    public function miPortalOauth2Post(string $path, string $code, array $body = [])
+    public function miPortalOauth2Post(string $path, string $code, array $body = []): Response
     {
         $request = $this->miPortalOauth2Request($code);
         return $request->post($this->url . $path, $body);

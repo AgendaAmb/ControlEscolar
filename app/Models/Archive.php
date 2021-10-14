@@ -38,7 +38,6 @@ class Archive extends Model
      * @var string[]
      */
     protected $with = [
-        'academicAreas',
         'personalDocuments',
         'entranceDocuments',
         'academicProgram', 
@@ -48,16 +47,6 @@ class Archive extends Model
         'scientificProductions.authors',
         'humanCapitals'
     ];
-
-    /**
-     * Obtiene las áreas académicas de interés.
-     *
-     * @return BelongsToMany
-     */
-    public function academicAreas(): BelongsToMany
-    {
-        return $this->belongsToMany(AcademicArea::class);
-    }
     
     /**
      * Obtiene los documentos personales requeridos del expediente.

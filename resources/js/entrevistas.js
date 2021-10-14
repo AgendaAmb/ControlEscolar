@@ -8,7 +8,6 @@ window.Vue = require('vue').default;
 
 // Componentes para las entrevistas.
 import VueScheduler from "v-calendar-scheduler";
-import { EventBus } from "v-calendar-scheduler/components/EventBus";
 import CalendarioEntrevistas from './components/entrevistas/CalendarioEntrevistas.vue';
 
 // Import styles
@@ -50,14 +49,4 @@ const app = new Vue({
     components: {
         CalendarioEntrevistas,
     },
-
-    mounted() {
-        EventBus.$on('day-clicked', (date) => {
-            
-        });
-    },
-
-    beforeDestroy() {
-        EventBus.$off('day-clicked');
-    }
 });

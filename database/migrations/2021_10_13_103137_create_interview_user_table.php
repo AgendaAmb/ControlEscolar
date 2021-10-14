@@ -19,12 +19,16 @@ class CreateInterviewUserTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreignId('user_id')
-                ->constrained('users')
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+
+            $table->foreign(['user_id', 'user_type'])
+                ->references(['id','type'])
+                ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->primary(['interview_id', 'user_id']);
+            $table->primary(['interview_id', 'user_id', 'user_type']);
         });
     }
 
