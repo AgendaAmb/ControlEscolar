@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
@@ -22,6 +23,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+# Rutas para inicio de sesión.
+Route::name('authenticate.')->group(function(){
+
+    # Usuarios del sistema.
+    Route::get('/', [LoginController::class, 'login'])->name('login');
+});
+
+
 # Rutas para gestión de usuarios.
 Route::prefix('users')->name('users.')->group(function(){
 
@@ -33,7 +42,7 @@ Route::prefix('users')->name('users.')->group(function(){
 });
 
 # Rutas para el pre-registro.
-Route::name('pre-registro.')->group(function(){
+Route::prefix('pre-registro')->name('pre-registro.')->group(function(){
     
     # Obtención de datos
     Route::get('/', [PreRegisterController::class, 'index'])->name('index');
@@ -75,7 +84,7 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 # Rutas para las entrevistas.
-Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
+Route::prefix('entrevistas')->middleware('auth')->name('entrevistas.')->group(function(){
 
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');

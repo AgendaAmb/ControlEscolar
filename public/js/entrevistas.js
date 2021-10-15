@@ -38584,6 +38584,9 @@ Vue.use(v_calendar_scheduler__WEBPACK_IMPORTED_MODULE_0__.default, {
 
 var app = new Vue({
   el: '#app',
+  data: {
+    loggedUser: user
+  },
   components: {
     CalendarioEntrevistas: _components_entrevistas_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__.default
   }

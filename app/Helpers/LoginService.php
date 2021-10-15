@@ -8,16 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
-class MiPortalService
+class LoginService
 {
     /*
     |--------------------------------------------------------------------------
-    | Mi Portal Service
+    | Login Service
     |--------------------------------------------------------------------------
     |
-    | Consume los servicios de la aplicación de "Mi portal".
+    | Consume los servicios de autenticación de "Mi portal".
     |
     */
 
@@ -76,17 +75,55 @@ class MiPortalService
     }
 
     /**
-     * Requests an oauth client token
+     * Determines if the incoming request is a redirect callback.
+     *
+     * @param Request $request
+     *
+     * @return bool
+     */
+    public function isCallbackRequest(Request $request): bool
+    {
+        return $request->code !== null &&  $request->state !== null;
+    }
+
+    /**
+     * Creates an oauth2 redirect uri.
+     *
+     * @param string $code
+     *
+     * @return string|bool
+     */
+    public function requestAuthorization(Request $request)
+    {
+        # Genera el url de autorización.
+        $query = http_build_query([
+            'client_id' => $this->client_id,
+            'redirect_uri' => $this->redirect_uri,
+            'response_type' => 'code',
+            'scope' => '',
+            'state' => $request->session()->get('state'),
+        ]);
+
+        # URL para autorizar la solicitud.
+        $url = $this->url.'oauth/authorize?'.$query;
+
+        return redirect($url);
+    }
+
+    /**
+     * Generates an oauth2 client token.
      *
      * @return string
      */
-    private function requestClientToken()
+    public function requestAuthorizationCodeToken($code)
     {
         # Solicita el token bearer
         $token_response = Http::post($this->url.'oauth/token', [
-            'grant_type' => 'client_credentials',
+            'grant_type' => 'authorization_code',
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret,
+            'redirect_uri' => $this->redirect_uri,
+            'code' => $code,
         ]);
 
         # Arroja error, en caso de que el token no sea válido.
@@ -97,23 +134,24 @@ class MiPortalService
     }
 
     /**
-     * Generates a new Request.
+     * Generates a new Oauth2 Request.
      */
-    private function miPortalRequest()
+    private function miPortalOauth2Request($code)
     {
-        $token = $this->requestClientToken();
+        $token = $this->requestAuthorizationCodeToken($code);
         return Http::withToken($token)->withHeaders(['content-type' => 'application/json', 'accept' => 'application/json']);
     }
-
+    
     /**
-     * Consume un get de MiPortal.
+     * Consume un get de tipo Oauth2 de MiPortal.
      * 
      * @param string $path
+     * @param string $code
      * @param array $query
      */
-    public function miPortalGet(string $path, array $query = []): Response
+    public function loginGet(string $path, string $code, array $query = []): Response
     {
-        $request = $this->miPortalRequest()->asForm();
+        $request = $this->miPortalOauth2Request($code);
         return $request->get($this->url. $path, $query);
     }
 
@@ -123,9 +161,9 @@ class MiPortalService
      * @param string $path
      * @param array $query
      */
-    public function miPortalPost(string $path, array $body = []): Response
+    public function loginPost(string $path, string $code, array $body = []): Response
     {
-        $request = $this->miPortalRequest();
-        return $request->post($this->url. $path, $body);
+        $request = $this->miPortalOauth2Request($code);
+        return $request->post($this->url . $path, $body);
     }
 }

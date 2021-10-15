@@ -45,6 +45,9 @@ Vue.use(VueScheduler, {
 
 const app = new Vue({
     el: '#app',
+    data:{
+        loggedUser: user,
+    },
 
     components: {
         CalendarioEntrevistas,

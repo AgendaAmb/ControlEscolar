@@ -11,8 +11,8 @@ class InterviewController extends Controller
      * 
      * @param Request $request
      */
-    public function calendario()
+    public function calendario(Request $request)
     {
-        return view('entrevistas.index');
+        return view('entrevistas.index')->with('user', $request->session()->get('user'));
     }
 }

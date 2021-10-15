@@ -21,6 +21,7 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
+        "v-calendar-scheduler": "^0.7.4",
         "vue": "^2.0.8",
         "vue-loader": "^15.9.8",
         "vue-template-compiler": "^2.6.12"
@@ -29,7 +30,6 @@
         "dhtmlx-scheduler": "^5.3.12",
         "moment": "^2.29.1",
         "v-calendar": "^2.3.4",
-        "v-calendar-scheduler": "^0.7.4",
         "vue-event-calendar": "^1.5.2",
         "vue-select": "^3.13.0",
         "vuex": "^3.6.2"

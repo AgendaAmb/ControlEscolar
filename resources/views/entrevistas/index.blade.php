@@ -1,3 +1,7 @@
+<script>
+const user = @json($user);
+</script>
+
 @extends('layouts.app')
 
 @section('headerPicture')
