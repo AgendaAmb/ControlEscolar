@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AcademicProgram extends Model
@@ -23,8 +24,28 @@ class AcademicProgram extends Model
      *
      * @return HasMany
      */
-    public function academicProgram(): HasMany
+    public function announcements(): HasMany
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    /**
+     * Obtiene los documentos requeridos del expediente.
+     *
+     * @return HasMany
+     */
+    public function oldestAnnouncement(): HasOne
+    {
+        return $this->hasOne(Announcement::class)->oldestOfMany();
+    }
+
+    /**
+     * Obtiene los documentos requeridos del expediente.
+     *
+     * @return HasMany
+     */
+    public function latestAnnouncement(): HasOne
+    {
+        return $this->hasOne(Announcement::class)->latestOfMany();
     }
 }

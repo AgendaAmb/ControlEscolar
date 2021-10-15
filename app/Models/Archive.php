@@ -40,12 +40,12 @@ class Archive extends Model
     protected $with = [
         'personalDocuments',
         'entranceDocuments',
-        'academicProgram', 
+        'announcement.academicProgram', 
         'academicDegrees.requiredDocuments',
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
         'scientificProductions.authors',
-        'humanCapitals'
+        'humanCapitals',
     ];
     
     /**
@@ -71,6 +71,17 @@ class Archive extends Model
         return $this->belongsToMany(RequiredDocument::class)
             ->withPivot('location')
             ->where('type', 'entrance');
+    }
+
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsTo
+     */
+    public function appliant(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id')
+            ->where('type', $this->user_type);
     }
 
     /**
@@ -142,8 +153,8 @@ class Archive extends Model
      *
      * @return BelongsTo
      */
-    public function academicProgram(): BelongsTo
+    public function announcement(): BelongsTo
     {
-        return $this->belongsTo(AcademicProgram::class);
+        return $this->belongsTo(Announcement::class);
     }
 }

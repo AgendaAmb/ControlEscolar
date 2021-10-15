@@ -66,7 +66,7 @@ class LoginController extends Controller
 
         # Busca al usuario en el sistema central.
         $user_response = $this->loginService->loginGet('api/users/whoami', $request->code);
-
+        
         # Si la respuesta fue errónea, devuele el error.
         if ($user_response->failed())
             return back()->withErrors($user_response->collect());

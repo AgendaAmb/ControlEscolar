@@ -1698,8 +1698,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    // Id del expediente
     archive_id: Number,
-    postulante: Object,
+    // Curp del postulante
+    curp: String,
+    // Nombre del postulante.
+    name: String,
+    // Primer apellido del postulante.
+    middlename: String,
+    // Segundo apellido del postulante.
+    surname: String,
+    // Fecha de nacimiento.
+    birth_date: String,
+    // Género.
+    gender: String,
+    // Estado civil.
+    civic_state: String,
+    // Estado de nacimiento.
+    birth_state: String,
+    // País de nacimiento.
+    birth_country: String,
+    // País de residencia.
+    residence_country: String,
+    // Teléfono de contacto.
+    phone_number: String,
+    // Correo del postulante.
+    email: String,
+    // Correo alterno del postulante.
+    altern_email: String,
+    // Documentos personales
     documentos: Array
   },
   components: {
@@ -2189,6 +2216,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue");
 /* harmony import */ var _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue");
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
+/* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/components/postulacion/RequisitosIngreso.vue");
 //
 //
 //
@@ -2303,6 +2331,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -2317,7 +2347,8 @@ __webpack_require__.r(__webpack_exports__);
     CapitalHumano: _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     ProduccionCientifica: _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     ExperienciaLaboral: _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default
+    LenguaExtranjera: _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    RequisitosIngreso: _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__.default
   },
   props: {
     // Id del expediente.
@@ -2341,7 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
     // Capitales humanos del postulante.
     human_capitals: Array,
     // Postulante de la solicitud.
-    postulante: Object
+    appliant: Object
   },
   computed: {
     ColorStrip: {
@@ -7308,19 +7339,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.postulante.curp,
-                      expression: "postulante.curp"
+                      value: _vm.curp,
+                      expression: "curp"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", readonly: "" },
-                  domProps: { value: _vm.postulante.curp },
+                  domProps: { value: _vm.curp },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.postulante, "curp", $event.target.value)
+                      _vm.curp = $event.target.value
                     }
                   }
                 })
@@ -7334,19 +7365,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.postulante.nombres,
-                      expression: "postulante.nombres"
+                      value: _vm.name,
+                      expression: "name"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", readonly: "" },
-                  domProps: { value: _vm.postulante.nombres },
+                  domProps: { value: _vm.name },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.postulante, "nombres", $event.target.value)
+                      _vm.name = $event.target.value
                     }
                   }
                 })
@@ -7360,19 +7391,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.postulante.apPaterno,
-                      expression: "postulante.apPaterno"
+                      value: _vm.middlename,
+                      expression: "middlename"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", readonly: "" },
-                  domProps: { value: _vm.postulante.apPaterno },
+                  domProps: { value: _vm.middlename },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.postulante, "apPaterno", $event.target.value)
+                      _vm.middlename = $event.target.value
                     }
                   }
                 })
@@ -7386,19 +7417,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.postulante.apMaterno,
-                      expression: "postulante.apMaterno"
+                      value: _vm.surname,
+                      expression: "surname"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { type: "text", readonly: "" },
-                  domProps: { value: _vm.postulante.apMaterno },
+                  domProps: { value: _vm.surname },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.postulante, "apMaterno", $event.target.value)
+                      _vm.surname = $event.target.value
                     }
                   }
                 })
@@ -7414,23 +7445,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.fechaNacimiento,
-                  expression: "postulante.fechaNacimiento"
+                  value: _vm.birth_date,
+                  expression: "birth_date"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "date", readonly: "" },
-              domProps: { value: _vm.postulante.fechaNacimiento },
+              domProps: { value: _vm.birth_date },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(
-                    _vm.postulante,
-                    "fechaNacimiento",
-                    $event.target.value
-                  )
+                  _vm.birth_date = $event.target.value
                 }
               }
             })
@@ -7444,19 +7471,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.genero,
-                  expression: "postulante.genero"
+                  value: _vm.gender,
+                  expression: "gender"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.genero },
+              domProps: { value: _vm.gender },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.postulante, "genero", $event.target.value)
+                  _vm.gender = $event.target.value
                 }
               }
             })
@@ -7470,19 +7497,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.estadoCivil,
-                  expression: "postulante.estadoCivil"
+                  value: _vm.civic_state,
+                  expression: "civic_state"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.estadoCivil },
+              domProps: { value: _vm.civic_state },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.postulante, "estadoCivil", $event.target.value)
+                  _vm.civic_state = $event.target.value
                 }
               }
             })
@@ -7496,23 +7523,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.paisNacimiento,
-                  expression: "postulante.paisNacimiento"
+                  value: _vm.birth_country,
+                  expression: "birth_country"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.paisNacimiento },
+              domProps: { value: _vm.birth_country },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(
-                    _vm.postulante,
-                    "paisNacimiento",
-                    $event.target.value
-                  )
+                  _vm.birth_country = $event.target.value
                 }
               }
             })
@@ -7526,23 +7549,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.estadoNacimiento,
-                  expression: "postulante.estadoNacimiento"
+                  value: _vm.birth_state,
+                  expression: "birth_state"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.estadoNacimiento },
+              domProps: { value: _vm.birth_state },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(
-                    _vm.postulante,
-                    "estadoNacimiento",
-                    $event.target.value
-                  )
+                  _vm.birth_state = $event.target.value
                 }
               }
             })
@@ -7556,23 +7575,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.paisResidencia,
-                  expression: "postulante.paisResidencia"
+                  value: _vm.residence_country,
+                  expression: "residence_country"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.paisResidencia },
+              domProps: { value: _vm.residence_country },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(
-                    _vm.postulante,
-                    "paisResidencia",
-                    $event.target.value
-                  )
+                  _vm.residence_country = $event.target.value
                 }
               }
             })
@@ -7586,31 +7601,75 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.postulante.telefonoContacto,
-                  expression: "postulante.telefonoContacto"
+                  value: _vm.phone_number,
+                  expression: "phone_number"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", readonly: "" },
-              domProps: { value: _vm.postulante.telefonoContacto },
+              domProps: { value: _vm.phone_number },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(
-                    _vm.postulante,
-                    "telefonoContacto",
-                    $event.target.value
-                  )
+                  _vm.phone_number = $event.target.value
                 }
               }
             })
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "form-group col-lg-6" }, [
+            _c("label", [_vm._v(" Correo electrónico: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", readonly: "" },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            })
+          ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "form-group col-lg-6" }, [
+            _c("label", [_vm._v(" Correo de contacto alterno: ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.altern_email,
+                  expression: "altern_email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", readonly: "" },
+              domProps: { value: _vm.altern_email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.altern_email = $event.target.value
+                }
+              }
+            })
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -7648,34 +7707,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-lg-6" }, [
-      _c("label", [_vm._v(" Correo electrónico: ")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", readonly: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group col-lg-6" }, [
-      _c("label", [_vm._v(" Correo de contacto alterno: ")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", readonly: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -8103,18 +8135,25 @@ var render = function() {
             _vm._v(" Datos Personales ")
           ]),
           _vm._v(" "),
-          _c("postulante", {
-            attrs: {
-              postulante: _vm.postulante,
-              archive_id: _vm.archive_id,
-              documentos: _vm.personal_documents
-            },
-            on: {
-              "update:documentos": function($event) {
-                _vm.personal_documents = $event
-              }
-            }
-          }),
+          _c(
+            "postulante",
+            _vm._b(
+              {
+                attrs: {
+                  archive_id: _vm.archive_id,
+                  documentos: _vm.personal_documents
+                },
+                on: {
+                  "update:documentos": function($event) {
+                    _vm.personal_documents = $event
+                  }
+                }
+              },
+              "postulante",
+              _vm.appliant,
+              false
+            )
+          ),
           _vm._v(" "),
           _c("hr", { staticClass: "d-block", style: _vm.ColorStrip })
         ],
@@ -21550,6 +21589,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/postulacion.js ***!
   \*************************************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_postulacion_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/postulacion/CapitalHumano.vue */ "./resources/js/components/postulacion/CapitalHumano.vue");
 /* harmony import */ var _components_postulacion_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/postulacion/DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
 /* harmony import */ var _components_postulacion_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/postulacion/Expedientes.vue */ "./resources/js/components/postulacion/Expedientes.vue");
@@ -21576,6 +21616,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 
 
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21584,7 +21625,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_10__.default({
   el: '#app',
   components: {
     CapitalHumano: _components_postulacion_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -21597,6 +21638,11 @@ var app = new Vue({
     ProduccionCientifica: _components_postulacion_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__.default,
     RequisitosIngreso: _components_postulacion_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__.default,
     SolicitudPostulante: _components_postulacion_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__.default
+  },
+  data: {
+    archive: archiveModel,
+    appliant: appliantModel,
+    academic_program: academicProgram
   }
 });
 })();

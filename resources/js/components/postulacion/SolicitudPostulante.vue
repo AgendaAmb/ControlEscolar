@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-12">
       <h2 class="d-block my-5 font-weight-bold"> Datos Personales </h2>
-      <postulante :postulante="postulante"
+      <postulante 
+        v-bind="appliant"
         :archive_id="archive_id"
         :documentos.sync="personal_documents">
       </postulante>
@@ -120,6 +121,7 @@ import CapitalHumano from './CapitalHumano.vue';
 import ProduccionCientifica from './ProduccionCientifica.vue';
 import ExperienciaLaboral from './ExperienciaLaboral.vue';
 import LenguaExtranjera from './LenguaExtranjera.vue';
+import RequisitosIngreso from './RequisitosIngreso.vue';
 
 
 export default {
@@ -132,6 +134,7 @@ export default {
     ProduccionCientifica,
     ExperienciaLaboral,
     LenguaExtranjera,
+    RequisitosIngreso
   },
 
   props: {
@@ -166,7 +169,7 @@ export default {
     human_capitals: Array,
 
     // Postulante de la solicitud.
-    postulante: Object
+    appliant: Object
   },
 
   computed: {

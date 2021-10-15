@@ -8,7 +8,7 @@
        :max-date="MaxDate" ></vue-scheduler>
     </div>
     <div v-if="IsActive === false" class="col-12 mx-2">
-      <button class="my-3 v-cal-button" @click="abreModal"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" @click="abreModalEntrevistas"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
@@ -22,11 +22,15 @@ div.col-12.mx-2 > button.my-3.v-cal-button{
 
 <script>
 import Periodo from './Periodo';
+import Entrevista from './Entrevista';
 var moment = require('moment');
 
 export default {
   name: "calendario-entrevistas",
-  components: {Periodo},
+  components: {
+    Periodo,
+    Entrevista
+  },
 
   data() {
     return {
@@ -56,26 +60,6 @@ export default {
           name: "observaciones",
           type: "textarea",
           label: "Observaciones",
-      }],
-
-      period_fields: [{
-          name: "start_date",
-          label: "Fecha de inicio",
-          type: "date",
-          required: true,
-          value: null,
-        },{
-          name: "end_date",
-          label: "Fecha de fin",
-          type: "date",
-          required: true,
-          value: null,
-        },{
-          name: "num_salas",
-          type: "number",
-          label: "Número de salas",
-          required: true,
-          value: null,
       }],
     };
   },
@@ -151,8 +135,22 @@ export default {
   },
 
   methods: {
-    abreModal(){
-      var modal = Periodo.show(this.PeriodDialog, this.period_fields);
+    abreModalPeriodo(){
+      var modal = Periodo.show(this.PeriodDialog, []);
+
+      modal.$on('event-created', (event) => {
+        this.events.push(event._e);
+        this.$emit('event-created', event._e);
+
+      });
+      
+      modal.$on('new_period', (period) => {
+        Vue.set(this, 'period', period);
+      });
+    },
+
+    abreModalEntrevistas(){
+      var modal = Entrevista.show(this.PeriodDialog, this.period_fields);
 
       modal.$on('event-created', (event) => {
         this.events.push(event._e);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +26,26 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        User::create([
+            'id' => 262698,
+            'type' => 'students'
+        ]);
+
+        User::create([
+            'id' => 260651,
+            'type' => 'students'
+        ]);
+
+        User::create([
+            'id' => 11007,
+            'type' => 'workers'
+        ]);
+
+        User::create([
+            'id' => 12457,
+            'type' => 'workers'
+        ]);
     }
 
     /**

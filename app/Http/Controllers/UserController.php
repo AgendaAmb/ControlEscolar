@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MiPortalService;
-use App\Http\Requests\CreateMeetingRequest;
+use App\Http\Requests\ShowUserRequest;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -40,6 +40,26 @@ class UserController extends Controller
         # Recolecta el resultado.
         $data = $response->collect();
     
+        # Devuelve el resultado
+        return new JsonResponse($data, $response->status());
+    }
+
+    /**
+     * Recupera a un usuario del sistema central.
+     */
+    public function show(ShowUserRequest $request)
+    {
+        $data = $request->validated();
+
+        # Busca al usuario.
+        $response = $this->miPortalService->miPortalGet(self::USERS, [
+            'filter[id]' => $data['id'],
+            'filter[type]' => User::TYPES[$data['type']]
+        ]);
+
+        # Recolecta el resultado.
+        $data = $response->collect()->first();
+
         # Devuelve el resultado
         return new JsonResponse($data, $response->status());
     }

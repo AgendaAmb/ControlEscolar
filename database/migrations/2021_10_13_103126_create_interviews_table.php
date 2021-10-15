@@ -20,6 +20,7 @@ class CreateInterviewsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            $table->date('date');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
 

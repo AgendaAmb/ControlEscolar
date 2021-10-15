@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MiPortalService;
 use App\Http\Requests\AddScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateAcademicDegreeRequest;
 use App\Http\Requests\UpdateAppliantLanguageRequest;
@@ -16,6 +17,7 @@ use App\Models\Archive;
 use App\Models\Author;
 use App\Models\HumanCapital;
 use App\Models\ScientificProduction;
+use App\Models\User;
 use App\Models\WorkingExperience;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,6 +27,26 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ArchiveController extends Controller
 {
+    /**
+     * El controlador consume al proovedor de servicios de zoom.
+     *
+     * @var \App\Helpers\MiPortalService
+     */
+    private $miPortalService;
+
+    /**
+     * Endpoint de usuarios.
+     */
+    private const USERS = 'api/usuarios';
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->miPortalService = new MiPortalService;
+    }
+
     /**
      * Show the archives dashboard.
      *
@@ -75,15 +97,28 @@ class ArchiveController extends Controller
      */
     public function postulacion(Request $request, $archive)
     {
-        $archiveModel = Archive::with(['entranceDocuments' => function($query){
+        $archiveModel = Archive::find($archive);
+        $archiveModel->loadMissing([
+            'entranceDocuments' => fn($query) => $query->where('intention_letter', false)->where('recommendation_letter', false)
+        ]);
 
-            return $query->where('intention_letter', false)->where('recommendation_letter', false);
-        }])->firstWhere('id',  $archive);
+        $academic_program = $archiveModel->announcement->academicProgram;
+        $appliant = $archiveModel->appliant->toArray();
 
-        $academic_program = $archiveModel->academicProgram;
+        # Busca al usuario.
+        $response = $this->miPortalService->miPortalGet('api/usuarios', [
+            'filter[id]' => $appliant['id'],
+            'filter[type]' => User::TYPES[$appliant['type']]
+        ]);
+
+        # Recolecta el resultado.
+        $data = $response->collect()->first();
+        $data['marital_state'] = $appliant['marital_state'];
+        $data['birth_state'] = $appliant['birth_state'];
 
         return view('postulacion.show')
         ->with('archive', $archiveModel)
+        ->with('appliant', $data)
         ->with('academic_program', $academic_program);
     }
 

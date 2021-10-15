@@ -7,57 +7,57 @@
           <div class="row">
             <div class="form-group col-12">
               <label> CURP:</label>
-              <input v-model="postulante.curp" type="text" class="form-control" readonly>
+              <input v-model="curp" type="text" class="form-control" readonly>
             </div>
             <div class="form-group col-12">
               <label> Nombre(s): </label>
-              <input v-model="postulante.nombres" type="text" class="form-control" readonly>
+              <input v-model="name" type="text" class="form-control" readonly>
             </div>
             <div class="form-group col-md-6">
               <label> Primer Apellido: </label>
-              <input v-model="postulante.apPaterno" type="text" class="form-control" readonly>
+              <input v-model="middlename" type="text" class="form-control" readonly>
             </div>
             <div class="form-group col-md-6">
               <label> Segundo Apellido: </label>
-              <input v-model="postulante.apMaterno" type="text" class="form-control" readonly>
+              <input v-model="surname" type="text" class="form-control" readonly>
             </div>
           </div>
         </div>
         <div class="form-group col-xl-4">
           <label> Fecha de nacimiento </label>
-          <input v-model="postulante.fechaNacimiento" type="date" class="form-control" readonly>
+          <input v-model="birth_date" type="date" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Género: </label>
-          <input v-model="postulante.genero" type="text" class="form-control" readonly>
+          <input v-model="gender" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Estado civil: </label>
-          <input v-model="postulante.estadoCivil" type="text" class="form-control" readonly>
+          <input v-model="civic_state" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> País de nacimiento: </label>
-          <input v-model="postulante.paisNacimiento" type="text" class="form-control" readonly>
+          <input v-model="birth_country" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> Estado de nacimiento: </label>
-          <input v-model="postulante.estadoNacimiento" type="text" class="form-control" readonly>
+          <input v-model="birth_state" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> País de residencia: </label>
-          <input v-model="postulante.paisResidencia" type="text" class="form-control" readonly>
+          <input v-model="residence_country" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> Teléfono de contacto: </label>
-          <input v-model="postulante.telefonoContacto" type="text" class="form-control" readonly>
+          <input v-model="phone_number" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-6">
           <label> Correo electrónico: </label>
-          <input type="text" class="form-control" readonly>
+          <input v-model="email" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-6">
           <label> Correo de contacto alterno: </label>
-          <input type="text" class="form-control" readonly>
+          <input v-model="altern_email" type="text" class="form-control" readonly>
         </div>
       </div>
     </div>
@@ -77,8 +77,49 @@ import DocumentoRequerido from "./DocumentoRequerido.vue";
 
 export default {
   props: {
+    // Id del expediente
     archive_id: Number,
-    postulante: Object,
+
+    // Curp del postulante
+    curp: String,
+
+    // Nombre del postulante.
+    name: String,
+
+    // Primer apellido del postulante.
+    middlename: String,
+
+    // Segundo apellido del postulante.
+    surname: String,
+
+    // Fecha de nacimiento.
+    birth_date: String,
+
+    // Género.
+    gender: String,
+
+    // Estado civil.
+    civic_state: String,
+
+    // Estado de nacimiento.
+    birth_state: String,
+
+    // País de nacimiento.
+    birth_country: String,
+
+    // País de residencia.
+    residence_country: String,
+
+    // Teléfono de contacto.
+    phone_number: String,
+
+    // Correo del postulante.
+    email: String,
+
+    // Correo alterno del postulante.
+    altern_email: String,
+
+    // Documentos personales
     documentos: Array,
   },
   components: { DocumentoRequerido },

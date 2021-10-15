@@ -36,6 +36,7 @@ Route::prefix('users')->name('users.')->group(function(){
 
     # Usuarios del sistema.
     Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::post('/show', [UserController::class, 'show'])->name('show');
    
     # Obtener usuario de mi portal.
     Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
@@ -84,7 +85,7 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 # Rutas para las entrevistas.
-Route::prefix('entrevistas')->middleware('auth')->name('entrevistas.')->group(function(){
+Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
 
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');

@@ -1,9 +1,8 @@
 <?php
 
-use Carbon\Carbon;
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateArchivesTable extends Migration
@@ -17,7 +16,18 @@ class CreateArchivesTable extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('academic_program_id')->constrained('academic_programs')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+            
+            $table->foreign(['user_id', 'user_type'])
+                ->references(['id', 'type'])
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreignId('announcement_id')
+                ->constrained('announcements')
+                ->onDelete('cascade');
+
             $table->integer('status');
             $table->string('comments')->nullable();
             $table->string('motivation')->nullable();

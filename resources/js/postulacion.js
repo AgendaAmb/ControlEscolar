@@ -6,6 +6,7 @@
 
  window.Vue = require('vue').default;
 
+import Vue from 'vue';
 import CapitalHumano from './components/postulacion/CapitalHumano.vue';
 import DocumentoRequerido from './components/postulacion/DocumentoRequerido.vue';
 import Expedientes from './components/postulacion/Expedientes.vue';
@@ -39,5 +40,11 @@ const app = new Vue({
         ProduccionCientifica,
         RequisitosIngreso,
         SolicitudPostulante,
+    },
+
+    data: {
+        archive: archiveModel,
+        appliant: appliantModel,
+        academic_program: academicProgram
     },
 });

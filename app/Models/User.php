@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,17 @@ class User extends Authenticatable
      *
      * @var bool
      */
+    public const TYPES = [
+        'students' => 'App\\Models\\Auth\\Student',
+        'workers' => 'App\\Models\\Auth\\Worker',
+        'externs' => 'App\\Models\\Auth\\Extern'
+    ];
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
     public $incrementing = false;
 
     /**
@@ -27,10 +39,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'id',
-        'type',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -92,6 +101,14 @@ class User extends Authenticatable
     public function academicEntities(): BelongsToMany
     {
         return $this->belongsToMany(AcademicEntity::class)->wherePivot('user_type', $this->type);
+    }
+
+    /**
+     * A model may have multiple academic areas.
+     */
+    public function archives(): HasMany
+    {
+        return $this->hasMany(Archive::class)->where('user_type', $this->type);
     }
 
     /**

@@ -16,7 +16,7 @@ class AcademicDegreeObserver
      */
     public function created(AcademicDegree $academicDegree)
     {
-        $academicProgram = $academicDegree->archive->academicProgram;
+        $academicProgram = $academicDegree->archive->announcement->academicProgram;
         $requiredDocumentsId = [];
 
         switch($academicProgram->type)
