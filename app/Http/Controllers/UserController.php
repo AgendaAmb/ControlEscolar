@@ -42,18 +42,29 @@ class UserController extends Controller
 
         # Filtra a los profesores
         $miPortal_workers = $data->where('user_type', 'workers');
-
         $data = $miPortal_appliants->map(function($appliant) use ($miPortal_workers, $appliants){
 
+
             # Fusiona los datos de Mi Portal con los del sistema actual.
-            $app_appliant = $appliants->where('type', 'students')->where('id', $appliant['id'])->first();
+            $app_appliant = $appliants->where('type', $appliant['user_type'])->where('id', $appliant['id'])->first();
             $merged_appliant = collect($app_appliant->toArray())->merge($appliant);
 
             # Obtiene los datos de la carta de intención.
             $intention_letter = $app_appliant->latestArchive->intentionLetters->first();
+           
+            dd($merged_appliant);
+           
+            $professor = $intention_letter->toArray();
+        
+            # Fusiona los dato del profesor con los de Mi Portal.
+            $miPortal_professor = $miPortal_workers->where('id', $professor['user_id'])->where('type', $professor['user_type']);
             
 
-            dd($intention_letter);
+            
+
+
+
+
 
         });
 

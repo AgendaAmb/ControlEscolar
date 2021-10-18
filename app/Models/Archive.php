@@ -91,7 +91,7 @@ class Archive extends Model
     public function intentionLetters(): BelongsToMany
     {
         return $this->requiredDocuments()
-        ->select('*')
+        ->select('required_documents.*', 'archive_intention_letter.user_id', 'archive_intention_letter.user_type')
         ->where('type', 'entrance')
         ->where('intention_letter', true)
         ->join('archive_intention_letter', function(JoinClause $join){
