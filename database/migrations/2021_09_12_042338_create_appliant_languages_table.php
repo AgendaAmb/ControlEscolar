@@ -36,11 +36,13 @@ class CreateAppliantLanguagesTable extends Migration
         Schema::create('appliant_language_required_document', function (Blueprint $table) {
             $table->foreignId('appliant_language_id')
                 ->constrained('appliant_languages')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             
             $table->foreignId('required_document_id')
                 ->constrained('required_documents')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->string('location')->nullable();
             $table->primary(['appliant_language_id', 'required_document_id'], 'pk_appliantLanguageReqDocument');

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Models\Role;
 
 class RequiredDocument extends Model
 {
@@ -111,7 +112,6 @@ class RequiredDocument extends Model
     {
         return self::where('type', 'language')->pluck('id');
     }
-
 
     /**
      * Obtiene los expedientes, asociados al documento requerido.

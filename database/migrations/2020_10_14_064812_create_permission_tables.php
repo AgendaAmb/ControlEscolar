@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -128,14 +129,19 @@ class CreatePermissionTables extends Migration
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
             ->forget(config('permission.cache.key'));
 
-        Role::create(['name' => 'aspirante_foraneo']);
         Role::create(['name' => 'aspirante_local']);
+        Role::create(['name' => 'aspirante_foraneo']);
         Role::create(['name' => 'aspirante_extranjero']);
         Role::create(['name' => 'profesor_nb']);
         Role::create(['name' => 'profesor_colaborador']);
         Role::create(['name' => 'control_escolar']);
         Role::create(['name' => 'personal_apoyo']);
         Role::create(['name' => 'admin']);
+
+        User::find(262698)->assignRole('aspirante_local');
+        User::find(260651)->assignRole('aspirante_extranjero');
+        User::find(11007)->assignRole('aspirante_local');
+        User::find(12457)->assignRole('aspirante_local');
     }
 
     /**

@@ -3,8 +3,6 @@
 namespace App\Observers;
 
 use App\Models\AcademicDegree;
-use App\Models\RequiredDocument;
-use Illuminate\Support\Facades\Storage;
 
 class AcademicDegreeObserver
 {
@@ -16,18 +14,15 @@ class AcademicDegreeObserver
      */
     public function created(AcademicDegree $academicDegree)
     {
-        $academicProgram = $academicDegree->archive->announcement->academicProgram;
-        $requiredDocumentsId = [];
+        $academic_program = $academicDegree->archive->announcement->academicProgram;
+        $role_id = $academicDegree->archive->appliant->roles()->first()->id;
+        $academic_documents_id = $academic_program
+            ->requiredDocuments()
+            ->wherePivot('role_id', $role_id)
+            ->where('type', 'academic')
+            ->pluck('id');
 
-        switch($academicProgram->type)
-        {
-            case 'imarec': $requiredDocumentsId = RequiredDocument::bachelorDocumentsId(); break;
-            case 'maestria': $requiredDocumentsId = RequiredDocument::bachelorDocumentsId(); break;
-            case 'enrem': $requiredDocumentsId = RequiredDocument::bachelorDocumentsId(); break;
-            case 'doctorado': $requiredDocumentsId = RequiredDocument::masterDocumentsId(); break;
-        }
-
-        $academicDegree->requiredDocuments()->attach($requiredDocumentsId);
+        $academicDegree->requiredDocuments()->attach($academic_documents_id);
     }
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,6 +75,41 @@ class User extends Authenticatable
     ];
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::retrieved(function ($user) {
+            $user->load([
+                'roles' => fn($q) => $q->select('id','name')->where('model_type', $user->type),
+                'latestArchive' => fn($q) => $q->where('user_type', $user->type),
+            ]);
+        });
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return Builder
+     */
+    public static function scopeAppliant(Builder $query): Builder
+    {
+        return $query->whereHas('roles', fn($q) => $q->whereIn('name', ['aspirante_local','aspirante_foraneo','aspirante_extranjero']));
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return Builder
+     */
+    public static function scopeHasArchive(Builder $query): Builder
+    {
+        return $query->has('archives');
+    }
+
+    /**
      * A model may have multiple roles.
      */
     public function roles(): BelongsToMany
@@ -84,7 +121,7 @@ class User extends Authenticatable
             'role_id',
             'id',
             'id'
-        )->wherePivot('model_type', $this->type);
+        );
     }
 
     /**
@@ -106,9 +143,17 @@ class User extends Authenticatable
     /**
      * A model may have multiple academic areas.
      */
+    public function latestArchive(): HasOne
+    {
+        return $this->hasOne(Archive::class, 'user_id', 'id')->latestOfMany();
+    }
+
+    /**
+     * A model may have multiple academic areas.
+     */
     public function archives(): HasMany
     {
-        return $this->hasMany(Archive::class)->where('user_type', $this->type);
+        return $this->hasMany(Archive::class, 'user_id', 'id');
     }
 
     /**
@@ -127,10 +172,9 @@ class User extends Authenticatable
 
             else if(is_string($role))
             {
-                $role_id = Role::where('name', $role)->where('guard_name', $this->guard_name)->value('id');
+                $role_id = Role::where('name', $role)->value('id');
                 $this->roles()->attach($role_id, ['model_type' => $this->type]);
             }
         }
     }
-
 }

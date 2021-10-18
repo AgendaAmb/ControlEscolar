@@ -36,6 +36,7 @@ Route::prefix('users')->name('users.')->group(function(){
 
     # Usuarios del sistema.
     Route::get('/', [UserController::class, 'index'])->name('index');
+    Route::get('/appliants', [UserController::class, 'appliants'])->name('appliants');
     Route::post('/show', [UserController::class, 'show'])->name('show');
    
     # Obtener usuario de mi portal.

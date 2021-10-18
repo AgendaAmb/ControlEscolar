@@ -32,7 +32,9 @@
               <label> Postulante </label>
               <select v-model="appliant" class="modal-input">
                 <option :value="null" selected>Escoge un postulante </option>
-                <option v-for="appliant in appliants" :key="appliant.id" :value="appliant"> {{ appliant.name }} </option>
+                <option v-for="appliant in appliants" :key="appliant.id" :value="appliant"> 
+                  {{ appliant.name + " " + appliant.middlename + " " + appliant.surname }} 
+                </option>
               </select>
             </div>
   
@@ -80,10 +82,11 @@ import EventDialogInput from "./EventDialogInput";
 
 
 export default {
-  name: "periodo",
+  name: "modal-entrevista",
   components: { EventDialogInput },
   props: {
     title: String,
+    intention_letter_professor: String,
     inputClass: String,
     overrideInputClass: Boolean,
     fields: Array,

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\JoinClause;
 
 class Archive extends Model
 {
@@ -38,15 +39,27 @@ class Archive extends Model
      * @var string[]
      */
     protected $with = [
+        'announcement.academicProgram', 
         'personalDocuments',
         'entranceDocuments',
-        'announcement.academicProgram', 
+        'intentionLetters',
         'academicDegrees.requiredDocuments',
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
         'scientificProductions.authors',
         'humanCapitals',
     ];
+
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function requiredDocuments(): BelongsToMany
+    {
+        return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
+    }
+
     
     /**
      * Obtiene los documentos personales requeridos del expediente.
@@ -55,9 +68,7 @@ class Archive extends Model
      */
     public function personalDocuments(): BelongsToMany
     {
-        return $this->belongsToMany(RequiredDocument::class)
-            ->withPivot('location')
-            ->where('type', 'personal');
+        return $this->requiredDocuments()->where('type', 'personal');
     }
 
     /**
@@ -68,9 +79,25 @@ class Archive extends Model
      */
     public function entranceDocuments(): BelongsToMany
     {
-        return $this->belongsToMany(RequiredDocument::class)
-            ->withPivot('location')
-            ->where('type', 'entrance');
+        return $this->requiredDocuments()->where('type', 'entrance')->where('intention_letter', false);
+    }
+
+    /**
+     * Obtiene los documentos requeridos para el ingreso del
+     * postulante, al programa académico.
+     *
+     * @return BelongsToMany
+     */
+    public function intentionLetters(): BelongsToMany
+    {
+        return $this->requiredDocuments()
+        ->select('*')
+        ->where('type', 'entrance')
+        ->where('intention_letter', true)
+        ->join('archive_intention_letter', function(JoinClause $join){
+            $join->on('archive_intention_letter.archive_id', '=', 'archive_required_document.archive_id')   
+                ->on('archive_intention_letter.required_document_id', '=', 'archive_required_document.required_document_id');
+        });
     }
 
     /**
@@ -80,8 +107,7 @@ class Archive extends Model
      */
     public function appliant(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')
-            ->where('type', $this->user_type);
+        return $this->belongsTo(User::class, 'user_id', 'id')->where('type', $this->user_type);
     }
 
     /**

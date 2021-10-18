@@ -77,7 +77,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo maestrías.
             [
                 'name' =>"5A.- Título de licenciatura o acta de examen.",
-                'type' => 'academic-lic',
+                'type' => 'academic',
                 'label' => '05A_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '05A_TitLicenciatula_2021_CJG',
@@ -88,7 +88,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo IMAREC
             [
                 'name' =>"5A.- Carta de pasantía.",
-                'type' => 'academic-lic',
+                'type' => 'academic',
                 'label' => '05A_CartaPasante_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '05A_CartaPasante_2021_CJG',
@@ -99,7 +99,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo doctorado.
             [
                 'name' =>"5B.- Título de maestría o acta de examen.",
-                'type' => 'academic-mast',
+                'type' => 'academic',
                 'label' => '05B_TítuloMat_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '05B_TítuloMat_2021_CJG',
@@ -110,7 +110,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo maestrías.
             [
                 'name' =>"6A.- Certificado de materias de la licenciatura.",
-                'type' => 'academic-lic',
+                'type' => 'academic',
                 'label' => '06A_CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '06A_CertfLic_2021_CJG',
@@ -121,7 +121,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo doctorado.
             [
                 'name' =>"6B.- Certificado de materias de la maestría.",
-                'type' => 'academic-mast',
+                'type' => 'academic',
                 'label' => '06B_CertMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '06B_CertfMast_2021_CJG',
@@ -132,7 +132,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo maestrías.
             [
                 'name' =>"7A.- Certificado de promedio de la licenciatura.",
-                'type' => 'academic-lic',
+                'type' => 'academic',
                 'label' => '07A_PromedioLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '07A_PromedioLic_2021_CJG',
@@ -143,7 +143,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo doctorado.
             [
                 'name' =>"7B.- Certificado de promedio de la maestría.",
-                'type' => 'academic-mast',
+                'type' => 'academic',
                 'label' => '07B_PromedioMae_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '07B_PromedioMae_2021_CJG',
@@ -154,7 +154,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo maestrías.
             [
                 'name' =>"8A.- Cédula de la licenciatura (aplica solo para estudios realizados en México).",
-                'type' => 'academic-lic',
+                'type' => 'academic',
                 'label' => '08A_Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '08A_Cédula_2021_CJG',
@@ -166,7 +166,7 @@ class CreateRequiredDocumentsTable extends Migration
             # Solo doctorado.
             [
                 'name' =>"8B.- Cédula de la maestría (aplica solo para estudios realizados en México).",
-                'type' => 'academic-mast',
+                'type' => 'academic',
                 'label' => '08B_Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '08B_Cédula_2021_CJG',

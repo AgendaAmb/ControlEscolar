@@ -43,7 +43,27 @@ class CreateArchivesTable extends Migration
             $table->primary(['archive_id', 'required_document_id'], 'pk_archive_required_document');
         });
 
-        
+        Schema::create('archive_intention_letter', function (Blueprint $table){
+            $table->unsignedBigInteger('archive_id');
+            $table->unsignedBigInteger('required_document_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+
+            $table->foreign(['archive_id', 'required_document_id'])
+                ->references(['archive_id', 'required_document_id'])
+                ->on('archive_required_document')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign(['user_id', 'user_type'])
+                ->references(['id', 'type'])
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+
+            $table->primary(['archive_id','required_document_id','user_id','user_type'], 'pk_arch_int_letter');
+        });
     }
 
     /**
@@ -53,7 +73,7 @@ class CreateArchivesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('archives_required_document');
+        Schema::dropIfExists('archive_required_document');
         Schema::dropIfExists('archives');
     }
 }

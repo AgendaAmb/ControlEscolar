@@ -35,11 +35,6 @@ class ArchiveController extends Controller
     private $miPortalService;
 
     /**
-     * Endpoint de usuarios.
-     */
-    private const USERS = 'api/usuarios';
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -98,10 +93,6 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $archive)
     {
         $archiveModel = Archive::find($archive);
-        $archiveModel->loadMissing([
-            'entranceDocuments' => fn($query) => $query->where('intention_letter', false)->where('recommendation_letter', false)
-        ]);
-
         $academic_program = $archiveModel->announcement->academicProgram;
         $appliant = $archiveModel->appliant->toArray();
 

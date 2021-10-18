@@ -49,7 +49,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
   },
   data: function data() {
     return {
-      users: [],
+      appliants: [],
       period: null,
       events: [],
       interview_fields: [{
@@ -124,8 +124,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     this.$nextTick(function () {
       var _this = this;
 
-      axios.get("/controlescolar/users").then(function (response) {
-        Vue.set(_this, "users", response.data);
+      axios.get("/controlescolar/users/appliants").then(function (response) {
+        Vue.set(_this, "appliants", response.data);
       })["catch"](function (error) {});
       axios.get("/controlescolar/entrevistas/periods").then(function (response) {
         if (Object.keys(response.data).length > 0) Vue.set(_this, 'period', response.data);
@@ -149,7 +149,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     abreModalEntrevistas: function abreModalEntrevistas() {
       var _this3 = this;
 
-      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.PeriodDialog, this.period_fields);
+      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.period_fields, this.appliants);
       modal.$on('event-created', function (event) {
         _this3.events.push(event._e);
 
@@ -254,16 +254,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "periodo",
+  name: "modal-entrevista",
   components: {
     EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__.default
   },
   props: {
     title: String,
+    intention_letter_professor: String,
     inputClass: String,
     overrideInputClass: Boolean,
     fields: Array,
@@ -707,7 +710,7 @@ function open(propsData) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  show: function show(params, extraFields) {
+  show: function show(params, extraFields, appliants) {
     var defaultParam = {
       title: 'Create event',
       inputClass: null,
@@ -737,6 +740,7 @@ function open(propsData) {
       }]
     });
     propsData.fields = extraFields ? defaultFields.concat(extraFields) : defaultFields;
+    propsData.appliants = appliants;
     return open(propsData);
   }
 });
@@ -26807,7 +26811,19 @@ var render = function() {
                                 key: appliant.id,
                                 domProps: { value: appliant }
                               },
-                              [_vm._v(" " + _vm._s(appliant.name) + " ")]
+                              [
+                                _vm._v(
+                                  " \n                " +
+                                    _vm._s(
+                                      appliant.name +
+                                        " " +
+                                        appliant.middlename +
+                                        " " +
+                                        appliant.surname
+                                    ) +
+                                    " \n              "
+                                )
+                              ]
                             )
                           })
                         ],

@@ -27,6 +27,26 @@ class CreateAcademicProgramsTable extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('academic_program_required_document', function (Blueprint $table) {
+            $table->foreignId('academic_program_id')
+                ->constrained('academic_programs')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreignId('required_document_id')
+                ->constrained('required_documents')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            
+            $table->foreignId('role_id')
+                ->constrained('roles')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+
+            $table->primary(['academic_program_id', 'required_document_id', 'role_id'], 'pk_acad_prog_req_doc');
+        });
+
         DB::table('academic_programs')->insert([
             [
                 'name' => 'Maestría en ciencias ambientales', 
@@ -51,49 +71,135 @@ class CreateAcademicProgramsTable extends Migration
             ],
         ]);
 
-        /*
         DB::table('academic_program_required_document')->insert([
+            [ 'required_document_id' => 1, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 4, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 10, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 10, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 10, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 12, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 12, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 1, 'role_id' => 3 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 1, 'role_id' => 1 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 1, 'role_id' => 2 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 1, 'role_id' => 3 ],
 
-            # Maestría en ciencias ambientales
-            [ 'required_document_id' => 1, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 2, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 3, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 4, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 5, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 8, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 10, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 12, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 14, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 15, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 16, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 17, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 19, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 20, 'academic_program_id' => 1 ],
-            [ 'required_document_id' => 21, 'academic_program_id' => 1 ],
 
-            # Doctorado en ciencias ambientales.
-            [ 'required_document_id' => 1, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 2, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 3, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 4, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 5, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 7, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 8, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 9, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 10, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 11, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 12, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 13, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 14, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 15, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 16, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 17, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 18, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 19, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 20, 'academic_program_id' => 2 ],
-            [ 'required_document_id' => 21, 'academic_program_id' => 2 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 4, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 7, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 7, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 7, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 9, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 9, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 9, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 11, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 11, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 11, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 13, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 13, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 18, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 2, 'role_id' => 3 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 2, 'role_id' => 1 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 2, 'role_id' => 2 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 2, 'role_id' => 3 ],
+
+
+            [ 'required_document_id' => 1, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 1, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 2, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 3, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 4, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 5, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 6, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 6, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 6, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 8, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 10, 'academic_program_id' => 4, 'role_id' => 1 ], 
+            [ 'required_document_id' => 10, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 10, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 12, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 12, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 14, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 15, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 16, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 17, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 19, 'academic_program_id' => 4, 'role_id' => 3 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 4, 'role_id' => 1 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 4, 'role_id' => 2 ],
+            [ 'required_document_id' => 20, 'academic_program_id' => 4, 'role_id' => 3 ],
 
             # ENREM.
+            /*
             [ 'required_document_id' => 22, 'academic_program_id' => 3 ],
             [ 'required_document_id' => 23, 'academic_program_id' => 3 ],
             [ 'required_document_id' => 24, 'academic_program_id' => 3 ],
@@ -113,26 +219,8 @@ class CreateAcademicProgramsTable extends Migration
             [ 'required_document_id' => 38, 'academic_program_id' => 3 ],
             [ 'required_document_id' => 39, 'academic_program_id' => 3 ],
             [ 'required_document_id' => 40, 'academic_program_id' => 3 ],
-            [ 'required_document_id' => 41, 'academic_program_id' => 3 ],
-
-            # Maestría en ciencias ambientales
-            [ 'required_document_id' => 1, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 2, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 3, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 4, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 5, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 8, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 10, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 12, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 14, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 15, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 16, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 17, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 18, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 19, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 20, 'academic_program_id' => 4 ],
-            [ 'required_document_id' => 21, 'academic_program_id' => 4 ],
-        ]);*/
+            [ 'required_document_id' => 41, 'academic_program_id' => 3 ],*/
+        ]);
     }
 
     /**
@@ -142,7 +230,7 @@ class CreateAcademicProgramsTable extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('academic_program_required_document');
+        Schema::dropIfExists('academic_program_required_document');
         Schema::dropIfExists('academic_programs');
     }
 }

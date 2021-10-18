@@ -20,6 +20,7 @@ class CreateAnnouncementsTable extends Migration
                 ->constrained('academic_programs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+                
             $table->date('from');
             $table->date('to');
 

@@ -45,11 +45,13 @@ class CreateAcademicDegreesTable extends Migration
         Schema::create('academic_degree_required_document', function (Blueprint $table) {
             $table->foreignId('academic_degree_id')
                 ->constrained('academic_degrees')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             
             $table->foreignId('required_document_id')
                 ->constrained('required_documents')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->string('location')->nullable();
             $table->primary(['academic_degree_id', 'required_document_id'], 'pk_academicDegreeReqDocument');

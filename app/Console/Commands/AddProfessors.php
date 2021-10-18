@@ -39,8 +39,8 @@ class AddProfessors extends Command
      */
     public function handle()
     {
-        AddAppliants::dispatch();
-        //JobsAddProfessors::dispatch();
+        //AddAppliants::dispatch();
+        JobsAddProfessors::dispatch();
         return 0;
     }
 }

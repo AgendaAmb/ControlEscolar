@@ -34,7 +34,7 @@ export default {
 
   data() {
     return {
-      users: [],
+      appliants: [],
       period: null,
       events: [],
       interview_fields: [{
@@ -116,9 +116,9 @@ export default {
    */
   mounted() {
     this.$nextTick(function () {
-      axios.get("/controlescolar/users")
+      axios.get("/controlescolar/users/appliants")
         .then((response) => {
-          Vue.set(this, "users", response.data);
+          Vue.set(this, "appliants", response.data);
         })
         .catch((error) => {});
 
@@ -150,7 +150,7 @@ export default {
     },
 
     abreModalEntrevistas(){
-      var modal = Entrevista.show(this.PeriodDialog, this.period_fields);
+      var modal = Entrevista.show(this.InterviewDialog, this.period_fields, this.appliants);
 
       modal.$on('event-created', (event) => {
         this.events.push(event._e);

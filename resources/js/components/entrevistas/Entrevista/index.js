@@ -10,7 +10,7 @@ function open(propsData) {
 }
 
 export default {
-    show(params, extraFields) {
+    show(params, extraFields, appliants) {
         const defaultParam = {
             title: 'Create event',
             inputClass: null,
@@ -48,6 +48,7 @@ export default {
             });
 
         propsData.fields = extraFields ? defaultFields.concat(extraFields) : defaultFields;
+        propsData.appliants = appliants;
         return open(propsData);
     }
 }

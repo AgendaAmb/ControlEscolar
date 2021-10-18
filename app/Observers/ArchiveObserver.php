@@ -15,6 +15,20 @@ class ArchiveObserver
      */
     public function created(Archive $archive)
     {
+        $academic_program = $archive->announcement->academicProgram;
+        $role_id = $archive->appliant->roles()->first()->id;
+        $personal_documents_id = $academic_program
+            ->requiredDocuments()
+            ->wherePivot('role_id', $role_id)
+            ->where('type', 'personal')
+            ->pluck('id');
+
+        $entrance_documents_id = $academic_program
+            ->requiredDocuments()
+            ->wherePivot('role_id', $role_id)
+            ->where('type', 'entrance')
+            ->pluck('id');
+
         $archive->academicDegrees()->createMany([
             ['state'=>'Incompleto']
         ]);
@@ -35,8 +49,8 @@ class ArchiveObserver
             ['state'=>'Incompleto']
         ]);
 
-        $archive->personalDocuments()->attach(RequiredDocument::personalDocumentsId());
-        $archive->personalDocuments()->attach(RequiredDocument::entranceDocumentsId());
+        $archive->personalDocuments()->attach($personal_documents_id);
+        $archive->personalDocuments()->attach($entrance_documents_id);
     }
 
     /**
