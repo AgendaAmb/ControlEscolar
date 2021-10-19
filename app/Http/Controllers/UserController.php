@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\MiPortalService;
 use App\Http\Requests\ShowUserRequest;
+use App\Http\Resources\InterviewAppliantsCollection;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
@@ -29,7 +30,10 @@ class UserController extends Controller
      */
     public function appliants()
     {
-        $appliants = User::appliant()->hasArchive()->get();
+        $appliants = User::with(['latestArchive.intentionLetters:archive_intention_letter.user_id,archive_intention_letter.user_type'])
+            ->hasArchive()
+            ->appliant()
+            ->get();
         
         # Obtiene el listado de reuniones.
         $response = $this->miPortalService->miPortalGet('api/usuarios', ['module' => env('MIPORTAL_MODULE_ID')]);
@@ -42,35 +46,9 @@ class UserController extends Controller
 
         # Filtra a los profesores
         $miPortal_workers = $data->where('user_type', 'workers');
-        $data = $miPortal_appliants->map(function($appliant) use ($miPortal_workers, $appliants){
 
 
-            # Fusiona los datos de Mi Portal con los del sistema actual.
-            $app_appliant = $appliants->where('type', $appliant['user_type'])->where('id', $appliant['id'])->first();
-            $merged_appliant = collect($app_appliant->toArray())->merge($appliant);
-
-            # Obtiene los datos de la carta de intención.
-            $intention_letter = $app_appliant->latestArchive->intentionLetters->first();
-           
-            dd($merged_appliant);
-           
-            $professor = $intention_letter->toArray();
-        
-            # Fusiona los dato del profesor con los de Mi Portal.
-            $miPortal_professor = $miPortal_workers->where('id', $professor['user_id'])->where('type', $professor['user_type']);
-            
-
-            
-
-
-
-
-
-        });
-
-
-        # Devuelve el resultado
-        return new JsonResponse($data, $response->status());
+        return new InterviewAppliantsCollection($appliants, $miPortal_workers, $miPortal_appliants);
     }
 
     /**

@@ -51,6 +51,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     /**
@@ -73,21 +76,6 @@ class User extends Authenticatable
         'Otros' => 'Otro',
         'No especificar' => 'NoEspecificar'
     ];
-
-    /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::retrieved(function ($user) {
-            $user->load([
-                'roles' => fn($q) => $q->select('id','name')->where('model_type', $user->type),
-                'latestArchive' => fn($q) => $q->where('user_type', $user->type),
-            ]);
-        });
-    }
 
     /**
      * The "booted" method of the model.

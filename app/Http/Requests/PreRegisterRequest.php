@@ -67,12 +67,12 @@ class PreRegisterRequest extends FormRequest
         
         return [
             'pertenece_uaslp' => ['required', 'boolean'],
-            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true', 'numeric'],
-            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'string'],
+            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'numeric'],
+            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
             'email' => [ 'required', 'string', 'email', 'max:255' ],
             'email_alterno' => [ 'required', 'string', 'email', 'max:255' ],
-            'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'string', 'max:255'],
-            'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'same:password','string', 'max:255'],
+            'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
+            'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password','string', 'max:255'],
             'curp' => ['nullable', 'required_if:no_curp,false',  'size:18', $curp_pattern,],
             'name' => ['required', 'string', 'max:255' ],
             'first_surname' => ['required','string','max:255'],

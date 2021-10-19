@@ -10,12 +10,10 @@ function open(propsData) {
 }
 
 export default {
-    show(params, extraFields, appliants) {
+    show(params, appliants, rooms, date) {
         const defaultParam = {
-            title: 'Create event',
             inputClass: null,
             overrideInputClass: false,
-            createButtonLabel: 'Create',
             //  -------------------------
             startTime: null,
             endTime: null,
@@ -23,32 +21,10 @@ export default {
         };
 
         const propsData = Object.assign(defaultParam, params);
-
-        const defaultFields = [];
-
-        if ( propsData.enableTimeInputs )
-            defaultFields.splice(1, 0, {
-                label: 'Times',
-                fields: [
-                    {
-                        name: 'startTime',
-                        type: 'time',
-                        label: 'Start Time',
-                        required: true,
-                        value: propsData.startTime
-                    },
-                    {
-                        name: 'endTime',
-                        type: 'time',
-                        label: 'End Time',
-                        required: true,
-                        value: propsData.endTime
-                    }
-                ]
-            });
-
-        propsData.fields = extraFields ? defaultFields.concat(extraFields) : defaultFields;
+        propsData.fields = [];
+        propsData.date = date.toLocaleDateString();
         propsData.appliants = appliants;
+        propsData.rooms = rooms;
         return open(propsData);
     }
 }

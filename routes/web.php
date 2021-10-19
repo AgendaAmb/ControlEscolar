@@ -90,6 +90,7 @@ Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
 
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
+    Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
 
     # Periodods.
     Route::apiResource('periods', PeriodController::class);

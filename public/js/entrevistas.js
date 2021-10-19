@@ -36,6 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -51,56 +52,13 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     return {
       appliants: [],
       period: null,
-      events: [],
-      interview_fields: [{
-        fields: [{
-          name: "hora_inicio",
-          type: 'time',
-          label: "Hora de inicio."
-        }, {
-          name: "hora_fin",
-          type: 'time',
-          label: "Hora de fin."
-        }]
-      }, {
-        name: "appliant_name",
-        label: "Nombre del postulante",
-        readonly: true
-      }, {
-        name: "sala",
-        type: "text",
-        required: true,
-        label: "Número de sala"
-      }, {
-        name: "observaciones",
-        type: "textarea",
-        label: "Observaciones"
-      }]
+      events: []
     };
   },
   computed: {
     IsActive: {
       get: function get() {
         return this.period !== null;
-      }
-    },
-    InterviewDialog: {
-      get: function get() {
-        return {
-          title: "Programar una entrevista",
-          createButtonLabel: "Agendar entrevista",
-          enableTimeInputs: false,
-          fields: this.interview_fields
-        };
-      }
-    },
-    PeriodDialog: {
-      get: function get() {
-        return {
-          title: "Nuevo periodo de entrevistas",
-          createButtonLabel: "Crear periodo",
-          enableTimeInputs: false
-        };
       }
     },
     MinDate: {
@@ -146,10 +104,12 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         Vue.set(_this2, 'period', period);
       });
     },
-    abreModalEntrevistas: function abreModalEntrevistas() {
+    abreModalEntrevistas: function abreModalEntrevistas(date) {
       var _this3 = this;
 
-      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.period_fields, this.appliants);
+      if (moment(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
+      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
+      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.appliants, this.period.rooms, date);
       modal.$on('event-created', function (event) {
         _this3.events.push(event._e);
 
@@ -254,8 +214,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -265,20 +223,18 @@ __webpack_require__.r(__webpack_exports__);
     EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__.default
   },
   props: {
-    title: String,
-    intention_letter_professor: String,
+    date: String,
     inputClass: String,
     overrideInputClass: Boolean,
     fields: Array,
-    createButtonLabel: String,
     appliants: Array,
     rooms: Array
   },
   data: function data() {
     return {
       isActive: false,
+      intention_letter_professor: null,
       event: {},
-      date: null,
       start_time: null,
       end_time: null,
       appliant: null,
@@ -304,6 +260,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.isActive = true;
+  },
+  computed: {
+    IntentionLetterProfessor: {
+      get: function get() {
+        if (this.appliant === null) return null;
+        var professor = this.appliant.intention_letter_professor;
+        return professor.name + " " + professor.middlename + " " + professor.surname;
+      }
+    }
   },
   methods: {
     /**
@@ -710,37 +675,20 @@ function open(propsData) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  show: function show(params, extraFields, appliants) {
+  show: function show(params, appliants, rooms, date) {
     var defaultParam = {
-      title: 'Create event',
       inputClass: null,
       overrideInputClass: false,
-      createButtonLabel: 'Create',
       //  -------------------------
       startTime: null,
       endTime: null,
       enableTimeInputs: true
     };
     var propsData = Object.assign(defaultParam, params);
-    var defaultFields = [];
-    if (propsData.enableTimeInputs) defaultFields.splice(1, 0, {
-      label: 'Times',
-      fields: [{
-        name: 'startTime',
-        type: 'time',
-        label: 'Start Time',
-        required: true,
-        value: propsData.startTime
-      }, {
-        name: 'endTime',
-        type: 'time',
-        label: 'End Time',
-        required: true,
-        value: propsData.endTime
-      }]
-    });
-    propsData.fields = extraFields ? defaultFields.concat(extraFields) : defaultFields;
+    propsData.fields = [];
+    propsData.date = date.toLocaleDateString();
     propsData.appliants = appliants;
+    propsData.rooms = rooms;
     return open(propsData);
   }
 });
@@ -26602,10 +26550,11 @@ var render = function() {
           ? _c("vue-scheduler", {
               attrs: {
                 events: _vm.events,
-                "event-dialog-config": _vm.InterviewDialog,
                 "min-date": _vm.MinDate,
-                "max-date": _vm.MaxDate
-              }
+                "max-date": _vm.MaxDate,
+                "disable-dialog": true
+              },
+              on: { "day-clicked": _vm.abreModalEntrevistas }
             })
           : _vm._e()
       ],
@@ -26618,7 +26567,7 @@ var render = function() {
             "button",
             {
               staticClass: "my-3 v-cal-button",
-              on: { click: _vm.abreModalEntrevistas }
+              on: { click: _vm.abreModalPeriodo }
             },
             [_vm._v(" Programar periodo de entrevistas ")]
           )
@@ -26671,7 +26620,7 @@ var render = function() {
               [
                 _c("header", { staticClass: "v-cal-dialog-card__header" }, [
                   _c("h5", { staticClass: "v-cal-dialog__title" }, [
-                    _vm._v(_vm._s(_vm.title))
+                    _vm._v(" Agendar una entrevista")
                   ]),
                   _vm._v(" "),
                   _c("button", {
@@ -26698,7 +26647,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "modal-input",
-                        attrs: { type: "date", readonly: "" },
+                        attrs: { type: "text", readonly: "" },
                         domProps: { value: _vm.date },
                         on: {
                           input: function($event) {
@@ -26837,8 +26786,25 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.IntentionLetterProfessor,
+                            expression: "IntentionLetterProfessor"
+                          }
+                        ],
                         staticClass: "modal-input",
-                        attrs: { type: "text", readonly: "" }
+                        attrs: { type: "text", readonly: "" },
+                        domProps: { value: _vm.IntentionLetterProfessor },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.IntentionLetterProfessor = $event.target.value
+                          }
+                        }
                       })
                     ]),
                     _vm._v(" "),
@@ -26904,13 +26870,7 @@ var render = function() {
                       staticClass: "v-cal-button is-rounded is-primary",
                       attrs: { type: "submit" }
                     },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.createButtonLabel) +
-                          "\n          "
-                      )
-                    ]
+                    [_vm._v("Programar entrevista ")]
                   )
                 ])
               ]

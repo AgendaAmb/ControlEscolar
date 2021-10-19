@@ -93,6 +93,19 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $archive)
     {
         $archiveModel = Archive::find($archive);
+        $archiveModel->loadMissing([
+            'appliant',
+            'announcement.academicProgram', 
+            'personalDocuments',
+            'entranceDocuments',
+            'intentionLetters',
+            'academicDegrees.requiredDocuments',
+            'appliantLanguages.requiredDocuments',
+            'appliantWorkingExperiences',
+            'scientificProductions.authors',
+            'humanCapitals'
+        ]);
+
         $academic_program = $archiveModel->announcement->academicProgram;
         $appliant = $archiveModel->appliant->toArray();
 

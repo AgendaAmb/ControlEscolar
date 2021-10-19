@@ -5,7 +5,7 @@
       <div class="v-cal-dialog-card">
         <form @submit.prevent="creaPeriodo">
           <header class="v-cal-dialog-card__header">
-            <h5 class="v-cal-dialog__title">{{ title }}</h5>
+            <h5 class="v-cal-dialog__title"> Agendar una entrevista</h5>
             <button
               type="button"
               class="v-cal-dialog__close"
@@ -15,7 +15,7 @@
           <section class="v-cal-dialog-card__body form-row">
             <div class="form-group col-12">
               <label> Fecha </label>
-              <input v-model="date" type="date" class="modal-input" readonly>
+              <input v-model="date" type="text" class="modal-input" readonly>
             </div>
 
             <div class="form-group col-md-5">
@@ -40,7 +40,7 @@
   
             <div class="form-group col-12">
               <label> Profesor que otorgó la carta de intención </label>
-              <input type="text" class="modal-input" readonly>
+              <input v-model="IntentionLetterProfessor" type="text" class="modal-input" readonly>
             </div>
 
             <div class="form-group col-12">
@@ -52,9 +52,7 @@
             </div>
           </section>
           <footer class="v-cal-dialog-card__footer">
-            <button type="submit" class="v-cal-button is-rounded is-primary">
-              {{ createButtonLabel }}
-            </button>
+            <button type="submit" class="v-cal-button is-rounded is-primary">Programar entrevista </button>
           </footer>
         </form>
       </div>
@@ -85,20 +83,18 @@ export default {
   name: "modal-entrevista",
   components: { EventDialogInput },
   props: {
-    title: String,
-    intention_letter_professor: String,
+    date: String,
     inputClass: String,
     overrideInputClass: Boolean,
     fields: Array,
-    createButtonLabel: String,
     appliants: Array,
     rooms: Array
   },
   data() {
     return {
       isActive: false,
+      intention_letter_professor: null,
       event: {},
-      date: null,
       start_time: null,
       end_time: null,
       appliant: null,
@@ -106,6 +102,7 @@ export default {
       room: null,
     };
   },
+
   beforeMount() {
     let plainEvent = {};
     this.fields.map((field) => {
@@ -129,6 +126,19 @@ export default {
   mounted() {
     this.isActive = true;
   },
+
+  computed: {
+    IntentionLetterProfessor: {
+      get () {
+        if (this.appliant === null)
+          return null;
+
+        var professor = this.appliant.intention_letter_professor;
+        return professor.name + " " + professor.middlename + " " + professor.surname;
+      }
+    },
+  },
+
   methods: {
 
     /**

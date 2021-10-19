@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UserExists;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ShowUserRequest extends FormRequest
@@ -24,8 +25,8 @@ class ShowUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','numeric','exists:users,id'],
-            'type' => ['required','string','in:externs,students,workers'],
+            'type' => ['required','string','in:students,workers,externs'],
+            'id' => ['required','numeric', new UserExists($this->user_type)],
         ];
     }
 }

@@ -39,6 +39,7 @@ class Archive extends Model
      * @var string[]
      */
     protected $with = [
+        /*
         'announcement.academicProgram', 
         'personalDocuments',
         'entranceDocuments',
@@ -47,7 +48,7 @@ class Archive extends Model
         'appliantLanguages.requiredDocuments',
         'appliantWorkingExperiences',
         'scientificProductions.authors',
-        'humanCapitals',
+        'humanCapitals',*/
     ];
 
     /**

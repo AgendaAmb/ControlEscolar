@@ -3,12 +3,13 @@
     <div class="col-12">
       <vue-scheduler v-if="IsActive === true"
        :events="events" 
-       :event-dialog-config="InterviewDialog" 
        :min-date="MinDate" 
-       :max-date="MaxDate" ></vue-scheduler>
+       :max-date="MaxDate" 
+       :disable-dialog="true"
+       @day-clicked="abreModalEntrevistas"></vue-scheduler>
     </div>
     <div v-if="IsActive === false" class="col-12 mx-2">
-      <button class="my-3 v-cal-button" @click="abreModalEntrevistas"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" @click="abreModalPeriodo"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
@@ -37,30 +38,6 @@ export default {
       appliants: [],
       period: null,
       events: [],
-      interview_fields: [{
-          fields: [{
-            name: "hora_inicio",
-            type: 'time',
-            label: "Hora de inicio.",
-          },{
-            name: "hora_fin",
-            type: 'time',
-            label: "Hora de fin.",
-          }]
-        },{
-          name: "appliant_name",
-          label: "Nombre del postulante",
-          readonly: true,
-        },{
-          name: "sala",
-          type: "text",
-          required: true,
-          label: "Número de sala",
-        },{
-          name: "observaciones",
-          type: "textarea",
-          label: "Observaciones",
-      }],
     };
   },
 
@@ -68,27 +45,6 @@ export default {
     IsActive: {
       get() {
         return this.period !== null;
-      }
-    },
-
-    InterviewDialog: {
-      get(){
-        return {
-          title: "Programar una entrevista",
-          createButtonLabel: "Agendar entrevista",
-          enableTimeInputs: false,
-          fields: this.interview_fields
-        };
-      }
-    },
-
-    PeriodDialog: {
-      get(){
-        return {
-          title: "Nuevo periodo de entrevistas",
-          createButtonLabel: "Crear periodo",
-          enableTimeInputs: false,
-        };
       }
     },
 
@@ -149,8 +105,14 @@ export default {
       });
     },
 
-    abreModalEntrevistas(){
-      var modal = Entrevista.show(this.InterviewDialog, this.period_fields, this.appliants);
+    abreModalEntrevistas(date){
+      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+        return false;
+
+      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+        return false;
+
+      var modal = Entrevista.show(this.InterviewDialog, this.appliants, this.period.rooms, date);
 
       modal.$on('event-created', (event) => {
         this.events.push(event._e);
