@@ -6,6 +6,7 @@ use App\Helpers\MiPortalService;
 use App\Http\Requests\ShowUserRequest;
 use App\Http\Resources\InterviewAppliantsCollection;
 use App\Models\User;
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -34,19 +35,26 @@ class UserController extends Controller
             ->hasArchive()
             ->appliant()
             ->get();
-        
-        # Obtiene el listado de reuniones.
-        $response = $this->miPortalService->miPortalGet('api/usuarios', ['module' => env('MIPORTAL_MODULE_ID')]);
+
+        $professors = User::role('profesor_nb')->pluck('id')->toArray();
+        $responses = [];
+
+        # Realiza 2 peticiones.
+        # 1.- Obtiene a los postulantes.
+        # 2.- Obtiene a los profesores.
+        $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
+            'module' => env('MIPORTAL_MODULE_ID'),
+            'filter[id]' => $appliants->pluck('id')->toArray()
+        ]);
+
+        $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
+            'module' => env('MIPORTAL_MODULE_ID'),
+            'filter[id]' => $professors
+        ]);
 
         # Recolecta el resultado.
-        $data = $response->collect();
-        
-        # Filtra a los aspirantes.
-        $miPortal_appliants = $data->where('user_type', 'students');
-
-        # Filtra a los profesores
-        $miPortal_workers = $data->where('user_type', 'workers');
-
+        $miPortal_appliants = $responses[0]->collect();
+        $miPortal_workers = $responses[1]->collect();
 
         return new InterviewAppliantsCollection($appliants, $miPortal_workers, $miPortal_appliants);
     }

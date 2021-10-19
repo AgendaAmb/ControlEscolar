@@ -46,7 +46,6 @@ class InterviewAppliantsCollection extends ResourceCollection
     public function toArray($request)
     {
         $data = $this->miPortal_appliants->map(function($appliant){
-
             # Fusiona los datos de Mi Portal con los del sistema actual.
             $app_appliant = $this->where('type', $appliant['user_type'])->where('id', $appliant['id'])->first();
 

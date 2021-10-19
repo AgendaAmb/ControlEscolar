@@ -10,7 +10,7 @@ function open(propsData) {
 }
 
 export default {
-    show(params, appliants, rooms, date) {
+    show(params, period_id, appliants, rooms, date) {
         const defaultParam = {
             inputClass: null,
             overrideInputClass: false,
@@ -21,8 +21,9 @@ export default {
         };
 
         const propsData = Object.assign(defaultParam, params);
+        propsData.period_id = period_id;
         propsData.fields = [];
-        propsData.date = date.toLocaleDateString();
+        propsData.date = date.toISOString().split('T')[0];
         propsData.appliants = appliants;
         propsData.rooms = rooms;
         return open(propsData);

@@ -109,7 +109,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
       if (moment(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
-      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.appliants, this.period.rooms, date);
+      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
       modal.$on('event-created', function (event) {
         _this3.events.push(event._e);
 
@@ -135,10 +135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Event__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Event */ "./resources/js/components/entrevistas/Event.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDialogInput */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue");
+/* harmony import */ var _EventDialogInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EventDialogInput */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue");
 //
 //
 //
@@ -214,15 +211,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "modal-entrevista",
   components: {
-    EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__.default
+    EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_0__.default
   },
   props: {
+    period_id: Number,
     date: String,
     inputClass: String,
     overrideInputClass: Boolean,
@@ -243,19 +239,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   beforeMount: function beforeMount() {
-    var plainEvent = {};
-    this.fields.map(function (field) {
-      if (!field.fields) plainEvent[field.name] = field.value;else {
-        var fields = field.fields;
-        fields.map(function (field) {
-          if (field.type === "time") {
-            plainEvent[field.name] = field.value ? moment__WEBPACK_IMPORTED_MODULE_1___default()(field.value, "HH:mm") : null;
-          } else plainEvent[field.name] = field.value;
-        });
-      }
-    });
-    this.event = new _Event__WEBPACK_IMPORTED_MODULE_0__.default(plainEvent); //  Insert the Dialog component in body tag
-
+    //  Insert the Dialog component in body tag
     document.body.appendChild(this.$el);
   },
   mounted: function mounted() {
@@ -275,19 +259,15 @@ __webpack_require__.r(__webpack_exports__);
      * Genera el periodo de entrevistas.
      */
     creaPeriodo: function creaPeriodo() {
-      var _this = this;
-
-      axios.post('/controlescolar/entrevistas/periods', {
-        start_date: this.start_date,
-        end_date: this.end_date,
-        num_salas: this.num_salas
-      }).then(function (response) {
-        var period = response.data;
-
-        _this.$emit('new_period', period);
-
-        _this.close();
-      })["catch"](function (error) {});
+      axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
+        period_id: this.period_id,
+        user_id: this.appliant.id,
+        user_type: this.appliant.user_type,
+        date: this.date,
+        start_time: this.start_time,
+        end_time: this.end_time,
+        room_id: this.room.id
+      }).then(function (response) {})["catch"](function (error) {});
       /*
       this.$emit("event-created", this.event);
       this.close();*/
@@ -304,14 +284,14 @@ __webpack_require__.r(__webpack_exports__);
      * Cierra el modal (ventana emergente).
      */
     close: function close() {
-      var _this2 = this;
+      var _this = this;
 
       this.isActive = false; // Timeout for the animation complete before destroying
 
       setTimeout(function () {
-        _this2.$destroy();
+        _this.$destroy();
 
-        _this2.$el.remove();
+        _this.$el.remove();
       }, 150);
     }
   }
@@ -675,7 +655,7 @@ function open(propsData) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  show: function show(params, appliants, rooms, date) {
+  show: function show(params, period_id, appliants, rooms, date) {
     var defaultParam = {
       inputClass: null,
       overrideInputClass: false,
@@ -685,8 +665,9 @@ function open(propsData) {
       enableTimeInputs: true
     };
     var propsData = Object.assign(defaultParam, params);
+    propsData.period_id = period_id;
     propsData.fields = [];
-    propsData.date = date.toLocaleDateString();
+    propsData.date = date.toISOString().split('T')[0];
     propsData.appliants = appliants;
     propsData.rooms = rooms;
     return open(propsData);

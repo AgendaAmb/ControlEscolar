@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Room extends Model
+class EvaluationConcept extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,13 +19,12 @@ class Room extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Gets the list of evaluation concepts.
      *
-     * @var array
+     * @return BelongsToMany
      */
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
-    ];
+    public function evaluationRubrics(): BelongsToMany
+    {
+        return $this->belongsToMany(EvaluationRubric::class);
+    }
 }

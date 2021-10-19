@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreInterviewRequest;
+use App\Models\Interview;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class InterviewController extends Controller
@@ -24,6 +26,9 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
-        dd($request->safe());
+        $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
+        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
+
+        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
 }

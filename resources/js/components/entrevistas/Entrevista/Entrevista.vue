@@ -74,8 +74,6 @@
 </style>
 
 <script>
-import Event from "../Event";
-import moment from "moment";
 import EventDialogInput from "./EventDialogInput";
 
 
@@ -83,6 +81,7 @@ export default {
   name: "modal-entrevista",
   components: { EventDialogInput },
   props: {
+    period_id: Number,
     date: String,
     inputClass: String,
     overrideInputClass: Boolean,
@@ -104,22 +103,6 @@ export default {
   },
 
   beforeMount() {
-    let plainEvent = {};
-    this.fields.map((field) => {
-      if (!field.fields) plainEvent[field.name] = field.value;
-      else {
-        const fields = field.fields;
-        fields.map((field) => {
-          if (field.type === "time") {
-            plainEvent[field.name] = field.value
-              ? moment(field.value, "HH:mm")
-              : null;
-          } else plainEvent[field.name] = field.value;
-        });
-      }
-    });
-
-    this.event = new Event(plainEvent);
     //  Insert the Dialog component in body tag
     document.body.appendChild(this.$el);
   },
@@ -146,15 +129,17 @@ export default {
      */
     creaPeriodo() {
       
-      axios.post('/controlescolar/entrevistas/periods', {
-        start_date: this.start_date,
-        end_date: this.end_date,
-        num_salas: this.num_salas,
+      axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
+        period_id: this.period_id,
+        user_id: this.appliant.id,
+        user_type: this.appliant.user_type,
+        date: this.date,
+        start_time: this.start_time,
+        end_time: this.end_time,
+        room_id: this.room.id
       
       }).then(response =>  {
-        var period = response.data;
-        this.$emit('new_period', period);
-        this.close();
+        
       }).catch(error => {
 
       });

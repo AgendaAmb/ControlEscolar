@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInterviewsTable extends Migration
+class CreateEvaluationConceptDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,14 @@ class CreateInterviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('interviews', function (Blueprint $table) {
+        Schema::create('evaluation_concept_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('room_id')
-                ->constrained('rooms')
+            $table->foreignId('evaluation_concept_id')
+                ->constrained('evaluation_concepts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
-
-            # Control de modelos.
+            $table->string('description', 512);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -37,6 +33,6 @@ class CreateInterviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interviews');
+        Schema::dropIfExists('evaluation_concept_details');
     }
 }

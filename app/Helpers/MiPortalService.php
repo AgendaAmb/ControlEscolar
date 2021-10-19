@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Exception;
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Client\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -127,5 +128,29 @@ class MiPortalService
     {
         $request = $this->miPortalRequest();
         return $request->post($this->url. $path, $body);
+    }
+
+    /**
+     * Consume un get de MiPortal.
+     * 
+     * @param array $poolRequests
+     */
+    public function miPortalPool(array $poolRequests): array
+    {
+        # Añade al arreglo de datos la url absoluta por petición..
+        $poolRequests = collect($poolRequests)->map(
+            fn($route) => $this->url.$route['url'].'?'.http_build_query($route['query'])
+        );
+        
+        # Devuelve el resultado de las solicitudes.
+        return $this->miPortalRequest()->pool(function(Pool $pool) use ($poolRequests){
+            $responses = [];
+
+            foreach ($poolRequests as $poolRequest)
+                $responses[] = $pool->get($poolRequest);
+            
+
+            return $responses;
+        });
     }
 }

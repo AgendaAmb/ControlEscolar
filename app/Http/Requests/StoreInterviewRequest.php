@@ -27,10 +27,10 @@ class StoreInterviewRequest extends FormRequest
         return [
             'user_type' => ['required','string','in:students,workers,externs'],
             'user_id' => ['required','numeric', new UserExists($this->user_type)],
-            'period_id' => ['required','exists:periods,id'],
             'date' => ['required','date'],
-            'start_time' => ['required'],
-            'end_time' => ['required'],
+            'start_time' => ['required','date_format:H:i'],
+            'end_time' => ['required','date_format:H:i','after:start_time'],
+            'period_id' => ['required','exists:periods,id','exclude'],
             'room_id' => ['required','numeric','exists:rooms,id']
         ]; 
     }

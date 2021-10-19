@@ -112,7 +112,7 @@ export default {
       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
         return false;
 
-      var modal = Entrevista.show(this.InterviewDialog, this.appliants, this.period.rooms, date);
+      var modal = Entrevista.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
 
       modal.$on('event-created', (event) => {
         this.events.push(event._e);

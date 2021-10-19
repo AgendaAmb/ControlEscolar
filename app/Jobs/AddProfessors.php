@@ -106,6 +106,7 @@ class AddProfessors implements ShouldQueue
             return;
 
         $professors = $miPortalResponse->collect()->toArray();
+        dd($professors);
 
         foreach ($professors as $mi_portal_professor)
         {   

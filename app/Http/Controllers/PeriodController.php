@@ -27,6 +27,7 @@ class PeriodController extends Controller
     {
         $period = Period::create($request->safe()->except('num_salas'));
         $period->rooms()->createMany(array_fill(0, $request->num_salas, []));
+        $period->load('rooms');
 
         return new JsonResponse($period, JsonResponse::HTTP_CREATED); 
     }
