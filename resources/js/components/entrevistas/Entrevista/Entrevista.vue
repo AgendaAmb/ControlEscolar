@@ -3,7 +3,7 @@
     <div class="v-cal-dialog" v-if="isActive">
       <div class="v-cal-dialog__bg" @click="cancel"></div>
       <div class="v-cal-dialog-card">
-        <form @submit.prevent="creaPeriodo">
+        <form @submit.prevent="creaEntrevista">
           <header class="v-cal-dialog-card__header">
             <h5 class="v-cal-dialog__title"> Agendar una entrevista</h5>
             <button
@@ -91,6 +91,7 @@ export default {
   },
   data() {
     return {
+      id: -1,
       isActive: false,
       intention_letter_professor: null,
       event: {},
@@ -127,7 +128,7 @@ export default {
     /**
      * Genera el periodo de entrevistas.
      */
-    creaPeriodo() {
+    creaEntrevista() {
       
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
         period_id: this.period_id,
@@ -139,15 +140,18 @@ export default {
         room_id: this.room.id
       
       }).then(response =>  {
-        
+        var data = response.data;
+        this.id = data.id;
+
+        this.$emit('nuevaEntrevista', {
+          id: this.id,
+          date: this.date,
+          startTime: this.start_time,
+          endTime: this.end_time,
+        });
       }).catch(error => {
 
       });
-
-
-      /*
-      this.$emit("event-created", this.event);
-      this.close();*/
     },
 
     /**

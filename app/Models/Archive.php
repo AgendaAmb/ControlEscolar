@@ -184,4 +184,15 @@ class Archive extends Model
     {
         return $this->belongsTo(Announcement::class);
     }
+
+    /**
+     * Obtiene el programa académico, al cual corresponde
+     * el expediente.
+     *
+     * @return HasOne
+     */
+    public function evaluationRubric(): HasOne
+    {
+        return $this->hasOne(EvaluationRubric::class);
+    }
 }

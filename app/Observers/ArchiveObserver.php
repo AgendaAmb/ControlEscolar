@@ -59,10 +59,7 @@ class ArchiveObserver
      * @param  \App\Models\Archive  $archive
      * @return void
      */
-    public function updated(Archive $archive)
-    {
-        //
-    }
+    public function updated(Archive $archive){}
 
     /**
      * Handle the Archive "deleted" event.

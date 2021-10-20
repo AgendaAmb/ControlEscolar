@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\EvaluationConcept;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,20 +23,27 @@ class CreateEvaluationConceptsTable extends Migration
         });
 
         Schema::create('evaluation_concept_evaluation_rubric', function (Blueprint $table) {
-            $table->foreignId('evaluation_concept_id')
-                ->constrained('evaluation_concepts')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreignId('evaluation_rubric_id')
-                ->constrained('evaluation_rubrics')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
+            $table->unsignedBigInteger('evaluation_concept_id');
+            $table->unsignedBigInteger('evaluation_rubric_id');
             $table->string('notes')->nullable();
             $table->integer('score')->nullable();
 
-            $table->primary(['evaluation_concept_id', 'evaluation_rubric_id'], 'pk_eval_concept_eval_rubric');
+            $table->foreign('evaluation_concept_id', 'fk_eval_concept')
+                ->references('id')
+                ->on('evaluation_concepts')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('evaluation_rubric_id', 'fk_eval_rubric')
+                ->references('id')
+                ->on('evaluation_rubrics')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->primary([
+                'evaluation_concept_id', 
+                'evaluation_rubric_id'
+            ], 'pk_eval_concept_eval_rubric');
         });
     }
 

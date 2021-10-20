@@ -110,13 +110,12 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       if (moment(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
       var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
-      modal.$on('event-created', function (event) {
-        _this3.events.push(event._e);
+      modal.$on('nuevaEntrevista', function (event) {
+        _this3.events.push({
+          id: event.id
+        });
 
         _this3.$emit('event-created', event._e);
-      });
-      modal.$on('new_period', function (period) {
-        Vue.set(_this3, 'period', period);
       });
     }
   }
@@ -228,6 +227,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      id: -1,
       isActive: false,
       intention_letter_professor: null,
       event: {},
@@ -258,7 +258,9 @@ __webpack_require__.r(__webpack_exports__);
     /**
      * Genera el periodo de entrevistas.
      */
-    creaPeriodo: function creaPeriodo() {
+    creaEntrevista: function creaEntrevista() {
+      var _this = this;
+
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
         period_id: this.period_id,
         user_id: this.appliant.id,
@@ -267,10 +269,17 @@ __webpack_require__.r(__webpack_exports__);
         start_time: this.start_time,
         end_time: this.end_time,
         room_id: this.room.id
-      }).then(function (response) {})["catch"](function (error) {});
-      /*
-      this.$emit("event-created", this.event);
-      this.close();*/
+      }).then(function (response) {
+        var data = response.data;
+        _this.id = data.id;
+
+        _this.$emit('nuevaEntrevista', {
+          id: _this.id,
+          date: _this.date,
+          startTime: _this.start_time,
+          endTime: _this.end_time
+        });
+      })["catch"](function (error) {});
     },
 
     /**
@@ -284,14 +293,14 @@ __webpack_require__.r(__webpack_exports__);
      * Cierra el modal (ventana emergente).
      */
     close: function close() {
-      var _this = this;
+      var _this2 = this;
 
       this.isActive = false; // Timeout for the animation complete before destroying
 
       setTimeout(function () {
-        _this.$destroy();
+        _this2.$destroy();
 
-        _this.$el.remove();
+        _this2.$el.remove();
       }, 150);
     }
   }
@@ -26594,7 +26603,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.creaPeriodo.apply(null, arguments)
+                    return _vm.creaEntrevista.apply(null, arguments)
                   }
                 }
               },

@@ -15,8 +15,13 @@ class CreateEvaluationRubricsTable extends Migration
     {
         Schema::create('evaluation_rubrics', function (Blueprint $table) {
             $table->id();
-            $table->string('considerations');
-            $table->string('aditional_information');
+            $table->foreignId('archive_id')
+                ->constrained('archives')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+                
+            $table->string('considerations')->nullable();
+            $table->string('aditional_information')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

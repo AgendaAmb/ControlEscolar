@@ -22,7 +22,8 @@ class CreateArchivesTable extends Migration
             $table->foreign(['user_id', 'user_type'])
                 ->references(['id', 'type'])
                 ->on('users')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreignId('announcement_id')
                 ->constrained('announcements')
@@ -36,10 +37,17 @@ class CreateArchivesTable extends Migration
         });
 
         Schema::create('archive_required_document', function (Blueprint $table){
-            $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
-            $table->foreignId('required_document_id')->constrained('required_documents')->onDelete('cascade');
-            $table->string('location')->nullable();
+            $table->foreignId('archive_id')
+                ->constrained('archives')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
+            $table->foreignId('required_document_id')
+                ->constrained('required_documents')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->string('location')->nullable();
             $table->primary(['archive_id', 'required_document_id'], 'pk_archive_required_document');
         });
 

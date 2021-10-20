@@ -114,14 +114,11 @@ export default {
 
       var modal = Entrevista.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
 
-      modal.$on('event-created', (event) => {
-        this.events.push(event._e);
+      modal.$on('nuevaEntrevista', (event) => {
+        this.events.push({
+          id: event.id
+        });
         this.$emit('event-created', event._e);
-
-      });
-      
-      modal.$on('new_period', (period) => {
-        Vue.set(this, 'period', period);
       });
     }
   }
