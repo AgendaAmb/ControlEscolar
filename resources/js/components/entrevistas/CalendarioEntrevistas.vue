@@ -88,6 +88,11 @@ export default {
 
         });
     });
+
+
+
+    console.log($('h3.v-cal-header__title').text());
+    
   },
 
   methods: {

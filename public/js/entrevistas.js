@@ -89,6 +89,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
         if (Object.keys(response.data).length > 0) Vue.set(_this, 'period', response.data);
       })["catch"](function (error) {});
     });
+    console.log($('h3.v-cal-header__title').text());
   },
   methods: {
     abreModalPeriodo: function abreModalPeriodo() {

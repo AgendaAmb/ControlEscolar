@@ -10207,7 +10207,7 @@ h3 {
   transition: all 0.3s ease-in-out;
 }
 .v-cal-button.is-rounded {
-  border-radius: 4px;
+  border-radius: 15px !important;
 }
 .v-cal-button.v-cal-button--is-active {
   background-color: #fff;
@@ -10241,12 +10241,12 @@ h3 {
   display: flex;
 }
 .v-cal-header__actions .v-cal-button:first-child {
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
+  border-bottom-left-radius: 15px !important;
+  border-top-left-radius: 15px !important;
 }
 .v-cal-header__actions .v-cal-button:last-child {
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom-right-radius: 15px !important;
+  border-top-right-radius: 15px !important;
 }
 .v-cal-header__actions .v-cal-button:not(:last-child) {
   border-right: none;
@@ -10309,8 +10309,8 @@ h3 {
   background: #fff;
 }
 .v-cal-content.v-cal-content--month .v-cal-weekdays, .v-cal-content.v-cal-content--week .v-cal-weekdays, .v-cal-content.v-cal-content--day .v-cal-weekdays {
-  background-color: #F5F6FA;
-  color: #A3A6B4;
+  background-color: #fecc56 !important;
+  color: white !important;
   text-transform: uppercase;
   font-size: 0.75rem;
   font-weight: bold;
@@ -10508,4 +10508,22 @@ h3 {
 }
 .v-cal-content.v-cal-content--day .v-cal-weekdays .v-cal-weekday-item {
   flex-grow: 1;
+}
+
+.v-cal-header .v-cal-header__title {
+  text-transform: capitalize;
+}
+
+.v-cal-header__actions .v-cal-button {
+  background-color: #115089;
+  color: white;
+}
+.v-cal-header__actions .v-cal-button.v-cal-button--is-active {
+  background-color: white;
+  color: #115089;
+}
+
+.v-cal-day__number {
+  color: #115089;
+  font-size: 15px !important;
 }

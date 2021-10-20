@@ -8,9 +8,13 @@
 
 @font-face
 {
-    font-family:'Myraid Pro Bold';
+    font-family:'Myriad Pro Bold';
     src: url(./MyriadPro-Bold.otf) format('opentype');
     font-display: auto;
+}
+
+.v-cal-day__number{
+    font-family: 'Myriad Pro Bold';
 }
 
 .search-button
