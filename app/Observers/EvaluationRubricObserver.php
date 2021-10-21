@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\EvaluationConcept;
 use App\Models\EvaluationRubric;
 
 class EvaluationRubricObserver
@@ -14,7 +15,11 @@ class EvaluationRubricObserver
      */
     public function created(EvaluationRubric $evaluationRubric)
     {
-        //
+        $evaluationRubric->evaluationConcepts()->attach(EvaluationConcept::type('basic')->pluck('id'));
+        $evaluationRubric->evaluationConcepts()->attach(EvaluationConcept::type('academic')->pluck('id'));
+        $evaluationRubric->evaluationConcepts()->attach(EvaluationConcept::type('research')->pluck('id'));
+        $evaluationRubric->evaluationConcepts()->attach(EvaluationConcept::type('working_experience')->pluck('id'));
+        $evaluationRubric->evaluationConcepts()->attach(EvaluationConcept::type('personal_attributes')->pluck('id'));
     }
 
     /**

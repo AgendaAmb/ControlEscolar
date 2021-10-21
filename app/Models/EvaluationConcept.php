@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 class EvaluationConcept extends Model
 {
     use HasFactory, SoftDeletes;
@@ -18,6 +18,20 @@ class EvaluationConcept extends Model
      * @var string[]
      */
     protected $guarded = [];
+
+    /**
+     * Gets the list of evaluation concepts.
+     * 
+     * @param Builder $builder
+     * @param string $type
+     * 
+     * @return Builder
+     *
+     */
+    public static function scopeType(Builder $builder, string $type): Builder
+    {
+        return $builder->where('type', $type);
+    }
 
     /**
      * Gets the list of evaluation concepts.

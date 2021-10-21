@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.js('resources/js/admin.js', 'public/js').vue();
+mix.js('resources/js/rubrica.js', 'public/js').vue();
 mix.js('resources/js/preregistro.js', 'public/js').vue();
 mix.js('resources/js/postulacion.js', 'public/js').vue();
 mix.js('resources/js/entrevistas.js', 'public/js').vue();

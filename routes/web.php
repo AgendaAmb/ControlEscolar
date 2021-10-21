@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
@@ -92,6 +91,9 @@ Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
     Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
+
+    # Rúbrica de evaluación
+    Route::get('rubrica/{evaluationRubric}', [InterviewController::class, 'rubrica'])->name('rubrica');
 
     # Periodods.
     Route::apiResource('periods', PeriodController::class);

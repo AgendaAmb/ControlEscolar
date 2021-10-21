@@ -2,6 +2,7 @@
 
 use App\Models\AcademicProgram;
 use App\Models\Archive;
+use App\Models\EvaluationRubric;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,9 @@ class InsertTestArchive extends Migration
         DB::table('archive_intention_letter')->insert([
             ['required_document_id' => 17, 'archive_id' => 1, 'user_id' => 12457, 'user_type' => 'workers'],
             ['required_document_id' => 17, 'archive_id' => 2, 'user_id' => 12457, 'user_type' => 'workers']]);
+
+        EvaluationRubric::create(['archive_id' => 1]);
+        EvaluationRubric::create(['archive_id' => 2]);
     }
 
     /**

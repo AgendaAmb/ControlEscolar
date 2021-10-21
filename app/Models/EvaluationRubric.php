@@ -13,6 +13,17 @@ class EvaluationRubric extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
+
+    /**
      * The attributes that aren't mass assignable.
      *
      * @var string[]
@@ -37,5 +48,55 @@ class EvaluationRubric extends Model
     public function evaluationConcepts(): BelongsToMany
     {
         return $this->belongsToMany(EvaluationConcept::class);
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return BelongsToMany
+     */
+    public function basicConcepts(): BelongsToMany
+    {
+        return $this->evaluationConcepts()->type('basic');
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return BelongsToMany
+     */
+    public function academicConcepts(): BelongsToMany
+    {
+        return $this->evaluationConcepts()->type('academic');
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return BelongsToMany
+     */
+    public function researchConcepts(): BelongsToMany
+    {
+        return $this->evaluationConcepts()->type('research');
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return BelongsToMany
+     */
+    public function workingExperienceConcepts(): BelongsToMany
+    {
+        return $this->evaluationConcepts()->type('working_experience');
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return BelongsToMany
+     */
+    public function personalAttributesConcepts(): BelongsToMany
+    {
+        return $this->evaluationConcepts()->type('personal_attributes');
     }
 }
