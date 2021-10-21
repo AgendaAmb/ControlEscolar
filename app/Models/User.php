@@ -117,7 +117,7 @@ class User extends Authenticatable
      */
     public function academicAreas(): BelongsToMany
     {
-        return $this->belongsToMany(AcademicArea::class)->wherePivot('user_type', $this->type);
+        return $this->belongsToMany(AcademicArea::class);
     }
 
     /**
@@ -125,7 +125,15 @@ class User extends Authenticatable
      */
     public function academicEntities(): BelongsToMany
     {
-        return $this->belongsToMany(AcademicEntity::class)->wherePivot('user_type', $this->type);
+        return $this->belongsToMany(AcademicEntity::class);
+    }
+
+    /**
+     * A model may have multiple academic areas.
+     */
+    public function academicComittes(): BelongsToMany
+    {
+        return $this->belongsToMany(AcademicComitte::class);
     }
 
     /**

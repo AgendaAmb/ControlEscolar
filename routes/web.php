@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
@@ -97,4 +98,16 @@ Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
 
     # Api de zoom.
     Route::apiResource('zoom', ZoomController::class);
+});
+
+
+# Rutas de admin.
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    # Vista de admin.
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+
+    # Profesores
+    Route::get('workers', [AdminController::class, 'workers'])->name('workers');
+    Route::post('newWorker', [AdminController::class, 'newWorker'])->name('newWorker');
 });

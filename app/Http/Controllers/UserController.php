@@ -8,22 +8,17 @@ use App\Http\Resources\InterviewAppliantsCollection;
 use App\Models\User;
 use Illuminate\Http\Client\Pool;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * El controlador consume al proovedor de servicios de zoom.
-     *
-     * @var \App\Helpers\MiPortalService
-     */
-    private $miPortalService;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->miPortalService = new MiPortalService;
+        parent::__construct();
     }
     
     /**

@@ -28,18 +28,11 @@ use Spatie\QueryBuilder\QueryBuilder;
 class ArchiveController extends Controller
 {
     /**
-     * El controlador consume al proovedor de servicios de zoom.
-     *
-     * @var \App\Helpers\MiPortalService
-     */
-    private $miPortalService;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->miPortalService = new MiPortalService;
+        parent::__construct();
     }
 
     /**

@@ -211,16 +211,16 @@ body
 }
 
 
-#Registro{
+#Registro,#NuevoUsuario{
     color: white; 
 }
 
-#Registro .modal-title{
+#Registro .modal-title ,#NuevoUsuario .modal-title{
     color: #fecc56;
-    font-family:'Myraid pro bold';
+    font-family:'Myriad pro bold';
 }
 
-#Registro .modal-header .close{
+#Registro .modal-header .close ,#NuevoUsuario .modal-header .close{
   padding: 0%;
 }
 

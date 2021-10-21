@@ -140,8 +140,7 @@ class CreatePermissionTables extends Migration
 
         User::find(262698)->assignRole('aspirante_local');
         User::find(260651)->assignRole('aspirante_extranjero');
-        User::find(11007)->assignRole('aspirante_local');
-        User::find(12457)->assignRole('aspirante_local');
+        User::find(12457)->assignRole('profesor_nb');
     }
 
     /**
