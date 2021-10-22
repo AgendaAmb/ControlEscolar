@@ -70,7 +70,12 @@ const app = new Vue({
          * @param {*} period 
          */
         actualizaPeriodo(period){
-            Vue.set(this, 'period', period);
+            const getKeyLength = (x) => Object.keys(period).length;
+            const keyLength = getKeyLength(item);
+            
+            if (!!keyLength) 
+                Vue.set(this, 'period', period);
+                
             Vue.set(this, 'interviews', period.interviews);
         },
 
