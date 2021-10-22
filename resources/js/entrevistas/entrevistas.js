@@ -52,6 +52,7 @@ const app = new Vue({
         loggedUser: user,
         period: null,
         appliants: [],
+        interviews: [],
         date: null,
     },
 
@@ -63,8 +64,22 @@ const app = new Vue({
     },
 
     methods:{
+        
+        /**
+         * Actualiza el periodo de entrevistas.
+         * @param {*} period 
+         */
         actualizaPeriodo(period){
             Vue.set(this, 'period', period);
+            Vue.set(this, 'interviews', period.interviews);
+        },
+
+        /**
+         * Agrega una nueva entrevista.
+         * @param {*} period 
+         */
+        agregaEntrevista(entrevista){
+            this.interviews.push(entrevista);
         }
     },
 

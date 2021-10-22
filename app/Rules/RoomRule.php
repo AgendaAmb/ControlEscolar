@@ -2,6 +2,7 @@
 
 namespace App\Rules;
 
+use App\Models\Interview;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Validation\Rule as ValidationRule;
 
@@ -41,11 +42,10 @@ class RoomRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ValidationRule::unique('interviews', 'room_id')->where(function($query){
-            return $query->where('start_time', '>=', $this->start_time)
-                ->where('end_time', '<', $this->start_time)
-                ->where('date', $this->date);
-        });
+        return Interview::whereHas('room', fn($q) => $q->where('id', $value))
+            ->where('date', $this->date)
+            ->where(fn($q) => $q->where('start_time', '>=', $this->start_time)->orWhere('end_time', '<', $this->start_time))
+            ->count() === 0;
     }
 
     /**
@@ -55,6 +55,6 @@ class RoomRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'La sala no se encuentra disponible';
     }
 }

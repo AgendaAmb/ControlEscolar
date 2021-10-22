@@ -26,32 +26,29 @@ class UserController extends Controller
      */
     public function appliants()
     {
+        # Busca a aquellos postulantes que no tengan programada una entrevista.
         $appliants = User::with(['latestArchive.intentionLetters:archive_intention_letter.user_id,archive_intention_letter.user_type'])
             ->hasArchive()
             ->appliant()
+            ->noInterviews()
             ->get();
 
-        $professors = User::role('profesor_nb')->pluck('id')->toArray();
-        $responses = [];
+        # Busca a los profesores en el sistema.
+        $professors = User::role('profesor_nb')->pluck('id');
+        
+        # Fusiona a los usuarios.
+        $users = $professors->merge($appliants->pluck('id'))->toArray();
 
-        # Realiza 2 peticiones.
-        # 1.- Obtiene a los postulantes.
-        # 2.- Obtiene a los profesores.
-        $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
-            'module' => env('MIPORTAL_MODULE_ID'),
+        # Consulta a los usuarios.
+        $response = $this->miPortalService->miPortalGet('api/usuarios', [
+            'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
             'fields[users]' => 'id,name,middlename,surname,type',
-            'filter[id]' => $appliants->pluck('id')->toArray()
-        ]);
-
-        $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
-            'module' => env('MIPORTAL_MODULE_ID'),
-            'fields[users]' => 'id,name,middlename,surname,type',
-            'filter[id]' => $professors
+            'filter[id]' => $users
         ]);
 
         # Recolecta el resultado.
-        $miPortal_appliants = $responses[0]->collect();
-        $miPortal_workers = $responses[1]->collect();
+        $miPortal_appliants = $response->collect()->where('user_type', 'students');
+        $miPortal_workers = $response->collect()->where('user_type', 'workers');
 
         return new InterviewAppliantsCollection($appliants, $miPortal_workers, $miPortal_appliants);
     }

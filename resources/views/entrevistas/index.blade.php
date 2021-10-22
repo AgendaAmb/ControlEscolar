@@ -12,7 +12,8 @@ const user = @json($user);
 @section('main')
 <calendario-entrevistas v-bind:period="period"
     v-bind:appliants="appliants"
-    v-bind:date.sync="date">
+    v-bind:date.sync="date"
+    v-bind:interviews="interviews">
 </calendario-entrevistas>
 
 <nuevo-periodo v-if="period !== null" 
@@ -23,7 +24,8 @@ const user = @json($user);
     v-bind:appliants="appliants"
     v-bind:period_id="period.id"
     v-bind:date="date"
-    v-bind:rooms="period.rooms">
+    v-bind:rooms="period.rooms"
+    v-on:nuevaentrevista="agregaEntrevista">
 </nueva-entrevista>
 
 <detalle-entrevista v-if="period !== null" ></detalle-entrevista>

@@ -144,12 +144,14 @@ export default {
         var data = response.data;
         this.id = data.id;
 
-        this.$emit('nuevaEntrevista', {
+        this.$emit('nuevaentrevista', {
           id: this.id,
           date: this.date,
           startTime: this.start_time,
           endTime: this.end_time,
         });
+
+        $('#NuevaEntrevista').modal('hide');
       }).catch(error => {
 
       });

@@ -98,6 +98,16 @@ class User extends Authenticatable
     }
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return Builder
+     */
+    public static function scopeNoInterviews(Builder $query): Builder
+    {
+        return $query->doesntHave('interviews');
+    }
+
+    /**
      * A model may have multiple roles.
      */
     public function roles(): BelongsToMany
@@ -150,6 +160,16 @@ class User extends Authenticatable
     public function archives(): HasMany
     {
         return $this->hasMany(Archive::class, 'user_id', 'id');
+    }
+
+    /**
+     * Obtiene los usuarios de la entrevista.
+     *
+     * @return BelongsToMany
+     */
+    public function interviews(): BelongsToMany
+    {
+        return $this->belongsToMany(Interview::class);
     }
 
     /**

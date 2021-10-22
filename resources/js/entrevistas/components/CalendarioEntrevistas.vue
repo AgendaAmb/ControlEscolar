@@ -2,7 +2,7 @@
   <div class="row my-5">
     <div class="col-lg-9">
       <vue-scheduler v-if="IsActive === true"
-       :events="events" 
+       :events="interviews" 
        :min-date="MinDate" 
        :max-date="MaxDate" 
        :disable-dialog="true"
@@ -35,12 +35,9 @@ export default {
 
     // Postulantes de la entrevista.
     appliants: Array,
-  },
 
-  data() {
-    return {
-      events: [],
-    };
+    // Entrevistas agendadas.
+    interviews: Array,
   },
 
   computed: {
@@ -80,21 +77,6 @@ export default {
 
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       $('#NuevaEntrevista').modal('show');
-      /*
-      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-        return false;
-
-      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-        return false;
-
-      var modal = Entrevista.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
-
-      modal.$on('nuevaEntrevista', (event) => {
-        this.events.push({
-          id: event.id
-        });
-        this.$emit('event-created', event._e);
-      });*/
     }
   }
 };

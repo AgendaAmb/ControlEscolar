@@ -45,12 +45,9 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
     // Periodo de entrevistas.
     period: Object,
     // Postulantes de la entrevista.
-    appliants: Array
-  },
-  data: function data() {
-    return {
-      events: []
-    };
+    appliants: Array,
+    // Entrevistas agendadas.
+    interviews: Array
   },
   computed: {
     IsActive: {
@@ -77,18 +74,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       $('#NuevaEntrevista').modal('show');
-      /*
-      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-        return false;
-       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-        return false;
-       var modal = Entrevista.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
-       modal.$on('nuevaEntrevista', (event) => {
-        this.events.push({
-          id: event.id
-        });
-        this.$emit('event-created', event._e);
-      });*/
     }
   }
 });
@@ -351,12 +336,14 @@ __webpack_require__.r(__webpack_exports__);
         var data = response.data;
         _this.id = data.id;
 
-        _this.$emit('nuevaEntrevista', {
+        _this.$emit('nuevaentrevista', {
           id: _this.id,
           date: _this.date,
           startTime: _this.start_time,
           endTime: _this.end_time
         });
+
+        $('#NuevaEntrevista').modal('hide');
       })["catch"](function (error) {});
     }
   }
@@ -25848,7 +25835,7 @@ var render = function() {
         _vm.IsActive === true
           ? _c("vue-scheduler", {
               attrs: {
-                events: _vm.events,
+                events: _vm.interviews,
                 "min-date": _vm.MinDate,
                 "max-date": _vm.MaxDate,
                 "disable-dialog": true
@@ -38887,6 +38874,7 @@ var app = new Vue({
     loggedUser: user,
     period: null,
     appliants: [],
+    interviews: [],
     date: null
   },
   components: {
@@ -38896,8 +38884,21 @@ var app = new Vue({
     DetalleEntrevista: _components_DetalleEntrevista_vue__WEBPACK_IMPORTED_MODULE_4__.default
   },
   methods: {
+    /**
+     * Actualiza el periodo de entrevistas.
+     * @param {*} period 
+     */
     actualizaPeriodo: function actualizaPeriodo(period) {
       Vue.set(this, 'period', period);
+      Vue.set(this, 'interviews', period.interviews);
+    },
+
+    /**
+     * Agrega una nueva entrevista.
+     * @param {*} period 
+     */
+    agregaEntrevista: function agregaEntrevista(entrevista) {
+      this.interviews.push(entrevista);
     }
   },
 
