@@ -16,7 +16,7 @@ const user = @json($user);
     v-bind:interviews="interviews">
 </calendario-entrevistas>
 
-<nuevo-periodo v-if="period !== null" 
+<nuevo-periodo v-if="period === null" 
     v-on:nuevoperiodo="actualizaPeriodo">
 </nuevo-periodo>
 
