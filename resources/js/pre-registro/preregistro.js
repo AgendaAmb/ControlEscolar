@@ -3,12 +3,15 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-    
-import Rubrica from './components/rubrica/Rubrica';
-import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 window.Vue = require('vue').default;
-Vue.use(GridPlugin);
+
+import AcademicProgram from "./components/AcademicProgram.vue";
+import CrearCuenta from "./components/CrearCuenta.vue";
+import DatosMiPortal from "./components/DatosMiPortal.vue";
+import DatosPersonales from "./components/DatosPersonales.vue";
+import DatosUaslp from "./components/DatosUaslp.vue";
+import PreRegistro from "./components/PreRegistro.vue";
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,12 +23,17 @@ Vue.use(GridPlugin);
 
 const app = new Vue({
     el: '#app',
-    data:{
-        loggedUser: user,
-        rubric: rubric,
-    },
 
     components: {
-        Rubrica
-    }
+        AcademicProgram, 
+        CrearCuenta, 
+        DatosMiPortal, 
+        DatosPersonales, 
+        DatosUaslp,
+        PreRegistro
+    },
+    data: {
+        academic_programs: academicPrograms,
+        selected_academic_program: null,
+    },
 });

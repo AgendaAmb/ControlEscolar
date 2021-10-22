@@ -5,8 +5,8 @@
  */
 
 window.Vue = require('vue').default;
-import UsuariosCe from './components/admin/UsuariosCe';
-import NuevoUsuario from './components/admin/NuevoUsuario';
+import UsuariosCe from './components/UsuariosCe';
+import NuevoUsuario from './components/NuevoUsuario';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 Vue.use(GridPlugin);

@@ -8,7 +8,10 @@ window.Vue = require('vue').default;
 
 // Componentes para las entrevistas.
 import VueScheduler from "v-calendar-scheduler";
-import CalendarioEntrevistas from './components/entrevistas/CalendarioEntrevistas.vue';
+import CalendarioEntrevistas from './components/CalendarioEntrevistas.vue';
+import NuevoPeriodo from './components/NuevoPeriodo.vue';
+import NuevaEntrevista from './components/NuevaEntrevista.vue';
+import DetalleEntrevista from './components/DetalleEntrevista.vue';
 
 // Import styles
 import "v-calendar-scheduler/lib/main.css";
@@ -47,9 +50,36 @@ const app = new Vue({
     el: '#app',
     data:{
         loggedUser: user,
+        period: null,
+        appliants: [],
+        date: null,
     },
 
     components: {
         CalendarioEntrevistas,
+        NuevoPeriodo,
+        NuevaEntrevista,
+        DetalleEntrevista
+    },
+
+    methods:{
+        actualizaPeriodo(period){
+            Vue.set(this, 'period', period);
+        }
+    },
+
+    /**
+     * Jala los datos de los servidores de AA.
+     */
+    mounted() {
+        this.$nextTick(function () {
+            axios.get("/controlescolar/users/appliants")
+            .then(response => Vue.set(this, "appliants", response.data))
+            .catch(error => {});
+
+            axios.get("/controlescolar/entrevistas/periods")
+            .then(response => this.actualizaPeriodo(response.data))
+            .catch(error => {});
+        });
     },
 });

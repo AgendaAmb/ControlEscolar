@@ -49047,9 +49047,9 @@ var GridPlugin = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -49085,9 +49085,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/rubrica/Rubrica.vue":
+/***/ "./resources/js/rubrica/components/Rubrica.vue":
 /*!*****************************************************!*\
-  !*** ./resources/js/components/rubrica/Rubrica.vue ***!
+  !*** ./resources/js/rubrica/components/Rubrica.vue ***!
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -49095,8 +49095,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rubrica.vue?vue&type=template&id=43148f04& */ "./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04&");
-/* harmony import */ var _Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Rubrica.vue?vue&type=script&lang=js& */ "./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Rubrica.vue?vue&type=template&id=acaf2458& */ "./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458&");
+/* harmony import */ var _Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Rubrica.vue?vue&type=script&lang=js& */ "./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -49107,8 +49107,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -49118,14 +49118,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/rubrica/Rubrica.vue"
+component.options.__file = "resources/js/rubrica/components/Rubrica.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js&":
 /*!******************************************************************************!*\
-  !*** ./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -49133,30 +49133,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Rubrica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Rubrica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04&":
+/***/ "./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458&":
 /*!************************************************************************************!*\
-  !*** ./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04& ***!
+  !*** ./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458& ***!
   \************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_43148f04___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Rubrica.vue?vue&type=template&id=43148f04& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Rubrica_vue_vue_type_template_id_acaf2458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Rubrica.vue?vue&type=template&id=acaf2458& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/rubrica/Rubrica.vue?vue&type=template&id=43148f04& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/Rubrica.vue?vue&type=template&id=acaf2458& ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -61481,11 +61481,11 @@ Vue.compile = compileToFunctions;
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*********************************!*\
-  !*** ./resources/js/rubrica.js ***!
-  \*********************************/
+/*!*****************************************!*\
+  !*** ./resources/js/rubrica/rubrica.js ***!
+  \*****************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_rubrica_Rubrica__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/rubrica/Rubrica */ "./resources/js/components/rubrica/Rubrica.vue");
+/* harmony import */ var _components_Rubrica__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/Rubrica */ "./resources/js/rubrica/components/Rubrica.vue");
 /* harmony import */ var _syncfusion_ej2_vue_grids__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @syncfusion/ej2-vue-grids */ "./node_modules/@syncfusion/ej2-vue-grids/src/grid/grid.component.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -61511,7 +61511,7 @@ var app = new Vue({
     rubric: rubric
   },
   components: {
-    Rubrica: _components_rubrica_Rubrica__WEBPACK_IMPORTED_MODULE_0__.default
+    Rubrica: _components_Rubrica__WEBPACK_IMPORTED_MODULE_0__.default
   }
 });
 })();

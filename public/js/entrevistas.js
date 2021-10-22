@@ -1,9 +1,9 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -12,8 +12,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Periodo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Periodo */ "./resources/js/components/entrevistas/Periodo/index.js");
-/* harmony import */ var _Entrevista__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Entrevista */ "./resources/js/components/entrevistas/Entrevista/index.js");
 //
 //
 //
@@ -37,21 +35,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
-
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "calendario-entrevistas",
-  components: {
-    Periodo: _Periodo__WEBPACK_IMPORTED_MODULE_0__.default,
-    Entrevista: _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default
+  props: {
+    // Periodo de entrevistas.
+    period: Object,
+    // Postulantes de la entrevista.
+    appliants: Array
   },
   data: function data() {
     return {
-      appliants: [],
-      period: null,
       events: []
     };
   },
@@ -74,60 +71,34 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       }
     }
   },
-
-  /**
-   * Jala los datos de los servidores de AA.
-   */
-  mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios.get("/controlescolar/users/appliants").then(function (response) {
-        Vue.set(_this, "appliants", response.data);
-      })["catch"](function (error) {});
-      axios.get("/controlescolar/entrevistas/periods").then(function (response) {
-        if (Object.keys(response.data).length > 0) Vue.set(_this, 'period', response.data);
-      })["catch"](function (error) {});
-    });
-    console.log($('h3.v-cal-header__title').text());
-  },
   methods: {
-    abreModalPeriodo: function abreModalPeriodo() {
-      var _this2 = this;
-
-      var modal = _Periodo__WEBPACK_IMPORTED_MODULE_0__.default.show(this.PeriodDialog, []);
-      modal.$on('event-created', function (event) {
-        _this2.events.push(event._e);
-
-        _this2.$emit('event-created', event._e);
-      });
-      modal.$on('new_period', function (period) {
-        Vue.set(_this2, 'period', period);
-      });
-    },
     abreModalEntrevistas: function abreModalEntrevistas(date) {
-      var _this3 = this;
-
       if (moment(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
-      var modal = _Entrevista__WEBPACK_IMPORTED_MODULE_1__.default.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
-      modal.$on('nuevaEntrevista', function (event) {
-        _this3.events.push({
+      this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
+      $('#NuevaEntrevista').modal('show');
+      /*
+      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+        return false;
+       if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+        return false;
+       var modal = Entrevista.show(this.InterviewDialog, this.period.id, this.appliants, this.period.rooms, date);
+       modal.$on('nuevaEntrevista', (event) => {
+        this.events.push({
           id: event.id
         });
-
-        _this3.$emit('event-created', event._e);
-      });
+        this.$emit('event-created', event._e);
+      });*/
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -135,7 +106,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _EventDialogInput__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EventDialogInput */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue");
 //
 //
 //
@@ -211,19 +181,130 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "modal-entrevista",
-  components: {
-    EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_0__.default
+  name: "detalle-entrevista",
+  data: function data() {
+    return {
+      event: {},
+      start_date: null,
+      end_date: null,
+      num_salas: 1
+    };
   },
+  methods: {
+    creaPeriodo: function creaPeriodo() {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "nueva-entrevista",
   props: {
+    // Id del periodo.
     period_id: Number,
+    // Fecha de la entrevista.
     date: String,
-    inputClass: String,
-    overrideInputClass: Boolean,
-    fields: Array,
+    // Postulantes.
     appliants: Array,
+    // Salas disponibles.
     rooms: Array
   },
   data: function data() {
@@ -239,14 +320,10 @@ __webpack_require__.r(__webpack_exports__);
       room: null
     };
   },
-  beforeMount: function beforeMount() {
-    //  Insert the Dialog component in body tag
-    document.body.appendChild(this.$el);
-  },
-  mounted: function mounted() {
-    this.isActive = true;
-  },
   computed: {
+    /**
+     * Nombre del profesor que otorgó la carta de intención.
+     */
     IntentionLetterProfessor: {
       get: function get() {
         if (this.appliant === null) return null;
@@ -257,7 +334,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     /**
-     * Genera el periodo de entrevistas.
+     * Genera la entrevista.
      */
     creaEntrevista: function creaEntrevista() {
       var _this = this;
@@ -281,38 +358,16 @@ __webpack_require__.r(__webpack_exports__);
           endTime: _this.end_time
         });
       })["catch"](function (error) {});
-    },
-
-    /**
-     * Cancela la generación del periodo.
-     */
-    cancel: function cancel() {
-      this.close();
-    },
-
-    /**
-     * Cierra el modal (ventana emergente).
-     */
-    close: function close() {
-      var _this2 = this;
-
-      this.isActive = false; // Timeout for the animation complete before destroying
-
-      setTimeout(function () {
-        _this2.$destroy();
-
-        _this2.$el.remove();
-      }, 150);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -320,8 +375,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -336,265 +389,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "EventDialogInput",
-  props: {
-    value: [Date, String, Number, Boolean, Array, Object],
-    field: {
-      type: Object,
-      required: true
-    }
-  },
-  beforeMount: function beforeMount() {
-    //  Date workaround
-    if (this.field.type === 'date' && this.value) {
-      this.Value = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.value).format().slice(0, 10);
-    } //  Time workaround
-
-
-    if (this.field.type === 'time' && this.value) {
-      this.Value = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.value).format().slice(11, 16);
-    }
-  },
-  computed: {
-    Value: {
-      get: function get() {
-        return this.value;
-      },
-      set: function set(newValue) {
-        this.$emit('update:value', newValue);
-      }
-    },
-    isCheckOrRadio: function isCheckOrRadio() {
-      return this.field.type === 'radio' || this.field.type === 'checkbox';
-    },
-    fieldLabel: function fieldLabel() {
-      return this.field.label ? this.field.label : this.field.name;
-    },
-    fieldClass: function fieldClass() {
-      if (this.overrideInputClass) return this.inputClass;
-      var classes = ['v-cal-input', this.inputClass];
-
-      if (this.isCheckOrRadio) {
-        if (!this.field.choices) {
-          classes.push('is-inline');
-          classes.push('is-' + this.field.type);
-        } else {
-          classes.push('v-cal-input-group');
-        }
-      }
-
-      return classes.join(' ');
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "EventDialogInput",
-  props: {
-    value: [Date, String, Number, Boolean, Array, Object],
-    field: {
-      type: Object,
-      required: true
-    }
-  },
-  beforeMount: function beforeMount() {
-    //  Date workaround
-    if (this.field.type === 'date' && this.value) {
-      this.Value = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.value).format().slice(0, 10);
-    } //  Time workaround
-
-
-    if (this.field.type === 'time' && this.value) {
-      this.Value = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.value).format().slice(11, 16);
-    }
-  },
-  computed: {
-    Value: {
-      get: function get() {
-        return this.value;
-      },
-      set: function set(newValue) {
-        this.$emit('update:value', newValue);
-      }
-    },
-    isCheckOrRadio: function isCheckOrRadio() {
-      return this.field.type === 'radio' || this.field.type === 'checkbox';
-    },
-    fieldLabel: function fieldLabel() {
-      return this.field.label ? this.field.label : this.field.name;
-    },
-    fieldClass: function fieldClass() {
-      if (this.overrideInputClass) return this.inputClass;
-      var classes = ['v-cal-input', this.inputClass];
-
-      if (this.isCheckOrRadio) {
-        if (!this.field.choices) {
-          classes.push('is-inline');
-          classes.push('is-' + this.field.type);
-        } else {
-          classes.push('v-cal-input-group');
-        }
-      }
-
-      return classes.join(' ');
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Event__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Event */ "./resources/js/components/entrevistas/Event.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDialogInput */ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "periodo",
-  components: {
-    EventDialogInput: _EventDialogInput__WEBPACK_IMPORTED_MODULE_2__.default
-  },
-  props: {
-    title: String,
-    inputClass: String,
-    overrideInputClass: Boolean,
-    fields: Array,
-    createButtonLabel: String
-  },
+  name: "nuevo-periodo",
   data: function data() {
     return {
-      isActive: false,
       event: {},
       start_date: null,
       end_date: null,
       num_salas: 1
     };
   },
-  beforeMount: function beforeMount() {
-    var plainEvent = {};
-    this.fields.map(function (field) {
-      if (!field.fields) plainEvent[field.name] = field.value;else {
-        var fields = field.fields;
-        fields.map(function (field) {
-          if (field.type === "time") {
-            plainEvent[field.name] = field.value ? moment__WEBPACK_IMPORTED_MODULE_1___default()(field.value, "HH:mm") : null;
-          } else plainEvent[field.name] = field.value;
-        });
-      }
-    });
-    this.event = new _Event__WEBPACK_IMPORTED_MODULE_0__.default(plainEvent); //  Insert the Dialog component in body tag
-
-    document.body.appendChild(this.$el);
-  },
-  mounted: function mounted() {
-    this.isActive = true;
-  },
   methods: {
-    /**
-     * Genera el periodo de entrevistas.
-     */
     creaPeriodo: function creaPeriodo() {
       var _this = this;
 
@@ -605,272 +453,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         var period = response.data;
 
-        _this.$emit('new_period', period);
+        _this.$emit('nuevoperiodo', period);
 
-        _this.close();
+        $('#NuevoPeriodo').modal('hide');
       })["catch"](function (error) {});
-      /*
-      this.$emit("event-created", this.event);
-      this.close();*/
-    },
-
-    /**
-     * Cancela la generación del periodo.
-     */
-    cancel: function cancel() {
-      this.close();
-    },
-
-    /**
-     * Cierra el modal (ventana emergente).
-     */
-    close: function close() {
-      var _this2 = this;
-
-      this.isActive = false; // Timeout for the animation complete before destroying
-
-      setTimeout(function () {
-        _this2.$destroy();
-
-        _this2.$el.remove();
-      }, 150);
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Entrevista/index.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/index.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _Entrevista_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Entrevista.vue */ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue");
-
-
-
-function open(propsData) {
-  var EventDialogComponent = vue__WEBPACK_IMPORTED_MODULE_1__.default.extend(_Entrevista_vue__WEBPACK_IMPORTED_MODULE_0__.default);
-  return new EventDialogComponent({
-    el: document.createElement('div'),
-    propsData: propsData
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  show: function show(params, period_id, appliants, rooms, date) {
-    var defaultParam = {
-      inputClass: null,
-      overrideInputClass: false,
-      //  -------------------------
-      startTime: null,
-      endTime: null,
-      enableTimeInputs: true
-    };
-    var propsData = Object.assign(defaultParam, params);
-    propsData.period_id = period_id;
-    propsData.fields = [];
-    propsData.date = date.toISOString().split('T')[0];
-    propsData.appliants = appliants;
-    propsData.rooms = rooms;
-    return open(propsData);
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Event.js":
-/*!******************************************************!*\
-  !*** ./resources/js/components/entrevistas/Event.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Event)
-/* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-
-function Event(plainEvent) {
-  var _this = this;
-
-  var _e;
-
-  if (plainEvent) {
-    //  Validate date
-    if (!moment__WEBPACK_IMPORTED_MODULE_0___default()(plainEvent.date).isValid()) console.error('Invalid Event date: ' + plainEvent.date); //  Validate startTime if present
-
-    var startIsValid = moment__WEBPACK_IMPORTED_MODULE_0___default()(plainEvent.startTime, "HH:mm").isValid();
-    if (plainEvent.startTime && !startIsValid) console.error('Invalid Event start time: ' + plainEvent.startTime); //  Validate endTime if present
-
-    var endIsValid = moment__WEBPACK_IMPORTED_MODULE_0___default()(plainEvent.endTime, "HH:mm").isValid();
-    if (plainEvent.endTime && !endIsValid) console.error('Invalid Event end time: ' + plainEvent.endTime); //  Validate endTime if startTime is present
-
-    if (startIsValid && !plainEvent.endTime) console.error('Events with a start time require an end time as well.');
-    _e = plainEvent; //  Get additional event attributes
-
-    var keys = Object.keys(plainEvent); //  Assign additional variables to plain object _e
-
-    keys.map(function (k) {
-      if (!['date', 'startTime', 'endTime'].includes(k)) {
-        Object.defineProperty(_this, k, {
-          get: function get() {
-            return _e[k];
-          },
-          set: function set(v) {
-            return _e[k] = v;
-          }
-        });
-      }
-    });
-  } else _e = {
-    date: new Date(),
-    startTime: null,
-    endTime: null
-  };
-
-  var _date = moment__WEBPACK_IMPORTED_MODULE_0___default()(_e.date);
-
-  var _startTime = _e.startTime ? moment__WEBPACK_IMPORTED_MODULE_0___default()(_e.startTime, "HH:mm") : null;
-
-  var _endTime = _e.endTime ? moment__WEBPACK_IMPORTED_MODULE_0___default()(_e.endTime, "HH:mm") : null;
-
-  var _overlaps = 0;
-  Object.defineProperty(this, '_e', {
-    get: function get() {
-      return Object.assign(JSON.parse(JSON.stringify(_e)), {
-        date: moment__WEBPACK_IMPORTED_MODULE_0___default()(_e.date).toDate(),
-        //   Make sure date is correctly parsed and formatted
-        startTime: _e.startTime,
-        endTime: _e.endTime
-      });
-    }
-  });
-  Object.defineProperty(this, 'date', {
-    enumerable: true,
-    get: function get() {
-      return _date;
-    },
-    set: function set(nDate) {
-      _date = moment__WEBPACK_IMPORTED_MODULE_0___default()(nDate);
-      _e.date = moment__WEBPACK_IMPORTED_MODULE_0___default()(nDate).toDate();
-    }
-  });
-  Object.defineProperty(this, 'startTime', {
-    enumerable: true,
-    get: function get() {
-      return _startTime;
-    },
-    set: function set(nStartTime) {
-      _startTime = nStartTime;
-      _e.startTime = nStartTime.format('HH:mm');
-    }
-  });
-  Object.defineProperty(this, 'endTime', {
-    enumerable: true,
-    get: function get() {
-      return _endTime;
-    },
-    set: function set(nEndTime) {
-      _endTime = nEndTime;
-      _e.endTime = nEndTime.format('HH:mm');
-    }
-  });
-  Object.defineProperty(this, 'overlaps', {
-    get: function get() {
-      return _overlaps;
-    },
-    set: function set(nOverlaps) {
-      _overlaps = nOverlaps;
-    }
-  });
-  Object.defineProperty(this, 'bindGetter', {
-    get: function get() {
-      return function (attr, value) {
-        var _this2 = this;
-
-        return Object.defineProperty(this, attr, {
-          get: function get() {
-            if (typeof value === 'function') {
-              return value(_this2);
-            } else {
-              return _e[value];
-            }
-          }
-        });
-      };
-    }
-  });
-}
-;
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/index.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _Periodo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Periodo.vue */ "./resources/js/components/entrevistas/Periodo/Periodo.vue");
-
-
-
-function open(propsData) {
-  var EventDialogComponent = vue__WEBPACK_IMPORTED_MODULE_1__.default.extend(_Periodo_vue__WEBPACK_IMPORTED_MODULE_0__.default);
-  return new EventDialogComponent({
-    el: document.createElement('div'),
-    propsData: propsData
-  });
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  show: function show(params, extraFields) {
-    var defaultParam = {
-      title: 'Create event',
-      inputClass: null,
-      overrideInputClass: false,
-      createButtonLabel: 'Create',
-      //  -------------------------
-      startTime: null,
-      endTime: null,
-      enableTimeInputs: true
-    };
-    var propsData = Object.assign(defaultParam, params);
-    var defaultFields = [];
-    if (propsData.enableTimeInputs) defaultFields.splice(1, 0, {
-      label: 'Times',
-      fields: [{
-        name: 'startTime',
-        type: 'time',
-        label: 'Start Time',
-        required: true,
-        value: propsData.startTime
-      }, {
-        name: 'endTime',
-        type: 'time',
-        label: 'End Time',
-        required: true,
-        value: propsData.endTime
-      }]
-    });
-    propsData.fields = extraFields ? defaultFields.concat(extraFields) : defaultFields;
-    return open(propsData);
   }
 });
 
@@ -924,9 +511,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.zoom-out-enter-active[data-v-3d5c24
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&":
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -941,17 +528,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv.col-12.mx-2 > button.my-3.v-cal-button[data-v-256047cc]{\n  margin-left: 10px;\n  border-radius: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ndiv.col-12.mx-2 > button.my-3.v-cal-button[data-v-1bdfed60]{\n  margin-left: 10px;\n  border-radius: 5px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -959,94 +546,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-input[data-v-603720e9] {\n    transition: all 0.3s ease-in-out;\n    display: block;\n    font-family: inherit;\n    width: 100%;\n    border: 1px solid #E8E9EC;\n    border-radius: 4px;\n    padding: 10px 12px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.detalle-entrevista[data-v-659b4636] {\n  max-width: 750px;\n}\n.modal-header.modal-header-blue[data-v-659b4636], .modal-footer button.btn-primary[data-v-659b4636], .areas-academicas[data-v-659b4636] {\n  background-color: #115089;\n  font-family: 'Myriad Pro Bold';\n  color: white;\n}\n.modal-body label[data-v-659b4636], .title-prof-carta-intencion[data-v-659b4636], .sala[data-v-659b4636] {\n  color: #115089;\n}\n.modal-body .fecha[data-v-659b4636], .prof-carta-intencion[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #115089;\n}\n.modal-body .postulante[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n}\n.modal-footer button.btn-secondary[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.zoom-out-enter-active[data-v-603720e9],\n.zoom-out-leave-active[data-v-603720e9] {\n  transition: opacity 150ms ease-out;\n}\n.zoom-out-enter-active .animation-content[data-v-603720e9],\n.zoom-out-enter-active .animation-content[data-v-603720e9],\n.zoom-out-leave-active .animation-content[data-v-603720e9],\n.zoom-out-leave-active .animation-content[data-v-603720e9] {\n  transition: transform 150ms ease-out;\n}\n.zoom-out-enter[data-v-603720e9],\n.zoom-out-leave-active[data-v-603720e9] {\n  opacity: 0;\n}\n.zoom-out-enter .animation-content[data-v-603720e9],\n.zoom-out-enter .animation-content[data-v-603720e9],\n.zoom-out-leave-active .animation-content[data-v-603720e9],\n.zoom-out-leave-active .animation-content[data-v-603720e9] {\n  transform: scale(1.05);\n}\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv.v-cal-input > input[type=number][data-v-0ba92262]{\r\n    transition: all 0.3s ease-in-out;\r\n    display: block;\r\n    font-family: inherit;\r\n    width: 100%;\r\n    border: 1px solid #E8E9EC;\r\n    border-radius: 4px;\r\n    padding: 10px 12px;\n}\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv.v-cal-input > input[type=number][data-v-074850df]{\r\n    transition: all 0.3s ease-in-out;\r\n    display: block;\r\n    font-family: inherit;\r\n    width: 100%;\r\n    border: 1px solid #E8E9EC;\r\n    border-radius: 4px;\r\n    padding: 10px 12px;\n}\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&":
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& ***!
   \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -1055,23 +570,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-input[data-v-56454da7] {\n    transition: all 0.3s ease-in-out;\n    display: block;\n    font-family: inherit;\n    width: 100%;\n    border: 1px solid #E8E9EC;\n    border-radius: 4px;\n    padding: 10px 12px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-34cc71e8], .modal-footer button.btn-primary[data-v-34cc71e8] {\n  background-color: #115089;\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-34cc71e8] {\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-34cc71e8] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1079,13 +594,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 // Imports
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.zoom-out-enter-active[data-v-56454da7],\n.zoom-out-leave-active[data-v-56454da7] {\n  transition: opacity 150ms ease-out;\n}\n.zoom-out-enter-active .animation-content[data-v-56454da7],\n.zoom-out-enter-active .animation-content[data-v-56454da7],\n.zoom-out-leave-active .animation-content[data-v-56454da7],\n.zoom-out-leave-active .animation-content[data-v-56454da7] {\n  transition: transform 150ms ease-out;\n}\n.zoom-out-enter[data-v-56454da7],\n.zoom-out-leave-active[data-v-56454da7] {\n  opacity: 0;\n}\n.zoom-out-enter .animation-content[data-v-56454da7],\n.zoom-out-enter .animation-content[data-v-56454da7],\n.zoom-out-leave-active .animation-content[data-v-56454da7],\n.zoom-out-leave-active .animation-content[data-v-56454da7] {\n  transform: scale(1.05);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-23a19f57], .modal-footer button.btn-primary[data-v-23a19f57] {\n  background-color: #115089;\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-23a19f57] {\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-23a19f57] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22662,9 +22177,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&":
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& ***!
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -22675,7 +22190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_256047cc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_1bdfed60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&");
 
             
 
@@ -22684,18 +22199,18 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_256047cc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_1bdfed60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_256047cc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_1bdfed60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22703,9 +22218,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_0_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_style_index_0_id_659b4636_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&");
 
             
 
@@ -22714,107 +22229,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_0_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_style_index_0_id_659b4636_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_0_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_1_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_1_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_1_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_style_index_0_id_659b4636_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_0ba92262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_0ba92262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_0ba92262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_074850df_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_074850df_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_074850df_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&":
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& ***!
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -22823,9 +22248,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_0_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_style_index_0_id_34cc71e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&");
 
             
 
@@ -22834,18 +22259,18 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_0_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_style_index_0_id_34cc71e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_0_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_style_index_0_id_34cc71e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -22853,9 +22278,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_1_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_style_index_0_id_23a19f57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&");
 
             
 
@@ -22864,11 +22289,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_1_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_style_index_0_id_23a19f57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_1_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_style_index_0_id_23a19f57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -24997,9 +24422,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue":
+/***/ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue":
 /*!***********************************************************************!*\
-  !*** ./resources/js/components/entrevistas/CalendarioEntrevistas.vue ***!
+  !*** ./resources/js/entrevistas/components/CalendarioEntrevistas.vue ***!
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25008,9 +24433,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true& */ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true&");
-/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=script&lang=js& */ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js&");
-/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_style_index_0_id_256047cc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& */ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&");
+/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true& */ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true&");
+/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CalendarioEntrevistas_vue_vue_type_style_index_0_id_1bdfed60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& */ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -25022,26 +24447,26 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "256047cc",
+  "1bdfed60",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/entrevistas/CalendarioEntrevistas.vue"
+component.options.__file = "resources/js/entrevistas/components/CalendarioEntrevistas.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/Entrevista.vue ***!
-  \***********************************************************************/
+/***/ "./resources/js/entrevistas/components/DetalleEntrevista.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/entrevistas/components/DetalleEntrevista.vue ***!
+  \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25049,53 +24474,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Entrevista.vue?vue&type=template&id=603720e9&scoped=true& */ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true&");
-/* harmony import */ var _Entrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Entrevista.vue?vue&type=script&lang=js& */ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js&");
-/* harmony import */ var _Entrevista_vue_vue_type_style_index_0_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&");
-/* harmony import */ var _Entrevista_vue_vue_type_style_index_1_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__.default)(
-  _Entrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "603720e9",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/entrevistas/Entrevista/Entrevista.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true& */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true&");
-/* harmony import */ var _EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=script&lang=js& */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js&");
-/* harmony import */ var _EventDialogInput_vue_vue_type_style_index_0_id_0ba92262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true& */ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true&");
+/* harmony import */ var _DetalleEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DetalleEntrevista.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DetalleEntrevista_vue_vue_type_style_index_0_id_659b4636_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& */ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -25105,67 +24487,26 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _DetalleEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "0ba92262",
+  "659b4636",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/entrevistas/Entrevista/EventDialogInput.vue"
+component.options.__file = "resources/js/entrevistas/components/DetalleEntrevista.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/EventDialogInput.vue ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=template&id=074850df&scoped=true& */ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true&");
-/* harmony import */ var _EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=script&lang=js& */ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js&");
-/* harmony import */ var _EventDialogInput_vue_vue_type_style_index_0_id_074850df_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "074850df",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/entrevistas/Periodo/EventDialogInput.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/Periodo.vue":
+/***/ "./resources/js/entrevistas/components/NuevaEntrevista.vue":
 /*!*****************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/Periodo.vue ***!
+  !*** ./resources/js/entrevistas/components/NuevaEntrevista.vue ***!
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25174,41 +24515,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Periodo.vue?vue&type=template&id=56454da7&scoped=true& */ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true&");
-/* harmony import */ var _Periodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Periodo.vue?vue&type=script&lang=js& */ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js&");
-/* harmony import */ var _Periodo_vue_vue_type_style_index_0_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&");
-/* harmony import */ var _Periodo_vue_vue_type_style_index_1_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& */ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true& */ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true&");
+/* harmony import */ var _NuevaEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NuevaEntrevista.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js&");
+/* harmony import */ var _NuevaEntrevista_vue_vue_type_style_index_0_id_34cc71e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& */ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
 ;
 
 
-
 /* normalize component */
 
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__.default)(
-  _Periodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _NuevaEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "56454da7",
+  "34cc71e8",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/entrevistas/Periodo/Periodo.vue"
+component.options.__file = "resources/js/entrevistas/components/NuevaEntrevista.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/entrevistas/components/NuevoPeriodo.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/entrevistas/components/NuevoPeriodo.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true& */ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true&");
+/* harmony import */ var _NuevoPeriodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NuevoPeriodo.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _NuevoPeriodo_vue_vue_type_style_index_0_id_23a19f57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& */ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _NuevoPeriodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "23a19f57",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/entrevistas/components/NuevoPeriodo.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25217,15 +24597,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -25233,46 +24613,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DetalleEntrevista.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25281,8 +24629,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevaEntrevista.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevoPeriodo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -25299,93 +24663,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&":
+/***/ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&":
 /*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& ***!
+  !*** ./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& ***!
   \********************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_256047cc_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=style&index=0&id=256047cc&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_style_index_0_id_1bdfed60_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=style&index=0&id=1bdfed60&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************/
+/***/ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_0_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=0&id=603720e9&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_style_index_0_id_659b4636_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=style&index=0&id=659b4636&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_style_index_1_id_603720e9_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=style&index=1&id=603720e9&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_0ba92262_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=style&index=0&id=0ba92262&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_style_index_0_id_074850df_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=style&index=0&id=074850df&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&":
+/***/ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&":
 /*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& ***!
+  !*** ./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& ***!
   \**************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_0_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=0&id=56454da7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_style_index_0_id_34cc71e8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************/
+/***/ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_style_index_1_id_56454da7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=style&index=1&id=56454da7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_style_index_0_id_23a19f57_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=style&index=0&id=23a19f57&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -25621,87 +24946,70 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true&":
+/***/ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true&":
 /*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true& ***!
+  !*** ./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true& ***!
   \******************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_256047cc_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CalendarioEntrevistas_vue_vue_type_template_id_1bdfed60_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true& ***!
-  \******************************************************************************************************************/
+/***/ "./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true& ***!
+  \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Entrevista_vue_vue_type_template_id_603720e9_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Entrevista.vue?vue&type=template&id=603720e9&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DetalleEntrevista_vue_vue_type_template_id_659b4636_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true&":
-/*!************************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true& ***!
-  \************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_0ba92262_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true&":
-/*!*********************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true& ***!
-  \*********************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EventDialogInput_vue_vue_type_template_id_074850df_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EventDialogInput.vue?vue&type=template&id=074850df&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true&":
+/***/ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true&":
 /*!************************************************************************************************************!*\
-  !*** ./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true& ***!
+  !*** ./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true& ***!
   \************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Periodo_vue_vue_type_template_id_56454da7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Periodo.vue?vue&type=template&id=56454da7&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevaEntrevista_vue_vue_type_template_id_34cc71e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true& ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NuevoPeriodo_vue_vue_type_template_id_23a19f57_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true&");
 
 
 /***/ }),
@@ -26516,9 +25824,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/CalendarioEntrevistas.vue?vue&type=template&id=256047cc&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/CalendarioEntrevistas.vue?vue&type=template&id=1bdfed60&scoped=true& ***!
   \*********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -26535,7 +25843,7 @@ var render = function() {
   return _c("div", { staticClass: "row my-5" }, [
     _c(
       "div",
-      { staticClass: "col-12" },
+      { staticClass: "col-lg-9" },
       [
         _vm.IsActive === true
           ? _c("vue-scheduler", {
@@ -26552,13 +25860,15 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _c("div", { staticClass: "col-lg-3" }),
+    _vm._v(" "),
     _vm.IsActive === false
       ? _c("div", { staticClass: "col-12 mx-2" }, [
           _c(
             "button",
             {
               staticClass: "my-3 v-cal-button",
-              on: { click: _vm.abreModalPeriodo }
+              attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" }
             },
             [_vm._v(" Programar periodo de entrevistas ")]
           )
@@ -26573,10 +25883,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/Entrevista.vue?vue&type=template&id=603720e9&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/DetalleEntrevista.vue?vue&type=template&id=659b4636&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26589,626 +25899,162 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "zoom-out" } }, [
-    _vm.isActive
-      ? _c("div", { staticClass: "v-cal-dialog" }, [
-          _c("div", {
-            staticClass: "v-cal-dialog__bg",
-            on: { click: _vm.cancel }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "v-cal-dialog-card" }, [
-            _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.creaEntrevista.apply(null, arguments)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "DetalleEntrevista",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "modal-dialog detalle-entrevista",
+          attrs: { role: "document" }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.creaPeriodo.apply(null, arguments)
+                    }
                   }
-                }
-              },
-              [
-                _c("header", { staticClass: "v-cal-dialog-card__header" }, [
-                  _c("h5", { staticClass: "v-cal-dialog__title" }, [
-                    _vm._v(" Agendar una entrevista")
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "v-cal-dialog__close",
-                    attrs: { type: "button" },
-                    on: { click: _vm.cancel }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "section",
-                  { staticClass: "v-cal-dialog-card__body form-row" },
-                  [
-                    _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [_vm._v(" Fecha ")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.date,
-                            expression: "date"
-                          }
-                        ],
-                        staticClass: "modal-input",
-                        attrs: { type: "text", readonly: "" },
-                        domProps: { value: _vm.date },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.date = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-5" }, [
-                      _c("label", [_vm._v(" Hora de inicio ")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.start_time,
-                            expression: "start_time"
-                          }
-                        ],
-                        staticClass: "modal-input",
-                        attrs: { type: "time" },
-                        domProps: { value: _vm.start_time },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.start_time = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-md-5" }, [
-                      _c("label", [_vm._v(" Hora de fin ")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.end_time,
-                            expression: "end_time"
-                          }
-                        ],
-                        staticClass: "modal-input",
-                        attrs: { type: "time" },
-                        domProps: { value: _vm.end_time },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.end_time = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [_vm._v(" Postulante ")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.appliant,
-                              expression: "appliant"
-                            }
-                          ],
-                          staticClass: "modal-input",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.appliant = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { selected: "" },
-                              domProps: { value: null }
-                            },
-                            [_vm._v("Escoge un postulante ")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.appliants, function(appliant) {
-                            return _c(
-                              "option",
-                              {
-                                key: appliant.id,
-                                domProps: { value: appliant }
-                              },
-                              [
-                                _vm._v(
-                                  " \n                " +
-                                    _vm._s(
-                                      appliant.name +
-                                        " " +
-                                        appliant.middlename +
-                                        " " +
-                                        appliant.surname
-                                    ) +
-                                    " \n              "
-                                )
-                              ]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [
-                        _vm._v(" Profesor que otorgó la carta de intención ")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.IntentionLetterProfessor,
-                            expression: "IntentionLetterProfessor"
-                          }
-                        ],
-                        staticClass: "modal-input",
-                        attrs: { type: "text", readonly: "" },
-                        domProps: { value: _vm.IntentionLetterProfessor },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.IntentionLetterProfessor = $event.target.value
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group col-12" }, [
-                      _c("label", [_vm._v(" Número de sala ")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.room,
-                              expression: "room"
-                            }
-                          ],
-                          staticClass: "modal-input",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.room = $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "option",
-                            {
-                              attrs: { selected: "" },
-                              domProps: { value: null }
-                            },
-                            [_vm._v("Escoge una sala ")]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.rooms, function(room, roomNumber) {
-                            return _c(
-                              "option",
-                              { key: room.id, domProps: { value: room } },
-                              [_vm._v(" " + _vm._s(roomNumber + 1) + " ")]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("footer", { staticClass: "v-cal-dialog-card__footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "v-cal-button is-rounded is-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Programar entrevista ")]
-                  )
-                ])
-              ]
-            )
+                },
+                [_vm._m(1)]
+              )
+            ])
           ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-header modal-header-blue text-center" },
+      [
+        _c(
+          "h5",
+          { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+          [_vm._v(" Registro de entrevistas ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-3 mt-3" }, [
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("h5", { staticClass: "d-block fecha" }, [
+          _vm._v(" Lunes 4 de octubre, 2021 ")
+        ]),
+        _vm._v(" "),
+        _c("h5", { staticClass: "d-block postulante mt-3" }, [
+          _vm._v(" Córdova Molina Cynthia del Carmen ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "d-block mt-3 mb-0 title-prof-carta-intencion" },
+          [_vm._v(" Carta de intención otorgada por: ")]
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "d-block mt-0 prof-carta-intencion" }, [
+          _vm._v(" Dr. Antonio Cardona Benavides ")
         ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = []
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6 my-auto" }, [
+        _c("p", { staticClass: "d-block mt-0 sala" }, [
+          _vm._v(" Sala 1, 8:00 a 9:30 ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "row mt-3 justify-content-between areas-academicas my-auto py-2"
+          },
+          [
+            _c("div", { staticClass: "col-2 my-auto" }, [
+              _c("h5", { staticClass: "d-block my-auto" }, [
+                _vm._v(" Evaluación ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 my-auto" }, [
+              _c("h5", { staticClass: "d-block my-auto" }, [
+                _vm._v(" Prevención ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 my-auto" }, [
+              _c("h5", { staticClass: "d-block my-auto" }, [
+                _vm._v(" Recursos naturales ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 my-auto" }, [
+              _c("h5", { staticClass: "d-block my-auto" }, [
+                _vm._v(" Gestión Ambiental ")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-2 my-auto" }, [
+              _c("h5", { staticClass: "d-block my-auto" }, [
+                _vm._v(" Salud Ambiental ")
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Entrevista/EventDialogInput.vue?vue&type=template&id=0ba92262&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { class: _vm.fieldClass },
-    [
-      _vm.field.type === "textarea"
-        ? [
-            _vm.field.showLabel !== false
-              ? _c("label", { attrs: { for: _vm.field.name } }, [
-                  _vm._v(_vm._s(_vm.fieldLabel))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.Value,
-                  expression: "Value"
-                }
-              ],
-              attrs: {
-                id: _vm.field.name,
-                name: _vm.field.name,
-                required: _vm.field.required,
-                placeholder: _vm.fieldLabel
-              },
-              domProps: { value: _vm.Value },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.Value = $event.target.value
-                }
-              }
-            })
-          ]
-        : [
-            _vm.field.showLabel !== false
-              ? _c("label", { attrs: { for: _vm.field.name } }, [
-                  _vm._v(_vm._s(_vm.fieldLabel))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            (_vm.field.type ? _vm.field.type : "text") === "checkbox"
-              ? _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: "checkbox"
-                  },
-                  domProps: {
-                    checked: Array.isArray(_vm.Value)
-                      ? _vm._i(_vm.Value, null) > -1
-                      : _vm.Value
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.Value,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.Value = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.Value = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.Value = $$c
-                      }
-                    }
-                  }
-                })
-              : (_vm.field.type ? _vm.field.type : "text") === "radio"
-              ? _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: "radio"
-                  },
-                  domProps: { checked: _vm._q(_vm.Value, null) },
-                  on: {
-                    change: function($event) {
-                      _vm.Value = null
-                    }
-                  }
-                })
-              : _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: _vm.field.type ? _vm.field.type : "text"
-                  },
-                  domProps: { value: _vm.Value },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.Value = $event.target.value
-                    }
-                  }
-                })
-          ]
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true&":
-/*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/EventDialogInput.vue?vue&type=template&id=074850df&scoped=true& ***!
-  \************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { class: _vm.fieldClass },
-    [
-      _vm.field.type === "textarea"
-        ? [
-            _vm.field.showLabel !== false
-              ? _c("label", { attrs: { for: _vm.field.name } }, [
-                  _vm._v(_vm._s(_vm.fieldLabel))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.Value,
-                  expression: "Value"
-                }
-              ],
-              attrs: {
-                id: _vm.field.name,
-                name: _vm.field.name,
-                required: _vm.field.required,
-                placeholder: _vm.fieldLabel
-              },
-              domProps: { value: _vm.Value },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.Value = $event.target.value
-                }
-              }
-            })
-          ]
-        : [
-            _vm.field.showLabel !== false
-              ? _c("label", { attrs: { for: _vm.field.name } }, [
-                  _vm._v(_vm._s(_vm.fieldLabel))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            (_vm.field.type ? _vm.field.type : "text") === "checkbox"
-              ? _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: "checkbox"
-                  },
-                  domProps: {
-                    checked: Array.isArray(_vm.Value)
-                      ? _vm._i(_vm.Value, null) > -1
-                      : _vm.Value
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.Value,
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = null,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 && (_vm.Value = $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            (_vm.Value = $$a
-                              .slice(0, $$i)
-                              .concat($$a.slice($$i + 1)))
-                        }
-                      } else {
-                        _vm.Value = $$c
-                      }
-                    }
-                  }
-                })
-              : (_vm.field.type ? _vm.field.type : "text") === "radio"
-              ? _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: "radio"
-                  },
-                  domProps: { checked: _vm._q(_vm.Value, null) },
-                  on: {
-                    change: function($event) {
-                      _vm.Value = null
-                    }
-                  }
-                })
-              : _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Value,
-                      expression: "Value"
-                    }
-                  ],
-                  attrs: {
-                    placeholder: _vm.fieldLabel,
-                    required: _vm.field.required,
-                    id: _vm.field.name,
-                    type: _vm.field.type ? _vm.field.type : "text"
-                  },
-                  domProps: { value: _vm.Value },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.Value = $event.target.value
-                    }
-                  }
-                })
-          ]
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true&":
 /*!***************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/entrevistas/Periodo/Periodo.vue?vue&type=template&id=56454da7&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=template&id=34cc71e8&scoped=true& ***!
   \***************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -27222,15 +26068,356 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "zoom-out" } }, [
-    _vm.isActive
-      ? _c("div", { staticClass: "v-cal-dialog" }, [
-          _c("div", {
-            staticClass: "v-cal-dialog__bg",
-            on: { click: _vm.cancel }
-          }),
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "NuevaEntrevista",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "v-cal-dialog-card" }, [
+          _c("div", { staticClass: "modal-body" }, [
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.creaEntrevista.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "form-row mt-4 mb-2" }, [
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [_vm._v(" Fecha ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.date,
+                          expression: "date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "date", readonly: "" },
+                      domProps: { value: _vm.date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.date = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-5" }, [
+                    _c("label", [_vm._v(" Hora de inicio ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.start_time,
+                          expression: "start_time"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "time" },
+                      domProps: { value: _vm.start_time },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.start_time = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-5" }, [
+                    _c("label", [_vm._v(" Hora de fin ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.end_time,
+                          expression: "end_time"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "time" },
+                      domProps: { value: _vm.end_time },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.end_time = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [_vm._v(" Postulante ")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.appliant,
+                            expression: "appliant"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.appliant = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: { selected: "" },
+                            domProps: { value: null }
+                          },
+                          [_vm._v("Escoge un postulante ")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.appliants, function(appliant) {
+                          return _c(
+                            "option",
+                            { key: appliant.id, domProps: { value: appliant } },
+                            [
+                              _vm._v(
+                                " \n                  " +
+                                  _vm._s(
+                                    appliant.name +
+                                      " " +
+                                      appliant.middlename +
+                                      " " +
+                                      appliant.surname
+                                  ) +
+                                  " \n                "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [
+                      _vm._v(" Profesor que otorgó la carta de intención ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.IntentionLetterProfessor,
+                          expression: "IntentionLetterProfessor"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", readonly: "" },
+                      domProps: { value: _vm.IntentionLetterProfessor },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.IntentionLetterProfessor = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [_vm._v(" Número de sala ")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.room,
+                            expression: "room"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.room = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: { selected: "" },
+                            domProps: { value: null }
+                          },
+                          [_vm._v("Escoge una sala ")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.rooms, function(room, roomNumber) {
+                          return _c(
+                            "option",
+                            { key: room.id, domProps: { value: room } },
+                            [_vm._v(" " + _vm._s(roomNumber + 1) + " ")]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.creaEntrevista }
+              },
+              [_vm._v(" Registrar ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Cancelar")]
+            )
+          ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header modal-header-blue" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v(" Nueva entrevista ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevoPeriodo.vue?vue&type=template&id=23a19f57&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "NuevoPeriodo",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
             _c(
               "form",
               {
@@ -27242,136 +26429,147 @@ var render = function() {
                 }
               },
               [
-                _c("header", { staticClass: "v-cal-dialog-card__header" }, [
-                  _c("h5", { staticClass: "v-cal-dialog__title" }, [
-                    _vm._v(_vm._s(_vm.title))
+                _c("div", { staticClass: "form-row mt-4 mb-2" }, [
+                  _c("div", { staticClass: "form-group col-6" }, [
+                    _c("label", [_vm._v(" Fecha de inicio ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.start_date,
+                          expression: "start_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "date", required: "" },
+                      domProps: { value: _vm.start_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.start_date = $event.target.value
+                        }
+                      }
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("button", {
-                    staticClass: "v-cal-dialog__close",
-                    attrs: { type: "button" },
-                    on: { click: _vm.cancel }
-                  })
+                  _c("div", { staticClass: "form-group col-6" }, [
+                    _c("label", [_vm._v(" Fecha de fin ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.end_date,
+                          expression: "end_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "date", required: "" },
+                      domProps: { value: _vm.end_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.end_date = $event.target.value
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "section",
-                  { staticClass: "v-cal-dialog-card__body form-row" },
-                  [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("div", { staticClass: "form-row mt-4 mb-2" }, [
-                        _c("div", { staticClass: "form-group col-6" }, [
-                          _c("label", [_vm._v(" Fecha de inicio ")]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.start_date,
-                                expression: "start_date"
-                              }
-                            ],
-                            staticClass: "modal-input",
-                            attrs: { type: "date", required: "" },
-                            domProps: { value: _vm.start_date },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.start_date = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group col-6" }, [
-                          _c("label", [_vm._v(" Fecha de fin ")]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.end_date,
-                                expression: "end_date"
-                              }
-                            ],
-                            staticClass: "modal-input",
-                            attrs: { type: "date", required: "" },
-                            domProps: { value: _vm.end_date },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.end_date = $event.target.value
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-row my-2" }, [
-                        _c("div", { staticClass: "form-group col-9" }, [
-                          _c("label", [_vm._v(" Número de salas ")]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model.number",
-                                value: _vm.num_salas,
-                                expression: "num_salas",
-                                modifiers: { number: true }
-                              }
-                            ],
-                            staticClass: "modal-input",
-                            attrs: { type: "number", required: "", min: "1" },
-                            domProps: { value: _vm.num_salas },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.num_salas = _vm._n($event.target.value)
-                              },
-                              blur: function($event) {
-                                return _vm.$forceUpdate()
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("footer", { staticClass: "v-cal-dialog-card__footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "v-cal-button is-rounded is-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v(
-                        "\n            " +
-                          _vm._s(_vm.createButtonLabel) +
-                          "\n          "
-                      )
-                    ]
-                  )
+                _c("div", { staticClass: "form-row my-2" }, [
+                  _c("div", { staticClass: "form-group col-9" }, [
+                    _c("label", [_vm._v(" Número de salas ")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.number",
+                          value: _vm.num_salas,
+                          expression: "num_salas",
+                          modifiers: { number: true }
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", required: "", min: "1" },
+                      domProps: { value: _vm.num_salas },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.num_salas = _vm._n($event.target.value)
+                        },
+                        blur: function($event) {
+                          return _vm.$forceUpdate()
+                        }
+                      }
+                    })
+                  ])
                 ])
               ]
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.creaPeriodo }
+              },
+              [_vm._v(" Registrar ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Cancelar")]
+            )
           ])
         ])
-      : _vm._e()
-  ])
+      ])
+    ]
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header modal-header-blue" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v(" Nuevo periodo de entrevistas ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39631,19 +38829,25 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!*************************************!*\
-  !*** ./resources/js/entrevistas.js ***!
-  \*************************************/
+/*!*************************************************!*\
+  !*** ./resources/js/entrevistas/entrevistas.js ***!
+  \*************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_calendar_scheduler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-calendar-scheduler */ "./node_modules/v-calendar-scheduler/index.js");
-/* harmony import */ var _components_entrevistas_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/entrevistas/CalendarioEntrevistas.vue */ "./resources/js/components/entrevistas/CalendarioEntrevistas.vue");
-/* harmony import */ var v_calendar_scheduler_lib_main_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-calendar-scheduler/lib/main.css */ "./node_modules/v-calendar-scheduler/lib/main.css");
+/* harmony import */ var _components_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/CalendarioEntrevistas.vue */ "./resources/js/entrevistas/components/CalendarioEntrevistas.vue");
+/* harmony import */ var _components_NuevoPeriodo_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/NuevoPeriodo.vue */ "./resources/js/entrevistas/components/NuevoPeriodo.vue");
+/* harmony import */ var _components_NuevaEntrevista_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/NuevaEntrevista.vue */ "./resources/js/entrevistas/components/NuevaEntrevista.vue");
+/* harmony import */ var _components_DetalleEntrevista_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/DetalleEntrevista.vue */ "./resources/js/entrevistas/components/DetalleEntrevista.vue");
+/* harmony import */ var v_calendar_scheduler_lib_main_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! v-calendar-scheduler/lib/main.css */ "./node_modules/v-calendar-scheduler/lib/main.css");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default; // Componentes para las entrevistas.
+
+
+
 
 
  // Import styles
@@ -39680,10 +38884,37 @@ Vue.use(v_calendar_scheduler__WEBPACK_IMPORTED_MODULE_0__.default, {
 var app = new Vue({
   el: '#app',
   data: {
-    loggedUser: user
+    loggedUser: user,
+    period: null,
+    appliants: [],
+    date: null
   },
   components: {
-    CalendarioEntrevistas: _components_entrevistas_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__.default
+    CalendarioEntrevistas: _components_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    NuevoPeriodo: _components_NuevoPeriodo_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    NuevaEntrevista: _components_NuevaEntrevista_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    DetalleEntrevista: _components_DetalleEntrevista_vue__WEBPACK_IMPORTED_MODULE_4__.default
+  },
+  methods: {
+    actualizaPeriodo: function actualizaPeriodo(period) {
+      Vue.set(this, 'period', period);
+    }
+  },
+
+  /**
+   * Jala los datos de los servidores de AA.
+   */
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      var _this = this;
+
+      axios.get("/controlescolar/users/appliants").then(function (response) {
+        return Vue.set(_this, "appliants", response.data);
+      })["catch"](function (error) {});
+      axios.get("/controlescolar/entrevistas/periods").then(function (response) {
+        return _this.actualizaPeriodo(response.data);
+      })["catch"](function (error) {});
+    });
   }
 });
 })();

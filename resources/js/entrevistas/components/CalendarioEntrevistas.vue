@@ -1,6 +1,6 @@
 <template>
   <div class="row my-5">
-    <div class="col-12">
+    <div class="col-lg-9">
       <vue-scheduler v-if="IsActive === true"
        :events="events" 
        :min-date="MinDate" 
@@ -8,8 +8,10 @@
        :disable-dialog="true"
        @day-clicked="abreModalEntrevistas"></vue-scheduler>
     </div>
+    <div class="col-lg-3">
+    </div>
     <div v-if="IsActive === false" class="col-12 mx-2">
-      <button class="my-3 v-cal-button" @click="abreModalPeriodo"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
@@ -22,21 +24,21 @@ div.col-12.mx-2 > button.my-3.v-cal-button{
 </style>
 
 <script>
-import Periodo from './Periodo';
-import Entrevista from './Entrevista';
 var moment = require('moment');
 
 export default {
   name: "calendario-entrevistas",
-  components: {
-    Periodo,
-    Entrevista
+
+  props: {
+    // Periodo de entrevistas.
+    period: Object,
+
+    // Postulantes de la entrevista.
+    appliants: Array,
   },
 
   data() {
     return {
-      appliants: [],
-      period: null,
       events: [],
     };
   },
@@ -67,50 +69,18 @@ export default {
     }
   },
 
-  /**
-   * Jala los datos de los servidores de AA.
-   */
-  mounted() {
-    this.$nextTick(function () {
-      axios.get("/controlescolar/users/appliants")
-        .then((response) => {
-          Vue.set(this, "appliants", response.data);
-        })
-        .catch((error) => {});
-
-      axios.get("/controlescolar/entrevistas/periods")
-        .then((response) => {
-          if (Object.keys(response.data).length > 0)
-            Vue.set(this, 'period', response.data);
-        })
-        .catch((error) => {
-
-
-        });
-    });
-
-
-
-    console.log($('h3.v-cal-header__title').text());
-    
-  },
-
   methods: {
-    abreModalPeriodo(){
-      var modal = Periodo.show(this.PeriodDialog, []);
-
-      modal.$on('event-created', (event) => {
-        this.events.push(event._e);
-        this.$emit('event-created', event._e);
-
-      });
-      
-      modal.$on('new_period', (period) => {
-        Vue.set(this, 'period', period);
-      });
-    },
 
     abreModalEntrevistas(date){
+      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+        return false;
+
+      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+        return false;
+
+      this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
+      $('#NuevaEntrevista').modal('show');
+      /*
       if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
         return false;
 
@@ -124,7 +94,7 @@ export default {
           id: event.id
         });
         this.$emit('event-created', event._e);
-      });
+      });*/
     }
   }
 };

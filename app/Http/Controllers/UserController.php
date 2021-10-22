@@ -39,11 +39,13 @@ class UserController extends Controller
         # 2.- Obtiene a los profesores.
         $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
             'module' => env('MIPORTAL_MODULE_ID'),
+            'fields[users]' => 'id,name,middlename,surname,type',
             'filter[id]' => $appliants->pluck('id')->toArray()
         ]);
 
         $responses[] = $this->miPortalService->miPortalGet('api/usuarios', [
             'module' => env('MIPORTAL_MODULE_ID'),
+            'fields[users]' => 'id,name,middlename,surname,type',
             'filter[id]' => $professors
         ]);
 
