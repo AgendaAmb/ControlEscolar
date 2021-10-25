@@ -334,7 +334,7 @@ __webpack_require__.r(__webpack_exports__);
       //return false;
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
-      $('#NuevaEntrevista').modal('show');
+      $('#DetalleEntrevista').modal('show');
     },
     goToToday: function goToToday() {
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.today);
@@ -27662,7 +27662,10 @@ var render = function() {
             "button",
             {
               staticClass: "my-3 v-cal-button",
-              attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" }
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#DetalleEntrevista"
+              }
             },
             [_vm._v(" Programar periodo de entrevistas ")]
           )
