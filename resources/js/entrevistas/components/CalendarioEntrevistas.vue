@@ -336,11 +336,11 @@ export default {
     },
 
     abreModalEntrevistas(date){
-      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-        return false;
+      //if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+        //return false;
 
-      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-        return false;
+      //if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+        //return false;
 
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);

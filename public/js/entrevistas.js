@@ -328,10 +328,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     abreModalEntrevistas: function abreModalEntrevistas(date) {
-      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
-      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
+      //if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+      //return false;
+      //if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+      //return false;
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
-      this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date); //$('#NuevaEntrevista').modal('show');
+      this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
+      $('#NuevaEntrevista').modal('show');
     },
     goToToday: function goToToday() {
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.today);
