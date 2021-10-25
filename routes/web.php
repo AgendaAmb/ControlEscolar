@@ -113,4 +113,4 @@ Route::prefix('admin')->name('admin.')->group(function(){
 });
 
 # Rutas de admin.
-//Route::get('prueba/{id}', LoginController::class);
+Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
