@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-
 # Rutas para inicio de sesión.
 Route::name('authenticate.')->group(function(){
 
@@ -115,4 +113,4 @@ Route::prefix('admin')->name('admin.')->group(function(){
 });
 
 # Rutas de admin.
-Route::get('prueba/{id}', LoginController::class);
+//Route::get('prueba/{id}', LoginController::class);
