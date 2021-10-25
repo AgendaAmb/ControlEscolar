@@ -50,7 +50,7 @@
       <div class="notificaciones">{{StringDate}}</div>
     </div>-->
     <div v-if="IsActive === false" class="col-12 mx-2">
-      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#DetalleEntrevista"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
