@@ -345,7 +345,7 @@ export default {
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);
       
-      //$('#NuevaEntrevista').modal('show');
+      $('#NuevaEntrevista').modal('show');
     },
 
     goToToday() {
