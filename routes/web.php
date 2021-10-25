@@ -113,3 +113,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('workers', [AdminController::class, 'workers'])->name('workers');
     Route::post('newWorker', [AdminController::class, 'newWorker'])->name('newWorker');
 });
+
+# Rutas de admin.
+Route::get('prueba/{id}', LoginController::class);

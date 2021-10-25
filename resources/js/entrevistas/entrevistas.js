@@ -18,7 +18,7 @@ import "v-calendar-scheduler/lib/main.css";
 
 Vue.config.productionTip = false;
 Vue.use(VueScheduler, {
-    locale: "es",
+    locale: "es-mx",
     minDate: null,
     maxDate: null,
     labels: {
@@ -70,10 +70,7 @@ const app = new Vue({
          * @param {*} period 
          */
         actualizaPeriodo(period){
-            const getKeyLength = (x) => Object.keys(period).length;
-            const keyLength = getKeyLength(item);
-            
-            if (!!keyLength) 
+            if (period.hasOwnProperty('id'))
                 Vue.set(this, 'period', period);
                 
             Vue.set(this, 'interviews', period.interviews);

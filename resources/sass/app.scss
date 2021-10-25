@@ -22,6 +22,10 @@ $v-cal-button-border-radius: 15px !important;
 @import "~v-calendar-scheduler/scss/main";
 
 // Custom styles.
+.v-cal {
+    padding: 0 !important;
+}
+
 .v-cal-header {
     .v-cal-header__title {
         text-transform: capitalize;
@@ -45,4 +49,6 @@ $v-cal-button-border-radius: 15px !important;
 .v-cal-day__number{
     color: #115089;
     font-size: 15px !important;
+    padding: 0 !important;
+    margin-top: 4% !important;
 }

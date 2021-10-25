@@ -16665,6 +16665,10 @@ h3 {
   flex-grow: 1;
 }
 
+.v-cal {
+  padding: 0 !important;
+}
+
 .v-cal-header .v-cal-header__title {
   text-transform: capitalize;
 }
@@ -16681,4 +16685,6 @@ h3 {
 .v-cal-day__number {
   color: #115089;
   font-size: 15px !important;
+  padding: 0 !important;
+  margin-top: 4% !important;
 }
