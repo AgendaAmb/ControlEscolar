@@ -29,25 +29,50 @@ var moment = require('moment');
 export default {
   name: "calendario-entrevistas",
   components: {
+    // Permite crear periodos de entrevistas.
     Periodo,
+
+    // Permite agendar una nueva entrevista.
     Entrevista
+  },
+
+  // Propiedades inmutables
+  props: {
+    // Usuario autenticado.
+    auth_user: Object
   },
 
   data() {
     return {
+      // Postulantes a los que se les puede agendar una
+      // entrevista.
       appliants: [],
+
+      // Periodo de entrevistas.
       period: null,
+
+      // Entrevistas.
       events: [],
     };
   },
 
+  /**
+   * Propiedades reactivas.
+   */
   computed: {
+    /**
+     * Disponibilidad para programar / ver los postulantes
+     * que serán entrevistados.
+     */
     IsActive: {
       get() {
         return this.period !== null;
       }
     },
 
+    /**
+     * Fecha de inicio del periodo de entrevistas.
+     */
     MinDate: {
       get(){
         if (this.period === null)
@@ -57,6 +82,9 @@ export default {
       }
     },
 
+    /**
+     * Fecha límite del periodo de entrevistas.
+     */
     MaxDate: {
       get(){
         if (this.period === null)
@@ -71,7 +99,7 @@ export default {
    * Jala los datos de los servidores de AA.
    */
   mounted() {
-    this.$nextTick(function () {
+    this.$nextTick(() => {
       axios.get("/controlescolar/users/appliants")
         .then((response) => {
           Vue.set(this, "appliants", response.data);
