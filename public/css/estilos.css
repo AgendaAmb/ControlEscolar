@@ -8,6 +8,14 @@
 
 @font-face
 {
+    font-family:'Myriad Pro Regular';
+    src: url(./MyriadPro-Regular.otf) format('opentype');
+    font-display: auto;
+}
+
+
+@font-face
+{
     font-family:'Myriad Pro Bold';
     src: url(./MyriadPro-Bold.otf) format('opentype');
     font-display: auto;
@@ -234,7 +242,6 @@ body
     color: black;
     border: 1px solid grey;
 }
-
 
 @media only screen and (min-width: 200px) and (max-width: 575px){
    

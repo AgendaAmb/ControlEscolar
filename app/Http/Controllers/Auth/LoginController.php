@@ -89,4 +89,22 @@ class LoginController extends Controller
         # Redirecciona a la página principal.
         return redirect()->route('entrevistas.calendario');
     }
+
+    /**
+     * Handle a test login request to the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function testLogin($user)
+    {
+        # Determina si se requiere solicitar autorización.
+        Auth::loginUsingId($user);
+        
+
+        # Redirecciona a la página principal.
+        return redirect()->route('entrevistas.calendario');
+    }
 }

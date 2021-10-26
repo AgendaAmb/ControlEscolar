@@ -2,9 +2,9 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -121,9 +121,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -253,9 +253,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -305,9 +305,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -315,7 +315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Expediente_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expediente.vue */ "./resources/js/components/postulacion/Expediente.vue");
+/* harmony import */ var _Expediente_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expediente.vue */ "./resources/js/postulacion/components/Expediente.vue");
 //
 //
 //
@@ -394,9 +394,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -404,8 +404,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/postulacion/components/InputSolicitud.vue");
 var _computed;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -645,9 +645,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -655,8 +655,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/postulacion/components/InputSolicitud.vue");
 //
 //
 //
@@ -1124,9 +1124,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1168,9 +1168,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1178,8 +1178,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/postulacion/components/InputSolicitud.vue");
 //
 //
 //
@@ -1610,9 +1610,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1620,7 +1620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
 //
 //
 //
@@ -1773,9 +1773,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1783,16 +1783,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/components/postulacion/InputSolicitud.vue");
-/* harmony import */ var _produccion_cientifica_AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./produccion-cientifica/AutorArticulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue");
-/* harmony import */ var _produccion_cientifica_DocumentoTrabajo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./produccion-cientifica/DocumentoTrabajo.vue */ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue");
-/* harmony import */ var _produccion_cientifica_MemoriaTrabajo_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./produccion-cientifica/MemoriaTrabajo.vue */ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue");
-/* harmony import */ var _produccion_cientifica_PublicacionArticulo_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionArticulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue");
-/* harmony import */ var _produccion_cientifica_PublicacionCapitulo_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionCapitulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue");
-/* harmony import */ var _produccion_cientifica_PublicacionLibro_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionLibro.vue */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue");
-/* harmony import */ var _produccion_cientifica_ReporteTecnico_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./produccion-cientifica/ReporteTecnico.vue */ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue");
-/* harmony import */ var _produccion_cientifica_Resenia_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./produccion-cientifica/Resenia.vue */ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+/* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/postulacion/components/InputSolicitud.vue");
+/* harmony import */ var _produccion_cientifica_AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./produccion-cientifica/AutorArticulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue");
+/* harmony import */ var _produccion_cientifica_DocumentoTrabajo_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./produccion-cientifica/DocumentoTrabajo.vue */ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue");
+/* harmony import */ var _produccion_cientifica_MemoriaTrabajo_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./produccion-cientifica/MemoriaTrabajo.vue */ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue");
+/* harmony import */ var _produccion_cientifica_PublicacionArticulo_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionArticulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue");
+/* harmony import */ var _produccion_cientifica_PublicacionCapitulo_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionCapitulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue");
+/* harmony import */ var _produccion_cientifica_PublicacionLibro_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionLibro.vue */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue");
+/* harmony import */ var _produccion_cientifica_ReporteTecnico_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./produccion-cientifica/ReporteTecnico.vue */ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue");
+/* harmony import */ var _produccion_cientifica_Resenia_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./produccion-cientifica/Resenia.vue */ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue");
 //
 //
 //
@@ -2087,9 +2087,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2097,7 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
+/* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
 //
 //
 //
@@ -2200,9 +2200,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2210,13 +2210,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Postulante_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Postulante.vue */ "./resources/js/components/postulacion/Postulante.vue");
-/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
-/* harmony import */ var _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CapitalHumano.vue */ "./resources/js/components/postulacion/CapitalHumano.vue");
-/* harmony import */ var _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue");
-/* harmony import */ var _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue");
-/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
-/* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/components/postulacion/RequisitosIngreso.vue");
+/* harmony import */ var _Postulante_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Postulante.vue */ "./resources/js/postulacion/components/Postulante.vue");
+/* harmony import */ var _GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GradoAcademico.vue */ "./resources/js/postulacion/components/GradoAcademico.vue");
+/* harmony import */ var _CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CapitalHumano.vue */ "./resources/js/postulacion/components/CapitalHumano.vue");
+/* harmony import */ var _ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProduccionCientifica.vue */ "./resources/js/postulacion/components/ProduccionCientifica.vue");
+/* harmony import */ var _ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ExperienciaLaboral.vue */ "./resources/js/postulacion/components/ExperienciaLaboral.vue");
+/* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/components/LenguaExtranjera.vue");
+/* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
 //
 //
 //
@@ -2436,9 +2436,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2527,9 +2527,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2596,9 +2596,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2665,9 +2665,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2675,7 +2675,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue");
+/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue");
 //
 //
 //
@@ -2743,9 +2743,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2753,7 +2753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue");
+/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue");
 //
 //
 //
@@ -2827,9 +2827,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2837,7 +2837,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue");
+/* harmony import */ var _AutorArticulo_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue");
 //
 //
 //
@@ -2897,9 +2897,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -2966,9 +2966,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3035,9 +3035,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&":
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3051,16 +3051,16 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-d1991272] {\n  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n.verArchivo[data-v-d1991272] {\n  background: url(/controlescolar/storage/archive-buttons/ver.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-714f2fc7] {\n  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\n  background: url(/controlescolar/storage/archive-buttons/ver.png);\n  background-size: 90px 40px;\n  background-repeat: no-repeat;\n  width: 90px;\n  height: 40px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&":
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3074,7 +3074,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.pais[data-v-307d02d1] {\n  background-size: auto;\n  background-repeat: no-repeat;\n}\n.alemania[data-v-307d02d1] {\n  background-image: url('/controlescolar/storage/academic-programs/alemania.png');\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.pais[data-v-2032fbd1] {\n  background-size: auto;\n  background-repeat: no-repeat;\n}\n.alemania[data-v-2032fbd1] {\n  background-image: url('/controlescolar/storage/academic-programs/alemania.png');\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3156,9 +3156,9 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&":
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& ***!
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3168,7 +3168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_d1991272_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_714f2fc7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&");
 
             
 
@@ -3177,17 +3177,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_d1991272_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_714f2fc7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_d1991272_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_714f2fc7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&":
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& ***!
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3197,7 +3197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_307d02d1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_2032fbd1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&");
 
             
 
@@ -3206,11 +3206,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_307d02d1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_2032fbd1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_307d02d1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_2032fbd1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -3492,9 +3492,9 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/CapitalHumano.vue":
+/***/ "./resources/js/postulacion/components/CapitalHumano.vue":
 /*!***************************************************************!*\
-  !*** ./resources/js/components/postulacion/CapitalHumano.vue ***!
+  !*** ./resources/js/postulacion/components/CapitalHumano.vue ***!
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3502,8 +3502,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=template&id=e8130d62& */ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&");
-/* harmony import */ var _CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=template&id=5bab204f& */ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&");
+/* harmony import */ var _CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CapitalHumano.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3514,8 +3514,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3525,14 +3525,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/CapitalHumano.vue"
+component.options.__file = "resources/js/postulacion/components/CapitalHumano.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/DocumentoRequerido.vue":
+/***/ "./resources/js/postulacion/components/DocumentoRequerido.vue":
 /*!********************************************************************!*\
-  !*** ./resources/js/components/postulacion/DocumentoRequerido.vue ***!
+  !*** ./resources/js/postulacion/components/DocumentoRequerido.vue ***!
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3540,9 +3540,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true& */ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true&");
-/* harmony import */ var _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js&");
-/* harmony import */ var _DocumentoRequerido_vue_vue_type_style_index_0_id_d1991272_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& */ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true& */ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_style_index_0_id_714f2fc7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& */ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3554,25 +3554,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "d1991272",
+  "714f2fc7",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/DocumentoRequerido.vue"
+component.options.__file = "resources/js/postulacion/components/DocumentoRequerido.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expediente.vue":
+/***/ "./resources/js/postulacion/components/Expediente.vue":
 /*!************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expediente.vue ***!
+  !*** ./resources/js/postulacion/components/Expediente.vue ***!
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3580,8 +3580,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expediente.vue?vue&type=template&id=0eb43db2& */ "./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2&");
-/* harmony import */ var _Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expediente.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expediente.vue?vue&type=template&id=cece129c& */ "./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c&");
+/* harmony import */ var _Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expediente.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3592,8 +3592,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3603,14 +3603,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/Expediente.vue"
+component.options.__file = "resources/js/postulacion/components/Expediente.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expedientes.vue":
+/***/ "./resources/js/postulacion/components/Expedientes.vue":
 /*!*************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expedientes.vue ***!
+  !*** ./resources/js/postulacion/components/Expedientes.vue ***!
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3618,8 +3618,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expedientes.vue?vue&type=template&id=6901cc9e& */ "./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e&");
-/* harmony import */ var _Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expedientes.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expedientes.vue?vue&type=template&id=7e3180b1& */ "./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1&");
+/* harmony import */ var _Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expedientes.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3630,8 +3630,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3641,14 +3641,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/Expedientes.vue"
+component.options.__file = "resources/js/postulacion/components/Expedientes.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ExperienciaLaboral.vue":
+/***/ "./resources/js/postulacion/components/ExperienciaLaboral.vue":
 /*!********************************************************************!*\
-  !*** ./resources/js/components/postulacion/ExperienciaLaboral.vue ***!
+  !*** ./resources/js/postulacion/components/ExperienciaLaboral.vue ***!
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3656,8 +3656,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExperienciaLaboral.vue?vue&type=template&id=efd6f8da& */ "./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da&");
-/* harmony import */ var _ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExperienciaLaboral.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExperienciaLaboral.vue?vue&type=template&id=62303c93& */ "./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93&");
+/* harmony import */ var _ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExperienciaLaboral.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3668,8 +3668,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3679,14 +3679,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/ExperienciaLaboral.vue"
+component.options.__file = "resources/js/postulacion/components/ExperienciaLaboral.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/GradoAcademico.vue":
+/***/ "./resources/js/postulacion/components/GradoAcademico.vue":
 /*!****************************************************************!*\
-  !*** ./resources/js/components/postulacion/GradoAcademico.vue ***!
+  !*** ./resources/js/postulacion/components/GradoAcademico.vue ***!
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3694,8 +3694,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GradoAcademico.vue?vue&type=template&id=5cf7dad2& */ "./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2&");
-/* harmony import */ var _GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GradoAcademico.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GradoAcademico.vue?vue&type=template&id=f84fd85c& */ "./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c&");
+/* harmony import */ var _GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GradoAcademico.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3706,8 +3706,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__.render,
-  _GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3717,14 +3717,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/GradoAcademico.vue"
+component.options.__file = "resources/js/postulacion/components/GradoAcademico.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/InputSolicitud.vue":
+/***/ "./resources/js/postulacion/components/InputSolicitud.vue":
 /*!****************************************************************!*\
-  !*** ./resources/js/components/postulacion/InputSolicitud.vue ***!
+  !*** ./resources/js/postulacion/components/InputSolicitud.vue ***!
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3732,8 +3732,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputSolicitud.vue?vue&type=template&id=24a771e5& */ "./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5&");
-/* harmony import */ var _InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js&");
+/* harmony import */ var _InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputSolicitud.vue?vue&type=template&id=4b87aae5& */ "./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5&");
+/* harmony import */ var _InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3744,8 +3744,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__.render,
-  _InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__.render,
+  _InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3755,14 +3755,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/InputSolicitud.vue"
+component.options.__file = "resources/js/postulacion/components/InputSolicitud.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/LenguaExtranjera.vue":
+/***/ "./resources/js/postulacion/components/LenguaExtranjera.vue":
 /*!******************************************************************!*\
-  !*** ./resources/js/components/postulacion/LenguaExtranjera.vue ***!
+  !*** ./resources/js/postulacion/components/LenguaExtranjera.vue ***!
   \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3770,9 +3770,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true& */ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true&");
-/* harmony import */ var _LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js&");
-/* harmony import */ var _LenguaExtranjera_vue_vue_type_style_index_0_id_307d02d1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& */ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&");
+/* harmony import */ var _LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true& */ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true&");
+/* harmony import */ var _LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js&");
+/* harmony import */ var _LenguaExtranjera_vue_vue_type_style_index_0_id_2032fbd1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& */ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3784,25 +3784,25 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "307d02d1",
+  "2032fbd1",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/LenguaExtranjera.vue"
+component.options.__file = "resources/js/postulacion/components/LenguaExtranjera.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Postulante.vue":
+/***/ "./resources/js/postulacion/components/Postulante.vue":
 /*!************************************************************!*\
-  !*** ./resources/js/components/postulacion/Postulante.vue ***!
+  !*** ./resources/js/postulacion/components/Postulante.vue ***!
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3810,8 +3810,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Postulante.vue?vue&type=template&id=f1759a00& */ "./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00&");
-/* harmony import */ var _Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Postulante.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Postulante.vue?vue&type=template&id=1129ec00& */ "./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00&");
+/* harmony import */ var _Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Postulante.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3822,8 +3822,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3833,14 +3833,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/Postulante.vue"
+component.options.__file = "resources/js/postulacion/components/Postulante.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue":
+/***/ "./resources/js/postulacion/components/ProduccionCientifica.vue":
 /*!**********************************************************************!*\
-  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue ***!
+  !*** ./resources/js/postulacion/components/ProduccionCientifica.vue ***!
   \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3848,8 +3848,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
-/* harmony import */ var _ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=template&id=2eaa5ada& */ "./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada&");
+/* harmony import */ var _ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3860,8 +3860,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3871,14 +3871,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/ProduccionCientifica.vue"
+component.options.__file = "resources/js/postulacion/components/ProduccionCientifica.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue":
+/***/ "./resources/js/postulacion/components/RequisitosIngreso.vue":
 /*!*******************************************************************!*\
-  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue ***!
+  !*** ./resources/js/postulacion/components/RequisitosIngreso.vue ***!
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3886,8 +3886,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
-/* harmony import */ var _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=template&id=1f9010b4& */ "./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4&");
+/* harmony import */ var _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3898,8 +3898,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render,
-  _RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3909,14 +3909,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/RequisitosIngreso.vue"
+component.options.__file = "resources/js/postulacion/components/RequisitosIngreso.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/SolicitudPostulante.vue":
+/***/ "./resources/js/postulacion/components/SolicitudPostulante.vue":
 /*!*********************************************************************!*\
-  !*** ./resources/js/components/postulacion/SolicitudPostulante.vue ***!
+  !*** ./resources/js/postulacion/components/SolicitudPostulante.vue ***!
   \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3924,8 +3924,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SolicitudPostulante.vue?vue&type=template&id=3e233704& */ "./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704&");
-/* harmony import */ var _SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SolicitudPostulante.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SolicitudPostulante.vue?vue&type=template&id=4a49cb7e& */ "./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e&");
+/* harmony import */ var _SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SolicitudPostulante.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3936,8 +3936,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__.render,
-  _SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3947,14 +3947,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/SolicitudPostulante.vue"
+component.options.__file = "resources/js/postulacion/components/SolicitudPostulante.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue":
 /*!*************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue ***!
   \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -3962,8 +3962,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue?vue&type=template&id=3cf25948& */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948&");
-/* harmony import */ var _AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AutorArticulo.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutorArticulo.vue?vue&type=template&id=e5978b48& */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48&");
+/* harmony import */ var _AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AutorArticulo.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -3974,8 +3974,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__.render,
-  _AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -3985,14 +3985,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue":
 /*!****************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4000,8 +4000,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoTrabajo.vue?vue&type=template&id=c1ec3276& */ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276&");
-/* harmony import */ var _DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoTrabajo.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoTrabajo.vue?vue&type=template&id=31e1c076& */ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076&");
+/* harmony import */ var _DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoTrabajo.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4012,8 +4012,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__.render,
-  _DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4023,14 +4023,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue":
 /*!**************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue ***!
   \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4038,8 +4038,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MemoriaTrabajo.vue?vue&type=template&id=39fb962e& */ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e&");
-/* harmony import */ var _MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MemoriaTrabajo.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MemoriaTrabajo.vue?vue&type=template&id=a5fca42e& */ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e&");
+/* harmony import */ var _MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MemoriaTrabajo.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4050,8 +4050,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__.render,
-  _MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4061,14 +4061,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue":
 /*!*******************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue ***!
   \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4076,8 +4076,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionArticulo.vue?vue&type=template&id=86d431d4& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4&");
-/* harmony import */ var _PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionArticulo.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionArticulo.vue?vue&type=template&id=574be3d4& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4&");
+/* harmony import */ var _PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionArticulo.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4088,8 +4088,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__.render,
-  _PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4099,14 +4099,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue":
 /*!*******************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue ***!
   \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4114,8 +4114,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionCapitulo.vue?vue&type=template&id=04d0ed54& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54&");
-/* harmony import */ var _PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionCapitulo.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionCapitulo.vue?vue&type=template&id=155bb056& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056&");
+/* harmony import */ var _PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionCapitulo.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4126,8 +4126,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__.render,
-  _PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4137,14 +4137,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue":
 /*!****************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4152,8 +4152,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionLibro.vue?vue&type=template&id=63f42a52& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52&");
-/* harmony import */ var _PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionLibro.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PublicacionLibro.vue?vue&type=template&id=160b23d7& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7&");
+/* harmony import */ var _PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PublicacionLibro.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4164,8 +4164,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__.render,
-  _PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__.render,
+  _PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4175,14 +4175,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue":
 /*!**************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue ***!
   \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4190,8 +4190,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReporteTecnico.vue?vue&type=template&id=10d5848c& */ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c&");
-/* harmony import */ var _ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReporteTecnico.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReporteTecnico.vue?vue&type=template&id=7cd6928c& */ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c&");
+/* harmony import */ var _ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReporteTecnico.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4202,8 +4202,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4213,14 +4213,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue":
 /*!*******************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/Resenia.vue ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/Resenia.vue ***!
   \*******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4228,8 +4228,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Resenia.vue?vue&type=template&id=20806842& */ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842&");
-/* harmony import */ var _Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Resenia.vue?vue&type=script&lang=js& */ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Resenia.vue?vue&type=template&id=b1731a42& */ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42&");
+/* harmony import */ var _Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Resenia.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -4240,8 +4240,8 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
   _Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
   null,
@@ -4251,14 +4251,14 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/postulacion/produccion-cientifica/Resenia.vue"
+component.options.__file = "resources/js/postulacion/components/produccion-cientifica/Resenia.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4266,14 +4266,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4281,14 +4281,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4296,14 +4296,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expediente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expediente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4311,14 +4311,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expedientes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expedientes.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4326,14 +4326,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExperienciaLaboral.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExperienciaLaboral.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4341,14 +4341,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GradoAcademico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GradoAcademico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4356,14 +4356,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InputSolicitud.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InputSolicitud.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4371,14 +4371,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4386,14 +4386,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Postulante.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Postulante.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4401,14 +4401,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4416,14 +4416,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4431,14 +4431,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SolicitudPostulante.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SolicitudPostulante.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4446,14 +4446,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AutorArticulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AutorArticulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4461,14 +4461,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoTrabajo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoTrabajo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4476,14 +4476,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MemoriaTrabajo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MemoriaTrabajo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4491,14 +4491,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionArticulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionArticulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4506,14 +4506,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionCapitulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionCapitulo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4521,14 +4521,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionLibro.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionLibro.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4536,14 +4536,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReporteTecnico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReporteTecnico.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -4551,358 +4551,358 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Resenia.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Resenia.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&":
+/***/ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& ***!
+  !*** ./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& ***!
   \*****************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_d1991272_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=style&index=0&id=d1991272&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_714f2fc7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=style&index=0&id=714f2fc7&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&":
+/***/ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&":
 /*!***************************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& ***!
+  !*** ./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& ***!
   \***************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_307d02d1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=style&index=0&id=307d02d1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_style_index_0_id_2032fbd1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2032fbd1&scoped=true&lang=css&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&":
+/***/ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&":
 /*!**********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62& ***!
+  !*** ./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f& ***!
   \**********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_e8130d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=template&id=e8130d62& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CapitalHumano_vue_vue_type_template_id_5bab204f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CapitalHumano.vue?vue&type=template&id=5bab204f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true&":
+/***/ "./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true&":
 /*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true& ***!
+  !*** ./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true& ***!
   \***************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_d1991272_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_714f2fc7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2&":
+/***/ "./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c&":
 /*!*******************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2& ***!
+  !*** ./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c& ***!
   \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_0eb43db2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expediente.vue?vue&type=template&id=0eb43db2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expediente_vue_vue_type_template_id_cece129c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expediente.vue?vue&type=template&id=cece129c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e&":
+/***/ "./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1&":
 /*!********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e& ***!
+  !*** ./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1& ***!
   \********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_6901cc9e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expedientes.vue?vue&type=template&id=6901cc9e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expedientes_vue_vue_type_template_id_7e3180b1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Expedientes.vue?vue&type=template&id=7e3180b1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da&":
+/***/ "./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93&":
 /*!***************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da& ***!
+  !*** ./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93& ***!
   \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_efd6f8da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExperienciaLaboral.vue?vue&type=template&id=efd6f8da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExperienciaLaboral_vue_vue_type_template_id_62303c93___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExperienciaLaboral.vue?vue&type=template&id=62303c93& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2&":
+/***/ "./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c&":
 /*!***********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2& ***!
+  !*** ./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c& ***!
   \***********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_5cf7dad2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GradoAcademico.vue?vue&type=template&id=5cf7dad2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GradoAcademico_vue_vue_type_template_id_f84fd85c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GradoAcademico.vue?vue&type=template&id=f84fd85c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5&":
+/***/ "./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5&":
 /*!***********************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5& ***!
+  !*** ./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5& ***!
   \***********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_24a771e5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InputSolicitud.vue?vue&type=template&id=24a771e5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InputSolicitud_vue_vue_type_template_id_4b87aae5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InputSolicitud.vue?vue&type=template&id=4b87aae5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true&":
+/***/ "./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true&":
 /*!*************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true& ***!
+  !*** ./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true& ***!
   \*************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_307d02d1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LenguaExtranjera_vue_vue_type_template_id_2032fbd1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00&":
+/***/ "./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00&":
 /*!*******************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00& ***!
+  !*** ./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00& ***!
   \*******************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_f1759a00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Postulante.vue?vue&type=template&id=f1759a00& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Postulante_vue_vue_type_template_id_1129ec00___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Postulante.vue?vue&type=template&id=1129ec00& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&":
+/***/ "./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada&":
 /*!*****************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da& ***!
+  !*** ./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada& ***!
   \*****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_6c98e1da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=6c98e1da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=2eaa5ada& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/***/ "./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4&":
 /*!**************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  !*** ./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4& ***!
   \**************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_2da25eb4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=template&id=2da25eb4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RequisitosIngreso_vue_vue_type_template_id_1f9010b4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RequisitosIngreso.vue?vue&type=template&id=1f9010b4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704&":
+/***/ "./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e&":
 /*!****************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704& ***!
+  !*** ./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e& ***!
   \****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_3e233704___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SolicitudPostulante.vue?vue&type=template&id=3e233704& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SolicitudPostulante_vue_vue_type_template_id_4a49cb7e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SolicitudPostulante.vue?vue&type=template&id=4a49cb7e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48&":
 /*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48& ***!
   \********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_3cf25948___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AutorArticulo.vue?vue&type=template&id=3cf25948& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutorArticulo_vue_vue_type_template_id_e5978b48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AutorArticulo.vue?vue&type=template&id=e5978b48& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076&":
 /*!***********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076& ***!
   \***********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_c1ec3276___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoTrabajo.vue?vue&type=template&id=c1ec3276& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoTrabajo_vue_vue_type_template_id_31e1c076___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoTrabajo.vue?vue&type=template&id=31e1c076& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e&":
 /*!*********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e& ***!
   \*********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_39fb962e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MemoriaTrabajo.vue?vue&type=template&id=39fb962e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MemoriaTrabajo_vue_vue_type_template_id_a5fca42e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MemoriaTrabajo.vue?vue&type=template&id=a5fca42e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4&":
 /*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4& ***!
   \**************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_86d431d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionArticulo.vue?vue&type=template&id=86d431d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionArticulo_vue_vue_type_template_id_574be3d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionArticulo.vue?vue&type=template&id=574be3d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056&":
 /*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056& ***!
   \**************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_04d0ed54___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionCapitulo.vue?vue&type=template&id=04d0ed54& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionCapitulo_vue_vue_type_template_id_155bb056___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionCapitulo.vue?vue&type=template&id=155bb056& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7&":
 /*!***********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7& ***!
   \***********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_63f42a52___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionLibro.vue?vue&type=template&id=63f42a52& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PublicacionLibro_vue_vue_type_template_id_160b23d7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./PublicacionLibro.vue?vue&type=template&id=160b23d7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c&":
 /*!*********************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c& ***!
   \*********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_10d5848c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReporteTecnico.vue?vue&type=template&id=10d5848c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReporteTecnico_vue_vue_type_template_id_7cd6928c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ReporteTecnico.vue?vue&type=template&id=7cd6928c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c&");
 
 
 /***/ }),
 
-/***/ "./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842&":
+/***/ "./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42&":
 /*!**************************************************************************************************************!*\
-  !*** ./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842& ***!
+  !*** ./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42& ***!
   \**************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_20806842___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Resenia.vue?vue&type=template&id=20806842& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Resenia_vue_vue_type_template_id_b1731a42___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Resenia.vue?vue&type=template&id=b1731a42& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42&");
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/CapitalHumano.vue?vue&type=template&id=e8130d62& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f& ***!
   \*************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -5022,9 +5022,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/DocumentoRequerido.vue?vue&type=template&id=d1991272&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/DocumentoRequerido.vue?vue&type=template&id=714f2fc7&scoped=true& ***!
   \******************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -5106,9 +5106,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expediente.vue?vue&type=template&id=0eb43db2& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expediente.vue?vue&type=template&id=cece129c& ***!
   \**********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -5148,9 +5148,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Expedientes.vue?vue&type=template&id=6901cc9e& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Expedientes.vue?vue&type=template&id=7e3180b1& ***!
   \***********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -5328,9 +5328,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93&":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ExperienciaLaboral.vue?vue&type=template&id=efd6f8da& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ExperienciaLaboral.vue?vue&type=template&id=62303c93& ***!
   \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -5682,9 +5682,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/GradoAcademico.vue?vue&type=template&id=5cf7dad2& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/GradoAcademico.vue?vue&type=template&id=f84fd85c& ***!
   \**************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -6544,9 +6544,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/InputSolicitud.vue?vue&type=template&id=24a771e5& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/InputSolicitud.vue?vue&type=template&id=4b87aae5& ***!
   \**************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -6648,9 +6648,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/LenguaExtranjera.vue?vue&type=template&id=307d02d1&scoped=true& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/LenguaExtranjera.vue?vue&type=template&id=2032fbd1&scoped=true& ***!
   \****************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -7306,9 +7306,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/Postulante.vue?vue&type=template&id=f1759a00& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/Postulante.vue?vue&type=template&id=1129ec00& ***!
   \**********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -7714,9 +7714,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada&":
 /*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/ProduccionCientifica.vue?vue&type=template&id=6c98e1da& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada& ***!
   \********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8005,9 +8005,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/RequisitosIngreso.vue?vue&type=template&id=2da25eb4& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4& ***!
   \*****************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8108,9 +8108,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/SolicitudPostulante.vue?vue&type=template&id=3e233704& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/SolicitudPostulante.vue?vue&type=template&id=4a49cb7e& ***!
   \*******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8567,9 +8567,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48&":
 /*!***********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=3cf25948& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/AutorArticulo.vue?vue&type=template&id=e5978b48& ***!
   \***********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8643,9 +8643,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076&":
 /*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=c1ec3276& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/DocumentoTrabajo.vue?vue&type=template&id=31e1c076& ***!
   \**************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8745,9 +8745,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=39fb962e& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/MemoriaTrabajo.vue?vue&type=template&id=a5fca42e& ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8847,9 +8847,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=86d431d4& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionArticulo.vue?vue&type=template&id=574be3d4& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -8951,9 +8951,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=04d0ed54& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionCapitulo.vue?vue&type=template&id=155bb056& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -9060,9 +9060,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7&":
 /*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=63f42a52& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/PublicacionLibro.vue?vue&type=template&id=160b23d7& ***!
   \**************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -9143,9 +9143,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=10d5848c& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/ReporteTecnico.vue?vue&type=template&id=7cd6928c& ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -9245,9 +9245,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42&":
 /*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/postulacion/produccion-cientifica/Resenia.vue?vue&type=template&id=20806842& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/produccion-cientifica/Resenia.vue?vue&type=template&id=b1731a42& ***!
   \*****************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -21585,21 +21585,21 @@ Vue.compile = compileToFunctions;
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*************************************!*\
-  !*** ./resources/js/postulacion.js ***!
-  \*************************************/
+/*!*************************************************!*\
+  !*** ./resources/js/postulacion/postulacion.js ***!
+  \*************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _components_postulacion_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/postulacion/CapitalHumano.vue */ "./resources/js/components/postulacion/CapitalHumano.vue");
-/* harmony import */ var _components_postulacion_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/postulacion/DocumentoRequerido.vue */ "./resources/js/components/postulacion/DocumentoRequerido.vue");
-/* harmony import */ var _components_postulacion_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/postulacion/Expedientes.vue */ "./resources/js/components/postulacion/Expedientes.vue");
-/* harmony import */ var _components_postulacion_ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/postulacion/ExperienciaLaboral.vue */ "./resources/js/components/postulacion/ExperienciaLaboral.vue");
-/* harmony import */ var _components_postulacion_GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/postulacion/GradoAcademico.vue */ "./resources/js/components/postulacion/GradoAcademico.vue");
-/* harmony import */ var _components_postulacion_LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/postulacion/LenguaExtranjera.vue */ "./resources/js/components/postulacion/LenguaExtranjera.vue");
-/* harmony import */ var _components_postulacion_Postulante_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/postulacion/Postulante.vue */ "./resources/js/components/postulacion/Postulante.vue");
-/* harmony import */ var _components_postulacion_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/postulacion/ProduccionCientifica.vue */ "./resources/js/components/postulacion/ProduccionCientifica.vue");
-/* harmony import */ var _components_postulacion_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/postulacion/RequisitosIngreso.vue */ "./resources/js/components/postulacion/RequisitosIngreso.vue");
-/* harmony import */ var _components_postulacion_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/postulacion/SolicitudPostulante.vue */ "./resources/js/components/postulacion/SolicitudPostulante.vue");
+/* harmony import */ var _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CapitalHumano.vue */ "./resources/js/postulacion/components/CapitalHumano.vue");
+/* harmony import */ var _components_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+/* harmony import */ var _components_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Expedientes.vue */ "./resources/js/postulacion/components/Expedientes.vue");
+/* harmony import */ var _components_ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ExperienciaLaboral.vue */ "./resources/js/postulacion/components/ExperienciaLaboral.vue");
+/* harmony import */ var _components_GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/GradoAcademico.vue */ "./resources/js/postulacion/components/GradoAcademico.vue");
+/* harmony import */ var _components_LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/LenguaExtranjera.vue */ "./resources/js/postulacion/components/LenguaExtranjera.vue");
+/* harmony import */ var _components_Postulante_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Postulante.vue */ "./resources/js/postulacion/components/Postulante.vue");
+/* harmony import */ var _components_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ProduccionCientifica.vue */ "./resources/js/postulacion/components/ProduccionCientifica.vue");
+/* harmony import */ var _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
+/* harmony import */ var _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/SolicitudPostulante.vue */ "./resources/js/postulacion/components/SolicitudPostulante.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -21628,16 +21628,16 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 var app = new vue__WEBPACK_IMPORTED_MODULE_10__.default({
   el: '#app',
   components: {
-    CapitalHumano: _components_postulacion_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__.default,
-    DocumentoRequerido: _components_postulacion_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    Expedientes: _components_postulacion_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    ExperienciaLaboral: _components_postulacion_ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    GradoAcademico: _components_postulacion_GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    LenguaExtranjera: _components_postulacion_LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default,
-    Postulante: _components_postulacion_Postulante_vue__WEBPACK_IMPORTED_MODULE_6__.default,
-    ProduccionCientifica: _components_postulacion_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__.default,
-    RequisitosIngreso: _components_postulacion_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__.default,
-    SolicitudPostulante: _components_postulacion_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__.default
+    CapitalHumano: _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    DocumentoRequerido: _components_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    Expedientes: _components_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    ExperienciaLaboral: _components_ExperienciaLaboral_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    GradoAcademico: _components_GradoAcademico_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    LenguaExtranjera: _components_LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    Postulante: _components_Postulante_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    ProduccionCientifica: _components_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__.default,
+    RequisitosIngreso: _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__.default,
+    SolicitudPostulante: _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__.default
   },
   data: {
     archive: archiveModel,
