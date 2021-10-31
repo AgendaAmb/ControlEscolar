@@ -106,7 +106,6 @@ class AddProfessors implements ShouldQueue
             return;
 
         $professors = $miPortalResponse->collect()->toArray();
-        dd($professors);
 
         foreach ($professors as $mi_portal_professor)
         {   
@@ -118,8 +117,8 @@ class AddProfessors implements ShouldQueue
             $academic_area = AcademicArea::firstWhere('name', $professor['academic_area']);
             $academic_entity = AcademicEntity::firstWhere('name', $professor['academic_entity']);
 
-            $professor_model = User::updateOrCreate(collect($professor)->only('id', 'type')->toArray());
-            $professor_model->syncRoles(['profesor_nb']);
+            $professor_model = User::firstOrCreate(collect($professor)->only('id', 'type')->toArray());
+            $professor_model->roles()->sync([4 => [ 'model_id' => $professor_model->id, 'model_type' => $professor['type']]]);
             $professor_model->academicAreas()->sync([$academic_area->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
             $professor_model->academicEntities()->sync([$academic_entity->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
 

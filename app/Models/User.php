@@ -53,7 +53,8 @@ class User extends Authenticatable
         'remember_token',
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'pivot'
     ];
 
     /**
@@ -119,7 +120,7 @@ class User extends Authenticatable
             'role_id',
             'id',
             'id'
-        );
+        )->select('id', 'name');
     }
 
     /**
@@ -192,5 +193,15 @@ class User extends Authenticatable
                 $this->roles()->attach($role_id, ['model_type' => $this->type]);
             }
         }
+    }
+
+    /**
+     * Determina si el usuario es un postulante.
+     *
+     * @return 
+     */
+    public function getIsAppliantAttribute()
+    {
+        return $this->hasAnyRole(['aspirante_local','aspirante_foraneo','aspirante_extranjero']);
     }
 }

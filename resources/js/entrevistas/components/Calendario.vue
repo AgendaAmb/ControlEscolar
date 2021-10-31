@@ -15,11 +15,11 @@
         <h3 class="v-cal-header__title">{{ calendarTitle }}</h3>
       </div>
     </header>
-    <component
-            :is="activeView"
-            :class="'v-cal-content--' + activeView"
-            v-bind="activeViewProps"
-    ></component>
+    <component :is="activeView"
+        :class="'v-cal-content--' + activeView"
+        v-bind="activeViewProps">
+    </component>
+    
     <footer class="v-cal-footer"></footer>
   </div>
 </template>

@@ -99,7 +99,7 @@ export default {
    * Jala los datos de los servidores de AA.
    */
   mounted() {
-    this.$nextTick(() => {
+    this.$nextTick(function() {
       axios.get("/controlescolar/users/appliants")
         .then((response) => {
           Vue.set(this, "appliants", response.data);

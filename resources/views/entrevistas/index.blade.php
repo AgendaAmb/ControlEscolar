@@ -1,5 +1,7 @@
 <script>
 const user = @json($user);
+const period = @json($period);
+const appliants = @json($appliants);
 </script>
 
 @extends('layouts.app')
@@ -11,9 +13,9 @@ const user = @json($user);
 
 @section('main')
 <calendario-entrevistas v-bind:period="period"
-    v-bind:appliants="appliants"
     v-bind:date.sync="date"
-    v-bind:interviews="interviews">
+    v-bind:interviews="period.interviews"
+    v-bind:auth_user="loggedUser">
 </calendario-entrevistas>
 
 <nuevo-periodo v-if="period === null" 
@@ -21,14 +23,14 @@ const user = @json($user);
 </nuevo-periodo>
 
 <nueva-entrevista v-if="period !== null" 
-    v-bind:appliants="appliants"
+    v-bind:appliants="period.appliants"
     v-bind:period_id="period.id"
     v-bind:date="date"
     v-bind:rooms="period.rooms"
     v-on:nuevaentrevista="agregaEntrevista">
 </nueva-entrevista>
 
-<detalle-entrevista v-if="period !== null" ></detalle-entrevista>
+<detalle-entrevista v-if="period !== null" v-bind="selectedInterview"></detalle-entrevista>
 
 @endsection
 @push('scripts')

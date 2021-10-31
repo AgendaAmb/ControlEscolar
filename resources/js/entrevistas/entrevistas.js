@@ -49,11 +49,11 @@ Vue.use(VueScheduler, {
 const app = new Vue({
     el: '#app',
     data:{
+        appliants: appliants,
         loggedUser: user,
-        period: null,
-        appliants: [],
-        interviews: [],
+        period: period,
         date: null,
+        selectedInterview: null,
     },
 
     components: {
@@ -82,6 +82,23 @@ const app = new Vue({
          */
         agregaEntrevista(entrevista){
             this.interviews.push(entrevista);
+        },
+
+        /**
+         * 
+         */
+        interviewDetails(interview) {
+            this.selectedInterview = {
+                appliant: interview.appliant,
+                areas: interview.areas,
+                date: interview.date,
+                professor: interview.professor,
+                room: interview.room,
+                start_time: interview.start_time,
+                end_time: interview.end_time
+            };
+
+            $('#DetalleEntrevista').modal('show');
         }
     },
 
@@ -89,14 +106,6 @@ const app = new Vue({
      * Jala los datos de los servidores de AA.
      */
     mounted() {
-        this.$nextTick(function () {
-            axios.get("/controlescolar/users/appliants")
-            .then(response => Vue.set(this, "appliants", response.data))
-            .catch(error => {});
-
-            axios.get("/controlescolar/entrevistas/periods")
-            .then(response => this.actualizaPeriodo(response.data))
-            .catch(error => {});
-        });
+        this.$root.$on('show_details', this.interviewDetails);
     },
 });

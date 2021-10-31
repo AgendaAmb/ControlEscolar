@@ -12,33 +12,45 @@
         <div class="modal-body">
           <form @submit.prevent="creaPeriodo">
             <div class="row mx-3 mt-3">
-              <div class="col-lg-6">
-                <h5 class="d-block fecha"> Lunes 4 de octubre, 2021 </h5>
-                <h5 class="d-block postulante mt-3"> Córdova Molina Cynthia del Carmen </h5>
+              <div class="col-lg-6 px-0">
+                <h5 class="d-block fecha"> {{date}} </h5>
+                <h5 class="d-block postulante mt-3"> {{appliant}} </h5>
                 <p class="d-block mt-3 mb-0 title-prof-carta-intencion"> Carta de intención otorgada por: </p>
-                <p class="d-block mt-0 prof-carta-intencion"> Dr. Antonio Cardona Benavides </p>
+                <p class="d-block mt-0 prof-carta-intencion"> {{professor}} </p>
               </div>
-              <div class="col-lg-6 my-auto">
-                <p class="d-block mt-0 sala"> Sala 1, 8:00 a 9:30 </p>
+              <div class="col-lg-6 my-auto px-0">
+                <p class="d-block mt-0 sala"> Sala {{room}}, {{start_time}} - {{end_time}} </p>
               </div>
               <div class="col-12">
-                <div class="row mt-3 justify-content-between areas-academicas my-auto py-2">
-                  <div class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> Evaluación </h5>
+                <table class="table">
+                  <thead class="areas-academicas">
+                    <tr>
+                      <th v-for="area in areas" :key="area.id">
+                        <h5 class="d-block my-auto"> {{area.name}} </h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td v-for="area in areas" :key="area.id">
+                        <p> {{area.professor_name}} </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!--
+                <div class="row justify-content-between my-auto">
+                  
+                  <div v-for="area in areas" :key="area.id" class="col-2 px-0 my-auto">
+                    <h5 class="d-block areas-academicas my-auto py-3 px-3"> {{area.name}} </h5>
+                    <a class="registrar-participacion py-3" href="#">
+                      <p> {{area.professor_name}} </p>
+                    </a>
                   </div>
-                  <div class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> Prevención </h5>
+                  <div v-for="area in areas" :key="area.id" class="col-2 my-auto">
+                    <h5 class="d-block my-auto"> {{area.name}} </h5>
                   </div>
-                  <div class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> Recursos naturales </h5>
-                  </div>
-                  <div class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> Gestión Ambiental </h5>
-                  </div>
-                  <div class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> Salud Ambiental </h5>
-                  </div>
-                </div>
+                </div>-->
               </div>
             </div>
           </form>
@@ -59,6 +71,12 @@
   color: white;
 }
 
+.areas-academicas {
+  text-align: center;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
 .modal-body label, .title-prof-carta-intencion, .sala {
   color: #115089;
 }
@@ -68,9 +86,28 @@
   color: #115089;
 }
 
+.registrar-participacion {
+  background-color: white;
+  color: #115089;
+  font-family: 'Myriad Pro Regular';
+  display: block;
+  font-size: 12px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.prof-carta-intencion {
+  text-transform: capitalize;
+}
+
+.fecha::first-letter {
+  text-transform: capitalize;
+}
+
 .modal-body .postulante {
   font-family: 'Myriad Pro Bold';
   color: #fecc56;
+  text-transform: capitalize;
 }
 
 .modal-footer button.btn-secondary {
@@ -83,18 +120,66 @@
 export default {
   name: "detalle-entrevista",
 
-  data() {
-    return {
-      event: {},
-      start_date: null,
-      end_date: null,
-      num_salas: 1,
-    };
+  props: {
+    // Nombre del postulante de la entrevista.
+    appliant: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    // Nombre del postulante de la entrevista.
+    date: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    // Profesor que otorgó la carta de intención
+    professor: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    // Número de sala.
+    room: {
+      type: Number,
+      default: -1
+    },
+
+    // Hora de inicio.
+    start_time: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    // Hora de fin.
+    end_time: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    // Áreas académicas de las entrevistas.
+    areas: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+
+    // Teachers
+    users: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
+
+  computed: {
   },
 
   methods: {
     creaPeriodo() {
-    },
-  }
+    }
+  },
 };
 </script>

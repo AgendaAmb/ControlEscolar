@@ -121,18 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -149,31 +137,85 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     // Periodo de entrevistas.
-    period: Object,
-    // Postulantes de la entrevista.
-    appliants: Array,
+    period: {
+      type: Object,
+      "default": null
+    },
     // Entrevistas agendadas.
-    interviews: Array
+    interviews: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    // Usuario autenticado.
+    auth_user: {
+      type: Object,
+      "default": function _default() {
+        return {
+          id: -1,
+          type: null,
+          name: null,
+          middlename: null,
+          surname: null,
+          roles: []
+        };
+      }
+    },
+    // Vistas disponibles del calendario.
+    availableViews: {
+      type: Array,
+      "default": function _default() {
+        return ['month', 'week', 'day'];
+      }
+    },
+    // Configuración de la hora (locale).
+    locale: {
+      type: String,
+      "default": 'es-mx'
+    },
+    // Plantillas / visualizaciones disponibles para
+    // el calendario.
+    labels: {
+      type: Object,
+      "default": function _default() {
+        return {
+          today: "Hoy",
+          back: "Atrás",
+          next: "Siguiente",
+          month: "Mes",
+          week: "Semana",
+          day: "Día",
+          all_day: "Todo el día"
+        };
+      }
+    },
+    // Rango de horas disponibles para
+    // el calendario.
+    timeRange: {
+      type: Array,
+      "default": function _default() {
+        return [0, 23];
+      }
+    },
+    // Colorea el día actual.
+    showTodayButton: {
+      type: Boolean,
+      "default": true
+    },
+    // Día actual.
+    today: {
+      type: Object,
+      "default": function _default() {
+        return moment__WEBPACK_IMPORTED_MODULE_0___default()();
+      }
+    }
   },
   data: function data() {
     return {
-      locale: "es-mx",
       initialView: 'month',
-      showTodayButton: true,
-      today: moment__WEBPACK_IMPORTED_MODULE_0___default()(),
-      activeView: '',
-      activeDate: null,
-      availableViews: ['month', 'week', 'day'],
-      timeRange: [0, 23],
-      labels: {
-        today: "Hoy",
-        back: "Atrás",
-        next: "Siguiente",
-        month: "Mes",
-        week: "Semana",
-        day: "Día",
-        all_day: "Todo el día"
-      }
+      activeView: 'month',
+      activeDate: moment__WEBPACK_IMPORTED_MODULE_0___default()()
     };
   },
   filters: {
@@ -182,12 +224,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    initialDate: function initialDate() {
-      this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.initialDate);
-    },
-    initialView: function initialView() {
-      this.activeView = this.initialView;
-    },
     activeDate: function activeDate() {
       this.$emit(this.activeView + '-changed', this.activeDate.toDate());
     },
@@ -196,6 +232,24 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    isProfessor: function isProfessor() {
+      var roles = this.auth_user.roles.filter(function (role) {
+        return role.name === 'profesor_nb';
+      });
+      return roles.length > 0;
+    },
+    isAdmin: function isAdmin() {
+      var roles = this.auth_user.roles.filter(function (role) {
+        return role.name === 'administrator';
+      });
+      return roles.length > 0;
+    },
+    isSchoolControl: function isSchoolControl() {
+      var roles = this.auth_user.roles.filter(function (role) {
+        return role.name === 'control_escolar';
+      });
+      return roles.length > 0;
+    },
     newEvents: function newEvents() {
       var _this = this;
 
@@ -293,9 +347,19 @@ __webpack_require__.r(__webpack_exports__);
     CalendarClass: {
       get: function get() {
         return {
-          'col-12': !this.dayClicked,
-          'col-lg-9': this.dayClicked,
-          'pr-lg-0': true
+          'col-lg-8': this.isProfessor,
+          'col-12': !this.isProfessor,
+          'pr-lg-0': true,
+          'order-3': true
+        };
+      }
+    },
+    NotificationsClass: {
+      get: function get() {
+        return {
+          'col-lg-4': true,
+          'pl-lg-0': true,
+          'order-3': true
         };
       }
     },
@@ -306,35 +370,25 @@ __webpack_require__.r(__webpack_exports__);
         };
       }
     },
-    StringDate: {
-      get: function get() {
-        if (this.period === null) return "";
-        var event = new Date(this.period.start_date);
-        var options = {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        };
-        return event.toLocaleDateString('es-MX', options);
-      }
+    StringDate: function StringDate() {
+      if (this.activeDate === null) return this.activeDate;
+      return this.activeDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
+    },
+    ActiveDateInterviews: function ActiveDateInterviews() {
+      var activeDate = this.activeDate.format('YYYY-MM-DD');
+      return this.interviews.filter(function (interview) {
+        var interviewDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.date);
+        return interviewDate.isSame(activeDate);
+      });
     }
   },
   methods: {
-    getDayInterviews: function getDayInterviews(date) {
-      var moment_date = moment__WEBPACK_IMPORTED_MODULE_0___default()(date, 'YYYY-MM-DD');
-      return this.interviews.filter(function (interview) {
-        return moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.date).isSame(moment_date);
-      });
-    },
     abreModalEntrevistas: function abreModalEntrevistas(date) {
-      //if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-      //return false;
-      //if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-      //return false;
+      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
+      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
-      $('#DetalleEntrevista').modal('show');
+      if (!this.isProfessor) $('#NuevaEntrevista').modal('show');
     },
     goToToday: function goToToday() {
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.today);
@@ -352,12 +406,22 @@ __webpack_require__.r(__webpack_exports__);
       return {
         'v-cal-button--is-active': this.activeView === view
       };
+    },
+    interviewDataFrom: function interviewDataFrom(interview) {
+      var appliant = interview.appliant.name + " " + interview.appliant.middlename + " " + interview.appliant.surname;
+      var professor = interview.intention_letter_professor.name + " " + interview.intention_letter_professor.middlename + " " + interview.intention_letter_professor.surname;
+      var start_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.start_time, 'hh:mm:ss').format('hh:mm A');
+      var end_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.end_time, 'hh:mm:ss').format('hh:mm A');
+      return {
+        'room': interview.room_id,
+        'areas': interview.academic_areas,
+        'date': this.StringDate,
+        'appliant': appliant.toLowerCase(),
+        'professor': professor.toLowerCase(),
+        'start_time': start_time,
+        'end_time': end_time
+      };
     }
-  },
-  mounted: function mounted() {
-    //  Initial setup
-    this.activeView = this.initialView;
-    this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.initialDate);
   }
 });
 
@@ -455,16 +519,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
-  data: function data() {
-    return {
-      event: {},
-      start_date: null,
-      end_date: null,
-      num_salas: 1
-    };
+  props: {
+    // Nombre del postulante de la entrevista.
+    appliant: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Nombre del postulante de la entrevista.
+    date: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Profesor que otorgó la carta de intención
+    professor: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Número de sala.
+    room: {
+      type: Number,
+      "default": -1
+    },
+    // Hora de inicio.
+    start_time: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Hora de fin.
+    end_time: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Áreas académicas de las entrevistas.
+    areas: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    // Teachers
+    users: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
   },
+  computed: {},
   methods: {
     creaPeriodo: function creaPeriodo() {}
   }
@@ -624,17 +764,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "interview",
   props: {
-    // Postulante de la entrevista.
-    appliant: String,
-    // Profesor de la carta de intención.
-    professor: String,
+    // Nombre del postulante de la entrevista.
+    appliant: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Nombre del postulante de la entrevista.
+    date: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Profesor que otorgó la carta de intención
+    professor: {
+      type: String,
+      "default": "Indefinido"
+    },
     // Número de sala.
-    room: String,
-    // Horario.
-    time: String
+    room: {
+      type: Number,
+      "default": -1
+    },
+    // Hora de inicio.
+    start_time: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Hora de fin.
+    end_time: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // Áreas académicas.
+    areas: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
+  methods: {
+    showDetails: function showDetails() {
+      this.$root.$emit('show_details', this);
+      return false;
+    }
   }
 });
 
@@ -1782,7 +1980,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.detalle-entrevista[data-v-659b4636] {\n  max-width: 750px;\n}\n.modal-header.modal-header-blue[data-v-659b4636], .modal-footer button.btn-primary[data-v-659b4636], .areas-academicas[data-v-659b4636] {\n  background-color: #115089;\n  font-family: 'Myriad Pro Bold';\n  color: white;\n}\n.modal-body label[data-v-659b4636], .title-prof-carta-intencion[data-v-659b4636], .sala[data-v-659b4636] {\n  color: #115089;\n}\n.modal-body .fecha[data-v-659b4636], .prof-carta-intencion[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #115089;\n}\n.modal-body .postulante[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n}\n.modal-footer button.btn-secondary[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.detalle-entrevista[data-v-659b4636] {\n  max-width: 750px;\n}\n.modal-header.modal-header-blue[data-v-659b4636], .modal-footer button.btn-primary[data-v-659b4636], .areas-academicas[data-v-659b4636] {\n  background-color: #115089;\n  font-family: 'Myriad Pro Bold';\n  color: white;\n}\n.areas-academicas[data-v-659b4636] {\n  text-align: center;\n  font-size: 13px;\n  text-transform: capitalize;\n}\n.modal-body label[data-v-659b4636], .title-prof-carta-intencion[data-v-659b4636], .sala[data-v-659b4636] {\n  color: #115089;\n}\n.modal-body .fecha[data-v-659b4636], .prof-carta-intencion[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #115089;\n}\n.registrar-participacion[data-v-659b4636] {\n  background-color: white;\n  color: #115089;\n  font-family: 'Myriad Pro Regular';\n  display: block;\n  font-size: 12px;\n  text-transform: capitalize;\n  text-align: center;\n}\n.prof-carta-intencion[data-v-659b4636] {\n  text-transform: capitalize;\n}\n.fecha[data-v-659b4636]::first-letter {\n  text-transform: capitalize;\n}\n.modal-body .postulante[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n  text-transform: capitalize;\n}\n.modal-footer button.btn-secondary[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n  display: block;\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\n  font-family: 'Myriad Pro Regular';\n  font-size: 13px;\n  color: #115089;\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\n  font-family: 'Myriad Pro Bold';\n  font-size: 13px;\n  color: #115089;\n  text-transform: capitalize;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23491,6 +23713,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_style_index_0_id_21c69871_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_style_index_0_id_21c69871_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_style_index_0_id_21c69871_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& ***!
@@ -25838,23 +26090,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Interview.vue?vue&type=template&id=21c69871& */ "./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&");
+/* harmony import */ var _Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Interview.vue?vue&type=template&id=21c69871&scoped=true& */ "./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true&");
 /* harmony import */ var _Interview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Interview.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas/components/Interview.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Interview_vue_vue_type_style_index_0_id_21c69871_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& */ "./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _Interview_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  null,
+  "21c69871",
   null
   
 )
@@ -26250,6 +26504,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_style_index_0_id_21c69871_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=style&index=0&id=21c69871&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css&":
 /*!**************************************************************************************************************************!*\
   !*** ./resources/js/entrevistas/components/NuevaEntrevista.vue?vue&type=style&index=0&id=34cc71e8&scoped=true&lang=css& ***!
@@ -26571,19 +26838,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true& ***!
+  \******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Interview.vue?vue&type=template&id=21c69871& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Interview_vue_vue_type_template_id_21c69871_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Interview.vue?vue&type=template&id=21c69871&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true&");
 
 
 /***/ }),
@@ -27612,8 +27879,8 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.IsActive === true
-      ? _c("div", { staticClass: "col-lg-8 pr-lg-0 order-3" }, [
+    _vm.IsActive
+      ? _c("div", { class: _vm.CalendarClass }, [
           _c(
             "div",
             { staticClass: "v-cal" },
@@ -27639,7 +27906,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.IsActive === true
+    _vm.IsActive && _vm.isProfessor
       ? _c(
           "div",
           { staticClass: "col-lg-4 pl-lg-0 order-3" },
@@ -27648,8 +27915,16 @@ var render = function() {
               _c("p", [_vm._v(_vm._s(_vm.StringDate))])
             ]),
             _vm._v(" "),
-            _vm._l(_vm.getDayInterviews(_vm.activeDate), function(interview) {
-              return _c("interview", { key: interview.id })
+            _vm._l(_vm.ActiveDateInterviews, function(interview) {
+              return _c(
+                "interview",
+                _vm._b(
+                  { key: interview.id },
+                  "interview",
+                  _vm.interviewDataFrom(interview),
+                  false
+                )
+              )
             })
           ],
           2
@@ -27662,10 +27937,7 @@ var render = function() {
             "button",
             {
               staticClass: "my-3 v-cal-button",
-              attrs: {
-                "data-toggle": "modal",
-                "data-target": "#DetalleEntrevista"
-              }
+              attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" }
             },
             [_vm._v(" Programar periodo de entrevistas ")]
           )
@@ -27730,7 +28002,82 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._m(1)]
+                [
+                  _c("div", { staticClass: "row mx-3 mt-3" }, [
+                    _c("div", { staticClass: "col-lg-6 px-0" }, [
+                      _c("h5", { staticClass: "d-block fecha" }, [
+                        _vm._v(" " + _vm._s(_vm.date) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("h5", { staticClass: "d-block postulante mt-3" }, [
+                        _vm._v(" " + _vm._s(_vm.appliant) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass:
+                            "d-block mt-3 mb-0 title-prof-carta-intencion"
+                        },
+                        [_vm._v(" Carta de intención otorgada por: ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        { staticClass: "d-block mt-0 prof-carta-intencion" },
+                        [_vm._v(" " + _vm._s(_vm.professor) + " ")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-6 my-auto px-0" }, [
+                      _c("p", { staticClass: "d-block mt-0 sala" }, [
+                        _vm._v(
+                          " Sala " +
+                            _vm._s(_vm.room) +
+                            ", " +
+                            _vm._s(_vm.start_time) +
+                            " - " +
+                            _vm._s(_vm.end_time) +
+                            " "
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("table", { staticClass: "table" }, [
+                        _c("thead", { staticClass: "areas-academicas" }, [
+                          _c(
+                            "tr",
+                            _vm._l(_vm.areas, function(area) {
+                              return _c("th", { key: area.id }, [
+                                _c("h5", { staticClass: "d-block my-auto" }, [
+                                  _vm._v(" " + _vm._s(area.name) + " ")
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("tbody", [
+                          _c(
+                            "tr",
+                            _vm._l(_vm.areas, function(area) {
+                              return _c("td", { key: area.id }, [
+                                _c("p", [
+                                  _vm._v(
+                                    " " + _vm._s(area.professor_name) + " "
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ]
               )
             ])
           ])
@@ -27768,79 +28115,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-3 mt-3" }, [
-      _c("div", { staticClass: "col-lg-6" }, [
-        _c("h5", { staticClass: "d-block fecha" }, [
-          _vm._v(" Lunes 4 de octubre, 2021 ")
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "d-block postulante mt-3" }, [
-          _vm._v(" Córdova Molina Cynthia del Carmen ")
-        ]),
-        _vm._v(" "),
-        _c(
-          "p",
-          { staticClass: "d-block mt-3 mb-0 title-prof-carta-intencion" },
-          [_vm._v(" Carta de intención otorgada por: ")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "d-block mt-0 prof-carta-intencion" }, [
-          _vm._v(" Dr. Antonio Cardona Benavides ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-6 my-auto" }, [
-        _c("p", { staticClass: "d-block mt-0 sala" }, [
-          _vm._v(" Sala 1, 8:00 a 9:30 ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "row mt-3 justify-content-between areas-academicas my-auto py-2"
-          },
-          [
-            _c("div", { staticClass: "col-2 my-auto" }, [
-              _c("h5", { staticClass: "d-block my-auto" }, [
-                _vm._v(" Evaluación ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 my-auto" }, [
-              _c("h5", { staticClass: "d-block my-auto" }, [
-                _vm._v(" Prevención ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 my-auto" }, [
-              _c("h5", { staticClass: "d-block my-auto" }, [
-                _vm._v(" Recursos naturales ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 my-auto" }, [
-              _c("h5", { staticClass: "d-block my-auto" }, [
-                _vm._v(" Gestión Ambiental ")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-2 my-auto" }, [
-              _c("h5", { staticClass: "d-block my-auto" }, [
-                _vm._v(" Salud Ambiental ")
-              ])
-            ])
-          ]
-        )
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -27905,10 +28179,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas/components/Interview.vue?vue&type=template&id=21c69871&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -27921,25 +28195,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row mx-3" }, [
+  return _c("a", { staticClass: "row mx-3", on: { click: _vm.showDetails } }, [
     _c("div", { staticClass: "col-7" }, [
-      _c("p", { staticClass: "my-1" }, [
+      _c("h5", { staticClass: "my-1 appliant" }, [
         _vm._v(" " + _vm._s(_vm.appliant) + " ")
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "my-1" }, [
+      _c("p", { staticClass: "mt-2 mb-0 detail" }, [
         _vm._v(" Carta de intención otorgada por: ")
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "my-1" }, [
+      _c("p", { staticClass: "my-0" }, [
         _vm._v(" " + _vm._s(_vm.professor) + " ")
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-5 text-right" }, [
-      _c("p", { staticClass: "my-1" }, [_vm._v(" " + _vm._s(_vm.room) + " ")]),
+      _c("p", { staticClass: "my-1 detail" }, [
+        _vm._v(" Sala " + _vm._s(_vm.room) + " ")
+      ]),
       _vm._v(" "),
-      _c("p", { staticClass: "my-1" }, [_vm._v(" " + _vm._s(_vm.time) + " ")])
+      _c("p", { staticClass: "my-1 detail" }, [
+        _vm._v(
+          " " + _vm._s(_vm.start_time) + " - " + _vm._s(_vm.end_time) + " "
+        )
+      ])
     ])
   ])
 }
@@ -41216,11 +41496,11 @@ Vue.use(v_calendar_scheduler__WEBPACK_IMPORTED_MODULE_0__.default, {
 var app = new Vue({
   el: '#app',
   data: {
+    appliants: appliants,
     loggedUser: user,
-    period: null,
-    appliants: [],
-    interviews: [],
-    date: null
+    period: period,
+    date: null,
+    selectedInterview: null
   },
   components: {
     CalendarioEntrevistas: _components_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__.default,
@@ -41244,6 +41524,22 @@ var app = new Vue({
      */
     agregaEntrevista: function agregaEntrevista(entrevista) {
       this.interviews.push(entrevista);
+    },
+
+    /**
+     * 
+     */
+    interviewDetails: function interviewDetails(interview) {
+      this.selectedInterview = {
+        appliant: interview.appliant,
+        areas: interview.areas,
+        date: interview.date,
+        professor: interview.professor,
+        room: interview.room,
+        start_time: interview.start_time,
+        end_time: interview.end_time
+      };
+      $('#DetalleEntrevista').modal('show');
     }
   },
 
@@ -41251,16 +41547,7 @@ var app = new Vue({
    * Jala los datos de los servidores de AA.
    */
   mounted: function mounted() {
-    this.$nextTick(function () {
-      var _this = this;
-
-      axios.get("/controlescolar/users/appliants").then(function (response) {
-        return Vue.set(_this, "appliants", response.data);
-      })["catch"](function (error) {});
-      axios.get("/controlescolar/entrevistas/periods").then(function (response) {
-        return _this.actualizaPeriodo(response.data);
-      })["catch"](function (error) {});
-    });
+    this.$root.$on('show_details', this.interviewDetails);
   }
 });
 })();

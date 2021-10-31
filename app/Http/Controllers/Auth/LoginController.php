@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -46,8 +47,54 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        parent::__construct();
+        $this->middleware('guest')->except(['testLogin','logout']);
         $this->loginService = new LoginService;
+    }
+
+    /**
+     * Recupera los usuarios del sistema autenticado.
+     *
+     * @param \Illuminate\Http\Request  $request
+     * @param User $user
+     * @return void
+     */
+    private function getUsers(Request $request, User $user)
+    {
+        # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
+        if ($user->hasAnyRole(['aspirante_local','aspirante_foraneo','aspirante_extranjero']))
+            return;
+
+        # Carga otros datos que requiere el modelo.
+        $user->load(['academicAreas', 'academicEntities']);
+
+        # Busca a los postulantes.
+        $appliants = User::with(['latestArchive.intentionLetters:archive_intention_letter.user_id,archive_intention_letter.user_type'])
+            ->hasArchive()
+            ->appliant()
+            ->pluck('id');
+
+        # Busca a los profesores en el sistema.
+        $professors = User::role('profesor_nb')->pluck('id');
+        
+        # Fusiona a los usuarios.
+        $users = $professors->merge($appliants)->toArray();
+
+        # Consulta a los usuarios.
+        $response = $this->miPortalService->miPortalGet('api/usuarios', [
+            'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
+            'fields[users]' => 'id,name,middlename,surname,type',
+            'filter[id]' => $users
+        ]);
+
+        # Recolecta el resultado.
+        $miPortal_appliants = $response->collect()->where('user_type', 'students');
+        $miPortal_workers = $response->collect()->where('user_type', 'workers');
+
+        # Guarda a los usuarios del sistema central en la sesión.
+        $request->session()->put('appliants', $miPortal_appliants);
+        $request->session()->put('workers', $miPortal_workers);
+        $request->session()->put('user', $user);
     }
 
     /**
@@ -82,9 +129,10 @@ class LoginController extends Controller
             return back()->withErrors(['motivo' => 'Usuario no registrado en el sistema']);
 
         # Autentica al usuario y guarda los datos del sistema central.
+        $miportal_user['roles'] = $user->roles;
         Auth::login($user);
-        $request->session()->put('user', $miportal_user);
-        
+
+        $this->getUsers($request, $user);
 
         # Redirecciona a la página principal.
         return redirect()->route('entrevistas.calendario');
@@ -98,11 +146,15 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function testLogin($user)
+    public function testLogin(Request $request, $user)
     {
         # Determina si se requiere solicitar autorización.
         Auth::loginUsingId($user);
         
+        /** @var User */
+        $user = Auth::user();
+        $user->load('roles');
+        $this->getUsers($request, $user);
 
         # Redirecciona a la página principal.
         return redirect()->route('entrevistas.calendario');

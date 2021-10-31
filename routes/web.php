@@ -84,11 +84,18 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 # Rutas para las entrevistas.
-Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
+Route::prefix('entrevistas')
+->middleware(['auth'])
+->name('entrevistas.')
+->group(function(){
 
     # Calendario
-    Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
-    Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
+    Route::get('calendario', [InterviewController::class, 'calendario'])
+    ->name('calendario');
+    
+    # Agenda una nueva entrevista.
+    Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])
+    ->name('nuevaEntrevista');
 
     # Rúbrica de evaluación
     Route::get('rubrica/{evaluationRubric}', [InterviewController::class, 'rubrica'])->name('rubrica');
@@ -102,14 +109,20 @@ Route::prefix('entrevistas')->name('entrevistas.')->group(function(){
 
 
 # Rutas de admin.
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')
+->name('admin.')
+->group(function(){
 
     # Vista de admin.
-    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/', [AdminController::class, 'index'])
+    ->name('index');
 
     # Profesores
-    Route::get('workers', [AdminController::class, 'workers'])->name('workers');
-    Route::post('newWorker', [AdminController::class, 'newWorker'])->name('newWorker');
+    Route::get('workers', [AdminController::class, 'workers'])
+    ->name('workers');
+    
+    Route::post('newWorker', [AdminController::class, 'newWorker'])
+    ->name('newWorker');
 });
 
 # Rutas de admin.

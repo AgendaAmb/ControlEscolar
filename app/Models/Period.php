@@ -24,7 +24,11 @@ class Period extends Model
      *
      * @var string[]
      */
-    protected $with = ['rooms','interviews.users'];
+    protected $with = [
+        'rooms',
+        'interviews.appliant:id,type',
+        'interviews.academicAreas'
+    ];
 
     /**
      * The attributes that should be hidden for serialization.

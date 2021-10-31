@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="col-lg-8 pr-lg-0 order-3" v-if="IsActive === true">
+    <div :class="CalendarClass" v-if="IsActive">
       <div class="v-cal">
         <component
           :is="activeView"
@@ -30,27 +30,15 @@
         <footer class="v-cal-footer"></footer>
       </div>
     </div>
-    <div class="col-lg-4 pl-lg-0 order-3" v-if="IsActive === true">
+    <div class="col-lg-4 pl-lg-0 order-3" v-if="IsActive && isProfessor">
       <header class="dia-entrevista"><p>{{StringDate}}</p></header>
-      <interview v-for="interview in getDayInterviews(activeDate)" 
+      <interview v-for="interview in ActiveDateInterviews" 
+        v-bind="interviewDataFrom(interview)"
         :key="interview.id"
         ></interview>
     </div>
-    
-
-      <!--
-      <vue-scheduler v-if="IsActive === true"
-       :events="interviews" 
-       :min-date="MinDate" 
-       :max-date="MaxDate" 
-       :disable-dialog="true"
-       @day-clicked="abreModalEntrevistas"></vue-scheduler>
-    </div>
-    <div class="col-lg-3 px-lg-0"> 
-      <div class="notificaciones">{{StringDate}}</div>
-    </div>-->
     <div v-if="IsActive === false" class="col-12 mx-2">
-      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#DetalleEntrevista"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
@@ -132,34 +120,99 @@ export default {
 
   props: {
     // Periodo de entrevistas.
-    period: Object,
-
-    // Postulantes de la entrevista.
-    appliants: Array,
+    period: {
+      type: Object,
+      default: null
+    },
 
     // Entrevistas agendadas.
-    interviews: Array,
+    interviews: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+
+    // Usuario autenticado.
+    auth_user: {
+      type: Object,
+
+      default() {
+        return {
+          id: -1,
+          type: null,
+          name: null,
+          middlename: null,
+          surname: null,
+          roles: []
+        }
+      }
+    },
+
+    // Vistas disponibles del calendario.
+    availableViews: {
+      type: Array,
+
+      default(){
+        return ['month', 'week', 'day'];
+      }
+    },
+
+    // Configuración de la hora (locale).
+    locale: {
+      type: String,
+      default: 'es-mx'
+    },
+
+    // Plantillas / visualizaciones disponibles para
+    // el calendario.
+    labels: {
+      type: Object,
+
+      default() {
+        return {
+          today: "Hoy",
+          back: "Atrás",
+          next: "Siguiente",
+          month: "Mes",
+          week: "Semana",
+          day: "Día",
+          all_day: "Todo el día",
+        };
+      }
+    },
+
+    // Rango de horas disponibles para
+    // el calendario.
+    timeRange: {
+      type: Array,
+
+      default() {
+        return [0,23];
+      }
+    },
+
+    // Colorea el día actual.
+    showTodayButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    // Día actual.
+    today: {
+      type: Object,
+
+      default() {
+        return moment();
+      }
+    }
   },
 
   data(){
     return {
-      locale: "es-mx",
       initialView: 'month',
-      showTodayButton: true,
-      today: moment(),
-      activeView: '',
-      activeDate: null,
-      availableViews: ['month', 'week', 'day'],
-      timeRange: [0,23],
-      labels: {
-        today: "Hoy",
-        back: "Atrás",
-        next: "Siguiente",
-        month: "Mes",
-        week: "Semana",
-        day: "Día",
-        all_day: "Todo el día",
-      }
+      activeView: 'month',
+      activeDate: moment(),
     };
   },
 
@@ -170,16 +223,8 @@ export default {
   },
     
   watch: {
-    initialDate() {
-      this.activeDate = moment(this.initialDate);
-    },
-
-    initialView() {
-      this.activeView = this.initialView;
-    },
-
     activeDate() {
-      this.$emit(this.activeView + '-changed', this.activeDate.toDate() );
+      this.$emit(this.activeView + '-changed', this.activeDate.toDate());
     },
 
     activeView() {
@@ -188,6 +233,30 @@ export default {
   },
 
   computed: {
+    isProfessor(){
+      var roles = this.auth_user.roles.filter(role => {
+        return role.name === 'profesor_nb';
+      });
+
+      return roles.length > 0;
+    },
+
+    isAdmin(){
+      var roles = this.auth_user.roles.filter(role => {
+        return role.name === 'administrator';
+      });
+
+      return roles.length > 0;
+    },
+
+    isSchoolControl(){
+      var roles = this.auth_user.roles.filter(role => {
+        return role.name === 'control_escolar';
+      });
+
+      return roles.length > 0;
+    },
+
     newEvents() {
       return this.interviews.map(e => {
         return new Event(e).bindGetter('displayText', this.eventDisplay);
@@ -297,9 +366,20 @@ export default {
     CalendarClass: {
       get(){
         return {
-          'col-12': !this.dayClicked,
-          'col-lg-9': this.dayClicked,
-          'pr-lg-0': true
+          'col-lg-8': this.isProfessor,
+          'col-12': !this.isProfessor,
+          'pr-lg-0': true,
+          'order-3': true,
+        }
+      }
+    },
+
+    NotificationsClass: {
+      get(){
+        return {
+          'col-lg-4': true,
+          'pl-lg-0': true,
+          'order-3': true,
         }
       }
     },
@@ -312,40 +392,36 @@ export default {
       }
     },
 
-    StringDate: {
-      get(){
-        if (this.period === null)
-          return "";
+    StringDate(){        
+      if (this.activeDate === null)
+        return this.activeDate;
+        
+      return this.activeDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
+    },
 
-        var event = new Date(this.period.start_date);
-        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            
-        return event.toLocaleDateString('es-MX', options);
-      }
-    }
+    ActiveDateInterviews() {
+      const activeDate = this.activeDate.format('YYYY-MM-DD');
+
+      return this.interviews.filter(interview => {
+        const interviewDate = moment(interview.date);
+        return interviewDate.isSame(activeDate);
+      });
+    },
   },
 
   methods: {
-
-    getDayInterviews(date) {
-      var moment_date = moment(date, 'YYYY-MM-DD');
-      
-      return this.interviews.filter(interview => {
-        return moment(interview.date).isSame(moment_date);
-      });
-    },
-
     abreModalEntrevistas(date){
-      //if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-        //return false;
+      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+        return false;
 
-      //if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-        //return false;
+      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+        return false;
 
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);
       
-      $('#DetalleEntrevista').modal('show');
+      if (!this.isProfessor)
+        $('#NuevaEntrevista').modal('show');
     },
 
     goToToday() {
@@ -369,12 +445,30 @@ export default {
         'v-cal-button--is-active': this.activeView === view 
       };
     },
-  },
 
-  mounted() {
-  //  Initial setup
-    this.activeView = this.initialView;
-    this.activeDate = moment(this.initialDate);
+    interviewDataFrom(interview){
+
+      var appliant = interview.appliant.name + " " 
+        + interview.appliant.middlename + " "
+        + interview.appliant.surname;
+
+      var professor = interview.intention_letter_professor.name + " " 
+        + interview.intention_letter_professor.middlename + " "
+        + interview.intention_letter_professor.surname;
+
+      var start_time = moment(interview.start_time, 'hh:mm:ss').format('hh:mm A');
+      var end_time = moment(interview.end_time, 'hh:mm:ss').format('hh:mm A');
+
+      return {
+        'room': interview.room_id,
+        'areas': interview.academic_areas,
+        'date': this.StringDate,
+        'appliant': appliant.toLowerCase(),
+        'professor': professor.toLowerCase(),
+        'start_time': start_time,
+        'end_time': end_time,
+      };
+    }
   },
 };
 </script>
