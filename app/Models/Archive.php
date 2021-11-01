@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\JoinClause;
 
 class Archive extends Model
 {
@@ -34,22 +35,16 @@ class Archive extends Model
     protected $guarded = [];
 
     /**
-     * Eager loaded relationships.
+     * Une el nombre del programa académico con la convocatoria.
      *
-     * @var string[]
+     * @return QueryBuilder
      */
-    protected $with = [
-        /*
-        'announcement.academicProgram', 
-        'personalDocuments',
-        'entranceDocuments',
-        'intentionLetters',
-        'academicDegrees.requiredDocuments',
-        'appliantLanguages.requiredDocuments',
-        'appliantWorkingExperiences',
-        'scientificProductions.authors',
-        'humanCapitals',*/
-    ];
+    public function scopeWhereAppliantDoesntHaveInterview(Builder $query): Builder
+    {
+        return $query->whereHas('appliant', function($subquery){
+            $subquery->doesntHave('interviews');
+        });
+    }
 
     /**
      * Obtiene los documentos personales requeridos del expediente.
@@ -87,18 +82,22 @@ class Archive extends Model
      * Obtiene los documentos requeridos para el ingreso del
      * postulante, al programa académico.
      *
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function intentionLetters(): BelongsToMany
+    public function archiveRequiredDocuments(): HasMany
     {
-        return $this->requiredDocuments()
-        ->select('required_documents.*', 'archive_intention_letter.user_id', 'archive_intention_letter.user_type')
-        ->where('type', 'entrance')
-        ->where('intention_letter', true)
-        ->join('archive_intention_letter', function(JoinClause $join){
-            $join->on('archive_intention_letter.archive_id', '=', 'archive_required_document.archive_id')   
-                ->on('archive_intention_letter.required_document_id', '=', 'archive_required_document.required_document_id');
-        });
+        return $this->hasMany(ArchiveRequiredDocument::class);
+    }
+
+    /**
+     * Obtiene los documentos requeridos para el ingreso del
+     * postulante, al programa académico.
+     *
+     * @return HasOneThrough
+     */
+    public function intentionLetter(): HasOneThrough
+    {
+        return $this->hasOneThrough(IntentionLetter::class, ArchiveRequiredDocument::class);
     }
 
     /**
@@ -108,7 +107,7 @@ class Archive extends Model
      */
     public function appliant(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id')->where('type', $this->user_type);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**

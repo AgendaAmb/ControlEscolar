@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\JoinClause;
 
 class Interview extends Model
 {
@@ -61,11 +59,26 @@ class Interview extends Model
      */
     public function appliant(): BelongsToMany
     {
-        return $this
-        ->users()
-        ->whereHas('roles', fn($query) => $query->whereIn(
-            'name', ['aspirante_local','aspirante_foraneo','aspirante_extranjero'])
-        )->limit(1);
+        return $this->users()->whereHas('roles', function($query){ 
+            $query->whereIn('name', [
+                'aspirante_local',
+                'aspirante_foraneo',
+                'aspirante_extranjero'
+            ]); 
+        });
+    }
+
+    /**
+     * Obtiene las áreas académicas de la entrevista.
+     * @return BelongsToMany
+     * 
+     */
+    public function intentionLetterProfessor(): BelongsToMany
+    {
+        return $this->users()->join('archives', 'archives.user_id', 'users.id')
+            ->join('archive_required_document', 'archives.id', 'archive_required_document.archive_id')    
+            ->join('archive_intention_letter', 'archive_intention_letter.archive_required_document_id', 'archive_required_document.id')
+            ->select('archive_intention_letter.user_id as id', 'archive_intention_letter.user_type as type');
     }
 
     /**

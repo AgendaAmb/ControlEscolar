@@ -54,6 +54,7 @@ const app = new Vue({
         period: period,
         date: null,
         selectedInterview: null,
+        announcements: announcements
     },
 
     components: {
@@ -81,7 +82,7 @@ const app = new Vue({
          * @param {*} period 
          */
         agregaEntrevista(entrevista){
-            this.interviews.push(entrevista);
+            this.period.interviews.push(entrevista);
         },
 
         /**

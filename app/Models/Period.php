@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,8 +27,10 @@ class Period extends Model
      */
     protected $with = [
         'rooms',
+        'announcement.archives',
         'interviews.appliant:id,type',
-        'interviews.academicAreas'
+        'interviews.academicAreas',
+        'interviews.intentionLetterProfessor'
     ];
 
     /**
@@ -61,5 +64,15 @@ class Period extends Model
     public function interviews(): HasManyThrough
     {
         return $this->hasManyThrough(Interview::class, Room::class);
+    }
+
+    /**
+     * Obtiene la convocatoria del periodo de entrevistas.
+     *
+     * @return HasManyThrough
+     */
+    public function announcement(): BelongsTo
+    {
+        return $this->belongsTo(Announcement::class);
     }
 }

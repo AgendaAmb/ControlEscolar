@@ -75,7 +75,7 @@ class LoginController extends Controller
             ->pluck('id');
 
         # Busca a los profesores en el sistema.
-        $professors = User::role('profesor_nb')->pluck('id');
+        $professors = User::role(['profesor_nb','admin','control_escolar','personal_apoyo'])->pluck('id');
         
         # Fusiona a los usuarios.
         $users = $professors->merge($appliants)->toArray();

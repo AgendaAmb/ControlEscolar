@@ -23,6 +23,13 @@
             </div>
             <div class="form-row my-2">
               <div class="form-group col-9">
+                <label> Convocatoria: </label>
+                <select v-model="announcement_id" class="form-control">
+                  <option :value="null" selected>Escoge una convocatoria </option>
+                  <option v-for="announcement in announcements" :key="announcement.id" :value="announcement.id"> {{ announcement.name }} </option>
+                </select>
+              </div>
+              <div class="form-group col-9">
                 <label> Número de salas </label>
                 <input v-model.number="num_salas" type="number" class="form-control" required min="1">
               </div>
@@ -58,12 +65,23 @@
 <script>
 export default {
   name: "nuevo-periodo",
+  
+  props: {
+    // Convocatorias disponibles.
+    announcements: {
+      type: Array,
+      default(){
+        return [];
+      }
+    }
+  },
 
   data() {
     return {
       event: {},
       start_date: null,
       end_date: null,
+      announcement_id: null,
       num_salas: 1,
     };
   },
@@ -75,12 +93,10 @@ export default {
         start_date: this.start_date,
         end_date: this.end_date,
         num_salas: this.num_salas,
+        announcement_id: this.announcement_id,
       
       }).then(response =>  {
-        var period = response.data;
-        this.$emit('nuevoperiodo', period);
-        
-        $('#NuevoPeriodo').modal('hide');
+        window.location.href = response.data.url;
       }).catch(error => {
 
       });

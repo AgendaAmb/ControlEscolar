@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePeriodRequest;
 use App\Models\Period;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 
 class PeriodController extends Controller
 {
@@ -16,6 +16,6 @@ class PeriodController extends Controller
         $period = Period::create($request->safe()->except('num_salas'));
         $period->rooms()->createMany(array_fill(0, $request->num_salas, []));
 
-        return new RedirectResponse(route('entrevistas.calendario'));
+        return new JsonResponse(['url'=>route('entrevistas.calendario')]);
     }
 }

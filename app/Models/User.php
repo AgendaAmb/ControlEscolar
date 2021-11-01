@@ -172,6 +172,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Interview::class);
     }
+    
+    /**
+     * Obtiene las cartas de intención, otorgadas por el usuario..
+     *
+     * @return HasMany
+     */
+    public function intentionLetters(): HasMany
+    {
+        return $this->hasMany(IntentionLetter::class);
+    }
 
     /**
      * Assign the given role to the model.

@@ -27,7 +27,8 @@ class CreateArchivesTable extends Migration
 
             $table->foreignId('announcement_id')
                 ->constrained('announcements')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->integer('status');
             $table->string('comments')->nullable();
@@ -37,6 +38,7 @@ class CreateArchivesTable extends Migration
         });
 
         Schema::create('archive_required_document', function (Blueprint $table){
+            $table->id();
             $table->foreignId('archive_id')
                 ->constrained('archives')
                 ->onDelete('cascade')
@@ -48,20 +50,17 @@ class CreateArchivesTable extends Migration
                 ->onUpdate('cascade');
 
             $table->string('location')->nullable();
-            $table->primary(['archive_id', 'required_document_id'], 'pk_archive_required_document');
         });
 
         Schema::create('archive_intention_letter', function (Blueprint $table){
-            $table->unsignedBigInteger('archive_id');
-            $table->unsignedBigInteger('required_document_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('user_type');
-
-            $table->foreign(['archive_id', 'required_document_id'])
-                ->references(['archive_id', 'required_document_id'])
-                ->on('archive_required_document')
+            $table->foreignId('archive_required_document_id')
+                ->primary()
+                ->constrained('archive_required_document')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
 
             $table->foreign(['user_id', 'user_type'])
                 ->references(['id', 'type'])
@@ -69,8 +68,7 @@ class CreateArchivesTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-
-            $table->primary(['archive_id','required_document_id','user_id','user_type'], 'pk_arch_int_letter');
+            $table->timestamps();
         });
     }
 

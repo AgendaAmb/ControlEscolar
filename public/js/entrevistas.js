@@ -141,13 +141,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       "default": null
     },
-    // Entrevistas agendadas.
-    interviews: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
-    },
     // Usuario autenticado.
     auth_user: {
       type: Object,
@@ -253,7 +246,7 @@ __webpack_require__.r(__webpack_exports__);
     newEvents: function newEvents() {
       var _this = this;
 
-      return this.interviews.map(function (e) {
+      return this.period.interviews.map(function (e) {
         return new _Event__WEBPACK_IMPORTED_MODULE_1__.default(e).bindGetter('displayText', _this.eventDisplay);
       });
     },
@@ -376,7 +369,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     ActiveDateInterviews: function ActiveDateInterviews() {
       var activeDate = this.activeDate.format('YYYY-MM-DD');
-      return this.interviews.filter(function (interview) {
+      return this.period.interviews.filter(function (interview) {
         var interviewDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.date);
         return interviewDate.isSame(activeDate);
       });
@@ -408,16 +401,14 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     interviewDataFrom: function interviewDataFrom(interview) {
-      var appliant = interview.appliant.name + " " + interview.appliant.middlename + " " + interview.appliant.surname;
-      var professor = interview.intention_letter_professor.name + " " + interview.intention_letter_professor.middlename + " " + interview.intention_letter_professor.surname;
       var start_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.start_time, 'hh:mm:ss').format('hh:mm A');
       var end_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.end_time, 'hh:mm:ss').format('hh:mm A');
       return {
         'room': interview.room_id,
         'areas': interview.academic_areas,
         'date': this.StringDate,
-        'appliant': appliant.toLowerCase(),
-        'professor': professor.toLowerCase(),
+        'appliant': interview.appliant.name.toLowerCase(),
+        'professor': interview.intention_letter_professor.name.toLowerCase(),
         'start_time': start_time,
         'end_time': end_time
       };
@@ -961,8 +952,7 @@ __webpack_require__.r(__webpack_exports__);
     IntentionLetterProfessor: {
       get: function get() {
         if (this.appliant === null) return null;
-        var professor = this.appliant.intention_letter_professor;
-        return professor.name + " " + professor.middlename + " " + professor.surname;
+        return this.appliant.intention_letter_professor.name;
       }
     }
   },
@@ -976,7 +966,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
         period_id: this.period_id,
         user_id: this.appliant.id,
-        user_type: this.appliant.user_type,
+        user_type: this.appliant.type,
         date: this.date,
         start_time: this.start_time,
         end_time: this.end_time,
@@ -1068,30 +1058,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nuevo-periodo",
+  props: {
+    // Convocatorias disponibles.
+    announcements: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
   data: function data() {
     return {
       event: {},
       start_date: null,
       end_date: null,
+      announcement_id: null,
       num_salas: 1
     };
   },
   methods: {
     creaPeriodo: function creaPeriodo() {
-      var _this = this;
-
       axios.post('/controlescolar/entrevistas/periods', {
         start_date: this.start_date,
         end_date: this.end_date,
-        num_salas: this.num_salas
+        num_salas: this.num_salas,
+        announcement_id: this.announcement_id
       }).then(function (response) {
-        var period = response.data;
-
-        _this.$emit('nuevoperiodo', period);
-
-        $('#NuevoPeriodo').modal('hide');
+        window.location.href = response.data.url;
       })["catch"](function (error) {});
     }
   }
@@ -28402,13 +28404,7 @@ var render = function() {
                             [
                               _vm._v(
                                 " \n                  " +
-                                  _vm._s(
-                                    appliant.name +
-                                      " " +
-                                      appliant.middlename +
-                                      " " +
-                                      appliant.surname
-                                  ) +
+                                  _vm._s(appliant.name) +
                                   " \n                "
                               )
                             ]
@@ -28662,6 +28658,62 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-row my-2" }, [
+                  _c("div", { staticClass: "form-group col-9" }, [
+                    _c("label", [_vm._v(" Convocatoria: ")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.announcement_id,
+                            expression: "announcement_id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.announcement_id = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: { selected: "" },
+                            domProps: { value: null }
+                          },
+                          [_vm._v("Escoge una convocatoria ")]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.announcements, function(announcement) {
+                          return _c(
+                            "option",
+                            {
+                              key: announcement.id,
+                              domProps: { value: announcement.id }
+                            },
+                            [_vm._v(" " + _vm._s(announcement.name) + " ")]
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "form-group col-9" }, [
                     _c("label", [_vm._v(" Número de salas ")]),
                     _vm._v(" "),
@@ -41500,7 +41552,8 @@ var app = new Vue({
     loggedUser: user,
     period: period,
     date: null,
-    selectedInterview: null
+    selectedInterview: null,
+    announcements: announcements
   },
   components: {
     CalendarioEntrevistas: _components_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__.default,
@@ -41523,7 +41576,7 @@ var app = new Vue({
      * @param {*} period 
      */
     agregaEntrevista: function agregaEntrevista(entrevista) {
-      this.interviews.push(entrevista);
+      this.period.interviews.push(entrevista);
     },
 
     /**

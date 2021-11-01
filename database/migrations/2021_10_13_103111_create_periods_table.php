@@ -15,6 +15,11 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('announcement_id')
+                ->constrained('announcements')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+                    
             $table->date('start_date');
             $table->date('end_date');
 

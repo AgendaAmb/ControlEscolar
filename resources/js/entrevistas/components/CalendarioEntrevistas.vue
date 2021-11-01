@@ -125,14 +125,6 @@ export default {
       default: null
     },
 
-    // Entrevistas agendadas.
-    interviews: {
-      type: Array,
-      default() {
-        return [];
-      }
-    },
-
     // Usuario autenticado.
     auth_user: {
       type: Object,
@@ -258,7 +250,7 @@ export default {
     },
 
     newEvents() {
-      return this.interviews.map(e => {
+      return this.period.interviews.map(e => {
         return new Event(e).bindGetter('displayText', this.eventDisplay);
       });
     },
@@ -402,7 +394,7 @@ export default {
     ActiveDateInterviews() {
       const activeDate = this.activeDate.format('YYYY-MM-DD');
 
-      return this.interviews.filter(interview => {
+      return this.period.interviews.filter(interview => {
         const interviewDate = moment(interview.date);
         return interviewDate.isSame(activeDate);
       });
@@ -447,15 +439,6 @@ export default {
     },
 
     interviewDataFrom(interview){
-
-      var appliant = interview.appliant.name + " " 
-        + interview.appliant.middlename + " "
-        + interview.appliant.surname;
-
-      var professor = interview.intention_letter_professor.name + " " 
-        + interview.intention_letter_professor.middlename + " "
-        + interview.intention_letter_professor.surname;
-
       var start_time = moment(interview.start_time, 'hh:mm:ss').format('hh:mm A');
       var end_time = moment(interview.end_time, 'hh:mm:ss').format('hh:mm A');
 
@@ -463,8 +446,8 @@ export default {
         'room': interview.room_id,
         'areas': interview.academic_areas,
         'date': this.StringDate,
-        'appliant': appliant.toLowerCase(),
-        'professor': professor.toLowerCase(),
+        'appliant': interview.appliant.name.toLowerCase(),
+        'professor': interview.intention_letter_professor.name.toLowerCase(),
         'start_time': start_time,
         'end_time': end_time,
       };

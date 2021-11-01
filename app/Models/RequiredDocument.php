@@ -57,6 +57,19 @@ class RequiredDocument extends Model
     }
 
     /**
+     * Obtiene los documentos que solo los postulantes
+     * pueden subir.
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public static function scopeIntentionLetter($query)
+    {
+        return $query->where('intention_letter', true)
+            ->where('type', 'entrance');
+    }
+
+    /**
      * Obtiene el id de los documentos personales.
      *
      * @param  mixed $query
@@ -110,6 +123,18 @@ class RequiredDocument extends Model
     public static function languageDocumentsId()
     {
         return self::where('type', 'language')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos para comprobación de
+     * lenguas extranjeras.
+     *
+     * @param  mixed $query
+     * @return object
+     */
+    public static function intentionLetterId()
+    {
+        return self::where('type', 'entrance')->where('intention_letter', true)->pluck('id');
     }
 
     /**

@@ -21,6 +21,16 @@ class AcademicProgram extends Model
     protected $guarded = [];
 
     /**
+     * Eager loads.
+     *
+     * @var string[]
+     */
+    protected $with = [
+        'latestAnnouncement.period',
+        'latestAnnouncement.archives.intentionLetter'
+    ];
+
+    /**
      * Obtiene los documentos requeridos del expediente.
      *
      * @return HasMany
@@ -47,7 +57,10 @@ class AcademicProgram extends Model
      */
     public function latestAnnouncement(): HasOne
     {
-        return $this->hasOne(Announcement::class)->latestOfMany();
+        return $this->hasOne(Announcement::class)
+            ->latestOfMany()
+            ->select('announcements.*', 'academic_programs.name as name')
+            ->join('academic_programs', 'academic_programs.id', 'academic_program_id');
     }
 
     /**

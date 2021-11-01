@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Archive;
-use App\Models\RequiredDocument;
 
 class ArchiveObserver
 {

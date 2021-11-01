@@ -32,7 +32,7 @@
                 <select v-model="appliant" class="form-control">
                   <option :value="null" selected>Escoge un postulante </option>
                   <option v-for="appliant in appliants" :key="appliant.id" :value="appliant"> 
-                    {{ appliant.name + " " + appliant.middlename + " " + appliant.surname }} 
+                    {{ appliant.name }} 
                   </option>
                 </select>
               </div>
@@ -119,8 +119,7 @@ export default {
         if (this.appliant === null)
           return null;
 
-        var professor = this.appliant.intention_letter_professor;
-        return professor.name + " " + professor.middlename + " " + professor.surname;
+        return this.appliant.intention_letter_professor.name;
       }
     },
   },
@@ -134,7 +133,7 @@ export default {
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
         period_id: this.period_id,
         user_id: this.appliant.id,
-        user_type: this.appliant.user_type,
+        user_type: this.appliant.type,
         date: this.date,
         start_time: this.start_time,
         end_time: this.end_time,
