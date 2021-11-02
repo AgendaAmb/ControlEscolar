@@ -73,7 +73,6 @@ class InterviewController extends Controller
      
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
         $interview_model->load('users.roles:name');
-
         $archive->evaluationRubric()->create($request->safe()->except('interview_id'));
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
