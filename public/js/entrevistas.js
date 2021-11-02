@@ -551,6 +551,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
   props: {
@@ -604,15 +621,50 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  computed: {},
+  computed: {
+    loggedUserName: function loggedUserName() {
+      var loggedUser = this.$root.loggedUser;
+      return (loggedUser.name + " " + loggedUser.middlename + " " + loggedUser.surname).toLowerCase();
+    }
+  },
   methods: {
-    inscribirUsuario: function inscribirUsuario() {
+    inscribirUsuario: function inscribirUsuario(index) {
+      var _this = this;
+
       if (confirm('¿Estás seguro que deseas participar en esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/interviewUser', {
         interview_id: this.id,
         user_id: this.$root.loggedUser.id,
         user_type: this.$root.loggedUser.user_type
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {
+        var result = {
+          id: response.data.id,
+          name: response.data.name,
+          professor_name: _this.loggedUserName
+        };
+        Vue.set(_this.areas, index, result);
+      })["catch"](function (error) {});
+      return false;
+    },
+    cancelarRegistro: function cancelarRegistro(index) {
+      var _this2 = this;
+
+      if (confirm('¿Estás seguro que deseas cancelar tu participación en la entrevista?') === false) return false;
+      console.log(this.$root.loggedUser);
+      axios["delete"]('/controlescolar/entrevistas/interviewUser', {
+        data: {
+          interview_id: this.id,
+          user_id: this.$root.loggedUser.id,
+          user_type: this.$root.loggedUser.user_type
+        }
+      }).then(function (response) {
+        Vue.set(_this2.areas, index, {
+          'id': -1,
+          'name': 'Área Académica Disponible',
+          'professor_name': false
+        });
+      })["catch"](function (error) {});
+      return false;
     }
   }
 });
@@ -2003,7 +2055,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.detalle-entrevista[data-v-659b4636] {\n  max-width: 750px;\n}\n.modal-header.modal-header-blue[data-v-659b4636], .modal-footer button.btn-primary[data-v-659b4636], .areas-academicas[data-v-659b4636] {\n  background-color: #115089;\n  font-family: 'Myriad Pro Bold';\n  color: white;\n}\n.areas-academicas[data-v-659b4636] {\n  text-align: center;\n  font-size: 13px;\n  text-transform: capitalize;\n}\n.modal-body label[data-v-659b4636], .title-prof-carta-intencion[data-v-659b4636], .sala[data-v-659b4636] {\n  color: #115089;\n}\n.modal-body .fecha[data-v-659b4636], .prof-carta-intencion[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #115089;\n}\n.registrar-participacion[data-v-659b4636] {\n  background-color: white;\n  color: #115089;\n  font-family: 'Myriad Pro Regular';\n  display: block;\n  font-size: 12px;\n  text-transform: capitalize;\n  text-align: center;\n}\n.prof-carta-intencion[data-v-659b4636] {\n  text-transform: capitalize;\n}\n.fecha[data-v-659b4636]::first-letter {\n  text-transform: capitalize;\n}\n.modal-body .postulante[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n  text-transform: capitalize;\n}\n.modal-footer button.btn-secondary[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.detalle-entrevista[data-v-659b4636] {\n  max-width: 750px;\n}\n.modal-header.modal-header-blue[data-v-659b4636], .modal-footer button.btn-primary[data-v-659b4636], .areas-academicas[data-v-659b4636] {\n  background-color: #115089;\n  font-family: 'Myriad Pro Bold';\n  color: white;\n}\n.areas-academicas[data-v-659b4636] {\n  text-align: center;\n  font-size: 13px;\n  text-transform: capitalize;\n}\n.modal-body label[data-v-659b4636], .title-prof-carta-intencion[data-v-659b4636], .sala[data-v-659b4636] {\n  color: #115089;\n}\n.modal-body .fecha[data-v-659b4636], .prof-carta-intencion[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #115089;\n}\n.registrar-participacion[data-v-659b4636] {\n  background-color: white;\n  color: #115089;\n  font-family: 'Myriad Pro Regular';\n  display: block;\n  font-size: 12px;\n  text-transform: capitalize;\n  text-align: center;\n}\n.prof-carta-intencion[data-v-659b4636] {\n  text-transform: capitalize;\n}\n.prof-area[data-v-659b4636] {\n  text-transform: capitalize;\n  color: #115089;\n  font-family: 'Myriad Pro Regular';\n  text-align: center;\n}\n.prof-area + a > p[data-v-659b4636] {\n  font-size: 12px;\n  text-align: center;\n  color: #115089;\n}\n.fecha[data-v-659b4636]::first-letter {\n  text-transform: capitalize;\n}\n.modal-body .postulante[data-v-659b4636] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n  text-transform: capitalize;\n}\n.modal-footer button.btn-secondary[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -28085,10 +28137,10 @@ var render = function() {
                         _c("tbody", [
                           _c(
                             "tr",
-                            _vm._l(_vm.areas, function(area) {
+                            _vm._l(_vm.areas, function(area, index) {
                               return _c("td", { key: area.id }, [
                                 area.professor_name !== false
-                                  ? _c("p", [
+                                  ? _c("p", { staticClass: "prof-area" }, [
                                       _vm._v(
                                         " " + _vm._s(area.professor_name) + " "
                                       )
@@ -28097,10 +28149,29 @@ var render = function() {
                                       "a",
                                       {
                                         attrs: { href: "#" },
-                                        on: { click: _vm.inscribirUsuario }
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.inscribirUsuario(index)
+                                          }
+                                        }
                                       },
                                       [_c("p", [_vm._v(" Inscribirme ")])]
+                                    ),
+                                _vm._v(" "),
+                                _vm.loggedUserName === area.professor_name
+                                  ? _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.cancelarRegistro(index)
+                                          }
+                                        }
+                                      },
+                                      [_c("p", [_vm._v(" Cancelar registro ")])]
                                     )
+                                  : _vm._e()
                               ])
                             }),
                             0

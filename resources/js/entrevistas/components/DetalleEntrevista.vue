@@ -32,10 +32,13 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td v-for="area in areas" :key="area.id">
-                        <p v-if="area.professor_name !== false"> {{area.professor_name}} </p>
-                        <a v-else href="#" @click="inscribirUsuario">
+                      <td v-for="(area, index) in areas" :key="area.id">
+                        <p class="prof-area" v-if="area.professor_name !== false"> {{area.professor_name}} </p>
+                        <a v-else href="#" @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
+                        </a>
+                        <a v-if="loggedUserName === area.professor_name" href="#" @click="cancelarRegistro(index)"> 
+                          <p> Cancelar registro </p>
                         </a>
                       </td>
                     </tr>
@@ -102,6 +105,20 @@
 .prof-carta-intencion {
   text-transform: capitalize;
 }
+
+.prof-area {
+  text-transform: capitalize;
+  color: #115089;
+  font-family: 'Myriad Pro Regular';
+  text-align: center;
+}
+
+.prof-area + a > p {
+  font-size: 12px;
+  text-align: center;
+  color: #115089;
+}
+
 
 .fecha::first-letter {
   text-transform: capitalize;
@@ -184,10 +201,15 @@ export default {
   },
 
   computed: {
+    loggedUserName(){
+      var loggedUser = this.$root.loggedUser;
+
+      return (loggedUser.name + " " + loggedUser.middlename + " " + loggedUser.surname).toLowerCase();
+    }
   },
 
   methods: {
-    inscribirUsuario(){
+    inscribirUsuario(index){
       if (confirm('¿Estás seguro que deseas participar en esta entrevista?') === false)
         return false;
 
@@ -197,10 +219,42 @@ export default {
         user_type: this.$root.loggedUser.user_type,
       
       }).then(response => {
+        const result = {
+          id: response.data.id,
+          name: response.data.name,
+          professor_name: this.loggedUserName
+        };
 
-      }).catch(error => {
-        
+        Vue.set(this.areas, index, result);
+      }).catch(error => { 
       });
+
+      return false;
+    },
+
+    cancelarRegistro(index){
+      if (confirm('¿Estás seguro que deseas cancelar tu participación en la entrevista?') === false)
+        return false;
+
+      console.log(this.$root.loggedUser);
+
+      axios.delete('/controlescolar/entrevistas/interviewUser', {
+        data: {
+          interview_id: this.id,
+          user_id: this.$root.loggedUser.id,
+          user_type: this.$root.loggedUser.user_type,
+        }
+      }).then(response => {
+        Vue.set(this.areas, index, {
+          'id': -1,
+          'name': 'Área Académica Disponible',
+          'professor_name': false,
+        });
+      }).catch(error => { 
+
+      });
+
+      return false;
     }
   },
 };

@@ -190,7 +190,7 @@ class Archive extends Model
      *
      * @return HasMany
      */
-    public function evaluationRubric(): HasMany
+    public function evaluationRubrics(): HasMany
     {
         return $this->hasMany(EvaluationRubric::class);
     }

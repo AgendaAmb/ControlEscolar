@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewInterviewUserRequest;
+use App\Http\Requests\RemoveInterviewUserRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
 use App\Models\AcademicProgram;
@@ -72,10 +73,9 @@ class InterviewController extends Controller
         $archive = $appliant->latestArchive;
      
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
-        $interview_model->load('users.roles:name');
-        $archive->evaluationRubric()->create($request->safe()->except('interview_id'));
+        $archive->evaluationRubrics()->create($request->safe()->except('interview_id'));
 
-        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
+        return new JsonResponse($request->user()->academicAreas->first(), JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -83,19 +83,20 @@ class InterviewController extends Controller
      * 
      * @param Request $request
      */
-    public function removeInterviewUser(Request $request)
+    public function removeInterviewUser(RemoveInterviewUserRequest $request)
     {
         # Registra al profesor a la entrevista.
         $interview_model = Interview::find($request->safe()->interview_id);
-        /*$interview_model->users()->detach($request->user_id);
-        $interview_model->load('users.roles:name');
-*/
-        # Recupera al postulante y genera una nueva rúbrica para el
-        # profesor.
-        $appliant = $interview_model->appliant()->first;
-        $archive = $appliant->latestArchive;
+        $interview_model->users()->detach($request->user_id);
 
-        dd($archive);
-        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
+        # Obtiene al postulante.
+        $appliant = $interview_model->appliant->first();
+        $archive = $appliant->latestArchive;
+        $archive->evaluationRubrics()
+            ->where('user_id', $request->user_id)
+            ->where('user_type', $request->user_type)
+            ->delete();
+
+        return new JsonResponse(['message'=>'¡Registro a entrevista cancelado exitosamente!'], JsonResponse::HTTP_CREATED);
     }
 }

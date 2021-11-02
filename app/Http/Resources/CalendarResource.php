@@ -94,11 +94,11 @@ class CalendarResource extends JsonResource
         # Llena la información de los usuarios que participan en 
         # la entrevista.
         $areas = collect($interview['academic_areas'])->map(function($area) use ($request) {
-            $miPortal_professor = $this->getMiPortalUser($request, $area->professor_id, 'workers'); 
+            $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers'); 
             
             return [
-                'id' => $area->area_id,
-                'name' => $area->area_name,
+                'id' => $area['area_id'],
+                'name' => $area['area_name'],
                 'professor_name' => Str::lower($miPortal_professor['name'])
             ];
         });

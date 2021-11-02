@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\UniqueAreaInterviewRule;
-use App\Rules\UniqueUserInterviewRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewInterviewUserRequest extends FormRequest
+class RemoveInterviewUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,9 +13,8 @@ class NewInterviewUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->hasRole('profesor_nb');
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,11 +25,7 @@ class NewInterviewUserRequest extends FormRequest
         return [
             'user_id' => ['required','numeric','exists:users,id'],
             'user_type' => ['required','string','in:workers'],
-            'interview_id' => [
-                'required','numeric','exists:interviews,id', 
-                new UniqueUserInterviewRule($this->user_id, $this->user_type), 
-                new UniqueAreaInterviewRule($this->user_id, $this->user_type)
-            ],
+            'interview_id' => ['required','numeric','exists:interviews,id'],
         ];
     }
 }
