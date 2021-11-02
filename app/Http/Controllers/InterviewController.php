@@ -6,6 +6,7 @@ use App\Http\Requests\NewInterviewUserRequest;
 use App\Http\Requests\RemoveInterviewUserRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
+use App\Http\Resources\InterviewProgramResource;
 use App\Models\AcademicProgram;
 use App\Models\EvaluationRubric;
 use App\Models\Interview;
@@ -33,33 +34,10 @@ class InterviewController extends Controller
      */
     public function programa(Request $request)
     {
-        $interviews = $request->user()->interviews->groupBy(['date', function($item) {
-            return $item['room_id'];
-        }], $preserveKeys = true);
+        $interview_program_resource = new InterviewProgramResource($request->user()->interviews());
 
         return view('entrevistas.show')
-            ->with('interviews', $interviews);
-    }
-
-    /**
-     * Devuelve la vista de la rúbrica.
-     * 
-     * @param Request $request
-     */
-    public function rubrica(Request $request, EvaluationRubric $evaluationRubric)
-    {
-        $evaluationRubric->load([
-            'archive',
-            'basicConcepts',
-            'academicConcepts',
-            'researchConcepts',
-            'workingExperienceConcepts',
-            'personalAttributesConcepts'
-        ]);
-
-        return view('entrevistas.rubrica')
-            ->with('user', $request->session()->get('user'))
-            ->with('rubric', $evaluationRubric);
+            ->with('interviews',  $interview_program_resource->toArray($request));
     }
 
     /**
@@ -83,12 +61,19 @@ class InterviewController extends Controller
      */
     public function newInterviewUser(NewInterviewUserRequest $request)
     {
+        # Obtiene el modelo de la entrevista.
         $interview_model = Interview::find($request->safe()->interview_id);
+        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
+        
+        # Obtiene al postulante.
         $appliant = $interview_model->appliant->first();
         $archive = $appliant->latestArchive;
-     
-        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
-        $archive->evaluationRubrics()->create($request->safe()->except('interview_id'));
+
+        $interview_model->evaluationRubrics()->create([
+            'archive_id' => $archive->id,
+            'user_id' => $request->user_id,
+            'user_type' => $request->user_type
+        ]);
 
         return new JsonResponse($request->user()->academicAreas->first(), JsonResponse::HTTP_CREATED);
     }
@@ -103,11 +88,7 @@ class InterviewController extends Controller
         # Registra al profesor a la entrevista.
         $interview_model = Interview::find($request->safe()->interview_id);
         $interview_model->users()->detach($request->user_id);
-
-        # Obtiene al postulante.
-        $appliant = $interview_model->appliant->first();
-        $archive = $appliant->latestArchive;
-        $archive->evaluationRubrics()
+        $interview_model->evaluationRubrics()
             ->where('user_id', $request->user_id)
             ->where('user_type', $request->user_type)
             ->delete();

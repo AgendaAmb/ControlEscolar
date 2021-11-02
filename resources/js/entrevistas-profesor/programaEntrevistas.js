@@ -8,7 +8,7 @@ const moment = require('moment');
 
     
 window.Vue = require('vue').default;
-//import ProfessorInterview from './components/ProfessorInterview.vue';
+import InterviewDay from './components/InterviewDay.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,6 +23,7 @@ const app = new Vue({
     name:'professor-interviews',
 
     components: {
+        InterviewDay
     },
 
     data: {

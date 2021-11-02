@@ -16,17 +16,10 @@ const interviews = @json($interviews);
         <h1 class="d-block año">2021</h1>
     </div>
 </div>
-<div class="row justify-content-center">
-    <div v-for="(interview_rooms, interview_date) in interviews" class="col-10 text-center my-4">
-        <a class="d-block interview-day text-decoration-none" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            <p class="my-0 py-0"> @{{ StringDate(interview_date) }}</p>
-        </a>
-        <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-              ¡Pinole!
-            </div>
-        </div>
-    </div>
+<div v-for="(interview_rooms, interview_date) in interviews" class="row justify-content-center">
+    <interview-day v-bind:interview_date="StringDate(interview_date)" 
+        v-bind:interview_rooms="interview_rooms">
+    </interview-day>
 </div>
 
 @endsection

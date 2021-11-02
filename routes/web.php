@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EvaluationRubricController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
@@ -109,7 +110,11 @@ Route::prefix('entrevistas')
     ->name('interviewUser');
 
     # Rúbrica de evaluación
-    Route::get('rubrica/{evaluationRubric}', [InterviewController::class, 'rubrica'])->name('rubrica');
+    Route::prefix('rubrica')->name('rubrica.')->group(function(){
+        Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
+        Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
+        Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');
+    });
 
     # Periodods.
     Route::apiResource('periods', PeriodController::class);

@@ -5,6 +5,13 @@
     font-display: auto;
 }
 
+@font-face
+{
+    font-family:'Myriad Pro Light';
+    src: url(./MyriadPro-Light.otf) format('opentype');
+    font-display: auto;
+}
+
 
 @font-face
 {
@@ -21,7 +28,57 @@
     font-display: auto;
 }
 
-.mes {
+.myriad-bold {
+    font-family: 'Myriad Pro Bold';
+}
+
+.myriad-regular {
+    font-family: 'Myriad Pro Regular';
+}
+
+.myriad-light {
+    font-family: 'Myriad Pro Light';
+}
+
+
+.myriad-bold.yellow {
+    color: #fecc56;
+}
+
+.myriad-bold.blue {
+    color: #115089;
+}
+
+.myriad-bold.white {
+    color: white;
+}
+
+.myriad-regular.yellow {
+    color: #fecc56;
+}
+
+.myriad-regular.blue {
+    color: #115089;
+}
+
+.myriad-regular.white {
+    color: white;
+}
+
+
+.mmyriad-light.yellow {
+    color: #fecc56;
+}
+
+.myriad-light.blue {
+    color: #115089;
+}
+
+.myriad-light.white {
+    color: white;
+}
+
+.mes, .title {
     font-family: 'Myriad Pro Bold';
     font-size: 66px;
     text-align: center;
@@ -30,7 +87,12 @@
     text-transform: capitalize;
 }
   
-.año {
+.hr {
+    background-color: #115089;
+    border-width: 3px;
+}
+
+.año, .sub-title {
     font-family: 'Myriad Pro Regular';
     color: #115089;
     text-align: center;
@@ -51,6 +113,12 @@
 
 .interview-day > p:first-letter {
     text-transform: uppercase;
+}
+
+.room-details {
+    color: #115089;
+    font-family: 'Myriad Pro Bold';
+    text-align: left;
 }
 
 

@@ -5,6 +5,7 @@
  */
     
 import Rubrica from './components/Rubrica';
+import BasicData from './components/BasicData';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 window.Vue = require('vue').default;
@@ -23,9 +24,12 @@ const app = new Vue({
     data:{
         loggedUser: user,
         rubric: rubric,
+        appliant: appliant,
+        announcement: announcement
     },
 
     components: {
-        Rubrica
+        Rubrica,
+        BasicData
     }
 });
