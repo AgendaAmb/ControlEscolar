@@ -28,7 +28,8 @@ class Interview extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'laravel_through_key'
+        'laravel_through_key',
+        'pivot'
     ];
 
     /**

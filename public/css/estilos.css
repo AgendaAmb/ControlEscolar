@@ -21,6 +21,39 @@
     font-display: auto;
 }
 
+.mes {
+    font-family: 'Myriad Pro Bold';
+    font-size: 66px;
+    text-align: center;
+    color: #fecc56;
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+  
+.año {
+    font-family: 'Myriad Pro Regular';
+    color: #115089;
+    text-align: center;
+    font-size: 66px;
+}
+
+.interview-day {
+    font-family: 'Myriad Pro Bold';
+    color: white;
+    background-color: #115089;
+    text-align: center;
+    font-size: 38px;
+}
+
+.interview-day > p {
+    display: inline-block !important;
+}
+
+.interview-day > p:first-letter {
+    text-transform: uppercase;
+}
+
+
 .v-cal-day__number{
     font-family: 'Myriad Pro Bold';
 }

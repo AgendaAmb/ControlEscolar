@@ -13,6 +13,7 @@ const announcements = @json($announcements);
 @section('id', 'id=entrevistas')
 
 @section('main')
+@include('entrevistas.navbar')
 <calendario-entrevistas v-if="period !== null"
     v-bind:period="period"
     v-bind:date.sync="date"
@@ -41,7 +42,6 @@ const announcements = @json($announcements);
 </nueva-entrevista>
 
 <detalle-entrevista v-if="period !== null" v-bind="selectedInterview"></detalle-entrevista>
-
 @endsection
 @push('scripts')
 <script src="{{ asset('js/entrevistas.js') }}" defer></script>

@@ -92,6 +92,10 @@ Route::prefix('entrevistas')
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])
     ->name('calendario');
+
+    # Programa de entrevistas
+    Route::get('programa', [InterviewController::class, 'programa'])
+    ->name('programa');
     
     # Agenda una nueva entrevista.
     Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])

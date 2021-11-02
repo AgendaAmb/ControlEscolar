@@ -20,3 +20,4 @@ mix.js('resources/js/rubrica/rubrica.js', 'public/js').vue();
 mix.js('resources/js/pre-registro/preregistro.js', 'public/js').vue();
 mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();
 mix.js('resources/js/entrevistas/entrevistas.js', 'public/js').vue();
+mix.js('resources/js/entrevistas/programaEntrevistas.js', 'public/js').vue();

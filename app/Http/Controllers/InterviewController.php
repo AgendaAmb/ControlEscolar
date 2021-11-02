@@ -27,6 +27,21 @@ class InterviewController extends Controller
     }
 
     /**
+     * Devuelve la vista del programa de entrevistas.
+     * 
+     * @param Request $request
+     */
+    public function programa(Request $request)
+    {
+        $interviews = $request->user()->interviews->groupBy(['date', function($item) {
+            return $item['room_id'];
+        }], $preserveKeys = true);
+
+        return view('entrevistas.show')
+            ->with('interviews', $interviews);
+    }
+
+    /**
      * Devuelve la vista de la rúbrica.
      * 
      * @param Request $request
