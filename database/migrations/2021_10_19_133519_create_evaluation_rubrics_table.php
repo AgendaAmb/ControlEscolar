@@ -19,6 +19,15 @@ class CreateEvaluationRubricsTable extends Migration
                 ->constrained('archives')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->unsignedBigInteger('user_id');
+            $table->string('user_type');
+    
+            $table->foreign(['user_id', 'user_type'])
+                ->references(['id','type'])
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
                 
             $table->string('considerations')->nullable();
             $table->string('aditional_information')->nullable();

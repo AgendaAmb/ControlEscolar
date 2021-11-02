@@ -33,7 +33,10 @@
                   <tbody>
                     <tr>
                       <td v-for="area in areas" :key="area.id">
-                        <p> {{area.professor_name}} </p>
+                        <p v-if="area.professor_name !== false"> {{area.professor_name}} </p>
+                        <a v-else href="#" @click="inscribirUsuario">
+                          <p> Inscribirme </p>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -121,6 +124,12 @@ export default {
   name: "detalle-entrevista",
 
   props: {
+    // Id de la entrevista.
+    id: {
+      type: Number,
+      default: -1
+    },
+
     // Nombre del postulante de la entrevista.
     appliant: {
       type: String,
@@ -178,7 +187,20 @@ export default {
   },
 
   methods: {
-    creaPeriodo() {
+    inscribirUsuario(){
+      if (confirm('¿Estás seguro que deseas participar en esta entrevista?') === false)
+        return false;
+
+      axios.post('/controlescolar/entrevistas/interviewUser', {
+        interview_id: this.id,
+        user_id: this.$root.loggedUser.id,
+        user_type: this.$root.loggedUser.user_type,
+      
+      }).then(response => {
+
+      }).catch(error => {
+        
+      });
     }
   },
 };

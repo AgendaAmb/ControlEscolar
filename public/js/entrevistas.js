@@ -404,6 +404,7 @@ __webpack_require__.r(__webpack_exports__);
       var start_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.start_time, 'hh:mm:ss').format('hh:mm A');
       var end_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.end_time, 'hh:mm:ss').format('hh:mm A');
       return {
+        'id': interview.id,
         'room': interview.room_id,
         'areas': interview.academic_areas,
         'date': this.StringDate,
@@ -547,9 +548,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
   props: {
+    // Id de la entrevista.
+    id: {
+      type: Number,
+      "default": -1
+    },
     // Nombre del postulante de la entrevista.
     appliant: {
       type: String,
@@ -597,7 +606,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {},
   methods: {
-    creaPeriodo: function creaPeriodo() {}
+    inscribirUsuario: function inscribirUsuario() {
+      if (confirm('¿Estás seguro que deseas participar en esta entrevista?') === false) return false;
+      axios.post('/controlescolar/entrevistas/interviewUser', {
+        interview_id: this.id,
+        user_id: this.$root.loggedUser.id,
+        user_type: this.$root.loggedUser.user_type
+      }).then(function (response) {})["catch"](function (error) {});
+    }
   }
 });
 
@@ -781,6 +797,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "interview",
   props: {
+    // Clave de la entrevista.
+    id: {
+      type: Number,
+      "default": -1
+    },
     // Nombre del postulante de la entrevista.
     appliant: {
       type: String,
@@ -28066,11 +28087,20 @@ var render = function() {
                             "tr",
                             _vm._l(_vm.areas, function(area) {
                               return _c("td", { key: area.id }, [
-                                _c("p", [
-                                  _vm._v(
-                                    " " + _vm._s(area.professor_name) + " "
-                                  )
-                                ])
+                                area.professor_name !== false
+                                  ? _c("p", [
+                                      _vm._v(
+                                        " " + _vm._s(area.professor_name) + " "
+                                      )
+                                    ])
+                                  : _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: { click: _vm.inscribirUsuario }
+                                      },
+                                      [_c("p", [_vm._v(" Inscribirme ")])]
+                                    )
                               ])
                             }),
                             0
@@ -41584,6 +41614,7 @@ var app = new Vue({
      */
     interviewDetails: function interviewDetails(interview) {
       this.selectedInterview = {
+        id: interview.id,
         appliant: interview.appliant,
         areas: interview.areas,
         date: interview.date,

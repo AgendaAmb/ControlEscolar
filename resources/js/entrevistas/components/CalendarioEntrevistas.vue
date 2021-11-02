@@ -443,6 +443,7 @@ export default {
       var end_time = moment(interview.end_time, 'hh:mm:ss').format('hh:mm A');
 
       return {
+        'id': interview.id,
         'room': interview.room_id,
         'areas': interview.academic_areas,
         'date': this.StringDate,

@@ -40,6 +40,12 @@ export default {
   name: "interview",
 
   props: {
+    // Clave de la entrevista.
+    id: {
+      type: Number,
+      default: -1
+    },
+
     // Nombre del postulante de la entrevista.
     appliant: {
       type: String,

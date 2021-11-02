@@ -90,6 +90,7 @@ const app = new Vue({
          */
         interviewDetails(interview) {
             this.selectedInterview = {
+                id: interview.id,
                 appliant: interview.appliant,
                 areas: interview.areas,
                 date: interview.date,

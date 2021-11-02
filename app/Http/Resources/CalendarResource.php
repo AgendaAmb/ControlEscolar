@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class CalendarResource extends JsonResource
 {
@@ -83,6 +84,64 @@ class CalendarResource extends JsonResource
     }
 
     /**
+     * Sets the available announcements.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    private function setInterviewAcademicAreas($request, &$interview)
+    {
+        # Llena la información de los usuarios que participan en 
+        # la entrevista.
+        $areas = collect($interview['academic_areas'])->map(function($area) use ($request) {
+            $miPortal_professor = $this->getMiPortalUser($request, $area->professor_id, 'workers'); 
+            
+            return [
+                'id' => $area->area_id,
+                'name' => $area->area_name,
+                'professor_name' => Str::lower($miPortal_professor['name'])
+            ];
+        });
+
+        # Determina Si el usuario ya está inscrito al área académica
+        # de la entrevista.
+        /*$user_areas_available = $request->user()->academicAreas
+            ->whereIn('name', $areas->pluck('name'))
+            ->count() === 0;
+        
+        $areas = $areas->toArray();
+
+        # Verifica que el usuario pueda registrarse a la entrevista.
+        if ($user_areas_available === true)
+        {
+            $miPortal_user = $this->getMiPortalUser($request, $request->user()->id, 'workers');
+            $area = $request->user()->academicAreas->first();
+            $areas[] = [
+                'id' => $area->id,
+                'name' => $area->name,
+                'professor_name' => $miPortal_user['name']
+            ];
+        }*/
+
+        $areas = $areas->toArray();
+        # Verifica si la cantidad de áreas académicas es igual a 5.
+        # En caso de que no sea así, se llena el arreglo de datos con 5
+        # áreas académicas vacías.
+        if (count($areas) < 5)
+        {
+            $empty_areas = array_fill(0, 5 - count($areas), [
+                'name' => 'Área académica disponible',
+                'professor_name' => false
+            ]);
+
+            $areas = array_merge($areas, $empty_areas);
+        }
+
+        # Asocia las áreas con la entrevista.
+        $interview['academic_areas'] = $areas;
+    }
+
+    /**
      * Sets the available period.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -98,14 +157,16 @@ class CalendarResource extends JsonResource
 
 
         # Carga los modelos asociados al periodo y quita las convocatorias.
-        if ($this->period !== null)
-            $this->announcements = null;
+        if ($this->period === null)
+            return; 
             
+        $this->announcements = null;
         $this->period->interviews = $this->period->interviews->map(function($interview) use ($request){
             $interview = $interview->toArray();
 
             $this->setInterviewAppliant($request, $interview);
             $this->setIntentionLetterProfessor($request, $interview);
+            $this->setInterviewAcademicAreas($request, $interview);
 
             return $interview;
         })->toArray();
@@ -118,6 +179,8 @@ class CalendarResource extends JsonResource
             'interviews' => $this->period->interviews,
             'rooms' => $this->period->rooms,
         ];
+
+        $this->period['rooms'] = $this->period['rooms']->toArray();
     }
 
     /**

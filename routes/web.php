@@ -97,6 +97,13 @@ Route::prefix('entrevistas')
     Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])
     ->name('nuevaEntrevista');
 
+    # Agregar y eliminar a los usuarios de una entrevista.
+    Route::post('interviewUser', [InterviewController::class, 'newInterviewUser'])
+    ->name('interviewUser');
+
+    Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])
+    ->name('interviewUser');
+
     # Rúbrica de evaluación
     Route::get('rubrica/{evaluationRubric}', [InterviewController::class, 'rubrica'])->name('rubrica');
 

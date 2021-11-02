@@ -188,10 +188,10 @@ class Archive extends Model
      * Obtiene el programa académico, al cual corresponde
      * el expediente.
      *
-     * @return HasOne
+     * @return HasMany
      */
-    public function evaluationRubric(): HasOne
+    public function evaluationRubric(): HasMany
     {
-        return $this->hasOne(EvaluationRubric::class);
+        return $this->hasMany(EvaluationRubric::class);
     }
 }

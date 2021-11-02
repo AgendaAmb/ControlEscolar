@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewInterviewUserRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
 use App\Models\AcademicProgram;
@@ -20,6 +21,7 @@ class InterviewController extends Controller
     public function calendario(Request $request)
     {
         $calendar_resource = new CalendarResource(AcademicProgram::all());
+
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
@@ -55,6 +57,46 @@ class InterviewController extends Controller
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
         $interview_model->load('users.roles:name');
 
+        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Añade a un profesor a la entrevista.
+     * 
+     * @param Request $request
+     */
+    public function newInterviewUser(NewInterviewUserRequest $request)
+    {
+        $interview_model = Interview::find($request->safe()->interview_id);
+        $appliant = $interview_model->appliant->first();
+        $archive = $appliant->latestArchive;
+     
+        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
+        $interview_model->load('users.roles:name');
+
+        $archive->evaluationRubric()->create($request->safe()->except('interview_id'));
+
+        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Añade a un profesor a la entrevista.
+     * 
+     * @param Request $request
+     */
+    public function removeInterviewUser(Request $request)
+    {
+        # Registra al profesor a la entrevista.
+        $interview_model = Interview::find($request->safe()->interview_id);
+        /*$interview_model->users()->detach($request->user_id);
+        $interview_model->load('users.roles:name');
+*/
+        # Recupera al postulante y genera una nueva rúbrica para el
+        # profesor.
+        $appliant = $interview_model->appliant()->first;
+        $archive = $appliant->latestArchive;
+
+        dd($archive);
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
 }
