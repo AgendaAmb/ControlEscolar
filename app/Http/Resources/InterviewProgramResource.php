@@ -60,7 +60,7 @@ class InterviewProgramResource extends JsonResource
 
             },'appliant'
         ])->get();
-
+        
         $this->interviews = $user_interviews->map(function($interview) use ($request){
             $rubric = $interview->evaluationRubrics->first();
             

@@ -67,6 +67,7 @@ class RubricResource extends JsonResource
             'basic_concepts' => $rubric->basicConcepts->toArray(),
             'academic_concepts' => $rubric->academicConcepts->toArray(),
             'research_concepts' => $rubric->researchConcepts->toArray(),
+            'research_concepts_details' => $rubric->researchConceptsDetails,
             'working_experience_concepts' => $rubric->workingExperienceConcepts->toArray(),
             'personal_attributes_concepts' => $rubric->personalAttributesConcepts->toArray(),
         ];

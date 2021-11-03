@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class EvaluationRubric extends Model
 {
@@ -22,6 +23,15 @@ class EvaluationRubric extends Model
         'updated_at',
         'deleted_at',
         'pivot'
+    ];
+
+    /**
+     * The attributes appended for serialization.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'reseachConceptsDetails',
     ];
 
     /**
@@ -100,5 +110,18 @@ class EvaluationRubric extends Model
     public function personalAttributesConcepts(): BelongsToMany
     {
         return $this->evaluationConcepts()->type('personal_attributes');
+    }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @return array
+     */
+    public function getResearchConceptsDetailsAttribute(): array
+    {
+        $filename = implode('/', ['evaluation_rubrics',$this->id]);
+        $content = Storage::get($filename);
+
+        return json_decode($content, true);
     }
 }

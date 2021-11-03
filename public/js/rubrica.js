@@ -85694,6 +85694,7 @@ var app = new Vue({
     basic_concepts: rubric.basic_concepts,
     academic_concepts: rubric.academic_concepts,
     research_concepts: rubric.research_concepts,
+    research_concepts_details: rubric.research_concepts_details,
     working_experience_concepts: rubric.working_experience_concepts,
     personal_attributes_concepts: rubric.personal_attributes_concepts,
     loggedUser: user,
