@@ -4,8 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
     
-import Rubrica from './components/Rubrica';
-import BasicData from './components/BasicData';
+import AppliantData from './components/AppliantData';
+import EvaluationRubricSection from './components/EvaluationRubricSection';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 window.Vue = require('vue').default;
@@ -29,7 +29,7 @@ const app = new Vue({
     },
 
     components: {
-        Rubrica,
-        BasicData
+        AppliantData,
+        EvaluationRubricSection
     }
 });

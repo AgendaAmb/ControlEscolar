@@ -78,6 +78,10 @@
     color: white;
 }
 
+.rubric-title {
+    font-size: 28px;
+}
+
 .mes, .title {
     font-family: 'Myriad Pro Bold';
     font-size: 66px;

@@ -19,11 +19,11 @@ class EvaluationRubricController extends Controller
         $evaluationRubric->load([
             'archive:id,user_id,user_type,announcement_id',
             'archive.announcement.academicProgram:id,name',
-            'basicConcepts',
-            'academicConcepts',
-            'researchConcepts',
-            'workingExperienceConcepts',
-            'personalAttributesConcepts'
+            'basicConcepts.evaluationConceptDetails',
+            'academicConcepts.evaluationConceptDetails',
+            'researchConcepts.evaluationConceptDetails',
+            'workingExperienceConcepts.evaluationConceptDetails',
+            'personalAttributesConcepts.evaluationConceptDetails'
         ]);
 
         $rubricResource = new RubricResource($evaluationRubric);

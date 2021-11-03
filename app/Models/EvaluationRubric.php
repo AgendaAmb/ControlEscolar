@@ -20,7 +20,8 @@ class EvaluationRubric extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'pivot'
     ];
 
     /**
@@ -47,7 +48,8 @@ class EvaluationRubric extends Model
      */
     public function evaluationConcepts(): BelongsToMany
     {
-        return $this->belongsToMany(EvaluationConcept::class);
+        return $this->belongsToMany(EvaluationConcept::class)
+            ->select('evaluation_concepts.*', 'notes', 'score');
     }
 
     /**

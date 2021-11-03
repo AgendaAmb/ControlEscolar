@@ -20,6 +20,18 @@ class EvaluationConcept extends Model
     protected $guarded = [];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'pivot'
+    ];
+
+    /**
      * Gets the list of evaluation concepts.
      * 
      * @param Builder $builder
