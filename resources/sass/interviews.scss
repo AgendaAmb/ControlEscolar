@@ -1,0 +1,31 @@
+// Custom styles.
+.v-cal {
+    padding: 0 !important;
+}
+
+.v-cal-header {
+    .v-cal-header__title {
+        text-transform: capitalize;
+    }
+}  
+
+// Custom actions
+.v-cal-header__actions {
+  
+    .v-cal-button {
+        background-color: #115089;
+        color: white;
+    }
+
+    .v-cal-button.v-cal-button--is-active {
+        background-color: white;
+        color: #115089;
+    }
+}
+
+.v-cal-day__number{
+    color: #115089;
+    font-size: 15px !important;
+    padding: 0 !important;
+    margin-top: 4% !important;
+}

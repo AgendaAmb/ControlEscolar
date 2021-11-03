@@ -30,7 +30,7 @@ class CreateEvaluationRubricsTable extends Migration
                 ->onUpdate('cascade');
                 
             $table->string('considerations')->nullable();
-            $table->string('aditional_information')->nullable();
+            $table->string('additional_information')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,27 +20,31 @@ const announcement = @json($announcement);
     <hr class="col-11 hr">
 </div>
 
-<evaluation-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:concepts="rubric.basic_concepts">
+<evaluation-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:concepts="basic_concepts">
     <template v-slot:appliant_data>
         <appliant-data v-bind:appliant="appliant" v-bind:announcement="announcement"></appliant-data>
     </template>
 </evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="rubric.academic_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="rubric.research_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="rubric.working_experience_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'5. Atributos personales'" v-bind:concepts="rubric.personal_attributes_concepts"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="academic_concepts"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="research_concepts"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="working_experience_concepts"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'5. Atributos personales'" v-bind:concepts="personal_attributes_concepts"></evaluation-rubric-section>
 
-<div class="form-row mt-2 justify-content-center">
-    <h4 class="col-11 myriad-bold blue rubric-title mb-3"> 6. Varios </h4>
+<div class="form-row mt-2 justify-content-center rubric-section">
+    <h4 class="col-11 myriad-bold rubric-section-header mb-3"> 6. Varios </h4>
     <div class="form-group col-lg-11">
-        <label for="exampleFormControlTextarea1">1. ¿Tienes algún último comentario o aportación que desees agregar para ser considerado en tu evaluación?</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label> ¿Tienes algún último comentario o aportación que desees agregar para ser considerado en tu evaluación?</label>
+        <textarea v-model="considerations" class="form-control" rows="3"></textarea>
     </div>
     <div class="form-group col-lg-11">
-        <label for="exampleFormControlTextarea1">Situaciones o información importante que haya detectado la comisión de evaluación</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label> Situaciones o información importante que haya detectado la comisión de evaluación</label>
+        <textarea v-model="additional_information" class="form-control" rows="3"></textarea>
     </div>        
     <hr class="col-11 hr">
+    <div class="form-group col-lg-11 text-right">
+        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('save')"> Guardar </button>
+        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('send')"> Enviar </button>
+    </div>
 </div>
 @endsection
 

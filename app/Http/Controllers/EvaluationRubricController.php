@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateEvaluationRubricRequest;
 use App\Http\Resources\RubricResource;
 use App\Models\EvaluationRubric;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class EvaluationRubricController extends Controller
@@ -43,15 +45,42 @@ class EvaluationRubricController extends Controller
     }
 
     /**
+     * Updates an existing evaluation rubric pivot.
+     *
+     * @param  array $concept
+     * @param  \App\Models\EvaluationRubric  $evaluationRubric
+     * @return void
+     */
+    private function updatePivot(array $concept, EvaluationRubric $evaluationRubric)
+    {
+        foreach ($concept as $concept)
+        {
+            $evaluationRubric->evaluationConcepts()->updateExistingPivot($concept['id'], [
+                'score' => $concept['score'],
+                'notes' => $concept['notes']
+            ]);
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateEvaluationRubricRequest  $request
      * @param  \App\Models\EvaluationRubric  $evaluationRubric
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EvaluationRubric $evaluationRubric)
+    public function update(UpdateEvaluationRubricRequest $request, EvaluationRubric $evaluationRubric)
     {
-        //
+        $this->updatePivot($request->basic_concepts, $evaluationRubric);
+        $this->updatePivot($request->academic_concepts, $evaluationRubric);
+        $this->updatePivot($request->research_concepts, $evaluationRubric);
+        $this->updatePivot($request->working_experience_concepts, $evaluationRubric);
+        $this->updatePivot($request->personal_attributes_concepts, $evaluationRubric);
+
+        $evaluationRubric->fill($request->safe()->only('considerations','additional_information'));
+        $evaluationRubric->save();
+
+        return new JsonResponse(['message'=>'Solicitud actualizada'], JsonResponse::HTTP_OK);
     }
 
     /**

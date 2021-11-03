@@ -1,9 +1,9 @@
 <template>
-    <div class="row mt-2 justify-content-center">
-        <h4 class="col-11 myriad-bold blue rubric-title mb-3"> {{ title }} </h4>
+    <div class="row mt-2 justify-content-center rubric-section">
+        <h4 class="col-11 myriad-bold rubric-section-header mb-3"> {{ title }} </h4>
         <slot name="appliant_data"></slot>
         <div class="col-lg-11 table-responsive px-0">
-            <table class="table rubric">
+            <table class="table rubric-section-body">
                 <thead>
                     <tr>
                         <th class="concept"></th>
@@ -31,9 +31,8 @@
                     <tr v-for="concept in concepts" :key="concept.id">
                         <td class="text-justify concept">{{concept.description}}</td>
                         <td class="text-justify" v-for="detail in detailsFrom(concept)" :key="detail.id">{{detail.text}}</td>
-                        <td >
-                        </td>
-                        <td></td>
+                        <td class="score"><input v-model.number="concept.score" type="number"></td>
+                        <td class="notes"><input v-model="concept.notes" type="text"></td>
                     </tr>
                 </tbody>
             </table>
@@ -41,61 +40,6 @@
         <hr class="col-11 hr">
     </div>
 </template>
-
-<style scoped>
-
-.rubric {
-    text-align: center;
-}
-
-.rubric > thead th, .rubric > tbody td {
-    border-style: solid;
-    border-color:gray;
-    border-width: 0px 1px 1px 0px;
-}
-
-.rubric > tbody td {
-    font-size:13px;
-}
-
-.excelent, .very-good, .good, .goofy {
-    font-size:18px;
-}
-
-.excelent {
-    color: #009cff;
-}
-
-.very-good {
-    color: #ffa500;
-}
-
-.good {
-    color: #8ACC25;
-}
-
-.goofy {
-    color: #fcb063;
-}
-
-.excelent + p, .very-good + p:first-of-type {
-    color: black;
-    font-size: 14px;
-}
-
-.concept, .score-category, .notes {
-    width: 15%;
-}
-
-.score {
-    width: 10%;
-}
-
-
-.table-input {
-    display: block;
-}
-</style>
 
 <script>
 export default {
