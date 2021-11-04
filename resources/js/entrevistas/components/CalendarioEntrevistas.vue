@@ -19,18 +19,27 @@
       </div>
     </div>
 
+    <div v-if="!isProfessor" class="col-12 order-3 mt-2 mb-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <button class="v-cal-button w-100" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
+        </div>
+      </div>
+    </div>
+
+
     <div :class="CalendarClass" v-if="IsActive">
       <div class="v-cal">
         <component
           :is="activeView"
           :class="'v-cal-content--' + activeView"
           v-bind="activeViewProps"
-          @day-clicked="abreModalEntrevistas"
+          @day-clicked="muestraEntrevistas"
           ></component>
         <footer class="v-cal-footer"></footer>
       </div>
     </div>
-    <div class="col-lg-4 pl-lg-0 order-3" v-if="IsActive && isProfessor">
+    <div class="col-lg-4 pl-lg-0 order-3" v-if="IsActive">
       <header class="dia-entrevista"><p>{{StringDate}}</p></header>
       <interview v-for="interview in ActiveDateInterviews" 
         v-bind="interviewDataFrom(interview)"
@@ -358,19 +367,8 @@ export default {
     CalendarClass: {
       get(){
         return {
-          'col-lg-8': this.isProfessor,
-          'col-12': !this.isProfessor,
+          'col-lg-8': true,
           'pr-lg-0': true,
-          'order-3': true,
-        }
-      }
-    },
-
-    NotificationsClass: {
-      get(){
-        return {
-          'col-lg-4': true,
-          'pl-lg-0': true,
           'order-3': true,
         }
       }
@@ -402,7 +400,7 @@ export default {
   },
 
   methods: {
-    abreModalEntrevistas(date){
+    muestraEntrevistas(date){
       if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
         return false;
 
@@ -412,6 +410,11 @@ export default {
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);
       
+      //if (!this.isProfessor)
+      //  $('#NuevaEntrevista').modal('show');
+    },
+
+    muestraModalNuevaEntrevista(){
       if (!this.isProfessor)
         $('#NuevaEntrevista').modal('show');
     },

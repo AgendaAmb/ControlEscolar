@@ -14,7 +14,7 @@
             <div class="form-row mt-4 mb-2">
               <div class="form-group col-12">
                 <label> Fecha </label>
-                <input v-model="date" type="date" class="form-control" readonly>
+                <input v-model="date" type="date" class="form-control" :min="min_date" :max="max_date">
               </div>
 
               <div class="form-group col-md-5">
@@ -88,6 +88,12 @@ export default {
 
     // Fecha de la entrevista.
     date: String,
+
+    // Fecha mínima del inicio del periodo.
+    min_date: String,
+
+    // Fecha máxima del inicio del periodo.
+    max_date: String,
 
     // Postulantes.
     appliants: Array,

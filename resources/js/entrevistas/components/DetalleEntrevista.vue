@@ -15,13 +15,13 @@
               <div class="col-lg-6 px-0">
                 <h5 class="d-block fecha"> {{date}} </h5>
                 <h5 class="d-block postulante mt-3"> {{appliant}} </h5>
-                <p class="d-block mt-3 mb-0 title-prof-carta-intencion"> Carta de intención otorgada por: </p>
+                <p class="d-block mt-3 mb-0 prof-carta-intencion"> Carta de intención otorgada por: </p>
                 <p class="d-block mt-0 prof-carta-intencion"> {{professor}} </p>
               </div>
               <div class="col-lg-6 my-auto px-0">
                 <p class="d-block mt-0 sala"> Sala {{room}}, {{start_time}} - {{end_time}} </p>
               </div>
-              <div class="col-12">
+              <div class="col-12 table-responsive px-0">
                 <table class="table">
                   <thead class="areas-academicas">
                     <tr>
@@ -34,7 +34,7 @@
                     <tr>
                       <td v-for="(area, index) in areas" :key="area.id">
                         <p class="prof-area" v-if="area.professor_name !== false"> {{area.professor_name}} </p>
-                        <a v-else href="#" @click="inscribirUsuario(index)">
+                        <a v-else-if="!isSuscribed" href="#" @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
                         <a v-if="loggedUserName === area.professor_name" href="#" @click="cancelarRegistro(index)"> 
@@ -44,19 +44,6 @@
                     </tr>
                   </tbody>
                 </table>
-                <!--
-                <div class="row justify-content-between my-auto">
-                  
-                  <div v-for="area in areas" :key="area.id" class="col-2 px-0 my-auto">
-                    <h5 class="d-block areas-academicas my-auto py-3 px-3"> {{area.name}} </h5>
-                    <a class="registrar-participacion py-3" href="#">
-                      <p> {{area.professor_name}} </p>
-                    </a>
-                  </div>
-                  <div v-for="area in areas" :key="area.id" class="col-2 my-auto">
-                    <h5 class="d-block my-auto"> {{area.name}} </h5>
-                  </div>
-                </div>-->
               </div>
             </div>
           </form>
@@ -66,75 +53,6 @@
   </div>
 </template>
 
-<style scoped>
-.detalle-entrevista {
-  max-width: 750px;
-}
-
-.modal-header.modal-header-blue, .modal-footer button.btn-primary, .areas-academicas {
-  background-color: #115089;
-  font-family: 'Myriad Pro Bold';
-  color: white;
-}
-
-.areas-academicas {
-  text-align: center;
-  font-size: 13px;
-  text-transform: capitalize;
-}
-
-.modal-body label, .title-prof-carta-intencion, .sala {
-  color: #115089;
-}
-
-.modal-body .fecha, .prof-carta-intencion {
-  font-family: 'Myriad Pro Bold';
-  color: #115089;
-}
-
-.registrar-participacion {
-  background-color: white;
-  color: #115089;
-  font-family: 'Myriad Pro Regular';
-  display: block;
-  font-size: 12px;
-  text-transform: capitalize;
-  text-align: center;
-}
-
-.prof-carta-intencion {
-  text-transform: capitalize;
-}
-
-.prof-area {
-  text-transform: capitalize;
-  color: #115089;
-  font-family: 'Myriad Pro Regular';
-  text-align: center;
-}
-
-.prof-area + a > p {
-  font-size: 12px;
-  text-align: center;
-  color: #115089;
-}
-
-
-.fecha::first-letter {
-  text-transform: capitalize;
-}
-
-.modal-body .postulante {
-  font-family: 'Myriad Pro Bold';
-  color: #fecc56;
-  text-transform: capitalize;
-}
-
-.modal-footer button.btn-secondary {
-  color: white;
-  font-family: 'Myriad Pro Bold';
-}
-</style>
 
 <script>
 export default {
@@ -197,7 +115,7 @@ export default {
       default() {
         return [];
       }
-    }
+    },
   },
 
   computed: {
@@ -205,6 +123,15 @@ export default {
       var loggedUser = this.$root.loggedUser;
 
       return (loggedUser.name + " " + loggedUser.middlename + " " + loggedUser.surname).toLowerCase();
+    },
+
+    isSuscribed() {
+      var loggedUser = this.loggedUserName;
+      
+      return this.areas.filter(area => {
+        return area.professor_name === loggedUser;
+      
+      }).length > 0;
     }
   },
 

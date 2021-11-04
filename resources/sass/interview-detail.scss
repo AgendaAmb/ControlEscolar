@@ -1,0 +1,70 @@
+#DetalleEntrevista {
+    .detalle-entrevista {
+        max-width: 750px;
+      }
+      
+    .modal-header.modal-header-blue, .modal-footer button.btn-primary {
+        background-color: #115089;
+        font-family: 'Myriad Pro Bold';
+        color: white;
+    }
+      
+    .areas-academicas {
+        text-align: center;
+        font-size: 13px;
+        text-transform: capitalize;
+        background-color: #115089;
+        font-family: 'Myriad Pro Bold';
+        color: white;
+    }
+
+    .modal-body {
+        label, .fecha, .sala, .prof-carta-intencion {
+            color: #115089;
+        }
+
+        .fecha, .postulante, .prof-carta-intencion:last-of-type {
+            font-family: 'Myriad Pro Bold';
+        }
+
+        .fecha::first-letter, .postulante {
+            text-transform: capitalize;
+        }
+
+        .postulante {
+            color: #fecc56;
+        }
+      
+        .postulante, .prof-carta-intencion:last-of-type {
+            text-transform: capitalize;
+        }
+    }
+
+    .registrar-participacion {
+        background-color: white;
+        color: #115089;
+        font-family: 'Myriad Pro Regular';
+        display: block;
+        font-size: 12px;
+        text-transform: capitalize;
+        text-align: center;
+    }
+      
+    .prof-area {
+        text-transform: capitalize;
+        color: #115089;
+        font-family: 'Myriad Pro Regular';
+        text-align: center;
+    }
+      
+    .prof-area + a > p {
+        font-size: 12px;
+        text-align: center;
+        color: #115089;
+    }
+      
+    .modal-footer button.btn-secondary {
+        color: white;
+        font-family: 'Myriad Pro Bold';
+    }
+}
