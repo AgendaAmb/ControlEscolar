@@ -46,7 +46,8 @@ class InterviewProgramResource extends JsonResource
     }
 
     /**
-     * Gets the list of interviews from the authenticated user.
+     * Sets the interviews from the authenticated user or
+     * if it's admin, returns all the interviews.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void
@@ -55,6 +56,9 @@ class InterviewProgramResource extends JsonResource
     {
         $user_interviews = $this->resource->with([
             'evaluationRubrics' => function($query) use ($request){
+                if ($request->user()->hasRole('admin'))
+                    return;
+
                 $query->where('user_id', $request->user()->id)
                     ->where('user_type', $request->user()->type);
 
@@ -62,16 +66,21 @@ class InterviewProgramResource extends JsonResource
         ])->get();
         
         $this->interviews = $user_interviews->map(function($interview) use ($request){
-            $rubric = $interview->evaluationRubrics->first();
-            
+
+            # Obtiene las rúbricas de evaluación
+            $rubrics = $interview->evaluationRubrics->map(function ($rubric){
+                return route('entrevistas.rubrica.show', $rubric);
+            })->toArray();
+
+            # Devuelve la información como arreglo
             return [
                 'id' => $interview->id,
-                'rubric' => route('entrevistas.rubrica.show', $rubric),
                 'appliant' => Str::lower($this->getInterviewAppliant($request, $interview)),
                 'date' => $interview->date,
                 'start_time' => $interview->start_time,
                 'end_time' => $interview->end_time,
                 'room_id' => $interview->room_id,
+                'rubrics' => $rubrics
             ];
         
         })->groupBy(['date', function($item) {
@@ -84,6 +93,23 @@ class InterviewProgramResource extends JsonResource
         });
     }
 
+
+    /**
+     * Sets the appliant name.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    private function setUser($request)
+    {
+        $worker = $request->session()->get('user');
+
+        # Toma los datos de los trabajadores, que fueron recuperados del sistema
+        # central.
+        $this->user = $request->session()->get('workers')->firstWhere('id', $worker->id);
+        $this->user['roles'] = $worker->roles->toArray();
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -93,7 +119,11 @@ class InterviewProgramResource extends JsonResource
     public function toArray($request)
     {
         $this->setInterviews($request);
+        $this->setUser($request);
 
-        return $this->interviews->toArray();
+        return [
+            'interviews' => $this->interviews->toArray(),
+            'user' => $this->user,
+        ];
     }
 }

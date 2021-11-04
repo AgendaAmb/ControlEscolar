@@ -34,7 +34,7 @@
                     <tr>
                       <td v-for="(area, index) in areas" :key="area.id">
                         <p class="prof-area" v-if="area.professor_name !== false"> {{area.professor_name}} </p>
-                        <a v-else-if="!isSuscribed" href="#" @click="inscribirUsuario(index)">
+                        <a v-else-if="!isSuscribed && !$root.loggedUserIsAdmin()" href="#" @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
                         <a v-if="loggedUserName === area.professor_name" href="#" @click="cancelarRegistro(index)"> 

@@ -28022,7 +28022,8 @@ var render = function() {
                                         " " + _vm._s(area.professor_name) + " "
                                       )
                                     ])
-                                  : !_vm.isSuscribed
+                                  : !_vm.isSuscribed &&
+                                    !_vm.$root.loggedUserIsAdmin()
                                   ? _c(
                                       "a",
                                       {
@@ -41564,7 +41565,8 @@ var app = new Vue({
     },
 
     /**
-     * 
+     * Despliega el modal de los detalles de la entrevista.
+     * @param {*} period 
      */
     interviewDetails: function interviewDetails(interview) {
       this.selectedInterview = {
@@ -41578,6 +41580,28 @@ var app = new Vue({
         end_time: interview.end_time
       };
       $('#DetalleEntrevista').modal('show');
+    },
+
+    /**
+     * Determina si el usuario autenticado es administrador.
+     * @param {*} period 
+     */
+    loggedUserIsAdmin: function loggedUserIsAdmin() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'admin';
+      });
+      return roles.length > 0;
+    },
+
+    /**
+     * Determina si el usuario autenticado es administrador.
+     * @param {*} period 
+     */
+    loggedUserIsSchoolControl: function loggedUserIsSchoolControl() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'control_escolar';
+      });
+      return roles.length > 0;
     }
   },
 

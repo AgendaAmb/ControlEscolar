@@ -28,11 +28,36 @@ const app = new Vue({
 
     data: {
         interviews: interviews,
+        loggedUser: user,
     },
 
     methods: {
         StringDate(date){     
             return moment(date).locale('es-MX').format("dddd D \\d\\e MMMM \\d\\e\\l YYYY");
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+         loggedUserIsAdmin(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'admin';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+         loggedUserIsSchoolControl(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'control_escolar';
+            });
+    
+            return roles.length > 0;
         },
     }
 });

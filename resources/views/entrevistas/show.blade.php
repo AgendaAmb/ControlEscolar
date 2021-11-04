@@ -1,5 +1,6 @@
 <script>
 const interviews = @json($interviews);
+const user = @json($user);
 </script>
 @extends('layouts.app')
     

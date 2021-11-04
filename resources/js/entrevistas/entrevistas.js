@@ -86,7 +86,8 @@ const app = new Vue({
         },
 
         /**
-         * 
+         * Despliega el modal de los detalles de la entrevista.
+         * @param {*} period 
          */
         interviewDetails(interview) {
             this.selectedInterview = {
@@ -101,7 +102,31 @@ const app = new Vue({
             };
 
             $('#DetalleEntrevista').modal('show');
-        }
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+        loggedUserIsAdmin(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'admin';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+         loggedUserIsSchoolControl(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'control_escolar';
+            });
+    
+            return roles.length > 0;
+        },
     },
 
     /**

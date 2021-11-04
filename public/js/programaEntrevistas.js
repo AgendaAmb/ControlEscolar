@@ -59,6 +59,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -22066,7 +22069,20 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table text-center" }, [
-                _vm._m(0, true),
+                _c("thead", { staticClass: "interview-program-header" }, [
+                  _c("tr", [
+                    _c("th", [_vm._v(" Horario ")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(" Nombre ")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(" Expediente ")]),
+                    _vm._v(" "),
+                    !_vm.$root.loggedUserIsAdmin() &&
+                    _vm.loggedUserIsSchoolControl()
+                      ? _c("th", [_vm._v(" Rúbrica de evaluación ")])
+                      : _c("th", [_vm._v(" Rúbricas de evaluación ")])
+                  ])
+                ]),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -22084,13 +22100,23 @@ var render = function() {
                         _vm._v(_vm._s(interview.appliant))
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true),
+                      _vm._m(0, true),
                       _vm._v(" "),
-                      _c("td", [
-                        _c("a", { attrs: { href: interview.rubric } }, [
-                          _vm._v("Formatos de evaluación")
-                        ])
-                      ])
+                      _c(
+                        "td",
+                        _vm._l(interview.rubrics, function(rubric) {
+                          return _c(
+                            "a",
+                            {
+                              key: rubric,
+                              staticClass: "d-block",
+                              attrs: { href: rubric }
+                            },
+                            [_vm._v(" Formato de evaluación")]
+                          )
+                        }),
+                        0
+                      )
                     ])
                   }),
                   0
@@ -22105,22 +22131,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "interview-program-header" }, [
-      _c("tr", [
-        _c("th", [_vm._v(" Horario ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Nombre ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Expediente ")]),
-        _vm._v(" "),
-        _c("th", [_vm._v(" Rúbrica de evaluación ")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -34418,11 +34428,34 @@ var app = new Vue({
     InterviewDay: _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: {
-    interviews: interviews
+    interviews: interviews,
+    loggedUser: user
   },
   methods: {
     StringDate: function StringDate(date) {
       return moment(date).locale('es-MX').format("dddd D \\d\\e MMMM \\d\\e\\l YYYY");
+    },
+
+    /**
+     * Determina si el usuario autenticado es administrador.
+     * @param {*} period 
+     */
+    loggedUserIsAdmin: function loggedUserIsAdmin() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'admin';
+      });
+      return roles.length > 0;
+    },
+
+    /**
+     * Determina si el usuario autenticado es administrador.
+     * @param {*} period 
+     */
+    loggedUserIsSchoolControl: function loggedUserIsSchoolControl() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'control_escolar';
+      });
+      return roles.length > 0;
     }
   }
 });

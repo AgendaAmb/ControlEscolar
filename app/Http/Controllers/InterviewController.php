@@ -8,7 +8,6 @@ use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\InterviewProgramResource;
 use App\Models\AcademicProgram;
-use App\Models\EvaluationRubric;
 use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,10 +33,13 @@ class InterviewController extends Controller
      */
     public function programa(Request $request)
     {
-        $interview_program_resource = new InterviewProgramResource($request->user()->interviews());
+        $interviews = $request->user()->hasRole('admin') === false
+        ?   $request->user()->interviews()
+        :   Interview::select('*');
 
-        return view('entrevistas.show')
-            ->with('interviews',  $interview_program_resource->toArray($request));
+        $interview_program_resource = new InterviewProgramResource($interviews);
+
+        return view('entrevistas.show', $interview_program_resource->toArray($request));
     }
 
     /**
