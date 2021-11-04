@@ -23,8 +23,13 @@
                                     <td>{{interview.start_time + " a " + interview.end_time}}</td>
                                     <td class="appliant">{{interview.appliant}}</td>
                                     <td><a href="#">Ver documentos</a></td>
-                                    <td>
-                                        <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric" :href="rubric"> Formato de evaluación</a>
+                                    <td v-if="!$root.loggedUserIsAdmin() && !loggedUserIsSchoolControl()">
+                                        <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location"> Formato de evaluación</a>
+                                    </td>
+                                    <td v-else>
+                                        <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location">
+                                            Profesor {{rubric.professor}}
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

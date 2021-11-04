@@ -15,7 +15,10 @@ class StoreInterviewRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if ($this->user()->hasAnyRole(['admin','control_escolar']))
+            return true;
+
+        return false;
     }
 
     /**

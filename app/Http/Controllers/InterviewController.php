@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConfirmInterviewRequest;
 use App\Http\Requests\NewInterviewUserRequest;
 use App\Http\Requests\RemoveInterviewUserRequest;
 use App\Http\Requests\StoreInterviewRequest;
@@ -33,7 +34,7 @@ class InterviewController extends Controller
      */
     public function programa(Request $request)
     {
-        $interviews = $request->user()->hasRole('admin') === false
+        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar']) === false
         ?   $request->user()->interviews()
         :   Interview::select('*');
 
@@ -43,7 +44,7 @@ class InterviewController extends Controller
     }
 
     /**
-     * Devuelve la vista del.
+     * Agenda una nueva entrevista.
      * 
      * @param Request $request
      */
@@ -52,6 +53,8 @@ class InterviewController extends Controller
         $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
         $interview_model->load('users.roles:name');
+        $interview_model->confirmed = false;
+        $interview_model->save();
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
@@ -96,5 +99,15 @@ class InterviewController extends Controller
             ->delete();
 
         return new JsonResponse(['message'=>'¡Registro a entrevista cancelado exitosamente!'], JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Confirma una entrevista.
+     * 
+     * @param Request $request
+     */
+    public function confirmInterview(ConfirmInterviewRequest $request)
+    {
+        dd($request->all());
     }
 }

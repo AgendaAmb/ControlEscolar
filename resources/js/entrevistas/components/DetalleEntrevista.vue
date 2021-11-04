@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="creaPeriodo">
+          <form @submit.prevent="confirmaEntrevista">
             <div class="row mx-3 mt-3">
               <div class="col-lg-6 px-0">
                 <h5 class="d-block fecha"> {{date}} </h5>
@@ -43,6 +43,14 @@
                       </td>
                     </tr>
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="5">
+                        <button class="btn btn-primary" type="submit"> Confirmar entrevista </button>
+                        <button class="btn btn-danger ml-1"> Cerrar </button>
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>
@@ -53,7 +61,12 @@
   </div>
 </template>
 
-
+<style scoped>
+tfoot > tr > td > button {
+  color: white;
+  font-family: 'Myriad Pro Bold';
+}
+</style>
 <script>
 export default {
   name: "detalle-entrevista",
@@ -137,7 +150,7 @@ export default {
 
   methods: {
     inscribirUsuario(index){
-      if (confirm('¿Estás seguro que deseas participar en esta entrevista?') === false)
+      if (confirm('¿Estás segure que deseas participar en esta entrevista?') === false)
         return false;
 
       axios.post('/controlescolar/entrevistas/interviewUser', {
@@ -160,7 +173,7 @@ export default {
     },
 
     cancelarRegistro(index){
-      if (confirm('¿Estás seguro que deseas cancelar tu participación en la entrevista?') === false)
+      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false)
         return false;
 
       console.log(this.$root.loggedUser);
@@ -179,6 +192,20 @@ export default {
         });
       }).catch(error => { 
 
+      });
+
+      return false;
+    },
+
+    confirmaEntrevista(){
+      if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false)
+        return false;
+
+      axios.post('/controlescolar/entrevistas/confirmInterview', {
+        interview_id: this.id
+      }).then(response => {
+        
+      }).catch(error => { 
       });
 
       return false;

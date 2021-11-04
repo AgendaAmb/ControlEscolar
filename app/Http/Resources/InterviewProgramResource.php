@@ -68,8 +68,13 @@ class InterviewProgramResource extends JsonResource
         $this->interviews = $user_interviews->map(function($interview) use ($request){
 
             # Obtiene las rúbricas de evaluación
-            $rubrics = $interview->evaluationRubrics->map(function ($rubric){
-                return route('entrevistas.rubrica.show', $rubric);
+            $rubrics = $interview->evaluationRubrics->map(function ($rubric) use ($request){
+                $professor = $this->getMiPortalUser($request, $rubric->user_id, 'workers');
+
+                return [
+                    'location' => route('entrevistas.rubrica.show', $rubric),
+                    'professor' => Str::lower($professor['name'])
+                ];
             })->toArray();
 
             # Devuelve la información como arreglo

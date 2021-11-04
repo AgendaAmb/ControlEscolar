@@ -85,29 +85,21 @@ Route::prefix('solicitud')->name('solicitud.')->group(function(){
 });
 
 # Rutas para las entrevistas.
-Route::prefix('entrevistas')
-->middleware(['auth'])
-->name('entrevistas.')
-->group(function(){
+Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function(){
 
     # Calendario
-    Route::get('calendario', [InterviewController::class, 'calendario'])
-    ->name('calendario');
+    Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
     # Programa de entrevistas
-    Route::get('programa', [InterviewController::class, 'programa'])
-    ->name('programa');
-    
+    Route::get('programa', [InterviewController::class, 'programa'])->name('programa');
+
     # Agenda una nueva entrevista.
-    Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])
-    ->name('nuevaEntrevista');
+    Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
+    Route::post('confirmInterview', [InterviewController::class, 'confirmInterview'])->name('confirmInterview');
 
     # Agregar y eliminar a los usuarios de una entrevista.
-    Route::post('interviewUser', [InterviewController::class, 'newInterviewUser'])
-    ->name('interviewUser');
-
-    Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])
-    ->name('interviewUser');
+    Route::post('interviewUser', [InterviewController::class, 'newInterviewUser'])->name('interviewUser');
+    Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])->name('interviewUser');
 
     # Rúbrica de evaluación
     Route::prefix('rubrica')->name('rubrica.')->group(function(){
@@ -122,6 +114,20 @@ Route::prefix('entrevistas')
     # Api de zoom.
     Route::apiResource('zoom', ZoomController::class);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Rutas de admin.

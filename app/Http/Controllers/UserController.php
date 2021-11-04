@@ -33,7 +33,7 @@ class UserController extends Controller
         $miPortal_appliants = $request->session()->get('appliants');
         $miPortal_workers = $request->session()->get('workers');
 
-        return new InterviewAppliantsCollection($appliants, $miPortal_workers, $miPortal_appliants);
+        return $miPortal_appliants;
     }
 
     /**

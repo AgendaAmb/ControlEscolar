@@ -26,6 +26,15 @@ class EvaluationRubric extends Model
     ];
 
     /**
+     * Relationship eager loads.
+     *
+     * @var array
+     */
+    protected $with = [
+        'professor'
+    ];
+
+    /**
      * The attributes appended for serialization.
      *
      * @var array
@@ -49,6 +58,16 @@ class EvaluationRubric extends Model
     public function archive(): BelongsTo
     {
         return $this->belongsTo(Archive::class);
+    } 
+    
+    /**
+    * Gets the professor who filled the rubric.
+    *
+    * @return BelongsTo
+    */
+    public function professor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
