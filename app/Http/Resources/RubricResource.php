@@ -67,11 +67,39 @@ class RubricResource extends JsonResource
             'basic_concepts' => $rubric->basicConcepts->toArray(),
             'academic_concepts' => $rubric->academicConcepts->toArray(),
             'research_concepts' => $rubric->researchConcepts->toArray(),
-            'research_concepts_details' => $rubric->researchConceptsDetails,
             'working_experience_concepts' => $rubric->workingExperienceConcepts->toArray(),
             'personal_attributes_concepts' => $rubric->personalAttributesConcepts->toArray(),
         ];
     } 
+
+    /**
+     * Gets an user from the main system.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int $id
+     * @param string $type
+     * @return void
+     */
+    private function setResearchConceptDetails($request)
+    {
+        $rubric = $this->resource;
+        $details = collect($rubric->researchConceptsDetails);
+        
+        $research_concepts = $rubric->researchConcepts->map(function($concept) use ($details){
+            $concept_details = $details->where('id', $concept->id)
+                ->groupBy('group')
+                ->values()
+                ->toArray();
+
+            $concept = $concept->toArray();
+            $concept['evaluation_concept_details'] = $concept_details;
+
+            return $concept;
+        });
+
+        $this->rubric['research_concepts'] = $research_concepts;
+    } 
+
     /**
      * Gets an user from the main system.
      *
@@ -121,6 +149,7 @@ class RubricResource extends JsonResource
         $this->setAppliant($request);
         $this->setUser($request);
         $this->setRubric($request);
+        $this->setResearchConceptDetails($request);
         $this->setAnnouncement($request);
 
         return [

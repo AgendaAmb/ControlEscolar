@@ -51327,6 +51327,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'evaluation-rubric-section',
   props: {
@@ -51354,7 +51366,38 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: ''
       }];
+      if (concept.type === 'research') return [];
       return concept.evaluation_concept_details;
+    },
+    researchDetailsFrom: function researchDetailsFrom(concept) {
+      if (concept.type !== 'research') return {};
+      return concept.evaluation_concept_details;
+    },
+    isHeader: function isHeader(detail) {
+      return detail.type === 'header';
+    },
+    isTextInput: function isTextInput(detail) {
+      return detail.type === 'text';
+    },
+    isTextArea: function isTextArea(detail) {
+      return detail.type === 'textarea';
+    },
+    isRadioInput: function isRadioInput(detail) {
+      return detail.type === 'radio';
+    },
+    labelClassFor: function labelClassFor(detail) {
+      return {
+        'd-block': true,
+        'myriad-regular': !this.isHeader(detail),
+        'myriad-bold': this.isHeader(detail),
+        'text-left': true,
+        'mt-0': true,
+        'mb-1': true
+      };
+    },
+    labelTextFor: function labelTextFor(detail) {
+      if (this.isHeader(detail)) return detail.header;
+      return detail.label;
     }
   }
 });
@@ -73264,6 +73307,97 @@ var render = function() {
                     )
                   }),
                   _vm._v(" "),
+                  _vm._l(_vm.researchDetailsFrom(concept), function(
+                    detail_data
+                  ) {
+                    return _c(
+                      "td",
+                      { key: detail_data.id, staticClass: "text-justify" },
+                      _vm._l(detail_data, function(detail, index) {
+                        return _c(
+                          "div",
+                          { key: index, staticClass: "d-block mb-4" },
+                          [
+                            _c("label", { class: _vm.labelClassFor(detail) }, [
+                              _vm._v(
+                                " " + _vm._s(_vm.labelTextFor(detail)) + " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(detail.choices, function(choice, index) {
+                              return _c(
+                                "div",
+                                {
+                                  key: index,
+                                  staticClass: "form-check form-check-inline"
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: detail.value,
+                                        expression: "detail.value"
+                                      }
+                                    ],
+                                    staticClass: "form-check-input my-auto",
+                                    attrs: { type: "radio" },
+                                    domProps: {
+                                      value: choice,
+                                      checked: _vm._q(detail.value, choice)
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(detail, "value", choice)
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-check-label" },
+                                    [_vm._v(" " + _vm._s(choice) + " ")]
+                                  )
+                                ]
+                              )
+                            }),
+                            _vm._v(" "),
+                            _vm.isTextArea(detail)
+                              ? _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: detail.value,
+                                      expression: "detail.value"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { rows: "2" },
+                                  domProps: { value: detail.value },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        detail,
+                                        "value",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e()
+                          ],
+                          2
+                        )
+                      }),
+                      0
+                    )
+                  }),
+                  _vm._v(" "),
                   _c("td", { staticClass: "score" }, [
                     _c("input", {
                       directives: [
@@ -85710,11 +85844,13 @@ var app = new Vue({
   methods: {
     getConceptData: function getConceptData(concepts) {
       return concepts.map(function (concept) {
-        return {
+        data = {
           id: concept.id,
           notes: concept.notes,
           score: concept.score
         };
+        if (concept.type === 'research') data['evaluation_concept_details'] = concept.evaluation_concept_details;
+        return data;
       });
     },
     guardaRubrica: function guardaRubrica(state) {
