@@ -129,7 +129,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -234,6 +233,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    ActiveDate: function ActiveDate() {
+      if (this.activeDate.isBefore(this.MinDate)) return this.MinDate;
+      if (this.activeDate.isAfter(this.MaxDate)) return this.MaxDate;
+      return this.activeDate;
+    },
     canCreateInterviewPeriod: function canCreateInterviewPeriod() {
       return this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl();
     },
@@ -272,8 +276,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     isNextAllowed: function isNextAllowed() {
       if (this.MaxDate) {
-        var afterRef = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.activeDate).add(1, this.activeView + 's');
-        return this.MaxDate.isSameOrAfter(afterRef, this.activeView);
+        var afterRef = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.ActiveDate).add(1, this.activeView + 's');
+        return this.MaxDate.isSameOrAfter(afterRef, this.ActiveView);
       }
 
       return true;
@@ -283,7 +287,7 @@ __webpack_require__.r(__webpack_exports__);
         var _this2 = this;
 
         var props = {
-          activeDate: this.MinDate,
+          activeDate: this.ActiveDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
@@ -306,30 +310,30 @@ __webpack_require__.r(__webpack_exports__);
         if (this.activeDate === null) return '';
 
         if (this.activeView === 'month') {
-          return this.activeDate.format('MMMM YYYY');
+          return this.ActiveDate.format('MMMM YYYY');
         }
 
         if (this.activeView === 'week') {
-          var weekStart = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.activeDate).day(0);
-          var weekEnd = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.activeDate).day(6);
+          var weekStart = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.ActiveDate).day(0);
+          var weekEnd = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.ActiveDate).day(6);
           return weekStart.format('MMM D') + ' - ' + weekEnd.format('MMM D');
         }
 
         if (this.activeView === 'day') {
-          return this.activeDate.format('dddd MMM D');
+          return this.ActiveDate.format('dddd MMM D');
         }
       }
     },
     calendarMonth: {
       get: function get() {
-        if (this.activeDate === null) return '';
-        return this.activeDate.format('MMMM');
+        if (this.ActiveDate === null) return '';
+        return this.ActiveDate.format('MMMM');
       }
     },
     calendarYear: {
       get: function get() {
-        if (this.activeDate === null) return '';
-        return this.activeDate.format('YYYY');
+        if (this.ActiveDate === null) return '';
+        return this.ActiveDate.format('YYYY');
       }
     },
     IsActive: {
@@ -358,19 +362,12 @@ __webpack_require__.r(__webpack_exports__);
         };
       }
     },
-    TodayButtonClass: {
-      get: function get() {
-        return {
-          'v-cal-button--is-active': this.activeDate && this.activeDate.isSame(this.today, 'day')
-        };
-      }
-    },
     StringDate: function StringDate() {
-      if (this.activeDate === null) return this.activeDate;
-      return this.activeDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
+      if (this.ActiveDate === null) return this.ActiveDate;
+      return this.ActiveDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
     },
     ActiveDateInterviews: function ActiveDateInterviews() {
-      var activeDate = this.activeDate.format('YYYY-MM-DD');
+      var activeDate = this.ActiveDate.format('YYYY-MM-DD');
       return this.period.interviews.filter(function (interview) {
         var interviewDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.date);
         return interviewDate.isSame(activeDate);
@@ -27892,18 +27889,6 @@ var render = function() {
                 },
                 [_vm._v(" Prev ")]
               ),
-              _vm._v(" "),
-              _vm.showTodayButton
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "v-cal-button",
-                      class: _vm.TodayButtonClass,
-                      on: { click: _vm.goToToday }
-                    },
-                    [_vm._v(" Hoy ")]
-                  )
-                : _vm._e(),
               _vm._v(" "),
               _c(
                 "button",

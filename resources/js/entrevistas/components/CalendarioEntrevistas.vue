@@ -3,7 +3,6 @@
     <div class="order-2 col-sm-6 col-md-3 order-md-1 actions-left my-auto" v-if="IsActive === true">
       <div class="btn-group" role="group">
         <button :disabled="!isPrevAllowed" class="v-cal-button" @click="prev"> Prev </button>
-        <button class="v-cal-button" v-if="showTodayButton" @click="goToToday" :class="TodayButtonClass"> Hoy </button>
         <button :disabled="!isNextAllowed" class="v-cal-button" @click="next"> Sig </button>
       </div>
     </div>
@@ -234,6 +233,16 @@ export default {
   },
 
   computed: {
+    ActiveDate() {
+      if (this.activeDate.isBefore(this.MinDate))
+        return this.MinDate;
+
+      if (this.activeDate.isAfter(this.MaxDate))
+        return this.MaxDate;
+
+      return this.activeDate;
+    },
+
     canCreateInterviewPeriod() {
       return this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl();
     },
@@ -278,16 +287,17 @@ export default {
 
     isNextAllowed() {
       if ( this.MaxDate ) {
-        const afterRef = moment(this.activeDate).add(1, this.activeView + 's');
-        return this.MaxDate.isSameOrAfter(afterRef, this.activeView);
+        const afterRef = moment(this.ActiveDate).add(1, this.activeView + 's');
+        return this.MaxDate.isSameOrAfter(afterRef, this.ActiveView);
       }
       return true
     },
 
     activeViewProps: {
       get() {
+
         let props = {
-          activeDate: this.MinDate,
+          activeDate: this.ActiveDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
@@ -311,36 +321,36 @@ export default {
           return '';
 
         if ( this.activeView === 'month') {
-          return this.activeDate.format('MMMM YYYY');
+          return this.ActiveDate.format('MMMM YYYY');
         }
 
         if (this.activeView === 'week' ) {
-          const weekStart = moment(this.activeDate).day(0);
-          const weekEnd = moment(this.activeDate).day(6);
+          const weekStart = moment(this.ActiveDate).day(0);
+          const weekEnd = moment(this.ActiveDate).day(6);
           return weekStart.format('MMM D') + ' - ' + weekEnd.format('MMM D');
         }
 
         if ( this.activeView === 'day' ) {
-          return this.activeDate.format('dddd MMM D')
+          return this.ActiveDate.format('dddd MMM D')
         }
       }
     },
 
     calendarMonth: {
       get () {
-        if ( this.activeDate === null )
+        if ( this.ActiveDate === null )
           return '';
 
-        return this.activeDate.format('MMMM');
+        return this.ActiveDate.format('MMMM');
       }
     },
 
     calendarYear: {
       get () {
-        if ( this.activeDate === null )
+        if ( this.ActiveDate === null )
           return '';
 
-        return this.activeDate.format('YYYY');
+        return this.ActiveDate.format('YYYY');
       }
     },
 
@@ -378,23 +388,15 @@ export default {
       }
     },
 
-    TodayButtonClass: {
-      get() {
-        return { 
-          'v-cal-button--is-active': this.activeDate && this.activeDate.isSame(this.today, 'day' )
-        };
-      }
-    },
-
     StringDate(){        
-      if (this.activeDate === null)
-        return this.activeDate;
+      if (this.ActiveDate === null)
+        return this.ActiveDate;
         
-      return this.activeDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
+      return this.ActiveDate.format("dddd, DD \\d\\e MMMM \\d\\e\\l YYYY");
     },
 
     ActiveDateInterviews() {
-      const activeDate = this.activeDate.format('YYYY-MM-DD');
+      const activeDate = this.ActiveDate.format('YYYY-MM-DD');
 
       return this.period.interviews.filter(interview => {
         const interviewDate = moment(interview.date);
@@ -462,5 +464,7 @@ export default {
       };
     }
   },
+
+  
 };
 </script>
