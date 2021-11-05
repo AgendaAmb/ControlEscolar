@@ -167,7 +167,7 @@ export default {
       if (this.min_date === null)
         return null;
 
-      return moment(this.min_date).substract(1, 'days').format('YYYY-MM-DD');
+      return moment(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
     }
   }
 };

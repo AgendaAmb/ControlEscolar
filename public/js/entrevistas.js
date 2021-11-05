@@ -1095,7 +1095,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 }, "computed", {
   MinDate: function MinDate() {
     if (this.min_date === null) return null;
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.min_date).substract(1, 'days').format('YYYY-MM-DD');
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
   }
 }));
 
