@@ -287,7 +287,7 @@ export default {
     activeViewProps: {
       get() {
         let props = {
-          activeDate: this.activeDate,
+          activeDate: this.minDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,

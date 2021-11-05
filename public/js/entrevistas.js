@@ -234,6 +234,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    canCreateInterviewPeriod: function canCreateInterviewPeriod() {
+      return this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl();
+    },
     isProfessor: function isProfessor() {
       var roles = this.auth_user.roles.filter(function (role) {
         return role.name === 'profesor_nb';
@@ -280,7 +283,7 @@ __webpack_require__.r(__webpack_exports__);
         var _this2 = this;
 
         var props = {
-          activeDate: this.activeDate,
+          activeDate: this.minDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
@@ -27983,7 +27986,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    !_vm.isProfessor
+    _vm.period !== null && !_vm.isProfessor
       ? _c("div", { staticClass: "col-12 order-3 mt-2 mb-4" }, [
           _c("div", { staticClass: "row justify-content-center" }, [
             _c("div", { staticClass: "col-md-8 text-center" }, [
