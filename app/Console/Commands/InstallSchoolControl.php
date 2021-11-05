@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\AddAppliants;
-use App\Jobs\AddProfessors as JobsAddProfessors;
+use App\Jobs\AddProfessors;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
-class AddProfessors extends Command
+class InstallSchoolControl extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'professors:insert';
+    protected $signature = 'controlescolar:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Agrega a los profesores del NB';
+    protected $description = 'Instala el sistema de control escolar';
 
     /**
      * Create a new command instance.
@@ -39,8 +39,9 @@ class AddProfessors extends Command
      */
     public function handle()
     {
-        //AddAppliants::dispatch();
-        JobsAddProfessors::dispatch();
-        return 0;
+        Artisan::call('migrate:fresh');
+        AddProfessors::dispatch();
+
+        return Command::SUCCESS;
     }
 }

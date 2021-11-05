@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="confirmaEntrevista">
+          <form @submit.prevent="prevent">
             <div class="row mx-3 mt-3">
               <div class="col-lg-6 px-0">
                 <h5 class="d-block fecha"> {{date}} </h5>
@@ -37,7 +37,7 @@
                         <a v-else-if="!isSuscribed && !$root.loggedUserIsAdmin()" href="#" @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
-                        <a v-if="loggedUserName === area.professor_name" href="#" @click="cancelarRegistro(index)"> 
+                        <a v-if="canRemoveUser(area)" href="#" @click="cancelarRegistro(index)"> 
                           <p> Cancelar registro </p>
                         </a>
                       </td>
@@ -46,8 +46,10 @@
                   <tfoot>
                     <tr>
                       <td colspan="5">
-                        <button class="btn btn-primary" type="submit"> Confirmar entrevista </button>
-                        <button class="btn btn-danger ml-1"> Cerrar </button>
+                        <button v-if="isConfirmable" class="btn btn-primary" @click="confirmaEntrevista"> Confirmar entrevista </button>
+                        <button v-if="isReopenable" class="btn btn-primary" @click="reabreEntrevista"> Reabrir entrevista </button>
+                        <button v-if="isRemovable" class="btn btn-danger ml-1" @click="eliminarEntrevista"> Cancelar entrevista </button>
+                        <button class="btn btn-danger ml-1" type="button" data-dismiss="modal" aria-label="Close"> Cerrar </button>
                       </td>
                     </tr>
                   </tfoot>
@@ -122,6 +124,14 @@ export default {
       }
     },
 
+    // Áreas académicas de las entrevistas.
+    areas: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+
     // Teachers
     users: {
       type: Array,
@@ -129,6 +139,12 @@ export default {
         return [];
       }
     },
+
+    // La entrevista ya fue confirmada.
+    confirmed: {
+      type: Boolean,
+      default: false
+    }
   },
 
   computed: {
@@ -145,10 +161,51 @@ export default {
         return area.professor_name === loggedUser;
       
       }).length > 0;
+    },
+
+    isReopenable() {
+      return this.confirmed === true && this.$root.loggedUserIsAdmin();
+    },
+
+    isConfirmable() {
+
+      if (this.confirmed === true)
+        return false;
+
+      return true;
+      /*
+      return this.areas.filter(area => {
+        return area.professor_name !== false;
+      
+      }).length > 2;*/
+    },
+
+    isRemovable() {
+      return !this.confirmed && this.$root.loggedUserIsAdmin();
+    },
+
+    Confirmed: {
+      get() {
+        return this.confirmed;
+      },
+      set(value) {
+        this.$emit('update:confirmed', value);
+      }
     }
   },
 
   methods: {
+
+    canRemoveUser(area){
+      if (area.professor_name === false)
+        return false;
+
+      if (this.confirmed === true)
+        return false;
+
+      return this.loggedUserName === area.professor_name || this.$root.loggedUserIsAdmin();
+    },
+
     inscribirUsuario(index){
       if (confirm('¿Estás segure que deseas participar en esta entrevista?') === false)
         return false;
@@ -202,12 +259,48 @@ export default {
         return false;
 
       axios.post('/controlescolar/entrevistas/confirmInterview', {
-        interview_id: this.id
+        id: this.id
       }).then(response => {
-        
+        this.Confirmed = true;
+        $('#DetalleEntrevista').modal('hide');
       }).catch(error => { 
       });
 
+      return false;
+    },
+
+    reabreEntrevista(){
+      if (confirm('¿Estás segure que deseas reabrir esta entrevista?') === false)
+        return false;
+
+      axios.post('/controlescolar/entrevistas/reopenInterview', {
+        id: this.id
+      }).then(response => {
+        this.Confirmed = false;
+        $('#DetalleEntrevista').modal('hide');
+      }).catch(error => { 
+      });
+
+      return false;
+    },
+
+    eliminarEntrevista(){
+      if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false)
+        return false;
+
+      axios.post('/controlescolar/entrevistas/deleteInterview', {
+        id: this.id
+      }).then(response => {
+        this.$emit('interview_deleted', this.id);
+        $('#DetalleEntrevista').modal('hide');
+
+      }).catch(error => { 
+      });
+
+      return false;
+    },
+
+    prevent() {
       return false;
     }
   },

@@ -43,7 +43,11 @@ const announcements = @json($announcements);
     v-on:nuevaentrevista="agregaEntrevista">
 </nueva-entrevista>
 
-<detalle-entrevista v-if="period !== null" v-bind="selectedInterview"></detalle-entrevista>
+<detalle-entrevista v-if="period !== null" 
+    v-bind="selectedInterview"
+    v-on:interview_deleted="removeInterview"
+    v-on:update:confirmed="confirmInterview">
+</detalle-entrevista>
 @endsection
 @push('scripts')
 <script src="{{ asset('js/entrevistas.js') }}" defer></script>

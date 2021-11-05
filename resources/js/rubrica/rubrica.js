@@ -45,16 +45,16 @@ const app = new Vue({
     methods: {
         getConceptData(concepts){
             return concepts.map(concept => {
-                data = {
+                var concept_data = {
                     id: concept.id,
                     notes: concept.notes,
                     score: concept.score
                 };
 
                 if (concept.type === 'research') 
-                    data['evaluation_concept_details'] = concept.evaluation_concept_details;
+                    concept_data['evaluation_concept_details'] = concept.evaluation_concept_details;
 
-                return data;
+                return concept_data;
             });
         },
 

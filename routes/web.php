@@ -93,9 +93,11 @@ Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|pr
     # Programa de entrevistas
     Route::get('programa', [InterviewController::class, 'programa'])->name('programa');
 
-    # Agenda una nueva entrevista.
+    # Entrevistas.
     Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
     Route::post('confirmInterview', [InterviewController::class, 'confirmInterview'])->name('confirmInterview');
+    Route::post('reopenInterview', [InterviewController::class, 'reopenInterview'])->name('reopenInterview');
+    Route::post('deleteInterview', [InterviewController::class, 'deleteInterview'])->name('deleteInterview');
 
     # Agregar y eliminar a los usuarios de una entrevista.
     Route::post('interviewUser', [InterviewController::class, 'newInterviewUser'])->name('interviewUser');

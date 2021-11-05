@@ -82,6 +82,12 @@ export default {
       default: "Indefinido"
     },
 
+    // Hora de fin.
+    confirmed: {
+      type: Boolean,
+      default: false
+    },
+
     // Áreas académicas.
     areas: {
       type: Array,

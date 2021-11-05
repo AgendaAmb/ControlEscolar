@@ -47,13 +47,13 @@ class EvaluationRubricController extends Controller
     /**
      * Updates an existing evaluation rubric pivot.
      *
-     * @param  array $concept
+     * @param  array $concepts
      * @param  \App\Models\EvaluationRubric  $evaluationRubric
      * @return void
      */
-    private function updatePivot(array $concept, EvaluationRubric $evaluationRubric)
+    private function updatePivot(array $concepts, EvaluationRubric $evaluationRubric)
     {
-        foreach ($concept as $concept)
+        foreach ($concepts as $concept)
         {
             $evaluationRubric->evaluationConcepts()->updateExistingPivot($concept['id'], [
                 'score' => $concept['score'],
@@ -77,8 +77,14 @@ class EvaluationRubricController extends Controller
         $this->updatePivot($request->working_experience_concepts, $evaluationRubric);
         $this->updatePivot($request->personal_attributes_concepts, $evaluationRubric);
 
+        
+
         $evaluationRubric->fill($request->safe()->only('considerations','additional_information'));
         $evaluationRubric->save();
+        $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){
+            return $concept['evaluation_concept_details'];
+        })->flatten(2)
+        ->toArray();
 
         return new JsonResponse(['message'=>'Solicitud actualizada'], JsonResponse::HTTP_OK);
     }

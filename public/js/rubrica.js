@@ -85844,13 +85844,13 @@ var app = new Vue({
   methods: {
     getConceptData: function getConceptData(concepts) {
       return concepts.map(function (concept) {
-        data = {
+        var concept_data = {
           id: concept.id,
           notes: concept.notes,
           score: concept.score
         };
-        if (concept.type === 'research') data['evaluation_concept_details'] = concept.evaluation_concept_details;
-        return data;
+        if (concept.type === 'research') concept_data['evaluation_concept_details'] = concept.evaluation_concept_details;
+        return concept_data;
       });
     },
     guardaRubrica: function guardaRubrica(state) {

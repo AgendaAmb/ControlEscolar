@@ -454,6 +454,7 @@ export default {
         'professor': interview.intention_letter_professor.name.toLowerCase(),
         'start_time': start_time,
         'end_time': end_time,
+        'confirmed': interview.confirmed
       };
     }
   },

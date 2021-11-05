@@ -143,4 +143,16 @@ class EvaluationRubric extends Model
 
         return json_decode($content, true);
     }
+
+    /**
+     * Gets the list of evaluation concepts.
+     *
+     * @param array $details
+     * @return void
+     */
+    public function setResearchConceptsDetailsAttribute(array $details): void
+    {
+        $filename = implode('/', ['evaluation_rubrics',$this->id]);
+        Storage::put($filename, json_encode($details, JSON_PRETTY_PRINT));
+    }
 }

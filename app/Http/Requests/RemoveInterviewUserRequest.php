@@ -13,7 +13,7 @@ class RemoveInterviewUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasRole('profesor_nb');
+        return $this->user()->hasAnyRole(['profesor_nb','admin']);
     }
     /**
      * Get the validation rules that apply to the request.

@@ -413,7 +413,8 @@ __webpack_require__.r(__webpack_exports__);
         'appliant': interview.appliant.name.toLowerCase(),
         'professor': interview.intention_letter_professor.name.toLowerCase(),
         'start_time': start_time,
-        'end_time': end_time
+        'end_time': end_time,
+        'confirmed': interview.confirmed
       };
     }
   }
@@ -432,6 +433,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var _props;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
 //
 //
 //
@@ -503,7 +510,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
-  props: {
+  props: (_props = {
     // Id de la entrevista.
     id: {
       type: Number,
@@ -545,15 +552,21 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
-    },
-    // Teachers
-    users: {
-      type: Array,
-      "default": function _default() {
-        return [];
-      }
     }
-  },
+  }, _defineProperty(_props, "areas", {
+    type: Array,
+    "default": function _default() {
+      return [];
+    }
+  }), _defineProperty(_props, "users", {
+    type: Array,
+    "default": function _default() {
+      return [];
+    }
+  }), _defineProperty(_props, "confirmed", {
+    type: Boolean,
+    "default": false
+  }), _props),
   computed: {
     loggedUserName: function loggedUserName() {
       var loggedUser = this.$root.loggedUser;
@@ -564,9 +577,37 @@ __webpack_require__.r(__webpack_exports__);
       return this.areas.filter(function (area) {
         return area.professor_name === loggedUser;
       }).length > 0;
+    },
+    isReopenable: function isReopenable() {
+      return this.confirmed === true && this.$root.loggedUserIsAdmin();
+    },
+    isConfirmable: function isConfirmable() {
+      if (this.confirmed === true) return false;
+      return true;
+      /*
+      return this.areas.filter(area => {
+        return area.professor_name !== false;
+      
+      }).length > 2;*/
+    },
+    isRemovable: function isRemovable() {
+      return !this.confirmed && this.$root.loggedUserIsAdmin();
+    },
+    Confirmed: {
+      get: function get() {
+        return this.confirmed;
+      },
+      set: function set(value) {
+        this.$emit('update:confirmed', value);
+      }
     }
   },
   methods: {
+    canRemoveUser: function canRemoveUser(area) {
+      if (area.professor_name === false) return false;
+      if (this.confirmed === true) return false;
+      return this.loggedUserName === area.professor_name || this.$root.loggedUserIsAdmin();
+    },
     inscribirUsuario: function inscribirUsuario(index) {
       var _this = this;
 
@@ -606,10 +647,43 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     confirmaEntrevista: function confirmaEntrevista() {
+      var _this3 = this;
+
       if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/confirmInterview', {
-        interview_id: this.id
-      }).then(function (response) {})["catch"](function (error) {});
+        id: this.id
+      }).then(function (response) {
+        _this3.Confirmed = true;
+        $('#DetalleEntrevista').modal('hide');
+      })["catch"](function (error) {});
+      return false;
+    },
+    reabreEntrevista: function reabreEntrevista() {
+      var _this4 = this;
+
+      if (confirm('¿Estás segure que deseas reabrir esta entrevista?') === false) return false;
+      axios.post('/controlescolar/entrevistas/reopenInterview', {
+        id: this.id
+      }).then(function (response) {
+        _this4.Confirmed = false;
+        $('#DetalleEntrevista').modal('hide');
+      })["catch"](function (error) {});
+      return false;
+    },
+    eliminarEntrevista: function eliminarEntrevista() {
+      var _this5 = this;
+
+      if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false) return false;
+      axios.post('/controlescolar/entrevistas/deleteInterview', {
+        id: this.id
+      }).then(function (response) {
+        _this5.$emit('interview_deleted', _this5.id);
+
+        $('#DetalleEntrevista').modal('hide');
+      })["catch"](function (error) {});
+      return false;
+    },
+    prevent: function prevent() {
       return false;
     }
   }
@@ -829,6 +903,11 @@ __webpack_require__.r(__webpack_exports__);
     end_time: {
       type: String,
       "default": "Indefinido"
+    },
+    // Hora de fin.
+    confirmed: {
+      type: Boolean,
+      "default": false
     },
     // Áreas académicas.
     areas: {
@@ -28040,7 +28119,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.confirmaEntrevista.apply(null, arguments)
+                      return _vm.prevent.apply(null, arguments)
                     }
                   }
                 },
@@ -28127,7 +28206,7 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                _vm.loggedUserName === area.professor_name
+                                _vm.canRemoveUser(area)
                                   ? _c(
                                       "a",
                                       {
@@ -28147,7 +28226,57 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._m(1)
+                        _c("tfoot", [
+                          _c("tr", [
+                            _c("td", { attrs: { colspan: "5" } }, [
+                              _vm.isConfirmable
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      on: { click: _vm.confirmaEntrevista }
+                                    },
+                                    [_vm._v(" Confirmar entrevista ")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.isReopenable
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      on: { click: _vm.reabreEntrevista }
+                                    },
+                                    [_vm._v(" Reabrir entrevista ")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.isRemovable
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger ml-1",
+                                      on: { click: _vm.eliminarEntrevista }
+                                    },
+                                    [_vm._v(" Cancelar entrevista ")]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger ml-1",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal",
+                                    "aria-label": "Close"
+                                  }
+                                },
+                                [_vm._v(" Cerrar ")]
+                              )
+                            ])
+                          ])
+                        ])
                       ])
                     ])
                   ])
@@ -28189,26 +28318,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tfoot", [
-      _c("tr", [
-        _c("td", { attrs: { colspan: "5" } }, [
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v(" Confirmar entrevista ")]
-          ),
-          _vm._v(" "),
-          _c("button", { staticClass: "btn btn-danger ml-1" }, [
-            _vm._v(" Cerrar ")
-          ])
-        ])
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -41688,9 +41797,21 @@ var app = new Vue({
         professor: interview.professor,
         room: interview.room,
         start_time: interview.start_time,
-        end_time: interview.end_time
+        end_time: interview.end_time,
+        confirmed: interview.confirmed
       };
       $('#DetalleEntrevista').modal('show');
+    },
+
+    /**
+     * Elimina una entrevista del calendario.
+     * @param {*} period 
+     */
+    removeInterview: function removeInterview(interview_id) {
+      var filtered = this.period.interviews.filter(function (interview) {
+        return interview.id !== interview_id;
+      });
+      Vue.set(this.period, 'interviews', filtered);
     },
 
     /**
@@ -41713,6 +41834,22 @@ var app = new Vue({
         return role.name === 'control_escolar';
       });
       return roles.length > 0;
+    },
+
+    /**
+     * Confirma una entrevista.
+     */
+    confirmInterview: function confirmInterview(newValue) {
+      var _this = this;
+
+      var interview = this.period.interviews.find(function (interview) {
+        return interview.id === _this.selectedInterview.id;
+      });
+
+      if (interview !== null) {
+        interview.confirmed = newValue;
+        this.selectedInterview.confirmed = newValue;
+      }
     }
   },
 

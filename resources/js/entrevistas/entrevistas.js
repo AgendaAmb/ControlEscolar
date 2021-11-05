@@ -98,10 +98,23 @@ const app = new Vue({
                 professor: interview.professor,
                 room: interview.room,
                 start_time: interview.start_time,
-                end_time: interview.end_time
+                end_time: interview.end_time,
+                confirmed: interview.confirmed
             };
 
             $('#DetalleEntrevista').modal('show');
+        },
+
+        /**
+         * Elimina una entrevista del calendario.
+         * @param {*} period 
+         */
+         removeInterview(interview_id) {
+            var filtered = this.period.interviews.filter(interview => {
+                return interview.id !== interview_id;
+            });
+
+            Vue.set(this.period, 'interviews', filtered);
         },
 
         /**
@@ -120,12 +133,26 @@ const app = new Vue({
          * Determina si el usuario autenticado es administrador.
          * @param {*} period 
          */
-         loggedUserIsSchoolControl(){
+        loggedUserIsSchoolControl(){
             var roles = this.loggedUser.roles.filter(role => {
                 return role.name === 'control_escolar';
             });
     
             return roles.length > 0;
+        },
+
+        /**
+         * Confirma una entrevista.
+         */
+        confirmInterview(newValue){
+            var interview = this.period.interviews.find(interview => {
+                return interview.id === this.selectedInterview.id;
+            })
+
+            if (interview !== null) {
+                interview.confirmed = newValue;
+                this.selectedInterview.confirmed = newValue;
+            }
         },
     },
 
