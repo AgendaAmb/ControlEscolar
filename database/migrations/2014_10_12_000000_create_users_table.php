@@ -37,11 +37,11 @@ class CreateUsersTable extends Migration
             'type' => 'students'
         ]);
 
-        /*
+        
         User::create([
             'id' => 11007,
             'type' => 'workers'
-        ]);*/
+        ]);
 
         User::create([
             'id' => 12457,
