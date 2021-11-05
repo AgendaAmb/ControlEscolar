@@ -301,9 +301,7 @@ export default {
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
-          events: this.newEvents.filter(interview => {
-            return interview.date.isSame(this.activeDate, this.activeView);
-          })
+          events: this.newEvents
         };
 
         if ( this.activeView === 'week' || this.activeView === 'day') {
