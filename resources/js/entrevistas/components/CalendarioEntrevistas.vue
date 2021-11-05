@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div v-if="!isProfessor" class="col-12 order-3 mt-2 mb-4">
+    <div v-if="period !== null && !isProfessor" class="col-12 order-3 mt-2 mb-4">
       <div class="row justify-content-center">
         <div class="col-md-8 text-center">
           <button class="v-cal-button w-100" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
@@ -234,6 +234,10 @@ export default {
   },
 
   computed: {
+    canCreateInterviewPeriod() {
+      return this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl();
+    },
+
     isProfessor(){
       var roles = this.auth_user.roles.filter(role => {
         return role.name === 'profesor_nb';
