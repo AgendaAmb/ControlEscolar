@@ -117,6 +117,16 @@ export default {
 
   computed: {
     /**
+     * Fecha mínima.
+     */
+    MinDate() {
+      if (this.min_date === null)
+        return null;
+
+      return moment(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
+    },
+
+    /**
      * Nombre del profesor que otorgó la carta de intención.
      */
     IntentionLetterProfessor: {
@@ -161,14 +171,5 @@ export default {
       });
     },
   },
-
-  computed: {
-    MinDate() {
-      if (this.min_date === null)
-        return null;
-
-      return moment(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
-    }
-  }
 };
 </script>

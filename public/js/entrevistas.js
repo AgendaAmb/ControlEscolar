@@ -940,8 +940,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -1023,7 +1021,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nueva-entrevista",
   props: {
     // Id del periodo.
@@ -1052,6 +1050,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: {
+    /**
+     * Fecha mínima.
+     */
+    MinDate: function MinDate() {
+      if (this.min_date === null) return null;
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
+    },
+
     /**
      * Nombre del profesor que otorgó la carta de intención.
      */
@@ -1092,12 +1098,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {});
     }
   }
-}, "computed", {
-  MinDate: function MinDate() {
-    if (this.min_date === null) return null;
-    return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.min_date).subtract(1, 'days').format('YYYY-MM-DD');
-  }
-}));
+});
 
 /***/ }),
 
