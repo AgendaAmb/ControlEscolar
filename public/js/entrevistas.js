@@ -938,6 +938,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1018,13 +1022,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({
   name: "nueva-entrevista",
   props: {
     // Id del periodo.
     period_id: Number,
-    // Fecha de la entrevista.
-    date: String,
     // Fecha mínima del inicio del periodo.
     min_date: String,
     // Fecha máxima del inicio del periodo.
@@ -1037,6 +1040,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       id: -1,
+      date: '',
       isActive: false,
       intention_letter_professor: null,
       event: {},
@@ -1088,7 +1092,12 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {});
     }
   }
-});
+}, "computed", {
+  MinDate: function MinDate() {
+    if (this.min_date === null) return null;
+    return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.min_date).substract(1).format('YYYY-MM-DD');
+  }
+}));
 
 /***/ }),
 
@@ -28482,7 +28491,7 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: {
                         type: "date",
-                        min: _vm.min_date,
+                        min: _vm.MinDate,
                         max: _vm.max_date
                       },
                       domProps: { value: _vm.date },

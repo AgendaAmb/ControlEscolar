@@ -14,7 +14,7 @@
             <div class="form-row mt-4 mb-2">
               <div class="form-group col-12">
                 <label> Fecha </label>
-                <input v-model="date" type="date" class="form-control" :min="min_date" :max="max_date">
+                <input v-model="date" type="date" class="form-control" :min="MinDate" :max="max_date">
               </div>
 
               <div class="form-group col-md-5">
@@ -79,15 +79,13 @@
 </style>
 
 <script>
+import moment from 'moment';
 export default {
   name: "nueva-entrevista",
 
   props: {
     // Id del periodo.
     period_id: Number,
-
-    // Fecha de la entrevista.
-    date: String,
 
     // Fecha mínima del inicio del periodo.
     min_date: String,
@@ -105,6 +103,7 @@ export default {
   data() {
     return {
       id: -1,
+      date: '',
       isActive: false,
       intention_letter_professor: null,
       event: {},
@@ -161,6 +160,15 @@ export default {
 
       });
     },
+  },
+
+  computed: {
+    MinDate() {
+      if (this.min_date === null)
+        return null;
+
+      return moment(this.min_date).substract(1).format('YYYY-MM-DD');
+    }
   }
 };
 </script>
