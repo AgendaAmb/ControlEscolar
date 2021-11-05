@@ -283,7 +283,7 @@ __webpack_require__.r(__webpack_exports__);
         var _this2 = this;
 
         var props = {
-          activeDate: this.minDate,
+          activeDate: this.MinDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
