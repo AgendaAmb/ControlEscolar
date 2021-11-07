@@ -13,7 +13,6 @@ const announcements = @json($announcements);
 @section('id', 'id=entrevistas')
 
 @section('main')
-@include('entrevistas.navbar')
 <calendario-entrevistas v-if="period !== null"
     v-bind:period="period"
     v-bind:date.sync="date"

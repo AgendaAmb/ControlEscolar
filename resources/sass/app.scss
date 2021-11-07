@@ -18,6 +18,9 @@ $v-cal-days-head-bg: #fecc56 !important;
 $v-cal-days-head-color: white !important; 
 $v-cal-button-border-radius: 15px !important;
 
+// Interview main layout styles.
+@import './main-layout.scss';
+
 // Import styles.
 @import "~v-calendar-scheduler/scss/main";
 
@@ -29,3 +32,6 @@ $v-cal-button-border-radius: 15px !important;
 
 // Interview detail styles.
 @import './interview-detail.scss';
+
+// Recommendation letter styles.
+@import './recommendation-letter.scss';

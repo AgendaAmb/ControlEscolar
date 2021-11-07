@@ -21,15 +21,13 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     @stack('scripts')
 </head>
-<body>
-    <x-academic-program-header>
-        <a href="https://ambiental.uaslp.mx">
-            @section('headerPicture') <img class="img-fluid mt-4" src="{{ asset('storage/headers/logod.png') }}"> @show
-        </a>
-    </x-academic-program-header>
+<body class="d-block mw-100 mx-0">
+    <x-academic-program-header/>
+    @section('main-content')
     <main id="app"@section('container-class') class="container-fluid" @show> 
         @yield('main') 
     </main>
+    @show
     @stack('variables')
     @stack('vuejs')
 </body>

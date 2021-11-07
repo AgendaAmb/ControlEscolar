@@ -172,7 +172,7 @@ export default {
       if (this.confirmed === true)
         return false;
 
-      return true;
+      return this.$root.loggedUserIsAdmin();
       /*
       return this.areas.filter(area => {
         return area.professor_name !== false;

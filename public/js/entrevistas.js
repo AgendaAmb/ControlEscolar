@@ -284,16 +284,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     activeViewProps: {
       get: function get() {
-        var _this2 = this;
-
         var props = {
           activeDate: this.ActiveDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
-          events: this.newEvents.filter(function (interview) {
-            return interview.date.isSame(_this2.activeDate, _this2.activeView);
-          })
+          events: this.newEvents
         };
 
         if (this.activeView === 'week' || this.activeView === 'day') {
@@ -583,7 +579,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     isConfirmable: function isConfirmable() {
       if (this.confirmed === true) return false;
-      return true;
+      return this.$root.loggedUserIsAdmin();
       /*
       return this.areas.filter(area => {
         return area.professor_name !== false;
