@@ -71,7 +71,6 @@
         </div>
     </div>
     <hr class="d-block">
-
 </main>
 @endsection
 

@@ -54,9 +54,12 @@ class InterviewController extends Controller
     {
         $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
-        $interview_model->load('users.roles:name');
+        $interview_model->load(['users.roles:name', 'appliant']);
         $interview_model->confirmed = false;
         $interview_model->save();
+        $appliant = $interview_model->appliant->first()->toArray();
+        unset($interview_model->appliant);
+        $interview_model->appliant = $appliant;
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }

@@ -81,54 +81,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -375,8 +327,7 @@ __webpack_require__.r(__webpack_exports__);
       if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
       if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
-      this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date); //if (!this.isProfessor)
-      //  $('#NuevaEntrevista').modal('show');
+      this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
     },
     muestraModalNuevaEntrevista: function muestraModalNuevaEntrevista() {
       if (!this.isProfessor) $('#NuevaEntrevista').modal('show');
@@ -1087,7 +1038,8 @@ __webpack_require__.r(__webpack_exports__);
           id: _this.id,
           date: _this.date,
           startTime: _this.start_time,
-          endTime: _this.end_time
+          endTime: _this.end_time,
+          appliant: data.appliant
         });
 
         $('#NuevaEntrevista').modal('hide');
@@ -2066,7 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ndiv.col-12.mx-2 > button.my-3.v-cal-button[data-v-1bdfed60]{\n  margin-left: 10px;\n  border-radius: 5px;\n}\n.notificaciones[data-v-1bdfed60] {\n    margin-top: 101px;\n    padding: 13px 0;\n    background-color: #115089;\n    color: white;\n    font-family: 'Myriad Pro Bold';\n    text-align: center;\n}\n.notificaciones[data-v-1bdfed60]::first-letter {\n  text-transform: uppercase;\n}\n.mes[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Bold';\n  font-size: 66px;\n  text-align: center;\n  color: #fecc56;\n  margin-bottom: 0;\n  text-transform: capitalize;\n}\n.año[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Regular';\n  color: #115089;\n  text-align: center;\n  font-size: 66px;\n}\n.dia-entrevista[data-v-1bdfed60] {\n  display: block;\n  margin: 0 auto;\n}\n.dia-entrevista > p[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Bold';\n  margin-top: 1px;\n  padding: 12px 15px 12px 15px;\n  background-color: #115089;\n  color: white;\n  font-size: 16px;\n  text-align: center;\n}\n.dia-entrevista > p[data-v-1bdfed60]::first-letter {\n  text-transform: uppercase;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mes[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Bold';\n  font-size: 66px;\n  text-align: center;\n  color: #fecc56;\n  margin-bottom: 0;\n  text-transform: capitalize;\n}\n.año[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Regular';\n  color: #115089;\n  text-align: center;\n  font-size: 66px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27876,126 +27828,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row my-5" }, [
+  return _c("div", { staticClass: "d-flex flex-column" }, [
     _vm.IsActive === true
-      ? _c(
-          "div",
-          {
-            staticClass:
-              "order-2 col-sm-6 col-md-3 order-md-1 actions-left my-auto"
-          },
-          [
-            _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button",
-                  attrs: { disabled: !_vm.isPrevAllowed },
-                  on: { click: _vm.prev }
-                },
-                [_vm._v(" Prev ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button",
-                  attrs: { disabled: !_vm.isNextAllowed },
-                  on: { click: _vm.next }
-                },
-                [_vm._v(" Sig ")]
-              )
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.IsActive === true
-      ? _c("div", { staticClass: "order-1 col-md-6 order-md-2" }, [
-          _c("h1", { staticClass: "v-cal-header__title mes" }, [
-            _vm._v(_vm._s(_vm.calendarMonth))
+      ? _c("div", { staticClass: "calendar-header" }, [
+          _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "v-cal-button",
+                attrs: { disabled: !_vm.isPrevAllowed },
+                on: { click: _vm.prev }
+              },
+              [_vm._v(" Prev ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "v-cal-button",
+                attrs: { disabled: !_vm.isNextAllowed },
+                on: { click: _vm.next }
+              },
+              [_vm._v(" Sig ")]
+            )
           ]),
           _vm._v(" "),
-          _c("h1", { staticClass: "d-block v-cal-header__title año" }, [
-            _vm._v(_vm._s(_vm.calendarYear))
+          _c("div", [
+            _c("h1", { staticClass: "v-cal-header__title mes" }, [
+              _vm._v(_vm._s(_vm.calendarMonth))
+            ]),
+            _vm._v(" "),
+            _c("h1", { staticClass: "d-block v-cal-header__title año" }, [
+              _vm._v(_vm._s(_vm.calendarYear))
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
+            _c(
+              "button",
+              {
+                staticClass: "v-cal-button",
+                class: _vm.calendarViewButtonClass("month"),
+                on: {
+                  click: function($event) {
+                    return _vm.switchView("month")
+                  }
+                }
+              },
+              [_vm._v(" Mes ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "v-cal-button",
+                class: _vm.calendarViewButtonClass("week"),
+                on: {
+                  click: function($event) {
+                    return _vm.switchView("week")
+                  }
+                }
+              },
+              [_vm._v(" Semana ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "v-cal-button",
+                class: _vm.calendarViewButtonClass("day"),
+                on: {
+                  click: function($event) {
+                    return _vm.switchView("day")
+                  }
+                }
+              },
+              [_vm._v(" Día ")]
+            )
           ])
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.IsActive === true
-      ? _c(
-          "div",
-          {
-            staticClass:
-              "col-sm-6 col-md-3 actions-right my-auto order-2 text-left text-sm-right"
-          },
-          [
-            _c("div", { staticClass: "btn-group", attrs: { role: "group" } }, [
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button",
-                  class: _vm.calendarViewButtonClass("month"),
-                  on: {
-                    click: function($event) {
-                      return _vm.switchView("month")
-                    }
-                  }
-                },
-                [_vm._v(" Mes ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button",
-                  class: _vm.calendarViewButtonClass("week"),
-                  on: {
-                    click: function($event) {
-                      return _vm.switchView("week")
-                    }
-                  }
-                },
-                [_vm._v(" Semana ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button",
-                  class: _vm.calendarViewButtonClass("day"),
-                  on: {
-                    click: function($event) {
-                      return _vm.switchView("day")
-                    }
-                  }
-                },
-                [_vm._v(" Dia ")]
-              )
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
     _vm.period !== null && !_vm.isProfessor
-      ? _c("div", { staticClass: "col-12 order-3 mt-2 mb-4" }, [
-          _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-8 text-center" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "v-cal-button w-100",
-                  on: { click: _vm.muestraModalNuevaEntrevista }
-                },
-                [_vm._v(" Nueva Entrevista ")]
-              )
-            ])
-          ])
+      ? _c("div", { staticClass: "new-interview" }, [
+          _c(
+            "button",
+            {
+              staticClass: "v-cal-button",
+              on: { click: _vm.muestraModalNuevaEntrevista }
+            },
+            [_vm._v(" Nueva Entrevista ")]
+          )
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.IsActive
-      ? _c("div", { class: _vm.CalendarClass }, [
+      ? _c("div", { staticClass: "calendar-body" }, [
           _c(
             "div",
             { staticClass: "v-cal" },
@@ -28017,44 +27945,27 @@ var render = function() {
               _c("footer", { staticClass: "v-cal-footer" })
             ],
             1
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.IsActive
-      ? _c(
-          "div",
-          { staticClass: "col-lg-4 pl-lg-0 order-3" },
-          [
-            _c("header", { staticClass: "dia-entrevista" }, [
-              _c("p", [_vm._v(_vm._s(_vm.StringDate))])
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.ActiveDateInterviews, function(interview) {
-              return _c(
-                "interview",
-                _vm._b(
-                  { key: interview.id },
-                  "interview",
-                  _vm.interviewDataFrom(interview),
-                  false
-                )
-              )
-            })
-          ],
-          2
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.IsActive === false
-      ? _c("div", { staticClass: "col-12 mx-2" }, [
+          ),
+          _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "my-3 v-cal-button",
-              attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" }
-            },
-            [_vm._v(" Programar periodo de entrevistas ")]
+            "div",
+            { staticClass: "interview-day" },
+            [
+              _c("header", [_c("p", [_vm._v(_vm._s(_vm.StringDate))])]),
+              _vm._v(" "),
+              _vm._l(_vm.ActiveDateInterviews, function(interview) {
+                return _c(
+                  "interview",
+                  _vm._b(
+                    { key: interview.id },
+                    "interview",
+                    _vm.interviewDataFrom(interview),
+                    false
+                  )
+                )
+              })
+            ],
+            2
           )
         ])
       : _vm._e()
@@ -28393,7 +28304,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("a", { staticClass: "row mx-3", on: { click: _vm.showDetails } }, [
-    _c("div", { staticClass: "col-7" }, [
+    _c("div", { staticClass: "col-7 text-left" }, [
       _c("h5", { staticClass: "my-1 appliant" }, [
         _vm._v(" " + _vm._s(_vm.appliant) + " ")
       ]),

@@ -163,6 +163,7 @@ export default {
           date: this.date,
           startTime: this.start_time,
           endTime: this.end_time,
+          appliant: data.appliant
         });
 
         $('#NuevaEntrevista').modal('hide');

@@ -16755,30 +16755,118 @@ header.header nav.nav-options a.nav-link + .dropdown-menu {
   color: white;
 }
 
-.v-cal {
+.calendar .v-cal {
   padding: 0 !important;
 }
-
-.v-cal-header .v-cal-header__title {
-  text-transform: capitalize;
+.calendar .calendar-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 90%;
 }
-
-.v-cal-header__actions .v-cal-button {
+.calendar .new-interview {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+.calendar .new-interview > button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+.calendar .v-cal-button {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: "Myriad Pro Regular";
+  font-size: 16px;
+  padding: 3px 25px;
   background-color: #115089;
+  border-color: #115089;
   color: white;
 }
-.v-cal-header__actions .v-cal-button.v-cal-button--is-active {
+.calendar .v-cal-button.v-cal-button--is-active {
   background-color: white;
   color: #115089;
 }
-
-.v-cal-day__number {
+.calendar .v-cal-button:hover {
+  background-color: white;
+  color: #115089;
+  border-color: #115089;
+}
+.calendar .v-cal-button:first-of-type {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.calendar .v-cal-button:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.calendar .calendar-body {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+}
+.calendar .calendar-body .v-cal {
+  display: block;
+  width: 67%;
+}
+.calendar .calendar-body .interview-day {
+  display: block;
+  padding: 0;
+  width: 33%;
+  background-color: white;
+}
+.calendar .calendar-body .interview-day > header {
+  display: block;
+  margin: 0 auto;
+}
+.calendar .calendar-body .interview-day > header > p {
+  margin-top: 1px;
+  padding: 12px 15px 12px 15px;
+  background-color: #115089;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+.calendar .calendar-body .interview-day > header > p::first-letter {
+  text-transform: uppercase;
+}
+.calendar .v-cal-day__number {
   color: #115089;
   font-size: 15px !important;
   padding: 0 !important;
   margin-top: 4% !important;
 }
 
+@media (max-width: 991.98px) {
+  .calendar .calendar-header {
+    flex-direction: column;
+  }
+  .calendar .calendar-header .v-cal-button:first-of-type {
+    margin-left: auto;
+    margin-right: none;
+  }
+  .calendar .calendar-header .v-cal-button:last-of-type {
+    margin-left: none;
+    margin-right: auto;
+  }
+  .calendar .new-interview > button {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .calendar .calendar-body {
+    flex-direction: column;
+  }
+  .calendar .calendar-body .v-cal {
+    width: 100%;
+  }
+  .calendar .calendar-body .interview-day {
+    margin-top: 50px;
+    width: 100%;
+  }
+}
 #DetalleEntrevista .detalle-entrevista {
   max-width: 750px;
 }
