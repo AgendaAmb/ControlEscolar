@@ -27,6 +27,11 @@ const announcements = @json($announcements);
         v-bind:auth_user="loggedUser">
     </calendario-entrevistas>
 
+    <nuevo-periodo v-if="period === null" 
+        v-on:nuevoperiodo="actualizaPeriodo"
+        v-bind:announcements="announcements">
+    </nuevo-periodo>
+
     <nueva-entrevista v-if="period !== null"
         v-bind:min_date="period.start_date"
         v-bind:max_date="period.end_date"
