@@ -1035,10 +1035,9 @@ __webpack_require__.r(__webpack_exports__);
         room_id: this.room.id
       }).then(function (response) {
         var data = response.data;
-        _this.id = data.id;
 
         _this.$emit('nuevaentrevista', {
-          id: _this.id,
+          id: data.id,
           date: data.date,
           start_time: data.start_time,
           room_id: data.room_id,
@@ -1048,6 +1047,13 @@ __webpack_require__.r(__webpack_exports__);
           academic_areas: data.academic_areas
         });
 
+        _this.id = -1;
+        _this.date = '';
+        _this.intention_letter_professor = null;
+        _this.event = {};
+        _this.start_time = null;
+        _this.end_time = null;
+        _this.appliant = null;
         $('#NuevaEntrevista').modal('hide');
       })["catch"](function (error) {});
     }
@@ -41706,6 +41712,9 @@ var app = new Vue({
      */
     agregaEntrevista: function agregaEntrevista(entrevista) {
       this.period.interviews.push(entrevista);
+      Vue.set(this, 'appliants', this.appliants.filter(function (appliant) {
+        return appliant.id !== entrevista.appliant.id;
+      }));
     },
 
     /**

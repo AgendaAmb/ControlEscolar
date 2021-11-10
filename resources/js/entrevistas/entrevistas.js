@@ -83,6 +83,10 @@ const app = new Vue({
          */
         agregaEntrevista(entrevista){
             this.period.interviews.push(entrevista);
+
+            Vue.set(this, 'appliants', this.appliants.filter(appliant => {
+                return appliant.id !== entrevista.appliant.id
+            }));
         },
 
         /**
