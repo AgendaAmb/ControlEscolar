@@ -15,7 +15,7 @@
         <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button>
       </div>
     </div>
-    <div v-if="period !== null && !isProfessor" class="new-interview">
+    <div v-if="period !== null && isProfessor === false" class="new-interview">
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
     </div>
 
@@ -38,6 +38,9 @@
           :key="interview.id"
           ></interview>
       </div>
+    </div>
+    <div v-if="IsActive === false" class="mx-auto">
+      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>

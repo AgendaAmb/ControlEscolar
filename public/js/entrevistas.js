@@ -81,6 +81,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -27909,7 +27912,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.period !== null && !_vm.isProfessor
+    _vm.period !== null && _vm.isProfessor === false
       ? _c("div", { staticClass: "new-interview" }, [
           _c(
             "button",
@@ -27966,6 +27969,19 @@ var render = function() {
               })
             ],
             2
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.IsActive === false
+      ? _c("div", { staticClass: "mx-auto" }, [
+          _c(
+            "button",
+            {
+              staticClass: "my-3 v-cal-button",
+              attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" }
+            },
+            [_vm._v(" Programar periodo de entrevistas ")]
           )
         ])
       : _vm._e()
