@@ -22083,7 +22083,7 @@ var render = function() {
                     _c("th", [_vm._v(" Expediente ")]),
                     _vm._v(" "),
                     !_vm.$root.loggedUserIsAdmin() &&
-                    _vm.loggedUserIsSchoolControl()
+                    !_vm.$root.loggedUserIsSchoolControl()
                       ? _c("th", [_vm._v(" Rúbrica de evaluación ")])
                       : _c("th", [_vm._v(" Rúbricas de evaluación ")])
                   ])
@@ -22108,7 +22108,7 @@ var render = function() {
                       _vm._m(0, true),
                       _vm._v(" "),
                       !_vm.$root.loggedUserIsAdmin() &&
-                      !_vm.loggedUserIsSchoolControl()
+                      !_vm.$root.loggedUserIsSchoolControl()
                         ? _c(
                             "td",
                             _vm._l(interview.rubrics, function(rubric) {

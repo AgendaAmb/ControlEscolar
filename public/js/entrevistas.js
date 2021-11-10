@@ -1039,10 +1039,13 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$emit('nuevaentrevista', {
           id: _this.id,
-          date: _this.date,
-          startTime: _this.start_time,
-          endTime: _this.end_time,
-          appliant: data.appliant
+          date: data.date,
+          start_time: data.start_time,
+          room_id: data.room_id,
+          end_time: data.end_time,
+          appliant: data.appliant,
+          intention_letter_professor: data.intention_letter_professor,
+          academic_areas: data.academic_areas
         });
 
         $('#NuevaEntrevista').modal('hide');

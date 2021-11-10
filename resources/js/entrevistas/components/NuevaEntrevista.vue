@@ -160,10 +160,13 @@ export default {
 
         this.$emit('nuevaentrevista', {
           id: this.id,
-          date: this.date,
-          startTime: this.start_time,
-          endTime: this.end_time,
-          appliant: data.appliant
+          date: data.date,
+          start_time: data.start_time,
+          room_id: data.room_id,
+          end_time: data.end_time,
+          appliant: data.appliant,
+          intention_letter_professor: data.intention_letter_professor,
+          academic_areas:data.academic_areas
         });
 
         $('#NuevaEntrevista').modal('hide');

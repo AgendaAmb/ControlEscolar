@@ -14,7 +14,7 @@
                                     <th> Horario </th>
                                     <th> Nombre </th>
                                     <th> Expediente </th>
-                                    <th v-if="!$root.loggedUserIsAdmin() && loggedUserIsSchoolControl()"> Rúbrica de evaluación </th>
+                                    <th v-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl()"> Rúbrica de evaluación </th>
                                     <th v-else> Rúbricas de evaluación </th>
                                 </tr>
                             </thead>
@@ -23,7 +23,7 @@
                                     <td>{{interview.start_time + " a " + interview.end_time}}</td>
                                     <td class="appliant">{{interview.appliant}}</td>
                                     <td><a href="#">Ver documentos</a></td>
-                                    <td v-if="!$root.loggedUserIsAdmin() && !loggedUserIsSchoolControl()">
+                                    <td v-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl()">
                                         <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location"> Formato de evaluación</a>
                                     </td>
                                     <td v-else>

@@ -46,6 +46,24 @@ class InterviewController extends Controller
     }
 
     /**
+     * Sets the available announcements.
+     *
+     * @return void
+     */
+    private function setInterviewAcademicAreas(&$interview)
+    {
+        # Llena el modelo con 5 áreas académicas vacías.
+        $empty_areas = array_fill(0, 5, [
+                'name' => 'Área académica disponible',
+                'professor_name' => false
+        ]);
+
+        # Asigna de forma inicial, ningún área académica.
+        unset($interview->academicAreas);
+        $interview->academic_areas = $empty_areas;
+    }
+
+    /**
      * Agenda una nueva entrevista.
      * 
      * @param Request $request
@@ -57,9 +75,33 @@ class InterviewController extends Controller
         $interview_model->load(['users.roles:name', 'appliant']);
         $interview_model->confirmed = false;
         $interview_model->save();
+
+        # Obtiene los datos del profesor que otorgó la carta de intención, con 
+        # base a la información de mi portal.
+        $professor = $interview_model->intentionLetterProfessor->first();
+        $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
+        $professor_name = implode(' ', [$miPortal_worker['name'],$miPortal_worker['middlename'],$miPortal_worker['surname']]);
+
+        # Obtiene los datos del postulante, con base a la información de mi portal.
+        $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
+        $name = implode(' ', [$miPortal_user['name'],$miPortal_user['middlename'],$miPortal_user['surname']]);
+
+        # Devuelve en la respuesta, los datos de los usuarios.
         $appliant = $interview_model->appliant->first()->toArray();
+        $appliant['name'] = $name;
+
+        # Sobreescribe con información nueva.
         unset($interview_model->appliant);
+        unset($interview_model->intentionLetterProfessor);
         $interview_model->appliant = $appliant;
+        $interview_model->intention_letter_professor = [
+            'id' => $miPortal_worker['id'],
+            'type' => $miPortal_worker['user_type'],
+            'name' => $professor_name
+        ];
+
+        # Establece las áreas académicas de la entrevista.
+        $this->setInterviewAcademicAreas($interview_model);
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
