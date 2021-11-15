@@ -603,6 +603,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/controlescolar/entrevistas/confirmInterview', {
         id: this.id
       }).then(function (response) {
+          console.log(response);
         _this3.Confirmed = true;
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {});

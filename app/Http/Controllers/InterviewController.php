@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\ConfirmInterviewRequest;
 use App\Http\Requests\DeleteInterviewRequest;
 use App\Http\Requests\NewInterviewUserRequest;
 use App\Http\Requests\RemoveInterviewUserRequest;
 use App\Http\Requests\ReopenInterviewRequest;
+use App\Http\Requests\CreateMeetingRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\InterviewProgramResource;
@@ -14,6 +16,8 @@ use App\Models\AcademicProgram;
 use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class InterviewController extends Controller
 {
@@ -155,8 +159,13 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-        Interview::where('id', $request->id)->update(['confirmed' => true]);
-
+       
+        $interview2 = DB::table('interviews')->where('id',  $request->id)->first();
+        
+        app(ZoomController::class)->store($interview2);
+       /** Interview::where('id', $request->id)->update(['confirmed' => true]); */
+        
+       
         return new JsonResponse(['message'=>'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }
 

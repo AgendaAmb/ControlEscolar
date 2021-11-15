@@ -6,15 +6,19 @@ use App\Helpers\ZoomService;
 use App\Http\Requests\CreateMeetingRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Models\Interview;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
 
-class InterviewController extends Controller
+class ZoomController extends Controller
 {
     # Tipos de reunión.
     private const MEETING_TYPE_INSTANT = 1;
     private const MEETING_TYPE_SCHEDULE = 2;
     private const MEETING_TYPE_RECURRING = 3;
     private const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
-    
+         
     /**
      * Ruta para las reniones programadas con la cuenta del PMPCA.
      * 
@@ -40,7 +44,7 @@ class InterviewController extends Controller
     {
         $this->zoomService = new ZoomService;
     }
-
+        
     /**
      * Enlista todas las reuniones de zoom.
      * 
@@ -63,14 +67,33 @@ class InterviewController extends Controller
      * 
      * @param CreateMeetingRequest $request
      **/
-    public function store(CreateMeetingRequest $request): JsonResponse
+    public function store($request): JsonResponse
     {
-        $data = $request->validated();
+         /** Prueba para ver el listado de reuniones creadas **/
+        $response = $this->zoomService->zoomGet(self::USER_MEETINGS_URL, ['page_size' => 300]);
+        
+        # Recolecta el resultado.
+        $data2 = $response->collect();
+        dd($data2);
+        /****/
+         /**Creacion de formato de fecha checar hora de inicio por que lo esta poniendo mal, al parecer 
+          * la esta poniendo en utc 5 **/
+        $star_time=$request->date.'T'.$request->start_time;
+        $end=$request->date.'T'.$request->end_time;
+        $FechaStar= Carbon::createFromDate($star_time);
+        $FechaEnd=Carbon::createFromDate($end);
+        
+        $Duration= $FechaStar->diffInMinutes($FechaEnd);
+        
+
         $data['type'] = self::MEETING_TYPE_SCHEDULE;
         $data['timezone'] = 'America/Mexico_City';
-
-        $response = $this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
-    
+        $data['start_time'] =  $star_time;
+        $data['duration'] = $Duration;
+        $data['topic'] = "Reunion";
+        dd($this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data));
+        $response =$this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
+        
         # Devuelve el resultado
         return new JsonResponse($response->collect(), $response->status());
     }
