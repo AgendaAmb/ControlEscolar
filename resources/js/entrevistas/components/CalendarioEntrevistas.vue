@@ -1,33 +1,25 @@
 <template>
-  <div class="row my-5">
-    <div class="order-2 col-sm-6 col-md-3 order-md-1 actions-left my-auto" v-if="IsActive === true">
+  <div class="d-flex flex-column">
+    <div v-if="IsActive === true" class="calendar-header">
       <div class="btn-group" role="group">
         <button :disabled="!isPrevAllowed" class="v-cal-button" @click="prev"> Prev </button>
         <button :disabled="!isNextAllowed" class="v-cal-button" @click="next"> Sig </button>
       </div>
-    </div>
-    <div class="order-1 col-md-6 order-md-2" v-if="IsActive === true" >
-      <h1 class="v-cal-header__title mes">{{ calendarMonth }}</h1>
-      <h1 class="d-block v-cal-header__title año">{{ calendarYear }}</h1>
-    </div>
-    <div class="col-sm-6 col-md-3 actions-right my-auto order-2 text-left text-sm-right" v-if="IsActive === true">
+      <div>
+        <h1 class="v-cal-header__title mes">{{ calendarMonth }}</h1>
+        <h1 class="d-block v-cal-header__title año">{{ calendarYear }}</h1>
+      </div>
       <div class="btn-group" role="group">
         <button class="v-cal-button" @click="switchView('month')" :class="calendarViewButtonClass('month')"> Mes </button>
         <button class="v-cal-button" @click="switchView('week')" :class="calendarViewButtonClass('week')"> Semana </button>
-        <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Dia </button>
+        <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button>
       </div>
     </div>
-
-    <div v-if="period !== null && !isProfessor" class="col-12 order-3 mt-2 mb-4">
-      <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-          <button class="v-cal-button w-100" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
-        </div>
-      </div>
+    <div v-if="period !== null && isProfessor === false" class="new-interview">
+      <button class="v-cal-button" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
     </div>
 
-
-    <div :class="CalendarClass" v-if="IsActive">
+    <div v-if="IsActive" class="calendar-body">
       <div class="v-cal">
         <component
           :is="activeView"
@@ -37,39 +29,23 @@
           ></component>
         <footer class="v-cal-footer"></footer>
       </div>
+      <div class="interview-day">
+        <header>
+          <p>{{StringDate}}</p>
+        </header>
+        <interview v-for="interview in ActiveDateInterviews" 
+          v-bind="interviewDataFrom(interview)"
+          :key="interview.id"
+          ></interview>
+      </div>
     </div>
-    <div class="col-lg-4 pl-lg-0 order-3" v-if="IsActive">
-      <header class="dia-entrevista"><p>{{StringDate}}</p></header>
-      <interview v-for="interview in ActiveDateInterviews" 
-        v-bind="interviewDataFrom(interview)"
-        :key="interview.id"
-        ></interview>
-    </div>
-    <div v-if="IsActive === false" class="col-12 mx-2">
+    <div v-if="IsActive === false" class="mx-auto">
       <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
     </div>
   </div>
 </template>
 
 <style scoped>
-div.col-12.mx-2 > button.my-3.v-cal-button{
-  margin-left: 10px;
-  border-radius: 5px;
-}
-
-.notificaciones {
-    margin-top: 101px;
-    padding: 13px 0;
-    background-color: #115089;
-    color: white;
-    font-family: 'Myriad Pro Bold';
-    text-align: center;
-}
-
-.notificaciones::first-letter {
-  text-transform: uppercase;
-}
-
 .mes {
   font-family: 'Myriad Pro Bold';
   font-size: 66px;
@@ -85,27 +61,6 @@ div.col-12.mx-2 > button.my-3.v-cal-button{
   text-align: center;
   font-size: 66px;
 }
-
-.dia-entrevista {
-  display: block;
-  margin: 0 auto;
-}
-
-.dia-entrevista > p {
-  font-family: 'Myriad Pro Bold';
-  margin-top: 1px;
-  padding: 12px 15px 12px 15px;
-  background-color: #115089;
-  color: white;
-  font-size: 16px;
-  text-align: center;
-}
-
-.dia-entrevista > p::first-letter {
-  text-transform: uppercase;
-}
-
-
 </style>
 
 <script>
@@ -413,9 +368,6 @@ export default {
 
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);
-      
-      //if (!this.isProfessor)
-      //  $('#NuevaEntrevista').modal('show');
     },
 
     muestraModalNuevaEntrevista(){

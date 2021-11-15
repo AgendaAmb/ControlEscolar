@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicProgram extends Model
 {
@@ -21,14 +24,27 @@ class AcademicProgram extends Model
     protected $guarded = [];
 
     /**
-     * Eager loads.
+     * Scopes model eager loads.
      *
-     * @var string[]
+     * @return Builder
      */
-    protected $with = [
-        'latestAnnouncement.period',
-        'latestAnnouncement.archives.intentionLetter'
-    ];
+    public static function scopeWithInterviewEagerLoads(Builder $query): Builder
+    {
+        return $query->with('periods', function($query){
+
+            $query->with('announcement.archives.appliant', function($subquery){
+                $subquery->doesntHave('interviews');
+            })->with('interviews.intentionLetterProfessor', function($subquery){
+
+                $subquery->where('archive_intention_letter.user_id', '<>', Auth::id());
+            })->with([
+                'announcement.archives.intentionLetter',
+                'rooms'
+            ])->whereYear('end_date', '<=', date('Y'))
+            ->whereMonth('end_date', '<=', date('m'));
+        
+        })->with('latestAnnouncement');
+    }
 
     /**
      * Obtiene los documentos requeridos del expediente.
@@ -71,5 +87,15 @@ class AcademicProgram extends Model
     public function requiredDocuments(): BelongsToMany
     {
         return $this->belongsToMany(RequiredDocument::class);
+    }
+
+    /**
+     * Obtiene los periodos de entrevista del programa académico.
+     *
+     * @return HasMany
+     */
+    public function periods(): HasManyThrough
+    {
+        return $this->hasManyThrough(Period::class, Announcement::class);
     }
 }

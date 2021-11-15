@@ -135,7 +135,7 @@ class LoginController extends Controller
         $this->getUsers($request, $user);
 
         # Redirecciona a la página principal.
-        return redirect()->route('entrevistas.calendario');
+        return redirect()->route('authenticate.home');
     }
 
     /**
@@ -157,6 +157,6 @@ class LoginController extends Controller
         $this->getUsers($request, $user);
 
         # Redirecciona a la página principal.
-        return redirect()->route('entrevistas.calendario');
+        return redirect()->route('authenticate.home');
     }
 }

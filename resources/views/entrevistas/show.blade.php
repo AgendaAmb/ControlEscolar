@@ -10,7 +10,6 @@ const user = @json($user);
 @section('id', 'id=entrevistas')
     
 @section('main')
-@include('entrevistas.navbar')
 <div class="row">
     <div class="col-12 text-center">
         <h1 class="mes">Entrevistas</h1>

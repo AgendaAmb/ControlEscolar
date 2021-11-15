@@ -4,11 +4,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EvaluationRubricController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +25,11 @@ use Illuminate\Support\Facades\Route;
 # Rutas para inicio de sesión.
 Route::name('authenticate.')->group(function(){
 
-    # Usuarios del sistema.
+    # Inicio de sesión por OAUTH2.
     Route::get('/', [LoginController::class, 'login'])->name('login');
+
+    # Página principal.
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 
@@ -118,20 +121,6 @@ Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|pr
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Rutas de admin.
 Route::prefix('admin')
 ->name('admin.')
@@ -151,3 +140,8 @@ Route::prefix('admin')
 
 # Rutas de admin.
 Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+
+
+
+# Vista de la carta de recomendación
+Route::view('recommendationLetter', 'postulacion.recommendation-letter');

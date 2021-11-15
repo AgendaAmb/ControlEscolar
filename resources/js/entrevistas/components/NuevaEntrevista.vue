@@ -156,14 +156,25 @@ export default {
       
       }).then(response =>  {
         var data = response.data;
-        this.id = data.id;
 
         this.$emit('nuevaentrevista', {
-          id: this.id,
-          date: this.date,
-          startTime: this.start_time,
-          endTime: this.end_time,
+          id: data.id,
+          date: data.date,
+          start_time: data.start_time,
+          room_id: data.room_id,
+          end_time: data.end_time,
+          appliant: data.appliant,
+          intention_letter_professor: data.intention_letter_professor,
+          academic_areas:data.academic_areas
         });
+
+        this.id = -1;
+        this.date = '';
+        this.intention_letter_professor = null;
+        this.event = {};
+        this.start_time = null;
+        this.end_time = null;
+        this.appliant = null;
 
         $('#NuevaEntrevista').modal('hide');
       }).catch(error => {

@@ -10,7 +10,7 @@ class CalendarResource extends JsonResource
     /**
      * Gets an user from the main system.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @param int $id
      * @param string $type
      * @return void
@@ -28,6 +28,38 @@ class CalendarResource extends JsonResource
             'id' => $miPortal_user['id'],
             'type' => $miPortal_user['user_type'],
             'name' => $name
+        ];
+    }
+
+    /**
+     * Maps an appliant from the main system.
+     *
+     * @param $archive
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
+    private function mapArchiveAppliant($archive, $request)
+    {
+        $appliant = $this->getMiPortalUser($request, $archive->user_id, 'appliants');
+        $appliant['intention_letter_professor'] = $this->getMiPortalUser($request, $archive->intentionLetter->user_id, 'workers');
+        return $appliant;
+    }
+
+    /**
+     * Maps an academic area.
+     *
+     * @param $area
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
+    private function mapAcademicArea($area, $request)
+    {
+        $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers'); 
+            
+        return [
+            'id' => $area['area_id'],
+            'name' => $area['area_name'],
+            'professor_name' => Str::lower($miPortal_professor['name'])
         ];
     }
 
@@ -93,37 +125,11 @@ class CalendarResource extends JsonResource
     {
         # Llena la información de los usuarios que participan en 
         # la entrevista.
-        $areas = collect($interview['academic_areas'])->map(function($area) use ($request) {
-            $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers'); 
-            
-            return [
-                'id' => $area['area_id'],
-                'name' => $area['area_name'],
-                'professor_name' => Str::lower($miPortal_professor['name'])
-            ];
-        });
+        $areas = collect($interview['academic_areas'])->map(
+            fn($area) => $this->mapAcademicArea($area, $request)
+        )->toArray();
 
-        # Determina Si el usuario ya está inscrito al área académica
-        # de la entrevista.
-        /*$user_areas_available = $request->user()->academicAreas
-            ->whereIn('name', $areas->pluck('name'))
-            ->count() === 0;
-        
-        $areas = $areas->toArray();
 
-        # Verifica que el usuario pueda registrarse a la entrevista.
-        if ($user_areas_available === true)
-        {
-            $miPortal_user = $this->getMiPortalUser($request, $request->user()->id, 'workers');
-            $area = $request->user()->academicAreas->first();
-            $areas[] = [
-                'id' => $area->id,
-                'name' => $area->name,
-                'professor_name' => $miPortal_user['name']
-            ];
-        }*/
-
-        $areas = $areas->toArray();
         # Verifica si la cantidad de áreas académicas es igual a 5.
         # En caso de que no sea así, se llena el arreglo de datos con 5
         # áreas académicas vacías.
@@ -150,18 +156,19 @@ class CalendarResource extends JsonResource
     private function setPeriod($request)
     {
         # Filtra el primer periodo no nulo.
-        $this->periods = $this->announcements->map->period;
-        $this->period = $this->periods->filter(function ($period){
-            return $period !== null;
-        })->first();
-
+        $this->period = $this->resource->filter(function($academic_program){
+            return $academic_program->periods->count() > 0;
+        
+        })->map(fn($academic_program) => $academic_program->periods->first())->first();
 
         # Carga los modelos asociados al periodo y quita las convocatorias.
         if ($this->period === null)
             return; 
             
         $this->announcements = null;
-        $this->period->interviews = $this->period->interviews->map(function($interview) use ($request){
+        $this->period->interviews = $this->period->interviews->filter(function($interview){
+            return $interview->intentionLetterProfessor->count() > 0;
+        })->map(function($interview) use ($request){
             $interview = $interview->toArray();
 
             $this->setInterviewAppliant($request, $interview);
@@ -197,29 +204,11 @@ class CalendarResource extends JsonResource
 
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;
-        $this->appliants = $archives->map(function($archive) use ($request){
-            
-            $miPortal_appliant = collect($request
-                ->session()
-                ->get('appliants'))
-                ->firstWhere('id', $archive->user_id);
-
-            $miPortal_professor = collect($request
-                ->session()
-                ->get('workers'))
-                ->firstWhere('id', $archive->intentionLetter->user_id);
-            
-            return [
-                'id' => $miPortal_appliant['id'],
-                'type' => $miPortal_appliant['user_type'],
-                'name' => implode(' ', [$miPortal_appliant['name'],$miPortal_appliant['middlename'],$miPortal_appliant['surname']]),
-                'intention_letter_professor' => [
-                    'id' => $miPortal_professor['id'],
-                    'type' => $miPortal_professor['user_type'],
-                    'name' => implode(' ', [$miPortal_professor['name'],$miPortal_professor['middlename'],$miPortal_professor['surname']]),
-                ],
-            ];
-        })->toArray();
+        $this->appliants = $archives->filter(
+            fn($archive) => $archive->appliant !== null
+        )->map(
+            fn($archive) => $this->mapArchiveAppliant($archive, $request)
+        )->values()->toArray();
     }
 
     /**

@@ -16157,6 +16157,29 @@ h3 {
     border-color: #dee2e6;
   }
 }
+header.header {
+  display: block;
+  background-color: #13497D;
+}
+header.header a.header-image > img {
+  display: block;
+  margin-left: auto;
+}
+header.header nav.nav-options {
+  background-color: gray;
+}
+header.header nav.nav-options a.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-family: "Myriad Pro Bold";
+}
+header.header nav.nav-options a.nav-link + .dropdown-menu {
+  color: gray;
+  font-size: 16px;
+  border-radius: 0%;
+}
+
 .v-cal-dialog {
   position: fixed;
   left: 0;
@@ -16732,30 +16755,118 @@ h3 {
   color: white;
 }
 
-.v-cal {
+.calendar .v-cal {
   padding: 0 !important;
 }
-
-.v-cal-header .v-cal-header__title {
-  text-transform: capitalize;
+.calendar .calendar-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 90%;
 }
-
-.v-cal-header__actions .v-cal-button {
+.calendar .new-interview {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+.calendar .new-interview > button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+.calendar .v-cal-button {
+  margin-top: auto;
+  margin-bottom: auto;
+  font-family: "Myriad Pro Regular";
+  font-size: 16px;
+  padding: 3px 25px;
   background-color: #115089;
+  border-color: #115089;
   color: white;
 }
-.v-cal-header__actions .v-cal-button.v-cal-button--is-active {
+.calendar .v-cal-button.v-cal-button--is-active {
   background-color: white;
   color: #115089;
 }
-
-.v-cal-day__number {
+.calendar .v-cal-button:hover {
+  background-color: white;
+  color: #115089;
+  border-color: #115089;
+}
+.calendar .v-cal-button:first-of-type {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.calendar .v-cal-button:last-of-type {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.calendar .calendar-body {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+}
+.calendar .calendar-body .v-cal {
+  display: block;
+  width: 67%;
+}
+.calendar .calendar-body .interview-day {
+  display: block;
+  padding: 0;
+  width: 33%;
+  background-color: white;
+}
+.calendar .calendar-body .interview-day > header {
+  display: block;
+  margin: 0 auto;
+}
+.calendar .calendar-body .interview-day > header > p {
+  margin-top: 1px;
+  padding: 12px 15px 12px 15px;
+  background-color: #115089;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+.calendar .calendar-body .interview-day > header > p::first-letter {
+  text-transform: uppercase;
+}
+.calendar .v-cal-day__number {
   color: #115089;
   font-size: 15px !important;
   padding: 0 !important;
   margin-top: 4% !important;
 }
 
+@media (max-width: 991.98px) {
+  .calendar .calendar-header {
+    flex-direction: column;
+  }
+  .calendar .calendar-header .v-cal-button:first-of-type {
+    margin-left: auto;
+    margin-right: none;
+  }
+  .calendar .calendar-header .v-cal-button:last-of-type {
+    margin-left: none;
+    margin-right: auto;
+  }
+  .calendar .new-interview > button {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  .calendar .calendar-body {
+    flex-direction: column;
+  }
+  .calendar .calendar-body .v-cal {
+    width: 100%;
+  }
+  .calendar .calendar-body .interview-day {
+    margin-top: 50px;
+    width: 100%;
+  }
+}
 #DetalleEntrevista .detalle-entrevista {
   max-width: 750px;
 }
@@ -16810,4 +16921,84 @@ h3 {
 #DetalleEntrevista .modal-footer button.btn-secondary {
   color: white;
   font-family: "Myriad Pro Bold";
+}
+
+main.recommendation-letter {
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+main.recommendation-letter h1,
+main.recommendation-letter hr + h2,
+main.recommendation-letter hr + h2 + div.d-block {
+  display: block;
+  width: 98%;
+  margin-left: auto;
+}
+main.recommendation-letter h1 p, main.recommendation-letter h1 > label,
+main.recommendation-letter hr + h2 p,
+main.recommendation-letter hr + h2 > label,
+main.recommendation-letter hr + h2 + div.d-block p,
+main.recommendation-letter hr + h2 + div.d-block > label {
+  font-size: 20px;
+  font-family: "Myraid light";
+  font-weight: bold;
+}
+main.recommendation-letter h1, main.recommendation-letter h2, main.recommendation-letter hr {
+  color: #115089;
+}
+main.recommendation-letter h1 {
+  font-family: "Myriad Pro Bold";
+}
+main.recommendation-letter h2 {
+  font-family: "Myriad Pro Regular";
+  font-weight: bold;
+}
+main.recommendation-letter hr {
+  border-width: 2px;
+  background-color: #115089;
+}
+main.recommendation-letter table.candidate-analysis {
+  overflow-x: scroll;
+  border-collapse: collapse;
+  max-width: 100%;
+  min-width: 1200px;
+}
+main.recommendation-letter table.candidate-analysis > thead {
+  font-size: 20px;
+  font-family: "Myriad Pro Bold";
+}
+main.recommendation-letter table.candidate-analysis > thead > tr > th {
+  width: 10%;
+  text-align: center;
+}
+main.recommendation-letter table.candidate-analysis > thead > tr > th:first-of-type {
+  width: 60%;
+  text-align: justify;
+}
+@media (max-width: 767.98px) {
+  main.recommendation-letter #FechaRelacion {
+    width: 100%;
+  }
+}
+@media (min-width: 576px) and (max-width: 991.98px) {
+  main.recommendation-letter #FechaRelacion {
+    width: 90%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  main.recommendation-letter #FechaRelacion {
+    width: 70%;
+  }
+}
+@media (min-width: 992px) {
+  main.recommendation-letter #FechaRelacion {
+    width: 60%;
+  }
+}
+@media (min-width: 1200px) {
+  main.recommendation-letter #FechaRelacion {
+    width: 50%;
+  }
 }

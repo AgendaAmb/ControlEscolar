@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,11 +27,8 @@ class Period extends Model
      * @var string[]
      */
     protected $with = [
-        'rooms',
-        'announcement.archives',
         'interviews.appliant:id,type',
         'interviews.academicAreas',
-        'interviews.intentionLetterProfessor'
     ];
 
     /**

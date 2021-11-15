@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/recommendation-letter.js": "/js/recommendation-letter.js",
     "/js/admin.js": "/js/admin.js",
     "/js/rubrica.js": "/js/rubrica.js",
     "/js/preregistro.js": "/js/preregistro.js",

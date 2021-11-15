@@ -1,0 +1,92 @@
+main.recommendation-letter {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+    h1, 
+    hr + h2, 
+    hr + h2 + div.d-block {
+        display: block;
+        width: 98%;
+        margin-left: auto;
+
+        p, > label {
+            font-size: 20px;
+            font-family: 'Myraid light';
+            font-weight: bold;
+        }
+    }
+
+    h1, h2, hr {
+        color: #115089;
+    }
+
+    h1 {
+        font-family: 'Myriad Pro Bold';
+    }
+
+    h2 {
+        font-family: 'Myriad Pro Regular';
+        font-weight: bold;
+    }
+
+    hr {
+        border-width: 2px;
+        background-color: #115089;
+    }
+
+    table.candidate-analysis {
+        overflow-x: scroll;
+        border-collapse: collapse;
+        max-width: 100%;
+        min-width: 1200px;
+
+        > thead {
+            font-size: 20px;
+            font-family: 'Myriad Pro Bold';
+
+            > tr > th {
+                width: 10%;
+                text-align: center;
+            }
+
+            > tr > th:first-of-type {
+                width: 60%;
+                text-align: justify;
+            }
+
+        }
+    }
+
+
+    @include media-breakpoint-between(xs, sm) {
+        #FechaRelacion {
+            width:  100%;
+        }
+    }
+    
+    @include media-breakpoint-between(sm, md) {
+        #FechaRelacion {
+            width:  90%;
+        }
+    }
+
+    @include media-breakpoint-between(md, lg) {
+        #FechaRelacion {
+            width:  70%;
+        }
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+        #FechaRelacion {
+            width:  60%;
+        }
+    }
+    
+    @include media-breakpoint-up(xl) {
+        #FechaRelacion {
+            width:  50%;
+        }
+    }
+}
