@@ -284,16 +284,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     activeViewProps: {
       get: function get() {
-        var _this2 = this;
-
         var props = {
           activeDate: this.ActiveDate,
           minDate: this.MinDate,
           maxDate: this.MaxDate,
           use12: true,
-          events: this.newEvents.filter(function (interview) {
-            return interview.date.isSame(_this2.activeDate, _this2.activeView);
-          })
+          events: this.newEvents
         };
 
         if (this.activeView === 'week' || this.activeView === 'day') {

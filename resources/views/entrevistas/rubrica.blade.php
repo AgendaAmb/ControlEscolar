@@ -42,10 +42,21 @@ const announcement = @json($announcement);
     </div>        
     <hr class="col-11 hr">
     <div class="form-group col-lg-11 text-right">
-        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('save')"> Guardar </button>
-        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('send')"> Enviar </button>
+        <button class="btn btn-primary interview-button" type="button" disabled  v-if="visbleSave">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Guardando...
+          </button>                                                                                  
+         
+        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('save')" v-if="!visbleSave"> Guardar </button>
+        <button class="btn btn-primary interview-button" type="button" disabled  v-if="visbleSend" >
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Enviando...
+          </button>
+        <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('send')" v-if="!visbleSend"> Enviar </button>
     </div>
 </div>
+
+
 @endsection
 
 @push('scripts')

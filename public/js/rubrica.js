@@ -85835,7 +85835,10 @@ var app = new Vue({
     appliant: appliant,
     announcement: announcement,
     considerations: rubric.considerations,
-    additional_information: rubric.additional_information
+    additional_information: rubric.additional_information,
+    dataModal: "",
+    visbleSave: false,
+    visbleSend: false
   },
   components: {
     AppliantData: _components_AppliantData__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -85854,6 +85857,10 @@ var app = new Vue({
       });
     },
     guardaRubrica: function guardaRubrica(state) {
+      var _this = this;
+
+      state == "save" ? this.visbleSave = true : this.visbleSave = false;
+      state == "send" ? this.visbleSend = true : this.visbleSend = false;
       var rubric_id = this.id;
       var basic_concepts = this.getConceptData(this.basic_concepts);
       var academic_concepts = this.getConceptData(this.academic_concepts);
@@ -85869,7 +85876,11 @@ var app = new Vue({
         personal_attributes_concepts: personal_attributes_concepts,
         considerations: this.considerations,
         additional_information: this.additional_information
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {
+        _this.visbleSave = false, _this.visbleSend = false, alert('Tu información se ha guardado con exito.');
+      })["catch"](function (error) {
+        _this.visbleSave = false, _this.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. REcuerda llenar todos los campos necesarios');
+      });
     }
   }
 });
