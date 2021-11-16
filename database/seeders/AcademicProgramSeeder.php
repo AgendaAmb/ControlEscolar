@@ -14,5 +14,6 @@ class AcademicProgramSeeder extends Seeder
     public function run()
     {
         //
+        
     }
 }
