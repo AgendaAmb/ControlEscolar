@@ -22,6 +22,7 @@ class CreateAcademicDegreesTable extends Migration
 
             // Estado de titulación.
             $table->string('status')->nullable();
+            $table->string('titration_date')->nullable();
             $table->string('titration_mode')->nullable();
             $table->string('country')->nullable();
             $table->string('university')->nullable();

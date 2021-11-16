@@ -32,7 +32,7 @@ class CreateRequiredDocumentsTable extends Migration
         DB::table('required_documents')->insert([
             # Todos
             [
-                'name' =>"1.- Acta de nacimiento.",
+                'name' =>"1.- Acta de nacimiento",
                 'type' => 'personal',
                 'label' => "01_ActaNac_AñoDeSolicitud_iniciales(Apellidos,Nombres)",                
                 'notes' => null,
@@ -43,7 +43,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"2.- CURP expedido por la RENAPO. ",
+                'name' =>"2.- CURP expedido por la RENAPO",
                 'type' => 'personal',
                 'label' => '02_CURP_añodesolicitud_iniciales',
                 'notes' => 'CURP Certificada y verificada por el registro civil.<br> Puedes generarlo, dando clic a <a href="https://www.gob.mx/curp/" target="_blank"> este vínculo </a>',
@@ -54,7 +54,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"3.- Credencial de elector INE en ampliación tamaño carta.",
+                'name' =>"3.- INE en ampliación tamaño carta",
                 'type' => 'personal',
                 'label' => '03_INE_añodesolicitud_iniciales',                
                 'notes' => null,
@@ -65,7 +65,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"4.- Primera página del pasaporte.",
+                'name' =>"4.- Primera página del pasaporte",
                 'type' => 'personal',
                 'label' => '04_Pasaporte_añodesolicitud_iniciales',                
                 'notes' => null,
@@ -76,7 +76,7 @@ class CreateRequiredDocumentsTable extends Migration
 
             # Solo maestrías.
             [
-                'name' =>"5A.- Título de licenciatura o acta de examen.",
+                'name' =>"5A.- Título de licenciatura o acta de examen",
                 'type' => 'academic',
                 'label' => '05A_TitLicenciatula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -87,7 +87,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo IMAREC
             [
-                'name' =>"5A.- Carta de pasantía.",
+                'name' =>"5A.- Carta de pasantía",
                 'type' => 'academic',
                 'label' => '05A_CartaPasante_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -98,7 +98,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo doctorado.
             [
-                'name' =>"5B.- Título de maestría o acta de examen.",
+                'name' =>"5B.- Título de maestría o acta de examen",
                 'type' => 'academic',
                 'label' => '05B_TítuloMat_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -109,7 +109,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo maestrías.
             [
-                'name' =>"6A.- Certificado de materias de la licenciatura.",
+                'name' =>"6A.- Certificado de materias de la licenciatura",
                 'type' => 'academic',
                 'label' => '06A_CertLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -120,7 +120,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo doctorado.
             [
-                'name' =>"6B.- Certificado de materias de la maestría.",
+                'name' =>"6B.- Certificado de materias de la maestría",
                 'type' => 'academic',
                 'label' => '06B_CertMast_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -131,7 +131,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo maestrías.
             [
-                'name' =>"7A.- Certificado de promedio de la licenciatura.",
+                'name' =>"7A.- Constancia de promedio de la licenciatura.",
                 'type' => 'academic',
                 'label' => '07A_PromedioLic_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -142,7 +142,7 @@ class CreateRequiredDocumentsTable extends Migration
 
             # Solo doctorado.
             [
-                'name' =>"7B.- Certificado de promedio de la maestría.",
+                'name' =>"7B.- Constancia de promedio de la maestría.",
                 'type' => 'academic',
                 'label' => '07B_PromedioMae_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -153,7 +153,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Solo maestrías.
             [
-                'name' =>"8A.- Cédula de la licenciatura (aplica solo para estudios realizados en México).",
+                'name' =>"8A.- Cédula de la licenciatura",
                 'type' => 'academic',
                 'label' => '08A_Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -165,7 +165,7 @@ class CreateRequiredDocumentsTable extends Migration
 
             # Solo doctorado.
             [
-                'name' =>"8B.- Cédula de la maestría (aplica solo para estudios realizados en México).",
+                'name' =>"8B.- Cédula de la maestría",
                 'type' => 'academic',
                 'label' => '08B_Cédula_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -176,7 +176,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"12.- EXANI III (no aplica a estudiantes extranjeros).",
+                'name' =>"12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
                 'type' => 'entrance',
                 'label' => '12_EXANIIII_añodesolicitud_iniciales',                
                 'notes' => null,
@@ -198,7 +198,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"13.- Certificado de idioma vigente.",
+                'name' =>"13.- Certificado de idioma vigente",
                 'type' => 'language',
                 'label' => '13_Idioma_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
@@ -221,7 +221,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"14.- Carta de intención de un profesor del núcleo básico.",
+                'name' =>"11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)",
                 'type' => 'entrance',
                 'label' => '14_Intencion_añodesolicitud_iniciales',                
                 'notes' => null,
@@ -232,7 +232,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"19.- Propuesta de proyecto.",
+                'name' =>"19.- Propuesta de proyecto avalada por el profesor postulante",
                 'type' => 'entrance',
                 'label' => '19_Proyecto_iniciales',                
                 'notes' => null,
@@ -243,7 +243,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"18A.- Carta de recomendación.",
+                'name' =>"Dos cartas de recomendación académica",
                 'type' => 'curricular',
                 'label' => '18A_Recomendación_01_añodesolicitud_iniciales',                
                 'notes' => null,

@@ -45,6 +45,12 @@ class ArchiveSeeder extends Seeder
                 'id' => $miPortal_appliant['id'],
                 'type' => $miPortal_appliant['user_type']
             ]);
+/*
+            $mi_portal_service->miPortalPost('api/usuarios/modulos', [
+                'module_id' => env('MIPORTAL_MODULE_ID'),
+                'user_id' => $miPortal_appliant['id'],
+                'user_type' => $miPortal_appliant['type'],
+            ]);*/
 
             if (!$appliant->hasRole('aspirante_local'))
                 $appliant->assignRole('aspirante_local');
@@ -57,13 +63,16 @@ class ArchiveSeeder extends Seeder
                 'status' => 1
             ]);
 
+            $new_archive->academicDegrees()->updateOrCreate(['archive_id' => $new_archive->id], $old_archive['academic_degrees'][0]);
+            $new_archive->appliantLanguages()->updateOrCreate(['archive_id' => $new_archive->id], $old_archive['appliant_languages'][0]);
+
             $required_documents = [
                 'personalDocuments' => collect($old_archive['personal_documents'] ?? []),
                 'academicDocuments' => collect($old_archive['academic_documents'] ?? []),
                 'entranceDocuments' => collect($old_archive['entrance_documents'] ?? []),
+                'languageDocuments' => collect($old_archive['languageDocuments'] ?? []),
                 'curricularDocuments' => collect($old_archive['curricular_documents'] ?? [])
             ];
-            /*
 
             foreach ($required_documents as $type => $required_document_files)
             {
@@ -71,6 +80,7 @@ class ArchiveSeeder extends Seeder
                 {
                     $required_document_id = RequiredDocument::firstWhere('name', 'like', '%'.$file['name'].'%')->id ?? null;
 
+                    dump($required_document_id.'=>'.$file['name']);
                     if ($required_document_id === null)
                         continue;
     
@@ -82,14 +92,12 @@ class ArchiveSeeder extends Seeder
                     ]);
     
                     Storage::put($path, base64_decode($file['Contenido']));
-    
-
 
                     $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
                         'location' => $path
                     ]);
                 }
-            }*/
+            }
         }
 
 
