@@ -71,6 +71,7 @@ class EvaluationRubricController extends Controller
      */
     public function update(UpdateEvaluationRubricRequest $request, EvaluationRubric $evaluationRubric)
     {
+        
         $this->updatePivot($request->basic_concepts, $evaluationRubric);
         $this->updatePivot($request->academic_concepts, $evaluationRubric);
         $this->updatePivot($request->research_concepts, $evaluationRubric);
@@ -80,6 +81,7 @@ class EvaluationRubricController extends Controller
         
 
         $evaluationRubric->fill($request->safe()->only('considerations','additional_information'));
+        $request->state=="send"?$evaluationRubric->isComplete=true:$evaluationRubric->isComplete=false;
         $evaluationRubric->save();
         $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){
             return $concept['evaluation_concept_details'];

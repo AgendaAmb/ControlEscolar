@@ -69,13 +69,7 @@ class ZoomController extends Controller
      **/
     public function store($request): JsonResponse
     {
-         /** Prueba para ver el listado de reuniones creadas **/
-        $response = $this->zoomService->zoomGet(self::USER_MEETINGS_URL, ['page_size' => 300]);
-        
-        # Recolecta el resultado.
-        $data2 = $response->collect();
-        dd($data2);
-        /****/
+
          /**Creacion de formato de fecha checar hora de inicio por que lo esta poniendo mal, al parecer 
           * la esta poniendo en utc 5 **/
         $star_time=$request->date.'T'.$request->start_time;
@@ -87,13 +81,13 @@ class ZoomController extends Controller
         
 
         $data['type'] = self::MEETING_TYPE_SCHEDULE;
-        $data['timezone'] = 'America/Mexico_City';
-        $data['start_time'] =  $star_time;
+        $data['timezone'] = "America/Mexico_City";
+        $data['start_time'] =  $FechaStar;
         $data['duration'] = $Duration;
         $data['topic'] = "Reunion";
-        dd($this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data));
+       
         $response =$this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
-        
+      
         # Devuelve el resultado
         return new JsonResponse($response->collect(), $response->status());
     }

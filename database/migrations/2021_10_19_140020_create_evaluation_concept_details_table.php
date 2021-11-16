@@ -128,7 +128,7 @@ class CreateEvaluationConceptDetailsTable extends Migration
         ]);
 
         $models[19]->evaluationConceptDetails()->createMany([
-            ['score_group' => 'Excelente', 'text'=>'El estudiante labora y su actividad está relacionada con las ciencias ambientales. Esta dispuesto a dejar de laborar.'],
+            ['score_group' => 'Excelente', 'text'=>'El estudiante labora y su actividad está relacionada con las ciencias ambientales. Esta dispuesto a dejar de laborar.En caso de ser recién egresado favor de considerar en este punto.'],
             ['score_group' => 'Muy bien', 'text'=>'El estudiante labora pero su actividad no esta relacionada con las ciencias ambientales. Dejará su trabajo para ingresar al posgrado.'],
             ['score_group' => 'Bien', 'text'=>'El estudiante tiene formación ambiental pero actualmente no labora.'],
             ['score_group' => 'Deficiente', 'text'=>'No estudia, ni labora.'],

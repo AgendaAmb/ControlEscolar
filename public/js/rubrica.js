@@ -85879,7 +85879,7 @@ var app = new Vue({
       }).then(function (response) {
         _this.visbleSave = false, _this.visbleSend = false, alert('Tu información se ha guardado con exito.');
       })["catch"](function (error) {
-        _this.visbleSave = false, _this.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. REcuerda llenar todos los campos necesarios');
+        _this.visbleSave = false, _this.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. Recuerda llenar todos los campos necesarios');
       });
     }
   }
