@@ -22,11 +22,15 @@ class CalendarResource extends JsonResource
             ->get($type))
             ->firstWhere('id', $id);
 
-        $name = implode(' ', [$miPortal_user['name'],$miPortal_user['middlename'],$miPortal_user['surname']]);
+        $name = implode(' ', [
+            $miPortal_user['name'] ?? '',
+            $miPortal_user['middlename'] ?? '',
+            $miPortal_user['surname']  ?? ''
+        ]);
 
         return [
-            'id' => $miPortal_user['id'],
-            'type' => $miPortal_user['user_type'],
+            'id' => $miPortal_user['id']  ?? '',
+            'type' => $miPortal_user['user_type']  ?? '',
             'name' => $name
         ];
     }
