@@ -161,10 +161,10 @@ class InterviewController extends Controller
     {
        
         $interview2 = DB::table('interviews')->where('id',  $request->id)->first();
-        
+        //Crear url para la sesion de zoom//
         app(ZoomController::class)->store($interview2);
-       /** Interview::where('id', $request->id)->update(['confirmed' => true]); */
-        
+        Interview::where('id', $request->id)->update(['confirmed' => true]);
+        //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
        
         return new JsonResponse(['message'=>'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }

@@ -70,7 +70,7 @@ const app = new Vue({
             const research_concepts = this.getConceptData(this.research_concepts);
             const working_experience_concepts = this.getConceptData(this.working_experience_concepts);
             const personal_attributes_concepts = this.getConceptData(this.personal_attributes_concepts);
-           
+            
             axios.put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
                 
                 state: state,
@@ -89,7 +89,7 @@ const app = new Vue({
             }).catch(error => {
                 this.visbleSave=false,
                 this.visbleSend=false,
-                alert('Lo sentimos tu información no se ha guardado con exito. REcuerda llenar todos los campos necesarios')
+                alert('Lo sentimos tu información no se ha guardado con exito. Recuerda llenar todos los campos necesarios')
             });
         }
     }

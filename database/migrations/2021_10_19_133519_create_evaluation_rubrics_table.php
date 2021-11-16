@@ -31,6 +31,7 @@ class CreateEvaluationRubricsTable extends Migration
                 
             $table->string('considerations')->nullable();
             $table->string('additional_information')->nullable();
+            $table->boolean('isComplete')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
