@@ -63,10 +63,10 @@ class ArchiveSeeder extends Seeder
                 'entranceDocuments' => collect($old_archive['entrance_documents'] ?? []),
                 'curricularDocuments' => collect($old_archive['curricular_documents'] ?? [])
             ];
+            /*
 
             foreach ($required_documents as $type => $required_document_files)
             {
-                /*
                 foreach ($required_document_files as $file)
                 {
                     $required_document_id = RequiredDocument::firstWhere('name', 'like', '%'.$file['name'].'%')->id ?? null;
