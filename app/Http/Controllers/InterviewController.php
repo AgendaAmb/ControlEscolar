@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 
 class InterviewController extends Controller
 {
+    
     /**
      * Devuelve la vista del calendario.
      * 
@@ -159,13 +160,23 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
+       /**Traer a los trabajadores del arreglo de sesiones */
+        $Trabajadores=collect($request->session()->get('workers'));
        
-        $interview2 = DB::table('interviews')->where('id',  $request->id)->first();
-        //Crear url para la sesion de zoom//
-        app(ZoomController::class)->store($interview2);
+        $interview2 = Interview::findorFail($request->id);
+       
+        
         Interview::where('id', $request->id)->update(['confirmed' => true]);
+        //Crear url para la sesion de zoom//
+        $ResponseMeating=app(ZoomController::class)->store($interview2);
         //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
-       
+        foreach ($interview2->users as $key => $User) {
+            /**Obtener al trabajador inscrito en la entrevista */
+            $Trabajador=$Trabajadores->where('id',$User->id);
+          
+        }
+        
+
         return new JsonResponse(['message'=>'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }
 

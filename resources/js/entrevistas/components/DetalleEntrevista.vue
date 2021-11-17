@@ -259,7 +259,9 @@ export default {
         return false;
 
       axios.post('/controlescolar/entrevistas/confirmInterview', {
-        id: this.id
+
+        id: this.id,
+        alumno:this.appliant
       }).then(response => {
         this.Confirmed = true;
         $('#DetalleEntrevista').modal('hide');

@@ -71,7 +71,11 @@ class ZoomController extends Controller
     {
 
          /**Creacion de formato de fecha checar hora de inicio por que lo esta poniendo mal, al parecer 
-          * la esta poniendo en utc 5 **/
+          * la esta poniendo en utc 5
+          Ver tambien que onda el formato en que se esta recibiendo la hora por que no se si esta en formato 24 o 12 
+          **/
+        
+        
         $star_time=$request->date.'T'.$request->start_time;
         $end=$request->date.'T'.$request->end_time;
         $FechaStar= Carbon::createFromDate($star_time);

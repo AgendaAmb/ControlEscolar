@@ -10,7 +10,10 @@ const academicPrograms = @json($academic_programs);
 
 @section('container-class', 'class=container')
 @section('main')
+
 <expedientes :academic_programs="academic_programs"></expedientes>
+
+
 @endsection
 
 @push('scripts')

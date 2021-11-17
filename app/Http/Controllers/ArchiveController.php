@@ -43,6 +43,7 @@ class ArchiveController extends Controller
      */
     public function index(Request $request)
     {
+        //dd(AcademicProgram::all());
         return view('postulacion.index')
             ->with('user', $request->user())
             ->with('academic_programs', AcademicProgram::all());
