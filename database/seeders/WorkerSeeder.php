@@ -81,6 +81,7 @@ class WorkerSeeder extends Seeder
 
         foreach ($professorsArray as $mi_portal_professor)
         {   
+            sleep(5);
             $professor = $professors->firstWhere('id', $mi_portal_professor['id']);
 
             if ($professor === null)

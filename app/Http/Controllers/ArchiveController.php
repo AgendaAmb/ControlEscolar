@@ -23,6 +23,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ArchiveController extends Controller
@@ -43,7 +44,6 @@ class ArchiveController extends Controller
      */
     public function index(Request $request)
     {
-        //dd(AcademicProgram::all());
         return view('postulacion.index')
             ->with('user', $request->user())
             ->with('academic_programs', AcademicProgram::all());
@@ -58,23 +58,13 @@ class ArchiveController extends Controller
     public function archives(Request $request)
     {
         $archives = QueryBuilder::for(Archive::class)
-            ->allowedFilters(['academic_program_id'])
-            ->select([
-                'archives.id as id', 
-                DB::raw("NULL as name"), 
-                'status',
-                DB::raw("concat('solicitud/', archives.id) as archive_location")
-            
-            ])->addSelect([
-                'academic_program' => AcademicProgram::select('name')
-                    ->whereColumn('academic_program_id', 'academic_programs.id')
-                    ->limit(1)
-            ])->without(
-                'personalDocuments','entranceDocuments',
-                'academicAreas','appliantLanguages',
-                'academicDegrees', 'appliantWorkingExperiences',
-                'scientificProductions', 'humanCapitals'
-            )->get();
+            ->with('appliant')
+            ->allowedIncludes(['announcement.academic_program'])
+            ->allowedFilters([
+                AllowedFilter::exact('announcement.academic_program.id')
+            ])->get();
+
+        dd($archives);
 
         return new JsonResponse($archives);
     } 

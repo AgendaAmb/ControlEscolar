@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\UserRetrieved;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,6 +28,15 @@ class User extends Authenticatable
         'students' => 'App\\Models\\Auth\\Student',
         'workers' => 'App\\Models\\Auth\\Worker',
         'externs' => 'App\\Models\\Auth\\Extern'
+    ];
+
+     /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'retrieved' => UserRetrieved::class,
     ];
 
     /**
@@ -96,6 +106,26 @@ class User extends Authenticatable
     public static function scopeHasArchive(Builder $query): Builder
     {
         return $query->has('archives');
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return bool
+     */
+    public function isAppliant(): bool
+    {
+        return $this->hasAnyRole(['aspirante_local','aspirante_foraneo','aspirante_extranjero']);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return bool
+     */
+    public function isWorker(): bool
+    {
+        return $this->hasAnyRole(['profesor_nb','control_escolar','personal_apoyo','admin']);
     }
 
     /**

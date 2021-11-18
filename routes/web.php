@@ -54,7 +54,7 @@ Route::prefix('pre-registro')->name('pre-registro.')->group(function(){
 });
 
 # Rutas de las solicitudes académicas.
-Route::prefix('solicitud')->name('solicitud.')->group(function(){
+Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function(){
 
     # Expedientes
     Route::get('/', [ArchiveController::class,'index'])->name('index');

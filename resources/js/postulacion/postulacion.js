@@ -4,8 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- window.Vue = require('vue').default;
-
 import Vue from 'vue';
 import CapitalHumano from './components/CapitalHumano.vue';
 import DocumentoRequerido from './components/DocumentoRequerido.vue';
@@ -17,6 +15,8 @@ import Postulante from './components/Postulante.vue';
 import ProduccionCientifica from './components/ProduccionCientifica.vue';
 import RequisitosIngreso from './components/RequisitosIngreso.vue';
 import SolicitudPostulante from './components/SolicitudPostulante.vue';
+
+window.Vue = require('vue').default;
 
 /**
  * The following block of code may be used to automatically register your

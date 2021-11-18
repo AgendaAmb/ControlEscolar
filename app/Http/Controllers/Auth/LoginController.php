@@ -61,6 +61,9 @@ class LoginController extends Controller
      */
     private function getUsers(Request $request, User $user)
     {
+        # Guarda al usuario autenticado.
+        $request->session()->put('user', $user);
+
         # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
         if ($user->hasAnyRole(['aspirante_local','aspirante_foraneo','aspirante_extranjero']))
             return;
@@ -94,7 +97,6 @@ class LoginController extends Controller
         # Guarda a los usuarios del sistema central en la sesión.
         $request->session()->put('appliants', $miPortal_appliants);
         $request->session()->put('workers', $miPortal_workers);
-        $request->session()->put('user', $user);
     }
 
     /**
