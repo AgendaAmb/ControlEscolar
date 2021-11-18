@@ -65,7 +65,7 @@ class LoginController extends Controller
         $request->session()->put('user', $user);
 
         # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
-        if ($user->hasAnyRole(['aspirante_local','aspirante_foraneo','aspirante_extranjero']))
+        if (!$user->isWorker())
             return;
 
         # Carga otros datos que requiere el modelo.
@@ -91,7 +91,7 @@ class LoginController extends Controller
         ]);
 
         # Recolecta el resultado.
-        $miPortal_appliants = $response->collect()->where('user_type', 'students');
+        $miPortal_appliants = $response->collect()->whereNotIn('user_type', ['workers']);
         $miPortal_workers = $response->collect()->where('user_type', 'workers');
 
         # Guarda a los usuarios del sistema central en la sesión.

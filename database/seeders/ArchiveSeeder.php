@@ -30,6 +30,7 @@ class ArchiveSeeder extends Seeder
     {
         return [
             'module_id' => env('MIPORTAL_MODULE_ID'),
+            'curp' => $old_archive['appliant_curp'],
             'pertenece_uaslp' => false,
             'email' => $old_archive['user']['email'] ?? 'pmpca@gmail.com',
             'altern_email' => $old_archive['user']['altern_email'] ?? 'escolar@pmpca.uaslp.mx',
@@ -139,7 +140,7 @@ class ArchiveSeeder extends Seeder
      *
      * @return void
      */
-    private function migrateOldUsers(&$old_archives)
+    private function migrateOldUsers($old_archives)
     {
         # Curp de usuarios viejos de control escolar.
         $curps = $old_archives->pluck('appliant_curp')->toArray();
@@ -156,6 +157,10 @@ class ArchiveSeeder extends Seeder
 
         # Arreglo con los nuevos postulantes.
         $new_appliants = [];
+
+        # Arreglo con los usuario, a los cuales se les asignará
+        # un módulo.
+        $new_module_users = [];
         
         # Crea un nuevo expediente (migra el expediente anterior) al sistema nuevo.
         foreach ($appliants as $appliant)
@@ -176,21 +181,35 @@ class ArchiveSeeder extends Seeder
             # Busca el expediente viejo.
             $old_archive = $old_archives->firstWhere('appliant_curp', $appliant['curp']);
 
+            # Continúa, en caso de que el expediente no exista.
+            if ($old_archive === null)
+                continue;
+
             # Crea un expediente nuevo.
             $new_archive = $this->newArchive($new_appliant, $appliant, $old_archive);
 
             # Guarda los documentos probatorios.
             $this->storeOldDocuments($appliant, $old_archive, $new_archive);
+
+            # Añade un usuario al arreglo.
+            $new_module_users[] = [
+                'module_id' => env('MIPORTAL_MODULE_ID'),
+                'user_id' => $appliant['id'],
+                'user_type' => $appliant['user_type']
+            ];
         }
 
         # Filtra aquellos expedientes, que no estén en el arreglo de nuevos 
         # postulantes.
-        $old_archives = $old_archives
-            ->whereNotIn('appliant_curp', collect($appliants)->pluck('curp')->toArray())
-            ->whereNotNull('name')
-            ->whereNotNull('middlename');
+        $cropped_archives = $old_archives
+            ->whereNotIn('appliant_curp', collect($appliants)->pluck('curp')->toArray());
 
-        return $new_appliants;
+        # Agrega a cualquier nuevo usuario al módulo de control escolar.
+        $this->mi_portal_service->miPortalPost('api/usuarios/modulos/storeMany', [
+            'users' => $new_module_users
+        ]);
+
+        return $cropped_archives;
     }
 
     /**
@@ -198,11 +217,8 @@ class ArchiveSeeder extends Seeder
      *
      * @return void
      */
-    private function migrateNewUsers(&$old_archives)
+    private function migrateNewUsers($old_archives)
     {   
-        # Arreglo con los nuevos postulantes.
-        $new_appliants = [];
-
         # Arreglo con los nuevos postulantes.
         $new_module_users = [];
 
@@ -211,7 +227,6 @@ class ArchiveSeeder extends Seeder
             # Anade un expediente al arreglo.
             $new_module_users[] = $this->newModuleUserData($old_archive);
         
-
         # Consume un post masivo, por parte del portal.
         $response = $this->mi_portal_service->miPortalPost('api/usuarios/storeMany', [
             'users' => $new_module_users
@@ -244,7 +259,7 @@ class ArchiveSeeder extends Seeder
 
         # Registra a los usuarios que ya estén en mi portal. Recupera el curp 
         # de dichos usuarios.
-        $this->migrateOldUsers($old_archives);
-        $this->migrateNewUsers($old_archives);
+        $cropped_archives = $this->migrateOldUsers($old_archives);
+        $this->migrateNewUsers($cropped_archives);
     }
 }
