@@ -106,7 +106,7 @@ class WorkerSeeder extends Seeder
         }
 
         # Agrega a cualquier nuevo usuario al módulo de control escolar.
-        $this->mi_portal_service->miPortalPost('api/usuarios/modulos/storeMany', [
+        $miPortalService->miPortalPost('api/usuarios/modulos/storeMany', [
             'users' => $new_module_users
         ]);
     }
