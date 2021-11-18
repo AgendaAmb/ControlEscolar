@@ -79,9 +79,11 @@ class WorkerSeeder extends Seeder
 
         $professorsArray = $miPortalResponse->collect()->toArray();
 
+        # Arreglo con los nuevos usuarios del módulo.
+        $new_module_users = [];
+
         foreach ($professorsArray as $mi_portal_professor)
         {   
-            sleep(2);
             $professor = $professors->firstWhere('id', $mi_portal_professor['id']);
 
             if ($professor === null)
@@ -95,11 +97,17 @@ class WorkerSeeder extends Seeder
             $professor_model->academicAreas()->sync([$academic_area->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
             $professor_model->academicEntities()->sync([$academic_entity->id => [ 'user_id' => $professor_model->id, 'user_type' => $professor['type']]]);
 
-            $miPortalService->miPortalPost('api/usuarios/modulos', [
+            # Agrega al arreglo de datos al modelo.
+            $new_module_users[] = [
                 'module_id' => env('MIPORTAL_MODULE_ID'),
                 'user_id' => $mi_portal_professor['id'],
                 'user_type' => $professor['type'],
-            ]);
+            ];
         }
+
+        # Agrega a cualquier nuevo usuario al módulo de control escolar.
+        $this->mi_portal_service->miPortalPost('api/usuarios/modulos/storeMany', [
+            'users' => $new_module_users
+        ]);
     }
 }
