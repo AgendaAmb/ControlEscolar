@@ -22,16 +22,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+# Página principal.
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
 # Rutas para inicio de sesión.
 Route::name('authenticate.')->group(function(){
 
     # Inicio de sesión por OAUTH2.
     Route::get('/', [LoginController::class, 'login'])->name('login');
-
-    # Página principal.
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
-
 
 # Rutas para gestión de usuarios.
 Route::prefix('users')->name('users.')->group(function(){
