@@ -171,7 +171,7 @@ class ArchiveSeeder extends Seeder
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
             Storage::put($path, base64_decode($file['Contenido']));
 
-            $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
+            $appliant_language->requiredDocuments()->updateExistingPivot($required_document_id, [
                 'location' => $path
             ]);
         }
@@ -254,7 +254,7 @@ class ArchiveSeeder extends Seeder
                 $path = implode('/', [
                     'archives',
                     $new_archive->id,
-                    'curricular',
+                    'curricularDocuments',
                     $required_document_id.'.pdf'
                 ]);
 
@@ -271,6 +271,51 @@ class ArchiveSeeder extends Seeder
     }
 
     /**
+     * Stores entrance documents.
+     *
+     * @return void
+     */
+    private function storeAcademicDocuments($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con documentos
+        $documents = [
+            'Título de licenciatura o acta de examen o carta de pasante  (Solo aplica en IMaREC)' => '5A.- Título de licenciatura o acta de examen',
+            '8B.- Cédula de la maestría' => '8B.- Cédula de la maestría'
+        ];
+
+        # Lenguaje del postulante.
+        $academic_degree = $new_archive->academicDegrees()->first();
+
+        foreach ($old_archive['academic_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name =  $documents[$file['name']];
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $path = implode('/', [
+                'archives',
+                $new_archive->id,
+                'academicDocuments',
+                $required_document_id.'.pdf'
+            ]);
+
+            # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+            Storage::put($path, base64_decode($file['Contenido']));
+
+            $academic_degree->requiredDocuments()->updateExistingPivot($required_document_id, [
+                'location' => $path
+            ]);
+        }
+    }
+
+    /**
      * Creates a new archive.
      *
      * @return void
@@ -278,56 +323,10 @@ class ArchiveSeeder extends Seeder
     private function storeOldDocuments($appliant, $old_archive, $new_archive)
     {
         $this->storePersonalDocuments($appliant, $old_archive, $new_archive);
+        $this->storeAcademicDocuments($appliant, $old_archive, $new_archive);
         $this->storeLanguageDocuments($appliant, $old_archive, $new_archive);
         $this->storeEntranceDocuments($appliant, $old_archive, $new_archive);
         $this->storeCurricularDocuments($appliant, $old_archive, $new_archive);
-
-
-        # Arreglo con nombres transitivos de los documentos viejos
-        # a los documentos nuevos.
-        $transition_array = [
-            'Título de licenciatura o acta de examen o carta de pasante  (Solo aplica en IMaREC)' => '5A.- Carta de pasantía',
-            '16.- Dos cartas de recomendación académica' => '18A.- Carta de recomendación',
-        ];
-
-        # Recolecta los documentos requeridos.
-        $required_documents = [
-            'academicDocuments' => collect($old_archive['academic_documents'] ?? []),
-            'curricularDocuments' => collect($old_archive['curricular_documents'] ?? [])
-        ];
-
-        # Guarda los documentos probatorios del sistema viejo, en el sistema
-        # de archivos del nuevo sistema..
-        foreach ($required_documents as $type => $required_document_files)
-        {
-            foreach ($required_document_files as $file)
-            {
-                # Nombre del documento.
-                $document_name = $transition_array[$file['name']] ?? null;
-
-                # Busca el id del documento requerido, que tenga coincidencia con el nombre.
-                $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
-
-                # En caso de no encontrarse, se va al siguiente documento.
-                if ($required_document_id === null)
-                    continue;
-
-                # Genera la ruta del documento probatorio.
-                $path = implode('/', [
-                    'archives',
-                    $new_archive->id,
-                    $type,
-                    $required_document_id.'.pdf'
-                ]);
-    
-                # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
-                Storage::put($path, base64_decode($file['Contenido']));
-
-                $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
-                    'location' => $path
-                ]);
-            }
-        }
     }
 
     /**
@@ -444,6 +443,8 @@ class ArchiveSeeder extends Seeder
      */
     public function run()
     {
+        sleep(10);
+
         # APIs.
         $this->mi_portal_service = new MiPortalService;
         $this->old_ce_service = new OldSchoolControlService;

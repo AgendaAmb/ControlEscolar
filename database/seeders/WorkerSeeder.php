@@ -81,7 +81,7 @@ class WorkerSeeder extends Seeder
 
         foreach ($professorsArray as $mi_portal_professor)
         {   
-            sleep(2);
+            sleep(1);
             $professor = $professors->firstWhere('id', $mi_portal_professor['id']);
 
             if ($professor === null)
@@ -101,5 +101,8 @@ class WorkerSeeder extends Seeder
                 'user_type' => $professor['type'],
             ]);
         }
+
+        dump('Profesores agregados, ejecutando una pequeña pausa');
+        sleep(10);
     }
 }
