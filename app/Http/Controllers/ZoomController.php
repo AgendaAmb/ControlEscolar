@@ -67,7 +67,7 @@ class ZoomController extends Controller
      * 
      * @param CreateMeetingRequest $request
      **/
-    public function store($request): JsonResponse
+    public function store($request)
     {
 
          /**Creacion de formato de fecha checar hora de inicio por que lo esta poniendo mal, al parecer 
@@ -75,12 +75,11 @@ class ZoomController extends Controller
           Ver tambien que onda el formato en que se esta recibiendo la hora por que no se si esta en formato 24 o 12 
           **/
         
-        
         $star_time=$request->date.'T'.$request->start_time;
         $end=$request->date.'T'.$request->end_time;
-        $FechaStar= Carbon::createFromDate($star_time);
-        $FechaEnd=Carbon::createFromDate($end);
-        
+        $FechaStar= Carbon::createFromDate($star_time)->subHour(6);
+        $FechaEnd=Carbon::createFromDate($end)->subHour(6);
+       
         $Duration= $FechaStar->diffInMinutes($FechaEnd);
         
 
@@ -88,12 +87,12 @@ class ZoomController extends Controller
         $data['timezone'] = "America/Mexico_City";
         $data['start_time'] =  $FechaStar;
         $data['duration'] = $Duration;
-        $data['topic'] = "Reunion";
+        $data['topic'] = "Reunion doctorado";
        
         $response =$this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
-      
+    
         # Devuelve el resultado
-        return new JsonResponse($response->collect(), $response->status());
+        return $response->collect();
     }
 
     /**

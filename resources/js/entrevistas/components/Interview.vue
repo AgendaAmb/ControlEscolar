@@ -4,11 +4,14 @@
       <h5 class="my-1 appliant"> {{ appliant }} </h5>
       <p class="mt-2 mb-0 detail"> Carta de intención otorgada por: </p>
       <p class="my-0"> {{ professor }} </p>
+      <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
+      <p class="my-0"  v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p> 
     </div>
     <div class="col-5 text-right">
       <p class="my-1 detail"> Sala {{ room }} </p>
       <p class="my-1 detail"> {{start_time}} - {{end_time}} </p>
     </div>
+  
   </a>
 </template>
 
@@ -88,6 +91,11 @@ export default {
       default: false
     },
 
+  // Hora de inicio.
+    url: {
+      type: String,
+      default: "Indefinido"
+    },
     // Áreas académicas.
     areas: {
       type: Array,

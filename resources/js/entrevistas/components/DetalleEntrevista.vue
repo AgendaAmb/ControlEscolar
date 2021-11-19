@@ -1,4 +1,4 @@
-<template>
+x<template>
   <!-- Modal -->
   <div class="modal fade" id="DetalleEntrevista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog detalle-entrevista" role="document">

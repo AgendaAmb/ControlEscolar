@@ -17,11 +17,12 @@ use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class InterviewController extends Controller
 {
-    
+
     /**
      * Devuelve la vista del calendario.
      * 
@@ -42,8 +43,8 @@ class InterviewController extends Controller
     public function programa(Request $request)
     {
         $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar']) === false
-        ?   $request->user()->interviews()
-        :   Interview::select('*');
+            ?   $request->user()->interviews()
+            :   Interview::select('*');
 
         $interview_program_resource = new InterviewProgramResource($interviews);
 
@@ -59,8 +60,8 @@ class InterviewController extends Controller
     {
         # Llena el modelo con 5 áreas académicas vacías.
         $empty_areas = array_fill(0, 5, [
-                'name' => 'Área académica disponible',
-                'professor_name' => false
+            'name' => 'Área académica disponible',
+            'professor_name' => false
         ]);
 
         # Asigna de forma inicial, ningún área académica.
@@ -85,11 +86,11 @@ class InterviewController extends Controller
         # base a la información de mi portal.
         $professor = $interview_model->intentionLetterProfessor->first();
         $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
-        $professor_name = implode(' ', [$miPortal_worker['name'],$miPortal_worker['middlename'],$miPortal_worker['surname']]);
+        $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
 
         # Obtiene los datos del postulante, con base a la información de mi portal.
         $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
-        $name = implode(' ', [$miPortal_user['name'],$miPortal_user['middlename'],$miPortal_user['surname']]);
+        $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
 
         # Devuelve en la respuesta, los datos de los usuarios.
         $appliant = $interview_model->appliant->first()->toArray();
@@ -121,7 +122,7 @@ class InterviewController extends Controller
         # Obtiene el modelo de la entrevista.
         $interview_model = Interview::find($request->safe()->interview_id);
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
-        
+
         # Obtiene al postulante.
         $appliant = $interview_model->appliant->first();
         $archive = $appliant->latestArchive;
@@ -150,7 +151,7 @@ class InterviewController extends Controller
             ->where('user_type', $request->user_type)
             ->delete();
 
-        return new JsonResponse(['message'=>'¡Registro a entrevista cancelado exitosamente!'], JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['message' => '¡Registro a entrevista cancelado exitosamente!'], JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -160,24 +161,33 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-       /**Traer a los trabajadores del arreglo de sesiones */
-        $Trabajadores=collect($request->session()->get('workers'));
-       
-        $interview2 = Interview::findorFail($request->id);
-       
-        
-        Interview::where('id', $request->id)->update(['confirmed' => true]);
-        //Crear url para la sesion de zoom//
-        $ResponseMeating=app(ZoomController::class)->store($interview2);
-        //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
-        foreach ($interview2->users as $key => $User) {
-            /**Obtener al trabajador inscrito en la entrevista */
-            $Trabajador=$Trabajadores->where('id',$User->id);
-          
-        }
-        
 
-        return new JsonResponse(['message'=>'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
+
+        $interview2 = Interview::findorFail($request->id);
+
+
+        /**Checar si el url es null por si se reabrio el interview */
+        if ($interview2->url == null) {
+            //Crear url para la sesion de zoom//
+            $ResponseMeating = app(ZoomController::class)->store($interview2);
+            Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
+
+            //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
+            //dd($ResponseMeating['id']);
+            /**Traer a los trabajadores del arreglo de sesiones alumno*/
+            $Trabajadores = $request->session()->get('workers');
+            foreach ($interview2->users as $key => $User) {
+                /**Obtener al trabajador inscrito en la entrevista */
+                $Trabajador = $Trabajadores->where('id', $User->id)->first();
+
+                $User::findorFail($User->id);
+                // Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating));
+
+            }
+        }
+
+
+        return new JsonResponse(['message' => 'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }
 
     /**
@@ -189,7 +199,7 @@ class InterviewController extends Controller
     {
         Interview::where('id', $request->id)->update(['confirmed' => false]);
 
-        return new JsonResponse(['message'=>'Se ha vuelto a abrir la entrevista'], JsonResponse::HTTP_OK);
+        return new JsonResponse(['message' => 'Se ha vuelto a abrir la entrevista'], JsonResponse::HTTP_OK);
     }
 
     /**
@@ -201,6 +211,6 @@ class InterviewController extends Controller
     {
         Interview::where('id', $request->id)->delete();
 
-        return new JsonResponse(['message'=>'Entrevista eliminada exitosamente'], JsonResponse::HTTP_OK);
+        return new JsonResponse(['message' => 'Entrevista eliminada exitosamente'], JsonResponse::HTTP_OK);
     }
 }
