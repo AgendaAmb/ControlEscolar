@@ -116,10 +116,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // Nombre del componente
   name: 'search-archive-form',
@@ -136,13 +132,27 @@ __webpack_require__.r(__webpack_exports__);
   // Propiedades reactivas.
   data: function data() {
     return {
-      name: '',
-      academic_program: null
+      announcement: null
     };
   },
   methods: {
     buscaExpedientes: function buscaExpedientes() {
-      axios.get('/controlescolar/solicitud/archives', {}).then(function (response) {})["catch"](function (error) {});
+      var _this = this;
+
+      // Parámetros de búsqueda.
+      var params = {};
+
+      if (this.announcement !== null) {
+        params = {
+          params: {
+            'filter[announcement.id]': this.announcement
+          }
+        };
+      }
+
+      axios.get('/controlescolar/solicitud/archives', params).then(function (response) {
+        _this.$emit('archives_found', response.data);
+      })["catch"](function (error) {});
       return false;
     }
   }
@@ -458,8 +468,6 @@ var render = function() {
       }
     },
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", [_vm._v(" Programa académico ")]),
         _vm._v(" "),
@@ -470,8 +478,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.academic_program,
-                expression: "academic_program"
+                value: _vm.announcement,
+                expression: "announcement"
               }
             ],
             staticClass: "form-control",
@@ -485,7 +493,7 @@ var render = function() {
                     var val = "_value" in o ? o._value : o.value
                     return val
                   })
-                _vm.academic_program = $event.target.multiple
+                _vm.announcement = $event.target.multiple
                   ? $$selectedVal
                   : $$selectedVal[0]
               }
@@ -503,9 +511,9 @@ var render = function() {
                 "option",
                 {
                   key: academicProgram.id,
-                  domProps: { value: academicProgram.id }
+                  domProps: { value: academicProgram.latest_announcement.id }
                 },
-                [_vm._v(_vm._s(_vm.academic_program.name))]
+                [_vm._v(_vm._s(academicProgram.name))]
               )
             })
           ],
@@ -521,18 +529,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Nombre del postulante")]),
-      _vm._v(" "),
-      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

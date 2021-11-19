@@ -1,14 +1,10 @@
 <template>
     <form @submit.prevent="buscaExpedientes" class="d-block w-50">
         <div class="form-group">
-            <label>Nombre del postulante</label>
-            <input type="text" class="form-control">
-        </div>
-        <div class="form-group">
             <label> Programa académico </label>
-            <select v-model="academic_program" class="form-control">
+            <select v-model="announcement" class="form-control">
                 <option :value="null" selected>Escoge una opción</option>
-                <option v-for="academicProgram in academic_programs" :key="academicProgram.id" :value="academicProgram.id">{{ academic_program.name}}</option>
+                <option v-for="academicProgram in academic_programs" :key="academicProgram.id" :value="academicProgram.latest_announcement.id">{{ academicProgram.name}}</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -34,18 +30,26 @@ export default {
     // Propiedades reactivas.
     data() {
         return {
-            name: '',
-            academic_program: null,
+            announcement: null,
         }
     },
 
     methods: {
         buscaExpedientes(){
 
-            axios.get('/controlescolar/solicitud/archives', {
+            // Parámetros de búsqueda.
+            var params = {}
 
-            }).then(response => {
+            if (this.announcement !== null) {
+                params = {
+                    params: {
+                        'filter[announcement.id]': this.announcement
+                    }
+                };
+            }
 
+            axios.get('/controlescolar/solicitud/archives', params).then(response => {
+                this.$emit('archives_found', response.data);
             }).catch(error => {
 
             });

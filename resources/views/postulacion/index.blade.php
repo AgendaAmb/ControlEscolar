@@ -6,7 +6,7 @@ const academicPrograms = @json($academic_programs);
 @extends('layouts.app')
 
 @section('main')
-<search-archive-form></search-archive-form>
+<search-archive-form :academic_programs="academic_programs"></search-archive-form>
 <archives></archives>
 @endsection
 

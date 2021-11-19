@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateHumanCapitalRequest;
 use App\Http\Requests\UpdateScientificProductionAuthorRequest;
 use App\Http\Requests\UpdateScientificProductionRequest;
 use App\Http\Requests\UpdateWorkingExperienceRequest;
+use App\Http\Resources\ArchiveResource;
 use App\Models\AcademicDegree;
 use App\Models\AcademicProgram;
 use App\Models\AppliantLanguage;
@@ -46,7 +47,7 @@ class ArchiveController extends Controller
     {
         return view('postulacion.index')
             ->with('user', $request->user())
-            ->with('academic_programs', AcademicProgram::all());
+            ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get());
     }
 
     /**
@@ -59,14 +60,12 @@ class ArchiveController extends Controller
     {
         $archives = QueryBuilder::for(Archive::class)
             ->with('appliant')
-            ->allowedIncludes(['announcement.academic_program'])
+            ->allowedIncludes(['announcement'])
             ->allowedFilters([
-                AllowedFilter::exact('announcement.academic_program.id')
+                AllowedFilter::exact('announcement.id'),
             ])->get();
-
-        dd($archives);
-
-        return new JsonResponse($archives);
+        
+        return ArchiveResource::collection($archives);
     } 
 
     /**

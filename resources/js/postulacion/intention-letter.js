@@ -32,5 +32,7 @@ const app = new Vue({
     data: {
         auth_user: authUser,
         academic_programs: academicPrograms
-    }
+    },
+
+    
 });
