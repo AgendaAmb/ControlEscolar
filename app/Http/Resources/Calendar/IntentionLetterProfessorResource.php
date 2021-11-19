@@ -2,9 +2,8 @@
 
 namespace App\Http\Resources\Calendar;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class IntentionLetterProfessorResource extends JsonResource
+class IntentionLetterProfessorResource extends UserResource
 {
     /**
      * Transform the resource into an array.
@@ -14,16 +13,6 @@ class IntentionLetterProfessorResource extends JsonResource
      */
     public function toArray($request)
     {
-        $name = implode(' ', [
-            $this->name,
-            $this->middlename,
-            $this->surname,
-        ]);
-
-        return [
-            'id' => $this->id,
-            'type' => $this->type,
-            'name' => $name
-        ];
+        return parent::toArray($request);
     }
 }
