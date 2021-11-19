@@ -167,11 +167,11 @@ class InterviewController extends Controller
         $interview2 = Interview::findorFail($request->id);
        
         
-        //Interview::where('id', $request->id)->update(['confirmed' => true]);
+        Interview::where('id', $request->id)->update(['confirmed' => true]);
         //Crear url para la sesion de zoom//
         $ResponseMeating=app(ZoomController::class)->store($interview2);
         //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
-        dd($ResponseMeating['id']);
+        //dd($ResponseMeating['id']);
         foreach ($interview2->users as $key => $User) {
             /**Obtener al trabajador inscrito en la entrevista */
             $Trabajador=$Trabajadores->where('id',$User->id)->first();
