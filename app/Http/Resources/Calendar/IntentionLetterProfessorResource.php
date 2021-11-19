@@ -13,6 +13,10 @@ class IntentionLetterProfessorResource extends UserResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+            'name' => $this->getFullName()
+        ];
     }
 }

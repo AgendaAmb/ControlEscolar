@@ -7,6 +7,20 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserResource extends JsonResource
 {
     /**
+     * Get the users full name
+     *
+     * @return string
+     */
+    protected function getFullName()
+    {
+        return implode(' ', [
+            $this->name,
+            $this->middlename,
+            $this->surname,
+        ]);
+    }
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -14,16 +28,10 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $name = implode(' ', [
-            $this->name,
-            $this->middlename,
-            $this->surname,
-        ]);
-
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'name' => $name
+            'name' => $this->getFullName()
         ];
     }
 }
