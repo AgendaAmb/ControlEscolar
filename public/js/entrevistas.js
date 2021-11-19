@@ -364,7 +364,8 @@ __webpack_require__.r(__webpack_exports__);
         'professor': interview.intention_letter_professor.name.toLowerCase(),
         'start_time': start_time,
         'end_time': end_time,
-        'confirmed': interview.confirmed
+        'confirmed': interview.confirmed,
+        'url': interview.url
       };
     }
   }
@@ -817,6 +818,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "interview",
   props: {
@@ -859,6 +863,11 @@ __webpack_require__.r(__webpack_exports__);
     confirmed: {
       type: Boolean,
       "default": false
+    },
+    // Hora de inicio.
+    url: {
+      type: String,
+      "default": "Indefinido"
     },
     // Áreas académicas.
     areas: {
@@ -28341,7 +28350,21 @@ var render = function() {
       _vm._v(" "),
       _c("p", { staticClass: "my-0" }, [
         _vm._v(" " + _vm._s(_vm.professor) + " ")
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.confirmed
+        ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+            _vm._v(" Enlace de la reunión: ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.confirmed
+        ? _c("p", { staticClass: "my-0" }, [
+            _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
+              _vm._v(_vm._s(_vm.url))
+            ])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-5 text-right" }, [
