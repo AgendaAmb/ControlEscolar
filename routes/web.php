@@ -23,16 +23,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-# Página principal.
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-# Rutas para inicio de sesión.
+# Rutas de autenticacion.
 Route::name('authenticate.')->group(function(){
 
-    # Inicio de sesión por OAUTH2.
-    Route::get('/', [LoginController::class, 'login'])->name('login');
     # Página principal.
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+    # Inicio de sesión por OAUTH2.
+    Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
 });
 
 # Rutas para gestión de usuarios.
@@ -142,7 +141,6 @@ Route::prefix('admin')
 
 # Rutas de admin.
 Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
-
 
 
 # Vista de la carta de recomendación

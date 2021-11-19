@@ -40,7 +40,12 @@ class AdminController extends Controller
      */
     public function workers()
     {
-        $users = User::with(['roles','academicAreas', 'academicEntities'])->get();
+        $users = User::with([
+            'roles',
+            'academicAreas', 
+            'academicEntities'
+        
+        ])->worker()->paginate(100);
 
         return new JsonResponse($users, JsonResponse::HTTP_OK);
     }

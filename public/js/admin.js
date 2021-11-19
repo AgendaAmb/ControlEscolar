@@ -49203,7 +49203,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("/controlescolar/admin/workers").then(function (response) {
-      Vue.set(_this, 'data', response.data);
+      var users = response.data.data;
+      Vue.set(_this, 'data', users);
     })["catch"](function (error) {});
   }
 });
