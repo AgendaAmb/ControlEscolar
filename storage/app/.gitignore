@@ -1,3 +1,5 @@
-*
-!public/
-!.gitignore
+archives/
+evaluation_rubrics/
+expedientes/
+debugbar/
+framework/
