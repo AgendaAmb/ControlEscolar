@@ -49,7 +49,7 @@ export default {
             }
 
             axios.get('/controlescolar/solicitud/archives', params).then(response => {
-                this.$emit('archives_found', response.data);
+                this.$emit('archives-found', response.data);
             }).catch(error => {
 
             });

@@ -151,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.get('/controlescolar/solicitud/archives', params).then(function (response) {
-        _this.$emit('archives_found', response.data);
+        _this.$emit('archives-found', response.data);
       })["catch"](function (error) {});
       return false;
     }
@@ -12798,7 +12798,17 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_3__.default({
   },
   data: {
     auth_user: authUser,
-    academic_programs: academicPrograms
+    academic_programs: academicPrograms,
+    archives: []
+  },
+  methods: {
+    /**
+     * Actualiza los expedientes, con base al evento "archives_found", 
+     * emitido por alguno de los componentes hijos
+     */
+    updateArchives: function updateArchives(archives) {
+      vue__WEBPACK_IMPORTED_MODULE_3__.default.set(this, 'archives', archives);
+    }
   }
 });
 })();

@@ -81,7 +81,7 @@ class ArchiveController extends Controller
             'announcement.academicProgram', 
             'personalDocuments',
             'entranceDocuments',
-            'intentionLetters',
+            'intentionLetter',
             'academicDegrees.requiredDocuments',
             'appliantLanguages.requiredDocuments',
             'appliantWorkingExperiences',
@@ -92,10 +92,15 @@ class ArchiveController extends Controller
         $academic_program = $archiveModel->announcement->academicProgram;
         $appliant = $archiveModel->appliant->toArray();
 
+        # Determina el tipo
+        $type = isset($appliant['user_type']) 
+        ? $appliant['type']
+        : User::TYPES[$appliant['type']];
+
         # Busca al usuario.
         $response = $this->miPortalService->miPortalGet('api/usuarios', [
             'filter[id]' => $appliant['id'],
-            'filter[type]' => User::TYPES[$appliant['type']]
+            'filter[type]' => $appliant['type']
         ]);
 
         # Recolecta el resultado.
