@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Calendar\AppliantResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
-class CalendarResource extends JsonResource
+class InterviewCalendarResource extends JsonResource
 {
     /**
      * Gets an user from the main system.
@@ -45,11 +44,9 @@ class CalendarResource extends JsonResource
      */
     private function mapArchiveAppliant($archive, $request)
     {
-        return (new AppliantResource(
-            $archive->appliant, 
-            $archive->intentionLetter->professor ?? []
-
-        ))->toArray($request);
+        $appliant = $this->getMiPortalUser($request, $archive->user_id, 'appliants');
+        $appliant['intention_letter_professor'] = $this->getMiPortalUser($request, $archive->intentionLetter->user_id, 'workers');
+        return $appliant;
     }
 
     /**
