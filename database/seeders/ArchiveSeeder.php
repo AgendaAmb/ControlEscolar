@@ -50,7 +50,6 @@ class ArchiveSeeder extends Seeder
         ];
     }
 
-
     /**
      * Creates a new archive.
      *
@@ -89,29 +88,163 @@ class ArchiveSeeder extends Seeder
     }
 
     /**
-     * Creates a new archive.
+     * Stores language documents.
      *
      * @return void
      */
-    private function storeOldDocuments($appliant, $old_archive, $new_archive)
+    private function storePersonalDocuments($appliant, $old_archive, $new_archive)
     {
-        # Recolecta los documentos requeridos.
-        $required_documents = [
-            'personalDocuments' => collect($old_archive['personal_documents'] ?? []),
-            'academicDocuments' => collect($old_archive['academic_documents'] ?? []),
-            'entranceDocuments' => collect($old_archive['entrance_documents'] ?? []),
-            'languageDocuments' => collect($old_archive['languageDocuments'] ?? []),
-            'curricularDocuments' => collect($old_archive['curricular_documents'] ?? [])
+        # Arreglo con nombres transitivos de los documentos viejos
+        # a los documentos nuevos.
+        $transition_array = [
+            '1.- Acta de nacimiento' => '1.- Acta de nacimiento',
+            '2.- CURP expedido por la RENAPO' => '2.- CURP expedido por la RENAPO',
+            '3.- INE en ampliación tamaño carta' => '3.- INE en ampliación tamaño carta',
         ];
 
-        # Guarda los documentos probatorios del sistema viejo, en el sistema
-        # de archivos del nuevo sistema..
-        foreach ($required_documents as $type => $required_document_files)
+        foreach ($old_archive['personal_documents'] as $file)
         {
-            foreach ($required_document_files as $file)
+            # Nombre del documento.
+            $document_name = $transition_array[$file['name']] ?? null;
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $path = implode('/', [
+                'archives',
+                $new_archive->id,
+                'personalDocuments',
+                $required_document_id.'.pdf'
+            ]);
+    
+            # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+            Storage::put($path, base64_decode($file['Contenido']));
+
+            $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
+                'location' => $path
+            ]);
+        }
+    }
+
+    /**
+     * Stores language documents.
+     *
+     * @return void
+     */
+    private function storeLanguageDocuments($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con nombres transitivos de los documentos viejos
+        # a los documentos nuevos.
+        $transition_array = [
+            '13.- Certificado de idioma vigente' => '13.- Certificado de idioma vigente',
+        ];
+
+        # Lenguaje del postulante.
+        $appliant_language = $new_archive->appliantLanguages()->first();
+
+        foreach ($old_archive['language_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name = $transition_array[$file['name']] ?? null;
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $path = implode('/', [
+                'archives',
+                $new_archive->id,
+                'appliantLanguage',
+                $appliant_language->id,
+                $required_document_id.'.pdf'
+            ]);
+    
+            # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+            Storage::put($path, base64_decode($file['Contenido']));
+
+            $appliant_language->requiredDocuments()->updateExistingPivot($required_document_id, [
+                'location' => $path
+            ]);
+        }
+    }
+
+    /**
+     * Stores entrance documents.
+     *
+     * @return void
+     */
+    private function storeEntranceDocuments($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con nombres transitivos de los documentos viejos
+        # a los documentos nuevos.
+        $transition_array = [
+            '11.- Carta de intención de un profesor del núcleo básico del PMPCA (el profesor la envía directamente)' => '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)',
+            '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)' => '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)',
+        ];
+
+        foreach ($old_archive['language_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name = $transition_array[$file['name']] ?? null;
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $path = implode('/', [
+                'archives',
+                $new_archive->id,
+                'entranceDocuments',
+                $required_document_id.'.pdf'
+            ]);
+    
+            # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+            Storage::put($path, base64_decode($file['Contenido']));
+
+            $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
+                'location' => $path
+            ]);
+        }
+    }
+
+    /**
+     * Stores entrance documents.
+     *
+     * @return void
+     */
+    private function storeCurricularDocuments($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con documentos
+        $documents = [
+            '18A.- Carta de recomendación',
+            '18B.- Carta de recomendación'
+        ];
+
+        # Índice
+        $i = 0;
+
+        foreach ($old_archive['entrance_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name = $file['name'];
+
+            if ($document_name === '16.- Dos cartas de recomendación académica' && $i < 2)
             {
                 # Busca el id del documento requerido, que tenga coincidencia con el nombre.
-                $required_document_id = RequiredDocument::firstWhere('name', 'like', '%'.$file['name'].'%')->id ?? null;
+                $required_document_id = RequiredDocument::firstWhere('name', $documents[$i])->id ?? null;
 
                 # En caso de no encontrarse, se va al siguiente documento.
                 if ($required_document_id === null)
@@ -121,18 +254,79 @@ class ArchiveSeeder extends Seeder
                 $path = implode('/', [
                     'archives',
                     $new_archive->id,
-                    $type,
+                    'curricularDocuments',
                     $required_document_id.'.pdf'
                 ]);
-    
+
                 # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
                 Storage::put($path, base64_decode($file['Contenido']));
 
                 $new_archive->requiredDocuments()->updateExistingPivot($required_document_id, [
                     'location' => $path
                 ]);
+
+                $i++;
             }
         }
+    }
+
+    /**
+     * Stores entrance documents.
+     *
+     * @return void
+     */
+    private function storeAcademicDocuments($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con documentos
+        $documents = [
+            'Título de licenciatura o acta de examen o carta de pasante  (Solo aplica en IMaREC)' => '5A.- Título de licenciatura o acta de examen',
+            '8B.- Cédula de la maestría' => '8B.- Cédula de la maestría'
+        ];
+
+        # Lenguaje del postulante.
+        $academic_degree = $new_archive->academicDegrees()->first();
+
+        foreach ($old_archive['academic_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name =  $documents[$file['name']];
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $path = implode('/', [
+                'archives',
+                $new_archive->id,
+                'academicDocuments',
+                $required_document_id.'.pdf'
+            ]);
+
+            # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+            Storage::put($path, base64_decode($file['Contenido']));
+
+            $academic_degree->requiredDocuments()->updateExistingPivot($required_document_id, [
+                'location' => $path
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new archive.
+     *
+     * @return void
+     */
+    private function storeOldDocuments($appliant, $old_archive, $new_archive)
+    {
+        $this->storePersonalDocuments($appliant, $old_archive, $new_archive);
+        $this->storeAcademicDocuments($appliant, $old_archive, $new_archive);
+        $this->storeLanguageDocuments($appliant, $old_archive, $new_archive);
+        $this->storeEntranceDocuments($appliant, $old_archive, $new_archive);
+        $this->storeCurricularDocuments($appliant, $old_archive, $new_archive);
     }
 
     /**
@@ -249,6 +443,8 @@ class ArchiveSeeder extends Seeder
      */
     public function run()
     {
+        sleep(10);
+
         # APIs.
         $this->mi_portal_service = new MiPortalService;
         $this->old_ce_service = new OldSchoolControlService;

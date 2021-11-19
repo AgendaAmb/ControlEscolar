@@ -243,7 +243,7 @@ class CreateRequiredDocumentsTable extends Migration
             
             # Todos
             [
-                'name' =>"Dos cartas de recomendación académica",
+                'name' =>"18A.- Carta de recomendación",
                 'type' => 'curricular',
                 'label' => '18A_Recomendación_01_añodesolicitud_iniciales',                
                 'notes' => null,

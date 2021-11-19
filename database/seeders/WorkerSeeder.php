@@ -84,6 +84,7 @@ class WorkerSeeder extends Seeder
 
         foreach ($professorsArray as $mi_portal_professor)
         {   
+            sleep(1);
             $professor = $professors->firstWhere('id', $mi_portal_professor['id']);
 
             if ($professor === null)
@@ -105,9 +106,7 @@ class WorkerSeeder extends Seeder
             ];
         }
 
-        # Agrega a cualquier nuevo usuario al módulo de control escolar.
-        $miPortalService->miPortalPost('api/usuarios/modulos/storeMany', [
-            'users' => $new_module_users
-        ]);
+        dump('Profesores agregados, ejecutando una pequeña pausa');
+        sleep(10);
     }
 }
