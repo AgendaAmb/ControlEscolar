@@ -17,6 +17,7 @@ use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class InterviewController extends Controller
@@ -160,20 +161,24 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-       /**Traer a los trabajadores del arreglo de sesiones */
-        $Trabajadores=collect($request->session()->get('workers'));
-       
+       /**Traer a los trabajadores del arreglo de sesiones alumno*/
+        $Trabajadores=$request->session()->get('workers');
+        
         $interview2 = Interview::findorFail($request->id);
        
         
-        Interview::where('id', $request->id)->update(['confirmed' => true]);
+        //Interview::where('id', $request->id)->update(['confirmed' => true]);
         //Crear url para la sesion de zoom//
         $ResponseMeating=app(ZoomController::class)->store($interview2);
         //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
+        dd($ResponseMeating['id']);
         foreach ($interview2->users as $key => $User) {
             /**Obtener al trabajador inscrito en la entrevista */
-            $Trabajador=$Trabajadores->where('id',$User->id);
-          
+            $Trabajador=$Trabajadores->where('id',$User->id)->first();
+            
+            $User::findorFail($User->id);
+           // Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating));
+            
         }
         
 

@@ -3,7 +3,7 @@
         <img class="d-block img-fluid ml-auto" src="{{ asset('storage/headers/logod.png') }}">
     </a>
     <nav class="nav nav-options">
-        <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
+      <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
         <div class="nav-item dropdown">
             <a id="Postulacion" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> Postulación </a>
             <div class="dropdown-menu" aria-labelledby="Postulacion">
