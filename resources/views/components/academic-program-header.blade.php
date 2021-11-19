@@ -18,6 +18,6 @@
             </div>
         </div>
         <a class="nav-link" href="#"> Inscripciones </a>
-        <a class="nav-link" href="#"> Administración </a>
+        <a class="nav-link" href="{{ route('admin.index') }}"> Administración </a>
     </nav>
 </header> 

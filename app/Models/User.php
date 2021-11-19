@@ -95,7 +95,26 @@ class User extends Authenticatable
      */
     public static function scopeAppliant(Builder $query): Builder
     {
-        return $query->whereHas('roles', fn($q) => $q->whereIn('name', ['aspirante_local','aspirante_foraneo','aspirante_extranjero']));
+        return $query->whereHas('roles', fn($q) => $q->whereIn('name', [
+            'aspirante_local',
+            'aspirante_foraneo',
+            'aspirante_extranjero'
+        ]));
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return Builder
+     */
+    public static function scopeWorker(Builder $query): Builder
+    {
+        return $query->whereHas('roles', fn($q) => $q->whereIn('name', [
+            'admin',
+            'profesor_nb',
+            'personal_apoyo',
+            'control_escolar'
+        ]));
     }
 
     /**
