@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Calendar\AppliantResource;
+use App\Http\Resources\Calendar\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 
@@ -219,22 +220,6 @@ class CalendarResource extends JsonResource
     }
 
     /**
-     * Sets the appliant name.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    private function setUser($request)
-    {
-        $worker = $request->session()->get('user');
-
-        # Toma los datos de los trabajadores, que fueron recuperados del sistema
-        # central.
-        $this->user = $request->session()->get('workers')->firstWhere('id', $worker->id);
-        $this->user['roles'] = $worker->roles;
-    }
-
-    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -245,12 +230,11 @@ class CalendarResource extends JsonResource
         $this->setAnnouncements($request);
         $this->setPeriod($request);
         $this->setAppliants($request);
-        $this->setUser($request);
 
         return [
             'appliants' => $this->appliants ?? null,
             'announcements' => $this->announcements,
-            'user' => $this->user,
+            'user' => (new UserResource($request->user()))->toArray($request),
             'period' => $this->period,
         ];
     }
