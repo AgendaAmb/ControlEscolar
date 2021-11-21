@@ -11,7 +11,7 @@ use App\Http\Requests\ReopenInterviewRequest;
 use App\Http\Requests\CreateMeetingRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
-use App\Http\Resources\InterviewProgramResource;
+use App\Http\Resources\InterviewProgram\InterviewProgramResource;
 use App\Models\AcademicProgram;
 use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
