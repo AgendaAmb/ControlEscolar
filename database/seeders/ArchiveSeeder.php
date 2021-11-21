@@ -339,6 +339,8 @@ class ArchiveSeeder extends Seeder
         # Obtiene el curp de aquellos usuarios que estén registrados.
         $appliants = $response->collect();
 
+        dd($appliants);
+
         # Arreglo con los nuevos postulantes.
         $new_appliants = [];
 
@@ -472,7 +474,7 @@ class ArchiveSeeder extends Seeder
      */
     public function run()
     {
-        sleep(10);
+        # sleep(10);
        
         # APIs.
         $this->mi_portal_service = new MiPortalService;
@@ -480,6 +482,8 @@ class ArchiveSeeder extends Seeder
 
         # Expedientes viejos.
         $old_archives_response = $this->old_ce_service->get('api/oldArchives');
+
+        dd($old_archives_response->status());
         $old_archives = $old_archives_response->collect();
        
         # Registra a los usuarios que ya estén en mi portal. Recupera el curp 
