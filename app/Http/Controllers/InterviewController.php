@@ -18,11 +18,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-
+use App\Mail\SendMeeatingInformation;
+use App\Mail\SendMeeatingInformationProfesor;
 
 class InterviewController extends Controller
 {
-
+    public $alumno;
     /**
      * Devuelve la vista del calendario.
      * 
@@ -161,28 +162,37 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-
-
+      
         $interview2 = Interview::findorFail($request->id);
+
 
 
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
             //Crear url para la sesion de zoom//
             $ResponseMeating = app(ZoomController::class)->store($interview2);
-            Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
+            //Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
 
             //AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
             //dd($ResponseMeating['id']);
             /**Traer a los trabajadores del arreglo de sesiones alumno*/
             $Trabajadores = $request->session()->get('workers');
+           
             foreach ($interview2->users as $key => $User) {
-                /**Obtener al trabajador inscrito en la entrevista */
-                $Trabajador = $Trabajadores->where('id', $User->id)->first();
 
-                $User::findorFail($User->id);
-                // Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating));
+                if ($User->user_type == "externs" || $User->user_type == "students") {
+                    $this->alumno=$User;
+                   Mail::to("A260651@alumnos.uaslp.mx")->send(new SendMeeatingInformation($ResponseMeating, $User, $request->room));
+                    //Mail::to($User->email)->send(new SendMeeatingInformation($ResponseMeating,$User,$request->room));
+                } else if ($User->user_type == "workers") {
+                    /**Obtener al trabajador inscrito en la entrevista */
+                    $Trabajador = $Trabajadores->where('id', $User->id)->first();
 
+                   // $User::findorFail($User->id);
+ 
+                    Mail::to("A260651@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating,$Trabajador,$request->room,$this->alumno));
+                    //Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating,$Trabajador,$request->room,$User));
+                }
             }
         }
 
