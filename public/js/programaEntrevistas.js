@@ -22105,7 +22105,18 @@ var render = function() {
                         _vm._v(_vm._s(interview.appliant))
                       ]),
                       _vm._v(" "),
-                      _vm._m(0, true),
+                      _c("td", [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: interview.archive_url,
+                              target: "_blank"
+                            }
+                          },
+                          [_vm._v("Ver documentos")]
+                        )
+                      ]),
                       _vm._v(" "),
                       !_vm.$root.loggedUserIsAdmin() &&
                       !_vm.$root.loggedUserIsSchoolControl()
@@ -22159,16 +22170,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Ver documentos")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

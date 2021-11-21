@@ -17,6 +17,7 @@ class InterviewResource extends JsonResource
     public function toArray($request)
     {
         $appliant = $this->appliant->first() ?? null;
+        $archive = $appliant->latestArchive->id ?? null;
 
         return [
             'id' => $this->id,
@@ -25,6 +26,7 @@ class InterviewResource extends JsonResource
                 $appliant->middlename,
                 $appliant->surname
             ])),
+            'archive_url' => $this->when($archive !== null, route('solicitud.show', $archive)),
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
