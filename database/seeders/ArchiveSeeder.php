@@ -456,7 +456,13 @@ class ArchiveSeeder extends Seeder
             $new_archive->storeIntentionLetter(12457,  base64_decode($file['Contenido']));
         }
     }
+    private function ReasigRecommentLetter(){
+        $DavidBalderas=User::findorFail(3);
+        $Expediente=$DavidBalderas->latestArchive;
 
+        $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/FormRecomendacion2021-signed.pdf'));
+
+    }
     
     /**
      * Run the database seeds.
@@ -466,7 +472,7 @@ class ArchiveSeeder extends Seeder
     public function run()
     {
         sleep(10);
-
+       
         # APIs.
         $this->mi_portal_service = new MiPortalService;
         $this->old_ce_service = new OldSchoolControlService;
@@ -479,5 +485,7 @@ class ArchiveSeeder extends Seeder
         # de dichos usuarios.
         $cropped_archives = $this->migrateOldUsers($old_archives);
         $this->migrateNewUsers($cropped_archives);
+
+        $this->ReasigRecommentLetter();
     }
 }
