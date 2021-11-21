@@ -465,6 +465,23 @@ class ArchiveSeeder extends Seeder
 
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/FormRecomendacion2021-signed.pdf'));
 
+        $Madeleyne = User::findorFail(100);
+        $Expediente=$Madeleyne->latestArchive;
+
+        $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/RecomendaciónCupido.pdf'));
+        $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendación_01_2021_CHM.pdf'));
+
+        $AlmaG = User::findorFail(104);
+        $Expediente=$AlmaG->latestArchive;
+
+        $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendacion_01_2021_MAAG.pdf'));
+
+        $Hilda = User::findorFail(103);
+        $Expediente=$AlmaG->latestArchive;
+
+        $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf'));
+       
+
     }
     
     /**
