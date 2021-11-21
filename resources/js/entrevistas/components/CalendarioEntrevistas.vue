@@ -411,7 +411,7 @@ export default {
         'start_time': start_time,
         'end_time': end_time,
         'confirmed': interview.confirmed,
-         'url':interview.url
+        'url':interview.url
       };
     }
   },

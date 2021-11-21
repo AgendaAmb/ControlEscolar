@@ -435,7 +435,9 @@ class ArchiveSeeder extends Seeder
         # Obtiene el curp de aquellos usuarios que estén registrados.
         $this->migrateOldUsers($old_archives);
     }
-
+    private function putRecommendationLetter(){
+        //crear un nuevo require document//
+    }
     /**
      * Run the database seeds.
      *
@@ -452,7 +454,7 @@ class ArchiveSeeder extends Seeder
         # Expedientes viejos.
         $old_archives_response = $this->old_ce_service->get('api/oldArchives');
         $old_archives = $old_archives_response->collect();
-
+       
         # Registra a los usuarios que ya estén en mi portal. Recupera el curp 
         # de dichos usuarios.
         $cropped_archives = $this->migrateOldUsers($old_archives);
