@@ -1,12 +1,14 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/recommendation-letter.js": "/js/recommendation-letter.js",
     "/js/admin.js": "/js/admin.js",
-    "/js/rubrica.js": "/js/rubrica.js",
     "/js/preregistro.js": "/js/preregistro.js",
     "/js/postulacion.js": "/js/postulacion.js",
+    "/appliant/js/appliant.js": "/appliant/js/appliant.js",
+    "/professor/js/professor.js": "/professor/js/professor.js",
+    "/js/recommendation-letter.js": "/js/recommendation-letter.js",
     "/js/intention-letter.js": "/js/intention-letter.js",
     "/js/entrevistas.js": "/js/entrevistas.js",
     "/js/programaEntrevistas.js": "/js/programaEntrevistas.js",
+    "/js/rubrica.js": "/js/rubrica.js",
     "/css/app.css": "/css/app.css"
 }
