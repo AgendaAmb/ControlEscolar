@@ -47,6 +47,11 @@ class CreateUsersTable extends Migration
             'id' => 12457,
             'type' => 'workers'
         ]);
+
+        User::create([
+            'id' => 7515,
+            'type' => 'workers'
+        ]);
     }
 
     /**
