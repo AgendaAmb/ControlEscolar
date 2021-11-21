@@ -603,7 +603,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/confirmInterview', {
         id: this.id,
-        alumno: this.appliant
+        alumno: this.appliant,
+        room: this.room
       }).then(function (response) {
         _this3.Confirmed = true;
         $('#DetalleEntrevista').modal('hide');
