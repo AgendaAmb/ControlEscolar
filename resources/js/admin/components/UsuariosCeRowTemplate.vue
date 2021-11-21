@@ -16,7 +16,10 @@
                 <li v-for="entity in data.academic_entities" :key="entity.id">{{entity.name}}</li>
             </ul>
         </td>
-        <td></td>
+        <td>
+            <button @click="modificaTrabajador" class="btn btn-primary"> Modificar </button>
+            <button @click="eliminaTrabajador" class="btn btn-danger"> Eliminar </button>
+        </td>
     </tr>
 </template>
 
@@ -27,6 +30,28 @@ export default {
     data() {
         return {
             data: {},
+        }
+    },
+
+    methods: {
+        /**
+         * Envía una notificación para modificar al usuario
+         */
+        modificaTrabajador(){
+            this.$emit('updateWorker', {
+                id: data.id,
+                type: data.type
+            });
+        },
+
+        /**
+         * Envía una notificación para eliminar al trabajador
+         */
+        eliminaTrabajador(){
+            this.$emit('deleteWorker', {
+                id: data.id,
+                type: data.type
+            });
         }
     }
 }

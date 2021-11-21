@@ -96,12 +96,27 @@ class PreRegisterController extends Controller
         }
 
         # Se crea el usuario.
-        User::create([
+        $user = User::create([
             'id' => $response_data['id'],
             'type' => $response_data['user_type'],
             'birth_state' => $data['birth_state'],
             'marital_state' => $data['civic_state']
         ]);
+
+        # Determina el tipo de postulante.
+        if ($data['birth_state'] === 'San Luis Potosi')
+            $user->assignRole('aspirante_local');
+        else if ($data['birth_country'] === 'México')
+            $user->assignRole('aspirante_foraneo');
+        else 
+            $user->assignRole('aspirante_extranjero');
+
+        # Registra al postulante al módulo de control escolar.
+        $this->service->miPortalPost('api/usuarios/modulos', [
+            'module_id' => env('MIPORTAL_MODULE_ID'),
+            'user_id' => $data['id'],
+            'type' => $data['user_type']
+        ]);        
 
         # Respuesta de éxito.
         return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);

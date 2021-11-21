@@ -36,7 +36,9 @@ export default {
     mounted() {
         axios.get("/controlescolar/admin/workers")
         .then((response) => {
-          Vue.set(this, 'data', response.data);
+            var users = response.data.data;
+
+            Vue.set(this, 'data', users);
         })
         .catch((error) => {
 
