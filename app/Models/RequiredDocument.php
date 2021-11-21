@@ -70,6 +70,19 @@ class RequiredDocument extends Model
     }
 
     /**
+     * Obtiene los documentos que solo los postulantes
+     * pueden subir.
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public static function scopeRecommendationLetter($query)
+    {
+        return $query->where('recommendation_letter', true)
+            ->where('type', 'entrance');
+    }
+
+    /**
      * Obtiene el id de los documentos personales.
      *
      * @param  mixed $query

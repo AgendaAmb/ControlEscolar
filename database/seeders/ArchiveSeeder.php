@@ -74,16 +74,6 @@ class ArchiveSeeder extends Seeder
             'archive_id' => $new_archive->id
         ], $old_archive['appliant_languages'][0]);
 
-        # Asigna un profesor temporal, que otorgó la carta de intención.
-        $new_archive->intentionLetter()->firstOrCreate([
-            'archive_required_document_id' => $new_archive
-                ->archiveRequiredDocuments()
-                ->whereIsIntentionLetter()
-                ->value('id'),
-            'user_id' => 12457,
-            'user_type' => 'workers'
-        ]);
-
         return $new_archive;
     }
 
@@ -187,7 +177,6 @@ class ArchiveSeeder extends Seeder
         # Arreglo con nombres transitivos de los documentos viejos
         # a los documentos nuevos.
         $transition_array = [
-            '11.- Carta de intención de un profesor del núcleo básico del PMPCA (el profesor la envía directamente)' => '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)',
             '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)' => '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)',
         ];
 
@@ -222,7 +211,7 @@ class ArchiveSeeder extends Seeder
 
     /**
      * Stores entrance documents.
-     *
+     
      * @return void
      */
     private function storeCurricularDocuments($appliant, $old_archive, $new_archive)
@@ -327,6 +316,7 @@ class ArchiveSeeder extends Seeder
         $this->storeLanguageDocuments($appliant, $old_archive, $new_archive);
         $this->storeEntranceDocuments($appliant, $old_archive, $new_archive);
         $this->storeCurricularDocuments($appliant, $old_archive, $new_archive);
+        $this->storeIntentionLetter($appliant, $old_archive, $new_archive);
     }
 
     /**
@@ -436,12 +426,38 @@ class ArchiveSeeder extends Seeder
         $this->migrateOldUsers($old_archives);
     }
 
+    /**
+     * Almacena las cartas de recomendación e intención
+     */
+    private function storeIntentionLetter($appliant, $old_archive, $new_archive)
+    {
+        # Arreglo con nombres transitivos de los documentos viejos
+        # a los documentos nuevos.
+        $transition_array = [
+            '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)' 
+            => '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)',
+        ];
 
-    private function putRecommendationLetter(){
-        //crear un nuevo require document//
+        foreach ($old_archive['entrance_documents'] as $file)
+        {
+            # Nombre del documento.
+            $document_name = $transition_array[$file['name']] ?? null;
+
+            # Busca el id del documento requerido, que tenga coincidencia con el nombre.
+            $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
+
+            dump([$file['name'], $required_document_id]);
+
+            # En caso de no encontrarse, se va al siguiente documento.
+            if ($required_document_id === null)
+                continue;
+
+            # Genera la ruta del documento probatorio.
+            $new_archive->storeIntentionLetter(12457,  base64_decode($file['Contenido']));
+        }
     }
 
-
+    
     /**
      * Run the database seeds.
      *

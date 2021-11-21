@@ -28,6 +28,11 @@ class ArchiveObserver
             ->where('type', 'entrance')
             ->pluck('id');
 
+        $curricular_documents_id = $academic_program
+            ->requiredDocuments()
+            ->recommendationLetter()
+            ->pluck('id');
+
         $archive->academicDegrees()->createMany([
             ['state'=>'Incompleto']
         ]);
@@ -50,6 +55,7 @@ class ArchiveObserver
 
         $archive->personalDocuments()->attach($personal_documents_id);
         $archive->personalDocuments()->attach($entrance_documents_id);
+        $archive->curricularDocuments()->attach($curricular_documents_id);
     }
 
     /**
