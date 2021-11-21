@@ -435,9 +435,13 @@ class ArchiveSeeder extends Seeder
         # Obtiene el curp de aquellos usuarios que estén registrados.
         $this->migrateOldUsers($old_archives);
     }
+
+
     private function putRecommendationLetter(){
         //crear un nuevo require document//
     }
+
+
     /**
      * Run the database seeds.
      *
