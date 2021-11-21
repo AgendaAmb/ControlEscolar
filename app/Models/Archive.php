@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Archive extends Model
 {
@@ -65,6 +66,16 @@ class Archive extends Model
     public function personalDocuments(): BelongsToMany
     {
         return $this->requiredDocuments()->where('type', 'personal');
+    }
+
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function curricularDocuments(): BelongsToMany
+    {
+        return $this->requiredDocuments()->where('type', 'curricular');
     }
 
     /**
@@ -193,5 +204,95 @@ class Archive extends Model
     public function evaluationRubrics(): HasMany
     {
         return $this->hasMany(EvaluationRubric::class);
+    }
+
+    /**
+     * Agrega una carta de intención al expediente.
+     *
+     * @param int $professor
+     * @param object $intention_letter_content
+     * 
+     * @return IntentionLetter|bool
+     */
+    public function createOrUpdateIntentionLetter($professor, $intention_letter_content): mixed
+    {
+        # Obtiene el id de la tabla pivote, asociada al documento requerido
+        # que representa a la carta de intención
+        $pivot_id = $this->archiveRequiredDocuments()->whereIsIntentionLetter()->value('id');
+
+        # Asigna la ruta de la carta de intención y lo guarda en el sistema
+        # de archivos.
+        $path = implode('/', [
+            'archives',
+            $this->id,
+            'entranceDocuments',
+            'intention_letter.pdf'
+        ]);
+
+        Storage::put($path, $intention_letter_content);
+        
+        # Establece en la base de datos, la ubicación de la carta
+        $this->archiveRequiredDocuments()
+            ->whereIsIntentionLetter()
+            ->update(['location' => $path]);
+
+        # Si el pivote es nulo, no se agrega la carta de intención.
+        if ($pivot_id === null)
+            return false;
+
+        # Asocia una nueva carta de intención con el expediente. Posteriormente
+        # devuelve el modelo que representa a dicha carta y que está asociado
+        # con el expediente.
+        return $this->intentionLetter()->firstOrCreate([
+            'archive_required_document_id' => $pivot_id,
+            'user_id' => $professor,
+            'user_type' => 'workers'
+        ]);
+    }
+
+    /**
+     * Agrega una carta de recomendación al expediente.
+     *
+     * @param object $intention_letter_content 
+     * @return bool
+     */
+    public function createRecommendationLetter($recommendation_letter_content)
+    {
+        # Busca el id de la carta de recomendación.
+        $recommendation_letter_id = $this->archiveRequiredDocuments()
+            ->whereNull('location')
+            ->whereIsRecommendationLetter()
+            ->limit(1)
+            ->value('id');
+
+        # Ya se otorgaron las 2 cartas.
+        if ($recommendation_letter_id === null)
+            return false;
+
+        # Verifica la cantidad de cartas de recomendación otorgadas.
+        $recommendation_letter_count = $this->archiveRequiredDocuments()
+            ->whereNull('location')
+            ->whereIsRecommendationLetter()
+            ->count();
+
+        # Asigna la ruta de la carta de intención y lo guarda en el sistema
+        # de archivos.
+        $path = implode('/', [
+            'archives',
+            $this->id,
+            'entranceDocuments',
+            'recommendation_letter_',
+            $recommendation_letter_count,
+            '.pdf'
+        ]);
+        
+        Storage::put($path, $recommendation_letter_content);
+
+        # Guarda la carta de recomendación en la base de datos.
+        $this->archiveRequiredDocuments()
+            ->where('id', $recommendation_letter_id)
+            ->update(['location' => $path]);
+
+        return true;
     }
 }

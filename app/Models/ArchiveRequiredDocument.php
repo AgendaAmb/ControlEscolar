@@ -74,4 +74,16 @@ class ArchiveRequiredDocument extends Model
             'requiredDocument', fn($q) => $q->where('intention_letter', true)->where('type', 'entrance')
         );
     }
+
+    /**
+     * Obtiene la carta de intención.
+     *
+     * @return Builder
+     */
+    public static function scopeWhereIsRecommendationLetter(Builder $query): Builder
+    {
+        return $query->whereHas(
+            'requiredDocument', fn($q) => $q->where('recommendation_letter', true)->where('type', 'curricular')
+        );
+    }
 }
