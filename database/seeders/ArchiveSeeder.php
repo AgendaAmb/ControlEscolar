@@ -457,7 +457,8 @@ class ArchiveSeeder extends Seeder
         }
     }
     private function ReasigRecommentLetter(){
-        $DavidBalderas=User::findorFail(3);
+  
+        $DavidBalderas = User::findorFail(102);
         $Expediente=$DavidBalderas->latestArchive;
 
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/FormRecomendacion2021-signed.pdf'));

@@ -43,7 +43,10 @@ class UserRetrieved
                 ->first() ?? [];
 
             if (count($worker) > 0)
+            {
                 $this->user->fill($worker);
+                $this->user->type = $worker['user_type'];
+            }
         }
         else if ($this->user->isAppliant())
         {
@@ -56,7 +59,10 @@ class UserRetrieved
                 ->first() ?? [];
 
             if (count($appliant) > 0)
+            {
                 $this->user->fill($appliant);
+                $this->user->type = $appliant['user_type'];
+            }
         }
     }
 
