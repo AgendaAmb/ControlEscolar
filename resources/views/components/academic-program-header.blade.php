@@ -6,8 +6,8 @@
       <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
         <div class="nav-item dropdown">
             <a id="Postulacion" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> Postulación </a>
-            <div class="dropdown-menu" aria-labelledby="Postulacion">
-                <a class="dropdown-item" href="{{ route('solicitud.index') }}"> Expedientes </a>
+            <div class="dropdown-menu" aria-labelledby="Postulacion" >
+                <a class="dropdown-item" href="{{ route('solicitud.index') }}" > Expedientes </a>
             </div>
         </div>
         <div class="nav-item dropdown">
@@ -17,7 +17,10 @@
                 <a class="dropdown-item" href="{{ route('entrevistas.programa') }}">Programa de entrevistas</a>
             </div>
         </div>
+        @if (Auth::user()->hasRole('admin'))
         <a class="nav-link" href="#"> Inscripciones </a>
-        <a class="nav-link" href="{{ route('admin.index') }}"> Administración </a>
+            
+        <a class="nav-link" href="{{ route('admin.index') }}" > Administración </a>
+        @endif
     </nav>
 </header> 
