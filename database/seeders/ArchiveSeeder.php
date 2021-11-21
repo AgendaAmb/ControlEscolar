@@ -475,9 +475,11 @@ class ArchiveSeeder extends Seeder
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendacion_01_2021_MAAG.pdf'));
 
         $Hilda = User::findorFail(103);
-        $Expediente=$AlmaG->latestArchive;
-
+        $Expediente=$Hilda->latestArchive;
+        $Expediente->requiredDocuments()->atacch(18);
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf'));
+
+
        
 
     }
