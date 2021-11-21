@@ -72,7 +72,7 @@ class PreRegisterController extends Controller
     public function store(PreRegisterRequest $request)
     {
         # Obtiene los datos validados.
-        $data = $request->validated();
+        $data = $request->safe()->except('announcement_id');
         $data['module_id'] = env('MIPORTAL_MODULE_ID');
 
         # Envía la petición de registro de usuario al sistema principal.
@@ -110,6 +110,13 @@ class PreRegisterController extends Controller
             $user->assignRole('aspirante_foraneo');
         else 
             $user->assignRole('aspirante_extranjero');
+
+        # Genera el expediente del postulante.
+        $user->archives()->create([
+            'user_type' => $response_data['user_type'],
+            'announcement_id' => $request->announcement_id,           
+            'status' => 0,
+        ]);
 
         # Registra al postulante al módulo de control escolar.
         $this->service->miPortalPost('api/usuarios/modulos', [

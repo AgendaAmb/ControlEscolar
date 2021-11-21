@@ -49243,12 +49243,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'usuarios-ce-row-template',
   data: function data() {
     return {
       data: {}
     };
+  },
+  methods: {
+    /**
+     * Envía una notificación para modificar al usuario
+     */
+    modificaTrabajador: function modificaTrabajador() {
+      this.$emit('updateWorker', {
+        id: data.id,
+        type: data.type
+      });
+    },
+
+    /**
+     * Envía una notificación para eliminar al trabajador
+     */
+    eliminaTrabajador: function eliminaTrabajador() {
+      this.$emit('deleteWorker', {
+        id: data.id,
+        type: data.type
+      });
+    }
   }
 });
 
@@ -50031,7 +50055,22 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("td")
+    _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: { click: _vm.modificaTrabajador }
+        },
+        [_vm._v(" Modificar ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-danger", on: { click: _vm.eliminaTrabajador } },
+        [_vm._v(" Eliminar ")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

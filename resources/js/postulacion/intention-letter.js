@@ -31,8 +31,17 @@ const app = new Vue({
 
     data: {
         auth_user: authUser,
-        academic_programs: academicPrograms
+        academic_programs: academicPrograms,
+        archives: []
     },
 
-    
+    methods: {
+        /**
+         * Actualiza los expedientes, con base al evento "archives_found", 
+         * emitido por alguno de los componentes hijos
+         */
+        updateArchives(archives){
+            Vue.set(this, 'archives', archives);
+        }
+    }
 });
