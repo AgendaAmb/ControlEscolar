@@ -508,5 +508,6 @@ class ArchiveSeeder extends Seeder
         $this->migrateNewUsers($cropped_archives);
 
         $this->ReasigRecommentLetter();
+        
     }
 }
