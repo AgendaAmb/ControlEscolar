@@ -460,7 +460,7 @@ class ArchiveSeeder extends Seeder
                 continue;
 
             # Genera la ruta del documento probatorio.
-            $new_archive->createRecommendationLetter(12457,  base64_decode($file['Contenido']));
+            $new_archive->createOrUpdateIntentionLetter(12457,  base64_decode($file['Contenido']));
         }
     }
     private function ReasigRecommentLetter(){
