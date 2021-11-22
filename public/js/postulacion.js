@@ -6491,7 +6491,7 @@ var render = function() {
               key: documento.name,
               attrs: {
                 archivo: documento.archivo,
-                location: documento.location,
+                location: documento.pivot.location,
                 errores: documento.errores
               },
               on: {
@@ -6499,7 +6499,7 @@ var render = function() {
                   return _vm.$set(documento, "archivo", $event)
                 },
                 "update:location": function($event) {
-                  return _vm.$set(documento, "location", $event)
+                  return _vm.$set(documento.pivot, "location", $event)
                 },
                 "update:errores": function($event) {
                   return _vm.$set(documento, "errores", $event)

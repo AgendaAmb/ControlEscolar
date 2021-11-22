@@ -165,7 +165,7 @@
       v-for="documento in RequiredDocuments" 
       :key="documento.name"
       :archivo.sync="documento.archivo" 
-      :location.sync="documento.location" 
+      :location.sync="documento.pivot.location" 
       :errores.sync = "documento.errores"
       v-bind="documento"
       @enviaDocumento = "cargaDocumento" >
