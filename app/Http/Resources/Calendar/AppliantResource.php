@@ -42,7 +42,7 @@ class AppliantResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'type' => $this->type,
+            'type' => $this->user_type,
             'name' => $name,
             'intention_letter_professor' => (new IntentionLetterProfessorResource($this->professor))->toArray($request)
         ];

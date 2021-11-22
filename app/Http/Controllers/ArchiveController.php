@@ -2,30 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\MiPortalService;
-use App\Http\Requests\AddScientificProductionAuthorRequest;
-use App\Http\Requests\UpdateAcademicDegreeRequest;
-use App\Http\Requests\UpdateAppliantLanguageRequest;
-use App\Http\Requests\UpdateHumanCapitalRequest;
-use App\Http\Requests\UpdateScientificProductionAuthorRequest;
-use App\Http\Requests\UpdateScientificProductionRequest;
-use App\Http\Requests\UpdateWorkingExperienceRequest;
-use App\Http\Resources\ArchiveResource;
-use App\Models\AcademicDegree;
-use App\Models\AcademicProgram;
-use App\Models\AppliantLanguage;
-use App\Models\Archive;
-use App\Models\Author;
-use App\Models\HumanCapital;
-use App\Models\ScientificProduction;
-use App\Models\User;
-use App\Models\WorkingExperience;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Spatie\QueryBuilder\AllowedFilter;
-use Spatie\QueryBuilder\QueryBuilder;
+# Peticiones
+use App\Http\Requests\{
+    AddScientificProductionAuthorRequest,
+    UpdateAcademicDegreeRequest,
+    UpdateAppliantLanguageRequest,
+    UpdateHumanCapitalRequest,
+    UpdateScientificProductionAuthorRequest,
+    UpdateScientificProductionRequest,
+    UpdateWorkingExperienceRequest,
+};
+
+# Resources (respuestas en formato JSON)
+use App\Http\Resources\AppliantArchive\ArchiveResource;
+
+# Modelos
+use App\Models\ {
+    AcademicDegree,
+    AcademicProgram,
+    AppliantLanguage,
+    Archive,
+    Author,
+    HumanCapital,
+    ScientificProduction,
+    User,
+    WorkingExperience,
+};
+
+# Clases auxiliares de Laravel.
+use Illuminate\Http\{ 
+    JsonResponse,
+    Request
+};
+
+use Illuminate\Support\Facades\{
+    DB,
+    Schema
+};
+
+# Clases de otros paquetes.
+use Spatie\QueryBuilder\{
+    AllowedFilter,
+    QueryBuilder
+};
 
 class ArchiveController extends Controller
 {

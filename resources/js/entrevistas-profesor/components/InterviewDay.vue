@@ -22,7 +22,7 @@
                                 <tr v-for="interview in interviews" :key="interview.id"> 
                                     <td>{{interview.start_time + " a " + interview.end_time}}</td>
                                     <td class="appliant">{{interview.appliant}}</td>
-                                    <td><a href="#">Ver documentos</a></td>
+                                    <td><a :href="interview.archive_url" target="_blank">Ver documentos</a></td>
                                     <td v-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl()">
                                         <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location"> Formato de evaluación</a>
                                     </td>
