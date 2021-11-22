@@ -360,8 +360,6 @@ class ArchiveSeeder extends Seeder
             $new_appliant = User::firstOrCreate([
                 'id' => $appliant['id'],
                 'type' => $appliant['user_type'],
-                'birth_state' => $appliant['birth_state'],
-
             ]);
 
             # El usuario creado es un nuevo postulante.
