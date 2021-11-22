@@ -224,7 +224,7 @@ class Archive extends Model
      * 
      * @return IntentionLetter|bool
      */
-    public function createOrUpdateIntentionLetter($professor, $intention_letter_content): mixed
+    public function createOrUpdateIntentionLetter($professor, $intention_letter_content)
     {
         # Obtiene el id de la tabla pivote, asociada al documento requerido
         # que representa a la carta de intención

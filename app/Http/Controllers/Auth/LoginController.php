@@ -86,7 +86,7 @@ class LoginController extends Controller
         # Consulta a los usuarios.
         $response = $this->miPortalService->miPortalGet('api/usuarios', [
             'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
-            'fields[users]' => 'id,name,middlename,surname,type,curp,email',
+            //'fields[users]' => 'id,name,middlename,surname,type,curp,email',
             'filter[id]' => $users
         ]);
 
