@@ -267,6 +267,9 @@ class ArchiveSeeder extends Seeder
     {
         # Arreglo con documentos
         $documents = [
+            '5B.- Título de maestría o acta de examen' => '5B.- Título de maestría o acta de examen', 
+            '6B.- Certificado de materias de la maestría' => '6B.- Certificado de materias de la maestría',
+            '7B.- Constancia de promedio de la maestría' => '7B.- Constancia de promedio de la maestría.',
             'Título de licenciatura o acta de examen o carta de pasante  (Solo aplica en IMaREC)' => '5A.- Título de licenciatura o acta de examen',
             '8B.- Cédula de la maestría' => '8B.- Cédula de la maestría'
         ];
