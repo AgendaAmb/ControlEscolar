@@ -267,10 +267,14 @@ class ArchiveSeeder extends Seeder
     {
         # Arreglo con documentos
         $documents = [
+            '5A.- Título de licenciatura o acta de examen' => '5B.- Título de licenciatura o acta de examen', 
             '5B.- Título de maestría o acta de examen' => '5B.- Título de maestría o acta de examen', 
+            '6A.- Certificado de materias de la licenciatura' => '6A.- Certificado de materias de la licenciatura',
             '6B.- Certificado de materias de la maestría' => '6B.- Certificado de materias de la maestría',
+            '7A.- Constancia de promedio de la licenciatura' => '7A.- Constancia de promedio de la licenciatura.',
             '7B.- Constancia de promedio de la maestría' => '7B.- Constancia de promedio de la maestría.',
             'Título de licenciatura o acta de examen o carta de pasante  (Solo aplica en IMaREC)' => '5A.- Título de licenciatura o acta de examen',
+            '8A.- Cédula de la licenciatura' => '8A.- Cédula de la licenciatura',
             '8B.- Cédula de la maestría' => '8B.- Cédula de la maestría'
         ];
 
