@@ -62,6 +62,8 @@ class UserRetrieved
             {
                 $this->user->fill($appliant);
                 $this->user->type = $appliant['user_type'];
+                $this->user->birth_country = $appliant['nationality'];
+                $this->user->residence_country = $appliant['residence'];
             }
         }
     }

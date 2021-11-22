@@ -359,7 +359,9 @@ class ArchiveSeeder extends Seeder
             # Nuevo postulante o recupera una instancia previa.
             $new_appliant = User::firstOrCreate([
                 'id' => $appliant['id'],
-                'type' => $appliant['user_type']
+                'type' => $appliant['user_type'],
+                'birth_state' => $appliant['birth_state'],
+
             ]);
 
             # El usuario creado es un nuevo postulante.
