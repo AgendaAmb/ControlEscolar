@@ -337,9 +337,6 @@ class ArchiveSeeder extends Seeder
         
         # Obtiene el curp de aquellos usuarios que estén registrados.
         $appliants = $response->collect();
-
-        dd($appliants);
-
         # Arreglo con los nuevos postulantes.
         $new_appliants = [];
 
@@ -508,6 +505,6 @@ class ArchiveSeeder extends Seeder
         $this->migrateNewUsers($cropped_archives);
 
         $this->ReasigRecommentLetter();
-        
+
     }
 }

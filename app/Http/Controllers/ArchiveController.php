@@ -109,27 +109,13 @@ class ArchiveController extends Controller
         ]);
 
         $academic_program = $archiveModel->announcement->academicProgram;
-        $appliant = $archiveModel->appliant->toArray();
-
-        # Determina el tipo
-        $type = isset($appliant['user_type']) 
-        ? $appliant['type']
-        : User::TYPES[$appliant['type']];
-
-        # Busca al usuario.
-        $response = $this->miPortalService->miPortalGet('api/usuarios', [
-            'filter[id]' => $appliant['id'],
-            'filter[type]' => $appliant['type']
-        ]);
+        $appliant = $archiveModel->appliant;
 
         # Recolecta el resultado.
-        $data = $response->collect()->first();
-        $data['marital_state'] = $appliant['marital_state'];
-        $data['birth_state'] = $appliant['birth_state'];
 
         return view('postulacion.show')
         ->with('archive', $archiveModel)
-        ->with('appliant', $data)
+        ->with('appliant', $appliant)
         ->with('academic_program', $academic_program);
     }
 

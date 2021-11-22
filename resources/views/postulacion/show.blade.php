@@ -28,12 +28,6 @@ const academicProgram = @json($academic_program);
 </form>
 @endsection
 
-@if ()
-
-@elseif (Auth::user()->isAppliant())
-
-@endif
-
 @push('scripts')
 <script src="{{ asset('js/postulacion.js') }}" defer></script>
 @endpush
