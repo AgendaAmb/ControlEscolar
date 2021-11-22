@@ -455,7 +455,7 @@ class ArchiveSeeder extends Seeder
                 continue;
 
             # Genera la ruta del documento probatorio.
-            $new_archive->storeIntentionLetter(12457,  base64_decode($file['Contenido']));
+            $new_archive->createRecommendationLetter(12457,  base64_decode($file['Contenido']));
         }
     }
     private function ReasigRecommentLetter(){
@@ -477,9 +477,11 @@ class ArchiveSeeder extends Seeder
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendacion_01_2021_MAAG.pdf'));
 
         $Hilda = User::findorFail(103);
-        $Expediente=$AlmaG->latestArchive;
-
+        $Expediente=$Hilda->latestArchive;
+        $Expediente->requiredDocuments()->attach(18,['Location'=>"/public/DocumentoExtra/Protocolo_Hilda_Guadalupe_Cisneros_Ontiveros_DoctoradoPMPCA.pdf"]);
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf'));
+
+
        
 
     }
