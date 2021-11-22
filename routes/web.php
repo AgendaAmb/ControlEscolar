@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EvaluationRubricController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
@@ -22,8 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 # Rutas de autenticacion.
 Route::name('authenticate.')->group(function(){
 
@@ -32,6 +31,13 @@ Route::name('authenticate.')->group(function(){
 
     # Inicio de sesión por OAUTH2.
     Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
+});
+
+# Rutas para la gestión de archivos
+Route::middleware(['auth'])->name('file.')->group(function(){
+
+    # Ver y descargar tipos de archivos.
+    Route::get('/{archive}/{type}/{name}', [FileController::class, 'view'])->name('get');
 });
 
 # Rutas para gestión de usuarios.

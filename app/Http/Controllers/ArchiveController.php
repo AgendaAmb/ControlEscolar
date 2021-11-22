@@ -269,8 +269,8 @@ class ArchiveController extends Controller
 
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
-            'archives/'.$request->archive_id.'/appliantLanguage/'.$request->id, 
-            $request->requiredDocumentId.'.pdf'
+            'archives/'.$request->archive_id.'/laguageDocuments/',
+            $request->id.'_'.$request->requiredDocumentId.'.pdf'
         );
 
         # Asocia los documentos requeridos.

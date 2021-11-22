@@ -153,9 +153,8 @@ class ArchiveSeeder extends Seeder
             $path = implode('/', [
                 'archives',
                 $new_archive->id,
-                'appliantLanguage',
-                $appliant_language->id,
-                $required_document_id.'.pdf'
+                'languageDocuments',
+                $appliant_language->id.'_'.$required_document_id.'.pdf'
             ]);
     
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
@@ -501,8 +500,6 @@ class ArchiveSeeder extends Seeder
 
         # Expedientes viejos.
         $old_archives_response = $this->old_ce_service->get('api/oldArchives');
-
-        dd($old_archives_response->status());
         $old_archives = $old_archives_response->collect();
        
         # Registra a los usuarios que ya estén en mi portal. Recupera el curp 
