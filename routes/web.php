@@ -33,13 +33,6 @@ Route::name('authenticate.')->group(function(){
     Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
 });
 
-# Rutas para la gestión de archivos
-Route::middleware(['auth'])->name('file.')->group(function(){
-
-    # Ver y descargar tipos de archivos.
-    Route::get('/{archive}/{type}/{name}', [FileController::class, 'view'])->name('get');
-});
-
 # Rutas para gestión de usuarios.
 Route::prefix('users')->name('users.')->group(function(){
 
@@ -49,7 +42,7 @@ Route::prefix('users')->name('users.')->group(function(){
     Route::post('/show', [UserController::class, 'show'])->name('show');
    
     # Obtener usuario de mi portal.
-    Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
+    Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser'); 
 });
 
 # Rutas para el pre-registro.
@@ -92,6 +85,9 @@ Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(func
 
     # Capital humano.
     Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
+
+    # Ver y descargar tipos de archivos.
+    Route::get('/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');  
 });
 
 # Rutas para las entrevistas.

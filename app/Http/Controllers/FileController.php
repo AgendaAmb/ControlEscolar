@@ -12,7 +12,7 @@ class FileController extends Controller
     /**
      * Visualiza un expediente.
      */
-    public function viewDocument($request, $archive, $type, $name)
+    public function viewDocument(ArchiveFileRequest $request, $archive, $type, $name)
     {
         try 
         {
