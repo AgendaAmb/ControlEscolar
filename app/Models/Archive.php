@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class Archive extends Model
@@ -86,7 +87,16 @@ class Archive extends Model
      */
     public function entranceDocuments(): BelongsToMany
     {
-        return $this->requiredDocuments()->where('type', 'entrance')->where('intention_letter', false);
+        /** @var App\Models\User */
+        $user = Auth::user();
+        $intention_letter_visible = $user->isWorker();
+
+        $query = $this->requiredDocuments()->where('type', 'entrance');
+
+        if ($intention_letter_visible === false)
+            return $query->where('intention_letter', false);
+
+        return $query->orderBy('required_documents.name');
     }
 
     /**

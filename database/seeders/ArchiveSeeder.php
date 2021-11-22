@@ -177,6 +177,8 @@ class ArchiveSeeder extends Seeder
         # a los documentos nuevos.
         $transition_array = [
             '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)' => '12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)',
+            '10.- Carta compromiso y manifestación de conocimientos' => '18.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)',
+            '19.- Propuesta de proyecto avalada por el profesor postulante' => '19.- Propuesta de proyecto avalada por el profesor postulante'
         ];
 
         foreach ($old_archive['language_documents'] as $file)
