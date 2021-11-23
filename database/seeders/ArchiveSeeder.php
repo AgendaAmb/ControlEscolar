@@ -59,7 +59,7 @@ class ArchiveSeeder extends Seeder
     {
         # Crea un expediente nuevo.
         $new_archive = $new_appliant->archives()->firstOrCreate([
-            'user_type' => $appliant['user_type'], 
+            'user_type' => $appliant['user_type'],
             'announcement_id' => isset($old_archive['academic_degrees'][0]['cvu']) ? 2 : 4,
             'status' => 1
         ]);
@@ -92,8 +92,7 @@ class ArchiveSeeder extends Seeder
             '3.- INE en ampliación tamaño carta' => '3.- INE en ampliación tamaño carta',
         ];
 
-        foreach ($old_archive['personal_documents'] as $file)
-        {
+        foreach ($old_archive['personal_documents'] as $file) {
             # Nombre del documento.
             $document_name = $transition_array[$file['name']] ?? null;
 
@@ -109,9 +108,9 @@ class ArchiveSeeder extends Seeder
                 'archives',
                 $new_archive->id,
                 'personalDocuments',
-                $required_document_id.'.pdf'
+                $required_document_id . '.pdf'
             ]);
-    
+
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
             Storage::put($path, base64_decode($file['Contenido']));
 
@@ -137,8 +136,7 @@ class ArchiveSeeder extends Seeder
         # Lenguaje del postulante.
         $appliant_language = $new_archive->appliantLanguages()->first();
 
-        foreach ($old_archive['language_documents'] as $file)
-        {
+        foreach ($old_archive['language_documents'] as $file) {
             # Nombre del documento.
             $document_name = $transition_array[$file['name']] ?? null;
 
@@ -154,9 +152,9 @@ class ArchiveSeeder extends Seeder
                 'archives',
                 $new_archive->id,
                 'languageDocuments',
-                $appliant_language->id.'_'.$required_document_id.'.pdf'
+                $appliant_language->id . '_' . $required_document_id . '.pdf'
             ]);
-    
+
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
             Storage::put($path, base64_decode($file['Contenido']));
 
@@ -181,8 +179,7 @@ class ArchiveSeeder extends Seeder
             '19.- Propuesta de proyecto avalada por el profesor postulante' => '19.- Propuesta de proyecto avalada por el profesor postulante'
         ];
 
-        foreach ($old_archive['language_documents'] as $file)
-        {
+        foreach ($old_archive['language_documents'] as $file) {
             # Nombre del documento.
             $document_name = $transition_array[$file['name']] ?? null;
 
@@ -198,9 +195,9 @@ class ArchiveSeeder extends Seeder
                 'archives',
                 $new_archive->id,
                 'entranceDocuments',
-                $required_document_id.'.pdf'
+                $required_document_id . '.pdf'
             ]);
-    
+
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
             Storage::put($path, base64_decode($file['Contenido']));
 
@@ -226,13 +223,11 @@ class ArchiveSeeder extends Seeder
         # Índice
         $i = 0;
 
-        foreach ($old_archive['entrance_documents'] as $file)
-        {
+        foreach ($old_archive['entrance_documents'] as $file) {
             # Nombre del documento.
             $document_name = $file['name'];
 
-            if ($document_name === '16.- Dos cartas de recomendación académica' && $i < 2)
-            {
+            if ($document_name === '16.- Dos cartas de recomendación académica' && $i < 2) {
                 # Busca el id del documento requerido, que tenga coincidencia con el nombre.
                 $required_document_id = RequiredDocument::firstWhere('name', $documents[$i])->id ?? null;
 
@@ -245,7 +240,7 @@ class ArchiveSeeder extends Seeder
                     'archives',
                     $new_archive->id,
                     'curricularDocuments',
-                    $required_document_id.'.pdf'
+                    $required_document_id . '.pdf'
                 ]);
 
                 # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
@@ -269,8 +264,8 @@ class ArchiveSeeder extends Seeder
     {
         # Arreglo con documentos
         $documents = [
-            '5A.- Título de licenciatura o acta de examen' => '5B.- Título de licenciatura o acta de examen', 
-            '5B.- Título de maestría o acta de examen' => '5B.- Título de maestría o acta de examen', 
+            '5A.- Título de licenciatura o acta de examen' => '5B.- Título de licenciatura o acta de examen',
+            '5B.- Título de maestría o acta de examen' => '5B.- Título de maestría o acta de examen',
             '6A.- Certificado de materias de la licenciatura' => '6A.- Certificado de materias de la licenciatura',
             '6B.- Certificado de materias de la maestría' => '6B.- Certificado de materias de la maestría',
             '7A.- Constancia de promedio de la licenciatura' => '7A.- Constancia de promedio de la licenciatura.',
@@ -283,8 +278,7 @@ class ArchiveSeeder extends Seeder
         # Lenguaje del postulante.
         $academic_degree = $new_archive->academicDegrees()->first();
 
-        foreach ($old_archive['academic_documents'] as $file)
-        {
+        foreach ($old_archive['academic_documents'] as $file) {
             # Nombre del documento.
             $document_name =  $documents[$file['name']];
 
@@ -300,7 +294,7 @@ class ArchiveSeeder extends Seeder
                 'archives',
                 $new_archive->id,
                 'academicDocuments',
-                $required_document_id.'.pdf'
+                $required_document_id . '.pdf'
             ]);
 
             # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
@@ -343,7 +337,7 @@ class ArchiveSeeder extends Seeder
             'fields[users]' => 'id,type,curp',
             'filter[curp]' => $curps,
         ]);
-        
+
         # Obtiene el curp de aquellos usuarios que estén registrados.
         $appliants = $response->collect();
         # Arreglo con los nuevos postulantes.
@@ -352,10 +346,9 @@ class ArchiveSeeder extends Seeder
         # Arreglo con los usuario, a los cuales se les asignará
         # un módulo.
         $new_module_users = [];
-        
+
         # Crea un nuevo expediente (migra el expediente anterior) al sistema nuevo.
-        foreach ($appliants as $appliant)
-        {
+        foreach ($appliants as $appliant) {
             # Nuevo postulante o recupera una instancia previa.
             $new_appliant = User::firstOrCreate([
                 'id' => $appliant['id'],
@@ -363,8 +356,7 @@ class ArchiveSeeder extends Seeder
             ]);
 
             # El usuario creado es un nuevo postulante.
-            if (!$new_appliant->hasRole('aspirante_local'))
-            {
+            if (!$new_appliant->hasRole('aspirante_local')) {
                 $new_appliant->assignRole('aspirante_local');
                 $new_appliants[] = $new_appliant;
             }
@@ -409,7 +401,7 @@ class ArchiveSeeder extends Seeder
      * @return void
      */
     private function migrateNewUsers($old_archives)
-    {   
+    {
         # Arreglo con los nuevos postulantes.
         $new_module_users = [];
 
@@ -417,14 +409,13 @@ class ArchiveSeeder extends Seeder
         foreach ($old_archives as $old_archive)
             # Anade un expediente al arreglo.
             $new_module_users[] = $this->newModuleUserData($old_archive);
-        
+
         # Consume un post masivo, por parte del portal.
         $response = $this->mi_portal_service->miPortalPost('api/usuarios/storeMany', [
             'users' => $new_module_users
         ]);
 
-        if ($response->failed())
-        {
+        if ($response->failed()) {
             dump($response->status());
             return;
         }
@@ -441,12 +432,11 @@ class ArchiveSeeder extends Seeder
         # Arreglo con nombres transitivos de los documentos viejos
         # a los documentos nuevos.
         $transition_array = [
-            '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)' 
+            '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)'
             => '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)',
         ];
 
-        foreach ($old_archive['entrance_documents'] as $file)
-        {
+        foreach ($old_archive['entrance_documents'] as $file) {
             # Nombre del documento.
             $document_name = $transition_array[$file['name']] ?? null;
 
@@ -463,34 +453,117 @@ class ArchiveSeeder extends Seeder
             $new_archive->createOrUpdateIntentionLetter(12457,  base64_decode($file['Contenido']));
         }
     }
-    private function ReasigRecommentLetter(){
-  
+    private function ReasigRecommentLetter()
+    {
+
         $DavidBalderas = User::findorFail(102);
-        $Expediente=$DavidBalderas->latestArchive;
+        $Expediente = $DavidBalderas->latestArchive;
 
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/FormRecomendacion2021-signed.pdf'));
 
         $Madeleyne = User::findorFail(100);
-        $Expediente=$Madeleyne->latestArchive;
+        $Expediente = $Madeleyne->latestArchive;
 
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/RecomendaciónCupido.pdf'));
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendación_01_2021_CHM.pdf'));
 
         $AlmaG = User::findorFail(104);
-        $Expediente=$AlmaG->latestArchive;
+        $Expediente = $AlmaG->latestArchive;
 
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/16_Recomendacion_01_2021_MAAG.pdf'));
 
         $Hilda = User::findorFail(103);
-        $Expediente=$Hilda->latestArchive;
-        $Expediente->requiredDocuments()->attach(18,['Location'=>"/public/DocumentoExtra/Protocolo_Hilda_Guadalupe_Cisneros_Ontiveros_DoctoradoPMPCA.pdf"]);
+        $Expediente = $Hilda->latestArchive;
+        $Expediente->requiredDocuments()->attach(18, ['Location' => "/public/DocumentoExtra/Protocolo_Hilda_Guadalupe_Cisneros_Ontiveros_DoctoradoPMPCA.pdf"]);
         $Expediente->createRecommendationLetter(Storage::get('/public/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf'));
+    }
+    //**Metodo para descargar todos los archivos que se encuentran actualmente en el sistema antiguo. */
+    //**No se enlazan a la estructura.*/
+    private function downloadAllOldArchives($old_archives)
+    {
+        $count = 0;
+
+        for ($i = 0; $i < count($old_archives); $i++) {
+            if (isset($old_archives[$i]['personal_documents'])) {
+               
+                for ($j = 0; $j < count($old_archives[$i]['personal_documents']); $j++) {
+                    //dd(count($old_archives[$i]['personal_documents']));
+                    $path = implode('/', [
+                        'archives',
+                        $i,
+                        'personalDocuments',
+                        $j . '.pdf'
+                    ]);
+
+                    # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+                    Storage::put($path, base64_decode($old_archives[$i]['personal_documents'][$j]['Contenido']));
+                }
+            }
 
 
-       
+            if (isset($old_archives[$i]['academic_documents'])) {
+                for ($j = 0; $j < count($old_archives[$i]['academic_documents']); $j++) {
+                    //dd(count($old_archives[$i]['personal_documents']));
+                    $path = implode('/', [
+                        'archives',
+                        $i,
+                        'academic_documents',
+                        $j . '.pdf'
+                    ]);
+
+                    # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+                    Storage::put($path, base64_decode($old_archives[$i]['academic_documents'][$j]['Contenido']));
+                }
+            } 
+            if (isset($old_archives[$i]['entrance_documents'])) {
+                for ($j = 0; $j < count($old_archives[$i]['entrance_documents']); $j++) {
+                    //dd(count($old_archives[$i]['personal_documents']));
+                    $path = implode('/', [
+                        'archives',
+                        $i,
+                        'entrance_documents',
+                        $j . '.pdf'
+                    ]);
+
+                    # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+                    Storage::put($path, base64_decode($old_archives[$i]['entrance_documents'][$j]['Contenido']));
+                }
+            }
+            if (isset($old_archives[$i]['language_documents'])) {
+                for ($j = 0; $j < count($old_archives[$i]['language_documents']); $j++) {
+                    //dd(count($old_archives[$i]['personal_documents']));
+                    $path = implode('/', [
+                        'archives',
+                        $i,
+                        'language_documents',
+                        $j . '.pdf'
+                    ]);
+
+                    # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+                    Storage::put($path, base64_decode($old_archives[$i]['language_documents'][$j]['Contenido']));
+                }
+            }
+            if (isset($old_archives[$i]['curricular_documents'])) {
+                for ($j = 0; $j < count($old_archives[$i]['curricular_documents']); $j++) {
+                    //dd(count($old_archives[$i]['personal_documents']));
+                    $path = implode('/', [
+                        'archives',
+                        $i,
+                        'curricular_documents',
+                        $j . '.pdf'
+                    ]);
+
+                    # Guarda el nuevo documento probatorio y lo actualiza en el modelo de datos.
+                    Storage::put($path, base64_decode($old_archives[$i]['curricular_documents'][$j]['Contenido']));
+                }
+            }
+           
+           
+        }
+    }
+    private function ReasingIntentionLetter(){
 
     }
-    
     /**
      * Run the database seeds.
      *
@@ -499,7 +572,7 @@ class ArchiveSeeder extends Seeder
     public function run()
     {
         # sleep(10);
-       
+
         # APIs.
         $this->mi_portal_service = new MiPortalService;
         $this->old_ce_service = new OldSchoolControlService;
@@ -507,13 +580,16 @@ class ArchiveSeeder extends Seeder
         # Expedientes viejos.
         $old_archives_response = $this->old_ce_service->get('api/oldArchives');
         $old_archives = $old_archives_response->collect();
-       
+
+        #Descargar archivos viejos
+        //$this->downloadAllOldArchives($old_archives);
         # Registra a los usuarios que ya estén en mi portal. Recupera el curp 
         # de dichos usuarios.
         $cropped_archives = $this->migrateOldUsers($old_archives);
         $this->migrateNewUsers($cropped_archives);
 
         $this->ReasigRecommentLetter();
+        $this->ReasingIntentionLetter();
 
     }
 }
