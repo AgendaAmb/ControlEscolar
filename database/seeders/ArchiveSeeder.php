@@ -179,7 +179,7 @@ class ArchiveSeeder extends Seeder
             '19.- Propuesta de proyecto avalada por el profesor postulante' => '19.- Propuesta de proyecto avalada por el profesor postulante'
         ];
 
-        foreach ($old_archive['language_documents'] as $file) {
+        foreach ($old_archive['entrance_documents'] as $file) {
             # Nombre del documento.
             $document_name = $transition_array[$file['name']] ?? null;
 
@@ -442,8 +442,6 @@ class ArchiveSeeder extends Seeder
 
             # Busca el id del documento requerido, que tenga coincidencia con el nombre.
             $required_document_id = RequiredDocument::firstWhere('name', $document_name)->id ?? null;
-
-            dump([$file['name'], $required_document_id]);
 
             # En caso de no encontrarse, se va al siguiente documento.
             if ($required_document_id === null)
