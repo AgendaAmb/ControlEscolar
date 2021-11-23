@@ -160,9 +160,40 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-        
+        $BasicConceptsPercentage=15;
+        $PromedioBC=0;
+
+        $academicConceptsPercentage=30;
+        $PromedioAc=0;
+
+        $researchConceptsPercentage=15;
+        $PromedioRC=0;
+
         $interview2 = Interview::findorFail($request->id);
-        //$interview2->
+        
+        foreach ($interview2->evaluationRubrics as $rubric) {
+            foreach($rubric->basicConcepts as $basicC){
+                $PromedioBC+=$basicC->score;  
+            }
+            $PromedioBC=(($PromedioBC*$BasicConceptsPercentage)/count($rubric->basicConcepts))/100;
+           
+           
+            foreach($rubric->academicConcepts as $academicC){
+                $PromedioAc+=$academicC->score;  
+            }
+            $PromedioAc=(($PromedioAc*$academicConceptsPercentage)/count($rubric->academicConcepts))/100;
+            
+            foreach($rubric->researchConcepts as $ResearchC){
+                $PromedioRC+=$ResearchC->score;  
+            }
+            $PromedioRC=(($PromedioRC*$researchConceptsPercentage)/count($rubric->researchConcepts))/100;
+            
+            
+            dd($PromedioRC);
+        }
+        
+        
+       
 
 
         /**Checar si el url es null por si se reabrio el interview */

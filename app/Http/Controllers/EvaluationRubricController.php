@@ -71,7 +71,7 @@ class EvaluationRubricController extends Controller
      */
     public function update(UpdateEvaluationRubricRequest $request, EvaluationRubric $evaluationRubric)
     {
-        
+       
         $this->updatePivot($request->basic_concepts, $evaluationRubric);
         $this->updatePivot($request->academic_concepts, $evaluationRubric);
         $this->updatePivot($request->research_concepts, $evaluationRubric);

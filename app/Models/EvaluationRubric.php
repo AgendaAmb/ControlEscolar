@@ -71,7 +71,7 @@ class EvaluationRubric extends Model
     }
 
     /**
-     * Gets the list of evaluation concepts.
+     * Gets the list of every  evaluation concepts.
      *
      * @return BelongsToMany
      */
@@ -82,7 +82,7 @@ class EvaluationRubric extends Model
     }
 
     /**
-     * Gets the list of evaluation concepts.
+     * Gets the list of basic concepts.
      *
      * @return BelongsToMany
      */
@@ -92,7 +92,7 @@ class EvaluationRubric extends Model
     }
 
     /**
-     * Gets the list of evaluation concepts.
+     * Gets the list of academic concepts.
      *
      * @return BelongsToMany
      */
@@ -102,7 +102,7 @@ class EvaluationRubric extends Model
     }
 
     /**
-     * Gets the list of evaluation concepts.
+     * Gets the list of research concepts.
      *
      * @return BelongsToMany
      */
@@ -112,7 +112,7 @@ class EvaluationRubric extends Model
     }
 
     /**
-     * Gets the list of evaluation concepts.
+     * Gets the list of workingExperience concepts.
      *
      * @return BelongsToMany
      */
