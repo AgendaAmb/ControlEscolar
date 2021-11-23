@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\EvaluationRubric;
+namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;

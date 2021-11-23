@@ -160,9 +160,9 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-      
+        
         $interview2 = Interview::findorFail($request->id);
-
+        //$interview2->
 
 
         /**Checar si el url es null por si se reabrio el interview */

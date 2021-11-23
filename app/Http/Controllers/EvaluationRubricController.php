@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateEvaluationRubricRequest;
-use App\Http\Resources\EvaluationRubric\RubricResource;
+use App\Http\Resources\RubricResource;
 use App\Models\EvaluationRubric;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
