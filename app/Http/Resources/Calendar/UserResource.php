@@ -13,11 +13,13 @@ class UserResource extends JsonResource
      */
     protected function getFullName()
     {
-        return implode(' ', [
-            $this->name,
-            $this->middlename,
-            $this->surname,
-        ]);
+       
+            return implode(' ', [
+                $this->name?? '',
+                $this->middlename?? '',
+                $this->surname?? '',
+            ]);
+       
     }
 
     /**
