@@ -41,7 +41,7 @@ class AcademicProgram extends Model
             })->with([
                 'announcement.archives.intentionLetter',
                 'rooms'
-            ]);/*->whereYear('end_date', '<=', date('Y'))
+            ])->where('finished', false);/*->whereYear('end_date', '<=', date('Y'))
             ->whereMonth('end_date', '<=', date('m'))*/;
         
         })->with('latestAnnouncement');
