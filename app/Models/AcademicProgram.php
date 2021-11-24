@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
@@ -97,5 +98,15 @@ class AcademicProgram extends Model
     public function periods(): HasManyThrough
     {
         return $this->hasManyThrough(Period::class, Announcement::class);
+    }
+
+    /**
+     * Obtiene los periodos de entrevista del programa académico.
+     *
+     * @return HasMany
+     */
+    public function latestPeriod(): HasOneThrough
+    {
+        return $this->hasOneThrough(Period::class, Announcement::class)->latestOfMany();
     }
 }

@@ -65,8 +65,8 @@ class LoginController extends Controller
         $request->session()->put('user', $user);
 
         # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
-        if (!$user->isWorker())
-            return;
+        //if (!$user->isWorker())
+        //    return;
 
         # Carga otros datos que requiere el modelo.
         $user->load(['academicAreas', 'academicEntities']);
