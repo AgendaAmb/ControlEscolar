@@ -43,6 +43,16 @@ class Period extends Model
     ];
 
     /**
+     * Une el nombre del programa académico con la convocatoria.
+     *
+     * @return QueryBuilder
+     */
+    public function scopeWhereNotFinished(Builder $query): Builder
+    {
+        return $query->where('finished', false);
+    }
+
+    /**
      * Obtiene las salas que pertenecen al periodo de la
      * convocatoria actual.
      *

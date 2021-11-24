@@ -11,6 +11,7 @@ use App\Http\Requests\ReopenInterviewRequest;
 use App\Http\Requests\StoreInterviewRequest;
 use App\Http\Resources\CalendarResource;
 use App\Http\Resources\InterviewProgram\InterviewProgramResource;
+use App\Http\Resources\Interviews\CalendarResource as InterviewsCalendarResource;
 use App\Models\AcademicProgram;
 use App\Models\Interview;
 use Illuminate\Http\JsonResponse;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMeeatingInformation;
 use App\Mail\SendMeeatingInformationProfesor;
+use App\Models\Period;
 
 class InterviewController extends Controller
 {
@@ -29,6 +31,12 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
+        //dd(Period::whereNotFinished()->first());
+
+        dd((new InterviewsCalendarResource(Period::whereNotFinished()->first()))->toArray($request) );
+
+
+
         $calendar_resource = new CalendarResource(AcademicProgram::withInterviewEagerLoads()->get());
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
