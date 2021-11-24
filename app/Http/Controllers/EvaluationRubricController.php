@@ -18,6 +18,7 @@ class EvaluationRubricController extends Controller
      */
     public function show(Request $request, EvaluationRubric $evaluationRubric)
     {
+       
         $evaluationRubric->load([
             'archive:id,user_id,user_type,announcement_id',
             'archive.announcement.academicProgram:id,name',
@@ -29,7 +30,7 @@ class EvaluationRubricController extends Controller
         ]);
 
         $rubricResource = new RubricResource($evaluationRubric);
-
+        
         return view('entrevistas.rubrica', $rubricResource->toArray($request));
     }
 
