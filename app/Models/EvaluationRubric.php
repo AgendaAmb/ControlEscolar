@@ -58,13 +58,13 @@ class EvaluationRubric extends Model
     public function archive(): BelongsTo
     {
         return $this->belongsTo(Archive::class);
-    } 
-    
+    }
+
     /**
-    * Gets the professor who filled the rubric.
-    *
-    * @return BelongsTo
-    */
+     * Gets the professor who filled the rubric.
+     *
+     * @return BelongsTo
+     */
     public function professor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -138,7 +138,7 @@ class EvaluationRubric extends Model
      */
     public function getResearchConceptsDetailsAttribute(): array
     {
-        $filename = implode('/', ['evaluation_rubrics',$this->id]);
+        $filename = implode('/', ['evaluation_rubrics', $this->id]);
         $content = Storage::get($filename);
 
         return json_decode($content, true);
@@ -152,7 +152,75 @@ class EvaluationRubric extends Model
      */
     public function setResearchConceptsDetailsAttribute(array $details): void
     {
-        $filename = implode('/', ['evaluation_rubrics',$this->id]);
+        $filename = implode('/', ['evaluation_rubrics', $this->id]);
         Storage::put($filename, json_encode($details, JSON_PRETTY_PRINT));
     }
+    /**Funcion que regresa el promedio de una rubrica de los datos basicos*/
+    public function getAverageScoreBasicConcepts(): Float
+    {
+        //Porcentaje del 100 que vale los datos basicos//
+        $BasicConceptsPercentage = 15;
+        $PromedioBC = 0;
+        //**Sumatoria de valores  */
+        foreach ($this->basicConcepts as $basicC) {
+            $PromedioBC += $basicC->score;
+        }
+        //**Calculo de promedio de Datos basicos */
+        $PromedioBC = (($PromedioBC * $BasicConceptsPercentage) / count($this->basicConcepts)) / 100;
+
+        return $PromedioBC;
+    }
+    /**Funcion que regresa el promedio de una rubrica de los Datos academicos*/
+    public function getAverageScoreAcademicConcepts(): Float
+    {
+        //Porcentaje del 100 que vale los Datos academicos//
+        $academicConceptsPercentage = 30;
+        $PromedioAc = 0;
+        //**Sumatoria de valores  */
+        foreach ($this->academicConcepts as $academicC) {
+            $PromedioAc += $academicC->score;
+        }
+        $PromedioAc = (($PromedioAc * $academicConceptsPercentage) / count($this->academicConcepts)) / 100;
+        return $PromedioAc;
+    }
+     /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
+     public function getAverageScoreResearchConcepts(): Float
+     {
+         //Porcentaje del 100 que vale los Datos de investigacion//
+         $researchConceptsPercentage=15;
+         $PromedioRC = 0;
+         //**Sumatoria de valores  */
+         foreach ($this->researchConcepts as $ResearchC) {
+             $PromedioRC += $ResearchC->score;
+         }
+         $PromedioRC = (($PromedioRC * $researchConceptsPercentage) / count($this->researchConcepts)) / 100;
+         return $PromedioRC;
+     }
+     /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
+     public function getAverageWorkingExperienceConcepts(): Float
+     {
+         //Porcentaje del 100 que vale los Datos de investigacion//
+         $workingExperienceConceptsPercentage=20;
+         $PromedioWEC = 0;
+         //**Sumatoria de valores  */
+         foreach ($this->workingExperienceConcepts as $workingExperienceConcept) {
+            $PromedioWEC += $workingExperienceConcept->score;
+         }
+         $PromedioWEC = (($PromedioWEC * $workingExperienceConceptsPercentage) / count($this->workingExperienceConcepts)) / 100;
+         return $PromedioWEC;
+     }
+     
+     /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
+     public function getAverageWorkingPersonalAttributesConcepts(): Float
+     {
+         //Porcentaje del 100 que vale los Datos de investigacion//
+         $personalAttributesConceptsPerfcentage=15;
+         $PromedioPEC=0;
+         //**Sumatoria de valores  */
+         foreach ($this->personalAttributesConcepts as $personalAttributesConcept) {
+            $PromedioPEC += $personalAttributesConcept->score;
+         }
+         $PromedioPEC = (($PromedioPEC * $personalAttributesConceptsPerfcentage) / count($this->personalAttributesConcepts)) / 100;
+         return $PromedioPEC;
+     }
 }
