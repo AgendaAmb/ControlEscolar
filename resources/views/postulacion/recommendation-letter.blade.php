@@ -68,6 +68,12 @@
                 En síntesis ¿Por qué recomienda al aspirante para ingresar al PMPCA?
             </label>
             <textarea class="form-control" rows="4"></textarea>
+            <label class="mt-4"> 
+                <input type="checkbox">
+               Al guardar confirmo que esta información es exacta y veridica y autorizo que sea utilizada en la evaluación
+               del aspirante por el Comité Académico del PMPCA. 
+            </label>
+            <label ><strong>Nota: </strong>&nbsp; Esta información es confidencial y no será del conocimiento del candidato.</label>
         </div>
     </div>
     <hr class="d-block">
