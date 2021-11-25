@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="form-row my-4">
       <div class="col-12">
-        <label> Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz </label>          
+        <label> Explica los motivos, por los cuales deseas aplicar al programa académico </label>          
         <textarea v-model="Motivation" class="form-control" rows="8"></textarea>
       </div>
 

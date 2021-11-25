@@ -8028,7 +8028,7 @@ var render = function() {
         _c("div", { staticClass: "col-12" }, [
           _c("label", [
             _vm._v(
-              " Explica los motivos, por los cuales deseas aplicar al programa académico de chanchito feliz "
+              " Explica los motivos, por los cuales deseas aplicar al programa académico "
             )
           ]),
           _vm._v(" "),

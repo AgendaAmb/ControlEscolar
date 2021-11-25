@@ -179,7 +179,7 @@ class ArchiveController extends Controller
         # Asocia los documentos requeridos.
         $archive->entranceDocuments()->detach($request->requiredDocumentId);
         $archive->entranceDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
-
+        /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
             $archive->entranceDocuments()
             ->select('required_documents.*','archive_required_document.location as location')
@@ -219,6 +219,9 @@ class ArchiveController extends Controller
      */
     public function updateAcademicDegreeRequiredDocument(Request $request)
     {
+        //FUncion guarda el archivo y actualiza el archivo que se guardo al momento de ver,
+        //Pero hasta que subes el archivo por 2 vez aparece el mensaje que se a guardado con exito
+
         $academic_degree = AcademicDegree::find($request->id);
 
         # Archivo de la solicitud
@@ -230,7 +233,7 @@ class ArchiveController extends Controller
         # Asocia los documentos requeridos.
         $academic_degree->requiredDocuments()->detach($request->requiredDocumentId);
         $academic_degree->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
-
+       
         return new JsonResponse(
             $academic_degree->requiredDocuments()
             ->select('required_documents.*','academic_degree_required_document.location as location')
