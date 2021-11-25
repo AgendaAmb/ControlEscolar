@@ -64,7 +64,7 @@
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
       :archivo.sync="documento.archivo" 
-      :location.sync="documento.pivot.location" 
+      :location.sync="documento.pivot.location" archives
       :errores.sync = "documento.errores"
       @enviaDocumento = "cargaDocumento" 
       v-bind="documento">

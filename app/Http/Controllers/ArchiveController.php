@@ -141,17 +141,18 @@ class ArchiveController extends Controller
     public function updateArchivePersonalDocument(Request $request)
     {
         $archive = Archive::find($request->archive_id);
-
+       
         # Archivo de la solicitud
+       
         $ruta = $request->file('file')->storeAs(
             'archives/'.$request->archive_id.'/personalDocuments', 
             $request->requiredDocumentId.'.pdf'
         );
-
+        
         # Asocia los documentos requeridos.
         $archive->personalDocuments()->detach($request->requiredDocumentId);
         $archive->personalDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
-
+   
         return new JsonResponse(
             $archive->personalDocuments()
             ->select('required_documents.*','archive_required_document.location as location')
