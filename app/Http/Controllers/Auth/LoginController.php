@@ -110,15 +110,19 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         # Determina si se requiere solicitar autorización.
+        ///*
         if (!$this->loginService->isCallbackRequest($request))
             return $this->loginService->requestAuthorization($request);
+        //*/
 
         # Busca al usuario en el sistema central.
         $user_response = $this->loginService->loginGet('api/users/whoami', $request->code);
         
         # Si la respuesta fue errónea, devuele el error.
+        ///*
         if ($user_response->failed())
             return back()->withErrors($user_response->collect());
+        //*/
 
         # Recolecta los datos del usuario.
         $miportal_user = $user_response->collect();
@@ -127,8 +131,10 @@ class LoginController extends Controller
         $user = User::where('id', $miportal_user['id'])->where('type', $miportal_user['user_type'])->first();
 
         # Si el usuario no está en el sistema, manda error.
+        ///*
         if ($user === null)
             return back()->withErrors(['motivo' => 'Usuario no registrado en el sistema']);
+        //*/
 
         # Autentica al usuario y guarda los datos del sistema central.
         $miportal_user['roles'] = $user->roles;

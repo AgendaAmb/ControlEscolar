@@ -17,10 +17,12 @@
                 <a class="dropdown-item" href="{{ route('entrevistas.programa') }}">Programa de entrevistas</a>
             </div>
         </div>
-        @if (Auth::user()->hasRole('admin'))
-        <a class="nav-link" href="#"> Inscripciones </a>
-            
-        <a class="nav-link" href="{{ route('admin.index') }}" > Administración </a>
-        @endif
+        @auth
+            @if (Auth::user()->hasRole('admin'))
+                <a class="nav-link" href="#"> Inscripciones </a>
+                    
+                <a class="nav-link" href="{{ route('admin.index') }}" > Administración </a>
+            @endif    
+        @endauth
     </nav>
 </header> 

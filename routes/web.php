@@ -27,10 +27,12 @@ use Illuminate\Support\Facades\Route;
 Route::name('authenticate.')->group(function(){
 
     # Página principal.
-    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    //->middleware('auth');
 
     # Inicio de sesión por OAUTH2.
-    Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
+    Route::get('/', [LoginController::class, 'login'])->name('login');
+    //->middleware('guest');
 });
 
 # Rutas para gestión de usuarios.
