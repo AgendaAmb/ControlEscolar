@@ -23,20 +23,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/',function(){
+    return redirect("/controlescolar");
+});
+
 # Rutas de autenticacion.
-Route::name('authenticate.')->group(function(){
+Route::prefix('/controlescolar/')->name('authenticate.')->group(function(){
 
     # Página principal.
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    //->middleware('auth');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')
+    ->middleware('auth');
+
+    Route::get('/', [LoginController::class, 'prelogin'])->name('prelogin');
 
     # Inicio de sesión por OAUTH2.
-    Route::get('/', [LoginController::class, 'login'])->name('login');
-    //->middleware('guest');
+    Route::get('/login', [LoginController::class, 'login'])->name('login')
+    ->middleware('guest');
 });
 
 # Rutas para gestión de usuarios.
-Route::prefix('users')->name('users.')->group(function(){
+Route::prefix('/controlescolar/users')->name('users.')->group(function(){
 
     # Usuarios del sistema.
     Route::get('/', [UserController::class, 'index'])->name('index');
@@ -48,7 +54,7 @@ Route::prefix('users')->name('users.')->group(function(){
 });
 
 # Rutas para el pre-registro.
-Route::prefix('pre-registro')->name('pre-registro.')->group(function(){
+Route::prefix('/controlescolar/pre-registro')->name('pre-registro.')->group(function(){
     
     # Obtención de datos
     Route::get('/', [PreRegisterController::class, 'index'])->name('index');
@@ -56,7 +62,7 @@ Route::prefix('pre-registro')->name('pre-registro.')->group(function(){
 });
 
 # Rutas de las solicitudes académicas.
-Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function(){
+Route::prefix('/controlescolar/solicitud')->name('solicitud.')->middleware(['auth'])->group(function(){
 
     # Expedientes
     Route::get('/', [ArchiveController::class,'index'])->name('index');
@@ -93,7 +99,7 @@ Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(func
 });
 
 # Rutas para las entrevistas.
-Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function(){
+Route::prefix('/controlescolar/entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function(){
 
     # Calendario
     Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
@@ -109,7 +115,7 @@ Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|pr
 
     # Agregar y eliminar a los usuarios de una entrevista.
     Route::post('interviewUser', [InterviewController::class, 'newInterviewUser'])->name('interviewUser');
-    Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])->name('interviewUser');
+    Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])->name('interviewUserDelete');
 
     # Rúbrica de evaluación
     Route::prefix('rubrica')->name('rubrica.')->group(function(){
@@ -127,9 +133,7 @@ Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|pr
 
 
 # Rutas de admin.
-Route::prefix('admin')
-->name('admin.')
-->group(function(){
+Route::prefix('/controlescolar/admin')->name('admin.')->group(function(){
 
     # Vista de admin.
     Route::get('/', [AdminController::class, 'index'])
@@ -144,7 +148,7 @@ Route::prefix('admin')
 });
 
 # Rutas de admin.
-Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+Route::get('/controlescolar/prueba/{id}', [LoginController::class, 'testLogin']);
 
 
 # Vista de la carta de recomendación

@@ -184,14 +184,14 @@ export default {
 
       axios({
         method: 'post',
-        url: '/controlescolar/',
+        url: '/controlescolar/login',
         data: formData,
         headers: {
           'Accept' : 'application/json',
           'Content-Type': 'multipart/form-data'
         }
-      }).then(response => {        
-        
+      }).then(response => {
+        console.log(response);
       }).catch(error => {
         var errores = error.response.data['errors'];
 

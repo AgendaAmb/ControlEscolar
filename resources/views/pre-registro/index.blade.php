@@ -4,6 +4,7 @@ const academicPrograms = @json($academic_programs);
 @extends('layouts.app')
 
 @section('main')
+{{-- Esto de aqui solo es un espaciado --}}
 <div class="row justify-content-center">
     <div class="form-group col-md-12 text-center">
     </div>

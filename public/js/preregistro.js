@@ -1019,13 +1019,15 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('disability', this.disability);
       axios({
         method: 'post',
-        url: '/controlescolar/',
+        url: '/controlescolar/login',
         data: formData,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
-      }).then(function (response) {})["catch"](function (error) {
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
           Vue.set(_this.errores, key, errores[key][0]);

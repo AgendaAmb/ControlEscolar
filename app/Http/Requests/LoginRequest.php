@@ -20,6 +20,9 @@ class LoginRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
+        //
+        //return
+
         $code = JsonResponse::HTTP_UNPROCESSABLE_ENTITY;
 
         throw new HttpResponseException(

@@ -99,6 +99,13 @@ class LoginController extends Controller
         $request->session()->put('workers', $miPortal_workers);
     }
 
+    public function prelogin(){
+        if(!Auth::user()){
+            return redirect(route('pre-registro.index'));
+        }
+        return redirect(route('home'));
+    }
+
     /**
      * Handle a login request to the application.
      *
@@ -107,40 +114,50 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function login(LoginRequest $request)
     {
-        # Determina si se requiere solicitar autorización.
-        ///*
-        if (!$this->loginService->isCallbackRequest($request))
-            return $this->loginService->requestAuthorization($request);
-        //*/
+        //puse esta condicion para entrar en local, 
+        //se debe quitar y descomentar la funcion de arriab despues
+        if(!isset($request)){
+            return redirect(route('pre-registro.index'));
+        }else
+        {
 
-        # Busca al usuario en el sistema central.
-        $user_response = $this->loginService->loginGet('api/users/whoami', $request->code);
-        
-        # Si la respuesta fue errónea, devuele el error.
-        ///*
-        if ($user_response->failed())
-            return back()->withErrors($user_response->collect());
-        //*/
+            # Determina si se requiere solicitar autorización.
+            ///*
+            if (!$this->loginService->isCallbackRequest($request))
+                return $this->loginService->requestAuthorization($request);
+            //*/
 
-        # Recolecta los datos del usuario.
-        $miportal_user = $user_response->collect();
+            # Busca al usuario en el sistema central.
+            $user_response = $this->loginService->loginGet('api/users/whoami', $request->code);
+            
+            # Si la respuesta fue errónea, devuele el error.
+            ///*
+            if ($user_response->failed())
+                return back()->withErrors($user_response->collect());
+            //*/
 
-        # Busca al usuario en el sistema.
-        $user = User::where('id', $miportal_user['id'])->where('type', $miportal_user['user_type'])->first();
+            # Recolecta los datos del usuario.
+            $miportal_user = $user_response->collect();
 
-        # Si el usuario no está en el sistema, manda error.
-        ///*
-        if ($user === null)
-            return back()->withErrors(['motivo' => 'Usuario no registrado en el sistema']);
-        //*/
+            # Busca al usuario en el sistema.
+            $user = User::where('id', $miportal_user['id'])->where('type', $miportal_user['user_type'])->first();
 
-        # Autentica al usuario y guarda los datos del sistema central.
-        $miportal_user['roles'] = $user->roles;
-        Auth::login($user);
+            # Si el usuario no está en el sistema, manda error.
+            ///*
+            if ($user === null)
+                return back()->withErrors(['motivo' => 'Usuario no registrado en el sistema']);
+            //*/
 
-        $this->getUsers($request, $user);
+            # Autentica al usuario y guarda los datos del sistema central.
+            $miportal_user['roles'] = $user->roles;
+            Auth::login($user);
+
+            $this->getUsers($request, $user);
+            
+            }
 
         # Redirecciona a la página principal.
         return redirect()->route('authenticate.home');

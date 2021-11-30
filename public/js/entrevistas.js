@@ -2041,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mes[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Bold';\n  font-size: 66px;\n  text-align: center;\n  color: #fecc56;\n  margin-bottom: 0;\n  text-transform: capitalize;\n}\n.año[data-v-1bdfed60] {\n  font-family: 'Myriad Pro Regular';\n  color: #115089;\n  text-align: center;\n  font-size: 66px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mes[data-v-1bdfed60] {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 66px;\r\n  text-align: center;\r\n  color: #fecc56;\r\n  margin-bottom: 0;\r\n  text-transform: capitalize;\n}\n.año[data-v-1bdfed60] {\r\n  font-family: 'Myriad Pro Regular';\r\n  color: #115089;\r\n  text-align: center;\r\n  font-size: 66px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2065,7 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntfoot > tr > td > button[data-v-659b4636] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntfoot > tr > td > button[data-v-659b4636] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2089,7 +2089,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\n  font-family: 'Myriad Pro Bold';\n  color: #fecc56;\n  display: block;\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\n  font-family: 'Myriad Pro Regular';\n  font-size: 13px;\n  color: #115089;\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\n  font-family: 'Myriad Pro Bold';\n  font-size: 13px;\n  color: #115089;\n  text-transform: capitalize;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Bold';\r\n  color: #fecc56;\r\n  display: block;\r\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Regular';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  text-transform: capitalize;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2113,7 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-34cc71e8], .modal-footer button.btn-primary[data-v-34cc71e8] {\n  background-color: #115089;\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-34cc71e8] {\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-34cc71e8] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-34cc71e8], .modal-footer button.btn-primary[data-v-34cc71e8] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-34cc71e8] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-34cc71e8] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2137,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-23a19f57], .modal-footer button.btn-primary[data-v-23a19f57] {\n  background-color: #115089;\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-23a19f57] {\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-23a19f57] {\n  color: white;\n  font-family: 'Myriad Pro Bold';\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-23a19f57], .modal-footer button.btn-primary[data-v-23a19f57] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-23a19f57] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-23a19f57] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
