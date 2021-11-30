@@ -1695,6 +1695,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3051,7 +3053,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-714f2fc7] {\r\n  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background: url(/controlescolar/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6673,34 +6675,22 @@ var render = function() {
         _vm.Language === "Alemán"
           ? _c("img", {
               staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/alemania.png"
-              }
+              attrs: { width: "120px", src: "/storage/emojis/alemania.png" }
             })
           : _vm.Language === "Español"
           ? _c("img", {
               staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/mexico.png"
-              }
+              attrs: { width: "120px", src: "/storage/emojis/mexico.png" }
             })
           : _vm.Language === "Inglés"
           ? _c("img", {
               staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/inglaterra.png"
-              }
+              attrs: { width: "120px", src: "/storage/emojis/inglaterra.png" }
             })
           : _vm.Language === "Francés"
           ? _c("img", {
               staticClass: "d-block mx-auto",
-              attrs: {
-                width: "120px",
-                src: "/controlescolar/storage/emojis/francia.png"
-              }
+              attrs: { width: "120px", src: "/storage/emojis/francia.png" }
             })
           : _vm._e()
       ]),

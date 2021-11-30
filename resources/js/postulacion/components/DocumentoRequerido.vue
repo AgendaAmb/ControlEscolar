@@ -27,7 +27,7 @@
 
 <style scoped>
 .cargarArchivo {
-  background: url(/controlescolar/storage/archive-buttons/seleccionar.png);
+  background: url(/storage/archive-buttons/seleccionar.png);
   background-size: 90px 40px;
   background-repeat: no-repeat;
   width: 90px;
@@ -35,7 +35,7 @@
 }
 
 .verArchivo {
-  background: url(/controlescolar/storage/archive-buttons/ver.png);
+  background: url(/storage/archive-buttons/ver.png);
   background-size: 90px 40px;
   background-repeat: no-repeat;
   width: 90px;

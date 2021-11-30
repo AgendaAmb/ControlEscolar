@@ -7,14 +7,14 @@
       <img v-if="Language === 'Alemán'" 
         class="d-block mx-auto" 
         width="120px" 
-        src="/controlescolar/storage/emojis/alemania.png">
+        src="/storage/emojis/alemania.png">
       
       <img v-else-if="Language === 'Español'" 
         class="d-block mx-auto" 
         width="120px" 
-        src="/controlescolar/storage/emojis/mexico.png">
-      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
-      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/francia.png">
+        src="/storage/emojis/mexico.png">
+      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/storage/emojis/inglaterra.png">
+      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/storage/emojis/francia.png">
     </div>
 
     <!--
