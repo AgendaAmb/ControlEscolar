@@ -64,13 +64,16 @@
       </div>
     </div>
 
-    <documento-requerido v-for="documento in Documentos" :key="documento.name"
-      :archivo.sync="documento.archivo" 
-      :location.sync="documento.pivot.location" 
-      :errores.sync = "documento.errores"
-      @enviaDocumento = "cargaDocumento" 
-      v-bind="documento">
-    </documento-requerido>
+    <div class="row mt-4">
+      <h3>Documentos</h3>
+      <documento-requerido v-for="documento in Documentos" :key="documento.name"
+         :archivo.sync="documento.archivo"
+         :location.sync="documento.pivot.location"
+         :errores.sync = "documento.errores"
+         @enviaDocumento = "cargaDocumento"
+         v-bind="documento">
+      </documento-requerido>
+    </div>
   </div>
 </template>
 

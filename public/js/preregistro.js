@@ -112,6 +112,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -898,6 +900,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1612,7 +1616,7 @@ var render = function() {
         _vm._v(" "),
         "tipo_usuario" in _vm.errores
           ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(" " + _vm._s(_vm.errores.tipo_usuario) + " ")
+              _vm._v("\n      " + _vm._s(_vm.errores.tipo_usuario) + "\n    ")
             ])
           : _vm._e()
       ]),
@@ -2950,95 +2954,103 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _c("datos-personales", {
-                    attrs: {
-                      errores: _vm.errores,
-                      tipo_usuario: _vm.tipo_usuario,
-                      readonly: _vm.Readonly,
-                      countries: _vm.countries,
-                      curp: _vm.curp,
-                      no_curp: _vm.no_curp,
-                      name: _vm.name,
-                      first_surname: _vm.first_surname,
-                      last_surname: _vm.last_surname,
-                      birth_date: _vm.birth_date,
-                      ocupation: _vm.ocupation,
-                      birth_country: _vm.birth_country,
-                      birth_state: _vm.birth_state,
-                      residence_country: _vm.residence_country,
-                      gender: _vm.gender,
-                      other_gender: _vm.other_gender,
-                      civic_state: _vm.civic_state,
-                      other_civic_state: _vm.other_civic_state,
-                      zip_code: _vm.zip_code,
-                      phone_number: _vm.phone_number,
-                      ethnicity: _vm.ethnicity,
-                      is_disabled: _vm.is_disabled,
-                      disability: _vm.disability
-                    },
-                    on: {
-                      "update:tipo_usuario": function($event) {
-                        _vm.tipo_usuario = $event
-                      },
-                      "update:curp": function($event) {
-                        _vm.curp = $event
-                      },
-                      "update:no_curp": function($event) {
-                        _vm.no_curp = $event
-                      },
-                      "update:name": function($event) {
-                        _vm.name = $event
-                      },
-                      "update:first_surname": function($event) {
-                        _vm.first_surname = $event
-                      },
-                      "update:last_surname": function($event) {
-                        _vm.last_surname = $event
-                      },
-                      "update:birth_date": function($event) {
-                        _vm.birth_date = $event
-                      },
-                      "update:ocupation": function($event) {
-                        _vm.ocupation = $event
-                      },
-                      "update:birth_country": function($event) {
-                        _vm.birth_country = $event
-                      },
-                      "update:birth_state": function($event) {
-                        _vm.birth_state = $event
-                      },
-                      "update:residence_country": function($event) {
-                        _vm.residence_country = $event
-                      },
-                      "update:gender": function($event) {
-                        _vm.gender = $event
-                      },
-                      "update:other_gender": function($event) {
-                        _vm.other_gender = $event
-                      },
-                      "update:civic_state": function($event) {
-                        _vm.civic_state = $event
-                      },
-                      "update:other_civic_state": function($event) {
-                        _vm.other_civic_state = $event
-                      },
-                      "update:zip_code": function($event) {
-                        _vm.zip_code = $event
-                      },
-                      "update:phone_number": function($event) {
-                        _vm.phone_number = $event
-                      },
-                      "update:ethnicity": function($event) {
-                        _vm.ethnicity = $event
-                      },
-                      "update:is_disabled": function($event) {
-                        _vm.is_disabled = $event
-                      },
-                      "update:disability": function($event) {
-                        _vm.disability = $event
-                      }
-                    }
-                  })
+                  _vm.tipo_usuario !== null
+                    ? _c(
+                        "div",
+                        [
+                          _c("datos-personales", {
+                            attrs: {
+                              errores: _vm.errores,
+                              tipo_usuario: _vm.tipo_usuario,
+                              readonly: _vm.Readonly,
+                              countries: _vm.countries,
+                              curp: _vm.curp,
+                              no_curp: _vm.no_curp,
+                              name: _vm.name,
+                              first_surname: _vm.first_surname,
+                              last_surname: _vm.last_surname,
+                              birth_date: _vm.birth_date,
+                              ocupation: _vm.ocupation,
+                              birth_country: _vm.birth_country,
+                              birth_state: _vm.birth_state,
+                              residence_country: _vm.residence_country,
+                              gender: _vm.gender,
+                              other_gender: _vm.other_gender,
+                              civic_state: _vm.civic_state,
+                              other_civic_state: _vm.other_civic_state,
+                              zip_code: _vm.zip_code,
+                              phone_number: _vm.phone_number,
+                              ethnicity: _vm.ethnicity,
+                              is_disabled: _vm.is_disabled,
+                              disability: _vm.disability
+                            },
+                            on: {
+                              "update:tipo_usuario": function($event) {
+                                _vm.tipo_usuario = $event
+                              },
+                              "update:curp": function($event) {
+                                _vm.curp = $event
+                              },
+                              "update:no_curp": function($event) {
+                                _vm.no_curp = $event
+                              },
+                              "update:name": function($event) {
+                                _vm.name = $event
+                              },
+                              "update:first_surname": function($event) {
+                                _vm.first_surname = $event
+                              },
+                              "update:last_surname": function($event) {
+                                _vm.last_surname = $event
+                              },
+                              "update:birth_date": function($event) {
+                                _vm.birth_date = $event
+                              },
+                              "update:ocupation": function($event) {
+                                _vm.ocupation = $event
+                              },
+                              "update:birth_country": function($event) {
+                                _vm.birth_country = $event
+                              },
+                              "update:birth_state": function($event) {
+                                _vm.birth_state = $event
+                              },
+                              "update:residence_country": function($event) {
+                                _vm.residence_country = $event
+                              },
+                              "update:gender": function($event) {
+                                _vm.gender = $event
+                              },
+                              "update:other_gender": function($event) {
+                                _vm.other_gender = $event
+                              },
+                              "update:civic_state": function($event) {
+                                _vm.civic_state = $event
+                              },
+                              "update:other_civic_state": function($event) {
+                                _vm.other_civic_state = $event
+                              },
+                              "update:zip_code": function($event) {
+                                _vm.zip_code = $event
+                              },
+                              "update:phone_number": function($event) {
+                                _vm.phone_number = $event
+                              },
+                              "update:ethnicity": function($event) {
+                                _vm.ethnicity = $event
+                              },
+                              "update:is_disabled": function($event) {
+                                _vm.is_disabled = $event
+                              },
+                              "update:disability": function($event) {
+                                _vm.disability = $event
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e()
                 ],
                 1
               )

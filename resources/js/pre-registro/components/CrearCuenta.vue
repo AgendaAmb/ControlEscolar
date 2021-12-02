@@ -15,7 +15,9 @@
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno">
         <label class="form-check-label"> Ninguno de los anteriores </label>
       </div>
-      <div v-if="'tipo_usuario' in errores" class="invalid-feedback"> {{ errores.tipo_usuario }} </div>
+      <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
+        {{ errores.tipo_usuario }}
+      </div>
     </div>
     <div class="col-12"></div>
 
@@ -77,28 +79,20 @@ export default {
   props: {
     // El usuario pertenece a la comunidad de agenda ambiental.
     tipo_usuario: String,
-
     // El usuario pertenece a la UASLP.
     pertenece_uaslp: Boolean,
-    
     // Facultad de adscripción del usuario.
     facultad: String,
-
     // Usuario de la UASLP.
     clave_uaslp: String,
-
     // Email de registro.
     email: String,
-
     // Email de registro alterno.
     email_alterno: String,
-
     // Contraseña de registro.
     password: String,
-
     // Confirmación de la contraseña.
     rpassword: String,
-
     // Errores.
     errores: Object,
   },

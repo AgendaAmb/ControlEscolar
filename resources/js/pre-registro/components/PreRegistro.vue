@@ -24,31 +24,33 @@
               @miPortalUserUpdated="miPortalUserUpdated">
             </crear-cuenta>
 
-            <!-- Datos generales -->
-            <datos-personales :errores="errores"
-              :tipo_usuario.sync="tipo_usuario"
-              :readonly="Readonly"
-              :countries="countries"
-              :curp.sync="curp"
-              :no_curp.sync="no_curp"
-              :name.sync="name"
-              :first_surname.sync="first_surname"
-              :last_surname.sync="last_surname"
-              :birth_date.sync="birth_date"
-              :ocupation.sync="ocupation"
-              :birth_country.sync="birth_country"
-              :birth_state.sync="birth_state"
-              :residence_country.sync="residence_country"
-              :gender.sync="gender"
-              :other_gender.sync="other_gender"
-              :civic_state.sync="civic_state"
-              :other_civic_state.sync="other_civic_state"
-              :zip_code.sync="zip_code"
-              :phone_number.sync="phone_number"
-              :ethnicity.sync="ethnicity"
-              :is_disabled.sync="is_disabled"
-              :disability.sync="disability">
-            </datos-personales>
+            <div v-if="tipo_usuario !== null">
+              <!-- Datos generales -->
+              <datos-personales :errores="errores"
+                                :tipo_usuario.sync="tipo_usuario"
+                                :readonly="Readonly"
+                                :countries="countries"
+                                :curp.sync="curp"
+                                :no_curp.sync="no_curp"
+                                :name.sync="name"
+                                :first_surname.sync="first_surname"
+                                :last_surname.sync="last_surname"
+                                :birth_date.sync="birth_date"
+                                :ocupation.sync="ocupation"
+                                :birth_country.sync="birth_country"
+                                :birth_state.sync="birth_state"
+                                :residence_country.sync="residence_country"
+                                :gender.sync="gender"
+                                :other_gender.sync="other_gender"
+                                :civic_state.sync="civic_state"
+                                :other_civic_state.sync="other_civic_state"
+                                :zip_code.sync="zip_code"
+                                :phone_number.sync="phone_number"
+                                :ethnicity.sync="ethnicity"
+                                :is_disabled.sync="is_disabled"
+                                :disability.sync="disability">
+              </datos-personales>
+            </div>
           </form>
         </div>
       </div>

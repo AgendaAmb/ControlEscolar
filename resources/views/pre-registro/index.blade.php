@@ -11,7 +11,7 @@ const academicPrograms = @json($academic_programs);
 </div>
 
 <div class="mt-5 row text-center justify-content-center">
-    <academic-program 
+    <academic-program
         v-for="academic_program in academic_programs"
         v-bind="academic_program"
         :id="academic_program.id"
