@@ -2954,7 +2954,7 @@ var render = function() {
                     }
                   }),
                   _vm._v(" "),
-                  _vm.tipo_usuario !== null
+                  _vm.tipo_usuario !== null && this.name !== "Ninguno"
                     ? _c(
                         "div",
                         [
