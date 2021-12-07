@@ -11,7 +11,7 @@
         </div>
         <div class="modal-body">
           <form @submit.prevent="creaEntrevista">
-            <div class="form-row mt-4 mb-2">
+            <div class="mt-4 mb-2 form-row">
               <div class="form-group col-12">
                 <label> Fecha </label>
                 <input v-model="date" type="date" class="form-control" :min="MinDate" :max="max_date">

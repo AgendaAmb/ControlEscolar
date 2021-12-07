@@ -58,7 +58,7 @@ class AcademicProgram extends Model
     }
 
     /**
-     * Obtiene los documentos requeridos del expediente.
+     * Obtiene la fecha de convocatoria mas antigua
      *
      * @return HasMany
      */
@@ -68,7 +68,7 @@ class AcademicProgram extends Model
     }
 
     /**
-     * Obtiene los documentos requeridos del expediente.
+     * Obtiene la fecha de convocatoria mas reciente
      *
      * @return HasMany
      */

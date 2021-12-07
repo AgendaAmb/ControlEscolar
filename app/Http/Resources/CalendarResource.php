@@ -208,7 +208,7 @@ class CalendarResource extends JsonResource
     {
         # Verifica que el periodo exista.
         if ($this->period === null)
-            return;
+            return;//return no se puede
 
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;

@@ -40,7 +40,7 @@ export default {
             // Parámetros de búsqueda.
             var params = {}
 
-            if (this.announcement !== null) {
+            if (this.announcement !== null) { //si existe una fecha de convocatoria abierta
                 params = {
                     params: {
                         'filter[announcement.id]': this.announcement

@@ -30,7 +30,9 @@ class InterviewController extends Controller
     public function calendario(Request $request)
     {
         //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::withInterviewEagerLoads()->get());
+        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        //return AcademicProgram::WithInterviewEagerLoads()->get();
+        return $calendar_resource;
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }

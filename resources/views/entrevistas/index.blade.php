@@ -8,7 +8,7 @@ const announcements = @json($announcements);
 @extends('layouts.app')
 
 @section('headerPicture')
-<img class="img-fluid mt-4" src="{{ asset('storage/headers/logod.png') }}" width="600px">
+<img class="mt-4 img-fluid" src="{{ asset('storage/headers/logod.png') }}" width="600px">
 @endsection
 
 @section('main-content')

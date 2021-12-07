@@ -122,7 +122,7 @@ class Archive extends Model
     }
 
     /**
-     * Obtiene los documentos personales requeridos del expediente.
+     * Obtiene el postulante.
      *
      * @return BelongsTo
      */
