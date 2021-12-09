@@ -180,7 +180,7 @@ export default {
       }).catch(error => {
 
       });
-    },
-  },
+    }
+  }
 };
 </script>

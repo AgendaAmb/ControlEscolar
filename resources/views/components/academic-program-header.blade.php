@@ -1,6 +1,6 @@
-<header class="d-block header mb-5">
+<header class="mb-5 d-block header">
     <a class="d-block header-image" href="https://ambiental.uaslp.mx">
-        <img class="d-block img-fluid ml-auto" src="{{ asset('storage/headers/logod.png') }}">
+        <img class="ml-auto d-block img-fluid" src="{{ asset('storage/headers/logod.png') }}">
     </a>
     @auth
         <nav class="nav nav-options">
@@ -23,7 +23,10 @@
                     <a class="nav-link" href="#"> Inscripciones </a>
                         
                     <a class="nav-link" href="{{ route('admin.index') }}" > Administración </a>
-                @endif    
+                @endif
+            
+            <a href="#" class="nav-link">logout</a>
+  
         </nav>
     @endauth
 </header> 

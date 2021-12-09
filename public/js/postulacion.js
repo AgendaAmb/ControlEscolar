@@ -837,6 +837,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5704,7 +5707,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row my-3" },
+    { staticClass: "my-3 row" },
     [
       _c("div", { staticClass: "form-group col-12" }, [
         _c("div", { staticClass: "row" }, [
@@ -6175,7 +6178,8 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.degree_type === "Maestría"
+        _vm._v("\n    " + _vm._s(_vm.degree_type) + "\n    "),
+        _vm.degree_type === "Doctorado"
           ? _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "form-group col-md-4" }, [
                 _c("label", [_vm._v(" Número de CVU CONACYT: ")]),
@@ -6519,7 +6523,7 @@ var render = function() {
         )
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "col-12 my-3" }, [
+      _c("div", { staticClass: "my-3 col-12" }, [
         _c(
           "button",
           {

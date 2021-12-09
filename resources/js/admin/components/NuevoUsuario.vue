@@ -1,7 +1,7 @@
 <template>
   <div class="modal fade" id="NuevoUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div class="modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3 px-2" style="background-color: #8b96a8">
+      <div class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3" style="background-color: #8b96a8">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Nuevo trabajador</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-6 col-xl-3 mt-5">
+              <div class="mt-5 col-lg-6 col-xl-3">
                 <h4> Roles </h4>
                 <div v-for="role in roles" :key="role.id" class="form-check">
                     <input class="form-check-input" type="checkbox" :value="role.id" v-model="selected_roles">
@@ -25,7 +25,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-6 col-xl-3 mt-5">
+              <div class="mt-5 col-lg-6 col-xl-3">
                 <h4> Áreas académicas </h4>
                 <div v-for="area in academic_areas" :key="area.id" class="form-check">
                     <input class="form-check-input" type="checkbox" :value="area.id" v-model="selected_academic_areas">
@@ -33,7 +33,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-6 col-xl-3 mt-5">
+              <div class="mt-5 col-lg-6 col-xl-3">
                 <h4> Entidades académicas </h4>
                 <div v-for="entity in academic_entities" :key="entity.id" class="form-check">
                     <input class="form-check-input" type="checkbox" :value="entity.id" v-model="selected_academic_entities">
@@ -41,7 +41,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-6 col-xl-3 mt-5">
+              <div class="mt-5 col-lg-6 col-xl-3">
                 <h4> Comités académicos </h4>
                 <div v-for="comitte in academic_comittes" :key="comitte.id" class="form-check">
                     <input class="form-check-input" type="checkbox" :value="comitte.id" v-model="selected_academic_comittes">
@@ -51,7 +51,7 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer justify-content-start my-3 px-0">
+        <div class="px-0 my-3 modal-footer justify-content-start">
             <button id="submit" type="submit" class="btn btn-primary" style="background-color: #0160AE" @click="registraUsuario">Registrar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
@@ -98,15 +98,11 @@ export default {
             selected_academic_entities: this.selected_academic_entities,
             selected_academic_comittes: this.selected_academic_comittes
         }).then(response => {
-
+          console.log(response);
         }).catch(error => {
-
+          console.log(error);
         });
     },
-  },
-
-  mounted() {
-
-  },
+  }
 };
 </script>

@@ -32,7 +32,7 @@ class InterviewController extends Controller
         //return $request;
         $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
         //return AcademicProgram::WithInterviewEagerLoads()->get();
-        return $calendar_resource;
+        //return $calendar_resource;
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
