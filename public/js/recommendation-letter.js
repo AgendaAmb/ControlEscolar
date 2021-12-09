@@ -104,7 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'candidate-analysis',
   components: {
-    AnalysisParameter: _AnalysisParameter_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    AnalysisParameter: _AnalysisParameter_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     // Otros parámetros que se quieran especificar, para la carta 
@@ -195,8 +195,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _AnalysisParameter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnalysisParameter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _AnalysisParameter_vue_vue_type_template_id_21bc5d07___WEBPACK_IMPORTED_MODULE_0__.render,
   _AnalysisParameter_vue_vue_type_template_id_21bc5d07___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -233,8 +233,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
-  _CandidateAnalysis_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CandidateAnalysis_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _CandidateAnalysis_vue_vue_type_template_id_37ed4559___WEBPACK_IMPORTED_MODULE_0__.render,
   _CandidateAnalysis_vue_vue_type_template_id_37ed4559___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -262,7 +262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalysisParameter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AnalysisParameter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/recommendation-letter/components/AnalysisParameter.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalysisParameter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalysisParameter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -277,7 +277,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CandidateAnalysis_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CandidateAnalysis.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/recommendation-letter/components/CandidateAnalysis.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CandidateAnalysis_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CandidateAnalysis_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -324,7 +324,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -338,18 +338,18 @@ var render = function() {
             name: "model",
             rawName: "v-model",
             value: _vm.Score,
-            expression: "Score"
-          }
+            expression: "Score",
+          },
         ],
         staticClass: "form-control w-50 h-50 mx-auto",
         attrs: { type: "radio", value: "Excelente" },
         domProps: { checked: _vm._q(_vm.Score, "Excelente") },
         on: {
-          change: function($event) {
+          change: function ($event) {
             _vm.Score = "Excelente"
-          }
-        }
-      })
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c("td", [
@@ -359,18 +359,18 @@ var render = function() {
             name: "model",
             rawName: "v-model",
             value: _vm.Score,
-            expression: "Score"
-          }
+            expression: "Score",
+          },
         ],
         staticClass: "form-control w-50 h-50 mx-auto",
         attrs: { type: "radio", value: "Bueno" },
         domProps: { checked: _vm._q(_vm.Score, "Bueno") },
         on: {
-          change: function($event) {
+          change: function ($event) {
             _vm.Score = "Bueno"
-          }
-        }
-      })
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c("td", [
@@ -380,18 +380,18 @@ var render = function() {
             name: "model",
             rawName: "v-model",
             value: _vm.Score,
-            expression: "Score"
-          }
+            expression: "Score",
+          },
         ],
         staticClass: "form-control w-50 h-50 mx-auto",
         attrs: { type: "radio", value: "Regular" },
         domProps: { checked: _vm._q(_vm.Score, "Regular") },
         on: {
-          change: function($event) {
+          change: function ($event) {
             _vm.Score = "Regular"
-          }
-        }
-      })
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c("td", [
@@ -401,19 +401,19 @@ var render = function() {
             name: "model",
             rawName: "v-model",
             value: _vm.Score,
-            expression: "Score"
-          }
+            expression: "Score",
+          },
         ],
         staticClass: "form-control w-50 h-50 mx-auto",
         attrs: { type: "radio", value: "Deficiente" },
         domProps: { checked: _vm._q(_vm.Score, "Deficiente") },
         on: {
-          change: function($event) {
+          change: function ($event) {
             _vm.Score = "Deficiente"
-          }
-        }
-      })
-    ])
+          },
+        },
+      }),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -434,7 +434,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -443,7 +443,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "tbody",
-      _vm._l(_vm.parameters, function(parameter) {
+      _vm._l(_vm.parameters, function (parameter) {
         return _c(
           "analysis-parameter",
           _vm._b(
@@ -451,10 +451,10 @@ var render = function() {
               key: parameter.name,
               attrs: { score: parameter.score },
               on: {
-                "update:score": function($event) {
+                "update:score": function ($event) {
                   return _vm.$set(parameter, "score", $event)
-                }
-              }
+                },
+              },
             },
             "analysis-parameter",
             parameter,
@@ -465,11 +465,11 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(1),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -483,11 +483,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v(" Regular ")]),
         _vm._v(" "),
-        _c("th", [_vm._v(" Deficiente ")])
-      ])
+        _c("th", [_vm._v(" Deficiente ")]),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -495,16 +495,16 @@ var staticRenderFns = [
       _c("tr", [
         _c("td", { attrs: { colspan: "5" } }, [
           _c("label", { staticClass: "d-block mt-3" }, [
-            _vm._v("Otra que desee especificar")
+            _vm._v("Otra que desee especificar"),
           ]),
           _vm._v(" "),
           _c("button", { staticClass: "btn btn-primary" }, [
-            _vm._v("Agregar otro parámtero")
-          ])
-        ])
-      ])
+            _vm._v("Agregar otro parámtero"),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -12749,7 +12749,7 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 
 
 /**
@@ -12760,11 +12760,11 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_1__.default({
+var app = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
   el: '#app',
   name: 'recommendation-letter',
   components: {
-    CandidateAnalysis: _components_CandidateAnalysis__WEBPACK_IMPORTED_MODULE_0__.default
+    CandidateAnalysis: _components_CandidateAnalysis__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 })();

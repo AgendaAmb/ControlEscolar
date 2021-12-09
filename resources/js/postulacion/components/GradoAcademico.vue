@@ -1,5 +1,4 @@
 <template>
-hola
   <div class="my-3 row">
     <div class="form-group col-12">
 
@@ -107,8 +106,8 @@ hola
       <!-- 
         Pedir CVU, solo en Doctorado
       -->
-      {{degree_type}}
-      <div class="row" v-if="degree_type === 'Doctorado'" >
+      
+      <div class="row" v-if="degree_type === 'Maestría'" >
         <div class="form-group col-md-4">
           <label> Número de CVU CONACYT: </label>
           <input v-model.number="CVU" type="number" class="form-control">
@@ -132,7 +131,6 @@ hola
           </select>
         </div>
       </div>
-
       <!-- 
         Promedio del postulante
       -->

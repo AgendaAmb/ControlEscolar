@@ -21653,11 +21653,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_style_index_0_id_9617f314_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_style_index_0_id_9617f314_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_style_index_0_id_9617f314_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_style_index_0_id_9617f314_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -21963,8 +21963,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _InterviewDay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _InterviewDay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _InterviewDay_vue_vue_type_template_id_9617f314_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _InterviewDay_vue_vue_type_template_id_9617f314_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -21993,7 +21993,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewDay.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -22039,7 +22039,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -22052,13 +22052,13 @@ var render = function() {
           "data-toggle": "collapse",
           href: _vm.href,
           "aria-expanded": "false",
-          "aria-controls": _vm.id
-        }
+          "aria-controls": _vm.id,
+        },
       },
       [
         _c("p", { staticClass: "my-0 py-0" }, [
-          _vm._v(" " + _vm._s(_vm.interview_date) + " ")
-        ])
+          _vm._v(" " + _vm._s(_vm.interview_date) + " "),
+        ]),
       ]
     ),
     _vm._v(" "),
@@ -22066,10 +22066,10 @@ var render = function() {
       _c(
         "div",
         { staticClass: "card" },
-        _vm._l(_vm.interview_rooms, function(interviews, interview_room) {
+        _vm._l(_vm.interview_rooms, function (interviews, interview_room) {
           return _c("div", { key: interview_room, staticClass: "card-body" }, [
             _c("h4", { staticClass: "d-block room-details" }, [
-              _vm._v(" Sala " + _vm._s(interview_room) + " ")
+              _vm._v(" Sala " + _vm._s(interview_room) + " "),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
@@ -22085,24 +22085,24 @@ var render = function() {
                     !_vm.$root.loggedUserIsAdmin() &&
                     !_vm.$root.loggedUserIsSchoolControl()
                       ? _c("th", [_vm._v(" Rúbrica de evaluación ")])
-                      : _c("th", [_vm._v(" Rúbricas de evaluación ")])
-                  ])
+                      : _c("th", [_vm._v(" Rúbricas de evaluación ")]),
+                  ]),
                 ]),
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(interviews, function(interview) {
+                  _vm._l(interviews, function (interview) {
                     return _c("tr", { key: interview.id }, [
                       _c("td", [
                         _vm._v(
                           _vm._s(
                             interview.start_time + " a " + interview.end_time
                           )
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "appliant" }, [
-                        _vm._v(_vm._s(interview.appliant))
+                        _vm._v(_vm._s(interview.appliant)),
                       ]),
                       _vm._v(" "),
                       _c("td", [
@@ -22111,24 +22111,24 @@ var render = function() {
                           {
                             attrs: {
                               href: interview.archive_url,
-                              target: "_blank"
-                            }
+                              target: "_blank",
+                            },
                           },
                           [_vm._v("Ver documentos")]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       !_vm.$root.loggedUserIsAdmin() &&
                       !_vm.$root.loggedUserIsSchoolControl()
                         ? _c(
                             "td",
-                            _vm._l(interview.rubrics, function(rubric) {
+                            _vm._l(interview.rubrics, function (rubric) {
                               return _c(
                                 "a",
                                 {
                                   key: rubric.location,
                                   staticClass: "d-block",
-                                  attrs: { href: rubric.location }
+                                  attrs: { href: rubric.location },
                                 },
                                 [_vm._v(" Formato de evaluación")]
                               )
@@ -22137,37 +22137,37 @@ var render = function() {
                           )
                         : _c(
                             "td",
-                            _vm._l(interview.rubrics, function(rubric) {
+                            _vm._l(interview.rubrics, function (rubric) {
                               return _c(
                                 "a",
                                 {
                                   key: rubric.location,
                                   staticClass:
                                     "d-block text-capitalize text-decoration-none",
-                                  attrs: { href: rubric.location }
+                                  attrs: { href: rubric.location },
                                 },
                                 [
                                   _vm._v(
                                     "\n                                        Profesor " +
                                       _vm._s(rubric.professor) +
                                       "\n                                    "
-                                  )
+                                  ),
                                 ]
                               )
                             }),
                             0
-                          )
+                          ),
                     ])
                   }),
                   0
-                )
-              ])
-            ])
+                ),
+              ]),
+            ]),
           ])
         }),
         0
-      )
-    ])
+      ),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -34442,7 +34442,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js").default;
+window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
 
 /**
  * The following block of code may be used to automatically register your
@@ -34456,7 +34456,7 @@ var app = new Vue({
   el: '#app',
   name: 'professor-interviews',
   components: {
-    InterviewDay: _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    InterviewDay: _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: {
     interviews: interviews,
