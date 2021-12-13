@@ -2338,6 +2338,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8121,50 +8146,45 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _c(
-        "div",
-        { staticClass: "col-12" },
-        [
-          _c("h2", { staticClass: "my-5 d-block font-weight-bold" }, [
-            _vm._v(" Datos Personales "),
-          ]),
-          _vm._v(" "),
-          _c(
-            "postulante",
-            _vm._b(
-              {
-                attrs: {
-                  archive_id: _vm.archive_id,
-                  documentos: _vm.personal_documents,
-                },
-                on: {
-                  "update:documentos": function ($event) {
-                    _vm.personal_documents = $event
-                  },
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-12" },
+      [
+        _c("h2", { staticClass: "my-5 d-block font-weight-bold" }, [
+          _vm._v(" Datos Personales "),
+        ]),
+        _vm._v(" "),
+        _c(
+          "postulante",
+          _vm._b(
+            {
+              attrs: {
+                archive_id: _vm.archive_id,
+                documentos: _vm.personal_documents,
+              },
+              on: {
+                "update:documentos": function ($event) {
+                  _vm.personal_documents = $event
                 },
               },
-              "postulante",
-              _vm.appliant,
-              false
-            )
-          ),
-          _vm._v(" "),
-          _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
-        ],
-        1
-      ),
-      _vm._v(" "),
+            },
+            "postulante",
+            _vm.appliant,
+            false
+          )
+        ),
+        _vm._v(" "),
+        _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
       _c(
-        "div",
-        { staticClass: "col-12" },
+        "details",
         [
-          _c("h2", { staticClass: "my-5 d-block font-weight-bold" }, [
-            _vm._v(" Historial académico "),
-          ]),
+          _vm._m(0),
           _vm._v(" "),
           _vm._l(_vm.academic_degrees, function (grado) {
             return _c(
@@ -8241,37 +8261,44 @@ var render = function () {
               )
             )
           }),
-          _vm._v(" "),
-          _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
         ],
         2
       ),
       _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("requisitos-ingreso", {
-        attrs: {
-          archive_id: _vm.archive_id,
-          motivation: _vm.motivation,
-          documentos: _vm.entrance_documents,
-        },
-        on: {
-          "update:motivation": function ($event) {
-            _vm.motivation = $event
+      _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
+    ]),
+    _vm._v(" "),
+    _c(
+      "details",
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("requisitos-ingreso", {
+          attrs: {
+            archive_id: _vm.archive_id,
+            motivation: _vm.motivation,
+            documentos: _vm.entrance_documents,
           },
-          "update:documentos": function ($event) {
-            _vm.entrance_documents = $event
+          on: {
+            "update:motivation": function ($event) {
+              _vm.motivation = $event
+            },
+            "update:documentos": function ($event) {
+              _vm.entrance_documents = $event
+            },
           },
-        },
-      }),
-      _vm._v(" "),
-      _c("hr", { staticClass: "my-4 col-12", style: _vm.ColorStrip }),
-      _vm._v(" "),
+        }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("hr", { staticClass: "my-4 col-12", style: _vm.ColorStrip }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
       _c(
-        "div",
-        { staticClass: "col-12" },
+        "details",
         [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _vm._l(_vm.appliant_languages, function (language) {
             return _c(
@@ -8338,17 +8365,18 @@ var render = function () {
               )
             )
           }),
-          _vm._v(" "),
-          _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
         ],
         2
       ),
       _vm._v(" "),
+      _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
       _c(
-        "div",
-        { staticClass: "col-12" },
+        "details",
         [
-          _vm._m(2),
+          _vm._m(3),
           _vm._v(" "),
           _vm._l(_vm.appliant_working_experiences, function (experience) {
             return _c(
@@ -8408,17 +8436,18 @@ var render = function () {
               )
             )
           }),
-          _vm._v(" "),
-          _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
         ],
         2
       ),
       _vm._v(" "),
+      _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
       _c(
-        "div",
-        { staticClass: "col-12" },
+        "details",
         [
-          _vm._m(3),
+          _vm._m(4),
           _vm._v(" "),
           _vm._l(_vm.scientific_productions, function (production) {
             return _c(
@@ -8469,17 +8498,18 @@ var render = function () {
               )
             )
           }),
-          _vm._v(" "),
-          _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
         ],
         2
       ),
       _vm._v(" "),
+      _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
       _c(
-        "div",
-        { staticClass: "col-12" },
+        "details",
         [
-          _vm._m(4),
+          _vm._m(5),
           _vm._v(" "),
           _vm._l(_vm.human_capitals, function (humanCapital) {
             return _c(
@@ -8513,49 +8543,70 @@ var render = function () {
         ],
         2
       ),
-    ],
-    1
-  )
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "my-4 col-12" }, [
-      _c("strong", [_vm._v(" Requisitos de ingreso ")]),
+    return _c("summary", [
+      _c("h2", { staticClass: "mb-5 d-block font-weight-bold" }, [
+        _vm._v(" Historial académico "),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "my-4 d-block" }, [
-      _c("strong", [_vm._v(" Dominio de idiomas ")]),
+    return _c("summary", [
+      _c("h2", { staticClass: "my-4 col-12" }, [
+        _c("strong", [_vm._v(" Requisitos de ingreso ")]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "my-4 d-block" }, [
-      _c("strong", [_vm._v(" Experiencia laboral (Opcional) ")]),
+    return _c("summary", [
+      _c("h2", { staticClass: "my-4 d-block" }, [
+        _c("strong", [_vm._v(" Dominio de idiomas ")]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "my-4 d-block" }, [
-      _c("strong", [_vm._v(" Producción científica (Opcional)")]),
+    return _c("summary", [
+      _c("h2", { staticClass: "my-4 d-block" }, [
+        _c("strong", [_vm._v(" Experiencia laboral (Opcional) ")]),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h2", { staticClass: "my-4 d-block" }, [
-      _c("strong", [_vm._v(" Capital humano (cursos impartidos)[Opcional] ")]),
+    return _c("summary", [
+      _c("h2", { staticClass: "my-4 d-block" }, [
+        _c("strong", [_vm._v(" Producción científica (Opcional)")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("summary", [
+      _c("h2", { staticClass: "my-4 d-block" }, [
+        _c("strong", [
+          _vm._v(" Capital humano (cursos impartidos)[Opcional] "),
+        ]),
+      ]),
     ])
   },
 ]

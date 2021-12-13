@@ -63,7 +63,7 @@ Route::prefix('pre-registro')->name('pre-registro.')->middleware('guest')->group
 Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function(){
 
     # Expedientes
-    Route::get('/', [ArchiveController::class,'index'])->name('index');
+    Route::get('/', [ArchiveController::class,'index'])->middleware(['VerificarPostulante'])->name('index');
     Route::get('/archives', [ArchiveController::class,'archives'])->name('archives');
     Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('show'); 
 
@@ -147,6 +147,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 # Rutas de admin.
 Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+
+Route::get('/logout',[Logincontroller::class,'logout'])->name('logout');
 
 
 # Vista de la carta de recomendación

@@ -95,6 +95,9 @@ class ArchiveController extends Controller
     public function postulacion(Request $request, $archive)
     {
         $archiveModel = Archive::find($archive);
+        if($archiveModel == null)
+            return 'no existe expediente para este aspirante';
+
         $archiveModel->loadMissing([
             'appliant',
             'announcement.academicProgram', 

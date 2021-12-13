@@ -11,7 +11,10 @@
     </div>
   
     <div class="col-12">
-      <h2 class="my-5 d-block font-weight-bold"> Historial académico </h2>
+    <details>
+    <summary>
+      <h2 class="mb-5 d-block font-weight-bold"> Historial académico </h2>
+    </summary>
       <grado-academico v-for="grado in academic_degrees"
         v-bind="grado"
         v-bind:key="grado.id"
@@ -32,19 +35,27 @@
         :paises="Countries"
         @gradoAcademicoAgregado="gradoAcademicoAgregado"> 
       </grado-academico>
+    </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
 
-    <h2 class="my-4 col-12"><strong> Requisitos de ingreso </strong></h2>  
+  <details>
+    <summary>
+      <h2 class="my-4 col-12"><strong> Requisitos de ingreso </strong></h2> 
+    </summary>  
     <requisitos-ingreso
       :archive_id="archive_id"
       :motivation.sync="motivation"
       :documentos.sync="entrance_documents">
     </requisitos-ingreso>
+  </details> 
     <hr class="my-4 col-12" :style="ColorStrip">
 
     <div class="col-12">
+      <details>
+        <summary>
       <h2 class="my-4 d-block"><strong> Dominio de idiomas </strong></h2>
+      </summary>
       <lengua-extranjera v-for="language in appliant_languages"
         v-bind="language"
         v-bind:key="language.id"
@@ -61,11 +72,16 @@
         :writing_level.sync="language.writing_level"
         :documentos.sync="language.required_documents">
       </lengua-extranjera>
+      </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
 
     <div class="col-12">
-      <h2 class="my-4 d-block"><strong> Experiencia laboral (Opcional) </strong></h2>
+      <details>
+        <summary>
+          <h2 class="my-4 d-block"><strong> Experiencia laboral (Opcional) </strong></h2>
+        </summary>
+      
       <experiencia-laboral v-for="experience in appliant_working_experiences"
         v-bind="experience"
         v-bind:key="experience.id"
@@ -79,11 +95,15 @@
         :working_position_description.sync="experience.working_position_description"
         :achievements.sync="experience.achievements">
       </experiencia-laboral>
+      </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
 
     <div class="col-12">
+      <details>
+        <summary>
       <h2 class="my-4 d-block"><strong> Producción científica (Opcional)</strong></h2>
+      </summary>
       <produccion-cientifica v-for="production in scientific_productions"
         v-bind="production"
         v-bind:key="production.id"
@@ -96,11 +116,15 @@
         :institution.sync="production.institution"
         :post_title.sync="production.post_title">
       </produccion-cientifica>
+    </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
 
     <div class="col-12">
-      <h2 class="my-4 d-block"><strong> Capital humano (cursos impartidos)[Opcional] </strong></h2>
+      <details>
+        <summary>
+          <h2 class="my-4 d-block"><strong> Capital humano (cursos impartidos)[Opcional] </strong></h2>
+        </summary>
       <capital-humano v-for="humanCapital in human_capitals"
         v-bind="humanCapital"
         v-bind:key="humanCapital.id"
@@ -108,6 +132,7 @@
         :assisted_at.sync="humanCapital.assisted_at"
         :scolarship_level.sync="humanCapital.scolarship_level">
       </capital-humano>
+      </details>
     </div>
   </div>
 </template>
