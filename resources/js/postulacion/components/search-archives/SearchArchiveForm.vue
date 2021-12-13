@@ -7,7 +7,12 @@
                 <option v-for="academicProgram in academic_programs" :key="academicProgram.id" :value="academicProgram.latest_announcement.id">{{ academicProgram.name}}</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="row mx-1">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+            <div v-if="dataLength !== null" class="mx-3">
+                {{dataLength}} <span> Resultados encontrados</span>
+            </div>
+        </div>
     </form>
 </template>
 
@@ -31,6 +36,7 @@ export default {
     data() {
         return {
             announcement: null,
+            dataLength: null
         }
     },
 
@@ -49,6 +55,7 @@ export default {
             }
 
             axios.get('/controlescolar/solicitud/archives', params).then(response => {
+                this.dataLength = response.data.length;
                 this.$emit('archives-found', response.data);
             }).catch(error => {
 

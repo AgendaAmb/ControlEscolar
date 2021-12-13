@@ -116,6 +116,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // Nombre del componente
   name: 'search-archive-form',
@@ -132,7 +137,8 @@ __webpack_require__.r(__webpack_exports__);
   // Propiedades reactivas.
   data: function data() {
     return {
-      announcement: null
+      announcement: null,
+      dataLength: null
     };
   },
   methods: {
@@ -152,6 +158,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.get('/controlescolar/solicitud/archives', params).then(function (response) {
+        _this.dataLength = response.data.length;
+
         _this.$emit('archives-found', response.data);
       })["catch"](function (error) {});
       return false;
@@ -522,11 +530,20 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Submit")]
-      ),
+      _c("div", { staticClass: "row mx-1" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [_vm._v("Buscar")]
+        ),
+        _vm._v(" "),
+        _vm.dataLength !== null
+          ? _c("div", { staticClass: "mx-3" }, [
+              _vm._v("\n            " + _vm._s(_vm.dataLength) + " "),
+              _c("span", [_vm._v(" Resultados encontrados")]),
+            ])
+          : _vm._e(),
+      ]),
     ]
   )
 }

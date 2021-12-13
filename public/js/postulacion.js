@@ -176,6 +176,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -204,7 +211,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       errores: {},
-      datosValidos: {}
+      datosValidos: {},
+      textStateUpload: ''
     };
   },
   computed: {
@@ -235,6 +243,13 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    checkUpload: function checkUpload() {
+      if (this.location !== null && this.location !== undefined) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     cargaDocumento: function cargaDocumento(e) {
       var name = e.target.files[0].name;
       this.Errores = {};
@@ -5071,9 +5086,28 @@ var render = function () {
   return _c("div", { staticClass: "col-12" }, [
     _c("div", { staticClass: "row my-3" }, [
       _c("div", { staticClass: "form-group col-9 my-auto" }, [
-        _c("h5", { staticClass: "mt-4 d-block" }, [
-          _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
-        ]),
+        _c(
+          "h5",
+          { staticClass: "mt-4 d-block" },
+          [
+            _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
+            _vm._v(" "),
+            _vm.checkUpload() === true
+              ? [
+                  _c("i", [_vm._v("Estado:")]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "text-success" }, [_vm._v("Subido")]),
+                ]
+              : [
+                  _c("i", [_vm._v("Estado:")]),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "text-danger" }, [
+                    _vm._v("Sin subir"),
+                  ]),
+                ],
+          ],
+          2
+        ),
         _vm._v(" "),
         _vm.notes !== null
           ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
@@ -5096,7 +5130,7 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-3 my-auto" }, [
-        _vm.location !== null && _vm.location !== undefined
+        _vm.checkUpload() === true
           ? _c("a", {
               staticClass: "verArchivo d-block my-2 ml-auto",
               attrs: { href: _vm.location, target: "_blank" },

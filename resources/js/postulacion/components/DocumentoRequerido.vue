@@ -2,14 +2,21 @@
   <div class="col-12">
     <div class="row my-3">
       <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block"><strong> {{ name }} </strong></h5>
+        <h5 class="mt-4 d-block"><strong> {{ name }} </strong>
+          <template v-if="checkUpload() === true">
+            <i>Estado:</i> <i class="text-success">Subido</i>
+          </template>
+          <template v-else>
+            <i>Estado:</i> <i class="text-danger">Sin subir</i>
+          </template> 
+        </h5>
         <p v-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
 
         <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
       </div>
       <div class="form-group col-3 my-auto"> 
-        <a v-if="location !== null && location !== undefined" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
+        <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
         <label class="cargarArchivo d-block ml-auto my-auto">
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
@@ -79,7 +86,8 @@ export default {
   data() {
     return {
       errores: {},
-      datosValidos: {}
+      datosValidos: {},
+      textStateUpload: ''
     };
   },
 
@@ -112,6 +120,13 @@ export default {
   },
 
   methods: {
+    checkUpload()  {
+      if(this.location !== null && this.location !== undefined){
+        return true;
+      }else{
+        return false;
+      }
+    },
     cargaDocumento(e) {
       
       var name = e.target.files[0].name;
