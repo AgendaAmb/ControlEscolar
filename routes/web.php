@@ -37,6 +37,9 @@ Route::name('authenticate.')->group(function(){
     # Inicio de sesión por OAUTH2.
     Route::get('/login', [LoginController::class, 'login'])->name('login')
     ->middleware('guest');
+
+    Route::post('/register', [LoginController::class, 'register'])->name('register')
+    ->middleware('guest');
 });
 
 # Rutas para gestión de usuarios.

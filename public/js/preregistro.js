@@ -991,8 +991,6 @@ __webpack_require__.r(__webpack_exports__);
       this.phone_number = Number(user.phone_number);
     },
     registraUsuario: function registraUsuario() {
-      var _this = this;
-
       this.errores = {};
       var formData = new FormData();
       formData.append('clave_uaslp', this.clave_uaslp);
@@ -1023,7 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('disability', this.disability);
       axios({
         method: 'post',
-        url: '/controlescolar/login',
+        url: '/controlescolar/register',
         data: formData,
         headers: {
           'Accept': 'application/json',
@@ -1032,20 +1030,19 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
-        var errores = error.response.data['errors'];
-        Object.keys(errores).forEach(function (key) {
-          Vue.set(_this.errores, key, errores[key][0]);
-        });
+        console.log(error);
       });
     }
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      var _this2 = this;
-
-      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states').then(function (response) {
-        _this2.countries = response.data;
-      });
+      /*
+        axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states')
+        .then(response => {
+          this.countries = response.data;
+        });
+      */
+      this.countries = ['Mexico', 'USA'];
     });
   }
 });

@@ -186,7 +186,7 @@ export default {
 
       axios({
         method: 'post',
-        url: '/controlescolar/login',
+        url: '/controlescolar/register',
         data: formData,
         headers: {
           'Accept' : 'application/json',
@@ -195,11 +195,7 @@ export default {
       }).then(response => {
         console.log(response);
       }).catch(error => {
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
+        console.log(error);
       });
     }
   },
@@ -207,11 +203,15 @@ export default {
   mounted: function(){
         
     this.$nextTick(function () {
-
+    /*
       axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states')
       .then(response => {
         this.countries = response.data;
       });
+    */
+      this.countries = ['Mexico','USA'];
+
+
     });
   },
 };

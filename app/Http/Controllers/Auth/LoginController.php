@@ -185,6 +185,12 @@ class LoginController extends Controller
         return redirect()->route('authenticate.home');
     }
 
+    public function register(Request $request)
+    {
+        dd($request)
+        return $request;
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
