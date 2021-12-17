@@ -187,8 +187,9 @@ class LoginController extends Controller
 
     public function register(Request $request)
     {
-        dd($request)
-        return $request;
+        //dd($request);
+        //return $request;
+        return "hola";
     }
 
     public function logout(Request $request)

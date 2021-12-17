@@ -1036,13 +1036,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      /*
-        axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states')
-        .then(response => {
-          this.countries = response.data;
-        });
-      */
-      this.countries = ['Mexico', 'USA'];
+      var _this = this;
+
+      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states').then(function (response) {
+        _this.countries = response.data;
+      });
     });
   }
 });

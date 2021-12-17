@@ -203,15 +203,11 @@ export default {
   mounted: function(){
         
     this.$nextTick(function () {
-    /*
+    
       axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states')
       .then(response => {
         this.countries = response.data;
       });
-    */
-      this.countries = ['Mexico','USA'];
-
-
     });
   },
 };
