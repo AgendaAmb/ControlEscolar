@@ -993,6 +993,7 @@ __webpack_require__.r(__webpack_exports__);
     registraUsuario: function registraUsuario() {
       this.errores = {};
       var formData = new FormData();
+      formData.append('tipo_usuario', this.tipo_usuario);
       formData.append('clave_uaslp', this.clave_uaslp);
       formData.append('directorio_activo', this.directorio_activo);
       formData.append('pertenece_uaslp', this.pertenece_uaslp);
@@ -1018,7 +1019,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('phone_number', this.phone_number);
       formData.append('ethnicity', this.ethnicity);
       formData.append('is_disabled', this.is_disabled);
-      formData.append('disability', this.disability);
+      formData.append('disability', this.disability); //console.log("formdata:" + formData);
+
       axios({
         method: 'post',
         url: '/controlescolar/register',
@@ -1028,7 +1030,7 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data);
       })["catch"](function (error) {
         console.log(error);
       });

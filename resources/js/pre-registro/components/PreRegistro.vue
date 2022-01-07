@@ -157,6 +157,7 @@ export default {
     registraUsuario(){
       this.errores = {};
       var formData = new FormData();
+      formData.append('tipo_usuario', this.tipo_usuario);
       formData.append('clave_uaslp', this.clave_uaslp);
       formData.append('directorio_activo', this.directorio_activo);
       formData.append('pertenece_uaslp', this.pertenece_uaslp);
@@ -184,6 +185,8 @@ export default {
       formData.append('is_disabled', this.is_disabled);
       formData.append('disability', this.disability);
 
+      //console.log("formdata:" + formData);
+
       axios({
         method: 'post',
         url: '/controlescolar/register',
@@ -193,7 +196,7 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        console.log(response);
+        console.log(response.data);
       }).catch(error => {
         console.log(error);
       });

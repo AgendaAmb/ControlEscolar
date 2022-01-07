@@ -10,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -188,8 +189,76 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         //dd($request);
+        return $this->crearusuarioAA($request);
         //return $request;
-        return "hola";
+        //return "hola";
+        //validar datos
+
+        //switch para checar tipo de usuario
+        /*
+        switch($request->tipo_usuario){
+            case 'Comunidad AA':
+                //creamos cuenta para alumno con cuenta en la agenda ambiental
+            break;
+            case 'Comunidad UASLP':
+                //creamos cuenta en en este sistema y en el portal tambien a usuario partiendo de cuenta de uaslp
+                break;
+            default:
+                //creamos cuenta en este sistema y en el portal tambien a usuario completamente externo
+            break;
+        }
+        //crear usuario
+        */
+    }
+
+    private function crearusuario(){
+        /*
+        User::create([
+            'id' => $request->clave_uaslp
+        ]);
+        */
+    }
+
+    private function crearusuarioAA($req){
+        /*
+        Http::post("",[
+            "email" => $req->email,
+            "CorreoAlterno" => $req->email_alterno,
+            "Pais" => $req->,
+            "LugarResidencia" => $req->,
+            "CURP" => $req->,
+            "nombres" => $req->,
+            "ApellidoP" => $req->,
+            "ApellidoM" => $req->,
+            "Edad" => $req->,
+            "Genero" => $req->,
+            "Celular" => $req->,
+            "CP" => $req->,
+            "Ocupacion" => $req->,
+            "GEtnico" => $req->,
+            "Discapacidad" => $req->
+        ]);
+        */
+        $res = Http::post("http://127.0.0.1:8000/register",[
+            "_token" => csrf_field(),
+            "email" => "a278737@alumnos.uaslp.mx",
+            "CorreoAlterno" => "a278737@alumnos.uaslp.mx",
+            "Pais" => "Mexico",
+            "LugarResidencia" => "Mexico",
+            "CURP" => "TUEM980929HSPRSG00",
+            "Nombres" => "Miguel",
+            "ApellidoP" => "Trujillo",
+            "ApellidoM" => "Esquivel",
+            "Edad" => "22",
+            "Genero" => "Masculino",
+            "Tel" => "4443203350",
+            "CP" => "78438",
+            "Ocupacion" => "Programador",
+            "GEtnico" => "No",
+            "Discapacidad" => "no"
+        ]);
+
+        return $res;
     }
 
     public function logout(Request $request)
