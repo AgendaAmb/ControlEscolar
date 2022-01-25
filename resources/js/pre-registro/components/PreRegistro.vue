@@ -25,7 +25,7 @@
             </crear-cuenta>
 
             <div v-if="tipo_usuario !== null && this.name !== 'Ninguno'">
-              <!-- Datos generales -->
+              <!-- Datos generals -->
               <datos-personales :errores="errores"
                  :tipo_usuario.sync="tipo_usuario"
                  :readonly="Readonly"

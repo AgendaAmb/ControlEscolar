@@ -11,6 +11,7 @@ const academicProgram = @json($academic_program);
     
 @section('container-class', 'class=container')
 @section('main')
+{{dd($appliant)}}
 <form v-on:submit.prevent="actualizaSolicitud"> 
     <solicitud-postulante
         :archive_id="archive.id"

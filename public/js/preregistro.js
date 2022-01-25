@@ -1570,6 +1570,7 @@ var render = function () {
               type: "radio",
               name: "TipoUsuario",
               value: "Comunidad UASLP",
+              disabled: "",
             },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad UASLP") },
             on: {
@@ -1581,7 +1582,7 @@ var render = function () {
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
             _vm._v(
-              " No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP "
+              " No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP (proximamente)"
             ),
           ]),
         ]),
@@ -1607,7 +1608,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Ninguno de los anteriores "),
+            _vm._v(" Ninguno de los anteriores (proximamente)"),
           ]),
         ]),
         _vm._v(" "),
@@ -2329,24 +2330,20 @@ var render = function () {
             },
           ],
           class: _vm.inputClassFor("birth_country"),
-          attrs: { readonly: _vm.Readonly, disabled: _vm.Readonly },
           on: {
-            change: [
-              function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.BirthCountry = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              _vm.escogePais,
-            ],
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.BirthCountry = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
           },
         },
         [
@@ -2442,19 +2439,22 @@ var render = function () {
           ],
           class: _vm.inputClassFor("residence_country"),
           on: {
-            change: function ($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function (o) {
-                  return o.selected
-                })
-                .map(function (o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.ResidenceCountry = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            },
+            change: [
+              function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.ResidenceCountry = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.escogePais,
+            ],
           },
         },
         [

@@ -189,16 +189,17 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         //dd($request);
-        return $this->crearusuarioAA($request);
+        //return $this->crearusuarioAA($request);
         //return $request;
         //return "hola";
         //validar datos
 
         //switch para checar tipo de usuario
-        /*
+        ///*
         switch($request->tipo_usuario){
             case 'Comunidad AA':
                 //creamos cuenta para alumno con cuenta en la agenda ambiental
+                return $request;
             break;
             case 'Comunidad UASLP':
                 //creamos cuenta en en este sistema y en el portal tambien a usuario partiendo de cuenta de uaslp
@@ -208,16 +209,17 @@ class LoginController extends Controller
             break;
         }
         //crear usuario
-        */
+        //*/
     }
-
+/*
     private function crearusuario(){
-        /*
+
         User::create([
             'id' => $request->clave_uaslp
         ]);
-        */
+
     }
+    */
 
     private function crearusuarioAA($req){
         /*
@@ -266,6 +268,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect(route('authenticate.prelogin'));
     }
 }

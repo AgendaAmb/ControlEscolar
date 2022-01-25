@@ -102,7 +102,7 @@ class ArchiveController extends Controller
             'appliant',
             'announcement.academicProgram', 
             'personalDocuments',
-            'entranceDocuments',
+            'entranceDocumens',
             'intentionLetter',
             'academicDegrees.requiredDocuments',
             'appliantLanguages.requiredDocuments',

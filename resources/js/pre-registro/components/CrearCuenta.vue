@@ -8,12 +8,12 @@
         <label class="form-check-label"> Soy miembro de la comunidad de Agenda Ambiental </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP">
-        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP </label>
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" disabled>
+        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP (proximamente)</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno">
-        <label class="form-check-label"> Ninguno de los anteriores </label>
+        <label class="form-check-label"> Ninguno de los anteriores (proximamente)</label>
       </div>
       <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
         {{ errores.tipo_usuario }}
