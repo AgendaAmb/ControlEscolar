@@ -229,12 +229,13 @@ export default {
       })
         .then((response) => {
           if (response.message === "Éxito") {
-            window.location.href = this.url + "/controlescolar/home";
+            window.location.href = "/controlescolar/home";
+            //window.location.href = this.url + "/controlescolar/home";
           }
         })
         .catch((error) => {
           //alert(error.response.data);
-          console.log(error.response.data.errors);
+          console.log(error.response.data);
         });
     },
   },

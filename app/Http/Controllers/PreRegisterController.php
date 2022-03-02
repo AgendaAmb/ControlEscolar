@@ -7,9 +7,11 @@ use App\Http\Requests\PreRegisterRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Models\AcademicProgram;
 use App\Models\User;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PreRegisterController extends Controller
 {
@@ -149,13 +151,19 @@ class PreRegisterController extends Controller
         // return new JsonResponse("hola",200);
         $data = $request->except('announcement_id');
 
-        if($request->tipo_usuario == "Ninguno" || $request->tipo_usuario == "Comunidad UASLP"){
+        //3 opciones posibles tipo_usuario
+        /*
+         Comunidad AA
+         Comunidad UASLP
+         Ninguno
+         */
+        if($request->tipo_usuario == "Comunidad UASLP" || $request->tipo_usuario == "Ninguno"){
             # Obtiene los datos validados.
             try{
                 $data['module_id'] = env('MIPORTAL_MODULE_ID');
 
                 # Envía la petición de registro de usuario al sistema principal.
-                $response = $this->service->miPortalPost('api/RegisterExternalUser', $data);
+                $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
                 $response_data = $response->collect()->toArray();
             }catch(\Exception $e){
                 return new JsonResponse($e->getMessage(),200);
@@ -204,6 +212,14 @@ class PreRegisterController extends Controller
             'announcement_id' => $request->announcement_id,           
             'status' => 0,
         ]);
+        
+        Auth::loginUsingId($user);
+        
+        /** @var User */
+        $user = Auth::user();
+        $user->load('roles');
+        // $l = new LoginController;
+        // $l->preAuth($request,$user->id); //con esto ya deberia estar autenticado
 
         // # Registra al postulante al módulo de control escolar.
         // $this->service->miPortalPost('api/usuarios/modulos', [

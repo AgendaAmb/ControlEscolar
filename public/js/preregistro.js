@@ -1020,8 +1020,6 @@ __webpack_require__.r(__webpack_exports__);
       this.phone_number = Number(user.phone_number);
     },
     registraUsuario: function registraUsuario() {
-      var _this = this;
-
       this.errores = {};
       var formData = new FormData();
       formData.append("announcement_id", this.academic_program.id);
@@ -1067,20 +1065,20 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         if (response.message === "Éxito") {
-          window.location.href = _this.url + "/controlescolar/home";
+          window.location.href = "/controlescolar/home"; //window.location.href = this.url + "/controlescolar/home";
         }
       })["catch"](function (error) {
         //alert(error.response.data);
-        console.log(error.response.data.errors);
+        console.log(error.response.data);
       });
     }
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      var _this2 = this;
+      var _this = this;
 
       axios.get("https://ambiental.uaslp.mx/apiagenda/api/countries/states").then(function (response) {
-        _this2.countries = response.data;
+        _this.countries = response.data;
       });
     });
   }

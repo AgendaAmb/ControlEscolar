@@ -182,16 +182,33 @@ class LoginController extends Controller
         $this->getUsers($request, $user);
 
         # Redirecciona a la página principal.
-        return redirect()->route('authenticate.home');
+        return redirect(route('authenticate.home'));
+    }
+
+    public function preAuth(Request $request, $user)
+    {
+        # Determina si se requiere solicitar autorización.
+        Auth::loginUsingId($user);
+        
+        /** @var User */
+        $user = Auth::user();
+        $user->load('roles');
+        $this->getUsers($request, $user);
     }
         
     //login depues del preregistro ->  se manda a llamar desde POST y recibe id_user
     public function userFromPortal(Request $request, $user)
     {
-       // verificar si existe
-       if(User::find([$user, 'students'])){
-           $this->testLogin($request,$user);
-       }
+        
+        $u=User::find([$user, 'students'])->first();
+        
+        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){
+         
+            // verificar si existe
+            //if($u){
+                $this->testLogin($request,$user);
+            //}
+        }
        
        return redirect(route('pre-registro.index'));
 
