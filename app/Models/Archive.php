@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasManyTrought;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -109,8 +111,20 @@ class Archive extends Model
     {
         return $this->hasMany(ArchiveRequiredDocument::class);
     }
-
+        
     /**
+     * Obtiene los documentos requeridos para el ingreso del
+     * postulante, al programa académico.
+     *
+     * @return HasManyTrought
+     */
+    public function recommendationLetter(): HasManyThrough
+    {
+        return $this->hasManyThrough(RecommendationLetter::class, ArchiveRequiredDocument::class, 'archive_id', 'required_document_id');
+    }
+
+
+    /**1
      * Obtiene los documentos requeridos para el ingreso del
      * postulante, al programa académico.
      *
@@ -139,6 +153,16 @@ class Archive extends Model
     public function appliantLanguages(): HasMany
     {
         return $this->hasMany(AppliantLanguage::class);
+    }
+
+    /**
+     * Obtiene las lénguas extranjeras del postulante.
+     *
+     * @return HasMany
+     */
+    public function myRecommendationLetter(): HasMany
+    {
+        return $this->hasMany(MyRecommendationLetter::class);
     }
 
     /**
@@ -262,9 +286,7 @@ class Archive extends Model
 
     /**
      * Agrega una carta de recomendación al expediente.
-     *
-     * @param object $intention_letter_content 
-     * @return bool
+        * @param object $recommendation_letter
      */
     public function createRecommendationLetter($recommendation_letter_content)
     {
@@ -275,15 +297,20 @@ class Archive extends Model
             ->limit(1)
             ->value('id');
 
-        # Ya se otorgaron las 2 cartas.
-        if ($recommendation_letter_id === null)
-            return false;
+        // # Ya se otorgaron las 2 cartas.
+        // if ($recommendation_letter_id === null)
+        //     return false;
 
         # Verifica la cantidad de cartas de recomendación otorgadas.
         $recommendation_letter_count = $this->archiveRequiredDocuments()
-            ->whereNull('location')
+            ->whereNotNull('location')
             ->whereIsRecommendationLetter()
             ->count();
+            
+            //ya existen las dos cartas de recomendaion
+            if($recommendation_letter_count >= 2){
+                return false;
+            }
 
         # Asigna la ruta de la carta de intención y lo guarda en el sistema
         # de archivos.

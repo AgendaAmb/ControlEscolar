@@ -84,8 +84,8 @@ class OldSchoolControlService
      */
     private function getRequest()
     {
-        $token = $this->requestClientToken();
-        return Http::withToken($token)->withHeaders(['content-type' => 'application/json', 'accept' => 'application/json']);
+        // $token = $this->requestClientToken();
+        return Http::withHeaders(['content-type' => 'application/json', 'accept' => 'application/json']);
     }
 
     /**

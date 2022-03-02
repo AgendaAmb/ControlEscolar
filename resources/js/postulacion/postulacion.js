@@ -45,6 +45,14 @@ const app = new Vue({
     data: {
         archive: archiveModel,
         appliant: appliantModel,
-        academic_program: academicProgram
+        academic_program: academicProgram,
+        recommendation_letters: recommendation_letters,
+        archives_recommendation_letters: archives_recommendation_letters
     },
+
+    methods: {
+        actualizaSolicitud(){
+            // console.log('hola');
+        }
+    }
 });

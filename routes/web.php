@@ -9,8 +9,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
+use App\Http\Controllers\ExternalRecommendationLetter;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('controlescolar')->group(function () {
 
     # Rutas de autenticacion.
-    Route::name('authenticate.')->group(function(){
+    Route::name('authenticate.')->group(function () {
         # Página principal.
         Route::get('/home', [HomeController::class, 'index'])->name('home')
             ->middleware('auth');
@@ -39,6 +41,9 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('/login', [LoginController::class, 'login'])->name('login')
             ->middleware('guest');
 
+        // Route::post('/', [LoginController::class, 'LoginPostPreRegister'])->name('login.post.preRegister');
+        Route::get('/auth/{id}',[LoginController::class, 'userFromPortal']);
+
         Route::post('/register', [LoginController::class, 'register'])->name('register')
             ->middleware('guest');
     });
@@ -46,10 +51,10 @@ Route::prefix('controlescolar')->group(function () {
     # Rutas de admin.
     Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
-    Route::get('/logout',[Logincontroller::class,'logout'])->name('logout');
+    Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
     # Rutas para gestión de usuarios.
-    Route::prefix('users')->name('users.')->group(function(){
+    Route::prefix('users')->name('users.')->group(function () {
 
         # Usuarios del sistema.
         Route::get('/', [UserController::class, 'index'])->name('index');
@@ -60,8 +65,9 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('/miPortalUser', [PreRegisterController::class, 'miPortalUser'])->name('miPortalUser');
     });
 
+
     # Rutas para el pre-registro.
-    Route::prefix('pre-registro')->name('pre-registro.')->middleware('guest')->group(function(){
+    Route::prefix('pre-registro')->name('pre-registro.')->middleware('guest')->group(function () {
 
         # Obtención de datos
         Route::get('/', [PreRegisterController::class, 'index'])->name('index');
@@ -69,12 +75,12 @@ Route::prefix('controlescolar')->group(function () {
     });
 
     # Rutas de las solicitudes académicas.
-    Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function(){
+    Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
-        Route::get('/', [ArchiveController::class,'index'])->middleware(['VerificarPostulante'])->name('index');
-        Route::get('/archives', [ArchiveController::class,'archives'])->name('archives');
-        Route::get('/{archive}', [ArchiveController::class,'postulacion'])->name('show');
+        Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
+        Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
+        Route::get('/{archive}', [ArchiveController::class, 'postulacion'])->name('show');
 
         # Requisitos de ingreso.
         Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']);
@@ -103,10 +109,15 @@ Route::prefix('controlescolar')->group(function () {
 
         # Ver y descargar tipos de archivos.
         Route::get('/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');
+
+        #Carta de recomendación {invitado-
+        # referente hacia un postulante}
+        Route::post('/sentEmailRecommendationLetter', [ArchiveController::class, 'sentEmailRecommendationLetter']);
+        // /{recommendation_letter}/{appliant}/{academic_program}
     });
 
     # Rutas para las entrevistas.
-    Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function(){
+    Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function () {
 
         # Calendario
         Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
@@ -125,7 +136,7 @@ Route::prefix('controlescolar')->group(function () {
         Route::delete('interviewUser', [InterviewController::class, 'removeInterviewUser'])->name('interviewUserDelete');
 
         # Rúbrica de evaluación
-        Route::prefix('rubrica')->name('rubrica.')->group(function(){
+        Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
             Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
             Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');
@@ -140,21 +151,39 @@ Route::prefix('controlescolar')->group(function () {
 
 
     # Rutas de admin.
-    Route::prefix('admin')->name('admin.')->group(function(){
+    Route::prefix('admin')->name('admin.')->group(function () {
 
         # Vista de admin.
         Route::get('/', [AdminController::class, 'index'])
-        ->name('index');
+            ->name('index');
 
         # Profesores
         Route::get('workers', [AdminController::class, 'workers'])
-        ->name('workers');
+            ->name('workers');
 
         Route::post('newWorker', [AdminController::class, 'newWorker'])
-        ->name('newWorker');
+            ->name('newWorker');
     });
 
-    # Vista de la carta de recomendación
-    Route::view('recommendationLetter', 'postulacion.recommendation-letter');
 
+    
+    //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
+    Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
+        # El que recive correo recibe la vista
+        
+        //el token se almacena en la tabla de carta de recomendacion, esto permitira tener mayor seguridad sin acceder a la tabla de usuarios 
+        Route::get('/show/{token}', [ExternalRecommendationLetter::class, 'recommendationLetter'])->name('show');
+        // Route::get('/{user_id}', [ArchiveController::class, 'recommendationLetter'])->name('recommendationLetter.show');
+        // Route::delete('/recommendationLetter/{id_rl}', [ArchiveController::class, 'deleteRecommendationLetter']) middleware(['auth', 'role:admin|control_escolar']) -> name('recommendationLetter.destroy');
+
+        # Al guardar se hace la peticion para almacenar datos
+        Route::post('/addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
+    });
+
+    //investigar para control de rutas lo siguiente
+    //policies 
+
+    //prueba de registro para comprobar que funciona control escolar
+    //convertir despues a log in con auth
+    Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
 });

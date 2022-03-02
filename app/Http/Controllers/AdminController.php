@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MiPortalService;
 use App\Http\Requests\StoreWorkerRequest;
 use App\Models\AcademicArea;
 use App\Models\AcademicComitte;
@@ -94,5 +95,14 @@ class AdminController extends Controller
         $user->load(['academicAreas','academicEntities','academicComittes','roles']);
         
         return new JsonResponse($user, JsonResponse::HTTP_CREATED);
+    }
+        
+    //necesita la request y la ruta hacia la api del portal
+    public function pruebaRegistro()
+    {
+        $service = new MiPortalService;
+        // 
+        $res = $service->miPortalPost('api/RegisterExternalUser',['Hola']);
+        return $res;
     }
 }

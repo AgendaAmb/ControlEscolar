@@ -95,7 +95,7 @@
     <!-- País de nacimiento -->
     <div class="col-lg-6 mt-3">
       <label class="mt-3"> País de nacimiento </label>
-      <select v-model="BirthCountry" :class="inputClassFor('birth_country')">
+      <select v-model="BirthCountry" :class="inputClassFor('birth_country')"  @change="escogePais">
         <option value="" selected> Escoge un país </option>
         <option v-for="country in countries" :key="country.id" :value="country.name"> {{country.name}} </option>
       </select>
@@ -115,7 +115,7 @@
     <!-- País de residencia -->
     <div class="col-lg-6 mt-3">
       <label class="mt-3"> País de residencia </label>
-      <select v-model="ResidenceCountry" :class="inputClassFor('residence_country')" @change="escogePais">
+      <select v-model="ResidenceCountry" :class="inputClassFor('residence_country')">
         <option value="" selected> Escoge un país </option>
         <option v-for="country in countries" :key="country.id" :value="country.name"> {{country.name}} </option>
       </select>

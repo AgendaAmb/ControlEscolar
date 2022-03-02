@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Request\AuthorizationException;
 
 class PreRegisterRequest extends FormRequest
 {
@@ -55,6 +56,11 @@ class PreRegisterRequest extends FormRequest
             'residence' => $this->residence_country
         ]);
     }
+
+    // public function failedAuthorization()
+    // {
+    //     throw new AuthorizationException;
+    // }
 
     /**
      * Get the validation rules that apply to the request.

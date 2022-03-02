@@ -1,8 +1,13 @@
 <script>
-    const recommendation_letter = @json($recommendation_letter);
+    const idArchive = @json($idArchive);
+    const archiveRl = @json($archiveRl);
     const appliant = @json($appliant);
     const announcement = @json($announcement);
     const parameters = @json($parameters);
+    const index = @json($index);
+    // console.log(archiveRl[num].id);
+    // console.log(num);
+    console.log(appliant.middlename);
 </script>
 
 @extends('layouts.app')
@@ -20,25 +25,25 @@
     <form  v-on:submit.prevent="actualizaRecomendationLetter"> 
     {{-- informacion de relacion con el candidato --}}
     <relationship-with-candidate
-        :archive_id = "recommendation_letter.id"
-        :time_to_know = "recommendation_letter.time_to_meet"
-        :how_meet = "recommendation_letter.how_meet"
-        :kind_relationship = "recommendation_letter.kind_relationship"
-        :experience_with_candidate = "recommendation_letter.experience_with_candidate"
-        :qualification_student = "recommendation_letter.qualification_student"
+        :archive_id = "archiveRl[index].id"
+        :time_to_know = "archiveRl[index].time_to_meet"
+        :how_meet = "archiveRl[index].how_meet"
+        :kind_relationship = "archiveRl[index].kind_relationship"
+        :experience_with_candidate = "archiveRl[index].experience_with_candidate"
+        :qualification_student = "archiveRl[index].qualification_student"
     ></relationship-with-candidate> 
     {{-- 
         analisis del candidato, puntos importantes 
         se incluye el pie de fondo
         --}}
     <candidate-analysis
-        :special_skills = "recommendation_letter.special_skills"
-        :why_recommendation = "recommendation_letter.why_recommendation"
+        :special_skills = "archiveRl[index].special_skills"
+        :why_recommendation = "archiveRl[index].why_recommendation"
         {{-- 
             se supone que tambien los parametros
             parameters
             --}}
-        :parameters = "parameters"
+        :score_parameters = "parameters"
         :custom_parameters = "custom_parameters"
     ></candidate-analysis> 
 

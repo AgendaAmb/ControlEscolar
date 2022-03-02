@@ -4,15 +4,15 @@
     <div class="form-group col-12 mb-3">
       <h3 class="d-block mb-3"> ¿Eres miembro de la comunidad de Agenda Ambiental o perteneces a la UASLP? </h3>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
         <label class="form-check-label"> Soy miembro de la comunidad de Agenda Ambiental </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" disabled>
-        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP (proximamente)</label>
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" v-on:click="setPerteneceUASLP(true)">
+        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">
         <label class="form-check-label"> Ninguno de los anteriores (proximamente)</label>
       </div>
       <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
@@ -209,6 +209,9 @@ export default {
         'form-control': true,
         'is-invalid': model in this.errores
       }
+    },
+    setPerteneceUASLP(res){
+        this.PerteneceUaslp = res;
     }
   }
 };

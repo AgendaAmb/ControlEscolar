@@ -1,19 +1,14 @@
 <template>
-    <tr>
-        <td> {{ name }} </td>
-        <td> 
-            <input type="radio" v-model="Score" class="form-control w-50 h-50 mx-auto" value="Excelente">
-        </td>
-        <td>
-            <input type="radio" v-model="Score" class="form-control w-50 h-50 mx-auto" value="Bueno">
-        </td>
-        <td>
-            <input type="radio" v-model="Score" class="form-control w-50 h-50 mx-auto" value="Regular">
-        </td>
-        <td>
-            <input type="radio" v-model="Score" class="form-control w-50 h-50 mx-auto" value="Deficiente">
-        </td>
+    
+    <tr class=" row pt-2 justify-content-center">
+        <td class="col-8 align-self-start"><span>{{ name }}</span> </td>
+        <td class="col-1 align-self-center"><form class="form-check"><input v-model="Score" class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Excelente"></form></td>
+        <td class="col-1 align-self-center"><form class="form-check"><input v-model="Score" class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Bueno"></form></td>
+        <td class="col-1 align-self-center"><form class="form-check"><input v-model="Score" class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Regular"></form></td>
+        <td class="col-1 align-self-center"><form class="form-check"><input v-model="Score" class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Deficiente"></form></td>
     </tr>
+    
+     
 </template>
 
 <script>
@@ -31,7 +26,9 @@ export default {
         score: {
             type: String,
             default: null,
-        }
+        },
+
+        //valuesRadioBtns: ['Excelente','Bueno','Regular','Deficiente']
     },
 
     computed: {

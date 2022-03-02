@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ArchiveRequiredDocument extends Model
@@ -44,7 +45,7 @@ class ArchiveRequiredDocument extends Model
     }
 
     /**
-     * Obtiene la carta de intención.
+     * Obtiene la carta de intención y recomendacion.
      *
      * @return BelongsTo
      */
@@ -66,6 +67,16 @@ class ArchiveRequiredDocument extends Model
     /**
      * Obtiene la carta de intención.
      *
+     * @return HasMany
+     */
+    public function recommendationLetter(): HasMany
+    {
+        return $this->hasMany(RecommendationLetter::class);
+    }
+
+    /**
+     * Obtiene la carta de intención.
+     *
      * @return Builder
      */
     public static function scopeWhereIsIntentionLetter(Builder $query): Builder
@@ -76,7 +87,7 @@ class ArchiveRequiredDocument extends Model
     }
 
     /**
-     * Obtiene la carta de intención.
+     * Obtiene la carta de recomendacion.
      *
      * @return Builder
      */

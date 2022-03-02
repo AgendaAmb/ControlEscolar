@@ -70,6 +70,7 @@ class CreateArchivesTable extends Migration
 
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -81,5 +82,6 @@ class CreateArchivesTable extends Migration
     {
         Schema::dropIfExists('archive_required_document');
         Schema::dropIfExists('archives');
+        Schema::dropIfExists('archive_intention_letter');
     }
 }

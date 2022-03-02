@@ -242,6 +242,9 @@ __webpack_require__.r(__webpack_exports__);
         'form-control': true,
         'is-invalid': model in this.errores
       };
+    },
+    setPerteneceUASLP: function setPerteneceUASLP(res) {
+      this.PerteneceUaslp = res;
     }
   }
 });
@@ -902,6 +905,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -921,7 +947,7 @@ __webpack_require__.r(__webpack_exports__);
       tipo_usuario: null,
       clave_uaslp: null,
       directorio_activo: null,
-      pertenece_uaslp: null,
+      pertenece_uaslp: false,
       facultad: null,
       email: null,
       email_alterno: null,
@@ -951,7 +977,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     Readonly: {
       get: function get() {
-        return this.tipo_usuario === 'Comunidad UASLP' || this.tipo_usuario === 'Comunidad AA';
+        return this.tipo_usuario === "Comunidad UASLP" || this.tipo_usuario === "Comunidad AA";
       }
     },
     AcademicProgram: {
@@ -959,11 +985,14 @@ __webpack_require__.r(__webpack_exports__);
         return this.academic_program;
       },
       set: function set(newValue) {
-        this.$emit('update:academic_program', newValue);
+        this.$emit("update:academic_program", newValue);
       }
     }
   },
   methods: {
+    a: function a() {
+      window.location.href = "/controlescolar/home";
+    },
     uaslpUserUpdated: function uaslpUserUpdated(user) {
       this.facultad = user.dependency;
       this.directorio_activo = user.DirectorioActivo;
@@ -971,11 +1000,11 @@ __webpack_require__.r(__webpack_exports__);
       this.first_surname = user.first_surname;
       this.last_surname = user.last_surname;
       this.email = user.email;
-      this.birth_country = 'México';
-      this.residence_country = 'México';
+      this.birth_country = "México";
+      this.residence_country = "México";
     },
     miPortalUserUpdated: function miPortalUserUpdated(user) {
-      this.clave_uaslp = user.ClaveUASLP;
+      this.clave_uaslp = String(user.id);
       this.facultad = user.Dependencia;
       this.name = user.name;
       this.first_surname = user.middlename;
@@ -991,57 +1020,67 @@ __webpack_require__.r(__webpack_exports__);
       this.phone_number = Number(user.phone_number);
     },
     registraUsuario: function registraUsuario() {
+      var _this = this;
+
       this.errores = {};
       var formData = new FormData();
-      formData.append('tipo_usuario', this.tipo_usuario);
-      formData.append('clave_uaslp', this.clave_uaslp);
-      formData.append('directorio_activo', this.directorio_activo);
-      formData.append('pertenece_uaslp', this.pertenece_uaslp);
-      formData.append('email', this.email);
-      formData.append('email_alterno', this.email_alterno);
-      formData.append('password', this.password);
-      formData.append('rpassword', this.rpassword);
-      formData.append('curp', this.curp);
-      formData.append('no_curp', this.no_curp);
-      formData.append('name', this.name);
-      formData.append('first_surname', this.first_surname);
-      formData.append('last_surname', this.last_surname);
-      formData.append('birth_date', this.birth_date);
-      formData.append('ocupation', this.ocupation);
-      formData.append('gender', this.gender);
-      formData.append('other_gender', this.other_gender);
-      formData.append('civic_state', this.civic_state);
-      formData.append('other_civic_state', this.other_civic_state);
-      formData.append('birth_country', this.birth_country);
-      formData.append('birth_state', this.birth_state);
-      formData.append('residence_country', this.residence_country);
-      formData.append('zip_code', this.zip_code);
-      formData.append('phone_number', this.phone_number);
-      formData.append('ethnicity', this.ethnicity);
-      formData.append('is_disabled', this.is_disabled);
-      formData.append('disability', this.disability); //console.log("formdata:" + formData);
+      formData.append("announcement_id", this.academic_program.id);
+      formData.append("tipo_usuario", this.tipo_usuario);
+      formData.append("clave_uaslp", Number(this.clave_uaslp));
+      formData.append("directorio_activo", this.directorio_activo);
+      formData.append("pertenece_uaslp", this.pertenece_uaslp);
+      formData.append("email", this.email);
+      formData.append("email_alterno", this.email_alterno);
+      formData.append("curp", this.curp);
+      formData.append("no_curp", this.no_curp);
+      formData.append("name", this.name);
+      formData.append("first_surname", this.first_surname);
+      formData.append("last_surname", this.last_surname);
+      formData.append("birth_date", this.birth_date);
+      formData.append("ocupation", this.ocupation);
+      formData.append("gender", this.gender);
+      formData.append("other_gender", this.other_gender);
+      formData.append("civic_state", this.civic_state);
+      formData.append("other_civic_state", this.other_civic_state);
+      formData.append("birth_country", this.birth_country);
+      formData.append("birth_state", this.birth_state);
+      formData.append("residence_country", this.residence_country);
+      formData.append("zip_code", this.zip_code);
+      formData.append("phone_number", this.phone_number);
+      formData.append("ethnicity", this.ethnicity);
+      formData.append("is_disabled", this.is_disabled);
+      formData.append("disability", this.disability);
+
+      if (!this.pertenece_uaslp) {
+        formData.append("password", this.password);
+        formData.append("rpassword", this.rpassword);
+      } //console.log("formdata:" + formData);
+
 
       axios({
-        method: 'post',
-        url: '/controlescolar/register',
+        method: "post",
+        url: "/controlescolar/pre-registro",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        console.log(response.data);
+        if (response.message === "Éxito") {
+          window.location.href = _this.url + "/controlescolar/home";
+        }
       })["catch"](function (error) {
-        console.log(error);
+        //alert(error.response.data);
+        console.log(error.response.data.errors);
       });
     }
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      var _this = this;
+      var _this2 = this;
 
-      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/states').then(function (response) {
-        _this.countries = response.data;
+      axios.get("https://ambiental.uaslp.mx/apiagenda/api/countries/states").then(function (response) {
+        _this2.countries = response.data;
       });
     });
   }
@@ -1544,6 +1583,9 @@ var render = function () {
             },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad AA") },
             on: {
+              click: function ($event) {
+                return _vm.setPerteneceUASLP(true)
+              },
               change: function ($event) {
                 _vm.TipoUsuario = "Comunidad AA"
               },
@@ -1570,10 +1612,12 @@ var render = function () {
               type: "radio",
               name: "TipoUsuario",
               value: "Comunidad UASLP",
-              disabled: "",
             },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad UASLP") },
             on: {
+              click: function ($event) {
+                return _vm.setPerteneceUASLP(true)
+              },
               change: function ($event) {
                 _vm.TipoUsuario = "Comunidad UASLP"
               },
@@ -1582,7 +1626,7 @@ var render = function () {
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
             _vm._v(
-              " No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP (proximamente)"
+              " No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP "
             ),
           ]),
         ]),
@@ -1601,6 +1645,9 @@ var render = function () {
             attrs: { type: "radio", name: "TipoUsuario", value: "Ninguno" },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Ninguno") },
             on: {
+              click: function ($event) {
+                return _vm.setPerteneceUASLP(false)
+              },
               change: function ($event) {
                 _vm.TipoUsuario = "Ninguno"
               },
@@ -2331,19 +2378,22 @@ var render = function () {
           ],
           class: _vm.inputClassFor("birth_country"),
           on: {
-            change: function ($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function (o) {
-                  return o.selected
-                })
-                .map(function (o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.BirthCountry = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
-            },
+            change: [
+              function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.BirthCountry = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.escogePais,
+            ],
           },
         },
         [
@@ -2439,22 +2489,19 @@ var render = function () {
           ],
           class: _vm.inputClassFor("residence_country"),
           on: {
-            change: [
-              function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.ResidenceCountry = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              _vm.escogePais,
-            ],
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.ResidenceCountry = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
           },
         },
         [
@@ -3048,6 +3095,18 @@ var render = function () {
                         1
                       )
                     : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      on: {
+                        click: function ($event) {
+                          return _vm.a()
+                        },
+                      },
+                    },
+                    [_vm._v("Hola")]
+                  ),
                 ],
                 1
               ),

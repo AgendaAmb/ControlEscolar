@@ -151,6 +151,18 @@ class RequiredDocument extends Model
     }
 
     /**
+     * Obtiene el id de los documentos para comprobación de
+     * lenguas extranjeras.
+     *
+     * @param  mixed $query
+     * @return object
+     */
+    public static function recommendationLetterId()
+    {
+        return self::where('type', 'curricular')->where('recommendation_letter', true)->pluck('id');
+    }
+
+    /**
      * Obtiene los expedientes, asociados al documento requerido.
      *
      * @return void

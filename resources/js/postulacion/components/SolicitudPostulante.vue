@@ -133,6 +133,22 @@
         :scolarship_level.sync="humanCapital.scolarship_level">
       </capital-humano>
       </details>
+       <hr class="my-4 d-block" :style="ColorStrip">
+    </div>
+
+    <div class="col-12">
+      <details>
+        <summary>
+      <h2 class="my-4 d-block"><strong> Carta de recomendación </strong></h2>
+      </summary>
+      <carta-recomendacion 
+       :appliant = "appliant"
+       :academic_program = "academic_program"
+       :recommendation_letters = "recommendation_letters"
+       :archives_recommendation_letters = "archives_recommendation_letters"
+      />
+    </details>
+      <hr class="my-4 d-block" :style="ColorStrip">
     </div>
   </div>
 </template>
@@ -146,6 +162,7 @@ import ProduccionCientifica from './ProduccionCientifica.vue';
 import ExperienciaLaboral from './ExperienciaLaboral.vue';
 import LenguaExtranjera from './LenguaExtranjera.vue';
 import RequisitosIngreso from './RequisitosIngreso.vue';
+import CartaRecomendacion from './CartaDeRecomendacion.vue';
 
 
 export default {
@@ -158,7 +175,8 @@ export default {
     ProduccionCientifica,
     ExperienciaLaboral,
     LenguaExtranjera,
-    RequisitosIngreso
+    RequisitosIngreso,
+    CartaRecomendacion
   },
 
   props: {
@@ -188,9 +206,16 @@ export default {
     
     // Producciones científicas del postulante.
     scientific_productions: Array,
+    
 
     // Capitales humanos del postulante.
     human_capitals: Array,
+
+    //archivos arreglo de {id_archive_required_docuent, id_archive, location}
+    archives_recommendation_letters:Array,
+
+    //Cartas de recomendacion Arreglo que contiene correos
+    recommendation_letters:Array,
 
     // Postulante de la solicitud.
     appliant: Object
@@ -257,3 +282,4 @@ export default {
   }
 };
 </script>
+

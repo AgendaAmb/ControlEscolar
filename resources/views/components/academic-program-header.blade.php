@@ -31,7 +31,7 @@
             <div>
                 Clave/rpe: <b>{{Auth::user()->id}}</b> Tipo de usuario: <b>{{Auth::user()->type}}</b> 
                 Roles: @foreach (Auth::user()->roles as $r)
-                <b> {{$r->name}},</b>
+                {{-- <b> {{$r->name}},</b> --}}
                 @endforeach
             </div>
   
