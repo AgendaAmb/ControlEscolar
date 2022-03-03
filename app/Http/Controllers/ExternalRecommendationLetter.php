@@ -40,152 +40,103 @@ class ExternalRecommendationLetter extends Controller
      */
     public function addRecommendationLetter(StoreRecommendationLetter $request)
     {
+            
+        $appliant = $request->appliant;
+        $announcement = $request->announcement;
+        $parameters = $request->score_parameters;
         //existe o no registro de carta 
 
-
-        /*
-        en la carta de recomendacion se recibiran los siguientes parametros
-
-        info del aplicante
-            (token)
-        info de carta de recomendacion
-            (email de evaluador)
-            (id carta recomendacion)
-        */
-        
-        # Se busca expediente, para asignar nombre
-        $archive = Archive::find($request->archive_id);
-        $archive->loadMissing([
-            'appliant',
-            'announcement.academicProgram',
-            'personalDocuments',
-            'recommendationLetter',
-            'myRecommendationLetter',
-            'entranceDocuments',
-            'intentionLetter',
-            'academicDegrees.requiredDocuments',
-            'appliantLanguages.requiredDocuments',
-            'appliantWorkingExperiences',
-            'scientificProductions.authors',
-            'humanCapitals'
-        ]);
-
-        # Cartas de recomendacion en expediente
-        $num_recommendation_letter_count = $archive->archiveRequiredDocuments()
-            ->whereNotNull('location')
-            ->whereIsRecommendationLetter()
-            ->count();
-
-        #Se verifica el numero de cartas de recomendacion ya enviadas por archivo de solicitante
-        if ($num_recommendation_letter_count > 2) {
-            return new JsonResponse('Cartas enviadas, no se permiten mas', 200);
+        #Extrae carta de DB
+        try {
+            $recommendation_letter = MyRecommendationLetter::where('token', $request->token)->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(
+                'no existe carta de recomendacion',
+                200,
+            );
         }
 
+
         # Verifica que la carta no se ha enviado del propio correo 
-        foreach ($archive->myRecommendationLetter as $rl) {
+        // el correo coincide
+        if (strcmp($recommendation_letter->email_evaluator, $request->email) != 0) {
+            //token unico coincide
+            if ($recommendation_letter->token == $request->token) {
+                //no se ha respondido aun
+                if ($recommendation_letter->answer <= 0) {
 
-            // el correo coincide
-            if (strcmp($rl->email_evaluator, $request->email) != 0) {
-                //token unico coincide
-                if ($rl->token == $request->token) {
-                    //no se ha respondido aun
-                    if ($rl->answer <= 0) {
+                    try {
+                        //archivo de carta de recomendacion
+                        $archive_rl = RecommendationLetter::where('rl_id', $recommendation_letter->id)->first();
+                        //archivo requerido
+                        $archive_required = ArchiveRequiredDocument::where('id', $archive_rl->required_document_id)->first();
+                        //Expediente del estudiante
+                        $archive = Archive::where('id', $archive_required->archive_id)->first();
 
-                        # Crear archivo PDF
-                        //Se guarda en una variable local 
-                        $recommendation_letter_pdf = PDF::loadView('pdf.recommendation-letter', $request)
-                            ->setOptions([
-                                'defaultPaperSize' => 'a4',
-                                'isJavaScriptEnabled' => true,
-                                'isFontSubsettingEnabled' =>  true,
-                                'dpi' => 120
-                            ]); //opciones para visualizar correctamente el pdf
-
-                        //Se guarda en STORAGE
-                        $path = 'archives/' . $request->archive_id . '/recommendation-letter/' . $request->recommendation_letter_id . '_answerBy' . $archive->email_evaluator . '_#' . $num_recommendation_letter_count .  '.pdf';
-                        $recommendation_letter_pdf->save(storage_path($path));
-
-                        #Actualizar modelos
-
-                        try {
-                            //carta de recomendacion
-                            $rl->update($request->safe()->except($request->safe()->except('score_parameters', 'custom_parameters', 'recommendation_letter_id')));
-
-                            //archivo de carta de recomendacion
-                            $archive_rl = RecommendationLetter::where('rl_id', $rl->id)->update(['location'=> $path]);
-
-                            //archivo requerido
-                            $archive_required = ArchiveRequiredDocument::where('id', $archive_rl->required_document_id)->update(['location'=> $path]);;
-                        } catch (\Exception $e) {
-                            
-                        }
+                    } catch (\Exception $e) {
+                        return new JsonResponse(
+                            'no se cargaron modelos de archivos',
+                            200
+                        );
                     }
+                    
+
+                    # Crear archivo PDF
+                    //Se guarda en una variable local 
+                    try {
+                        $recommendation_letter_pdf = PDF::loadView('pdf.recommendation-letter', compact('recommendation_letter', 'appliant', 'announcement','parameters'))
+                        ->setOptions([
+                            'defaultPaperSize' => 'a4',
+                            'isJavaScriptEnabled' => true,
+                            'isFontSubsettingEnabled' =>  true,
+                            'dpi' => 120
+                        ]); //opciones para visualizar correctamente el pdf
+                        //Se guarda en STORAGE
+                    } catch (\Exception $e) {
+                        return new JsonResponse(
+                            'el pdf no se genero',
+                            200
+                        );
+                    }
+                    
+                    $recommendation_letter_pdf = PDF::loadView('pdf.recommendation-letter', compact('recommendation_letter', 'appliant', 'announcement','parameters'))
+                        ->setOptions([
+                            'defaultPaperSize' => 'a4',
+                            'isJavaScriptEnabled' => true,
+                            'isFontSubsettingEnabled' =>  true,
+                            'dpi' => 120
+                        ]); //opciones para visualizar correctamente el pdf
+                        //Se guarda en STORAGE
+
+                        
+                    $path = 'app/'. 'archives/' . $request->archive_id . 'entranceDocuments/' .'recommendation_letter_'. $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
+                    $recommendation_letter_pdf->save(storage_path($path));
+
+                    #Actualizar modelos
+
+                    try {
+                        //carta de recomendacion
+                        $recommendation_letter->update($request->safe()->except($request->safe()->except('score_parameters', 'custom_parameters', 'recommendation_letter_id')));
+                        //archivo de carta de recomendacion
+                        $archive_rl->update(['location' => $path]);
+                        //archivo requerido
+                        $archive_required->update(['location' => $path]);;
+                    } catch (\Exception $e) {
+                        return new JsonResponse('Error al actualizar registros de locacion', 200);
+                    }
+                } else {
+                    return new JsonResponse(
+                        'La carta ya fue respondida, agrademos tu participacion',
+                        200,
+                    );
                 }
             }
         }
-        # Se actualizan los registros ya existentes
 
-        # Carta de recomendacion 
-        foreach ($archive->myRecommendationLetter as $rl) {
-            if ($rl->id == $request->recommendation_letter_id) {
-                $rl->update($request->safe()->except($request->safe()->except('score_parameters', 'custom_parameters', 'recommendation_letter_id')));
-                break;
-            }
-        }
-
-        # Archivo pdf de carta
-
-
-        // //Se guardan los datos en la tabla de recommendation_letter 
-        // $data_rl_table = $request->safe()->except('score_parameters', 'custom_parameters', 'recommendation_letter_id');
-        // MyRecommendationLetter::where('id', $request->recommendation_letter_id)->update($data_rl_table);
-
-        // $data_score_table = $request->safe()->only('score_parameters');
-        // //ciclo para crear y guardar los datos de score
-
-        // $data_custom_parameter =  $request->safe()->only('custom_parameters');
-        // //ciclo para crear y guardar parametros personalizadOS
-
-        // #Creacion de modelos 
-
-        // //Se crea carta de recomendacion (campos de texto y llaves foraneas)
-        // $recommendation_letter  = MyRecommendationLetter::create($data_rl_table);
-        // $res_rec = new JsonResponse($recommendation_letter);
-
-        // foreach ($data_score_table as $data) {
-        //     $res_param = new JsonResponse(ScoreParameter::create($data->validate([
-        //         'rl_id' => ['required', 'integer'],
-        //         'parameter_id' => ['required', 'integer'],
-        //         'score' => ['required', 'string', 'max:255']
-        //     ])));
-        // }
-
-        // foreach ($data_custom_parameter as $data) {
-        //     $res_cust_param = new JsonResponse(CustomParameter::create($data->validate([
-        //         'rl_id' => ['required', 'integer', 'max:255'],
-        //         'text' => ['required', 'string', 'max:255'],
-        //         'score' => ['required', 'string', 'max: 225']
-        //     ])));
-        // }
-
-        //Se crea el fila en ArchiveRequiredDocument una vez realizado todo 
-        // $my_archive_required_document = ArchiveRequiredDocument::create([
-        //     'archive_id' => $request->archive_id,
-        //     'required_document_id' => $required_document_id,
-        //     'location' => $path
-        // ]);
-
-        //Se retorna una respueta SI SE PUDO O NO GUARDAR EL ARCHIVO
-        // return new JsonResponse(RecommendationLetter::create([
-        //     'rl_id' => $request->recommendation_letter_id,
-        //     'required_document_id' => $my_archive_required_document->id,
-        //     'location' => $path
-        // ]), 200);
-
-        return new JsonResponse($path, 200);
+        return new JsonResponse('no se pudo guardar la carta, lo sentimos, trabajaremos en ello', 200);
     }
 
-        /**
+    /**
      * Envia la vista de carta de recomendación con los datos requeridos
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -205,10 +156,9 @@ class ExternalRecommendationLetter extends Controller
         #Busqueda de Carta de recomendacion y archivo
         try {
             //Busqueda de carta con token y correo 
-            $rl = MyRecommendationLetter::where(
-                'token', $token
-            );
-             
+            $rl = MyRecommendationLetter::where([
+                ['token', $token],
+            ])->first();
         } catch (\Exception $e) {
             return view('postulacion.error-noAppliant')
                 ->with('user_id', $request->token);
@@ -216,7 +166,6 @@ class ExternalRecommendationLetter extends Controller
 
         // Se extrae el archivo de postulacion
         $archive = Archive::where('id', $rl->archive_id)->first();
-        
 
         #Carga de modelos en archivo
         $archive->loadMissing([
@@ -263,6 +212,7 @@ class ExternalRecommendationLetter extends Controller
             ->with('recommendation_letter', $rl)
             ->with('appliant', $appliant)                   //usuario 
             ->with('announcement', $announcement)
-            ->with('parameters', $parameters); //programa academico
+            ->with('parameters', $parameters)
+            ->with('token',$token); //programa academico
     }
 }

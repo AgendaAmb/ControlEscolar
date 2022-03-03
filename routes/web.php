@@ -177,7 +177,7 @@ Route::prefix('controlescolar')->group(function () {
         // Route::delete('/recommendationLetter/{id_rl}', [ArchiveController::class, 'deleteRecommendationLetter']) middleware(['auth', 'role:admin|control_escolar']) -> name('recommendationLetter.destroy');
 
         # Al guardar se hace la peticion para almacenar datos
-        Route::post('/addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
+        Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
     });
 
     //investigar para control de rutas lo siguiente

@@ -506,6 +506,8 @@ class ArchiveController extends Controller
     public function sentEmailRecommendationLetter(Request $request)
     {
 
+        
+
         // Variables locales
         $message = "El correo ya ha sido enviado";
         $change_email = 0;
@@ -519,6 +521,7 @@ class ArchiveController extends Controller
             'letter_created' => ['required'],
             'recommendation_letter' => ['required_if:letter_created,1'] // ya existe carta por lo tanto es requerido
         ]);
+      
 
         //Se busca el archivo por el USER ID
         $archive = Archive::where('user_id', $request->appliant['id'])->first();

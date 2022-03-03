@@ -79,14 +79,14 @@
 
     <!-- Confirmacion de datos -->
     <label class="mt-4">
-      <input type="checkbox" name="confirmation_form" />
+      <input type="checkbox" v-model="ConfirmSubmit"> 
       Al guardar confirmo que esta información es exacta y veridica y autorizo
       que sea utilizada en la evaluación del aspirante por el Comité Académico
       del PMPCA.
     </label>
 
-    <label
-      ><strong>Nota: </strong>&nbsp; Esta información es confidencial y no será
+    <label 
+      ><strong>Nota: </strong>Esta información es confidencial y no será
       del conocimiento del candidato.</label
     >
 
@@ -105,6 +105,7 @@ export default {
     AnalysisParameter,
     CustomParameter,
   },
+   
 
   computed: {
     specialSkills: {
@@ -126,6 +127,16 @@ export default {
         this.$emit("update:why_recommendation", value);
       },
     },
+
+    ConfirmSubmit:{
+       get() {
+        return this.confirm_submit;
+      },
+
+      set(value) {
+        this.$emit('update:confirm_submit',value);
+      },
+    }
   },
 
   methods: {
@@ -149,6 +160,7 @@ export default {
     //parametros requeridos
     special_skills: String,
     why_recommendation: String,
+    confirm_submit: Boolean,
     //parametros definidos para el análisis del candidato.
     parameters: {
       type: Array,

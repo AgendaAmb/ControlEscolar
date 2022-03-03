@@ -30,12 +30,12 @@ const app = new Vue({
         RelationshipWithCandidate,
     },
     data: {
-        idArchive: idArchive,
         recommendation_letter: recommendation_letter,
         appliant: appliant,
         announcement: announcement,
-        parameters: parameters,
-        index: index,
+        token: token,
+        confirm_submit: false,
+        // parameters: parameters,
         parameters: [
             {
                 name: "Conocimiento y destrezas en su campo",
@@ -104,11 +104,11 @@ const app = new Vue({
         ],
         //otros parametros
         custom_parameters: [
-                {
-                    name: "",
-                    score: "",
-                },
-            ],
+            {
+                name: "",
+                score: "",
+            },
+        ],
     },
 
     methods: {
@@ -131,26 +131,64 @@ const app = new Vue({
             // }
 
 
+            // if(this.confirm_submit){
+            // axios.post(
+            //     route(
+            //         'recommendationLetter.store',
+            //         {
+            //             recommendation_letter_id: this.recommendation_letter.id, 
+            //             answer: 1,
+            //             token:this.token,
+            //             email_evaluator: this.recommendation_letter.email_evaluator,
+            //             time_to_meet: this.recommendation_letter.time_to_meet,
+            //             how_meet: this.recommendation_letter.how_meet,
+            //             kind_relationship: this.recommendation_letter.kind_relationship,
+            //             experience_with_candidate: this.recommendation_letter.experience_with_candidate,
+            //             qualifications_students: this.recommendation_letter.qualifications_students,
+            //             special_skills: this.recommendation_letter.special_skills,
+            //             why_recommendation: this.recommendation_letter.why_recommendation,
+            //             //colecciones a evaluar separadas
+            //             score_parameters: this.score_parameters,
+            //             custom_parameters: this.custom_parameters,
+            //         },
+            //         this.appliant,
+            //         this.announcement
+            // )).then(response => {
+            //     this.$emit
+            // });
+            // }else{
+            //     alert("Confirma que la información sera confidencial para continuar");
+            // }
+            if (this.confirm_submit) {
+                axios.post('/controlescolar/recommendationLetter/addRecommendationLetter', {
+                    recommendation_letter_id: this.recommendation_letter.id,
+                    answer: 1,
+                    token: this.token,
+                    email_evaluator: this.recommendation_letter.email_evaluator,
+                    time_to_meet: this.recommendation_letter.time_to_meet,
+                    how_meet: this.recommendation_letter.how_meet,
+                    kind_relationship: this.recommendation_letter.kind_relationship,
+                    experience_with_candidate: this.recommendation_letter.experience_with_candidate,
+                    qualifications_students: this.recommendation_letter.qualification_student,
+                    special_skills: this.recommendation_letter.special_skills,
+                    why_recommendation: this.recommendation_letter.why_recommendation,
+                    //colecciones a evaluar separadas
+                    score_parameters: this.parameters,
+                    custom_parameters: this.custom_parameters,
+                    appliant: this.appliant,
+                    announcement: this.announcement
+                }).then((response) => {
+                    console.log(response);
+                    // alert('Tu respuesta ha sido enviada, agradecemos tu cooperacion, puedes cerrar ya esta ventana');
+                }).catch((error) => {
+                    //alert(error.response.data);
+                    // alert('ERROR, no pudimos guardar tu respuesta');
+                    console.log(error.response.data);
+                });
 
-            axios.post('controlescolar/recommendationLetter/addRecommendationLetter', {
-                recommendation_letter_id: this.archiveRl.id, 
-                archive_id: this.idArchive,
-                token:this.token,
-                answer: 1,
-                email_evaluator: this.archiveRl.email_evaluator,
-                time_to_meet: this.archiveRl.time_to_meet,
-                how_meet: this.archiveRl.how_meet,
-                kind_relationship: this.archiveRl.kind_relationship,
-                experience_with_candidate: this.archiveRl.experience_with_candidate,
-                qualifications_students: this.archiveRl.qualifications_students,
-                special_skills: this.archiveRl.special_skills,
-                why_recommendation: this.archiveRl.why_recommendation,
-                //colecciones a evaluar separadas
-                score_parameters: this.score_parameters,
-                custom_parameters: this.custom_parameters,
-            }).then(response => {
-                this.$emit
-            });
+            } else {
+                alert("Confirma que la información sera confidencial para continuar");
+            }
         }
     },
 });

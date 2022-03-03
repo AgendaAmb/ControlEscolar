@@ -242,11 +242,9 @@ class LoginController extends Controller
     }
 /*
     private function crearusuario(){
-
         User::create([
             'id' => $request->clave_uaslp
         ]);
-
     }
     */
 

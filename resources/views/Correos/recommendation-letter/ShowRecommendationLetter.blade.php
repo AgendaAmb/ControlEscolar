@@ -7,16 +7,15 @@ Le escribimos de nuestro programa de "{{$academic_program['name']}}", debido a q
 
 Usted podrá otorgar su carta de recomendación.
 
-{{-- Token: {{$my_token}} --}}
 
 @component('mail::button', ['url' => route('recommendationLetter.show', ['token' => $my_token])])
 dando clic aquí
 @endcomponent
 
-<br>
+
 Agradecemos su colaboración.
 
 Atentamente
 Control Escolar de Agenda Ambiental.
-<br>
+
 @endcomponent

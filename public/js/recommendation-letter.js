@@ -2241,6 +2241,14 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.$emit("update:why_recommendation", value);
       }
+    },
+    ConfirmSubmit: {
+      get: function get() {
+        return this.confirm_submit;
+      },
+      set: function set(value) {
+        this.$emit('update:confirm_submit', value);
+      }
     }
   },
   methods: {
@@ -2264,6 +2272,7 @@ __webpack_require__.r(__webpack_exports__);
     //parametros requeridos
     special_skills: String,
     why_recommendation: String,
+    confirm_submit: Boolean,
     //parametros definidos para el análisis del candidato.
     parameters: {
       type: Array,
@@ -25007,9 +25016,50 @@ var render = function () {
       },
     }),
     _vm._v(" "),
-    _vm._m(1),
+    _c("label", { staticClass: "mt-4" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.ConfirmSubmit,
+            expression: "ConfirmSubmit",
+          },
+        ],
+        attrs: { type: "checkbox" },
+        domProps: {
+          checked: Array.isArray(_vm.ConfirmSubmit)
+            ? _vm._i(_vm.ConfirmSubmit, null) > -1
+            : _vm.ConfirmSubmit,
+        },
+        on: {
+          change: function ($event) {
+            var $$a = _vm.ConfirmSubmit,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && (_vm.ConfirmSubmit = $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  (_vm.ConfirmSubmit = $$a
+                    .slice(0, $$i)
+                    .concat($$a.slice($$i + 1)))
+              }
+            } else {
+              _vm.ConfirmSubmit = $$c
+            }
+          },
+        },
+      }),
+      _vm._v(
+        " \n    Al guardar confirmo que esta información es exacta y veridica y autorizo\n    que sea utilizada en la evaluación del aspirante por el Comité Académico\n    del PMPCA.\n  "
+      ),
+    ]),
     _vm._v(" "),
-    _vm._m(2),
+    _vm._m(1),
     _vm._v(" "),
     _c("hr", { staticClass: "d-block" }),
   ])
@@ -25037,21 +25087,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", { staticClass: "mt-4" }, [
-      _c("input", { attrs: { type: "checkbox", name: "confirmation_form" } }),
-      _vm._v(
-        "\n    Al guardar confirmo que esta información es exacta y veridica y autorizo\n    que sea utilizada en la evaluación del aspirante por el Comité Académico\n    del PMPCA.\n  "
-      ),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("label", [
       _c("strong", [_vm._v("Nota: ")]),
       _vm._v(
-        "  Esta información es confidencial y no será\n    del conocimiento del candidato."
+        "Esta información es confidencial y no será\n    del conocimiento del candidato."
       ),
     ])
   },
@@ -37808,10 +37847,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CandidateAnalysis__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/CandidateAnalysis */ "./resources/js/recommendation-letter/components/CandidateAnalysis.vue");
 /* harmony import */ var _components_DataCandidate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/DataCandidate */ "./resources/js/recommendation-letter/components/DataCandidate.vue");
 /* harmony import */ var _components_RelationshipWithCandidate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/RelationshipWithCandidate */ "./resources/js/recommendation-letter/components/RelationshipWithCandidate.vue");
-var _data;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -37839,65 +37874,68 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
     DataCandidate: _components_DataCandidate__WEBPACK_IMPORTED_MODULE_2__["default"],
     RelationshipWithCandidate: _components_RelationshipWithCandidate__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
-  data: (_data = {
-    idArchive: idArchive,
+  data: {
     recommendation_letter: recommendation_letter,
     appliant: appliant,
     announcement: announcement,
-    parameters: parameters,
-    index: index
-  }, _defineProperty(_data, "parameters", [{
-    name: "Conocimiento y destrezas en su campo",
-    score: null
-  }, {
-    name: "Dedicación al trabajo",
-    score: null
-  }, {
-    name: "Imaginación y creatividad",
-    score: null
-  }, {
-    name: "Habilidad para comunicarse",
-    score: null
-  }, {
-    name: "Rendimiento",
-    score: null
-  }, {
-    name: "Perseverancia",
-    score: null
-  }, {
-    name: "Capacidad de convivencia con otras personas",
-    score: null
-  }, {
-    name: "Disciplina de estudio",
-    score: null
-  }, {
-    name: "Habilidad de investigación",
-    score: null
-  }, {
-    name: "Habilidades de comunicación oral y escrita",
-    score: null
-  }, {
-    name: "Hábitos de trabajo",
-    score: null
-  }, {
-    name: "Organización",
-    score: null
-  }, {
-    name: "Planificación",
-    score: null
-  }, {
-    name: "Oportunidad",
-    score: null
-  }, {
-    name: "Colaboración en equipo",
-    score: null
-  }, {
-    name: "Iniciativa propia",
-    score: null
-  }]), _defineProperty(_data, "custom_parameters", [{
-    name: "",
-    score: ""
-  }]), _data),
+    token: token,
+    confirm_submit: false,
+    // parameters: parameters,
+    parameters: [{
+      name: "Conocimiento y destrezas en su campo",
+      score: null
+    }, {
+      name: "Dedicación al trabajo",
+      score: null
+    }, {
+      name: "Imaginación y creatividad",
+      score: null
+    }, {
+      name: "Habilidad para comunicarse",
+      score: null
+    }, {
+      name: "Rendimiento",
+      score: null
+    }, {
+      name: "Perseverancia",
+      score: null
+    }, {
+      name: "Capacidad de convivencia con otras personas",
+      score: null
+    }, {
+      name: "Disciplina de estudio",
+      score: null
+    }, {
+      name: "Habilidad de investigación",
+      score: null
+    }, {
+      name: "Habilidades de comunicación oral y escrita",
+      score: null
+    }, {
+      name: "Hábitos de trabajo",
+      score: null
+    }, {
+      name: "Organización",
+      score: null
+    }, {
+      name: "Planificación",
+      score: null
+    }, {
+      name: "Oportunidad",
+      score: null
+    }, {
+      name: "Colaboración en equipo",
+      score: null
+    }, {
+      name: "Iniciativa propia",
+      score: null
+    }],
+    //otros parametros
+    custom_parameters: [{
+      name: "",
+      score: ""
+    }]
+  },
   methods: {
     /*
     Se necesita
@@ -37908,32 +37946,67 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
     }
           */
     actualizaRecomendationLetter: function actualizaRecomendationLetter() {
-      var _this = this;
-
       //tranforma los datos a objetos
       // let aux_score = [];
       // for(const index in this.score_parameters){
       //     aux_score.push({index})
       // }
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('controlescolar/recommendationLetter/addRecommendationLetter', {
-        recommendation_letter_id: this.archiveRl.id,
-        archive_id: this.idArchive,
-        token: this.token,
-        answer: 1,
-        email_evaluator: this.archiveRl.email_evaluator,
-        time_to_meet: this.archiveRl.time_to_meet,
-        how_meet: this.archiveRl.how_meet,
-        kind_relationship: this.archiveRl.kind_relationship,
-        experience_with_candidate: this.archiveRl.experience_with_candidate,
-        qualifications_students: this.archiveRl.qualifications_students,
-        special_skills: this.archiveRl.special_skills,
-        why_recommendation: this.archiveRl.why_recommendation,
-        //colecciones a evaluar separadas
-        score_parameters: this.score_parameters,
-        custom_parameters: this.custom_parameters
-      }).then(function (response) {
-        _this.$emit;
-      });
+      // if(this.confirm_submit){
+      // axios.post(
+      //     route(
+      //         'recommendationLetter.store',
+      //         {
+      //             recommendation_letter_id: this.recommendation_letter.id, 
+      //             answer: 1,
+      //             token:this.token,
+      //             email_evaluator: this.recommendation_letter.email_evaluator,
+      //             time_to_meet: this.recommendation_letter.time_to_meet,
+      //             how_meet: this.recommendation_letter.how_meet,
+      //             kind_relationship: this.recommendation_letter.kind_relationship,
+      //             experience_with_candidate: this.recommendation_letter.experience_with_candidate,
+      //             qualifications_students: this.recommendation_letter.qualifications_students,
+      //             special_skills: this.recommendation_letter.special_skills,
+      //             why_recommendation: this.recommendation_letter.why_recommendation,
+      //             //colecciones a evaluar separadas
+      //             score_parameters: this.score_parameters,
+      //             custom_parameters: this.custom_parameters,
+      //         },
+      //         this.appliant,
+      //         this.announcement
+      // )).then(response => {
+      //     this.$emit
+      // });
+      // }else{
+      //     alert("Confirma que la información sera confidencial para continuar");
+      // }
+      if (this.confirm_submit) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default().post('/controlescolar/recommendationLetter/addRecommendationLetter', {
+          recommendation_letter_id: this.recommendation_letter.id,
+          answer: 1,
+          token: this.token,
+          email_evaluator: this.recommendation_letter.email_evaluator,
+          time_to_meet: this.recommendation_letter.time_to_meet,
+          how_meet: this.recommendation_letter.how_meet,
+          kind_relationship: this.recommendation_letter.kind_relationship,
+          experience_with_candidate: this.recommendation_letter.experience_with_candidate,
+          qualifications_students: this.recommendation_letter.qualification_student,
+          special_skills: this.recommendation_letter.special_skills,
+          why_recommendation: this.recommendation_letter.why_recommendation,
+          //colecciones a evaluar separadas
+          score_parameters: this.parameters,
+          custom_parameters: this.custom_parameters,
+          appliant: this.appliant,
+          announcement: this.announcement
+        }).then(function (response) {
+          console.log(response); // alert('Tu respuesta ha sido enviada, agradecemos tu cooperacion, puedes cerrar ya esta ventana');
+        })["catch"](function (error) {
+          //alert(error.response.data);
+          // alert('ERROR, no pudimos guardar tu respuesta');
+          console.log(error.response.data);
+        });
+      } else {
+        alert("Confirma que la información sera confidencial para continuar");
+      }
     }
   }
 });

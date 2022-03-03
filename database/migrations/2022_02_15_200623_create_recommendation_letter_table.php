@@ -83,8 +83,6 @@ class CreateRecommendationLetterTable extends Migration
             $table->string('token')->nullable();
             $table->bigInteger('answer')->nullable();
 
-
-
             $table->string('time_to_meet')->nullable();
             $table->string('how_meet')->nullable();
             $table->string('kind_relationship')->nullable();

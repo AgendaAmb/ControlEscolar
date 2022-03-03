@@ -91,13 +91,14 @@ class Archive extends Model
     {
         /** @var App\Models\User */
         $user = Auth::user();
-        $intention_letter_visible = $user->isWorker();
-
         $query = $this->requiredDocuments()->where('type', 'entrance');
 
-        if ($intention_letter_visible === false)
-            return $query->where('intention_letter', false);
-
+        if($user){
+            $intention_letter_visible = $user->isWorker();
+            if ($intention_letter_visible === false){
+                return $query->where('intention_letter', false);
+            }
+        }
         return $query->orderBy('required_documents.name');
     }
 
