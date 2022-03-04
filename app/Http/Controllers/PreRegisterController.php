@@ -55,7 +55,7 @@ class PreRegisterController extends Controller
     public function miPortalUser(Request $request)
     {
         # Busca al usuario en el sistema de MiPortal.
-        $response = $this->service->miPortalGet('api/usuarios', ['filter[email]' => $request->email]);
+        $response = $this->service->miPortalGet('/api/usuarios', ['filter[email]' => $request->email]);
         $response_data = $response->collect();
 
         # La solicitud no fue llevada a cabo correctamente.
@@ -144,7 +144,7 @@ class PreRegisterController extends Controller
         ]);
 
         if ($val->fails()) {
-            return new JsonResponse($val->errors(),200);
+            return new JsonResponse($val->errors(), 500);
          }
 
         //return new JsonResponse('hola',200);
@@ -166,7 +166,7 @@ class PreRegisterController extends Controller
                 $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
                 $response_data = $response->collect()->toArray();
             }catch(\Exception $e){
-                return new JsonResponse($e->getMessage(),200);
+                return new JsonResponse($e->getMessage(),500);
             }
             
             

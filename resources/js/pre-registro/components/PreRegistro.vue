@@ -228,7 +228,7 @@ export default {
         },
       })
         .then((response) => {
-          // if (response.message === "Éxito") {
+          if (response.code === 201) {
             Swal.fire({
               title: "Registro exitoso",
               text: "Tu cuenta ha sido creada",
@@ -244,7 +244,7 @@ export default {
             });
             // window.location.href = "/controlescolar/home";
             //window.location.href = this.url + "/controlescolar/home";
-          // }
+          }
         })
         .catch((error) => {
           //alert(error.response.data);

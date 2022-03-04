@@ -12,6 +12,7 @@ import DatosMiPortal from "./components/DatosMiPortal.vue";
 import DatosPersonales from "./components/DatosPersonales.vue";
 import DatosUaslp from "./components/DatosUaslp.vue";
 import PreRegistro from "./components/PreRegistro.vue";
+
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 

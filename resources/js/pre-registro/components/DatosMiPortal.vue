@@ -62,6 +62,7 @@ export default {
         this.$emit('miPortalUserUpdated', res);
 
       }).catch((err) => { 
+        console.log(err.response.data);
         this.spinnerVisible = false;
       });
     },

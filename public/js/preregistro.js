@@ -318,6 +318,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$emit('miPortalUserUpdated', res);
       })["catch"](function (err) {
+        console.log(err.response.data);
         _this.spinnerVisible = false;
       });
     },
@@ -1070,22 +1071,22 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        // if (response.message === "Éxito") {
-        Swal.fire({
-          title: "Registro exitoso",
-          text: "Tu cuenta ha sido creada",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Acceder a cuenta"
-        }).then(function (result) {
-          if (result.isConfirmed) {
-            window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
-          }
-        }); // window.location.href = "/controlescolar/home";
-        //window.location.href = this.url + "/controlescolar/home";
-        // }
+        if (response.code === 201) {
+          Swal.fire({
+            title: "Registro exitoso",
+            text: "Tu cuenta ha sido creada",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Acceder a cuenta"
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
+            }
+          }); // window.location.href = "/controlescolar/home";
+          //window.location.href = this.url + "/controlescolar/home";
+        }
       })["catch"](function (error) {
         //alert(error.response.data);
         console.log(error.response.data);
