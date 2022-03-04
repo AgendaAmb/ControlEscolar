@@ -2,14 +2,14 @@
   <div class="form-row">
     <!-- Pregunta al usuario si ya tiene alguna cuenta existente en el sistema. -->
     <div class="form-group col-12 mb-3">
-      <h3 class="d-block mb-3"> ¿Eres miembro de la comunidad de Agenda Ambiental o perteneces a la UASLP? </h3>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> Soy miembro de la comunidad de Agenda Ambiental </label>
-      </div>
+      <h3 class="d-block mb-3"> ¿Eres miembro de la UASLP? </h3>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP </label>
+        <label class="form-check-label"> Si pertenezco a la UASLP </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
+        <label class="form-check-label"> No, pero ya estoy registrado en el portal de Agenda Ambiental </label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">

@@ -179,13 +179,9 @@ class ArchiveController extends Controller
         //         ->with('user_id', $request->token);
         // }
 
-        //prueba 
-        return  view('postulacion.error-lettersSent')
-        ->with('user_id', 298428);
-
         $rl = MyRecommendationLetter::where(
             'token', $token
-        );
+        )->first();
 
         // return new JsonResponse(
         //     $rl,
@@ -505,8 +501,6 @@ class ArchiveController extends Controller
 
     public function sentEmailRecommendationLetter(Request $request)
     {
-
-        
 
         // Variables locales
         $message = "El correo ya ha sido enviado";

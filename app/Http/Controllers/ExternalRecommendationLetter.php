@@ -40,10 +40,12 @@ class ExternalRecommendationLetter extends Controller
      */
     public function addRecommendationLetter(StoreRecommendationLetter $request)
     {
-            
+
         $appliant = $request->appliant;
         $announcement = $request->announcement;
         $parameters = $request->score_parameters;
+        $custom_parameters = $request->custom_parameters;
+        $message ='Exito';
         //existe o no registro de carta 
 
         #Extrae carta de DB
@@ -55,6 +57,7 @@ class ExternalRecommendationLetter extends Controller
                 200,
             );
         }
+        $cosas = compact('recommendation_letter', 'appliant');
 
 
         # Verifica que la carta no se ha enviado del propio correo 
@@ -72,6 +75,25 @@ class ExternalRecommendationLetter extends Controller
                         $archive_required = ArchiveRequiredDocument::where('id', $archive_rl->required_document_id)->first();
                         //Expediente del estudiante
                         $archive = Archive::where('id', $archive_required->archive_id)->first();
+                        // return new JsonResponse(
+                        //     $archive,
+                        //     200
+                        // );
+                        $archive->loadMissing([
+                            'appliant',
+                            'announcement.academicProgram',
+                            'personalDocuments',
+                            'recommendationLetter',
+                            'myRecommendationLetter',
+                            'entranceDocuments',
+                            'intentionLetter',
+                            'academicDegrees.requiredDocuments',
+                            'appliantLanguages.requiredDocuments',
+                            'appliantWorkingExperiences',
+                            'scientificProductions.authors',
+                            'humanCapitals'
+                        ]);
+
 
                     } catch (\Exception $e) {
                         return new JsonResponse(
@@ -79,61 +101,140 @@ class ExternalRecommendationLetter extends Controller
                             200
                         );
                     }
-                    
+                    #Se crea campos de parametros establecidos y customs
+                    //Score parameters
+                    try {
+                        foreach ($request->score_parameters as $score) {
+                            
+                            //busca el parametro
+                            $parameter_found = Parameter::where('text', $score['name'])->first();
+
+                            // return new JsonResponse(
+                            //     $parameter_found,
+                            //     200
+                            // );
+                            ScoreParameter::create([
+                                'rl_id' => $recommendation_letter->id,
+                                'parameter_id' => $parameter_found->id,
+                                'score' => $score['score']
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        return new JsonResponse(
+                            $e->getMessage(),
+                            200
+                        );
+                    }
+                    //Custom parameter
+                    try {
+                        //Custom Parameters
+                        foreach ($request->custom_parameters as $custom) {
+                            CustomParameter::create([
+                                'rl_id' => $recommendation_letter->id,
+                                'text' => $custom['name'],
+                                'score' => $custom['score']
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        return new JsonResponse(
+                            $e->getMessage(),
+                            200
+                        );
+                    }
+
+
+
+
 
                     # Crear archivo PDF
                     //Se guarda en una variable local 
                     try {
-                        $recommendation_letter_pdf = PDF::loadView('pdf.recommendation-letter', compact('recommendation_letter', 'appliant', 'announcement','parameters'))
-                        ->setOptions([
-                            'defaultPaperSize' => 'a4',
-                            'isJavaScriptEnabled' => true,
-                            'isFontSubsettingEnabled' =>  true,
-                            'dpi' => 120
-                        ]); //opciones para visualizar correctamente el pdf
+
+                        $data = array(
+                            'recommendation_letter' => $recommendation_letter,
+                            'appliant' => $appliant,
+                            'announcement' => $announcement,
+                            'parameters' => $parameters,
+                            'custom_parameters' => $custom_parameters,
+                        );
+                        
+
+                        $my_data = (object) $data;
+                        // view()->share('pdf.prueba', $recommendation_letter, $appliant);
+                        
+                        // view()->share('pdf.prueba',[$parameters]);
+                        // view()->share('pdf.prueba',[$custom_parameters]);
+
+                        // $recommendation_letter_pdf = PDF::loadView('pdf.prueba', [
+                        //     'data' => $data
+                        // ])
+                        //     ->setOptions([
+                        //         'defaultPaperSize' => 'a4',
+                        //         'isJavaScriptEnabled' => true,
+                        //         'isFontSubsettingEnabled' =>  true,
+                        //         'dpi' => 120
+                        //     ]); //opciones para visualizar correctamente el pdf
+                        // $recommendation_letter_pdf = PDF::loadView('pdf.prueba',['archive', ])
+                        //     ->setOptions([
+                        //         'defaultPaperSize' => 'a4',
+                        //         'isJavaScriptEnabled' => true,
+                        //         'isFontSubsettingEnabled' =>  true,
+                        //         'dpi' => 120
+                        //     ]);
                         //Se guarda en STORAGE
                     } catch (\Exception $e) {
                         return new JsonResponse(
-                            'el pdf no se genero',
+                            $e->getMessage(),
                             200
                         );
                     }
-                    
-                    $recommendation_letter_pdf = PDF::loadView('pdf.recommendation-letter', compact('recommendation_letter', 'appliant', 'announcement','parameters'))
-                        ->setOptions([
-                            'defaultPaperSize' => 'a4',
-                            'isJavaScriptEnabled' => true,
-                            'isFontSubsettingEnabled' =>  true,
-                            'dpi' => 120
-                        ]); //opciones para visualizar correctamente el pdf
-                        //Se guarda en STORAGE
 
-                        
-                    $path = 'app/'. 'archives/' . $request->archive_id . 'entranceDocuments/' .'recommendation_letter_'. $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
-                    $recommendation_letter_pdf->save(storage_path($path));
+
+                    // try {
+
+                    //     $path = '/app/archives/myArchivo.pdf';
+                    //     $recommendation_letter_pdf->save(storage_path($path));
+                    //     // $path = '/app/' . 'archives/' . '/entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
+                    //     // $recommendation_letter_pdf->save(storage_path($path));
+                    // } catch (\Exception $e) {
+                    //     return new JsonResponse(
+                    //         $e->getMessage(),
+                    //         200
+                    //     );
+                    // }
+                    // $path = '\app/' . 'archives/' . $request->archive_id . 'entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
+                    // $recommendation_letter_pdf->save(storage_path($path));
 
                     #Actualizar modelos
 
                     try {
                         //carta de recomendacion
-                        $recommendation_letter->update($request->safe()->except($request->safe()->except('score_parameters', 'custom_parameters', 'recommendation_letter_id')));
-                        //archivo de carta de recomendacion
-                        $archive_rl->update(['location' => $path]);
-                        //archivo requerido
-                        $archive_required->update(['location' => $path]);;
+                        $recommendation_letter->update($request->safe()->except(['score_parameters', 'custom_parameters', 'recommendation_letter_id','appliant','announcement']));
+
+                        // archivo de carta de recomendacion
+                        // $archive_rl =  RecommendationLetter::where('rl_id', $recommendation_letter->id)->first()->update([
+                        //     'location' => $path,
+                        //     // 'rl_id' => $recommendation_letter->id,
+                        //     // 'required_document_id' => $archive_required->id,
+                        // ]);
+
+
+                        // //archivo requerido
+                        // $archive_required->update(['location' => $path]);
                     } catch (\Exception $e) {
-                        return new JsonResponse('Error al actualizar registros de locacion', 200);
+                        return new JsonResponse($e->getMessage(), 200);
                     }
                 } else {
-                    return new JsonResponse(
-                        'La carta ya fue respondida, agrademos tu participacion',
-                        200,
-                    );
+                    $message = 'Carta contestada';
                 }
+            }else{
+                $message = 'Token invalido';
             }
+        }else{
+            $message = 'Correo invalido';
         }
 
-        return new JsonResponse('no se pudo guardar la carta, lo sentimos, trabajaremos en ello', 200);
+        return new JsonResponse($message, 200);
     }
 
     /**
@@ -187,7 +288,7 @@ class ExternalRecommendationLetter extends Controller
         #Verificacion de carta no contestada
         if ($rl->answer >= 1) {
             return view('postulacion.error-lettersSent')
-                ->with($archive->appliant->id);
+                ->with('user_id', $archive->appliant->id);
         }
 
         #Extraccion de variables necesarias
@@ -213,6 +314,27 @@ class ExternalRecommendationLetter extends Controller
             ->with('appliant', $appliant)                   //usuario 
             ->with('announcement', $announcement)
             ->with('parameters', $parameters)
-            ->with('token',$token); //programa academico
+            ->with('token', $token); //programa academico
+    }
+
+    public function pruebaPDF(StoreRecommendationLetter $request)
+    {
+        $recommendation_letter_pdf = PDF::loadView('pdf.prueba', compact('request'))
+            ->setOptions([
+                'defaultPaperSize' => 'a4',
+                'isJavaScriptEnabled' => true,
+                'isFontSubsettingEnabled' =>  true,
+                'dpi' => 120
+            ]); //opciones para visualizar correctamente el pdf
+
+        try {
+            $path = '/app/archives/myArchivo.pdf';
+            $recommendation_letter_pdf->save(storage_path($path));
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+
+        return $recommendation_letter_pdf->stream();
     }
 }

@@ -71,5 +71,16 @@ class MyRecommendationLetter extends Model
     {
         return $this->hasMany(ScoreParameter::class);
     }
+
+    /**
+     * Obtiene los documentos requeridos para el ingreso del
+     * postulante, al programa académico.
+     *
+     * @return HasMany
+     */
+    public function custom_parameters(): HasMany
+    {
+        return $this->hasMany(CustomParameter::class);
+    }
         
 }

@@ -37,7 +37,7 @@
             v-for="(parameter, index) in custom_parameters"
             :key="index"
             v-bind="parameter"
-            :remove="deleteCustomParameter"
+            :remove.sync="deleteCustomParameter"
             :index = "index"
             :score.sync="parameter.score"
             :name.sync="parameter.name"
@@ -51,7 +51,7 @@
           <tr>
             <td colspan="5">
               <label class="d-block mt-3">Otra que desee especificar</label>
-              <button @click="addCustomParameter()" class="btn btn-primary">
+              <button @click="addCustomParameter" class="btn btn-primary">
                 Agregar otro parametro
               </button>
             </td>

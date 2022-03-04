@@ -12,6 +12,8 @@ class CustomParameter extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'custom_parameters_rl';
+
     protected $hidden = [
         'created_at',
         'updated_at',

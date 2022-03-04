@@ -169,7 +169,7 @@ const app = new Vue({
                     how_meet: this.recommendation_letter.how_meet,
                     kind_relationship: this.recommendation_letter.kind_relationship,
                     experience_with_candidate: this.recommendation_letter.experience_with_candidate,
-                    qualifications_students: this.recommendation_letter.qualification_student,
+                    qualification_student: this.recommendation_letter.qualification_student,
                     special_skills: this.recommendation_letter.special_skills,
                     why_recommendation: this.recommendation_letter.why_recommendation,
                     //colecciones a evaluar separadas
@@ -180,6 +180,7 @@ const app = new Vue({
                 }).then((response) => {
                     console.log(response);
                     // alert('Tu respuesta ha sido enviada, agradecemos tu cooperacion, puedes cerrar ya esta ventana');
+                    
                 }).catch((error) => {
                     //alert(error.response.data);
                     // alert('ERROR, no pudimos guardar tu respuesta');

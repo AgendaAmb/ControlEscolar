@@ -21,7 +21,7 @@
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault1"
-          value="Bueno"
+          value="Excelente"
         />
       </form>
     </td>
@@ -33,7 +33,7 @@
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault1"
-          value="Excelente"
+          value="Bueno"
         />
       </form>
     </td>

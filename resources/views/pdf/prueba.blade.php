@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hola</h1>
     
+<h2>My First Web Page</h2>
+<p>My First Paragraph.</p>
+<br>
+{{$archive->myRecommendationLetter}}
+<br>
+
+{{-- {{$appliant}} --}}
+
 </body>
 </html>

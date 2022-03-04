@@ -33,7 +33,7 @@ class StoreRecommendationLetter extends FormRequest
             'how_meet' => ['required', 'string', 'max:255'],
             'kind_relationship' => ['required', 'string', 'max:255'],
             'experience_with_candidate' => ['required', 'string', 'max:255'],
-            'qualifications_students' => ['required', 'string', 'max:255'],
+            'qualification_student' => ['required', 'string', 'max:255'],
             'special_skills' => ['required', 'string', 'max:255'],
             'why_recommendation' => ['required', 'string', 'max:255'],
 
@@ -59,7 +59,7 @@ class StoreRecommendationLetter extends FormRequest
             'how_meet.required'=>'No se ha contestado el como conocio al estudiante',
             'kind_relationship.required'=>'No se ha contestado la relacion que tiene al estudiante',
             'experience_with_candidate.required'=>'No se ha contestado la relacion que tiene al estudiante',
-            'qualifications_students.required'=>'No se ha contestado como califica al estudiante en experiencias pasadas estudiante',
+            'qualification_student.required'=>'No se ha contestado como califica al estudiante en experiencias pasadas estudiante',
             'special_skills.required'=>'No se ha contestado las habilidades que reconoce del estudiante',
             'why_recommendation.required'=>'No se ha contestado el por que recomienda al estudiante',
             'score_parameters.required'=>'No se han contestado todos los campos de parametros estudiante',

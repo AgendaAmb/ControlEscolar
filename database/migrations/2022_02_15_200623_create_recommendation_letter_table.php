@@ -121,7 +121,7 @@ class CreateRecommendationLetterTable extends Migration
             # Estados de control
             $table->softDeletes();
             $table->timestamps();
-            // $table->primary(['rl_id', 'required_document_id'], 'pk_doc_rec_lett'); //llave de pntaje a parametro definido
+            $table->primary(['rl_id', 'required_document_id'], 'id'); //llave de pntaje a parametro definido
         });
 
         //Parametros de analisis de candidato
@@ -138,7 +138,7 @@ class CreateRecommendationLetterTable extends Migration
         });
 
         //datos para indicar la direccion hacia el tipo de documento requerido 
-        Schema::create('score_paremeters_rl', function (Blueprint $table) {
+        Schema::create('score_parameters_rl', function (Blueprint $table) {
 
             //recommendation letter relacion
             $table->foreignId('rl_id')

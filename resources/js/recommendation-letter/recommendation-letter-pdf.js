@@ -33,16 +33,9 @@
          recommendation_letter: recommendation_letter,
          appliant: appliant,
          announcement: announcement,
-         token: token,
-         confirm_submit: false,
          parameters: parameters,
-         //otros parametros
-         custom_parameters: [
-             {
-                 name: "",
-                 score: "",
-             },
-         ],
+         confirm_submit: false,
+         custom_parameters: custom_parameters
      },
  
      methods: {

@@ -1558,41 +1558,7 @@ var render = function () {
     [
       _c("div", { staticClass: "form-group col-12 mb-3" }, [
         _c("h3", { staticClass: "d-block mb-3" }, [
-          _vm._v(
-            " ¿Eres miembro de la comunidad de Agenda Ambiental o perteneces a la UASLP? "
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.TipoUsuario,
-                expression: "TipoUsuario",
-              },
-            ],
-            staticClass: "form-check-input",
-            attrs: {
-              type: "radio",
-              name: "TipoUsuario",
-              value: "Comunidad AA",
-            },
-            domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad AA") },
-            on: {
-              click: function ($event) {
-                return _vm.setPerteneceUASLP(true)
-              },
-              change: function ($event) {
-                _vm.TipoUsuario = "Comunidad AA"
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Soy miembro de la comunidad de Agenda Ambiental "),
-          ]),
+          _vm._v(" ¿Eres miembro de la UASLP? "),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-check" }, [
@@ -1623,8 +1589,40 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
+            _vm._v(" Si pertenezco a la UASLP "),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.TipoUsuario,
+                expression: "TipoUsuario",
+              },
+            ],
+            staticClass: "form-check-input",
+            attrs: {
+              type: "radio",
+              name: "TipoUsuario",
+              value: "Comunidad AA",
+            },
+            domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad AA") },
+            on: {
+              click: function ($event) {
+                return _vm.setPerteneceUASLP(true)
+              },
+              change: function ($event) {
+                _vm.TipoUsuario = "Comunidad AA"
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c("label", { staticClass: "form-check-label" }, [
             _vm._v(
-              " No soy miembro de la comunidad de Agenda Ambiental, pero sí la UASLP "
+              " No, pero ya estoy registrado en el portal de Agenda Ambiental "
             ),
           ]),
         ]),

@@ -178,6 +178,7 @@ Route::prefix('controlescolar')->group(function () {
 
         # Al guardar se hace la peticion para almacenar datos
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
+        Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
 
     //investigar para control de rutas lo siguiente
