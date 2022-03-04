@@ -11,6 +11,11 @@ import Vue from 'vue';
 import CandidateAnalysis from './components/CandidateAnalysis';
 import DataCandidate from './components/DataCandidate';
 import RelationshipWithCandidate from './components/RelationshipWithCandidate';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+import swal from "sweetalert2";
+window.Swal = swal;
 
 /**
  * The following block of code may be used to automatically register your
@@ -28,6 +33,7 @@ const app = new Vue({
         CandidateAnalysis,
         DataCandidate,
         RelationshipWithCandidate,
+        VueSweetalert2
     },
     data: {
         recommendation_letter: recommendation_letter,
@@ -178,6 +184,23 @@ const app = new Vue({
                     appliant: this.appliant,
                     announcement: this.announcement
                 }).then((response) => {
+                    if (response.data == 'Exito') {
+                        Swal.fire({
+                          title: "Registro exitoso! Su formulario ha sido completado",
+                          text: "Se le informara al postulante de su participación",
+                          icon: "success",
+                          showCancelButton: false,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Aceptar",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            window.location.href = "https://ambiental.uaslp.mx/controlescolar/pre-registro";
+                          }
+                        });
+                        // window.location.href = "/controlescolar/home";
+                        // window.location.href = this.url + "/controlescolar/home";
+                      }
                     console.log(response);
                     // alert('Tu respuesta ha sido enviada, agradecemos tu cooperacion, puedes cerrar ya esta ventana');
                     

@@ -557,7 +557,7 @@ class ArchiveController extends Controller
                 foreach($rlsCompare as $rlCompare){
                     //carta diferente
                     if($rlCompare->id != $rl->id){
-                        if(strcmp($rlCompare->email_evaluator,$rl->email_evaluator) === 0){
+                        if(strcmp($rlCompare->email_evaluator,$rl->email_evaluator) == 0){
                             return new JsonResponse('Correo existente, intente con uno diferente', 200);
                         }
                     }
@@ -578,8 +578,8 @@ class ArchiveController extends Controller
         } else { //no existe carta
 
             foreach ($archive->myRecommendationLetter as $rl) {
-                if(strcmp($rl->email_evaluator,$rl->email_evaluator) === 0){
-                    return new JsonResponse('Correo existente, intente con uno diferente', 200);
+                if(strcmp($rl->email_evaluator,$request->email) == 0){
+                    return new JsonResponse('Correo registrado para otra carta, intente uno diferente', 200);
                 }
             }
 

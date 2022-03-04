@@ -17,9 +17,9 @@
       <template v-else-if="checkUpload() === 0">
         <i>Estado:</i> <i class="text-warning">Esperando respuesta</i>
       </template>
-      <template v-else>
+      <!-- <template v-else>
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
-      </template>
+      </template> -->
 
       <div v-if="checkUpload() != 1" class="form-group mt-3">
         <button
@@ -75,6 +75,9 @@
 
 
 <script>
+import swal from "sweetalert2";
+window.Swal = swal;
+
 export default {
   name: "valida-carta-recomendacion",
 
@@ -187,15 +190,33 @@ export default {
           request
         )
         .then((response) => {
-          if(this.$recommendation_letter== null){
-            this.$recommendation_letter = {
-              email_evaluator : this.emailToSent,
-            };
+          // console.log(response.data);
+          // if(this.$recommendation_letter== null){
+          //   this.$recommendation_letter = {
+          //     email_evaluator : this.emailToSent,
+          //   };
+          // }
+          // alert(response.data);
+          if (response.data == 'Exito, el correo ha sido enviado') {
+            Swal.fire({
+              title: "El correo se ha enviado correctamente",
+              text: "Ahora solo queda esperar a que la persona responda el formulario",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            }).then((result) => {
+              // if (result.isConfirmed) {
+              //    window.location.href = "controlescolar/solicitud/";
+              // }
+            });
+            // window.location.href = "/controlescolar/home";
+            // window.location.href = this.url + "/controlescolar/home";
           }
-          alert(response.data);
         })
         .catch((error) => {
-          alert('Ha ocurrido un error, intenta mas tarde');
+          // alert('Ha ocurrido un error, intenta mas tarde');
           console.log(error);
         });
       // }

@@ -51,7 +51,7 @@
           <tr>
             <td colspan="5">
               <label class="d-block mt-3">Otra que desee especificar</label>
-              <button @click="addCustomParameter" class="btn btn-primary">
+              <button @click="addCustomParameter" class="btn btn-primary" type="button">
                 Agregar otro parametro
               </button>
             </td>
@@ -142,7 +142,7 @@ export default {
   methods: {
     addCustomParameter() {
       this.custom_parameters.push({ name: "", score: "" }); //agregar a la lista
-      console.log(this.custom_parameters.length);
+      // console.log(this.custom_parameters.length);
     },
 
     deleteCustomParameter(index) {

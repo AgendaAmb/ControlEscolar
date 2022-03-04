@@ -146,48 +146,51 @@ class ExternalRecommendationLetter extends Controller
 
 
 
-                    # Crear archivo PDF
-                    //Se guarda en una variable local 
-                    try {
-
-                        $data = array(
-                            'recommendation_letter' => $recommendation_letter,
-                            'appliant' => $appliant,
-                            'announcement' => $announcement,
-                            'parameters' => $parameters,
-                            'custom_parameters' => $custom_parameters,
-                        );
+                    // # Crear archivo PDF
+                    // //Se guarda en una variable local 
+                    // try {
+                    //     $data = [
+                    //         'recommendation_letter' => $recommendation_letter,
+                    //         'appliant' => $appliant
+                    //     ];
+                    //     // $data = array(
+                    //     //     'recommendation_letter' => $recommendation_letter,
+                    //     //     'appliant' => $appliant,
+                    //     //     'announcement' => $announcement,
+                    //     //     'parameters' => $parameters,
+                    //     //     'custom_parameters' => $custom_parameters,
+                    //     // );
                         
 
-                        $my_data = (object) $data;
-                        // view()->share('pdf.prueba', $recommendation_letter, $appliant);
+                    //     // $my_data = (object) $data;
+                    //     // view()->share('pdf.prueba', $recommendation_letter, $appliant);
                         
-                        // view()->share('pdf.prueba',[$parameters]);
-                        // view()->share('pdf.prueba',[$custom_parameters]);
+                    //     // view()->share('pdf.prueba',[$parameters]);
+                    //     // view()->share('pdf.prueba',[$custom_parameters]);
 
-                        // $recommendation_letter_pdf = PDF::loadView('pdf.prueba', [
-                        //     'data' => $data
-                        // ])
-                        //     ->setOptions([
-                        //         'defaultPaperSize' => 'a4',
-                        //         'isJavaScriptEnabled' => true,
-                        //         'isFontSubsettingEnabled' =>  true,
-                        //         'dpi' => 120
-                        //     ]); //opciones para visualizar correctamente el pdf
-                        // $recommendation_letter_pdf = PDF::loadView('pdf.prueba',['archive', ])
-                        //     ->setOptions([
-                        //         'defaultPaperSize' => 'a4',
-                        //         'isJavaScriptEnabled' => true,
-                        //         'isFontSubsettingEnabled' =>  true,
-                        //         'dpi' => 120
-                        //     ]);
-                        //Se guarda en STORAGE
-                    } catch (\Exception $e) {
-                        return new JsonResponse(
-                            $e->getMessage(),
-                            200
-                        );
-                    }
+                    //     $recommendation_letter_pdf = PDF::loadView('pdf.prueba', [
+                    //         'data' => $data
+                    //     ])
+                    //         ->setOptions([
+                    //             'defaultPaperSize' => 'a4',
+                    //             'isJavaScriptEnabled' => true,
+                    //             'isFontSubsettingEnabled' =>  true,
+                    //             'dpi' => 120
+                    //         ]); //opciones para visualizar correctamente el pdf
+                    //     // $recommendation_letter_pdf = PDF::loadView('pdf.prueba',['archive', ])
+                    //     //     ->setOptions([
+                    //     //         'defaultPaperSize' => 'a4',
+                    //     //         'isJavaScriptEnabled' => true,
+                    //     //         'isFontSubsettingEnabled' =>  true,
+                    //     //         'dpi' => 120
+                    //     //     ]);
+                    //     //Se guarda en STORAGE
+                    // } catch (\Exception $e) {
+                    //     return new JsonResponse(
+                    //         $e->getMessage(),
+                    //         200
+                    //     );
+                    // }
 
 
                     // try {
@@ -202,7 +205,7 @@ class ExternalRecommendationLetter extends Controller
                     //         200
                     //     );
                     // }
-                    // $path = '\app/' . 'archives/' . $request->archive_id . 'entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
+                    // // $path = '\app/' . 'archives/' . $request->archive_id . 'entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
                     // $recommendation_letter_pdf->save(storage_path($path));
 
                     #Actualizar modelos
@@ -317,15 +320,24 @@ class ExternalRecommendationLetter extends Controller
             ->with('token', $token); //programa academico
     }
 
-    public function pruebaPDF(StoreRecommendationLetter $request)
+    public function pruebaPDF(Request $request)
     {
-        $recommendation_letter_pdf = PDF::loadView('pdf.prueba', compact('request'))
+        $recommendation_letter = MyRecommendationLetter::find(1)->first();
+        $appliant = User::find(3)->first();
+        $data = [
+            'recommendation_letter' => $recommendation_letter,
+            'appliant' => $appliant
+        ];
+        
+        $recommendation_letter_pdf = PDF::loadView('pdf.prueba', ["recommendation_letter" => $recommendation_letter])
             ->setOptions([
                 'defaultPaperSize' => 'a4',
                 'isJavaScriptEnabled' => true,
                 'isFontSubsettingEnabled' =>  true,
                 'dpi' => 120
             ]); //opciones para visualizar correctamente el pdf
+
+            
 
         try {
             $path = '/app/archives/myArchivo.pdf';

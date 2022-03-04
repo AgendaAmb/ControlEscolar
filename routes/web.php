@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/',function(){return redirect("/controlescolar");});
 ##COMENTAR ESTE GRUPO DE RUTAS
 
-
+// Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -168,7 +168,7 @@ use Illuminate\Support\Facades\Route;
 
     
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
-    Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
+    Route::prefix('recommendationLetter')->name('recommendationLetter.')->middleware('guest')->group(function () {
         # El que recive correo recibe la vista
         
         //el token se almacena en la tabla de carta de recomendacion, esto permitira tener mayor seguridad sin acceder a la tabla de usuarios 
@@ -187,3 +187,4 @@ use Illuminate\Support\Facades\Route;
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
     Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
+// });

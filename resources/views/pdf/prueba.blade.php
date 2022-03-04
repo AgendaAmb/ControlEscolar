@@ -13,7 +13,7 @@
 <h2>My First Web Page</h2>
 <p>My First Paragraph.</p>
 <br>
-{{$archive->myRecommendationLetter}}
+{{$data}}
 <br>
 
 {{-- {{$appliant}} --}}
