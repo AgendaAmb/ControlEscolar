@@ -210,6 +210,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -226,9 +227,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    toString: function toString(rl) {
-      console.log(rl);
-    },
     sizeRecommendationLetter: function sizeRecommendationLetter() {
       // console.log("archivos" + this.archives_recommendation_letters.length);
       // console.log("cartas" + this.recommendation_letters.length);
@@ -2801,6 +2799,8 @@ __webpack_require__.r(__webpack_exports__);
       return res;
     },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
+      var _this = this;
+
       // //cadena no es similar a las existentes o  es nueva | INSERTAR
       // if(!res){
       var request; //Ya existe carta de recomendacion
@@ -2824,9 +2824,16 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {
-        console.log(response);
+        if (_this.$recommendation_letter == null) {
+          _this.$recommendation_letter = {
+            email_evaluator: _this.emailToSent
+          };
+        }
+
+        alert(response.data);
       })["catch"](function (error) {
-        console.log(error.response.data.errors);
+        alert('Ha ocurrido un error, intenta mas tarde');
+        console.log(error);
       }); // }
     }
   }

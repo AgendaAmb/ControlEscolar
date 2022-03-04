@@ -23,6 +23,7 @@
           :appliant="appliant"
           :academic_program="academic_program"
           :errors="errors"
+          
         >
         </valida-carta-recomendacion>
       </div>
@@ -96,9 +97,6 @@ export default {
   },
 
   methods: {
-    toString(rl) {
-      console.log(rl);
-    },
 
     sizeRecommendationLetter() {
       // console.log("archivos" + this.archives_recommendation_letters.length);

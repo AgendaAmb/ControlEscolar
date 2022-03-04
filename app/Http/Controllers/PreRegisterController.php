@@ -216,8 +216,9 @@ class PreRegisterController extends Controller
         Auth::loginUsingId($user);
         
         /** @var User */
-        $user = Auth::user();
-        $user->load('roles');
+        // $user = Auth::user();
+        // $user->load('roles');
+        // $user->assignRole('')
         // $l = new LoginController;
         // $l->preAuth($request,$user->id); //con esto ya deberia estar autenticado
 

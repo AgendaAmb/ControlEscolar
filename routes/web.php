@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/',function(){return redirect("/controlescolar");});
 ##COMENTAR ESTE GRUPO DE RUTAS
-Route::prefix('controlescolar')->group(function () {
+
 
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
@@ -187,4 +187,3 @@ Route::prefix('controlescolar')->group(function () {
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
     Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
-});

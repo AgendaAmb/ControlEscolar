@@ -503,7 +503,7 @@ class ArchiveController extends Controller
     {
 
         // Variables locales
-        $message = "El correo ya ha sido enviado";
+        $message = 'Exito, el correo ha sido enviado';
         $change_email = 0;
         $my_token = Str::random(20);
 
@@ -542,7 +542,7 @@ class ArchiveController extends Controller
 
         #Se verifica el numero de cartas de recomendacion ya enviadas por archivo de solicitante
         if ($num_recommendation_letter_count > 2) {
-            return new JsonResponse('Cartas enviadas, no se permiten mas', 200);
+            return new JsonResponse('Maximo numero de cartas contestadas, ya no se permiten mas respuestas', 200);
         }
 
         #Ids para relacion a archive required document table
@@ -550,15 +550,15 @@ class ArchiveController extends Controller
 
         //Se verifica si ya existe un registro de Carta o se necesita crear
         if ($request->letter_created == 1) { //ya existe registro de carta
-
+            $rlsCompare = $archive->myRecommendationLetter;
             foreach ($archive->myRecommendationLetter as $rl) {
 
                 #Se verifica que no exista el mismo correo para contestar la carta en otra
-                foreach($archive->myRecommendationLetter as $rlCompare){
+                foreach($rlsCompare as $rlCompare){
                     //carta diferente
                     if($rlCompare->id != $rl->id){
-                        if(strcmp($rlCompare->email_evaluator,$rl->email_evaluator) == 0){
-                            return new JsonResponse('Ya existe ese correo en otra carta, inserte otro porfavor', 200);
+                        if(strcmp($rlCompare->email_evaluator,$rl->email_evaluator) === 0){
+                            return new JsonResponse('Correo existente, intente con uno diferente', 200);
                         }
                     }
                 }
@@ -576,6 +576,12 @@ class ArchiveController extends Controller
                 }
             }
         } else { //no existe carta
+
+            foreach ($archive->myRecommendationLetter as $rl) {
+                if(strcmp($rl->email_evaluator,$rl->email_evaluator) === 0){
+                    return new JsonResponse('Correo existente, intente con uno diferente', 200);
+                }
+            }
 
             #SE REQUIERE CREAR CAMPOS EN TABLAS
             try {
@@ -617,7 +623,7 @@ class ArchiveController extends Controller
             try {
                 //Email enviado
                 Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
-                $message = 'Se ha enviado el correo';
+                
             } catch (\Exception $e) {
                 return $e->getMessage();
             }

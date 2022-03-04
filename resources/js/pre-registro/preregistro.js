@@ -12,6 +12,8 @@ import DatosMiPortal from "./components/DatosMiPortal.vue";
 import DatosPersonales from "./components/DatosPersonales.vue";
 import DatosUaslp from "./components/DatosUaslp.vue";
 import PreRegistro from "./components/PreRegistro.vue";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,10 +32,12 @@ const app = new Vue({
         DatosMiPortal, 
         DatosPersonales, 
         DatosUaslp,
-        PreRegistro
+        PreRegistro,
+        VueSweetalert2
     },
     data: {
         academic_programs: academicPrograms,
         selected_academic_program: null,
     },
 });
+

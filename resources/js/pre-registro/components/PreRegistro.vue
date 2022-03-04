@@ -70,14 +70,11 @@
               >
               </datos-personales>
             </div>
-
-            <button @click="a()">Hola</button>
+            <!-- <button @click="a()">sdfasd</button> -->
           </form>
         </div>
       </div>
     </div>
-
-    
   </div>
 </template>
 
@@ -85,6 +82,9 @@
 <script>
 import CrearCuenta from "./CrearCuenta.vue";
 import DatosPersonales from "./DatosPersonales.vue";
+
+import swal from "sweetalert2";
+window.Swal = swal;
 
 export default {
   components: { CrearCuenta, DatosPersonales },
@@ -151,9 +151,10 @@ export default {
   },
 
   methods: {
-    a(){
- window.location.href = "/controlescolar/home";
-    },
+    // a(){
+    //   Swal.fire('Test!', 'Hello test message','success');
+    // },
+
     uaslpUserUpdated(user) {
       this.facultad = user.dependency;
       this.directorio_activo = user.DirectorioActivo;
@@ -183,7 +184,6 @@ export default {
     },
 
     registraUsuario() {
-     
       this.errores = {};
       var formData = new FormData();
       formData.append("announcement_id", this.academic_program.id);
@@ -228,10 +228,23 @@ export default {
         },
       })
         .then((response) => {
-          if (response.message === "Éxito") {
-            window.location.href = "/controlescolar/home";
+          // if (response.message === "Éxito") {
+            Swal.fire({
+              title: "Registro exitoso",
+              text: "Tu cuenta ha sido creada",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Acceder a cuenta",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                 window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
+              }
+            });
+            // window.location.href = "/controlescolar/home";
             //window.location.href = this.url + "/controlescolar/home";
-          }
+          // }
         })
         .catch((error) => {
           //alert(error.response.data);

@@ -187,10 +187,16 @@ export default {
           request
         )
         .then((response) => {
-          console.log(response);
+          if(this.$recommendation_letter== null){
+            this.$recommendation_letter = {
+              email_evaluator : this.emailToSent,
+            };
+          }
+          alert(response.data);
         })
         .catch((error) => {
-          console.log(error.response.data.errors);
+          alert('Ha ocurrido un error, intenta mas tarde');
+          console.log(error);
         });
       // }
     },
