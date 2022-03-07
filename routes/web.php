@@ -28,14 +28,14 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/',function(){return redirect("/controlescolar");});
 ##COMENTAR ESTE GRUPO DE RUTAS
 
+Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
+
 // Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
         Route::get('/home', [HomeController::class, 'index'])->name('home')
             ->middleware('auth');
-
-        Route::get('/', [LoginController::class, 'prelogin'])->name('prelogin');
 
         # Inicio de sesión por OAUTH2.
         Route::get('/login', [LoginController::class, 'login'])->name('login')
