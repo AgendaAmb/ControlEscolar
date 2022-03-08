@@ -186,5 +186,5 @@ Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelog
 
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
-    Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
+    Route::get('/pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
 // });
