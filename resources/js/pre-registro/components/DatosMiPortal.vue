@@ -54,7 +54,8 @@ export default {
       var data = {
         "email":this.CorreoRegistro
       }
-
+      //console.log(data);
+///*
       axios.post('/controlescolar/users/miPortalUser',data)
       .then(response => {
         this.spinnerVisible = false;
@@ -65,6 +66,7 @@ export default {
         console.log(err.response.data);
         this.spinnerVisible = false;
       });
+      //*/
     },
 
     inputClassFor(model){

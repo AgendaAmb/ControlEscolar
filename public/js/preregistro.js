@@ -311,7 +311,9 @@ __webpack_require__.r(__webpack_exports__);
 
       var data = {
         "email": this.CorreoRegistro
-      };
+      }; //console.log(data);
+      ///*
+
       axios.post('/controlescolar/users/miPortalUser', data).then(function (response) {
         _this.spinnerVisible = false;
         var res = response['data'][0];
@@ -320,7 +322,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err.response.data);
         _this.spinnerVisible = false;
-      });
+      }); //*/
     },
     inputClassFor: function inputClassFor(model) {
       return {
