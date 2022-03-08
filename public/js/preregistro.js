@@ -1100,6 +1100,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           });
         }
 
+        if (error.response.status == 504) {
+          Swal.fire({
+            title: "Campos incorrectos",
+            text: "Verifica nuevamente tus campos",
+            icon: "error"
+          });
+        }
+
         console.log(error.response.data);
         console.log(error.response.data.message);
       });
@@ -5473,7 +5481,9 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Si pertenezco a la UASLP "),
+            _vm._v(
+              " Si pertenezco a la UASLP, pero No estoy registrado en el portal de Agenda Ambiental"
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -5506,7 +5516,7 @@ var render = function () {
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
             _vm._v(
-              " No, pero ya estoy registrado en el portal de Agenda Ambiental "
+              " No pertenezco a la UASLP, pero Ya estoy registrado en el portal de Agenda Ambiental "
             ),
           ]),
         ]),
@@ -5535,7 +5545,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Ninguno de los anteriores (proximamente)"),
+            _vm._v(" Ninguno de los anteriores"),
           ]),
         ]),
         _vm._v(" "),

@@ -254,7 +254,15 @@ export default {
               title: "Error al crear usuario",
               text: error.response.data,
               icon: "error",
-            })
+            });
+          }
+
+          if(error.response.status == 504){
+             Swal.fire({
+              title: "Campos incorrectos",
+              text: "Verifica nuevamente tus campos",
+              icon: "error",
+            });
           }
           console.log(error.response.data);
           console.log(error.response.data.message);
