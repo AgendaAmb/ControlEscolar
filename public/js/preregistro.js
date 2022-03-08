@@ -5515,9 +5515,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(
-              " No pertenezco a la UASLP, pero Ya estoy registrado en el portal de Agenda Ambiental "
-            ),
+            _vm._v(" Ya estoy registrado en el portal de Agenda Ambiental "),
           ]),
         ]),
         _vm._v(" "),

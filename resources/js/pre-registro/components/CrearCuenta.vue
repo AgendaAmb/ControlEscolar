@@ -9,7 +9,7 @@
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> No pertenezco a la UASLP, pero Ya estoy registrado en el portal de Agenda Ambiental </label>
+        <label class="form-check-label"> Ya estoy registrado en el portal de Agenda Ambiental </label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">
