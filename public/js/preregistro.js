@@ -1073,7 +1073,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        if (response.code === 201) {
+        if (response.status == 201) {
           Swal.fire({
             title: "Registro exitoso",
             text: "Tu cuenta ha sido creada",
@@ -1091,7 +1091,17 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
         }
       })["catch"](function (error) {
         //alert(error.response.data);
+        if (error.response.status == 502) {
+          //alert(error.response.data);
+          Swal.fire({
+            title: "Error al crear usuario",
+            text: error.response.data,
+            icon: "error"
+          });
+        }
+
         console.log(error.response.data);
+        console.log(error.response.data.message);
       });
     }
   },

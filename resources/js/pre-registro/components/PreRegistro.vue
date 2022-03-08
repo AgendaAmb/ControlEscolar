@@ -228,7 +228,7 @@ export default {
         },
       })
         .then((response) => {
-          if (response.code === 201) {
+          if (response.status == 201) {
             Swal.fire({
               title: "Registro exitoso",
               text: "Tu cuenta ha sido creada",
@@ -248,7 +248,16 @@ export default {
         })
         .catch((error) => {
           //alert(error.response.data);
+          if(error.response.status == 502){
+            //alert(error.response.data);
+             Swal.fire({
+              title: "Error al crear usuario",
+              text: error.response.data,
+              icon: "error",
+            })
+          }
           console.log(error.response.data);
+          console.log(error.response.data.message);
         });
     },
   },

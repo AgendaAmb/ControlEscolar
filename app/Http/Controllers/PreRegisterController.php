@@ -12,6 +12,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\LoginService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Http;
 
 class PreRegisterController extends Controller
 {
@@ -190,15 +196,19 @@ class PreRegisterController extends Controller
             }
         }
         
+        try{
+            # Se crea el usuario.
+            $user = User::create([
+                'id' => $request->clave_uaslp,
+                'type' => $request->tipo_usuario,
+                'birth_state' => $data['birth_state'],
+                'marital_state' => $data['civic_state']
+            ]);
+        }catch(\Exception $e){
+            return new JsonResponse("Error al crear el usuario o ya existe el usuario",502);
+        }
 
-        //return new JsonResponse("hola 2",200);
-        # Se crea el usuario.
-        $user = User::create([
-            'id' => $request->clave_uaslp,
-            'type' => $request->tipo_usuario,
-            'birth_state' => $data['birth_state'],
-            'marital_state' => $data['civic_state']
-        ]);
+        //return new JsonResponse('hola1',500);
 
         # Determina el tipo de postulante.
         if ($data['birth_state'] === 'San Luis Potosi')
@@ -208,30 +218,82 @@ class PreRegisterController extends Controller
         else 
             $user->assignRole('aspirante_extranjero');
 
+        //return new JsonResponse('hola2',500);
+
         # Genera el expediente del postulante.
         $user->archives()->create([
             'user_type' => $request->tipo_usuario,
             'announcement_id' => $request->announcement_id,           
             'status' => 0,
         ]);
-        
-        Auth::loginUsingId($user);
-        
-        /** @var User */
-        // $user = Auth::user();
-        // $user->load('roles');
-        // $user->assignRole('')
-        // $l = new LoginController;
-        // $l->preAuth($request,$user->id); //con esto ya deberia estar autenticado
 
-        // # Registra al postulante al módulo de control escolar.
-        // $this->service->miPortalPost('api/usuarios/modulos', [
-        //     'module_id' => env('MIPORTAL_MODULE_ID'),
-        //     'user_id' => $data['id'],
-        //     'type' => $data['user_type']
-        // ]);        
+        //return new JsonResponse('hola3',500);
+        
+        
+            Auth::loginUsingId($user->id);
 
-        # Respuesta de éxito.
+        
+            // $user = Auth::user();
+            // $user->load('roles');
+            // $user->assignRole('')
+            // $l = new LoginController;
+            // $l->preAuth($request,$user->id); //con esto ya deberia estar autenticado
+
+            // # Registra al postulante al módulo de control escolar.
+            // $this->service->miPortalPost('api/usuarios/modulos', [
+            //     'module_id' => env('MIPORTAL_MODULE_ID'),
+            //     'user_id' => $data['id'],
+            //     'type' => $data['user_type']
+            // ]);        
+
+            //return new JsonResponse('hola4',200);
+
+            # Respuesta de éxito.
         return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);
+    }
+
+    public function loginAfterRegister($user_id,$request){
+        Auth::loginUsingId($user_id);
+
+            /** @var User */
+            $auth_user = Auth::user();
+            $auth_user->load('roles');
+
+            # Guarda al usuario autenticado.
+            $request->session()->put('user', $auth_user);
+
+            # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
+            //if (!$user->isWorker())
+            //    return;
+
+            # Carga otros datos que requiere el modelo.
+            $auth_user->load(['academicAreas', 'academicEntities']);
+
+            # Busca a los postulantes.
+            $appliants = User::with(['latestArchive.intentionLetters:archive_intention_letter.user_id,archive_intention_letter.user_type'])
+                ->hasArchive()
+                ->appliant()
+                ->pluck('id');
+
+            # Busca a los profesores en el sistema.
+            $professors = User::role(['profesor_nb','admin','control_escolar','personal_apoyo'])->pluck('id');
+            
+            # Fusiona a los usuarios.
+            $users = $professors->merge($appliants)->toArray();
+
+            # Consulta a los usuarios.
+            $response = $this->service->miPortalGet('api/usuarios', [
+                'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
+                //'fields[users]' => 'id,name,middlename,surname,type,curp,email',
+                'filter[id]' => $users
+            ]);
+
+            # Recolecta el resultado.
+            $miPortal_appliants = $response->collect()->whereNotIn('user_type', ['workers']);
+            $miPortal_workers = $response->collect()->where('user_type', 'workers');
+
+            # Guarda a los usuarios del sistema central en la sesión.
+            $request->session()->put('appliants', $miPortal_appliants);
+            $request->session()->put('workers', $miPortal_workers);
     }
 }
