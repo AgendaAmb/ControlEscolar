@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 ##COMENTAR ESTE GRUPO DE RUTAS
 
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
-//Route::redirect('/controlescolar', '/');
 
 // Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
