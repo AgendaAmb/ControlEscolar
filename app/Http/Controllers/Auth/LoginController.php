@@ -200,7 +200,7 @@ class LoginController extends Controller
     public function userFromPortal(Request $request, $user)
     {
         
-        $u=User::find([$user, 'students'])->first();
+        $u=User::find([$user])->first();
         
         if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){
          
