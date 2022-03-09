@@ -102,10 +102,10 @@ class LoginController extends Controller
 
     public function prelogin(){
         //
-        if(!Auth::user()){
-            return redirect(route('pre-registro.index'));
+        if(auth()->check()){
+            return redirect(route('home'));
         }
-        return redirect(route('home'));
+        return redirect(route('pre-registro.index'));
     }
 
     /**
