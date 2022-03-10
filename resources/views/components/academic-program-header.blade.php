@@ -8,16 +8,18 @@
             <div class="nav-item dropdown">
                 <a id="Postulacion" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> Postulación </a>
                 <div class="dropdown-menu" aria-labelledby="Postulacion" >
-                    <a class="dropdown-item" href="{{ route('solicitud.index') }}" > Expedientes </a>
+                    <a class="dropdown-item" href="{{ route('solicitud.index') }}" > Expediente </a>
                 </div>
             </div>
-            <div class="nav-item dropdown">
-                <a id="Entrevistas" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> Entrevistas </a>
-                <div class="dropdown-menu" aria-labelledby="Entrevistas">
-                    <a class="dropdown-item" href="{{ route('entrevistas.calendario') }}">Calendario de entrevistas</a>
-                    <a class="dropdown-item" href="{{ route('entrevistas.programa') }}">Programa de entrevistas</a>
+            @role('profesor_nb|profesor_colaborador|admin')
+                <div class="nav-item dropdown">
+                    <a id="Entrevistas" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> Entrevistas </a>
+                    <div class="dropdown-menu" aria-labelledby="Entrevistas">
+                        <a class="dropdown-item" href="{{ route('entrevistas.calendario') }}">Calendario de entrevistas</a>
+                        <a class="dropdown-item" href="{{ route('entrevistas.programa') }}">Programa de entrevistas</a>
+                    </div>
                 </div>
-            </div>
+            @endrole
             
                 @if (Auth::user()->hasRole('admin'))
                     <a class="nav-link" href="#"> Inscripciones </a>

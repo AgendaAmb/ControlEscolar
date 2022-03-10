@@ -169,7 +169,7 @@ class PreRegisterController extends Controller
          Comunidad UASLP
          Ninguno
          */
-        if($request->tipo_usuario == "Comunidad UASLP" || $request->tipo_usuario == "Ninguno"){
+        //if($request->tipo_usuario == "Comunidad UASLP" || $request->tipo_usuario == "Ninguno"){ //borre este if porque ahora lo hago desde el portal para actualizar tambien el modulo
             # Obtiene los datos validados.
             try{
                 $data['module_id'] = env('MIPORTAL_MODULE_ID');
@@ -179,7 +179,7 @@ class PreRegisterController extends Controller
                 $response_data = $response->collect()->toArray();
             }catch(\Exception $e){
                 return new JsonResponse($e->getMessage(),500);
-            }
+        //}
             
             
             # La petición no pudo llevarse a cabo. Un error de datos por parte del
