@@ -234,21 +234,17 @@ class PreRegisterController extends Controller
         //return new JsonResponse('hola3',500);
         
         
-            Auth::loginUsingId($user->id);
+            //Auth::loginUsingId($user->id); //esto solo lo autentica pero no le carga sus datos
 
         
-            // $user = Auth::user();
-            // $user->load('roles');
-            // $user->assignRole('')
-            // $l = new LoginController;
-            // $l->preAuth($request,$user->id); //con esto ya deberia estar autenticado
+            $this->loginAfterRegister($user->id,$request); //con esto ya deberia estar autenticado
 
             // # Registra al postulante al módulo de control escolar.
             // $this->service->miPortalPost('api/usuarios/modulos', [
             //     'module_id' => env('MIPORTAL_MODULE_ID'),
             //     'user_id' => $data['id'],
             //     'type' => $data['user_type']
-            // ]);        
+            // ]);    
 
             //return new JsonResponse('hola4',200);
 

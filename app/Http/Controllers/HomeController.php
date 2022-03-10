@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\MiPortalService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,6 +15,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $s = new MiPortalService;
+        $usr = $s->miPortalGet('api/usuarios',['filter[id]' => Auth::user()->id])->collect();
+
+        return view('home',[ 'user' => $usr[0] ]);
     }
 }
