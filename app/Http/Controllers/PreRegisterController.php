@@ -180,7 +180,7 @@ class PreRegisterController extends Controller
                 $response_data = $response->collect()->toArray();
             }catch(\Exception $e){
                 return new JsonResponse($e->getMessage(),500);
-        //}
+            }
             
             
             # La petición no pudo llevarse a cabo. Un error de datos por parte del
@@ -199,7 +199,7 @@ class PreRegisterController extends Controller
 
                 return new JsonResponse($response_data, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             }
-        }
+        //}
         
         try{
             # Se crea el usuario.
