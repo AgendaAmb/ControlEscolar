@@ -172,7 +172,8 @@ class PreRegisterController extends Controller
         //if($request->tipo_usuario == "Comunidad UASLP" || $request->tipo_usuario == "Ninguno"){ //borre este if porque ahora lo hago desde el portal para actualizar tambien el modulo
             # Obtiene los datos validados.
             try{
-                $data['module_id'] = env('MIPORTAL_MODULE_ID');
+                //$data['module_id'] = env('MIPORTAL_MODULE_ID');
+                $data['module_id'] = 2; //2 = control escolar
 
                 # Envía la petición de registro de usuario al sistema principal.
                 $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
