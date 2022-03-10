@@ -726,7 +726,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "datos-personales",
   props: {
@@ -6292,7 +6291,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("birth_date"),
-        attrs: { type: "date", readonly: _vm.Readonly },
+        attrs: { type: "date" },
         domProps: { value: _vm.BirthDate },
         on: {
           input: function ($event) {
