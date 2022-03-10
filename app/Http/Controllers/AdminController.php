@@ -100,9 +100,16 @@ class AdminController extends Controller
     //necesita la request y la ruta hacia la api del portal
     public function pruebaRegistro()
     {
-        $service = new MiPortalService;
+        //$u = User::where('id',278737)->first();
+        //if($u){
+            //return $u;
+        //}
+
+        return 'x';
+
+        //$service = new MiPortalService;
         // 
-        $res = $service->miPortalPost('api/RegisterExternalUser',['Hola']);
-        return $res;
+        //$res = $service->miPortalPost('api/RegisterExternalUser',['Hola']);
+        //return $res;
     }
 }

@@ -102,10 +102,10 @@ class LoginController extends Controller
 
     public function prelogin(){
         //
-        if(!Auth::user()){
-            return redirect(route('pre-registro.index'));
+        if(auth()->check()){
+            return redirect(route('home'));
         }
-        return redirect(route('home'));
+        return redirect(route('pre-registro.index'));
     }
 
     /**
@@ -197,17 +197,14 @@ class LoginController extends Controller
     }
         
     //login depues del preregistro ->  se manda a llamar desde POST y recibe id_user
-    public function userFromPortal(Request $request, $user)
+    public function userFromPortal(Request $request,$user_id)
     {
         
-        $u=User::find([$user, 'students'])->first();
+        $u = User::where('id',$user_id)->first();
         
-        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){
-         
-            // verificar si existe
-            //if($u){
-                $this->testLogin($request,$user);
-            //}
+        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
+            //$this->testLogin($request,$user_id);
+            return redirect('/pruebaRegistro');
         }
        
        return redirect(route('pre-registro.index'));

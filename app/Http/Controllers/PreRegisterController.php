@@ -63,6 +63,10 @@ class PreRegisterController extends Controller
         //return new JsonResponse($request->email, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         //a278737@alumnos.uaslp.mx
         # Busca al usuario en el sistema de MiPortal.
+        if($request->email == null || $request->email == "" || $request->email == " "){
+            return new JsonResponse("datos erroneos", JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
         $response = $this->service->miPortalGet('api/usuarios', ['filter[email]' => $request->email]);
         $response_data = $response->collect();
 
@@ -152,7 +156,7 @@ class PreRegisterController extends Controller
         ]);
 
         if ($val->fails()) {
-            return new JsonResponse($val->errors(), 500);
+            return new JsonResponse($val->errors(), 504);
          }
 
         //return new JsonResponse('hola',200);

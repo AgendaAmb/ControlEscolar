@@ -29,8 +29,9 @@ use Illuminate\Support\Facades\Route;
 ##COMENTAR ESTE GRUPO DE RUTAS
 
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
+Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (no se porque exactamente XD) 
 
-Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -187,4 +188,4 @@ Route::prefix('controlescolar')->group(function () {
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
     Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
-});
+// });

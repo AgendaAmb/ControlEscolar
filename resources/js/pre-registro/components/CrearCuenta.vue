@@ -5,11 +5,11 @@
       <h3 class="d-block mb-3"> ¿Eres miembro de la UASLP? </h3>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> Si pertenezco a la UASLP </label>
+        <label class="form-check-label"> Si pertenezco a la UASLP, pero No estoy registrado en el portal de Agenda Ambiental</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> No, pero ya estoy registrado en el portal de Agenda Ambiental </label>
+        <label class="form-check-label"> Ya estoy registrado en el portal de Agenda Ambiental </label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">
