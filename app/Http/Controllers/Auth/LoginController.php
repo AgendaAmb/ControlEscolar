@@ -202,12 +202,9 @@ class LoginController extends Controller
         
         $u = User::where('id',$user_id)->first();
         
-        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){
-         
-            // verificar si existe
-            //if($u){
-                $this->testLogin($request,$user_id);
-            //}
+        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
+            //$this->testLogin($request,$user_id);
+            return redirect('/pruebaRegistro');
         }
        
        return redirect(route('pre-registro.index'));
