@@ -1,5 +1,8 @@
 <template>
   <div class="row align-items-start">
+    <div class="col mb-1">
+      <strong>Correo No.{{ index }} :</strong>
+    </div>
     <!-- Campo para rellenar el correo -->
     <input
       type="text"
@@ -7,7 +10,6 @@
       :class="inputClassFor(checkUpload())"
       v-model="myEmail"
       :readonly="checkUpload() == 1"
-      
     />
     <div class="col">
       <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
@@ -108,9 +110,10 @@ export default {
       default: null,
     },
 
+    index: Number,
     appliant: Object,
     academic_program: Object,
-    errors:Array,
+    errors: Array,
   },
 
   computed: {
@@ -197,7 +200,7 @@ export default {
           //   };
           // }
           // alert(response.data);
-          if (response.data == 'Exito, el correo ha sido enviado') {
+          if (response.data == "Exito, el correo ha sido enviado") {
             Swal.fire({
               title: "El correo se ha enviado correctamente",
               text: "Ahora solo queda esperar a que la persona responda el formulario",

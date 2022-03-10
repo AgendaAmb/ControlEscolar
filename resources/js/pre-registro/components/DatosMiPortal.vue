@@ -60,6 +60,7 @@ export default {
       .then(response => {
         this.spinnerVisible = false;
         var res = response['data'][0];
+        console.log(res);
         this.$emit('miPortalUserUpdated', res);
 
       }).catch((err) => { 

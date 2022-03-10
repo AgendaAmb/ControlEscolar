@@ -13,7 +13,7 @@
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">
-        <label class="form-check-label"> Ninguno de los anteriores (proximamente)</label>
+        <label class="form-check-label"> Ninguno de los anteriores</label>
       </div>
       <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
         {{ errores.tipo_usuario }}

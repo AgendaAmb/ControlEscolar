@@ -31,6 +31,7 @@ class CreateRequiredDocumentsTable extends Migration
 
         DB::table('required_documents')->insert([
             # Todos
+            # 01_ActaNac
             [
                 'name' =>"1.- Acta de nacimiento",
                 'type' => 'personal',
@@ -42,6 +43,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Todos
+            # 02_CURP
             [
                 'name' =>"2.- CURP expedido por la RENAPO",
                 'type' => 'personal',
@@ -53,6 +55,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Todos
+            # 03_INE
             [
                 'name' =>"3.- INE en ampliación tamaño carta",
                 'type' => 'personal',
@@ -64,6 +67,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Todos
+            # 04_Pasaporte
             [
                 'name' =>"4.- Primera página del pasaporte",
                 'type' => 'personal',
@@ -74,7 +78,20 @@ class CreateRequiredDocumentsTable extends Migration
                 'recommendation_letter' => false,
             ],
 
+            # Solo ENREM
+            # 05A_TituloLic/ActaExamen
+            [
+                'name' =>"5.- Título de preparatoria",
+                'type' => 'academic',
+                'label' => '05A_HighSchool_YearAppliant_Initials(LastName,Name-MiddleName',                
+                'notes' => null,
+                'example' => '05A_HighSchool_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
             # Solo maestrías.
+            # 05A_TituloLic/ActaExamen
             [
                 'name' =>"5A.- Título de licenciatura o acta de examen",
                 'type' => 'academic',
@@ -84,30 +101,34 @@ class CreateRequiredDocumentsTable extends Migration
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
+
+            # Solo doctorado
+            # 05B_TituloMast/ActExamen
+            [
+                'name' =>"5B.- Título de Maestria o acta de examen",
+                'type' => 'academic',
+                'label' => '05A_TitMaestria_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
+                'notes' => null,
+                'example' => '05A_TitMaestria_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
             
             # Solo IMAREC
+            # 05C_CartaDePasante
             [
-                'name' =>"5A.- Carta de pasantía",
+                'name' =>"5C.- Carta de pasantía",
                 'type' => 'academic',
-                'label' => '05A_CartaPasante_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
+                'label' => '05C_CartaPasante_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
                 'notes' => null,
-                'example' => '05A_CartaPasante_2021_CJG',
+                'example' => '05C_CartaPasante_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
-            
-            # Solo doctorado.
-            [
-                'name' =>"5B.- Título de maestría o acta de examen",
-                'type' => 'academic',
-                'label' => '05B_TítuloMat_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
-                'notes' => null,
-                'example' => '05B_TítuloMat_2021_CJG',
-                'intention_letter' => false,
-                'recommendation_letter' => false,
-            ],
+           
             
             # Solo maestrías.
+            # 06A_CertificLic
             [
                 'name' =>"6A.- Certificado de materias de la licenciatura",
                 'type' => 'academic',
@@ -119,6 +140,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Solo doctorado.
+            # 06B_CertificadoMaest
             [
                 'name' =>"6B.- Certificado de materias de la maestría",
                 'type' => 'academic',
@@ -130,6 +152,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Solo maestrías.
+            # 07A_PromedioLic
             [
                 'name' =>"7A.- Constancia de promedio de la licenciatura.",
                 'type' => 'academic',
@@ -141,6 +164,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
 
             # Solo doctorado.
+            # 07B_PromedioMaes
             [
                 'name' =>"7B.- Constancia de promedio de la maestría.",
                 'type' => 'academic',
@@ -152,6 +176,7 @@ class CreateRequiredDocumentsTable extends Migration
             ],
             
             # Solo maestrías.
+            # 08A_Cedula_Lic
             [
                 'name' =>"8A.- Cédula de la licenciatura",
                 'type' => 'academic',
@@ -164,6 +189,7 @@ class CreateRequiredDocumentsTable extends Migration
 
 
             # Solo doctorado.
+            # 08B_Cedula_Maestria
             [
                 'name' =>"8B.- Cédula de la maestría",
                 'type' => 'academic',
@@ -173,77 +199,135 @@ class CreateRequiredDocumentsTable extends Migration
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
-            
-            # Todos
+
+            # Solo EMREC
+            # 09 Application 
             [
-                'name' =>"12.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
-                'type' => 'entrance',
-                'label' => '12_EXANIIII_añodesolicitud_iniciales',                
+                'name' =>"9.- Application",
+                'type' => 'academic',
+                'label' => '9_Application_YearApplication_initials(LastName,Names)',                
                 'notes' => null,
-                'example' => '12_EXANIIII_2021_CJG',
+                'example' => '09_Application_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
-            
+
+             # Solo EMREC.
+             # 09 Application DAAD
+             [
+                'name' =>"9A.- Application DAAD",
+                'type' => 'academic',
+                'label' => '9A_ApplicationDAAD_YearApplication_initials(LastName,Names)',                
+                'notes' => null,
+                'example' => '09A_ApplicationDAAD_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+            # 10 llenado en linea (Exposicion de motivos)
+
             # Todos
+            # Carta compromiso (llenado en linea, espoxision de motivos )
             [
-                'name' =>"18.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)",
+                'name' =>"11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)",
                 'type' => 'entrance',
-                'label' => '18_EXANIIII_añodesolicitud_iniciales',                
+                'label' => '11_CartaCompromiso_añodesolicitud_iniciales',                
                 'notes' => 'Favor de descargar, <a href="#"> dando clic aquí</a>',
-                'example' => '18_CartaCompromiso_2021_CJG',
+                'example' => '11_CartaCompromiso_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
-            
-            # Todos
+
+            # Todos, excepto EMREC
+            #12 Carta de intencion
             [
-                'name' =>"13.- Certificado de idioma vigente",
-                'type' => 'language',
-                'label' => '13_Idioma_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
-                'notes' => null,
-                'example' => '13_Idioma_2021_CJG',
-                'intention_letter' => false,
-                'recommendation_letter' => false,
-            ],
-            
-            # Todos
-            /*
-            [
-                'name' =>"13B.-Certificado de idioma español.",
-                'type' => 'language',
-                'label' => '13B_Español_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
-                'notes' => null,
-                'example' => '13B_Español_2021_CJG',
-                'intention_letter' => false,
-                'recommendation_letter' => false,
-            ],*/
-            
-            # Todos
-            [
-                'name' =>"11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)",
+                'name' =>"12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)",
                 'type' => 'entrance',
-                'label' => '14_Intencion_añodesolicitud_iniciales',                
+                'label' => '12_Intencion_añodesolicitud_iniciales',                
                 'notes' => null,
-                'example' => '14_Intencion_2021_CJG',
+                'example' => '12_Intencion_2021_CJG',
                 'intention_letter' => true,
                 'recommendation_letter' => false,
             ],
+
             
-            # Todos
+            # Todos, excepto EMREC
+            #13 EXANII
             [
-                'name' =>"19.- Propuesta de proyecto avalada por el profesor postulante",
+                'name' =>"13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)",
                 'type' => 'entrance',
-                'label' => '19_Proyecto_iniciales',                
+                'label' => '13_EXANIIII_añodesolicitud_iniciales',                
                 'notes' => null,
-                'example' => '19_Proyecto_CJG',
+                'example' => '13_EXANIIII_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+            # Solo Doctorado y EMREC
+            # 14_Proyecto_en_PDF_6Cuartillas
+            [
+                'name' =>"14.- Propuesta de proyecto avalada por el profesor postulante",
+                'type' => 'entrance',
+                'label' => '14_Proyecto_añodesolicitud_iniciales',                
+                'notes' => null,
+                'example' => '14_Proyecto_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+
+            # Todos
+            # 15_Certificad_Idiomas
+            [
+                'name' =>"15.- Certificado de idioma vigente",
+                'type' => 'language',
+                'label' => '15_Idioma_AñoDeSolicitud_iniciales(Apellidos,Nombres)',                
+                'notes' => null,
+                'example' => '15_Idioma_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+            # Solo EMREC
+            # 16.- ProofExperienceDocument
+            [
+                'name' =>"16.- Proof Experience Document",
+                'type' => 'curricular',
+                'label' => '16_ProofExperience_YearAppliant_initials(Apellidos,Nombres)',                
+                'notes' => null,
+                'example' => '15_ProofExperience_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+            # Solo EMREC
+            # 17.- ConfirmationEMP
+            [
+                'name' =>"17.- ConfirmationEMP",
+                'type' => 'curricular',
+                'label' => '17_ConfirmationEMP_YearAppliant_initials(Apellidos,Nombres)',                
+                'notes' => null,
+                'example' => '17_ConfirmationEMP_2021_CJG',
+                'intention_letter' => false,
+                'recommendation_letter' => false,
+            ],
+
+            # Solo EMREC
+            # 18.- FormatoEuropass
+            [
+                'name' =>"18.- FormatoEuropass",
+                'type' => 'curricular',
+                'label' => '18._FormatoEuropass_YearAppliant_initials(Apellidos,Nombres)',                
+                'notes' => null,
+                'example' => '17_ConfirmationEMP_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
             ],
             
             # Todos
+            # 19.- Propuesta de proyecto
             [
-                'name' =>"18A.- Carta de recomendación",
+                'name' =>"19A.- Carta de recomendación",
                 'type' => 'curricular',
                 'label' => '18A_Recomendación_01_añodesolicitud_iniciales',                
                 'notes' => null,
@@ -252,17 +336,7 @@ class CreateRequiredDocumentsTable extends Migration
                 'recommendation_letter' => true,
             ],
             
-            # Todos
-            [
-                'name' =>"18B.- Carta de recomendación.",
-                'type' => 'curricular',
-                'label' => '18B_Recomendación_02_añodesolicitud_iniciales',                
-                'notes' => null,
-                'example' => '18B_Recomendación_02_2021_CJG',
-                'intention_letter' => false,
-                'recommendation_letter' => true,
-            ],
-/*
+         /*
             [
                 'name' =>"1.- Birth Certificate",
                 'type' => 'personal',

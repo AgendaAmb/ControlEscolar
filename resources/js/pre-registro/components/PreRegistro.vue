@@ -48,6 +48,7 @@
                 :tipo_usuario.sync="tipo_usuario"
                 :readonly="Readonly"
                 :countries="countries"
+                :mystates="mystates"
                 :curp.sync="curp"
                 :no_curp.sync="no_curp"
                 :name.sync="name"
@@ -67,6 +68,7 @@
                 :ethnicity.sync="ethnicity"
                 :is_disabled.sync="is_disabled"
                 :disability.sync="disability"
+
               >
               </datos-personales>
             </div>
@@ -98,6 +100,7 @@ export default {
   data() {
     return {
       countries: [],
+      mystates: [],
       errores: {},
       tipo_usuario: null,
       clave_uaslp: null,
@@ -158,29 +161,58 @@ export default {
     uaslpUserUpdated(user) {
       this.facultad = user.dependency;
       this.directorio_activo = user.DirectorioActivo;
+
+      //nombres
       this.name = user.name;
       this.first_surname = user.first_surname;
       this.last_surname = user.last_surname;
+
+      //email
       this.email = user.email;
+
+      //nacionalidad  y pais de residencia
       this.birth_country = "México";
       this.residence_country = "México";
+      // console.log(this.countries.length);
+      for (let i = 0; i < this.countries.length; i++) {
+        if (this.countries[i].name == this.birth_country) {
+            this.mystates  = this.countries[i].states;
+        }
+      }
+      // console.log(this.mystates);
     },
 
     miPortalUserUpdated(user) {
+      //clave facultad
       this.clave_uaslp = String(user.id);
       this.facultad = user.Dependencia;
+
+      //nombre
       this.name = user.name;
       this.first_surname = user.middlename;
       this.last_surname = user.surname;
+
+      //emilas
       this.email = user.email;
       this.email_alterno = user.altern_email;
-      this.birth_country = user.nationality;
+      
+      //datos generales
+      this.birth_date = user.birth_date
       this.ocupation = user.ocupation;
       this.curp = user.curp;
       this.ocupation = user.ocupation;
       this.gender = user.gender;
       this.zip_code = Number(user.zip_code);
       this.phone_number = Number(user.phone_number);
+      
+      //nacionalidad y pais de nacimiento
+      this.birth_country = user.nationality;
+      this.residence_country = user.residence;
+      for (let i = 0; i < this.countries.length; i++) {
+        if (this.countries[i].name == this.birth_country) {
+            this.mystates  = this.countries[i].states;
+        }
+      }
     },
 
     registraUsuario() {
@@ -239,7 +271,8 @@ export default {
               confirmButtonText: "Acceder a cuenta",
             }).then((result) => {
               if (result.isConfirmed) {
-                 window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
+                window.location.href =
+                  "https://ambiental.uaslp.mx/controlescolar/home";
               }
             });
             // window.location.href = "/controlescolar/home";
@@ -248,13 +281,13 @@ export default {
         })
         .catch((error) => {
           //alert(error.response.data);
-          if(error.response.status == 502){
+          if (error.response.status == 502) {
             //alert(error.response.data);
-             Swal.fire({
+            Swal.fire({
               title: "Error al crear usuario",
               text: error.response.data,
               icon: "error",
-            })
+            });
           }
           console.log(error.response.data);
           console.log(error.response.data.message);
@@ -267,6 +300,15 @@ export default {
       axios
         .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
         .then((response) => {
+          // if(response.data[1].name === 'Albania'){
+          //     console.log('no es');
+          // }else{
+          //     console.log('si es');
+          // }
+
+          // console.log(response.data[1].states);
+          
+
           this.countries = response.data;
         });
     });

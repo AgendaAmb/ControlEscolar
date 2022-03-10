@@ -102,9 +102,12 @@
     <div class="col-12">
       <details>
         <summary>
-      <h2 class="my-4 d-block"><strong> Producción científica (Opcional)</strong></h2>
-      </summary>
-      <produccion-cientifica v-for="production in scientific_productions"
+          <h2 class="my-4 d-block"><strong> Requisitos curriculares </strong></h2>
+        </summary>
+
+        <!-- Produccion cientifica subseccion -->
+        <h5 class="mt-4 d-block"><strong> Producción científica (Opcional) </strong> </h5>
+        <produccion-cientifica v-for="production in scientific_productions"
         v-bind="production"
         v-bind:key="production.id"
         :state.sync="production.state"
@@ -115,25 +118,18 @@
         :article_name.sync="production.article_name"
         :institution.sync="production.institution"
         :post_title.sync="production.post_title">
-      </produccion-cientifica>
-    </details>
-      <hr class="my-4 d-block" :style="ColorStrip">
-    </div>
-
-    <div class="col-12">
-      <details>
-        <summary>
-          <h2 class="my-4 d-block"><strong> Capital humano (cursos impartidos)[Opcional] </strong></h2>
-        </summary>
-      <capital-humano v-for="humanCapital in human_capitals"
+        </produccion-cientifica>
+        <!-- Capital humano subseccion -->
+        <h5 class="mt-4 d-block"><strong> Capital humano (Cursos impartidos) [Opcional] </strong> </h5>
+        <capital-humano v-for="humanCapital in human_capitals"
         v-bind="humanCapital"
         v-bind:key="humanCapital.id"
         :course_name.sync="humanCapital.course_name"
         :assisted_at.sync="humanCapital.assisted_at"
         :scolarship_level.sync="humanCapital.scolarship_level">
-      </capital-humano>
+       </capital-humano>
       </details>
-       <hr class="my-4 d-block" :style="ColorStrip">
+      <hr class="my-4 d-block" :style="ColorStrip">
     </div>
 
     <div class="col-12">

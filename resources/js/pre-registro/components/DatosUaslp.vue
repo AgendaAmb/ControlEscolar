@@ -15,8 +15,11 @@
 
 <script>
 
+import swal from "sweetalert2";
+window.Swal = swal;
 
 export default {
+  
   name: "datos-uaslp",
 
   props: {
@@ -58,10 +61,25 @@ export default {
 
       axios.post('https://ambiental.uaslp.mx/apiagenda/api/users/uaslp-user',data)
       .then(response => {
+        
         this.spinnerVisible = false;
         var res = response['data']['data'];
+        console.log(res);
+        // Swal.fire({
+        //       title: "Datos extraidos",
+        //       text: res,
+        //       icon: "success",
+        //       showCancelButton: false,
+        //       confirmButtonColor: "#3085d6",
+        //       cancelButtonColor: "#d33",
+        //       confirmButtonText: "Acceder a cuenta",
+        //     }).then((result) => {
+        //       if (result.isConfirmed) {
+        //          window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
+        //       }
+        //     });
         this.$emit('uaslpUserUpdated', res);
-
+        
       }).catch((err) => { 
         this.spinnerVisible = false;
       });

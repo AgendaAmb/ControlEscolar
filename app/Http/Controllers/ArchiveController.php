@@ -44,6 +44,7 @@ use App\Models\{
     ScoreParameter,
 };
 use FontLib\Table\Type\os2;
+use Illuminate\Auth\Events\Validated;
 # Clases auxiliares de Laravel.
 use Illuminate\Http\{
     JsonResponse,
@@ -104,14 +105,35 @@ class ArchiveController extends Controller
      */
     public function archives(Request $request)
     {
-        $archives = QueryBuilder::for(Archive::class)
-            ->with('appliant')
-            ->allowedIncludes(['announcement'])
-            ->allowedFilters([
-                AllowedFilter::exact('announcement.id'),
-            ])->get();
+        // try{
+        //     $validate  = $request->validate([
+        //         'announcement.id' => 'required',
+        //         'date_from' =>  'required|date',
+        //         'date_to' => 'required|date|after_or_equal:date_from'
+        //     ]);
+        // }catch(\Exception $e){
+        //     return new JsonResponse($validate,502);
+        // }
+            $archives_2 = Archive::where(
+                ['created_at','<=',$request->date_from.' 00:00:00'],
+                ['created_at','>=',$request->date_to.' 00:00:00']
+                )->get();
+            
+            // try{
+            
+            // $archives = QueryBuilder::for(Archive::class)
+            //     ->with('appliant')
+            //     ->allowedIncludes(['announcement'])
+            //     ->allowedFilters([
+            //         AllowedFilter::exact('announcement.id'),
+            //     ])
+            //     ->get();
+    
+            // }catch(\Exception $e){
+            //     return new JsonResponse("No existen archivos para las fechas y modalidad indicada",502);
+            // }
 
-        return ArchiveResource::collection($archives);
+        return ArchiveResource::collection($archives_2);
     }
 
     /**
@@ -145,7 +167,7 @@ class ArchiveController extends Controller
 
 
 
-        // dd($archiveModel->recommendationLetter);
+        // dd($archiveModel->personalDocuments);
         return view('postulacion.show')
             ->with('archive', $archiveModel)
             ->with('appliant', $appliant)
@@ -546,7 +568,8 @@ class ArchiveController extends Controller
         }
 
         #Ids para relacion a archive required document table
-        $required_document_id  = ($num_recommendation_letter_count < 1) ? 19 : 20; //Maximo de dos cartas, por lo tanto sera solo (0,1)
+        // $required_document_id  = ($num_recommendation_letter_count < 1) ? 19 : 20; //Maximo de dos cartas, por lo tanto sera solo (0,1)
+        $required_document_id = 19;
 
         //Se verifica si ya existe un registro de Carta o se necesita crear
         if ($request->letter_created == 1) { //ya existe registro de carta

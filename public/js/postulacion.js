@@ -212,6 +212,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -2537,10 +2546,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2740,6 +2745,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2767,6 +2774,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       type: Object,
       "default": null
     },
+    index: Number,
     appliant: Object,
     academic_program: Object,
     errors: Array
@@ -2846,7 +2854,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         //   };
         // }
         // alert(response.data);
-        if (response.data == 'Exito, el correo ha sido enviado') {
+        if (response.data == "Exito, el correo ha sido enviado") {
           Swal.fire({
             title: "El correo se ha enviado correctamente",
             text: "Ahora solo queda esperar a que la persona responda el formulario",
@@ -9186,7 +9194,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mt-2" }, [
+  return _c("div", { staticClass: "container-fluid mt-2" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _vm.sizeRecommendationLetter() == 0
       ? _c(
           "div",
@@ -9194,7 +9204,7 @@ var render = function () {
           _vm._l(_vm.emails, function (my_email, index) {
             return _c(
               "div",
-              { key: index, staticClass: "form-group col-md-5 m-2 d-flex" },
+              { key: index, staticClass: "form-group col-md-5 mr-2 d-flex" },
               [
                 _c("valida-carta-recomendacion", {
                   attrs: {
@@ -9202,6 +9212,7 @@ var render = function () {
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
                     errors: _vm.errors,
+                    index: index + 1,
                   },
                 }),
               ],
@@ -9214,7 +9225,7 @@ var render = function () {
       ? _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { staticClass: "form-group col-md-5 m-2 d-flex" },
+            { staticClass: "form-group col-md-5 mr-2 d-flex" },
             [
               _c("valida-carta-recomendacion", {
                 attrs: {
@@ -9224,6 +9235,7 @@ var render = function () {
                     _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
                   academic_program: _vm.academic_program,
+                  index: 1,
                 },
               }),
             ],
@@ -9232,13 +9244,14 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "form-group col-md-5 m-2 d-flex" },
+            { staticClass: "form-group col-md-5 ml-2 d-flex" },
             [
               _c("valida-carta-recomendacion", {
                 attrs: {
                   email: _vm.emails[0].email,
                   appliant: _vm.appliant,
                   academic_program: _vm.academic_program,
+                  index: 2,
                 },
               }),
             ],
@@ -9247,11 +9260,11 @@ var render = function () {
         ])
       : _c(
           "div",
-          { staticClass: "row" },
+          { staticClass: "row " },
           _vm._l(_vm.recommendation_letters, function (rl, index) {
             return _c(
               "div",
-              { key: index, staticClass: "form-group col-md-5 d-flex" },
+              { key: index, staticClass: "form-group col-md-5 mr-2 d-flex" },
               [
                 _c("valida-carta-recomendacion", {
                   attrs: {
@@ -9261,6 +9274,7 @@ var render = function () {
                       _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
+                    index: index + 1,
                   },
                 }),
               ],
@@ -9271,7 +9285,23 @@ var render = function () {
         ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row " }, [
+      _c("strong", [_vm._v("Nota: ")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n      Ingresa a continuación dos correos validos de profesores que puedan\n      otorgarte una carta de recomendación."
+        ),
+        _c("br"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -12704,6 +12734,8 @@ var render = function () {
         [
           _vm._m(4),
           _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
           _vm._l(_vm.scientific_productions, function (production) {
             return _c(
               "produccion-cientifica",
@@ -12753,18 +12785,8 @@ var render = function () {
               )
             )
           }),
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [
-      _c(
-        "details",
-        [
-          _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
           _vm._v(" "),
           _vm._l(_vm.human_capitals, function (humanCapital) {
             return _c(
@@ -12806,7 +12828,7 @@ var render = function () {
       _c(
         "details",
         [
-          _vm._m(6),
+          _vm._m(7),
           _vm._v(" "),
           _c("carta-recomendacion", {
             attrs: {
@@ -12872,7 +12894,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("summary", [
       _c("h2", { staticClass: "my-4 d-block" }, [
-        _c("strong", [_vm._v(" Producción científica (Opcional)")]),
+        _c("strong", [_vm._v(" Requisitos curriculares ")]),
       ]),
     ])
   },
@@ -12880,12 +12902,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("summary", [
-      _c("h2", { staticClass: "my-4 d-block" }, [
-        _c("strong", [
-          _vm._v(" Capital humano (cursos impartidos)[Opcional] "),
-        ]),
-      ]),
+    return _c("h5", { staticClass: "mt-4 d-block" }, [
+      _c("strong", [_vm._v(" Producción científica (Opcional) ")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mt-4 d-block" }, [
+      _c("strong", [_vm._v(" Capital humano (Cursos impartidos) [Opcional] ")]),
     ])
   },
   function () {
@@ -12922,6 +12948,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row align-items-start" }, [
+    _c("div", { staticClass: "col mb-1" }, [
+      _c("strong", [_vm._v("Correo No." + _vm._s(_vm.index) + " :")]),
+    ]),
+    _vm._v(" "),
     _c("input", {
       directives: [
         {
