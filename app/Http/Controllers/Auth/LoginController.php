@@ -201,10 +201,11 @@ class LoginController extends Controller
     {
         
         $u = User::where('id',$user_id)->first();
+        //return env('CONTROL_ESCOLAR_ACCESS_KEY');
         
         if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
-            //$this->testLogin($request,$user_id);
-            return redirect('/pruebaRegistro');
+            $this->testLogin($request,$user_id);
+            //return redirect('/pruebaRegistro');
         }
        
        return redirect(route('pre-registro.index'));
@@ -292,6 +293,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect(route('authenticate.prelogin'));
+        //return redirect(route('authenticate.prelogin'));
+        return redirect('https://ambiental.uaslp.mx/Miportal');
     }
 }
