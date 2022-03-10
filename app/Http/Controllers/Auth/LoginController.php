@@ -201,7 +201,7 @@ class LoginController extends Controller
     {
         
         $u = User::where('id',$user_id)->first();
-        return $u;
+        return $request->ak;
         
         if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
             $this->testLogin($request,$user_id);
