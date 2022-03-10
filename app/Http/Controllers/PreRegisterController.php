@@ -177,7 +177,7 @@ class PreRegisterController extends Controller
 
                 # Envía la petición de registro de usuario al sistema principal.
                 $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
-                $response_data = $response->collect()->toArray();cd ..
+                $response_data = $response->collect()->toArray();
             }catch(\Exception $e){
                 return new JsonResponse($e->getMessage(),500);
         //}
