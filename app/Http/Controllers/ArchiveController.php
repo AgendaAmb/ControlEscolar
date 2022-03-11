@@ -51,7 +51,7 @@ use Illuminate\Http\{
     Request,
     File
 };
-
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\{
     DB,
     Schema,
@@ -103,39 +103,67 @@ class ArchiveController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      * 
      */
+    
     public function archives(Request $request)
     {
+        
         // try{
         //     $validate  = $request->validate([
         //         'announcement.id' => 'required',
-        //         'date_from' =>  'required|date',
-        //         'date_to' => 'required|date|after_or_equal:date_from'
+        //         'date_from' =>  'required|string',
+        //         'date_to' => 'required|string|after_or_equal:date_from'
         //     ]);
         // }catch(\Exception $e){
-        //     return new JsonResponse($validate,502);
+        //     return new JsonResponse('Error de validacion',502);
         // }
-            $archives_2 = Archive::where(
-                ['created_at','<=',$request->date_from.' 00:00:00'],
-                ['created_at','>=',$request->date_to.' 00:00:00']
-                )->get();
-            
-            // try{
-            
-            // $archives = QueryBuilder::for(Archive::class)
-            //     ->with('appliant')
-            //     ->allowedIncludes(['announcement'])
-            //     ->allowedFilters([
-            //         AllowedFilter::exact('announcement.id'),
-            //     ])
-            //     ->get();
-    
-            // }catch(\Exception $e){
-            //     return new JsonResponse("No existen archivos para las fechas y modalidad indicada",502);
-            // }
 
-        return ArchiveResource::collection($archives_2);
+        // Archive::whereDate();
+        // try{
+
+
+
+        // $archives_2 =QueryBuilder::for(Archive::class)
+        //     ->with('appliant')
+        //     ->whereBetween('created_at', [$startDate, $endDate])
+        //     ->get();
+
+        // return new JsonResponse($startDate .' --' .$endDate,302);
+
+        // $archives_2 = Archive::whereBetween('created_at', [$startDate, $endDate]);
+        // }catch(\Exception $e){
+        //     return new JsonResponse($e,302);
+        // }
+        // return new JsonResponse($archives_2,202);
+       
+
+            try{
+                
+                $startDate = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_from'));
+                $endDate   = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_to'));
+
+                // $startDate = Carbon::createFromFormat('Y-m-d', '2021-06-01')->startOfDay();
+                // $endDate = Carbon::createFromFormat('Y-m-d', '2021-06-30')->endOfDay();
+            }catch (\Exception $e){
+                return new JsonResponse( AllowedFilter::exact('date_from') .'---'.  AllowedFilter::exact('date_to'),200);
+            }
+
+
+        try {
+            
+            $archives = QueryBuilder::for(Archive::class)
+                ->with('appliant')
+                ->allowedIncludes(['announcement'])
+                ->allowedFilters([
+                    AllowedFilter::exact('announcement.id'),
+                ])
+                // ->whereBetween('created_at', [$startDate, $endDate])
+                ->get();
+        } catch (\Exception $e) {
+            return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$startDate .' -- Hasta: '.$endDate, 502);
+        }
+
+        return ArchiveResource::collection($archives);
     }
-
     /**
      * Show the application dashboard.
      *

@@ -192,6 +192,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
   data: function data() {
     return {
       announcement: null,
+      dataLength: null,
       date_to: null,
       date_from: null
     };
@@ -226,18 +227,21 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         params = {
           params: {
             "filter[announcement.id]": this.announcement,
-            "filter[date_from]": this.date_from,
-            "filter[date_to]": this.date_to
+            "date_from": this.date_from,
+            "date_to": this.date_to
           }
         };
       }
 
       var request = {
         announcement: this.announcement,
-        date_from: this.emailToSent,
-        date_to: this.appliant
+        date_from: this.date_from,
+        date_to: this.date_to
       };
-      axios.get("/controlescolar/solicitud/archives", request).then(function (response) {
+      axios.get("/controlescolar/solicitud/archives", {
+        date_from: this.date_from,
+        date_to: this.date_to
+      }).then(function (response) {
         console.log(response);
         _this.dataLength = response.data.length; // cantidad de articulos
 
@@ -4119,7 +4123,7 @@ var render = function () {
       _c("div", { staticClass: "row mx-1" }, [
         _vm._m(2),
         _vm._v(" "),
-        _vm.dataLength !== null
+        _vm.dataLength != null
           ? _c("div", { staticClass: "col mx-3" }, [
               _vm._v("\n      " + _vm._s(_vm.dataLength) + " "),
               _c("span", [_vm._v(" Resultados encontrados")]),

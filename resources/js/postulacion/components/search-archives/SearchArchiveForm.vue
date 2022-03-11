@@ -49,7 +49,7 @@
         <button type="submit" class="btn btn-primary">Buscar</button>
       </div>
 
-      <div v-if="dataLength !== null" class="col mx-3">
+      <div v-if="dataLength != null" class="col mx-3">
         {{ dataLength }} <span> Resultados encontrados</span>
       </div>
     </div>
@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       announcement: null,
-
+      dataLength : null,
       date_to: null,
       date_from: null,
     };
@@ -126,20 +126,23 @@ export default {
         params = {
           params: {
             "filter[announcement.id]": this.announcement,
-            "filter[date_from]": this.date_from,
-            "filter[date_to]": this.date_to,
+            "date_from": this.date_from,
+            "date_to": this.date_to,
           },
         };
       }
 
       let request = {
           announcement: this.announcement,
-          date_from: this.emailToSent,
-          date_to: this.appliant,
+          date_from: this.date_from,
+          date_to: this.date_to
         };
 
       axios
-        .get("/controlescolar/solicitud/archives",request)
+        .get("/controlescolar/solicitud/archives",{
+          date_from: this.date_from,
+          date_to: this.date_to
+        })
         .then((response) => {
             console.log(response);
           this.dataLength = response.data.length; // cantidad de articulos
