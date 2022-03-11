@@ -95,13 +95,14 @@ class PreRegisterController extends Controller
             'false' => false,
             'null' => null
         ];
+
         
         $request->merge([
             'name' => $casts[$request->name] ?? $request->name, 
             'first_surname' => $casts[$request->first_surname] ?? $request->first_surname, 
             'last_surname' => $casts[$request->last_surname] ?? $request->last_surname, 
-            'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? null, 
-            'no_curp' => $casts[$request->no_curp] ?? null,
+            'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? true, 
+            'no_curp' => $casts[$request->no_curp] ?? true,
             'is_disabled' => $casts[$request->is_disabled] ?? null,
             'clave_uaslp' => $casts[$request->clave_uaslp] ?? $request->clave_uaslp,            
             'directorio_activo' => $casts[$request->directorio_activo] ?? $request->directorio_activo,
@@ -120,17 +121,20 @@ class PreRegisterController extends Controller
             'nationality' => $request->birth_country,
             'residence' => $request->residence_country
         ]);
+        
+        
 
         $val = Validator::make($request->all(),[
             'announcement_id' => ['required','exists:announcements,id'],
             'pertenece_uaslp' => ['required', 'boolean'],
-            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'numeric'],
-            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
+            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,==,true', 'prohibited_if:pertenece_uaslp,false', 'numeric'],
+            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,==,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
             'email' => [ 'required', 'string', 'email', 'max:255' ],
             'email_alterno' => [ 'required', 'string', 'email', 'max:255' ],
-            'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
-            'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password','string', 'max:255'],
-            'curp' => ['nullable', 'required_if:no_curp,false',  'size:18', $this->curp_pattern,],
+            'password' => ['nullable', 'required_if:pertenece_uaslp,==,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
+            'rpassword' => ['nullable', 'required_if:pertenece_uaslp,==,false', 'prohibited_if:pertenece_uaslp,true', 'same:password','string', 'max:255'],
+            'no_curp' => ['required', 'boolean'],
+            'curp' => ['nullable', 'required_if:no_curp,==,false', 'size:18', $this->curp_pattern,],
             'name' => ['required', 'string', 'max:255' ],
             'first_surname' => ['required','string','max:255'],
             'last_surname' => ['nullable'],
@@ -157,7 +161,8 @@ class PreRegisterController extends Controller
 
         if ($val->fails()) {
             return new JsonResponse($val->errors(), 504);
-         }
+        }
+
 
         //return new JsonResponse('hola',200);
         // return new JsonResponse("hola",200);
@@ -202,13 +207,24 @@ class PreRegisterController extends Controller
         //}
         
         try{
-            # Se crea el usuario.
+            # Se crea el usuario. Comunidad UASLP / Comunidad AA
+            $my_id = $request->clave_uaslp;
+
+            #No pertenece a la uaslp ni agenda.
+            if(!$request->pertenece_uaslp){ // es falso entonces crear id aleatorio
+                while(User::where('id',$my_id)->first()){
+                    $my_id = mt_rand(1,99999);
+                }
+            }
+
+            //Crea al usuario
             $user = User::create([
-                'id' => $request->clave_uaslp,
+                'id' => $my_id,
                 'type' => $request->tipo_usuario,
                 'birth_state' => $data['birth_state'],
                 'marital_state' => $data['civic_state']
             ]);
+            
         }catch(\Exception $e){
             return new JsonResponse("Error al crear el usuario o ya existe el usuario",502);
         }
@@ -231,14 +247,9 @@ class PreRegisterController extends Controller
             'announcement_id' => $request->announcement_id,           
             'status' => 0,
         ]);
-
-        //return new JsonResponse('hola3',500);
         
-        
-            //Auth::loginUsingId($user->id); //esto solo lo autentica pero no le carga sus datos
-
-        
-            $this->loginAfterRegister($user->id,$request); //con esto ya deberia estar autenticado
+        #Log In del usuario 
+        $this->loginAfterRegister($user->id,$request); //con esto ya deberia estar autenticado
 
             // # Registra al postulante al módulo de control escolar.
             // $this->service->miPortalPost('api/usuarios/modulos', [

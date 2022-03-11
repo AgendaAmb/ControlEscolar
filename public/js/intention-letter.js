@@ -219,28 +219,23 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       var _this = this;
 
       // Parámetros de búsqueda.
-      var params = {};
-      console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
+      var params = {}; // console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
+      // if (this.announcement !== null) {
+      //   //si existe una fecha de convocatoria abierta
+      //   params = {
+      //     params: {
+      //       "filter[announcement.id]": this.announcement,
+      //       "date_from": this.date_from,
+      //       "date_to": this.date_to,
+      //     },
+      //   };
+      // }
 
-      if (this.announcement !== null) {
-        //si existe una fecha de convocatoria abierta
-        params = {
-          params: {
-            "filter[announcement.id]": this.announcement,
-            "date_from": this.date_from,
-            "date_to": this.date_to
-          }
-        };
-      }
-
-      var request = {
-        announcement: this.announcement,
-        date_from: this.date_from,
-        date_to: this.date_to
-      };
       axios.get("/controlescolar/solicitud/archives", {
-        date_from: this.date_from,
-        date_to: this.date_to
+        params: {
+          date_from: this.date_from,
+          date_to: this.date_to
+        }
       }).then(function (response) {
         console.log(response);
         _this.dataLength = response.data.length; // cantidad de articulos

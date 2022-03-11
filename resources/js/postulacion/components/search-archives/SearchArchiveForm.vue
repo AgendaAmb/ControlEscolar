@@ -120,28 +120,24 @@ export default {
       // Parámetros de búsqueda.
       var params = {};
 
-        console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
-      if (this.announcement !== null) {
-        //si existe una fecha de convocatoria abierta
-        params = {
-          params: {
-            "filter[announcement.id]": this.announcement,
-            "date_from": this.date_from,
-            "date_to": this.date_to,
-          },
-        };
-      }
+        // console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
 
-      let request = {
-          announcement: this.announcement,
-          date_from: this.date_from,
-          date_to: this.date_to
-        };
-
+      // if (this.announcement !== null) {
+      //   //si existe una fecha de convocatoria abierta
+      //   params = {
+      //     params: {
+      //       "filter[announcement.id]": this.announcement,
+      //       "date_from": this.date_from,
+      //       "date_to": this.date_to,
+      //     },
+      //   };
+      // }
       axios
         .get("/controlescolar/solicitud/archives",{
-          date_from: this.date_from,
-          date_to: this.date_to
+          params:{
+            date_from: this.date_from,
+            date_to: this.date_to
+          }
         })
         .then((response) => {
             console.log(response);

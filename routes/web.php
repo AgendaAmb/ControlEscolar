@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
 Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (no se porque exactamente XD) 
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -50,7 +50,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
     });
 
     # Rutas de admin.
-    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
@@ -79,9 +79,14 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
+
+        #Administrador
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/{archive}', [ArchiveController::class, 'postulacion'])->name('show');
+
+        #Usuario
+        Route::get('/miExpediente', [ArchiveController::class, 'postulacion'])->name('miExpediente');
 
         # Requisitos de ingreso.
         Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']);
@@ -188,4 +193,4 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
     Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
-// });
+});

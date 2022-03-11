@@ -79,7 +79,6 @@
         type="date"
         :class="inputClassFor('birth_date')"
         v-model="BirthDate"
-        :readonly="tipo_usuario == 'Comunidad AA'"
       />
       <div v-if="'birth_date' in errores" class="invalid-feedback">
         {{ errores.birth_date }}

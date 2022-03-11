@@ -726,7 +726,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "datos-personales",
   props: {
@@ -1302,7 +1301,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       formData.append("email", this.email);
       formData.append("email_alterno", this.email_alterno);
       formData.append("curp", this.curp);
-      formData.append("no_curp", this.no_curp);
+      formData.append("no_curp", !this.no_curp);
       formData.append("name", this.name);
       formData.append("first_surname", this.first_surname);
       formData.append("last_surname", this.last_surname);
@@ -1324,7 +1323,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       if (!this.pertenece_uaslp) {
         formData.append("password", this.password);
         formData.append("rpassword", this.rpassword);
-      } //console.log("formdata:" + formData);
+      } //  console.log("form data no curp: " + formData.get('no_curp'));
 
 
       axios({
@@ -6292,7 +6291,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("birth_date"),
-        attrs: { type: "date", readonly: _vm.tipo_usuario == "Comunidad AA" },
+        attrs: { type: "date" },
         domProps: { value: _vm.BirthDate },
         on: {
           input: function ($event) {
