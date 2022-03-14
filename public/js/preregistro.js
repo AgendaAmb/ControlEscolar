@@ -1346,7 +1346,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
             confirmButtonText: "Acceder a cuenta"
           }).then(function (result) {
             if (result.isConfirmed) {
-              window.location.href = "https://ambiental.uaslp.mx/controlescolar/home";
+              window.location.href = // "https://ambiental.uaslp.mx/controlescolar/home";
+              window.location.href = "/controlescolar/home";
             }
           }); // window.location.href = "/controlescolar/home";
           //window.location.href = this.url + "/controlescolar/home";

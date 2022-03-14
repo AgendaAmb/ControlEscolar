@@ -7,14 +7,17 @@
 
             {{-- Inicio disponible para todos --}}
             <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
+            
+            {{-- Muestra expediente de postulante para subir cambios --}}
 
-            @if (Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero'))
-                <div class="dropdown-menu" aria-labelledby="Postulacion">
-                    <a class="dropdown-item" href="{{ route('solicitud.miExpediente') }}">Mi expediente</a>
-                </div>
+            {{-- Funciona en produccion --}}
+            {{-- @if (Auth::user()->hasRole('aspirante_extranjero') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_local'))  --}}
+            {{-- funciona para pruebas --}}
+            @if (!Auth::user()->hasRole('admin') || !Auth::user()->hasRole('control_escolar')) 
+                <a class="nav-link" href="{{ route('solicitud.ExpedientePostulante',['user_id' => auth()->user()->id] ) }}">Mi expediente</a>
             @endif
 
-            @if (Auth::user()->hasRole('admin'))
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar'))
 
                 {{-- Expedientes de todos los alumnos --}}
                 <div class="nav-item dropdown">

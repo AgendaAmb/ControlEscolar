@@ -276,7 +276,8 @@ export default {
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location.href =
-                  "https://ambiental.uaslp.mx/controlescolar/home";
+                  // "https://ambiental.uaslp.mx/controlescolar/home";
+                  window.location.href = "/controlescolar/home";
               }
             });
             // window.location.href = "/controlescolar/home";

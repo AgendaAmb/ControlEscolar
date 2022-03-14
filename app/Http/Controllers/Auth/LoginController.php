@@ -49,7 +49,7 @@ class LoginController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('guest')->except(['testLogin','logout']);
+        $this->middleware('guest')->except(['logout']);
         $this->loginService = new LoginService;
     }
 

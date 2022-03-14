@@ -80,13 +80,13 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
         # Expedientes
 
-        #Administrador
+        #Admin
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
-        Route::get('/{archive}', [ArchiveController::class, 'postulacion'])->name('show');
+        Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show'); //Vista de expediente pero sin poder modificar archivos
 
-        #Usuario
-        Route::get('/miExpediente', [ArchiveController::class, 'postulacion'])->name('miExpediente');
+        #Appliant
+        Route::get('/expediente/{user_id}', [ArchiveController::class,'appliantFile_AppliantView'])->name('ExpedientePostulante'); //Vista de expediente para alumno, rellenar campos
 
         # Requisitos de ingreso.
         Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']);

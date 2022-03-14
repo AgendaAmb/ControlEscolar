@@ -103,77 +103,106 @@ class ArchiveController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      * 
      */
-    
+
     public function archives(Request $request)
     {
-        
-        // try{
-        //     $validate  = $request->validate([
-        //         'announcement.id' => 'required',
-        //         'date_from' =>  'required|string',
-        //         'date_to' => 'required|string|after_or_equal:date_from'
-        //     ]);
-        // }catch(\Exception $e){
-        //     return new JsonResponse('Error de validacion',502);
-        // }
+        try {
 
-        // Archive::whereDate();
-        // try{
+            // $startDate = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_from'));
+            // $endDate   = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_to'));
 
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->date_from)->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->date_to)->endOfDay();
+        } catch (\Exception $e) {
+            return new JsonResponse('Error al crear la fecha', 200);
+        }
 
-
-        // $archives_2 =QueryBuilder::for(Archive::class)
-        //     ->with('appliant')
-        //     ->whereBetween('created_at', [$startDate, $endDate])
-        //     ->get();
-
-        // return new JsonResponse($startDate .' --' .$endDate,302);
-
-        // $archives_2 = Archive::whereBetween('created_at', [$startDate, $endDate]);
-        // }catch(\Exception $e){
-        //     return new JsonResponse($e,302);
-        // }
-        // return new JsonResponse($archives_2,202);
-       
-
-            try{
-                
-                $startDate = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_from'));
-                $endDate   = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_to'));
-
-                // $startDate = Carbon::createFromFormat('Y-m-d', '2021-06-01')->startOfDay();
-                // $endDate = Carbon::createFromFormat('Y-m-d', '2021-06-30')->endOfDay();
-            }catch (\Exception $e){
-                return new JsonResponse( AllowedFilter::exact('date_from') .'---'.  AllowedFilter::exact('date_to'),200);
-            }
-
+        // return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$request->date_from .' -- Hasta: '.$request->date_from, 502);
 
         try {
-            
+
             $archives = QueryBuilder::for(Archive::class)
                 ->with('appliant')
                 ->allowedIncludes(['announcement'])
                 ->allowedFilters([
                     AllowedFilter::exact('announcement.id'),
                 ])
-                // ->whereBetween('created_at', [$startDate, $endDate])
+                ->whereBetween('created_at', [$startDate, $endDate])
                 ->get();
         } catch (\Exception $e) {
-            return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$startDate .' -- Hasta: '.$endDate, 502);
+            // return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$startDate .' -- Hasta: '.$endDate, 502);
         }
 
         return ArchiveResource::collection($archives);
     }
+
+
+    /**
+     * Show the file of each user
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function appliantFile_AppliantView(Request $request, $user_id)
+    {
+        // return $user_id;
+        //User is not a student
+        if ($request->user()->getIsAppliantAttribute() === false) {
+            return back()->withInput();
+        }
+
+        //Is a postulant so we need to show the the file
+        try {
+            //deberia de retornar el archivo
+            $archiveModel = Archive::where('user_id', $request->user()->id)->first();
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors($e); //Regresa a la pagina donde se encuentra mostando errores
+        }
+
+        //No existe archivo
+        if ($archiveModel == null) {
+            // return  new JsonResponse ($request->user()->id);
+            return '<h1>No existe expediente para el postulante</h1>';
+        }
+
+        //Carga modelos de archivo
+        $archiveModel->loadMissing([
+            'appliant',
+            'announcement.academicProgram',
+            'personalDocuments',
+            'recommendationLetter',
+            'myRecommendationLetter',
+            'entranceDocuments',
+            'intentionLetter',
+            'academicDegrees.requiredDocuments',
+            'appliantLanguages.requiredDocuments',
+            'appliantWorkingExperiences',
+            'scientificProductions.authors',
+            'humanCapitals'
+        ]);
+
+        $academic_program = $archiveModel->announcement->academicProgram;
+        $appliant = $archiveModel->appliant;
+
+        // dd($archiveModel->personalDocuments);
+        return view('postulacion.show')
+            ->with('archive', $archiveModel)
+            ->with('appliant', $appliant)
+            ->with('academic_program', $academic_program)
+            ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
+            ->with('archives_recommendation_letters', $archiveModel->recommendationLetter);
+    }
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function postulacion(Request $request, $archiveusr)
+    public function appliantFile_AdminView(Request $request, $archiveusr)
     {
         $archiveModel = Archive::where('id', $archiveusr)->first();
-        if ($archiveModel == null)
-            return 'no existe expediente para este aspirante';
+        if ($archiveModel == null) {
+            return '<h1>No existe expediente para el postulante</h1>';
+        }
 
         $archiveModel->loadMissing([
             'appliant',
@@ -193,8 +222,6 @@ class ArchiveController extends Controller
         $academic_program = $archiveModel->announcement->academicProgram;
         $appliant = $archiveModel->appliant;
 
-
-
         // dd($archiveModel->personalDocuments);
         return view('postulacion.show')
             ->with('archive', $archiveModel)
@@ -204,7 +231,7 @@ class ArchiveController extends Controller
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter);
     }
 
-        /**
+    /**
      * Envia la vista de carta de recomendación con los datos requeridos
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -230,7 +257,8 @@ class ArchiveController extends Controller
         // }
 
         $rl = MyRecommendationLetter::where(
-            'token', $token
+            'token',
+            $token
         )->first();
 
         // return new JsonResponse(
@@ -565,7 +593,7 @@ class ArchiveController extends Controller
             'letter_created' => ['required'],
             'recommendation_letter' => ['required_if:letter_created,1'] // ya existe carta por lo tanto es requerido
         ]);
-      
+
 
         //Se busca el archivo por el USER ID
         $archive = Archive::where('user_id', $request->appliant['id'])->first();
@@ -605,10 +633,10 @@ class ArchiveController extends Controller
             foreach ($archive->myRecommendationLetter as $rl) {
 
                 #Se verifica que no exista el mismo correo para contestar la carta en otra
-                foreach($rlsCompare as $rlCompare){
+                foreach ($rlsCompare as $rlCompare) {
                     //carta diferente
-                    if($rlCompare->id != $rl->id){
-                        if(strcmp($rlCompare->email_evaluator,$rl->email_evaluator) == 0){
+                    if ($rlCompare->id != $rl->id) {
+                        if (strcmp($rlCompare->email_evaluator, $rl->email_evaluator) == 0) {
                             return new JsonResponse('Correo existente, intente con uno diferente', 200);
                         }
                     }
@@ -629,7 +657,7 @@ class ArchiveController extends Controller
         } else { //no existe carta
 
             foreach ($archive->myRecommendationLetter as $rl) {
-                if(strcmp($rl->email_evaluator,$request->email) == 0){
+                if (strcmp($rl->email_evaluator, $request->email) == 0) {
                     return new JsonResponse('Correo registrado para otra carta, intente uno diferente', 200);
                 }
             }
@@ -659,25 +687,24 @@ class ArchiveController extends Controller
             }
         }
 
-       
+
 
         #Se envia correo si todo salio correcto
         // if ($request->letter_created == 0 || ($request->letter_created == 1 && $change_email == 1)) {
-            
-            if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
-                $my_token = $request->recommendation_letter['token'];
-                 //return json response
-            }
 
-         
+        if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
+            $my_token = $request->recommendation_letter['token'];
+            //return json response
+        }
 
-            try {
-                //Email enviado
-                Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
-                
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
+
+
+        try {
+            //Email enviado
+            Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
         // }
 
         //return json response

@@ -7,7 +7,7 @@
     <div class="row ">
       <strong>Nota: </strong>
       <p>
-        Ingresa a continuación dos correos validos de profesores que puedan
+         &nbsp;&nbsp;&nbsp;&nbsp;Ingresa a continuación dos correos validos de profesores que puedan
         otorgarte una carta de recomendación.<br />
       </p>
     </div>

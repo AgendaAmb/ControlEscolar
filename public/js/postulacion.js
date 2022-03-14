@@ -9295,7 +9295,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n      Ingresa a continuación dos correos validos de profesores que puedan\n      otorgarte una carta de recomendación."
+          "\n           Ingresa a continuación dos correos validos de profesores que puedan\n      otorgarte una carta de recomendación."
         ),
         _c("br"),
       ]),
