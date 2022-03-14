@@ -2863,14 +2863,28 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Aceptar"
-          }).then(function (result) {// if (result.isConfirmed) {
-            //    window.location.href = "controlescolar/solicitud/";
-            // }
-          }); // window.location.href = "/controlescolar/home";
-          // window.location.href = this.url + "/controlescolar/home";
+          });
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Error al enviar carta',
+            text: response.data,
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Entendido"
+          });
         }
       })["catch"](function (error) {
-        // alert('Ha ocurrido un error, intenta mas tarde');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: error.data,
+          showCancelButton: true,
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Entendido"
+        }); // alert('Ha ocurrido un error, intenta mas tarde');
+
         console.log(error);
       }); // }
     }

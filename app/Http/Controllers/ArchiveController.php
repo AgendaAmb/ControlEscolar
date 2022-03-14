@@ -581,9 +581,8 @@ class ArchiveController extends Controller
     {
 
         // Variables locales
-        $message = 'Exito, el correo ha sido enviado';
-        $change_email = 0;
-        $my_token = Str::random(20);
+        $message = 'Exito, el correo ha sido enviado'; // Mensaje de retorno
+        $my_token = Str::random(20);    //Token para identificar carta recomendacion
 
         //validacion de datos
         $request->validate([
@@ -593,6 +592,19 @@ class ArchiveController extends Controller
             'letter_created' => ['required'],
             'recommendation_letter' => ['required_if:letter_created,1'] // ya existe carta por lo tanto es requerido
         ]);
+
+        #Se envia correo si todo salio correcto
+        if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
+            $my_token = $request->recommendation_letter['token'];
+            //return json response
+        }
+
+        try {
+            //Email enviado
+            Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
+        } catch (\Exception $e) {
+            return new JsonResponse('Problema al enviar correo', 200);
+        }
 
 
         //Se busca el archivo por el USER ID
@@ -683,31 +695,18 @@ class ArchiveController extends Controller
                     'required_document_id' => intval($archive_rd->id),
                 ]);
             } catch (\Exception $e) {
-                return $e->getMessage();
+                return new JsonResponse('Error al crear la carta de recomendación comuniquese con Agenda Ambiental', 200);
             }
         }
 
+        #Carta enviada, lista para llenar en base de datos
 
+        #Correo enviado
+        #Filas Creadas
 
-        #Se envia correo si todo salio correcto
-        // if ($request->letter_created == 0 || ($request->letter_created == 1 && $change_email == 1)) {
-
-        if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
-            $my_token = $request->recommendation_letter['token'];
-            //return json response
-        }
-
-
-
-        try {
-            //Email enviado
-            Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-        // }
-
-        //return json response
+        //Recommendation letter
+        //ArchiveRequiredDocument
+        //ArchiveRecommendationLetter
         return new JsonResponse(
             $message,
             200
