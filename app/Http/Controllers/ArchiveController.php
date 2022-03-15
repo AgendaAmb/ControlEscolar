@@ -186,7 +186,7 @@ class ArchiveController extends Controller
         // dd($archiveModel->personalDocuments);
         return view('postulacion.show')
             ->with('archive', $archiveModel)
-            ->with('appliant', $appliant)
+            ->with('appliant', $request->session()->get('user_data'))
             ->with('academic_program', $academic_program)
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter);
@@ -603,7 +603,7 @@ class ArchiveController extends Controller
             //Email enviado
             Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
         } catch (\Exception $e) {
-            return new JsonResponse('Problema al enviar correo', 200);
+            return new JsonResponse('Error: '.$e->getMessage(), 200);
         }
 
 

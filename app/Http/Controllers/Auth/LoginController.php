@@ -68,7 +68,7 @@ class LoginController extends Controller
         # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
         //if (!$user->isWorker())
         //    return;
-
+        /** @var User */
         # Carga otros datos que requiere el modelo.
         $user->load(['academicAreas', 'academicEntities']);
 
@@ -84,20 +84,30 @@ class LoginController extends Controller
         # Fusiona a los usuarios.
         $users = $professors->merge($appliants)->toArray();
 
-        # Consulta a los usuarios.
-        $response = $this->miPortalService->miPortalGet('api/usuarios', [
-            'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
-            //'fields[users]' => 'id,name,middlename,surname,type,curp,email',
-            'filter[id]' => $users
-        ]);
 
-        # Recolecta el resultado.
-        $miPortal_appliants = $response->collect()->whereNotIn('user_type', ['workers']);
-        $miPortal_workers = $response->collect()->where('user_type', 'workers');
+        #Peticion a portal (Busca usuario)
+        $user_data =  $this->miPortalService-> miPortalGet('api/usuarios',['filter[id]' => Auth::user()->id])->collect();
+        $request->session()->put('user_data', $user_data[0]);
 
-        # Guarda a los usuarios del sistema central en la sesión.
-        $request->session()->put('appliants', $miPortal_appliants);
-        $request->session()->put('workers', $miPortal_workers);
+        # Carga modelos si es administrador o profesor
+        if($user_data[0]['user_type'] != 'students'){
+
+            # Usuario trabajador / Administrador
+            $response = $this->miPortalService->miPortalGet('api/usuarios', [
+                'filter[userModules.id]' => env('MIPORTAL_MODULE_ID'),
+                //'fields[users]' => 'id,name,middlename,surname,type,curp,email',
+                'filter[id]' => $users
+            ]);
+
+            # Recolecta el resultado.
+            $miPortal_appliants = $response->collect()->whereNotIn('user_type', ['workers']);
+            $miPortal_workers = $response->collect()->where('user_type', 'workers');
+
+            # Guarda a los usuarios del sistema central en la sesión.
+            $request->session()->put('appliants', $miPortal_appliants);
+            $request->session()->put('workers', $miPortal_workers);
+        }
+
     }
 
     public function prelogin(){
@@ -199,7 +209,7 @@ class LoginController extends Controller
     //login depues del preregistro ->  se manda a llamar desde POST y recibe id_user
     public function userFromPortal(Request $request,$user_id)
     {
-        
+         //Obtiene usuario de control escolar
         $u = User::where('id',$user_id)->first();
         //return env('CONTROL_ESCOLAR_ACCESS_KEY');
         

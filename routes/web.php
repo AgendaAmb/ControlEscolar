@@ -174,7 +174,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
     
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
-    Route::prefix('recommendationLetter')->name('recommendationLetter.')->middleware('guest','auth')->group(function () {
+    Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
         # El que recive correo recibe la vista
         
         //el token se almacena en la tabla de carta de recomendacion, esto permitira tener mayor seguridad sin acceder a la tabla de usuarios 

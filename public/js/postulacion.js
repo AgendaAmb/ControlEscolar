@@ -2669,6 +2669,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2866,7 +2868,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
           });
         } else {
           Swal.fire({
-            position: 'top-end',
             icon: 'error',
             title: 'Error al enviar carta',
             text: response.data,
@@ -2876,14 +2877,12 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
           });
         }
       })["catch"](function (error) {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'error',
-          title: error.data,
-          showCancelButton: true,
-          cancelButtonColor: "#d33",
-          cancelButtonText: "Entendido"
-        }); // alert('Ha ocurrido un error, intenta mas tarde');
+        var _Swal$fire;
+
+        Swal.fire((_Swal$fire = {
+          title: "Error al mandar carta de recomendacion",
+          icon: 'error'
+        }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
 
         console.log(error);
       }); // }

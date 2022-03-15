@@ -212,7 +212,6 @@ export default {
             })
             }else{
               Swal.fire({
-              position: 'top-end',
               icon: 'error',
               title: 'Error al enviar carta',
               text: response.data,
@@ -225,7 +224,7 @@ export default {
         .catch((error) => {
 
           Swal.fire({
-            position: 'top-end',
+            title: "Error al mandar carta de recomendacion",
             icon: 'error',
             title: error.data,
              showCancelButton: true,

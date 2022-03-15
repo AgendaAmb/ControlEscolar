@@ -18,9 +18,8 @@ class HomeController extends Controller
     {
         $s = new MiPortalService;
         $usr = $s->miPortalGet('api/usuarios',['filter[id]' => Auth::user()->id])->collect();
-            
-        //Obtiene el archivo
-        // $archive = Archive::where('id',$usr[0]['id'])->first();
+        $data = $request->session()->all();
+        // dd($data);
 
         return view('home',[ 
             'user' => $usr[0],
