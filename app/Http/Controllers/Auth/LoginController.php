@@ -66,8 +66,7 @@ class LoginController extends Controller
         $request->session()->put('user', $user);
 
         # Solo solicita los datos, siempre y cuando el usuario sea un postulante.
-        //if (!$user->isWorker())
-        //    return;
+        
         /** @var User */
         # Carga otros datos que requiere el modelo.
         $user->load(['academicAreas', 'academicEntities']);
@@ -211,11 +210,10 @@ class LoginController extends Controller
     {
          //Obtiene usuario de control escolar
         $u = User::where('id',$user_id)->first();
-        //return env('CONTROL_ESCOLAR_ACCESS_KEY');
         
+        //Autho2
         if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
             $this->testLogin($request,$user_id);
-            //return redirect('/pruebaRegistro');
         }
        
        return redirect(route('pre-registro.index'));
