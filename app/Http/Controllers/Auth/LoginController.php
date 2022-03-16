@@ -212,9 +212,9 @@ class LoginController extends Controller
         $u = User::where('id',$user_id)->first();
         
         //Autho2
-        if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
+        // if($request->ak!='' && $request->ak == env('CONTROL_ESCOLAR_ACCESS_KEY') && $u){   
             $this->testLogin($request,$user_id);
-        }
+        // }
        
        return redirect(route('pre-registro.index'));
 
