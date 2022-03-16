@@ -131,10 +131,10 @@ class LoginController extends Controller
     {
         //puse esta condicion para entrar en local, 
         //se debe quitar y descomentar la funcion de arriab despues
-        if(!isset($request)){
-            return redirect(route('pre-registro.index'));
-        }else
-        {
+        // if(!isset($request)){
+        //     return redirect(route('pre-registro.index'));
+        // }else
+        // {
             # Determina si se requiere solicitar autorización.
             ///*
             if (!$this->loginService->isCallbackRequest($request))
@@ -167,7 +167,7 @@ class LoginController extends Controller
 
             $this->getUsers($request, $user);
             
-            }
+            // }
 
         # Redirecciona a la página principal.
         return redirect()->route('authenticate.home');

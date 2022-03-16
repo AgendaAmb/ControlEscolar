@@ -54,5 +54,5 @@
             </div> --}}
 
         </nav>
-    @endauth
+        @endauth
 </header>

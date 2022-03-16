@@ -149,19 +149,12 @@ export default {
         console.log("object");
         if (this.recommendation_letter["email_evaluator"]) {
           //Correo ya se envio
-          res = 0;
-
-          if (this.archive_recommendation_letter != null) {
-            if (this.archive_recommendation_letter["location"]) {
-              //La carta ha sido contestadad
-              res = 1;
-            }
-          }
+          res = this.recommendation_letter["answer"]; // 0 o 1
         }
       }
       return res;
     },
-
+    
     enviarCorreoCartaRecomendacion() {
       // //cadena no es similar a las existentes o  es nueva | INSERTAR
       // if(!res){

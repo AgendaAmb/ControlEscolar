@@ -49,8 +49,8 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
             ->middleware('guest');
     });
 
-    # Rutas de admin.
-    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    // # Rutas de admin.
+    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
