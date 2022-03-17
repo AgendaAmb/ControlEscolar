@@ -7,9 +7,9 @@
     <input
       type="text"
       class="form-control mb-2"
-      :class="inputClassFor(checkUpload())"
+      :class="inputClassFor()"
       v-model="myEmail"
-      :readonly="checkUpload() == 1"
+      :readonly="checkUpload() === 1"
     />
     <div class="col">
       <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
@@ -19,9 +19,9 @@
       <template v-else-if="checkUpload() === 0">
         <i>Estado:</i> <i class="text-warning">Esperando respuesta</i>
       </template>
-      <!-- <template v-else>
+      <template v-else>
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
-      </template> -->
+      </template>
 
       <div v-if="checkUpload() != 1" class="form-group mt-3">
         <button
@@ -33,41 +33,26 @@
       </div>
 
       <div v-else class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="location"
-          target="_blank"
-        ></a>
-        <label class="cargarArchivo d-block ml-auto my-auto">
-          <input
-            type="file"
-            class="form-control d-none"
-            @change="cargaDocumento"
-          />
-        </label>
-        <div
-          v-if="'file' in Errores"
-          class="invalid-feedback d-block text-right"
-        >
-          <p class="h6">{{ Errores.file }}</p>
-        </div>
-
-        <div
-          v-if="'file' in datosValidos"
-          class="valid-feedback d-block text-right"
-        >
-          <p class="h6">{{ datosValidos.file }}</p>
-        </div>
-      </div>
+      <a
+        class="verArchivo d-block my-2 ml-auto"
+        :href="archive_recommendation_letter['location']"
+        target="_blank"
+      > 
+      <img  :src="asset('storage/archive-buttons/seleccionar.png')" >
+      </a>
     </div>
+
+    </div>
+
+    
   </div>
 </template>
 
 
 <style scoped>
+/*  v-if="archive_recommendation_letter!=null" */
 .verArchivo {
-  background: url(/storage/archive-buttons/ver.png);
+  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */
   background-size: 90px 40px;
   background-repeat: no-repeat;
   width: 90px;
@@ -86,6 +71,10 @@ export default {
   data() {
     return {
       emailToSent: String,
+      isReadonly: {
+        type: Boolean,
+        default: false,
+      },
       values: {
         1: true,
         0: false,
@@ -130,7 +119,7 @@ export default {
   },
 
   methods: {
-    inputClassFor(value) {
+    inputClassFor() {
       return {
         "form-control": true,
         // "is-invalid": (errors.values())?true:false,
@@ -149,12 +138,14 @@ export default {
         console.log("object");
         if (this.recommendation_letter["email_evaluator"]) {
           //Correo ya se envio
-          res = this.recommendation_letter["answer"]; // 0 o 1
+          res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
         }
       }
+
+      console.log("res: " + res);
       return res;
     },
-    
+
     enviarCorreoCartaRecomendacion() {
       // //cadena no es similar a las existentes o  es nueva | INSERTAR
       // if(!res){
@@ -202,28 +193,27 @@ export default {
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Aceptar",
-            })
-            }else{
-              Swal.fire({
-              icon: 'error',
-              title: 'Error al enviar carta',
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Error al enviar carta",
               text: response.data,
               showCancelButton: true,
               cancelButtonColor: "#d33",
               cancelButtonText: "Entendido",
-            })
-            }
+            });
+          }
         })
         .catch((error) => {
-
           Swal.fire({
             title: "Error al mandar carta de recomendacion",
-            icon: 'error',
+            icon: "error",
             title: error.data,
-             showCancelButton: true,
-             cancelButtonColor: "#d33",
-             cancelButtonText: "Entendido",
-          })
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Entendido",
+          });
           // alert('Ha ocurrido un error, intenta mas tarde');
           console.log(error);
         });

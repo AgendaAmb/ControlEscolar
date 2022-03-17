@@ -2734,21 +2734,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2756,6 +2741,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
   data: function data() {
     return {
       emailToSent: String,
+      isReadonly: {
+        type: Boolean,
+        "default": false
+      },
       values: {
         1: true,
         0: false,
@@ -2794,7 +2783,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     }
   },
   methods: {
-    inputClassFor: function inputClassFor(value) {
+    inputClassFor: function inputClassFor() {
       return {
         "form-control": true // "is-invalid": (errors.values())?true:false,
 
@@ -2812,10 +2801,11 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 
         if (this.recommendation_letter["email_evaluator"]) {
           //Correo ya se envio
-          res = this.recommendation_letter["answer"]; // 0 o 1
+          res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
         }
       }
 
+      console.log("res: " + res);
       return res;
     },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
@@ -2861,8 +2851,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
           });
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Error al enviar carta',
+            icon: "error",
+            title: "Error al enviar carta",
             text: response.data,
             showCancelButton: true,
             cancelButtonColor: "#d33",
@@ -2874,7 +2864,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 
         Swal.fire((_Swal$fire = {
           title: "Error al mandar carta de recomendacion",
-          icon: 'error'
+          icon: "error"
         }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
 
         console.log(error);
@@ -3557,7 +3547,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.verArchivo[data-v-0e323dc8] {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12968,8 +12958,8 @@ var render = function () {
         },
       ],
       staticClass: "form-control mb-2",
-      class: _vm.inputClassFor(_vm.checkUpload()),
-      attrs: { type: "text", readonly: _vm.checkUpload() == 1 },
+      class: _vm.inputClassFor(),
+      attrs: { type: "text", readonly: _vm.checkUpload() === 1 },
       domProps: { value: _vm.myEmail },
       on: {
         input: function ($event) {
@@ -12999,7 +12989,13 @@ var render = function () {
                 _vm._v("Esperando respuesta"),
               ]),
             ]
-          : _vm._e(),
+          : [
+              _c("i", [_vm._v("Estado:")]),
+              _vm._v(" "),
+              _c("i", { staticClass: "text-danger" }, [
+                _vm._v("No se ha enviado correo"),
+              ]),
+            ],
         _vm._v(" "),
         _vm.checkUpload() != 1
           ? _c("div", { staticClass: "form-group mt-3" }, [
@@ -13017,48 +13013,23 @@ var render = function () {
               ),
             ])
           : _c("div", { staticClass: "form-group col-3 my-auto" }, [
-              _vm.checkUpload() === true
-                ? _c("a", {
-                    staticClass: "verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
-                  })
-                : _vm._e(),
-              _vm._v(" "),
               _c(
-                "label",
-                { staticClass: "cargarArchivo d-block ml-auto my-auto" },
+                "a",
+                {
+                  staticClass: "verArchivo d-block my-2 ml-auto",
+                  attrs: {
+                    href: _vm.archive_recommendation_letter["location"],
+                    target: "_blank",
+                  },
+                },
                 [
-                  _c("input", {
-                    staticClass: "form-control d-none",
-                    attrs: { type: "file" },
-                    on: { change: _vm.cargaDocumento },
+                  _c("img", {
+                    attrs: {
+                      src: _vm.asset("storage/archive-buttons/seleccionar.png"),
+                    },
                   }),
                 ]
               ),
-              _vm._v(" "),
-              "file" in _vm.Errores
-                ? _c(
-                    "div",
-                    { staticClass: "invalid-feedback d-block text-right" },
-                    [
-                      _c("p", { staticClass: "h6" }, [
-                        _vm._v(_vm._s(_vm.Errores.file)),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              "file" in _vm.datosValidos
-                ? _c(
-                    "div",
-                    { staticClass: "valid-feedback d-block text-right" },
-                    [
-                      _c("p", { staticClass: "h6" }, [
-                        _vm._v(_vm._s(_vm.datosValidos.file)),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
             ]),
       ],
       2

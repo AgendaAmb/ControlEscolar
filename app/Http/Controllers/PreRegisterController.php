@@ -124,8 +124,8 @@ class PreRegisterController extends Controller
         $val = Validator::make($request->all(), [
             'announcement_id' => ['required', 'exists:announcements,id'],
             'pertenece_uaslp' => ['required', 'boolean'],
-            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'numeric'],
-            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
+            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
+            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
             'email' => ['required', 'string', 'email', 'max:255'],
             'email_alterno' => ['required', 'string', 'email', 'max:255'],
             'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
@@ -161,32 +161,26 @@ class PreRegisterController extends Controller
             return new JsonResponse($val->errors(), 504);
         }
 
-        # ----------------------- Crear Usuario.
-        $my_id = intval('298428'); //cast to integer  [Comunidad UASLP / Comunidad AA]
+        # ---------------------------------------------------- Crear Usuario.
 
-        #No pertenece a la uaslp ni agenda.
-        if (!$request->pertenece_uaslp) { // es falso entonces crear id aleatorio
-            try {
-                //generar un nuevo id
-                $my_id = mt_rand(1, 99999);  //Id random
-
-                //  //revisa si no esta integrado en el sistema ya
-                // while(User::where('id', $my_id)->first()){ // ya existe el usuario registrado
-                //     $my_id = mt_rand(1,99999);  //Id random
-                // }
-            } catch (\Exception $e) {
-                return new JsonResponse("Error crear usuario externo a la universidad", 502);
-            }
-        } else {
-            $my_id = intval($request->clave_uaslp); //cast to integer
-        }
-
-
-        # ------------------------- Creacion de usuario en control escolar
+        # -------------------------- Datos a validar en Portal.
+        $data = $request->except(['announcement_id', 'tipo_usuario']); //data to save
+        
+         # ------------------------- Creacion de usuario en control portal
         try {
+            $data['module_id'] = 2; //2 = control escolar
+            $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
+            $response_data = $response->collect()->toArray();
+        } catch (\Exception $e) {
+            return new JsonResponse('Hey hey', 500);
+        }
+        
+        return new JsonResponse([$response_data, $data],502);
+         # ------------------------- Creacion de usuario en control escolar
+         try {
             # Se crea el usuario.
             $user = User::create([
-                'id' => $my_id,
+                'id' => $response_data['id'],
                 'type' => $request->tipo_usuario,
                 'birth_state' => $request->birth_state,
                 'marital_state' => $request->civic_state
@@ -212,20 +206,6 @@ class PreRegisterController extends Controller
         ]);
 
 
-        # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['announcement_id', 'tipo_usuario']); //data to save
-        try {
-            //$data['module_id'] = env('MIPORTAL_MODULE_ID');
-            $data['module_id'] = 2; //2 = control escolar
-
-            # Envía la petición de registro de usuario al sistema principal.
-            $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
-            $response_data = $response->collect()->toArray();
-        } catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), 500);
-        }
-
-
         # La petición no pudo llevarse a cabo. Un error de datos por parte del
         # cliente o del servidor.
         if ($response->failed()) {
@@ -239,7 +219,7 @@ class PreRegisterController extends Controller
                 ->filter(fn ($val, $key) => $val !== null)
                 ->toArray();
 
-            return new JsonResponse($response_data, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+            return new JsonResponse('Aqui ando', JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         # --------------------- Log In del usuario 
@@ -281,9 +261,14 @@ class PreRegisterController extends Controller
         $users = $professors->merge($appliants)->toArray();
 
 
-        #Peticion a portal (Busca usuario)
-        $user_data =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => Auth::user()->id])->collect();
-        $request->session()->put('user_data', $user_data[0]);
+        try{
+            #Peticion a portal (Busca usuario)
+            $user_data =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => Auth::user()->id])->collect();
+            $request->session()->put('user_data', $user_data[0]);
+            
+        }catch (\Exception $e) {
+            return new JsonResponse('algo mal',502);
+        }
 
         # Carga modelos si es administrador o profesor
         if ($user_data[0]['user_type'] != 'students') {
@@ -303,5 +288,6 @@ class PreRegisterController extends Controller
             $request->session()->put('appliants', $miPortal_appliants);
             $request->session()->put('workers', $miPortal_workers);
         }
+        
     }
 }

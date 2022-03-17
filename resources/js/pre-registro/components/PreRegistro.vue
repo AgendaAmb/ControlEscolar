@@ -223,8 +223,6 @@ export default {
       var formData = new FormData();
       formData.append("announcement_id", this.academic_program.id);
       formData.append("tipo_usuario", this.tipo_usuario);
-      formData.append("clave_uaslp", Number(this.clave_uaslp));
-      formData.append("directorio_activo", this.directorio_activo);
       formData.append("pertenece_uaslp", this.pertenece_uaslp);
       formData.append("email", this.email);
       formData.append("email_alterno", this.email_alterno);
@@ -250,6 +248,9 @@ export default {
       if (!this.pertenece_uaslp) {
         formData.append("password", this.password);
         formData.append("rpassword", this.rpassword);
+      }else{
+        formData.append("clave_uaslp", Number(this.clave_uaslp));
+        formData.append("directorio_activo", this.directorio_activo);
       }
 
       //  console.log("form data no curp: " + formData.get('no_curp'));
