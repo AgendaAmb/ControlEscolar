@@ -99,7 +99,7 @@ class PreRegisterController extends Controller
         $request->merge([
             'name' => $casts[$request->name] ?? $request->name,
             'first_surname' => $casts[$request->first_surname] ?? $request->first_surname,
-            'last_surname' => $casts[$request->last_surname] ?? $request->last_surname,
+            'tipo_usuario' => $casts[$request->last_surname] ?? $request->last_surname,
             'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? null,
             'no_curp' => $casts[$request->no_curp] ?? null,
             'is_disabled' => $casts[$request->is_disabled] ?? null,
@@ -115,6 +115,7 @@ class PreRegisterController extends Controller
             'birth_state' => $casts[$request->birth_state] ?? $request->birth_state,
             'residence_country' => $casts[$request->residence_country] ?? $request->residence_country,
             'altern_email' => $request->email_alterno,
+            'name' => $request->name,
             'middlename' => $request->first_surname,
             'surname' => $request->last_surname,
             'nationality' => $request->birth_country,
@@ -123,18 +124,19 @@ class PreRegisterController extends Controller
 
         $val = Validator::make($request->all(), [
             'announcement_id' => ['required', 'exists:announcements,id'],
+            'tipo_usuario' => ['required', 'string', 'max:255'],
             'pertenece_uaslp' => ['required', 'boolean'],
             'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
             'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
             'email' => ['required', 'string', 'email', 'max:255'],
-            'email_alterno' => ['required', 'string', 'email', 'max:255'],
+            'altern_email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
             'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
             'no_curp' => ['required', 'boolean'],
             'curp' => ['nullable', 'required_if:no_curp,false',  'size:18', $this->curp_pattern,],
             'name' => ['required', 'string', 'max:255'],
-            'first_surname' => ['required', 'string', 'max:255'],
-            'last_surname' => ['nullable'],
+            'middlename' => ['required', 'string', 'max:255'],
+            'surname' => ['nullable'],
             'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
             'ocupation' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
@@ -149,9 +151,6 @@ class PreRegisterController extends Controller
             'is_disabled' => ['required', 'boolean'],
             'ethnicity' => ['required', 'string', 'max:255'],
             'disability' => ['nullable', 'required_if:is_disabled,true'],
-            'altern_email' => ['required', 'same:email_alterno'],
-            'middlename' => ['required', 'same:first_surname'],
-            'surname' => ['required', 'same:last_surname'],
             'nationality' => ['required', 'same:birth_country'],
             'residence' => ['required', 'same:residence_country']
         ]);
@@ -162,9 +161,9 @@ class PreRegisterController extends Controller
         }
 
         # ---------------------------------------------------- Crear Usuario.
-
+        
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['announcement_id', 'tipo_usuario']); //data to save
+        $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_country','birth_state' ]); //data to save
         
          # ------------------------- Creacion de usuario en control portal
         try {
