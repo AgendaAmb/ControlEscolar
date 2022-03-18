@@ -101,7 +101,7 @@ class PreRegisterController extends Controller
             'middlename' => $casts[$request->middlename] ?? $request->middlename, 
             'surname' =>  $casts[$request->surname] ?? $request->surname, 
 
-            'tipo_usuario' => $casts[$request->tipo_usuario] ?? $request->last_surname,
+            'tipo_usuario' => $casts[$request->tipo_usuario] ??$request->tipo_usuario,
             'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? null,
             
             'clave_uaslp' => $casts[$request->clave_uaslp] ?? $request->clave_uaslp,
