@@ -98,16 +98,22 @@ class PreRegisterController extends Controller
 
         $request->merge([
             'name' => $casts[$request->name] ?? $request->name,
-            'first_surname' => $casts[$request->first_surname] ?? $request->first_surname,
-            'tipo_usuario' => $casts[$request->last_surname] ?? $request->last_surname,
+            'middlename' => $casts[$request->middlename] ?? $request->middlename, 
+            'surname' =>  $casts[$request->surname] ?? $request->surname, 
+
+            'tipo_usuario' => $casts[$request->tipo_usuario] ?? $request->last_surname,
             'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? null,
-            'no_curp' => $casts[$request->no_curp] ?? null,
-            'is_disabled' => $casts[$request->is_disabled] ?? null,
+            
             'clave_uaslp' => $casts[$request->clave_uaslp] ?? $request->clave_uaslp,
             'directorio_activo' => $casts[$request->directorio_activo] ?? $request->directorio_activo,
+
+            'no_curp' => $casts[$request->no_curp] ?? null,
+            'is_disabled' => $casts[$request->is_disabled] ?? null,
             'curp' => $casts[$request->curp] ?? $request->curp,
+            
             'password' => $casts[$request->password] ?? $request->password,
             'rpassword' => $casts[$request->rpassword] ?? $request->rpassword,
+            
             'ocupation' => $casts[$request->ocupation] ?? $request->ocupation,
             'other_gender' => $casts[$request->other_gender] ?? $request->other_gender,
             'other_civic_state' => $casts[$request->other_civic_state] ?? $request->other_civic_state,
@@ -115,9 +121,7 @@ class PreRegisterController extends Controller
             'birth_state' => $casts[$request->birth_state] ?? $request->birth_state,
             'residence_country' => $casts[$request->residence_country] ?? $request->residence_country,
             'altern_email' => $request->email_alterno,
-            'name' => $request->name,
-            'middlename' => $request->first_surname,
-            'surname' => $request->last_surname,
+            
             'nationality' => $request->birth_country,
             'residence' => $request->residence_country
         ]);
@@ -136,7 +140,7 @@ class PreRegisterController extends Controller
             'curp' => ['nullable', 'required_if:no_curp,false',  'size:18', $this->curp_pattern,],
             'name' => ['required', 'string', 'max:255'],
             'middlename' => ['required', 'string', 'max:255'],
-            'surname' => ['nullable'],
+            'surname' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
             'ocupation' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
