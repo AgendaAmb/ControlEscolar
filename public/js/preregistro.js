@@ -1297,12 +1297,12 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       formData.append("tipo_usuario", this.tipo_usuario);
       formData.append("pertenece_uaslp", this.pertenece_uaslp);
       formData.append("email", this.email);
-      formData.append("email_alterno", this.email_alterno);
+      formData.append("altern_email", this.email_alterno);
       formData.append("curp", this.curp);
       formData.append("no_curp", !this.no_curp);
       formData.append("name", this.name);
-      formData.append("first_surname", this.first_surname);
-      formData.append("last_surname", this.last_surname);
+      formData.append("middlename", this.first_surname);
+      formData.append("surname", this.last_surname);
       formData.append("birth_date", this.birth_date);
       formData.append("ocupation", this.ocupation);
       formData.append("gender", this.gender);
@@ -1359,7 +1359,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           //alert(error.response.data);
           Swal.fire({
             title: "Error al crear usuario",
-            text: error.response.data,
             icon: "error"
           });
         }
