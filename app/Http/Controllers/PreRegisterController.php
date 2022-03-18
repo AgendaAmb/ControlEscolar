@@ -111,6 +111,8 @@ class PreRegisterController extends Controller
             'is_disabled' => $casts[$request->is_disabled] ?? null,
             'curp' => $casts[$request->curp] ?? $request->curp,
             
+            'email' =>  $casts[$request->email] ?? $request->email,
+            'altern_email' => $casts[$request->altern_email] ?? $request->altern_email,
             'password' => $casts[$request->password] ?? $request->password,
             'rpassword' => $casts[$request->rpassword] ?? $request->rpassword,
             
@@ -120,8 +122,7 @@ class PreRegisterController extends Controller
             'birth_country' => $casts[$request->birth_country] ?? $request->birth_country,
             'birth_state' => $casts[$request->birth_state] ?? $request->birth_state,
             'residence_country' => $casts[$request->residence_country] ?? $request->residence_country,
-            'altern_email' => $request->email_alterno,
-            
+
             'nationality' => $request->birth_country,
             'residence' => $request->residence_country
         ]);
@@ -132,8 +133,8 @@ class PreRegisterController extends Controller
             'pertenece_uaslp' => ['required', 'boolean'],
             'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
             'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'altern_email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'unique:users,email', 'string', 'email', 'max:255' ],
+            'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
             'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
             'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
             'no_curp' => ['required', 'boolean'],
