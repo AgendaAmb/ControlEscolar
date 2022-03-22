@@ -51,6 +51,7 @@ use Illuminate\Http\{
     Request,
     File
 };
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\{
     DB,
@@ -84,9 +85,11 @@ class ArchiveController extends Controller
      */
     public function index(Request $request)
     {
+
         return view('postulacion.index')
             ->with('user', $request->user())
             ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get());
+
     }
 
     //agregar la carta de recomendacion con la informacion del usuario
@@ -136,6 +139,34 @@ class ArchiveController extends Controller
         return ArchiveResource::collection($archives);
     }
 
+     /**
+     * Show the file of each user
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    
+    public function getDataFromSessionUser(Request $request)
+    {
+        //User data from ControlEscolar
+        $appliant = $request->session()->get('user');
+        //Usser data from portal
+        $user_data = $request->session()->get('user_data');
+        
+        //Add data portal to local collection USER
+        $appliant->setAttribute('curp',$user_data['curp']);
+        $appliant->setAttribute('name',$user_data['name']);
+        $appliant->setAttribute('middlename',$user_data['middlename']);
+        $appliant->setAttribute('surname',$user_data['surname']);
+        $appliant->setAttribute('age',$user_data['age']);
+        $appliant->setAttribute('gender',$user_data['gender']);
+        $appliant->setAttribute('birth_country',$user_data['nationality']);
+        $appliant->setAttribute('birth_state',$user_data['residence']);
+        $appliant->setAttribute('residence_country',$user_data['residence']);
+        $appliant->setAttribute('phone_number',$user_data['phone_number']);
+        $appliant->setAttribute('email',$user_data['email']);
+        $appliant->setAttribute('altern_email',$user_data['altern_email']);
+        return $appliant;
+    }
 
     /**
      * Show the file of each user
@@ -181,15 +212,33 @@ class ArchiveController extends Controller
         ]);
 
         $academic_program = $archiveModel->announcement->academicProgram;
-        $appliant = $archiveModel->appliant;
+        
+        //function that returns the info complete in the appliant model
+        $appliant = $this->getDataFromSessionUser($request);
 
-        // dd($archiveModel->personalDocuments);
+        #Set the image according to academic program
+        //Doctorado en ciencias ambientales
+        $img = 'DOCTORADO-SUPERIOR.png';
+
+        if($academic_program->name == 'Maestría en ciencias ambientales' ){
+            $img = 'PMPCA-SUPERIOR.png';
+        }else if($academic_program->name == 'Maestría en ciencias ambientales, doble titulación'){
+            $img = 'ENREM-SUPERIOR.png';
+        }else if($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles'){
+            $img = 'IMAREC-SUPERIOR.png';
+        }
+
+        $header_academic_program = asset('storage/headers/'.$img);
+
+        // dd($appliant);
+
         return view('postulacion.show')
             ->with('archive', $archiveModel)
-            ->with('appliant', $request->session()->get('user_data'))
+            ->with('appliant', $appliant)
             ->with('academic_program', $academic_program)
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
-            ->with('archives_recommendation_letters', $archiveModel->recommendationLetter);
+            ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
+            ->with('header_academic_program', $header_academic_program);
     }
 
     /**
@@ -334,6 +383,7 @@ class ArchiveController extends Controller
     }
 
     /**
+     * 
      * Actualiza un documento requerido, para el grado académico
      *
      * @return \Illuminate\Contracts\Support\Renderable

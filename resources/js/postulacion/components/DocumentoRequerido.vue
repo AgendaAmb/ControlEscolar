@@ -1,6 +1,7 @@
 <template>
   <div class="col-12">
     <div class="row my-3">
+      
       <div class="form-group col-9 my-auto">
         <h5 class="mt-4 d-block"><strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
@@ -15,24 +16,27 @@
         <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
       </div>
-      <div class="form-group col-3 my-auto"> 
+
+      <div class="form-group col-3 my-auto">    
         <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
         <label class="cargarArchivo d-block ml-auto my-auto">
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
-        <div v-if="'file' in Errores" class="invalid-feedback d-block text-right"> 
-          <p class="h6">{{ Errores.file }} </p>
-        </div>
-
-        <div v-if="'file' in datosValidos" class="valid-feedback d-block text-right"> 
-          <p class="h6">{{ datosValidos.file }} </p>
-        </div>
       </div>    
     </div>
   </div>
 </template>
 
 <style scoped>
+
+/* 
+
+ <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
+        <label class="cargarArchivo d-block ml-auto my-auto">
+          <input type="file" class="form-control d-none" @change="cargaDocumento">
+        </label>
+        
+        */
 .cargarArchivo {
   background: url(/storage/archive-buttons/seleccionar.png);
   background-size: 90px 40px;
@@ -40,7 +44,6 @@
   width: 90px;
   height: 40px;
 }
-
 .verArchivo {
   background: url(/storage/archive-buttons/ver.png);
   background-size: 90px 40px;
@@ -55,6 +58,8 @@ export default {
   name: "documento-requerido",
 
   props: {
+    
+
     id: {
       type: Number,
     },

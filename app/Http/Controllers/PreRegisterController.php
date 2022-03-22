@@ -271,7 +271,7 @@ class PreRegisterController extends Controller
             $request->session()->put('user_data', $user_data[0]);
             
         }catch (\Exception $e) {
-            return new JsonResponse('algo mal',502);
+            return new JsonResponse('Peticion erronea',502);
         }
 
         # Carga modelos si es administrador o profesor

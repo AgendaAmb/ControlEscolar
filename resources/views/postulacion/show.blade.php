@@ -4,16 +4,17 @@ const appliantModel = @json($appliant);
 const academicProgram = @json($academic_program);
 const recommendation_letters = @json($recommendation_letters);
 const archives_recommendation_letters = @json($archives_recommendation_letters);
+const header_academic_program = @json($header_academic_program);
+
 </script>
 @extends('layouts.app')
-    
-@section('headerPicture')
-<img class="img-fluid mt-4" src="{{ asset('storage/headers/DOCTORADO-SUPERIOR.png') }}" width="600px">
-@endsection
+
     
 @section('container-class', 'class=container')
 @section('main')
-{{-- {{dd($appliant)}} --}}
+{{-- Img representativa de postulacion --}}
+<img class="img-fluid mt-4 " src="{{ $header_academic_program }}" width="100%" height="300px!important">
+
 <form v-on:submit.prevent="actualizaSolicitud"> 
     <solicitud-postulante
         :archive_id="archive.id"

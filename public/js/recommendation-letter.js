@@ -2523,6 +2523,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -29168,53 +29197,66 @@ var render = function () {
       "div",
       { staticClass: "d-block d-lg-flex flex-lg-row justify-content-between" },
       [
-        _c(
-          "div",
-          { staticClass: "d-block d-lg-inline-block" },
-          [
-            _c("p", { staticClass: "d-block mb-0 myriad-bold" }, [
-              _vm._v(
-                "\n        " +
-                  _vm._s(
-                    _vm.appliant.name +
-                      " " +
-                      _vm.appliant.middlename +
-                      " " +
-                      _vm.appliant.surname
-                  ) +
-                  "\n      "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "d-block myriad-light appliant-email" }, [
-              _vm._v(
-                "\n        " + _vm._s(_vm.appliant.nationality) + "\n      "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "d-block myriad-light appliant-curp" }, [
-              _vm._v(
-                "\n        " + _vm._s(_vm.appliant.academic_degree) + "\n      "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "mb-3" }),
-            _vm._v(" "),
-            _vm._l(_vm.areaInCharge, function (data, index) {
-              return _c("p", { key: index, staticClass: "mb-1" }, [
-                _vm._v("\n        " + _vm._s(data) + "\n      "),
+        _c("div", { staticClass: "d-block d-lg-inline-block" }, [
+          _c("p", { staticClass: "d-block mb-0 myriad-bold" }, [
+            _vm._v(
+              "\n        " +
+                _vm._s(
+                  _vm.appliant.name +
+                    " " +
+                    _vm.appliant.middlename +
+                    " " +
+                    _vm.appliant.surname
+                ) +
+                "\n      "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "d-block mb-0 myriad-light " }, [
+            _vm._v(
+              "\n        Nacionalidad: " +
+                _vm._s(_vm.appliant.birth_country) +
+                "\n      "
+            ),
+          ]),
+          _vm._v(" "),
+          _vm.appliant.academic_degree != null
+            ? _c("p", { staticClass: "d-block mb-0 myriad-light " }, [
+                _vm._v(
+                  "\n        Grado academico: " +
+                    _vm._s(_vm.appliant.academic_degree) +
+                    " \n      "
+                ),
               ])
-            }),
-          ],
-          2
-        ),
+            : _c("p", { staticClass: "d-block mb-0 myriad-light " }, [
+                _vm._v(
+                  "\n        Grado academico: Sin grado academico registrado\n      "
+                ),
+              ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mb-3" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "d-block myriad-light mb-0" }, [
+            _vm._v(
+              "\n        Telefono: " +
+                _vm._s(_vm.appliant.phone_number) +
+                "\n      "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "d-block myriad-light " }, [
+            _vm._v(
+              "\n        Email: " + _vm._s(_vm.appliant.email) + "\n      "
+            ),
+          ]),
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "d-block d-lg-inline-block" }, [
           _c("p", { staticClass: "d-block mb-0 myriad-bold" }, [
             _vm._v(_vm._s(_vm.announcement_date)),
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "d-block myriad-light appliant-email" }, [
+          _c("p", { staticClass: "d-block myriad-light " }, [
             _vm._v(
               "\n        " +
                 _vm._s(_vm.announcement.academic_program.name) +
@@ -29222,9 +29264,19 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _c("p", { staticClass: "d-block myriad-light appliant-curp" }, [
-            _vm._v("Agenda Ambiental"),
-          ]),
+          _c("p", { staticClass: "mb-3" }),
+          _vm._v(" "),
+          _vm.appliant.dependency != null
+            ? _c("p", { staticClass: "d-block myriad-light " }, [
+                _vm._v(
+                  "\n        " + _vm._s(_vm.appliant.dependency) + "\n      "
+                ),
+              ])
+            : _c("p", [
+                _vm._v(
+                  "\n        Universidad Autónoma de San Luis Potosí\n      "
+                ),
+              ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "d-block d-lg-inline-block" }),

@@ -50,7 +50,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
     });
 
     // # Rutas de admin.
-    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
@@ -114,7 +114,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
         Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
 
         # Ver y descargar tipos de archivos.
-        Route::get('/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');
+        Route::get('expediente/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');
 
         #Carta de recomendación {invitado-
         # referente hacia un postulante}
@@ -184,7 +184,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
         # Al guardar se hace la peticion para almacenar datos
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
-        Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
+        // Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
 
     //investigar para control de rutas lo siguiente
@@ -192,5 +192,5 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
     //prueba de registro para comprobar que funciona control escolar
     //convertir despues a log in con auth
-    Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
+    // Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
 // });

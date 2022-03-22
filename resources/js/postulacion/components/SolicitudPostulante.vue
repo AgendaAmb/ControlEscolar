@@ -214,7 +214,9 @@ export default {
     recommendation_letters:Array,
 
     // Postulante de la solicitud.
-    appliant: Object
+    appliant: Object,
+
+
   },
 
   computed: {

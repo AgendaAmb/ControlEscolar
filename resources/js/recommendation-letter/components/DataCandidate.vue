@@ -16,29 +16,58 @@
     <div class="d-block d-lg-flex flex-lg-row justify-content-between">
       <div class="d-block d-lg-inline-block">
         <!-- Datos del aplicante -->
+
+        <!-- Nombre -->
         <p class="d-block mb-0 myriad-bold">
           {{
             appliant.name + " " + appliant.middlename + " " + appliant.surname
           }}
         </p>
-        <p class="d-block myriad-light appliant-email">
-          {{ appliant.nationality }}
+
+        <!-- Nacionalidad -->
+        <p class="d-block mb-0 myriad-light ">
+          Nacionalidad: {{ appliant.birth_country }}
         </p>
-        <p class="d-block myriad-light appliant-curp">
-          {{ appliant.academic_degree }}
+
+        <!-- Grado academico -->
+          <!-- Agregar en el portal -->
+        <p v-if='appliant.academic_degree != null' class="d-block mb-0 myriad-light ">
+          Grado academico: {{ appliant.academic_degree }} 
+        </p>
+        <p v-else class="d-block mb-0 myriad-light ">
+          Grado academico: Sin grado academico registrado
         </p>
 
         <p class="mb-3"></p>
-        <p class="mb-1" v-for="(data, index) in areaInCharge" :key="index">
-          {{ data }}
+
+        <!-- Numero telefonico de contacto -->
+        <p class="d-block myriad-light mb-0">
+          Telefono: {{ appliant.phone_number }}
         </p>
+        <!--Email principal de contacto -->
+        <p class="d-block myriad-light ">
+          Email: {{ appliant.email }}
+        </p>
+
       </div>
+
       <div class="d-block d-lg-inline-block">
+        <!-- Programa academico y fecha de postulacion -->
         <p class="d-block mb-0 myriad-bold">{{ announcement_date }}</p>
-        <p class="d-block myriad-light appliant-email">
+        <p class="d-block myriad-light ">
           {{ announcement.academic_program.name }}
         </p>
-        <p class="d-block myriad-light appliant-curp">Agenda Ambiental</p>
+
+        <p class="mb-3"></p>
+        <!-- Area a cargo o dependencia -->
+        <p v-if='appliant.dependency != null' class="d-block myriad-light ">
+          {{appliant.dependency}}
+        </p>
+        
+        <p v-else>
+          Universidad Autónoma de San Luis Potosí
+        </p>
+
       </div>
       <div class="d-block d-lg-inline-block"></div>
     </div>

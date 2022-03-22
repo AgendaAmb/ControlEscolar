@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecommendationLetter;
@@ -28,8 +28,17 @@ use App\Services\PayUService\Exception;
 
 class ExternalRecommendationLetter extends Controller
 {
+
+    /**
+     * Web service de Mi portal.
+     * 
+     * @var \App\Helpers\MiPortalService
+     */
+    private $service;
+
     public function __construct()
     {
+        $this->service = new MiPortalService;
         parent::__construct();
     }
 
@@ -290,7 +299,7 @@ class ExternalRecommendationLetter extends Controller
 
         #Verificacion de carta no contestada
         if ($rl->answer >= 1) {
-            return view('postulacion.error-lettersSent')
+            return view('postulacion.success-letterSent')
                 ->with('user_id', $archive->appliant->id);
         }
 
@@ -308,7 +317,43 @@ class ExternalRecommendationLetter extends Controller
             ->whereIsRecommendationLetter()
             ->count();
         $announcement = $archive->announcement;
+
+        //Obtiene la informacion del aplicante 
         $appliant = $archive->appliant;
+
+        //Peticion a portal
+        try{
+            #Peticion a portal (Busca usuario)
+            $user_collection =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
+        }catch (\Exception $e) {
+            return new JsonResponse('Peticion erronea',502);
+        }
+
+        //Existe el postulante en el portal 
+        if($user_collection){
+            $user_data = $user_collection[0]; //Se retorno solo uno entonces se extrae informacion 
+             //Add data portal to local collection USER
+            $appliant->setAttribute('curp',$user_data['curp']);
+            $appliant->setAttribute('name',$user_data['name']);
+            $appliant->setAttribute('middlename',$user_data['middlename']);
+            $appliant->setAttribute('surname',$user_data['surname']);
+            $appliant->setAttribute('age',$user_data['age']);
+            $appliant->setAttribute('gender',$user_data['gender']);
+            $appliant->setAttribute('birth_country',$user_data['nationality']);
+            $appliant->setAttribute('birth_state',$user_data['residence']);
+            $appliant->setAttribute('residence_country',$user_data['residence']);
+            $appliant->setAttribute('phone_number',$user_data['phone_number']);
+            $appliant->setAttribute('email',$user_data['email']);
+            $appliant->setAttribute('altern_email',$user_data['altern_email']);
+            /* Faltaria
+                Academic degree
+                // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
+                Dependencia
+                // $appliant->setAttribute('dependency',$user_data['dependency']);
+
+
+            */
+        }
         $academic_program = $archive->announcement->academicProgram;
 
         //Enviar los datos necesarios 

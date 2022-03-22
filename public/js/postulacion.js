@@ -328,6 +328,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -2297,6 +2300,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2734,6 +2738,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2793,14 +2808,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     //  0  : En espera de respuesta del externo
     //  1  : Completado
     checkUpload: function checkUpload() {
-      var res = 2; // console.log("hola");
-      // console.log(this.recommendation_letter );
+      var res = 2;
 
       if (this.recommendation_letter != null) {
-        console.log("object");
-
         if (this.recommendation_letter["email_evaluator"]) {
-          //Correo ya se envio
           res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
         }
       }
@@ -2809,8 +2820,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       return res;
     },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
-      // //cadena no es similar a las existentes o  es nueva | INSERTAR
-      // if(!res){
       var request; //Ya existe carta de recomendacion
 
       if (this.recommendation_letter != null) {
@@ -2832,13 +2841,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       }
 
       axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {
-        // console.log(response.data);
-        // if(this.$recommendation_letter== null){
-        //   this.$recommendation_letter = {
-        //     email_evaluator : this.emailToSent,
-        //   };
-        // }
-        // alert(response.data);
         if (response.data == "Exito, el correo ha sido enviado") {
           Swal.fire({
             title: "El correo se ha enviado correctamente",
@@ -2868,7 +2870,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
 
         console.log(error);
-      }); // }
+      });
     }
   }
 });
@@ -3499,7 +3501,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cargarArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3547,7 +3549,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9381,22 +9383,6 @@ var render = function () {
             on: { change: _vm.cargaDocumento },
           }),
         ]),
-        _vm._v(" "),
-        "file" in _vm.Errores
-          ? _c("div", { staticClass: "invalid-feedback d-block text-right" }, [
-              _c("p", { staticClass: "h6" }, [
-                _vm._v(_vm._s(_vm.Errores.file) + " "),
-              ]),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        "file" in _vm.datosValidos
-          ? _c("div", { staticClass: "valid-feedback d-block text-right" }, [
-              _c("p", { staticClass: "h6" }, [
-                _vm._v(_vm._s(_vm.datosValidos.file) + " "),
-              ]),
-            ])
-          : _vm._e(),
       ]),
     ]),
   ])
@@ -12944,7 +12930,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row align-items-start" }, [
-    _c("div", { staticClass: "col mb-1" }, [
+    _c("div", { staticClass: "col " }, [
       _c("strong", [_vm._v("Correo No." + _vm._s(_vm.index) + " :")]),
     ]),
     _vm._v(" "),
@@ -12957,7 +12943,7 @@ var render = function () {
           expression: "myEmail",
         },
       ],
-      staticClass: "form-control mb-2",
+      staticClass: "form-control ",
       class: _vm.inputClassFor(),
       attrs: { type: "text", readonly: _vm.checkUpload() === 1 },
       domProps: { value: _vm.myEmail },
@@ -12998,7 +12984,7 @@ var render = function () {
             ],
         _vm._v(" "),
         _vm.checkUpload() != 1
-          ? _c("div", { staticClass: "form-group mt-3" }, [
+          ? _c("div", { staticClass: "form-group " }, [
               _c(
                 "button",
                 {
@@ -13012,23 +12998,18 @@ var render = function () {
                 [_vm._v("\n        Enviar correo\n      ")]
               ),
             ])
-          : _c("div", { staticClass: "form-group col-3 my-auto" }, [
+          : _c("div", [
               _c(
-                "a",
+                "button",
                 {
-                  staticClass: "verArchivo d-block my-2 ml-auto",
-                  attrs: {
-                    href: _vm.archive_recommendation_letter["location"],
-                    target: "_blank",
+                  staticClass: "btn btn-primary",
+                  on: {
+                    click: function ($event) {
+                      return _vm.verCartaRecomendacion()
+                    },
                   },
                 },
-                [
-                  _c("img", {
-                    attrs: {
-                      src: _vm.asset("storage/archive-buttons/seleccionar.png"),
-                    },
-                  }),
-                ]
+                [_vm._v("\n        Ver archivo\n      ")]
               ),
             ]),
       ],

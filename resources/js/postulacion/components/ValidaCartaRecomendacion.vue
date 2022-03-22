@@ -1,12 +1,12 @@
 <template>
   <div class="row align-items-start">
-    <div class="col mb-1">
+    <div class="col ">
       <strong>Correo No.{{ index }} :</strong>
     </div>
     <!-- Campo para rellenar el correo -->
     <input
       type="text"
-      class="form-control mb-2"
+      class="form-control "
       :class="inputClassFor()"
       v-model="myEmail"
       :readonly="checkUpload() === 1"
@@ -23,7 +23,7 @@
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
       </template>
 
-      <div v-if="checkUpload() != 1" class="form-group mt-3">
+      <div v-if="checkUpload() != 1" class="form-group ">
         <button
           @click="enviarCorreoCartaRecomendacion()"
           class="btn btn-primary"
@@ -32,6 +32,23 @@
         </button>
       </div>
 
+      <div v-else>
+        <button
+          @click="verCartaRecomendacion()"
+          class="btn btn-primary"
+        >
+          Ver archivo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+
+<style scoped>
+/* 
+      Esto va en vista de administrador
       <div v-else class="form-group col-3 my-auto">
       <a
         class="verArchivo d-block my-2 ml-auto"
@@ -41,15 +58,9 @@
       <img  :src="asset('storage/archive-buttons/seleccionar.png')" >
       </a>
     </div>
-
-    </div>
-
     
-  </div>
-</template>
+    */
 
-
-<style scoped>
 /*  v-if="archive_recommendation_letter!=null" */
 .verArchivo {
   /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */
@@ -132,23 +143,16 @@ export default {
 
     checkUpload() {
       let res = 2;
-      // console.log("hola");
-      // console.log(this.recommendation_letter );
       if (this.recommendation_letter != null) {
-        console.log("object");
         if (this.recommendation_letter["email_evaluator"]) {
-          //Correo ya se envio
           res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
         }
       }
-
       console.log("res: " + res);
       return res;
     },
 
     enviarCorreoCartaRecomendacion() {
-      // //cadena no es similar a las existentes o  es nueva | INSERTAR
-      // if(!res){
 
       let request;
 
@@ -177,13 +181,6 @@ export default {
           request
         )
         .then((response) => {
-          // console.log(response.data);
-          // if(this.$recommendation_letter== null){
-          //   this.$recommendation_letter = {
-          //     email_evaluator : this.emailToSent,
-          //   };
-          // }
-          // alert(response.data);
           if (response.data == "Exito, el correo ha sido enviado") {
             Swal.fire({
               title: "El correo se ha enviado correctamente",
@@ -217,7 +214,6 @@ export default {
           // alert('Ha ocurrido un error, intenta mas tarde');
           console.log(error);
         });
-      // }
     },
   },
 };
