@@ -160,7 +160,6 @@ class ArchiveController extends Controller
         $appliant->setAttribute('age',$user_data['age']);
         $appliant->setAttribute('gender',$user_data['gender']);
         $appliant->setAttribute('birth_country',$user_data['nationality']);
-        $appliant->setAttribute('birth_state',$user_data['residence']);
         $appliant->setAttribute('residence_country',$user_data['residence']);
         $appliant->setAttribute('phone_number',$user_data['phone_number']);
         $appliant->setAttribute('email',$user_data['email']);

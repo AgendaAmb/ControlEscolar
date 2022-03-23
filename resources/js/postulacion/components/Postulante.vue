@@ -35,7 +35,7 @@
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Estado civil: </label>
-          <input v-model="civic_state" type="text" class="form-control" readonly>
+          <input v-model="marital_state" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> País de nacimiento: </label>
@@ -82,6 +82,11 @@ import DocumentoRequerido from "./DocumentoRequerido.vue";
 
 export default {
   props: {
+    //v bind for appliant data from control escolar
+    // Estado civil.
+    marital_state: String,
+
+    //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
 
@@ -102,9 +107,6 @@ export default {
 
     // Género.
     gender: String,
-
-    // Estado civil.
-    civic_state: String,
 
     // Estado de nacimiento.
     birth_state: String,

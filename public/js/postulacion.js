@@ -1901,6 +1901,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    //v bind for appliant data from control escolar
+    // Estado civil.
+    marital_state: String,
+    //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
     // Curp del postulante
@@ -1915,8 +1919,6 @@ __webpack_require__.r(__webpack_exports__);
     birth_date: String,
     // Género.
     gender: String,
-    // Estado civil.
-    civic_state: String,
     // Estado de nacimiento.
     birth_state: String,
     // País de nacimiento.
@@ -11808,19 +11810,19 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.civic_state,
-                expression: "civic_state",
+                value: _vm.marital_state,
+                expression: "marital_state",
               },
             ],
             staticClass: "form-control",
             attrs: { type: "text", readonly: "" },
-            domProps: { value: _vm.civic_state },
+            domProps: { value: _vm.marital_state },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.civic_state = $event.target.value
+                _vm.marital_state = $event.target.value
               },
             },
           }),
