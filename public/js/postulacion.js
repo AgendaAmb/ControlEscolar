@@ -9371,12 +9371,12 @@ var render = function () {
       _c("div", { staticClass: "form-group col-3 my-auto" }, [
         _vm.checkUpload() === true
           ? _c("a", {
-              staticClass: "verArchivo d-block my-2 ml-auto",
+              staticClass: " verArchivo d-block my-2 ml-auto",
               attrs: { href: _vm.location, target: "_blank" },
             })
           : _vm._e(),
         _vm._v(" "),
-        _c("label", { staticClass: "cargarArchivo d-block ml-auto my-auto" }, [
+        _c("label", { staticClass: " cargarArchivo d-block ml-auto my-auto" }, [
           _c("input", {
             staticClass: "form-control d-none",
             attrs: { type: "file" },

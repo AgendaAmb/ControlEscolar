@@ -89,6 +89,8 @@ class PreRegisterController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         # -------------------- Validacion
         $casts = [
             'true' => true,
@@ -127,6 +129,7 @@ class PreRegisterController extends Controller
             'residence' => $request->residence_country
         ]);
 
+
         $val = Validator::make($request->all(), [
             'announcement_id' => ['required', 'exists:announcements,id'],
             'tipo_usuario' => ['required', 'string', 'max:255'],
@@ -146,7 +149,7 @@ class PreRegisterController extends Controller
             'ocupation' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
             'other_gender' => ['nullable', 'required_if:gender,Otro'],
-            'civic_state' => ['required', 'string', 'in:Soltero,Casado,Divorciado,Viudo,Otro,No especificar'],
+            'civic_state' => ['required', 'string'],
             'other_civic_state' => ['nullable', 'required_if:civic_state,Otro'],
             'birth_country' => ['required', 'string', 'max:255'],
             'birth_state' => ['required', 'string', 'max:255'],
@@ -160,10 +163,11 @@ class PreRegisterController extends Controller
             'residence' => ['required', 'same:residence_country']
         ]);
 
+
         #------------------------ Verifica validacion
-        if ($val->fails()) {
-            return new JsonResponse($val->errors(), 504);
-        }
+        // if ($val->fails()) {
+        //     return new JsonResponse($val->errors(), 504);
+        // }
 
         # ---------------------------------------------------- Crear Usuario.
         
@@ -176,15 +180,14 @@ class PreRegisterController extends Controller
             $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
             $response_data = $response->collect()->toArray();
         } catch (\Exception $e) {
-            return new JsonResponse('Hey hey', 500);
+            return new JsonResponse('Erorr al crear usuario en Portal Agenda Ambiental', 500);
         }
-        
-        return new JsonResponse([$response_data, $data],502);
+
          # ------------------------- Creacion de usuario en control escolar
          try {
             # Se crea el usuario.
             $user = User::create([
-                'id' => $response_data['id'],
+                'id' => $response_data[1], 
                 'type' => $request->tipo_usuario,
                 'birth_state' => $request->birth_state,
                 'marital_state' => $request->civic_state

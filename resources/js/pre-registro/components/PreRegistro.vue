@@ -265,6 +265,7 @@ export default {
         },
       })
         .then((response) => {
+          console.log(response.data);
           if (response.status == 201) {
             Swal.fire({
               title: "Registro exitoso",
@@ -283,6 +284,22 @@ export default {
             });
             // window.location.href = "/controlescolar/home";
             //window.location.href = this.url + "/controlescolar/home";
+          }else{
+            Swal.fire({
+              title: "Registro exitoso",
+              text: response.data,
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Acceder a cuenta",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href =
+                  // "https://ambiental.uaslp.mx/controlescolar/home";
+                  window.location.href = "/controlescolar/home";
+              }
+            });
           }
         })
         .catch((error) => {
