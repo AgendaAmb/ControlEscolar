@@ -18,8 +18,9 @@
       </div>
 
       <div class="form-group col-3 my-auto">    
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
+        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="location" target="_blank"> Ver Archivo</a>
         <label class=" cargarArchivo d-block ml-auto my-auto">
+          Subir Documento
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
       </div>    
@@ -37,7 +38,7 @@
         </label>
         
         */
-.cargarArchivo {
+/* .cargarArchivo {
   background: url(/storage/archive-buttons/seleccionar.png);
   background-size: 90px 40px;
   background-repeat: no-repeat;
@@ -50,6 +51,31 @@
   background-repeat: no-repeat;
   width: 90px;
   height: 40px;
+} */
+
+.cargarArchivo {
+  background-color: #3490dc;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
+}
+.verArchivo {
+  background-color: #3490dc;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
 }
 </style>
 
