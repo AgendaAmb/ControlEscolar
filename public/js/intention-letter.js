@@ -218,38 +218,37 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     buscaExpedientes: function buscaExpedientes() {
       var _this = this;
 
-      // Parámetros de búsqueda.
-      var params = {}; // console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
-      // if (this.announcement !== null) {
-      //   //si existe una fecha de convocatoria abierta
-      //   params = {
-      //     params: {
-      //       "filter[announcement.id]": this.announcement,
-      //       "date_from": this.date_from,
-      //       "date_to": this.date_to,
-      //     },
-      //   };
-      // }
-
-      axios.get("/controlescolar/solicitud/archives", {
-        params: {
-          date_from: this.date_from,
-          date_to: this.date_to
-        }
-      }).then(function (response) {
-        console.log(response);
-        _this.dataLength = response.data.length; // cantidad de articulos
-
-        _this.$emit("archives-found", response.data); //actualiza archivos
-
-      })["catch"](function (error) {
-        console.log(error);
+      //Datos no completos para hacer busqueda
+      if (this.announcement == null || this.date_from == null || this.date_to == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
-          text: error.response.data,
+          text: 'Alguno de los campos falta por completar, ingresa fecha y programa academico',
           icon: "error"
         });
-      });
+      } else {
+        //Se hace la busqueda
+        axios.get("/controlescolar/solicitud/archives", {
+          params: {
+            date_from: this.date_from,
+            date_to: this.date_to,
+            "filter[announcement.id]": this.announcement
+          }
+        }).then(function (response) {
+          console.log(response);
+          _this.dataLength = response.data.length; // cantidad de articulos
+
+          _this.$emit("archives-found", response.data); //actualiza archivos
+
+        })["catch"](function (error) {
+          console.log(error);
+          Swal.fire({
+            title: "Error al hacer busqueda",
+            text: error.response.data,
+            icon: "error"
+          });
+        });
+      }
+
       return false;
     }
   }

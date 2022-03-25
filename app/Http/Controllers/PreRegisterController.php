@@ -172,7 +172,7 @@ class PreRegisterController extends Controller
         # ---------------------------------------------------- Crear Usuario.
         
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_country','birth_state' ]); //data to save
+        $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_state' ]); //data to save
         
          # ------------------------- Creacion de usuario en control portal
         try {
@@ -180,20 +180,27 @@ class PreRegisterController extends Controller
             $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
             $response_data = $response->collect()->toArray();
         } catch (\Exception $e) {
-            return new JsonResponse('Erorr al crear usuario en Portal Agenda Ambiental', 500);
+            return new JsonResponse('Error al crear usuario en Portal Agenda Ambiental', 500);
+        }
+
+        #No se pudo crear usuario en portal
+        if(!$response_data['message'] || $response_data['message']!='¡Usuario Creado! y/o modulo actualizado'){
+            return new JsonResponse(['message' => 'Error al crear usuario en Portal Agenda Ambiental'], JsonResponse::HTTP_CREATED);
         }
 
          # ------------------------- Creacion de usuario en control escolar
          try {
             # Se crea el usuario.
             $user = User::create([
-                'id' => $response_data[1], 
+                'id' => $response_data['user_id'], 
                 'type' => $request->tipo_usuario,
                 'birth_state' => $request->birth_state,
                 'marital_state' => $request->civic_state
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
+            // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
+            return new JsonResponse($response_data, 502);
+
         }
 
         # ------------- Asigna rol a usuario

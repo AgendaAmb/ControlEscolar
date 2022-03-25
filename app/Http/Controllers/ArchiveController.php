@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 use App\Services\PayUService\Exception;
 use App\Http\Resources\AppliantArchive\ArchiveResource;
 use App\Mail\SendRecommendationLetter;
+use Illuminate\Support\Facades\Auth;
 //convertir blade a pdf
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -61,6 +62,7 @@ use Illuminate\Support\Facades\{
     Storage
 };
 use Nette\Utils\Json;
+use App\Helpers\MiPortalService;
 # Clases de otros paquetes.
 use Spatie\QueryBuilder\{
     AllowedFilter,
@@ -70,10 +72,18 @@ use Spatie\QueryBuilder\{
 class ArchiveController extends Controller
 {
     /**
+     * Web service de Mi portal.
+     * 
+     * @var \App\Helpers\MiPortalService
+     */
+    private $service;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->service = new MiPortalService;
         parent::__construct();
     }
 
@@ -133,7 +143,7 @@ class ArchiveController extends Controller
                 ->whereBetween('created_at', [$startDate, $endDate])
                 ->get();
         } catch (\Exception $e) {
-            // return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$startDate .' -- Hasta: '.$endDate, 502);
+            return new JsonResponse(['message' => "No existen archivos para las fechas y modalidad indicada"] , 502);
         }
 
         return ArchiveResource::collection($archives);
@@ -164,6 +174,34 @@ class ArchiveController extends Controller
         $appliant->setAttribute('phone_number',$user_data['phone_number']);
         $appliant->setAttribute('email',$user_data['email']);
         $appliant->setAttribute('altern_email',$user_data['altern_email']);
+        return $appliant;
+    }
+
+    /*
+        Return the appliant model filled with data
+    */
+    public function getDataFromPortalUser($appliant)
+    {
+        #Search user in portal
+        $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
+
+        #Save only the first user that the portal get reach
+
+        $user_data = $user_data_collect[0];
+
+        #Add data of user from portal to the collection in controlescolar
+        $appliant->setAttribute('curp',$user_data['curp']);
+        $appliant->setAttribute('name',$user_data['name']);
+        $appliant->setAttribute('middlename',$user_data['middlename']);
+        $appliant->setAttribute('surname',$user_data['surname']);
+        $appliant->setAttribute('age',$user_data['age']);
+        $appliant->setAttribute('gender',$user_data['gender']);
+        $appliant->setAttribute('birth_country',$user_data['nationality']);
+        $appliant->setAttribute('residence_country',$user_data['residence']);
+        $appliant->setAttribute('phone_number',$user_data['phone_number']);
+        $appliant->setAttribute('email',$user_data['email']);
+        $appliant->setAttribute('altern_email',$user_data['altern_email']);
+            
         return $appliant;
     }
 
@@ -214,6 +252,7 @@ class ArchiveController extends Controller
         
         //function that returns the info complete in the appliant model
         $appliant = $this->getDataFromSessionUser($request);
+        
 
         #Set the image according to academic program
         //Doctorado en ciencias ambientales
@@ -231,6 +270,7 @@ class ArchiveController extends Controller
 
         // dd($appliant);
 
+        //Change for the view of appliant
         return view('postulacion.show')
             ->with('archive', $archiveModel)
             ->with('appliant', $appliant)
@@ -268,15 +308,34 @@ class ArchiveController extends Controller
         ]);
 
         $academic_program = $archiveModel->announcement->academicProgram;
-        $appliant = $archiveModel->appliant;
+         
+        //function that returns the info complete in the appliant model
+        $appliant = $this->getDataFromPortalUser($archiveModel->appliant);
+
+        #Set the image according to academic program
+        //Doctorado en ciencias ambientales
+        $img = 'DOCTORADO-SUPERIOR.png';
+
+        if($academic_program->name == 'Maestría en ciencias ambientales' ){
+            $img = 'PMPCA-SUPERIOR.png';
+        }else if($academic_program->name == 'Maestría en ciencias ambientales, doble titulación'){
+            $img = 'ENREM-SUPERIOR.png';
+        }else if($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles'){
+            $img = 'IMAREC-SUPERIOR.png';
+        }
+
+        $header_academic_program = asset('storage/headers/'.$img);
 
         // dd($archiveModel->personalDocuments);
+
+        //Change to the view for admin
         return view('postulacion.show')
             ->with('archive', $archiveModel)
             ->with('appliant', $appliant)
             ->with('academic_program', $academic_program)
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
-            ->with('archives_recommendation_letters', $archiveModel->recommendationLetter);
+            ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
+            ->with('header_academic_program', $header_academic_program);
     }
 
     /**

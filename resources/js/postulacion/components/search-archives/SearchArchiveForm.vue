@@ -117,32 +117,27 @@ export default {
 
   methods: {
     buscaExpedientes() {
-      // Parámetros de búsqueda.
-      var params = {};
-
-        // console.log('Desde: ', this.date_from, ' Hasta: ', this.date_to);
-
-      // if (this.announcement !== null) {
-      //   //si existe una fecha de convocatoria abierta
-      //   params = {
-      //     params: {
-      //       "filter[announcement.id]": this.announcement,
-      //       "date_from": this.date_from,
-      //       "date_to": this.date_to,
-      //     },
-      //   };
-      // }
-      axios
+      //Datos no completos para hacer busqueda
+      if (this.announcement == null || this.date_from == null || this.date_to == null ) {
+          Swal.fire({
+              title: "Error al hacer busqueda",
+              text: 'Alguno de los campos falta por completar, ingresa fecha y programa academico',
+              icon: "error",
+              });
+      }else{
+        //Se hace la busqueda
+        axios
         .get("/controlescolar/solicitud/archives",{
           params:{
             date_from: this.date_from,
-            date_to: this.date_to
+            date_to: this.date_to,
+            "filter[announcement.id]": this.announcement,
           }
         })
         .then((response) => {
             console.log(response);
-          this.dataLength = response.data.length; // cantidad de articulos
-          this.$emit("archives-found", response.data); //actualiza archivos
+            this.dataLength = response.data.length; // cantidad de articulos
+            this.$emit("archives-found", response.data); //actualiza archivos
         })
         .catch((error) => {
             console.log(error);
@@ -152,6 +147,9 @@ export default {
               icon: "error",
             })
         });
+      }
+
+      
 
       return false;
     },
