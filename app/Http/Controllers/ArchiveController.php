@@ -707,9 +707,13 @@ class ArchiveController extends Controller
             //return json response
         }
 
+        //Imgs to put in the email
+        $url_LogoAA = asset('/storage/headers/logod.png');
+        $url_ContactoAA = asset('/storage/logos/rtic');
+
         try {
             //Email enviado
-            Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token));
+            Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token, $url_LogoAA, $url_ContactoAA));
         } catch (\Exception $e) {
             return new JsonResponse('Error: '.$e->getMessage(), 200);
         }

@@ -165,16 +165,16 @@ class PreRegisterController extends Controller
 
 
         #------------------------ Verifica validacion
-        // if ($val->fails()) {
-        //     return new JsonResponse($val->errors(), 504);
-        // }
+        if ($val->fails()) {
+            return new JsonResponse($val->errors(), 504);
+        }
 
         # ---------------------------------------------------- Crear Usuario.
         
         # -------------------------- Datos a validar en Portal.
         $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_state' ]); //data to save
         
-         # ------------------------- Creacion de usuario en control portal
+         # ------------------------- Creacion de usuario en portal Agenda Ambiental
         try {
             $data['module_id'] = 2; //2 = control escolar
             $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal

@@ -19,18 +19,22 @@ class SendRecommendationLetter extends Mailable
     public $appliant;
     public $email;
     public $my_token;
+    public $url_LogoAA;
+    public $url_ContactoAA;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct( $email,  $appliant,  $academic_program, $my_token )
+    public function __construct( $email,  $appliant,  $academic_program, $my_token, $url_LogoAA, $url_ContactoAA )
     {
         $this->appliant = $appliant;
         $this->email = $email;
         $this->academic_program = $academic_program;
         $this->my_token = $my_token;
+        $this->url_ContactoAA = $url_ContactoAA;
+        $this->url_LogoAA = $url_LogoAA;
     }
 
     /**
