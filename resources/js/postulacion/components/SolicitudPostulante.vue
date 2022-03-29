@@ -18,6 +18,7 @@
       <grado-academico v-for="grado in academic_degrees"
         v-bind="grado"
         v-bind:key="grado.id"
+        :alias_academic_program ="academic_program.alias"
         :state.sync="grado.state"
         :cvu.sync="grado.cvu"
         :knowledge_card.sync="grado.knowledge_card"
@@ -230,7 +231,7 @@ export default {
           case 'maestria': color = "#0598BC"; break;
           case 'doctorado': color = "#FECC50"; break;
           case 'enrem': color = "#118943"; break;
-          case 'imarec': color = "#"; break;
+          case 'imarec': color = "#118943"; break;
         }
 
         return {
@@ -244,7 +245,7 @@ export default {
   data(){
     return {
       Countries: [],
-      CountryUniversities:[],
+      myUniversities:[],
       EnglishExams: [],
       EnglishExamTypes: []
     };

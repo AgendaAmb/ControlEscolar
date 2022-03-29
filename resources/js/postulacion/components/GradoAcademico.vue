@@ -7,19 +7,24 @@
         Grado, título, etc.
       -->
       <div  class="row">
-        <div class="form-group col-md-6 col-lg-4">
-          <label> Nivel de escolaridad: </label>
-
-          <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
+       
+        <div  v-if="alias_academic_program == 'doctorado'" class="form-group col-md-6 col-lg-4">
+           <label> Nivel de escolaridad: </label>
+          <!-- Solo se podra seleccionar para doctorado -->
+          <select  v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
             <option value="" selected>Escoge una opción</option>
             <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
               {{ escolaridad }}
             </option>
           </select>
-
           <div v-if="estaEnError('degree_type')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
 
+        <div  v-else class="form-group col-md-6 col-lg-4">
+           <label> Nivel de escolaridad: </label>
+          <input value="Licenciatura" type="text" class="form-control" :readonly="true">
+        </div>
+      
         <div class="form-group col-md-6 col-lg-4">
           <label> Título obtenido: </label>
           <input v-model="Degree" type="text" class="form-control" :class="objectForError('degree')">
@@ -56,6 +61,7 @@
           <div v-if="estaEnError('country')" class="invalid-feedback">{{ errores.country }}</div>
         </div>
 
+
         <div class="form-group col-lg-6">
           <label> Universidad de estudios: </label>
           <select v-model="University" class="form-control" :class="objectForError('university')">
@@ -67,6 +73,7 @@
 
           <div v-if="estaEnError('university')" class="invalid-feedback">{{ errores.university }}</div>
         </div>
+
 
         <div class="d-block d-lg-none form-group col-md-6">
           <label> Estatus: </label>
@@ -163,6 +170,10 @@
 
     </div>
 
+    <div class="my-3">
+      <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary">Guardar cambios</button>
+    </div>
+
     <documento-requerido 
       v-for="documento in RequiredDocuments" 
       :key="documento.name"
@@ -172,11 +183,7 @@
       v-bind="documento"
       @enviaDocumento = "cargaDocumento" >
     </documento-requerido>
-
-    <div class="my-3 col-12">
-      <button @click="agregaHistorialAcademico" class="btn btn-success"> Agregar </button>
-      <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary"> Guardar </button>
-    </div>
+    
   </div>
 </template>
 
@@ -189,6 +196,9 @@ export default {
   name: "grado-academico",
 
   props: {
+
+    //Alias academic program
+    alias_academic_program: String,
 
     // Países que el postulante puede escoger.
     paises: Array,
@@ -249,6 +259,7 @@ export default {
     return {
       fechaobtencion: '',
       errores: {},
+      initial_country : null,
       datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
@@ -304,6 +315,7 @@ export default {
 
     Country: {
       get(){
+        
         return this.country;
       },
       set(newVal){
@@ -420,10 +432,13 @@ export default {
   },
   methods: {
     escogePais(evento) {
+      this.initial_country = this.country;
+
       this.Universidades =
         this.paises[evento.target.selectedIndex - 1].universities;
     },
 
+    //Funcion para un futuro guardar datos permanentes
     agregaHistorialAcademico(evento) {
       this.enviaHistorialAcademico(evento, 'Completo');
     },
@@ -454,6 +469,15 @@ export default {
         digital_signature: this.digital_signature
 
       }).then(response => {
+        
+            Swal.fire({
+              title: "Los datos se han actualizado correctamente",
+              text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
 
         Object.keys(response.data).forEach(dataKey => {
           var event = 'update:' + dataKey;
@@ -465,6 +489,13 @@ export default {
           this.$emit('gradoAcademicoAgregado', this);
 
       }).catch(error => {
+         Swal.fire({
+              title: "Error al actualizar datos",
+              text: "Alguno o varios de de los datos es invalido, intenta nuevamente insertando todos los datos indicados",
+              showCancelButton: false,
+              icon: "error",
+            });
+
         this.State = 'Incompleto';
         var errores = error.response.data['errors'];
 

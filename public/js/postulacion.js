@@ -1035,6 +1035,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1044,6 +1051,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   name: "grado-academico",
   props: {
+    //Alias academic program
+    alias_academic_program: String,
     // Países que el postulante puede escoger.
     paises: Array,
     // id del grado.
@@ -1085,6 +1094,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fechaobtencion: '',
       errores: {},
+      initial_country: null,
       datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
@@ -1239,8 +1249,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     escogePais: function escogePais(evento) {
+      this.initial_country = this.country;
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
     },
+    //Funcion para un futuro guardar datos permanentes
     agregaHistorialAcademico: function agregaHistorialAcademico(evento) {
       this.enviaHistorialAcademico(evento, 'Completo');
     },
@@ -1268,6 +1280,14 @@ __webpack_require__.r(__webpack_exports__);
         knowledge_card: this.knowledge_card,
         digital_signature: this.digital_signature
       }).then(function (response) {
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar"
+        });
         Object.keys(response.data).forEach(function (dataKey) {
           var event = 'update:' + dataKey;
 
@@ -1277,6 +1297,12 @@ __webpack_require__.r(__webpack_exports__);
         });
         if (response.data.state === 'Completo') _this.$emit('gradoAcademicoAgregado', _this);
       })["catch"](function (error) {
+        Swal.fire({
+          title: "Error al actualizar datos",
+          text: "Alguno o varios de de los datos es invalido, intenta nuevamente insertando todos los datos indicados",
+          showCancelButton: false,
+          icon: "error"
+        });
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
@@ -2581,6 +2607,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2648,7 +2675,7 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case 'imarec':
-            color = "#";
+            color = "#118943";
             break;
         }
 
@@ -2662,7 +2689,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       Countries: [],
-      CountryUniversities: [],
+      myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: []
     };
@@ -10035,64 +10062,79 @@ var render = function () {
     [
       _c("div", { staticClass: "form-group col-12" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
-            _c("label", [_vm._v(" Nivel de escolaridad: ")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.DegreeType,
-                    expression: "DegreeType",
-                  },
-                ],
-                staticClass: "form-control",
-                class: _vm.objectForError("degree_type"),
-                on: {
-                  change: function ($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function (o) {
-                        return o.selected
-                      })
-                      .map(function (o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.DegreeType = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                },
-              },
-              [
-                _c("option", { attrs: { value: "", selected: "" } }, [
-                  _vm._v("Escoge una opción"),
-                ]),
+          _vm.alias_academic_program == "doctorado"
+            ? _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
+                _c("label", [_vm._v(" Nivel de escolaridad: ")]),
                 _vm._v(" "),
-                _vm._l(_vm.escolaridades, function (escolaridad) {
-                  return _c(
-                    "option",
-                    { key: escolaridad, domProps: { value: escolaridad } },
-                    [
-                      _vm._v(
-                        "\n            " + _vm._s(escolaridad) + "\n          "
-                      ),
-                    ]
-                  )
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.DegreeType,
+                        expression: "DegreeType",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    class: _vm.objectForError("degree_type"),
+                    on: {
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.DegreeType = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "", selected: "" } }, [
+                      _vm._v("Escoge una opción"),
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.escolaridades, function (escolaridad) {
+                      return _c(
+                        "option",
+                        { key: escolaridad, domProps: { value: escolaridad } },
+                        [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(escolaridad) +
+                              "\n          "
+                          ),
+                        ]
+                      )
+                    }),
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.estaEnError("degree_type")
+                  ? _c("div", { staticClass: "invalid-feedback" }, [
+                      _vm._v(_vm._s(_vm.errores.degree_type)),
+                    ])
+                  : _vm._e(),
+              ])
+            : _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
+                _c("label", [_vm._v(" Nivel de escolaridad: ")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    value: "Licenciatura",
+                    type: "text",
+                    readonly: true,
+                  },
                 }),
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _vm.estaEnError("degree_type")
-              ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(_vm._s(_vm.errores.degree_type)),
-                ])
-              : _vm._e(),
-          ]),
+              ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-6 col-lg-4" }, [
             _c("label", [_vm._v(" Título obtenido: ")]),
@@ -10815,6 +10857,17 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "my-3" }, [
+        _c(
+          "button",
+          {
+            staticClass: "mx-2 btn btn-primary",
+            on: { click: _vm.actualizaHistorialAcademico },
+          },
+          [_vm._v("Guardar cambios")]
+        ),
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.RequiredDocuments, function (documento) {
         return _c(
           "documento-requerido",
@@ -10845,26 +10898,6 @@ var render = function () {
           )
         )
       }),
-      _vm._v(" "),
-      _c("div", { staticClass: "my-3 col-12" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success",
-            on: { click: _vm.agregaHistorialAcademico },
-          },
-          [_vm._v(" Agregar ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "mx-2 btn btn-primary",
-            on: { click: _vm.actualizaHistorialAcademico },
-          },
-          [_vm._v(" Guardar ")]
-        ),
-      ]),
     ],
     2
   )
@@ -12500,6 +12533,7 @@ var render = function () {
                 {
                   key: grado.id,
                   attrs: {
+                    alias_academic_program: _vm.academic_program.alias,
                     state: grado.state,
                     cvu: grado.cvu,
                     knowledge_card: grado.knowledge_card,
