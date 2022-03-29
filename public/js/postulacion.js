@@ -465,9 +465,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "expediente",
   props: {
+    //Index de expediente
+    index: Number,
     // Programas académicos.
     id: Number,
     // Nombre del postulante
@@ -9402,7 +9405,7 @@ var render = function () {
               "a",
               {
                 staticClass: " verArchivo d-block my-2 ml-auto",
-                attrs: { href: _vm.location, target: "_blank" },
+                attrs: { href: "expediente/" + _vm.location, target: "_blank" },
               },
               [_vm._v(" Ver Archivo")]
             )
@@ -9444,6 +9447,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
+    _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
+      _vm._v(" " + _vm._s(_vm.index) + " "),
+    ]),
+    _vm._v(" "),
     _c("th", { staticClass: "text-center", attrs: { scope: "row" } }, [
       _vm._v(" " + _vm._s(_vm.id) + " "),
     ]),

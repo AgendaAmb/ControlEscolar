@@ -12,7 +12,7 @@
     <header class="container-fluid p-4">
         <div class="row">
             <div class="col-12 mb-0">
-                <img src="{{$url_LogoAA}}" alt="Logo Agenda Ambiental">
+                <img src="{{$url_LogoAA}}" alt="Logo Agenda Ambiental" style="width: 100%">
             </div>
             <div class="col-12 mt-0 mb-5" style="height:25px; background-color:#ffc300">
             </div>

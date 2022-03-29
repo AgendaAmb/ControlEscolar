@@ -208,6 +208,7 @@ export default {
       //nacionalidad y pais de nacimiento
       this.birth_country = user.nationality;
       this.residence_country = user.residence;
+      
       for (let i = 0; i < this.countries.length; i++) {
         if (this.countries[i].name == this.birth_country) {
             this.mystates  = this.countries[i].states;

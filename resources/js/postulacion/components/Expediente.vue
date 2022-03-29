@@ -1,5 +1,6 @@
 <template>
   <tr>
+    <th scope="row" class="text-center"> {{index}} </th>
     <th scope="row" class="text-center"> {{id}} </th>
     <td class="text-center"> {{name}} </td>
     <td> {{academic_program}} </td>
@@ -16,6 +17,9 @@ export default {
   name: "expediente",
 
   props: {
+    //Index de expediente
+    index:Number,
+
     // Programas académicos.
     id: Number,
 

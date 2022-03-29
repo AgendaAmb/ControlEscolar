@@ -146,6 +146,29 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => "No existen archivos para las fechas y modalidad indicada"] , 502);
         }
 
+        //Comprobar que todos los modelos de appliant tengan la información necesaria
+        //Caso contrario insertar información en modelos
+
+        foreach($archives as $archive){
+            //El postulante no tiene toda la información
+           if(!$archive->appliant->name){
+               
+               
+               try{
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
+               }catch (\Exception $e) {
+                   return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+               }
+               
+                if(sizeof($user_data_collect)>0){
+                    $user_data = $user_data_collect[0];
+                    //Se guarda el nombre del usuario en el modelo
+                    $archive->appliant->setAttribute('name',$user_data['name'].' '.$user_data['middlename'].' '.$user_data['surname']);
+                }
+               
+           }
+        }
+        // return new JsonResponse($archives, 200); //Ver info archivos en consola
         return ArchiveResource::collection($archives);
     }
 
@@ -709,7 +732,7 @@ class ArchiveController extends Controller
 
         //Imgs to put in the email
         $url_LogoAA = asset('/storage/headers/logod.png');
-        $url_ContactoAA = asset('/storage/logos/rtic');
+        $url_ContactoAA = asset('/storage/logos/rtic.png');
 
         try {
             //Email enviado

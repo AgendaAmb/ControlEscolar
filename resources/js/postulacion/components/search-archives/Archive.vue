@@ -1,5 +1,6 @@
 <template>
     <tr>
+        <th scope="row">{{index}}</th>
         <th scope="row">{{id}}</th>
         <td>{{name}}</td>
         <td>{{academic_program}}</td>
@@ -16,6 +17,11 @@ export default {
 
     // Propiedas. 
     props: {
+
+        index:{
+            type:Number,
+            default:0,
+        },
         
         // Id del expediente.
         id: {

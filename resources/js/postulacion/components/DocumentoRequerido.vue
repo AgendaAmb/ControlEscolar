@@ -18,7 +18,7 @@
       </div>
 
       <div class="form-group col-3 my-auto">    
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="location" target="_blank"> Ver Archivo</a>
+        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/'+location" target="_blank"> Ver Archivo</a>
         <label class=" cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input type="file" class="form-control d-none" @change="cargaDocumento">

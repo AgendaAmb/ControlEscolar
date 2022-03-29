@@ -27,7 +27,8 @@ export default {
             type: Array,
             default() {
                 return [
-                    'Número de expediente',
+                    'No. expediente',
+                    'No. registro',
                     'Nombre completo', 
                     'Programa académico',
                     'Expediente'

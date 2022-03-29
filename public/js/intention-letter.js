@@ -23,11 +23,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // Nombre del componente
   name: 'archive',
   // Propiedas. 
   props: {
+    index: {
+      type: Number,
+      "default": 0
+    },
     // Id del expediente.
     id: {
       type: Number,
@@ -86,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
     columns: {
       type: Array,
       "default": function _default() {
-        return ['Número de expediente', 'Nombre completo', 'Programa académico', 'Expediente'];
+        return ['No. expediente', 'No. registro', 'Nombre completo', 'Programa académico', 'Expediente'];
       }
     }
   }
@@ -3912,6 +3917,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
+    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.index))]),
+    _vm._v(" "),
     _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.id))]),
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.name))]),
