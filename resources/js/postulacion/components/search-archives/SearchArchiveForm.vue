@@ -73,16 +73,6 @@ export default {
         return [];
       },
     },
-
-    // date_to: {
-    //   type: Date,
-    //   default: null,
-    // },
-
-    // date_from: {
-    //   type: Date,
-    //   default: null,
-    // },
   },
 
   // Propiedades reactivas.
@@ -93,26 +83,6 @@ export default {
       date_to: null,
       date_from: null,
     };
-  },
-
-  computed: {
-    // DateTo: {
-    //   get() {
-    //     return this.date_to;
-    //   },
-    //   set(newVal) {
-    //     this.$emit("update:date_to", newVal);
-    //   },
-    // },
-
-    // DateFrom: {
-    //   get() {
-    //     return this.date_from;
-    //   },
-    //   set(newVal) {
-    //     this.$emit("update:date_from", newVal);
-    //   },
-    // },
   },
 
   methods: {

@@ -38,6 +38,16 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       "default": -1
     },
+    // Fecha inicio postulacion
+    announcement_from: {
+      type: Date,
+      "default": null
+    },
+    // Fecha de terminacion postulacion
+    announcement_to: {
+      type: Date,
+      "default": null
+    },
     name: {
       type: String,
       "default": ''
@@ -91,7 +101,7 @@ __webpack_require__.r(__webpack_exports__);
     columns: {
       type: Array,
       "default": function _default() {
-        return ['No. expediente', 'No. registro', 'Nombre completo', 'Programa académico', 'Expediente'];
+        return ['No. expediente', 'Periodo', 'Nombre completo', 'Programa académico', 'Expediente'];
       }
     }
   }
@@ -183,15 +193,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       "default": function _default() {
         return [];
       }
-    } // date_to: {
-    //   type: Date,
-    //   default: null,
-    // },
-    // date_from: {
-    //   type: Date,
-    //   default: null,
-    // },
-
+    }
   },
   // Propiedades reactivas.
   data: function data() {
@@ -201,23 +203,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       date_to: null,
       date_from: null
     };
-  },
-  computed: {// DateTo: {
-    //   get() {
-    //     return this.date_to;
-    //   },
-    //   set(newVal) {
-    //     this.$emit("update:date_to", newVal);
-    //   },
-    // },
-    // DateFrom: {
-    //   get() {
-    //     return this.date_from;
-    //   },
-    //   set(newVal) {
-    //     this.$emit("update:date_from", newVal);
-    //   },
-    // },
   },
   methods: {
     buscaExpedientes: function buscaExpedientes() {
@@ -3919,7 +3904,11 @@ var render = function () {
   return _c("tr", [
     _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.index))]),
     _vm._v(" "),
-    _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.id))]),
+    _c("th", { attrs: { scope: "row" } }, [
+      _vm._v("Desde : " + _vm._s(_vm.announcement_from) + " "),
+      _c("br"),
+      _vm._v(" Hasta : " + _vm._s(_vm.announcement_to)),
+    ]),
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.name))]),
     _vm._v(" "),

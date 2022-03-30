@@ -95,6 +95,8 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
         # Grados académicos.
         Route::get('/{archive}/latestAcademicDegree', [ArchiveController::class, 'latestAcademicDegree']);
+        Route::post('/addAcademicDegree', [ArchiveController::class, 'addAcademicDegree']);
+        Route::post('/deleteAcademicDegree', [ArchiveController::class, 'deleteAcademicDegree']);
         Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
         Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
 

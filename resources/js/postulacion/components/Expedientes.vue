@@ -36,8 +36,9 @@
           </tr>
         </thead>
         <tbody>
-          <expediente v-for="archive in archives" 
+          <expediente v-for="(archive,index) in archives" 
             :key="archive.id"
+            :index="index"
             v-bind="archive">
           </expediente>
         </tbody>

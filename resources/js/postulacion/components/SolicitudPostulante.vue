@@ -15,9 +15,10 @@
     <summary>
       <h2 class="mb-5 d-block font-weight-bold"> Historial académico </h2>
     </summary>
-      <grado-academico v-for="grado in academic_degrees"
+      <grado-academico v-for="(grado,index) in academic_degrees"
         v-bind="grado"
         v-bind:key="grado.id"
+        :index="index+1"
         :alias_academic_program ="academic_program.alias"
         :state.sync="grado.state"
         :cvu.sync="grado.cvu"
@@ -36,6 +37,8 @@
         :paises="Countries"
         @gradoAcademicoAgregado="gradoAcademicoAgregado"> 
       </grado-academico>
+      <button  @click="agregaHistorialAcademico" class="btn btn btn-outline-primary mt-4 pl-2" style="height:45px;">Agregar Registro</button>
+
     </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
@@ -129,6 +132,7 @@
         :assisted_at.sync="humanCapital.assisted_at"
         :scolarship_level.sync="humanCapital.scolarship_level">
        </capital-humano>
+
       </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
@@ -230,7 +234,7 @@ export default {
         {
           case 'maestria': color = "#0598BC"; break;
           case 'doctorado': color = "#FECC50"; break;
-          case 'enrem': color = "#118943"; break;
+          case 'enrem': color = "#FF384D"; break;
           case 'imarec': color = "#118943"; break;
         }
 
@@ -267,6 +271,33 @@ export default {
   },
 
   methods: { 
+
+    agregaHistorialAcademico(){
+       axios.post('/controlescolar/solicitud/addAcademicDegree',{
+         archive_id:this.archive_id,
+         state: 'Incompleto'
+       }
+       ).then(response =>{
+         Swal.fire({
+              title: "Éxito al crear nuevo registro",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+            gradoAcademicoAgregado(academic_degrees[academic_degrees.length-1])
+       }).catch(error =>{
+
+         console.log(error.data.message);
+          Swal.fire({
+              title: "Error al agregar nuevo registro",
+              showCancelButton: false,
+              icon: "error",
+            });
+       });
+    },
+
     gradoAcademicoAgregado(grado){
       var url = '/controlescolar/solicitud/' + archive.id + '/latestAcademicDegree';
 

@@ -23,6 +23,8 @@ class ArchiveResource extends JsonResource
         
         return [
             'id' => $this->id,
+            'announcement_from' => $this->announcement->from,   //desde 
+            'announcement_to' => $this->announcement->to,       //hasta
             'name' => $name,
             'academic_program' => $this->announcement->academicProgram->name ?? '',
             'location' => route('solicitud.show', $this->id)

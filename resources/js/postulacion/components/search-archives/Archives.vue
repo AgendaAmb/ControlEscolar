@@ -28,7 +28,7 @@ export default {
             default() {
                 return [
                     'No. expediente',
-                    'No. registro',
+                    'Periodo',
                     'Nombre completo', 
                     'Programa académico',
                     'Expediente'

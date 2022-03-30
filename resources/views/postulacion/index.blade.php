@@ -8,9 +8,14 @@ const academicPrograms = @json($academic_programs);
 @section('main')
 
 @role('admin')
-    <search-archive-form :academic_programs="academic_programs" v-on:archives-found="updateArchives"> </search-archive-form>
+    <search-archive-form :academic_programs="academic_programs" v-on:archives-found="updateArchives"> 
+    </search-archive-form>
 <archives>
-    <archive v-for="archive in archives" v-bind="archive"></archive>
+    <archive v-for="(archive,index) in archives" 
+    :index="index+1"
+    v-bind="archive"
+    >
+    </archive>
 </archives>
 @endrole
 

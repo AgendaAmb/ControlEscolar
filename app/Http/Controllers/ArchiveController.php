@@ -15,6 +15,7 @@ use App\Http\Requests\{
     UpdateMailRecommendationLetter,
 };
 
+use Illuminate\Validation\Rule;
 # Resources (respuestas en formato JSON)
 use Illuminate\Support\Str;
 use App\Services\PayUService\Exception;
@@ -102,14 +103,6 @@ class ArchiveController extends Controller
 
     }
 
-    //agregar la carta de recomendacion con la informacion del usuario
-
-    // public function recommendationLetter(Request $request){
-    //     return view('postulacion.recommendation-letter')
-    //     -> with('user', $request->user())
-    //     ;  
-    // }
-
     /**
      * Obtiene los expedientes, vía api.
      *
@@ -120,10 +113,6 @@ class ArchiveController extends Controller
     public function archives(Request $request)
     {
         try {
-
-            // $startDate = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_from'));
-            // $endDate   = Carbon::createFromFormat('Y-m-d', AllowedFilter::exact('date_to'));
-
             $startDate = Carbon::createFromFormat('Y-m-d', $request->date_from)->startOfDay();
             $endDate = Carbon::createFromFormat('Y-m-d', $request->date_to)->endOfDay();
         } catch (\Exception $e) {
@@ -153,7 +142,6 @@ class ArchiveController extends Controller
             //El postulante no tiene toda la información
            if(!$archive->appliant->name){
                
-               
                try{
                 $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
                }catch (\Exception $e) {
@@ -161,9 +149,15 @@ class ArchiveController extends Controller
                }
                
                 if(sizeof($user_data_collect)>0){
+
+                    //ArchiveResource create $user_data_collect[0];
                     $user_data = $user_data_collect[0];
                     //Se guarda el nombre del usuario en el modelo
                     $archive->appliant->setAttribute('name',$user_data['name'].' '.$user_data['middlename'].' '.$user_data['surname']);
+                }else{
+                    //No existe aplicante por lo que no se podra ver expediente
+                    $archive->appliant->setAttribute('name','Usuario invalido');
+                    $archive->id = -1;
                 }
                
            }
@@ -542,6 +536,57 @@ class ArchiveController extends Controller
 
         return new JsonResponse($academic_degree);
     }
+
+    /**
+     * Crea nuevo registro de datos academicos para el postulante
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    
+    public function addAcademicDegree(Request $request)
+    {
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'state' => ['required', 'string', 'max:255']
+        ]);
+
+        try{
+            $academic_degree = AcademicDegree::create([
+                'archive_id' => $request->archive_id,
+                'state' => $request->state
+            ]);
+        }catch (\Exception $e){
+            return new JsonResponse('Error al crear registro academico para el usuario', 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Programa academico agregado, inserta los datos necesarios para continuar con tu postulacion'],200);
+    }
+
+    /**
+     * Elimina datos académicos del postulante del registro seleccionado
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    
+    public function deleteAcademicDegree(Request $request)
+    {
+
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'id' => ['required', 'numeric']
+        ]);
+        
+        try{
+            //Find the exact model of academic degree to delete
+            $deleted = AcademicDegree::where('id', $request->id,)->where('archive_id',$request->archive_id)->delete();
+
+        }catch (\Exception $e){
+            return new JsonResponse('Error eliminar el registro de datos academicos seleccionado', 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Programa academico eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'],200);
+    }
+
 
     /**
      * Actualiza un documento requerido, para el grado académico

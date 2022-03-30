@@ -1,7 +1,7 @@
 <template>
     <tr>
         <th scope="row">{{index}}</th>
-        <th scope="row">{{id}}</th>
+        <th scope="row">Desde : {{announcement_from }} <br> Hasta : {{announcement_to}}</th>
         <td>{{name}}</td>
         <td>{{academic_program}}</td>
         <td>
@@ -27,6 +27,18 @@ export default {
         id: {
             type: Number,
             default: -1
+        },
+
+        // Fecha inicio postulacion
+        announcement_from: {
+            type: Date,
+            default: null
+        },
+
+        // Fecha de terminacion postulacion
+        announcement_to: {
+            type: Date,
+            default: null
         },
 
         name: {

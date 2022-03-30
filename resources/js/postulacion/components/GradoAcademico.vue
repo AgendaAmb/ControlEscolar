@@ -1,6 +1,16 @@
 <template>
-  <div class="my-3 row">
-    <div class="form-group col-12">
+  
+    <details>
+      <summary class="d-flex align-middle">
+        <div class="col-9">
+          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Registro Escolaridad # {{index}} </h4>
+        </div>
+        <div class="col-3">
+          <button  @click="eliminaHistorialAcademico" class="btn btn-danger" style="height:45px;">Eliminar Registro</button>
+        </div>
+      </summary>
+      <div class="my-3 row">
+      <div class="form-group col-12">
 
       <!-- 
         Datos generales del estatus de estudio.
@@ -183,8 +193,10 @@
       v-bind="documento"
       @enviaDocumento = "cargaDocumento" >
     </documento-requerido>
-    
-  </div>
+    </div>
+      <hr class="my-4 d-block" :style="ColorStrip">
+    </details>
+  
 </template>
 
 <script>
@@ -196,6 +208,8 @@ export default {
   name: "grado-academico",
 
   props: {
+    //Index de la escolaridad 
+    index: Number,
 
     //Alias academic program
     alias_academic_program: String,
@@ -439,36 +453,55 @@ export default {
     },
 
     //Funcion para un futuro guardar datos permanentes
-    agregaHistorialAcademico(evento) {
+    actualizaHistorialAcademico(evento){
       this.enviaHistorialAcademico(evento, 'Completo');
     },
 
-    actualizaHistorialAcademico(evento){
-      this.enviaHistorialAcademico(evento, 'Incompleto');
+    eliminaHistorialAcademico(){
+      axios.post('/controlescolar/solicitud/deleteAcademicDegree', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+          Swal.fire({
+              title: "Éxito al eliminar registro",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+      }).catch(error=>{
+          Swal.fire({
+              title: "Error al eliminar registro",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
     },
+
 
     enviaHistorialAcademico(evento, state){
       this.errores = {};
-
-      axios.post('/controlescolar/solicitud/updateAcademicDegree', {
-        
-        id: this.id,
-        archive_id: this.archive_id,
-        degree: this.degree,
-        degree_type: this.degree_type,
-        cvu: this.cvu,
-        cedula: this.cedula,
-        country: this.country,
-        university: this.university,
-        status: this.status,
-        state: state,
-        average: this.average,
-        min_avg: this.min_avg,
-        max_avg: this.max_avg,
-        knowledge_card: this.knowledge_card,
-        digital_signature: this.digital_signature
-
-      }).then(response => {
+      
+      axios.post('/controlescolar/solicitud/updateAcademicDegree',  
+        {
+          id:this.id,
+          archive_id: this.archive_id,
+          degree: this.degree,
+          degree_type: this.degree_type,
+          cvu: this.cvu,
+          cedula: this.cedula,
+          country: this.country,
+          university: this.university,
+          status: this.status,
+          state: state,
+          average: this.average,
+          min_avg: this.min_avg,
+          max_avg: this.max_avg,
+          knowledge_card: this.knowledge_card,
+          digital_signature: this.digital_signature
+        }
+      ).then(response => {
         
             Swal.fire({
               title: "Los datos se han actualizado correctamente",
