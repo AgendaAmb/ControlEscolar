@@ -136,7 +136,7 @@ class PreRegisterController extends Controller
             'pertenece_uaslp' => ['required', 'boolean'],
             'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
             'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
-            'email' => ['required', 'unique:users,email', 'string', 'email', 'max:255' ],
+            'email' => ['required', 'string', 'email', 'max:255' ],
             'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
             'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
             'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],

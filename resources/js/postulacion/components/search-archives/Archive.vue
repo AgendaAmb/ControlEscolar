@@ -5,7 +5,7 @@
         <td>{{name}}</td>
         <td>{{academic_program}}</td>
         <td>
-            <a :href="location"> Ver expediente </a>
+            <a :href="location" target="_blank"> Ver expediente </a>
         </td>
     </tr>
 </template>

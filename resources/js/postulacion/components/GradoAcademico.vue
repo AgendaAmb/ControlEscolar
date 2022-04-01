@@ -1,12 +1,12 @@
 <template>
   
     <details>
-      <summary class="d-flex align-middle">
-        <div class="col-9">
-          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Registro Escolaridad # {{index}} </h4>
+      <summary class="d-flex justify-content-end">
+        <div class="col-9 justify-content-start">
+          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Nivel de escolaridad {{index}} </h4>
         </div>
-        <div class="col-3">
-          <button  @click="eliminaHistorialAcademico" class="btn btn-danger" style="height:45px;">Eliminar Registro</button>
+        <div class="col-3 justify-content-end" >
+          <button  @click="eliminaHistorialAcademico" class="btn btn-danger" style="height:45px;">Eliminar Escolaridad</button>
         </div>
       </summary>
       <div class="my-3 row">
@@ -180,8 +180,10 @@
 
     </div>
 
-    <div class="my-3">
-      <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary">Guardar cambios</button>
+    <div class="row my-3 mb-1">
+      <div class="col ml-1">
+      <button @click="actualizaHistorialAcademico" class="mx-2 btn btn-primary ">Guardar cambios</button>
+      </div>
     </div>
 
     <documento-requerido 
@@ -194,7 +196,7 @@
       @enviaDocumento = "cargaDocumento" >
     </documento-requerido>
     </div>
-      <hr class="my-4 d-block" :style="ColorStrip">
+       <hr class="d-block" :style="ColorStrip">
     </details>
   
 </template>
@@ -282,6 +284,27 @@ export default {
   },
 
   computed: {
+
+    // ColorStrip: {
+    //   get: function (){
+
+    //     var color = "#FFFFFF";
+
+    //     switch(this.academic_program.alias)
+    //     {
+    //       case 'maestria': color = "#0598BC"; break;
+    //       case 'doctorado': color = "#FECC50"; break;
+    //       case 'enrem': color = "#FF384D"; break;
+    //       case 'imarec': color = "#118943"; break;
+    //     }
+
+    //     return {
+    //       backgroundColor: color,
+    //       height: '1px'
+    //     };
+    //   }
+    // },
+
     Universidades: {
       get: function () {
         return this.universidades;
@@ -462,6 +485,8 @@ export default {
         id: this.id,
         archive_id: this.archive_id
       }).then(response =>{
+          //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
           Swal.fire({
               title: "Éxito al eliminar registro",
               text: response.data.message, // Imprime el mensaje del controlador

@@ -101,9 +101,13 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
         Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
 
         # Experiencia laboral.
+        Route::post('/addWorkingExperience', [ArchiveController::class, 'addWorkingExperience']);
+        Route::post('/deleteWorkingExperience', [ArchiveController::class, 'deleteWorkingExperience']);
         Route::post('/updateWorkingExperience', [ArchiveController::class, 'updateWorkingExperience']);
 
         # Lenguas extranjeras del postulante.
+        Route::post('/addAppliantLanguage', [ArchiveController::class, 'addAppliantLanguage']);
+        Route::post('/deleteAppliantLanguage', [ArchiveController::class, 'deleteAppliantLanguage']);
         Route::post('/updateAppliantLanguage', [ArchiveController::class, 'updateAppliantLanguage']);
         Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
 

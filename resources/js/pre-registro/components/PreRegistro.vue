@@ -287,7 +287,7 @@ export default {
             //window.location.href = this.url + "/controlescolar/home";
           }else{
             Swal.fire({
-              title: "Registro exitoso",
+              title: "El usuario ya ha sido registrado",
               text: response.data,
               icon: "success",
               showCancelButton: false,

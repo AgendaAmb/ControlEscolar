@@ -7,7 +7,7 @@
         :archive_id="archive_id"
         :documentos.sync="personal_documents">
       </postulante>
-      <hr class="d-block" :style="ColorStrip">
+       <hr class="d-block" :style="ColorStrip">
     </div>
   
     <div class="col-12">
@@ -35,9 +35,11 @@
         :degree_type.sync="grado.degree_type"
         :required_documents.sync="grado.required_documents"
         :paises="Countries"
-        @gradoAcademicoAgregado="gradoAcademicoAgregado"> 
+        @delete-item="eliminaHistorialAcademicoFromList"
+        > 
       </grado-academico>
-      <button  @click="agregaHistorialAcademico" class="btn btn btn-outline-primary mt-4 pl-2" style="height:45px;">Agregar Registro</button>
+        <button  @click="agregaHistorialAcademico" class="btn btn-success mt-4 pl-2" style="height:45px;">Agregar Escolaridad</button>
+       
 
     </details>
       <hr class="my-4 d-block" :style="ColorStrip">
@@ -60,9 +62,10 @@
         <summary>
       <h2 class="my-4 d-block"><strong> Dominio de idiomas </strong></h2>
       </summary>
-      <lengua-extranjera v-for="language in appliant_languages"
+      <lengua-extranjera v-for="(language,index) in appliant_languages"
         v-bind="language"
         v-bind:key="language.id"
+        :index="index+1"
         :state.sync="language.state"
         :language.sync="language.language"
         :institution.sync="language.institution"
@@ -74,8 +77,10 @@
         :conversational_level.sync="language.conversational_level"
         :reading_level.sync="language.reading_level"
         :writing_level.sync="language.writing_level"
-        :documentos.sync="language.required_documents">
+        :documentos.sync="language.required_documents"
+        @delete-item="eliminaLenguaExtranjeraFromList">
       </lengua-extranjera>
+      <button  @click="agregaLenguaExtranjera" class="btn btn-success mt-4 pl-2" style="height:45px;">Agregar Idioma</button>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
@@ -86,9 +91,10 @@
           <h2 class="my-4 d-block"><strong> Experiencia laboral (Opcional) </strong></h2>
         </summary>
       
-      <experiencia-laboral v-for="experience in appliant_working_experiences"
+      <experiencia-laboral v-for="(experience,index) in appliant_working_experiences"
         v-bind="experience"
         v-bind:key="experience.id"
+        :index="index+1"
         :state.sync="experience.state"
         :institution.sync="experience.institution"
         :working_position.sync="experience.working_position"
@@ -97,8 +103,10 @@
         :knowledge_area.sync="experience.knowledge_area"
         :field.sync="experience.field"
         :working_position_description.sync="experience.working_position_description"
-        :achievements.sync="experience.achievements">
+        :achievements.sync="experience.achievements"
+        @delete-item="eliminaExperienciaLaboralFromList">
       </experiencia-laboral>
+      <button  @click="agregaExperienciaLaboral" class="btn btn-success mt-4 pl-2" style="height:45px;">Agregar Experiencia Laboral</button>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip">
     </div>
@@ -207,7 +215,6 @@ export default {
     
     // Producciones científicas del postulante.
     scientific_productions: Array,
-    
 
     // Capitales humanos del postulante.
     human_capitals: Array,
@@ -272,6 +279,93 @@ export default {
 
   methods: { 
 
+    // ColorStrip(){
+    //     var color = "#FFFFFF";
+
+    //     switch(this.academic_program.alias)
+    //     {
+    //       case 'maestria': color = "#0598BC"; break;
+    //       case 'doctorado': color = "#FECC50"; break;
+    //       case 'enrem': color = "#FF384D"; break;
+    //       case 'imarec': color = "#118943"; break;
+    //     }
+
+    //     return {
+    //       backgroundColor: color,
+    //       height: '1px'
+    //     };
+    // },
+
+    /*
+       ESTADOS PARA : EXPERIENCIA LABORAL
+    */ 
+  
+    agregaExperienciaLaboral(){
+      axios.post('/controlescolar/solicitud/addWorkingExperience',{
+         archive_id:this.archive_id,
+         state: 'Incompleto'
+         }
+       ).then(response =>{
+         Swal.fire({
+              title: "Éxito al agregar nueva experiencia laboral!",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+
+            //Add new model create to the current list
+            this.appliant_working_experiences.push(response.data.model);
+       }).catch(error =>{
+
+         console.log(error.data.message);
+          Swal.fire({
+              title: ":( Error al agregar nueva experiencia laboral",
+              showCancelButton: false,
+              icon: "error",
+            });
+       });
+    },
+    
+    //Escucha al hijo para eliminar de la lista actual
+    eliminaExperienciaLaboralFromList(index){
+        appliant_working_experiences.splice(index,1);
+    },
+    eliminaLenguaExtranjeraFromList(index){
+        appliant_languages.splice(index,1);
+    },
+    eliminaHistorialAcademicoFromList(index){
+        academic_degrees.splice(index,1);
+    },
+    
+    agregaLenguaExtranjera() {
+       axios.post('/controlescolar/solicitud/addAppliantLanguage',{
+         archive_id:this.archive_id,
+         state: 'Incompleto'
+       }
+       ).then(response =>{
+         Swal.fire({
+              title: "Éxito al agregar nuevo idioma!",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+            // lenguaAgregado(appliant_languages[appliant_languages.length-1])
+       }).catch(error =>{
+
+         console.log(error.data.message);
+          Swal.fire({
+              title: ":( Error al agregar nuevo Idioma",
+              showCancelButton: false,
+              icon: "error",
+            });
+       });
+    },
+
+
     agregaHistorialAcademico(){
        axios.post('/controlescolar/solicitud/addAcademicDegree',{
          archive_id:this.archive_id,
@@ -279,24 +373,25 @@ export default {
        }
        ).then(response =>{
          Swal.fire({
-              title: "Éxito al crear nuevo registro",
+              title: "Éxito al agregar nuevo Grado Academico!",
               text: response.data.message, // Imprime el mensaje del controlador
               icon: "success",
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continuar",
             });
-            gradoAcademicoAgregado(academic_degrees[academic_degrees.length-1])
+            // gradoAcademicoAgregado(academic_degrees[academic_degrees.length-1])
        }).catch(error =>{
 
          console.log(error.data.message);
           Swal.fire({
-              title: "Error al agregar nuevo registro",
+              title: ":( Error al agregar nuevo Grado Academico",
               showCancelButton: false,
               icon: "error",
             });
        });
     },
+    
 
     gradoAcademicoAgregado(grado){
       var url = '/controlescolar/solicitud/' + archive.id + '/latestAcademicDegree';

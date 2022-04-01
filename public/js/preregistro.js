@@ -1356,7 +1356,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           //window.location.href = this.url + "/controlescolar/home";
         } else {
           Swal.fire({
-            title: "Registro exitoso",
+            title: "El usuario ya ha sido registrado",
             text: response.data,
             icon: "success",
             showCancelButton: false,
