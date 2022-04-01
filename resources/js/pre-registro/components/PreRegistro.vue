@@ -36,6 +36,7 @@
               :email_alterno.sync="email_alterno"
               :password.sync="password"
               :rpassword.sync="rpassword"
+              :hasAlternEmail.sync="hasAlternEmail"
               @uaslpUserUpdated="uaslpUserUpdated"
               @miPortalUserUpdated="miPortalUserUpdated"
             >
@@ -130,6 +131,7 @@ export default {
       ethnicity: null,
       is_disabled: false,
       disability: null,
+      hasAlternEmail: false,
     };
   },
 
@@ -180,6 +182,7 @@ export default {
         }
       }
       // console.log(this.mystates);
+      this.hasData();
     },
 
     miPortalUserUpdated(user) {
@@ -213,6 +216,14 @@ export default {
         if (this.countries[i].name == this.birth_country) {
             this.mystates  = this.countries[i].states;
         }
+      }
+
+      this.hasData();
+    },
+
+    hasData(){
+      if(this.altern_email!=null){
+        this.hasAlternEmail = true;
       }
     },
 

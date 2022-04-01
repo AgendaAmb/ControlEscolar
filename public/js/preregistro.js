@@ -115,6 +115,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -141,7 +148,9 @@ __webpack_require__.r(__webpack_exports__);
     // Confirmación de la contraseña.
     rpassword: String,
     // Errores.
-    errores: Object
+    errores: Object,
+    //Tienen o no altern email
+    hasAlternEmail: Boolean
   },
   data: function data() {
     return {
@@ -1173,6 +1182,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1219,7 +1229,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       phone_number: null,
       ethnicity: null,
       is_disabled: false,
-      disability: null
+      disability: null,
+      hasAlternEmail: false
     };
   },
   computed: {
@@ -1260,6 +1271,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
         }
       } // console.log(this.mystates);
 
+
+      this.hasData();
     },
     miPortalUserUpdated: function miPortalUserUpdated(user) {
       //clave facultad
@@ -1288,6 +1301,13 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
         if (this.countries[i].name == this.birth_country) {
           this.mystates = this.countries[i].states;
         }
+      }
+
+      this.hasData();
+    },
+    hasData: function hasData() {
+      if (this.altern_email != null) {
+        this.hasAlternEmail = true;
       }
     },
     registraUsuario: function registraUsuario() {
@@ -5909,40 +5929,69 @@ var render = function () {
           : _vm._e(),
       ]),
       _vm._v(" "),
-      _c("div", { class: _vm.EmailClass }, [
-        _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.EmailAlterno,
-              expression: "EmailAlterno",
-            },
-          ],
-          class: _vm.inputClassFor("email_alterno"),
-          attrs: {
-            type: "email",
-            readonly: _vm.TipoUsuario === "Comunidad AA",
-          },
-          domProps: { value: _vm.EmailAlterno },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.EmailAlterno = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        "email_alterno" in _vm.errores
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
-            ])
-          : _vm._e(),
-      ]),
+      _vm.hasAlternEmail != false && _vm.TipoUsuario === "Comunidad AA"
+        ? _c("div", { class: _vm.EmailClass }, [
+            _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.EmailAlterno,
+                  expression: "EmailAlterno",
+                },
+              ],
+              class: _vm.inputClassFor("email_alterno"),
+              attrs: { type: "email", readonly: true },
+              domProps: { value: _vm.EmailAlterno },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.EmailAlterno = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            "email_alterno" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
+                ])
+              : _vm._e(),
+          ])
+        : _c("div", { class: _vm.EmailClass }, [
+            _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.EmailAlterno,
+                  expression: "EmailAlterno",
+                },
+              ],
+              class: _vm.inputClassFor("email_alterno"),
+              attrs: { type: "email" },
+              domProps: { value: _vm.EmailAlterno },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.EmailAlterno = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            "email_alterno" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
+                ])
+              : _vm._e(),
+          ]),
       _vm._v(" "),
       _c("div", { class: _vm.PasswordClass }, [
         _c("label", [_vm._v(" Contraseña")]),
@@ -7307,6 +7356,7 @@ var render = function () {
                       email_alterno: _vm.email_alterno,
                       password: _vm.password,
                       rpassword: _vm.rpassword,
+                      hasAlternEmail: _vm.hasAlternEmail,
                     },
                     on: {
                       "update:tipo_usuario": function ($event) {
@@ -7332,6 +7382,12 @@ var render = function () {
                       },
                       "update:rpassword": function ($event) {
                         _vm.rpassword = $event
+                      },
+                      "update:hasAlternEmail": function ($event) {
+                        _vm.hasAlternEmail = $event
+                      },
+                      "update:has-altern-email": function ($event) {
+                        _vm.hasAlternEmail = $event
                       },
                       uaslpUserUpdated: _vm.uaslpUserUpdated,
                       miPortalUserUpdated: _vm.miPortalUserUpdated,

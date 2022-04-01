@@ -48,9 +48,16 @@
       <div v-if="'email' in errores" class="invalid-feedback"> {{ errores.email}} </div>
     </div>
 
-    <div :class="EmailClass">
+    <!-- Se podra cambiar el correo alterno si no se tiene nada -->
+    <div v-if='hasAlternEmail!=false  && TipoUsuario === "Comunidad AA"' :class="EmailClass">
       <label> Ingresa un correo de contacto alterno </label>
-      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno" :readonly="TipoUsuario === 'Comunidad AA'">
+      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno" :readonly=true>
+      <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
+    </div>
+
+    <div v-else :class="EmailClass">
+      <label> Ingresa un correo de contacto alterno </label>
+      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno">
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
@@ -95,6 +102,8 @@ export default {
     rpassword: String,
     // Errores.
     errores: Object,
+    //Tienen o no altern email
+    hasAlternEmail: Boolean,
   },
 
   data() {
