@@ -2,7 +2,7 @@
   <details class="mt-1">
     <summary class="d-flex justify-content-end">
       <div class="col-9 justify-content-start">
-        <h5 v-if="Type!='Escoge una opción'" class="align-middle mb-5 d-block font-weight-bold">
+        <h5 v-if="Type!=null" class="align-middle mb-5 d-block font-weight-bold">
           {{Type + ' ' + index}} 
         </h5>
 

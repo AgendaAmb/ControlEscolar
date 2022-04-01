@@ -13,11 +13,11 @@
             {{-- Funciona en produccion --}}
             {{-- @if (Auth::user()->hasRole('aspirante_extranjero') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_local'))  --}}
             {{-- funciona para pruebas --}}
-            @if (!Auth::user()->hasRole('admin') || !Auth::user()->hasRole('control_escolar')) 
+            @if (Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) 
                 <a class="nav-link" href="{{ route('solicitud.ExpedientePostulante',['user_id' => auth()->user()->id] ) }}">Mi expediente</a>
             @endif
 
-            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar'))
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') )
 
                 {{-- Expedientes de todos los alumnos --}}
                 <div class="nav-item dropdown">
@@ -38,7 +38,11 @@
                         <a class="dropdown-item" href="{{ route('entrevistas.programa') }}">Programa de entrevistas</a>
                     </div>
                 </div>
+            @endif
+            
 
+            {{-- Control por el administrador --}}
+            @if (Auth::user()->hasRole('admin'))
                 {{-- Otras opciones proximamente .... --}}
                 <a class="nav-link" href="#"> Inscripciones </a>
                 <a class="nav-link" href="{{ route('admin.index') }}"> Administración </a>
