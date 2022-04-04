@@ -9670,7 +9670,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n           Ingresa a continuación dos correos validos de profesores que puedan\n      otorgarte una carta de recomendación."
+          "\n           Ingresa a continuación dos correos validos de alguien que pueda\n      otorgarte una carta de recomendación."
         ),
         _c("br"),
       ]),
@@ -13527,20 +13527,7 @@ var render = function () {
                 [_vm._v("\n        Enviar correo\n      ")]
               ),
             ])
-          : _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  on: {
-                    click: function ($event) {
-                      return _vm.verCartaRecomendacion()
-                    },
-                  },
-                },
-                [_vm._v("\n        Ver archivo\n      ")]
-              ),
-            ]),
+          : _c("div"),
       ],
       2
     ),

@@ -38,11 +38,11 @@
     <div class="col-12"></div>
 
     <!-- El usuario no es miembro de ninguno de los 2. -->
-    <div v-if="TipoUsuario === 'Ninguno'" class="form-group col-12">
+    <!-- <div v-if="TipoUsuario === 'Ninguno'" class="form-group col-12">
       <h5 class="modal-title mt-3" >Crear cuenta </h5>
-    </div>
+    </div> -->
 
-    <div :class="EmailClass">
+    <div v-if="TipoUsuario != 'Ninguno'" :class="EmailClass">
       <label> Ingresa un correo electrónico </label>
       <input type="email" :class="inputClassFor('email')" v-model="Email" :readonly="ClaveUaslp !== null">
       <div v-if="'email' in errores" class="invalid-feedback"> {{ errores.email}} </div>
@@ -55,22 +55,32 @@
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
-    <div v-else :class="EmailClass">
+    <div v-else-if ="TipoUsuario != 'Ninguno'" :class="EmailClass">
       <label> Ingresa un correo de contacto alterno </label>
       <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno">
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
-    <div :class="PasswordClass">
+    <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
       <label> Contraseña</label>
       <input type="password" :class="inputClassFor('password')" v-model="Password">
       <div v-if="'password' in errores" class="invalid-feedback"> {{ errores.password}} </div>
     </div>
 
-    <div :class="PasswordClass">
+    <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
       <label> Repite tu Contraseña </label>
       <input type="password" :class="inputClassFor('rpassword')" v-model="RPassword">
       <div v-if="'rpassword' in errores" class="invalid-feedback"> {{ errores.rpassword}} </div>
+    </div>
+
+    <div v-if="TipoUsuario == 'Ninguno'" class="col-12">
+      <h3>¡Crea tu cuenta en el portal!</h3>
+      <p>Para poder inscribirte a cualquier programa academico es necesario crear una cuenta en el Portal de Agenda ambiental. <br> </p>
+      <p class="mt-2">  Puedes crear tu cuenta dando </p>
+    </div>
+
+    <div v-if="TipoUsuario == 'Ninguno'" class="col-12 d-flex flex-column my-auto align-items-center">
+      <a href="https://ambiental.uaslp.mx/login?Nuevo=1" target="_blank" class="btn btn-light">click aqui</a> 
     </div>
   </div>
 </template>

@@ -122,6 +122,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1183,6 +1193,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1377,7 +1389,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
         } else {
           Swal.fire({
             title: "El usuario ya ha sido registrado",
-            text: response.data,
+            text: response.data.message,
             icon: "success",
             showCancelButton: false,
             confirmButtonColor: "#3085d6",
@@ -1391,17 +1403,15 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           });
         }
       })["catch"](function (error) {
-        //alert(error.response.data);
-        if (error.response.status == 502) {
-          //alert(error.response.data);
-          Swal.fire({
-            title: "Error al crear usuario",
-            icon: "error"
-          });
-        }
+        console.log(response.data); //alert(error.response.data);
 
-        console.log(error.response.data);
-        console.log(error.response.data.message);
+        Swal.fire({
+          title: "Error al crear usuario",
+          text: response.data,
+          icon: "error",
+          confirmButtonColor: "#cfbaf0",
+          confirmButtonText: "Ok, volver a formulario"
+        });
       });
     }
   },
@@ -5889,45 +5899,39 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "col-12" }),
       _vm._v(" "),
-      _vm.TipoUsuario === "Ninguno"
-        ? _c("div", { staticClass: "form-group col-12" }, [
-            _c("h5", { staticClass: "modal-title mt-3" }, [
-              _vm._v("Crear cuenta "),
-            ]),
+      _vm.TipoUsuario != "Ninguno"
+        ? _c("div", { class: _vm.EmailClass }, [
+            _c("label", [_vm._v(" Ingresa un correo electrónico ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Email,
+                  expression: "Email",
+                },
+              ],
+              class: _vm.inputClassFor("email"),
+              attrs: { type: "email", readonly: _vm.ClaveUaslp !== null },
+              domProps: { value: _vm.Email },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Email = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            "email" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.email) + " "),
+                ])
+              : _vm._e(),
           ])
         : _vm._e(),
-      _vm._v(" "),
-      _c("div", { class: _vm.EmailClass }, [
-        _c("label", [_vm._v(" Ingresa un correo electrónico ")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Email,
-              expression: "Email",
-            },
-          ],
-          class: _vm.inputClassFor("email"),
-          attrs: { type: "email", readonly: _vm.ClaveUaslp !== null },
-          domProps: { value: _vm.Email },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Email = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        "email" in _vm.errores
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(" " + _vm._s(_vm.errores.email) + " "),
-            ])
-          : _vm._e(),
-      ]),
       _vm._v(" "),
       _vm.hasAlternEmail != false && _vm.TipoUsuario === "Comunidad AA"
         ? _c("div", { class: _vm.EmailClass }, [
@@ -5961,7 +5965,8 @@ var render = function () {
                 ])
               : _vm._e(),
           ])
-        : _c("div", { class: _vm.EmailClass }, [
+        : _vm.TipoUsuario != "Ninguno"
+        ? _c("div", { class: _vm.EmailClass }, [
             _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
             _vm._v(" "),
             _c("input", {
@@ -5991,76 +5996,128 @@ var render = function () {
                   _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
                 ])
               : _vm._e(),
-          ]),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { class: _vm.PasswordClass }, [
-        _c("label", [_vm._v(" Contraseña")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Password,
-              expression: "Password",
-            },
-          ],
-          class: _vm.inputClassFor("password"),
-          attrs: { type: "password" },
-          domProps: { value: _vm.Password },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Password = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        "password" in _vm.errores
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(" " + _vm._s(_vm.errores.password) + " "),
-            ])
-          : _vm._e(),
-      ]),
+      _vm.TipoUsuario != "Ninguno"
+        ? _c("div", { class: _vm.PasswordClass }, [
+            _c("label", [_vm._v(" Contraseña")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Password,
+                  expression: "Password",
+                },
+              ],
+              class: _vm.inputClassFor("password"),
+              attrs: { type: "password" },
+              domProps: { value: _vm.Password },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.Password = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            "password" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.password) + " "),
+                ])
+              : _vm._e(),
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("div", { class: _vm.PasswordClass }, [
-        _c("label", [_vm._v(" Repite tu Contraseña ")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
+      _vm.TipoUsuario != "Ninguno"
+        ? _c("div", { class: _vm.PasswordClass }, [
+            _c("label", [_vm._v(" Repite tu Contraseña ")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.RPassword,
+                  expression: "RPassword",
+                },
+              ],
+              class: _vm.inputClassFor("rpassword"),
+              attrs: { type: "password" },
+              domProps: { value: _vm.RPassword },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.RPassword = $event.target.value
+                },
+              },
+            }),
+            _vm._v(" "),
+            "rpassword" in _vm.errores
+              ? _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(" " + _vm._s(_vm.errores.rpassword) + " "),
+                ])
+              : _vm._e(),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.TipoUsuario == "Ninguno"
+        ? _c("div", { staticClass: "col-12" }, [
+            _c("h3", [_vm._v("¡Crea tu cuenta en el portal!")]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", { staticClass: "mt-2" }, [
+              _vm._v("  Puedes crear tu cuenta dando "),
+            ]),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.TipoUsuario == "Ninguno"
+        ? _c(
+            "div",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.RPassword,
-              expression: "RPassword",
+              staticClass:
+                "col-12 d-flex flex-column my-auto align-items-center",
             },
-          ],
-          class: _vm.inputClassFor("rpassword"),
-          attrs: { type: "password" },
-          domProps: { value: _vm.RPassword },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.RPassword = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        "rpassword" in _vm.errores
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v(" " + _vm._s(_vm.errores.rpassword) + " "),
-            ])
-          : _vm._e(),
-      ]),
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-light",
+                  attrs: {
+                    href: "https://ambiental.uaslp.mx/login?Nuevo=1",
+                    target: "_blank",
+                  },
+                },
+                [_vm._v("click aqui")]
+              ),
+            ]
+          )
+        : _vm._e(),
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v(
+        "Para poder inscribirte a cualquier programa academico es necesario crear una cuenta en el Portal de Agenda ambiental. "
+      ),
+      _c("br"),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -7313,7 +7370,13 @@ var render = function () {
               _c(
                 "button",
                 {
-                  staticClass: "close",
+                  staticClass: "btn-close",
+                  staticStyle: {
+                    "border-radius": "10px",
+                    border: "none",
+                    color: "black",
+                    "background-color": "#8b96a8",
+                  },
                   attrs: {
                     type: "button",
                     "data-dismiss": "modal",
@@ -7326,9 +7389,14 @@ var render = function () {
                   },
                 },
                 [
-                  _c("span", { attrs: { "aria-hidden": "true" } }, [
-                    _vm._v("X"),
-                  ]),
+                  _c(
+                    "span",
+                    {
+                      staticStyle: { color: "white", "font-size": "25px" },
+                      attrs: { "aria-hidden": "true" },
+                    },
+                    [_vm._v("X")]
+                  ),
                 ]
               ),
             ]),
@@ -7394,7 +7462,7 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
-                  _vm.tipo_usuario !== null && this.name !== "Ninguno"
+                  _vm.tipo_usuario !== null && _vm.Readonly
                     ? _c(
                         "div",
                         [

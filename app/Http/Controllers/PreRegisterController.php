@@ -184,8 +184,12 @@ class PreRegisterController extends Controller
         }
 
         #No se pudo crear usuario en portal
-        if(!$response_data['message'] || $response_data['message']!='¡Usuario Creado! y/o modulo actualizado'){
-            return new JsonResponse(['message' => 'Error al crear usuario en Portal Agenda Ambiental'], JsonResponse::HTTP_CREATED);
+        if($response_data['message']){
+            if($response_data['message']!='¡Usuario Creado! y/o modulo actualizado'){
+                return new JsonResponse(['message' => $response_data['message']], 500);
+            }
+        }else{
+            return new JsonResponse(['message' => 'Error al crear usuario en Portal'], 500);
         }
 
          # ------------------------- Creacion de usuario en control escolar

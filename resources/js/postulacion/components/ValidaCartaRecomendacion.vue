@@ -33,12 +33,12 @@
       </div>
 
       <div v-else>
-        <button
+        <!-- <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
-        </button>
+        </button> -->
       </div>
 
     </div>

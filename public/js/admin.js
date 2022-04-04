@@ -49468,6 +49468,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'usuarios-ce',
@@ -50196,10 +50204,14 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "row align-items-center" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-12 my-5" },
+      { staticClass: "col-12 mt-5" },
       [
         _c(
           "ejs-grid",
@@ -50220,7 +50232,7 @@ var render = function () {
                     field: "id",
                     headerText: "RPE",
                     textAlign: "Center",
-                    width: "20%",
+                    width: "10%",
                   },
                 }),
                 _vm._v(" "),
@@ -50229,7 +50241,7 @@ var render = function () {
                     field: "roles",
                     headerText: "Roles",
                     textAlign: "Center",
-                    width: "20%",
+                    width: "15%",
                   },
                 }),
                 _vm._v(" "),
@@ -50238,7 +50250,7 @@ var render = function () {
                     field: "academic_areas",
                     headerText: "Áreas académicas",
                     textAlign: "Center",
-                    width: "20%",
+                    width: "15%",
                   },
                 }),
                 _vm._v(" "),
@@ -50247,7 +50259,7 @@ var render = function () {
                     field: "academic_entities",
                     headerText: "Entidades académicas",
                     textAlign: "Center",
-                    width: "20%",
+                    width: "30%",
                   },
                 }),
                 _vm._v(" "),
@@ -50256,7 +50268,7 @@ var render = function () {
                     field: "academic_entities",
                     headerText: "Acciones",
                     textAlign: "Center",
-                    width: "20%",
+                    width: "30%",
                   },
                 }),
               ],
@@ -50265,21 +50277,46 @@ var render = function () {
           ],
           1
         ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "mt-5 d-block btn btn-primary",
-            attrs: { "data-toggle": "modal", "data-target": "#NuevoUsuario" },
-          },
-          [_vm._v(" Agregar usuario. ")]
-        ),
       ],
       1
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-6 d-flex flex-column my-auto  align-items-center" },
+      [
+        _c("h3", { staticClass: "ml-2" }, [
+          _vm._v("Administración de usuarios"),
+        ]),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-6 d-flex flex-column my-auto align-items-center" },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success w-50",
+            attrs: { "data-toggle": "modal", "data-target": "#NuevoUsuario" },
+          },
+          [_vm._v(" Agregar usuario. ")]
+        ),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 

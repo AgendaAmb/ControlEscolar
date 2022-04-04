@@ -14,14 +14,16 @@
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Registro</h2>
           <button
+            style="border-radius: 10px; border:none; color:black; background-color:#8b96a8;"
             type="button"
             @click="AcademicProgram = null"
-            class="close"
+            class="btn-close"
             data-dismiss="modal"
             aria-label="Close"
           >
-            <span aria-hidden="true">X</span>
+            <span aria-hidden="true" style="color:white; font-size: 25px" >X</span>
           </button>
+
         </div>
         <div class="modal-body">
           <form v-on:submit.prevent="registraUsuario">
@@ -42,7 +44,7 @@
             >
             </crear-cuenta>
 
-            <div v-if="tipo_usuario !== null && this.name !== 'Ninguno'">
+            <div v-if="tipo_usuario !== null && Readonly">
               <!-- Datos generals -->
               <datos-personales
                 :errores="errores"
@@ -153,6 +155,9 @@ export default {
         this.$emit("update:academic_program", newValue);
       },
     },
+
+    
+
   },
 
   methods: {
@@ -299,7 +304,7 @@ export default {
           }else{
             Swal.fire({
               title: "El usuario ya ha sido registrado",
-              text: response.data,
+              text: response.data.message,
               icon: "success",
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
@@ -315,16 +320,16 @@ export default {
           }
         })
         .catch((error) => {
-          //alert(error.response.data);
-          if (error.response.status == 502) {
+          console.log(response.data);
             //alert(error.response.data);
             Swal.fire({
               title: "Error al crear usuario",
+              text: response.data,
               icon: "error",
+              confirmButtonColor: "#cfbaf0",
+              confirmButtonText: "Ok, volver a formulario",
+
             });
-          }
-          console.log(error.response.data);
-          console.log(error.response.data.message);
         });
     },
   },
