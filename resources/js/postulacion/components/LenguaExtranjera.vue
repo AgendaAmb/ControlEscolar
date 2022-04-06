@@ -1,5 +1,5 @@
-<template>
-  <details>
+<template >
+  <details class="mb-2">
     <summary  class="d-flex justify-content-end">
         <div class="col-9 justify-content-start">
           <h4 class=" align-middle mb-5 d-block font-weight-bold"> Idioma {{index}} </h4>
@@ -191,7 +191,7 @@
     </documento-requerido>
       <hr class="my-4 d-block" :style="ColorStrip">
   </div>
-  
+   <hr class="d-block mb-1" :style="ColorStrip">
   </details>
 </template>
 
@@ -426,14 +426,12 @@ export default {
         });
 
       }).catch(error => {
-        
-        // La solicitud no fue procesada correctamente.
-        this.State = 'Incompleto';
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
+        Swal.fire({
+              title: "Error al actualizar datos",
+              text: error.response.data['message'],
+              showCancelButton: false,
+              icon: "error",
+            });
       });
     },
     

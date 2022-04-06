@@ -132,6 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1109,7 +1110,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/pre-registro/components/DatosPersonales.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
-//
 //
 //
 //
@@ -6072,10 +6072,6 @@ var render = function () {
             _c("h3", [_vm._v("¡Crea tu cuenta en el portal!")]),
             _vm._v(" "),
             _vm._m(0),
-            _vm._v(" "),
-            _c("p", { staticClass: "mt-2" }, [
-              _vm._v("  Puedes crear tu cuenta dando "),
-            ]),
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -6087,6 +6083,10 @@ var render = function () {
                 "col-12 d-flex flex-column my-auto align-items-center",
             },
             [
+              _c("p", { staticClass: "mt-2" }, [
+                _vm._v("  Puedes crear tu cuenta dando "),
+              ]),
+              _vm._v(" "),
               _c(
                 "a",
                 {
@@ -6096,7 +6096,7 @@ var render = function () {
                     target: "_blank",
                   },
                 },
-                [_vm._v("click aqui")]
+                [_vm._v("clic aquí")]
               ),
             ]
           )
@@ -6112,7 +6112,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", [
       _vm._v(
-        "Para poder inscribirte a cualquier programa academico es necesario crear una cuenta en el Portal de Agenda ambiental. "
+        "Para poder inscribirte a cualquier programa académico es necesario crear una cuenta en el Portal de Agenda Ambiental. "
       ),
       _c("br"),
     ])

@@ -33,6 +33,7 @@
           :country.sync="grado.country"
           :university.sync="grado.university"
           :degree_type.sync="grado.degree_type"
+          :titration_date.sync="grado.titration_date"
           :required_documents.sync="grado.required_documents"
           :paises="Countries"
           @delete-item="eliminaHistorialAcademicoFromList"
@@ -57,6 +58,8 @@
           :archive_id="archive_id"
           :motivation.sync="motivation"
           :documentos.sync="entrance_documents"
+          :user_id = "appliant.id"
+          :viewer_id = "viewer.id"
         >
         </requisitos-ingreso>
       </details>
@@ -156,21 +159,38 @@
           :article_name.sync="production.article_name"
           :institution.sync="production.institution"
           :post_title.sync="production.post_title"
+          @delete-item="eliminaProduccionCientificaFromList"
         >
         </produccion-cientifica>
+        <button
+          @click="agregaProduccionCientifica"
+          class="btn btn-success mt-4 mb-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Producción Científica
+        </button>
         <!-- Capital humano subseccion -->
         <h5 class="mt-4 d-block">
           <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
         </h5>
         <capital-humano
-          v-for="humanCapital in human_capitals"
+          v-for="(humanCapital,index) in human_capitals"
           v-bind="humanCapital"
           v-bind:key="humanCapital.id"
+          :index="index"
           :course_name.sync="humanCapital.course_name"
           :assisted_at.sync="humanCapital.assisted_at"
           :scolarship_level.sync="humanCapital.scolarship_level"
+          @delete-item="eliminaCapitalHumanoFromList"
         >
         </capital-humano>
+         <button
+          @click="agregaCapitalHumano"
+          class="btn btn-success mt-4 mb-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Capital Humano
+        </button>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -255,6 +275,9 @@ export default {
 
     // Postulante de la solicitud.
     appliant: Object,
+
+    //Persona que esta viendo el expediente
+    viewer: Object,
   },
 
   computed: {
@@ -331,6 +354,7 @@ export default {
     /*
        ESTADOS PARA : EXPERIENCIA LABORAL
     */
+   
 
     agregaExperienciaLaboral() {
       axios
@@ -363,14 +387,9 @@ export default {
 
     //Escucha al hijo para eliminar de la lista actual
     eliminaExperienciaLaboralFromList(index) {
-      appliant_working_experiences.splice(index, 1);
+      this.appliant_working_experiences.splice(index, 1);
     },
-    eliminaLenguaExtranjeraFromList(index) {
-      appliant_languages.splice(index, 1);
-    },
-    eliminaHistorialAcademicoFromList(index) {
-      academic_degrees.splice(index, 1);
-    },
+   
 
     agregaLenguaExtranjera() {
       axios
@@ -386,7 +405,10 @@ export default {
             showCancelButton: false,
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Continuar",
+             //Add new model create to the current list
           });
+          this.appliant_languages.push(response.data.model);
+
           // lenguaAgregado(appliant_languages[appliant_languages.length-1])
         })
         .catch((error) => {
@@ -398,6 +420,11 @@ export default {
           });
         });
     },
+
+     eliminaLenguaExtranjeraFromList(index) {
+      this.appliant_languages.splice(index, 1);
+    },
+    
 
     agregaHistorialAcademico() {
       axios
@@ -414,7 +441,7 @@ export default {
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Continuar",
           });
-          // gradoAcademicoAgregado(academic_degrees[academic_degrees.length-1])
+          this.academic_degrees.push(response.data.model);
         })
         .catch((error) => {
           console.log(error.data.message);
@@ -426,16 +453,74 @@ export default {
         });
     },
 
-    gradoAcademicoAgregado(grado) {
-      var url =
-        "/controlescolar/solicitud/" + archive.id + "/latestAcademicDegree";
+    eliminaHistorialAcademicoFromList(index) {
+      this.academic_degrees.splice(index, 1);
+    },
 
+    agregaProduccionCientifica(){
       axios
-        .get(url)
-        .then((response) => {
-          archive.academic_degrees.push(response.data);
+        .post("/controlescolar/solicitud/addScientificProduction", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
         })
-        .catch((error) => {});
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nueva producción científica!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+
+          //Add new model create to the current list
+          this.scientific_productions.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nueva producción científica",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+   },
+
+    eliminaProduccionCientificaFromList(index) {
+      this.scientific_productions.splice(index, 1);
+    },
+
+    agregaCapitalHumano(){
+      axios
+        .post("/controlescolar/solicitud/addHumanCapital", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nuevo capital humano!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+
+          //Add new model create to the current list
+          this.human_capitals.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nuevo capital humano",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+   },
+
+    eliminaCapitalHumanoFromList(index) {
+      this.human_capitals.splice(index, 1);
     },
   },
 };

@@ -112,12 +112,18 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
         Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
 
         # Producciones científicas.
+        //Modelos
+        Route::post('/addScientificProduction', [ArchiveController::class, 'addScientificProduction']);
+        Route::post('/deleteScientificProduction', [ArchiveController::class, 'deleteScientificProduction']);
         Route::post('/updateScientificProduction', [ArchiveController::class, 'updateScientificProduction']);
+        //Autores
         Route::post('/addScientificProductionAuthor', [ArchiveController::class, 'addScientificProductionAuthor']);
         Route::post('/updateScientificProductionAuthor', [ArchiveController::class, 'updateScientificProductionAuthor']);
 
         # Capital humano.
+        Route::post('/addHumanCapital', [ArchiveController::class, 'addHumanCapital']);
         Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
+        Route::post('/deleteHumanCapital', [ArchiveController::class, 'deleteHumanCapital']);
 
         # Ver y descargar tipos de archivos.
         Route::get('expediente/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');

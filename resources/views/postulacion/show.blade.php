@@ -5,10 +5,9 @@ const academicProgram = @json($academic_program);
 const recommendation_letters = @json($recommendation_letters);
 const archives_recommendation_letters = @json($archives_recommendation_letters);
 const header_academic_program = @json($header_academic_program);
-
+const viewer = @json($viewer);
 </script>
 @extends('layouts.app')
-
     
 @section('container-class', 'class=container')
 @section('main')
@@ -22,6 +21,7 @@ const header_academic_program = @json($header_academic_program);
         :motivation="archive.motivation"
         :entrance_documents="archive.entrance_documents"
         :appliant="appliant"
+        :viewer="viewer"
         :academic_program="academic_program"
         :academic_degrees="archive.academic_degrees"
         :appliant_languages="archive.appliant_languages"

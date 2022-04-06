@@ -47,7 +47,8 @@ const app = new Vue({
         appliant: appliantModel,
         academic_program: academicProgram,
         recommendation_letters: recommendation_letters,
-        archives_recommendation_letters: archives_recommendation_letters
+        archives_recommendation_letters: archives_recommendation_letters,
+        viewer:viewer
     },
 
     methods: {

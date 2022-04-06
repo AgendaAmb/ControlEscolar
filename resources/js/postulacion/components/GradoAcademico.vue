@@ -30,9 +30,13 @@
           <div v-if="estaEnError('degree_type')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
 
-        <div  v-else class="form-group col-md-6 col-lg-4">
+        <div v-else class="form-group col-md-6 col-lg-4">
            <label> Nivel de escolaridad: </label>
-          <input value="Licenciatura" type="text" class="form-control" :readonly="true">
+          <!-- Solo se podra seleccionar para doctorado -->
+          <select  v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
+            <option value="Licenciatura" selected>Licenciatura</option>
+          </select>
+          <div v-if="estaEnError('degree_type')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
       
         <div class="form-group col-md-6 col-lg-4">
@@ -42,11 +46,23 @@
           <div v-if="estaEnError('degree')" class="invalid-feedback">{{ errores.degree_type }}</div>
         </div>
 
-        <div class="d-none d-lg-block form-group col-lg-4">
+        <div v-if='alias_academic_program == "imarec"' class="d-none d-lg-block form-group col-lg-4">
           <label> Estatus: </label>
           <select v-model="Status" class="form-control" :class="objectForError('status')">
             <option value="" selected>Escoge una opción</option>
-            <option v-for="estatusEstudio in estatusEstudios" :key="estatusEstudio" :value="estatusEstudio">
+            <option v-for="estatusEstudio in estatusEstudios_otros" :key="estatusEstudio" :value="estatusEstudio">
+              {{ estatusEstudio }}
+            </option>
+          </select>
+
+          <div v-if="estaEnError('status')" class="invalid-feedback">{{ errores.status }}</div>
+        </div>
+        
+        <div v-else class="d-none d-lg-block form-group col-lg-4">
+          <label> Estatus: </label>
+          <select v-model="Status" class="form-control" :class="objectForError('status')">
+            <option value="" selected>Escoge una opción</option>
+            <option v-for="estatusEstudio in estatusEstudios_PMPCA" :key="estatusEstudio" :value="estatusEstudio">
               {{ estatusEstudio }}
             </option>
           </select>
@@ -83,17 +99,7 @@
 
           <div v-if="estaEnError('university')" class="invalid-feedback">{{ errores.university }}</div>
         </div>
-
-
-        <div class="d-block d-lg-none form-group col-md-6">
-          <label> Estatus: </label>
-          <select v-model="Status" class="form-control">
-            <option value="" selected>Escoge una opción</option>
-            <option v-for="estatusEstudio in estatusEstudios" :key="estatusEstudio" :value="estatusEstudio">
-              {{ estatusEstudio }}
-            </option>
-          </select>
-        </div>
+        
       </div>
       
       <!-- 
@@ -107,17 +113,17 @@
 
         <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
           <label> Fecha de titulación: </label>
-          <input v-model="fechaobtencion" type="date" class="form-control">
+          <input v-model="TitrationDate" type="date" class="form-control">
         </div>
 
         <div v-if="Status === 'Pasante'" class="form-group col-md-6">
           <label> Fecha de obtención de pasantía: </label>
-          <input v-model="fechaobtencion" type="date" class="form-control">
+          <input v-model="TitrationDate" type="date" class="form-control">
         </div>
 
         <div v-if="Status === 'Título o grado en proceso'" class="form-group col-md-6">
           <label> Fecha de presentación de examen: </label>
-          <input v-model="fechaobtencion" type="date" class="form-control">
+          <input v-model="TitrationDate" type="date" class="form-control">
         </div>
       </div>
       <!-- 
@@ -232,13 +238,19 @@ export default {
     degree: String,
 
     // Tipo de grado académico
-    degree_type: String,
+    degree_type:{
+      type: String,
+      default: 'Licenciatura'
+    },
 
     // Estatus académico.
     status: String,
 
     // Modo de titulación.
     titration_mode: String,
+
+    //Fecha de titulacion
+    titration_date: Date,
 
     // País en donde el estudiante realizó sus estudios.
     country: String,
@@ -279,31 +291,37 @@ export default {
       datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
-      estatusEstudios: ["Pasante","Grado obtenido","Título o grado en proceso"],
+      estatusEstudios_PMPCA: ["Grado obtenido","Título o grado en proceso"],
+      estatusEstudios_otros: ["Pasante","Grado obtenido","Título o grado en proceso"],
     };
   },
 
   computed: {
+    ColorStrip: {
+      get() {
+        var color = "#FFFFFF";
 
-    // ColorStrip: {
-    //   get: function (){
+        switch (this.alias_academic_program) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+          case "doctorado":
+            color = "#FECC50";
+            break;
+          case "enrem":
+            color = "#FF384D";
+            break;
+          case "imarec":
+            color = "#118943";
+            break;
+        }
 
-    //     var color = "#FFFFFF";
-
-    //     switch(this.academic_program.alias)
-    //     {
-    //       case 'maestria': color = "#0598BC"; break;
-    //       case 'doctorado': color = "#FECC50"; break;
-    //       case 'enrem': color = "#FF384D"; break;
-    //       case 'imarec': color = "#118943"; break;
-    //     }
-
-    //     return {
-    //       backgroundColor: color,
-    //       height: '1px'
-    //     };
-    //   }
-    // },
+        return {
+          backgroundColor: color,
+          height: "1px",
+        };
+      },
+    },
 
     Universidades: {
       get: function () {
@@ -338,6 +356,15 @@ export default {
       },
       set(newVal){
         this.$emit('update:cedula',newVal);
+      }
+    },
+    
+    TitrationDate:{
+      get(){
+        return this.titration_date;
+      },
+      set(newVal){
+        this.$emit('update:titration_date',newVal);
       }
     },
 
@@ -468,6 +495,20 @@ export default {
     },
   },
   methods: {
+
+    selectOrNotDegreeType(){
+      let res = true;
+      let answer = this.alias_academic_program.localCompare('doctorado'); //compare string
+      
+      //alias no es doctorado por lo que es una maestria
+      if(answer != 0){
+        this.degree_type = 'Licenciatura'; //Solo licenciatura
+        res = false; //retorno falso
+      }
+
+      return res;
+    },
+
     escogePais(evento) {
       this.initial_country = this.country;
 
@@ -507,15 +548,13 @@ export default {
 
     enviaHistorialAcademico(evento, state){
       this.errores = {};
-      
-      axios.post('/controlescolar/solicitud/updateAcademicDegree',  
-        {
+      axios.post('/controlescolar/solicitud/updateAcademicDegree',{
           id:this.id,
           archive_id: this.archive_id,
           degree: this.degree,
           degree_type: this.degree_type,
           cvu: this.cvu,
-          cedula: this.cedula,
+          cedula: parseInt(this.cedula),
           country: this.country,
           university: this.university,
           status: this.status,
@@ -524,7 +563,8 @@ export default {
           min_avg: this.min_avg,
           max_avg: this.max_avg,
           knowledge_card: this.knowledge_card,
-          digital_signature: this.digital_signature
+          digital_signature: this.digital_signature,
+          titration_date: this.titration_date
         }
       ).then(response => {
         
@@ -537,29 +577,15 @@ export default {
               confirmButtonText: "Continuar",
             });
 
-        Object.keys(response.data).forEach(dataKey => {
-          var event = 'update:' + dataKey;
-          this.$emit(event, response.data[dataKey]);
-          Vue.set(this.datosValidos, key, 'Campo guardado exitosamente.');
-        });
-
-        if (response.data.state === 'Completo')
-          this.$emit('gradoAcademicoAgregado', this);
-
       }).catch(error => {
+
+        console.log(error.response.data);
          Swal.fire({
               title: "Error al actualizar datos",
-              text: "Alguno o varios de de los datos es invalido, intenta nuevamente insertando todos los datos indicados",
+              text: error.response.data['message'],
               showCancelButton: false,
               icon: "error",
             });
-
-        this.State = 'Incompleto';
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
       });
     },
 

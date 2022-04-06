@@ -75,12 +75,13 @@
 
     <div v-if="TipoUsuario == 'Ninguno'" class="col-12">
       <h3>¡Crea tu cuenta en el portal!</h3>
-      <p>Para poder inscribirte a cualquier programa academico es necesario crear una cuenta en el Portal de Agenda ambiental. <br> </p>
-      <p class="mt-2">  Puedes crear tu cuenta dando </p>
+      <p>Para poder inscribirte a cualquier programa académico es necesario crear una cuenta en el Portal de Agenda Ambiental. <br> </p>
+      
     </div>
 
     <div v-if="TipoUsuario == 'Ninguno'" class="col-12 d-flex flex-column my-auto align-items-center">
-      <a href="https://ambiental.uaslp.mx/login?Nuevo=1" target="_blank" class="btn btn-light">click aqui</a> 
+      <p class="mt-2">  Puedes crear tu cuenta dando </p>
+      <a href="https://ambiental.uaslp.mx/login?Nuevo=1" target="_blank" class="btn btn-light">clic aquí</a> 
     </div>
   </div>
 </template>

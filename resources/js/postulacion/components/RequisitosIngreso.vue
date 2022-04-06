@@ -11,7 +11,8 @@
       </div>
       
       <documento-requerido v-for="documento in Documentos" :key="documento.name"
-    
+        :user_id = "user_id"
+        :viewer_id = "viewer_id"
         :archivo.sync="documento.archivo" 
         :location.sync="documento.pivot.location" 
         :errores.sync = "documento.errores"
@@ -30,7 +31,17 @@ export default {
     archive_id: Number,
     motivation: String,
     documentos: Array,
+    
+    user_id:{
+      type:Number,
+      default:-1,
+    },
 
+    viewer_id:{
+      type:Number,
+      default:-1,
+    }
+    
   },
   components: { DocumentoRequerido },
   name: "requisitos-ingreso",

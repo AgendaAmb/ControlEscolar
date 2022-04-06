@@ -161,9 +161,9 @@ class ArchiveController extends Controller
                 
                     //Eliminar mi archivo para produccion
                     //Descomentar en local
-                    if($archive->appliant->name == 'ULISES URIEL DOMINGUEZ PEREZ'){
-                        unset($archives[$k]);
-                    }
+                    // if($archive->appliant->name == 'ULISES URIEL DOMINGUEZ PEREZ'){
+                    //     unset($archives[$k]);
+                    // }
 
                 }else{
                     //No existe aplicante por lo que no se podra ver expediente
@@ -237,7 +237,8 @@ class ArchiveController extends Controller
             ->with('academic_program', $academic_program)
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
-            ->with('header_academic_program', $header_academic_program);
+            ->with('header_academic_program', $header_academic_program)
+            ->with('viewer', $request->session()->get('user'));
     }
     
     /** 
@@ -254,6 +255,7 @@ class ArchiveController extends Controller
         $user_data = $user_data_collect[0];
 
         #Add data of user from portal to the collection in controlescolar
+        $appliant->setAttribute('birth_date',$user_data['birth_date']);
         $appliant->setAttribute('curp',$user_data['curp']);
         $appliant->setAttribute('name',$user_data['name']);
         $appliant->setAttribute('middlename',$user_data['middlename']);
@@ -285,6 +287,7 @@ class ArchiveController extends Controller
         $user_data = $request->session()->get('user_data');
         
         //Add data portal to local collection USER
+        $appliant->setAttribute('birth_date',$user_data['birth_date']);
         $appliant->setAttribute('curp',$user_data['curp']);
         $appliant->setAttribute('name',$user_data['name']);
         $appliant->setAttribute('middlename',$user_data['middlename']);
@@ -362,7 +365,7 @@ class ArchiveController extends Controller
         }
 
         $header_academic_program = asset('storage/headers/'.$img);
-
+        // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
         // dd($appliant);
 
         //Change for the view of appliant
@@ -372,7 +375,8 @@ class ArchiveController extends Controller
             ->with('academic_program', $academic_program)
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
-            ->with('header_academic_program', $header_academic_program);
+            ->with('header_academic_program', $header_academic_program)
+            ->with('viewer', $request->session()->get('user'));
     }
 
 
@@ -463,13 +467,43 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function updateAcademicDegree(UpdateAcademicDegreeRequest $request)
+    public function updateAcademicDegree(Request $request)
     {
-        $academic_degree = AcademicDegree::find($request->id);
-        $academic_degree->fill($request->validated());
-        $academic_degree->save();
+        
 
-        return new JsonResponse($academic_degree);
+        try{
+            $request->validate([
+                'id' => ['required','exists:academic_degrees,id'],
+                'archive_id' => ['required','exists:academic_degrees,archive_id'],
+                'state' => ['required', 'string'],
+                'degree' => ['nullable', 'required_if:state,Completo'],
+                'degree_type' => ['nullable', 'required_if:state,Completo', 'string'],
+                'cvu' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'numeric'],
+                'cedula' => ['nullable', Rule::requiredIf($this->status === 'Grado obtenido' && $this->state === 'Completo'), 'numeric'],
+                'country' => ['nullable', 'required_if:state,Completo', 'string'],
+                'university' => ['nullable', 'required_if:state,Completo', 'string'],
+                'status' => ['nullable', 'required_if:state,Completo', 'in:Pasante,Grado obtenido,Título o grado en proceso', 'string'],
+                'average' => ['nullable', 'required_if:state,Completo', 'numeric'],
+                'min_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
+                'max_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
+                'knowledge_card' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
+                'digital_signature' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
+                'titration_date' => ['nullable', 'required_if:state,Completo'],
+            ]);
+        } catch (\Exception $e){
+            return new JsonResponse(['message'=> 'Los datos tiene un formato invalido intente mas tarde'],400);
+        }
+
+        try{
+            $academic_degree = AcademicDegree::find($request->id);
+            $academic_degree->fill($request);
+            $academic_degree->save();
+    
+        } catch (\Exception $e){
+            return new JsonResponse(['message'=>'Error al actualizar información'],500);
+        }
+       
+        return new JsonResponse(['message'=>$academic_degree] ,200);
     }
 
     /**
@@ -494,7 +528,7 @@ class ArchiveController extends Controller
             return new JsonResponse('Error al crear registro academico para el usuario', 502);
         }
         //Recibe la información 
-        return new JsonResponse(['message'=>'Programa academico agregado, inserta los datos necesarios para continuar con tu postulacion'],200);
+        return new JsonResponse(['message'=>'Programa academico agregado, inserta los datos necesarios para continuar con tu postulacion', 'model'=>$academic_degree ],200);
     }
 
     /**
@@ -641,7 +675,7 @@ class ArchiveController extends Controller
             return new JsonResponse('Error al agregar nuevo idioma para el aplicante', 502);
         }
         //Recibe la información 
-        return new JsonResponse(['message'=>'Idioma agregado, inserta los datos necesarios para continuar con tu postulacion'],200);
+        return new JsonResponse(['message'=>'Idioma agregado, inserta los datos necesarios para continuar con tu postulacion', 'model' => $appliant_language],200);
      }
 
      /**
@@ -710,6 +744,31 @@ class ArchiveController extends Controller
     }
 
     /* -------------------------- INVESTIGACIÓN CIENTIFICA DEL APLICANTE --------------------------*/
+
+        
+     /**
+     * Add working experience to the model 
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function addScientificProduction(Request $request)
+    {
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'state' => ['required', 'string', 'max:255']
+        ]);
+
+        try{
+            $scientific_production = ScientificProduction::create([
+                'archive_id' => $request->archive_id,
+                'state' => $request->state
+            ]);
+        }catch (\Exception $e){
+            return new JsonResponse('Error al agregar produccion cientifica para el aplicante', 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Produccion cientifica agregada, inserta los datos necesarios para continuar con tu postulacion', 'model' => $scientific_production],200);
+    }
 
     /**
      * Actualiza la lengua extranjera de un postulante.
@@ -792,6 +851,26 @@ class ArchiveController extends Controller
         return new JsonResponse(Author::create($request->safe()->only('scientific_production_id', 'name')));
     }
 
+    public function deleteScientificProduction(Request $request)
+    {
+
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'id' => ['required', 'numeric']
+        ]);
+        
+        try{
+            //Find the exact model of academic degree to delete
+            $deleted = ScientificProduction::where('id', $request->id,)->where('archive_id',$request->archive_id)->delete();
+
+        }catch (\Exception $e){
+            return new JsonResponse(['message'=>'Error eliminar el registro de producción cientifica seleccionado'], 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Programa academico eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'],200);
+    }
+
+
     /**
      * Actualiza un autor de una producción científica.
      *
@@ -809,6 +888,32 @@ class ArchiveController extends Controller
         
     /* -------------------------- CAPITAL HUMANO DEL APLICANTE --------------------------*/
 
+       
+     /**
+     * Add working experience to the model 
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function addHumanCapital(Request $request)
+    {
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'state' => ['required', 'string', 'max:255']
+        ]);
+
+        try{
+            $human_capital = HumanCapital::create([
+                'archive_id' => $request->archive_id,
+                'state' => $request->state
+            ]);
+        }catch (\Exception $e){
+            return new JsonResponse('Error al agregar capital humano para el aplicante', 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Capital Humano, inserta los datos necesarios para continuar con tu postulacion', 'model' => $human_capital],200);
+    }
+
+
     /**
      * Actualiza el capital humano de un postulante.
      *
@@ -820,6 +925,26 @@ class ArchiveController extends Controller
 
         return new JsonResponse(HumanCapital::find($request->id));
     }
+
+    public function deleteHumanCapital(Request $request)
+    {
+
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'id' => ['required', 'numeric']
+        ]);
+        
+        try{
+            //Find the exact model of academic degree to delete
+            $deleted = HumanCapital::where('id', $request->id,)->where('archive_id',$request->archive_id)->delete();
+
+        }catch (\Exception $e){
+            return new JsonResponse(['message'=>'Error eliminar el registro de producción cientifica seleccionado'], 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Programa academico eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'],200);
+    }
+
 
 
     /* -------------------------- CARTA DE RECOMENDACION DEL APLICANTE --------------------------*/

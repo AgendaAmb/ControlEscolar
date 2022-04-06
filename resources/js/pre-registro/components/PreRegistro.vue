@@ -71,7 +71,6 @@
                 :ethnicity.sync="ethnicity"
                 :is_disabled.sync="is_disabled"
                 :disability.sync="disability"
-
               >
               </datos-personales>
             </div>

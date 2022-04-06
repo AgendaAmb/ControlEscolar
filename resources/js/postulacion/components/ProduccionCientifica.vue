@@ -7,16 +7,16 @@
         </h5>
 
         <h5 v-else class="align-middle mb-5 d-block font-weight-bold">
-          Publicación
+          Publicación {{index}}
         </h5>
       </div>
       <div class="col-3" >
         <button
-          @click="eliminaHistorialAcademico"
+          @click="eliminaProduccionCientifica"
           class="btn btn-danger"
           style="height: 45px"
         >
-          Eliminar Escolaridad
+          Eliminar Publicación
         </button>
       </div>
     </summary>
@@ -102,18 +102,9 @@
         >
         </resenia>
       </div>
-
-      <div v-if="Type !== null" class="col-12 my-3">
-        <button @click="agregaProduccionCientifica" class="btn btn-success">
-          Agregar
-        </button>
-        <button
-          @click="actualizaProduccionCientifica"
-          class="mx-2 btn btn-primary"
-        >
-          Guardar
-        </button>
-      </div>
+      <div class="col-12 my-3">
+        <button @click="guardaProduccionCientifica" class="mx-2 btn btn-primary"> Guardar cambios </button>
+        </div>
     </div>
   </details>
 </template>
@@ -283,12 +274,35 @@ export default {
   },
 
   methods: {
-    agregaProduccionCientifica(evento) {
-      this.enviaProduccionCientifica(evento, "Completo");
+    guardaProduccionCientifica(evento){
+      this.enviaProduccionCientifica(evento, 'Completo');
     },
 
-    actualizaProduccionCientifica(evento) {
-      this.enviaProduccionCientifica(evento, "Incompleto");
+     eliminaProduccionCientifica(){
+      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+        
+            //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
+
+          Swal.fire({
+              title: "Éxito al eliminar Producción cientifica",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+
+      }).catch(error=>{
+          Swal.fire({
+              title: "Error al eliminar Experiencia laboral",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
     },
 
     enviaProduccionCientifica(evento, estado) {
@@ -315,12 +329,12 @@ export default {
           });
         })
         .catch((error) => {
-          this.State = "Incompleto";
-          var errores = error.response.data["errors"];
-
-          Object.keys(errores).forEach((key) => {
-            Vue.set(this.errores, key, errores[key][0]);
-          });
+           Swal.fire({
+              title: "Error al actualizar datos",
+              text: error.response.data,
+              showCancelButton: false,
+              icon: "error",
+            });
         });
     },
 
