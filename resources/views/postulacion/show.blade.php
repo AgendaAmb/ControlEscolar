@@ -5,6 +5,7 @@ const academicProgram = @json($academic_program);
 const recommendation_letters = @json($recommendation_letters);
 const archives_recommendation_letters = @json($archives_recommendation_letters);
 const header_academic_program = @json($header_academic_program);
+const letters_Commitment = @json($letters_Commitment);
 const viewer = @json($viewer);
 </script>
 @extends('layouts.app')
@@ -30,6 +31,7 @@ const viewer = @json($viewer);
         :human_capitals="archive.human_capitals"
         :recommendation_letters = "recommendation_letters"
         :archives_recommendation_letters = "archives_recommendation_letters"
+        :letters_Commitment = "letters_Commitment"
         >
     </solicitud-postulante>
 </form>

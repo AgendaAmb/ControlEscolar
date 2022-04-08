@@ -11,27 +11,31 @@
             <i>Estado:</i> <i class="text-danger">Sin subir</i>
           </template> 
         </h5>
-        <p v-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
 
+        <!-- We have something in notes and its a letter -->
+        <p v-if="isLetterCommitment() === true " class="mt-3 mb-1 d-block"><strong> Observaciones: Descargar <a :href="notes+academiLetterCommitment" target="_blank">dando clic aquí</a></strong></p>
+        <!-- We have only something in notes -->
+        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
+        
         <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
       </div>
 
 
       <!-- Es carta de intención el archivo -->
-      <div v-if="name === '11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)'" class="form-group col-3 my-auto">
+      <div v-if="isIntentionLetter() === true " class="form-group col-3 my-auto">
         
         <!--La persona que esta revisando el expediente es diferente a la dueña del expediente-->
-        <a v-if="checkUpload() === true && user_id != viewer_id" class=" verArchivo d-block my-2 ml-auto" :href="location" target="_blank"> Ver Archivo</a>
+        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/'+location" target="_blank"> Ver Archivo</a>
         
-        <label v-if=" user_id != viewer_id" class=" cargarArchivo d-block ml-auto my-auto">
+        <label v-if="isStudentOrNot() === true" class=" cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input type="file" class="form-control d-none" @change="cargaDocumento">
         </label>
       </div>
 
       <div v-else class="form-group col-3 my-auto">    
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="location" target="_blank"> Ver Archivo</a>
+        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/'+location" target="_blank"> Ver Archivo</a>
         <label class=" cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input type="file" class="form-control d-none" @change="cargaDocumento">
@@ -112,6 +116,7 @@ export default {
     id: {
       type: Number,
     },
+
     name: {
       type: String
     },
@@ -134,6 +139,21 @@ export default {
      
     location: {
       type: String
+    },
+    
+    letters_Commitment: {
+      type: Array,
+      default: null
+    },
+
+    alias_academic_program:{
+      type: String,
+      default: null,
+    },
+
+    index_carta:{
+      type: Number,
+      default:0,
     }
   },
 
@@ -141,11 +161,13 @@ export default {
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: ''
+      textStateUpload: '',
+      academiLetterCommitment: '',
     };
   },
 
   computed: {
+
     Archivo:{ 
       get () {
         return this.archivo;
@@ -174,6 +196,59 @@ export default {
   },
 
   methods: {
+
+
+    isLetterCommitment(){
+      
+      if(this.name.localeCompare('11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)') == 0){
+     
+        //Set index in something wrong
+        this.academiLetterCommitment = 'DCA.docx';
+        
+        //Have notes and its letter commit array full
+        if(this.notes !== null ){
+          //we recieve also the alias of academic program and compare
+          if(this.alias_academic_program != null ){
+            switch (this.academic_program.alias) {
+              case "maestria":
+                this.academiLetterCommitment = 'DCA.docx';
+                break;
+              case "enrem":
+                this.academiLetterCommitment = 'DCA.docx';
+                break;
+              case "doctorado":
+                this.academiLetterCommitment = 'MCA.docx';
+                break;
+              case "imarec":
+                this.academiLetterCommitment = 'IMaREC.docx';
+                break;
+            }
+          }
+        }else{
+          return false;
+        }
+        //return a value 
+        return true;
+      }
+
+      return
+    },
+
+    isIntentionLetter(){
+      //If return 0 is intention letter of professor
+      if(this.name.localeCompare('12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') == 0){
+        return true;
+      }
+      return false;
+    },
+
+    isStudentOrNot(){
+      if(this.user_id != this.viewer_id){
+        return false;
+      }
+      return true;
+    },
+
     checkUpload()  {
       if(this.location !== null && this.location !== undefined){
         return true;

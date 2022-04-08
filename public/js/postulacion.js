@@ -408,6 +408,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -439,13 +443,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     location: {
       type: String
+    },
+    letters_Commitment: {
+      type: Array,
+      "default": null
+    },
+    alias_academic_program: {
+      type: String,
+      "default": null
+    },
+    index_carta: {
+      type: Number,
+      "default": 0
     }
   },
   data: function data() {
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: ''
+      textStateUpload: '',
+      academiLetterCommitment: ''
     };
   },
   computed: {
@@ -476,6 +493,57 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    isLetterCommitment: function isLetterCommitment() {
+      if (this.name.localeCompare('11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)') == 0) {
+        //Set index in something wrong
+        this.academiLetterCommitment = 'DCA.docx'; //Have notes and its letter commit array full
+
+        if (this.notes !== null) {
+          //we recieve also the alias of academic program and compare
+          if (this.alias_academic_program != null) {
+            switch (this.academic_program.alias) {
+              case "maestria":
+                this.academiLetterCommitment = 'DCA.docx';
+                break;
+
+              case "enrem":
+                this.academiLetterCommitment = 'DCA.docx';
+                break;
+
+              case "doctorado":
+                this.academiLetterCommitment = 'MCA.docx';
+                break;
+
+              case "imarec":
+                this.academiLetterCommitment = 'IMaREC.docx';
+                break;
+            }
+          }
+        } else {
+          return false;
+        } //return a value 
+
+
+        return true;
+      }
+
+      return;
+    },
+    isIntentionLetter: function isIntentionLetter() {
+      //If return 0 is intention letter of professor
+      if (this.name.localeCompare('12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') == 0) {
+        return true;
+      }
+
+      return false;
+    },
+    isStudentOrNot: function isStudentOrNot() {
+      if (this.user_id != this.viewer_id) {
+        return false;
+      }
+
+      return true;
+    },
     checkUpload: function checkUpload() {
       if (this.location !== null && this.location !== undefined) {
         return true;
@@ -1157,7 +1225,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1191,7 +1258,7 @@ __webpack_require__.r(__webpack_exports__);
     // Modo de titulación.
     titration_mode: String,
     //Fecha de titulacion
-    titration_date: Date,
+    titration_date: String,
     // País en donde el estudiante realizó sus estudios.
     country: String,
     // Universidad en donde el postulante realizó sus estudios.
@@ -1217,7 +1284,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fechaobtencion: '',
       errores: {},
-      initial_country: null,
       datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
@@ -1328,6 +1394,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     State: {
       get: function get() {
+        setCountryAndUniversities();
         return this.state;
       },
       set: function set(newVal) {
@@ -1421,8 +1488,29 @@ __webpack_require__.r(__webpack_exports__);
 
       return res;
     },
+    setCountryAndUniversities: function setCountryAndUniversities() {
+      var index_country; //foreach
+      // this.paises.forEach(element => {
+      //   if(string1.localeCompare(element.name[]) ){
+      //     index_country = 
+      //   }
+      // });
+      //country is not empty
+
+      if (this.country !== null) {
+        //Find the index
+        for (var i = 0; i < paises.length; i++) {
+          //Normal for
+          if (paises[i].name.localCompare(this.country)) {
+            index_country = i;
+            break;
+          }
+        }
+
+        this.Universidades = paises[index_country].universities;
+      }
+    },
     escogePais: function escogePais(evento) {
-      this.initial_country = this.country;
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
     },
     //Funcion para un futuro guardar datos permanentes
@@ -1461,14 +1549,14 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/controlescolar/solicitud/updateAcademicDegree', {
         id: this.id,
         archive_id: this.archive_id,
+        state: state,
+        status: this.status,
         degree: this.degree,
         degree_type: this.degree_type,
         cvu: this.cvu,
-        cedula: parseInt(this.cedula),
+        cedula: this.cedula,
         country: this.country,
         university: this.university,
-        status: this.status,
-        state: state,
         average: this.average,
         min_avg: this.min_avg,
         max_avg: this.max_avg,
@@ -1480,9 +1568,10 @@ __webpack_require__.r(__webpack_exports__);
           title: "Los datos se han actualizado correctamente",
           text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
           icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Continuar"
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar"
         });
       })["catch"](function (error) {
         console.log(error.response.data);
@@ -2642,6 +2731,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2655,6 +2746,14 @@ __webpack_require__.r(__webpack_exports__);
     viewer_id: {
       type: Number,
       "default": -1
+    },
+    letters_Commitment: {
+      type: Array,
+      "default": null
+    },
+    alias_academic_program: {
+      type: String,
+      "default": null
     }
   },
   components: {
@@ -2962,6 +3061,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3009,6 +3110,7 @@ __webpack_require__.r(__webpack_exports__);
     recommendation_letters: Array,
     // Postulante de la solicitud.
     appliant: Object,
+    letters_Commitment: Array,
     //Persona que esta viendo el expediente
     viewer: Object
   },
@@ -4080,7 +4182,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9948,7 +10050,23 @@ var render = function () {
           2
         ),
         _vm._v(" "),
-        _vm.notes !== null
+        _vm.isLetterCommitment() === true
+          ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+              _c("strong", [
+                _vm._v(" Observaciones: Descargar "),
+                _c(
+                  "a",
+                  {
+                    attrs: {
+                      href: _vm.notes + _vm.academiLetterCommitment,
+                      target: "_blank",
+                    },
+                  },
+                  [_vm._v("dando clic aquí")]
+                ),
+              ]),
+            ])
+          : _vm.notes !== null
           ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
               _c("strong", [
                 _vm._v(" Observaciones: "),
@@ -9968,21 +10086,23 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm.name ===
-      "11.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
+      _vm.isIntentionLetter() === true
         ? _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true && _vm.user_id != _vm.viewer_id
+            _vm.checkUpload() === true
               ? _c(
                   "a",
                   {
                     staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
+                    attrs: {
+                      href: "expediente/" + _vm.location,
+                      target: "_blank",
+                    },
                   },
                   [_vm._v(" Ver Archivo")]
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.user_id != _vm.viewer_id
+            _vm.isStudentOrNot() === true
               ? _c(
                   "label",
                   { staticClass: " cargarArchivo d-block ml-auto my-auto" },
@@ -10003,7 +10123,10 @@ var render = function () {
                   "a",
                   {
                     staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
+                    attrs: {
+                      href: "expediente/" + _vm.location,
+                      target: "_blank",
+                    },
                   },
                   [_vm._v(" Ver Archivo")]
                 )
@@ -13198,6 +13321,8 @@ var render = function () {
                 attrs: {
                   user_id: _vm.user_id,
                   viewer_id: _vm.viewer_id,
+                  letters_Commitment: _vm.letters_Commitment,
+                  alias_academic_program: _vm.alias_academic_program,
                   archivo: documento.archivo,
                   location: documento.pivot.location,
                   errores: documento.errores,
@@ -13404,6 +13529,8 @@ var render = function () {
               documentos: _vm.entrance_documents,
               user_id: _vm.appliant.id,
               viewer_id: _vm.viewer.id,
+              letters_Commitment: _vm.letters_Commitment,
+              alias_academic_program: _vm.academic_program.alias,
             },
             on: {
               "update:motivation": function ($event) {
@@ -26959,6 +27086,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_10__["default"]({
     academic_program: academicProgram,
     recommendation_letters: recommendation_letters,
     archives_recommendation_letters: archives_recommendation_letters,
+    letters_Commitment: letters_Commitment,
     viewer: viewer
   },
   methods: {

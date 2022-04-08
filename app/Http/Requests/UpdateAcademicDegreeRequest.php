@@ -27,20 +27,20 @@ class UpdateAcademicDegreeRequest extends FormRequest
         return [
             'id' => ['required','exists:academic_degrees,id'],
             'archive_id' => ['required','exists:academic_degrees,archive_id'],
-            'state' => ['required', 'string'],
+            'state' => ['required', 'in:Incompleto,Completo'],
+            'status' => ['nullable', 'required_if:state,Completo', 'in:Pasante,Grado obtenido,Título o grado en proceso', 'string'],
             'degree' => ['nullable', 'required_if:state,Completo'],
-            'degree_type' => ['nullable', 'required_if:state,Completo', 'string'],
-            'cvu' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'numeric'],
-            'cedula' => ['nullable', Rule::requiredIf($this->status === 'Grado obtenido' && $this->state === 'Completo'), 'numeric'],
+            'degree_type' => ['nullable', 'required_if:state,Completo', 'in:Licenciatura,Maestría', 'string'],                
+            'cvu' => ['nullable', 'required_if:degreeType,Maestría', 'numeric'],
+            'cedula' => ['nullable','required_if:status,Grado obtenido', 'numeric'],
             'country' => ['nullable', 'required_if:state,Completo', 'string'],
             'university' => ['nullable', 'required_if:state,Completo', 'string'],
-            'status' => ['nullable', 'required_if:state,Completo', 'in:Pasante,Grado obtenido,Título o grado en proceso', 'string'],
             'average' => ['nullable', 'required_if:state,Completo', 'numeric'],
             'min_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
             'max_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
-            'knowledge_card' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
-            'digital_signature' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
-            'titration_date' => ['nullable', 'required_if:state,Completo'],
+            'knowledge_card' => ['nullable','required_if:degreeType,Maestría', 'in:Si,No', 'string'],
+            'digital_signature' => ['nullable','required_if:degreeType,Maestría', 'in:Si,No', 'string'],
+            'titration_date' => ['nullable', 'required_if:state,Completo', 'date']
         ];
     }
 }

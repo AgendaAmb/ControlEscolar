@@ -31,6 +31,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
 Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (no se porque exactamente XD) 
 
+Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
+
+
 // Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
@@ -198,11 +201,4 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         // Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
-
-    //investigar para control de rutas lo siguiente
-    //policies 
-
-    //prueba de registro para comprobar que funciona control escolar
-    //convertir despues a log in con auth
-    // Route::get('pruebaRegistro', [AdminController::class, 'pruebaRegistro']);
 // });

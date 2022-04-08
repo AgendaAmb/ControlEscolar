@@ -52,4 +52,24 @@ class FileController extends Controller
             return abort(502, 'Archivo no encontrado');
         }
     }
+
+    public function downloadLetterCommitment(Request $request, $folderParent, $folderType, $namefile)
+    {
+        try 
+        {
+            # Crea la ruta al archivo.
+            $filePath = implode('/', [$folderParent,$folderType,$namefile]);
+
+            # Obtiene el archivo.
+            $locationFile = Storage::path('public/'.$filePath);
+
+            # Devuelve el archivo para descargar directamente.
+            return response()->download($locationFile);
+        }
+        catch (Exception $e) 
+        {
+            return abort(502, 'Archivo no encontrado');
+        }
+    }
+
 }

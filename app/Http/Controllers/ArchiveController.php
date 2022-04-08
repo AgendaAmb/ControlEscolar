@@ -161,9 +161,10 @@ class ArchiveController extends Controller
                 
                     //Eliminar mi archivo para produccion
                     //Descomentar en local
-                    // if($archive->appliant->name == 'ULISES URIEL DOMINGUEZ PEREZ'){
-                    //     unset($archives[$k]);
-                    // }
+                    //Quitas a Ulises y a Rodrigo
+                    if($archive->appliant->id == 298428 || $archive->appliant->id == 245241 ){
+                        unset($archives[$k]);
+                    }
 
                 }else{
                     //No existe aplicante por lo que no se podra ver expediente
@@ -226,8 +227,16 @@ class ArchiveController extends Controller
             $img = 'IMAREC-SUPERIOR.png';
         }
 
-        $header_academic_program = asset('storage/headers/'.$img);
+        $header_academic_program =          asset('storage/headers/'.$img);
+        $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
+        $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
+        $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
 
+        $letters_Commitment = [];
+        array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
+        array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
+        array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
+        
         // dd($archiveModel->personalDocuments);
 
         //Change to the view for admin
@@ -238,6 +247,7 @@ class ArchiveController extends Controller
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
             ->with('header_academic_program', $header_academic_program)
+            ->with('letters_Commitment', $letters_Commitment )
             ->with('viewer', $request->session()->get('user'));
     }
     
@@ -365,6 +375,17 @@ class ArchiveController extends Controller
         }
 
         $header_academic_program = asset('storage/headers/'.$img);
+
+        $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
+        $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
+        $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
+
+            
+        $letters_Commitment = [];
+        array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
+        array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
+        array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
+
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
         // dd($appliant);
 
@@ -376,6 +397,7 @@ class ArchiveController extends Controller
             ->with('recommendation_letters', $archiveModel->myRecommendationLetter)
             ->with('archives_recommendation_letters', $archiveModel->recommendationLetter)
             ->with('header_academic_program', $header_academic_program)
+            ->with('letters_Commitment', $letters_Commitment )
             ->with('viewer', $request->session()->get('user'));
     }
 
@@ -467,36 +489,13 @@ class ArchiveController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function updateAcademicDegree(Request $request)
+    public function updateAcademicDegree(UpdateAcademicDegreeRequest $request)
     {
         
 
         try{
-            $request->validate([
-                'id' => ['required','exists:academic_degrees,id'],
-                'archive_id' => ['required','exists:academic_degrees,archive_id'],
-                'state' => ['required', 'string'],
-                'degree' => ['nullable', 'required_if:state,Completo'],
-                'degree_type' => ['nullable', 'required_if:state,Completo', 'string'],
-                'cvu' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'numeric'],
-                'cedula' => ['nullable', Rule::requiredIf($this->status === 'Grado obtenido' && $this->state === 'Completo'), 'numeric'],
-                'country' => ['nullable', 'required_if:state,Completo', 'string'],
-                'university' => ['nullable', 'required_if:state,Completo', 'string'],
-                'status' => ['nullable', 'required_if:state,Completo', 'in:Pasante,Grado obtenido,Título o grado en proceso', 'string'],
-                'average' => ['nullable', 'required_if:state,Completo', 'numeric'],
-                'min_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
-                'max_avg' => ['nullable', 'required_if:state,Completo', 'numeric'],
-                'knowledge_card' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
-                'digital_signature' => ['nullable', Rule::requiredIf($this->degreeType === 'Maestría' && $this->state === 'Completo'), 'in:Si,No', 'string'],
-                'titration_date' => ['nullable', 'required_if:state,Completo'],
-            ]);
-        } catch (\Exception $e){
-            return new JsonResponse(['message'=> 'Los datos tiene un formato invalido intente mas tarde'],400);
-        }
-
-        try{
             $academic_degree = AcademicDegree::find($request->id);
-            $academic_degree->fill($request);
+            $academic_degree->update($request->safe()->toArray());
             $academic_degree->save();
     
         } catch (\Exception $e){
@@ -1175,5 +1174,4 @@ class ArchiveController extends Controller
             ->with('announcement', $announcement)
             ->with('parameters', $parameters); //programa academico
     }
-    
 }

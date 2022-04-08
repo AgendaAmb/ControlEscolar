@@ -178,7 +178,6 @@
           <label> Calificación máxima: </label>
           <input v-if="'max_avg' in errores" v-model.number="MaxAvg" type="number" class="form-control is-invalid">
           <input v-else v-model.number="MaxAvg" type="number" class="form-control">
-
           <div v-if="'max_avg' in errores" class="invalid-feedback">{{errores.max_avg}}</div>
         </div>
         
@@ -250,7 +249,7 @@ export default {
     titration_mode: String,
 
     //Fecha de titulacion
-    titration_date: Date,
+    titration_date: String,
 
     // País en donde el estudiante realizó sus estudios.
     country: String,
@@ -287,7 +286,6 @@ export default {
     return {
       fechaobtencion: '',
       errores: {},
-      initial_country : null,
       datosValidos: {},
       universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
@@ -407,6 +405,7 @@ export default {
 
     State: {
       get(){
+        setCountryAndUniversities();
         return this.state;
       },
       set(newVal){
@@ -509,9 +508,30 @@ export default {
       return res;
     },
 
-    escogePais(evento) {
-      this.initial_country = this.country;
+    setCountryAndUniversities(){
+      let index_country;
+      //foreach
+      // this.paises.forEach(element => {
+      //   if(string1.localeCompare(element.name[]) ){
+      //     index_country = 
+      //   }
+      // });
 
+      //country is not empty
+      if(this.country !== null){
+         //Find the index
+        for(let i=0; i<paises.length;i++){ //Normal for
+          if(paises[i].name.localCompare(this.country)){
+            index_country = i;
+            break;
+          }
+        }
+
+        this.Universidades = paises[index_country].universities;
+      }
+    },
+
+    escogePais(evento) {
       this.Universidades =
         this.paises[evento.target.selectedIndex - 1].universities;
     },
@@ -551,14 +571,14 @@ export default {
       axios.post('/controlescolar/solicitud/updateAcademicDegree',{
           id:this.id,
           archive_id: this.archive_id,
+          state: state,
+          status: this.status,
           degree: this.degree,
           degree_type: this.degree_type,
           cvu: this.cvu,
-          cedula: parseInt(this.cedula),
+          cedula: this.cedula,
           country: this.country,
           university: this.university,
-          status: this.status,
-          state: state,
           average: this.average,
           min_avg: this.min_avg,
           max_avg: this.max_avg,
@@ -572,9 +592,10 @@ export default {
               title: "Los datos se han actualizado correctamente",
               text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
               icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Continuar",
+              showCancelButton: true,
+              showConfirmButton: false,
+              cancelButtonColor: "#3085d6",
+              cancelButtonText: "Continuar",
             });
 
       }).catch(error => {
@@ -590,7 +611,6 @@ export default {
     },
 
     cargaDocumento(requiredDocument, file) {
-      
       var formData = new FormData();
       formData.append('id', this.id);
       formData.append('archive_id', this.archive_id);
