@@ -10093,10 +10093,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: {
-                      href: "expediente/" + _vm.location,
-                      target: "_blank",
-                    },
+                    attrs: { href: _vm.location, target: "_blank" },
                   },
                   [_vm._v(" Ver Archivo")]
                 )
@@ -10123,10 +10120,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: {
-                      href: "expediente/" + _vm.location,
-                      target: "_blank",
-                    },
+                    attrs: { href: _vm.location, target: "_blank" },
                   },
                   [_vm._v(" Ver Archivo")]
                 )
