@@ -1,4 +1,16 @@
 <template>
+<details>
+  <summary class="d-flex justify-content-end">
+        <div class="col-9 justify-content-start">
+          <h5 class="align-middle mb-5 d-block font-weight-bold">
+          Capital Humano {{index+1}}
+          </h5>
+        </div>
+        <div class="col-3 justify-content-end" >
+          <button  @click="eliminaCapitalHumano" class="btn btn-danger" style="height:45px;">Eliminar Capital Humano</button>
+        </div>
+      </summary>
+
   <div class="row">
     <div class="form-group col-md-4">
       <label> Nombre del curso: </label>
@@ -16,10 +28,10 @@
     </div>
 
     <div class="col-12 my-3">
-      <button @click="agregaCapitalHumano" class="btn btn-success"> Agregar </button>
-      <button @click="actualizaCapitalHumano" class="mx-2 btn btn-primary"> Guardar </button>
+      <button @click="guardaCapitalHumano" class="mx-2 btn btn-primary"> Guardar cambios </button>
     </div>
   </div>
+  </details>
 </template>
 
 
@@ -30,6 +42,9 @@ export default {
   props: {
     // id del capital humano.
     id: Number,
+
+    //Index
+    index: Number,
 
     // id del expediente.
     archive_id: Number,
@@ -81,12 +96,11 @@ export default {
   },
 
   methods: {
-    agregaCapitalHumano(evento){
+
+    guardaCapitalHumano(evento){
       this.enviaCapitalHumano(evento, 'Completo');
     },
-    actualizaCapitalHumano(evento){
-      this.enviaCapitalHumano(evento, 'Incompleto');
-    },
+  
     enviaCapitalHumano(evento, estado){
       this.errores = {};
 
@@ -114,6 +128,33 @@ export default {
         });
       });
     }
-  }
+  },
+  
+     eliminaCapitalHumano(){
+      axios.post('/controlescolar/solicitud/deleteHumanCapital', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+        
+            //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
+
+          Swal.fire({
+              title: "Éxito al eliminar Capital Humano",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+
+      }).catch(error=>{
+          Swal.fire({
+              title: "Error al eliminar Capital Humano",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
+    },
 };
 </script>

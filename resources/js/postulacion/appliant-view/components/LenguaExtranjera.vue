@@ -1,4 +1,13 @@
-<template>
+<template >
+  <details class="mb-2">
+    <summary  class="d-flex justify-content-end">
+        <div class="col-9 justify-content-start">
+          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Idioma {{index}} </h4>
+        </div>
+        <div class="col-3 justify-content-end" >
+          <button  @click="eliminaIdioma" class="btn btn-danger" style="height:45px;">Eliminar idioma</button>
+        </div>
+    </summary>
   <div class="row">
     <h4 class="form-group col-12 my-2"> </h4>
     
@@ -7,14 +16,14 @@
       <img v-if="Language === 'Alemán'" 
         class="d-block mx-auto" 
         width="120px" 
-        src="/controlescolar/storage/emojis/alemania.png">
+        src="/storage/emojis/alemania.png">
       
       <img v-else-if="Language === 'Español'" 
         class="d-block mx-auto" 
         width="120px" 
-        src="/controlescolar/storage/emojis/mexico.png">
-      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/inglaterra.png">
-      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/controlescolar/storage/emojis/francia.png">
+        src="/storage/emojis/mexico.png">
+      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/storage/emojis/inglaterra.png">
+      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/storage/emojis/francia.png">
     </div>
 
     <!--
@@ -169,6 +178,10 @@
       <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
     </div>
 
+    <div class="col-12 my-3">
+      <button @click="actualizaLenguaExtranjera" class="mx-2 btn btn-primary">Guardar canmbios</button>
+    </div>
+
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
       :archivo.sync="documento.archivo" 
       :location.sync="documento.pivot.location" 
@@ -176,12 +189,10 @@
       @enviaDocumento = "cargaDocumento" 
       v-bind="documento">
     </documento-requerido>
-
-    <div class="col-12 my-3">
-      <button @click="agregaLenguaExtranjera" class="btn btn-success"> Agregar </button>
-      <button @click="actualizaLenguaExtranjera" class="mx-2 btn btn-primary"> Guardar </button>
-    </div>
+      <hr class="my-4 d-block" :style="ColorStrip">
   </div>
+   <hr class="d-block mb-1" :style="ColorStrip">
+  </details>
 </template>
 
 
@@ -208,6 +219,9 @@ export default {
   name: "lengua-extranjera",
   components: { DocumentoRequerido, InputSolicitud },
   props: {
+    //Index
+    index:Number,
+
     // Id.
     id: Number,
 
@@ -379,12 +393,9 @@ export default {
   },
   methods:{
 
-    agregaLenguaExtranjera(evento) {
-      this.enviaLenguaExtranjera(evento, 'Completo');
-    },
 
     actualizaLenguaExtranjera(evento){
-      this.enviaLenguaExtranjera(evento, 'Incompleto');
+      this.enviaLenguaExtranjera(evento, 'Completo');
     },
 
     enviaLenguaExtranjera(evento, estado){
@@ -415,15 +426,37 @@ export default {
         });
 
       }).catch(error => {
-        
-        // La solicitud no fue procesada correctamente.
-        this.State = 'Incompleto';
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
+        Swal.fire({
+              title: "Error al actualizar datos",
+              text: error.response.data['message'],
+              showCancelButton: false,
+              icon: "error",
+            });
       });
+    },
+    
+    eliminaIdioma(){
+      axios.post('/controlescolar/solicitud/deleteAppliantLanguage', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+        //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
+          Swal.fire({
+              title: "Éxito al eliminar registro",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+      }).catch(error=>{
+          Swal.fire({
+              title: "Error al eliminar registro",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
     },
 
     cargaDocumento(requiredDocument, file) {

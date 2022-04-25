@@ -1,128 +1,228 @@
 <template>
   <div class="row">
     <div class="col-12">
-      <h2 class="d-block my-5 font-weight-bold"> Datos Personales </h2>
-      <postulante 
+      <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
+      <postulante
         v-bind="appliant"
         :archive_id="archive_id"
-        :documentos.sync="personal_documents">
+        :documentos.sync="personal_documents"
+      >
       </postulante>
-      <hr class="d-block" :style="ColorStrip">
-    </div>
-  
-    
-    <div class="col-12">
-      <h2 class="d-block my-5 font-weight-bold"> Historial académico </h2>
-      <grado-academico v-for="grado in academic_degrees"
-        v-bind="grado"
-        v-bind:key="grado.id"
-        :state.sync="grado.state"
-        :cvu.sync="grado.cvu"
-        :knowledge_card.sync="grado.knowledge_card"
-        :digital_signature.sync="grado.digital_signature"
-        :cedula.sync="grado.cedula"
-        :status.sync="grado.status"
-        :degree.sync="grado.degree"
-        :average.sync="grado.average"
-        :min_avg.sync="grado.min_avg"
-        :max_avg.sync="grado.max_avg"
-        :country.sync="grado.country"
-        :university.sync="grado.university"
-        :degree_type.sync="grado.degree_type"
-        :required_documents.sync="grado.required_documents"
-        :paises="Countries"
-        @gradoAcademicoAgregado="gradoAcademicoAgregado"> 
-      </grado-academico>
-      <hr class="d-block my-4" :style="ColorStrip">
-    </div>
-
-    <h2 class="col-12 my-4"><strong> Requisitos de ingreso </strong></h2>  
-    <requisitos-ingreso
-      :archive_id="archive_id"
-      :motivation.sync="motivation"
-      :documentos.sync="entrance_documents">
-    </requisitos-ingreso>
-    <hr class="col-12 my-4" :style="ColorStrip">
-
-    <div class="col-12">
-      <h2 class="d-block my-4"><strong> Dominio de idiomas </strong></h2>
-      <lengua-extranjera v-for="language in appliant_languages"
-        v-bind="language"
-        v-bind:key="language.id"
-        :state.sync="language.state"
-        :language.sync="language.language"
-        :institution.sync="language.institution"
-        :score.sync="language.score"
-        :presented_at.sync="language.presented_at"
-        :valid_from.sync="language.valid_from"
-        :valid_to.sync="language.valid_to"
-        :language_domain.sync="language.language_domain"
-        :conversational_level.sync="language.conversational_level"
-        :reading_level.sync="language.reading_level"
-        :writing_level.sync="language.writing_level"
-        :documentos.sync="language.required_documents">
-      </lengua-extranjera>
-      <hr class="d-block my-4" :style="ColorStrip">
+      <hr class="d-block" :style="ColorStrip" />
     </div>
 
     <div class="col-12">
-      <h2 class="d-block my-4"><strong> Experiencia laboral </strong></h2>
-      <experiencia-laboral v-for="experience in appliant_working_experiences"
-        v-bind="experience"
-        v-bind:key="experience.id"
-        :state.sync="experience.state"
-        :institution.sync="experience.institution"
-        :working_position.sync="experience.working_position"
-        :from.sync="experience.from"
-        :to.sync="experience.to"
-        :knowledge_area.sync="experience.knowledge_area"
-        :field.sync="experience.field"
-        :working_position_description.sync="experience.working_position_description"
-        :achievements.sync="experience.achievements">
-      </experiencia-laboral>
-      <hr class="d-block my-4" :style="ColorStrip">
+      <details>
+        <summary class="mb-5 font-weight-bold h3">Historial académico</summary>
+        <grado-academico
+          v-for="(grado, index) in academic_degrees"
+          v-bind="grado"
+          v-bind:key="grado.id"
+          :index="index + 1"
+          :alias_academic_program="academic_program.alias"
+          :state.sync="grado.state"
+          :cvu.sync="grado.cvu"
+          :knowledge_card.sync="grado.knowledge_card"
+          :digital_signature.sync="grado.digital_signature"
+          :cedula.sync="grado.cedula"
+          :status.sync="grado.status"
+          :degree.sync="grado.degree"
+          :average.sync="grado.average"
+          :min_avg.sync="grado.min_avg"
+          :max_avg.sync="grado.max_avg"
+          :country.sync="grado.country"
+          :university.sync="grado.university"
+          :degree_type.sync="grado.degree_type"
+          :titration_date.sync="grado.titration_date"
+          :required_documents.sync="grado.required_documents"
+          :paises="Countries"
+          @delete-item="eliminaHistorialAcademicoFromList"
+        >
+        </grado-academico>
+        <button
+          @click="agregaHistorialAcademico"
+          class="btn btn-success mt-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Escolaridad
+        </button>
+      </details>
+      <hr class="my-4 d-block" :style="ColorStrip" />
+    </div>
+    <div class="col-12">
+      <details>
+        <summary class="mb-5 font-weight-bold h3">
+          Requisitos de ingreso
+        </summary>
+        <requisitos-ingreso
+          :archive_id="archive_id"
+          :motivation.sync="motivation"
+          :documentos.sync="entrance_documents"
+          :user_id="appliant.id"
+          :viewer_id="viewer.id"
+          :letters_Commitment="letters_Commitment"
+          :alias_academic_program ="academic_program.alias"
+        >
+        </requisitos-ingreso>
+      </details>
+      <hr class="my-4 col-12" :style="ColorStrip" />
     </div>
 
     <div class="col-12">
-      <h2 class="d-block my-4"><strong> Producción científica </strong></h2>
-      <produccion-cientifica v-for="production in scientific_productions"
-        v-bind="production"
-        v-bind:key="production.id"
-        :state.sync="production.state"
-        :type.sync="production.type"
-        :title.sync="production.title"
-        :publish_date.sync="production.publish_date"
-        :magazine_name.sync="production.magazine_name"
-        :article_name.sync="production.article_name"
-        :institution.sync="production.institution"
-        :post_title.sync="production.post_title">
-      </produccion-cientifica>
-      <hr class="d-block my-4" :style="ColorStrip">
+      <details>
+        <summary class="mb-5 font-weight-bold h3">Dominio de idiomas</summary>
+        <lengua-extranjera
+          v-for="(language, index) in appliant_languages"
+          v-bind="language"
+          v-bind:key="language.id"
+          :index="index + 1"
+          :state.sync="language.state"
+          :language.sync="language.language"
+          :institution.sync="language.institution"
+          :score.sync="language.score"
+          :presented_at.sync="language.presented_at"
+          :valid_from.sync="language.valid_from"
+          :valid_to.sync="language.valid_to"
+          :language_domain.sync="language.language_domain"
+          :conversational_level.sync="language.conversational_level"
+          :reading_level.sync="language.reading_level"
+          :writing_level.sync="language.writing_level"
+          :documentos.sync="language.required_documents"
+          @delete-item="eliminaLenguaExtranjeraFromList"
+        >
+        </lengua-extranjera>
+        <button
+          @click="agregaLenguaExtranjera"
+          class="btn btn-success mt-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Idioma
+        </button>
+      </details>
+      <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
 
     <div class="col-12">
-      <h2 class="d-block my-4"><strong> Capital humano (cursos impartidos) </strong></h2>
-      <capital-humano v-for="humanCapital in human_capitals"
-        v-bind="humanCapital"
-        v-bind:key="humanCapital.id"
-        :course_name.sync="humanCapital.course_name"
-        :assisted_at.sync="humanCapital.assisted_at"
-        :scolarship_level.sync="humanCapital.scolarship_level">
-      </capital-humano>
+      <details>
+        <summary class="mb-5 font-weight-bold h3">
+          Experiencia laboral (Opcional)
+        </summary>
+
+        <experiencia-laboral
+          v-for="(experience, index) in appliant_working_experiences"
+          v-bind="experience"
+          v-bind:key="experience.id"
+          :index="index + 1"
+          :state.sync="experience.state"
+          :institution.sync="experience.institution"
+          :working_position.sync="experience.working_position"
+          :from.sync="experience.from"
+          :to.sync="experience.to"
+          :knowledge_area.sync="experience.knowledge_area"
+          :field.sync="experience.field"
+          :working_position_description.sync="
+            experience.working_position_description
+          "
+          :achievements.sync="experience.achievements"
+          @delete-item="eliminaExperienciaLaboralFromList"
+        >
+        </experiencia-laboral>
+        <button
+          @click="agregaExperienciaLaboral"
+          class="btn btn-success mt-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Experiencia Laboral
+        </button>
+      </details>
+      <hr class="my-4 d-block" :style="ColorStrip" />
+    </div>
+
+    <div class="col-12">
+      <details>
+        <summary class="mb-5 font-weight-bold h3">
+          Requisitos curriculares
+        </summary>
+
+        <!-- Produccion cientifica subseccion -->
+        <h5 class="mt-4 d-block">
+          <strong> Producción científica (Opcional) </strong>
+        </h5>
+        <produccion-cientifica
+          v-for="(production,index) in scientific_productions"
+          v-bind="production"
+          v-bind:key="production.id"
+          :index="index+1"
+          :state.sync="production.state"
+          :type.sync="production.type"
+          :title.sync="production.title"
+          :publish_date.sync="production.publish_date"
+          :magazine_name.sync="production.magazine_name"
+          :article_name.sync="production.article_name"
+          :institution.sync="production.institution"
+          :post_title.sync="production.post_title"
+          @delete-item="eliminaProduccionCientificaFromList"
+        >
+        </produccion-cientifica>
+        <button
+          @click="agregaProduccionCientifica"
+          class="btn btn-success mt-4 mb-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Producción Científica
+        </button>
+        <!-- Capital humano subseccion -->
+        <h5 class="mt-4 d-block">
+          <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
+        </h5>
+        <capital-humano
+          v-for="(humanCapital,index) in human_capitals"
+          v-bind="humanCapital"
+          v-bind:key="humanCapital.id"
+          :index="index"
+          :course_name.sync="humanCapital.course_name"
+          :assisted_at.sync="humanCapital.assisted_at"
+          :scolarship_level.sync="humanCapital.scolarship_level"
+          @delete-item="eliminaCapitalHumanoFromList"
+        >
+        </capital-humano>
+         <button
+          @click="agregaCapitalHumano"
+          class="btn btn-success mt-4 mb-4 pl-2"
+          style="height: 45px"
+        >
+          Agregar Capital Humano
+        </button>
+      </details>
+      <hr class="my-4 d-block" :style="ColorStrip" />
+    </div>
+
+    <div class="col-12">
+      <details>
+        <summary class="mb-5 font-weight-bold h3">
+          Carta de recomendación
+        </summary>
+        <carta-recomendacion
+          :appliant="appliant"
+          :academic_program="academic_program"
+          :recommendation_letters="recommendation_letters"
+          :archives_recommendation_letters="archives_recommendation_letters"
+        />
+      </details>
+      <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
   </div>
 </template>
 
 <script>
-
-import Postulante from './Postulante.vue';
-import GradoAcademico from './GradoAcademico.vue';
-import CapitalHumano from './CapitalHumano.vue';
-import ProduccionCientifica from './ProduccionCientifica.vue';
-import ExperienciaLaboral from './ExperienciaLaboral.vue';
-import LenguaExtranjera from './LenguaExtranjera.vue';
-import RequisitosIngreso from './RequisitosIngreso.vue';
-
+import Postulante from "./Postulante.vue";
+import GradoAcademico from "./GradoAcademico.vue";
+import CapitalHumano from "./CapitalHumano.vue";
+import ProduccionCientifica from "./ProduccionCientifica.vue";
+import ExperienciaLaboral from "./ExperienciaLaboral.vue";
+import LenguaExtranjera from "./LenguaExtranjera.vue";
+import RequisitosIngreso from "./RequisitosIngreso.vue";
+import CartaRecomendacion from "./CartaDeRecomendacion.vue";
 
 export default {
   name: "solicitud-postulante",
@@ -134,7 +234,8 @@ export default {
     ProduccionCientifica,
     ExperienciaLaboral,
     LenguaExtranjera,
-    RequisitosIngreso
+    RequisitosIngreso,
+    CartaRecomendacion,
   },
 
   props: {
@@ -161,75 +262,271 @@ export default {
 
     // Experiencias laborales del postulante.
     appliant_working_experiences: Array,
-    
+
     // Producciones científicas del postulante.
     scientific_productions: Array,
 
     // Capitales humanos del postulante.
     human_capitals: Array,
 
+    //archivos arreglo de {id_archive_required_docuent, id_archive, location}
+    archives_recommendation_letters: Array,
+
+    //Cartas de recomendacion Arreglo que contiene correos
+    recommendation_letters: Array,
+
     // Postulante de la solicitud.
-    appliant: Object
+    appliant: Object,
+    
+    letters_Commitment: Array,
+
+    //Persona que esta viendo el expediente
+    viewer: Object,
   },
 
   computed: {
     ColorStrip: {
-      get(){
+      get() {
+        var color = "#FFFFFF";
 
+        switch (this.academic_program.alias) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+          case "doctorado":
+            color = "#FECC50";
+            break;
+          case "enrem":
+            color = "#FF384D";
+            break;
+          case "imarec":
+            color = "#118943";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: "1px",
+        };
+      },
+    },
+  },
+
+  data() {
+    return {
+      Countries: [],
+      myUniversities: [],
+      EnglishExams: [],
+      EnglishExamTypes: [],
+    };
+  },
+
+  mounted: function () {
+    this.$nextTick(function () {
+      axios
+        .get("https://ambiental.uaslp.mx/apiagenda/api/countries/universities")
+        .then((response) => {
+          this.Countries = response.data;
+        });
+
+      axios
+        .get("https://ambiental.uaslp.mx/apiagenda/api/englishExams")
+        .then((response) => {
+          this.EnglishExams = response.data;
+        });
+    });
+  },
+
+  methods: {
+    ColorStrip(){
         var color = "#FFFFFF";
 
         switch(this.academic_program.alias)
         {
           case 'maestria': color = "#0598BC"; break;
           case 'doctorado': color = "#FECC50"; break;
-          case 'enrem': color = "#118943"; break;
-          case 'imarec': color = "#"; break;
+          case 'enrem': color = "#FF384D"; break;
+          case 'imarec': color = "#118943"; break;
         }
 
         return {
           backgroundColor: color,
           height: '1px'
         };
-      }
-    }
+    },
+
+    /*
+       ESTADOS PARA : EXPERIENCIA LABORAL
+    */
+   
+
+    agregaExperienciaLaboral() {
+      axios
+        .post("/controlescolar/solicitud/addWorkingExperience", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nueva experiencia laboral!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+
+          //Add new model create to the current list
+          this.appliant_working_experiences.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nueva experiencia laboral",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+    },
+
+    //Escucha al hijo para eliminar de la lista actual
+    eliminaExperienciaLaboralFromList(index) {
+      this.appliant_working_experiences.splice(index, 1);
+    },
+   
+
+    agregaLenguaExtranjera() {
+      axios
+        .post("/controlescolar/solicitud/addAppliantLanguage", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nuevo idioma!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+             //Add new model create to the current list
+          });
+          this.appliant_languages.push(response.data.model);
+
+          // lenguaAgregado(appliant_languages[appliant_languages.length-1])
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nuevo Idioma",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+    },
+
+     eliminaLenguaExtranjeraFromList(index) {
+      this.appliant_languages.splice(index, 1);
+    },
+    
+
+    agregaHistorialAcademico() {
+      axios
+        .post("/controlescolar/solicitud/addAcademicDegree", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nuevo Grado Academico!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+          this.academic_degrees.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nuevo Grado Academico",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+    },
+
+    eliminaHistorialAcademicoFromList(index) {
+      this.academic_degrees.splice(index, 1);
+    },
+
+    agregaProduccionCientifica(){
+      axios
+        .post("/controlescolar/solicitud/addScientificProduction", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nueva producción científica!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+
+          //Add new model create to the current list
+          this.scientific_productions.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nueva producción científica",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+   },
+
+    eliminaProduccionCientificaFromList(index) {
+      this.scientific_productions.splice(index, 1);
+    },
+
+    agregaCapitalHumano(){
+      axios
+        .post("/controlescolar/solicitud/addHumanCapital", {
+          archive_id: this.archive_id,
+          state: "Incompleto",
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito al agregar nuevo capital humano!",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+
+          //Add new model create to the current list
+          this.human_capitals.push(response.data.model);
+        })
+        .catch((error) => {
+          console.log(error.data.message);
+          Swal.fire({
+            title: ":( Error al agregar nuevo capital humano",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+   },
+
+    eliminaCapitalHumanoFromList(index) {
+      this.human_capitals.splice(index, 1);
+    },
   },
-
-  data(){
-    return {
-      Countries: [],
-      CountryUniversities:[],
-      EnglishExams: [],
-      EnglishExamTypes: []
-    };
-  },
-
-  mounted: function() {
-    this.$nextTick(function () {
-      axios.get('https://ambiental.uaslp.mx/apiagenda/api/countries/universities')
-      .then(response => {
-        this.Countries = response.data;
-      });
-
-      axios.get('https://ambiental.uaslp.mx/apiagenda/api/englishExams')
-      .then(response => {
-                
-        this.EnglishExams = response.data;
-      });
-    });
-  },
-
-  methods: { 
-    gradoAcademicoAgregado(grado){
-      var url = '/controlescolar/solicitud/' + archive.id + '/latestAcademicDegree';
-
-      axios.get(url)
-      .then(response => {
-        archive.academic_degrees.push(response.data);
-      
-      }).catch(error => {
-        
-      });
-    }
-  }
 };
 </script>
+

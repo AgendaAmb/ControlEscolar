@@ -1225,6 +1225,121 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1234,7 +1349,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   name: "grado-academico",
   props: {
-    //Index de la escolaridad 
+    //Index de la escolaridad
     index: Number,
     //Alias academic program
     alias_academic_program: String,
@@ -1251,7 +1366,7 @@ __webpack_require__.r(__webpack_exports__);
     // Tipo de grado académico
     degree_type: {
       type: String,
-      "default": 'Licenciatura'
+      "default": "Licenciatura"
     },
     // Estatus académico.
     status: String,
@@ -1282,7 +1397,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      fechaobtencion: '',
+      fechaobtencion: "",
       errores: {},
       datosValidos: {},
       universidades: [],
@@ -1333,7 +1448,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.cvu;
       },
       set: function set(newVal) {
-        this.$emit('update:cvu', newVal);
+        this.$emit("update:cvu", newVal);
       }
     },
     Degree: {
@@ -1341,7 +1456,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.degree;
       },
       set: function set(newVal) {
-        this.$emit('update:degree', newVal);
+        this.$emit("update:degree", newVal);
       }
     },
     Cedula: {
@@ -1349,7 +1464,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.cedula;
       },
       set: function set(newVal) {
-        this.$emit('update:cedula', newVal);
+        this.$emit("update:cedula", newVal);
       }
     },
     TitrationDate: {
@@ -1357,7 +1472,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.titration_date;
       },
       set: function set(newVal) {
-        this.$emit('update:titration_date', newVal);
+        this.$emit("update:titration_date", newVal);
       }
     },
     DegreeType: {
@@ -1365,7 +1480,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.degree_type;
       },
       set: function set(newVal) {
-        this.$emit('update:degree_type', newVal);
+        this.$emit("update:degree_type", newVal);
       }
     },
     Country: {
@@ -1373,7 +1488,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.country;
       },
       set: function set(newVal) {
-        this.$emit('update:country', newVal);
+        this.$emit("update:country", newVal);
       }
     },
     University: {
@@ -1381,7 +1496,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.university;
       },
       set: function set(newVal) {
-        this.$emit('update:university', newVal);
+        this.$emit("update:university", newVal);
       }
     },
     Status: {
@@ -1389,7 +1504,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.status;
       },
       set: function set(newVal) {
-        this.$emit('update:status', newVal);
+        this.$emit("update:status", newVal);
       }
     },
     State: {
@@ -1398,7 +1513,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.state;
       },
       set: function set(newVal) {
-        this.$emit('update:state', newVal);
+        this.$emit("update:state", newVal);
       }
     },
     RequiredDocuments: {
@@ -1406,7 +1521,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.required_documents;
       },
       set: function set(newVal) {
-        this.$emit('update:required_documents', newVal);
+        this.$emit("update:required_documents", newVal);
       }
     },
     KnowledgeCard: {
@@ -1414,7 +1529,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.knowledge_card;
       },
       set: function set(newVal) {
-        this.$emit('update:knowledge_card', newVal);
+        this.$emit("update:knowledge_card", newVal);
       }
     },
     DigitalSignature: {
@@ -1422,7 +1537,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.digital_signature;
       },
       set: function set(newVal) {
-        this.$emit('update:digital_signature', newVal);
+        this.$emit("update:digital_signature", newVal);
       }
     },
     Average: {
@@ -1430,15 +1545,15 @@ __webpack_require__.r(__webpack_exports__);
         return this.average;
       },
       set: function set(newVal) {
-        delete this.errores['average'];
+        delete this.errores["average"];
 
         if (isNaN(newVal) || newVal.length === 0) {
-          this.errores['average'] = 'La calificación mínima solo puede ser numérica';
-          this.$emit('update:average', 0);
+          this.errores["average"] = "La calificación mínima solo puede ser numérica";
+          this.$emit("update:average", 0);
           return;
         }
 
-        this.$emit('update:average', newVal);
+        this.$emit("update:average", newVal);
       }
     },
     MinAvg: {
@@ -1446,15 +1561,15 @@ __webpack_require__.r(__webpack_exports__);
         return this.min_avg;
       },
       set: function set(newVal) {
-        delete this.errores['min_avg'];
+        delete this.errores["min_avg"];
 
         if (isNaN(newVal) || newVal.length === 0) {
-          this.errores['min_avg'] = 'La calificación mínima solo puede ser numérica';
-          this.$emit('update:min_avg', 0);
+          this.errores["min_avg"] = "La calificación mínima solo puede ser numérica";
+          this.$emit("update:min_avg", 0);
           return;
         }
 
-        this.$emit('update:min_avg', newVal);
+        this.$emit("update:min_avg", newVal);
       }
     },
     MaxAvg: {
@@ -1462,70 +1577,61 @@ __webpack_require__.r(__webpack_exports__);
         return this.max_avg;
       },
       set: function set(newVal) {
-        delete this.errores['max_avg'];
+        delete this.errores["max_avg"];
 
         if (isNaN(newVal) || newVal.length === 0) {
-          this.errores['max_avg'] = 'La calificación máxima solo puede ser numérica';
-          this.$emit('update:max_avg', 0);
+          this.errores["max_avg"] = "La calificación máxima solo puede ser numérica";
+          this.$emit("update:max_avg", 0);
           return;
         }
 
-        this.$emit('update:max_avg', newVal);
+        this.$emit("update:max_avg", newVal);
       }
     }
   },
   methods: {
+    countryHasValue: function countryHasValue() {
+      //country is not empty
+      if (this.country != null) {
+        //Find the index
+        this.paises.forEach(function (pais) {
+          if (pais.name === this.country) {
+            this.Universidades = pais.universities;
+          }
+        });
+      }
+
+      return true;
+    },
     selectOrNotDegreeType: function selectOrNotDegreeType() {
       var res = true;
-      var answer = this.alias_academic_program.localCompare('doctorado'); //compare string
+      var answer = this.alias_academic_program.localCompare("doctorado"); //compare string
       //alias no es doctorado por lo que es una maestria
 
       if (answer != 0) {
-        this.degree_type = 'Licenciatura'; //Solo licenciatura
+        this.degree_type = "Licenciatura"; //Solo licenciatura
 
         res = false; //retorno falso
       }
 
       return res;
     },
-    setCountryAndUniversities: function setCountryAndUniversities() {
-      var index_country; //foreach
-      // this.paises.forEach(element => {
-      //   if(string1.localeCompare(element.name[]) ){
-      //     index_country = 
-      //   }
-      // });
-      //country is not empty
-
-      if (this.country !== null) {
-        //Find the index
-        for (var i = 0; i < paises.length; i++) {
-          //Normal for
-          if (paises[i].name.localCompare(this.country)) {
-            index_country = i;
-            break;
-          }
-        }
-
-        this.Universidades = paises[index_country].universities;
-      }
-    },
     escogePais: function escogePais(evento) {
       this.Universidades = this.paises[evento.target.selectedIndex - 1].universities;
     },
     //Funcion para un futuro guardar datos permanentes
     actualizaHistorialAcademico: function actualizaHistorialAcademico(evento) {
-      this.enviaHistorialAcademico(evento, 'Completo');
+      this.enviaHistorialAcademico(evento, "Completo");
     },
     eliminaHistorialAcademico: function eliminaHistorialAcademico() {
       var _this = this;
 
-      axios.post('/controlescolar/solicitud/deleteAcademicDegree', {
+      axios.post("/controlescolar/solicitud/deleteAcademicDegree", {
         id: this.id,
         archive_id: this.archive_id
       }).then(function (response) {
         //Llama al padre para que elimine el item de la lista de experiencia laboral
-        _this.$emit('delete-item', _this.index - 1);
+        _this.$emit("delete-item", _this.index - 1);
 
         Swal.fire({
           title: "Éxito al eliminar registro",
@@ -1546,7 +1652,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     enviaHistorialAcademico: function enviaHistorialAcademico(evento, state) {
       this.errores = {};
-      axios.post('/controlescolar/solicitud/updateAcademicDegree', {
+      axios.post("/controlescolar/solicitud/updateAcademicDegree", {
         id: this.id,
         archive_id: this.archive_id,
         state: state,
@@ -1577,7 +1683,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error.response.data);
         Swal.fire({
           title: "Error al actualizar datos",
-          text: error.response.data['message'],
+          text: error.response.data["message"],
           showCancelButton: false,
           icon: "error"
         });
@@ -1585,26 +1691,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
-      formData.append('id', this.id);
-      formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append("id", this.id);
+      formData.append("archive_id", this.archive_id);
+      formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("file", file);
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/updateAcademicDegreeRequiredDocument',
+        method: "post",
+        url: "/controlescolar/solicitud/updateAcademicDegreeRequiredDocument",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.datosValidos.file = "¡Archivo subido exitosamente!";
         requiredDocument.Location = response.data.location;
       })["catch"](function (error) {
-        var errores = error.response.data['errors'];
+        var errores = error.response.data["errors"];
         requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+          file: "file" in errores ? errores.file[0] : null,
+          id: "requiredDocumentId" in errores ? errores.requiredDocumentId[0] : null
         };
       });
     },
@@ -1613,7 +1719,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     objectForError: function objectForError(key) {
       return {
-        'is-invalid': this.estaEnError(key)
+        "is-invalid": this.estaEnError(key)
       };
     }
   }
@@ -3165,20 +3271,32 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    // ColorStrip(){
-    //     var color = "#FFFFFF";
-    //     switch(this.academic_program.alias)
-    //     {
-    //       case 'maestria': color = "#0598BC"; break;
-    //       case 'doctorado': color = "#FECC50"; break;
-    //       case 'enrem': color = "#FF384D"; break;
-    //       case 'imarec': color = "#118943"; break;
-    //     }
-    //     return {
-    //       backgroundColor: color,
-    //       height: '1px'
-    //     };
-    // },
+    ColorStrip: function ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case 'maestria':
+          color = "#0598BC";
+          break;
+
+        case 'doctorado':
+          color = "#FECC50";
+          break;
+
+        case 'enrem':
+          color = "#FF384D";
+          break;
+
+        case 'imarec':
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: '1px'
+      };
+    },
 
     /*
        ESTADOS PARA : EXPERIENCIA LABORAL
@@ -10773,8 +10891,12 @@ var render = function () {
       _c("div", { staticClass: "col-9 justify-content-start" }, [
         _c(
           "h4",
-          { staticClass: " align-middle mb-5 d-block font-weight-bold" },
-          [_vm._v(" Nivel de escolaridad " + _vm._s(_vm.index) + " ")]
+          { staticClass: "align-middle mb-5 d-block font-weight-bold" },
+          [
+            _vm._v(
+              "\n        Nivel de escolaridad " + _vm._s(_vm.index) + "\n      "
+            ),
+          ]
         ),
       ]),
       _vm._v(" "),
@@ -10786,7 +10908,7 @@ var render = function () {
             staticStyle: { height: "45px" },
             on: { click: _vm.eliminaHistorialAcademico },
           },
-          [_vm._v("Eliminar Escolaridad")]
+          [_vm._v("\n        Eliminar Escolaridad\n      ")]
         ),
       ]),
     ]),
@@ -10844,9 +10966,9 @@ var render = function () {
                           },
                           [
                             _vm._v(
-                              "\n          " +
+                              "\n              " +
                                 _vm._s(escolaridad) +
-                                "\n        "
+                                "\n            "
                             ),
                           ]
                         )
@@ -10857,7 +10979,11 @@ var render = function () {
                   _vm._v(" "),
                   _vm.estaEnError("degree_type")
                     ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errores.degree_type)),
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.errores.degree_type) +
+                            "\n          "
+                        ),
                       ])
                     : _vm._e(),
                 ])
@@ -10904,7 +11030,11 @@ var render = function () {
                   _vm._v(" "),
                   _vm.estaEnError("degree_type")
                     ? _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errores.degree_type)),
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.errores.degree_type) +
+                            "\n          "
+                        ),
                       ])
                     : _vm._e(),
                 ]),
@@ -10937,7 +11067,11 @@ var render = function () {
               _vm._v(" "),
               _vm.estaEnError("degree")
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.degree_type)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.degree_type) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -10994,9 +11128,9 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n          " +
+                                  "\n              " +
                                     _vm._s(estatusEstudio) +
-                                    "\n        "
+                                    "\n            "
                                 ),
                               ]
                             )
@@ -11008,7 +11142,11 @@ var render = function () {
                     _vm._v(" "),
                     _vm.estaEnError("status")
                       ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errores.status)),
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(_vm.errores.status) +
+                              "\n          "
+                          ),
                         ])
                       : _vm._e(),
                   ]
@@ -11064,9 +11202,9 @@ var render = function () {
                               },
                               [
                                 _vm._v(
-                                  "\n          " +
+                                  "\n              " +
                                     _vm._s(estatusEstudio) +
-                                    "\n        "
+                                    "\n            "
                                 ),
                               ]
                             )
@@ -11078,7 +11216,11 @@ var render = function () {
                     _vm._v(" "),
                     _vm.estaEnError("status")
                       ? _c("div", { staticClass: "invalid-feedback" }, [
-                          _vm._v(_vm._s(_vm.errores.status)),
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(_vm.errores.status) +
+                              "\n          "
+                          ),
                         ])
                       : _vm._e(),
                   ]
@@ -11135,9 +11277,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n          " +
+                          "\n              " +
                             _vm._s(PaisEstudio.name) +
-                            "\n        "
+                            "\n            "
                         ),
                       ]
                     )
@@ -11148,7 +11290,11 @@ var render = function () {
               _vm._v(" "),
               _vm.estaEnError("country")
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.country)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.country) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -11199,9 +11345,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n          " +
+                          "\n              " +
                             _vm._s(Universidad.name) +
-                            "\n        "
+                            "\n            "
                         ),
                       ]
                     )
@@ -11212,7 +11358,11 @@ var render = function () {
               _vm._v(" "),
               _vm.estaEnError("university")
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.university)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.university) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -11409,14 +11559,12 @@ var render = function () {
                     },
                     [
                       _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v(" Escoge una opción"),
+                        _vm._v("Escoge una opción"),
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+                      _c("option", { attrs: { value: "Si" } }, [_vm._v("Si")]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "No" } }, [
-                        _vm._v(" No "),
-                      ]),
+                      _c("option", { attrs: { value: "No" } }, [_vm._v("No")]),
                     ]
                   ),
                 ]),
@@ -11456,14 +11604,12 @@ var render = function () {
                     },
                     [
                       _c("option", { attrs: { value: "", selected: "" } }, [
-                        _vm._v(" Escoge una opción"),
+                        _vm._v("Escoge una opción"),
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "Si" } }, [_vm._v(" Si")]),
+                      _c("option", { attrs: { value: "Si" } }, [_vm._v("Si")]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "No" } }, [
-                        _vm._v(" No "),
-                      ]),
+                      _c("option", { attrs: { value: "No" } }, [_vm._v("No")]),
                     ]
                   ),
                 ]),
@@ -11528,7 +11674,11 @@ var render = function () {
               _vm._v(" "),
               "average" in _vm.errores
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.average)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.average) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -11590,7 +11740,11 @@ var render = function () {
               _vm._v(" "),
               "min_avg" in _vm.errores
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.min_avg)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.min_avg) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -11652,7 +11806,11 @@ var render = function () {
               _vm._v(" "),
               "max_avg" in _vm.errores
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.max_avg)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.max_avg) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -11664,10 +11822,10 @@ var render = function () {
             _c(
               "button",
               {
-                staticClass: "mx-2 btn btn-primary ",
+                staticClass: "mx-2 btn btn-primary",
                 on: { click: _vm.actualizaHistorialAcademico },
               },
-              [_vm._v("Guardar cambios")]
+              [_vm._v("\n          Guardar cambios\n        ")]
             ),
           ]),
         ]),

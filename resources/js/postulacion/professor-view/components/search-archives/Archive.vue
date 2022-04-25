@@ -1,42 +1,82 @@
 <template>
-    <tr>
-        <th scope="row">{{id}}</th>
-        <td>{{name}}</td>
-        <td>{{academic_program}}</td>
-        <td>
-            <a :href="location"> Ver expediente </a>
-        </td>
-    </tr>
+  <tr>
+    <th scope="row">{{ index }}</th>
+    <th v-if="academic_program != 'Doctorado en ciencias ambientales'" scope="row">
+      {{ announcement_from[0] + announcement_from[1] + announcement_from[2] +announcement_from[3]}} -
+      {{ announcement_to[0] + announcement_to[1] + announcement_to[2] + announcement_to[3]}}
+    </th>
+
+    <th v-else-if="announcement_from[6] == 1" scope="row">
+      {{ announcement_from[0] + announcement_from[1] + announcement_from[2] +announcement_from[3]}} - I
+    
+    </th>
+
+    <th v-else scope="row">
+      {{ announcement_from[0] + announcement_from[1] + announcement_from[2] +announcement_from[3]}} - II
+    </th>
+
+    <td>{{ name }}</td>
+    <td>{{ academic_program }}</td>
+    <td>
+      <a :href="location" target="_blank"> Ver expediente </a>
+    </td>
+  </tr>
 </template>
 
 <script>
 export default {
-    // Nombre del componente
-    name: 'archive',
+  // Nombre del componente
+  name: "archive",
 
-    // Propiedas. 
-    props: {
-        
-        // Id del expediente.
-        id: {
-            type: Number,
-            default: -1
-        },
+  data() {
+    return {
+      array_to: null,
+      array_from: null,
+    };
+  },
 
-        name: {
-            type: String,
-            default: ''
-        },
+  // Propiedas.
+  props: {
+    index: {
+      type: Number,
+      default: 0,
+    },
 
-        academic_program: {
-            type: String,
-            default: ''
-        },
+    // Id del expediente.
+    id: {
+      type: Number,
+      default: -1,
+    },
 
-        location: {
-            type: String,
-            default: ''
-        }
-    }
-}
+    // Fecha inicio postulacion
+    announcement_from: {
+      type: Date,
+      default: null,
+    },
+
+    // Fecha de terminacion postulacion
+    announcement_to: {
+      type: Date,
+      default: null,
+    },
+
+    name: {
+      type: String,
+      default: "",
+    },
+
+    academic_program: {
+      type: String,
+      default: "",
+    },
+
+    location: {
+      type: String,
+      default: "",
+    },
+  },
+
+  methods: {
+  },
+};
 </script>

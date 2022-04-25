@@ -2,7 +2,9 @@
   <div class="form-row my-4">
     <div class="col-12">
       <div class="row">
-        <div class="col-md-5 col-lg-6 col-xl-3 my-2"></div>
+        <div class="col-md-5 col-lg-6 col-xl-3 my-2">
+        <!-- Aqui va la foto -->
+        </div>
         <div class="form-group col-md-7 col-lg-6 col-xl-9">
           <div class="row">
             <div class="form-group col-12">
@@ -33,7 +35,7 @@
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Estado civil: </label>
-          <input v-model="civic_state" type="text" class="form-control" readonly>
+          <input v-model="marital_state" type="text" class="form-control" readonly>
         </div>
         <div class="form-group col-lg-3">
           <label> País de nacimiento: </label>
@@ -62,13 +64,16 @@
       </div>
     </div>
 
-    <documento-requerido v-for="documento in Documentos" :key="documento.name"
-      :archivo.sync="documento.archivo" 
-      :location.sync="documento.pivot.location" archives
-      :errores.sync = "documento.errores"
-      @enviaDocumento = "cargaDocumento" 
-      v-bind="documento">
-    </documento-requerido>
+    <div class="row mt-4">
+      <h3>Documentos</h3>
+      <documento-requerido v-for="documento in Documentos" :key="documento.name"
+         :archivo.sync="documento.archivo"
+         :location.sync="documento.pivot.location"
+         :errores.sync = "documento.errores"
+         @enviaDocumento = "cargaDocumento"
+         v-bind="documento">
+      </documento-requerido>
+    </div>
   </div>
 </template>
 
@@ -77,6 +82,11 @@ import DocumentoRequerido from "./DocumentoRequerido.vue";
 
 export default {
   props: {
+    //v bind for appliant data from control escolar
+    // Estado civil.
+    marital_state: String,
+
+    //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
 
@@ -97,9 +107,6 @@ export default {
 
     // Género.
     gender: String,
-
-    // Estado civil.
-    civic_state: String,
 
     // Estado de nacimiento.
     birth_state: String,

@@ -82,6 +82,7 @@ export default {
       dataLength : null,
       date_to: null,
       date_from: null,
+
     };
   },
 
@@ -105,7 +106,7 @@ export default {
           }
         })
         .then((response) => {
-            console.log(response);
+          
             this.dataLength = response.data.length; // cantidad de articulos
             this.$emit("archives-found", response.data); //actualiza archivos
         })

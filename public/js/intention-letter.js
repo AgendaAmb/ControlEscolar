@@ -24,10 +24,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // Nombre del componente
-  name: 'archive',
-  // Propiedas. 
+  name: "archive",
+  data: function data() {
+    return {
+      array_to: null,
+      array_from: null
+    };
+  },
+  // Propiedas.
   props: {
     index: {
       type: Number,
@@ -50,17 +69,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     name: {
       type: String,
-      "default": ''
+      "default": ""
     },
     academic_program: {
       type: String,
-      "default": ''
+      "default": ""
     },
     location: {
       type: String,
-      "default": ''
+      "default": ""
     }
-  }
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -224,7 +244,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
             "filter[announcement.id]": this.announcement
           }
         }).then(function (response) {
-          console.log(response);
           _this.dataLength = response.data.length; // cantidad de articulos
 
           _this.$emit("archives-found", response.data); //actualiza archivos
@@ -3904,11 +3923,51 @@ var render = function () {
   return _c("tr", [
     _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.index))]),
     _vm._v(" "),
-    _c("th", { attrs: { scope: "row" } }, [
-      _vm._v("Desde : " + _vm._s(_vm.announcement_from) + " "),
-      _c("br"),
-      _vm._v(" Hasta : " + _vm._s(_vm.announcement_to)),
-    ]),
+    _vm.academic_program != "Doctorado en ciencias ambientales"
+      ? _c("th", { attrs: { scope: "row" } }, [
+          _vm._v(
+            "\n    " +
+              _vm._s(
+                _vm.announcement_from[0] +
+                  _vm.announcement_from[1] +
+                  _vm.announcement_from[2] +
+                  _vm.announcement_from[3]
+              ) +
+              " -\n    " +
+              _vm._s(
+                _vm.announcement_to[0] +
+                  _vm.announcement_to[1] +
+                  _vm.announcement_to[2] +
+                  _vm.announcement_to[3]
+              ) +
+              "\n  "
+          ),
+        ])
+      : _vm.announcement_from[6] == 1
+      ? _c("th", { attrs: { scope: "row" } }, [
+          _vm._v(
+            "\n    " +
+              _vm._s(
+                _vm.announcement_from[0] +
+                  _vm.announcement_from[1] +
+                  _vm.announcement_from[2] +
+                  _vm.announcement_from[3]
+              ) +
+              " - I\n  \n  "
+          ),
+        ])
+      : _c("th", { attrs: { scope: "row" } }, [
+          _vm._v(
+            "\n    " +
+              _vm._s(
+                _vm.announcement_from[0] +
+                  _vm.announcement_from[1] +
+                  _vm.announcement_from[2] +
+                  _vm.announcement_from[3]
+              ) +
+              " - II\n  "
+          ),
+        ]),
     _vm._v(" "),
     _c("td", [_vm._v(_vm._s(_vm.name))]),
     _vm._v(" "),

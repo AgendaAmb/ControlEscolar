@@ -1,4 +1,15 @@
 <template>
+
+<details>
+      <summary class="d-flex justify-content-end">
+        <div class="col-9 justify-content-start">
+          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Experiencia Laboral {{index}} </h4>
+        </div>
+        <div class="col-3 justify-content-end" >
+          <button  @click="eliminaExperienciaLaboral" class="btn btn-danger" style="height:45px;">Eliminar Experiencia Laboral</button>
+        </div>
+      </summary>
+
   <div class="row">
     <h4 class="form-group col-12 my-2"></h4>
     <div class="form-group col-md-6">
@@ -66,10 +77,10 @@
     </div>
 
     <div class="col-12 my-3">
-      <button @click="agregaExperienciaLaboral" class="btn btn-success"> Agregar </button>
-      <button @click="guardaExperienciaLaboral" class="mx-2 btn btn-primary"> Guardar </button>
+      <button @click="guardaExperienciaLaboral" class="mx-2 btn btn-primary"> Guardar cambios </button>
     </div>
   </div>
+  </details>
 </template>
 
 
@@ -81,6 +92,7 @@ export default {
   name: "experiencia-laboral",
 
   props: {
+    index: Number,
     id: Number,
     archive_id:Number,
     state: String,
@@ -194,12 +206,38 @@ export default {
     }
   },
   methods: {
-    agregaExperienciaLaboral(evento){
+    
+    guardaExperienciaLaboral(evento){
       this.enviaExperienciaLaboral(evento, 'Completo');
     },
-    guardaExperienciaLaboral(evento){
-      this.enviaExperienciaLaboral(evento, 'Incompleto');
+
+    eliminaExperienciaLaboral(){
+      axios.post('/controlescolar/solicitud/deleteWorkingExperience', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+        
+            //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
+
+          Swal.fire({
+              title: "Éxito al eliminar Experiencia laboral",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+
+      }).catch(error=>{
+          Swal.fire({
+              title: "Error al eliminar Experiencia laboral",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
     },
+
     enviaExperienciaLaboral(evento, estado){
       this.errores = {};
 
