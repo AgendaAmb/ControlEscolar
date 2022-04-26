@@ -1,27 +1,31 @@
 <template>
   <details class="mt-1">
-    <summary class="d-flex justify-content-end">
-      <div class="col-9 justify-content-start">
-        <h5 v-if="Type!=null" class="align-middle mb-5 d-block font-weight-bold">
+    <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h5 v-if="Type!=null" class=" font-weight-bold">
           {{Type + ' ' + index}} 
         </h5>
 
-        <h5 v-else class="align-middle mb-5 d-block font-weight-bold">
+        <h5 v-else class="font-weight-bold">
           Publicación {{index}}
         </h5>
       </div>
-      <div class="col-3" >
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
         <button
           @click="eliminaProduccionCientifica"
           class="btn btn-danger"
-          style="height: 45px"
+          style="height: 35px; width:100%"
         >
           Eliminar Publicación
         </button>
       </div>
     </summary>
-    <div class="row">
-      <h4 class="form-group col-12 my-1"></h4>
+
+   
+    <div class="row mx-2">
+
       <div class="form-group col-md-4">
         <label> Tipo de publicación: </label>
         <select v-model="Type" class="form-control">
@@ -102,10 +106,20 @@
         >
         </resenia>
       </div>
+
+      <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
+        </div>
       <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class="mx-2 btn btn-primary"> Guardar cambios </button>
+        <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
         </div>
     </div>
+        <hr class="d-block" :style="ColorStrip" />
+
   </details>
 </template>
 

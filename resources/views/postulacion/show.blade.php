@@ -30,7 +30,7 @@
 
 @push('scripts')
 
-    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb'))
+    @if ( Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb'))
         {{-- Admin and professor view --}}
         <script src="{{ asset('professor/js/professor.js') }}" defer></script>
     @else

@@ -1,17 +1,25 @@
 <template>
 <details>
-  <summary class="d-flex justify-content-end">
-        <div class="col-9 justify-content-start">
-          <h5 class="align-middle mb-5 d-block font-weight-bold">
-          Capital Humano {{index+1}}
-          </h5>
-        </div>
-        <div class="col-3 justify-content-end" >
-          <button  @click="eliminaCapitalHumano" class="btn btn-danger" style="height:45px;">Eliminar Capital Humano</button>
-        </div>
-      </summary>
+  <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h5 class="font-weight-bold"> Capital Humano {{index+1}}</h5>
+      </div>
+      <div class="col-8 col-md-3 col-sm-2"></div>
 
-  <div class="row">
+      <div class="col-1 col-md-3 col-sm-5">
+        <button
+          @click="eliminaCapitalHumano"
+          class="btn btn-danger"
+          style="height: 35px; width:100%"
+        >
+          Eliminar Capital Humano
+        </button>
+      </div>
+    </summary>
+
+ 
+
+  <div class="row mx-2">
     <div class="form-group col-md-4">
       <label> Nombre del curso: </label>
       <input type="text" class="form-control" v-model="CourseName">
@@ -27,10 +35,20 @@
       <input type="text" class="form-control" v-model="ScolarshipLevel">
     </div>
 
+    <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores del capital humano correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
+        </div>
+
     <div class="col-12 my-3">
-      <button @click="guardaCapitalHumano" class="mx-2 btn btn-primary"> Guardar cambios </button>
+      <button @click="guardaCapitalHumano" class="btn btn-primary"> Guardar curso </button>
     </div>
   </div>
+          <hr class="d-block" :style="ColorStrip" />
+
   </details>
 </template>
 

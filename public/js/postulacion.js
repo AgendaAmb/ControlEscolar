@@ -49,6 +49,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "capital-humano",
   props: {
@@ -819,6 +837,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1340,6 +1375,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1393,7 +1438,11 @@ __webpack_require__.r(__webpack_exports__);
     // Promedio obtenido.
     max_avg: Number,
     // Documentos requeridos en el programa académico.
-    required_documents: Array
+    required_documents: Array,
+    universidades: {
+      type: Array,
+      "default": null
+    }
   },
   data: function data() {
     return {
@@ -1785,6 +1834,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
 /* harmony import */ var _InputSolicitud_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputSolicitud.vue */ "./resources/js/postulacion/components/InputSolicitud.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2556,6 +2621,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2812,6 +2891,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3169,6 +3258,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3271,30 +3430,42 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    getUniversities: function getUniversities(state) {
+      var universities = [];
+
+      for (var i = 0; i < this.Countries.length; i++) {
+        if (state === this.Countries[i].name) {
+          universities = this.Countries[i].universities;
+          break;
+        }
+      }
+
+      return universities;
+    },
     ColorStrip: function ColorStrip() {
       var color = "#FFFFFF";
 
       switch (this.academic_program.alias) {
-        case 'maestria':
+        case "maestria":
           color = "#0598BC";
           break;
 
-        case 'doctorado':
+        case "doctorado":
           color = "#FECC50";
           break;
 
-        case 'enrem':
+        case "enrem":
           color = "#FF384D";
           break;
 
-        case 'imarec':
+        case "imarec":
           color = "#118943";
           break;
       }
 
       return {
         backgroundColor: color,
-        height: '1px'
+        height: "1px"
       };
     },
 
@@ -9869,35 +10040,33 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("details", [
-    _c("summary", { staticClass: "d-flex justify-content-end" }, [
-      _c("div", { staticClass: "col-9 justify-content-start" }, [
-        _c(
-          "h5",
-          { staticClass: "align-middle mb-5 d-block font-weight-bold" },
-          [
-            _vm._v(
-              "\r\n          Capital Humano " +
-                _vm._s(_vm.index + 1) +
-                "\r\n          "
-            ),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 justify-content-end" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px" },
-            on: { click: _vm.eliminaCapitalHumano },
-          },
-          [_vm._v("Eliminar Capital Humano")]
-        ),
-      ]),
-    ]),
+    _c(
+      "summary",
+      { staticClass: "d-flex justify-content-start align-items-center my-2" },
+      [
+        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+          _c("h5", { staticClass: "font-weight-bold" }, [
+            _vm._v(" Capital Humano " + _vm._s(_vm.index + 1)),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "35px", width: "100%" },
+              on: { click: _vm.eliminaCapitalHumano },
+            },
+            [_vm._v("\r\n          Eliminar Capital Humano\r\n        ")]
+          ),
+        ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row mx-2" }, [
       _c("div", { staticClass: "form-group col-md-4" }, [
         _c("label", [_vm._v(" Nombre del curso: ")]),
         _vm._v(" "),
@@ -9976,20 +10145,38 @@ var render = function () {
         }),
       ]),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "col-12 my-3" }, [
         _c(
           "button",
           {
-            staticClass: "mx-2 btn btn-primary",
+            staticClass: "btn btn-primary",
             on: { click: _vm.guardaCapitalHumano },
           },
-          [_vm._v(" Guardar cambios ")]
+          [_vm._v(" Guardar curso ")]
         ),
       ]),
     ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\r\n            Para poder registrar los cambios en los campos anteriores del capital humano correspondiente es necesario seleccionar el siguiente botón, de\r\n            esta forma podremos guardar la información que acabas de compartir\r\n          "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -10517,27 +10704,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("details", [
-    _c("summary", { staticClass: "d-flex justify-content-end" }, [
-      _c("div", { staticClass: "col-9 justify-content-start" }, [
-        _c(
-          "h4",
-          { staticClass: " align-middle mb-5 d-block font-weight-bold" },
-          [_vm._v(" Experiencia Laboral " + _vm._s(_vm.index) + " ")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 justify-content-end" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px" },
-            on: { click: _vm.eliminaExperienciaLaboral },
-          },
-          [_vm._v("Eliminar Experiencia Laboral")]
-        ),
-      ]),
-    ]),
+    _c(
+      "summary",
+      { staticClass: "d-flex justify-content-start align-items-center my-2" },
+      [
+        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+          _c("h4", { staticClass: "font-weight-bold" }, [
+            _vm._v("Experiencia Laboral " + _vm._s(_vm.index)),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "35px", width: "100%" },
+              on: { click: _vm.eliminaExperienciaLaboral },
+            },
+            [_vm._v("\r\n          Eliminar Experiencia Laboral\r\n        ")]
+          ),
+        ]),
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("h4", { staticClass: "form-group col-12 my-2" }),
@@ -10829,17 +11020,21 @@ var render = function () {
           : _vm._e(),
       ]),
       _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
       _c("div", { staticClass: "col-12 my-3" }, [
         _c(
           "button",
           {
-            staticClass: "mx-2 btn btn-primary",
+            staticClass: " btn btn-primary",
             on: { click: _vm.guardaExperienciaLaboral },
           },
-          [_vm._v(" Guardar cambios ")]
+          [_vm._v(" Guardar Experiencia Laboral ")]
         ),
       ]),
     ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
   ])
 }
 var staticRenderFns = [
@@ -10847,7 +11042,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "form-group col-12 mt-5 mb-4" }, [
+    return _c("h5", { staticClass: "form-group col-12 mt-2 mb-2" }, [
       _c("strong", [_vm._v(" Periodo laboral ")]),
     ])
   },
@@ -10862,6 +11057,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", [_c("strong", [_vm._v(" Logros: ")])])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\r\n            Para poder registrar los cambios en los campos anteriores de la experiencia laboral correspondiente es necesario seleccionar el siguiente botón, de\r\n            esta forma podremos guardar la información que acabas de compartir\r\n          "
+        ),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
@@ -10887,31 +11095,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("details", [
-    _c("summary", { staticClass: "d-flex justify-content-end" }, [
-      _c("div", { staticClass: "col-9 justify-content-start" }, [
-        _c(
-          "h4",
-          { staticClass: "align-middle mb-5 d-block font-weight-bold" },
-          [
-            _vm._v(
-              "\n        Nivel de escolaridad " + _vm._s(_vm.index) + "\n      "
-            ),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 justify-content-end" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px" },
-            on: { click: _vm.eliminaHistorialAcademico },
-          },
-          [_vm._v("\n        Eliminar Escolaridad\n      ")]
-        ),
-      ]),
-    ]),
+    _c(
+      "summary",
+      { staticClass: "d-flex justify-content-start align-items-center my-2" },
+      [
+        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+          _c("h4", { staticClass: "font-weight-bold" }, [
+            _vm._v("Nivel de escolaridad " + _vm._s(_vm.index)),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "35px", width: "100%" },
+              on: { click: _vm.eliminaHistorialAcademico },
+            },
+            [_vm._v("\n        Eliminar Escolaridad\n      ")]
+          ),
+        ]),
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -11817,15 +12025,17 @@ var render = function () {
           ]),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3 mb-1" }, [
-          _c("div", { staticClass: "col ml-1" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "row align-items-center mt-0 mb-3" }, [
+          _c("div", { staticClass: "col" }, [
             _c(
               "button",
               {
-                staticClass: "mx-2 btn btn-primary",
+                staticClass: "mx-3 btn btn-primary",
                 on: { click: _vm.actualizaHistorialAcademico },
               },
-              [_vm._v("\n          Guardar cambios\n        ")]
+              [_vm._v("\n          Guardar Historial Academico\n        ")]
             ),
           ]),
         ]),
@@ -11867,7 +12077,23 @@ var render = function () {
     _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mt-0 mb-0" }, [
+      _c("div", { staticClass: "col mx-3" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n          Para poder registrar los cambios en los campos anteriores del\n          historial académico es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+          ),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -11996,27 +12222,31 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("details", { staticClass: "mb-2" }, [
-    _c("summary", { staticClass: "d-flex justify-content-end" }, [
-      _c("div", { staticClass: "col-9 justify-content-start" }, [
-        _c(
-          "h4",
-          { staticClass: " align-middle mb-5 d-block font-weight-bold" },
-          [_vm._v(" Idioma " + _vm._s(_vm.index) + " ")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 justify-content-end" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px" },
-            on: { click: _vm.eliminaIdioma },
-          },
-          [_vm._v("Eliminar idioma")]
-        ),
-      ]),
-    ]),
+    _c(
+      "summary",
+      { staticClass: "d-flex justify-content-start align-items-center my-2" },
+      [
+        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+          _c("h4", { staticClass: "font-weight-bold" }, [
+            _vm._v("Idioma " + _vm._s(_vm.index)),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "35px", width: "100%" },
+              on: { click: _vm.eliminaIdioma },
+            },
+            [_vm._v("\n        Eliminar Idioma\n      ")]
+          ),
+        ]),
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -12609,14 +12839,16 @@ var render = function () {
             : _vm._e(),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 my-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 mt-0 mb-3" }, [
           _c(
             "button",
             {
-              staticClass: "mx-2 btn btn-primary",
+              staticClass: " btn btn-primary",
               on: { click: _vm.actualizaLenguaExtranjera },
             },
-            [_vm._v("Guardar canmbios")]
+            [_vm._v("Guardar Idioma ")]
           ),
         ]),
         _vm._v(" "),
@@ -12659,7 +12891,21 @@ var render = function () {
     _c("hr", { staticClass: "d-block mb-1", style: _vm.ColorStrip }),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\n          Para poder registrar los cambios en los campos anteriores del idioma correspondiente es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -13096,47 +13342,43 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("details", { staticClass: "mt-1" }, [
-    _c("summary", { staticClass: "d-flex justify-content-end" }, [
-      _c("div", { staticClass: "col-9 justify-content-start" }, [
-        _vm.Type != null
-          ? _c(
-              "h5",
-              { staticClass: "align-middle mb-5 d-block font-weight-bold" },
-              [
+    _c(
+      "summary",
+      { staticClass: "d-flex justify-content-start align-items-center my-2" },
+      [
+        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+          _vm.Type != null
+            ? _c("h5", { staticClass: " font-weight-bold" }, [
                 _vm._v(
                   "\n        " +
                     _vm._s(_vm.Type + " " + _vm.index) +
                     " \n      "
                 ),
-              ]
-            )
-          : _c(
-              "h5",
-              { staticClass: "align-middle mb-5 d-block font-weight-bold" },
-              [
+              ])
+            : _c("h5", { staticClass: "font-weight-bold" }, [
                 _vm._v(
                   "\n        Publicación " + _vm._s(_vm.index) + "\n      "
                 ),
-              ]
-            ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px" },
-            on: { click: _vm.eliminaProduccionCientifica },
-          },
-          [_vm._v("\n        Eliminar Publicación\n      ")]
-        ),
-      ]),
-    ]),
+              ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "35px", width: "100%" },
+              on: { click: _vm.eliminaProduccionCientifica },
+            },
+            [_vm._v("\n        Eliminar Publicación\n      ")]
+          ),
+        ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("h4", { staticClass: "form-group col-12 my-1" }),
-      _vm._v(" "),
+    _c("div", { staticClass: "row mx-2" }, [
       _c("div", { staticClass: "form-group col-md-4" }, [
         _c("label", [_vm._v(" Tipo de publicación: ")]),
         _vm._v(" "),
@@ -13382,20 +13624,38 @@ var render = function () {
         1
       ),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "col-12 my-3" }, [
         _c(
           "button",
           {
-            staticClass: "mx-2 btn btn-primary",
+            staticClass: " btn btn-primary",
             on: { click: _vm.guardaProduccionCientifica },
           },
-          [_vm._v(" Guardar cambios ")]
+          [_vm._v(" Guardar publicación ")]
         ),
       ]),
     ]),
+    _vm._v(" "),
+    _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\n          Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -13453,7 +13713,9 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-12 my-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 mt-0 mb-3" }, [
           _c(
             "button",
             {
@@ -13503,7 +13765,21 @@ var render = function () {
     ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mt-3 mb-0" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\n          Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir en esta sección\n        "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -13564,7 +13840,7 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("Historial académico"),
           ]),
           _vm._v(" "),
@@ -13650,15 +13926,21 @@ var render = function () {
             )
           }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-4 pl-2",
-              staticStyle: { height: "45px" },
-              on: { click: _vm.agregaHistorialAcademico },
-            },
-            [_vm._v("\n        Agregar Escolaridad\n      ")]
-          ),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "row align-items-center mt-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { height: "45px", width: "250px" },
+                  on: { click: _vm.agregaHistorialAcademico },
+                },
+                [_vm._v("\n            Agregar Escolaridad\n          ")]
+              ),
+            ]),
+          ]),
         ],
         2
       ),
@@ -13670,7 +13952,7 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("\n        Requisitos de ingreso\n      "),
           ]),
           _vm._v(" "),
@@ -13704,7 +13986,7 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("Dominio de idiomas"),
           ]),
           _vm._v(" "),
@@ -13776,15 +14058,21 @@ var render = function () {
             )
           }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-4 pl-2",
-              staticStyle: { height: "45px" },
-              on: { click: _vm.agregaLenguaExtranjera },
-            },
-            [_vm._v("\n        Agregar Idioma\n      ")]
-          ),
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "row align-items-center mt-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { height: "45px", width: "250px" },
+                  on: { click: _vm.agregaLenguaExtranjera },
+                },
+                [_vm._v("\n            Agregar Idioma\n          ")]
+              ),
+            ]),
+          ]),
         ],
         2
       ),
@@ -13796,7 +14084,7 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("\n        Experiencia laboral (Opcional)\n      "),
           ]),
           _vm._v(" "),
@@ -13864,15 +14152,25 @@ var render = function () {
             }
           ),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-4 pl-2",
-              staticStyle: { height: "45px" },
-              on: { click: _vm.agregaExperienciaLaboral },
-            },
-            [_vm._v("\n        Agregar Experiencia Laboral\n      ")]
-          ),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "row align-items-center mt-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { height: "45px", width: "250px" },
+                  on: { click: _vm.agregaExperienciaLaboral },
+                },
+                [
+                  _vm._v(
+                    "\n            Agregar Experiencia Laboral\n          "
+                  ),
+                ]
+              ),
+            ]),
+          ]),
         ],
         2
       ),
@@ -13884,11 +14182,11 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("\n        Requisitos curriculares\n      "),
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _vm._m(3),
           _vm._v(" "),
           _vm._l(_vm.scientific_productions, function (production, index) {
             return _c(
@@ -13942,17 +14240,29 @@ var render = function () {
             )
           }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-4 mb-4 pl-2",
-              staticStyle: { height: "45px" },
-              on: { click: _vm.agregaProduccionCientifica },
-            },
-            [_vm._v("\n        Agregar Producción Científica\n      ")]
-          ),
+          _vm._m(4),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "row align-items-center mt-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { height: "45px", width: "250px" },
+                  on: { click: _vm.agregaProduccionCientifica },
+                },
+                [
+                  _vm._v(
+                    "\n            Agregar Producción Científica\n          "
+                  ),
+                ]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
+          _vm._v(" "),
+          _vm._m(5),
           _vm._v(" "),
           _vm._l(_vm.human_capitals, function (humanCapital, index) {
             return _c(
@@ -13986,15 +14296,21 @@ var render = function () {
             )
           }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-4 mb-4 pl-2",
-              staticStyle: { height: "45px" },
-              on: { click: _vm.agregaCapitalHumano },
-            },
-            [_vm._v("\n        Agregar Capital Humano\n      ")]
-          ),
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "row align-items-center mt-0" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { height: "45px", width: "250px" },
+                  on: { click: _vm.agregaCapitalHumano },
+                },
+                [_vm._v("\n            Agregar Capital Humano\n          ")]
+              ),
+            ]),
+          ]),
         ],
         2
       ),
@@ -14006,7 +14322,7 @@ var render = function () {
       _c(
         "details",
         [
-          _c("summary", { staticClass: "mb-5 font-weight-bold h3" }, [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
             _vm._v("\n        Carta de recomendación\n      "),
           ]),
           _vm._v(" "),
@@ -14032,6 +14348,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mb-0 mt-2" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n            Selecciona el siguiente botón para agregar una nueva licenciatura\n            o maestría según corresponda\n          "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mb-0 mt-2" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n            Selecciona el siguiente botón para agregar un nuevo idioma\n          "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mb-0 mt-2" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n            Selecciona el siguiente botón para agregar una nueva experiencia laboral\n          "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "mt-4 d-block" }, [
       _c("strong", [_vm._v(" Producción científica (Opcional) ")]),
     ])
@@ -14040,8 +14401,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mb-0 mt-2" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n            Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica\n          "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "mt-4 d-block" }, [
       _c("strong", [_vm._v(" Capital humano (Cursos impartidos) [Opcional] ")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row align-items-center mb-0 mt-2" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("label", [
+          _c("strong", [_vm._v("Nota: ")]),
+          _vm._v(
+            "\n            Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano\n          "
+          ),
+        ]),
+      ]),
     ])
   },
 ]

@@ -1,14 +1,22 @@
 <template>
 
 <details>
-      <summary class="d-flex justify-content-end">
-        <div class="col-9 justify-content-start">
-          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Experiencia Laboral {{index}} </h4>
-        </div>
-        <div class="col-3 justify-content-end" >
-          <button  @click="eliminaExperienciaLaboral" class="btn btn-danger" style="height:45px;">Eliminar Experiencia Laboral</button>
-        </div>
-      </summary>
+      <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h4 class="font-weight-bold">Experiencia Laboral {{ index }}</h4>
+      </div>
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
+        <button
+          @click="eliminaExperienciaLaboral"
+          class="btn btn-danger"
+          style="height: 35px; width:100%"
+        >
+          Eliminar Experiencia Laboral
+        </button>
+      </div>
+    </summary>
 
   <div class="row">
     <h4 class="form-group col-12 my-2"></h4>
@@ -30,7 +38,7 @@
       <div v-if="estaEnError('working_position')" class="invalid-feedback">{{errores.working_position}}</div>
     </div>
 
-    <h5 class="form-group col-12 mt-5 mb-4"><strong> Periodo laboral </strong></h5>
+    <h5 class="form-group col-12 mt-2 mb-2"><strong> Periodo laboral </strong></h5>
     <div class="col-12 my-4">
       <div class="row">
         <div class="form-group col-md-6">
@@ -76,10 +84,19 @@
       <div v-if="estaEnError('achievements')" class="invalid-feedback">{{errores.achievements}}</div>
     </div>
 
+     <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores de la experiencia laboral correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
+        </div>
+
     <div class="col-12 my-3">
-      <button @click="guardaExperienciaLaboral" class="mx-2 btn btn-primary"> Guardar cambios </button>
+      <button @click="guardaExperienciaLaboral" class=" btn btn-primary"> Guardar Experiencia Laboral </button>
     </div>
   </div>
+    <hr class="d-block" :style="ColorStrip" />
   </details>
 </template>
 

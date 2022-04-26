@@ -6,7 +6,17 @@
         <textarea v-model="Motivation" class="form-control" rows="8"></textarea>
       </div>
 
-      <div class="col-12 my-3">
+      
+        <div class="col-12 mt-3 mb-0">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir en esta sección
+          </label>
+        </div>
+   
+
+      <div class="col-12 mt-0 mb-3">
         <button @click="actualizaExposicionMotivos" class="btn btn-primary"> Guardar exposición de motivos </button>
       </div>
       

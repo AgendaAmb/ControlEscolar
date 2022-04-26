@@ -34,7 +34,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -53,7 +53,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     // # Rutas de admin.
-    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
@@ -201,4 +201,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         // Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
-// });
+});

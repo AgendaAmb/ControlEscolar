@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+    <!-- Info postulante -->
     <div class="col-12">
       <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
       <postulante
@@ -10,10 +11,10 @@
       </postulante>
       <hr class="d-block" :style="ColorStrip" />
     </div>
-
+    <!-- Historial academico -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">Historial académico</summary>
+        <summary class="mb-4 font-weight-bold h3">Historial académico</summary>
         <grado-academico
           v-for="(grado, index) in academic_degrees"
           v-bind="grado"
@@ -39,19 +40,33 @@
           @delete-item="eliminaHistorialAcademicoFromList"
         >
         </grado-academico>
-        <button
-          @click="agregaHistorialAcademico"
-          class="btn btn-success mt-4 pl-2"
-          style="height: 45px"
-        >
-          Agregar Escolaridad
-        </button>
+        <div class="row align-items-center mb-0 mt-2">
+          <div class="col-12">
+            <label>
+              <strong>Nota: </strong>
+              Selecciona el siguiente botón para agregar una nueva licenciatura
+              o maestría según corresponda
+            </label>
+          </div>
+        </div>
+        <div class="row align-items-center mt-0">
+          <div class="col-12">
+            <button
+              @click="agregaHistorialAcademico"
+              class="btn btn-success"
+              style="height: 45px; width: 250px"
+            >
+              Agregar Escolaridad
+            </button>
+          </div>
+        </div>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
+    <!-- Requisitos de ingreso -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">
+        <summary class="mb-4 font-weight-bold h3">
           Requisitos de ingreso
         </summary>
         <requisitos-ingreso
@@ -61,16 +76,16 @@
           :user_id="appliant.id"
           :viewer_id="viewer.id"
           :letters_Commitment="letters_Commitment"
-          :alias_academic_program ="academic_program.alias"
+          :alias_academic_program="academic_program.alias"
         >
         </requisitos-ingreso>
       </details>
       <hr class="my-4 col-12" :style="ColorStrip" />
     </div>
-
+    <!-- Dominio de idiomas -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">Dominio de idiomas</summary>
+        <summary class="mb-4 font-weight-bold h3">Dominio de idiomas</summary>
         <lengua-extranjera
           v-for="(language, index) in appliant_languages"
           v-bind="language"
@@ -91,20 +106,33 @@
           @delete-item="eliminaLenguaExtranjeraFromList"
         >
         </lengua-extranjera>
-        <button
-          @click="agregaLenguaExtranjera"
-          class="btn btn-success mt-4 pl-2"
-          style="height: 45px"
-        >
-          Agregar Idioma
-        </button>
+
+        <div class="row align-items-center mb-0 mt-2">
+          <div class="col-12">
+            <label>
+              <strong>Nota: </strong>
+              Selecciona el siguiente botón para agregar un nuevo idioma
+            </label>
+          </div>
+        </div>
+        <div class="row align-items-center mt-0">
+          <div class="col-12">
+            <button
+              @click="agregaLenguaExtranjera"
+              class="btn btn-success"
+              style="height: 45px; width: 250px"
+            >
+              Agregar Idioma
+            </button>
+          </div>
+        </div>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
-
+    <!-- Experiencia laboral -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">
+        <summary class="mb-4 font-weight-bold h3">
           Experiencia laboral (Opcional)
         </summary>
 
@@ -127,20 +155,33 @@
           @delete-item="eliminaExperienciaLaboralFromList"
         >
         </experiencia-laboral>
-        <button
-          @click="agregaExperienciaLaboral"
-          class="btn btn-success mt-4 pl-2"
-          style="height: 45px"
-        >
-          Agregar Experiencia Laboral
-        </button>
+
+        <div class="row align-items-center mb-0 mt-2">
+          <div class="col-12">
+            <label>
+              <strong>Nota: </strong>
+              Selecciona el siguiente botón para agregar una nueva experiencia laboral
+            </label>
+          </div>
+        </div>
+        <div class="row align-items-center mt-0">
+          <div class="col-12">
+            <button
+              @click="agregaExperienciaLaboral"
+              class="btn btn-success"
+              style="height: 45px; width:250px"
+            >
+              Agregar Experiencia Laboral
+            </button>
+          </div>
+        </div>
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
-
+    <!-- Requisitos curriculares -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">
+        <summary class="mb-4 font-weight-bold h3">
           Requisitos curriculares
         </summary>
 
@@ -149,10 +190,10 @@
           <strong> Producción científica (Opcional) </strong>
         </h5>
         <produccion-cientifica
-          v-for="(production,index) in scientific_productions"
+          v-for="(production, index) in scientific_productions"
           v-bind="production"
           v-bind:key="production.id"
-          :index="index+1"
+          :index="index + 1"
           :state.sync="production.state"
           :type.sync="production.type"
           :title.sync="production.title"
@@ -164,19 +205,34 @@
           @delete-item="eliminaProduccionCientificaFromList"
         >
         </produccion-cientifica>
-        <button
-          @click="agregaProduccionCientifica"
-          class="btn btn-success mt-4 mb-4 pl-2"
-          style="height: 45px"
-        >
-          Agregar Producción Científica
-        </button>
+
+         <div class="row align-items-center mb-0 mt-2">
+          <div class="col-12">
+            <label>
+              <strong>Nota: </strong>
+              Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica
+            </label>
+          </div>
+        </div>
+        <div class="row align-items-center mt-0">
+          <div class="col-12">
+            <button
+              @click="agregaProduccionCientifica"
+              class="btn btn-success"
+              style="height: 45px; width:250px"
+            >
+              Agregar Producción Científica
+            </button>
+          </div>
+        </div>
+            <hr class="d-block" :style="ColorStrip" />
+
         <!-- Capital humano subseccion -->
         <h5 class="mt-4 d-block">
           <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
         </h5>
         <capital-humano
-          v-for="(humanCapital,index) in human_capitals"
+          v-for="(humanCapital, index) in human_capitals"
           v-bind="humanCapital"
           v-bind:key="humanCapital.id"
           :index="index"
@@ -186,20 +242,34 @@
           @delete-item="eliminaCapitalHumanoFromList"
         >
         </capital-humano>
-         <button
-          @click="agregaCapitalHumano"
-          class="btn btn-success mt-4 mb-4 pl-2"
-          style="height: 45px"
-        >
-          Agregar Capital Humano
-        </button>
+
+        <div class="row align-items-center mb-0 mt-2">
+          <div class="col-12">
+            <label>
+              <strong>Nota: </strong>
+              Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano
+            </label>
+          </div>
+        </div>
+        <div class="row align-items-center mt-0">
+          <div class="col-12">
+            <button
+              @click="agregaCapitalHumano"
+              class="btn btn-success"
+              style="height: 45px; width:250px"
+            >
+              Agregar Capital Humano
+            </button>
+          </div>
+        </div>
+        
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
-
+    <!-- Cartas de recomendacion -->
     <div class="col-12">
       <details>
-        <summary class="mb-5 font-weight-bold h3">
+        <summary class="mb-4 font-weight-bold h3">
           Carta de recomendación
         </summary>
         <carta-recomendacion
@@ -277,7 +347,7 @@ export default {
 
     // Postulante de la solicitud.
     appliant: Object,
-    
+
     letters_Commitment: Array,
 
     //Persona que esta viendo el expediente
@@ -338,27 +408,45 @@ export default {
   },
 
   methods: {
-    ColorStrip(){
-        var color = "#FFFFFF";
 
-        switch(this.academic_program.alias)
-        {
-          case 'maestria': color = "#0598BC"; break;
-          case 'doctorado': color = "#FECC50"; break;
-          case 'enrem': color = "#FF384D"; break;
-          case 'imarec': color = "#118943"; break;
-        }
+    getUniversities(state){
+      let universities = [];
+      for(let i=0; i<this.Countries.length;i++){
+          if(state === this.Countries[i].name){
+            universities = this.Countries[i].universities;
+            break;
+          }
+      }
+      return universities;
+    },
 
-        return {
-          backgroundColor: color,
-          height: '1px'
-        };
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
     },
 
     /*
        ESTADOS PARA : EXPERIENCIA LABORAL
     */
-   
 
     agregaExperienciaLaboral() {
       axios
@@ -393,7 +481,6 @@ export default {
     eliminaExperienciaLaboralFromList(index) {
       this.appliant_working_experiences.splice(index, 1);
     },
-   
 
     agregaLenguaExtranjera() {
       axios
@@ -409,7 +496,7 @@ export default {
             showCancelButton: false,
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Continuar",
-             //Add new model create to the current list
+            //Add new model create to the current list
           });
           this.appliant_languages.push(response.data.model);
 
@@ -425,10 +512,9 @@ export default {
         });
     },
 
-     eliminaLenguaExtranjeraFromList(index) {
+    eliminaLenguaExtranjeraFromList(index) {
       this.appliant_languages.splice(index, 1);
     },
-    
 
     agregaHistorialAcademico() {
       axios
@@ -461,7 +547,7 @@ export default {
       this.academic_degrees.splice(index, 1);
     },
 
-    agregaProduccionCientifica(){
+    agregaProduccionCientifica() {
       axios
         .post("/controlescolar/solicitud/addScientificProduction", {
           archive_id: this.archive_id,
@@ -488,13 +574,13 @@ export default {
             icon: "error",
           });
         });
-   },
+    },
 
     eliminaProduccionCientificaFromList(index) {
       this.scientific_productions.splice(index, 1);
     },
 
-    agregaCapitalHumano(){
+    agregaCapitalHumano() {
       axios
         .post("/controlescolar/solicitud/addHumanCapital", {
           archive_id: this.archive_id,
@@ -521,7 +607,7 @@ export default {
             icon: "error",
           });
         });
-   },
+    },
 
     eliminaCapitalHumanoFromList(index) {
       this.human_capitals.splice(index, 1);

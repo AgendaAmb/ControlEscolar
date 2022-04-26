@@ -1,12 +1,20 @@
 <template >
   <details class="mb-2">
-    <summary  class="d-flex justify-content-end">
-        <div class="col-9 justify-content-start">
-          <h4 class=" align-middle mb-5 d-block font-weight-bold"> Idioma {{index}} </h4>
-        </div>
-        <div class="col-3 justify-content-end" >
-          <button  @click="eliminaIdioma" class="btn btn-danger" style="height:45px;">Eliminar idioma</button>
-        </div>
+    <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h4 class="font-weight-bold">Idioma {{ index }}</h4>
+      </div>
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
+        <button
+          @click="eliminaIdioma"
+          class="btn btn-danger"
+          style="height: 35px; width:100%"
+        >
+          Eliminar Idioma
+        </button>
+      </div>
     </summary>
   <div class="row">
     <h4 class="form-group col-12 my-2"> </h4>
@@ -178,8 +186,16 @@
       <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
     </div>
 
-    <div class="col-12 my-3">
-      <button @click="actualizaLenguaExtranjera" class="mx-2 btn btn-primary">Guardar canmbios</button>
+        <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores del idioma correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
+        </div>
+
+    <div class="col-12 mt-0 mb-3">
+      <button @click="actualizaLenguaExtranjera" class=" btn btn-primary">Guardar Idioma </button>
     </div>
 
     <documento-requerido v-for="documento in Documentos" :key="documento.name"
