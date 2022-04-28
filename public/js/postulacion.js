@@ -430,6 +430,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -479,8 +531,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: '',
-      academiLetterCommitment: ''
+      textStateUpload: "",
+      academiLetterCommitment: ""
     };
   },
   computed: {
@@ -489,7 +541,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.archivo;
       },
       set: function set(newValue) {
-        this.$emit('update:archivo', newValue);
+        this.$emit("update:archivo", newValue);
       }
     },
     Location: {
@@ -497,7 +549,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.location;
       },
       set: function set(newValue) {
-        this.$emit('update:location', newValue);
+        this.$emit("update:location", newValue);
       }
     },
     Errores: {
@@ -506,50 +558,157 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(newValue) {
         this.errores = newValue;
-        this.$emit('update:errores', newValue);
+        this.$emit("update:errores", newValue);
       }
     }
   },
   methods: {
+    requiredForAcademicProgram: function requiredForAcademicProgram() {
+      var res = true;
+
+      if (this.alias_academic_program === "maestria") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } // Documents for imarec
+      else if (this.alias_academic_program === "imarec") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "doctorado") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "enrem") {
+        switch (this.name) {
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)":
+            res = false;
+            break;
+
+          case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
+            res = false;
+            break;
+        }
+      } // return the answer accordin to academic program and name of the required document
+
+
+      return res;
+    },
     isLetterCommitment: function isLetterCommitment() {
-      if (this.name.localeCompare('11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)') == 0) {
-        //Set index in something wrong
-        this.academiLetterCommitment = 'DCA.docx'; //Have notes and its letter commit array full
-
-        if (this.notes !== null) {
-          //we recieve also the alias of academic program and compare
-          if (this.alias_academic_program != null) {
-            switch (this.academic_program.alias) {
-              case "maestria":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-
-              case "enrem":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-
-              case "doctorado":
-                this.academiLetterCommitment = 'MCA.docx';
-                break;
-
-              case "imarec":
-                this.academiLetterCommitment = 'IMaREC.docx';
-                break;
-            }
-          }
-        } else {
-          return false;
-        } //return a value 
-
-
+      if (this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {
         return true;
-      }
+      } //return a value
 
-      return;
+
+      return false;
     },
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (this.name.localeCompare('12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') == 0) {
+      if (this.name.localeCompare("12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") == 0) {
         return true;
       }
 
@@ -573,14 +732,14 @@ __webpack_require__.r(__webpack_exports__);
       var name = e.target.files[0].name;
       this.Errores = {};
 
-      if (!name.endsWith('.pdf')) {
+      if (!name.endsWith(".pdf")) {
         this.Errores = {
-          file: 'El archivo debe de contener formato pdf.'
+          file: "El archivo debe de contener formato pdf."
         };
         return false;
       }
 
-      this.$emit('enviaDocumento', this, e.target.files[0]);
+      this.$emit("enviaDocumento", this, e.target.files[0]);
     }
   }
 });
@@ -1385,6 +1544,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1486,6 +1646,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     Universidades: {
       get: function get() {
+        var pai = this.country;
+        var selected_pais; // console.log(this.universidades);
+
+        if (this.universidades === null) {
+          this.paises.forEach(function (pais, indice, array) {
+            if (!pai.toString().localeCompare(pais.name.toString())) {
+              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
+              selected_pais = pais;
+            }
+          });
+          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
+        }
+
         return this.universidades;
       },
       set: function set(value) {
@@ -2635,6 +2808,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2662,6 +2848,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     //Index
     index: Number,
+    // Documentos requeridos
+    required_documents: Array,
     // Id de la producción científica.
     id: Number,
     // Id del expediente.
@@ -2686,6 +2874,14 @@ __webpack_require__.r(__webpack_exports__);
     authors: Array
   },
   computed: {
+    RequiredDocuments: {
+      get: function get() {
+        return this.required_documents;
+      },
+      set: function set(newVal) {
+        this.$emit("update:required_documents", newVal);
+      }
+    },
     State: {
       get: function get() {
         return this.state;
@@ -3328,6 +3524,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3353,6 +3551,8 @@ __webpack_require__.r(__webpack_exports__);
     archive_id: Number,
     // Documentos personales.
     personal_documents: Array,
+    //Documentos curriculares 
+    curricular_documents: Array,
     // Motivos de ingreso.
     motivation: String,
     // Documentos de ingreso.
@@ -4471,7 +4671,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10329,85 +10529,140 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12" }, [
-    _c("div", { staticClass: "row my-3" }, [
-      _c("div", { staticClass: "form-group col-9 my-auto" }, [
-        _c(
-          "h5",
-          { staticClass: "mt-4 d-block" },
-          [
-            _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
+  return _vm.requiredForAcademicProgram() === true
+    ? _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "row my-3" }, [
+          _c("div", { staticClass: "form-group col-9 my-auto" }, [
+            _c(
+              "h5",
+              { staticClass: "mt-4 d-block" },
+              [
+                _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
+                _vm._v(" "),
+                _vm.checkUpload() === true
+                  ? [
+                      _c("i", [_vm._v("Estado:")]),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "text-success" }, [
+                        _vm._v("Subido"),
+                      ]),
+                    ]
+                  : [
+                      _c("i", [_vm._v("Estado:")]),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "text-danger" }, [
+                        _vm._v("Sin subir"),
+                      ]),
+                    ],
+              ],
+              2
+            ),
             _vm._v(" "),
-            _vm.checkUpload() === true
-              ? [
-                  _c("i", [_vm._v("Estado:")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "text-success" }, [_vm._v("Subido")]),
-                ]
-              : [
-                  _c("i", [_vm._v("Estado:")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "text-danger" }, [
-                    _vm._v("Sin subir"),
+            _vm.isLetterCommitment() === true
+              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n          Observaciones: Descargar carta\n          "
+                    ),
+                    _vm._v(" "),
+                    _vm.alias_academic_program === "maestria" ||
+                    _vm.alias_academic_program === "enrem"
+                      ? _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        )
+                      : _vm.alias_academic_program === "imarec"
+                      ? _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        )
+                      : _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        ),
                   ]),
-                ],
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _vm.isLetterCommitment() === true
-          ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-              _c("strong", [
-                _vm._v(" Observaciones: Descargar "),
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: _vm.notes + _vm.academiLetterCommitment,
-                      target: "_blank",
-                    },
-                  },
-                  [_vm._v("dando clic aquí")]
-                ),
-              ]),
-            ])
-          : _vm.notes !== null
-          ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-              _c("strong", [
-                _vm._v(" Observaciones: "),
-                _c("span", { domProps: { innerHTML: _vm._s(_vm.notes) } }),
-              ]),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-          _c("strong", [_vm._v(" Etiqueta: ")]),
-          _vm._v(" " + _vm._s(_vm.label) + " "),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "my-0 d-block" }, [
-          _c("strong", [_vm._v(" Ejemplo: ")]),
-          _vm._v(" " + _vm._s(_vm.example) + " "),
-        ]),
-      ]),
-      _vm._v(" "),
-      _vm.isIntentionLetter() === true
-        ? _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true
-              ? _c(
-                  "a",
-                  {
-                    staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
-                  },
-                  [_vm._v(" Ver Archivo")]
-                )
+                ])
+              : _vm.notes !== null
+              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+                  _c("strong", [
+                    _vm._v(" Observaciones: "),
+                    _c("span", { domProps: { innerHTML: _vm._s(_vm.notes) } }),
+                  ]),
+                ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.isStudentOrNot() === true
-              ? _c(
+            _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+              _c("strong", [_vm._v(" Etiqueta: ")]),
+              _vm._v(" " + _vm._s(_vm.label) + "\n      "),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "my-0 d-block" }, [
+              _c("strong", [_vm._v(" Ejemplo: ")]),
+              _vm._v(" " + _vm._s(_vm.example)),
+            ]),
+          ]),
+          _vm._v(" "),
+          _vm.isIntentionLetter() === true
+            ? _c("div", { staticClass: "form-group col-3 my-auto" }, [
+                _vm.checkUpload() === true
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "verArchivo d-block my-2 ml-auto",
+                        attrs: { href: _vm.location, target: "_blank" },
+                      },
+                      [_vm._v("\n        Ver Archivo")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isStudentOrNot() === true
+                  ? _c(
+                      "label",
+                      { staticClass: "cargarArchivo d-block ml-auto my-auto" },
+                      [
+                        _vm._v("\n        Subir Documento\n        "),
+                        _c("input", {
+                          staticClass: "form-control d-none",
+                          attrs: { type: "file" },
+                          on: { change: _vm.cargaDocumento },
+                        }),
+                      ]
+                    )
+                  : _vm._e(),
+              ])
+            : _c("div", { staticClass: "form-group col-3 my-auto" }, [
+                _vm.checkUpload() === true
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "verArchivo d-block my-2 ml-auto",
+                        attrs: { href: _vm.location, target: "_blank" },
+                      },
+                      [_vm._v("\n        Ver Archivo")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
                   "label",
-                  { staticClass: " cargarArchivo d-block ml-auto my-auto" },
+                  { staticClass: "cargarArchivo d-block ml-auto my-auto" },
                   [
                     _vm._v("\n        Subir Documento\n        "),
                     _c("input", {
@@ -10416,36 +10671,11 @@ var render = function () {
                       on: { change: _vm.cargaDocumento },
                     }),
                   ]
-                )
-              : _vm._e(),
-          ])
-        : _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true
-              ? _c(
-                  "a",
-                  {
-                    staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
-                  },
-                  [_vm._v(" Ver Archivo")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: " cargarArchivo d-block ml-auto my-auto" },
-              [
-                _vm._v("\n        Subir Documento\n        "),
-                _c("input", {
-                  staticClass: "form-control d-none",
-                  attrs: { type: "file" },
-                  on: { change: _vm.cargaDocumento },
-                }),
-              ]
-            ),
-          ]),
-    ]),
-  ])
+                ),
+              ]),
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12050,6 +12280,7 @@ var render = function () {
                   archivo: documento.archivo,
                   location: documento.pivot.location,
                   errores: documento.errores,
+                  alias_academic_program: _vm.alias_academic_program,
                 },
                 on: {
                   "update:archivo": function ($event) {
@@ -13341,305 +13572,344 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("details", { staticClass: "mt-1" }, [
-    _c(
-      "summary",
-      { staticClass: "d-flex justify-content-start align-items-center my-2" },
-      [
-        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
-          _vm.Type != null
-            ? _c("h5", { staticClass: " font-weight-bold" }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.Type + " " + _vm.index) +
-                    " \n      "
-                ),
-              ])
-            : _c("h5", { staticClass: "font-weight-bold" }, [
-                _vm._v(
-                  "\n        Publicación " + _vm._s(_vm.index) + "\n      "
-                ),
-              ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+  return _c(
+    "details",
+    { staticClass: "mt-1" },
+    [
+      _c(
+        "summary",
+        { staticClass: "d-flex justify-content-start align-items-center my-2" },
+        [
+          _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+            _vm.Type != null
+              ? _c("h5", { staticClass: " font-weight-bold" }, [
+                  _vm._v(
+                    "\n        " +
+                      _vm._s(_vm.Type + " " + _vm.index) +
+                      " \n      "
+                  ),
+                ])
+              : _c("h5", { staticClass: "font-weight-bold" }, [
+                  _vm._v(
+                    "\n        Publicación " + _vm._s(_vm.index) + "\n      "
+                  ),
+                ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: { height: "35px", width: "100%" },
+                on: { click: _vm.eliminaProduccionCientifica },
+              },
+              [_vm._v("\n        Eliminar Publicación\n      ")]
+            ),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mx-2" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", [_vm._v(" Tipo de publicación: ")]),
+          _vm._v(" "),
           _c(
-            "button",
+            "select",
             {
-              staticClass: "btn btn-danger",
-              staticStyle: { height: "35px", width: "100%" },
-              on: { click: _vm.eliminaProduccionCientifica },
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Type,
+                  expression: "Type",
+                },
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.Type = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+              },
             },
-            [_vm._v("\n        Eliminar Publicación\n      ")]
+            [
+              _c(
+                "option",
+                { attrs: { selected: "" }, domProps: { value: null } },
+                [_vm._v("Escoge una opción")]
+              ),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "articles" } }, [
+                _vm._v("Publicación de artículos"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "published_books" } }, [
+                _vm._v("Publicación de libros"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "published_chapters" } }, [
+                _vm._v("Capítulos publicados"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "technical_reports" } }, [
+                _vm._v("Reportes técnicos"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "working_memories" } }, [
+                _vm._v("Memorias de trabajo"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "working_documents" } }, [
+                _vm._v("Documentos de trabajo"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "reviews" } }, [
+                _vm._v("Reseñas"),
+              ]),
+            ]
           ),
         ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mx-2" }, [
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("label", [_vm._v(" Tipo de publicación: ")]),
         _vm._v(" "),
         _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.Type,
-                expression: "Type",
-              },
-            ],
-            staticClass: "form-control",
-            on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.Type = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-            },
-          },
+          "div",
+          { staticClass: "form-group col-md-12" },
           [
-            _c(
-              "option",
-              { attrs: { selected: "" }, domProps: { value: null } },
-              [_vm._v("Escoge una opción")]
-            ),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "articles" } }, [
-              _vm._v("Publicación de artículos"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "published_books" } }, [
-              _vm._v("Publicación de libros"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "published_chapters" } }, [
-              _vm._v("Capítulos publicados"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "technical_reports" } }, [
-              _vm._v("Reportes técnicos"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "working_memories" } }, [
-              _vm._v("Memorias de trabajo"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "working_documents" } }, [
-              _vm._v("Documentos de trabajo"),
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "reviews" } }, [_vm._v("Reseñas")]),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group col-md-12" },
-        [
-          _vm.tipos[_vm.Type] === "Publicación de artículos"
-            ? _c(
-                "publicacion-articulo",
-                {
+            _vm.tipos[_vm.Type] === "Publicación de artículos"
+              ? _c(
+                  "publicacion-articulo",
+                  {
+                    attrs: {
+                      title: _vm.Title,
+                      magazine_name: _vm.MagazineName,
+                      publish_date: _vm.PublishDate,
+                    },
+                    on: {
+                      "update:title": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:magazine_name": function ($event) {
+                        _vm.MagazineName = $event
+                      },
+                      "update:publish_date": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
+                  },
+                  _vm._l(_vm.Authors, function (author) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
+              : _vm.tipos[_vm.Type] === "Capítulos publicados"
+              ? _c("publicacion-capitulo", {
+                  attrs: {
+                    "titulo-capitulo": _vm.Title,
+                    "nombre-articulo": _vm.ArticleName,
+                    "ano-publicacion": _vm.PublishDate,
+                  },
+                  on: {
+                    "update:tituloCapitulo": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:titulo-capitulo": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:nombreArticulo": function ($event) {
+                      _vm.ArticleName = $event
+                    },
+                    "update:nombre-articulo": function ($event) {
+                      _vm.ArticleName = $event
+                    },
+                    "update:anoPublicacion": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                    "update:ano-publicacion": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                  },
+                })
+              : _vm.tipos[_vm.Type] === "Publicación de libros"
+              ? _c("publicacion-libro", {
+                  attrs: {
+                    "titulo-libro": _vm.Title,
+                    "ano-publicacion": _vm.PublishDate,
+                  },
+                  on: {
+                    "update:tituloLibro": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:titulo-libro": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:anoPublicacion": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                    "update:ano-publicacion": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                  },
+                })
+              : _vm.tipos[_vm.Type] === "Reportes técnicos"
+              ? _c("reporte-tecnico", {
                   attrs: {
                     title: _vm.Title,
-                    magazine_name: _vm.MagazineName,
+                    institulo: _vm.Institution,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:magazine_name": function ($event) {
-                      _vm.MagazineName = $event
+                    "update:institulo": function ($event) {
+                      _vm.Institution = $event
                     },
                     "update:publish_date": function ($event) {
                       _vm.PublishDate = $event
                     },
                   },
-                },
-                _vm._l(_vm.Authors, function (author) {
-                  return _c(
-                    "autor-articulo",
-                    _vm._b(
-                      {
-                        key: author.id,
-                        attrs: { name: author.name },
-                        on: {
-                          "update:name": function ($event) {
-                            return _vm.$set(author, "name", $event)
-                          },
-                          agregaAutor: _vm.agregaAutor,
-                          actualizaAutor: _vm.actualizaAutor,
-                        },
-                      },
-                      "autor-articulo",
-                      author,
-                      false
-                    )
-                  )
-                }),
-                1
-              )
-            : _vm.tipos[_vm.Type] === "Capítulos publicados"
-            ? _c("publicacion-capitulo", {
-                attrs: {
-                  "titulo-capitulo": _vm.Title,
-                  "nombre-articulo": _vm.ArticleName,
-                  "ano-publicacion": _vm.PublishDate,
-                },
-                on: {
-                  "update:tituloCapitulo": function ($event) {
-                    _vm.Title = $event
+                })
+              : _vm.tipos[_vm.Type] === "Memorias de trabajo"
+              ? _c("memoria-trabajo", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
                   },
-                  "update:titulo-capitulo": function ($event) {
-                    _vm.Title = $event
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
                   },
-                  "update:nombreArticulo": function ($event) {
-                    _vm.ArticleName = $event
+                })
+              : _vm.tipos[_vm.Type] === "Documentos de trabajo"
+              ? _c("documento-trabajo", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
                   },
-                  "update:nombre-articulo": function ($event) {
-                    _vm.ArticleName = $event
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
                   },
-                  "update:anoPublicacion": function ($event) {
-                    _vm.PublishDate = $event
+                })
+              : _vm.tipos[_vm.Type] === "Reseñas"
+              ? _c("resenia", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
                   },
-                  "update:ano-publicacion": function ($event) {
-                    _vm.PublishDate = $event
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
                   },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Publicación de libros"
-            ? _c("publicacion-libro", {
-                attrs: {
-                  "titulo-libro": _vm.Title,
-                  "ano-publicacion": _vm.PublishDate,
-                },
-                on: {
-                  "update:tituloLibro": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:titulo-libro": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:anoPublicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                  "update:ano-publicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Reportes técnicos"
-            ? _c("reporte-tecnico", {
-                attrs: {
-                  title: _vm.Title,
-                  institulo: _vm.Institution,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:institulo": function ($event) {
-                    _vm.Institution = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Memorias de trabajo"
-            ? _c("memoria-trabajo", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Documentos de trabajo"
-            ? _c("documento-trabajo", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Reseñas"
-            ? _c("resenia", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm._e(),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12 my-3" }, [
-        _c(
-          "button",
-          {
-            staticClass: " btn btn-primary",
-            on: { click: _vm.guardaProduccionCientifica },
-          },
-          [_vm._v(" Guardar publicación ")]
+                })
+              : _vm._e(),
+          ],
+          1
         ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 my-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: " btn btn-primary",
+              on: { click: _vm.guardaProduccionCientifica },
+            },
+            [_vm._v(" Guardar publicación ")]
+          ),
+        ]),
       ]),
-    ]),
-    _vm._v(" "),
-    _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
-  ])
+      _vm._v(" "),
+      _vm._l(_vm.RequiredDocuments, function (documento) {
+        return _c(
+          "documento-requerido",
+          _vm._b(
+            {
+              key: documento.name,
+              attrs: {
+                archivo: documento.archivo,
+                location: documento.pivot.location,
+                errores: documento.errores,
+                alias_academic_program: _vm.alias_academic_program,
+              },
+              on: {
+                "update:archivo": function ($event) {
+                  return _vm.$set(documento, "archivo", $event)
+                },
+                "update:location": function ($event) {
+                  return _vm.$set(documento.pivot, "location", $event)
+                },
+                "update:errores": function ($event) {
+                  return _vm.$set(documento, "errores", $event)
+                },
+                enviaDocumento: _vm.cargaDocumento,
+              },
+            },
+            "documento-requerido",
+            documento,
+            false
+          )
+        )
+      }),
+      _vm._v(" "),
+      _c("hr", { staticClass: "d-block mt-2", style: _vm.ColorStrip }),
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function () {
@@ -13871,6 +14141,9 @@ var render = function () {
                     paises: _vm.Countries,
                   },
                   on: {
+                    "update:alias_academic_program": function ($event) {
+                      return _vm.$set(_vm.academic_program, "alias", $event)
+                    },
                     "update:state": function ($event) {
                       return _vm.$set(grado, "state", $event)
                     },
@@ -13973,6 +14246,21 @@ var render = function () {
               "update:documentos": function ($event) {
                 _vm.entrance_documents = $event
               },
+              "update:user_id": function ($event) {
+                return _vm.$set(_vm.appliant, "id", $event)
+              },
+              "update:viewer_id": function ($event) {
+                return _vm.$set(_vm.viewer, "id", $event)
+              },
+              "update:letters_Commitment": function ($event) {
+                _vm.letters_Commitment = $event
+              },
+              "update:letters_-commitment": function ($event) {
+                _vm.letters_Commitment = $event
+              },
+              "update:alias_academic_program": function ($event) {
+                return _vm.$set(_vm.academic_program, "alias", $event)
+              },
             },
           }),
         ],
@@ -13998,6 +14286,7 @@ var render = function () {
                   key: language.id,
                   attrs: {
                     index: index + 1,
+                    alias_academic_program: _vm.academic_program.alias,
                     state: language.state,
                     language: language.language,
                     institution: language.institution,
@@ -14012,6 +14301,9 @@ var render = function () {
                     documentos: language.required_documents,
                   },
                   on: {
+                    "update:alias_academic_program": function ($event) {
+                      return _vm.$set(_vm.academic_program, "alias", $event)
+                    },
                     "update:state": function ($event) {
                       return _vm.$set(language, "state", $event)
                     },
@@ -14204,6 +14496,7 @@ var render = function () {
                     article_name: production.article_name,
                     institution: production.institution,
                     post_title: production.post_title,
+                    documentos: _vm.curricular_documents,
                   },
                   on: {
                     "update:state": function ($event) {
@@ -14229,6 +14522,9 @@ var render = function () {
                     },
                     "update:post_title": function ($event) {
                       return _vm.$set(production, "post_title", $event)
+                    },
+                    "update:documentos": function ($event) {
+                      _vm.curricular_documents = $event
                     },
                     "delete-item": _vm.eliminaProduccionCientificaFromList,
                   },

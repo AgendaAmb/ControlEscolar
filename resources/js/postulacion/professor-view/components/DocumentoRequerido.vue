@@ -13,8 +13,34 @@
         </h5>
 
         <!-- We have something in notes and its a letter -->
-        <p v-if="isLetterCommitment() === true " class="mt-3 mb-1 d-block"><strong> Observaciones: Descargar <a :href="notes+academiLetterCommitment" target="_blank">dando clic aquí</a></strong></p>
-        <!-- We have only something in notes -->
+        <p v-if="isLetterCommitment() === true" class="mt-3 mb-1 d-block">
+          <strong>
+            Observaciones: Descargar carta
+            <!-- Maestrias PMPCA -->
+            <a
+              v-if="alias_academic_program === 'maestria' ||alias_academic_program === 'enrem'"
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
+            <!-- Maestria imarec -->
+            <a
+              v-else-if="alias_academic_program === 'imarec'"
+              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
+            <!-- Doctorado PMPCA  -->
+            <a
+              v-else
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
+          </strong>
+          </p>
+
+        <!-- Solo hay algo en notas por lo que se adjunta -->
         <p v-else-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
         
         <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
@@ -34,6 +60,14 @@
 
       <div v-else class="form-group col-3 my-auto">    
         <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
+        <label class="cargarArchivo d-block ml-auto my-auto">
+          Subir Documento
+          <input
+            type="file"
+            class="form-control d-none"
+            @change="cargaDocumento"
+          />
+        </label>
       </div>   
 
     </div>
@@ -189,81 +223,178 @@ export default {
     }
   },
 
+  
   methods: {
+    requiredForAcademicProgram() {
+      let res = true;
 
-
-    isLetterCommitment(){
-      
-      if(this.name.localeCompare('11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)') == 0){
      
-        //Set index in something wrong
-        this.academiLetterCommitment = 'DCA.docx';
-        
-        //Have notes and its letter commit array full
-        if(this.notes !== null ){
-          //we recieve also the alias of academic program and compare
-          if(this.alias_academic_program != null ){
-            switch (this.academic_program.alias) {
-              case "maestria":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-              case "enrem":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-              case "doctorado":
-                this.academiLetterCommitment = 'MCA.docx';
-                break;
-              case "imarec":
-                this.academiLetterCommitment = 'IMaREC.docx';
-                break;
-            }
-          }
-        }else{
-          return false;
+      if (this.alias_academic_program === "maestria"  ) {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+          case "9.- Application":
+            res = false;
+            break;
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+            case "16.- Proof Experience Document":
+            res = false;
+            break;
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
         }
-        //return a value 
-        return true;
+      }
+      // Documents for imarec
+      else if (this.alias_academic_program === "imarec"  ) {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+            case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+             case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+            case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+            case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+          case "9.- Application":
+            res = false;
+            break;
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+            case "16.- Proof Experience Document":
+            res = false;
+            break;
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      }
+      //Documents for doctorado
+      else if (this.alias_academic_program === "doctorado"  ) {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+          case "9.- Application":
+            res = false;
+            break;
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+        
+            case "16.- Proof Experience Document":
+            res = false;
+            break;
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
       }
 
-      return
+      //Documents for doctorado
+      else if (this.alias_academic_program === "enrem"  ) {
+        switch (this.name) {
+          
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+          case "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)":
+            res = false;
+            break;
+          case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
+            res = false;
+            break;
+           
+        }
+      }
+
+      // return the answer accordin to academic program and name of the required document
+      
+
+      return res;
     },
 
-    isIntentionLetter(){
+    isLetterCommitment() {
+      if (
+        this.name ===
+        "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)"
+      ) {
+        return true;
+      }
+      //return a value
+      return false;
+    },
+
+    isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if(this.name.localeCompare('12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') == 0){
+      if (
+        this.name.localeCompare(
+          "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
+        ) == 0
+      ) {
         return true;
       }
       return false;
     },
 
-    isStudentOrNot(){
-      if(this.user_id != this.viewer_id){
+    isStudentOrNot() {
+      if (this.user_id != this.viewer_id) {
         return false;
       }
       return true;
     },
 
-    checkUpload()  {
-      if(this.location !== null && this.location !== undefined){
+    checkUpload() {
+      if (this.location !== null && this.location !== undefined) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
     cargaDocumento(e) {
-      
       var name = e.target.files[0].name;
       this.Errores = {};
 
-
-      if (!name.endsWith('.pdf')) {
-        this.Errores = { 
-          file:'El archivo debe de contener formato pdf.'
+      if (!name.endsWith(".pdf")) {
+        this.Errores = {
+          file: "El archivo debe de contener formato pdf.",
         };
         return false;
       }
 
-      this.$emit('enviaDocumento', this, e.target.files[0]);
+      this.$emit("enviaDocumento", this, e.target.files[0]);
     },
   },
 };

@@ -6,6 +6,7 @@
 
  import Vue from 'vue';
  import SearchArchiveForm from './components/search-archives/SearchArchiveForm.vue';
+ import SearchArchiveInput from './components/search-archives/SearchArchiveInput.vue';
  import Archives from './components/search-archives/Archives.vue';
  import Archive from './components/search-archives/Archive.vue';
 
@@ -24,6 +25,7 @@ const app = new Vue({
     el: '#app',
     name: 'search-archives',
     components: {
+        SearchArchiveInput,
         SearchArchiveForm,
         Archives,
         Archive

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class WorkingExperience extends Model
 {
@@ -28,6 +30,16 @@ class WorkingExperience extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * Obtiene los documentos requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function requiredDocuments(): BelongsToMany
+    {
+        return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
+    }
 
     /**
      * Obtiene los documentos requeridos del expediente.

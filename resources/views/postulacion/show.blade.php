@@ -17,8 +17,9 @@
 
     <form v-on:submit.prevent="actualizaSolicitud">
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
-            :motivation="archive.motivation" :entrance_documents="archive.entrance_documents" :appliant="appliant"
-            :viewer="viewer" :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
+            :curricular_documents="archive.curricular_documents" :motivation="archive.motivation"
+            :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
+            :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
             :appliant_languages="archive.appliant_languages"
             :appliant_working_experiences="archive.appliant_working_experiences"
             :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
@@ -30,7 +31,7 @@
 
 @push('scripts')
 
-    @if ( Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb'))
+    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb'))
         {{-- Admin and professor view --}}
         <script src="{{ asset('professor/js/professor.js') }}" defer></script>
     @else

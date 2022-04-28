@@ -30,12 +30,12 @@ class StoreRecommendationLetter extends FormRequest
             'token' => ['required','string', 'max:255'],
             'email_evaluator'=>['required','email','max:255'],
             'time_to_meet' => ['required', 'date', 'date_format:Y-m-d'],
-            'how_meet' => ['required', 'string', 'max:255'],
-            'kind_relationship' => ['required', 'string', 'max:255'],
-            'experience_with_candidate' => ['required', 'string', 'max:255'],
-            'qualification_student' => ['required', 'string', 'max:255'],
-            'special_skills' => ['required', 'string', 'max:255'],
-            'why_recommendation' => ['required', 'string', 'max:255'],
+            'how_meet' => ['required', 'string' ],
+            'kind_relationship' => ['required', 'string' ],
+            'experience_with_candidate' => ['required', 'string'],
+            'qualification_student' => ['required', 'string'],
+            'special_skills' => ['required', 'string' ],
+            'why_recommendation' => ['required', 'string'],
 
             /*
             Estos parametros son objetos por lo que se guardaran en un controlador separado

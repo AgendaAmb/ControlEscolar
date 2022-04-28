@@ -117,8 +117,21 @@
       <div class="col-12 my-3">
         <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
         </div>
+
+        
     </div>
-        <hr class="d-block" :style="ColorStrip" />
+    <documento-requerido
+        v-for="documento in RequiredDocuments"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program"
+        v-bind="documento"
+        @enviaDocumento="cargaDocumento"
+      >
+      </documento-requerido>
+        <hr class="d-block mt-2" :style="ColorStrip" />
 
   </details>
 </template>
@@ -155,6 +168,9 @@ export default {
     //Index
     index:Number,
 
+    // Documentos requeridos
+    required_documents: Array,
+
     // Id de la producción científica.
     id: Number,
 
@@ -190,6 +206,14 @@ export default {
   },
 
   computed: {
+    RequiredDocuments: {
+      get() {
+        return this.required_documents;
+      },
+      set(newVal) {
+        this.$emit("update:required_documents", newVal);
+      },
+    },
     State: {
       get() {
         return this.state;

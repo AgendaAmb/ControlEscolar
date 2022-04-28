@@ -40,6 +40,12 @@ class AcademicDegree extends Model
         return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
     }
 
+    public function academidDocuments()
+    {
+        $query = $this->requiredDocuments()->where('type', 'entrance');
+        return $query->orderBy('required_documents.name');
+    }
+
     /**
      * Obtiene los documentos requeridos del expediente.
      *

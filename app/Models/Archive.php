@@ -70,6 +70,7 @@ class Archive extends Model
     {
         return $this->requiredDocuments()->where('type', 'personal');
     }
+    
 
     /**
      * Obtiene los documentos personales requeridos del expediente.

@@ -457,6 +457,19 @@ export default {
 
     Universidades: {
       get: function () {
+        let pai = this.country;
+        let selected_pais;
+        // console.log(this.universidades);
+        if(this.universidades === null){
+          this.paises.forEach( function(pais, indice, array) {
+            if(!pai.toString().localeCompare(pais.name.toString())){
+              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
+              selected_pais = pais;
+            }
+          });
+          this.universidades = selected_pais.universities;
+          // console.log(selected_pais.universities);
+        }
         return this.universidades;
       },
       set: function (value) {

@@ -64,6 +64,7 @@ use Illuminate\Support\Facades\{
 };
 use Nette\Utils\Json;
 use App\Helpers\MiPortalService;
+use Database\Factories\ArchiveFactory;
 # Clases de otros paquetes.
 use Spatie\QueryBuilder\{
     AllowedFilter,
@@ -106,6 +107,38 @@ class ArchiveController extends Controller
     }
     
     /* -------------------------- ADMIN VIEW FUNCTIONS --------------------------*/
+
+    public function archivesProfessor(Request $request)
+    {
+        
+        try {
+
+            $archives = QueryBuilder::for(Archive::class)
+                ->with('appliant')
+                ->allowedIncludes(['announcement'])
+                ->allowedFilters([
+                    AllowedFilter::exact('announcement.id'),
+                ])
+                ->get();
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => "No existen archivos para las fechas y modalidad indicada"] , 502);
+        }
+
+        $archives_searched = [];
+        foreach($archives as $archive){
+           # Nombre completo del postulante
+            $name = implode(' ', [
+                $archive->appliant->name ?? '',
+                $archive->appliant->middlename ?? '',
+                $archive->appliant->surname ?? '',
+            ]);  
+            if($name === $request->student_name){
+                array_push($archives_searched,$archive);
+            }
+        }
+        
+         return ArchiveResource::collection($archives_searched);
+    }
 
     /**
      * Obtiene los expedientes, vía api. 
@@ -196,13 +229,16 @@ class ArchiveController extends Controller
         }
 
         $archiveModel->loadMissing([
+            // Cosas del aplicante
             'appliant',
             'announcement.academicProgram',
+            // Documentos y secciones para expedinte
             'personalDocuments',
-            'recommendationLetter',
-            'myRecommendationLetter',
+            'curricularDocuments',
             'entranceDocuments',
             'intentionLetter',
+            'recommendationLetter',
+            'myRecommendationLetter',
             'academicDegrees.requiredDocuments',
             'appliantLanguages.requiredDocuments',
             'appliantWorkingExperiences',
@@ -342,13 +378,16 @@ class ArchiveController extends Controller
 
         //Carga modelos de archivo
         $archiveModel->loadMissing([
+            // Cosas del aplicante
             'appliant',
             'announcement.academicProgram',
+            // Documentos y secciones para expedinte
             'personalDocuments',
-            'recommendationLetter',
-            'myRecommendationLetter',
+            'curricularDocuments',
             'entranceDocuments',
             'intentionLetter',
+            'recommendationLetter',
+            'myRecommendationLetter',
             'academicDegrees.requiredDocuments',
             'appliantLanguages.requiredDocuments',
             'appliantWorkingExperiences',

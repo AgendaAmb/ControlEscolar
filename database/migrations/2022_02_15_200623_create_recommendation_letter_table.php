@@ -83,15 +83,15 @@ class CreateRecommendationLetterTable extends Migration
             $table->string('token')->nullable();
             $table->bigInteger('answer')->nullable();
 
-            $table->string('time_to_meet')->nullable();
-            $table->string('how_meet')->nullable();
-            $table->string('kind_relationship')->nullable();
-            $table->string('experience_with_candidate')->nullable();
-            $table->string('qualification_student')->nullable();
+            $table->date('time_to_meet')->nullable();
+            $table->longText('how_meet')->nullable();
+            $table->longText('kind_relationship')->nullable();
+            $table->longText('experience_with_candidate')->nullable();
+            $table->longText('qualification_student')->nullable();
 
             //ANALISIS DE CANDIDATO
-            $table->string('special_skills')->nullable();
-            $table->string('why_recommendation')->nullable();
+            $table->longText('special_skills')->nullable();
+            $table->longText('why_recommendation')->nullable();
 
             # Estados de control
             $table->softDeletes();

@@ -20,7 +20,7 @@
           v-bind="grado"
           v-bind:key="grado.id"
           :index="index + 1"
-          :alias_academic_program="academic_program.alias"
+          :alias_academic_program.sync="academic_program.alias"
           :state.sync="grado.state"
           :cvu.sync="grado.cvu"
           :knowledge_card.sync="grado.knowledge_card"
@@ -73,10 +73,10 @@
           :archive_id="archive_id"
           :motivation.sync="motivation"
           :documentos.sync="entrance_documents"
-          :user_id="appliant.id"
-          :viewer_id="viewer.id"
-          :letters_Commitment="letters_Commitment"
-          :alias_academic_program="academic_program.alias"
+          :user_id.sync="appliant.id"
+          :viewer_id.sync="viewer.id"
+          :letters_Commitment.sync="letters_Commitment"
+          :alias_academic_program.sync="academic_program.alias"
         >
         </requisitos-ingreso>
       </details>
@@ -91,6 +91,7 @@
           v-bind="language"
           v-bind:key="language.id"
           :index="index + 1"
+          :alias_academic_program.sync="academic_program.alias"
           :state.sync="language.state"
           :language.sync="language.language"
           :institution.sync="language.institution"
@@ -202,6 +203,7 @@
           :article_name.sync="production.article_name"
           :institution.sync="production.institution"
           :post_title.sync="production.post_title"
+          :documentos.sync="curricular_documents"
           @delete-item="eliminaProduccionCientificaFromList"
         >
         </produccion-cientifica>
@@ -314,6 +316,9 @@ export default {
 
     // Documentos personales.
     personal_documents: Array,
+
+    //Documentos curriculares 
+    curricular_documents: Array,
 
     // Motivos de ingreso.
     motivation: String,

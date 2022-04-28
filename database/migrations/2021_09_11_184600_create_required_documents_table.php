@@ -83,7 +83,7 @@ class CreateRequiredDocumentsTable extends Migration
             [
                 'name' =>"5.- Título de preparatoria",
                 'type' => 'academic',
-                'label' => '05A_HighSchool_YearAppliant_Initials(LastName,Name-MiddleName',                
+                'label' => '05A_HighSchool_YearAppliant_Initials(LastName,Name-MiddleName)',                
                 'notes' => null,
                 'example' => '05A_HighSchool_2021_CJG',
                 'intention_letter' => false,
@@ -204,7 +204,7 @@ class CreateRequiredDocumentsTable extends Migration
             # 09 Application 
             [
                 'name' =>"9.- Application",
-                'type' => 'academic',
+                'type' => 'entrance',
                 'label' => '9_Application_YearApplication_initials(LastName,Names)',                
                 'notes' => null,
                 'example' => '09_Application_2021_CJG',
@@ -216,7 +216,7 @@ class CreateRequiredDocumentsTable extends Migration
              # 09 Application DAAD
              [
                 'name' =>"9A.- Application DAAD",
-                'type' => 'academic',
+                'type' => 'entrance',
                 'label' => '9A_ApplicationDAAD_YearApplication_initials(LastName,Names)',                
                 'notes' => null,
                 'example' => '09A_ApplicationDAAD_2021_CJG',
@@ -231,8 +231,8 @@ class CreateRequiredDocumentsTable extends Migration
             [
                 'name' =>"11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)",
                 'type' => 'entrance',
-                'label' => '11_CartaCompromiso_añodesolicitud_iniciales',                
-                'notes' => 'Favor de descargar, <a href="#"> dando clic aquí</a>',
+                'label' => '11_CartaCompromiso_añodesolicitud_iniciales',      
+                'notes' => null,          
                 'example' => '11_CartaCompromiso_2021_CJG',
                 'intention_letter' => false,
                 'recommendation_letter' => false,
@@ -292,7 +292,7 @@ class CreateRequiredDocumentsTable extends Migration
             # 16.- ProofExperienceDocument
             [
                 'name' =>"16.- Proof Experience Document",
-                'type' => 'curricular',
+                'type' => 'working',
                 'label' => '16_ProofExperience_YearAppliant_initials(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '15_ProofExperience_2021_CJG',
@@ -304,7 +304,7 @@ class CreateRequiredDocumentsTable extends Migration
             # 17.- ConfirmationEMP
             [
                 'name' =>"17.- ConfirmationEMP",
-                'type' => 'curricular',
+                'type' => 'working',
                 'label' => '17_ConfirmationEMP_YearAppliant_initials(Apellidos,Nombres)',                
                 'notes' => null,
                 'example' => '17_ConfirmationEMP_2021_CJG',
@@ -328,8 +328,8 @@ class CreateRequiredDocumentsTable extends Migration
             # 19.- Propuesta de proyecto
             [
                 'name' =>"19A.- Carta de recomendación",
-                'type' => 'curricular',
-                'label' => '18A_Recomendación_01_añodesolicitud_iniciales',                
+                'type' => 'recommendation',
+                'label' => '19A_Recomendación_01_añodesolicitud_iniciales',                
                 'notes' => null,
                 'example' => '18A_Recomendación_01_2021_CJG',
                 'intention_letter' => false,

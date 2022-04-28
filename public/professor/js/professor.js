@@ -424,6 +424,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -505,45 +539,152 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    requiredForAcademicProgram: function requiredForAcademicProgram() {
+      var res = true;
+
+      if (this.alias_academic_program === "maestria") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } // Documents for imarec
+      else if (this.alias_academic_program === "imarec") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "doctorado") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "enrem") {
+        switch (this.name) {
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)":
+            res = false;
+            break;
+
+          case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
+            res = false;
+            break;
+        }
+      } // return the answer accordin to academic program and name of the required document
+
+
+      return res;
+    },
     isLetterCommitment: function isLetterCommitment() {
-      if (this.name.localeCompare('11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)') == 0) {
-        //Set index in something wrong
-        this.academiLetterCommitment = 'DCA.docx'; //Have notes and its letter commit array full
-
-        if (this.notes !== null) {
-          //we recieve also the alias of academic program and compare
-          if (this.alias_academic_program != null) {
-            switch (this.academic_program.alias) {
-              case "maestria":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-
-              case "enrem":
-                this.academiLetterCommitment = 'DCA.docx';
-                break;
-
-              case "doctorado":
-                this.academiLetterCommitment = 'MCA.docx';
-                break;
-
-              case "imarec":
-                this.academiLetterCommitment = 'IMaREC.docx';
-                break;
-            }
-          }
-        } else {
-          return false;
-        } //return a value 
-
-
+      if (this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {
         return true;
-      }
+      } //return a value
 
-      return;
+
+      return false;
     },
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (this.name.localeCompare('12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') == 0) {
+      if (this.name.localeCompare("12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") == 0) {
         return true;
       }
 
@@ -567,14 +708,14 @@ __webpack_require__.r(__webpack_exports__);
       var name = e.target.files[0].name;
       this.Errores = {};
 
-      if (!name.endsWith('.pdf')) {
+      if (!name.endsWith(".pdf")) {
         this.Errores = {
-          file: 'El archivo debe de contener formato pdf.'
+          file: "El archivo debe de contener formato pdf."
         };
         return false;
       }
 
-      this.$emit('enviaDocumento', this, e.target.files[0]);
+      this.$emit("enviaDocumento", this, e.target.files[0]);
     }
   }
 });
@@ -1480,6 +1621,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     Universidades: {
       get: function get() {
+        var pai = this.country;
+        var selected_pais; // console.log(this.universidades);
+
+        if (this.universidades === null) {
+          this.paises.forEach(function (pais, indice, array) {
+            if (!pai.toString().localeCompare(pais.name.toString())) {
+              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
+              selected_pais = pais;
+            }
+          });
+          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
+        }
+
         return this.universidades;
       },
       set: function set(value) {
@@ -4465,7 +4619,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10352,17 +10506,43 @@ var render = function () {
         _vm.isLetterCommitment() === true
           ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
               _c("strong", [
-                _vm._v(" Observaciones: Descargar "),
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: _vm.notes + _vm.academiLetterCommitment,
-                      target: "_blank",
-                    },
-                  },
-                  [_vm._v("dando clic aquí")]
+                _vm._v(
+                  "\n          Observaciones: Descargar carta\n          "
                 ),
+                _vm._v(" "),
+                _vm.alias_academic_program === "maestria" ||
+                _vm.alias_academic_program === "enrem"
+                  ? _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
+                          target: "_blank",
+                        },
+                      },
+                      [_vm._v("dando clic aquí")]
+                    )
+                  : _vm.alias_academic_program === "imarec"
+                  ? _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
+                          target: "_blank",
+                        },
+                      },
+                      [_vm._v("dando clic aquí")]
+                    )
+                  : _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
+                          target: "_blank",
+                        },
+                      },
+                      [_vm._v("dando clic aquí")]
+                    ),
               ]),
             ])
           : _vm.notes !== null
@@ -10428,6 +10608,19 @@ var render = function () {
                   [_vm._v(" Ver Archivo")]
                 )
               : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "label",
+              { staticClass: "cargarArchivo d-block ml-auto my-auto" },
+              [
+                _vm._v("\n        Subir Documento\n        "),
+                _c("input", {
+                  staticClass: "form-control d-none",
+                  attrs: { type: "file" },
+                  on: { change: _vm.cargaDocumento },
+                }),
+              ]
+            ),
           ]),
     ]),
   ])
