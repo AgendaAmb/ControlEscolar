@@ -23,7 +23,7 @@ class CreateScientificProductionsTable extends Migration
 
             $table->string('type')->nullable();
             $table->string('title')->nullable();
-            $table->timestamp('publish_date')->nullable();
+            $table->string('publish_date')->nullable();
 
             # Estados de control.
             $table->string('state')->default('Incompleto');

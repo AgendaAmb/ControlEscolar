@@ -815,7 +815,8 @@ class ArchiveController extends Controller
      */
     public function updateScientificProduction(UpdateScientificProductionRequest $request)
     {
-        $type = ScientificProduction::where('id', $request->id)->value('type');
+        $scipro = ScientificProduction::where('id', $request->id);
+        $type = $scipro->value('type');
 
         # Determina si el tipo de producción científica cambió
         # y borra la producción científica anterior.
@@ -843,10 +844,10 @@ class ArchiveController extends Controller
                 $upsert_array = ['post_title' => $request->post_title];
                 break;
         }
-
+        
         # Actualiza los datos adicionales de la producción científica.
         if (count($upsert_array) > 0)
-            DB::table($request->type)->updateOrInsert($upsert_array, $identifiers);
+            DB::table($request->type)->updateOrInsert($identifiers, $upsert_array);
 
         # Actualiza los datos generales de la producción científica.
         ScientificProduction::where('id', $request->id)

@@ -2831,6 +2831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "produccion-cientifica",
   components: {
@@ -3008,9 +3009,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
-      var _this2 = this;
-
       this.errores = {};
+      var post_data = {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        type: this.type,
+        title: this.title,
+        publish_date: this.publish_date,
+        magazine_name: this.magazine_name,
+        article_name: this.article_name,
+        institution: this.institution,
+        post_title: this.post_title
+      };
+      console.log(post_data);
       axios.post("/controlescolar/solicitud/updateScientificProduction", {
         id: this.id,
         archive_id: this.archive_id,
@@ -3024,10 +3037,16 @@ __webpack_require__.r(__webpack_exports__);
         institution: this.institution,
         post_title: this.post_title
       }).then(function (response) {
-        Object.keys(response.data).forEach(function (dataKey) {
-          var event = "update:" + dataKey;
+        console.log(response.data.model); // Object.keys(response.data).forEach((dataKey) => {
+        //   var event = "update:" + dataKey;
+        //   this.$emit(event, response.data[dataKey]);
+        // });
 
-          _this2.$emit(event, response.data[dataKey]);
+        Swal.fire({
+          title: "Publicación cientifica",
+          text: "Los datos han sido actualizados",
+          showCancelButton: false,
+          icon: "success"
         });
       })["catch"](function (error) {
         Swal.fire({
@@ -3039,7 +3058,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     agregaAutor: function agregaAutor(nuevoAutor) {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
         scientific_production_id: this.id,
@@ -3047,11 +3066,11 @@ __webpack_require__.r(__webpack_exports__);
         type: this.type,
         name: nuevoAutor.Name
       }).then(function (response) {
-        Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
+        Vue.set(_this2.Authors, _this2.Authors.length - 1, response.data);
 
-        _this3.Authors.push({
+        _this2.Authors.push({
           id: -1,
-          scientific_production_id: _this3.id,
+          scientific_production_id: _this2.id,
           name: null
         });
       })["catch"](function (error) {});
@@ -13783,14 +13802,14 @@ var render = function () {
               ? _c("reporte-tecnico", {
                   attrs: {
                     title: _vm.Title,
-                    institulo: _vm.Institution,
+                    institution: _vm.Institution,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:institulo": function ($event) {
+                    "update:institution": function ($event) {
                       _vm.Institution = $event
                     },
                     "update:publish_date": function ($event) {
