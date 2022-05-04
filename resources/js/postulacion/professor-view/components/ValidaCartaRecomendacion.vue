@@ -1,17 +1,16 @@
 <template>
-  <div class="row align-items-start">
-    <div class="col ">
+  
+    <div class="col-12">
       <strong>Correo No.{{ index }} :</strong>
-    </div>
-    <!-- Campo para rellenar el correo -->
-    <input
-      type="text"
-      class="form-control "
-      :class="inputClassFor()"
-      v-model="myEmail"
-      :readonly="checkUpload() === 1"
-    />
-    <div class="col">
+      <!-- Campo para rellenar el correo -->
+      <input
+        type="text"
+        class="form-control"
+        :class="inputClassFor()"
+        v-model="myEmail"
+        :readonly="true"
+      />
+
       <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
       <template v-if="checkUpload() === 1">
         <i>Estado:</i> <i class="text-success">Completado</i>
@@ -23,16 +22,7 @@
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
       </template>
 
-      <div v-if="checkUpload() != 1" class="form-group ">
-        <button
-          @click="enviarCorreoCartaRecomendacion()"
-          class="btn btn-primary"
-        >
-          Enviar correo
-        </button>
-      </div>
-
-      <div v-else>
+      <div>
         <!-- <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
@@ -40,9 +30,8 @@
           Ver archivo
         </button> -->
       </div>
-
     </div>
-  </div>
+ 
 </template>
 
 
@@ -97,7 +86,7 @@ export default {
   props: {
     email: {
       type: String,
-      default: "example@example.com",
+      default: "",
     },
 
     recommendation_letter: {
@@ -153,7 +142,6 @@ export default {
     },
 
     enviarCorreoCartaRecomendacion() {
-
       let request;
 
       //Ya existe carta de recomendacion

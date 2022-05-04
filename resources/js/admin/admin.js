@@ -5,8 +5,12 @@
  */
 
 window.Vue = require('vue').default;
+window.Event = new Vue();
 import UsuariosCe from './components/UsuariosCe';
 import NuevoUsuario from './components/NuevoUsuario';
+import EditarUsuario from './components/EditarUsuario';
+import UsuariosCeRowTemplate from './components/UsuariosCeRowTemplate.vue';
+
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 Vue.use(GridPlugin);
@@ -29,7 +33,9 @@ const app = new Vue({
     },
 
     components: {
-        UsuariosCe,
-        NuevoUsuario
+        'usuarios-ce': UsuariosCe,
+        'nuevo-usuario':NuevoUsuario,
+        'editar-usuario':EditarUsuario,
+        'usuarios-ce-row-template': UsuariosCeRowTemplate
     }
 });

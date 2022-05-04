@@ -1,43 +1,27 @@
 <template>
   <details class="mt-1">
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
-        <h5 v-if="Type!=null" class=" font-weight-bold">
-          {{Type + ' ' + index}} 
+      <div class="col-12">
+        <h5 v-if="tipos[Type] != null" class="font-weight-bold">
+          {{ tipos[Type] + " " + index }}
         </h5>
 
-        <h5 v-else class="font-weight-bold">
-          Publicación {{index}}
-        </h5>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaProduccionCientifica"
-          class="btn btn-danger"
-          style="height: 35px; width:100%"
-        >
-          Eliminar Publicación
-        </button>
+        <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
       </div>
     </summary>
 
-   
     <div class="row mx-2">
-
       <div class="form-group col-md-4">
-        <label> Tipo de publicación: </label>
-        <select v-model="Type" class="form-control">
-          <option :value="null" selected>Escoge una opción</option>
-          <option value="articles">Publicación de artículos</option>
-          <option value="published_books">Publicación de libros</option>
-          <option value="published_chapters">Capítulos publicados</option>
-          <option value="technical_reports">Reportes técnicos</option>
-          <option value="working_memories">Memorias de trabajo</option>
-          <option value="working_documents">Documentos de trabajo</option>
-          <option value="reviews">Reseñas</option>
-        </select>
+        <input
+          v-model="Type"
+          type="text"
+          class="form-control"
+          :class="{ 'is-invalid': 'type' in errores }"
+          :readonly="true"
+        />
+        <div v-if="'type' in errores" class="invalid-feedback">
+          {{ errores.type }}
+        </div>
       </div>
 
       <div class="form-group col-md-12">
@@ -106,20 +90,8 @@
         >
         </resenia>
       </div>
-
-      <div class="col-12">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
-          </label>
-        </div>
-      <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
-        </div>
     </div>
-        <hr class="d-block" :style="ColorStrip" />
-
+    <hr class="d-block" :style="ColorStrip" />
   </details>
 </template>
 
@@ -153,7 +125,7 @@ export default {
 
   props: {
     //Index
-    index:Number,
+    index: Number,
 
     // Id de la producción científica.
     id: Number,
@@ -288,35 +260,36 @@ export default {
   },
 
   methods: {
-    guardaProduccionCientifica(evento){
-      this.enviaProduccionCientifica(evento, 'Completo');
+    guardaProduccionCientifica(evento) {
+      this.enviaProduccionCientifica(evento, "Completo");
     },
 
-     eliminaProduccionCientifica(){
-      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
-        id: this.id,
-        archive_id: this.archive_id
-      }).then(response =>{
-        
-            //Llama al padre para que elimine el item de la lista de experiencia laboral
-            this.$emit('delete-item',this.index-1);
+    eliminaProduccionCientifica() {
+      axios
+        .post("/controlescolar/solicitud/deleteScientificProduction", {
+          id: this.id,
+          archive_id: this.archive_id,
+        })
+        .then((response) => {
+          //Llama al padre para que elimine el item de la lista de experiencia laboral
+          this.$emit("delete-item", this.index - 1);
 
           Swal.fire({
-              title: "Éxito al eliminar Producción cientifica",
-              text: response.data.message, // Imprime el mensaje del controlador
-              icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Continuar",
-            });
-
-      }).catch(error=>{
+            title: "Éxito al eliminar Producción cientifica",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+        })
+        .catch((error) => {
           Swal.fire({
-              title: "Error al eliminar Experiencia laboral",
-              showCancelButton: false,
-              icon: "error",
-            });
-      }); 
+            title: "Error al eliminar Experiencia laboral",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
     },
 
     enviaProduccionCientifica(evento, estado) {
@@ -343,12 +316,12 @@ export default {
           });
         })
         .catch((error) => {
-           Swal.fire({
-              title: "Error al actualizar datos",
-              text: error.response.data,
-              showCancelButton: false,
-              icon: "error",
-            });
+          Swal.fire({
+            title: "Error al actualizar datos",
+            text: error.response.data,
+            showCancelButton: false,
+            icon: "error",
+          });
         });
     },
 

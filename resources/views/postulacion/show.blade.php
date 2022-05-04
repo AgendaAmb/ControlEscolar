@@ -31,12 +31,25 @@
 
 @push('scripts')
 
-    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb'))
-        {{-- Admin and professor view --}}
-        <script src="{{ asset('professor/js/professor.js') }}" defer></script>
+    {{-- Tendremos cuatro vistas
+        Administrador               Eliminar, agregar, modificar Cerrar expediente      components (postulaion.js)
+        Postulante                  Eliminar, agregar, modificar                        appliant-view (appliant.js)
+        Coordinador y profesor      Visualizar solamente                                professor-view (proffesor.js)
+        Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) --}}
+        
+        {{-- Admin view --}}
+    @if (Auth::user()->hasRole('admin'))
+    <script src="{{ asset('js/postulacion.js') }}" defer></script>
+        {{-- Professor view --}}
+    @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
+    <script src="{{ asset('professor/js/professor.js') }}" defer></script>
+        {{-- Appliant view --}}
+    @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador'))
+        <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
+        {{-- Control escolar and personal de apoyo view --}}
     @else
-        {{-- Student view --}}
-        <script src="{{ asset('js/postulacion.js') }}" defer></script>
+        <script src="{{ asset('appliant/js/appliant.js') }}" defer></script>
+        
     @endif
 
 

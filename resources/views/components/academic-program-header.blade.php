@@ -13,7 +13,7 @@
             {{-- Funciona en produccion --}}
             {{-- @if (Auth::user()->hasRole('aspirante_extranjero') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_local'))  --}}
             {{-- funciona para pruebas --}}
-            @if (Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) 
+            @if ((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && !Auth::user()->isWorker()) 
                 <a class="nav-link" href="{{ route('solicitud.ExpedientePostulante',['user_id' => auth()->user()->id] ) }}">Mi expediente</a>
             @endif
 
@@ -51,11 +51,13 @@
             <a href="{{ route('logout') }}" class="nav-link">logout</a>
 
             {{-- Cuadro temporal solo para mostrar la informacion del usuario --}}
-            {{-- <div>
+            <div>
                 Clave/rpe: <b>{{Auth::user()->id}}</b> Tipo de usuario: <b>{{Auth::user()->type}}</b> 
-                Roles: @foreach (Auth::user()->roles as $r)
+                Roles: 
+                @foreach (Auth::user()->roles as $r)
+                    </b>|| {{$r->name}}  ||<b>
                 @endforeach
-            </div> --}}
+            </div>
 
         </nav>
         @endauth

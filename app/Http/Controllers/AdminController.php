@@ -46,7 +46,7 @@ class AdminController extends Controller
             'academicAreas', 
             'academicEntities'
         
-        ])->worker()->paginate(100);
+        ])->worker()->paginate(10000);
 
         return new JsonResponse($users, JsonResponse::HTTP_OK);
     }
@@ -94,6 +94,35 @@ class AdminController extends Controller
         $user->academicComittes()->syncWithPivotValues($request->safe()->selected_academic_comittes, ['user_type' => $request->type]);
         $user->load(['academicAreas','academicEntities','academicComittes','roles']);
         
+        return new JsonResponse($user, JsonResponse::HTTP_CREATED);
+    }
+
+    public function updateWorker(StoreWorkerRequest $request)
+    {
+       # Busca al usuario.
+       $response = $this->miPortalService->miPortalGet('api/usuarios', [
+        'include' => 'userModules',
+        'fields[users]' => 'id',
+        'filter[id]' => $request->id,
+        ]);
+        
+        # Recolecta el resultado.
+        $data = $response->collect();
+
+        # Verifica que haya un resultado en la búsqueda.
+        if ($data->count() === 0)
+            return new JsonResponse(['id'=>'No encontrado'], JsonResponse::HTTP_NOT_FOUND);
+
+        # Verifica que el usuario pertenezca al módulo.
+        if (collect($data->first())->where('id', env('MIPORTAL_MODULE_ID'))->count() > 0)   {
+            $user = User::where('id',$request->id)->first();
+            $user->roles()->syncWithPivotValues($request->safe()->selected_roles, ['model_type' => $request->type]);
+            $user->academicAreas()->syncWithPivotValues($request->safe()->selected_academic_areas, ['user_type' => $request->type]);
+            $user->academicEntities()->syncWithPivotValues($request->safe()->selected_academic_entities, ['user_type' => $request->type]);
+            $user->academicComittes()->syncWithPivotValues($request->safe()->selected_academic_comittes, ['user_type' => $request->type]);
+            $user->load(['academicAreas','academicEntities','academicComittes','roles']);
+        }
+
         return new JsonResponse($user, JsonResponse::HTTP_CREATED);
     }
         

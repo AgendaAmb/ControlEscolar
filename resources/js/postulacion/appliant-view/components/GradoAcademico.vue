@@ -1,16 +1,16 @@
 <template>
   <details>
-    <summary class="d-flex justify-content-end">
-      <div class="col-9 justify-content-start">
-        <h4 class="align-middle mb-5 d-block font-weight-bold">
-          Nivel de escolaridad {{ index }}
-        </h4>
+    <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h4 class="font-weight-bold">Nivel de escolaridad {{ index }}</h4>
       </div>
-      <div class="col-3 justify-content-end">
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
         <button
           @click="eliminaHistorialAcademico"
           class="btn btn-danger"
-          style="height: 45px"
+          style="height: 35px; width:100%"
         >
           Eliminar Escolaridad
         </button>
@@ -152,7 +152,7 @@
             </div>
           </div>
 
-          <div  class="form-group col-lg-6">
+          <div class="form-group col-lg-6">
             <label> Universidad de estudios: </label>
             <select
               v-model="University"
@@ -295,23 +295,34 @@
         </div>
       </div>
 
-      <div class="row my-3 mb-1">
-        <div class="col ml-1">
-          <button
-            @click="actualizaHistorialAcademico"
-            class="mx-2 btn btn-primary"
-          >
-            Guardar cambios
-          </button>
+      <div class="row align-items-center mt-0 mb-0">
+        <div class="col mx-3">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores del
+            historial académico es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
         </div>
       </div>
 
+      <div class="row align-items-center mt-0 mb-3">
+        <div class="col">
+          <button
+            @click="actualizaHistorialAcademico"
+            class="mx-3 btn btn-primary"
+          >
+            Guardar Historial Academico
+          </button>
+        </div>
+      </div>
       <documento-requerido
         v-for="documento in RequiredDocuments"
         :key="documento.name"
         :archivo.sync="documento.archivo"
         :location.sync="documento.pivot.location"
         :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -395,6 +406,11 @@ export default {
 
     // Documentos requeridos en el programa académico.
     required_documents: Array,
+
+    universidades: {
+      type:Array,
+      default:null,
+    }
   },
 
   data: function () {
@@ -442,6 +458,18 @@ export default {
 
     Universidades: {
       get: function () {
+        let pai = this.country;
+
+        if(pai!=null && this.universidades === null){
+          this.paises.forEach( function(pais, indice, array) {
+            if(!pai.toString().localeCompare(pais.name.toString())){
+              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
+              this.universidades = pais.universities;
+            }
+          });
+         
+          // console.log(selected_pais.universities);
+        }
         return this.universidades;
       },
       set: function (value) {
@@ -638,7 +666,6 @@ export default {
 
       return res;
     },
- 
 
     escogePais(evento) {
       this.Universidades =
@@ -678,7 +705,6 @@ export default {
     },
 
     enviaHistorialAcademico(evento, state) {
-
       this.errores = {};
       axios
         .post("/controlescolar/solicitud/updateAcademicDegree", {

@@ -1,12 +1,11 @@
 <template>
-  <div class="form group mb-4">
+  <div class="col-12 form group mb-4">
     <label class="d-block"> Nombre del autor: </label>
-    <input type="text" :class="ClassObject" v-model="Name">
+    <input type="text" :class="ClassObject" v-model="Name"  :readonly='true'>
 
-
-    <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline ml-3"><i class="fas fa-user-plus"></i></button>
+    <!-- <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline ml-3"><i class="fas fa-user-plus"></i></button>
     <button v-if="Modifiable" @click="actualizaAutor" class="btn btn-primary d-inline ml-3"><i class="fas fa-user-shield"></i></button>
-    <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div>
+    <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div> -->
   </div>
 </template>
 

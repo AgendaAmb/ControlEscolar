@@ -17,11 +17,15 @@ mix.js('resources/js/admin/admin.js', 'public/js').vue();
 // Pre-registro
 mix.js('resources/js/pre-registro/preregistro.js', 'public/js').vue();
 
-// Postulación
+// Vistas postulación
 mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliant.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/professor-view/professor.js', 'public/professor/js').vue();
+mix.js('resources/js/postulacion/controlescolar-view/controlescolar.js', 'public/controlescolar/js').vue();
+
+// Carta de recomendacion
 mix.js('resources/js/recommendation-letter/recommendation-letter.js', 'public/js').vue();
+// Carta de intencion
 mix.js('resources/js/postulacion/intention-letter.js', 'public/js').vue();
 
 // Entrevistas

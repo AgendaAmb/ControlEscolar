@@ -1,19 +1,8 @@
 <template>
   <details>
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h4 class="font-weight-bold">Nivel de escolaridad {{ index }}</h4>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaHistorialAcademico"
-          class="btn btn-danger"
-          style="height: 35px; width:100%"
-        >
-          Eliminar Escolaridad
-        </button>
       </div>
     </summary>
     <div class="my-3 row">
@@ -24,45 +13,19 @@
       -->
         <div class="row">
           <div
-            v-if="alias_academic_program == 'doctorado'"
             class="form-group col-md-6 col-lg-4"
           >
             <label> Nivel de escolaridad: </label>
             <!-- Solo se podra seleccionar para doctorado -->
-            <select
+            <input
+              type="text"
               v-model="DegreeType"
               class="form-control"
               :class="objectForError('degree_type')"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="escolaridad in escolaridades"
-                :key="escolaridad"
-                :value="escolaridad"
-              >
-                {{ escolaridad }}
-              </option>
-            </select>
-            <div v-if="estaEnError('degree_type')" class="invalid-feedback">
-              {{ errores.degree_type }}
-            </div>
+              :readonly="true"
+            />
           </div>
-
-          <div v-else class="form-group col-md-6 col-lg-4">
-            <label> Nivel de escolaridad: </label>
-            <!-- Solo se podra seleccionar para doctorado -->
-            <select
-              v-model="DegreeType"
-              class="form-control"
-              :class="objectForError('degree_type')"
-            >
-              <option value="Licenciatura" selected>Licenciatura</option>
-            </select>
-            <div v-if="estaEnError('degree_type')" class="invalid-feedback">
-              {{ errores.degree_type }}
-            </div>
-          </div>
-
+        
           <div class="form-group col-md-6 col-lg-4">
             <label> Título obtenido: </label>
             <input
@@ -70,59 +33,28 @@
               type="text"
               class="form-control"
               :class="objectForError('degree')"
+              :readonly="true"
             />
-
-            <div v-if="estaEnError('degree')" class="invalid-feedback">
-              {{ errores.degree_type }}
-            </div>
+            
           </div>
 
           <div
-            v-if="alias_academic_program == 'imarec'"
             class="d-none d-lg-block form-group col-lg-4"
           >
             <label> Estatus: </label>
-            <select
+            <input
               v-model="Status"
+              type="text"
               class="form-control"
               :class="objectForError('status')"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="estatusEstudio in estatusEstudios_otros"
-                :key="estatusEstudio"
-                :value="estatusEstudio"
-              >
-                {{ estatusEstudio }}
-              </option>
-            </select>
+              :readonly="true"
+            />
 
             <div v-if="estaEnError('status')" class="invalid-feedback">
               {{ errores.status }}
             </div>
           </div>
 
-          <div v-else class="d-none d-lg-block form-group col-lg-4">
-            <label> Estatus: </label>
-            <select
-              v-model="Status"
-              class="form-control"
-              :class="objectForError('status')"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="estatusEstudio in estatusEstudios_PMPCA"
-                :key="estatusEstudio"
-                :value="estatusEstudio"
-              >
-                {{ estatusEstudio }}
-              </option>
-            </select>
-
-            <div v-if="estaEnError('status')" class="invalid-feedback">
-              {{ errores.status }}
-            </div>
-          </div>
         </div>
 
         <!-- 
@@ -131,22 +63,15 @@
         <div class="row">
           <div class="form-group col-lg-6">
             <label> País donde realizaste tus estudios: </label>
-            <select
-              v-model="Country"
-              class="form-control"
-              @change="escogePais"
-              :class="objectForError('country')"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="PaisEstudio in paises"
-                :key="PaisEstudio.id"
-                :value="PaisEstudio.name"
-              >
-                {{ PaisEstudio.name }}
-              </option>
-            </select>
 
+             <input
+              v-model="Country"
+              type="text"
+              class="form-control"
+              :class="objectForError('country')"
+              :readonly="true"
+            />
+           
             <div v-if="estaEnError('country')" class="invalid-feedback">
               {{ errores.country }}
             </div>
@@ -154,20 +79,13 @@
 
           <div class="form-group col-lg-6">
             <label> Universidad de estudios: </label>
-            <select
+            <input
               v-model="University"
+              type="text"
               class="form-control"
               :class="objectForError('university')"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="Universidad in Universidades"
-                :key="Universidad.id"
-                :value="Universidad.name"
-              >
-                {{ Universidad.name }}
-              </option>
-            </select>
+              :readonly="true"
+            />
 
             <div v-if="estaEnError('university')" class="invalid-feedback">
               {{ errores.university }}
@@ -181,17 +99,17 @@
         <div class="row" v-if="Status !== ''">
           <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
             <label> Número de cédula: </label>
-            <input v-model.number="Cedula" type="number" class="form-control" />
+            <input v-model.number="Cedula" type="number" class="form-control" :readonly="true" />
           </div>
 
           <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
             <label> Fecha de titulación: </label>
-            <input v-model="TitrationDate" type="date" class="form-control" />
+            <input v-model="TitrationDate" type="date" class="form-control"  :readonly="true"/>
           </div>
 
           <div v-if="Status === 'Pasante'" class="form-group col-md-6">
             <label> Fecha de obtención de pasantía: </label>
-            <input v-model="TitrationDate" type="date" class="form-control" />
+            <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
           </div>
 
           <div
@@ -199,7 +117,7 @@
             class="form-group col-md-6"
           >
             <label> Fecha de presentación de examen: </label>
-            <input v-model="TitrationDate" type="date" class="form-control" />
+            <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
           </div>
         </div>
         <!-- 
@@ -209,25 +127,34 @@
         <div class="row" v-if="degree_type === 'Maestría'">
           <div class="form-group col-md-4">
             <label> Número de CVU CONACYT: </label>
-            <input v-model.number="CVU" type="number" class="form-control" />
+            <input v-model.number="CVU" type="number" class="form-control" :readonly="true"/>
           </div>
 
           <div class="form-group col-md-4">
             <label> ¿Cuentas con una carta de reconocimiento? </label>
-            <select v-model="KnowledgeCard" class="form-control">
-              <option value="" selected>Escoge una opción</option>
-              <option value="Si">Si</option>
-              <option value="No">No</option>
-            </select>
+
+             <input
+              v-model="KnowledgeCard"
+              type="text"
+              class="form-control"
+              :class="objectForError('knowledge_card')"
+              :readonly="true"
+            />
+            
           </div>
 
           <div class="form-group col-md-4">
             <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
-            <select v-model="DigitalSignature" class="form-control">
-              <option value="" selected>Escoge una opción</option>
-              <option value="Si">Si</option>
-              <option value="No">No</option>
-            </select>
+
+             <input
+              v-model="DigitalSignature"
+              type="text"
+              class="form-control"
+              :class="objectForError('digital_signature')"
+              :readonly="true"
+            />
+
+           
           </div>
         </div>
         <!-- 
@@ -236,17 +163,12 @@
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
             <label> Promedio obtenido: </label>
+           
             <input
-              v-if="'average' in errores"
-              v-model.number="Average"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
               v-model.number="Average"
               type="number"
               class="form-control"
+              :readonly="true"
             />
 
             <div v-if="'average' in errores" class="invalid-feedback">
@@ -256,17 +178,12 @@
 
           <div class="form-group col-md-6 col-lg-4">
             <label> Calificación mínima: </label>
+            
             <input
-              v-if="'min_avg' in errores"
-              v-model.number="MinAvg"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
               v-model.number="MinAvg"
               type="number"
               class="form-control"
+              :readonly="true"
             />
 
             <div v-if="'min_avg' in errores" class="invalid-feedback">
@@ -276,17 +193,13 @@
 
           <div class="form-group col-md-6 col-lg-4">
             <label> Calificación máxima: </label>
+            
             <input
-              v-if="'max_avg' in errores"
-              v-model.number="MaxAvg"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
+              
               v-model.number="MaxAvg"
               type="number"
               class="form-control"
+              :readonly="true"
             />
             <div v-if="'max_avg' in errores" class="invalid-feedback">
               {{ errores.max_avg }}
@@ -294,28 +207,7 @@
           </div>
         </div>
       </div>
-
-      <div class="row align-items-center mt-0 mb-0">
-        <div class="col mx-3">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores del
-            historial académico es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
-          </label>
-        </div>
-      </div>
-
-      <div class="row align-items-center mt-0 mb-3">
-        <div class="col">
-          <button
-            @click="actualizaHistorialAcademico"
-            class="mx-3 btn btn-primary"
-          >
-            Guardar Historial Academico
-          </button>
-        </div>
-      </div>
+      
       <documento-requerido
         v-for="documento in RequiredDocuments"
         :key="documento.name"
@@ -407,9 +299,9 @@ export default {
     required_documents: Array,
 
     universidades: {
-      type:Array,
-      default:null,
-    }
+      type: Array,
+      default: null,
+    },
   },
 
   data: function () {
@@ -460,10 +352,10 @@ export default {
         let pai = this.country;
         let selected_pais;
         // console.log(this.universidades);
-        if(this.universidades === null){
-          this.paises.forEach( function(pais, indice, array) {
-            if(!pai.toString().localeCompare(pais.name.toString())){
-              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
+        if (this.universidades === null) {
+          this.paises.forEach(function (pais, indice, array) {
+            if (!pai.toString().localeCompare(pais.name.toString())) {
+              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");
               selected_pais = pais;
             }
           });

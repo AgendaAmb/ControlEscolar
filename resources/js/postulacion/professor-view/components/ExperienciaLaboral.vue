@@ -2,38 +2,23 @@
 
 <details>
       <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h4 class="font-weight-bold">Experiencia Laboral {{ index }}</h4>
       </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaExperienciaLaboral"
-          class="btn btn-danger"
-          style="height: 35px; width:100%"
-        >
-          Eliminar Experiencia Laboral
-        </button>
-      </div>
+     
     </summary>
 
   <div class="row">
     <h4 class="form-group col-12 my-2"></h4>
     <div class="form-group col-md-6">
       <label> Institución / Empresa:  </label>
-      <input v-model="Institution" type="text" :class="classObjectFor('institution')">
+      <input v-model="Institution" type="text" :class="classObjectFor('institution')" :readonly="true">
 
       <div v-if="estaEnError('institution')" class="invalid-feedback">{{errores.institution}}</div>
     </div>    
     <div class="form-group col-md-6">
       <label> En este puesto me desempeñé como: </label>
-      <select v-model="WorkingPosition" :class="classObjectFor('working_position')">
-        <option value="" selected>Escoge una opción</option>
-        <option value="Catedrático"> Catedrático </option>
-        <option value="Investigador"> Investigador </option>
-        <option value="Otro"> Otro </option>
-      </select>
+       <input v-model="WorkingPosition" type="text" :class="classObjectFor('working_position')" :readonly="true">
 
       <div v-if="estaEnError('working_position')" class="invalid-feedback">{{errores.working_position}}</div>
     </div>
@@ -43,13 +28,13 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label> Desde: </label>
-          <input v-model="From" type="date" :class="classObjectFor('from')">
+          <input v-model="From" type="date" :class="classObjectFor('from')" :readonly="true">
 
           <div v-if="estaEnError('from')" class="invalid-feedback">{{errores.from}}</div>
         </div>
         <div class="form-group col-md-6">
           <label> Hasta: </label>
-          <input v-model="To" type="date" :class="classObjectFor('to')">
+          <input v-model="To" type="date" :class="classObjectFor('to')"  :readonly="true">
 
           <div v-if="estaEnError('to')" class="invalid-feedback">{{errores.to}}</div>
         </div>
@@ -57,14 +42,14 @@
       <div class="row">
         <div class="form-group col-md-6">
           <label> Área de conocimiento: </label>
-          <input v-model="KnowledgeArea" type="text" :class="classObjectFor('knowledge_area')">
+          <input v-model="KnowledgeArea" type="text" :class="classObjectFor('knowledge_area')"  :readonly="true">
 
           <div v-if="estaEnError('knowledge_area')" class="invalid-feedback">{{errores.knowledge_area}}</div>
         </div>
 
         <div class="form-group col-md-6">
           <label> Campo: </label>
-          <input v-model="Field" type="text" :class="classObjectFor('field')">
+          <input v-model="Field" type="text" :class="classObjectFor('field')"  :readonly="true">
 
           <div v-if="estaEnError('field')" class="invalid-feedback">{{errores.field}}</div>
         </div>
@@ -73,28 +58,17 @@
 
     <div class="form-group my-3 col-xl-6">
       <h5><strong> Descripción del puesto: </strong></h5>
-      <textarea rows="5" v-model="WorkingPositionDescription" :class="classObjectFor('working_position_description')"></textarea>
+      <textarea rows="5" v-model="WorkingPositionDescription" :class="classObjectFor('working_position_description')" :readonly="true"></textarea>
 
       <div v-if="estaEnError('working_position_description')" class="invalid-feedback">{{errores.working_position_description}}</div>
     </div>
     <div class="form-group my-3 col-xl-6">
       <h5><strong> Logros: </strong></h5>
-      <textarea rows="5" v-model="Achievements" :class="classObjectFor('achievements')"></textarea>
-
+      <textarea rows="5" v-model="Achievements" :class="classObjectFor('achievements')" :readonly="true"></textarea>
       <div v-if="estaEnError('achievements')" class="invalid-feedback">{{errores.achievements}}</div>
     </div>
 
-     <div class="col-12">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores de la experiencia laboral correspondiente es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
-          </label>
-        </div>
-
-    <div class="col-12 my-3">
-      <button @click="guardaExperienciaLaboral" class=" btn btn-primary"> Guardar Experiencia Laboral </button>
-    </div>
+    
   </div>
     <hr class="d-block" :style="ColorStrip" />
   </details>

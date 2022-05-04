@@ -69,10 +69,10 @@ export default {
   methods: {
     buscaExpediente() {
       //Datos no completos para hacer busqueda
-      if (this.student_name == null) {
+      if (this.student_name == null || this.announcement == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
-          text: "El campo se encuentra vacio, porfavor introduzca el nombre",
+          text: "Alguno de los campos se encuentra vacio",
           icon: "error",
         });
       } else {

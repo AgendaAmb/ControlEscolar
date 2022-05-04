@@ -144,7 +144,7 @@ class User extends Authenticatable
      */
     public function isWorker(): bool
     {
-        return $this->hasAnyRole(['profesor_nb','control_escolar','personal_apoyo','admin']);
+        return $this->hasAnyRole(['profesor_colaborador','profesor_nb','control_escolar','personal_apoyo','admin']);
     }
 
     /**

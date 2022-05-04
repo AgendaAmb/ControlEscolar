@@ -2,17 +2,17 @@
   <div class="row">
     <div class="form-group col-md-4">
       <label> Título: </label>
-      <input type="text" class="form-control" v-model="Title">
+      <input type="text" class="form-control" v-model="Title"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-4">
       <label> Institución a la que se presenta el reporte: </label>
-      <input type="text" class="form-control" v-model="Institution">
+      <input type="text" class="form-control" v-model="Institution"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-4">
       <label> Fecha de publicación: </label>
-      <input type="date" class="form-control" v-model="PublishDate">
+      <input type="date" class="form-control" v-model="PublishDate"  :readonly='true'>
     </div>
   </div>
 </template>

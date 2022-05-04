@@ -110,7 +110,7 @@ class ArchiveController extends Controller
 
     public function archivesProfessor(Request $request)
     {
-        
+     
         try {
 
             $archives = QueryBuilder::for(Archive::class)
@@ -132,6 +132,11 @@ class ArchiveController extends Controller
                 $archive->appliant->middlename ?? '',
                 $archive->appliant->surname ?? '',
             ]);  
+
+            //To uppercase the name
+            $name = strtoupper($name);
+            $request->student_name = strtoupper($request->student_name);
+
             if($name === $request->student_name){
                 array_push($archives_searched,$archive);
             }

@@ -40,26 +40,7 @@
           @delete-item="eliminaHistorialAcademicoFromList"
         >
         </grado-academico>
-        <div class="row align-items-center mb-0 mt-2">
-          <div class="col-12">
-            <label>
-              <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva licenciatura
-              o maestría según corresponda
-            </label>
-          </div>
-        </div>
-        <div class="row align-items-center mt-0">
-          <div class="col-12">
-            <button
-              @click="agregaHistorialAcademico"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
-              Agregar Escolaridad
-            </button>
-          </div>
-        </div>
+        
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -106,26 +87,7 @@
           @delete-item="eliminaLenguaExtranjeraFromList"
         >
         </lengua-extranjera>
-
-        <div class="row align-items-center mb-0 mt-2">
-          <div class="col-12">
-            <label>
-              <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar un nuevo idioma
-            </label>
-          </div>
-        </div>
-        <div class="row align-items-center mt-0">
-          <div class="col-12">
-            <button
-              @click="agregaLenguaExtranjera"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
-              Agregar Idioma
-            </button>
-          </div>
-        </div>
+        
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -156,25 +118,7 @@
         >
         </experiencia-laboral>
 
-        <div class="row align-items-center mb-0 mt-2">
-          <div class="col-12">
-            <label>
-              <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva experiencia laboral
-            </label>
-          </div>
-        </div>
-        <div class="row align-items-center mt-0">
-          <div class="col-12">
-            <button
-              @click="agregaExperienciaLaboral"
-              class="btn btn-success"
-              style="height: 45px; width:250px"
-            >
-              Agregar Experiencia Laboral
-            </button>
-          </div>
-        </div>
+       
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -205,27 +149,7 @@
           @delete-item="eliminaProduccionCientificaFromList"
         >
         </produccion-cientifica>
-
-         <div class="row align-items-center mb-0 mt-2">
-          <div class="col-12">
-            <label>
-              <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica
-            </label>
-          </div>
-        </div>
-        <div class="row align-items-center mt-0">
-          <div class="col-12">
-            <button
-              @click="agregaProduccionCientifica"
-              class="btn btn-success"
-              style="height: 45px; width:250px"
-            >
-              Agregar Producción Científica
-            </button>
-          </div>
-        </div>
-            <hr class="d-block" :style="ColorStrip" />
+        <hr class="d-block" :style="ColorStrip" />
 
         <!-- Capital humano subseccion -->
         <h5 class="mt-4 d-block">
@@ -242,26 +166,7 @@
           @delete-item="eliminaCapitalHumanoFromList"
         >
         </capital-humano>
-
-        <div class="row align-items-center mb-0 mt-2">
-          <div class="col-12">
-            <label>
-              <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano
-            </label>
-          </div>
-        </div>
-        <div class="row align-items-center mt-0">
-          <div class="col-12">
-            <button
-              @click="agregaCapitalHumano"
-              class="btn btn-success"
-              style="height: 45px; width:250px"
-            >
-              Agregar Capital Humano
-            </button>
-          </div>
-        </div>
+       
         
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />

@@ -4,10 +4,10 @@
           Si no entonces esta pendiente
          -->
   <div class="container-fluid mt-2">
-    <div class="row ">
+    <div class="row mx-3 ">
       <strong>Nota: </strong>
       <p>
-         &nbsp;&nbsp;&nbsp;&nbsp;Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación.<br />
+         &nbsp;&nbsp;Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación.<br />
       </p>
     </div>
 
@@ -16,7 +16,7 @@
     <div class="row" v-if="sizeRecommendationLetter() == 0">
       <!-- Recorre la lista de correos de ejemplo, el usuario debera confirmar al aceptar -->
         <div
-          class="form-group col-md-5 mr-2 d-flex"
+          class="form-group col-6 d-flex"
           v-for="(my_email, index) in emails"
           :key="index"
         >
@@ -34,7 +34,7 @@
     </div>
 
     <div class="row" v-else-if="sizeRecommendationLetter() == 1">
-        <div class="form-group col-md-5 mr-2 d-flex">
+        <div class="form-group col-6 d-flex">
           <valida-carta-recomendacion
             :email="recommendation_letters[0].email_evaluator"
             :recommendation_letter="recommendation_letters[0]"
@@ -46,7 +46,7 @@
           </valida-carta-recomendacion>
         </div>
 
-        <div class="form-group col-md-5 ml-2 d-flex">
+        <div class="form-group col-6 d-flex">
           
           <valida-carta-recomendacion
             :email="emails[0].email"
@@ -63,7 +63,7 @@
     <div class="row " v-else>
       
         <div
-          class="form-group col-md-5 mr-2 d-flex"
+          class="form-group col-6 d-flex"
           v-for="(rl, index) in recommendation_letters"
           :key="index"
         >

@@ -51,16 +51,11 @@
       <!-- Es carta de intención  -->
       <div v-if="isIntentionLetter() === true " class="form-group col-3 my-auto">
         <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
-        <!-- Tendra que subir los archios -->
-        <label class=" cargarArchivo d-block ml-auto my-auto">
-          Subir Documento
-          <input type="file" class="form-control d-none" @change="cargaDocumento">
-        </label>
-      </div>
-
-      <div v-else class="form-group col-3 my-auto">    
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
-        <label class="cargarArchivo d-block ml-auto my-auto">
+        <!-- El profesor podra subir la carta de intencion -->
+         <label
+          v-if="isStudentOrNot() === true"
+          class="cargarArchivo d-block ml-auto my-auto"
+        >
           Subir Documento
           <input
             type="file"
@@ -68,6 +63,11 @@
             @change="cargaDocumento"
           />
         </label>
+      </div>
+
+      <div v-else class="form-group col-3 my-auto">    
+        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
+        
       </div>   
 
     </div>

@@ -1,27 +1,31 @@
 <template>
   <details class="mt-1">
-    <summary class="d-flex justify-content-end">
-      <div class="col-9 justify-content-start">
-        <h5 v-if="Type!=null" class="align-middle mb-5 d-block font-weight-bold">
-          {{Type + ' ' + index}} 
+    <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-3 col-md-6 ms-5">
+        <h5 v-if="tipos[Type]!=null" class=" font-weight-bold">
+          {{tipos[Type] + ' ' + index}} 
         </h5>
 
-        <h5 v-else class="align-middle mb-5 d-block font-weight-bold">
+        <h5 v-else class="font-weight-bold">
           Publicación {{index}}
         </h5>
       </div>
-      <div class="col-3" >
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
         <button
           @click="eliminaProduccionCientifica"
           class="btn btn-danger"
-          style="height: 45px"
+          style="height: 35px; width:100%"
         >
           Eliminar Publicación
         </button>
       </div>
     </summary>
-    <div class="row">
-      <h4 class="form-group col-12 my-1"></h4>
+
+   
+    <div class="row mx-2">
+
       <div class="form-group col-md-4">
         <label> Tipo de publicación: </label>
         <select v-model="Type" class="form-control">
@@ -102,10 +106,33 @@
         >
         </resenia>
       </div>
-      <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class="mx-2 btn btn-primary"> Guardar cambios </button>
+
+      <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
         </div>
+      <div class="col-12 my-3">
+        <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
+        </div>
+
+        
     </div>
+    <documento-requerido
+        v-for="documento in RequiredDocuments"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program"
+        v-bind="documento"
+        @enviaDocumento="cargaDocumento"
+      >
+      </documento-requerido>
+        <hr class="d-block mt-2" :style="ColorStrip" />
+
   </details>
 </template>
 
@@ -140,6 +167,9 @@ export default {
   props: {
     //Index
     index:Number,
+
+    // Documentos requeridos
+    required_documents: Array,
 
     // Id de la producción científica.
     id: Number,
@@ -176,6 +206,14 @@ export default {
   },
 
   computed: {
+    RequiredDocuments: {
+      get() {
+        return this.required_documents;
+      },
+      set(newVal) {
+        this.$emit("update:required_documents", newVal);
+      },
+    },
     State: {
       get() {
         return this.state;

@@ -1,58 +1,98 @@
 <template>
-    <tr class="text-center">
-        <td>{{ data.id }}</td>
-        <td>
-            <ul>
-                <li v-for="role in data.roles" :key="role.id">{{ role.name }}</li>
-            </ul>
-        </td>
-        <td>
-            <ul>
-                <li v-for="area in data.academic_areas" :key="area.id">{{area.name}}</li>
-            </ul>
-        </td>
-        <td>
-            <ul>
-                <li v-for="entity in data.academic_entities" :key="entity.id">{{entity.name}}</li>
-            </ul>
-        </td>
-        <td>
-            <button @click="modificaTrabajador" class="btn btn-primary"> Modificar </button>
-            <button @click="eliminaTrabajador" class="btn btn-danger"> Eliminar </button>
-        </td>
-    </tr>
+  <tr class="text-center">
+    <td>{{ id }}</td>
+    <td>
+      <ul>
+        <li v-for="role in roles" :key="role.id" class="list-group">
+          {{ role.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li v-for="area in academic_areas" :key="area.id" class="list-group">
+          {{ area.name }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li
+          v-for="entity in academic_entities"
+          :key="entity.id"
+          class="list-group"
+        >
+          {{ entity.name }}
+        </li>
+      </ul>
+    </td>
+    <td class="row">
+      <div class="col-6">
+
+        <button
+          @click.prevent="toggleModal(id,roles,academic_areas,academic_entities, academic_comittes)"
+          class="btn btn-primary"
+        >
+          Modificar
+        </button>
+      </div>
+      <div class="col-6">
+        <button @click="eliminaTrabajador" class="btn btn-danger">
+          Eliminar
+        </button>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <script>
 export default {
-    name: 'usuarios-ce-row-template',
+  name: "usuarios-ce-row-template",
 
-    data() {
-        return {
-            data: {},
-        }
+  props: {
+    id: {
+      type: Number,
+      default: null,
     },
-
-    methods: {
-        /**
-         * Envía una notificación para modificar al usuario
-         */
-        modificaTrabajador(){
-            this.$emit('updateWorker', {
-                id: data.id,
-                type: data.type
-            });
-        },
-
-        /**
-         * Envía una notificación para eliminar al trabajador
-         */
-        eliminaTrabajador(){
-            this.$emit('deleteWorker', {
-                id: data.id,
-                type: data.type
-            });
-        }
+    roles: {
+      type: Array,
+      default: null,
+    },
+    academic_areas: {
+      type: Array,
+      default: null,
+    },
+    academic_entities: {
+      type: Array,
+      default: null,
+    },
+    academic_comittes:{
+      type:Array,
+      default: null,
     }
-}
+  },
+
+  data() {
+    return {
+      data: {},
+    };
+  },
+
+  methods: {
+    /**
+     * Envía una notificación para modificar al usuario
+     */
+    toggleModal(id,roles,academic_areas,academic_entities, academic_comittes) {
+      Event.$emit('toggleModal', id,roles,academic_areas,academic_entities, academic_comittes);
+    },
+    
+
+    /**
+     * Envía una notificación para eliminar al trabajador
+     */
+    eliminaTrabajador() {
+      this.$emit("deleteWorker", this.id);
+    },
+  },
+};
 </script>

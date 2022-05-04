@@ -1647,16 +1647,14 @@ __webpack_require__.r(__webpack_exports__);
     Universidades: {
       get: function get() {
         var pai = this.country;
-        var selected_pais; // console.log(this.universidades);
 
-        if (this.universidades === null) {
+        if (pai != null && this.universidades === null) {
           this.paises.forEach(function (pais, indice, array) {
             if (!pai.toString().localeCompare(pais.name.toString())) {
               // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
-              selected_pais = pais;
+              this.universidades = pais.universities;
             }
-          });
-          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
+          }); // console.log(selected_pais.universities);
         }
 
         return this.universidades;
@@ -3917,8 +3915,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4719,7 +4715,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10409,7 +10405,7 @@ var render = function () {
           _vm._l(_vm.emails, function (my_email, index) {
             return _c(
               "div",
-              { key: index, staticClass: "form-group col-md-5 mr-2 d-flex" },
+              { key: index, staticClass: "form-group col-6 d-flex" },
               [
                 _c("valida-carta-recomendacion", {
                   attrs: {
@@ -10430,7 +10426,7 @@ var render = function () {
       ? _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { staticClass: "form-group col-md-5 mr-2 d-flex" },
+            { staticClass: "form-group col-6 d-flex" },
             [
               _c("valida-carta-recomendacion", {
                 attrs: {
@@ -10449,7 +10445,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "form-group col-md-5 ml-2 d-flex" },
+            { staticClass: "form-group col-6 d-flex" },
             [
               _c("valida-carta-recomendacion", {
                 attrs: {
@@ -10469,7 +10465,7 @@ var render = function () {
           _vm._l(_vm.recommendation_letters, function (rl, index) {
             return _c(
               "div",
-              { key: index, staticClass: "form-group col-md-5 mr-2 d-flex" },
+              { key: index, staticClass: "form-group col-6 d-flex" },
               [
                 _c("valida-carta-recomendacion", {
                   attrs: {
@@ -10495,12 +10491,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
+    return _c("div", { staticClass: "row mx-3 " }, [
       _c("strong", [_vm._v("Nota: ")]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n           Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación."
+          "\n         Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación."
         ),
         _c("br"),
       ]),
@@ -10627,7 +10623,10 @@ var render = function () {
                       "a",
                       {
                         staticClass: "verArchivo d-block my-2 ml-auto",
-                        attrs: { href: _vm.location, target: "_blank" },
+                        attrs: {
+                          href: "expediente/" + _vm.location,
+                          target: "_blank",
+                        },
                       },
                       [_vm._v("\n        Ver Archivo")]
                     )
@@ -10654,7 +10653,10 @@ var render = function () {
                       "a",
                       {
                         staticClass: "verArchivo d-block my-2 ml-auto",
-                        attrs: { href: _vm.location, target: "_blank" },
+                        attrs: {
+                          href: "expediente/" + _vm.location,
+                          target: "_blank",
+                        },
                       },
                       [_vm._v("\n        Ver Archivo")]
                     )
@@ -13581,11 +13583,11 @@ var render = function () {
         { staticClass: "d-flex justify-content-start align-items-center my-2" },
         [
           _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
-            _vm.Type != null
+            _vm.tipos[_vm.Type] != null
               ? _c("h5", { staticClass: " font-weight-bold" }, [
                   _vm._v(
                     "\n        " +
-                      _vm._s(_vm.Type + " " + _vm.index) +
+                      _vm._s(_vm.tipos[_vm.Type] + " " + _vm.index) +
                       " \n      "
                   ),
                 ])
@@ -14754,80 +14756,76 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row align-items-start" }, [
-    _c("div", { staticClass: "col " }, [
+  return _c(
+    "div",
+    { staticClass: "col-12" },
+    [
       _c("strong", [_vm._v("Correo No." + _vm._s(_vm.index) + " :")]),
-    ]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.myEmail,
-          expression: "myEmail",
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.myEmail,
+            expression: "myEmail",
+          },
+        ],
+        staticClass: "form-control",
+        class: _vm.inputClassFor(),
+        attrs: { type: "text", readonly: _vm.checkUpload() === 1 },
+        domProps: { value: _vm.myEmail },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.myEmail = $event.target.value
+          },
         },
-      ],
-      staticClass: "form-control ",
-      class: _vm.inputClassFor(),
-      attrs: { type: "text", readonly: _vm.checkUpload() === 1 },
-      domProps: { value: _vm.myEmail },
-      on: {
-        input: function ($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.myEmail = $event.target.value
-        },
-      },
-    }),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col" },
-      [
-        _vm.checkUpload() === 1
-          ? [
-              _c("i", [_vm._v("Estado:")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "text-success" }, [_vm._v("Completado")]),
-            ]
-          : _vm.checkUpload() === 0
-          ? [
-              _c("i", [_vm._v("Estado:")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "text-warning" }, [
-                _vm._v("Esperando respuesta"),
-              ]),
-            ]
-          : [
-              _c("i", [_vm._v("Estado:")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "text-danger" }, [
-                _vm._v("No se ha enviado correo"),
-              ]),
-            ],
-        _vm._v(" "),
-        _vm.checkUpload() != 1
-          ? _c("div", { staticClass: "form-group " }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  on: {
-                    click: function ($event) {
-                      return _vm.enviarCorreoCartaRecomendacion()
-                    },
+      }),
+      _vm._v(" "),
+      _vm.checkUpload() === 1
+        ? [
+            _c("i", [_vm._v("Estado:")]),
+            _vm._v(" "),
+            _c("i", { staticClass: "text-success" }, [_vm._v("Completado")]),
+          ]
+        : _vm.checkUpload() === 0
+        ? [
+            _c("i", [_vm._v("Estado:")]),
+            _vm._v(" "),
+            _c("i", { staticClass: "text-warning" }, [
+              _vm._v("Esperando respuesta"),
+            ]),
+          ]
+        : [
+            _c("i", [_vm._v("Estado:")]),
+            _vm._v(" "),
+            _c("i", { staticClass: "text-danger" }, [
+              _vm._v("No se ha enviado correo"),
+            ]),
+          ],
+      _vm._v(" "),
+      _vm.checkUpload() != 1
+        ? _c("div", { staticClass: "form-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function ($event) {
+                    return _vm.enviarCorreoCartaRecomendacion()
                   },
                 },
-                [_vm._v("\n        Enviar correo\n      ")]
-              ),
-            ])
-          : _c("div"),
-      ],
-      2
-    ),
-  ])
+              },
+              [_vm._v("\n      Enviar correo\n    ")]
+            ),
+          ])
+        : _c("div"),
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

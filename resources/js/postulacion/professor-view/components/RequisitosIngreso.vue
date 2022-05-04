@@ -3,22 +3,9 @@
     <div class="form-row my-4">
       <div class="col-12">
         <label> Explica los motivos, por los cuales deseas aplicar al programa académico </label>          
-        <textarea v-model="Motivation" class="form-control" rows="8"></textarea>
+        <textarea v-model="Motivation" class="form-control" rows="8" :readonly="true"></textarea>
       </div>
-
-      
-        <div class="col-12 mt-3 mb-0">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir en esta sección
-          </label>
-        </div>
-   
-
-      <div class="col-12 mt-0 mb-3">
-        <button @click="actualizaExposicionMotivos" class="btn btn-primary"> Guardar exposición de motivos </button>
-      </div>
+        
       
       <documento-requerido v-for="documento in Documentos" :key="documento.name"
         :user_id="user_id"

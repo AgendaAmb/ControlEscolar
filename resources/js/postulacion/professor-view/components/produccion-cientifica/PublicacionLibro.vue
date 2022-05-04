@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label> Título del libro: </label>
-      <input type="text" class="form-control" v-model="TituloLibro">
+      <input type="text" class="form-control" v-model="TituloLibro"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-6">
@@ -11,7 +11,7 @@
 
     <div class="form-group col-md-6">
       <label> Año de publicación: </label>
-      <input type="text" class="form-control" v-model="AnoPublicacion">
+      <input type="text" class="form-control" v-model="AnoPublicacion"  :readonly='true'>
     </div>
   </div>
 </template>

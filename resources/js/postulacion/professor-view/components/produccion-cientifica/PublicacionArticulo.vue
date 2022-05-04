@@ -2,7 +2,7 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label> Título del artículo: </label>
-      <input type="text" class="form-control" v-model="ArticleName">
+      <input type="text" class="form-control" v-model="ArticleName" :readonly='true'>
     </div>
 
     <div class="form-group col-md-6">
@@ -11,12 +11,12 @@
 
     <div class="form-group col-md-6">
       <label> Nombre de la revista: </label>
-      <input type="text" class="form-control" v-model="MagazineName">
+      <input type="text" class="form-control" v-model="MagazineName"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-6">
       <label> Fecha de publicación: </label>
-      <input type="date" class="form-control" v-model="PublishDate">
+      <input type="date" class="form-control" v-model="PublishDate"  :readonly='true'>
     </div>
   </div>
 </template>
