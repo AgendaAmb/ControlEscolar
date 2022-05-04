@@ -48,7 +48,7 @@
           :publish_date.sync="PublishDate"
         >
           <!-- Otros autores del artículos -->
-          <autor-articulo
+          <autor-articulo 
             v-for="author in Authors"
             v-bind="author"
             v-bind:key="author.id"
@@ -77,7 +77,7 @@
         <reporte-tecnico
           v-else-if="tipos[Type] === 'Reportes técnicos'"
           :title.sync="Title"
-          :institulo.sync="Institution"
+          :institution.sync="Institution"
           :publish_date.sync="PublishDate"
         >
         </reporte-tecnico>
@@ -138,6 +138,7 @@
 
 
 <script>
+import { colGroup } from "@syncfusion/ej2-grids";
 import DocumentoRequerido from "./DocumentoRequerido.vue";
 import InputSolicitud from "./InputSolicitud.vue";
 import AutorArticulo from "./produccion-cientifica/AutorArticulo.vue";
@@ -346,6 +347,23 @@ export default {
     enviaProduccionCientifica(evento, estado) {
       this.errores = {};
 
+      let post_data = {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        type: this.type,
+        title: this.title,
+        publish_date: this.publish_date,
+        magazine_name: this.magazine_name,
+        article_name: this.article_name,
+        institution: this.institution,
+        post_title: this.post_title,
+      };
+
+      console.log(post_data);
+      
+
       axios
         .post("/controlescolar/solicitud/updateScientificProduction", {
           id: this.id,
@@ -361,10 +379,17 @@ export default {
           post_title: this.post_title,
         })
         .then((response) => {
-          Object.keys(response.data).forEach((dataKey) => {
-            var event = "update:" + dataKey;
-            this.$emit(event, response.data[dataKey]);
-          });
+          console.log(response.data.model);
+          // Object.keys(response.data).forEach((dataKey) => {
+          //   var event = "update:" + dataKey;
+          //   this.$emit(event, response.data[dataKey]);
+          // });
+          Swal.fire({
+              title: "Publicación cientifica",
+              text: "Los datos han sido actualizados",
+              showCancelButton: false,
+              icon: "success",
+            });
         })
         .catch((error) => {
            Swal.fire({

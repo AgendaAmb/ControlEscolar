@@ -14,6 +14,16 @@ const academic_comittes = @json($academic_comittes);
 @endsection
 
 @section('main')
+<div class="content">
+
+    <editar-usuario
+    :roles="roles" 
+    :academic_areas="academic_areas" 
+    :academic_entities="academic_entities"
+    :academic_comittes="academic_comittes"
+    >
+    </editar-usuario>
+
 <usuarios-ce
     :roles="roles" 
     :academic_areas="academic_areas" 
@@ -21,6 +31,8 @@ const academic_comittes = @json($academic_comittes);
     :academic_comittes="academic_comittes"
     >
 </usuarios-ce>
+
+
 
 <nuevo-usuario 
     :roles="roles" 
@@ -30,13 +42,9 @@ const academic_comittes = @json($academic_comittes);
     >
 </nuevo-usuario>
 
-<editar-usuario 
-    :roles="roles" 
-    :academic_areas="academic_areas" 
-    :academic_entities="academic_entities"
-    :academic_comittes="academic_comittes"
-    >
-</editar-usuario>
+</div>
+
+
 
 @endsection
 
