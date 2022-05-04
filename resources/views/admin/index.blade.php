@@ -21,6 +21,7 @@ const academic_comittes = @json($academic_comittes);
     :academic_comittes="academic_comittes"
     >
 </usuarios-ce>
+
 <nuevo-usuario 
     :roles="roles" 
     :academic_areas="academic_areas" 
