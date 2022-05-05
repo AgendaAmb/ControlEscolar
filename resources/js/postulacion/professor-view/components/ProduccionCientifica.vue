@@ -61,7 +61,7 @@
         <reporte-tecnico
           v-else-if="tipos[Type] === 'Reportes técnicos'"
           :title.sync="Title"
-          :institulo.sync="Institution"
+          :institution.sync="Institution"
           :publish_date.sync="PublishDate"
         >
         </reporte-tecnico>

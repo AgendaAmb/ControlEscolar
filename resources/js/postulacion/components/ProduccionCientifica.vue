@@ -347,22 +347,21 @@ export default {
     enviaProduccionCientifica(evento, estado) {
       this.errores = {};
 
-      let post_data = {
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        language: this.language,
-        type: this.type,
-        title: this.title,
-        publish_date: this.publish_date,
-        magazine_name: this.magazine_name,
-        article_name: this.article_name,
-        institution: this.institution,
-        post_title: this.post_title,
-      };
+      // let post_data = {
+      //   id: this.id,
+      //   archive_id: this.archive_id,
+      //   state: estado,
+      //   language: this.language,
+      //   type: this.type,
+      //   title: this.title,
+      //   publish_date: this.publish_date,
+      //   magazine_name: this.magazine_name,
+      //   article_name: this.article_name,
+      //   institution: this.institution,
+      //   post_title: this.post_title,
+      // };
 
-      console.log(post_data);
-      
+      // console.log(post_data);
 
       axios
         .post("/controlescolar/solicitud/updateScientificProduction", {
@@ -379,7 +378,7 @@ export default {
           post_title: this.post_title,
         })
         .then((response) => {
-          console.log(response.data.model);
+          // console.log(response.data.model);
           // Object.keys(response.data).forEach((dataKey) => {
           //   var event = "update:" + dataKey;
           //   this.$emit(event, response.data[dataKey]);
