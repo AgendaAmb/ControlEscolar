@@ -3162,8 +3162,22 @@ __webpack_require__.r(__webpack_exports__);
         archive_id: this.archive_id,
         motivation: this.motivation
       }).then(function (response) {
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "La exposición de motivos se ha guardado correctamente",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar"
+        });
         _this.Motivation = response.data.motivation;
       })["catch"](function (error) {
+        Swal.fire({
+          title: ":( Error al actualizar exposición de motivos",
+          showCancelButton: false,
+          icon: "error"
+        });
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
           Vue.set(_this.errores, key, errores[key][0]);

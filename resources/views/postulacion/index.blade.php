@@ -6,7 +6,23 @@
 @extends('layouts.app')
 
 @section('main')
-    @hasanyrole('admin|control_escolar')
+    @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') ||  Auth::user()->id === 15641)
+        <search-archive-form :academic_programs="academic_programs" v-on:archives-found="updateArchives">
+        </search-archive-form>
+        <archives>
+            <archive v-for="(archive,index) in archives" :index="index + 1" v-bind="archive">
+            </archive>
+        </archives>
+    @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
+        <search-archive-input :academic_programs="academic_programs" v-on:archives-found="updateArchives">
+        </search-archive-input>
+        <archives>
+            <archive v-for="(archive,index) in archives" :index="index + 1" v-bind="archive">
+            </archive>
+        </archives>
+    @endif
+
+    {{-- @hasanyrole('admin|control_escolar')
         <search-archive-form :academic_programs="academic_programs" v-on:archives-found="updateArchives">
         </search-archive-form>
         <archives>
@@ -22,7 +38,7 @@
             <archive v-for="(archive,index) in archives" :index="index + 1" v-bind="archive">
             </archive>
         </archives>
-    @endhasanyrole
+    @endhasanyrole --}}
 @endsection
 
 @push('scripts')

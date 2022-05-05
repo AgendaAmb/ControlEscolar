@@ -35,21 +35,20 @@
         Administrador               Eliminar, agregar, modificar Cerrar expediente      components (postulaion.js)
         Postulante                  Eliminar, agregar, modificar                        appliant-view (appliant.js)
         Coordinador y profesor      Visualizar solamente                                professor-view (proffesor.js)
-        Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) --}}
-        
-        {{-- Admin view --}}
+        Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) 15641 --}}
+    {{-- Admin view --}}
     @if (Auth::user()->hasRole('admin'))
-    <script src="{{ asset('js/postulacion.js') }}" defer></script>
+        <script src="{{ asset('js/postulacion.js') }}" defer></script>
         {{-- Professor view --}}
-    @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
-    <script src="{{ asset('professor/js/professor.js') }}" defer></script>
-        {{-- Appliant view --}}
-    @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador'))
+    @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641)
         <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
+    @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
+        <script src="{{ asset('professor/js/professor.js') }}" defer></script>
+        {{-- Appliant view --}}
+
         {{-- Control escolar and personal de apoyo view --}}
     @else
         <script src="{{ asset('appliant/js/appliant.js') }}" defer></script>
-        
     @endif
 
 

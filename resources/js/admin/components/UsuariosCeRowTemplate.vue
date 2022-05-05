@@ -85,7 +85,7 @@ export default {
      * Envía una notificación para modificar al usuario
      */
     toggleModal(id,roles,academic_areas,academic_entities, academic_comittes) {
-      window.Event.$emit('toggleModal', id,roles,academic_areas,academic_entities, academic_comittes);
+      Event.$emit('toggleModal', id,roles,academic_areas,academic_entities, academic_comittes);
       console.log('Seleccione editar');
     },
     

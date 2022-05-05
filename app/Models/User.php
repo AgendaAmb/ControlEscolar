@@ -172,6 +172,11 @@ class User extends Authenticatable
         )->select('id', 'name');
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * A model may have multiple academic areas.
      */

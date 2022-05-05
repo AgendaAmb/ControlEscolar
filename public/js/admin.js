@@ -315,9 +315,9 @@ var Ajax = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Animation": () => (/* binding */ Animation),
-/* harmony export */   "enableRipple": () => (/* binding */ enableRipple),
+/* harmony export */   "rippleEffect": () => (/* binding */ rippleEffect),
 /* harmony export */   "isRippleEnabled": () => (/* binding */ isRippleEnabled),
-/* harmony export */   "rippleEffect": () => (/* binding */ rippleEffect)
+/* harmony export */   "enableRipple": () => (/* binding */ enableRipple)
 /* harmony export */ });
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom */ "./node_modules/@syncfusion/ej2-base/src/dom.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./node_modules/@syncfusion/ej2-base/src/base.js");
@@ -1675,9 +1675,9 @@ var ChildProperty = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Component": () => (/* binding */ Component),
+/* harmony export */   "versionBasedStatePersistence": () => (/* binding */ versionBasedStatePersistence),
 /* harmony export */   "enableVersionBasedPersistence": () => (/* binding */ enableVersionBasedPersistence),
-/* harmony export */   "versionBasedStatePersistence": () => (/* binding */ versionBasedStatePersistence)
+/* harmony export */   "Component": () => (/* binding */ Component)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
 /* harmony import */ var _module_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module-loader */ "./node_modules/@syncfusion/ej2-base/src/module-loader.js");
@@ -2169,26 +2169,26 @@ var Component = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addClass": () => (/* binding */ addClass),
-/* harmony export */   "append": () => (/* binding */ append),
-/* harmony export */   "attributes": () => (/* binding */ attributes),
-/* harmony export */   "classList": () => (/* binding */ classList),
-/* harmony export */   "cloneNode": () => (/* binding */ cloneNode),
-/* harmony export */   "closest": () => (/* binding */ closest),
-/* harmony export */   "containsClass": () => (/* binding */ containsClass),
 /* harmony export */   "createElement": () => (/* binding */ createElement),
-/* harmony export */   "detach": () => (/* binding */ detach),
-/* harmony export */   "getAttributeOrDefault": () => (/* binding */ getAttributeOrDefault),
-/* harmony export */   "includeInnerHTML": () => (/* binding */ includeInnerHTML),
-/* harmony export */   "isVisible": () => (/* binding */ isVisible),
-/* harmony export */   "matches": () => (/* binding */ matches),
-/* harmony export */   "prepend": () => (/* binding */ prepend),
-/* harmony export */   "remove": () => (/* binding */ remove),
+/* harmony export */   "addClass": () => (/* binding */ addClass),
 /* harmony export */   "removeClass": () => (/* binding */ removeClass),
+/* harmony export */   "isVisible": () => (/* binding */ isVisible),
+/* harmony export */   "prepend": () => (/* binding */ prepend),
+/* harmony export */   "append": () => (/* binding */ append),
+/* harmony export */   "detach": () => (/* binding */ detach),
+/* harmony export */   "remove": () => (/* binding */ remove),
+/* harmony export */   "attributes": () => (/* binding */ attributes),
 /* harmony export */   "select": () => (/* binding */ select),
 /* harmony export */   "selectAll": () => (/* binding */ selectAll),
+/* harmony export */   "closest": () => (/* binding */ closest),
+/* harmony export */   "siblings": () => (/* binding */ siblings),
+/* harmony export */   "getAttributeOrDefault": () => (/* binding */ getAttributeOrDefault),
 /* harmony export */   "setStyleAttribute": () => (/* binding */ setStyleAttribute),
-/* harmony export */   "siblings": () => (/* binding */ siblings)
+/* harmony export */   "classList": () => (/* binding */ classList),
+/* harmony export */   "matches": () => (/* binding */ matches),
+/* harmony export */   "includeInnerHTML": () => (/* binding */ includeInnerHTML),
+/* harmony export */   "containsClass": () => (/* binding */ containsClass),
+/* harmony export */   "cloneNode": () => (/* binding */ cloneNode)
 /* harmony export */ });
 /* harmony import */ var _event_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event-handler */ "./node_modules/@syncfusion/ej2-base/src/event-handler.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
@@ -2673,8 +2673,8 @@ function cloneNode(element, deep) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Draggable": () => (/* binding */ Draggable),
-/* harmony export */   "Position": () => (/* binding */ Position)
+/* harmony export */   "Position": () => (/* binding */ Position),
+/* harmony export */   "Draggable": () => (/* binding */ Draggable)
 /* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./node_modules/@syncfusion/ej2-base/src/base.js");
 /* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./browser */ "./node_modules/@syncfusion/ej2-base/src/browser.js");
@@ -4050,107 +4050,107 @@ var HijriParser;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IntlBase": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.IntlBase),
+/* harmony export */   "blazorCultureFormats": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.blazorCultureFormats),
 /* harmony export */   "Ajax": () => (/* reexport safe */ _ajax__WEBPACK_IMPORTED_MODULE_1__.Ajax),
 /* harmony export */   "Animation": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.Animation),
+/* harmony export */   "enableRipple": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.enableRipple),
+/* harmony export */   "isRippleEnabled": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.isRippleEnabled),
+/* harmony export */   "rippleEffect": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.rippleEffect),
 /* harmony export */   "Base": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.Base),
+/* harmony export */   "getComponent": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.getComponent),
+/* harmony export */   "removeChildInstance": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.removeChildInstance),
 /* harmony export */   "Browser": () => (/* reexport safe */ _browser__WEBPACK_IMPORTED_MODULE_4__.Browser),
+/* harmony export */   "Component": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.Component),
+/* harmony export */   "enableVersionBasedPersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.enableVersionBasedPersistence),
+/* harmony export */   "versionBasedStatePersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.versionBasedStatePersistence),
 /* harmony export */   "ChildProperty": () => (/* reexport safe */ _child_property__WEBPACK_IMPORTED_MODULE_6__.ChildProperty),
+/* harmony export */   "Draggable": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Draggable),
+/* harmony export */   "Position": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Position),
+/* harmony export */   "Droppable": () => (/* reexport safe */ _droppable__WEBPACK_IMPORTED_MODULE_8__.Droppable),
+/* harmony export */   "EventHandler": () => (/* reexport safe */ _event_handler__WEBPACK_IMPORTED_MODULE_9__.EventHandler),
+/* harmony export */   "Internationalization": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.Internationalization),
+/* harmony export */   "cldrData": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.cldrData),
+/* harmony export */   "defaultCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCulture),
+/* harmony export */   "defaultCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCurrencyCode),
+/* harmony export */   "enableRtl": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.enableRtl),
+/* harmony export */   "getDefaultDateObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getDefaultDateObject),
+/* harmony export */   "getNumberDependable": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumberDependable),
+/* harmony export */   "getNumericObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumericObject),
+/* harmony export */   "loadCldr": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.loadCldr),
+/* harmony export */   "onIntlChange": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.onIntlChange),
+/* harmony export */   "rightToLeft": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.rightToLeft),
+/* harmony export */   "setCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCulture),
+/* harmony export */   "setCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCurrencyCode),
+/* harmony export */   "KeyboardEvents": () => (/* reexport safe */ _keyboard__WEBPACK_IMPORTED_MODULE_11__.KeyboardEvents),
+/* harmony export */   "L10n": () => (/* reexport safe */ _l10n__WEBPACK_IMPORTED_MODULE_12__.L10n),
+/* harmony export */   "ModuleLoader": () => (/* reexport safe */ _module_loader__WEBPACK_IMPORTED_MODULE_13__.ModuleLoader),
 /* harmony export */   "Collection": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Collection),
 /* harmony export */   "CollectionFactory": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.CollectionFactory),
 /* harmony export */   "Complex": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Complex),
 /* harmony export */   "ComplexFactory": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.ComplexFactory),
-/* harmony export */   "Component": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.Component),
 /* harmony export */   "CreateBuilder": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.CreateBuilder),
-/* harmony export */   "Draggable": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Draggable),
-/* harmony export */   "Droppable": () => (/* reexport safe */ _droppable__WEBPACK_IMPORTED_MODULE_8__.Droppable),
 /* harmony export */   "Event": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Event),
-/* harmony export */   "EventHandler": () => (/* reexport safe */ _event_handler__WEBPACK_IMPORTED_MODULE_9__.EventHandler),
-/* harmony export */   "HijriParser": () => (/* reexport safe */ _hijri_parser__WEBPACK_IMPORTED_MODULE_16__.HijriParser),
-/* harmony export */   "Internationalization": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.Internationalization),
-/* harmony export */   "IntlBase": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.IntlBase),
-/* harmony export */   "KeyboardEvents": () => (/* reexport safe */ _keyboard__WEBPACK_IMPORTED_MODULE_11__.KeyboardEvents),
-/* harmony export */   "L10n": () => (/* reexport safe */ _l10n__WEBPACK_IMPORTED_MODULE_12__.L10n),
-/* harmony export */   "ModuleLoader": () => (/* reexport safe */ _module_loader__WEBPACK_IMPORTED_MODULE_13__.ModuleLoader),
 /* harmony export */   "NotifyPropertyChanges": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.NotifyPropertyChanges),
-/* harmony export */   "Observer": () => (/* reexport safe */ _observer__WEBPACK_IMPORTED_MODULE_20__.Observer),
-/* harmony export */   "Position": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Position),
 /* harmony export */   "Property": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Property),
-/* harmony export */   "SanitizeHtmlHelper": () => (/* reexport safe */ _sanitize_helper__WEBPACK_IMPORTED_MODULE_21__.SanitizeHtmlHelper),
 /* harmony export */   "SwipeSettings": () => (/* reexport safe */ _touch__WEBPACK_IMPORTED_MODULE_15__.SwipeSettings),
 /* harmony export */   "Touch": () => (/* reexport safe */ _touch__WEBPACK_IMPORTED_MODULE_15__.Touch),
-/* harmony export */   "addClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.addClass),
-/* harmony export */   "addInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.addInstance),
-/* harmony export */   "append": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.append),
-/* harmony export */   "attributes": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.attributes),
-/* harmony export */   "blazorCultureFormats": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.blazorCultureFormats),
+/* harmony export */   "HijriParser": () => (/* reexport safe */ _hijri_parser__WEBPACK_IMPORTED_MODULE_16__.HijriParser),
 /* harmony export */   "blazorTemplates": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.blazorTemplates),
-/* harmony export */   "classList": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.classList),
-/* harmony export */   "cldrData": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.cldrData),
-/* harmony export */   "cloneNode": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.cloneNode),
-/* harmony export */   "closest": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.closest),
-/* harmony export */   "compareElementParent": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.compareElementParent),
 /* harmony export */   "compile": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.compile),
-/* harmony export */   "containsClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.containsClass),
-/* harmony export */   "createElement": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.createElement),
+/* harmony export */   "getRandomId": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getRandomId),
+/* harmony export */   "getTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getTemplateEngine),
+/* harmony export */   "resetBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.resetBlazorTemplate),
+/* harmony export */   "setTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.setTemplateEngine),
+/* harmony export */   "updateBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.updateBlazorTemplate),
+/* harmony export */   "addInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.addInstance),
+/* harmony export */   "compareElementParent": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.compareElementParent),
 /* harmony export */   "createInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.createInstance),
 /* harmony export */   "debounce": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.debounce),
-/* harmony export */   "defaultCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCulture),
-/* harmony export */   "defaultCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCurrencyCode),
 /* harmony export */   "deleteObject": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.deleteObject),
-/* harmony export */   "detach": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.detach),
 /* harmony export */   "disableBlazorMode": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.disableBlazorMode),
 /* harmony export */   "enableBlazorMode": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.enableBlazorMode),
-/* harmony export */   "enableRipple": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.enableRipple),
-/* harmony export */   "enableRtl": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.enableRtl),
-/* harmony export */   "enableVersionBasedPersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.enableVersionBasedPersistence),
 /* harmony export */   "extend": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.extend),
 /* harmony export */   "formatUnit": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.formatUnit),
-/* harmony export */   "getAttributeOrDefault": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.getAttributeOrDefault),
-/* harmony export */   "getComponent": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.getComponent),
-/* harmony export */   "getDefaultDateObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getDefaultDateObject),
 /* harmony export */   "getElement": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getElement),
 /* harmony export */   "getEnumValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getEnumValue),
 /* harmony export */   "getInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getInstance),
-/* harmony export */   "getNumberDependable": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumberDependable),
-/* harmony export */   "getNumericObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumericObject),
-/* harmony export */   "getRandomId": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getRandomId),
-/* harmony export */   "getTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getTemplateEngine),
 /* harmony export */   "getUniqueID": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getUniqueID),
 /* harmony export */   "getValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getValue),
-/* harmony export */   "includeInnerHTML": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.includeInnerHTML),
 /* harmony export */   "isBlazor": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isBlazor),
 /* harmony export */   "isNullOrUndefined": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isNullOrUndefined),
 /* harmony export */   "isObject": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isObject),
 /* harmony export */   "isObjectArray": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isObjectArray),
-/* harmony export */   "isRippleEnabled": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.isRippleEnabled),
 /* harmony export */   "isUndefined": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isUndefined),
-/* harmony export */   "isVisible": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.isVisible),
-/* harmony export */   "loadCldr": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.loadCldr),
-/* harmony export */   "matches": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.matches),
 /* harmony export */   "merge": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.merge),
-/* harmony export */   "onIntlChange": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.onIntlChange),
-/* harmony export */   "prepend": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.prepend),
 /* harmony export */   "print": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.print),
 /* harmony export */   "queryParams": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.queryParams),
-/* harmony export */   "remove": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.remove),
-/* harmony export */   "removeChildInstance": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.removeChildInstance),
-/* harmony export */   "removeClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.removeClass),
-/* harmony export */   "resetBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.resetBlazorTemplate),
-/* harmony export */   "rightToLeft": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.rightToLeft),
-/* harmony export */   "rippleEffect": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.rippleEffect),
-/* harmony export */   "select": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.select),
-/* harmony export */   "selectAll": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.selectAll),
-/* harmony export */   "setCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCulture),
-/* harmony export */   "setCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCurrencyCode),
 /* harmony export */   "setImmediate": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.setImmediate),
-/* harmony export */   "setStyleAttribute": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.setStyleAttribute),
-/* harmony export */   "setTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.setTemplateEngine),
 /* harmony export */   "setValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.setValue),
-/* harmony export */   "siblings": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.siblings),
 /* harmony export */   "throwError": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.throwError),
 /* harmony export */   "uniqueID": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.uniqueID),
-/* harmony export */   "updateBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.updateBlazorTemplate),
-/* harmony export */   "versionBasedStatePersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.versionBasedStatePersistence)
+/* harmony export */   "addClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.addClass),
+/* harmony export */   "append": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.append),
+/* harmony export */   "attributes": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.attributes),
+/* harmony export */   "classList": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.classList),
+/* harmony export */   "cloneNode": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.cloneNode),
+/* harmony export */   "closest": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.closest),
+/* harmony export */   "containsClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.containsClass),
+/* harmony export */   "createElement": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.createElement),
+/* harmony export */   "detach": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.detach),
+/* harmony export */   "getAttributeOrDefault": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.getAttributeOrDefault),
+/* harmony export */   "includeInnerHTML": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.includeInnerHTML),
+/* harmony export */   "isVisible": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.isVisible),
+/* harmony export */   "matches": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.matches),
+/* harmony export */   "prepend": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.prepend),
+/* harmony export */   "remove": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.remove),
+/* harmony export */   "removeClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.removeClass),
+/* harmony export */   "select": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.select),
+/* harmony export */   "selectAll": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.selectAll),
+/* harmony export */   "setStyleAttribute": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.setStyleAttribute),
+/* harmony export */   "siblings": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.siblings),
+/* harmony export */   "Observer": () => (/* reexport safe */ _observer__WEBPACK_IMPORTED_MODULE_20__.Observer),
+/* harmony export */   "SanitizeHtmlHelper": () => (/* reexport safe */ _sanitize_helper__WEBPACK_IMPORTED_MODULE_21__.SanitizeHtmlHelper)
 /* harmony export */ });
 /* harmony import */ var _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./intl/intl-base */ "./node_modules/@syncfusion/ej2-base/src/intl/intl-base.js");
 /* harmony import */ var _ajax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ajax */ "./node_modules/@syncfusion/ej2-base/src/ajax.js");
@@ -4212,19 +4212,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Internationalization": () => (/* binding */ Internationalization),
+/* harmony export */   "onIntlChange": () => (/* binding */ onIntlChange),
+/* harmony export */   "rightToLeft": () => (/* binding */ rightToLeft),
 /* harmony export */   "cldrData": () => (/* binding */ cldrData),
 /* harmony export */   "defaultCulture": () => (/* binding */ defaultCulture),
 /* harmony export */   "defaultCurrencyCode": () => (/* binding */ defaultCurrencyCode),
-/* harmony export */   "enableRtl": () => (/* binding */ enableRtl),
-/* harmony export */   "getDefaultDateObject": () => (/* binding */ getDefaultDateObject),
-/* harmony export */   "getNumberDependable": () => (/* binding */ getNumberDependable),
-/* harmony export */   "getNumericObject": () => (/* binding */ getNumericObject),
-/* harmony export */   "loadCldr": () => (/* binding */ loadCldr),
-/* harmony export */   "onIntlChange": () => (/* binding */ onIntlChange),
-/* harmony export */   "rightToLeft": () => (/* binding */ rightToLeft),
+/* harmony export */   "Internationalization": () => (/* binding */ Internationalization),
 /* harmony export */   "setCulture": () => (/* binding */ setCulture),
-/* harmony export */   "setCurrencyCode": () => (/* binding */ setCurrencyCode)
+/* harmony export */   "setCurrencyCode": () => (/* binding */ setCurrencyCode),
+/* harmony export */   "loadCldr": () => (/* binding */ loadCldr),
+/* harmony export */   "enableRtl": () => (/* binding */ enableRtl),
+/* harmony export */   "getNumericObject": () => (/* binding */ getNumericObject),
+/* harmony export */   "getNumberDependable": () => (/* binding */ getNumberDependable),
+/* harmony export */   "getDefaultDateObject": () => (/* binding */ getDefaultDateObject)
 /* harmony export */ });
 /* harmony import */ var _intl_date_formatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./intl/date-formatter */ "./node_modules/@syncfusion/ej2-base/src/intl/date-formatter.js");
 /* harmony import */ var _intl_number_formatter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./intl/number-formatter */ "./node_modules/@syncfusion/ej2-base/src/intl/number-formatter.js");
@@ -4540,9 +4540,9 @@ function getDefaultDateObject(mode) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateFormat": () => (/* binding */ DateFormat),
 /* harmony export */   "basicPatterns": () => (/* binding */ basicPatterns),
-/* harmony export */   "datePartMatcher": () => (/* binding */ datePartMatcher)
+/* harmony export */   "datePartMatcher": () => (/* binding */ datePartMatcher),
+/* harmony export */   "DateFormat": () => (/* binding */ DateFormat)
 /* harmony export */ });
 /* harmony import */ var _parser_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parser-base */ "./node_modules/@syncfusion/ej2-base/src/intl/parser-base.js");
 /* harmony import */ var _intl_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./intl-base */ "./node_modules/@syncfusion/ej2-base/src/intl/intl-base.js");
@@ -5310,8 +5310,8 @@ var DateParser = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IntlBase": () => (/* binding */ IntlBase),
-/* harmony export */   "blazorCultureFormats": () => (/* binding */ blazorCultureFormats)
+/* harmony export */   "blazorCultureFormats": () => (/* binding */ blazorCultureFormats),
+/* harmony export */   "IntlBase": () => (/* binding */ IntlBase)
 /* harmony export */ });
 /* harmony import */ var _internationalization__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../internationalization */ "./node_modules/@syncfusion/ej2-base/src/internationalization.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
@@ -7934,14 +7934,14 @@ var ModuleLoader = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Collection": () => (/* binding */ Collection),
-/* harmony export */   "CollectionFactory": () => (/* binding */ CollectionFactory),
+/* harmony export */   "Property": () => (/* binding */ Property),
 /* harmony export */   "Complex": () => (/* binding */ Complex),
 /* harmony export */   "ComplexFactory": () => (/* binding */ ComplexFactory),
-/* harmony export */   "CreateBuilder": () => (/* binding */ CreateBuilder),
+/* harmony export */   "Collection": () => (/* binding */ Collection),
+/* harmony export */   "CollectionFactory": () => (/* binding */ CollectionFactory),
 /* harmony export */   "Event": () => (/* binding */ Event),
 /* harmony export */   "NotifyPropertyChanges": () => (/* binding */ NotifyPropertyChanges),
-/* harmony export */   "Property": () => (/* binding */ Property)
+/* harmony export */   "CreateBuilder": () => (/* binding */ CreateBuilder)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
 
@@ -8971,12 +8971,12 @@ var SanitizeHtmlHelper = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "blazorTemplates": () => (/* binding */ blazorTemplates),
-/* harmony export */   "compile": () => (/* binding */ compile),
 /* harmony export */   "getRandomId": () => (/* binding */ getRandomId),
-/* harmony export */   "getTemplateEngine": () => (/* binding */ getTemplateEngine),
+/* harmony export */   "compile": () => (/* binding */ compile),
+/* harmony export */   "updateBlazorTemplate": () => (/* binding */ updateBlazorTemplate),
 /* harmony export */   "resetBlazorTemplate": () => (/* binding */ resetBlazorTemplate),
 /* harmony export */   "setTemplateEngine": () => (/* binding */ setTemplateEngine),
-/* harmony export */   "updateBlazorTemplate": () => (/* binding */ updateBlazorTemplate)
+/* harmony export */   "getTemplateEngine": () => (/* binding */ getTemplateEngine)
 /* harmony export */ });
 /* harmony import */ var _template__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./template */ "./node_modules/@syncfusion/ej2-base/src/template.js");
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom */ "./node_modules/@syncfusion/ej2-base/src/dom.js");
@@ -9153,8 +9153,8 @@ var engineObj = { compile: new Engine().compile };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "compile": () => (/* binding */ compile),
-/* harmony export */   "expression": () => (/* binding */ expression)
+/* harmony export */   "expression": () => (/* binding */ expression),
+/* harmony export */   "compile": () => (/* binding */ compile)
 /* harmony export */ });
 /**
  * Template Engine
@@ -9807,31 +9807,31 @@ var Touch = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addInstance": () => (/* binding */ addInstance),
-/* harmony export */   "compareElementParent": () => (/* binding */ compareElementParent),
-/* harmony export */   "createInstance": () => (/* binding */ createInstance),
-/* harmony export */   "debounce": () => (/* binding */ debounce),
-/* harmony export */   "deleteObject": () => (/* binding */ deleteObject),
 /* harmony export */   "disableBlazorMode": () => (/* binding */ disableBlazorMode),
-/* harmony export */   "enableBlazorMode": () => (/* binding */ enableBlazorMode),
-/* harmony export */   "extend": () => (/* binding */ extend),
-/* harmony export */   "formatUnit": () => (/* binding */ formatUnit),
-/* harmony export */   "getElement": () => (/* binding */ getElement),
-/* harmony export */   "getEnumValue": () => (/* binding */ getEnumValue),
-/* harmony export */   "getInstance": () => (/* binding */ getInstance),
-/* harmony export */   "getUniqueID": () => (/* binding */ getUniqueID),
-/* harmony export */   "getValue": () => (/* binding */ getValue),
-/* harmony export */   "isBlazor": () => (/* binding */ isBlazor),
-/* harmony export */   "isNullOrUndefined": () => (/* binding */ isNullOrUndefined),
-/* harmony export */   "isObject": () => (/* binding */ isObject),
-/* harmony export */   "isObjectArray": () => (/* binding */ isObjectArray),
-/* harmony export */   "isUndefined": () => (/* binding */ isUndefined),
-/* harmony export */   "merge": () => (/* binding */ merge),
-/* harmony export */   "print": () => (/* binding */ print),
-/* harmony export */   "queryParams": () => (/* binding */ queryParams),
+/* harmony export */   "createInstance": () => (/* binding */ createInstance),
 /* harmony export */   "setImmediate": () => (/* binding */ setImmediate),
+/* harmony export */   "getValue": () => (/* binding */ getValue),
 /* harmony export */   "setValue": () => (/* binding */ setValue),
+/* harmony export */   "deleteObject": () => (/* binding */ deleteObject),
+/* harmony export */   "isObject": () => (/* binding */ isObject),
+/* harmony export */   "getEnumValue": () => (/* binding */ getEnumValue),
+/* harmony export */   "merge": () => (/* binding */ merge),
+/* harmony export */   "extend": () => (/* binding */ extend),
+/* harmony export */   "isNullOrUndefined": () => (/* binding */ isNullOrUndefined),
+/* harmony export */   "isUndefined": () => (/* binding */ isUndefined),
+/* harmony export */   "getUniqueID": () => (/* binding */ getUniqueID),
+/* harmony export */   "debounce": () => (/* binding */ debounce),
+/* harmony export */   "queryParams": () => (/* binding */ queryParams),
+/* harmony export */   "isObjectArray": () => (/* binding */ isObjectArray),
+/* harmony export */   "compareElementParent": () => (/* binding */ compareElementParent),
 /* harmony export */   "throwError": () => (/* binding */ throwError),
+/* harmony export */   "print": () => (/* binding */ print),
+/* harmony export */   "formatUnit": () => (/* binding */ formatUnit),
+/* harmony export */   "enableBlazorMode": () => (/* binding */ enableBlazorMode),
+/* harmony export */   "isBlazor": () => (/* binding */ isBlazor),
+/* harmony export */   "getElement": () => (/* binding */ getElement),
+/* harmony export */   "getInstance": () => (/* binding */ getInstance),
+/* harmony export */   "addInstance": () => (/* binding */ addInstance),
 /* harmony export */   "uniqueID": () => (/* binding */ uniqueID)
 /* harmony export */ });
 var instances = 'ej2_instances';
@@ -10346,8 +10346,8 @@ function combineArray(num) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Button": () => (/* binding */ Button),
-/* harmony export */   "buttonObserver": () => (/* binding */ buttonObserver)
+/* harmony export */   "buttonObserver": () => (/* binding */ buttonObserver),
+/* harmony export */   "Button": () => (/* binding */ Button)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _common_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/common */ "./node_modules/@syncfusion/ej2-buttons/src/common/common.js");
@@ -10708,13 +10708,13 @@ var Button = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createCheckBox": () => (/* binding */ createCheckBox),
-/* harmony export */   "destroy": () => (/* binding */ destroy),
+/* harmony export */   "wrapperInitialize": () => (/* binding */ wrapperInitialize),
 /* harmony export */   "getTextNode": () => (/* binding */ getTextNode),
+/* harmony export */   "destroy": () => (/* binding */ destroy),
 /* harmony export */   "preRender": () => (/* binding */ preRender),
+/* harmony export */   "createCheckBox": () => (/* binding */ createCheckBox),
 /* harmony export */   "rippleMouseHandler": () => (/* binding */ rippleMouseHandler),
-/* harmony export */   "setHiddenInput": () => (/* binding */ setHiddenInput),
-/* harmony export */   "wrapperInitialize": () => (/* binding */ wrapperInitialize)
+/* harmony export */   "setHiddenInput": () => (/* binding */ setHiddenInput)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 
@@ -10899,16 +10899,16 @@ function setHiddenInput(proxy, wrap) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Adaptor": () => (/* binding */ Adaptor),
-/* harmony export */   "CacheAdaptor": () => (/* binding */ CacheAdaptor),
-/* harmony export */   "CustomDataAdaptor": () => (/* binding */ CustomDataAdaptor),
-/* harmony export */   "GraphQLAdaptor": () => (/* binding */ GraphQLAdaptor),
 /* harmony export */   "JsonAdaptor": () => (/* binding */ JsonAdaptor),
+/* harmony export */   "UrlAdaptor": () => (/* binding */ UrlAdaptor),
 /* harmony export */   "ODataAdaptor": () => (/* binding */ ODataAdaptor),
 /* harmony export */   "ODataV4Adaptor": () => (/* binding */ ODataV4Adaptor),
-/* harmony export */   "RemoteSaveAdaptor": () => (/* binding */ RemoteSaveAdaptor),
-/* harmony export */   "UrlAdaptor": () => (/* binding */ UrlAdaptor),
 /* harmony export */   "WebApiAdaptor": () => (/* binding */ WebApiAdaptor),
-/* harmony export */   "WebMethodAdaptor": () => (/* binding */ WebMethodAdaptor)
+/* harmony export */   "WebMethodAdaptor": () => (/* binding */ WebMethodAdaptor),
+/* harmony export */   "RemoteSaveAdaptor": () => (/* binding */ RemoteSaveAdaptor),
+/* harmony export */   "CustomDataAdaptor": () => (/* binding */ CustomDataAdaptor),
+/* harmony export */   "GraphQLAdaptor": () => (/* binding */ GraphQLAdaptor),
+/* harmony export */   "CacheAdaptor": () => (/* binding */ CacheAdaptor)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -13907,8 +13907,8 @@ var Deferred = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Predicate": () => (/* binding */ Predicate),
-/* harmony export */   "Query": () => (/* binding */ Query)
+/* harmony export */   "Query": () => (/* binding */ Query),
+/* harmony export */   "Predicate": () => (/* binding */ Predicate)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-data/src/util.js");
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
@@ -17589,8 +17589,8 @@ var Data = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Print": () => (/* binding */ Print),
-/* harmony export */   "getCloneProperties": () => (/* binding */ getCloneProperties)
+/* harmony export */   "getCloneProperties": () => (/* binding */ getCloneProperties),
+/* harmony export */   "Print": () => (/* binding */ Print)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _base_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base/util */ "./node_modules/@syncfusion/ej2-grids/src/grid/base/util.js");
@@ -22359,279 +22359,279 @@ var ShowHide = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "accessPredicate": () => (/* binding */ accessPredicate),
+/* harmony export */   "created": () => (/* binding */ created),
+/* harmony export */   "destroyed": () => (/* binding */ destroyed),
+/* harmony export */   "load": () => (/* binding */ load),
+/* harmony export */   "rowDataBound": () => (/* binding */ rowDataBound),
+/* harmony export */   "queryCellInfo": () => (/* binding */ queryCellInfo),
+/* harmony export */   "headerCellInfo": () => (/* binding */ headerCellInfo),
 /* harmony export */   "actionBegin": () => (/* binding */ actionBegin),
 /* harmony export */   "actionComplete": () => (/* binding */ actionComplete),
 /* harmony export */   "actionFailure": () => (/* binding */ actionFailure),
-/* harmony export */   "addBegin": () => (/* binding */ addBegin),
-/* harmony export */   "addComplete": () => (/* binding */ addComplete),
-/* harmony export */   "addDeleteAction": () => (/* binding */ addDeleteAction),
-/* harmony export */   "afterContentRender": () => (/* binding */ afterContentRender),
-/* harmony export */   "appendInfiniteContent": () => (/* binding */ appendInfiniteContent),
-/* harmony export */   "autoCol": () => (/* binding */ autoCol),
+/* harmony export */   "dataBound": () => (/* binding */ dataBound),
+/* harmony export */   "rowSelecting": () => (/* binding */ rowSelecting),
+/* harmony export */   "rowSelected": () => (/* binding */ rowSelected),
+/* harmony export */   "rowDeselecting": () => (/* binding */ rowDeselecting),
+/* harmony export */   "rowDeselected": () => (/* binding */ rowDeselected),
+/* harmony export */   "cellSelecting": () => (/* binding */ cellSelecting),
+/* harmony export */   "cellSelected": () => (/* binding */ cellSelected),
+/* harmony export */   "cellDeselecting": () => (/* binding */ cellDeselecting),
+/* harmony export */   "cellDeselected": () => (/* binding */ cellDeselected),
+/* harmony export */   "columnSelecting": () => (/* binding */ columnSelecting),
+/* harmony export */   "columnSelected": () => (/* binding */ columnSelected),
+/* harmony export */   "columnDeselecting": () => (/* binding */ columnDeselecting),
+/* harmony export */   "columnDeselected": () => (/* binding */ columnDeselected),
+/* harmony export */   "columnDragStart": () => (/* binding */ columnDragStart),
+/* harmony export */   "columnDrag": () => (/* binding */ columnDrag),
+/* harmony export */   "columnDrop": () => (/* binding */ columnDrop),
+/* harmony export */   "rowDragStartHelper": () => (/* binding */ rowDragStartHelper),
+/* harmony export */   "rowDragStart": () => (/* binding */ rowDragStart),
+/* harmony export */   "rowDrag": () => (/* binding */ rowDrag),
+/* harmony export */   "rowDrop": () => (/* binding */ rowDrop),
+/* harmony export */   "beforePrint": () => (/* binding */ beforePrint),
+/* harmony export */   "printComplete": () => (/* binding */ printComplete),
+/* harmony export */   "detailDataBound": () => (/* binding */ detailDataBound),
+/* harmony export */   "toolbarClick": () => (/* binding */ toolbarClick),
 /* harmony export */   "batchAdd": () => (/* binding */ batchAdd),
 /* harmony export */   "batchCancel": () => (/* binding */ batchCancel),
 /* harmony export */   "batchDelete": () => (/* binding */ batchDelete),
-/* harmony export */   "batchEditFormRendered": () => (/* binding */ batchEditFormRendered),
-/* harmony export */   "batchForm": () => (/* binding */ batchForm),
-/* harmony export */   "beforeAutoFill": () => (/* binding */ beforeAutoFill),
 /* harmony export */   "beforeBatchAdd": () => (/* binding */ beforeBatchAdd),
-/* harmony export */   "beforeBatchCancel": () => (/* binding */ beforeBatchCancel),
 /* harmony export */   "beforeBatchDelete": () => (/* binding */ beforeBatchDelete),
 /* harmony export */   "beforeBatchSave": () => (/* binding */ beforeBatchSave),
-/* harmony export */   "beforeCellFocused": () => (/* binding */ beforeCellFocused),
-/* harmony export */   "beforeCheckboxRenderer": () => (/* binding */ beforeCheckboxRenderer),
-/* harmony export */   "beforeCheckboxRendererQuery": () => (/* binding */ beforeCheckboxRendererQuery),
-/* harmony export */   "beforeCopy": () => (/* binding */ beforeCopy),
-/* harmony export */   "beforeCustomFilterOpen": () => (/* binding */ beforeCustomFilterOpen),
-/* harmony export */   "beforeDataBound": () => (/* binding */ beforeDataBound),
-/* harmony export */   "beforeExcelExport": () => (/* binding */ beforeExcelExport),
-/* harmony export */   "beforeFltrcMenuOpen": () => (/* binding */ beforeFltrcMenuOpen),
-/* harmony export */   "beforeFragAppend": () => (/* binding */ beforeFragAppend),
-/* harmony export */   "beforeOpenAdaptiveDialog": () => (/* binding */ beforeOpenAdaptiveDialog),
-/* harmony export */   "beforeOpenColumnChooser": () => (/* binding */ beforeOpenColumnChooser),
-/* harmony export */   "beforePaste": () => (/* binding */ beforePaste),
-/* harmony export */   "beforePdfExport": () => (/* binding */ beforePdfExport),
-/* harmony export */   "beforePrint": () => (/* binding */ beforePrint),
-/* harmony export */   "beforeRefreshOnDataChange": () => (/* binding */ beforeRefreshOnDataChange),
-/* harmony export */   "beforeStartEdit": () => (/* binding */ beforeStartEdit),
 /* harmony export */   "beginEdit": () => (/* binding */ beginEdit),
-/* harmony export */   "bulkSave": () => (/* binding */ bulkSave),
-/* harmony export */   "cBoxFltrBegin": () => (/* binding */ cBoxFltrBegin),
-/* harmony export */   "cBoxFltrComplete": () => (/* binding */ cBoxFltrComplete),
-/* harmony export */   "cancelBegin": () => (/* binding */ cancelBegin),
-/* harmony export */   "captionActionComplete": () => (/* binding */ captionActionComplete),
-/* harmony export */   "cellDeselected": () => (/* binding */ cellDeselected),
-/* harmony export */   "cellDeselecting": () => (/* binding */ cellDeselecting),
 /* harmony export */   "cellEdit": () => (/* binding */ cellEdit),
-/* harmony export */   "cellFocused": () => (/* binding */ cellFocused),
 /* harmony export */   "cellSave": () => (/* binding */ cellSave),
 /* harmony export */   "cellSaved": () => (/* binding */ cellSaved),
-/* harmony export */   "cellSelected": () => (/* binding */ cellSelected),
-/* harmony export */   "cellSelecting": () => (/* binding */ cellSelecting),
-/* harmony export */   "cellSelectionBegin": () => (/* binding */ cellSelectionBegin),
-/* harmony export */   "cellSelectionComplete": () => (/* binding */ cellSelectionComplete),
-/* harmony export */   "checkBoxChange": () => (/* binding */ checkBoxChange),
-/* harmony export */   "checkScrollReset": () => (/* binding */ checkScrollReset),
-/* harmony export */   "click": () => (/* binding */ click),
-/* harmony export */   "closeBatch": () => (/* binding */ closeBatch),
-/* harmony export */   "closeEdit": () => (/* binding */ closeEdit),
-/* harmony export */   "closeFilterDialog": () => (/* binding */ closeFilterDialog),
-/* harmony export */   "closeInline": () => (/* binding */ closeInline),
-/* harmony export */   "colGroupRefresh": () => (/* binding */ colGroupRefresh),
-/* harmony export */   "columnChooserCancelBtnClick": () => (/* binding */ columnChooserCancelBtnClick),
-/* harmony export */   "columnChooserOpened": () => (/* binding */ columnChooserOpened),
-/* harmony export */   "columnDataStateChange": () => (/* binding */ columnDataStateChange),
-/* harmony export */   "columnDeselected": () => (/* binding */ columnDeselected),
-/* harmony export */   "columnDeselecting": () => (/* binding */ columnDeselecting),
-/* harmony export */   "columnDrag": () => (/* binding */ columnDrag),
-/* harmony export */   "columnDragStart": () => (/* binding */ columnDragStart),
-/* harmony export */   "columnDragStop": () => (/* binding */ columnDragStop),
-/* harmony export */   "columnDrop": () => (/* binding */ columnDrop),
-/* harmony export */   "columnMenuClick": () => (/* binding */ columnMenuClick),
-/* harmony export */   "columnMenuOpen": () => (/* binding */ columnMenuOpen),
-/* harmony export */   "columnPositionChanged": () => (/* binding */ columnPositionChanged),
-/* harmony export */   "columnSelected": () => (/* binding */ columnSelected),
-/* harmony export */   "columnSelecting": () => (/* binding */ columnSelecting),
-/* harmony export */   "columnSelectionBegin": () => (/* binding */ columnSelectionBegin),
-/* harmony export */   "columnSelectionComplete": () => (/* binding */ columnSelectionComplete),
-/* harmony export */   "columnVisibilityChanged": () => (/* binding */ columnVisibilityChanged),
-/* harmony export */   "columnWidthChanged": () => (/* binding */ columnWidthChanged),
-/* harmony export */   "columnsPrepared": () => (/* binding */ columnsPrepared),
-/* harmony export */   "commandClick": () => (/* binding */ commandClick),
-/* harmony export */   "componentRendered": () => (/* binding */ componentRendered),
-/* harmony export */   "contentReady": () => (/* binding */ contentReady),
-/* harmony export */   "contextMenuClick": () => (/* binding */ contextMenuClick),
-/* harmony export */   "contextMenuOpen": () => (/* binding */ contextMenuOpen),
-/* harmony export */   "createVirtualValidationForm": () => (/* binding */ createVirtualValidationForm),
-/* harmony export */   "created": () => (/* binding */ created),
-/* harmony export */   "crudAction": () => (/* binding */ crudAction),
-/* harmony export */   "customFilterClose": () => (/* binding */ customFilterClose),
-/* harmony export */   "dataBound": () => (/* binding */ dataBound),
-/* harmony export */   "dataReady": () => (/* binding */ dataReady),
-/* harmony export */   "dataSourceChanged": () => (/* binding */ dataSourceChanged),
-/* harmony export */   "dataSourceModified": () => (/* binding */ dataSourceModified),
-/* harmony export */   "dataStateChange": () => (/* binding */ dataStateChange),
-/* harmony export */   "dblclick": () => (/* binding */ dblclick),
-/* harmony export */   "deleteBegin": () => (/* binding */ deleteBegin),
-/* harmony export */   "deleteComplete": () => (/* binding */ deleteComplete),
-/* harmony export */   "destroy": () => (/* binding */ destroy),
-/* harmony export */   "destroyChildGrid": () => (/* binding */ destroyChildGrid),
-/* harmony export */   "destroyForm": () => (/* binding */ destroyForm),
-/* harmony export */   "destroyed": () => (/* binding */ destroyed),
-/* harmony export */   "detailDataBound": () => (/* binding */ detailDataBound),
-/* harmony export */   "detailIndentCellInfo": () => (/* binding */ detailIndentCellInfo),
-/* harmony export */   "detailStateChange": () => (/* binding */ detailStateChange),
-/* harmony export */   "dialogDestroy": () => (/* binding */ dialogDestroy),
-/* harmony export */   "doubleTap": () => (/* binding */ doubleTap),
-/* harmony export */   "editBegin": () => (/* binding */ editBegin),
-/* harmony export */   "editComplete": () => (/* binding */ editComplete),
-/* harmony export */   "editNextValCell": () => (/* binding */ editNextValCell),
-/* harmony export */   "editReset": () => (/* binding */ editReset),
 /* harmony export */   "endAdd": () => (/* binding */ endAdd),
 /* harmony export */   "endDelete": () => (/* binding */ endDelete),
 /* harmony export */   "endEdit": () => (/* binding */ endEdit),
-/* harmony export */   "enterKeyHandler": () => (/* binding */ enterKeyHandler),
-/* harmony export */   "excelAggregateQueryCellInfo": () => (/* binding */ excelAggregateQueryCellInfo),
-/* harmony export */   "excelExportComplete": () => (/* binding */ excelExportComplete),
-/* harmony export */   "excelHeaderQueryCellInfo": () => (/* binding */ excelHeaderQueryCellInfo),
-/* harmony export */   "excelQueryCellInfo": () => (/* binding */ excelQueryCellInfo),
-/* harmony export */   "expandChildGrid": () => (/* binding */ expandChildGrid),
-/* harmony export */   "exportDataBound": () => (/* binding */ exportDataBound),
-/* harmony export */   "exportDetailDataBound": () => (/* binding */ exportDetailDataBound),
-/* harmony export */   "exportGroupCaption": () => (/* binding */ exportGroupCaption),
-/* harmony export */   "exportRowDataBound": () => (/* binding */ exportRowDataBound),
+/* harmony export */   "recordDoubleClick": () => (/* binding */ recordDoubleClick),
+/* harmony export */   "recordClick": () => (/* binding */ recordClick),
+/* harmony export */   "beforeDataBound": () => (/* binding */ beforeDataBound),
+/* harmony export */   "beforeOpenColumnChooser": () => (/* binding */ beforeOpenColumnChooser),
+/* harmony export */   "beforeOpenAdaptiveDialog": () => (/* binding */ beforeOpenAdaptiveDialog),
+/* harmony export */   "resizeStart": () => (/* binding */ resizeStart),
+/* harmony export */   "onResize": () => (/* binding */ onResize),
+/* harmony export */   "resizeStop": () => (/* binding */ resizeStop),
+/* harmony export */   "checkBoxChange": () => (/* binding */ checkBoxChange),
+/* harmony export */   "beforeCopy": () => (/* binding */ beforeCopy),
+/* harmony export */   "beforePaste": () => (/* binding */ beforePaste),
+/* harmony export */   "beforeAutoFill": () => (/* binding */ beforeAutoFill),
+/* harmony export */   "filterChoiceRequest": () => (/* binding */ filterChoiceRequest),
 /* harmony export */   "filterAfterOpen": () => (/* binding */ filterAfterOpen),
 /* harmony export */   "filterBeforeOpen": () => (/* binding */ filterBeforeOpen),
-/* harmony export */   "filterBegin": () => (/* binding */ filterBegin),
-/* harmony export */   "filterCboxValue": () => (/* binding */ filterCboxValue),
-/* harmony export */   "filterChoiceRequest": () => (/* binding */ filterChoiceRequest),
-/* harmony export */   "filterCmenuSelect": () => (/* binding */ filterCmenuSelect),
-/* harmony export */   "filterComplete": () => (/* binding */ filterComplete),
-/* harmony export */   "filterDialogClose": () => (/* binding */ filterDialogClose),
-/* harmony export */   "filterDialogCreated": () => (/* binding */ filterDialogCreated),
-/* harmony export */   "filterMenuClose": () => (/* binding */ filterMenuClose),
-/* harmony export */   "filterOpen": () => (/* binding */ filterOpen),
 /* harmony export */   "filterSearchBegin": () => (/* binding */ filterSearchBegin),
-/* harmony export */   "fltrPrevent": () => (/* binding */ fltrPrevent),
-/* harmony export */   "foreignKeyData": () => (/* binding */ foreignKeyData),
-/* harmony export */   "freezeRefresh": () => (/* binding */ freezeRefresh),
-/* harmony export */   "freezeRender": () => (/* binding */ freezeRender),
-/* harmony export */   "frozenHeight": () => (/* binding */ frozenHeight),
-/* harmony export */   "generateQuery": () => (/* binding */ generateQuery),
-/* harmony export */   "getAggregateQuery": () => (/* binding */ getAggregateQuery),
-/* harmony export */   "getFilterBarOperator": () => (/* binding */ getFilterBarOperator),
-/* harmony export */   "getForeignKeyData": () => (/* binding */ getForeignKeyData),
-/* harmony export */   "getVirtualData": () => (/* binding */ getVirtualData),
-/* harmony export */   "groupAggregates": () => (/* binding */ groupAggregates),
-/* harmony export */   "groupBegin": () => (/* binding */ groupBegin),
-/* harmony export */   "groupCollapse": () => (/* binding */ groupCollapse),
-/* harmony export */   "groupComplete": () => (/* binding */ groupComplete),
-/* harmony export */   "headerCellInfo": () => (/* binding */ headerCellInfo),
-/* harmony export */   "headerDrop": () => (/* binding */ headerDrop),
-/* harmony export */   "headerRefreshed": () => (/* binding */ headerRefreshed),
-/* harmony export */   "hierarchyPrint": () => (/* binding */ hierarchyPrint),
-/* harmony export */   "immutableBatchCancel": () => (/* binding */ immutableBatchCancel),
-/* harmony export */   "inBoundModelChanged": () => (/* binding */ inBoundModelChanged),
-/* harmony export */   "infiniteCrudCancel": () => (/* binding */ infiniteCrudCancel),
-/* harmony export */   "infiniteEditHandler": () => (/* binding */ infiniteEditHandler),
-/* harmony export */   "infinitePageQuery": () => (/* binding */ infinitePageQuery),
-/* harmony export */   "infiniteScrollHandler": () => (/* binding */ infiniteScrollHandler),
-/* harmony export */   "infiniteShowHide": () => (/* binding */ infiniteShowHide),
-/* harmony export */   "initForeignKeyColumn": () => (/* binding */ initForeignKeyColumn),
-/* harmony export */   "initialCollapse": () => (/* binding */ initialCollapse),
-/* harmony export */   "initialEnd": () => (/* binding */ initialEnd),
-/* harmony export */   "initialLoad": () => (/* binding */ initialLoad),
-/* harmony export */   "keyPressed": () => (/* binding */ keyPressed),
-/* harmony export */   "lazyLoadGroupCollapse": () => (/* binding */ lazyLoadGroupCollapse),
+/* harmony export */   "commandClick": () => (/* binding */ commandClick),
+/* harmony export */   "exportGroupCaption": () => (/* binding */ exportGroupCaption),
 /* harmony export */   "lazyLoadGroupExpand": () => (/* binding */ lazyLoadGroupExpand),
-/* harmony export */   "lazyLoadScrollHandler": () => (/* binding */ lazyLoadScrollHandler),
-/* harmony export */   "load": () => (/* binding */ load),
-/* harmony export */   "modelChanged": () => (/* binding */ modelChanged),
-/* harmony export */   "nextCellIndex": () => (/* binding */ nextCellIndex),
+/* harmony export */   "lazyLoadGroupCollapse": () => (/* binding */ lazyLoadGroupCollapse),
+/* harmony export */   "initialLoad": () => (/* binding */ initialLoad),
+/* harmony export */   "initialEnd": () => (/* binding */ initialEnd),
+/* harmony export */   "dataReady": () => (/* binding */ dataReady),
+/* harmony export */   "contentReady": () => (/* binding */ contentReady),
+/* harmony export */   "uiUpdate": () => (/* binding */ uiUpdate),
 /* harmony export */   "onEmpty": () => (/* binding */ onEmpty),
-/* harmony export */   "onResize": () => (/* binding */ onResize),
+/* harmony export */   "inBoundModelChanged": () => (/* binding */ inBoundModelChanged),
+/* harmony export */   "modelChanged": () => (/* binding */ modelChanged),
+/* harmony export */   "colGroupRefresh": () => (/* binding */ colGroupRefresh),
+/* harmony export */   "headerRefreshed": () => (/* binding */ headerRefreshed),
 /* harmony export */   "pageBegin": () => (/* binding */ pageBegin),
 /* harmony export */   "pageComplete": () => (/* binding */ pageComplete),
-/* harmony export */   "pagerRefresh": () => (/* binding */ pagerRefresh),
-/* harmony export */   "partialRefresh": () => (/* binding */ partialRefresh),
-/* harmony export */   "pdfAggregateQueryCellInfo": () => (/* binding */ pdfAggregateQueryCellInfo),
-/* harmony export */   "pdfExportComplete": () => (/* binding */ pdfExportComplete),
-/* harmony export */   "pdfHeaderQueryCellInfo": () => (/* binding */ pdfHeaderQueryCellInfo),
-/* harmony export */   "pdfQueryCellInfo": () => (/* binding */ pdfQueryCellInfo),
-/* harmony export */   "preventBatch": () => (/* binding */ preventBatch),
-/* harmony export */   "preventFrozenScrollRefresh": () => (/* binding */ preventFrozenScrollRefresh),
-/* harmony export */   "printComplete": () => (/* binding */ printComplete),
-/* harmony export */   "printGridInit": () => (/* binding */ printGridInit),
-/* harmony export */   "queryCellInfo": () => (/* binding */ queryCellInfo),
-/* harmony export */   "recordAdded": () => (/* binding */ recordAdded),
-/* harmony export */   "recordClick": () => (/* binding */ recordClick),
-/* harmony export */   "recordDoubleClick": () => (/* binding */ recordDoubleClick),
-/* harmony export */   "refreshAggregateCell": () => (/* binding */ refreshAggregateCell),
-/* harmony export */   "refreshAggregates": () => (/* binding */ refreshAggregates),
-/* harmony export */   "refreshComplete": () => (/* binding */ refreshComplete),
-/* harmony export */   "refreshCustomFilterClearBtn": () => (/* binding */ refreshCustomFilterClearBtn),
-/* harmony export */   "refreshCustomFilterOkBtn": () => (/* binding */ refreshCustomFilterOkBtn),
-/* harmony export */   "refreshExpandandCollapse": () => (/* binding */ refreshExpandandCollapse),
-/* harmony export */   "refreshFooterRenderer": () => (/* binding */ refreshFooterRenderer),
-/* harmony export */   "refreshFrozenColumns": () => (/* binding */ refreshFrozenColumns),
-/* harmony export */   "refreshFrozenHeight": () => (/* binding */ refreshFrozenHeight),
-/* harmony export */   "refreshHandlers": () => (/* binding */ refreshHandlers),
-/* harmony export */   "refreshInfiniteCurrentViewData": () => (/* binding */ refreshInfiniteCurrentViewData),
-/* harmony export */   "refreshInfiniteModeBlocks": () => (/* binding */ refreshInfiniteModeBlocks),
-/* harmony export */   "refreshInfinitePersistSelection": () => (/* binding */ refreshInfinitePersistSelection),
-/* harmony export */   "refreshVirtualBlock": () => (/* binding */ refreshVirtualBlock),
-/* harmony export */   "refreshVirtualCache": () => (/* binding */ refreshVirtualCache),
-/* harmony export */   "refreshVirtualEditFormCells": () => (/* binding */ refreshVirtualEditFormCells),
-/* harmony export */   "refreshVirtualFrozenHeight": () => (/* binding */ refreshVirtualFrozenHeight),
-/* harmony export */   "refreshVirtualFrozenRows": () => (/* binding */ refreshVirtualFrozenRows),
-/* harmony export */   "refreshVirtualMaxPage": () => (/* binding */ refreshVirtualMaxPage),
-/* harmony export */   "removeInfiniteRows": () => (/* binding */ removeInfiniteRows),
-/* harmony export */   "renderResponsiveCmenu": () => (/* binding */ renderResponsiveCmenu),
-/* harmony export */   "reorderBegin": () => (/* binding */ reorderBegin),
-/* harmony export */   "reorderComplete": () => (/* binding */ reorderComplete),
-/* harmony export */   "resetColumns": () => (/* binding */ resetColumns),
-/* harmony export */   "resetInfiniteBlocks": () => (/* binding */ resetInfiniteBlocks),
-/* harmony export */   "resetVirtualFocus": () => (/* binding */ resetVirtualFocus),
-/* harmony export */   "resizeStart": () => (/* binding */ resizeStart),
-/* harmony export */   "resizeStop": () => (/* binding */ resizeStop),
-/* harmony export */   "restoreFocus": () => (/* binding */ restoreFocus),
-/* harmony export */   "rowDataBound": () => (/* binding */ rowDataBound),
-/* harmony export */   "rowDeselected": () => (/* binding */ rowDeselected),
-/* harmony export */   "rowDeselecting": () => (/* binding */ rowDeselecting),
-/* harmony export */   "rowDrag": () => (/* binding */ rowDrag),
-/* harmony export */   "rowDragAndDrop": () => (/* binding */ rowDragAndDrop),
-/* harmony export */   "rowDragAndDropBegin": () => (/* binding */ rowDragAndDropBegin),
-/* harmony export */   "rowDragAndDropComplete": () => (/* binding */ rowDragAndDropComplete),
-/* harmony export */   "rowDragStart": () => (/* binding */ rowDragStart),
-/* harmony export */   "rowDragStartHelper": () => (/* binding */ rowDragStartHelper),
-/* harmony export */   "rowDrop": () => (/* binding */ rowDrop),
-/* harmony export */   "rowModeChange": () => (/* binding */ rowModeChange),
-/* harmony export */   "rowPositionChanged": () => (/* binding */ rowPositionChanged),
-/* harmony export */   "rowSelected": () => (/* binding */ rowSelected),
-/* harmony export */   "rowSelecting": () => (/* binding */ rowSelecting),
-/* harmony export */   "rowSelectionBegin": () => (/* binding */ rowSelectionBegin),
-/* harmony export */   "rowSelectionComplete": () => (/* binding */ rowSelectionComplete),
-/* harmony export */   "rowsAdded": () => (/* binding */ rowsAdded),
-/* harmony export */   "rowsRemoved": () => (/* binding */ rowsRemoved),
-/* harmony export */   "rtlUpdated": () => (/* binding */ rtlUpdated),
-/* harmony export */   "saveComplete": () => (/* binding */ saveComplete),
-/* harmony export */   "scroll": () => (/* binding */ scroll),
-/* harmony export */   "scrollToEdit": () => (/* binding */ scrollToEdit),
-/* harmony export */   "searchBegin": () => (/* binding */ searchBegin),
-/* harmony export */   "searchComplete": () => (/* binding */ searchComplete),
-/* harmony export */   "selectRowOnContextOpen": () => (/* binding */ selectRowOnContextOpen),
-/* harmony export */   "selectVirtualRow": () => (/* binding */ selectVirtualRow),
-/* harmony export */   "setFreezeSelection": () => (/* binding */ setFreezeSelection),
-/* harmony export */   "setFullScreenDialog": () => (/* binding */ setFullScreenDialog),
-/* harmony export */   "setGroupCache": () => (/* binding */ setGroupCache),
-/* harmony export */   "setHeightToFrozenElement": () => (/* binding */ setHeightToFrozenElement),
-/* harmony export */   "setInfiniteCache": () => (/* binding */ setInfiniteCache),
-/* harmony export */   "setInfiniteColFrozenHeight": () => (/* binding */ setInfiniteColFrozenHeight),
-/* harmony export */   "setInfiniteFrozenHeight": () => (/* binding */ setInfiniteFrozenHeight),
-/* harmony export */   "setReorderDestinationElement": () => (/* binding */ setReorderDestinationElement),
-/* harmony export */   "setVirtualPageQuery": () => (/* binding */ setVirtualPageQuery),
-/* harmony export */   "showEmptyGrid": () => (/* binding */ showEmptyGrid),
 /* harmony export */   "sortBegin": () => (/* binding */ sortBegin),
 /* harmony export */   "sortComplete": () => (/* binding */ sortComplete),
-/* harmony export */   "stickyScrollComplete": () => (/* binding */ stickyScrollComplete),
-/* harmony export */   "textWrapRefresh": () => (/* binding */ textWrapRefresh),
-/* harmony export */   "toolbarClick": () => (/* binding */ toolbarClick),
-/* harmony export */   "toolbarRefresh": () => (/* binding */ toolbarRefresh),
-/* harmony export */   "tooltipDestroy": () => (/* binding */ tooltipDestroy),
-/* harmony export */   "uiUpdate": () => (/* binding */ uiUpdate),
+/* harmony export */   "filterBegin": () => (/* binding */ filterBegin),
+/* harmony export */   "filterComplete": () => (/* binding */ filterComplete),
+/* harmony export */   "searchBegin": () => (/* binding */ searchBegin),
+/* harmony export */   "searchComplete": () => (/* binding */ searchComplete),
+/* harmony export */   "reorderBegin": () => (/* binding */ reorderBegin),
+/* harmony export */   "reorderComplete": () => (/* binding */ reorderComplete),
+/* harmony export */   "rowDragAndDropBegin": () => (/* binding */ rowDragAndDropBegin),
+/* harmony export */   "rowDragAndDropComplete": () => (/* binding */ rowDragAndDropComplete),
+/* harmony export */   "groupBegin": () => (/* binding */ groupBegin),
+/* harmony export */   "groupComplete": () => (/* binding */ groupComplete),
 /* harmony export */   "ungroupBegin": () => (/* binding */ ungroupBegin),
 /* harmony export */   "ungroupComplete": () => (/* binding */ ungroupComplete),
+/* harmony export */   "groupAggregates": () => (/* binding */ groupAggregates),
+/* harmony export */   "refreshFooterRenderer": () => (/* binding */ refreshFooterRenderer),
+/* harmony export */   "refreshAggregateCell": () => (/* binding */ refreshAggregateCell),
+/* harmony export */   "refreshAggregates": () => (/* binding */ refreshAggregates),
+/* harmony export */   "rowSelectionBegin": () => (/* binding */ rowSelectionBegin),
+/* harmony export */   "rowSelectionComplete": () => (/* binding */ rowSelectionComplete),
+/* harmony export */   "columnSelectionBegin": () => (/* binding */ columnSelectionBegin),
+/* harmony export */   "columnSelectionComplete": () => (/* binding */ columnSelectionComplete),
+/* harmony export */   "cellSelectionBegin": () => (/* binding */ cellSelectionBegin),
+/* harmony export */   "cellSelectionComplete": () => (/* binding */ cellSelectionComplete),
+/* harmony export */   "beforeCellFocused": () => (/* binding */ beforeCellFocused),
+/* harmony export */   "cellFocused": () => (/* binding */ cellFocused),
+/* harmony export */   "keyPressed": () => (/* binding */ keyPressed),
+/* harmony export */   "click": () => (/* binding */ click),
+/* harmony export */   "destroy": () => (/* binding */ destroy),
+/* harmony export */   "columnVisibilityChanged": () => (/* binding */ columnVisibilityChanged),
+/* harmony export */   "scroll": () => (/* binding */ scroll),
+/* harmony export */   "columnWidthChanged": () => (/* binding */ columnWidthChanged),
+/* harmony export */   "columnPositionChanged": () => (/* binding */ columnPositionChanged),
+/* harmony export */   "rowDragAndDrop": () => (/* binding */ rowDragAndDrop),
+/* harmony export */   "rowsAdded": () => (/* binding */ rowsAdded),
+/* harmony export */   "rowsRemoved": () => (/* binding */ rowsRemoved),
+/* harmony export */   "columnDragStop": () => (/* binding */ columnDragStop),
+/* harmony export */   "headerDrop": () => (/* binding */ headerDrop),
+/* harmony export */   "dataSourceModified": () => (/* binding */ dataSourceModified),
+/* harmony export */   "refreshComplete": () => (/* binding */ refreshComplete),
+/* harmony export */   "refreshVirtualBlock": () => (/* binding */ refreshVirtualBlock),
+/* harmony export */   "dblclick": () => (/* binding */ dblclick),
+/* harmony export */   "toolbarRefresh": () => (/* binding */ toolbarRefresh),
+/* harmony export */   "bulkSave": () => (/* binding */ bulkSave),
+/* harmony export */   "autoCol": () => (/* binding */ autoCol),
+/* harmony export */   "tooltipDestroy": () => (/* binding */ tooltipDestroy),
 /* harmony export */   "updateData": () => (/* binding */ updateData),
+/* harmony export */   "editBegin": () => (/* binding */ editBegin),
+/* harmony export */   "editComplete": () => (/* binding */ editComplete),
+/* harmony export */   "addBegin": () => (/* binding */ addBegin),
+/* harmony export */   "addComplete": () => (/* binding */ addComplete),
+/* harmony export */   "saveComplete": () => (/* binding */ saveComplete),
+/* harmony export */   "deleteBegin": () => (/* binding */ deleteBegin),
+/* harmony export */   "deleteComplete": () => (/* binding */ deleteComplete),
+/* harmony export */   "preventBatch": () => (/* binding */ preventBatch),
+/* harmony export */   "dialogDestroy": () => (/* binding */ dialogDestroy),
+/* harmony export */   "crudAction": () => (/* binding */ crudAction),
+/* harmony export */   "addDeleteAction": () => (/* binding */ addDeleteAction),
+/* harmony export */   "destroyForm": () => (/* binding */ destroyForm),
+/* harmony export */   "doubleTap": () => (/* binding */ doubleTap),
+/* harmony export */   "beforeExcelExport": () => (/* binding */ beforeExcelExport),
+/* harmony export */   "excelExportComplete": () => (/* binding */ excelExportComplete),
+/* harmony export */   "excelQueryCellInfo": () => (/* binding */ excelQueryCellInfo),
+/* harmony export */   "excelHeaderQueryCellInfo": () => (/* binding */ excelHeaderQueryCellInfo),
+/* harmony export */   "exportDetailDataBound": () => (/* binding */ exportDetailDataBound),
+/* harmony export */   "beforePdfExport": () => (/* binding */ beforePdfExport),
+/* harmony export */   "pdfExportComplete": () => (/* binding */ pdfExportComplete),
+/* harmony export */   "pdfQueryCellInfo": () => (/* binding */ pdfQueryCellInfo),
+/* harmony export */   "pdfHeaderQueryCellInfo": () => (/* binding */ pdfHeaderQueryCellInfo),
+/* harmony export */   "accessPredicate": () => (/* binding */ accessPredicate),
+/* harmony export */   "contextMenuClick": () => (/* binding */ contextMenuClick),
+/* harmony export */   "freezeRender": () => (/* binding */ freezeRender),
+/* harmony export */   "freezeRefresh": () => (/* binding */ freezeRefresh),
+/* harmony export */   "contextMenuOpen": () => (/* binding */ contextMenuOpen),
+/* harmony export */   "columnMenuClick": () => (/* binding */ columnMenuClick),
+/* harmony export */   "columnMenuOpen": () => (/* binding */ columnMenuOpen),
+/* harmony export */   "filterOpen": () => (/* binding */ filterOpen),
+/* harmony export */   "filterDialogCreated": () => (/* binding */ filterDialogCreated),
+/* harmony export */   "filterMenuClose": () => (/* binding */ filterMenuClose),
+/* harmony export */   "initForeignKeyColumn": () => (/* binding */ initForeignKeyColumn),
+/* harmony export */   "getForeignKeyData": () => (/* binding */ getForeignKeyData),
+/* harmony export */   "generateQuery": () => (/* binding */ generateQuery),
+/* harmony export */   "showEmptyGrid": () => (/* binding */ showEmptyGrid),
+/* harmony export */   "foreignKeyData": () => (/* binding */ foreignKeyData),
+/* harmony export */   "columnDataStateChange": () => (/* binding */ columnDataStateChange),
+/* harmony export */   "dataStateChange": () => (/* binding */ dataStateChange),
+/* harmony export */   "dataSourceChanged": () => (/* binding */ dataSourceChanged),
+/* harmony export */   "rtlUpdated": () => (/* binding */ rtlUpdated),
+/* harmony export */   "beforeFragAppend": () => (/* binding */ beforeFragAppend),
+/* harmony export */   "frozenHeight": () => (/* binding */ frozenHeight),
+/* harmony export */   "textWrapRefresh": () => (/* binding */ textWrapRefresh),
+/* harmony export */   "recordAdded": () => (/* binding */ recordAdded),
+/* harmony export */   "cancelBegin": () => (/* binding */ cancelBegin),
+/* harmony export */   "editNextValCell": () => (/* binding */ editNextValCell),
+/* harmony export */   "hierarchyPrint": () => (/* binding */ hierarchyPrint),
+/* harmony export */   "expandChildGrid": () => (/* binding */ expandChildGrid),
+/* harmony export */   "printGridInit": () => (/* binding */ printGridInit),
+/* harmony export */   "exportRowDataBound": () => (/* binding */ exportRowDataBound),
+/* harmony export */   "exportDataBound": () => (/* binding */ exportDataBound),
+/* harmony export */   "rowPositionChanged": () => (/* binding */ rowPositionChanged),
+/* harmony export */   "columnChooserOpened": () => (/* binding */ columnChooserOpened),
+/* harmony export */   "batchForm": () => (/* binding */ batchForm),
+/* harmony export */   "beforeStartEdit": () => (/* binding */ beforeStartEdit),
+/* harmony export */   "beforeBatchCancel": () => (/* binding */ beforeBatchCancel),
+/* harmony export */   "batchEditFormRendered": () => (/* binding */ batchEditFormRendered),
+/* harmony export */   "partialRefresh": () => (/* binding */ partialRefresh),
+/* harmony export */   "beforeCustomFilterOpen": () => (/* binding */ beforeCustomFilterOpen),
+/* harmony export */   "selectVirtualRow": () => (/* binding */ selectVirtualRow),
+/* harmony export */   "columnsPrepared": () => (/* binding */ columnsPrepared),
+/* harmony export */   "cBoxFltrBegin": () => (/* binding */ cBoxFltrBegin),
+/* harmony export */   "cBoxFltrComplete": () => (/* binding */ cBoxFltrComplete),
+/* harmony export */   "fltrPrevent": () => (/* binding */ fltrPrevent),
+/* harmony export */   "beforeFltrcMenuOpen": () => (/* binding */ beforeFltrcMenuOpen),
 /* harmony export */   "valCustomPlacement": () => (/* binding */ valCustomPlacement),
-/* harmony export */   "validateVirtualForm": () => (/* binding */ validateVirtualForm),
-/* harmony export */   "virtaulCellFocus": () => (/* binding */ virtaulCellFocus),
+/* harmony export */   "filterCboxValue": () => (/* binding */ filterCboxValue),
+/* harmony export */   "componentRendered": () => (/* binding */ componentRendered),
+/* harmony export */   "restoreFocus": () => (/* binding */ restoreFocus),
+/* harmony export */   "detailStateChange": () => (/* binding */ detailStateChange),
+/* harmony export */   "detailIndentCellInfo": () => (/* binding */ detailIndentCellInfo),
 /* harmony export */   "virtaulKeyHandler": () => (/* binding */ virtaulKeyHandler),
-/* harmony export */   "virtualScrollAddActionBegin": () => (/* binding */ virtualScrollAddActionBegin),
-/* harmony export */   "virtualScrollEdit": () => (/* binding */ virtualScrollEdit),
+/* harmony export */   "virtaulCellFocus": () => (/* binding */ virtaulCellFocus),
 /* harmony export */   "virtualScrollEditActionBegin": () => (/* binding */ virtualScrollEditActionBegin),
+/* harmony export */   "virtualScrollEditSuccess": () => (/* binding */ virtualScrollEditSuccess),
 /* harmony export */   "virtualScrollEditCancel": () => (/* binding */ virtualScrollEditCancel),
-/* harmony export */   "virtualScrollEditSuccess": () => (/* binding */ virtualScrollEditSuccess)
+/* harmony export */   "virtualScrollEdit": () => (/* binding */ virtualScrollEdit),
+/* harmony export */   "refreshVirtualCache": () => (/* binding */ refreshVirtualCache),
+/* harmony export */   "editReset": () => (/* binding */ editReset),
+/* harmony export */   "virtualScrollAddActionBegin": () => (/* binding */ virtualScrollAddActionBegin),
+/* harmony export */   "getVirtualData": () => (/* binding */ getVirtualData),
+/* harmony export */   "refreshInfiniteModeBlocks": () => (/* binding */ refreshInfiniteModeBlocks),
+/* harmony export */   "resetInfiniteBlocks": () => (/* binding */ resetInfiniteBlocks),
+/* harmony export */   "infiniteScrollHandler": () => (/* binding */ infiniteScrollHandler),
+/* harmony export */   "infinitePageQuery": () => (/* binding */ infinitePageQuery),
+/* harmony export */   "infiniteShowHide": () => (/* binding */ infiniteShowHide),
+/* harmony export */   "appendInfiniteContent": () => (/* binding */ appendInfiniteContent),
+/* harmony export */   "removeInfiniteRows": () => (/* binding */ removeInfiniteRows),
+/* harmony export */   "setInfiniteCache": () => (/* binding */ setInfiniteCache),
+/* harmony export */   "infiniteEditHandler": () => (/* binding */ infiniteEditHandler),
+/* harmony export */   "initialCollapse": () => (/* binding */ initialCollapse),
+/* harmony export */   "getAggregateQuery": () => (/* binding */ getAggregateQuery),
+/* harmony export */   "closeFilterDialog": () => (/* binding */ closeFilterDialog),
+/* harmony export */   "columnChooserCancelBtnClick": () => (/* binding */ columnChooserCancelBtnClick),
+/* harmony export */   "getFilterBarOperator": () => (/* binding */ getFilterBarOperator),
+/* harmony export */   "resetColumns": () => (/* binding */ resetColumns),
+/* harmony export */   "pdfAggregateQueryCellInfo": () => (/* binding */ pdfAggregateQueryCellInfo),
+/* harmony export */   "excelAggregateQueryCellInfo": () => (/* binding */ excelAggregateQueryCellInfo),
+/* harmony export */   "setGroupCache": () => (/* binding */ setGroupCache),
+/* harmony export */   "lazyLoadScrollHandler": () => (/* binding */ lazyLoadScrollHandler),
+/* harmony export */   "groupCollapse": () => (/* binding */ groupCollapse),
+/* harmony export */   "beforeCheckboxRenderer": () => (/* binding */ beforeCheckboxRenderer),
+/* harmony export */   "refreshHandlers": () => (/* binding */ refreshHandlers),
+/* harmony export */   "refreshFrozenColumns": () => (/* binding */ refreshFrozenColumns),
+/* harmony export */   "setReorderDestinationElement": () => (/* binding */ setReorderDestinationElement),
+/* harmony export */   "refreshVirtualFrozenHeight": () => (/* binding */ refreshVirtualFrozenHeight),
+/* harmony export */   "setFreezeSelection": () => (/* binding */ setFreezeSelection),
+/* harmony export */   "setInfiniteFrozenHeight": () => (/* binding */ setInfiniteFrozenHeight),
+/* harmony export */   "setInfiniteColFrozenHeight": () => (/* binding */ setInfiniteColFrozenHeight),
+/* harmony export */   "beforeRefreshOnDataChange": () => (/* binding */ beforeRefreshOnDataChange),
+/* harmony export */   "immutableBatchCancel": () => (/* binding */ immutableBatchCancel),
+/* harmony export */   "refreshVirtualFrozenRows": () => (/* binding */ refreshVirtualFrozenRows),
+/* harmony export */   "checkScrollReset": () => (/* binding */ checkScrollReset),
+/* harmony export */   "refreshFrozenHeight": () => (/* binding */ refreshFrozenHeight),
+/* harmony export */   "setHeightToFrozenElement": () => (/* binding */ setHeightToFrozenElement),
+/* harmony export */   "preventFrozenScrollRefresh": () => (/* binding */ preventFrozenScrollRefresh),
+/* harmony export */   "nextCellIndex": () => (/* binding */ nextCellIndex),
+/* harmony export */   "refreshInfiniteCurrentViewData": () => (/* binding */ refreshInfiniteCurrentViewData),
+/* harmony export */   "infiniteCrudCancel": () => (/* binding */ infiniteCrudCancel),
+/* harmony export */   "filterDialogClose": () => (/* binding */ filterDialogClose),
+/* harmony export */   "refreshCustomFilterOkBtn": () => (/* binding */ refreshCustomFilterOkBtn),
+/* harmony export */   "refreshCustomFilterClearBtn": () => (/* binding */ refreshCustomFilterClearBtn),
+/* harmony export */   "renderResponsiveCmenu": () => (/* binding */ renderResponsiveCmenu),
+/* harmony export */   "filterCmenuSelect": () => (/* binding */ filterCmenuSelect),
+/* harmony export */   "customFilterClose": () => (/* binding */ customFilterClose),
+/* harmony export */   "setFullScreenDialog": () => (/* binding */ setFullScreenDialog),
+/* harmony export */   "refreshExpandandCollapse": () => (/* binding */ refreshExpandandCollapse),
+/* harmony export */   "rowModeChange": () => (/* binding */ rowModeChange),
+/* harmony export */   "enterKeyHandler": () => (/* binding */ enterKeyHandler),
+/* harmony export */   "refreshVirtualMaxPage": () => (/* binding */ refreshVirtualMaxPage),
+/* harmony export */   "setVirtualPageQuery": () => (/* binding */ setVirtualPageQuery),
+/* harmony export */   "selectRowOnContextOpen": () => (/* binding */ selectRowOnContextOpen),
+/* harmony export */   "pagerRefresh": () => (/* binding */ pagerRefresh),
+/* harmony export */   "closeInline": () => (/* binding */ closeInline),
+/* harmony export */   "closeBatch": () => (/* binding */ closeBatch),
+/* harmony export */   "closeEdit": () => (/* binding */ closeEdit),
+/* harmony export */   "resetVirtualFocus": () => (/* binding */ resetVirtualFocus),
+/* harmony export */   "afterContentRender": () => (/* binding */ afterContentRender),
+/* harmony export */   "refreshVirtualEditFormCells": () => (/* binding */ refreshVirtualEditFormCells),
+/* harmony export */   "scrollToEdit": () => (/* binding */ scrollToEdit),
+/* harmony export */   "beforeCheckboxRendererQuery": () => (/* binding */ beforeCheckboxRendererQuery),
+/* harmony export */   "createVirtualValidationForm": () => (/* binding */ createVirtualValidationForm),
+/* harmony export */   "validateVirtualForm": () => (/* binding */ validateVirtualForm),
+/* harmony export */   "destroyChildGrid": () => (/* binding */ destroyChildGrid),
+/* harmony export */   "stickyScrollComplete": () => (/* binding */ stickyScrollComplete),
+/* harmony export */   "captionActionComplete": () => (/* binding */ captionActionComplete),
+/* harmony export */   "refreshInfinitePersistSelection": () => (/* binding */ refreshInfinitePersistSelection)
 /* harmony export */ });
 /** @hidden */
 var created = 'create';
@@ -23197,9 +23197,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CellType": () => (/* binding */ CellType),
 /* harmony export */   "RenderType": () => (/* binding */ RenderType),
+/* harmony export */   "ToolbarItem": () => (/* binding */ ToolbarItem),
 /* harmony export */   "ResponsiveDialogAction": () => (/* binding */ ResponsiveDialogAction),
-/* harmony export */   "ResponsiveToolbarAction": () => (/* binding */ ResponsiveToolbarAction),
-/* harmony export */   "ToolbarItem": () => (/* binding */ ToolbarItem)
+/* harmony export */   "ResponsiveToolbarAction": () => (/* binding */ ResponsiveToolbarAction)
 /* harmony export */ });
 /**
  * Defines types of Cell
@@ -23320,19 +23320,19 @@ var ResponsiveToolbarAction;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditSettings": () => (/* binding */ EditSettings),
-/* harmony export */   "FilterSettings": () => (/* binding */ FilterSettings),
-/* harmony export */   "Grid": () => (/* binding */ Grid),
-/* harmony export */   "GroupSettings": () => (/* binding */ GroupSettings),
-/* harmony export */   "InfiniteScrollSettings": () => (/* binding */ InfiniteScrollSettings),
-/* harmony export */   "Predicate": () => (/* binding */ Predicate),
-/* harmony export */   "ResizeSettings": () => (/* binding */ ResizeSettings),
-/* harmony export */   "RowDropSettings": () => (/* binding */ RowDropSettings),
-/* harmony export */   "SearchSettings": () => (/* binding */ SearchSettings),
-/* harmony export */   "SelectionSettings": () => (/* binding */ SelectionSettings),
 /* harmony export */   "SortDescriptor": () => (/* binding */ SortDescriptor),
 /* harmony export */   "SortSettings": () => (/* binding */ SortSettings),
-/* harmony export */   "TextWrapSettings": () => (/* binding */ TextWrapSettings)
+/* harmony export */   "Predicate": () => (/* binding */ Predicate),
+/* harmony export */   "InfiniteScrollSettings": () => (/* binding */ InfiniteScrollSettings),
+/* harmony export */   "FilterSettings": () => (/* binding */ FilterSettings),
+/* harmony export */   "SelectionSettings": () => (/* binding */ SelectionSettings),
+/* harmony export */   "SearchSettings": () => (/* binding */ SearchSettings),
+/* harmony export */   "RowDropSettings": () => (/* binding */ RowDropSettings),
+/* harmony export */   "TextWrapSettings": () => (/* binding */ TextWrapSettings),
+/* harmony export */   "ResizeSettings": () => (/* binding */ ResizeSettings),
+/* harmony export */   "GroupSettings": () => (/* binding */ GroupSettings),
+/* harmony export */   "EditSettings": () => (/* binding */ EditSettings),
+/* harmony export */   "Grid": () => (/* binding */ Grid)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @syncfusion/ej2-data */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -28924,44 +28924,44 @@ var Grid = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addedRecords": () => (/* binding */ addedRecords),
-/* harmony export */   "addedRow": () => (/* binding */ addedRow),
-/* harmony export */   "ariaColIndex": () => (/* binding */ ariaColIndex),
-/* harmony export */   "ariaRowIndex": () => (/* binding */ ariaRowIndex),
-/* harmony export */   "beforeOpen": () => (/* binding */ beforeOpen),
-/* harmony export */   "change": () => (/* binding */ change),
-/* harmony export */   "changedRecords": () => (/* binding */ changedRecords),
-/* harmony export */   "colGroup": () => (/* binding */ colGroup),
-/* harmony export */   "content": () => (/* binding */ content),
-/* harmony export */   "create": () => (/* binding */ create),
-/* harmony export */   "deletedRecords": () => (/* binding */ deletedRecords),
-/* harmony export */   "downArrow": () => (/* binding */ downArrow),
-/* harmony export */   "editedRow": () => (/* binding */ editedRow),
-/* harmony export */   "enter": () => (/* binding */ enter),
-/* harmony export */   "focus": () => (/* binding */ focus),
-/* harmony export */   "frozenContent": () => (/* binding */ frozenContent),
-/* harmony export */   "frozenHeader": () => (/* binding */ frozenHeader),
-/* harmony export */   "frozenLeft": () => (/* binding */ frozenLeft),
-/* harmony export */   "frozenRight": () => (/* binding */ frozenRight),
-/* harmony export */   "gridChkBox": () => (/* binding */ gridChkBox),
+/* harmony export */   "rowCell": () => (/* binding */ rowCell),
+/* harmony export */   "gridHeader": () => (/* binding */ gridHeader),
 /* harmony export */   "gridContent": () => (/* binding */ gridContent),
 /* harmony export */   "gridFooter": () => (/* binding */ gridFooter),
-/* harmony export */   "gridHeader": () => (/* binding */ gridHeader),
 /* harmony export */   "headerContent": () => (/* binding */ headerContent),
-/* harmony export */   "leftRight": () => (/* binding */ leftRight),
 /* harmony export */   "movableContent": () => (/* binding */ movableContent),
 /* harmony export */   "movableHeader": () => (/* binding */ movableHeader),
-/* harmony export */   "open": () => (/* binding */ open),
-/* harmony export */   "pageDown": () => (/* binding */ pageDown),
-/* harmony export */   "pageUp": () => (/* binding */ pageUp),
-/* harmony export */   "row": () => (/* binding */ row),
-/* harmony export */   "rowCell": () => (/* binding */ rowCell),
-/* harmony export */   "shiftEnter": () => (/* binding */ shiftEnter),
-/* harmony export */   "shiftTab": () => (/* binding */ shiftTab),
-/* harmony export */   "tab": () => (/* binding */ tab),
+/* harmony export */   "frozenContent": () => (/* binding */ frozenContent),
+/* harmony export */   "frozenHeader": () => (/* binding */ frozenHeader),
+/* harmony export */   "content": () => (/* binding */ content),
 /* harmony export */   "table": () => (/* binding */ table),
+/* harmony export */   "row": () => (/* binding */ row),
+/* harmony export */   "gridChkBox": () => (/* binding */ gridChkBox),
+/* harmony export */   "editedRow": () => (/* binding */ editedRow),
+/* harmony export */   "addedRow": () => (/* binding */ addedRow),
+/* harmony export */   "changedRecords": () => (/* binding */ changedRecords),
+/* harmony export */   "addedRecords": () => (/* binding */ addedRecords),
+/* harmony export */   "deletedRecords": () => (/* binding */ deletedRecords),
+/* harmony export */   "leftRight": () => (/* binding */ leftRight),
+/* harmony export */   "frozenRight": () => (/* binding */ frozenRight),
+/* harmony export */   "frozenLeft": () => (/* binding */ frozenLeft),
+/* harmony export */   "ariaColIndex": () => (/* binding */ ariaColIndex),
+/* harmony export */   "ariaRowIndex": () => (/* binding */ ariaRowIndex),
 /* harmony export */   "tbody": () => (/* binding */ tbody),
-/* harmony export */   "upArrow": () => (/* binding */ upArrow)
+/* harmony export */   "colGroup": () => (/* binding */ colGroup),
+/* harmony export */   "open": () => (/* binding */ open),
+/* harmony export */   "change": () => (/* binding */ change),
+/* harmony export */   "focus": () => (/* binding */ focus),
+/* harmony export */   "create": () => (/* binding */ create),
+/* harmony export */   "beforeOpen": () => (/* binding */ beforeOpen),
+/* harmony export */   "downArrow": () => (/* binding */ downArrow),
+/* harmony export */   "upArrow": () => (/* binding */ upArrow),
+/* harmony export */   "pageUp": () => (/* binding */ pageUp),
+/* harmony export */   "pageDown": () => (/* binding */ pageDown),
+/* harmony export */   "enter": () => (/* binding */ enter),
+/* harmony export */   "shiftEnter": () => (/* binding */ shiftEnter),
+/* harmony export */   "tab": () => (/* binding */ tab),
+/* harmony export */   "shiftTab": () => (/* binding */ shiftTab)
 /* harmony export */ });
 /**
  * Specifies class names
@@ -29058,106 +29058,106 @@ var shiftTab = 'shiftTab';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Global": () => (/* binding */ Global),
-/* harmony export */   "addBiggerDialog": () => (/* binding */ addBiggerDialog),
-/* harmony export */   "addRemoveActiveClasses": () => (/* binding */ addRemoveActiveClasses),
-/* harmony export */   "addRemoveEventListener": () => (/* binding */ addRemoveEventListener),
-/* harmony export */   "alignFrozenEditForm": () => (/* binding */ alignFrozenEditForm),
-/* harmony export */   "appendChildren": () => (/* binding */ appendChildren),
-/* harmony export */   "applyBiggerTheme": () => (/* binding */ applyBiggerTheme),
-/* harmony export */   "calculateAggregate": () => (/* binding */ calculateAggregate),
-/* harmony export */   "checkDepth": () => (/* binding */ checkDepth),
-/* harmony export */   "clearReactVueTemplates": () => (/* binding */ clearReactVueTemplates),
-/* harmony export */   "compareChanges": () => (/* binding */ compareChanges),
-/* harmony export */   "createCboxWithWrap": () => (/* binding */ createCboxWithWrap),
-/* harmony export */   "createEditElement": () => (/* binding */ createEditElement),
-/* harmony export */   "distinctStringValues": () => (/* binding */ distinctStringValues),
 /* harmony export */   "doesImplementInterface": () => (/* binding */ doesImplementInterface),
-/* harmony export */   "ensureFirstRow": () => (/* binding */ ensureFirstRow),
-/* harmony export */   "ensureLastRow": () => (/* binding */ ensureLastRow),
-/* harmony export */   "eventPromise": () => (/* binding */ eventPromise),
-/* harmony export */   "extend": () => (/* binding */ extend),
-/* harmony export */   "extendObjWithFn": () => (/* binding */ extendObjWithFn),
-/* harmony export */   "generateExpandPredicates": () => (/* binding */ generateExpandPredicates),
-/* harmony export */   "getActualPropFromColl": () => (/* binding */ getActualPropFromColl),
-/* harmony export */   "getActualProperties": () => (/* binding */ getActualProperties),
-/* harmony export */   "getActualRowHeight": () => (/* binding */ getActualRowHeight),
-/* harmony export */   "getCellByColAndRowIndex": () => (/* binding */ getCellByColAndRowIndex),
-/* harmony export */   "getCellsByTableName": () => (/* binding */ getCellsByTableName),
-/* harmony export */   "getCollapsedRowsCount": () => (/* binding */ getCollapsedRowsCount),
-/* harmony export */   "getColumnByForeignKeyValue": () => (/* binding */ getColumnByForeignKeyValue),
-/* harmony export */   "getColumnModelByFieldName": () => (/* binding */ getColumnModelByFieldName),
-/* harmony export */   "getColumnModelByUid": () => (/* binding */ getColumnModelByUid),
-/* harmony export */   "getComplexFieldID": () => (/* binding */ getComplexFieldID),
-/* harmony export */   "getCustomDateFormat": () => (/* binding */ getCustomDateFormat),
-/* harmony export */   "getDatePredicate": () => (/* binding */ getDatePredicate),
-/* harmony export */   "getEditedDataIndex": () => (/* binding */ getEditedDataIndex),
-/* harmony export */   "getElementIndex": () => (/* binding */ getElementIndex),
-/* harmony export */   "getExpandedState": () => (/* binding */ getExpandedState),
-/* harmony export */   "getFilterMenuPostion": () => (/* binding */ getFilterMenuPostion),
-/* harmony export */   "getForeignData": () => (/* binding */ getForeignData),
-/* harmony export */   "getFrozenRightTbody": () => (/* binding */ getFrozenRightTbody),
-/* harmony export */   "getGridRowElements": () => (/* binding */ getGridRowElements),
-/* harmony export */   "getGridRowObjects": () => (/* binding */ getGridRowObjects),
-/* harmony export */   "getGroupKeysAndFields": () => (/* binding */ getGroupKeysAndFields),
-/* harmony export */   "getMovableTbody": () => (/* binding */ getMovableTbody),
-/* harmony export */   "getNumberFormat": () => (/* binding */ getNumberFormat),
-/* harmony export */   "getObject": () => (/* binding */ getObject),
-/* harmony export */   "getPosition": () => (/* binding */ getPosition),
-/* harmony export */   "getPredicates": () => (/* binding */ getPredicates),
-/* harmony export */   "getPrintGridModel": () => (/* binding */ getPrintGridModel),
-/* harmony export */   "getRowHeight": () => (/* binding */ getRowHeight),
-/* harmony export */   "getRowIndexFromElement": () => (/* binding */ getRowIndexFromElement),
-/* harmony export */   "getScrollBarWidth": () => (/* binding */ getScrollBarWidth),
-/* harmony export */   "getStateEventArgument": () => (/* binding */ getStateEventArgument),
-/* harmony export */   "getTransformValues": () => (/* binding */ getTransformValues),
-/* harmony export */   "getUid": () => (/* binding */ getUid),
-/* harmony export */   "getUpdateUsingRaf": () => (/* binding */ getUpdateUsingRaf),
-/* harmony export */   "getZIndexCalcualtion": () => (/* binding */ getZIndexCalcualtion),
-/* harmony export */   "gridActionHandler": () => (/* binding */ gridActionHandler),
+/* harmony export */   "valueAccessor": () => (/* binding */ valueAccessor),
 /* harmony export */   "headerValueAccessor": () => (/* binding */ headerValueAccessor),
-/* harmony export */   "inArray": () => (/* binding */ inArray),
-/* harmony export */   "isActionPrevent": () => (/* binding */ isActionPrevent),
-/* harmony export */   "isComplexField": () => (/* binding */ isComplexField),
-/* harmony export */   "isEditable": () => (/* binding */ isEditable),
+/* harmony export */   "getUpdateUsingRaf": () => (/* binding */ getUpdateUsingRaf),
 /* harmony export */   "isExportColumns": () => (/* binding */ isExportColumns),
-/* harmony export */   "isGroupAdaptive": () => (/* binding */ isGroupAdaptive),
-/* harmony export */   "isRowEnteredInGrid": () => (/* binding */ isRowEnteredInGrid),
-/* harmony export */   "ispercentageWidth": () => (/* binding */ ispercentageWidth),
-/* harmony export */   "iterateArrayOrObject": () => (/* binding */ iterateArrayOrObject),
-/* harmony export */   "iterateExtend": () => (/* binding */ iterateExtend),
-/* harmony export */   "measureColumnDepth": () => (/* binding */ measureColumnDepth),
-/* harmony export */   "parents": () => (/* binding */ parents),
-/* harmony export */   "parentsUntil": () => (/* binding */ parentsUntil),
-/* harmony export */   "performComplexDataOperation": () => (/* binding */ performComplexDataOperation),
-/* harmony export */   "prepareColumns": () => (/* binding */ prepareColumns),
-/* harmony export */   "recursive": () => (/* binding */ recursive),
-/* harmony export */   "refreshFilteredColsUid": () => (/* binding */ refreshFilteredColsUid),
-/* harmony export */   "refreshForeignData": () => (/* binding */ refreshForeignData),
-/* harmony export */   "registerEventHandlers": () => (/* binding */ registerEventHandlers),
-/* harmony export */   "removeAddCboxClasses": () => (/* binding */ removeAddCboxClasses),
-/* harmony export */   "removeElement": () => (/* binding */ removeElement),
-/* harmony export */   "removeEventHandlers": () => (/* binding */ removeEventHandlers),
-/* harmony export */   "renderMovable": () => (/* binding */ renderMovable),
-/* harmony export */   "resetRowIndex": () => (/* binding */ resetRowIndex),
-/* harmony export */   "setChecked": () => (/* binding */ setChecked),
-/* harmony export */   "setColumnIndex": () => (/* binding */ setColumnIndex),
-/* harmony export */   "setComplexFieldID": () => (/* binding */ setComplexFieldID),
-/* harmony export */   "setCssInGridPopUp": () => (/* binding */ setCssInGridPopUp),
-/* harmony export */   "setDisplayValue": () => (/* binding */ setDisplayValue),
-/* harmony export */   "setFormatter": () => (/* binding */ setFormatter),
-/* harmony export */   "setRowElements": () => (/* binding */ setRowElements),
-/* harmony export */   "setRowsInTbody": () => (/* binding */ setRowsInTbody),
-/* harmony export */   "setStyleAndAttributes": () => (/* binding */ setStyleAndAttributes),
-/* harmony export */   "setValidationRuels": () => (/* binding */ setValidationRuels),
-/* harmony export */   "sliceElements": () => (/* binding */ sliceElements),
-/* harmony export */   "splitFrozenRowObjectCells": () => (/* binding */ splitFrozenRowObjectCells),
-/* harmony export */   "templateCompiler": () => (/* binding */ templateCompiler),
-/* harmony export */   "toogleCheckbox": () => (/* binding */ toogleCheckbox),
 /* harmony export */   "updateColumnTypeForExportColumns": () => (/* binding */ updateColumnTypeForExportColumns),
 /* harmony export */   "updatecloneRow": () => (/* binding */ updatecloneRow),
-/* harmony export */   "valueAccessor": () => (/* binding */ valueAccessor),
-/* harmony export */   "wrap": () => (/* binding */ wrap)
+/* harmony export */   "getCollapsedRowsCount": () => (/* binding */ getCollapsedRowsCount),
+/* harmony export */   "recursive": () => (/* binding */ recursive),
+/* harmony export */   "iterateArrayOrObject": () => (/* binding */ iterateArrayOrObject),
+/* harmony export */   "iterateExtend": () => (/* binding */ iterateExtend),
+/* harmony export */   "templateCompiler": () => (/* binding */ templateCompiler),
+/* harmony export */   "setStyleAndAttributes": () => (/* binding */ setStyleAndAttributes),
+/* harmony export */   "extend": () => (/* binding */ extend),
+/* harmony export */   "setColumnIndex": () => (/* binding */ setColumnIndex),
+/* harmony export */   "prepareColumns": () => (/* binding */ prepareColumns),
+/* harmony export */   "setCssInGridPopUp": () => (/* binding */ setCssInGridPopUp),
+/* harmony export */   "getActualProperties": () => (/* binding */ getActualProperties),
+/* harmony export */   "parentsUntil": () => (/* binding */ parentsUntil),
+/* harmony export */   "getElementIndex": () => (/* binding */ getElementIndex),
+/* harmony export */   "inArray": () => (/* binding */ inArray),
+/* harmony export */   "getActualPropFromColl": () => (/* binding */ getActualPropFromColl),
+/* harmony export */   "removeElement": () => (/* binding */ removeElement),
+/* harmony export */   "getPosition": () => (/* binding */ getPosition),
+/* harmony export */   "getUid": () => (/* binding */ getUid),
+/* harmony export */   "appendChildren": () => (/* binding */ appendChildren),
+/* harmony export */   "parents": () => (/* binding */ parents),
+/* harmony export */   "calculateAggregate": () => (/* binding */ calculateAggregate),
+/* harmony export */   "getScrollBarWidth": () => (/* binding */ getScrollBarWidth),
+/* harmony export */   "getRowHeight": () => (/* binding */ getRowHeight),
+/* harmony export */   "getActualRowHeight": () => (/* binding */ getActualRowHeight),
+/* harmony export */   "isComplexField": () => (/* binding */ isComplexField),
+/* harmony export */   "getComplexFieldID": () => (/* binding */ getComplexFieldID),
+/* harmony export */   "setComplexFieldID": () => (/* binding */ setComplexFieldID),
+/* harmony export */   "isEditable": () => (/* binding */ isEditable),
+/* harmony export */   "isActionPrevent": () => (/* binding */ isActionPrevent),
+/* harmony export */   "wrap": () => (/* binding */ wrap),
+/* harmony export */   "setFormatter": () => (/* binding */ setFormatter),
+/* harmony export */   "addRemoveActiveClasses": () => (/* binding */ addRemoveActiveClasses),
+/* harmony export */   "distinctStringValues": () => (/* binding */ distinctStringValues),
+/* harmony export */   "getFilterMenuPostion": () => (/* binding */ getFilterMenuPostion),
+/* harmony export */   "getZIndexCalcualtion": () => (/* binding */ getZIndexCalcualtion),
+/* harmony export */   "toogleCheckbox": () => (/* binding */ toogleCheckbox),
+/* harmony export */   "setChecked": () => (/* binding */ setChecked),
+/* harmony export */   "createCboxWithWrap": () => (/* binding */ createCboxWithWrap),
+/* harmony export */   "removeAddCboxClasses": () => (/* binding */ removeAddCboxClasses),
+/* harmony export */   "refreshForeignData": () => (/* binding */ refreshForeignData),
+/* harmony export */   "getForeignData": () => (/* binding */ getForeignData),
+/* harmony export */   "getColumnByForeignKeyValue": () => (/* binding */ getColumnByForeignKeyValue),
+/* harmony export */   "getDatePredicate": () => (/* binding */ getDatePredicate),
+/* harmony export */   "renderMovable": () => (/* binding */ renderMovable),
+/* harmony export */   "isGroupAdaptive": () => (/* binding */ isGroupAdaptive),
+/* harmony export */   "getObject": () => (/* binding */ getObject),
+/* harmony export */   "getCustomDateFormat": () => (/* binding */ getCustomDateFormat),
+/* harmony export */   "getExpandedState": () => (/* binding */ getExpandedState),
+/* harmony export */   "getPrintGridModel": () => (/* binding */ getPrintGridModel),
+/* harmony export */   "extendObjWithFn": () => (/* binding */ extendObjWithFn),
+/* harmony export */   "measureColumnDepth": () => (/* binding */ measureColumnDepth),
+/* harmony export */   "checkDepth": () => (/* binding */ checkDepth),
+/* harmony export */   "refreshFilteredColsUid": () => (/* binding */ refreshFilteredColsUid),
+/* harmony export */   "Global": () => (/* binding */ Global),
+/* harmony export */   "getTransformValues": () => (/* binding */ getTransformValues),
+/* harmony export */   "applyBiggerTheme": () => (/* binding */ applyBiggerTheme),
+/* harmony export */   "alignFrozenEditForm": () => (/* binding */ alignFrozenEditForm),
+/* harmony export */   "ensureLastRow": () => (/* binding */ ensureLastRow),
+/* harmony export */   "ensureFirstRow": () => (/* binding */ ensureFirstRow),
+/* harmony export */   "isRowEnteredInGrid": () => (/* binding */ isRowEnteredInGrid),
+/* harmony export */   "getEditedDataIndex": () => (/* binding */ getEditedDataIndex),
+/* harmony export */   "eventPromise": () => (/* binding */ eventPromise),
+/* harmony export */   "getStateEventArgument": () => (/* binding */ getStateEventArgument),
+/* harmony export */   "ispercentageWidth": () => (/* binding */ ispercentageWidth),
+/* harmony export */   "resetRowIndex": () => (/* binding */ resetRowIndex),
+/* harmony export */   "compareChanges": () => (/* binding */ compareChanges),
+/* harmony export */   "setRowElements": () => (/* binding */ setRowElements),
+/* harmony export */   "splitFrozenRowObjectCells": () => (/* binding */ splitFrozenRowObjectCells),
+/* harmony export */   "gridActionHandler": () => (/* binding */ gridActionHandler),
+/* harmony export */   "getGridRowObjects": () => (/* binding */ getGridRowObjects),
+/* harmony export */   "getGridRowElements": () => (/* binding */ getGridRowElements),
+/* harmony export */   "sliceElements": () => (/* binding */ sliceElements),
+/* harmony export */   "getCellsByTableName": () => (/* binding */ getCellsByTableName),
+/* harmony export */   "getCellByColAndRowIndex": () => (/* binding */ getCellByColAndRowIndex),
+/* harmony export */   "setValidationRuels": () => (/* binding */ setValidationRuels),
+/* harmony export */   "getMovableTbody": () => (/* binding */ getMovableTbody),
+/* harmony export */   "getFrozenRightTbody": () => (/* binding */ getFrozenRightTbody),
+/* harmony export */   "setRowsInTbody": () => (/* binding */ setRowsInTbody),
+/* harmony export */   "getNumberFormat": () => (/* binding */ getNumberFormat),
+/* harmony export */   "addBiggerDialog": () => (/* binding */ addBiggerDialog),
+/* harmony export */   "performComplexDataOperation": () => (/* binding */ performComplexDataOperation),
+/* harmony export */   "setDisplayValue": () => (/* binding */ setDisplayValue),
+/* harmony export */   "addRemoveEventListener": () => (/* binding */ addRemoveEventListener),
+/* harmony export */   "createEditElement": () => (/* binding */ createEditElement),
+/* harmony export */   "getColumnModelByUid": () => (/* binding */ getColumnModelByUid),
+/* harmony export */   "getColumnModelByFieldName": () => (/* binding */ getColumnModelByFieldName),
+/* harmony export */   "registerEventHandlers": () => (/* binding */ registerEventHandlers),
+/* harmony export */   "removeEventHandlers": () => (/* binding */ removeEventHandlers),
+/* harmony export */   "clearReactVueTemplates": () => (/* binding */ clearReactVueTemplates),
+/* harmony export */   "getRowIndexFromElement": () => (/* binding */ getRowIndexFromElement),
+/* harmony export */   "generateExpandPredicates": () => (/* binding */ generateExpandPredicates),
+/* harmony export */   "getPredicates": () => (/* binding */ getPredicates),
+/* harmony export */   "getGroupKeysAndFields": () => (/* binding */ getGroupKeysAndFields)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @syncfusion/ej2-data */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -38046,15 +38046,15 @@ var CellRendererFactory = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FocusStrategy": () => (/* binding */ FocusStrategy),
+/* harmony export */   "Matrix": () => (/* binding */ Matrix),
 /* harmony export */   "ContentFocus": () => (/* binding */ ContentFocus),
+/* harmony export */   "HeaderFocus": () => (/* binding */ HeaderFocus),
 /* harmony export */   "FixedContentFocus": () => (/* binding */ FixedContentFocus),
 /* harmony export */   "FixedHeaderFocus": () => (/* binding */ FixedHeaderFocus),
+/* harmony export */   "SearchBox": () => (/* binding */ SearchBox),
 /* harmony export */   "FixedRightContentFocus": () => (/* binding */ FixedRightContentFocus),
-/* harmony export */   "FixedRightHeaderFocus": () => (/* binding */ FixedRightHeaderFocus),
-/* harmony export */   "FocusStrategy": () => (/* binding */ FocusStrategy),
-/* harmony export */   "HeaderFocus": () => (/* binding */ HeaderFocus),
-/* harmony export */   "Matrix": () => (/* binding */ Matrix),
-/* harmony export */   "SearchBox": () => (/* binding */ SearchBox)
+/* harmony export */   "FixedRightHeaderFocus": () => (/* binding */ FixedRightHeaderFocus)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _base_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../base/enum */ "./node_modules/@syncfusion/ej2-grids/src/grid/base/enum.js");
@@ -39914,9 +39914,9 @@ var ServiceLocator = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CaptionSummaryModelGenerator": () => (/* binding */ CaptionSummaryModelGenerator),
+/* harmony export */   "SummaryModelGenerator": () => (/* binding */ SummaryModelGenerator),
 /* harmony export */   "GroupSummaryModelGenerator": () => (/* binding */ GroupSummaryModelGenerator),
-/* harmony export */   "SummaryModelGenerator": () => (/* binding */ SummaryModelGenerator)
+/* harmony export */   "CaptionSummaryModelGenerator": () => (/* binding */ CaptionSummaryModelGenerator)
 /* harmony export */ });
 /* harmony import */ var _models_row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/row */ "./node_modules/@syncfusion/ej2-grids/src/grid/models/row.js");
 /* harmony import */ var _models_column__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/column */ "./node_modules/@syncfusion/ej2-grids/src/grid/models/column.js");
@@ -41531,8 +41531,8 @@ var Input;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fit": () => (/* binding */ fit),
-/* harmony export */   "flip": () => (/* binding */ flip),
-/* harmony export */   "isCollide": () => (/* binding */ isCollide)
+/* harmony export */   "isCollide": () => (/* binding */ isCollide),
+/* harmony export */   "flip": () => (/* binding */ flip)
 /* harmony export */ });
 /* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./position */ "./node_modules/@syncfusion/ej2-popups/src/common/position.js");
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
@@ -41965,8 +41965,8 @@ function getViewPortWidth() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition),
-/* harmony export */   "calculateRelativeBasedPosition": () => (/* binding */ calculateRelativeBasedPosition)
+/* harmony export */   "calculateRelativeBasedPosition": () => (/* binding */ calculateRelativeBasedPosition),
+/* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /**
@@ -42167,10 +42167,10 @@ function getElementHCenter() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createResize": () => (/* binding */ createResize),
-/* harmony export */   "removeResize": () => (/* binding */ removeResize),
-/* harmony export */   "setMaxHeight": () => (/* binding */ setMaxHeight),
+/* harmony export */   "setMinHeight": () => (/* binding */ setMinHeight),
 /* harmony export */   "setMaxWidth": () => (/* binding */ setMaxWidth),
-/* harmony export */   "setMinHeight": () => (/* binding */ setMinHeight)
+/* harmony export */   "setMaxHeight": () => (/* binding */ setMaxHeight),
+/* harmony export */   "removeResize": () => (/* binding */ removeResize)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /**
@@ -42716,8 +42716,8 @@ function removeResize() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AnimationSettings": () => (/* binding */ AnimationSettings),
 /* harmony export */   "ButtonProps": () => (/* binding */ ButtonProps),
+/* harmony export */   "AnimationSettings": () => (/* binding */ AnimationSettings),
 /* harmony export */   "Dialog": () => (/* binding */ Dialog),
 /* harmony export */   "DialogUtility": () => (/* binding */ DialogUtility)
 /* harmony export */ });
@@ -44593,11 +44593,11 @@ var DialogUtility;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Popup": () => (/* binding */ Popup),
 /* harmony export */   "PositionData": () => (/* binding */ PositionData),
-/* harmony export */   "getMaxZindex": () => (/* binding */ getMaxZindex),
+/* harmony export */   "Popup": () => (/* binding */ Popup),
 /* harmony export */   "getScrollableParent": () => (/* binding */ getScrollableParent),
-/* harmony export */   "getZindexPartial": () => (/* binding */ getZindexPartial)
+/* harmony export */   "getZindexPartial": () => (/* binding */ getZindexPartial),
+/* harmony export */   "getMaxZindex": () => (/* binding */ getMaxZindex)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _common_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/position */ "./node_modules/@syncfusion/ej2-popups/src/common/position.js");
@@ -45421,9 +45421,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Spinner": () => (/* binding */ Spinner),
 /* harmony export */   "createSpinner": () => (/* binding */ createSpinner),
+/* harmony export */   "showSpinner": () => (/* binding */ showSpinner),
 /* harmony export */   "hideSpinner": () => (/* binding */ hideSpinner),
-/* harmony export */   "setSpinner": () => (/* binding */ setSpinner),
-/* harmony export */   "showSpinner": () => (/* binding */ showSpinner)
+/* harmony export */   "setSpinner": () => (/* binding */ setSpinner)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 
@@ -47614,12 +47614,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ComponentBase": () => (/* binding */ ComponentBase),
-/* harmony export */   "_interopRequireWildcard": () => (/* binding */ _interopRequireWildcard),
 /* harmony export */   "aVue": () => (/* binding */ aVue),
+/* harmony export */   "_interopRequireWildcard": () => (/* binding */ _interopRequireWildcard),
 /* harmony export */   "allVue": () => (/* binding */ allVue),
 /* harmony export */   "gh": () => (/* binding */ gh),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
+/* harmony export */   "ComponentBase": () => (/* binding */ ComponentBase)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48079,9 +48079,9 @@ var ComponentBase = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$internalHooks": () => (/* binding */ $internalHooks),
+/* harmony export */   "getProps": () => (/* binding */ getProps),
 /* harmony export */   "EJComponentDecorator": () => (/* binding */ EJComponentDecorator),
-/* harmony export */   "EJcomponentFactory": () => (/* binding */ EJcomponentFactory),
-/* harmony export */   "getProps": () => (/* binding */ getProps)
+/* harmony export */   "EJcomponentFactory": () => (/* binding */ EJcomponentFactory)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _component_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component-base */ "./node_modules/@syncfusion/ej2-vue-base/src/component-base.js");
@@ -48242,17 +48242,17 @@ function collectDataFromConstructor(vm, Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "$internalHooks": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.$internalHooks),
 /* harmony export */   "ComponentBase": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.ComponentBase),
-/* harmony export */   "EJComponentDecorator": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJComponentDecorator),
-/* harmony export */   "EJcomponentFactory": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJcomponentFactory),
 /* harmony export */   "_interopRequireWildcard": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__._interopRequireWildcard),
 /* harmony export */   "aVue": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.aVue),
 /* harmony export */   "allVue": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.allVue),
-/* harmony export */   "compile": () => (/* reexport safe */ _template__WEBPACK_IMPORTED_MODULE_2__.compile),
-/* harmony export */   "getProps": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.getProps),
 /* harmony export */   "gh": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.gh),
-/* harmony export */   "isExecute": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.isExecute)
+/* harmony export */   "isExecute": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.isExecute),
+/* harmony export */   "$internalHooks": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.$internalHooks),
+/* harmony export */   "EJComponentDecorator": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJComponentDecorator),
+/* harmony export */   "EJcomponentFactory": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJcomponentFactory),
+/* harmony export */   "getProps": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.getProps),
+/* harmony export */   "compile": () => (/* reexport safe */ _template__WEBPACK_IMPORTED_MODULE_2__.compile)
 /* harmony export */ });
 /* harmony import */ var _component_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component-base */ "./node_modules/@syncfusion/ej2-vue-base/src/component-base.js");
 /* harmony import */ var _component_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component-decorator */ "./node_modules/@syncfusion/ej2-vue-base/src/component-decorator.js");
@@ -48400,11 +48400,11 @@ function compile(templateElement, helper) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AggregateColumnDirective": () => (/* binding */ AggregateColumnDirective),
-/* harmony export */   "AggregateColumnPlugin": () => (/* binding */ AggregateColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "AggregateColumnsDirective": () => (/* binding */ AggregateColumnsDirective),
 /* harmony export */   "AggregateColumnsPlugin": () => (/* binding */ AggregateColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "AggregateColumnDirective": () => (/* binding */ AggregateColumnDirective),
+/* harmony export */   "AggregateColumnPlugin": () => (/* binding */ AggregateColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48515,11 +48515,11 @@ var AggregateColumnPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AggregateDirective": () => (/* binding */ AggregateDirective),
-/* harmony export */   "AggregatePlugin": () => (/* binding */ AggregatePlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "AggregatesDirective": () => (/* binding */ AggregatesDirective),
 /* harmony export */   "AggregatesPlugin": () => (/* binding */ AggregatesPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "AggregateDirective": () => (/* binding */ AggregateDirective),
+/* harmony export */   "AggregatePlugin": () => (/* binding */ AggregatePlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48631,11 +48631,11 @@ var AggregatePlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ColumnDirective": () => (/* binding */ ColumnDirective),
-/* harmony export */   "ColumnPlugin": () => (/* binding */ ColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "ColumnsDirective": () => (/* binding */ ColumnsDirective),
 /* harmony export */   "ColumnsPlugin": () => (/* binding */ ColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "ColumnDirective": () => (/* binding */ ColumnDirective),
+/* harmony export */   "ColumnPlugin": () => (/* binding */ ColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48740,15 +48740,15 @@ var ColumnPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GridComponent": () => (/* binding */ GridComponent),
-/* harmony export */   "GridPlugin": () => (/* binding */ GridPlugin),
+/* harmony export */   "properties": () => (/* binding */ properties),
+/* harmony export */   "modelProps": () => (/* binding */ modelProps),
+/* harmony export */   "testProp": () => (/* binding */ testProp),
+/* harmony export */   "props": () => (/* binding */ props),
+/* harmony export */   "watch": () => (/* binding */ watch),
 /* harmony export */   "emitProbs": () => (/* binding */ emitProbs),
 /* harmony export */   "isExecute": () => (/* binding */ isExecute),
-/* harmony export */   "modelProps": () => (/* binding */ modelProps),
-/* harmony export */   "properties": () => (/* binding */ properties),
-/* harmony export */   "props": () => (/* binding */ props),
-/* harmony export */   "testProp": () => (/* binding */ testProp),
-/* harmony export */   "watch": () => (/* binding */ watch)
+/* harmony export */   "GridComponent": () => (/* binding */ GridComponent),
+/* harmony export */   "GridPlugin": () => (/* binding */ GridPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
@@ -49337,11 +49337,11 @@ var GridPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "StackedColumnDirective": () => (/* binding */ StackedColumnDirective),
-/* harmony export */   "StackedColumnPlugin": () => (/* binding */ StackedColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "StackedColumnsDirective": () => (/* binding */ StackedColumnsDirective),
 /* harmony export */   "StackedColumnsPlugin": () => (/* binding */ StackedColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "StackedColumnDirective": () => (/* binding */ StackedColumnDirective),
+/* harmony export */   "StackedColumnPlugin": () => (/* binding */ StackedColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -49464,9 +49464,17 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       "default": null
     },
-    data: {
+    index: {
+      type: Number,
+      "default": null
+    },
+    array_data: {
       type: Array,
       "default": null
+    },
+    first_time: {
+      type: Number,
+      "default": 0
     }
   },
   data: function data() {
@@ -49477,16 +49485,31 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     Checked: {
       get: function get() {
-        return check;
-      },
-      set: function set(newVal) {
-        //   search in data if the name is checked or not
-        this.data.forEach(function (value, i) {
-          if (value.name.localeCompare(this.name) === 0) {
-            check = true;
+        var name = this.name; //   search in data if the name is checked or not
+
+        this.array_data.forEach(function (value, i) {
+          if (value.name.localeCompare(name) === 0) {
+            console.log('si coincide');
           }
         });
-        if (check != true && check) this.$emit("update:[index]", newVal);
+        return this.check;
+      },
+      set: function set(newVal) {
+        var first_time = this.first_time;
+
+        if (this.first_time == 0) {
+          var name = this.name; //   search in data if the name is checked or not
+
+          this.array_data.forEach(function (value, i) {
+            if (value.name.localeCompare(name) === 0) {
+              newVal = true;
+              first_time = 1;
+            }
+          });
+        }
+
+        this.$emit("update:first_time", first_time);
+        this.$emit("update:check", newVal);
       }
     }
   }
@@ -49506,6 +49529,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _CheckboxEdit_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckboxEdit.vue */ "./resources/js/admin/components/CheckboxEdit.vue");
+//
+//
+//
 //
 //
 //
@@ -49643,7 +49669,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    window.Event.$on('toggleModal', function (id, roles, academic_areas, academic_entities, academic_comittes) {
+    Event.$on('toggleModal', function (id, roles, academic_areas, academic_entities, academic_comittes) {
       _this2.id = id;
       _this2.selected_academic_areas = academic_areas, _this2.selected_roles = roles, _this2.selected_academic_entities = academic_entities, _this2.selected_academic_comittes = academic_comittes;
 
@@ -50020,7 +50046,7 @@ __webpack_require__.r(__webpack_exports__);
      * Envía una notificación para modificar al usuario
      */
     toggleModal: function toggleModal(id, roles, academic_areas, academic_entities, academic_comittes) {
-      window.Event.$emit('toggleModal', id, roles, academic_areas, academic_entities, academic_comittes);
+      Event.$emit('toggleModal', id, roles, academic_areas, academic_entities, academic_comittes);
       console.log('Seleccione editar');
     },
 
@@ -53965,54 +53991,27 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "mt-5 col-lg-6 col-xl-3" }, [
-                      _c("h4", [_vm._v(" Roles ")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.selected_roles,
-                            expression: "selected_roles",
-                          },
-                        ],
-                        staticClass: "form-check-input",
-                        attrs: { type: "checkbox" },
-                        domProps: {
-                          value: _vm.role.id,
-                          checked: Array.isArray(_vm.selected_roles)
-                            ? _vm._i(_vm.selected_roles, _vm.role.id) > -1
-                            : _vm.selected_roles,
-                        },
-                        on: {
-                          change: function ($event) {
-                            var $$a = _vm.selected_roles,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = _vm.role.id,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  (_vm.selected_roles = $$a.concat([$$v]))
-                              } else {
-                                $$i > -1 &&
-                                  (_vm.selected_roles = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
-                              }
-                            } else {
-                              _vm.selected_roles = $$c
-                            }
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "form-check-label" }, [
-                        _vm._v(" " + _vm._s(_vm.role.name) + " "),
-                      ]),
-                    ]),
+                    _c(
+                      "div",
+                      { staticClass: "mt-5 col-lg-6 col-xl-3" },
+                      [
+                        _c("h4", [_vm._v(" Roles ")]),
+                        _vm._v(" "),
+                        _vm._l(_vm.roles, function (role, index) {
+                          return _c("checkbox-edit", {
+                            key: role.id,
+                            attrs: {
+                              name: role.name,
+                              id: role.id,
+                              pivot: role.pivot,
+                              index: index,
+                              array_data: _vm.selected_roles,
+                            },
+                          })
+                        }),
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",

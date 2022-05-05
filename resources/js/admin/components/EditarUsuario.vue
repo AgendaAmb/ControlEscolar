@@ -19,13 +19,16 @@
             <div class="row">
               <div class="mt-5 col-lg-6 col-xl-3">
                 <h4> Roles </h4>
-                   <!-- <checkbox-edit
-                     v-for="role in roles" :key="role.id" 
-                     v-bind="role"
-                     :data="roles"
-                   ></checkbox-edit> -->
-                    <input class="form-check-input" type="checkbox" :value="role.id" v-model="selected_roles">
-                    <label class="form-check-label"> {{ role.name }} </label>
+                   <checkbox-edit
+                     v-for="(role,index) in roles" :key="role.id" 
+                     :name = "role.name"
+                     :id = "role.id"
+                     :pivot="role.pivot"
+                     :index=index
+                     :array_data="selected_roles"
+                   ></checkbox-edit>
+                    <!-- <input class="form-check-input" type="checkbox" :value="role.id" v-model="selected_roles">
+                    <label class="form-check-label"> {{ role.name }} </label> -->
                 
               </div>
 
@@ -146,7 +149,7 @@ export default {
   },
 
   created() {
-    window.Event.$on('toggleModal', (id,roles,academic_areas,academic_entities, academic_comittes) => {
+    Event.$on('toggleModal', (id,roles,academic_areas,academic_entities, academic_comittes) => {
       this.id = id;
       this.selected_academic_areas = academic_areas,
       this.selected_roles = roles,

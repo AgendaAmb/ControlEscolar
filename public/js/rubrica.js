@@ -315,9 +315,9 @@ var Ajax = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Animation": () => (/* binding */ Animation),
-/* harmony export */   "enableRipple": () => (/* binding */ enableRipple),
+/* harmony export */   "rippleEffect": () => (/* binding */ rippleEffect),
 /* harmony export */   "isRippleEnabled": () => (/* binding */ isRippleEnabled),
-/* harmony export */   "rippleEffect": () => (/* binding */ rippleEffect)
+/* harmony export */   "enableRipple": () => (/* binding */ enableRipple)
 /* harmony export */ });
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dom */ "./node_modules/@syncfusion/ej2-base/src/dom.js");
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base */ "./node_modules/@syncfusion/ej2-base/src/base.js");
@@ -1675,9 +1675,9 @@ var ChildProperty = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Component": () => (/* binding */ Component),
+/* harmony export */   "versionBasedStatePersistence": () => (/* binding */ versionBasedStatePersistence),
 /* harmony export */   "enableVersionBasedPersistence": () => (/* binding */ enableVersionBasedPersistence),
-/* harmony export */   "versionBasedStatePersistence": () => (/* binding */ versionBasedStatePersistence)
+/* harmony export */   "Component": () => (/* binding */ Component)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
 /* harmony import */ var _module_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./module-loader */ "./node_modules/@syncfusion/ej2-base/src/module-loader.js");
@@ -2169,26 +2169,26 @@ var Component = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addClass": () => (/* binding */ addClass),
-/* harmony export */   "append": () => (/* binding */ append),
-/* harmony export */   "attributes": () => (/* binding */ attributes),
-/* harmony export */   "classList": () => (/* binding */ classList),
-/* harmony export */   "cloneNode": () => (/* binding */ cloneNode),
-/* harmony export */   "closest": () => (/* binding */ closest),
-/* harmony export */   "containsClass": () => (/* binding */ containsClass),
 /* harmony export */   "createElement": () => (/* binding */ createElement),
-/* harmony export */   "detach": () => (/* binding */ detach),
-/* harmony export */   "getAttributeOrDefault": () => (/* binding */ getAttributeOrDefault),
-/* harmony export */   "includeInnerHTML": () => (/* binding */ includeInnerHTML),
-/* harmony export */   "isVisible": () => (/* binding */ isVisible),
-/* harmony export */   "matches": () => (/* binding */ matches),
-/* harmony export */   "prepend": () => (/* binding */ prepend),
-/* harmony export */   "remove": () => (/* binding */ remove),
+/* harmony export */   "addClass": () => (/* binding */ addClass),
 /* harmony export */   "removeClass": () => (/* binding */ removeClass),
+/* harmony export */   "isVisible": () => (/* binding */ isVisible),
+/* harmony export */   "prepend": () => (/* binding */ prepend),
+/* harmony export */   "append": () => (/* binding */ append),
+/* harmony export */   "detach": () => (/* binding */ detach),
+/* harmony export */   "remove": () => (/* binding */ remove),
+/* harmony export */   "attributes": () => (/* binding */ attributes),
 /* harmony export */   "select": () => (/* binding */ select),
 /* harmony export */   "selectAll": () => (/* binding */ selectAll),
+/* harmony export */   "closest": () => (/* binding */ closest),
+/* harmony export */   "siblings": () => (/* binding */ siblings),
+/* harmony export */   "getAttributeOrDefault": () => (/* binding */ getAttributeOrDefault),
 /* harmony export */   "setStyleAttribute": () => (/* binding */ setStyleAttribute),
-/* harmony export */   "siblings": () => (/* binding */ siblings)
+/* harmony export */   "classList": () => (/* binding */ classList),
+/* harmony export */   "matches": () => (/* binding */ matches),
+/* harmony export */   "includeInnerHTML": () => (/* binding */ includeInnerHTML),
+/* harmony export */   "containsClass": () => (/* binding */ containsClass),
+/* harmony export */   "cloneNode": () => (/* binding */ cloneNode)
 /* harmony export */ });
 /* harmony import */ var _event_handler__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event-handler */ "./node_modules/@syncfusion/ej2-base/src/event-handler.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
@@ -2673,8 +2673,8 @@ function cloneNode(element, deep) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Draggable": () => (/* binding */ Draggable),
-/* harmony export */   "Position": () => (/* binding */ Position)
+/* harmony export */   "Position": () => (/* binding */ Position),
+/* harmony export */   "Draggable": () => (/* binding */ Draggable)
 /* harmony export */ });
 /* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./node_modules/@syncfusion/ej2-base/src/base.js");
 /* harmony import */ var _browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./browser */ "./node_modules/@syncfusion/ej2-base/src/browser.js");
@@ -4050,107 +4050,107 @@ var HijriParser;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IntlBase": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.IntlBase),
+/* harmony export */   "blazorCultureFormats": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.blazorCultureFormats),
 /* harmony export */   "Ajax": () => (/* reexport safe */ _ajax__WEBPACK_IMPORTED_MODULE_1__.Ajax),
 /* harmony export */   "Animation": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.Animation),
+/* harmony export */   "enableRipple": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.enableRipple),
+/* harmony export */   "isRippleEnabled": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.isRippleEnabled),
+/* harmony export */   "rippleEffect": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.rippleEffect),
 /* harmony export */   "Base": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.Base),
+/* harmony export */   "getComponent": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.getComponent),
+/* harmony export */   "removeChildInstance": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.removeChildInstance),
 /* harmony export */   "Browser": () => (/* reexport safe */ _browser__WEBPACK_IMPORTED_MODULE_4__.Browser),
+/* harmony export */   "Component": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.Component),
+/* harmony export */   "enableVersionBasedPersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.enableVersionBasedPersistence),
+/* harmony export */   "versionBasedStatePersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.versionBasedStatePersistence),
 /* harmony export */   "ChildProperty": () => (/* reexport safe */ _child_property__WEBPACK_IMPORTED_MODULE_6__.ChildProperty),
+/* harmony export */   "Draggable": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Draggable),
+/* harmony export */   "Position": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Position),
+/* harmony export */   "Droppable": () => (/* reexport safe */ _droppable__WEBPACK_IMPORTED_MODULE_8__.Droppable),
+/* harmony export */   "EventHandler": () => (/* reexport safe */ _event_handler__WEBPACK_IMPORTED_MODULE_9__.EventHandler),
+/* harmony export */   "Internationalization": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.Internationalization),
+/* harmony export */   "cldrData": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.cldrData),
+/* harmony export */   "defaultCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCulture),
+/* harmony export */   "defaultCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCurrencyCode),
+/* harmony export */   "enableRtl": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.enableRtl),
+/* harmony export */   "getDefaultDateObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getDefaultDateObject),
+/* harmony export */   "getNumberDependable": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumberDependable),
+/* harmony export */   "getNumericObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumericObject),
+/* harmony export */   "loadCldr": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.loadCldr),
+/* harmony export */   "onIntlChange": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.onIntlChange),
+/* harmony export */   "rightToLeft": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.rightToLeft),
+/* harmony export */   "setCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCulture),
+/* harmony export */   "setCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCurrencyCode),
+/* harmony export */   "KeyboardEvents": () => (/* reexport safe */ _keyboard__WEBPACK_IMPORTED_MODULE_11__.KeyboardEvents),
+/* harmony export */   "L10n": () => (/* reexport safe */ _l10n__WEBPACK_IMPORTED_MODULE_12__.L10n),
+/* harmony export */   "ModuleLoader": () => (/* reexport safe */ _module_loader__WEBPACK_IMPORTED_MODULE_13__.ModuleLoader),
 /* harmony export */   "Collection": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Collection),
 /* harmony export */   "CollectionFactory": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.CollectionFactory),
 /* harmony export */   "Complex": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Complex),
 /* harmony export */   "ComplexFactory": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.ComplexFactory),
-/* harmony export */   "Component": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.Component),
 /* harmony export */   "CreateBuilder": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.CreateBuilder),
-/* harmony export */   "Draggable": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Draggable),
-/* harmony export */   "Droppable": () => (/* reexport safe */ _droppable__WEBPACK_IMPORTED_MODULE_8__.Droppable),
 /* harmony export */   "Event": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Event),
-/* harmony export */   "EventHandler": () => (/* reexport safe */ _event_handler__WEBPACK_IMPORTED_MODULE_9__.EventHandler),
-/* harmony export */   "HijriParser": () => (/* reexport safe */ _hijri_parser__WEBPACK_IMPORTED_MODULE_16__.HijriParser),
-/* harmony export */   "Internationalization": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.Internationalization),
-/* harmony export */   "IntlBase": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.IntlBase),
-/* harmony export */   "KeyboardEvents": () => (/* reexport safe */ _keyboard__WEBPACK_IMPORTED_MODULE_11__.KeyboardEvents),
-/* harmony export */   "L10n": () => (/* reexport safe */ _l10n__WEBPACK_IMPORTED_MODULE_12__.L10n),
-/* harmony export */   "ModuleLoader": () => (/* reexport safe */ _module_loader__WEBPACK_IMPORTED_MODULE_13__.ModuleLoader),
 /* harmony export */   "NotifyPropertyChanges": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.NotifyPropertyChanges),
-/* harmony export */   "Observer": () => (/* reexport safe */ _observer__WEBPACK_IMPORTED_MODULE_20__.Observer),
-/* harmony export */   "Position": () => (/* reexport safe */ _draggable__WEBPACK_IMPORTED_MODULE_7__.Position),
 /* harmony export */   "Property": () => (/* reexport safe */ _notify_property_change__WEBPACK_IMPORTED_MODULE_14__.Property),
-/* harmony export */   "SanitizeHtmlHelper": () => (/* reexport safe */ _sanitize_helper__WEBPACK_IMPORTED_MODULE_21__.SanitizeHtmlHelper),
 /* harmony export */   "SwipeSettings": () => (/* reexport safe */ _touch__WEBPACK_IMPORTED_MODULE_15__.SwipeSettings),
 /* harmony export */   "Touch": () => (/* reexport safe */ _touch__WEBPACK_IMPORTED_MODULE_15__.Touch),
-/* harmony export */   "addClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.addClass),
-/* harmony export */   "addInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.addInstance),
-/* harmony export */   "append": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.append),
-/* harmony export */   "attributes": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.attributes),
-/* harmony export */   "blazorCultureFormats": () => (/* reexport safe */ _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__.blazorCultureFormats),
+/* harmony export */   "HijriParser": () => (/* reexport safe */ _hijri_parser__WEBPACK_IMPORTED_MODULE_16__.HijriParser),
 /* harmony export */   "blazorTemplates": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.blazorTemplates),
-/* harmony export */   "classList": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.classList),
-/* harmony export */   "cldrData": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.cldrData),
-/* harmony export */   "cloneNode": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.cloneNode),
-/* harmony export */   "closest": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.closest),
-/* harmony export */   "compareElementParent": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.compareElementParent),
 /* harmony export */   "compile": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.compile),
-/* harmony export */   "containsClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.containsClass),
-/* harmony export */   "createElement": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.createElement),
+/* harmony export */   "getRandomId": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getRandomId),
+/* harmony export */   "getTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getTemplateEngine),
+/* harmony export */   "resetBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.resetBlazorTemplate),
+/* harmony export */   "setTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.setTemplateEngine),
+/* harmony export */   "updateBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.updateBlazorTemplate),
+/* harmony export */   "addInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.addInstance),
+/* harmony export */   "compareElementParent": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.compareElementParent),
 /* harmony export */   "createInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.createInstance),
 /* harmony export */   "debounce": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.debounce),
-/* harmony export */   "defaultCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCulture),
-/* harmony export */   "defaultCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.defaultCurrencyCode),
 /* harmony export */   "deleteObject": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.deleteObject),
-/* harmony export */   "detach": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.detach),
 /* harmony export */   "disableBlazorMode": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.disableBlazorMode),
 /* harmony export */   "enableBlazorMode": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.enableBlazorMode),
-/* harmony export */   "enableRipple": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.enableRipple),
-/* harmony export */   "enableRtl": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.enableRtl),
-/* harmony export */   "enableVersionBasedPersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.enableVersionBasedPersistence),
 /* harmony export */   "extend": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.extend),
 /* harmony export */   "formatUnit": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.formatUnit),
-/* harmony export */   "getAttributeOrDefault": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.getAttributeOrDefault),
-/* harmony export */   "getComponent": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.getComponent),
-/* harmony export */   "getDefaultDateObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getDefaultDateObject),
 /* harmony export */   "getElement": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getElement),
 /* harmony export */   "getEnumValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getEnumValue),
 /* harmony export */   "getInstance": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getInstance),
-/* harmony export */   "getNumberDependable": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumberDependable),
-/* harmony export */   "getNumericObject": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.getNumericObject),
-/* harmony export */   "getRandomId": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getRandomId),
-/* harmony export */   "getTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.getTemplateEngine),
 /* harmony export */   "getUniqueID": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getUniqueID),
 /* harmony export */   "getValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.getValue),
-/* harmony export */   "includeInnerHTML": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.includeInnerHTML),
 /* harmony export */   "isBlazor": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isBlazor),
 /* harmony export */   "isNullOrUndefined": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isNullOrUndefined),
 /* harmony export */   "isObject": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isObject),
 /* harmony export */   "isObjectArray": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isObjectArray),
-/* harmony export */   "isRippleEnabled": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.isRippleEnabled),
 /* harmony export */   "isUndefined": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.isUndefined),
-/* harmony export */   "isVisible": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.isVisible),
-/* harmony export */   "loadCldr": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.loadCldr),
-/* harmony export */   "matches": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.matches),
 /* harmony export */   "merge": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.merge),
-/* harmony export */   "onIntlChange": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.onIntlChange),
-/* harmony export */   "prepend": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.prepend),
 /* harmony export */   "print": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.print),
 /* harmony export */   "queryParams": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.queryParams),
-/* harmony export */   "remove": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.remove),
-/* harmony export */   "removeChildInstance": () => (/* reexport safe */ _base__WEBPACK_IMPORTED_MODULE_3__.removeChildInstance),
-/* harmony export */   "removeClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.removeClass),
-/* harmony export */   "resetBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.resetBlazorTemplate),
-/* harmony export */   "rightToLeft": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.rightToLeft),
-/* harmony export */   "rippleEffect": () => (/* reexport safe */ _animation__WEBPACK_IMPORTED_MODULE_2__.rippleEffect),
-/* harmony export */   "select": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.select),
-/* harmony export */   "selectAll": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.selectAll),
-/* harmony export */   "setCulture": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCulture),
-/* harmony export */   "setCurrencyCode": () => (/* reexport safe */ _internationalization__WEBPACK_IMPORTED_MODULE_10__.setCurrencyCode),
 /* harmony export */   "setImmediate": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.setImmediate),
-/* harmony export */   "setStyleAttribute": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.setStyleAttribute),
-/* harmony export */   "setTemplateEngine": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.setTemplateEngine),
 /* harmony export */   "setValue": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.setValue),
-/* harmony export */   "siblings": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.siblings),
 /* harmony export */   "throwError": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.throwError),
 /* harmony export */   "uniqueID": () => (/* reexport safe */ _util__WEBPACK_IMPORTED_MODULE_18__.uniqueID),
-/* harmony export */   "updateBlazorTemplate": () => (/* reexport safe */ _template_engine__WEBPACK_IMPORTED_MODULE_17__.updateBlazorTemplate),
-/* harmony export */   "versionBasedStatePersistence": () => (/* reexport safe */ _component__WEBPACK_IMPORTED_MODULE_5__.versionBasedStatePersistence)
+/* harmony export */   "addClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.addClass),
+/* harmony export */   "append": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.append),
+/* harmony export */   "attributes": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.attributes),
+/* harmony export */   "classList": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.classList),
+/* harmony export */   "cloneNode": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.cloneNode),
+/* harmony export */   "closest": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.closest),
+/* harmony export */   "containsClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.containsClass),
+/* harmony export */   "createElement": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.createElement),
+/* harmony export */   "detach": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.detach),
+/* harmony export */   "getAttributeOrDefault": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.getAttributeOrDefault),
+/* harmony export */   "includeInnerHTML": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.includeInnerHTML),
+/* harmony export */   "isVisible": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.isVisible),
+/* harmony export */   "matches": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.matches),
+/* harmony export */   "prepend": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.prepend),
+/* harmony export */   "remove": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.remove),
+/* harmony export */   "removeClass": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.removeClass),
+/* harmony export */   "select": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.select),
+/* harmony export */   "selectAll": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.selectAll),
+/* harmony export */   "setStyleAttribute": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.setStyleAttribute),
+/* harmony export */   "siblings": () => (/* reexport safe */ _dom__WEBPACK_IMPORTED_MODULE_19__.siblings),
+/* harmony export */   "Observer": () => (/* reexport safe */ _observer__WEBPACK_IMPORTED_MODULE_20__.Observer),
+/* harmony export */   "SanitizeHtmlHelper": () => (/* reexport safe */ _sanitize_helper__WEBPACK_IMPORTED_MODULE_21__.SanitizeHtmlHelper)
 /* harmony export */ });
 /* harmony import */ var _intl_intl_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./intl/intl-base */ "./node_modules/@syncfusion/ej2-base/src/intl/intl-base.js");
 /* harmony import */ var _ajax__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ajax */ "./node_modules/@syncfusion/ej2-base/src/ajax.js");
@@ -4212,19 +4212,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Internationalization": () => (/* binding */ Internationalization),
+/* harmony export */   "onIntlChange": () => (/* binding */ onIntlChange),
+/* harmony export */   "rightToLeft": () => (/* binding */ rightToLeft),
 /* harmony export */   "cldrData": () => (/* binding */ cldrData),
 /* harmony export */   "defaultCulture": () => (/* binding */ defaultCulture),
 /* harmony export */   "defaultCurrencyCode": () => (/* binding */ defaultCurrencyCode),
-/* harmony export */   "enableRtl": () => (/* binding */ enableRtl),
-/* harmony export */   "getDefaultDateObject": () => (/* binding */ getDefaultDateObject),
-/* harmony export */   "getNumberDependable": () => (/* binding */ getNumberDependable),
-/* harmony export */   "getNumericObject": () => (/* binding */ getNumericObject),
-/* harmony export */   "loadCldr": () => (/* binding */ loadCldr),
-/* harmony export */   "onIntlChange": () => (/* binding */ onIntlChange),
-/* harmony export */   "rightToLeft": () => (/* binding */ rightToLeft),
+/* harmony export */   "Internationalization": () => (/* binding */ Internationalization),
 /* harmony export */   "setCulture": () => (/* binding */ setCulture),
-/* harmony export */   "setCurrencyCode": () => (/* binding */ setCurrencyCode)
+/* harmony export */   "setCurrencyCode": () => (/* binding */ setCurrencyCode),
+/* harmony export */   "loadCldr": () => (/* binding */ loadCldr),
+/* harmony export */   "enableRtl": () => (/* binding */ enableRtl),
+/* harmony export */   "getNumericObject": () => (/* binding */ getNumericObject),
+/* harmony export */   "getNumberDependable": () => (/* binding */ getNumberDependable),
+/* harmony export */   "getDefaultDateObject": () => (/* binding */ getDefaultDateObject)
 /* harmony export */ });
 /* harmony import */ var _intl_date_formatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./intl/date-formatter */ "./node_modules/@syncfusion/ej2-base/src/intl/date-formatter.js");
 /* harmony import */ var _intl_number_formatter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./intl/number-formatter */ "./node_modules/@syncfusion/ej2-base/src/intl/number-formatter.js");
@@ -4540,9 +4540,9 @@ function getDefaultDateObject(mode) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DateFormat": () => (/* binding */ DateFormat),
 /* harmony export */   "basicPatterns": () => (/* binding */ basicPatterns),
-/* harmony export */   "datePartMatcher": () => (/* binding */ datePartMatcher)
+/* harmony export */   "datePartMatcher": () => (/* binding */ datePartMatcher),
+/* harmony export */   "DateFormat": () => (/* binding */ DateFormat)
 /* harmony export */ });
 /* harmony import */ var _parser_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parser-base */ "./node_modules/@syncfusion/ej2-base/src/intl/parser-base.js");
 /* harmony import */ var _intl_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./intl-base */ "./node_modules/@syncfusion/ej2-base/src/intl/intl-base.js");
@@ -5310,8 +5310,8 @@ var DateParser = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IntlBase": () => (/* binding */ IntlBase),
-/* harmony export */   "blazorCultureFormats": () => (/* binding */ blazorCultureFormats)
+/* harmony export */   "blazorCultureFormats": () => (/* binding */ blazorCultureFormats),
+/* harmony export */   "IntlBase": () => (/* binding */ IntlBase)
 /* harmony export */ });
 /* harmony import */ var _internationalization__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../internationalization */ "./node_modules/@syncfusion/ej2-base/src/internationalization.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
@@ -7934,14 +7934,14 @@ var ModuleLoader = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Collection": () => (/* binding */ Collection),
-/* harmony export */   "CollectionFactory": () => (/* binding */ CollectionFactory),
+/* harmony export */   "Property": () => (/* binding */ Property),
 /* harmony export */   "Complex": () => (/* binding */ Complex),
 /* harmony export */   "ComplexFactory": () => (/* binding */ ComplexFactory),
-/* harmony export */   "CreateBuilder": () => (/* binding */ CreateBuilder),
+/* harmony export */   "Collection": () => (/* binding */ Collection),
+/* harmony export */   "CollectionFactory": () => (/* binding */ CollectionFactory),
 /* harmony export */   "Event": () => (/* binding */ Event),
 /* harmony export */   "NotifyPropertyChanges": () => (/* binding */ NotifyPropertyChanges),
-/* harmony export */   "Property": () => (/* binding */ Property)
+/* harmony export */   "CreateBuilder": () => (/* binding */ CreateBuilder)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-base/src/util.js");
 
@@ -8971,12 +8971,12 @@ var SanitizeHtmlHelper = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "blazorTemplates": () => (/* binding */ blazorTemplates),
-/* harmony export */   "compile": () => (/* binding */ compile),
 /* harmony export */   "getRandomId": () => (/* binding */ getRandomId),
-/* harmony export */   "getTemplateEngine": () => (/* binding */ getTemplateEngine),
+/* harmony export */   "compile": () => (/* binding */ compile),
+/* harmony export */   "updateBlazorTemplate": () => (/* binding */ updateBlazorTemplate),
 /* harmony export */   "resetBlazorTemplate": () => (/* binding */ resetBlazorTemplate),
 /* harmony export */   "setTemplateEngine": () => (/* binding */ setTemplateEngine),
-/* harmony export */   "updateBlazorTemplate": () => (/* binding */ updateBlazorTemplate)
+/* harmony export */   "getTemplateEngine": () => (/* binding */ getTemplateEngine)
 /* harmony export */ });
 /* harmony import */ var _template__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./template */ "./node_modules/@syncfusion/ej2-base/src/template.js");
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dom */ "./node_modules/@syncfusion/ej2-base/src/dom.js");
@@ -9153,8 +9153,8 @@ var engineObj = { compile: new Engine().compile };
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "compile": () => (/* binding */ compile),
-/* harmony export */   "expression": () => (/* binding */ expression)
+/* harmony export */   "expression": () => (/* binding */ expression),
+/* harmony export */   "compile": () => (/* binding */ compile)
 /* harmony export */ });
 /**
  * Template Engine
@@ -9807,31 +9807,31 @@ var Touch = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addInstance": () => (/* binding */ addInstance),
-/* harmony export */   "compareElementParent": () => (/* binding */ compareElementParent),
-/* harmony export */   "createInstance": () => (/* binding */ createInstance),
-/* harmony export */   "debounce": () => (/* binding */ debounce),
-/* harmony export */   "deleteObject": () => (/* binding */ deleteObject),
 /* harmony export */   "disableBlazorMode": () => (/* binding */ disableBlazorMode),
-/* harmony export */   "enableBlazorMode": () => (/* binding */ enableBlazorMode),
-/* harmony export */   "extend": () => (/* binding */ extend),
-/* harmony export */   "formatUnit": () => (/* binding */ formatUnit),
-/* harmony export */   "getElement": () => (/* binding */ getElement),
-/* harmony export */   "getEnumValue": () => (/* binding */ getEnumValue),
-/* harmony export */   "getInstance": () => (/* binding */ getInstance),
-/* harmony export */   "getUniqueID": () => (/* binding */ getUniqueID),
-/* harmony export */   "getValue": () => (/* binding */ getValue),
-/* harmony export */   "isBlazor": () => (/* binding */ isBlazor),
-/* harmony export */   "isNullOrUndefined": () => (/* binding */ isNullOrUndefined),
-/* harmony export */   "isObject": () => (/* binding */ isObject),
-/* harmony export */   "isObjectArray": () => (/* binding */ isObjectArray),
-/* harmony export */   "isUndefined": () => (/* binding */ isUndefined),
-/* harmony export */   "merge": () => (/* binding */ merge),
-/* harmony export */   "print": () => (/* binding */ print),
-/* harmony export */   "queryParams": () => (/* binding */ queryParams),
+/* harmony export */   "createInstance": () => (/* binding */ createInstance),
 /* harmony export */   "setImmediate": () => (/* binding */ setImmediate),
+/* harmony export */   "getValue": () => (/* binding */ getValue),
 /* harmony export */   "setValue": () => (/* binding */ setValue),
+/* harmony export */   "deleteObject": () => (/* binding */ deleteObject),
+/* harmony export */   "isObject": () => (/* binding */ isObject),
+/* harmony export */   "getEnumValue": () => (/* binding */ getEnumValue),
+/* harmony export */   "merge": () => (/* binding */ merge),
+/* harmony export */   "extend": () => (/* binding */ extend),
+/* harmony export */   "isNullOrUndefined": () => (/* binding */ isNullOrUndefined),
+/* harmony export */   "isUndefined": () => (/* binding */ isUndefined),
+/* harmony export */   "getUniqueID": () => (/* binding */ getUniqueID),
+/* harmony export */   "debounce": () => (/* binding */ debounce),
+/* harmony export */   "queryParams": () => (/* binding */ queryParams),
+/* harmony export */   "isObjectArray": () => (/* binding */ isObjectArray),
+/* harmony export */   "compareElementParent": () => (/* binding */ compareElementParent),
 /* harmony export */   "throwError": () => (/* binding */ throwError),
+/* harmony export */   "print": () => (/* binding */ print),
+/* harmony export */   "formatUnit": () => (/* binding */ formatUnit),
+/* harmony export */   "enableBlazorMode": () => (/* binding */ enableBlazorMode),
+/* harmony export */   "isBlazor": () => (/* binding */ isBlazor),
+/* harmony export */   "getElement": () => (/* binding */ getElement),
+/* harmony export */   "getInstance": () => (/* binding */ getInstance),
+/* harmony export */   "addInstance": () => (/* binding */ addInstance),
 /* harmony export */   "uniqueID": () => (/* binding */ uniqueID)
 /* harmony export */ });
 var instances = 'ej2_instances';
@@ -10346,8 +10346,8 @@ function combineArray(num) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Button": () => (/* binding */ Button),
-/* harmony export */   "buttonObserver": () => (/* binding */ buttonObserver)
+/* harmony export */   "buttonObserver": () => (/* binding */ buttonObserver),
+/* harmony export */   "Button": () => (/* binding */ Button)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _common_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/common */ "./node_modules/@syncfusion/ej2-buttons/src/common/common.js");
@@ -10708,13 +10708,13 @@ var Button = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createCheckBox": () => (/* binding */ createCheckBox),
-/* harmony export */   "destroy": () => (/* binding */ destroy),
+/* harmony export */   "wrapperInitialize": () => (/* binding */ wrapperInitialize),
 /* harmony export */   "getTextNode": () => (/* binding */ getTextNode),
+/* harmony export */   "destroy": () => (/* binding */ destroy),
 /* harmony export */   "preRender": () => (/* binding */ preRender),
+/* harmony export */   "createCheckBox": () => (/* binding */ createCheckBox),
 /* harmony export */   "rippleMouseHandler": () => (/* binding */ rippleMouseHandler),
-/* harmony export */   "setHiddenInput": () => (/* binding */ setHiddenInput),
-/* harmony export */   "wrapperInitialize": () => (/* binding */ wrapperInitialize)
+/* harmony export */   "setHiddenInput": () => (/* binding */ setHiddenInput)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 
@@ -10899,16 +10899,16 @@ function setHiddenInput(proxy, wrap) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Adaptor": () => (/* binding */ Adaptor),
-/* harmony export */   "CacheAdaptor": () => (/* binding */ CacheAdaptor),
-/* harmony export */   "CustomDataAdaptor": () => (/* binding */ CustomDataAdaptor),
-/* harmony export */   "GraphQLAdaptor": () => (/* binding */ GraphQLAdaptor),
 /* harmony export */   "JsonAdaptor": () => (/* binding */ JsonAdaptor),
+/* harmony export */   "UrlAdaptor": () => (/* binding */ UrlAdaptor),
 /* harmony export */   "ODataAdaptor": () => (/* binding */ ODataAdaptor),
 /* harmony export */   "ODataV4Adaptor": () => (/* binding */ ODataV4Adaptor),
-/* harmony export */   "RemoteSaveAdaptor": () => (/* binding */ RemoteSaveAdaptor),
-/* harmony export */   "UrlAdaptor": () => (/* binding */ UrlAdaptor),
 /* harmony export */   "WebApiAdaptor": () => (/* binding */ WebApiAdaptor),
-/* harmony export */   "WebMethodAdaptor": () => (/* binding */ WebMethodAdaptor)
+/* harmony export */   "WebMethodAdaptor": () => (/* binding */ WebMethodAdaptor),
+/* harmony export */   "RemoteSaveAdaptor": () => (/* binding */ RemoteSaveAdaptor),
+/* harmony export */   "CustomDataAdaptor": () => (/* binding */ CustomDataAdaptor),
+/* harmony export */   "GraphQLAdaptor": () => (/* binding */ GraphQLAdaptor),
+/* harmony export */   "CacheAdaptor": () => (/* binding */ CacheAdaptor)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -13907,8 +13907,8 @@ var Deferred = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Predicate": () => (/* binding */ Predicate),
-/* harmony export */   "Query": () => (/* binding */ Query)
+/* harmony export */   "Query": () => (/* binding */ Query),
+/* harmony export */   "Predicate": () => (/* binding */ Predicate)
 /* harmony export */ });
 /* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/@syncfusion/ej2-data/src/util.js");
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
@@ -17589,8 +17589,8 @@ var Data = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Print": () => (/* binding */ Print),
-/* harmony export */   "getCloneProperties": () => (/* binding */ getCloneProperties)
+/* harmony export */   "getCloneProperties": () => (/* binding */ getCloneProperties),
+/* harmony export */   "Print": () => (/* binding */ Print)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _base_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base/util */ "./node_modules/@syncfusion/ej2-grids/src/grid/base/util.js");
@@ -22359,279 +22359,279 @@ var ShowHide = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "accessPredicate": () => (/* binding */ accessPredicate),
+/* harmony export */   "created": () => (/* binding */ created),
+/* harmony export */   "destroyed": () => (/* binding */ destroyed),
+/* harmony export */   "load": () => (/* binding */ load),
+/* harmony export */   "rowDataBound": () => (/* binding */ rowDataBound),
+/* harmony export */   "queryCellInfo": () => (/* binding */ queryCellInfo),
+/* harmony export */   "headerCellInfo": () => (/* binding */ headerCellInfo),
 /* harmony export */   "actionBegin": () => (/* binding */ actionBegin),
 /* harmony export */   "actionComplete": () => (/* binding */ actionComplete),
 /* harmony export */   "actionFailure": () => (/* binding */ actionFailure),
-/* harmony export */   "addBegin": () => (/* binding */ addBegin),
-/* harmony export */   "addComplete": () => (/* binding */ addComplete),
-/* harmony export */   "addDeleteAction": () => (/* binding */ addDeleteAction),
-/* harmony export */   "afterContentRender": () => (/* binding */ afterContentRender),
-/* harmony export */   "appendInfiniteContent": () => (/* binding */ appendInfiniteContent),
-/* harmony export */   "autoCol": () => (/* binding */ autoCol),
+/* harmony export */   "dataBound": () => (/* binding */ dataBound),
+/* harmony export */   "rowSelecting": () => (/* binding */ rowSelecting),
+/* harmony export */   "rowSelected": () => (/* binding */ rowSelected),
+/* harmony export */   "rowDeselecting": () => (/* binding */ rowDeselecting),
+/* harmony export */   "rowDeselected": () => (/* binding */ rowDeselected),
+/* harmony export */   "cellSelecting": () => (/* binding */ cellSelecting),
+/* harmony export */   "cellSelected": () => (/* binding */ cellSelected),
+/* harmony export */   "cellDeselecting": () => (/* binding */ cellDeselecting),
+/* harmony export */   "cellDeselected": () => (/* binding */ cellDeselected),
+/* harmony export */   "columnSelecting": () => (/* binding */ columnSelecting),
+/* harmony export */   "columnSelected": () => (/* binding */ columnSelected),
+/* harmony export */   "columnDeselecting": () => (/* binding */ columnDeselecting),
+/* harmony export */   "columnDeselected": () => (/* binding */ columnDeselected),
+/* harmony export */   "columnDragStart": () => (/* binding */ columnDragStart),
+/* harmony export */   "columnDrag": () => (/* binding */ columnDrag),
+/* harmony export */   "columnDrop": () => (/* binding */ columnDrop),
+/* harmony export */   "rowDragStartHelper": () => (/* binding */ rowDragStartHelper),
+/* harmony export */   "rowDragStart": () => (/* binding */ rowDragStart),
+/* harmony export */   "rowDrag": () => (/* binding */ rowDrag),
+/* harmony export */   "rowDrop": () => (/* binding */ rowDrop),
+/* harmony export */   "beforePrint": () => (/* binding */ beforePrint),
+/* harmony export */   "printComplete": () => (/* binding */ printComplete),
+/* harmony export */   "detailDataBound": () => (/* binding */ detailDataBound),
+/* harmony export */   "toolbarClick": () => (/* binding */ toolbarClick),
 /* harmony export */   "batchAdd": () => (/* binding */ batchAdd),
 /* harmony export */   "batchCancel": () => (/* binding */ batchCancel),
 /* harmony export */   "batchDelete": () => (/* binding */ batchDelete),
-/* harmony export */   "batchEditFormRendered": () => (/* binding */ batchEditFormRendered),
-/* harmony export */   "batchForm": () => (/* binding */ batchForm),
-/* harmony export */   "beforeAutoFill": () => (/* binding */ beforeAutoFill),
 /* harmony export */   "beforeBatchAdd": () => (/* binding */ beforeBatchAdd),
-/* harmony export */   "beforeBatchCancel": () => (/* binding */ beforeBatchCancel),
 /* harmony export */   "beforeBatchDelete": () => (/* binding */ beforeBatchDelete),
 /* harmony export */   "beforeBatchSave": () => (/* binding */ beforeBatchSave),
-/* harmony export */   "beforeCellFocused": () => (/* binding */ beforeCellFocused),
-/* harmony export */   "beforeCheckboxRenderer": () => (/* binding */ beforeCheckboxRenderer),
-/* harmony export */   "beforeCheckboxRendererQuery": () => (/* binding */ beforeCheckboxRendererQuery),
-/* harmony export */   "beforeCopy": () => (/* binding */ beforeCopy),
-/* harmony export */   "beforeCustomFilterOpen": () => (/* binding */ beforeCustomFilterOpen),
-/* harmony export */   "beforeDataBound": () => (/* binding */ beforeDataBound),
-/* harmony export */   "beforeExcelExport": () => (/* binding */ beforeExcelExport),
-/* harmony export */   "beforeFltrcMenuOpen": () => (/* binding */ beforeFltrcMenuOpen),
-/* harmony export */   "beforeFragAppend": () => (/* binding */ beforeFragAppend),
-/* harmony export */   "beforeOpenAdaptiveDialog": () => (/* binding */ beforeOpenAdaptiveDialog),
-/* harmony export */   "beforeOpenColumnChooser": () => (/* binding */ beforeOpenColumnChooser),
-/* harmony export */   "beforePaste": () => (/* binding */ beforePaste),
-/* harmony export */   "beforePdfExport": () => (/* binding */ beforePdfExport),
-/* harmony export */   "beforePrint": () => (/* binding */ beforePrint),
-/* harmony export */   "beforeRefreshOnDataChange": () => (/* binding */ beforeRefreshOnDataChange),
-/* harmony export */   "beforeStartEdit": () => (/* binding */ beforeStartEdit),
 /* harmony export */   "beginEdit": () => (/* binding */ beginEdit),
-/* harmony export */   "bulkSave": () => (/* binding */ bulkSave),
-/* harmony export */   "cBoxFltrBegin": () => (/* binding */ cBoxFltrBegin),
-/* harmony export */   "cBoxFltrComplete": () => (/* binding */ cBoxFltrComplete),
-/* harmony export */   "cancelBegin": () => (/* binding */ cancelBegin),
-/* harmony export */   "captionActionComplete": () => (/* binding */ captionActionComplete),
-/* harmony export */   "cellDeselected": () => (/* binding */ cellDeselected),
-/* harmony export */   "cellDeselecting": () => (/* binding */ cellDeselecting),
 /* harmony export */   "cellEdit": () => (/* binding */ cellEdit),
-/* harmony export */   "cellFocused": () => (/* binding */ cellFocused),
 /* harmony export */   "cellSave": () => (/* binding */ cellSave),
 /* harmony export */   "cellSaved": () => (/* binding */ cellSaved),
-/* harmony export */   "cellSelected": () => (/* binding */ cellSelected),
-/* harmony export */   "cellSelecting": () => (/* binding */ cellSelecting),
-/* harmony export */   "cellSelectionBegin": () => (/* binding */ cellSelectionBegin),
-/* harmony export */   "cellSelectionComplete": () => (/* binding */ cellSelectionComplete),
-/* harmony export */   "checkBoxChange": () => (/* binding */ checkBoxChange),
-/* harmony export */   "checkScrollReset": () => (/* binding */ checkScrollReset),
-/* harmony export */   "click": () => (/* binding */ click),
-/* harmony export */   "closeBatch": () => (/* binding */ closeBatch),
-/* harmony export */   "closeEdit": () => (/* binding */ closeEdit),
-/* harmony export */   "closeFilterDialog": () => (/* binding */ closeFilterDialog),
-/* harmony export */   "closeInline": () => (/* binding */ closeInline),
-/* harmony export */   "colGroupRefresh": () => (/* binding */ colGroupRefresh),
-/* harmony export */   "columnChooserCancelBtnClick": () => (/* binding */ columnChooserCancelBtnClick),
-/* harmony export */   "columnChooserOpened": () => (/* binding */ columnChooserOpened),
-/* harmony export */   "columnDataStateChange": () => (/* binding */ columnDataStateChange),
-/* harmony export */   "columnDeselected": () => (/* binding */ columnDeselected),
-/* harmony export */   "columnDeselecting": () => (/* binding */ columnDeselecting),
-/* harmony export */   "columnDrag": () => (/* binding */ columnDrag),
-/* harmony export */   "columnDragStart": () => (/* binding */ columnDragStart),
-/* harmony export */   "columnDragStop": () => (/* binding */ columnDragStop),
-/* harmony export */   "columnDrop": () => (/* binding */ columnDrop),
-/* harmony export */   "columnMenuClick": () => (/* binding */ columnMenuClick),
-/* harmony export */   "columnMenuOpen": () => (/* binding */ columnMenuOpen),
-/* harmony export */   "columnPositionChanged": () => (/* binding */ columnPositionChanged),
-/* harmony export */   "columnSelected": () => (/* binding */ columnSelected),
-/* harmony export */   "columnSelecting": () => (/* binding */ columnSelecting),
-/* harmony export */   "columnSelectionBegin": () => (/* binding */ columnSelectionBegin),
-/* harmony export */   "columnSelectionComplete": () => (/* binding */ columnSelectionComplete),
-/* harmony export */   "columnVisibilityChanged": () => (/* binding */ columnVisibilityChanged),
-/* harmony export */   "columnWidthChanged": () => (/* binding */ columnWidthChanged),
-/* harmony export */   "columnsPrepared": () => (/* binding */ columnsPrepared),
-/* harmony export */   "commandClick": () => (/* binding */ commandClick),
-/* harmony export */   "componentRendered": () => (/* binding */ componentRendered),
-/* harmony export */   "contentReady": () => (/* binding */ contentReady),
-/* harmony export */   "contextMenuClick": () => (/* binding */ contextMenuClick),
-/* harmony export */   "contextMenuOpen": () => (/* binding */ contextMenuOpen),
-/* harmony export */   "createVirtualValidationForm": () => (/* binding */ createVirtualValidationForm),
-/* harmony export */   "created": () => (/* binding */ created),
-/* harmony export */   "crudAction": () => (/* binding */ crudAction),
-/* harmony export */   "customFilterClose": () => (/* binding */ customFilterClose),
-/* harmony export */   "dataBound": () => (/* binding */ dataBound),
-/* harmony export */   "dataReady": () => (/* binding */ dataReady),
-/* harmony export */   "dataSourceChanged": () => (/* binding */ dataSourceChanged),
-/* harmony export */   "dataSourceModified": () => (/* binding */ dataSourceModified),
-/* harmony export */   "dataStateChange": () => (/* binding */ dataStateChange),
-/* harmony export */   "dblclick": () => (/* binding */ dblclick),
-/* harmony export */   "deleteBegin": () => (/* binding */ deleteBegin),
-/* harmony export */   "deleteComplete": () => (/* binding */ deleteComplete),
-/* harmony export */   "destroy": () => (/* binding */ destroy),
-/* harmony export */   "destroyChildGrid": () => (/* binding */ destroyChildGrid),
-/* harmony export */   "destroyForm": () => (/* binding */ destroyForm),
-/* harmony export */   "destroyed": () => (/* binding */ destroyed),
-/* harmony export */   "detailDataBound": () => (/* binding */ detailDataBound),
-/* harmony export */   "detailIndentCellInfo": () => (/* binding */ detailIndentCellInfo),
-/* harmony export */   "detailStateChange": () => (/* binding */ detailStateChange),
-/* harmony export */   "dialogDestroy": () => (/* binding */ dialogDestroy),
-/* harmony export */   "doubleTap": () => (/* binding */ doubleTap),
-/* harmony export */   "editBegin": () => (/* binding */ editBegin),
-/* harmony export */   "editComplete": () => (/* binding */ editComplete),
-/* harmony export */   "editNextValCell": () => (/* binding */ editNextValCell),
-/* harmony export */   "editReset": () => (/* binding */ editReset),
 /* harmony export */   "endAdd": () => (/* binding */ endAdd),
 /* harmony export */   "endDelete": () => (/* binding */ endDelete),
 /* harmony export */   "endEdit": () => (/* binding */ endEdit),
-/* harmony export */   "enterKeyHandler": () => (/* binding */ enterKeyHandler),
-/* harmony export */   "excelAggregateQueryCellInfo": () => (/* binding */ excelAggregateQueryCellInfo),
-/* harmony export */   "excelExportComplete": () => (/* binding */ excelExportComplete),
-/* harmony export */   "excelHeaderQueryCellInfo": () => (/* binding */ excelHeaderQueryCellInfo),
-/* harmony export */   "excelQueryCellInfo": () => (/* binding */ excelQueryCellInfo),
-/* harmony export */   "expandChildGrid": () => (/* binding */ expandChildGrid),
-/* harmony export */   "exportDataBound": () => (/* binding */ exportDataBound),
-/* harmony export */   "exportDetailDataBound": () => (/* binding */ exportDetailDataBound),
-/* harmony export */   "exportGroupCaption": () => (/* binding */ exportGroupCaption),
-/* harmony export */   "exportRowDataBound": () => (/* binding */ exportRowDataBound),
+/* harmony export */   "recordDoubleClick": () => (/* binding */ recordDoubleClick),
+/* harmony export */   "recordClick": () => (/* binding */ recordClick),
+/* harmony export */   "beforeDataBound": () => (/* binding */ beforeDataBound),
+/* harmony export */   "beforeOpenColumnChooser": () => (/* binding */ beforeOpenColumnChooser),
+/* harmony export */   "beforeOpenAdaptiveDialog": () => (/* binding */ beforeOpenAdaptiveDialog),
+/* harmony export */   "resizeStart": () => (/* binding */ resizeStart),
+/* harmony export */   "onResize": () => (/* binding */ onResize),
+/* harmony export */   "resizeStop": () => (/* binding */ resizeStop),
+/* harmony export */   "checkBoxChange": () => (/* binding */ checkBoxChange),
+/* harmony export */   "beforeCopy": () => (/* binding */ beforeCopy),
+/* harmony export */   "beforePaste": () => (/* binding */ beforePaste),
+/* harmony export */   "beforeAutoFill": () => (/* binding */ beforeAutoFill),
+/* harmony export */   "filterChoiceRequest": () => (/* binding */ filterChoiceRequest),
 /* harmony export */   "filterAfterOpen": () => (/* binding */ filterAfterOpen),
 /* harmony export */   "filterBeforeOpen": () => (/* binding */ filterBeforeOpen),
-/* harmony export */   "filterBegin": () => (/* binding */ filterBegin),
-/* harmony export */   "filterCboxValue": () => (/* binding */ filterCboxValue),
-/* harmony export */   "filterChoiceRequest": () => (/* binding */ filterChoiceRequest),
-/* harmony export */   "filterCmenuSelect": () => (/* binding */ filterCmenuSelect),
-/* harmony export */   "filterComplete": () => (/* binding */ filterComplete),
-/* harmony export */   "filterDialogClose": () => (/* binding */ filterDialogClose),
-/* harmony export */   "filterDialogCreated": () => (/* binding */ filterDialogCreated),
-/* harmony export */   "filterMenuClose": () => (/* binding */ filterMenuClose),
-/* harmony export */   "filterOpen": () => (/* binding */ filterOpen),
 /* harmony export */   "filterSearchBegin": () => (/* binding */ filterSearchBegin),
-/* harmony export */   "fltrPrevent": () => (/* binding */ fltrPrevent),
-/* harmony export */   "foreignKeyData": () => (/* binding */ foreignKeyData),
-/* harmony export */   "freezeRefresh": () => (/* binding */ freezeRefresh),
-/* harmony export */   "freezeRender": () => (/* binding */ freezeRender),
-/* harmony export */   "frozenHeight": () => (/* binding */ frozenHeight),
-/* harmony export */   "generateQuery": () => (/* binding */ generateQuery),
-/* harmony export */   "getAggregateQuery": () => (/* binding */ getAggregateQuery),
-/* harmony export */   "getFilterBarOperator": () => (/* binding */ getFilterBarOperator),
-/* harmony export */   "getForeignKeyData": () => (/* binding */ getForeignKeyData),
-/* harmony export */   "getVirtualData": () => (/* binding */ getVirtualData),
-/* harmony export */   "groupAggregates": () => (/* binding */ groupAggregates),
-/* harmony export */   "groupBegin": () => (/* binding */ groupBegin),
-/* harmony export */   "groupCollapse": () => (/* binding */ groupCollapse),
-/* harmony export */   "groupComplete": () => (/* binding */ groupComplete),
-/* harmony export */   "headerCellInfo": () => (/* binding */ headerCellInfo),
-/* harmony export */   "headerDrop": () => (/* binding */ headerDrop),
-/* harmony export */   "headerRefreshed": () => (/* binding */ headerRefreshed),
-/* harmony export */   "hierarchyPrint": () => (/* binding */ hierarchyPrint),
-/* harmony export */   "immutableBatchCancel": () => (/* binding */ immutableBatchCancel),
-/* harmony export */   "inBoundModelChanged": () => (/* binding */ inBoundModelChanged),
-/* harmony export */   "infiniteCrudCancel": () => (/* binding */ infiniteCrudCancel),
-/* harmony export */   "infiniteEditHandler": () => (/* binding */ infiniteEditHandler),
-/* harmony export */   "infinitePageQuery": () => (/* binding */ infinitePageQuery),
-/* harmony export */   "infiniteScrollHandler": () => (/* binding */ infiniteScrollHandler),
-/* harmony export */   "infiniteShowHide": () => (/* binding */ infiniteShowHide),
-/* harmony export */   "initForeignKeyColumn": () => (/* binding */ initForeignKeyColumn),
-/* harmony export */   "initialCollapse": () => (/* binding */ initialCollapse),
-/* harmony export */   "initialEnd": () => (/* binding */ initialEnd),
-/* harmony export */   "initialLoad": () => (/* binding */ initialLoad),
-/* harmony export */   "keyPressed": () => (/* binding */ keyPressed),
-/* harmony export */   "lazyLoadGroupCollapse": () => (/* binding */ lazyLoadGroupCollapse),
+/* harmony export */   "commandClick": () => (/* binding */ commandClick),
+/* harmony export */   "exportGroupCaption": () => (/* binding */ exportGroupCaption),
 /* harmony export */   "lazyLoadGroupExpand": () => (/* binding */ lazyLoadGroupExpand),
-/* harmony export */   "lazyLoadScrollHandler": () => (/* binding */ lazyLoadScrollHandler),
-/* harmony export */   "load": () => (/* binding */ load),
-/* harmony export */   "modelChanged": () => (/* binding */ modelChanged),
-/* harmony export */   "nextCellIndex": () => (/* binding */ nextCellIndex),
+/* harmony export */   "lazyLoadGroupCollapse": () => (/* binding */ lazyLoadGroupCollapse),
+/* harmony export */   "initialLoad": () => (/* binding */ initialLoad),
+/* harmony export */   "initialEnd": () => (/* binding */ initialEnd),
+/* harmony export */   "dataReady": () => (/* binding */ dataReady),
+/* harmony export */   "contentReady": () => (/* binding */ contentReady),
+/* harmony export */   "uiUpdate": () => (/* binding */ uiUpdate),
 /* harmony export */   "onEmpty": () => (/* binding */ onEmpty),
-/* harmony export */   "onResize": () => (/* binding */ onResize),
+/* harmony export */   "inBoundModelChanged": () => (/* binding */ inBoundModelChanged),
+/* harmony export */   "modelChanged": () => (/* binding */ modelChanged),
+/* harmony export */   "colGroupRefresh": () => (/* binding */ colGroupRefresh),
+/* harmony export */   "headerRefreshed": () => (/* binding */ headerRefreshed),
 /* harmony export */   "pageBegin": () => (/* binding */ pageBegin),
 /* harmony export */   "pageComplete": () => (/* binding */ pageComplete),
-/* harmony export */   "pagerRefresh": () => (/* binding */ pagerRefresh),
-/* harmony export */   "partialRefresh": () => (/* binding */ partialRefresh),
-/* harmony export */   "pdfAggregateQueryCellInfo": () => (/* binding */ pdfAggregateQueryCellInfo),
-/* harmony export */   "pdfExportComplete": () => (/* binding */ pdfExportComplete),
-/* harmony export */   "pdfHeaderQueryCellInfo": () => (/* binding */ pdfHeaderQueryCellInfo),
-/* harmony export */   "pdfQueryCellInfo": () => (/* binding */ pdfQueryCellInfo),
-/* harmony export */   "preventBatch": () => (/* binding */ preventBatch),
-/* harmony export */   "preventFrozenScrollRefresh": () => (/* binding */ preventFrozenScrollRefresh),
-/* harmony export */   "printComplete": () => (/* binding */ printComplete),
-/* harmony export */   "printGridInit": () => (/* binding */ printGridInit),
-/* harmony export */   "queryCellInfo": () => (/* binding */ queryCellInfo),
-/* harmony export */   "recordAdded": () => (/* binding */ recordAdded),
-/* harmony export */   "recordClick": () => (/* binding */ recordClick),
-/* harmony export */   "recordDoubleClick": () => (/* binding */ recordDoubleClick),
-/* harmony export */   "refreshAggregateCell": () => (/* binding */ refreshAggregateCell),
-/* harmony export */   "refreshAggregates": () => (/* binding */ refreshAggregates),
-/* harmony export */   "refreshComplete": () => (/* binding */ refreshComplete),
-/* harmony export */   "refreshCustomFilterClearBtn": () => (/* binding */ refreshCustomFilterClearBtn),
-/* harmony export */   "refreshCustomFilterOkBtn": () => (/* binding */ refreshCustomFilterOkBtn),
-/* harmony export */   "refreshExpandandCollapse": () => (/* binding */ refreshExpandandCollapse),
-/* harmony export */   "refreshFooterRenderer": () => (/* binding */ refreshFooterRenderer),
-/* harmony export */   "refreshFrozenColumns": () => (/* binding */ refreshFrozenColumns),
-/* harmony export */   "refreshFrozenHeight": () => (/* binding */ refreshFrozenHeight),
-/* harmony export */   "refreshHandlers": () => (/* binding */ refreshHandlers),
-/* harmony export */   "refreshInfiniteCurrentViewData": () => (/* binding */ refreshInfiniteCurrentViewData),
-/* harmony export */   "refreshInfiniteModeBlocks": () => (/* binding */ refreshInfiniteModeBlocks),
-/* harmony export */   "refreshInfinitePersistSelection": () => (/* binding */ refreshInfinitePersistSelection),
-/* harmony export */   "refreshVirtualBlock": () => (/* binding */ refreshVirtualBlock),
-/* harmony export */   "refreshVirtualCache": () => (/* binding */ refreshVirtualCache),
-/* harmony export */   "refreshVirtualEditFormCells": () => (/* binding */ refreshVirtualEditFormCells),
-/* harmony export */   "refreshVirtualFrozenHeight": () => (/* binding */ refreshVirtualFrozenHeight),
-/* harmony export */   "refreshVirtualFrozenRows": () => (/* binding */ refreshVirtualFrozenRows),
-/* harmony export */   "refreshVirtualMaxPage": () => (/* binding */ refreshVirtualMaxPage),
-/* harmony export */   "removeInfiniteRows": () => (/* binding */ removeInfiniteRows),
-/* harmony export */   "renderResponsiveCmenu": () => (/* binding */ renderResponsiveCmenu),
-/* harmony export */   "reorderBegin": () => (/* binding */ reorderBegin),
-/* harmony export */   "reorderComplete": () => (/* binding */ reorderComplete),
-/* harmony export */   "resetColumns": () => (/* binding */ resetColumns),
-/* harmony export */   "resetInfiniteBlocks": () => (/* binding */ resetInfiniteBlocks),
-/* harmony export */   "resetVirtualFocus": () => (/* binding */ resetVirtualFocus),
-/* harmony export */   "resizeStart": () => (/* binding */ resizeStart),
-/* harmony export */   "resizeStop": () => (/* binding */ resizeStop),
-/* harmony export */   "restoreFocus": () => (/* binding */ restoreFocus),
-/* harmony export */   "rowDataBound": () => (/* binding */ rowDataBound),
-/* harmony export */   "rowDeselected": () => (/* binding */ rowDeselected),
-/* harmony export */   "rowDeselecting": () => (/* binding */ rowDeselecting),
-/* harmony export */   "rowDrag": () => (/* binding */ rowDrag),
-/* harmony export */   "rowDragAndDrop": () => (/* binding */ rowDragAndDrop),
-/* harmony export */   "rowDragAndDropBegin": () => (/* binding */ rowDragAndDropBegin),
-/* harmony export */   "rowDragAndDropComplete": () => (/* binding */ rowDragAndDropComplete),
-/* harmony export */   "rowDragStart": () => (/* binding */ rowDragStart),
-/* harmony export */   "rowDragStartHelper": () => (/* binding */ rowDragStartHelper),
-/* harmony export */   "rowDrop": () => (/* binding */ rowDrop),
-/* harmony export */   "rowModeChange": () => (/* binding */ rowModeChange),
-/* harmony export */   "rowPositionChanged": () => (/* binding */ rowPositionChanged),
-/* harmony export */   "rowSelected": () => (/* binding */ rowSelected),
-/* harmony export */   "rowSelecting": () => (/* binding */ rowSelecting),
-/* harmony export */   "rowSelectionBegin": () => (/* binding */ rowSelectionBegin),
-/* harmony export */   "rowSelectionComplete": () => (/* binding */ rowSelectionComplete),
-/* harmony export */   "rowsAdded": () => (/* binding */ rowsAdded),
-/* harmony export */   "rowsRemoved": () => (/* binding */ rowsRemoved),
-/* harmony export */   "rtlUpdated": () => (/* binding */ rtlUpdated),
-/* harmony export */   "saveComplete": () => (/* binding */ saveComplete),
-/* harmony export */   "scroll": () => (/* binding */ scroll),
-/* harmony export */   "scrollToEdit": () => (/* binding */ scrollToEdit),
-/* harmony export */   "searchBegin": () => (/* binding */ searchBegin),
-/* harmony export */   "searchComplete": () => (/* binding */ searchComplete),
-/* harmony export */   "selectRowOnContextOpen": () => (/* binding */ selectRowOnContextOpen),
-/* harmony export */   "selectVirtualRow": () => (/* binding */ selectVirtualRow),
-/* harmony export */   "setFreezeSelection": () => (/* binding */ setFreezeSelection),
-/* harmony export */   "setFullScreenDialog": () => (/* binding */ setFullScreenDialog),
-/* harmony export */   "setGroupCache": () => (/* binding */ setGroupCache),
-/* harmony export */   "setHeightToFrozenElement": () => (/* binding */ setHeightToFrozenElement),
-/* harmony export */   "setInfiniteCache": () => (/* binding */ setInfiniteCache),
-/* harmony export */   "setInfiniteColFrozenHeight": () => (/* binding */ setInfiniteColFrozenHeight),
-/* harmony export */   "setInfiniteFrozenHeight": () => (/* binding */ setInfiniteFrozenHeight),
-/* harmony export */   "setReorderDestinationElement": () => (/* binding */ setReorderDestinationElement),
-/* harmony export */   "setVirtualPageQuery": () => (/* binding */ setVirtualPageQuery),
-/* harmony export */   "showEmptyGrid": () => (/* binding */ showEmptyGrid),
 /* harmony export */   "sortBegin": () => (/* binding */ sortBegin),
 /* harmony export */   "sortComplete": () => (/* binding */ sortComplete),
-/* harmony export */   "stickyScrollComplete": () => (/* binding */ stickyScrollComplete),
-/* harmony export */   "textWrapRefresh": () => (/* binding */ textWrapRefresh),
-/* harmony export */   "toolbarClick": () => (/* binding */ toolbarClick),
-/* harmony export */   "toolbarRefresh": () => (/* binding */ toolbarRefresh),
-/* harmony export */   "tooltipDestroy": () => (/* binding */ tooltipDestroy),
-/* harmony export */   "uiUpdate": () => (/* binding */ uiUpdate),
+/* harmony export */   "filterBegin": () => (/* binding */ filterBegin),
+/* harmony export */   "filterComplete": () => (/* binding */ filterComplete),
+/* harmony export */   "searchBegin": () => (/* binding */ searchBegin),
+/* harmony export */   "searchComplete": () => (/* binding */ searchComplete),
+/* harmony export */   "reorderBegin": () => (/* binding */ reorderBegin),
+/* harmony export */   "reorderComplete": () => (/* binding */ reorderComplete),
+/* harmony export */   "rowDragAndDropBegin": () => (/* binding */ rowDragAndDropBegin),
+/* harmony export */   "rowDragAndDropComplete": () => (/* binding */ rowDragAndDropComplete),
+/* harmony export */   "groupBegin": () => (/* binding */ groupBegin),
+/* harmony export */   "groupComplete": () => (/* binding */ groupComplete),
 /* harmony export */   "ungroupBegin": () => (/* binding */ ungroupBegin),
 /* harmony export */   "ungroupComplete": () => (/* binding */ ungroupComplete),
+/* harmony export */   "groupAggregates": () => (/* binding */ groupAggregates),
+/* harmony export */   "refreshFooterRenderer": () => (/* binding */ refreshFooterRenderer),
+/* harmony export */   "refreshAggregateCell": () => (/* binding */ refreshAggregateCell),
+/* harmony export */   "refreshAggregates": () => (/* binding */ refreshAggregates),
+/* harmony export */   "rowSelectionBegin": () => (/* binding */ rowSelectionBegin),
+/* harmony export */   "rowSelectionComplete": () => (/* binding */ rowSelectionComplete),
+/* harmony export */   "columnSelectionBegin": () => (/* binding */ columnSelectionBegin),
+/* harmony export */   "columnSelectionComplete": () => (/* binding */ columnSelectionComplete),
+/* harmony export */   "cellSelectionBegin": () => (/* binding */ cellSelectionBegin),
+/* harmony export */   "cellSelectionComplete": () => (/* binding */ cellSelectionComplete),
+/* harmony export */   "beforeCellFocused": () => (/* binding */ beforeCellFocused),
+/* harmony export */   "cellFocused": () => (/* binding */ cellFocused),
+/* harmony export */   "keyPressed": () => (/* binding */ keyPressed),
+/* harmony export */   "click": () => (/* binding */ click),
+/* harmony export */   "destroy": () => (/* binding */ destroy),
+/* harmony export */   "columnVisibilityChanged": () => (/* binding */ columnVisibilityChanged),
+/* harmony export */   "scroll": () => (/* binding */ scroll),
+/* harmony export */   "columnWidthChanged": () => (/* binding */ columnWidthChanged),
+/* harmony export */   "columnPositionChanged": () => (/* binding */ columnPositionChanged),
+/* harmony export */   "rowDragAndDrop": () => (/* binding */ rowDragAndDrop),
+/* harmony export */   "rowsAdded": () => (/* binding */ rowsAdded),
+/* harmony export */   "rowsRemoved": () => (/* binding */ rowsRemoved),
+/* harmony export */   "columnDragStop": () => (/* binding */ columnDragStop),
+/* harmony export */   "headerDrop": () => (/* binding */ headerDrop),
+/* harmony export */   "dataSourceModified": () => (/* binding */ dataSourceModified),
+/* harmony export */   "refreshComplete": () => (/* binding */ refreshComplete),
+/* harmony export */   "refreshVirtualBlock": () => (/* binding */ refreshVirtualBlock),
+/* harmony export */   "dblclick": () => (/* binding */ dblclick),
+/* harmony export */   "toolbarRefresh": () => (/* binding */ toolbarRefresh),
+/* harmony export */   "bulkSave": () => (/* binding */ bulkSave),
+/* harmony export */   "autoCol": () => (/* binding */ autoCol),
+/* harmony export */   "tooltipDestroy": () => (/* binding */ tooltipDestroy),
 /* harmony export */   "updateData": () => (/* binding */ updateData),
+/* harmony export */   "editBegin": () => (/* binding */ editBegin),
+/* harmony export */   "editComplete": () => (/* binding */ editComplete),
+/* harmony export */   "addBegin": () => (/* binding */ addBegin),
+/* harmony export */   "addComplete": () => (/* binding */ addComplete),
+/* harmony export */   "saveComplete": () => (/* binding */ saveComplete),
+/* harmony export */   "deleteBegin": () => (/* binding */ deleteBegin),
+/* harmony export */   "deleteComplete": () => (/* binding */ deleteComplete),
+/* harmony export */   "preventBatch": () => (/* binding */ preventBatch),
+/* harmony export */   "dialogDestroy": () => (/* binding */ dialogDestroy),
+/* harmony export */   "crudAction": () => (/* binding */ crudAction),
+/* harmony export */   "addDeleteAction": () => (/* binding */ addDeleteAction),
+/* harmony export */   "destroyForm": () => (/* binding */ destroyForm),
+/* harmony export */   "doubleTap": () => (/* binding */ doubleTap),
+/* harmony export */   "beforeExcelExport": () => (/* binding */ beforeExcelExport),
+/* harmony export */   "excelExportComplete": () => (/* binding */ excelExportComplete),
+/* harmony export */   "excelQueryCellInfo": () => (/* binding */ excelQueryCellInfo),
+/* harmony export */   "excelHeaderQueryCellInfo": () => (/* binding */ excelHeaderQueryCellInfo),
+/* harmony export */   "exportDetailDataBound": () => (/* binding */ exportDetailDataBound),
+/* harmony export */   "beforePdfExport": () => (/* binding */ beforePdfExport),
+/* harmony export */   "pdfExportComplete": () => (/* binding */ pdfExportComplete),
+/* harmony export */   "pdfQueryCellInfo": () => (/* binding */ pdfQueryCellInfo),
+/* harmony export */   "pdfHeaderQueryCellInfo": () => (/* binding */ pdfHeaderQueryCellInfo),
+/* harmony export */   "accessPredicate": () => (/* binding */ accessPredicate),
+/* harmony export */   "contextMenuClick": () => (/* binding */ contextMenuClick),
+/* harmony export */   "freezeRender": () => (/* binding */ freezeRender),
+/* harmony export */   "freezeRefresh": () => (/* binding */ freezeRefresh),
+/* harmony export */   "contextMenuOpen": () => (/* binding */ contextMenuOpen),
+/* harmony export */   "columnMenuClick": () => (/* binding */ columnMenuClick),
+/* harmony export */   "columnMenuOpen": () => (/* binding */ columnMenuOpen),
+/* harmony export */   "filterOpen": () => (/* binding */ filterOpen),
+/* harmony export */   "filterDialogCreated": () => (/* binding */ filterDialogCreated),
+/* harmony export */   "filterMenuClose": () => (/* binding */ filterMenuClose),
+/* harmony export */   "initForeignKeyColumn": () => (/* binding */ initForeignKeyColumn),
+/* harmony export */   "getForeignKeyData": () => (/* binding */ getForeignKeyData),
+/* harmony export */   "generateQuery": () => (/* binding */ generateQuery),
+/* harmony export */   "showEmptyGrid": () => (/* binding */ showEmptyGrid),
+/* harmony export */   "foreignKeyData": () => (/* binding */ foreignKeyData),
+/* harmony export */   "columnDataStateChange": () => (/* binding */ columnDataStateChange),
+/* harmony export */   "dataStateChange": () => (/* binding */ dataStateChange),
+/* harmony export */   "dataSourceChanged": () => (/* binding */ dataSourceChanged),
+/* harmony export */   "rtlUpdated": () => (/* binding */ rtlUpdated),
+/* harmony export */   "beforeFragAppend": () => (/* binding */ beforeFragAppend),
+/* harmony export */   "frozenHeight": () => (/* binding */ frozenHeight),
+/* harmony export */   "textWrapRefresh": () => (/* binding */ textWrapRefresh),
+/* harmony export */   "recordAdded": () => (/* binding */ recordAdded),
+/* harmony export */   "cancelBegin": () => (/* binding */ cancelBegin),
+/* harmony export */   "editNextValCell": () => (/* binding */ editNextValCell),
+/* harmony export */   "hierarchyPrint": () => (/* binding */ hierarchyPrint),
+/* harmony export */   "expandChildGrid": () => (/* binding */ expandChildGrid),
+/* harmony export */   "printGridInit": () => (/* binding */ printGridInit),
+/* harmony export */   "exportRowDataBound": () => (/* binding */ exportRowDataBound),
+/* harmony export */   "exportDataBound": () => (/* binding */ exportDataBound),
+/* harmony export */   "rowPositionChanged": () => (/* binding */ rowPositionChanged),
+/* harmony export */   "columnChooserOpened": () => (/* binding */ columnChooserOpened),
+/* harmony export */   "batchForm": () => (/* binding */ batchForm),
+/* harmony export */   "beforeStartEdit": () => (/* binding */ beforeStartEdit),
+/* harmony export */   "beforeBatchCancel": () => (/* binding */ beforeBatchCancel),
+/* harmony export */   "batchEditFormRendered": () => (/* binding */ batchEditFormRendered),
+/* harmony export */   "partialRefresh": () => (/* binding */ partialRefresh),
+/* harmony export */   "beforeCustomFilterOpen": () => (/* binding */ beforeCustomFilterOpen),
+/* harmony export */   "selectVirtualRow": () => (/* binding */ selectVirtualRow),
+/* harmony export */   "columnsPrepared": () => (/* binding */ columnsPrepared),
+/* harmony export */   "cBoxFltrBegin": () => (/* binding */ cBoxFltrBegin),
+/* harmony export */   "cBoxFltrComplete": () => (/* binding */ cBoxFltrComplete),
+/* harmony export */   "fltrPrevent": () => (/* binding */ fltrPrevent),
+/* harmony export */   "beforeFltrcMenuOpen": () => (/* binding */ beforeFltrcMenuOpen),
 /* harmony export */   "valCustomPlacement": () => (/* binding */ valCustomPlacement),
-/* harmony export */   "validateVirtualForm": () => (/* binding */ validateVirtualForm),
-/* harmony export */   "virtaulCellFocus": () => (/* binding */ virtaulCellFocus),
+/* harmony export */   "filterCboxValue": () => (/* binding */ filterCboxValue),
+/* harmony export */   "componentRendered": () => (/* binding */ componentRendered),
+/* harmony export */   "restoreFocus": () => (/* binding */ restoreFocus),
+/* harmony export */   "detailStateChange": () => (/* binding */ detailStateChange),
+/* harmony export */   "detailIndentCellInfo": () => (/* binding */ detailIndentCellInfo),
 /* harmony export */   "virtaulKeyHandler": () => (/* binding */ virtaulKeyHandler),
-/* harmony export */   "virtualScrollAddActionBegin": () => (/* binding */ virtualScrollAddActionBegin),
-/* harmony export */   "virtualScrollEdit": () => (/* binding */ virtualScrollEdit),
+/* harmony export */   "virtaulCellFocus": () => (/* binding */ virtaulCellFocus),
 /* harmony export */   "virtualScrollEditActionBegin": () => (/* binding */ virtualScrollEditActionBegin),
+/* harmony export */   "virtualScrollEditSuccess": () => (/* binding */ virtualScrollEditSuccess),
 /* harmony export */   "virtualScrollEditCancel": () => (/* binding */ virtualScrollEditCancel),
-/* harmony export */   "virtualScrollEditSuccess": () => (/* binding */ virtualScrollEditSuccess)
+/* harmony export */   "virtualScrollEdit": () => (/* binding */ virtualScrollEdit),
+/* harmony export */   "refreshVirtualCache": () => (/* binding */ refreshVirtualCache),
+/* harmony export */   "editReset": () => (/* binding */ editReset),
+/* harmony export */   "virtualScrollAddActionBegin": () => (/* binding */ virtualScrollAddActionBegin),
+/* harmony export */   "getVirtualData": () => (/* binding */ getVirtualData),
+/* harmony export */   "refreshInfiniteModeBlocks": () => (/* binding */ refreshInfiniteModeBlocks),
+/* harmony export */   "resetInfiniteBlocks": () => (/* binding */ resetInfiniteBlocks),
+/* harmony export */   "infiniteScrollHandler": () => (/* binding */ infiniteScrollHandler),
+/* harmony export */   "infinitePageQuery": () => (/* binding */ infinitePageQuery),
+/* harmony export */   "infiniteShowHide": () => (/* binding */ infiniteShowHide),
+/* harmony export */   "appendInfiniteContent": () => (/* binding */ appendInfiniteContent),
+/* harmony export */   "removeInfiniteRows": () => (/* binding */ removeInfiniteRows),
+/* harmony export */   "setInfiniteCache": () => (/* binding */ setInfiniteCache),
+/* harmony export */   "infiniteEditHandler": () => (/* binding */ infiniteEditHandler),
+/* harmony export */   "initialCollapse": () => (/* binding */ initialCollapse),
+/* harmony export */   "getAggregateQuery": () => (/* binding */ getAggregateQuery),
+/* harmony export */   "closeFilterDialog": () => (/* binding */ closeFilterDialog),
+/* harmony export */   "columnChooserCancelBtnClick": () => (/* binding */ columnChooserCancelBtnClick),
+/* harmony export */   "getFilterBarOperator": () => (/* binding */ getFilterBarOperator),
+/* harmony export */   "resetColumns": () => (/* binding */ resetColumns),
+/* harmony export */   "pdfAggregateQueryCellInfo": () => (/* binding */ pdfAggregateQueryCellInfo),
+/* harmony export */   "excelAggregateQueryCellInfo": () => (/* binding */ excelAggregateQueryCellInfo),
+/* harmony export */   "setGroupCache": () => (/* binding */ setGroupCache),
+/* harmony export */   "lazyLoadScrollHandler": () => (/* binding */ lazyLoadScrollHandler),
+/* harmony export */   "groupCollapse": () => (/* binding */ groupCollapse),
+/* harmony export */   "beforeCheckboxRenderer": () => (/* binding */ beforeCheckboxRenderer),
+/* harmony export */   "refreshHandlers": () => (/* binding */ refreshHandlers),
+/* harmony export */   "refreshFrozenColumns": () => (/* binding */ refreshFrozenColumns),
+/* harmony export */   "setReorderDestinationElement": () => (/* binding */ setReorderDestinationElement),
+/* harmony export */   "refreshVirtualFrozenHeight": () => (/* binding */ refreshVirtualFrozenHeight),
+/* harmony export */   "setFreezeSelection": () => (/* binding */ setFreezeSelection),
+/* harmony export */   "setInfiniteFrozenHeight": () => (/* binding */ setInfiniteFrozenHeight),
+/* harmony export */   "setInfiniteColFrozenHeight": () => (/* binding */ setInfiniteColFrozenHeight),
+/* harmony export */   "beforeRefreshOnDataChange": () => (/* binding */ beforeRefreshOnDataChange),
+/* harmony export */   "immutableBatchCancel": () => (/* binding */ immutableBatchCancel),
+/* harmony export */   "refreshVirtualFrozenRows": () => (/* binding */ refreshVirtualFrozenRows),
+/* harmony export */   "checkScrollReset": () => (/* binding */ checkScrollReset),
+/* harmony export */   "refreshFrozenHeight": () => (/* binding */ refreshFrozenHeight),
+/* harmony export */   "setHeightToFrozenElement": () => (/* binding */ setHeightToFrozenElement),
+/* harmony export */   "preventFrozenScrollRefresh": () => (/* binding */ preventFrozenScrollRefresh),
+/* harmony export */   "nextCellIndex": () => (/* binding */ nextCellIndex),
+/* harmony export */   "refreshInfiniteCurrentViewData": () => (/* binding */ refreshInfiniteCurrentViewData),
+/* harmony export */   "infiniteCrudCancel": () => (/* binding */ infiniteCrudCancel),
+/* harmony export */   "filterDialogClose": () => (/* binding */ filterDialogClose),
+/* harmony export */   "refreshCustomFilterOkBtn": () => (/* binding */ refreshCustomFilterOkBtn),
+/* harmony export */   "refreshCustomFilterClearBtn": () => (/* binding */ refreshCustomFilterClearBtn),
+/* harmony export */   "renderResponsiveCmenu": () => (/* binding */ renderResponsiveCmenu),
+/* harmony export */   "filterCmenuSelect": () => (/* binding */ filterCmenuSelect),
+/* harmony export */   "customFilterClose": () => (/* binding */ customFilterClose),
+/* harmony export */   "setFullScreenDialog": () => (/* binding */ setFullScreenDialog),
+/* harmony export */   "refreshExpandandCollapse": () => (/* binding */ refreshExpandandCollapse),
+/* harmony export */   "rowModeChange": () => (/* binding */ rowModeChange),
+/* harmony export */   "enterKeyHandler": () => (/* binding */ enterKeyHandler),
+/* harmony export */   "refreshVirtualMaxPage": () => (/* binding */ refreshVirtualMaxPage),
+/* harmony export */   "setVirtualPageQuery": () => (/* binding */ setVirtualPageQuery),
+/* harmony export */   "selectRowOnContextOpen": () => (/* binding */ selectRowOnContextOpen),
+/* harmony export */   "pagerRefresh": () => (/* binding */ pagerRefresh),
+/* harmony export */   "closeInline": () => (/* binding */ closeInline),
+/* harmony export */   "closeBatch": () => (/* binding */ closeBatch),
+/* harmony export */   "closeEdit": () => (/* binding */ closeEdit),
+/* harmony export */   "resetVirtualFocus": () => (/* binding */ resetVirtualFocus),
+/* harmony export */   "afterContentRender": () => (/* binding */ afterContentRender),
+/* harmony export */   "refreshVirtualEditFormCells": () => (/* binding */ refreshVirtualEditFormCells),
+/* harmony export */   "scrollToEdit": () => (/* binding */ scrollToEdit),
+/* harmony export */   "beforeCheckboxRendererQuery": () => (/* binding */ beforeCheckboxRendererQuery),
+/* harmony export */   "createVirtualValidationForm": () => (/* binding */ createVirtualValidationForm),
+/* harmony export */   "validateVirtualForm": () => (/* binding */ validateVirtualForm),
+/* harmony export */   "destroyChildGrid": () => (/* binding */ destroyChildGrid),
+/* harmony export */   "stickyScrollComplete": () => (/* binding */ stickyScrollComplete),
+/* harmony export */   "captionActionComplete": () => (/* binding */ captionActionComplete),
+/* harmony export */   "refreshInfinitePersistSelection": () => (/* binding */ refreshInfinitePersistSelection)
 /* harmony export */ });
 /** @hidden */
 var created = 'create';
@@ -23197,9 +23197,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "CellType": () => (/* binding */ CellType),
 /* harmony export */   "RenderType": () => (/* binding */ RenderType),
+/* harmony export */   "ToolbarItem": () => (/* binding */ ToolbarItem),
 /* harmony export */   "ResponsiveDialogAction": () => (/* binding */ ResponsiveDialogAction),
-/* harmony export */   "ResponsiveToolbarAction": () => (/* binding */ ResponsiveToolbarAction),
-/* harmony export */   "ToolbarItem": () => (/* binding */ ToolbarItem)
+/* harmony export */   "ResponsiveToolbarAction": () => (/* binding */ ResponsiveToolbarAction)
 /* harmony export */ });
 /**
  * Defines types of Cell
@@ -23320,19 +23320,19 @@ var ResponsiveToolbarAction;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditSettings": () => (/* binding */ EditSettings),
-/* harmony export */   "FilterSettings": () => (/* binding */ FilterSettings),
-/* harmony export */   "Grid": () => (/* binding */ Grid),
-/* harmony export */   "GroupSettings": () => (/* binding */ GroupSettings),
-/* harmony export */   "InfiniteScrollSettings": () => (/* binding */ InfiniteScrollSettings),
-/* harmony export */   "Predicate": () => (/* binding */ Predicate),
-/* harmony export */   "ResizeSettings": () => (/* binding */ ResizeSettings),
-/* harmony export */   "RowDropSettings": () => (/* binding */ RowDropSettings),
-/* harmony export */   "SearchSettings": () => (/* binding */ SearchSettings),
-/* harmony export */   "SelectionSettings": () => (/* binding */ SelectionSettings),
 /* harmony export */   "SortDescriptor": () => (/* binding */ SortDescriptor),
 /* harmony export */   "SortSettings": () => (/* binding */ SortSettings),
-/* harmony export */   "TextWrapSettings": () => (/* binding */ TextWrapSettings)
+/* harmony export */   "Predicate": () => (/* binding */ Predicate),
+/* harmony export */   "InfiniteScrollSettings": () => (/* binding */ InfiniteScrollSettings),
+/* harmony export */   "FilterSettings": () => (/* binding */ FilterSettings),
+/* harmony export */   "SelectionSettings": () => (/* binding */ SelectionSettings),
+/* harmony export */   "SearchSettings": () => (/* binding */ SearchSettings),
+/* harmony export */   "RowDropSettings": () => (/* binding */ RowDropSettings),
+/* harmony export */   "TextWrapSettings": () => (/* binding */ TextWrapSettings),
+/* harmony export */   "ResizeSettings": () => (/* binding */ ResizeSettings),
+/* harmony export */   "GroupSettings": () => (/* binding */ GroupSettings),
+/* harmony export */   "EditSettings": () => (/* binding */ EditSettings),
+/* harmony export */   "Grid": () => (/* binding */ Grid)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @syncfusion/ej2-data */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -28924,44 +28924,44 @@ var Grid = /** @class */ (function (_super) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addedRecords": () => (/* binding */ addedRecords),
-/* harmony export */   "addedRow": () => (/* binding */ addedRow),
-/* harmony export */   "ariaColIndex": () => (/* binding */ ariaColIndex),
-/* harmony export */   "ariaRowIndex": () => (/* binding */ ariaRowIndex),
-/* harmony export */   "beforeOpen": () => (/* binding */ beforeOpen),
-/* harmony export */   "change": () => (/* binding */ change),
-/* harmony export */   "changedRecords": () => (/* binding */ changedRecords),
-/* harmony export */   "colGroup": () => (/* binding */ colGroup),
-/* harmony export */   "content": () => (/* binding */ content),
-/* harmony export */   "create": () => (/* binding */ create),
-/* harmony export */   "deletedRecords": () => (/* binding */ deletedRecords),
-/* harmony export */   "downArrow": () => (/* binding */ downArrow),
-/* harmony export */   "editedRow": () => (/* binding */ editedRow),
-/* harmony export */   "enter": () => (/* binding */ enter),
-/* harmony export */   "focus": () => (/* binding */ focus),
-/* harmony export */   "frozenContent": () => (/* binding */ frozenContent),
-/* harmony export */   "frozenHeader": () => (/* binding */ frozenHeader),
-/* harmony export */   "frozenLeft": () => (/* binding */ frozenLeft),
-/* harmony export */   "frozenRight": () => (/* binding */ frozenRight),
-/* harmony export */   "gridChkBox": () => (/* binding */ gridChkBox),
+/* harmony export */   "rowCell": () => (/* binding */ rowCell),
+/* harmony export */   "gridHeader": () => (/* binding */ gridHeader),
 /* harmony export */   "gridContent": () => (/* binding */ gridContent),
 /* harmony export */   "gridFooter": () => (/* binding */ gridFooter),
-/* harmony export */   "gridHeader": () => (/* binding */ gridHeader),
 /* harmony export */   "headerContent": () => (/* binding */ headerContent),
-/* harmony export */   "leftRight": () => (/* binding */ leftRight),
 /* harmony export */   "movableContent": () => (/* binding */ movableContent),
 /* harmony export */   "movableHeader": () => (/* binding */ movableHeader),
-/* harmony export */   "open": () => (/* binding */ open),
-/* harmony export */   "pageDown": () => (/* binding */ pageDown),
-/* harmony export */   "pageUp": () => (/* binding */ pageUp),
-/* harmony export */   "row": () => (/* binding */ row),
-/* harmony export */   "rowCell": () => (/* binding */ rowCell),
-/* harmony export */   "shiftEnter": () => (/* binding */ shiftEnter),
-/* harmony export */   "shiftTab": () => (/* binding */ shiftTab),
-/* harmony export */   "tab": () => (/* binding */ tab),
+/* harmony export */   "frozenContent": () => (/* binding */ frozenContent),
+/* harmony export */   "frozenHeader": () => (/* binding */ frozenHeader),
+/* harmony export */   "content": () => (/* binding */ content),
 /* harmony export */   "table": () => (/* binding */ table),
+/* harmony export */   "row": () => (/* binding */ row),
+/* harmony export */   "gridChkBox": () => (/* binding */ gridChkBox),
+/* harmony export */   "editedRow": () => (/* binding */ editedRow),
+/* harmony export */   "addedRow": () => (/* binding */ addedRow),
+/* harmony export */   "changedRecords": () => (/* binding */ changedRecords),
+/* harmony export */   "addedRecords": () => (/* binding */ addedRecords),
+/* harmony export */   "deletedRecords": () => (/* binding */ deletedRecords),
+/* harmony export */   "leftRight": () => (/* binding */ leftRight),
+/* harmony export */   "frozenRight": () => (/* binding */ frozenRight),
+/* harmony export */   "frozenLeft": () => (/* binding */ frozenLeft),
+/* harmony export */   "ariaColIndex": () => (/* binding */ ariaColIndex),
+/* harmony export */   "ariaRowIndex": () => (/* binding */ ariaRowIndex),
 /* harmony export */   "tbody": () => (/* binding */ tbody),
-/* harmony export */   "upArrow": () => (/* binding */ upArrow)
+/* harmony export */   "colGroup": () => (/* binding */ colGroup),
+/* harmony export */   "open": () => (/* binding */ open),
+/* harmony export */   "change": () => (/* binding */ change),
+/* harmony export */   "focus": () => (/* binding */ focus),
+/* harmony export */   "create": () => (/* binding */ create),
+/* harmony export */   "beforeOpen": () => (/* binding */ beforeOpen),
+/* harmony export */   "downArrow": () => (/* binding */ downArrow),
+/* harmony export */   "upArrow": () => (/* binding */ upArrow),
+/* harmony export */   "pageUp": () => (/* binding */ pageUp),
+/* harmony export */   "pageDown": () => (/* binding */ pageDown),
+/* harmony export */   "enter": () => (/* binding */ enter),
+/* harmony export */   "shiftEnter": () => (/* binding */ shiftEnter),
+/* harmony export */   "tab": () => (/* binding */ tab),
+/* harmony export */   "shiftTab": () => (/* binding */ shiftTab)
 /* harmony export */ });
 /**
  * Specifies class names
@@ -29058,106 +29058,106 @@ var shiftTab = 'shiftTab';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Global": () => (/* binding */ Global),
-/* harmony export */   "addBiggerDialog": () => (/* binding */ addBiggerDialog),
-/* harmony export */   "addRemoveActiveClasses": () => (/* binding */ addRemoveActiveClasses),
-/* harmony export */   "addRemoveEventListener": () => (/* binding */ addRemoveEventListener),
-/* harmony export */   "alignFrozenEditForm": () => (/* binding */ alignFrozenEditForm),
-/* harmony export */   "appendChildren": () => (/* binding */ appendChildren),
-/* harmony export */   "applyBiggerTheme": () => (/* binding */ applyBiggerTheme),
-/* harmony export */   "calculateAggregate": () => (/* binding */ calculateAggregate),
-/* harmony export */   "checkDepth": () => (/* binding */ checkDepth),
-/* harmony export */   "clearReactVueTemplates": () => (/* binding */ clearReactVueTemplates),
-/* harmony export */   "compareChanges": () => (/* binding */ compareChanges),
-/* harmony export */   "createCboxWithWrap": () => (/* binding */ createCboxWithWrap),
-/* harmony export */   "createEditElement": () => (/* binding */ createEditElement),
-/* harmony export */   "distinctStringValues": () => (/* binding */ distinctStringValues),
 /* harmony export */   "doesImplementInterface": () => (/* binding */ doesImplementInterface),
-/* harmony export */   "ensureFirstRow": () => (/* binding */ ensureFirstRow),
-/* harmony export */   "ensureLastRow": () => (/* binding */ ensureLastRow),
-/* harmony export */   "eventPromise": () => (/* binding */ eventPromise),
-/* harmony export */   "extend": () => (/* binding */ extend),
-/* harmony export */   "extendObjWithFn": () => (/* binding */ extendObjWithFn),
-/* harmony export */   "generateExpandPredicates": () => (/* binding */ generateExpandPredicates),
-/* harmony export */   "getActualPropFromColl": () => (/* binding */ getActualPropFromColl),
-/* harmony export */   "getActualProperties": () => (/* binding */ getActualProperties),
-/* harmony export */   "getActualRowHeight": () => (/* binding */ getActualRowHeight),
-/* harmony export */   "getCellByColAndRowIndex": () => (/* binding */ getCellByColAndRowIndex),
-/* harmony export */   "getCellsByTableName": () => (/* binding */ getCellsByTableName),
-/* harmony export */   "getCollapsedRowsCount": () => (/* binding */ getCollapsedRowsCount),
-/* harmony export */   "getColumnByForeignKeyValue": () => (/* binding */ getColumnByForeignKeyValue),
-/* harmony export */   "getColumnModelByFieldName": () => (/* binding */ getColumnModelByFieldName),
-/* harmony export */   "getColumnModelByUid": () => (/* binding */ getColumnModelByUid),
-/* harmony export */   "getComplexFieldID": () => (/* binding */ getComplexFieldID),
-/* harmony export */   "getCustomDateFormat": () => (/* binding */ getCustomDateFormat),
-/* harmony export */   "getDatePredicate": () => (/* binding */ getDatePredicate),
-/* harmony export */   "getEditedDataIndex": () => (/* binding */ getEditedDataIndex),
-/* harmony export */   "getElementIndex": () => (/* binding */ getElementIndex),
-/* harmony export */   "getExpandedState": () => (/* binding */ getExpandedState),
-/* harmony export */   "getFilterMenuPostion": () => (/* binding */ getFilterMenuPostion),
-/* harmony export */   "getForeignData": () => (/* binding */ getForeignData),
-/* harmony export */   "getFrozenRightTbody": () => (/* binding */ getFrozenRightTbody),
-/* harmony export */   "getGridRowElements": () => (/* binding */ getGridRowElements),
-/* harmony export */   "getGridRowObjects": () => (/* binding */ getGridRowObjects),
-/* harmony export */   "getGroupKeysAndFields": () => (/* binding */ getGroupKeysAndFields),
-/* harmony export */   "getMovableTbody": () => (/* binding */ getMovableTbody),
-/* harmony export */   "getNumberFormat": () => (/* binding */ getNumberFormat),
-/* harmony export */   "getObject": () => (/* binding */ getObject),
-/* harmony export */   "getPosition": () => (/* binding */ getPosition),
-/* harmony export */   "getPredicates": () => (/* binding */ getPredicates),
-/* harmony export */   "getPrintGridModel": () => (/* binding */ getPrintGridModel),
-/* harmony export */   "getRowHeight": () => (/* binding */ getRowHeight),
-/* harmony export */   "getRowIndexFromElement": () => (/* binding */ getRowIndexFromElement),
-/* harmony export */   "getScrollBarWidth": () => (/* binding */ getScrollBarWidth),
-/* harmony export */   "getStateEventArgument": () => (/* binding */ getStateEventArgument),
-/* harmony export */   "getTransformValues": () => (/* binding */ getTransformValues),
-/* harmony export */   "getUid": () => (/* binding */ getUid),
-/* harmony export */   "getUpdateUsingRaf": () => (/* binding */ getUpdateUsingRaf),
-/* harmony export */   "getZIndexCalcualtion": () => (/* binding */ getZIndexCalcualtion),
-/* harmony export */   "gridActionHandler": () => (/* binding */ gridActionHandler),
+/* harmony export */   "valueAccessor": () => (/* binding */ valueAccessor),
 /* harmony export */   "headerValueAccessor": () => (/* binding */ headerValueAccessor),
-/* harmony export */   "inArray": () => (/* binding */ inArray),
-/* harmony export */   "isActionPrevent": () => (/* binding */ isActionPrevent),
-/* harmony export */   "isComplexField": () => (/* binding */ isComplexField),
-/* harmony export */   "isEditable": () => (/* binding */ isEditable),
+/* harmony export */   "getUpdateUsingRaf": () => (/* binding */ getUpdateUsingRaf),
 /* harmony export */   "isExportColumns": () => (/* binding */ isExportColumns),
-/* harmony export */   "isGroupAdaptive": () => (/* binding */ isGroupAdaptive),
-/* harmony export */   "isRowEnteredInGrid": () => (/* binding */ isRowEnteredInGrid),
-/* harmony export */   "ispercentageWidth": () => (/* binding */ ispercentageWidth),
-/* harmony export */   "iterateArrayOrObject": () => (/* binding */ iterateArrayOrObject),
-/* harmony export */   "iterateExtend": () => (/* binding */ iterateExtend),
-/* harmony export */   "measureColumnDepth": () => (/* binding */ measureColumnDepth),
-/* harmony export */   "parents": () => (/* binding */ parents),
-/* harmony export */   "parentsUntil": () => (/* binding */ parentsUntil),
-/* harmony export */   "performComplexDataOperation": () => (/* binding */ performComplexDataOperation),
-/* harmony export */   "prepareColumns": () => (/* binding */ prepareColumns),
-/* harmony export */   "recursive": () => (/* binding */ recursive),
-/* harmony export */   "refreshFilteredColsUid": () => (/* binding */ refreshFilteredColsUid),
-/* harmony export */   "refreshForeignData": () => (/* binding */ refreshForeignData),
-/* harmony export */   "registerEventHandlers": () => (/* binding */ registerEventHandlers),
-/* harmony export */   "removeAddCboxClasses": () => (/* binding */ removeAddCboxClasses),
-/* harmony export */   "removeElement": () => (/* binding */ removeElement),
-/* harmony export */   "removeEventHandlers": () => (/* binding */ removeEventHandlers),
-/* harmony export */   "renderMovable": () => (/* binding */ renderMovable),
-/* harmony export */   "resetRowIndex": () => (/* binding */ resetRowIndex),
-/* harmony export */   "setChecked": () => (/* binding */ setChecked),
-/* harmony export */   "setColumnIndex": () => (/* binding */ setColumnIndex),
-/* harmony export */   "setComplexFieldID": () => (/* binding */ setComplexFieldID),
-/* harmony export */   "setCssInGridPopUp": () => (/* binding */ setCssInGridPopUp),
-/* harmony export */   "setDisplayValue": () => (/* binding */ setDisplayValue),
-/* harmony export */   "setFormatter": () => (/* binding */ setFormatter),
-/* harmony export */   "setRowElements": () => (/* binding */ setRowElements),
-/* harmony export */   "setRowsInTbody": () => (/* binding */ setRowsInTbody),
-/* harmony export */   "setStyleAndAttributes": () => (/* binding */ setStyleAndAttributes),
-/* harmony export */   "setValidationRuels": () => (/* binding */ setValidationRuels),
-/* harmony export */   "sliceElements": () => (/* binding */ sliceElements),
-/* harmony export */   "splitFrozenRowObjectCells": () => (/* binding */ splitFrozenRowObjectCells),
-/* harmony export */   "templateCompiler": () => (/* binding */ templateCompiler),
-/* harmony export */   "toogleCheckbox": () => (/* binding */ toogleCheckbox),
 /* harmony export */   "updateColumnTypeForExportColumns": () => (/* binding */ updateColumnTypeForExportColumns),
 /* harmony export */   "updatecloneRow": () => (/* binding */ updatecloneRow),
-/* harmony export */   "valueAccessor": () => (/* binding */ valueAccessor),
-/* harmony export */   "wrap": () => (/* binding */ wrap)
+/* harmony export */   "getCollapsedRowsCount": () => (/* binding */ getCollapsedRowsCount),
+/* harmony export */   "recursive": () => (/* binding */ recursive),
+/* harmony export */   "iterateArrayOrObject": () => (/* binding */ iterateArrayOrObject),
+/* harmony export */   "iterateExtend": () => (/* binding */ iterateExtend),
+/* harmony export */   "templateCompiler": () => (/* binding */ templateCompiler),
+/* harmony export */   "setStyleAndAttributes": () => (/* binding */ setStyleAndAttributes),
+/* harmony export */   "extend": () => (/* binding */ extend),
+/* harmony export */   "setColumnIndex": () => (/* binding */ setColumnIndex),
+/* harmony export */   "prepareColumns": () => (/* binding */ prepareColumns),
+/* harmony export */   "setCssInGridPopUp": () => (/* binding */ setCssInGridPopUp),
+/* harmony export */   "getActualProperties": () => (/* binding */ getActualProperties),
+/* harmony export */   "parentsUntil": () => (/* binding */ parentsUntil),
+/* harmony export */   "getElementIndex": () => (/* binding */ getElementIndex),
+/* harmony export */   "inArray": () => (/* binding */ inArray),
+/* harmony export */   "getActualPropFromColl": () => (/* binding */ getActualPropFromColl),
+/* harmony export */   "removeElement": () => (/* binding */ removeElement),
+/* harmony export */   "getPosition": () => (/* binding */ getPosition),
+/* harmony export */   "getUid": () => (/* binding */ getUid),
+/* harmony export */   "appendChildren": () => (/* binding */ appendChildren),
+/* harmony export */   "parents": () => (/* binding */ parents),
+/* harmony export */   "calculateAggregate": () => (/* binding */ calculateAggregate),
+/* harmony export */   "getScrollBarWidth": () => (/* binding */ getScrollBarWidth),
+/* harmony export */   "getRowHeight": () => (/* binding */ getRowHeight),
+/* harmony export */   "getActualRowHeight": () => (/* binding */ getActualRowHeight),
+/* harmony export */   "isComplexField": () => (/* binding */ isComplexField),
+/* harmony export */   "getComplexFieldID": () => (/* binding */ getComplexFieldID),
+/* harmony export */   "setComplexFieldID": () => (/* binding */ setComplexFieldID),
+/* harmony export */   "isEditable": () => (/* binding */ isEditable),
+/* harmony export */   "isActionPrevent": () => (/* binding */ isActionPrevent),
+/* harmony export */   "wrap": () => (/* binding */ wrap),
+/* harmony export */   "setFormatter": () => (/* binding */ setFormatter),
+/* harmony export */   "addRemoveActiveClasses": () => (/* binding */ addRemoveActiveClasses),
+/* harmony export */   "distinctStringValues": () => (/* binding */ distinctStringValues),
+/* harmony export */   "getFilterMenuPostion": () => (/* binding */ getFilterMenuPostion),
+/* harmony export */   "getZIndexCalcualtion": () => (/* binding */ getZIndexCalcualtion),
+/* harmony export */   "toogleCheckbox": () => (/* binding */ toogleCheckbox),
+/* harmony export */   "setChecked": () => (/* binding */ setChecked),
+/* harmony export */   "createCboxWithWrap": () => (/* binding */ createCboxWithWrap),
+/* harmony export */   "removeAddCboxClasses": () => (/* binding */ removeAddCboxClasses),
+/* harmony export */   "refreshForeignData": () => (/* binding */ refreshForeignData),
+/* harmony export */   "getForeignData": () => (/* binding */ getForeignData),
+/* harmony export */   "getColumnByForeignKeyValue": () => (/* binding */ getColumnByForeignKeyValue),
+/* harmony export */   "getDatePredicate": () => (/* binding */ getDatePredicate),
+/* harmony export */   "renderMovable": () => (/* binding */ renderMovable),
+/* harmony export */   "isGroupAdaptive": () => (/* binding */ isGroupAdaptive),
+/* harmony export */   "getObject": () => (/* binding */ getObject),
+/* harmony export */   "getCustomDateFormat": () => (/* binding */ getCustomDateFormat),
+/* harmony export */   "getExpandedState": () => (/* binding */ getExpandedState),
+/* harmony export */   "getPrintGridModel": () => (/* binding */ getPrintGridModel),
+/* harmony export */   "extendObjWithFn": () => (/* binding */ extendObjWithFn),
+/* harmony export */   "measureColumnDepth": () => (/* binding */ measureColumnDepth),
+/* harmony export */   "checkDepth": () => (/* binding */ checkDepth),
+/* harmony export */   "refreshFilteredColsUid": () => (/* binding */ refreshFilteredColsUid),
+/* harmony export */   "Global": () => (/* binding */ Global),
+/* harmony export */   "getTransformValues": () => (/* binding */ getTransformValues),
+/* harmony export */   "applyBiggerTheme": () => (/* binding */ applyBiggerTheme),
+/* harmony export */   "alignFrozenEditForm": () => (/* binding */ alignFrozenEditForm),
+/* harmony export */   "ensureLastRow": () => (/* binding */ ensureLastRow),
+/* harmony export */   "ensureFirstRow": () => (/* binding */ ensureFirstRow),
+/* harmony export */   "isRowEnteredInGrid": () => (/* binding */ isRowEnteredInGrid),
+/* harmony export */   "getEditedDataIndex": () => (/* binding */ getEditedDataIndex),
+/* harmony export */   "eventPromise": () => (/* binding */ eventPromise),
+/* harmony export */   "getStateEventArgument": () => (/* binding */ getStateEventArgument),
+/* harmony export */   "ispercentageWidth": () => (/* binding */ ispercentageWidth),
+/* harmony export */   "resetRowIndex": () => (/* binding */ resetRowIndex),
+/* harmony export */   "compareChanges": () => (/* binding */ compareChanges),
+/* harmony export */   "setRowElements": () => (/* binding */ setRowElements),
+/* harmony export */   "splitFrozenRowObjectCells": () => (/* binding */ splitFrozenRowObjectCells),
+/* harmony export */   "gridActionHandler": () => (/* binding */ gridActionHandler),
+/* harmony export */   "getGridRowObjects": () => (/* binding */ getGridRowObjects),
+/* harmony export */   "getGridRowElements": () => (/* binding */ getGridRowElements),
+/* harmony export */   "sliceElements": () => (/* binding */ sliceElements),
+/* harmony export */   "getCellsByTableName": () => (/* binding */ getCellsByTableName),
+/* harmony export */   "getCellByColAndRowIndex": () => (/* binding */ getCellByColAndRowIndex),
+/* harmony export */   "setValidationRuels": () => (/* binding */ setValidationRuels),
+/* harmony export */   "getMovableTbody": () => (/* binding */ getMovableTbody),
+/* harmony export */   "getFrozenRightTbody": () => (/* binding */ getFrozenRightTbody),
+/* harmony export */   "setRowsInTbody": () => (/* binding */ setRowsInTbody),
+/* harmony export */   "getNumberFormat": () => (/* binding */ getNumberFormat),
+/* harmony export */   "addBiggerDialog": () => (/* binding */ addBiggerDialog),
+/* harmony export */   "performComplexDataOperation": () => (/* binding */ performComplexDataOperation),
+/* harmony export */   "setDisplayValue": () => (/* binding */ setDisplayValue),
+/* harmony export */   "addRemoveEventListener": () => (/* binding */ addRemoveEventListener),
+/* harmony export */   "createEditElement": () => (/* binding */ createEditElement),
+/* harmony export */   "getColumnModelByUid": () => (/* binding */ getColumnModelByUid),
+/* harmony export */   "getColumnModelByFieldName": () => (/* binding */ getColumnModelByFieldName),
+/* harmony export */   "registerEventHandlers": () => (/* binding */ registerEventHandlers),
+/* harmony export */   "removeEventHandlers": () => (/* binding */ removeEventHandlers),
+/* harmony export */   "clearReactVueTemplates": () => (/* binding */ clearReactVueTemplates),
+/* harmony export */   "getRowIndexFromElement": () => (/* binding */ getRowIndexFromElement),
+/* harmony export */   "generateExpandPredicates": () => (/* binding */ generateExpandPredicates),
+/* harmony export */   "getPredicates": () => (/* binding */ getPredicates),
+/* harmony export */   "getGroupKeysAndFields": () => (/* binding */ getGroupKeysAndFields)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @syncfusion/ej2-data */ "./node_modules/@syncfusion/ej2-data/src/util.js");
@@ -38046,15 +38046,15 @@ var CellRendererFactory = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FocusStrategy": () => (/* binding */ FocusStrategy),
+/* harmony export */   "Matrix": () => (/* binding */ Matrix),
 /* harmony export */   "ContentFocus": () => (/* binding */ ContentFocus),
+/* harmony export */   "HeaderFocus": () => (/* binding */ HeaderFocus),
 /* harmony export */   "FixedContentFocus": () => (/* binding */ FixedContentFocus),
 /* harmony export */   "FixedHeaderFocus": () => (/* binding */ FixedHeaderFocus),
+/* harmony export */   "SearchBox": () => (/* binding */ SearchBox),
 /* harmony export */   "FixedRightContentFocus": () => (/* binding */ FixedRightContentFocus),
-/* harmony export */   "FixedRightHeaderFocus": () => (/* binding */ FixedRightHeaderFocus),
-/* harmony export */   "FocusStrategy": () => (/* binding */ FocusStrategy),
-/* harmony export */   "HeaderFocus": () => (/* binding */ HeaderFocus),
-/* harmony export */   "Matrix": () => (/* binding */ Matrix),
-/* harmony export */   "SearchBox": () => (/* binding */ SearchBox)
+/* harmony export */   "FixedRightHeaderFocus": () => (/* binding */ FixedRightHeaderFocus)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _base_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../base/enum */ "./node_modules/@syncfusion/ej2-grids/src/grid/base/enum.js");
@@ -39914,9 +39914,9 @@ var ServiceLocator = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CaptionSummaryModelGenerator": () => (/* binding */ CaptionSummaryModelGenerator),
+/* harmony export */   "SummaryModelGenerator": () => (/* binding */ SummaryModelGenerator),
 /* harmony export */   "GroupSummaryModelGenerator": () => (/* binding */ GroupSummaryModelGenerator),
-/* harmony export */   "SummaryModelGenerator": () => (/* binding */ SummaryModelGenerator)
+/* harmony export */   "CaptionSummaryModelGenerator": () => (/* binding */ CaptionSummaryModelGenerator)
 /* harmony export */ });
 /* harmony import */ var _models_row__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../models/row */ "./node_modules/@syncfusion/ej2-grids/src/grid/models/row.js");
 /* harmony import */ var _models_column__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/column */ "./node_modules/@syncfusion/ej2-grids/src/grid/models/column.js");
@@ -41531,8 +41531,8 @@ var Input;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fit": () => (/* binding */ fit),
-/* harmony export */   "flip": () => (/* binding */ flip),
-/* harmony export */   "isCollide": () => (/* binding */ isCollide)
+/* harmony export */   "isCollide": () => (/* binding */ isCollide),
+/* harmony export */   "flip": () => (/* binding */ flip)
 /* harmony export */ });
 /* harmony import */ var _position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./position */ "./node_modules/@syncfusion/ej2-popups/src/common/position.js");
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
@@ -41965,8 +41965,8 @@ function getViewPortWidth() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition),
-/* harmony export */   "calculateRelativeBasedPosition": () => (/* binding */ calculateRelativeBasedPosition)
+/* harmony export */   "calculateRelativeBasedPosition": () => (/* binding */ calculateRelativeBasedPosition),
+/* harmony export */   "calculatePosition": () => (/* binding */ calculatePosition)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /**
@@ -42167,10 +42167,10 @@ function getElementHCenter() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createResize": () => (/* binding */ createResize),
-/* harmony export */   "removeResize": () => (/* binding */ removeResize),
-/* harmony export */   "setMaxHeight": () => (/* binding */ setMaxHeight),
+/* harmony export */   "setMinHeight": () => (/* binding */ setMinHeight),
 /* harmony export */   "setMaxWidth": () => (/* binding */ setMaxWidth),
-/* harmony export */   "setMinHeight": () => (/* binding */ setMinHeight)
+/* harmony export */   "setMaxHeight": () => (/* binding */ setMaxHeight),
+/* harmony export */   "removeResize": () => (/* binding */ removeResize)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /**
@@ -42716,8 +42716,8 @@ function removeResize() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AnimationSettings": () => (/* binding */ AnimationSettings),
 /* harmony export */   "ButtonProps": () => (/* binding */ ButtonProps),
+/* harmony export */   "AnimationSettings": () => (/* binding */ AnimationSettings),
 /* harmony export */   "Dialog": () => (/* binding */ Dialog),
 /* harmony export */   "DialogUtility": () => (/* binding */ DialogUtility)
 /* harmony export */ });
@@ -44593,11 +44593,11 @@ var DialogUtility;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Popup": () => (/* binding */ Popup),
 /* harmony export */   "PositionData": () => (/* binding */ PositionData),
-/* harmony export */   "getMaxZindex": () => (/* binding */ getMaxZindex),
+/* harmony export */   "Popup": () => (/* binding */ Popup),
 /* harmony export */   "getScrollableParent": () => (/* binding */ getScrollableParent),
-/* harmony export */   "getZindexPartial": () => (/* binding */ getZindexPartial)
+/* harmony export */   "getZindexPartial": () => (/* binding */ getZindexPartial),
+/* harmony export */   "getMaxZindex": () => (/* binding */ getMaxZindex)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _common_position__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/position */ "./node_modules/@syncfusion/ej2-popups/src/common/position.js");
@@ -45421,9 +45421,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Spinner": () => (/* binding */ Spinner),
 /* harmony export */   "createSpinner": () => (/* binding */ createSpinner),
+/* harmony export */   "showSpinner": () => (/* binding */ showSpinner),
 /* harmony export */   "hideSpinner": () => (/* binding */ hideSpinner),
-/* harmony export */   "setSpinner": () => (/* binding */ setSpinner),
-/* harmony export */   "showSpinner": () => (/* binding */ showSpinner)
+/* harmony export */   "setSpinner": () => (/* binding */ setSpinner)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 
@@ -47614,12 +47614,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ComponentBase": () => (/* binding */ ComponentBase),
-/* harmony export */   "_interopRequireWildcard": () => (/* binding */ _interopRequireWildcard),
 /* harmony export */   "aVue": () => (/* binding */ aVue),
+/* harmony export */   "_interopRequireWildcard": () => (/* binding */ _interopRequireWildcard),
 /* harmony export */   "allVue": () => (/* binding */ allVue),
 /* harmony export */   "gh": () => (/* binding */ gh),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
+/* harmony export */   "ComponentBase": () => (/* binding */ ComponentBase)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48079,9 +48079,9 @@ var ComponentBase = /** @class */ (function (_super) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "$internalHooks": () => (/* binding */ $internalHooks),
+/* harmony export */   "getProps": () => (/* binding */ getProps),
 /* harmony export */   "EJComponentDecorator": () => (/* binding */ EJComponentDecorator),
-/* harmony export */   "EJcomponentFactory": () => (/* binding */ EJcomponentFactory),
-/* harmony export */   "getProps": () => (/* binding */ getProps)
+/* harmony export */   "EJcomponentFactory": () => (/* binding */ EJcomponentFactory)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _component_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component-base */ "./node_modules/@syncfusion/ej2-vue-base/src/component-base.js");
@@ -48242,17 +48242,17 @@ function collectDataFromConstructor(vm, Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "$internalHooks": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.$internalHooks),
 /* harmony export */   "ComponentBase": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.ComponentBase),
-/* harmony export */   "EJComponentDecorator": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJComponentDecorator),
-/* harmony export */   "EJcomponentFactory": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJcomponentFactory),
 /* harmony export */   "_interopRequireWildcard": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__._interopRequireWildcard),
 /* harmony export */   "aVue": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.aVue),
 /* harmony export */   "allVue": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.allVue),
-/* harmony export */   "compile": () => (/* reexport safe */ _template__WEBPACK_IMPORTED_MODULE_2__.compile),
-/* harmony export */   "getProps": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.getProps),
 /* harmony export */   "gh": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.gh),
-/* harmony export */   "isExecute": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.isExecute)
+/* harmony export */   "isExecute": () => (/* reexport safe */ _component_base__WEBPACK_IMPORTED_MODULE_0__.isExecute),
+/* harmony export */   "$internalHooks": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.$internalHooks),
+/* harmony export */   "EJComponentDecorator": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJComponentDecorator),
+/* harmony export */   "EJcomponentFactory": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.EJcomponentFactory),
+/* harmony export */   "getProps": () => (/* reexport safe */ _component_decorator__WEBPACK_IMPORTED_MODULE_1__.getProps),
+/* harmony export */   "compile": () => (/* reexport safe */ _template__WEBPACK_IMPORTED_MODULE_2__.compile)
 /* harmony export */ });
 /* harmony import */ var _component_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./component-base */ "./node_modules/@syncfusion/ej2-vue-base/src/component-base.js");
 /* harmony import */ var _component_decorator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component-decorator */ "./node_modules/@syncfusion/ej2-vue-base/src/component-decorator.js");
@@ -48400,11 +48400,11 @@ function compile(templateElement, helper) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AggregateColumnDirective": () => (/* binding */ AggregateColumnDirective),
-/* harmony export */   "AggregateColumnPlugin": () => (/* binding */ AggregateColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "AggregateColumnsDirective": () => (/* binding */ AggregateColumnsDirective),
 /* harmony export */   "AggregateColumnsPlugin": () => (/* binding */ AggregateColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "AggregateColumnDirective": () => (/* binding */ AggregateColumnDirective),
+/* harmony export */   "AggregateColumnPlugin": () => (/* binding */ AggregateColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48515,11 +48515,11 @@ var AggregateColumnPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AggregateDirective": () => (/* binding */ AggregateDirective),
-/* harmony export */   "AggregatePlugin": () => (/* binding */ AggregatePlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "AggregatesDirective": () => (/* binding */ AggregatesDirective),
 /* harmony export */   "AggregatesPlugin": () => (/* binding */ AggregatesPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "AggregateDirective": () => (/* binding */ AggregateDirective),
+/* harmony export */   "AggregatePlugin": () => (/* binding */ AggregatePlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48631,11 +48631,11 @@ var AggregatePlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ColumnDirective": () => (/* binding */ ColumnDirective),
-/* harmony export */   "ColumnPlugin": () => (/* binding */ ColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "ColumnsDirective": () => (/* binding */ ColumnsDirective),
 /* harmony export */   "ColumnsPlugin": () => (/* binding */ ColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "ColumnDirective": () => (/* binding */ ColumnDirective),
+/* harmony export */   "ColumnPlugin": () => (/* binding */ ColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -48740,15 +48740,15 @@ var ColumnPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "GridComponent": () => (/* binding */ GridComponent),
-/* harmony export */   "GridPlugin": () => (/* binding */ GridPlugin),
+/* harmony export */   "properties": () => (/* binding */ properties),
+/* harmony export */   "modelProps": () => (/* binding */ modelProps),
+/* harmony export */   "testProp": () => (/* binding */ testProp),
+/* harmony export */   "props": () => (/* binding */ props),
+/* harmony export */   "watch": () => (/* binding */ watch),
 /* harmony export */   "emitProbs": () => (/* binding */ emitProbs),
 /* harmony export */   "isExecute": () => (/* binding */ isExecute),
-/* harmony export */   "modelProps": () => (/* binding */ modelProps),
-/* harmony export */   "properties": () => (/* binding */ properties),
-/* harmony export */   "props": () => (/* binding */ props),
-/* harmony export */   "testProp": () => (/* binding */ testProp),
-/* harmony export */   "watch": () => (/* binding */ watch)
+/* harmony export */   "GridComponent": () => (/* binding */ GridComponent),
+/* harmony export */   "GridPlugin": () => (/* binding */ GridPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-base */ "./node_modules/@syncfusion/ej2-base/index.js");
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
@@ -49337,11 +49337,11 @@ var GridPlugin = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "StackedColumnDirective": () => (/* binding */ StackedColumnDirective),
-/* harmony export */   "StackedColumnPlugin": () => (/* binding */ StackedColumnPlugin),
+/* harmony export */   "isExecute": () => (/* binding */ isExecute),
 /* harmony export */   "StackedColumnsDirective": () => (/* binding */ StackedColumnsDirective),
 /* harmony export */   "StackedColumnsPlugin": () => (/* binding */ StackedColumnsPlugin),
-/* harmony export */   "isExecute": () => (/* binding */ isExecute)
+/* harmony export */   "StackedColumnDirective": () => (/* binding */ StackedColumnDirective),
+/* harmony export */   "StackedColumnPlugin": () => (/* binding */ StackedColumnPlugin)
 /* harmony export */ });
 /* harmony import */ var _syncfusion_ej2_vue_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @syncfusion/ej2-vue-base */ "./node_modules/@syncfusion/ej2-vue-base/index.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
@@ -51970,10 +51970,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
             '_'
         ),
-        monthsShort:
-            'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
-                '_'
-            ),
+        monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+            '_'
+        ),
         weekdays: 'الأحد_الإتنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
         weekdaysShort: 'احد_اتنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
         weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
@@ -52030,7 +52029,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
-//! locale : Arabic (Libya) [ar-ly]
+//! locale : Arabic (Lybia) [ar-ly]
 //! author : Ali Hmer: https://github.com/kikoanis
 
 ;(function (global, factory) {
@@ -52235,10 +52234,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
             '_'
         ),
-        monthsShort:
-            'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
-                '_'
-            ),
+        monthsShort: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
+            '_'
+        ),
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
         weekdaysShort: 'احد_اثنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
         weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
@@ -52334,10 +52332,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
             '_'
         ),
-        monthsShort:
-            'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
-                '_'
-            ),
+        monthsShort: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+            '_'
+        ),
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
         weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
         weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
@@ -52433,10 +52430,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
             '_'
         ),
-        monthsShort:
-            'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
-                '_'
-            ),
+        monthsShort: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
+            '_'
+        ),
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
         weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
         weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
@@ -52737,10 +52733,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'yan_fev_mar_apr_may_iyn_iyl_avq_sen_okt_noy_dek'.split('_'),
-        weekdays:
-            'Bazar_Bazar ertəsi_Çərşənbə axşamı_Çərşənbə_Cümə axşamı_Cümə_Şənbə'.split(
-                '_'
-            ),
+        weekdays: 'Bazar_Bazar ertəsi_Çərşənbə axşamı_Çərşənbə_Cümə axşamı_Cümə_Şənbə'.split(
+            '_'
+        ),
         weekdaysShort: 'Baz_BzE_ÇAx_Çər_CAx_Cüm_Şən'.split('_'),
         weekdaysMin: 'Bz_BE_ÇA_Çə_CA_Cü_Şə'.split('_'),
         weekdaysParseExact: true,
@@ -52865,21 +52860,20 @@ __webpack_require__.r(__webpack_exports__);
             format: 'студзеня_лютага_сакавіка_красавіка_траўня_чэрвеня_ліпеня_жніўня_верасня_кастрычніка_лістапада_снежня'.split(
                 '_'
             ),
-            standalone:
-                'студзень_люты_сакавік_красавік_травень_чэрвень_ліпень_жнівень_верасень_кастрычнік_лістапад_снежань'.split(
-                    '_'
-                ),
+            standalone: 'студзень_люты_сакавік_красавік_травень_чэрвень_ліпень_жнівень_верасень_кастрычнік_лістапад_снежань'.split(
+                '_'
+            ),
         },
-        monthsShort:
-            'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split('_'),
+        monthsShort: 'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split(
+            '_'
+        ),
         weekdays: {
             format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split(
                 '_'
             ),
-            standalone:
-                'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split(
-                    '_'
-                ),
+            standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split(
+                '_'
+            ),
             isFormat: /\[ ?[Ууў] ?(?:мінулую|наступную)? ?\] ?dddd/,
         },
         weekdaysShort: 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
@@ -53198,10 +53192,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
             '_'
         ),
-        monthsShort:
-            'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
-                '_'
-            ),
+        monthsShort: 'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
+            '_'
+        ),
         weekdays: 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পতিবার_শুক্রবার_শনিবার'.split(
             '_'
         ),
@@ -53346,10 +53339,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
             '_'
         ),
-        monthsShort:
-            'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
-                '_'
-            ),
+        monthsShort: 'জানু_ফেব্রু_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্ট_অক্টো_নভে_ডিসে'.split(
+            '_'
+        ),
         weekdays: 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পতিবার_শুক্রবার_শনিবার'.split(
             '_'
         ),
@@ -53484,16 +53476,14 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ཟླ་བ་དང་པོ_ཟླ་བ་གཉིས་པ_ཟླ་བ་གསུམ་པ_ཟླ་བ་བཞི་པ_ཟླ་བ་ལྔ་པ_ཟླ་བ་དྲུག་པ_ཟླ་བ་བདུན་པ_ཟླ་བ་བརྒྱད་པ_ཟླ་བ་དགུ་པ_ཟླ་བ་བཅུ་པ_ཟླ་བ་བཅུ་གཅིག་པ_ཟླ་བ་བཅུ་གཉིས་པ'.split(
             '_'
         ),
-        monthsShort:
-            'ཟླ་1_ཟླ་2_ཟླ་3_ཟླ་4_ཟླ་5_ཟླ་6_ཟླ་7_ཟླ་8_ཟླ་9_ཟླ་10_ཟླ་11_ཟླ་12'.split(
-                '_'
-            ),
+        monthsShort: 'ཟླ་1_ཟླ་2_ཟླ་3_ཟླ་4_ཟླ་5_ཟླ་6_ཟླ་7_ཟླ་8_ཟླ་9_ཟླ་10_ཟླ་11_ཟླ་12'.split(
+            '_'
+        ),
         monthsShortRegex: /^(ཟླ་\d{1,2})/,
         monthsParseExact: true,
-        weekdays:
-            'གཟའ་ཉི་མ་_གཟའ་ཟླ་བ་_གཟའ་མིག་དམར་_གཟའ་ལྷག་པ་_གཟའ་ཕུར་བུ_གཟའ་པ་སངས་_གཟའ་སྤེན་པ་'.split(
-                '_'
-            ),
+        weekdays: 'གཟའ་ཉི་མ་_གཟའ་ཟླ་བ་_གཟའ་མིག་དམར་_གཟའ་ལྷག་པ་_གཟའ་ཕུར་བུ_གཟའ་པ་སངས་_གཟའ་སྤེན་པ་'.split(
+            '_'
+        ),
         weekdaysShort: 'ཉི་མ་_ཟླ་བ་_མིག་དམར་_ལྷག་པ་_ཕུར་བུ_པ་སངས་_སྤེན་པ་'.split(
             '_'
         ),
@@ -53656,12 +53646,9 @@ __webpack_require__.r(__webpack_exports__);
             /^du/i,
             /^ker/i,
         ],
-        monthsRegex =
-            /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu|gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
-        monthsStrictRegex =
-            /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu)/i,
-        monthsShortStrictRegex =
-            /^(gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
+        monthsRegex = /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu|gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
+        monthsStrictRegex = /^(genver|c[ʼ\']hwevrer|meurzh|ebrel|mae|mezheven|gouere|eost|gwengolo|here|du|kerzu)/i,
+        monthsShortStrictRegex = /^(gen|c[ʼ\']hwe|meu|ebr|mae|eve|gou|eos|gwe|her|du|ker)/i,
         fullWeekdaysParse = [
             /^sul/i,
             /^lun/i,
@@ -53852,10 +53839,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_mart_april_maj_juni_juli_august_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
             '_'
@@ -53956,24 +53942,21 @@ __webpack_require__.r(__webpack_exports__);
 
     var ca = moment.defineLocale('ca', {
         months: {
-            standalone:
-                'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split(
-                    '_'
-                ),
+            standalone: 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split(
+                '_'
+            ),
             format: "de gener_de febrer_de març_d'abril_de maig_de juny_de juliol_d'agost_de setembre_d'octubre_de novembre_de desembre".split(
                 '_'
             ),
             isFormat: /D[oD]?(\s)+MMMM/,
         },
-        monthsShort:
-            'gen._febr._març_abr._maig_juny_jul._ag._set._oct._nov._des.'.split(
-                '_'
-            ),
+        monthsShort: 'gen._febr._març_abr._maig_juny_jul._ag._set._oct._nov._des.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split(
-                '_'
-            ),
+        weekdays: 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split(
+            '_'
+        ),
         weekdaysShort: 'dg._dl._dt._dc._dj._dv._ds.'.split('_'),
         weekdaysMin: 'dg_dl_dt_dc_dj_dv_ds'.split('_'),
         weekdaysParseExact: true,
@@ -54073,15 +54056,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var months = {
-            format: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
-                '_'
-            ),
-            standalone:
-                'ledna_února_března_dubna_května_června_července_srpna_září_října_listopadu_prosince'.split(
-                    '_'
-                ),
-        },
+    var months = 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
+            '_'
+        ),
         monthsShort = 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
         monthsParse = [
             /^led/i,
@@ -54099,8 +54076,7 @@ __webpack_require__.r(__webpack_exports__);
         ],
         // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
         // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
-        monthsRegex =
-            /^(leden|únor|březen|duben|květen|červenec|července|červen|června|srpen|září|říjen|listopad|prosinec|led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i;
+        monthsRegex = /^(leden|únor|březen|duben|květen|červenec|července|červen|června|srpen|září|říjen|listopad|prosinec|led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i;
 
     function plural(n) {
         return n > 1 && n < 5 && ~~(n / 10) !== 1;
@@ -54166,10 +54142,8 @@ __webpack_require__.r(__webpack_exports__);
         monthsShortRegex: monthsRegex,
         // NOTE: 'červen' is substring of 'červenec'; therefore 'červenec' must precede 'červen' in the regex to be fully matched.
         // Otherwise parser matches '1. červenec' as '1. červen' + 'ec'.
-        monthsStrictRegex:
-            /^(leden|ledna|února|únor|březen|března|duben|dubna|květen|května|červenec|července|červen|června|srpen|srpna|září|říjen|října|listopadu|listopad|prosinec|prosince)/i,
-        monthsShortStrictRegex:
-            /^(led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i,
+        monthsStrictRegex: /^(leden|ledna|února|únor|březen|března|duben|dubna|květen|května|červenec|července|červen|června|srpen|srpna|září|říjen|října|listopadu|listopad|prosinec|prosince)/i,
+        monthsShortStrictRegex: /^(led|úno|bře|dub|kvě|čvn|čvc|srp|zář|říj|lis|pro)/i,
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
@@ -54277,10 +54251,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'кӑр_нар_пуш_ака_май_ҫӗр_утӑ_ҫур_авн_юпа_чӳк_раш'.split('_'),
-        weekdays:
-            'вырсарникун_тунтикун_ытларикун_юнкун_кӗҫнерникун_эрнекун_шӑматкун'.split(
-                '_'
-            ),
+        weekdays: 'вырсарникун_тунтикун_ытларикун_юнкун_кӗҫнерникун_эрнекун_шӑматкун'.split(
+            '_'
+        ),
         weekdaysShort: 'выр_тун_ытл_юн_кӗҫ_эрн_шӑм'.split('_'),
         weekdaysMin: 'вр_тн_ыт_юн_кҫ_эр_шм'.split('_'),
         longDateFormat: {
@@ -54362,10 +54335,9 @@ __webpack_require__.r(__webpack_exports__);
         monthsShort: 'Ion_Chwe_Maw_Ebr_Mai_Meh_Gor_Aws_Med_Hyd_Tach_Rhag'.split(
             '_'
         ),
-        weekdays:
-            'Dydd Sul_Dydd Llun_Dydd Mawrth_Dydd Mercher_Dydd Iau_Dydd Gwener_Dydd Sadwrn'.split(
-                '_'
-            ),
+        weekdays: 'Dydd Sul_Dydd Llun_Dydd Mawrth_Dydd Mercher_Dydd Iau_Dydd Gwener_Dydd Sadwrn'.split(
+            '_'
+        ),
         weekdaysShort: 'Sul_Llun_Maw_Mer_Iau_Gwe_Sad'.split('_'),
         weekdaysMin: 'Su_Ll_Ma_Me_Ia_Gw_Sa'.split('_'),
         weekdaysParseExact: true,
@@ -54565,13 +54537,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Jänner_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
-        monthsShort:
-            'Jän._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
+        monthsShort: 'Jän._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
-                '_'
-            ),
+        weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+            '_'
+        ),
         weekdaysShort: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
         weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
         weekdaysParseExact: true,
@@ -54660,13 +54632,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
-        monthsShort:
-            'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
+        monthsShort: 'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
-                '_'
-            ),
+        weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+            '_'
+        ),
         weekdaysShort: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
         weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
         weekdaysParseExact: true,
@@ -54757,13 +54729,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
-        monthsShort:
-            'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
+        monthsShort: 'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
-                '_'
-            ),
+        weekdays: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+            '_'
+        ),
         weekdaysShort: 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
         weekdaysMin: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
         weekdaysParseExact: true,
@@ -54950,14 +54922,12 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     var el = moment.defineLocale('el', {
-        monthsNominativeEl:
-            'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
-                '_'
-            ),
-        monthsGenitiveEl:
-            'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split(
-                '_'
-            ),
+        monthsNominativeEl: 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
+            '_'
+        ),
+        monthsGenitiveEl: 'Ιανουαρίου_Φεβρουαρίου_Μαρτίου_Απριλίου_Μαΐου_Ιουνίου_Ιουλίου_Αυγούστου_Σεπτεμβρίου_Οκτωβρίου_Νοεμβρίου_Δεκεμβρίου'.split(
+            '_'
+        ),
         months: function (momentToFormat, format) {
             if (!momentToFormat) {
                 return this._monthsNominativeEl;
@@ -55841,10 +55811,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
-            'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
-                '_'
-            ),
+    var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+            '_'
+        ),
         monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
         monthsParse = [
             /^ene/i,
@@ -55860,8 +55829,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dic/i,
         ],
-        monthsRegex =
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+        monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
     var esDo = moment.defineLocale('es-do', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
@@ -55878,10 +55846,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
-        monthsShortStrictRegex:
-            /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+        monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+        monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
@@ -55969,10 +55935,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
-            'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
-                '_'
-            ),
+    var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+            '_'
+        ),
         monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
         monthsParse = [
             /^ene/i,
@@ -55988,8 +55953,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dic/i,
         ],
-        monthsRegex =
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+        monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
     var esMx = moment.defineLocale('es-mx', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
@@ -56006,10 +55970,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
-        monthsShortStrictRegex:
-            /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+        monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+        monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
@@ -56099,10 +56061,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
-            'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
-                '_'
-            ),
+    var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+            '_'
+        ),
         monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
         monthsParse = [
             /^ene/i,
@@ -56118,8 +56079,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dic/i,
         ],
-        monthsRegex =
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+        monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
     var esUs = moment.defineLocale('es-us', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
@@ -56136,10 +56096,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
-        monthsShortStrictRegex:
-            /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+        monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+        monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
@@ -56227,10 +56185,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
-            'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
-                '_'
-            ),
+    var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
+            '_'
+        ),
         monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_'),
         monthsParse = [
             /^ene/i,
@@ -56246,8 +56203,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dic/i,
         ],
-        monthsRegex =
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
+        monthsRegex = /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
     var es = moment.defineLocale('es', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
@@ -56264,10 +56220,8 @@ __webpack_require__.r(__webpack_exports__);
         },
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
-        monthsShortStrictRegex:
-            /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
+        monthsStrictRegex: /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)/i,
+        monthsShortStrictRegex: /^(ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i,
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
@@ -56381,12 +56335,12 @@ __webpack_require__.r(__webpack_exports__);
         months: 'jaanuar_veebruar_märts_aprill_mai_juuni_juuli_august_september_oktoober_november_detsember'.split(
             '_'
         ),
-        monthsShort:
-            'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split('_'),
-        weekdays:
-            'pühapäev_esmaspäev_teisipäev_kolmapäev_neljapäev_reede_laupäev'.split(
-                '_'
-            ),
+        monthsShort: 'jaan_veebr_märts_apr_mai_juuni_juuli_aug_sept_okt_nov_dets'.split(
+            '_'
+        ),
+        weekdays: 'pühapäev_esmaspäev_teisipäev_kolmapäev_neljapäev_reede_laupäev'.split(
+            '_'
+        ),
         weekdaysShort: 'P_E_T_K_N_R_L'.split('_'),
         weekdaysMin: 'P_E_T_K_N_R_L'.split('_'),
         longDateFormat: {
@@ -56457,15 +56411,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'urtarrila_otsaila_martxoa_apirila_maiatza_ekaina_uztaila_abuztua_iraila_urria_azaroa_abendua'.split(
             '_'
         ),
-        monthsShort:
-            'urt._ots._mar._api._mai._eka._uzt._abu._ira._urr._aza._abe.'.split(
-                '_'
-            ),
+        monthsShort: 'urt._ots._mar._api._mai._eka._uzt._abu._ira._urr._aza._abe.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'igandea_astelehena_asteartea_asteazkena_osteguna_ostirala_larunbata'.split(
-                '_'
-            ),
+        weekdays: 'igandea_astelehena_asteartea_asteazkena_osteguna_ostirala_larunbata'.split(
+            '_'
+        ),
         weekdaysShort: 'ig._al._ar._az._og._ol._lr.'.split('_'),
         weekdaysMin: 'ig_al_ar_az_og_ol_lr'.split('_'),
         weekdaysParseExact: true,
@@ -56566,18 +56518,15 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
             '_'
         ),
-        monthsShort:
-            'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
-                '_'
-            ),
-        weekdays:
-            'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
-                '_'
-            ),
-        weekdaysShort:
-            'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
-                '_'
-            ),
+        monthsShort: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
+            '_'
+        ),
+        weekdays: 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
+            '_'
+        ),
+        weekdaysShort: 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split(
+            '_'
+        ),
         weekdaysMin: 'ی_د_س_چ_پ_ج_ش'.split('_'),
         weekdaysParseExact: true,
         longDateFormat: {
@@ -56669,10 +56618,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var numbersPast =
-            'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(
-                ' '
-            ),
+    var numbersPast = 'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(
+            ' '
+        ),
         numbersFuture = [
             'nolla',
             'yhden',
@@ -56734,14 +56682,12 @@ __webpack_require__.r(__webpack_exports__);
         months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split(
             '_'
         ),
-        monthsShort:
-            'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split(
-                '_'
-            ),
-        weekdays:
-            'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split(
-                '_'
-            ),
+        monthsShort: 'tammi_helmi_maalis_huhti_touko_kesä_heinä_elo_syys_loka_marras_joulu'.split(
+            '_'
+        ),
+        weekdays: 'sunnuntai_maanantai_tiistai_keskiviikko_torstai_perjantai_lauantai'.split(
+            '_'
+        ),
         weekdaysShort: 'su_ma_ti_ke_to_pe_la'.split('_'),
         weekdaysMin: 'su_ma_ti_ke_to_pe_la'.split('_'),
         longDateFormat: {
@@ -56895,10 +56841,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
-        weekdays:
-            'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split(
-                '_'
-            ),
+        weekdays: 'sunnudagur_mánadagur_týsdagur_mikudagur_hósdagur_fríggjadagur_leygardagur'.split(
+            '_'
+        ),
         weekdaysShort: 'sun_mán_týs_mik_hós_frí_ley'.split('_'),
         weekdaysMin: 'su_má_tý_mi_hó_fr_le'.split('_'),
         longDateFormat: {
@@ -56969,10 +56914,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
-        monthsShort:
-            'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
-                '_'
-            ),
+        monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
         weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
@@ -57058,10 +57002,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
-        monthsShort:
-            'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
-                '_'
-            ),
+        monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
         weekdaysShort: 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
@@ -57147,12 +57090,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsStrictRegex =
-            /^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
-        monthsShortStrictRegex =
-            /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?)/i,
-        monthsRegex =
-            /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
+    var monthsStrictRegex = /^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
+        monthsShortStrictRegex = /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?)/i,
+        monthsRegex = /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
         monthsParse = [
             /^janv/i,
             /^févr/i,
@@ -57172,10 +57112,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
-        monthsShort:
-            'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
-                '_'
-            ),
+        monthsShort: 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split(
+            '_'
+        ),
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
         monthsStrictRegex: monthsStrictRegex,
@@ -57274,10 +57213,12 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
-            'jan._feb._mrt._apr._mai_jun._jul._aug._sep._okt._nov._des.'.split('_'),
-        monthsShortWithoutDots =
-            'jan_feb_mrt_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_');
+    var monthsShortWithDots = 'jan._feb._mrt._apr._mai_jun._jul._aug._sep._okt._nov._des.'.split(
+            '_'
+        ),
+        monthsShortWithoutDots = 'jan_feb_mrt_apr_mai_jun_jul_aug_sep_okt_nov_des'.split(
+            '_'
+        );
 
     var fy = moment.defineLocale('fy', {
         months: 'jannewaris_febrewaris_maart_april_maaie_juny_july_augustus_septimber_oktober_novimber_desimber'.split(
@@ -57600,10 +57541,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'xaneiro_febreiro_marzo_abril_maio_xuño_xullo_agosto_setembro_outubro_novembro_decembro'.split(
             '_'
         ),
-        monthsShort:
-            'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'domingo_luns_martes_mércores_xoves_venres_sábado'.split('_'),
         weekdaysShort: 'dom._lun._mar._mér._xov._ven._sáb.'.split('_'),
@@ -57710,19 +57650,17 @@ __webpack_require__.r(__webpack_exports__);
 
     var gomDeva = moment.defineLocale('gom-deva', {
         months: {
-            standalone:
-                'जानेवारी_फेब्रुवारी_मार्च_एप्रील_मे_जून_जुलय_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
-                    '_'
-                ),
+            standalone: 'जानेवारी_फेब्रुवारी_मार्च_एप्रील_मे_जून_जुलय_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
+                '_'
+            ),
             format: 'जानेवारीच्या_फेब्रुवारीच्या_मार्चाच्या_एप्रीलाच्या_मेयाच्या_जूनाच्या_जुलयाच्या_ऑगस्टाच्या_सप्टेंबराच्या_ऑक्टोबराच्या_नोव्हेंबराच्या_डिसेंबराच्या'.split(
                 '_'
             ),
             isFormat: /MMMM(\s)+D[oD]?/,
         },
-        monthsShort:
-            'जाने._फेब्रु._मार्च_एप्री._मे_जून_जुल._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
-                '_'
-            ),
+        monthsShort: 'जाने._फेब्रु._मार्च_एप्री._मे_जून_जुल._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'आयतार_सोमार_मंगळार_बुधवार_बिरेस्तार_सुक्रार_शेनवार'.split('_'),
         weekdaysShort: 'आयत._सोम._मंगळ._बुध._ब्रेस्त._सुक्र._शेन.'.split('_'),
@@ -57855,17 +57793,17 @@ __webpack_require__.r(__webpack_exports__);
 
     var gomLatn = moment.defineLocale('gom-latn', {
         months: {
-            standalone:
-                'Janer_Febrer_Mars_Abril_Mai_Jun_Julai_Agost_Setembr_Otubr_Novembr_Dezembr'.split(
-                    '_'
-                ),
+            standalone: 'Janer_Febrer_Mars_Abril_Mai_Jun_Julai_Agost_Setembr_Otubr_Novembr_Dezembr'.split(
+                '_'
+            ),
             format: 'Janerachea_Febrerachea_Marsachea_Abrilachea_Maiachea_Junachea_Julaiachea_Agostachea_Setembrachea_Otubrachea_Novembrachea_Dezembrachea'.split(
                 '_'
             ),
             isFormat: /MMMM(\s)+D[oD]?/,
         },
-        monthsShort:
-            'Jan._Feb._Mars_Abr._Mai_Jun_Jul._Ago._Set._Otu._Nov._Dez.'.split('_'),
+        monthsShort: 'Jan._Feb._Mars_Abr._Mai_Jun_Jul._Ago._Set._Otu._Nov._Dez.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: "Aitar_Somar_Mongllar_Budhvar_Birestar_Sukrar_Son'var".split('_'),
         weekdaysShort: 'Ait._Som._Mon._Bud._Bre._Suk._Son.'.split('_'),
@@ -58007,10 +57945,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'જાન્યુઆરી_ફેબ્રુઆરી_માર્ચ_એપ્રિલ_મે_જૂન_જુલાઈ_ઑગસ્ટ_સપ્ટેમ્બર_ઑક્ટ્બર_નવેમ્બર_ડિસેમ્બર'.split(
             '_'
         ),
-        monthsShort:
-            'જાન્યુ._ફેબ્રુ._માર્ચ_એપ્રિ._મે_જૂન_જુલા._ઑગ._સપ્ટે._ઑક્ટ્._નવે._ડિસે.'.split(
-                '_'
-            ),
+        monthsShort: 'જાન્યુ._ફેબ્રુ._માર્ચ_એપ્રિ._મે_જૂન_જુલા._ઑગ._સપ્ટે._ઑક્ટ્._નવે._ડિસે.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'રવિવાર_સોમવાર_મંગળવાર_બુધ્વાર_ગુરુવાર_શુક્રવાર_શનિવાર'.split(
             '_'
@@ -58125,8 +58062,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ינואר_פברואר_מרץ_אפריל_מאי_יוני_יולי_אוגוסט_ספטמבר_אוקטובר_נובמבר_דצמבר'.split(
             '_'
         ),
-        monthsShort:
-            'ינו׳_פבר׳_מרץ_אפר׳_מאי_יוני_יולי_אוג׳_ספט׳_אוק׳_נוב׳_דצמ׳'.split('_'),
+        monthsShort: 'ינו׳_פבר׳_מרץ_אפר׳_מאי_יוני_יולי_אוג׳_ספט׳_אוק׳_נוב׳_דצמ׳'.split(
+            '_'
+        ),
         weekdays: 'ראשון_שני_שלישי_רביעי_חמישי_שישי_שבת'.split('_'),
         weekdaysShort: 'א׳_ב׳_ג׳_ד׳_ה׳_ו׳_ש׳'.split('_'),
         weekdaysMin: 'א_ב_ג_ד_ה_ו_ש'.split('_'),
@@ -58188,8 +58126,7 @@ __webpack_require__.r(__webpack_exports__);
                 return number + ' שנים';
             },
         },
-        meridiemParse:
-            /אחה"צ|לפנה"צ|אחרי הצהריים|לפני הצהריים|לפנות בוקר|בבוקר|בערב/i,
+        meridiemParse: /אחה"צ|לפנה"צ|אחרי הצהריים|לפני הצהריים|לפנות בוקר|בבוקר|בערב/i,
         isPM: function (input) {
             return /^(אחה"צ|אחרי הצהריים|בערב)$/.test(input);
         },
@@ -58290,13 +58227,13 @@ __webpack_require__.r(__webpack_exports__);
             format: 'जनवरी_फ़रवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितम्बर_अक्टूबर_नवम्बर_दिसम्बर'.split(
                 '_'
             ),
-            standalone:
-                'जनवरी_फरवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितंबर_अक्टूबर_नवंबर_दिसंबर'.split(
-                    '_'
-                ),
+            standalone: 'जनवरी_फरवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितंबर_अक्टूबर_नवंबर_दिसंबर'.split(
+                '_'
+            ),
         },
-        monthsShort:
-            'जन._फ़र._मार्च_अप्रै._मई_जून_जुल._अग._सित._अक्टू._नव._दिस.'.split('_'),
+        monthsShort: 'जन._फ़र._मार्च_अप्रै._मई_जून_जुल._अग._सित._अक्टू._नव._दिस.'.split(
+            '_'
+        ),
         weekdays: 'रविवार_सोमवार_मंगलवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
         weekdaysShort: 'रवि_सोम_मंगल_बुध_गुरू_शुक्र_शनि'.split('_'),
         weekdaysMin: 'र_सो_मं_बु_गु_शु_श'.split('_'),
@@ -58313,17 +58250,13 @@ __webpack_require__.r(__webpack_exports__);
         longMonthsParse: monthsParse,
         shortMonthsParse: shortMonthsParse,
 
-        monthsRegex:
-            /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
+        monthsRegex: /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
 
-        monthsShortRegex:
-            /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
+        monthsShortRegex: /^(जनवरी|जन\.?|फ़रवरी|फरवरी|फ़र\.?|मार्च?|अप्रैल|अप्रै\.?|मई?|जून?|जुलाई|जुल\.?|अगस्त|अग\.?|सितम्बर|सितंबर|सित\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर|नव\.?|दिसम्बर|दिसंबर|दिस\.?)/i,
 
-        monthsStrictRegex:
-            /^(जनवरी?|फ़रवरी|फरवरी?|मार्च?|अप्रैल?|मई?|जून?|जुलाई?|अगस्त?|सितम्बर|सितंबर|सित?\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर?|दिसम्बर|दिसंबर?)/i,
+        monthsStrictRegex: /^(जनवरी?|फ़रवरी|फरवरी?|मार्च?|अप्रैल?|मई?|जून?|जुलाई?|अगस्त?|सितम्बर|सितंबर|सित?\.?|अक्टूबर|अक्टू\.?|नवम्बर|नवंबर?|दिसम्बर|दिसंबर?)/i,
 
-        monthsShortStrictRegex:
-            /^(जन\.?|फ़र\.?|मार्च?|अप्रै\.?|मई?|जून?|जुल\.?|अग\.?|सित\.?|अक्टू\.?|नव\.?|दिस\.?)/i,
+        monthsShortStrictRegex: /^(जन\.?|फ़र\.?|मार्च?|अप्रै\.?|मई?|जून?|जुल\.?|अग\.?|सित\.?|अक्टू\.?|नव\.?|दिस\.?)/i,
 
         calendar: {
             sameDay: '[आज] LT',
@@ -58486,15 +58419,13 @@ __webpack_require__.r(__webpack_exports__);
             format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split(
                 '_'
             ),
-            standalone:
-                'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split(
-                    '_'
-                ),
-        },
-        monthsShort:
-            'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split(
+            standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split(
                 '_'
             ),
+        },
+        monthsShort: 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
             '_'
@@ -58595,8 +58526,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var weekEndings =
-        'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ');
+    var weekEndings = 'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(
+        ' '
+    );
     function translate(number, withoutSuffix, key, isFuture) {
         var num = number;
         switch (key) {
@@ -58644,10 +58576,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._márc._ápr._máj._jún._júl._aug._szept._okt._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'jan._feb._márc._ápr._máj._jún._júl._aug._szept._okt._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'.split('_'),
         weekdaysShort: 'vas_hét_kedd_sze_csüt_pén_szo'.split('_'),
@@ -58736,16 +58667,14 @@ __webpack_require__.r(__webpack_exports__);
             format: 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split(
                 '_'
             ),
-            standalone:
-                'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split(
-                    '_'
-                ),
-        },
-        monthsShort: 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_'),
-        weekdays:
-            'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split(
+            standalone: 'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split(
                 '_'
             ),
+        },
+        monthsShort: 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_'),
+        weekdays: 'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split(
+            '_'
+        ),
         weekdaysShort: 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
         weekdaysMin: 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
         longDateFormat: {
@@ -59028,10 +58957,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'jan_feb_mar_apr_maí_jún_júl_ágú_sep_okt_nóv_des'.split('_'),
-        weekdays:
-            'sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur'.split(
-                '_'
-            ),
+        weekdays: 'sunnudagur_mánudagur_þriðjudagur_miðvikudagur_fimmtudagur_föstudagur_laugardagur'.split(
+            '_'
+        ),
         weekdaysShort: 'sun_mán_þri_mið_fim_fös_lau'.split('_'),
         weekdaysMin: 'Su_Má_Þr_Mi_Fi_Fö_La'.split('_'),
         longDateFormat: {
@@ -59574,10 +59502,9 @@ __webpack_require__.r(__webpack_exports__);
         ),
         monthsShort: 'იან_თებ_მარ_აპრ_მაი_ივნ_ივლ_აგვ_სექ_ოქტ_ნოე_დეკ'.split('_'),
         weekdays: {
-            standalone:
-                'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split(
-                    '_'
-                ),
+            standalone: 'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split(
+                '_'
+            ),
             format: 'კვირას_ორშაბათს_სამშაბათს_ოთხშაბათს_ხუთშაბათს_პარასკევს_შაბათს'.split(
                 '_'
             ),
@@ -59603,12 +59530,13 @@ __webpack_require__.r(__webpack_exports__);
         },
         relativeTime: {
             future: function (s) {
-                return s.replace(
-                    /(წამ|წუთ|საათ|წელ|დღ|თვ)(ი|ე)/,
-                    function ($0, $1, $2) {
-                        return $2 === 'ი' ? $1 + 'ში' : $1 + $2 + 'ში';
-                    }
-                );
+                return s.replace(/(წამ|წუთ|საათ|წელ|დღ|თვ)(ი|ე)/, function (
+                    $0,
+                    $1,
+                    $2
+                ) {
+                    return $2 === 'ი' ? $1 + 'ში' : $1 + $2 + 'ში';
+                });
             },
             past: function (s) {
                 if (/(წამი|წუთი|საათი|დღე|თვე)/.test(s)) {
@@ -59809,10 +59737,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
             '_'
         ),
-        monthsShort:
-            'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
-                '_'
-            ),
+        monthsShort: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
+            '_'
+        ),
         weekdays: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
         weekdaysShort: 'អា_ច_អ_ព_ព្រ_សុ_ស'.split('_'),
         weekdaysMin: 'អា_ច_អ_ព_ព្រ_សុ_ស'.split('_'),
@@ -59931,10 +59858,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ಜನವರಿ_ಫೆಬ್ರವರಿ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂಬರ್_ಅಕ್ಟೋಬರ್_ನವೆಂಬರ್_ಡಿಸೆಂಬರ್'.split(
             '_'
         ),
-        monthsShort:
-            'ಜನ_ಫೆಬ್ರ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂ_ಅಕ್ಟೋ_ನವೆಂ_ಡಿಸೆಂ'.split(
-                '_'
-            ),
+        monthsShort: 'ಜನ_ಫೆಬ್ರ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂ_ಅಕ್ಟೋ_ನವೆಂ_ಡಿಸೆಂ'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'ಭಾನುವಾರ_ಸೋಮವಾರ_ಮಂಗಳವಾರ_ಬುಧವಾರ_ಗುರುವಾರ_ಶುಕ್ರವಾರ_ಶನಿವಾರ'.split(
             '_'
@@ -60181,12 +60107,12 @@ __webpack_require__.r(__webpack_exports__);
     var ku = moment.defineLocale('ku', {
         months: months,
         monthsShort: months,
-        weekdays:
-            'یه‌كشه‌ممه‌_دووشه‌ممه‌_سێشه‌ممه‌_چوارشه‌ممه‌_پێنجشه‌ممه‌_هه‌ینی_شه‌ممه‌'.split(
-                '_'
-            ),
-        weekdaysShort:
-            'یه‌كشه‌م_دووشه‌م_سێشه‌م_چوارشه‌م_پێنجشه‌م_هه‌ینی_شه‌ممه‌'.split('_'),
+        weekdays: 'یه‌كشه‌ممه‌_دووشه‌ممه‌_سێشه‌ممه‌_چوارشه‌ممه‌_پێنجشه‌ممه‌_هه‌ینی_شه‌ممه‌'.split(
+            '_'
+        ),
+        weekdaysShort: 'یه‌كشه‌م_دووشه‌م_سێشه‌م_چوارشه‌م_پێنجشه‌م_هه‌ینی_شه‌ممه‌'.split(
+            '_'
+        ),
         weekdaysMin: 'ی_د_س_چ_پ_ه_ش'.split('_'),
         weekdaysParseExact: true,
         longDateFormat: {
@@ -60450,15 +60376,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Januar_Februar_Mäerz_Abrëll_Mee_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
-        monthsShort:
-            'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split(
-                '_'
-            ),
+        monthsShort: 'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split(
-                '_'
-            ),
+        weekdays: 'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split(
+            '_'
+        ),
         weekdaysShort: 'So._Mé._Dë._Më._Do._Fr._Sa.'.split('_'),
         weekdaysMin: 'So_Mé_Dë_Më_Do_Fr_Sa'.split('_'),
         weekdaysParseExact: true,
@@ -60539,10 +60463,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
             '_'
         ),
-        monthsShort:
-            'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
-                '_'
-            ),
+        monthsShort: 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
+            '_'
+        ),
         weekdays: 'ອາທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
         weekdaysShort: 'ທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
         weekdaysMin: 'ທ_ຈ_ອຄ_ພ_ພຫ_ສກ_ສ'.split('_'),
@@ -60674,10 +60597,9 @@ __webpack_require__.r(__webpack_exports__);
             format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split(
                 '_'
             ),
-            standalone:
-                'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split(
-                    '_'
-                ),
+            standalone: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split(
+                '_'
+            ),
             isFormat: /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?|MMMM?(\[[^\[\]]*\]|\s)+D[oD]?/,
         },
         monthsShort: 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
@@ -60685,10 +60607,9 @@ __webpack_require__.r(__webpack_exports__);
             format: 'sekmadienį_pirmadienį_antradienį_trečiadienį_ketvirtadienį_penktadienį_šeštadienį'.split(
                 '_'
             ),
-            standalone:
-                'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split(
-                    '_'
-                ),
+            standalone: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split(
+                '_'
+            ),
             isFormat: /dddd HH:mm/,
         },
         weekdaysShort: 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
@@ -60806,10 +60727,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'jan_feb_mar_apr_mai_jūn_jūl_aug_sep_okt_nov_dec'.split('_'),
-        weekdays:
-            'svētdiena_pirmdiena_otrdiena_trešdiena_ceturtdiena_piektdiena_sestdiena'.split(
-                '_'
-            ),
+        weekdays: 'svētdiena_pirmdiena_otrdiena_trešdiena_ceturtdiena_piektdiena_sestdiena'.split(
+            '_'
+        ),
         weekdaysShort: 'Sv_P_O_T_C_Pk_S'.split('_'),
         weekdaysMin: 'Sv_P_O_T_C_Pk_S'.split('_'),
         weekdaysParseExact: true,
@@ -60914,8 +60834,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split('_'),
+        monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
             '_'
@@ -61017,10 +60938,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Kohi-tāte_Hui-tanguru_Poutū-te-rangi_Paenga-whāwhā_Haratua_Pipiri_Hōngoingoi_Here-turi-kōkā_Mahuru_Whiringa-ā-nuku_Whiringa-ā-rangi_Hakihea'.split(
             '_'
         ),
-        monthsShort:
-            'Kohi_Hui_Pou_Pae_Hara_Pipi_Hōngoi_Here_Mahu_Whi-nu_Whi-ra_Haki'.split(
-                '_'
-            ),
+        monthsShort: 'Kohi_Hui_Pou_Pae_Hara_Pipi_Hōngoi_Here_Mahu_Whi-nu_Whi-ra_Haki'.split(
+            '_'
+        ),
         monthsRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
         monthsStrictRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
         monthsShortRegex: /(?:['a-z\u0101\u014D\u016B]+\-?){1,3}/i,
@@ -61201,15 +61121,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ജനുവരി_ഫെബ്രുവരി_മാർച്ച്_ഏപ്രിൽ_മേയ്_ജൂൺ_ജൂലൈ_ഓഗസ്റ്റ്_സെപ്റ്റംബർ_ഒക്ടോബർ_നവംബർ_ഡിസംബർ'.split(
             '_'
         ),
-        monthsShort:
-            'ജനു._ഫെബ്രു._മാർ._ഏപ്രി._മേയ്_ജൂൺ_ജൂലൈ._ഓഗ._സെപ്റ്റ._ഒക്ടോ._നവം._ഡിസം.'.split(
-                '_'
-            ),
+        monthsShort: 'ജനു._ഫെബ്രു._മാർ._ഏപ്രി._മേയ്_ജൂൺ_ജൂലൈ._ഓഗ._സെപ്റ്റ._ഒക്ടോ._നവം._ഡിസം.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'ഞായറാഴ്ച_തിങ്കളാഴ്ച_ചൊവ്വാഴ്ച_ബുധനാഴ്ച_വ്യാഴാഴ്ച_വെള്ളിയാഴ്ച_ശനിയാഴ്ച'.split(
-                '_'
-            ),
+        weekdays: 'ഞായറാഴ്ച_തിങ്കളാഴ്ച_ചൊവ്വാഴ്ച_ബുധനാഴ്ച_വ്യാഴാഴ്ച_വെള്ളിയാഴ്ച_ശനിയാഴ്ച'.split(
+            '_'
+        ),
         weekdaysShort: 'ഞായർ_തിങ്കൾ_ചൊവ്വ_ബുധൻ_വ്യാഴം_വെള്ളി_ശനി'.split('_'),
         weekdaysMin: 'ഞാ_തി_ചൊ_ബു_വ്യാ_വെ_ശ'.split('_'),
         longDateFormat: {
@@ -61328,10 +61246,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'Нэгдүгээр сар_Хоёрдугаар сар_Гуравдугаар сар_Дөрөвдүгээр сар_Тавдугаар сар_Зургадугаар сар_Долдугаар сар_Наймдугаар сар_Есдүгээр сар_Аравдугаар сар_Арван нэгдүгээр сар_Арван хоёрдугаар сар'.split(
             '_'
         ),
-        monthsShort:
-            '1 сар_2 сар_3 сар_4 сар_5 сар_6 сар_7 сар_8 сар_9 сар_10 сар_11 сар_12 сар'.split(
-                '_'
-            ),
+        monthsShort: '1 сар_2 сар_3 сар_4 сар_5 сар_6 сар_7 сар_8 сар_9 сар_10 сар_11 сар_12 сар'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'Ням_Даваа_Мягмар_Лхагва_Пүрэв_Баасан_Бямба'.split('_'),
         weekdaysShort: 'Ням_Дав_Мяг_Лха_Пүр_Баа_Бям'.split('_'),
@@ -61531,10 +61448,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
             '_'
         ),
-        monthsShort:
-            'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
-                '_'
-            ),
+        monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'रविवार_सोमवार_मंगळवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
         weekdaysShort: 'रवि_सोम_मंगळ_बुध_गुरू_शुक्र_शनि'.split('_'),
@@ -61833,10 +61749,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'Jan_Fra_Mar_Apr_Mej_Ġun_Lul_Aww_Set_Ott_Nov_Diċ'.split('_'),
-        weekdays:
-            'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split(
-                '_'
-            ),
+        weekdays: 'Il-Ħadd_It-Tnejn_It-Tlieta_L-Erbgħa_Il-Ħamis_Il-Ġimgħa_Is-Sibt'.split(
+            '_'
+        ),
         weekdaysShort: 'Ħad_Tne_Tli_Erb_Ħam_Ġim_Sib'.split('_'),
         weekdaysMin: 'Ħa_Tn_Tl_Er_Ħa_Ġi_Si'.split('_'),
         longDateFormat: {
@@ -62019,8 +61934,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split('_'),
+        monthsShort: 'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
         weekdaysShort: 'sø._ma._ti._on._to._fr._lø.'.split('_'),
@@ -62121,10 +62037,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'जनवरी_फेब्रुवरी_मार्च_अप्रिल_मई_जुन_जुलाई_अगष्ट_सेप्टेम्बर_अक्टोबर_नोभेम्बर_डिसेम्बर'.split(
             '_'
         ),
-        monthsShort:
-            'जन._फेब्रु._मार्च_अप्रि._मई_जुन_जुलाई._अग._सेप्ट._अक्टो._नोभे._डिसे.'.split(
-                '_'
-            ),
+        monthsShort: 'जन._फेब्रु._मार्च_अप्रि._मई_जुन_जुलाई._अग._सेप्ट._अक्टो._नोभे._डिसे.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split(
             '_'
@@ -62233,10 +62148,12 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
-            'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split('_'),
-        monthsShortWithoutDots =
-            'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
+    var monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split(
+            '_'
+        ),
+        monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split(
+            '_'
+        ),
         monthsParse = [
             /^jan/i,
             /^feb/i,
@@ -62251,8 +62168,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dec/i,
         ],
-        monthsRegex =
-            /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
+        monthsRegex = /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
 
     var nlBe = moment.defineLocale('nl-be', {
         months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
@@ -62270,17 +62186,16 @@ __webpack_require__.r(__webpack_exports__);
 
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
-        monthsShortStrictRegex:
-            /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
+        monthsStrictRegex: /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
+        monthsShortStrictRegex: /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
 
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
 
-        weekdays:
-            'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
+        weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split(
+            '_'
+        ),
         weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
         weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
         weekdaysParseExact: true,
@@ -62354,10 +62269,12 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
-            'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split('_'),
-        monthsShortWithoutDots =
-            'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
+    var monthsShortWithDots = 'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split(
+            '_'
+        ),
+        monthsShortWithoutDots = 'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split(
+            '_'
+        ),
         monthsParse = [
             /^jan/i,
             /^feb/i,
@@ -62372,8 +62289,7 @@ __webpack_require__.r(__webpack_exports__);
             /^nov/i,
             /^dec/i,
         ],
-        monthsRegex =
-            /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
+        monthsRegex = /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
 
     var nl = moment.defineLocale('nl', {
         months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
@@ -62391,17 +62307,16 @@ __webpack_require__.r(__webpack_exports__);
 
         monthsRegex: monthsRegex,
         monthsShortRegex: monthsRegex,
-        monthsStrictRegex:
-            /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
-        monthsShortStrictRegex:
-            /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
+        monthsStrictRegex: /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december)/i,
+        monthsShortStrictRegex: /^(jan\.?|feb\.?|mrt\.?|apr\.?|mei|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i,
 
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
 
-        weekdays:
-            'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
+        weekdays: 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split(
+            '_'
+        ),
         weekdaysShort: 'zo._ma._di._wo._do._vr._za.'.split('_'),
         weekdaysMin: 'zo_ma_di_wo_do_vr_za'.split('_'),
         weekdaysParseExact: true,
@@ -62481,8 +62396,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split('_'),
+        monthsShort: 'jan._feb._mars_apr._mai_juni_juli_aug._sep._okt._nov._des.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'sundag_måndag_tysdag_onsdag_torsdag_fredag_laurdag'.split('_'),
         weekdaysShort: 'su._må._ty._on._to._fr._lau.'.split('_'),
@@ -62556,19 +62472,17 @@ __webpack_require__.r(__webpack_exports__);
 
     var ocLnc = moment.defineLocale('oc-lnc', {
         months: {
-            standalone:
-                'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split(
-                    '_'
-                ),
+            standalone: 'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split(
+                '_'
+            ),
             format: "de genièr_de febrièr_de març_d'abril_de mai_de junh_de julhet_d'agost_de setembre_d'octòbre_de novembre_de decembre".split(
                 '_'
             ),
             isFormat: /D[oD]?(\s)+MMMM/,
         },
-        monthsShort:
-            'gen._febr._març_abr._mai_junh_julh._ago._set._oct._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'gen._febr._març_abr._mai_junh_julh._ago._set._oct._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'dimenge_diluns_dimars_dimècres_dijòus_divendres_dissabte'.split(
             '_'
@@ -62688,10 +62602,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
             '_'
         ),
-        monthsShort:
-            'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
-                '_'
-            ),
+        monthsShort: 'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
+            '_'
+        ),
         weekdays: 'ਐਤਵਾਰ_ਸੋਮਵਾਰ_ਮੰਗਲਵਾਰ_ਬੁਧਵਾਰ_ਵੀਰਵਾਰ_ਸ਼ੁੱਕਰਵਾਰ_ਸ਼ਨੀਚਰਵਾਰ'.split(
             '_'
         ),
@@ -62799,14 +62712,12 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var monthsNominative =
-            'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split(
-                '_'
-            ),
-        monthsSubjective =
-            'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split(
-                '_'
-            ),
+    var monthsNominative = 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split(
+            '_'
+        ),
+        monthsSubjective = 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'.split(
+            '_'
+        ),
         monthsParse = [
             /^sty/i,
             /^lut/i,
@@ -62860,8 +62771,9 @@ __webpack_require__.r(__webpack_exports__);
         monthsParse: monthsParse,
         longMonthsParse: monthsParse,
         shortMonthsParse: monthsParse,
-        weekdays:
-            'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split('_'),
+        weekdays: 'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split(
+            '_'
+        ),
         weekdaysShort: 'ndz_pon_wt_śr_czw_pt_sob'.split('_'),
         weekdaysMin: 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
         longDateFormat: {
@@ -62963,10 +62875,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez'.split('_'),
-        weekdays:
-            'domingo_segunda-feira_terça-feira_quarta-feira_quinta-feira_sexta-feira_sábado'.split(
-                '_'
-            ),
+        weekdays: 'domingo_segunda-feira_terça-feira_quarta-feira_quinta-feira_sexta-feira_sábado'.split(
+            '_'
+        ),
         weekdaysShort: 'dom_seg_ter_qua_qui_sex_sáb'.split('_'),
         weekdaysMin: 'do_2ª_3ª_4ª_5ª_6ª_sá'.split('_'),
         weekdaysParseExact: true,
@@ -63040,10 +62951,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'jan_fev_mar_abr_mai_jun_jul_ago_set_out_nov_dez'.split('_'),
-        weekdays:
-            'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split(
-                '_'
-            ),
+        weekdays: 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split(
+            '_'
+        ),
         weekdaysShort: 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
         weekdaysMin: 'Do_2ª_3ª_4ª_5ª_6ª_Sá'.split('_'),
         weekdaysParseExact: true,
@@ -63140,10 +63050,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ianuarie_februarie_martie_aprilie_mai_iunie_iulie_august_septembrie_octombrie_noiembrie_decembrie'.split(
             '_'
         ),
-        monthsShort:
-            'ian._feb._mart._apr._mai_iun._iul._aug._sept._oct._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'ian._feb._mart._apr._mai_iun._iul._aug._sept._oct._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'duminică_luni_marți_miercuri_joi_vineri_sâmbătă'.split('_'),
         weekdaysShort: 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
@@ -63261,26 +63170,23 @@ __webpack_require__.r(__webpack_exports__);
             format: 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split(
                 '_'
             ),
-            standalone:
-                'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
-                    '_'
-                ),
+            standalone: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
+                '_'
+            ),
         },
         monthsShort: {
             // по CLDR именно "июл." и "июн.", но какой смысл менять букву на точку?
             format: 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split(
                 '_'
             ),
-            standalone:
-                'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split(
-                    '_'
-                ),
+            standalone: 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split(
+                '_'
+            ),
         },
         weekdays: {
-            standalone:
-                'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split(
-                    '_'
-                ),
+            standalone: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split(
+                '_'
+            ),
             format: 'воскресенье_понедельник_вторник_среду_четверг_пятницу_субботу'.split(
                 '_'
             ),
@@ -63293,20 +63199,16 @@ __webpack_require__.r(__webpack_exports__);
         shortMonthsParse: monthsParse,
 
         // полные названия с падежами, по три буквы, для некоторых, по 4 буквы, сокращения с точкой и без точки
-        monthsRegex:
-            /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
+        monthsRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
 
         // копия предыдущего
-        monthsShortRegex:
-            /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
+        monthsShortRegex: /^(январ[ья]|янв\.?|феврал[ья]|февр?\.?|марта?|мар\.?|апрел[ья]|апр\.?|ма[йя]|июн[ья]|июн\.?|июл[ья]|июл\.?|августа?|авг\.?|сентябр[ья]|сент?\.?|октябр[ья]|окт\.?|ноябр[ья]|нояб?\.?|декабр[ья]|дек\.?)/i,
 
         // полные названия с падежами
-        monthsStrictRegex:
-            /^(январ[яь]|феврал[яь]|марта?|апрел[яь]|ма[яй]|июн[яь]|июл[яь]|августа?|сентябр[яь]|октябр[яь]|ноябр[яь]|декабр[яь])/i,
+        monthsStrictRegex: /^(январ[яь]|феврал[яь]|марта?|апрел[яь]|ма[яй]|июн[яь]|июл[яь]|августа?|сентябр[яь]|октябр[яь]|ноябр[яь]|декабр[яь])/i,
 
         // Выражение, которое соответствует только сокращённым формам
-        monthsShortStrictRegex:
-            /^(янв\.|февр?\.|мар[т.]|апр\.|ма[яй]|июн[ья.]|июл[ья.]|авг\.|сент?\.|окт\.|нояб?\.|дек\.)/i,
+        monthsShortStrictRegex: /^(янв\.|февр?\.|мар[т.]|апр\.|ма[яй]|июн[ья.]|июл[ья.]|авг\.|сент?\.|окт\.|нояб?\.|дек\.)/i,
         longDateFormat: {
             LT: 'H:mm',
             LTS: 'H:mm:ss',
@@ -63548,12 +63450,12 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
             '_'
         ),
-        monthsShort:
-            'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split('_'),
-        weekdays:
-            'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split(
-                '_'
-            ),
+        monthsShort: 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split(
+            '_'
+        ),
+        weekdays: 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split(
+            '_'
+        ),
         weekdaysShort: 'sotn_vuos_maŋ_gask_duor_bear_láv'.split('_'),
         weekdaysMin: 's_v_m_g_d_b_L'.split('_'),
         longDateFormat: {
@@ -63628,10 +63530,9 @@ __webpack_require__.r(__webpack_exports__);
         monthsShort: 'ජන_පෙබ_මාර්_අප්_මැයි_ජූනි_ජූලි_අගෝ_සැප්_ඔක්_නොවැ_දෙසැ'.split(
             '_'
         ),
-        weekdays:
-            'ඉරිදා_සඳුදා_අඟහරුවාදා_බදාදා_බ්‍රහස්පතින්දා_සිකුරාදා_සෙනසුරාදා'.split(
-                '_'
-            ),
+        weekdays: 'ඉරිදා_සඳුදා_අඟහරුවාදා_බදාදා_බ්‍රහස්පතින්දා_සිකුරාදා_සෙනසුරාදා'.split(
+            '_'
+        ),
         weekdaysShort: 'ඉරි_සඳු_අඟ_බදා_බ්‍රහ_සිකු_සෙන'.split('_'),
         weekdaysMin: 'ඉ_ස_අ_බ_බ්‍ර_සි_සෙ'.split('_'),
         weekdaysParseExact: true,
@@ -63709,10 +63610,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
-    var months =
-            'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split(
-                '_'
-            ),
+    var months = 'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split(
+            '_'
+        ),
         monthsShort = 'jan_feb_mar_apr_máj_jún_júl_aug_sep_okt_nov_dec'.split('_');
     function plural(n) {
         return n > 1 && n < 5;
@@ -63960,10 +63860,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split(
-                '_'
-            ),
+        monthsShort: 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
         weekdaysShort: 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
@@ -64151,44 +64050,32 @@ __webpack_require__.r(__webpack_exports__);
         words: {
             //Different grammatical cases
             ss: ['секунда', 'секунде', 'секунди'],
-            m: ['један минут', 'једног минута'],
-            mm: ['минут', 'минута', 'минута'],
+            m: ['један минут', 'једне минуте'],
+            mm: ['минут', 'минуте', 'минута'],
             h: ['један сат', 'једног сата'],
             hh: ['сат', 'сата', 'сати'],
-            d: ['један дан', 'једног дана'],
             dd: ['дан', 'дана', 'дана'],
-            M: ['један месец', 'једног месеца'],
             MM: ['месец', 'месеца', 'месеци'],
-            y: ['једну годину', 'једне године'],
-            yy: ['годину', 'године', 'година'],
+            yy: ['година', 'године', 'година'],
         },
         correctGrammaticalCase: function (number, wordKey) {
-            if (
-                number % 10 >= 1 &&
-                number % 10 <= 4 &&
-                (number % 100 < 10 || number % 100 >= 20)
-            ) {
-                return number % 10 === 1 ? wordKey[0] : wordKey[1];
-            }
-            return wordKey[2];
+            return number === 1
+                ? wordKey[0]
+                : number >= 2 && number <= 4
+                ? wordKey[1]
+                : wordKey[2];
         },
-        translate: function (number, withoutSuffix, key, isFuture) {
-            var wordKey = translator.words[key],
-                word;
-
+        translate: function (number, withoutSuffix, key) {
+            var wordKey = translator.words[key];
             if (key.length === 1) {
-                // Nominativ
-                if (key === 'y' && withoutSuffix) return 'једна година';
-                return isFuture || withoutSuffix ? wordKey[0] : wordKey[1];
+                return withoutSuffix ? wordKey[0] : wordKey[1];
+            } else {
+                return (
+                    number +
+                    ' ' +
+                    translator.correctGrammaticalCase(number, wordKey)
+                );
             }
-
-            word = translator.correctGrammaticalCase(number, wordKey);
-            // Nominativ
-            if (key === 'yy' && withoutSuffix && word === 'годину') {
-                return number + ' година';
-            }
-
-            return number + ' ' + word;
         },
     };
 
@@ -64196,8 +64083,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'јануар_фебруар_март_април_мај_јун_јул_август_септембар_октобар_новембар_децембар'.split(
             '_'
         ),
-        monthsShort:
-            'јан._феб._мар._апр._мај_јун_јул_авг._сеп._окт._нов._дец.'.split('_'),
+        monthsShort: 'јан._феб._мар._апр._мај_јун_јул_авг._сеп._окт._нов._дец.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'недеља_понедељак_уторак_среда_четвртак_петак_субота'.split('_'),
         weekdaysShort: 'нед._пон._уто._сре._чет._пет._суб.'.split('_'),
@@ -64253,11 +64141,11 @@ __webpack_require__.r(__webpack_exports__);
             mm: translator.translate,
             h: translator.translate,
             hh: translator.translate,
-            d: translator.translate,
+            d: 'дан',
             dd: translator.translate,
-            M: translator.translate,
+            M: 'месец',
             MM: translator.translate,
-            y: translator.translate,
+            y: 'годину',
             yy: translator.translate,
         },
         dayOfMonthOrdinalParse: /\d{1,2}\./,
@@ -64297,44 +64185,32 @@ __webpack_require__.r(__webpack_exports__);
         words: {
             //Different grammatical cases
             ss: ['sekunda', 'sekunde', 'sekundi'],
-            m: ['jedan minut', 'jednog minuta'],
-            mm: ['minut', 'minuta', 'minuta'],
+            m: ['jedan minut', 'jedne minute'],
+            mm: ['minut', 'minute', 'minuta'],
             h: ['jedan sat', 'jednog sata'],
             hh: ['sat', 'sata', 'sati'],
-            d: ['jedan dan', 'jednog dana'],
             dd: ['dan', 'dana', 'dana'],
-            M: ['jedan mesec', 'jednog meseca'],
             MM: ['mesec', 'meseca', 'meseci'],
-            y: ['jednu godinu', 'jedne godine'],
-            yy: ['godinu', 'godine', 'godina'],
+            yy: ['godina', 'godine', 'godina'],
         },
         correctGrammaticalCase: function (number, wordKey) {
-            if (
-                number % 10 >= 1 &&
-                number % 10 <= 4 &&
-                (number % 100 < 10 || number % 100 >= 20)
-            ) {
-                return number % 10 === 1 ? wordKey[0] : wordKey[1];
-            }
-            return wordKey[2];
+            return number === 1
+                ? wordKey[0]
+                : number >= 2 && number <= 4
+                ? wordKey[1]
+                : wordKey[2];
         },
-        translate: function (number, withoutSuffix, key, isFuture) {
-            var wordKey = translator.words[key],
-                word;
-
+        translate: function (number, withoutSuffix, key) {
+            var wordKey = translator.words[key];
             if (key.length === 1) {
-                // Nominativ
-                if (key === 'y' && withoutSuffix) return 'jedna godina';
-                return isFuture || withoutSuffix ? wordKey[0] : wordKey[1];
+                return withoutSuffix ? wordKey[0] : wordKey[1];
+            } else {
+                return (
+                    number +
+                    ' ' +
+                    translator.correctGrammaticalCase(number, wordKey)
+                );
             }
-
-            word = translator.correctGrammaticalCase(number, wordKey);
-            // Nominativ
-            if (key === 'yy' && withoutSuffix && word === 'godinu') {
-                return number + ' godina';
-            }
-
-            return number + ' ' + word;
         },
     };
 
@@ -64342,8 +64218,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
-        monthsShort:
-            'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split('_'),
+        monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'nedelja_ponedeljak_utorak_sreda_četvrtak_petak_subota'.split(
             '_'
@@ -64401,11 +64278,11 @@ __webpack_require__.r(__webpack_exports__);
             mm: translator.translate,
             h: translator.translate,
             hh: translator.translate,
-            d: translator.translate,
+            d: 'dan',
             dd: translator.translate,
-            M: translator.translate,
+            M: 'mesec',
             MM: translator.translate,
-            y: translator.translate,
+            y: 'godinu',
             yy: translator.translate,
         },
         dayOfMonthOrdinalParse: /\d{1,2}\./,
@@ -64445,10 +64322,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'Bhi_Ina_Inu_Mab_Ink_Inh_Kho_Igc_Iny_Imp_Lwe_Igo'.split('_'),
-        weekdays:
-            'Lisontfo_Umsombuluko_Lesibili_Lesitsatfu_Lesine_Lesihlanu_Umgcibelo'.split(
-                '_'
-            ),
+        weekdays: 'Lisontfo_Umsombuluko_Lesibili_Lesitsatfu_Lesine_Lesihlanu_Umgcibelo'.split(
+            '_'
+        ),
         weekdaysShort: 'Lis_Umb_Lsb_Les_Lsi_Lsh_Umg'.split('_'),
         weekdaysMin: 'Li_Us_Lb_Lt_Ls_Lh_Ug'.split('_'),
         weekdaysParseExact: true,
@@ -64635,10 +64511,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ago_Sep_Okt_Nov_Des'.split('_'),
-        weekdays:
-            'Jumapili_Jumatatu_Jumanne_Jumatano_Alhamisi_Ijumaa_Jumamosi'.split(
-                '_'
-            ),
+        weekdays: 'Jumapili_Jumatatu_Jumanne_Jumatano_Alhamisi_Ijumaa_Jumamosi'.split(
+            '_'
+        ),
         weekdaysShort: 'Jpl_Jtat_Jnne_Jtan_Alh_Ijm_Jmos'.split('_'),
         weekdaysMin: 'J2_J3_J4_J5_Al_Ij_J1'.split('_'),
         weekdaysParseExact: true,
@@ -64733,14 +64608,12 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
             '_'
         ),
-        monthsShort:
-            'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
-                '_'
-            ),
-        weekdays:
-            'ஞாயிற்றுக்கிழமை_திங்கட்கிழமை_செவ்வாய்கிழமை_புதன்கிழமை_வியாழக்கிழமை_வெள்ளிக்கிழமை_சனிக்கிழமை'.split(
-                '_'
-            ),
+        monthsShort: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
+            '_'
+        ),
+        weekdays: 'ஞாயிற்றுக்கிழமை_திங்கட்கிழமை_செவ்வாய்கிழமை_புதன்கிழமை_வியாழக்கிழமை_வெள்ளிக்கிழமை_சனிக்கிழமை'.split(
+            '_'
+        ),
         weekdaysShort: 'ஞாயிறு_திங்கள்_செவ்வாய்_புதன்_வியாழன்_வெள்ளி_சனி'.split(
             '_'
         ),
@@ -64858,15 +64731,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'జనవరి_ఫిబ్రవరి_మార్చి_ఏప్రిల్_మే_జూన్_జులై_ఆగస్టు_సెప్టెంబర్_అక్టోబర్_నవంబర్_డిసెంబర్'.split(
             '_'
         ),
-        monthsShort:
-            'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జులై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split(
-                '_'
-            ),
+        monthsShort: 'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జులై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'ఆదివారం_సోమవారం_మంగళవారం_బుధవారం_గురువారం_శుక్రవారం_శనివారం'.split(
-                '_'
-            ),
+        weekdays: 'ఆదివారం_సోమవారం_మంగళవారం_బుధవారం_గురువారం_శుక్రవారం_శనివారం'.split(
+            '_'
+        ),
         weekdaysShort: 'ఆది_సోమ_మంగళ_బుధ_గురు_శుక్ర_శని'.split('_'),
         weekdaysMin: 'ఆ_సో_మం_బు_గు_శు_శ'.split('_'),
         longDateFormat: {
@@ -65078,10 +64949,9 @@ __webpack_require__.r(__webpack_exports__);
             format: 'январи_феврали_марти_апрели_майи_июни_июли_августи_сентябри_октябри_ноябри_декабри'.split(
                 '_'
             ),
-            standalone:
-                'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split(
-                    '_'
-                ),
+            standalone: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split(
+                '_'
+            ),
         },
         monthsShort: 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
         weekdays: 'якшанбе_душанбе_сешанбе_чоршанбе_панҷшанбе_ҷумъа_шанбе'.split(
@@ -65188,10 +65058,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิกายน_ธันวาคม'.split(
             '_'
         ),
-        monthsShort:
-            'ม.ค._ก.พ._มี.ค._เม.ย._พ.ค._มิ.ย._ก.ค._ส.ค._ก.ย._ต.ค._พ.ย._ธ.ค.'.split(
-                '_'
-            ),
+        monthsShort: 'ม.ค._ก.พ._มี.ค._เม.ย._พ.ค._มิ.ย._ก.ค._ส.ค._ก.ย._ต.ค._พ.ย._ธ.ค.'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัสบดี_ศุกร์_เสาร์'.split('_'),
         weekdaysShort: 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัส_ศุกร์_เสาร์'.split('_'), // yes, three characters difference
@@ -65521,18 +65390,19 @@ __webpack_require__.r(__webpack_exports__);
         months: 'tera’ jar wa’_tera’ jar cha’_tera’ jar wej_tera’ jar loS_tera’ jar vagh_tera’ jar jav_tera’ jar Soch_tera’ jar chorgh_tera’ jar Hut_tera’ jar wa’maH_tera’ jar wa’maH wa’_tera’ jar wa’maH cha’'.split(
             '_'
         ),
-        monthsShort:
-            'jar wa’_jar cha’_jar wej_jar loS_jar vagh_jar jav_jar Soch_jar chorgh_jar Hut_jar wa’maH_jar wa’maH wa’_jar wa’maH cha’'.split(
-                '_'
-            ),
+        monthsShort: 'jar wa’_jar cha’_jar wej_jar loS_jar vagh_jar jav_jar Soch_jar chorgh_jar Hut_jar wa’maH_jar wa’maH wa’_jar wa’maH cha’'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
             '_'
         ),
-        weekdaysShort:
-            'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
-        weekdaysMin:
-            'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
+        weekdaysShort: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
+            '_'
+        ),
+        weekdaysMin: 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split(
+            '_'
+        ),
         longDateFormat: {
             LT: 'HH:mm',
             LTS: 'HH:mm:ss',
@@ -65627,7 +65497,7 @@ __webpack_require__.r(__webpack_exports__);
         weekdays: 'Pazar_Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi'.split(
             '_'
         ),
-        weekdaysShort: 'Paz_Pzt_Sal_Çar_Per_Cum_Cmt'.split('_'),
+        weekdaysShort: 'Paz_Pts_Sal_Çar_Per_Cum_Cts'.split('_'),
         weekdaysMin: 'Pz_Pt_Sa_Ça_Pe_Cu_Ct'.split('_'),
         meridiem: function (hours, minutes, isLower) {
             if (hours < 12) {
@@ -65834,10 +65704,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
             '_'
         ),
-        monthsShort:
-            'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
-                '_'
-            ),
+        monthsShort: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
+            '_'
+        ),
         weekdays: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
         weekdaysShort: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
         weekdaysMin: 'asamas_aynas_asinas_akras_akwas_asimwas_asiḍyas'.split('_'),
@@ -65907,10 +65776,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
             '_'
         ),
-        monthsShort:
-            'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
-                '_'
-            ),
+        monthsShort: 'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
+            '_'
+        ),
         weekdays: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
         weekdaysShort: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
         weekdaysMin: 'ⴰⵙⴰⵎⴰⵙ_ⴰⵢⵏⴰⵙ_ⴰⵙⵉⵏⴰⵙ_ⴰⴽⵔⴰⵙ_ⴰⴽⵡⴰⵙ_ⴰⵙⵉⵎⵡⴰⵙ_ⴰⵙⵉⴹⵢⴰⵙ'.split('_'),
@@ -65980,10 +65848,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
             '_'
         ),
-        monthsShort:
-            'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
-                '_'
-            ),
+        monthsShort: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
+            '_'
+        ),
         weekdays: 'يەكشەنبە_دۈشەنبە_سەيشەنبە_چارشەنبە_پەيشەنبە_جۈمە_شەنبە'.split(
             '_'
         ),
@@ -66134,18 +66001,15 @@ __webpack_require__.r(__webpack_exports__);
     }
     function weekdaysCaseReplace(m, format) {
         var weekdays = {
-                nominative:
-                    'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split(
-                        '_'
-                    ),
-                accusative:
-                    'неділю_понеділок_вівторок_середу_четвер_п’ятницю_суботу'.split(
-                        '_'
-                    ),
-                genitive:
-                    'неділі_понеділка_вівторка_середи_четверга_п’ятниці_суботи'.split(
-                        '_'
-                    ),
+                nominative: 'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split(
+                    '_'
+                ),
+                accusative: 'неділю_понеділок_вівторок_середу_четвер_п’ятницю_суботу'.split(
+                    '_'
+                ),
+                genitive: 'неділі_понеділка_вівторка_середи_четверга_п’ятниці_суботи'.split(
+                    '_'
+                ),
             },
             nounCase;
 
@@ -66176,10 +66040,9 @@ __webpack_require__.r(__webpack_exports__);
             format: 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split(
                 '_'
             ),
-            standalone:
-                'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split(
-                    '_'
-                ),
+            standalone: 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split(
+                '_'
+            ),
         },
         monthsShort: 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split(
             '_'
@@ -66398,10 +66261,9 @@ __webpack_require__.r(__webpack_exports__);
             '_'
         ),
         monthsShort: 'Yan_Fev_Mar_Apr_May_Iyun_Iyul_Avg_Sen_Okt_Noy_Dek'.split('_'),
-        weekdays:
-            'Yakshanba_Dushanba_Seshanba_Chorshanba_Payshanba_Juma_Shanba'.split(
-                '_'
-            ),
+        weekdays: 'Yakshanba_Dushanba_Seshanba_Chorshanba_Payshanba_Juma_Shanba'.split(
+            '_'
+        ),
         weekdaysShort: 'Yak_Dush_Sesh_Chor_Pay_Jum_Shan'.split('_'),
         weekdaysMin: 'Ya_Du_Se_Cho_Pa_Ju_Sha'.split('_'),
         longDateFormat: {
@@ -66541,10 +66403,9 @@ __webpack_require__.r(__webpack_exports__);
         months: 'tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12'.split(
             '_'
         ),
-        monthsShort:
-            'Thg 01_Thg 02_Thg 03_Thg 04_Thg 05_Thg 06_Thg 07_Thg 08_Thg 09_Thg 10_Thg 11_Thg 12'.split(
-                '_'
-            ),
+        monthsShort: 'Thg 01_Thg 02_Thg 03_Thg 04_Thg 05_Thg 06_Thg 07_Thg 08_Thg 09_Thg 10_Thg 11_Thg 12'.split(
+            '_'
+        ),
         monthsParseExact: true,
         weekdays: 'chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy'.split(
             '_'
@@ -66639,15 +66500,13 @@ __webpack_require__.r(__webpack_exports__);
         months: 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split(
             '_'
         ),
-        monthsShort:
-            'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split(
-                '_'
-            ),
+        monthsShort: 'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split(
+            '_'
+        ),
         monthsParseExact: true,
-        weekdays:
-            'S~úñdá~ý_Mó~ñdáý~_Túé~sdáý~_Wéd~ñésd~áý_T~húrs~dáý_~Fríd~áý_S~átúr~dáý'.split(
-                '_'
-            ),
+        weekdays: 'S~úñdá~ý_Mó~ñdáý~_Túé~sdáý~_Wéd~ñésd~áý_T~húrs~dáý_~Fríd~áý_S~átúr~dáý'.split(
+            '_'
+        ),
         weekdaysShort: 'S~úñ_~Móñ_~Túé_~Wéd_~Thú_~Frí_~Sát'.split('_'),
         weekdaysMin: 'S~ú_Mó~_Tú_~Wé_T~h_Fr~_Sá'.split('_'),
         weekdaysParseExact: true,
@@ -67587,7 +67446,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /* module decorator */ module = __webpack_require__.nmd(module);
 //! moment.js
-//! version : 2.29.3
+//! version : 2.29.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -67663,9 +67522,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function map(arr, fn) {
         var res = [],
-            i,
-            arrLen = arr.length;
-        for (i = 0; i < arrLen; ++i) {
+            i;
+        for (i = 0; i < arr.length; ++i) {
             res.push(fn(arr[i], i));
         }
         return res;
@@ -67794,10 +67652,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         updateInProgress = false;
 
     function copyConfig(to, from) {
-        var i,
-            prop,
-            val,
-            momentPropertiesLen = momentProperties.length;
+        var i, prop, val;
 
         if (!isUndefined(from._isAMomentObject)) {
             to._isAMomentObject = from._isAMomentObject;
@@ -67830,8 +67685,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             to._locale = from._locale;
         }
 
-        if (momentPropertiesLen > 0) {
-            for (i = 0; i < momentPropertiesLen; i++) {
+        if (momentProperties.length > 0) {
+            for (i = 0; i < momentProperties.length; i++) {
                 prop = momentProperties[i];
                 val = from[prop];
                 if (!isUndefined(val)) {
@@ -67886,9 +67741,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 var args = [],
                     arg,
                     i,
-                    key,
-                    argLen = arguments.length;
-                for (i = 0; i < argLen; i++) {
+                    key;
+                for (i = 0; i < arguments.length; i++) {
                     arg = '';
                     if (typeof arguments[i] === 'object') {
                         arg += '\n[' + i + '] ';
@@ -68038,8 +67892,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    var formattingTokens =
-            /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
+    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
         localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
         formatFunctions = {},
         formatTokenFunctions = {};
@@ -68343,9 +68196,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (typeof units === 'object') {
             units = normalizeObjectUnits(units);
             var prioritized = getPrioritizedUnits(units),
-                i,
-                prioritizedLen = prioritized.length;
-            for (i = 0; i < prioritizedLen; i++) {
+                i;
+            for (i = 0; i < prioritized.length; i++) {
                 this[prioritized[i].unit](units[prioritized[i].unit]);
             }
         } else {
@@ -68375,8 +68227,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         matchTimestamp = /[+-]?\d+(\.\d{1,3})?/, // 123456789 123456789.123
         // any word (or two) characters or numbers including two/three word month in arabic.
         // includes scottish gaelic two word and hyphenated months
-        matchWord =
-            /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
+        matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
         regexes;
 
     regexes = {};
@@ -68402,12 +68253,15 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return regexEscape(
             s
                 .replace('\\', '')
-                .replace(
-                    /\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g,
-                    function (matched, p1, p2, p3, p4) {
-                        return p1 || p2 || p3 || p4;
-                    }
-                )
+                .replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (
+                    matched,
+                    p1,
+                    p2,
+                    p3,
+                    p4
+                ) {
+                    return p1 || p2 || p3 || p4;
+                })
         );
     }
 
@@ -68419,8 +68273,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function addParseToken(token, callback) {
         var i,
-            func = callback,
-            tokenLen;
+            func = callback;
         if (typeof token === 'string') {
             token = [token];
         }
@@ -68429,8 +68282,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 array[callback] = toInt(input);
             };
         }
-        tokenLen = token.length;
-        for (i = 0; i < tokenLen; i++) {
+        for (i = 0; i < token.length; i++) {
             tokens[token[i]] = func;
         }
     }
@@ -68541,12 +68393,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // LOCALES
 
-    var defaultLocaleMonths =
-            'January_February_March_April_May_June_July_August_September_October_November_December'.split(
-                '_'
-            ),
-        defaultLocaleMonthsShort =
-            'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
+            '_'
+        ),
+        defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split(
+            '_'
+        ),
         MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
         defaultMonthsShortRegex = matchWord,
         defaultMonthsRegex = matchWord;
@@ -68988,12 +68840,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('W', match1to2);
     addRegexToken('WW', match1to2, match2);
 
-    addWeekParseToken(
-        ['w', 'ww', 'W', 'WW'],
-        function (input, week, config, token) {
-            week[token.substr(0, 1)] = toInt(input);
-        }
-    );
+    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (
+        input,
+        week,
+        config,
+        token
+    ) {
+        week[token.substr(0, 1)] = toInt(input);
+    });
 
     // HELPERS
 
@@ -69118,8 +68972,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return ws.slice(n, 7).concat(ws.slice(0, n));
     }
 
-    var defaultLocaleWeekdays =
-            'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split(
+            '_'
+        ),
         defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
         defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
         defaultWeekdaysRegex = matchWord,
@@ -69667,11 +69522,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return globalLocale;
     }
 
-    function isLocaleNameSane(name) {
-        // Prevent names that look like filesystem paths, i.e contain '/' or '\'
-        return name.match('^[^/\\\\]*$') != null;
-    }
-
     function loadLocale(name) {
         var oldLocale = null,
             aliasedRequire;
@@ -69680,8 +69530,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             locales[name] === undefined &&
             "object" !== 'undefined' &&
             module &&
-            module.exports &&
-            isLocaleNameSane(name)
+            module.exports
         ) {
             try {
                 oldLocale = globalLocale._abbr;
@@ -69898,10 +69747,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // iso 8601 regex
     // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
-    var extendedIsoRegex =
-            /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
-        basicIsoRegex =
-            /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
+        basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
         tzRegex = /Z|[+-]\d\d(?::?\d\d)?/,
         isoDates = [
             ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
@@ -69932,8 +69779,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ],
         aspNetJsonRegex = /^\/?Date\((-?\d+)/i,
         // RFC 2822 regex: For details see https://tools.ietf.org/html/rfc2822#section-3.3
-        rfc2822 =
-            /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
+        rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|([+-]\d{4}))$/,
         obsOffsets = {
             UT: 0,
             GMT: 0,
@@ -69956,13 +69802,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             allowTime,
             dateFormat,
             timeFormat,
-            tzFormat,
-            isoDatesLen = isoDates.length,
-            isoTimesLen = isoTimes.length;
+            tzFormat;
 
         if (match) {
             getParsingFlags(config).iso = true;
-            for (i = 0, l = isoDatesLen; i < l; i++) {
+
+            for (i = 0, l = isoDates.length; i < l; i++) {
                 if (isoDates[i][1].exec(match[1])) {
                     dateFormat = isoDates[i][0];
                     allowTime = isoDates[i][2] !== false;
@@ -69974,7 +69819,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 return;
             }
             if (match[3]) {
-                for (i = 0, l = isoTimesLen; i < l; i++) {
+                for (i = 0, l = isoTimes.length; i < l; i++) {
                     if (isoTimes[i][1].exec(match[3])) {
                         // match[2] should be 'T' or space
                         timeFormat = (match[2] || ' ') + isoTimes[i][0];
@@ -70354,13 +70199,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             skipped,
             stringLength = string.length,
             totalParsedInputLength = 0,
-            era,
-            tokenLen;
+            era;
 
         tokens =
             expandFormat(config._f, config._locale).match(formattingTokens) || [];
-        tokenLen = tokens.length;
-        for (i = 0; i < tokenLen; i++) {
+
+        for (i = 0; i < tokens.length; i++) {
             token = tokens[i];
             parsedInput = (string.match(getParseRegexForToken(token, config)) ||
                 [])[0];
@@ -70455,16 +70299,15 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             i,
             currentScore,
             validFormatFound,
-            bestFormatIsValid = false,
-            configfLen = config._f.length;
+            bestFormatIsValid = false;
 
-        if (configfLen === 0) {
+        if (config._f.length === 0) {
             getParsingFlags(config).invalidFormat = true;
             config._d = new Date(NaN);
             return;
         }
 
-        for (i = 0; i < configfLen; i++) {
+        for (i = 0; i < config._f.length; i++) {
             currentScore = 0;
             validFormatFound = false;
             tempConfig = copyConfig({}, config);
@@ -70705,8 +70548,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function isDurationValid(m) {
         var key,
             unitHasDecimal = false,
-            i,
-            orderLen = ordering.length;
+            i;
         for (key in m) {
             if (
                 hasOwnProp(m, key) &&
@@ -70719,7 +70561,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             }
         }
 
-        for (i = 0; i < orderLen; ++i) {
+        for (i = 0; i < ordering.length; ++i) {
             if (m[ordering[i]]) {
                 if (unitHasDecimal) {
                     return false; // only allow non-integers for smallest unit
@@ -71044,8 +70886,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
         // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
         // and further modified to allow for strings containing both week and day
-        isoRegex =
-            /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
+        isoRegex = /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
 
     function createDuration(input, key) {
         var duration = input,
@@ -71266,10 +71107,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 'ms',
             ],
             i,
-            property,
-            propertyLen = properties.length;
+            property;
 
-        for (i = 0; i < propertyLen; i += 1) {
+        for (i = 0; i < properties.length; i += 1) {
             property = properties[i];
             propertyTest = propertyTest || hasOwnProp(input, property);
         }
@@ -71892,17 +71732,19 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('NNNN', matchEraName);
     addRegexToken('NNNNN', matchEraNarrow);
 
-    addParseToken(
-        ['N', 'NN', 'NNN', 'NNNN', 'NNNNN'],
-        function (input, array, config, token) {
-            var era = config._locale.erasParse(input, token, config._strict);
-            if (era) {
-                getParsingFlags(config).era = era;
-            } else {
-                getParsingFlags(config).invalidEra = input;
-            }
+    addParseToken(['N', 'NN', 'NNN', 'NNNN', 'NNNNN'], function (
+        input,
+        array,
+        config,
+        token
+    ) {
+        var era = config._locale.erasParse(input, token, config._strict);
+        if (era) {
+            getParsingFlags(config).era = era;
+        } else {
+            getParsingFlags(config).invalidEra = input;
         }
-    );
+    });
 
     addRegexToken('y', matchUnsigned);
     addRegexToken('yy', matchUnsigned);
@@ -72194,12 +72036,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('GGGGG', match1to6, match6);
     addRegexToken('ggggg', match1to6, match6);
 
-    addWeekParseToken(
-        ['gggg', 'ggggg', 'GGGG', 'GGGGG'],
-        function (input, week, config, token) {
-            week[token.substr(0, 2)] = toInt(input);
-        }
-    );
+    addWeekParseToken(['gggg', 'ggggg', 'GGGG', 'GGGGG'], function (
+        input,
+        week,
+        config,
+        token
+    ) {
+        week[token.substr(0, 2)] = toInt(input);
+    });
 
     addWeekParseToken(['gg', 'GG'], function (input, week, config, token) {
         week[token] = hooks.parseTwoDigitYear(input);
@@ -73222,7 +73066,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     //! moment.js
 
-    hooks.version = '2.29.3';
+    hooks.version = '2.29.1';
 
     setHookCallback(createLocal);
 

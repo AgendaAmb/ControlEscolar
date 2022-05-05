@@ -100,8 +100,23 @@ export default {
         archive_id:this.archive_id,
         motivation: this.motivation,
       }).then(response => {
+        Swal.fire({
+              title: "¡Éxito!",
+              text: "La exposición de motivos se ha guardado correctamente",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            });
         this.Motivation = response.data.motivation;
       }).catch(error => {
+
+         Swal.fire({
+            title: ":( Error al actualizar exposición de motivos",
+            showCancelButton: false,
+            icon: "error",
+          });
         var errores = error.response.data['errors'];
 
         Object.keys(errores).forEach(key => {
