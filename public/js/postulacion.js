@@ -3007,21 +3007,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
-      this.errores = {};
-      var post_data = {
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        language: this.language,
-        type: this.type,
-        title: this.title,
-        publish_date: this.publish_date,
-        magazine_name: this.magazine_name,
-        article_name: this.article_name,
-        institution: this.institution,
-        post_title: this.post_title
-      };
-      console.log(post_data);
+      this.errores = {}; // let post_data = {
+      //   id: this.id,
+      //   archive_id: this.archive_id,
+      //   state: estado,
+      //   language: this.language,
+      //   type: this.type,
+      //   title: this.title,
+      //   publish_date: this.publish_date,
+      //   magazine_name: this.magazine_name,
+      //   article_name: this.article_name,
+      //   institution: this.institution,
+      //   post_title: this.post_title,
+      // };
+      // console.log(post_data);
+
       axios.post("/controlescolar/solicitud/updateScientificProduction", {
         id: this.id,
         archive_id: this.archive_id,
@@ -3035,11 +3035,11 @@ __webpack_require__.r(__webpack_exports__);
         institution: this.institution,
         post_title: this.post_title
       }).then(function (response) {
-        console.log(response.data.model); // Object.keys(response.data).forEach((dataKey) => {
+        // console.log(response.data.model);
+        // Object.keys(response.data).forEach((dataKey) => {
         //   var event = "update:" + dataKey;
         //   this.$emit(event, response.data[dataKey]);
         // });
-
         Swal.fire({
           title: "Publicación cientifica",
           text: "Los datos han sido actualizados",

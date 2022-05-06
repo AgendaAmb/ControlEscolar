@@ -1,5 +1,5 @@
 <template>
-  <div class="form-check">
+  <div class="">
     <input
       class="form-check-input"
       type="checkbox"
@@ -37,53 +37,54 @@ export default {
 
     array_data: {
       type: Array,
-      default: null,
+      default: [],
     },
 
-    first_time:{
-      type: Number,
-      default: 0,
-    }
+    tipo:{
+      type:String,
+      default: "roles"
+    },
   },
 
   data() {
     return {
       check: false,
+      first_time: 0,
     };
   },
-
 
   computed: {
     Checked: {
       get() {
-         let name = this.name
-          
-           //   search in data if the name is checked or not
-          this.array_data.forEach(function (value, i) {
-            if (value.name.localeCompare(name) === 0) {
-              
-              console.log('si coincide');
-            }
-          });
-
-        return this.check;
-      },
-      set(newVal) {
-        
         let first_time = this.first_time;
-        if(this.first_time == 0){
-          let name = this.name
-          
-           //   search in data if the name is checked or not
-          this.array_data.forEach(function (value, i) {
+        let newVal = this.check;
+        let array =  this.array_data ?  this.array_data : []; 
+        if (first_time <= 0 && array.length > 0) {
+          let name = this.name;
+
+          //   search in data if the name is checked or not
+          array.forEach(function (value, i) {
             if (value.name.localeCompare(name) === 0) {
               newVal = true;
               first_time = 1;
             }
           });
         }
-        this.$emit("update:first_time", first_time);
-        this.$emit("update:check", newVal);
+
+        if (first_time > 0) {
+          // this.$emit("update:first_time", first_time);
+          this.check = newVal;
+          this.first_time = 1;
+          // console.log('name ',this.name,' value:',this.check);
+        }
+
+        return this.check;
+      },
+
+      set(newVal) {
+        this.$emit("actualizaLista",this.name,newVal,this.tipo );
+        this.check = newVal;
+        // console.log('name: ', this.name, ' value:', this.check );
       },
     },
   },

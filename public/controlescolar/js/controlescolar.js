@@ -13748,14 +13748,14 @@ var render = function () {
               ? _c("reporte-tecnico", {
                   attrs: {
                     title: _vm.Title,
-                    institulo: _vm.Institution,
+                    institution: _vm.Institution,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:institulo": function ($event) {
+                    "update:institution": function ($event) {
                       _vm.Institution = $event
                     },
                     "update:publish_date": function ($event) {

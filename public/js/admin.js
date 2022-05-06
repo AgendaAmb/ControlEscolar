@@ -49470,37 +49470,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     array_data: {
       type: Array,
-      "default": null
+      "default": []
     },
-    first_time: {
-      type: Number,
-      "default": 0
+    tipo: {
+      type: String,
+      "default": "roles"
     }
   },
   data: function data() {
     return {
-      check: false
+      check: false,
+      first_time: 0
     };
   },
   computed: {
     Checked: {
       get: function get() {
-        var name = this.name; //   search in data if the name is checked or not
-
-        this.array_data.forEach(function (value, i) {
-          if (value.name.localeCompare(name) === 0) {
-            console.log('si coincide');
-          }
-        });
-        return this.check;
-      },
-      set: function set(newVal) {
         var first_time = this.first_time;
+        var newVal = this.check;
+        var array = this.array_data ? this.array_data : [];
 
-        if (this.first_time == 0) {
+        if (first_time <= 0 && array.length > 0) {
           var name = this.name; //   search in data if the name is checked or not
 
-          this.array_data.forEach(function (value, i) {
+          array.forEach(function (value, i) {
             if (value.name.localeCompare(name) === 0) {
               newVal = true;
               first_time = 1;
@@ -49508,8 +49501,17 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
 
-        this.$emit("update:first_time", first_time);
-        this.$emit("update:check", newVal);
+        if (first_time > 0) {
+          // this.$emit("update:first_time", first_time);
+          this.check = newVal;
+          this.first_time = 1; // console.log('name ',this.name,' value:',this.check);
+        }
+
+        return this.check;
+      },
+      set: function set(newVal) {
+        this.$emit("actualizaLista", this.name, newVal, this.tipo);
+        this.check = newVal; // console.log('name: ', this.name, ' value:', this.check );
       }
     }
   }
@@ -49599,6 +49601,57 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "editar-usuario",
@@ -49607,13 +49660,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     // Roles de usuario.
-    roles: Array,
+    roles: {
+      type: Array,
+      "default": []
+    },
     // Áreas académicas.
-    academic_areas: Array,
+    academic_areas: {
+      type: Array,
+      "default": []
+    },
     // Entidades académicas.
-    academic_entities: Array,
+    academic_entities: {
+      type: Array,
+      "default": []
+    },
     // Comités académicas.
-    academic_comittes: Array
+    academic_comittes: {
+      type: Array,
+      "default": []
+    }
   },
   data: function data() {
     return {
@@ -49641,12 +49706,100 @@ __webpack_require__.r(__webpack_exports__);
     show: function show() {
       this.active = true;
     },
+    actualizaLista: function actualizaLista(name, res, tipo) {
+      var lista_selected = [];
+      var lista = [];
+      var index = -1;
+
+      switch (tipo) {
+        case "roles":
+          lista_selected = this.selected_roles ? this.selected_roles : [];
+          lista = this.roles;
+          break;
+
+        case "academic_areas":
+          lista_selected = this.selected_academic_areas ? this.selected_academic_areas : [];
+          lista = this.academic_areas;
+          break;
+
+        case "academic_entities":
+          lista_selected = this.selected_academic_entities ? this.selected_academic_entities : [];
+          lista = this.academic_entities;
+          break;
+
+        case "academic_comittes":
+          lista_selected = this.selected_academic_comittes ? this.selected_academic_comittes : [];
+          lista = this.academic_comittes;
+          break;
+      } //Eliminar
+
+
+      if (!res) {
+        // console.log('estamos elimiando');
+        if (lista_selected.length > 0) {
+          //   search in data if the name is checked or not
+          lista_selected.forEach(function (value, i) {
+            if (value.name.localeCompare(name) === 0) {
+              index = i;
+            }
+          });
+
+          if (index >= 0) {
+            lista_selected.splice(index, 1);
+          }
+        }
+      } else {
+        //   search in data if the name is checked or not
+        lista.forEach(function (value, i) {
+          if (value.name.localeCompare(name) === 0) {
+            index = i;
+          }
+        });
+
+        if (lista_selected.length > 0) {
+          lista_selected.forEach(function (value, i) {
+            if (value.name.localeCompare(lista[index].name) === 0) {
+              index = -1;
+            }
+          });
+        }
+
+        if (index >= 0) {
+          lista_selected.push(lista[index]);
+        }
+      } // console.log("lista selected : ", lista_selected);
+
+
+      if (index >= 0) {
+        switch (tipo) {
+          case "roles":
+            this.selected_roles = lista_selected;
+            break;
+
+          case "academic_areas":
+            this.selected_academic_areas = lista_selected;
+            break;
+
+          case "academic_entities":
+            this.selected_academic_entities = lista_selected;
+            break;
+
+          case "academic_comittes":
+            this.selected_academic_comittes = lista_selected;
+            break;
+        }
+      }
+    },
     actualizaUsuario: function actualizaUsuario() {
       var _this = this;
 
-      axios.post('/controlescolar/admin/updateWorker', {
+      console.log("academic areas: ", this.selected_academic_areas);
+      console.log("roles : ", this.selected_roles);
+      console.log("academic entities : ", this.selected_academic_entities);
+      console.log("academic_comittes : ", this.selected_academic_comittes);
+      axios.post("/controlescolar/admin/updateWorker", {
         id: this.id,
-        type: 'workers',
+        type: "workers",
         selected_roles: this.selected_roles,
         selected_academic_areas: this.selected_academic_areas,
         selected_academic_entities: this.selected_academic_entities,
@@ -49663,19 +49816,23 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
+        Swal.fire({
+          title: "Error al actualizar",
+          showCancelButton: false,
+          icon: "error"
+        });
       });
     }
   },
   created: function created() {
     var _this2 = this;
 
-    Event.$on('toggleModal', function (id, roles, academic_areas, academic_entities, academic_comittes) {
+    Event.$on("toggleModal", function (id, roles, academic_areas, academic_entities, academic_comittes) {
       _this2.id = id;
       _this2.selected_academic_areas = academic_areas, _this2.selected_roles = roles, _this2.selected_academic_entities = academic_entities, _this2.selected_academic_comittes = academic_comittes;
 
-      _this2.show();
+      _this2.show(); // console.log("selected_roles: ", this.selected_roles);
 
-      console.log('selected_roles: ', _this2.selected_roles);
     });
   }
 });
@@ -53860,7 +54017,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-check" }, [
+  return _c("div", {}, [
     _c("input", {
       directives: [
         {
@@ -53964,7 +54121,7 @@ var render = function () {
                 [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-4" }, [
-                      _c("label", [_vm._v(" Coloca el RPE ")]),
+                      _c("label", [_vm._v(" RPE de usuario ")]),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -53976,7 +54133,7 @@ var render = function () {
                           },
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text" },
+                        attrs: { type: "text", readonly: true },
                         domProps: { value: _vm.id },
                         on: {
                           input: function ($event) {
@@ -53995,7 +54152,7 @@ var render = function () {
                       "div",
                       { staticClass: "mt-5 col-lg-6 col-xl-3" },
                       [
-                        _c("h4", [_vm._v(" Roles ")]),
+                        _c("h4", [_vm._v("Roles")]),
                         _vm._v(" "),
                         _vm._l(_vm.roles, function (role, index) {
                           return _c("checkbox-edit", {
@@ -54006,7 +54163,9 @@ var render = function () {
                               pivot: role.pivot,
                               index: index,
                               array_data: _vm.selected_roles,
+                              tipo: "roles",
                             },
+                            on: { actualizaLista: _vm.actualizaLista },
                           })
                         }),
                       ],
@@ -54017,65 +54176,21 @@ var render = function () {
                       "div",
                       { staticClass: "mt-5 col-lg-6 col-xl-3" },
                       [
-                        _c("h4", [_vm._v(" Áreas académicas ")]),
+                        _c("h4", [_vm._v("Áreas académicas")]),
                         _vm._v(" "),
-                        _vm._l(_vm.academic_areas, function (area) {
-                          return _c(
-                            "div",
-                            { key: area.id, staticClass: "form-check" },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selected_academic_areas,
-                                    expression: "selected_academic_areas",
-                                  },
-                                ],
-                                staticClass: "form-check-input",
-                                attrs: { type: "checkbox" },
-                                domProps: {
-                                  value: area.id,
-                                  checked: Array.isArray(
-                                    _vm.selected_academic_areas
-                                  )
-                                    ? _vm._i(
-                                        _vm.selected_academic_areas,
-                                        area.id
-                                      ) > -1
-                                    : _vm.selected_academic_areas,
-                                },
-                                on: {
-                                  change: function ($event) {
-                                    var $$a = _vm.selected_academic_areas,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = area.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selected_academic_areas =
-                                            $$a.concat([$$v]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selected_academic_areas = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
-                                      }
-                                    } else {
-                                      _vm.selected_academic_areas = $$c
-                                    }
-                                  },
-                                },
-                              }),
-                              _vm._v(" "),
-                              _c("label", { staticClass: "form-check-label" }, [
-                                _vm._v(" " + _vm._s(area.name) + " "),
-                              ]),
-                            ]
-                          )
+                        _vm._l(_vm.academic_areas, function (role, index) {
+                          return _c("checkbox-edit", {
+                            key: role.id,
+                            attrs: {
+                              name: role.name,
+                              id: role.id,
+                              pivot: role.pivot,
+                              index: index,
+                              array_data: _vm.selected_academic_areas,
+                              tipo: "academic_areas",
+                            },
+                            on: { actualizaLista: _vm.actualizaLista },
+                          })
                         }),
                       ],
                       2
@@ -54085,65 +54200,21 @@ var render = function () {
                       "div",
                       { staticClass: "mt-5 col-lg-6 col-xl-3" },
                       [
-                        _c("h4", [_vm._v(" Entidades académicas ")]),
+                        _c("h4", [_vm._v("Entidades académicas")]),
                         _vm._v(" "),
-                        _vm._l(_vm.academic_entities, function (entity) {
-                          return _c(
-                            "div",
-                            { key: entity.id, staticClass: "form-check" },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selected_academic_entities,
-                                    expression: "selected_academic_entities",
-                                  },
-                                ],
-                                staticClass: "form-check-input",
-                                attrs: { type: "checkbox" },
-                                domProps: {
-                                  value: entity.id,
-                                  checked: Array.isArray(
-                                    _vm.selected_academic_entities
-                                  )
-                                    ? _vm._i(
-                                        _vm.selected_academic_entities,
-                                        entity.id
-                                      ) > -1
-                                    : _vm.selected_academic_entities,
-                                },
-                                on: {
-                                  change: function ($event) {
-                                    var $$a = _vm.selected_academic_entities,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = entity.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selected_academic_entities =
-                                            $$a.concat([$$v]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selected_academic_entities = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
-                                      }
-                                    } else {
-                                      _vm.selected_academic_entities = $$c
-                                    }
-                                  },
-                                },
-                              }),
-                              _vm._v(" "),
-                              _c("label", { staticClass: "form-check-label" }, [
-                                _vm._v(" " + _vm._s(entity.name) + " "),
-                              ]),
-                            ]
-                          )
+                        _vm._l(_vm.academic_entities, function (role, index) {
+                          return _c("checkbox-edit", {
+                            key: role.id,
+                            attrs: {
+                              name: role.name,
+                              id: role.id,
+                              pivot: role.pivot,
+                              index: index,
+                              array_data: _vm.selected_academic_entities,
+                              tipo: "academic_entities",
+                            },
+                            on: { actualizaLista: _vm.actualizaLista },
+                          })
                         }),
                       ],
                       2
@@ -54153,65 +54224,21 @@ var render = function () {
                       "div",
                       { staticClass: "mt-5 col-lg-6 col-xl-3" },
                       [
-                        _c("h4", [_vm._v(" Comités académicos ")]),
+                        _c("h4", [_vm._v("Comités académicos")]),
                         _vm._v(" "),
-                        _vm._l(_vm.academic_comittes, function (comitte) {
-                          return _c(
-                            "div",
-                            { key: comitte.id, staticClass: "form-check" },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selected_academic_comittes,
-                                    expression: "selected_academic_comittes",
-                                  },
-                                ],
-                                staticClass: "form-check-input",
-                                attrs: { type: "checkbox" },
-                                domProps: {
-                                  value: comitte.id,
-                                  checked: Array.isArray(
-                                    _vm.selected_academic_comittes
-                                  )
-                                    ? _vm._i(
-                                        _vm.selected_academic_comittes,
-                                        comitte.id
-                                      ) > -1
-                                    : _vm.selected_academic_comittes,
-                                },
-                                on: {
-                                  change: function ($event) {
-                                    var $$a = _vm.selected_academic_comittes,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = comitte.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selected_academic_comittes =
-                                            $$a.concat([$$v]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selected_academic_comittes = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
-                                      }
-                                    } else {
-                                      _vm.selected_academic_comittes = $$c
-                                    }
-                                  },
-                                },
-                              }),
-                              _vm._v(" "),
-                              _c("label", { staticClass: "form-check-label" }, [
-                                _vm._v(" " + _vm._s(comitte.name) + " "),
-                              ]),
-                            ]
-                          )
+                        _vm._l(_vm.academic_comittes, function (role, index) {
+                          return _c("checkbox-edit", {
+                            key: role.id,
+                            attrs: {
+                              name: role.name,
+                              id: role.id,
+                              pivot: role.pivot,
+                              index: index,
+                              array_data: _vm.selected_academic_comittes,
+                              tipo: "academic_comittes",
+                            },
+                            on: { actualizaLista: _vm.actualizaLista },
+                          })
                         }),
                       ],
                       2
@@ -54229,11 +54256,11 @@ var render = function () {
                   "button",
                   {
                     staticClass: "btn btn-primary",
-                    staticStyle: { "background-color": "#0160AE" },
+                    staticStyle: { "background-color": "#0160ae" },
                     attrs: { id: "submit", type: "submit" },
                     on: { click: _vm.actualizaUsuario },
                   },
-                  [_vm._v("Registrar")]
+                  [_vm._v("\n          Guardar Cambios\n        ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -54242,7 +54269,7 @@ var render = function () {
                     staticClass: "btn btn-secondary",
                     attrs: { type: "button", "data-dismiss": "modal" },
                   },
-                  [_vm._v("Cerrar")]
+                  [_vm._v("\n          Cerrar\n        ")]
                 ),
               ]
             ),
@@ -54261,7 +54288,7 @@ var staticRenderFns = [
       _c(
         "h2",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Nuevo trabajador")]
+        [_vm._v("Editar trabajador")]
       ),
       _vm._v(" "),
       _c(
