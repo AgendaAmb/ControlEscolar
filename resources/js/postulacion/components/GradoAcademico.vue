@@ -418,7 +418,7 @@ export default {
       fechaobtencion: "",
       errores: {},
       datosValidos: {},
-      universidades: [],
+      // universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios_PMPCA: ["Grado obtenido", "Título o grado en proceso"],
       estatusEstudios_otros: [
@@ -459,15 +459,16 @@ export default {
     Universidades: {
       get: function () {
         let pai = this.country;
-
-        if(pai!=null && this.universidades === null){
+        let selected_pais = this.country;
+        // console.log(this.universidades);
+        if(this.universidades === null){
           this.paises.forEach( function(pais, indice, array) {
             if(!pai.toString().localeCompare(pais.name.toString())){
               // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
-              this.universidades = pais.universities;
+              selected_pais = pais;
             }
           });
-         
+          this.universidades = selected_pais.universities;
           // console.log(selected_pais.universities);
         }
         return this.universidades;

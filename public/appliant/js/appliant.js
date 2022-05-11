@@ -117,6 +117,32 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    ColorStrip: function ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+
+        case "doctorado":
+          color = "#FECC50";
+          break;
+
+        case "enrem":
+          color = "#FF384D";
+          break;
+
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px"
+      };
+    },
     guardaCapitalHumano: function guardaCapitalHumano(evento) {
       this.enviaCapitalHumano(evento, 'Completo');
     },
@@ -137,41 +163,56 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.$emit(event, response.data[dataKey]);
         });
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "El capital humano seleccionado de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar"
+        });
       })["catch"](function (error) {
         _this.State = 'Incompleto';
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
           Vue.set(_this.errores, key, errores[key][0]);
         });
+        Swal.fire({
+          title: "Error al actualizar datos",
+          text: error.response.data['message'],
+          showCancelButton: false,
+          icon: "error"
+        });
+      });
+    },
+    eliminaCapitalHumano: function eliminaCapitalHumano() {
+      var _this2 = this;
+
+      axios.post('/controlescolar/solicitud/deleteHumanCapital', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(function (response) {
+        //Llama al padre para que elimine el item de la lista de experiencia laboral
+        _this2.$emit('delete-item', _this2.index - 1);
+
+        Swal.fire({
+          title: "Éxito al eliminar Capital Humano",
+          text: response.data.message,
+          // Imprime el mensaje del controlador
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar"
+        });
+      })["catch"](function (error) {
+        Swal.fire({
+          title: "Error al eliminar Capital Humano",
+          showCancelButton: false,
+          icon: "error"
+        });
       });
     }
-  },
-  eliminaCapitalHumano: function eliminaCapitalHumano() {
-    var _this2 = this;
-
-    axios.post('/controlescolar/solicitud/deleteHumanCapital', {
-      id: this.id,
-      archive_id: this.archive_id
-    }).then(function (response) {
-      //Llama al padre para que elimine el item de la lista de experiencia laboral
-      _this2.$emit('delete-item', _this2.index - 1);
-
-      Swal.fire({
-        title: "Éxito al eliminar Capital Humano",
-        text: response.data.message,
-        // Imprime el mensaje del controlador
-        icon: "success",
-        showCancelButton: false,
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Continuar"
-      });
-    })["catch"](function (error) {
-      Swal.fire({
-        title: "Error al eliminar Capital Humano",
-        showCancelButton: false,
-        icon: "error"
-      });
-    });
   }
 });
 
@@ -1121,6 +1162,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }), _computed),
   methods: {
+    ColorStrip: function ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+
+        case "doctorado":
+          color = "#FECC50";
+          break;
+
+        case "enrem":
+          color = "#FF384D";
+          break;
+
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px"
+      };
+    },
     guardaExperienciaLaboral: function guardaExperienciaLaboral(evento) {
       this.enviaExperienciaLaboral(evento, 'Completo');
     },
@@ -1176,11 +1243,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.KnowledgeArea = response.data.knowledge_area;
         _this2.Field = response.data.field;
         _this2.working_position = response.data.working_position;
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "La experiencia laboral seleccionada de tu expediente ha sido modificada, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar"
+        });
       })["catch"](function (error) {
         _this2.State = 'Incompleto';
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
           Vue.set(_this2.errores, key, errores[key][0]);
+        });
+        Swal.fire({
+          title: "Error al actualizar datos",
+          text: error.response.data["message"],
+          showCancelButton: false,
+          icon: "error"
         });
       });
     },
@@ -1609,7 +1690,7 @@ __webpack_require__.r(__webpack_exports__);
       fechaobtencion: "",
       errores: {},
       datosValidos: {},
-      universidades: [],
+      // universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios_PMPCA: ["Grado obtenido", "Título o grado en proceso"],
       estatusEstudios_otros: ["Pasante", "Grado obtenido", "Título o grado en proceso"]
@@ -1647,14 +1728,16 @@ __webpack_require__.r(__webpack_exports__);
     Universidades: {
       get: function get() {
         var pai = this.country;
+        var selected_pais = this.country; // console.log(this.universidades);
 
-        if (pai != null && this.universidades === null) {
+        if (this.universidades === null) {
           this.paises.forEach(function (pais, indice, array) {
             if (!pai.toString().localeCompare(pais.name.toString())) {
               // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
-              this.universidades = pais.universities;
+              selected_pais = pais;
             }
-          }); // console.log(selected_pais.universities);
+          });
+          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
         }
 
         return this.universidades;
@@ -2234,6 +2317,125 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2271,6 +2473,14 @@ __webpack_require__.r(__webpack_exports__);
     reading_level: String,
     // Nivel de escritura.
     writing_level: String,
+    exam_presented: {
+      type: String,
+      "default": ""
+    },
+    kind_of_exam: {
+      type: String,
+      "default": ""
+    },
     // Documentos probatorios.
     documentos: Array
   },
@@ -2278,37 +2488,81 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errores: {},
       mensajesExito: {},
-      idiomas: ['Español', 'Inglés', 'Francés', 'Alemán', 'Otro'],
+      idiomas: ["Español", "Inglés", "Francés", "Alemán", "Otro"],
+      examNames: ["TOEFL", "IELTS", "CAMBRIDGE"],
+      kindOfExamNames: [],
+      kindOfExamNames_TOEFL: ["ITP", "iBT"],
+      kindOfExamNames_iELTS: ["IELTS Academic", "IELTS General"],
+      kindOfExamNames_CAMBRIDGE: ["FIRST (FCE)", "ADVANCED (CAE)", "PROFICIENCY (CPE)"],
+      localLanguage: null,
+      localExamenPresented: null,
       clases: {
-        state: 'form-control',
-        language: 'form-control',
-        institution: 'form-control',
-        score: 'form-control',
-        presented_at: 'form-control',
-        valid_from: 'form-control',
-        valid_to: 'form-control',
-        language_domain: 'form-control',
-        conversational_level: 'form-control',
-        reading_level: 'form-control',
-        writing_level: 'form-control'
+        state: "form-control",
+        language: "form-control",
+        institution: "form-control",
+        score: "form-control",
+        presented_at: "form-control",
+        valid_from: "form-control",
+        valid_to: "form-control",
+        language_domain: "form-control",
+        conversational_level: "form-control",
+        reading_level: "form-control",
+        writing_level: "form-control",
+        kind_of_exam: "form-control",
+        exam_presented: "form-control"
       }
     };
   },
   computed: {
+    KindOfExam: {
+      get: function get() {
+        return this.kind_of_exam;
+      },
+      set: function set(newVal) {
+        this.$emit("update:kind_of_exam", newVal);
+      }
+    },
+    ExamPresented: {
+      get: function get() {
+        switch (this.exam_presented) {
+          case "TOEFL":
+            this.kindOfExamNames = this.kindOfExamNames_TOEFL;
+            break;
+
+          case "IELTS":
+            this.kindOfExamNames = this.kindOfExamNames_iELTS;
+            break;
+
+          case "CAMBRIDGE":
+            this.kindOfExamNames = this.kindOfExamNames_CAMBRIDGE;
+            break;
+        }
+
+        return this.exam_presented;
+      },
+      set: function set(newVal) {
+        this.$emit("update:exam_presented", newVal);
+      }
+    },
     State: {
       get: function get() {
         return this.state;
       },
       set: function set(newVal) {
-        this.$emit('update:state', newVal);
+        this.$emit("update:state", newVal);
       }
     },
     Language: {
       get: function get() {
+        if (this.localLanguage === null) {
+          this.localLanguage = this.language;
+        }
+
         return this.language;
       },
       set: function set(newVal) {
-        this.$emit('update:language', newVal);
+        this.$emit("update:language", newVal);
+        this.localLanguage = newVal;
       }
     },
     Institution: {
@@ -2316,7 +2570,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.institution;
       },
       set: function set(newVal) {
-        this.$emit('update:institution', newVal);
+        this.$emit("update:institution", newVal);
       }
     },
     Score: {
@@ -2324,7 +2578,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.score;
       },
       set: function set(newVal) {
-        this.$emit('update:score', newVal);
+        this.$emit("update:score", newVal);
       }
     },
     PresentedAt: {
@@ -2332,7 +2586,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.presented_at;
       },
       set: function set(newVal) {
-        this.$emit('update:presented_at', newVal);
+        this.$emit("update:presented_at", newVal);
       }
     },
     ValidFrom: {
@@ -2340,7 +2594,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.valid_from;
       },
       set: function set(newVal) {
-        this.$emit('update:valid_from', newVal);
+        this.$emit("update:valid_from", newVal);
       }
     },
     ValidTo: {
@@ -2348,7 +2602,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.valid_to;
       },
       set: function set(newVal) {
-        this.$emit('update:valid_to', newVal);
+        this.$emit("update:valid_to", newVal);
       }
     },
     LanguageDomain: {
@@ -2356,7 +2610,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.language_domain;
       },
       set: function set(newVal) {
-        this.$emit('update:language_domain', newVal);
+        this.$emit("update:language_domain", newVal);
       }
     },
     ConversationalLevel: {
@@ -2364,7 +2618,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.conversational_level;
       },
       set: function set(newVal) {
-        this.$emit('update:conversational_level', newVal);
+        this.$emit("update:conversational_level", newVal);
       }
     },
     ReadingLevel: {
@@ -2372,7 +2626,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.reading_level;
       },
       set: function set(newVal) {
-        this.$emit('update:reading_level', newVal);
+        this.$emit("update:reading_level", newVal);
       }
     },
     WritingLevel: {
@@ -2380,7 +2634,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.writing_level;
       },
       set: function set(newVal) {
-        this.$emit('update:writing_level', newVal);
+        this.$emit("update:writing_level", newVal);
       }
     },
     Documentos: {
@@ -2388,19 +2642,88 @@ __webpack_require__.r(__webpack_exports__);
         return this.documentos;
       },
       set: function set(newVal) {
-        this.$emit('update:documentos', newVal);
+        this.$emit("update:documentos", newVal);
       }
     }
   },
   methods: {
+    ColorStrip: function ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+
+        case "doctorado":
+          color = "#FECC50";
+          break;
+
+        case "enrem":
+          color = "#FF384D";
+          break;
+
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px"
+      };
+    },
+    chooseExam: function chooseExam(evento) {
+      var examSelected = this.examNames[evento.target.selectedIndex - 1];
+
+      switch (examSelected) {
+        case "TOEFL":
+          this.kindOfExamNames = this.kindOfExamNames_TOEFL;
+          break;
+
+        case "IELTS":
+          this.kindOfExamNames = this.kindOfExamNames_iELTS;
+          break;
+
+        case "CAMBRIDGE":
+          this.kindOfExamNames = this.kindOfExamNames_CAMBRIDGE;
+          break;
+      }
+    },
+    isEnglish: function isEnglish() {
+      if (this.localLanguage.toString().localeCompare("Inglés")) {
+        return true;
+      }
+
+      return false;
+    },
+    // isTOFEL() {
+    //   if (this.localExamenPresented.toString().localeCompare("TOEFL")) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // isiELTS() {
+    //   if (this.localExamenPresented.toString().localeCompare("IELTS")) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
+    // isCAMBRIDGE() {
+    //   if (this.localExamenPresented.toString().localeCompare("CAMBRIDGE")) {
+    //     return true;
+    //   }
+    //   return false;
+    // },
     actualizaLenguaExtranjera: function actualizaLenguaExtranjera(evento) {
-      this.enviaLenguaExtranjera(evento, 'Completo');
+      this.enviaLenguaExtranjera(evento, "Completo");
     },
     enviaLenguaExtranjera: function enviaLenguaExtranjera(evento, estado) {
       var _this = this;
 
       this.errores = {};
-      axios.post('/controlescolar/solicitud/updateAppliantLanguage', {
+      console.log(this.kind_of_exam);
+      axios.post("/controlescolar/solicitud/updateAppliantLanguage", {
         id: this.id,
         archive_id: this.archive_id,
         state: estado,
@@ -2413,18 +2736,29 @@ __webpack_require__.r(__webpack_exports__);
         language_domain: this.language_domain,
         conversational_level: this.conversational_level,
         reading_level: this.reading_level,
-        writing_level: this.writing_level
+        writing_level: this.writing_level,
+        kind_of_exam: this.kind_of_exam,
+        exam_presented: this.exam_presented
       }).then(function (response) {
         // El resultado fue exitoso.
         Object.keys(response.data).forEach(function (dataKey) {
-          var event = 'update:' + dataKey;
+          var event = "update:" + dataKey;
 
           _this.$emit(event, response.data[dataKey]);
+        });
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "El idioma seleccionado se ha guardado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar"
         });
       })["catch"](function (error) {
         Swal.fire({
           title: "Error al actualizar datos",
-          text: error.response.data['message'],
+          text: error.response.data["message"],
           showCancelButton: false,
           icon: "error"
         });
@@ -2433,12 +2767,12 @@ __webpack_require__.r(__webpack_exports__);
     eliminaIdioma: function eliminaIdioma() {
       var _this2 = this;
 
-      axios.post('/controlescolar/solicitud/deleteAppliantLanguage', {
+      axios.post("/controlescolar/solicitud/deleteAppliantLanguage", {
         id: this.id,
         archive_id: this.archive_id
       }).then(function (response) {
         //Llama al padre para que elimine el item de la lista de experiencia laboral
-        _this2.$emit('delete-item', _this2.index - 1);
+        _this2.$emit("delete-item", _this2.index - 1);
 
         Swal.fire({
           title: "Éxito al eliminar registro",
@@ -2459,27 +2793,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     cargaDocumento: function cargaDocumento(requiredDocument, file) {
       var formData = new FormData();
-      formData.append('id', this.id);
-      formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append("id", this.id);
+      formData.append("archive_id", this.archive_id);
+      formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("file", file);
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/updateAppliantLanguageRequiredDocument',
+        method: "post",
+        url: "/controlescolar/solicitud/updateAppliantLanguageRequiredDocument",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
+        requiredDocument.datosValidos.file = "¡Archivo subido exitosamente!";
         requiredDocument.Location = response.data.location;
       })["catch"](function (error) {
         console.log(error);
-        var errores = error.response.data['errors'];
+        var errores = error.response.data["errors"];
         requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null
+          file: "file" in errores ? errores.file[0] : null,
+          id: "requiredDocumentId" in errores ? errores.requiredDocumentId[0] : null
         };
       });
     }
@@ -2975,6 +3309,32 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    ColorStrip: function ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+
+        case "doctorado":
+          color = "#FECC50";
+          break;
+
+        case "enrem":
+          color = "#FF384D";
+          break;
+
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px"
+      };
+    },
     guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
       this.enviaProduccionCientifica(evento, 'Completo');
     },
@@ -3027,10 +3387,19 @@ __webpack_require__.r(__webpack_exports__);
 
           _this2.$emit(event, response.data[dataKey]);
         });
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar"
+        });
       })["catch"](function (error) {
         Swal.fire({
           title: "Error al actualizar datos",
-          text: error.response.data,
+          text: error.response.data['message'],
           showCancelButton: false,
           icon: "error"
         });
@@ -3538,6 +3907,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3591,36 +3962,7 @@ __webpack_require__.r(__webpack_exports__);
     //Persona que esta viendo el expediente
     viewer: Object
   },
-  computed: {
-    ColorStrip: {
-      get: function get() {
-        var color = "#FFFFFF";
-
-        switch (this.academic_program.alias) {
-          case "maestria":
-            color = "#0598BC";
-            break;
-
-          case "doctorado":
-            color = "#FECC50";
-            break;
-
-          case "enrem":
-            color = "#FF384D";
-            break;
-
-          case "imarec":
-            color = "#118943";
-            break;
-        }
-
-        return {
-          backgroundColor: color,
-          height: "1px"
-        };
-      }
-    }
-  },
+  computed: {},
   data: function data() {
     return {
       Countries: [],
@@ -4700,7 +5042,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.pais[data-v-7987c72a] {\r\n  background-size: auto;\r\n  background-repeat: no-repeat;\n}\n.alemania[data-v-7987c72a] {\r\n  background-image: url('/controlescolar/storage/academic-programs/alemania.png');\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.pais[data-v-7987c72a] {\r\n  background-size: auto;\r\n  background-repeat: no-repeat;\n}\n.alemania[data-v-7987c72a] {\r\n  background-image: url(\"/controlescolar/storage/academic-programs/alemania.png\");\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12486,10 +12828,8 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row" },
+      { staticClass: "row my-2" },
       [
-        _c("h4", { staticClass: "form-group col-12 my-2" }),
-        _vm._v(" "),
         _c("div", { staticClass: "form-group col-4 my-auto" }, [
           _vm.Language === "Alemán"
             ? _c("img", {
@@ -12517,103 +12857,13 @@ var render = function () {
             : _vm._e(),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group col-8 d-md-none" }, [
-          _c("div", { staticClass: "row justify-content-end" }, [
-            _c("div", { staticClass: "form-group col-11" }, [
-              _c("label", [_vm._v(" Idioma: ")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Language,
-                      expression: "Language",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  class: { "is-invalid": "language" in _vm.errores },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.Language = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    },
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "", selected: "" } }, [
-                    _vm._v("Escoge una opción"),
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.idiomas, function (idioma) {
-                    return _c(
-                      "option",
-                      { key: idioma, domProps: { value: idioma } },
-                      [_vm._v(" " + _vm._s(idioma) + " ")]
-                    )
-                  }),
-                ],
-                2
-              ),
-              _vm._v(" "),
-              "language" in _vm.errores
-                ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.language)),
-                  ])
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-11" }, [
-              _c("label", [_vm._v(" Institución que otorgó el certificado: ")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.Institution,
-                    expression: "Institution",
-                  },
-                ],
-                staticClass: "form-control",
-                class: { "is-invalid": "institution" in _vm.errores },
-                attrs: { type: "text" },
-                domProps: { value: _vm.Institution },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.Institution = $event.target.value
-                  },
-                },
-              }),
-              _vm._v(" "),
-              "institution" in _vm.errores
-                ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.institution)),
-                  ])
-                : _vm._e(),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-8" }, [
           _c("div", { staticClass: "row justify-content-end" }, [
             _c(
               "div",
-              { staticClass: "form-group col-lg-6 d-none d-md-block" },
+              {
+                staticClass: "form-group col-lg-6 col-md-11 d-none d-md-block",
+              },
               [
                 _c("label", [_vm._v(" Idioma: ")]),
                 _vm._v(" "),
@@ -12655,7 +12905,13 @@ var render = function () {
                       return _c(
                         "option",
                         { key: idioma, domProps: { value: idioma } },
-                        [_vm._v(" " + _vm._s(idioma) + " ")]
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(idioma) +
+                              "\n            "
+                          ),
+                        ]
                       )
                     }),
                   ],
@@ -12664,7 +12920,11 @@ var render = function () {
                 _vm._v(" "),
                 "language" in _vm.errores
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.errores.language)),
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.errores.language) +
+                          "\n          "
+                      ),
                     ])
                   : _vm._e(),
               ]
@@ -12672,7 +12932,9 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "form-group col-lg-6 d-none d-md-block" },
+              {
+                staticClass: "form-group col-lg-6 col-md-11 d-none d-md-block",
+              },
               [
                 _c("label", [
                   _vm._v(" Institución que otorgó el certificado: "),
@@ -12703,31 +12965,150 @@ var render = function () {
                 _vm._v(" "),
                 "institution" in _vm.errores
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.errores.institution)),
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.errores.institution) +
+                          "\n          "
+                      ),
                     ])
                   : _vm._e(),
               ]
             ),
             _vm._v(" "),
-            _vm.Language === "Inglés"
-              ? _c("div", { staticClass: "form-group col-md-6" }, [
+            _vm.isEnglish
+              ? _c("div", { staticClass: "form-group col-lg-6 col-md-11" }, [
                   _c("label", [_vm._v(" ¿Qué examen de inglés presentaste? ")]),
                   _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                  }),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.ExamPresented,
+                          expression: "ExamPresented",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": "exam_presented" in _vm.errores },
+                      on: {
+                        change: [
+                          function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.ExamPresented = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          _vm.chooseExam,
+                        ],
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("Escoge una opción"),
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.examNames, function (exam) {
+                        return _c(
+                          "option",
+                          { key: exam, domProps: { value: exam } },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(exam) +
+                                "\n            "
+                            ),
+                          ]
+                        )
+                      }),
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  "exam_presented" in _vm.errores
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.errores.exam_presented) +
+                            "\n          "
+                        ),
+                      ])
+                    : _vm._e(),
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _vm.Language === "Inglés"
-              ? _c("div", { staticClass: "form-group col-md-6" }, [
+            _vm.isEnglish
+              ? _c("div", { staticClass: "form-group col-lg-6 col-md-11" }, [
                   _c("label", [_vm._v(" Escoge un tipo de examen ")]),
                   _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text" },
-                  }),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.KindOfExam,
+                          expression: "KindOfExam",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": "exam_presented" in _vm.errores },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.KindOfExam = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                      },
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v("Escoge una opción"),
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.kindOfExamNames, function (exam) {
+                        return _c(
+                          "option",
+                          { key: exam, domProps: { value: exam } },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(exam) +
+                                "\n            "
+                            ),
+                          ]
+                        )
+                      }),
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  "kind_of_exam" in _vm.errores
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.errores.kind_of_exam) +
+                            "\n          "
+                        ),
+                      ])
+                    : _vm._e(),
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -12763,13 +13144,17 @@ var render = function () {
               _vm._v(" "),
               "score" in _vm.errores
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.score)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.score) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-6" }, [
-              _c("label", [_vm._v(" Fecha de aplicación:  ")]),
+              _c("label", [_vm._v(" Fecha de aplicación: ")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -12796,7 +13181,11 @@ var render = function () {
               _vm._v(" "),
               "presented_at" in _vm.errores
                 ? _c("div", { staticClass: "invalid-feedback" }, [
-                    _vm._v(_vm._s(_vm.errores.presented_at)),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.errores.presented_at) +
+                        "\n          "
+                    ),
                   ])
                 : _vm._e(),
             ]),
@@ -12832,7 +13221,11 @@ var render = function () {
                 _vm._v(" "),
                 "valid_from" in _vm.errores
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.errores.valid_from)),
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.errores.valid_from) +
+                          "\n          "
+                      ),
                     ])
                   : _vm._e(),
               ]
@@ -12869,7 +13262,11 @@ var render = function () {
                 _vm._v(" "),
                 "valid_to" in _vm.errores
                   ? _c("div", { staticClass: "invalid-feedback" }, [
-                      _vm._v(_vm._s(_vm.errores.valid_to)),
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.errores.valid_to) +
+                          "\n          "
+                      ),
                     ])
                   : _vm._e(),
               ]
@@ -12905,7 +13302,9 @@ var render = function () {
           _vm._v(" "),
           "valid_from" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.valid_from)),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.errores.valid_from) + "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -12938,7 +13337,9 @@ var render = function () {
           _vm._v(" "),
           "valid_to" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.valid_to)),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.errores.valid_to) + "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -12971,7 +13372,11 @@ var render = function () {
           _vm._v(" "),
           "language_domain" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.language_domain)),
+                _vm._v(
+                  "\n        " +
+                    _vm._s(_vm.errores.language_domain) +
+                    "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -13004,7 +13409,11 @@ var render = function () {
           _vm._v(" "),
           "conversational_level" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.conversational_level)),
+                _vm._v(
+                  "\n        " +
+                    _vm._s(_vm.errores.conversational_level) +
+                    "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -13037,7 +13446,9 @@ var render = function () {
           _vm._v(" "),
           "reading_level" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.reading_level)),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.errores.reading_level) + "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -13070,7 +13481,9 @@ var render = function () {
           _vm._v(" "),
           "writing_level" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
-                _vm._v(_vm._s(_vm.errores.writing_level)),
+                _vm._v(
+                  "\n        " + _vm._s(_vm.errores.writing_level) + "\n      "
+                ),
               ])
             : _vm._e(),
         ]),
@@ -13081,10 +13494,10 @@ var render = function () {
           _c(
             "button",
             {
-              staticClass: " btn btn-primary",
+              staticClass: "btn btn-primary",
               on: { click: _vm.actualizaLenguaExtranjera },
             },
-            [_vm._v("Guardar Idioma ")]
+            [_vm._v("\n        Guardar Idioma\n      ")]
           ),
         ]),
         _vm._v(" "),
@@ -13136,7 +13549,7 @@ var staticRenderFns = [
       _c("label", [
         _c("strong", [_vm._v("Nota: ")]),
         _vm._v(
-          "\n          Para poder registrar los cambios en los campos anteriores del idioma correspondiente es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+          "\n        Para poder registrar los cambios en los campos anteriores del idioma\n        correspondiente es necesario seleccionar el siguiente botón, de esta\n        forma podremos guardar la información que acabas de compartir\n      "
         ),
       ]),
     ])
@@ -14303,6 +14716,8 @@ var render = function () {
                     conversational_level: language.conversational_level,
                     reading_level: language.reading_level,
                     writing_level: language.writing_level,
+                    exam_presented: language.exam_presented,
+                    kind_of_exam: language.kind_of_exam,
                     documentos: language.required_documents,
                   },
                   on: {
@@ -14341,6 +14756,12 @@ var render = function () {
                     },
                     "update:writing_level": function ($event) {
                       return _vm.$set(language, "writing_level", $event)
+                    },
+                    "update:exam_presented": function ($event) {
+                      return _vm.$set(language, "exam_presented", $event)
+                    },
+                    "update:kind_of_exam": function ($event) {
+                      return _vm.$set(language, "kind_of_exam", $event)
                     },
                     "update:documentos": function ($event) {
                       return _vm.$set(language, "required_documents", $event)

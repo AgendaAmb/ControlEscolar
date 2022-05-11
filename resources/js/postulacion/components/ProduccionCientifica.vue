@@ -48,7 +48,7 @@
           :publish_date.sync="PublishDate"
         >
           <!-- Otros autores del artículos -->
-          <autor-articulo 
+          <autor-articulo
             v-for="author in Authors"
             v-bind="author"
             v-bind:key="author.id"
@@ -138,7 +138,6 @@
 
 
 <script>
-import { colGroup } from "@syncfusion/ej2-grids";
 import DocumentoRequerido from "./DocumentoRequerido.vue";
 import InputSolicitud from "./InputSolicitud.vue";
 import AutorArticulo from "./produccion-cientifica/AutorArticulo.vue";
@@ -313,6 +312,30 @@ export default {
   },
 
   methods: {
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
+    },
+    
     guardaProduccionCientifica(evento){
       this.enviaProduccionCientifica(evento, 'Completo');
     },
@@ -347,22 +370,6 @@ export default {
     enviaProduccionCientifica(evento, estado) {
       this.errores = {};
 
-      // let post_data = {
-      //   id: this.id,
-      //   archive_id: this.archive_id,
-      //   state: estado,
-      //   language: this.language,
-      //   type: this.type,
-      //   title: this.title,
-      //   publish_date: this.publish_date,
-      //   magazine_name: this.magazine_name,
-      //   article_name: this.article_name,
-      //   institution: this.institution,
-      //   post_title: this.post_title,
-      // };
-
-      // console.log(post_data);
-
       axios
         .post("/controlescolar/solicitud/updateScientificProduction", {
           id: this.id,
@@ -378,22 +385,26 @@ export default {
           post_title: this.post_title,
         })
         .then((response) => {
-          // console.log(response.data.model);
-          // Object.keys(response.data).forEach((dataKey) => {
-          //   var event = "update:" + dataKey;
-          //   this.$emit(event, response.data[dataKey]);
-          // });
-          Swal.fire({
-              title: "Publicación cientifica",
-              text: "Los datos han sido actualizados",
-              showCancelButton: false,
-              icon: "success",
-            });
+          Object.keys(response.data).forEach((dataKey) => {
+            var event = "update:" + dataKey;
+            this.$emit(event, response.data[dataKey]);
+          });
+
+           Swal.fire({
+            title: "Los datos se han actualizado correctamente",
+            text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+            icon: "success",
+            showCancelButton: true,
+            showConfirmButton: false,
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Continuar",
+          });
+
         })
         .catch((error) => {
            Swal.fire({
               title: "Error al actualizar datos",
-              text: error.response.data,
+              text: error.response.data['message'],
               showCancelButton: false,
               icon: "error",
             });

@@ -86,7 +86,7 @@ export default {
      */
     toggleModal(id,roles,academic_areas,academic_entities, academic_comittes) {
       Event.$emit('toggleModal', id,roles,academic_areas,academic_entities, academic_comittes);
-      console.log('Seleccione editar');
+      // console.log('Seleccione editar');
     },
     
 

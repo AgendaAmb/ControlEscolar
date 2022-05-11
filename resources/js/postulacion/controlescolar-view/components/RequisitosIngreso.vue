@@ -95,7 +95,7 @@ export default {
 
   methods:{
 
-    actualizaExposicionMotivos(evento){
+   actualizaExposicionMotivos(evento){
       axios.post('/controlescolar/solicitud/updateMotivation', {
         archive_id:this.archive_id,
         motivation: this.motivation,

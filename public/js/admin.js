@@ -49807,6 +49807,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         Swal.fire({
           title: "El usuario con el id " + _this.id + " ha sido modificado",
+          // text: response.data,
           icon: "success",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
@@ -50203,8 +50204,7 @@ __webpack_require__.r(__webpack_exports__);
      * Envía una notificación para modificar al usuario
      */
     toggleModal: function toggleModal(id, roles, academic_areas, academic_entities, academic_comittes) {
-      Event.$emit('toggleModal', id, roles, academic_areas, academic_entities, academic_comittes);
-      console.log('Seleccione editar');
+      Event.$emit('toggleModal', id, roles, academic_areas, academic_entities, academic_comittes); // console.log('Seleccione editar');
     },
 
     /**

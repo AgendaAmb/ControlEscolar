@@ -37,6 +37,8 @@ class UpdateAppliantLanguageRequest extends FormRequest
             'conversational_level' => ['nullable', 'required_if:state,Completo', 'string'],
             'reading_level' => ['nullable', 'required_if:state,Completo', 'string'],
             'writing_level' => ['nullable', 'required_if:state,Completo', 'string'],
+            'kind_of_exam' => ['nullable', 'required_if:language,Inglés', 'string'],
+            'exam_presented' => ['nullable', 'required_if:language,Inglés', 'string'],
         ];
     }
 }

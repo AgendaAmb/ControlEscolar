@@ -312,6 +312,30 @@ export default {
   },
 
   methods: {
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
+    },
+    
     guardaProduccionCientifica(evento){
       this.enviaProduccionCientifica(evento, 'Completo');
     },
@@ -365,11 +389,22 @@ export default {
             var event = "update:" + dataKey;
             this.$emit(event, response.data[dataKey]);
           });
+
+           Swal.fire({
+            title: "Los datos se han actualizado correctamente",
+            text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+            icon: "success",
+            showCancelButton: true,
+            showConfirmButton: false,
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Continuar",
+          });
+
         })
         .catch((error) => {
            Swal.fire({
               title: "Error al actualizar datos",
-              text: error.response.data,
+              text: error.response.data['message'],
               showCancelButton: false,
               icon: "error",
             });

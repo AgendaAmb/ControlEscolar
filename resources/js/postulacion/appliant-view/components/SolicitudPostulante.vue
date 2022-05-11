@@ -103,6 +103,8 @@
           :conversational_level.sync="language.conversational_level"
           :reading_level.sync="language.reading_level"
           :writing_level.sync="language.writing_level"
+          :exam_presented.sync="language.exam_presented"
+          :kind_of_exam.sync="language.kind_of_exam"
           :documentos.sync="language.required_documents"
           @delete-item="eliminaLenguaExtranjeraFromList"
         >
@@ -360,31 +362,6 @@ export default {
   },
 
   computed: {
-    ColorStrip: {
-      get() {
-        var color = "#FFFFFF";
-
-        switch (this.academic_program.alias) {
-          case "maestria":
-            color = "#0598BC";
-            break;
-          case "doctorado":
-            color = "#FECC50";
-            break;
-          case "enrem":
-            color = "#FF384D";
-            break;
-          case "imarec":
-            color = "#118943";
-            break;
-        }
-
-        return {
-          backgroundColor: color,
-          height: "1px",
-        };
-      },
-    },
   },
 
   data() {

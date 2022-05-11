@@ -18,6 +18,8 @@ class CreateAppliantLanguagesTable extends Migration
             $table->foreignId('archive_id')->constrained('archives')->onDelete('cascade');
             $table->string('language')->nullable();
             $table->string('institution')->nullable();
+            $table->string('kind_of_exam')->nullable();
+            $table->string('exam_presented')->nullable();
             $table->integer('score')->nullable();
             $table->date('presented_at')->nullable();
             $table->date('valid_from')->nullable();

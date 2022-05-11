@@ -292,6 +292,7 @@ export default {
         .then((response) => {
           Swal.fire({
             title: "El usuario con el id " + this.id + " ha sido modificado",
+            // text: response.data,
             icon: "success",
             showCancelButton: false,
             confirmButtonColor: "#3085d6",

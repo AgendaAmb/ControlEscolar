@@ -813,6 +813,43 @@ class ArchiveController extends Controller
         return new JsonResponse(['message'=>'Produccion cientifica agregada, inserta los datos necesarios para continuar con tu postulacion', 'model' => $scientific_production],200);
     }
 
+    // public function getScientificProduction(Request $request)
+    // {
+    //     $request->validate([
+    //         'id' => ['required', 'numeric'],
+    //         'type' => ['required', 'string'],
+    //     ]);
+
+    //     $res = null;
+
+    //     if ($request->type != null  ) {
+    //         switch ($request->type) {
+    //           case ("articles"):
+    //             $res = DB::table('articles')->where('scientific_production_id', 'John')->first('name');
+    //             break;
+    //           case "published_books":
+    //             res = false;
+    //             break;
+    //           case "published_chapters":
+    //             res = false;
+    //             break;
+    //           case "technical_reports":
+    //             res = false;
+    //             break;
+    //           case "working_documents":
+    //             res = false;
+    //             break;
+    //              case "working_memories":
+    //             res = false;
+    //             break;
+    //             case "reviews":
+    //             res = false;
+    //             break;
+              
+    //         }
+    //       }
+    // }
+
     /**
      * Actualiza la lengua extranjera de un postulante.
      *
