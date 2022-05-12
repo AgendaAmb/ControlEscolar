@@ -10,7 +10,7 @@
         <button
           @click="eliminaHistorialAcademico"
           class="btn btn-danger"
-          style="height: 35px; width:100%"
+          style="height: 35px; width: 100%"
         >
           Eliminar Escolaridad
         </button>
@@ -458,18 +458,18 @@ export default {
 
     Universidades: {
       get: function () {
-        let pai = this.country;
         let selected_pais = this.country;
-        // console.log(this.universidades);
-        if(this.universidades === null){
-          this.paises.forEach( function(pais, indice, array) {
-            if(!pai.toString().localeCompare(pais.name.toString())){
-              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
-              selected_pais = pais;
+        let unis = this.universidades;
+        let mispaises = this.paises;
+        if (unis === null && selected_pais != null) {
+          mispaises.forEach(function (pais, indice, array) {
+            if (selected_pais.localeCompare(pais.name.toString()) === 0) {
+              unis = pais.universities;
             }
           });
-          this.universidades = selected_pais.universities;
-          // console.log(selected_pais.universities);
+          if (unis != null) {
+            this.universidades = unis;
+          }
         }
         return this.universidades;
       },

@@ -36,7 +36,17 @@ class AppliantLanguage extends Model
      */
     public function requiredDocuments(): BelongsToMany
     {
-        return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
+        return $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'language');
+    }
+
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function languageDocuments(): BelongsToMany
+    {
+        return $this->requiredDocuments()->where('type', 'language');
     }
 
     /**

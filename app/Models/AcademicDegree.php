@@ -37,13 +37,12 @@ class AcademicDegree extends Model
      */
     public function requiredDocuments(): BelongsToMany
     {
-        return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
+        return $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'academic');
     }
 
-    public function academidDocuments()
+    public function academicDocuments()
     {
-        $query = $this->requiredDocuments()->where('type', 'entrance');
-        return $query->orderBy('required_documents.name');
+        return  $this->requiredDocuments()->where('type', 'academic');
     }
 
     /**

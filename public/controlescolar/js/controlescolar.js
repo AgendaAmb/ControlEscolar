@@ -1709,17 +1709,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     Universidades: {
       get: function get() {
-        var pai = this.country;
-        var selected_pais = this.country; // console.log(this.universidades);
+        var selected_pais = this.country;
+        var unis = this.universidades;
+        var mispaises = this.paises;
 
-        if (this.universidades === null) {
-          this.paises.forEach(function (pais, indice, array) {
-            if (!pai.toString().localeCompare(pais.name.toString())) {
-              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");  
-              selected_pais = pais;
+        if (unis === null && selected_pais != null) {
+          mispaises.forEach(function (pais, indice, array) {
+            if (selected_pais.localeCompare(pais.name.toString()) === 0) {
+              unis = pais.universities;
             }
           });
-          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
+
+          if (unis != null) {
+            this.universidades = unis;
+          }
         }
 
         return this.universidades;

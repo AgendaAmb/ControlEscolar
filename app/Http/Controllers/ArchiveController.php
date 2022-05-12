@@ -567,6 +567,12 @@ class ArchiveController extends Controller
                 'archive_id' => $request->archive_id,
                 'state' => $request->state
             ]);
+
+            // $academic_degree->loadMissing([
+            //     'academicDocuments'
+            // ]);
+           
+
         }catch (\Exception $e){
             return new JsonResponse('Error al crear registro academico para el usuario', 502);
         }
@@ -714,6 +720,9 @@ class ArchiveController extends Controller
                 'archive_id' => $request->archive_id,
                 'state' => $request->state
             ]);
+            // $appliant_language->loadMissing([
+            //     'languageDocuments'
+            // ]);
         }catch (\Exception $e){
             return new JsonResponse('Error al agregar nuevo idioma para el aplicante', 502);
         }
