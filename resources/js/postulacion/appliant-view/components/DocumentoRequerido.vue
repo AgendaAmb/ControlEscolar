@@ -51,10 +51,9 @@
         </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
+      
 
-      <!-- Carta de intencion de un profesor -->
-      <div v-if="isIntentionLetter() === true" class="form-group col-3 my-auto">
-        <!--La persona que esta revisando el expediente es diferente a la dueña del expediente-->
+      <div class="form-group col-3 my-auto">
         <a
           v-if="checkUpload() === true"
           class="verArchivo d-block my-2 ml-auto"
@@ -63,19 +62,7 @@
         >
           Ver Archivo</a
         >
-       
-      </div>
-
-      <div v-else class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="location"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
-        <label class="cargarArchivo d-block ml-auto my-auto">
+        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input
             type="file"
