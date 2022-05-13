@@ -278,6 +278,7 @@
         </summary>
         <carta-recomendacion
           :appliant="appliant"
+          :archive_id="archive_id"
           :academic_program="academic_program"
           :recommendation_letters="recommendation_letters"
           :archives_recommendation_letters="archives_recommendation_letters"

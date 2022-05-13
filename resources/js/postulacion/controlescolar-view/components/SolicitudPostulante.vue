@@ -18,7 +18,7 @@
         <grado-academico
           v-for="(grado, index) in academic_degrees"
           v-bind="grado"
-          v-bind:key="grado.id"
+          v-bind:key="grado.id + index"
           :index="index + 1"
           :alias_academic_program.sync="academic_program.alias"
           :state.sync="grado.state"
@@ -36,7 +36,7 @@
           :degree_type.sync="grado.degree_type"
           :titration_date.sync="grado.titration_date"
           :required_documents.sync="grado.required_documents"
-          :paises="Countries"
+          :paises.sync="Countries"
           @delete-item="eliminaHistorialAcademicoFromList"
         >
         </grado-academico>
@@ -278,6 +278,7 @@
         </summary>
         <carta-recomendacion
           :appliant="appliant"
+          :archive_id="archive_id"
           :academic_program="academic_program"
           :recommendation_letters="recommendation_letters"
           :archives_recommendation_letters="archives_recommendation_letters"

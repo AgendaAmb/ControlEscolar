@@ -81,6 +81,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
+        Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');
 
         #Admin
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
@@ -122,6 +123,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         //Autores
         Route::post('/addScientificProductionAuthor', [ArchiveController::class, 'addScientificProductionAuthor']);
         Route::post('/updateScientificProductionAuthor', [ArchiveController::class, 'updateScientificProductionAuthor']);
+        Route::post('/deleteScientificProductionAuthor', [ArchiveController::class, 'deleteScientificProductionAuthor']);
 
         # Capital humano.
         Route::post('/addHumanCapital', [ArchiveController::class, 'addHumanCapital']);
@@ -203,5 +205,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Al guardar se hace la peticion para almacenar datos
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         // Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
+        Route::get('seeAnsweredRecommendationLetter', [ExternalRecommendationLetter::class, 'seeAnsweredRecommendationLetter'])->name('seeAnswered');
+
     });
 // });

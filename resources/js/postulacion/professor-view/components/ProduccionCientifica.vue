@@ -126,6 +126,7 @@ export default {
   props: {
     //Index
     index: Number,
+    alias_academic_program:String,
 
     // Id de la producción científica.
     id: Number,
@@ -137,7 +138,10 @@ export default {
     state: String,
 
     // Tipo de producción científica.
-    type: String,
+    type: {
+      type: String,
+      default: "ninguno"
+    },
 
     // Título.
     title: String,
@@ -158,7 +162,10 @@ export default {
     post_title: String,
 
     // Autores de la producción científica.
-    authors: Array,
+    authors: {
+      type:Array,
+      default: [],
+    }
   },
 
   computed: {
@@ -257,6 +264,34 @@ export default {
       scientific_production_id: this.id,
       name: null,
     });
+  },
+
+  computed:{
+    ColorStrip: {
+      get() {
+        var color = "#FFFFFF";
+
+        switch (this.alias_academic_program) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+          case "doctorado":
+            color = "#FECC50";
+            break;
+          case "enrem":
+            color = "#FF384D";
+            break;
+          case "imarec":
+            color = "#118943";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: "1px",
+        };
+      },
+    },
   },
 
   methods: {

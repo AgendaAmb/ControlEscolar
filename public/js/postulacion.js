@@ -498,31 +498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -572,8 +547,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: "",
-      academiLetterCommitment: ""
+      textStateUpload: '',
+      academiLetterCommitment: ''
     };
   },
   computed: {
@@ -582,7 +557,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.archivo;
       },
       set: function set(newValue) {
-        this.$emit("update:archivo", newValue);
+        this.$emit('update:archivo', newValue);
       }
     },
     Location: {
@@ -590,7 +565,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.location;
       },
       set: function set(newValue) {
-        this.$emit("update:location", newValue);
+        this.$emit('update:location', newValue);
       }
     },
     Errores: {
@@ -599,13 +574,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(newValue) {
         this.errores = newValue;
-        this.$emit("update:errores", newValue);
+        this.$emit('update:errores', newValue);
       }
     }
   },
   methods: {
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      var res = true;
+      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
@@ -749,18 +724,33 @@ __webpack_require__.r(__webpack_exports__);
     },
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (this.name.localeCompare("12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") == 0) {
+      if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
+        console.log(this.name);
         return true;
       }
 
       return false;
     },
-    isStudentOrNot: function isStudentOrNot() {
-      if (this.user_id != this.viewer_id) {
-        return false;
+    isProffesor: function isProffesor() {
+      var roles = [];
+      axios.post("/controlescolar/solicitud/getRol", {
+        viewer_id: this.viewer_id
+      }).then(function (response) {
+        roles = response.data.roles;
+      })["catch"](function (error) {
+        roles = error.data.roles;
+      });
+      console.log("roles" + roles);
+
+      if (roles.length > 0) {
+        roles.forEach(function (rol) {
+          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
+            return true;
+          }
+        });
       }
 
-      return true;
+      return false;
     },
     checkUpload: function checkUpload() {
       if (this.location !== null && this.location !== undefined) {
@@ -3156,6 +3146,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3408,8 +3424,21 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    agregaAutor: function agregaAutor(nuevoAutor) {
+    eliminaAutor: function eliminaAutor(autor) {
       var _this3 = this;
+
+      axios.post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
+        id: autor.id,
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: autor.Name
+      }).then(function (response) {
+        _this3.Authors.splice(autor.index, 1);
+      })["catch"](function (error) {});
+    },
+    agregaAutor: function agregaAutor(nuevoAutor) {
+      var _this4 = this;
 
       axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
         scientific_production_id: this.id,
@@ -3417,11 +3446,11 @@ __webpack_require__.r(__webpack_exports__);
         type: this.type,
         name: nuevoAutor.Name
       }).then(function (response) {
-        Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
+        Vue.set(_this4.Authors, _this4.Authors.length - 1, response.data);
 
-        _this3.Authors.push({
+        _this4.Authors.push({
           id: -1,
-          scientific_production_id: _this3.id,
+          scientific_production_id: _this4.id,
           name: null
         });
       })["catch"](function (error) {});
@@ -3622,6 +3651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/components/CartaDeRecomendacion.vue");
+//
 //
 //
 //
@@ -4420,11 +4450,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "autor-articulo",
   props: {
     // Id del autor.
     id: Number,
+    index: Number,
     // Id de la producción científica.
     scientific_production_id: Number,
     // Nombre del autor.
@@ -4473,6 +4505,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.$emit('agregaAutor', this);
+    },
+    eliminaAutor: function eliminaAutor() {
+      this.errores = {};
+      this.$emit('eliminaAutor', this);
     },
     actualizaAutor: function actualizaAutor() {
       this.errores = {};
@@ -5021,7 +5057,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10970,53 +11006,23 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm.isIntentionLetter() === true
-            ? _c("div", { staticClass: "form-group col-3 my-auto" }, [
-                _vm.checkUpload() === true
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "verArchivo d-block my-2 ml-auto",
-                        attrs: {
-                          href: "expediente/" + _vm.location,
-                          target: "_blank",
-                        },
-                      },
-                      [_vm._v("\n        Ver Archivo")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.isStudentOrNot() === true
-                  ? _c(
-                      "label",
-                      { staticClass: "cargarArchivo d-block ml-auto my-auto" },
-                      [
-                        _vm._v("\n        Subir Documento\n        "),
-                        _c("input", {
-                          staticClass: "form-control d-none",
-                          attrs: { type: "file" },
-                          on: { change: _vm.cargaDocumento },
-                        }),
-                      ]
-                    )
-                  : _vm._e(),
-              ])
-            : _c("div", { staticClass: "form-group col-3 my-auto" }, [
-                _vm.checkUpload() === true
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "verArchivo d-block my-2 ml-auto",
-                        attrs: {
-                          href: "expediente/" + _vm.location,
-                          target: "_blank",
-                        },
-                      },
-                      [_vm._v("\n        Ver Archivo")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
+          _c("div", { staticClass: "form-group col-3 my-auto" }, [
+            _vm.checkUpload() === true
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "verArchivo d-block my-2 ml-auto",
+                    attrs: {
+                      href: "expediente/" + _vm.location,
+                      target: "_blank",
+                    },
+                  },
+                  [_vm._v("\n        Ver Archivo")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isIntentionLetter() === false
+              ? _c(
                   "label",
                   { staticClass: "cargarArchivo d-block ml-auto my-auto" },
                   [
@@ -11027,8 +11033,9 @@ var render = function () {
                       on: { change: _vm.cargaDocumento },
                     }),
                   ]
-                ),
-              ]),
+                )
+              : _vm._e(),
+          ]),
         ]),
       ])
     : _vm._e()
@@ -14134,19 +14141,20 @@ var render = function () {
                       },
                     },
                   },
-                  _vm._l(_vm.Authors, function (author) {
+                  _vm._l(_vm.Authors, function (author, index) {
                     return _c(
                       "autor-articulo",
                       _vm._b(
                         {
                           key: author.id,
-                          attrs: { name: author.name },
+                          attrs: { index: index, name: author.name },
                           on: {
                             "update:name": function ($event) {
                               return _vm.$set(author, "name", $event)
                             },
                             agregaAutor: _vm.agregaAutor,
                             actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
                           },
                         },
                         "autor-articulo",
@@ -14158,54 +14166,106 @@ var render = function () {
                   1
                 )
               : _vm.tipos[_vm.Type] === "Capítulos publicados"
-              ? _c("publicacion-capitulo", {
-                  attrs: {
-                    "titulo-capitulo": _vm.Title,
-                    "nombre-articulo": _vm.ArticleName,
-                    "ano-publicacion": _vm.PublishDate,
+              ? _c(
+                  "publicacion-capitulo",
+                  {
+                    attrs: {
+                      "titulo-capitulo": _vm.Title,
+                      "nombre-articulo": _vm.ArticleName,
+                      "ano-publicacion": _vm.PublishDate,
+                    },
+                    on: {
+                      "update:tituloCapitulo": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:titulo-capitulo": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:nombreArticulo": function ($event) {
+                        _vm.ArticleName = $event
+                      },
+                      "update:nombre-articulo": function ($event) {
+                        _vm.ArticleName = $event
+                      },
+                      "update:anoPublicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                      "update:ano-publicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
                   },
-                  on: {
-                    "update:tituloCapitulo": function ($event) {
-                      _vm.Title = $event
-                    },
-                    "update:titulo-capitulo": function ($event) {
-                      _vm.Title = $event
-                    },
-                    "update:nombreArticulo": function ($event) {
-                      _vm.ArticleName = $event
-                    },
-                    "update:nombre-articulo": function ($event) {
-                      _vm.ArticleName = $event
-                    },
-                    "update:anoPublicacion": function ($event) {
-                      _vm.PublishDate = $event
-                    },
-                    "update:ano-publicacion": function ($event) {
-                      _vm.PublishDate = $event
-                    },
-                  },
-                })
+                  _vm._l(_vm.Authors, function (author, index) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { index: index, name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
               : _vm.tipos[_vm.Type] === "Publicación de libros"
-              ? _c("publicacion-libro", {
-                  attrs: {
-                    "titulo-libro": _vm.Title,
-                    "ano-publicacion": _vm.PublishDate,
+              ? _c(
+                  "publicacion-libro",
+                  {
+                    attrs: {
+                      "titulo-libro": _vm.Title,
+                      "ano-publicacion": _vm.PublishDate,
+                    },
+                    on: {
+                      "update:tituloLibro": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:titulo-libro": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:anoPublicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                      "update:ano-publicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
                   },
-                  on: {
-                    "update:tituloLibro": function ($event) {
-                      _vm.Title = $event
-                    },
-                    "update:titulo-libro": function ($event) {
-                      _vm.Title = $event
-                    },
-                    "update:anoPublicacion": function ($event) {
-                      _vm.PublishDate = $event
-                    },
-                    "update:ano-publicacion": function ($event) {
-                      _vm.PublishDate = $event
-                    },
-                  },
-                })
+                  _vm._l(_vm.Authors, function (author, index) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { index: index, name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
               : _vm.tipos[_vm.Type] === "Reportes técnicos"
               ? _c("reporte-tecnico", {
                   attrs: {
@@ -14546,7 +14606,7 @@ var render = function () {
               "grado-academico",
               _vm._b(
                 {
-                  key: grado.id,
+                  key: grado.id + index,
                   attrs: {
                     index: index + 1,
                     alias_academic_program: _vm.academic_program.alias,
@@ -14615,6 +14675,9 @@ var render = function () {
                     },
                     "update:required_documents": function ($event) {
                       return _vm.$set(grado, "required_documents", $event)
+                    },
+                    "update:paises": function ($event) {
+                      _vm.Countries = $event
                     },
                     "delete-item": _vm.eliminaHistorialAcademicoFromList,
                   },
@@ -15060,6 +15123,7 @@ var render = function () {
           _c("carta-recomendacion", {
             attrs: {
               appliant: _vm.appliant,
+              archive_id: _vm.archive_id,
               academic_program: _vm.academic_program,
               recommendation_letters: _vm.recommendation_letters,
               archives_recommendation_letters:
@@ -15327,6 +15391,22 @@ var render = function () {
             on: { click: _vm.actualizaAutor },
           },
           [_c("i", { staticClass: "fas fa-user-shield" })]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.Modifiable
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-danger d-inline ml-3",
+            on: { click: _vm.eliminaAutor },
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-minus-circle",
+              staticStyle: { color: "red" },
+            }),
+          ]
         )
       : _vm._e(),
     _vm._v(" "),
@@ -15698,12 +15778,7 @@ var render = function () {
       }),
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group col-md-6" },
-      [_c("autor-articulo")],
-      1
-    ),
+    _c("div", { staticClass: "form-group col-md-6" }, [_vm._t("default")], 2),
     _vm._v(" "),
     _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v(" Nombre del artículo: ")]),
@@ -15808,12 +15883,7 @@ var render = function () {
       }),
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group col-md-6" },
-      [_c("autor-articulo")],
-      1
-    ),
+    _c("div", { staticClass: "form-group col-md-6" }, [_vm._t("default")], 2),
     _vm._v(" "),
     _c("div", { staticClass: "form-group col-md-6" }, [
       _c("label", [_vm._v(" Año de publicación: ")]),

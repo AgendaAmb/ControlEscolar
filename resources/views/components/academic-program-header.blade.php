@@ -17,7 +17,7 @@
                 <a class="nav-link" href="{{ route('solicitud.ExpedientePostulante',['user_id' => auth()->user()->id] ) }}">Mi expediente</a>
             @endif
 
-            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') )
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador'))
 
                 {{-- Expedientes de todos los alumnos --}}
                 <div class="nav-item dropdown">

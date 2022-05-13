@@ -51,31 +51,25 @@
         </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
+     
 
-      <!-- Carta de intencion de un profesor -->
-      <div v-if="isIntentionLetter() === true" class="form-group col-3 my-auto">
-        <!--La persona que esta revisando el expediente es diferente a la dueña del expediente-->
+      <div  class="form-group col-3 my-auto">
         <a
           v-if="checkUpload() === true"
           class="verArchivo d-block my-2 ml-auto"
-         :href="'expediente/' + location"
+          :href="'expediente/' + location"
           target="_blank"
         >
           Ver Archivo</a
         >
-        
-      </div>
-
-      <div v-else class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-         :href="'expediente/' + location"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
-        
+        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
+          Subir Documento
+          <input
+            type="file"
+            class="form-control d-none"
+            @change="cargaDocumento"
+          />
+        </label>
       </div>
     </div>
   </div>
@@ -130,19 +124,19 @@
   height: 30px;
 }
 </style>
-
 <script>
 export default {
   name: "documento-requerido",
 
   props: {
-    user_id: {
-      type: Number,
+
+    user_id:{
+      type:Number,
       default: -1,
     },
 
-    viewer_id: {
-      type: Number,
+    viewer_id:{
+      type:Number,
       default: -1,
     },
 
@@ -151,86 +145,89 @@ export default {
     },
 
     name: {
-      type: String,
+      type: String
     },
 
     notes: {
-      type: String,
+      type: String
     },
 
     label: {
-      type: String,
+      type: String
     },
 
     example: {
-      type: String,
+      type: String
     },
 
     archivo: {
-      type: File,
+      type: File      
     },
-
+     
     location: {
-      type: String,
+      type: String
     },
-
+    
     letters_Commitment: {
       type: Array,
-      default: null,
+      default: null
     },
 
-    alias_academic_program: {
+    alias_academic_program:{
       type: String,
       default: null,
     },
 
-    index_carta: {
+    index_carta:{
       type: Number,
-      default: 0,
-    },
+      default:0,
+    }
   },
 
   data() {
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: "",
-      academiLetterCommitment: "",
+      textStateUpload: '',
+      academiLetterCommitment: '',
     };
   },
 
   computed: {
-    Archivo: {
-      get() {
+
+    Archivo:{ 
+      get () {
         return this.archivo;
       },
-      set(newValue) {
-        this.$emit("update:archivo", newValue);
-      },
+      set (newValue){
+        this.$emit('update:archivo', newValue);
+      }
     },
     Location: {
-      get() {
+      get () {
         return this.location;
       },
-      set(newValue) {
-        this.$emit("update:location", newValue);
-      },
+      set (newValue){
+        this.$emit('update:location', newValue);
+      }
     },
     Errores: {
-      get() {
+      get () {
         return this.errores;
       },
-      set(newValue) {
+      set (newValue){
         this.errores = newValue;
-        this.$emit("update:errores", newValue);
-      },
-    },
+        this.$emit('update:errores', newValue);
+      }
+    }
   },
+  
 
+  
   methods: {
     requiredForAcademicProgram() {
       let res = true;
-
+      // console.log("id: "+this.id+" nombre: "+this.name);
      
       if (this.alias_academic_program === "maestria"  ) {
         switch (this.name) {
@@ -351,9 +348,7 @@ export default {
 
     isLetterCommitment() {
       if (
-        this.name ===
-        "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)"
-      ) {
+        this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {
         return true;
       }
       //return a value
@@ -362,21 +357,38 @@ export default {
 
     isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (
-        this.name.localeCompare(
-          "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
-        ) == 0
-      ) {
+       
+      if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)")  {
+        console.log(this.name);
         return true;
       }
       return false;
     },
 
-    isStudentOrNot() {
-      if (this.user_id != this.viewer_id) {
+    isProffesor() {
+      let roles = [];
+      axios
+        .post("/controlescolar/solicitud/getRol", {
+          viewer_id: this.viewer_id,
+        })
+        .then((response) => {
+          roles = response.data.roles;
+        })
+        .catch((error) => {
+          roles = error.data.roles;
+        });
+
+        console.log("roles" + roles);
+        if(roles.length > 0){
+          roles.forEach(rol => {
+            if(rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador" ){
+              return true;
+            }
+          });
+        }
+
         return false;
-      }
-      return true;
+
     },
 
     checkUpload() {

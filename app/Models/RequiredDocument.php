@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RequiredDocument extends Model
 {
     use HasFactory, SoftDeletes;
+   
 
     /**
      * The attributes that should be hidden for serialization.

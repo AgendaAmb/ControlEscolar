@@ -49,12 +49,14 @@
         >
           <!-- Otros autores del artículos -->
           <autor-articulo
-            v-for="author in Authors"
+            v-for="(author,index) in Authors"
             v-bind="author"
+            :index="index"
             v-bind:key="author.id"
             :name.sync="author.name"
             @agregaAutor="agregaAutor"
             @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
           >
           </autor-articulo>
         </publicacion-articulo>
@@ -65,6 +67,18 @@
           :nombre-articulo.sync="ArticleName"
           :ano-publicacion.sync="PublishDate"
         >
+        <!-- Otros autores del artículos -->
+          <autor-articulo
+            v-for="(author,index) in Authors"
+            v-bind="author"
+            :index="index"
+            v-bind:key="author.id"
+            :name.sync="author.name"
+            @agregaAutor="agregaAutor"
+            @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
+          >
+          </autor-articulo>
         </publicacion-capitulo>
 
         <publicacion-libro
@@ -72,6 +86,18 @@
           :titulo-libro.sync="Title"
           :ano-publicacion.sync="PublishDate"
         >
+       <!-- Otros autores del artículos -->
+          <autor-articulo
+            v-for="(author,index) in Authors"
+            v-bind="author"
+            :index="index"
+            v-bind:key="author.id"
+            :name.sync="author.name"
+            @agregaAutor="agregaAutor"
+            @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
+          >
+          </autor-articulo>
         </publicacion-libro>
 
         <reporte-tecnico
@@ -409,6 +435,20 @@ export default {
               icon: "error",
             });
         });
+    },
+    eliminaAutor(autor){
+       axios
+        .post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
+          id: autor.id,
+          scientific_production_id: this.id,
+          archive_id: this.archive_id,
+          type: this.type,
+          name: autor.Name,
+        })
+        .then((response) => {
+          this.Authors.splice(autor.index, 1);
+        })
+        .catch((error) => {});
     },
 
     agregaAutor(nuevoAutor) {

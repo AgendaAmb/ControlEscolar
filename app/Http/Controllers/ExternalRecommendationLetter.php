@@ -5,6 +5,9 @@ use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecommendationLetter;
+use Illuminate\Support\Facades\{
+    DB,
+};
 use Illuminate\Http\{
     JsonResponse,
 };
@@ -151,74 +154,7 @@ class ExternalRecommendationLetter extends Controller
                         );
                     }
 
-
-
-
-
-                    // # Crear archivo PDF
-                    // //Se guarda en una variable local 
-                    // try {
-                    //     $data = [
-                    //         'recommendation_letter' => $recommendation_letter,
-                    //         'appliant' => $appliant
-                    //     ];
-                    //     // $data = array(
-                    //     //     'recommendation_letter' => $recommendation_letter,
-                    //     //     'appliant' => $appliant,
-                    //     //     'announcement' => $announcement,
-                    //     //     'parameters' => $parameters,
-                    //     //     'custom_parameters' => $custom_parameters,
-                    //     // );
-                        
-
-                    //     // $my_data = (object) $data;
-                    //     // view()->share('pdf.prueba', $recommendation_letter, $appliant);
-                        
-                    //     // view()->share('pdf.prueba',[$parameters]);
-                    //     // view()->share('pdf.prueba',[$custom_parameters]);
-
-                    //     $recommendation_letter_pdf = PDF::loadView('pdf.prueba', [
-                    //         'data' => $data
-                    //     ])
-                    //         ->setOptions([
-                    //             'defaultPaperSize' => 'a4',
-                    //             'isJavaScriptEnabled' => true,
-                    //             'isFontSubsettingEnabled' =>  true,
-                    //             'dpi' => 120
-                    //         ]); //opciones para visualizar correctamente el pdf
-                    //     // $recommendation_letter_pdf = PDF::loadView('pdf.prueba',['archive', ])
-                    //     //     ->setOptions([
-                    //     //         'defaultPaperSize' => 'a4',
-                    //     //         'isJavaScriptEnabled' => true,
-                    //     //         'isFontSubsettingEnabled' =>  true,
-                    //     //         'dpi' => 120
-                    //     //     ]);
-                    //     //Se guarda en STORAGE
-                    // } catch (\Exception $e) {
-                    //     return new JsonResponse(
-                    //         $e->getMessage(),
-                    //         200
-                    //     );
-                    // }
-
-
-                    // try {
-
-                    //     $path = '/app/archives/myArchivo.pdf';
-                    //     $recommendation_letter_pdf->save(storage_path($path));
-                    //     // $path = '/app/' . 'archives/' . '/entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
-                    //     // $recommendation_letter_pdf->save(storage_path($path));
-                    // } catch (\Exception $e) {
-                    //     return new JsonResponse(
-                    //         $e->getMessage(),
-                    //         200
-                    //     );
-                    // }
-                    // // $path = '\app/' . 'archives/' . $request->archive_id . 'entranceDocuments/' . 'recommendation_letter_' . $request->recommendation_letter_id . '_answerBy_' . $recommendation_letter->email_evaluator .  '.pdf';
-                    // $recommendation_letter_pdf->save(storage_path($path));
-
                     #Actualizar modelos
-
                     try {
                         //carta de recomendacion
                         $recommendation_letter->update($request->safe()->except(['score_parameters', 'custom_parameters', 'recommendation_letter_id','appliant','announcement']));
@@ -273,7 +209,7 @@ class ExternalRecommendationLetter extends Controller
                 ['token', $token],
             ])->first();
         } catch (\Exception $e) {
-            return view('postulacion.error-noAppliant')
+            return view('postulacion.recommendationLetter.errorNoAppliant')
                 ->with('user_id', $request->token);
         }
 
@@ -299,7 +235,7 @@ class ExternalRecommendationLetter extends Controller
 
         #Verificacion de carta no contestada
         if ($rl->answer >= 1) {
-            return view('postulacion.success-letterSent')
+            return view('postulacion.recommendationLetter.successLetterSent')
                 ->with('user_id', $archive->appliant->id);
         }
 
@@ -345,6 +281,7 @@ class ExternalRecommendationLetter extends Controller
             $appliant->setAttribute('phone_number',$user_data['phone_number']);
             $appliant->setAttribute('email',$user_data['email']);
             $appliant->setAttribute('altern_email',$user_data['altern_email']);
+            $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
             /* Faltaria
                 Academic degree
                 // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
@@ -357,7 +294,7 @@ class ExternalRecommendationLetter extends Controller
         $academic_program = $archive->announcement->academicProgram;
 
         //Enviar los datos necesarios 
-        return view('postulacion.recommendation-letter')
+        return view('postulacion.recommendationLetter.show')
             ->with('recommendation_letter', $rl)
             ->with('appliant', $appliant)                   //usuario 
             ->with('announcement', $announcement)
@@ -393,5 +330,104 @@ class ExternalRecommendationLetter extends Controller
 
 
         return $recommendation_letter_pdf->stream();
+    }
+
+    /**
+     * 
+     * Ver Carta de Recomendacion
+     * 
+     */
+    public function seeAnsweredRecommendationLetter(Request $request)
+    {
+        $request->validate([
+            'rl_id' => ['required', 'numeric','exists:recommendation_letter,id'],
+            'archive_id' => ['required', 'numeric','exists:archives,id'],
+        ]);
+
+        // Se extrae el archivo de postulacion
+        $archive = Archive::where('id', $request->archive_id)->first();
+
+        #Carga de modelos en archivo
+        $archive->loadMissing([
+            'appliant',
+            'announcement.academicProgram',
+            'personalDocuments',
+            'recommendationLetter',
+            'myRecommendationLetter',
+            'entranceDocuments',
+            'intentionLetter',
+            'academicDegrees.requiredDocuments',
+            'appliantLanguages.requiredDocuments',
+            'appliantWorkingExperiences',
+            'scientificProductions.authors',
+            'humanCapitals'
+        ]);
+
+
+
+        //Obtiene la informacion del aplicante 
+        $appliant = $archive->appliant;
+
+        //Peticion a portal
+        try{
+            #Peticion a portal (Busca usuario)
+            $user_collection =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
+        }catch (\Exception $e) {
+            return new JsonResponse('Peticion erronea',502);
+        }
+
+        //Existe el postulante en el portal 
+        if($user_collection){
+            $user_data = $user_collection[0]; //Se retorno solo uno entonces se extrae informacion 
+             //Add data portal to local collection USER
+            $appliant->setAttribute('curp',$user_data['curp']);
+            $appliant->setAttribute('name',$user_data['name']);
+            $appliant->setAttribute('middlename',$user_data['middlename']);
+            $appliant->setAttribute('surname',$user_data['surname']);
+            $appliant->setAttribute('age',$user_data['age']);
+            $appliant->setAttribute('gender',$user_data['gender']);
+            $appliant->setAttribute('birth_country',$user_data['nationality']);
+            $appliant->setAttribute('birth_state',$user_data['residence']);
+            $appliant->setAttribute('residence_country',$user_data['residence']);
+            $appliant->setAttribute('phone_number',$user_data['phone_number']);
+            $appliant->setAttribute('email',$user_data['email']);
+            $appliant->setAttribute('altern_email',$user_data['altern_email']);
+            $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
+            /* Faltaria
+                Academic degree
+                // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
+                Dependencia
+                // $appliant->setAttribute('dependency',$user_data['dependency']);
+
+
+            */
+        }
+
+        // $parts_announcement_date = explode("-", $archive->announcement->to);
+        $date = date('F, Y', strtotime($archive->announcement->to));
+
+        // Get recommendation letter
+        $recommendation_letter = MyRecommendationLetter::where('id', $request->rl_id)->first();
+    
+        //Get parameters to evaluate of rl
+        $parameters = DB::table('parameters_recommendation_letter')->all();
+
+        // Get score parameters
+        $score_parameters = ScoreParameter::where('rl_id', $request->rl_id);
+
+        //get custom parameters
+        $custom_parameters = CustomParameter::where('rl_id', $request->rl_id);
+
+        $recommendation_letter->setAttribute('parameters',$parameters);
+        $recommendation_letter->setAttribute('score_parameters',$score_parameters);
+        $recommendation_letter->setAttribute('custom_parameters',$custom_parameters);
+        $recommendation_letter->setAttribute('appliant',$appliant);
+        $recommendation_letter->setAttribute('announcement', $archive->announcement);
+        $recommendation_letter->setAttribute('announcement_date', $date);
+
+
+        view()->share('postulacion.recommendationLetter.pdf',$recommendation_letter);
+        $pdf = PDF::loadView('postulacion.recommendationLetter.pdf', ['recommendation_letter' => $recommendation_letter]);
+        return $pdf->download();
     }
 }

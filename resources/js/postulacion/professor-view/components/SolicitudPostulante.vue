@@ -45,7 +45,7 @@
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
     <!-- Requisitos de ingreso -->
-    <div class="col-12">
+    <div v-if="toString" class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">
           Requisitos de ingreso
@@ -72,6 +72,7 @@
           v-bind="language"
           v-bind:key="language.id"
           :index="index + 1"
+          :alias_academic_program="academic_program.alias"
           :state.sync="language.state"
           :language.sync="language.language"
           :institution.sync="language.institution"
@@ -103,6 +104,7 @@
           v-bind="experience"
           v-bind:key="experience.id"
           :index="index + 1"
+          :alias_academic_program="academic_program.alias"
           :state.sync="experience.state"
           :institution.sync="experience.institution"
           :working_position.sync="experience.working_position"
@@ -110,9 +112,7 @@
           :to.sync="experience.to"
           :knowledge_area.sync="experience.knowledge_area"
           :field.sync="experience.field"
-          :working_position_description.sync="
-            experience.working_position_description
-          "
+          :working_position_description.sync="experience.working_position_description"
           :achievements.sync="experience.achievements"
           @delete-item="eliminaExperienciaLaboralFromList"
         >
@@ -138,6 +138,7 @@
           v-bind="production"
           v-bind:key="production.id"
           :index="index + 1"
+          :alias_academic_program="academic_program.alias"
           :state.sync="production.state"
           :type.sync="production.type"
           :title.sync="production.title"
@@ -160,6 +161,7 @@
           v-bind="humanCapital"
           v-bind:key="humanCapital.id"
           :index="index"
+          :alias_academic_program="academic_program.alias"
           :course_name.sync="humanCapital.course_name"
           :assisted_at.sync="humanCapital.assisted_at"
           :scolarship_level.sync="humanCapital.scolarship_level"
@@ -309,10 +311,19 @@ export default {
         .then((response) => {
           this.EnglishExams = response.data;
         });
+
+        console.log(this.entrance_documents);
     });
   },
 
   methods: {
+
+    toString(){
+      this.entrance_documents.forEach(element => {
+          console.log(element.name);
+      });
+      return true;
+    },
 
     getUniversities(state){
       let universities = [];
@@ -324,31 +335,6 @@ export default {
       }
       return universities;
     },
-
-    ColorStrip() {
-      var color = "#FFFFFF";
-
-      switch (this.academic_program.alias) {
-        case "maestria":
-          color = "#0598BC";
-          break;
-        case "doctorado":
-          color = "#FECC50";
-          break;
-        case "enrem":
-          color = "#FF384D";
-          break;
-        case "imarec":
-          color = "#118943";
-          break;
-      }
-
-      return {
-        backgroundColor: color,
-        height: "1px",
-      };
-    },
-
     /*
        ESTADOS PARA : EXPERIENCIA LABORAL
     */

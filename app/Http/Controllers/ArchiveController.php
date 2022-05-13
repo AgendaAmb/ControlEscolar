@@ -88,6 +88,31 @@ class ArchiveController extends Controller
         $this->service = new MiPortalService;
         parent::__construct();
     }
+
+    public function getRol(Request $request)
+    {
+        $request->validate([
+            'viewer_id' => ['required', 'numeric'],
+        ]);
+            //             $res = DB::table('articles')->where('scientific_production_id', 'John')->first('name');
+
+        $isProffesor = $request->session()->get('user')->hasRole('profesor_nb');
+
+        $roles_id = DB::table('model_has_roles')->where('model_id', $request->viewer_id);
+        $viewer_roles = [];
+        
+        //Get the names
+        foreach($roles_id as $rol_id){
+            $rol =  DB::table('roles')->where('id', $rol_id->role_id);
+            if($rol != null){
+                array_push($viewer_roles, $rol->name);
+            }
+        }
+
+        return new JsonResponse(['roles' => $viewer_roles, 'isProfessor'=> $isProffesor
+        ] , 200);
+ 
+    }
     
     /* -------------------------- DASHBOARD DEL APLICANTE --------------------------*/
 
@@ -432,7 +457,6 @@ class ArchiveController extends Controller
 
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
         // dd($appliant);
-
         //Change for the view of appliant
         return view('postulacion.show')
             ->with('archive', $archiveModel)
@@ -512,8 +536,7 @@ class ArchiveController extends Controller
             $archive->entranceDocuments()
                 ->select('required_documents.*', 'archive_required_document.location as location')
                 ->where('id', $request->requiredDocumentId)
-                ->first()
-        );
+                ->first());
     }
 
     /*---------------------------------------- ACADEMIC DEGREE  ---------------------------------------- */
@@ -939,6 +962,24 @@ class ArchiveController extends Controller
         ScientificProduction::where('id', $request->scientific_production_id)->update($request->only('type'));
 
         return new JsonResponse(Author::create($request->safe()->only('scientific_production_id', 'name')));
+    }
+
+    /**
+     * Agrega un autor a la producción científica.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function deleteScientificProductionAuthor(UpdateScientificProductionAuthorRequest $request)
+    {
+        try{
+            //Find the exact model of academic degree to delete
+            $deleted = Author::where('id', $request->id)->where('scientific_production_id',$request->scientific_production_id)->delete();
+
+        }catch (\Exception $e){
+            return new JsonResponse(['message'=>'Error eliminar el registro autor de producción cientifica seleccionado'], 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message'=>'Autor eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'],200);
     }
 
     public function deleteScientificProduction(Request $request)

@@ -28,12 +28,12 @@
     </div>
 
     <div v-else>
-      <!-- <button
+      <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
-        </button> -->
+        </button>
     </div>
   </div>
 </template>
@@ -128,6 +128,28 @@ export default {
         "form-control": true,
         // "is-invalid": (errors.values())?true:false,
       };
+    },
+
+    verCartaRecomendacion(){
+        axios
+          .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+            params: {
+              rl_id: this.recommendation_letter['id'],
+              user_id: this.announcement,
+            },
+          })
+          .then((response) => {
+            this.dataLength = response.data.length; // cantidad de articulos
+            this.$emit("archives-found", response.data); //actualiza archivos
+          })
+          .catch((error) => {
+            console.log(error);
+            Swal.fire({
+              title: "Error al hacer busqueda",
+              text: error.response.data,
+              icon: "error",
+            });
+          });
     },
 
     // -1  : Correo no enviado

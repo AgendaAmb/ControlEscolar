@@ -84,6 +84,7 @@ export default {
 
   props: {
     index: Number,
+    alias_academic_program:String,
     id: Number,
     archive_id:Number,
     state: String,
@@ -106,6 +107,32 @@ export default {
   },
 
   computed: {
+    ColorStrip: {
+      get() {
+        var color = "#FFFFFF";
+
+        switch (this.alias_academic_program) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+          case "doctorado":
+            color = "#FECC50";
+            break;
+          case "enrem":
+            color = "#FF384D";
+            break;
+          case "imarec":
+            color = "#118943";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: "1px",
+        };
+      },
+    },
+
     State: {
       get(){
         return this.state;

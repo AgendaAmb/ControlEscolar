@@ -467,7 +467,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -550,7 +549,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      var res = true;
+      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
@@ -694,18 +693,33 @@ __webpack_require__.r(__webpack_exports__);
     },
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (this.name.localeCompare("12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") == 0) {
+      if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
+        console.log(this.name);
         return true;
       }
 
       return false;
     },
-    isStudentOrNot: function isStudentOrNot() {
-      if (this.user_id != this.viewer_id) {
-        return false;
+    isProffesor: function isProffesor() {
+      var roles = [];
+      axios.post("/controlescolar/solicitud/getRol", {
+        viewer_id: this.viewer_id
+      }).then(function (response) {
+        roles = response.data.roles;
+      })["catch"](function (error) {
+        roles = error.data.roles;
+      });
+      console.log("roles" + roles);
+
+      if (roles.length > 0) {
+        roles.forEach(function (rol) {
+          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
+            return true;
+          }
+        });
       }
 
-      return true;
+      return false;
     },
     checkUpload: function checkUpload() {
       if (this.location !== null && this.location !== undefined) {
@@ -979,6 +993,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "experiencia-laboral",
   props: {
     index: Number,
+    alias_academic_program: String,
     id: Number,
     archive_id: Number,
     state: String,
@@ -1001,6 +1016,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: (_computed = {
+    ColorStrip: {
+      get: function get() {
+        var color = "#FFFFFF";
+
+        switch (this.alias_academic_program) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+
+          case "doctorado":
+            color = "#FECC50";
+            break;
+
+          case "enrem":
+            color = "#FF384D";
+            break;
+
+          case "imarec":
+            color = "#118943";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: "1px"
+        };
+      }
+    },
     State: {
       get: function get() {
         return this.state;
@@ -2097,6 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     //Index
     index: Number,
+    alias_academic_program: String,
     // Id.
     id: Number,
     // Id del expediente.
@@ -2147,6 +2191,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    ColorStrip: {
+      get: function get() {
+        var color = "#FFFFFF";
+
+        switch (this.alias_academic_program) {
+          case "maestria":
+            color = "#0598BC";
+            break;
+
+          case "doctorado":
+            color = "#FECC50";
+            break;
+
+          case "enrem":
+            color = "#FF384D";
+            break;
+
+          case "imarec":
+            color = "#118943";
+            break;
+        }
+
+        return {
+          backgroundColor: color,
+          height: "1px"
+        };
+      }
+    },
     State: {
       get: function get() {
         return this.state;
@@ -2532,6 +2604,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _produccion_cientifica_PublicacionLibro_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionLibro.vue */ "./resources/js/postulacion/professor-view/components/produccion-cientifica/PublicacionLibro.vue");
 /* harmony import */ var _produccion_cientifica_ReporteTecnico_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./produccion-cientifica/ReporteTecnico.vue */ "./resources/js/postulacion/professor-view/components/produccion-cientifica/ReporteTecnico.vue");
 /* harmony import */ var _produccion_cientifica_Resenia_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./produccion-cientifica/Resenia.vue */ "./resources/js/postulacion/professor-view/components/produccion-cientifica/Resenia.vue");
+var _name$components$prop;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2640,7 +2716,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_name$components$prop = {
   name: "produccion-cientifica",
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2657,6 +2733,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     //Index
     index: Number,
+    alias_academic_program: String,
     // Id de la producción científica.
     id: Number,
     // Id del expediente.
@@ -2664,7 +2741,10 @@ __webpack_require__.r(__webpack_exports__);
     // Estado de control
     state: String,
     // Tipo de producción científica.
-    type: String,
+    type: {
+      type: String,
+      "default": "ninguno"
+    },
     // Título.
     title: String,
     // Fecha de publicación.
@@ -2678,7 +2758,10 @@ __webpack_require__.r(__webpack_exports__);
     // Nombre de la publicación.
     post_title: String,
     // Autores de la producción científica.
-    authors: Array
+    authors: {
+      type: Array,
+      "default": []
+    }
   },
   computed: {
     State: {
@@ -2774,103 +2857,131 @@ __webpack_require__.r(__webpack_exports__);
       scientific_production_id: this.id,
       name: null
     });
-  },
-  methods: {
-    guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
-      this.enviaProduccionCientifica(evento, "Completo");
-    },
-    eliminaProduccionCientifica: function eliminaProduccionCientifica() {
-      var _this = this;
+  }
+}, _defineProperty(_name$components$prop, "computed", {
+  ColorStrip: {
+    get: function get() {
+      var color = "#FFFFFF";
 
-      axios.post("/controlescolar/solicitud/deleteScientificProduction", {
-        id: this.id,
-        archive_id: this.archive_id
-      }).then(function (response) {
-        //Llama al padre para que elimine el item de la lista de experiencia laboral
-        _this.$emit("delete-item", _this.index - 1);
+      switch (this.alias_academic_program) {
+        case "maestria":
+          color = "#0598BC";
+          break;
 
-        Swal.fire({
-          title: "Éxito al eliminar Producción cientifica",
-          text: response.data.message,
-          // Imprime el mensaje del controlador
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Continuar"
-        });
-      })["catch"](function (error) {
-        Swal.fire({
-          title: "Error al eliminar Experiencia laboral",
-          showCancelButton: false,
-          icon: "error"
-        });
-      });
-    },
-    enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
-      var _this2 = this;
+        case "doctorado":
+          color = "#FECC50";
+          break;
 
-      this.errores = {};
-      axios.post("/controlescolar/solicitud/updateScientificProduction", {
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        language: this.language,
-        type: this.type,
-        title: this.title,
-        publish_date: this.publish_date,
-        magazine_name: this.magazine_name,
-        article_name: this.article_name,
-        institution: this.institution,
-        post_title: this.post_title
-      }).then(function (response) {
-        Object.keys(response.data).forEach(function (dataKey) {
-          var event = "update:" + dataKey;
+        case "enrem":
+          color = "#FF384D";
+          break;
 
-          _this2.$emit(event, response.data[dataKey]);
-        });
-      })["catch"](function (error) {
-        Swal.fire({
-          title: "Error al actualizar datos",
-          text: error.response.data,
-          showCancelButton: false,
-          icon: "error"
-        });
-      });
-    },
-    agregaAutor: function agregaAutor(nuevoAutor) {
-      var _this3 = this;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
 
-      axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
-        scientific_production_id: this.id,
-        archive_id: this.archive_id,
-        type: this.type,
-        name: nuevoAutor.Name
-      }).then(function (response) {
-        Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
-
-        _this3.Authors.push({
-          id: -1,
-          scientific_production_id: _this3.id,
-          name: null
-        });
-      })["catch"](function (error) {});
-    },
-    actualizaAutor: function actualizaAutor(autor) {
-      axios.post("/controlescolar/solicitud/updateScientificProductionAuthor", {
-        id: autor.id,
-        scientific_production_id: this.id,
-        archive_id: this.archive_id,
-        type: this.type,
-        name: autor.Name
-      }).then(function (response) {
-        Object.keys(response.data).forEach(function (dataKey) {
-          var event = "update:" + dataKey;
-          autor.$emit(event, response.data[dataKey]);
-        });
-      })["catch"](function (error) {});
+      return {
+        backgroundColor: color,
+        height: "1px"
+      };
     }
   }
-});
+}), _defineProperty(_name$components$prop, "methods", {
+  guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
+    this.enviaProduccionCientifica(evento, "Completo");
+  },
+  eliminaProduccionCientifica: function eliminaProduccionCientifica() {
+    var _this = this;
+
+    axios.post("/controlescolar/solicitud/deleteScientificProduction", {
+      id: this.id,
+      archive_id: this.archive_id
+    }).then(function (response) {
+      //Llama al padre para que elimine el item de la lista de experiencia laboral
+      _this.$emit("delete-item", _this.index - 1);
+
+      Swal.fire({
+        title: "Éxito al eliminar Producción cientifica",
+        text: response.data.message,
+        // Imprime el mensaje del controlador
+        icon: "success",
+        showCancelButton: false,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Continuar"
+      });
+    })["catch"](function (error) {
+      Swal.fire({
+        title: "Error al eliminar Experiencia laboral",
+        showCancelButton: false,
+        icon: "error"
+      });
+    });
+  },
+  enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
+    var _this2 = this;
+
+    this.errores = {};
+    axios.post("/controlescolar/solicitud/updateScientificProduction", {
+      id: this.id,
+      archive_id: this.archive_id,
+      state: estado,
+      language: this.language,
+      type: this.type,
+      title: this.title,
+      publish_date: this.publish_date,
+      magazine_name: this.magazine_name,
+      article_name: this.article_name,
+      institution: this.institution,
+      post_title: this.post_title
+    }).then(function (response) {
+      Object.keys(response.data).forEach(function (dataKey) {
+        var event = "update:" + dataKey;
+
+        _this2.$emit(event, response.data[dataKey]);
+      });
+    })["catch"](function (error) {
+      Swal.fire({
+        title: "Error al actualizar datos",
+        text: error.response.data,
+        showCancelButton: false,
+        icon: "error"
+      });
+    });
+  },
+  agregaAutor: function agregaAutor(nuevoAutor) {
+    var _this3 = this;
+
+    axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
+      scientific_production_id: this.id,
+      archive_id: this.archive_id,
+      type: this.type,
+      name: nuevoAutor.Name
+    }).then(function (response) {
+      Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
+
+      _this3.Authors.push({
+        id: -1,
+        scientific_production_id: _this3.id,
+        name: null
+      });
+    })["catch"](function (error) {});
+  },
+  actualizaAutor: function actualizaAutor(autor) {
+    axios.post("/controlescolar/solicitud/updateScientificProductionAuthor", {
+      id: autor.id,
+      scientific_production_id: this.id,
+      archive_id: this.archive_id,
+      type: this.type,
+      name: autor.Name
+    }).then(function (response) {
+      Object.keys(response.data).forEach(function (dataKey) {
+        var event = "update:" + dataKey;
+        autor.$emit(event, response.data[dataKey]);
+      });
+    })["catch"](function (error) {});
+  }
+}), _name$components$prop);
 
 /***/ }),
 
@@ -3215,6 +3326,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3314,9 +3427,16 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("https://ambiental.uaslp.mx/apiagenda/api/englishExams").then(function (response) {
         _this.EnglishExams = response.data;
       });
+      console.log(this.entrance_documents);
     });
   },
   methods: {
+    toString: function toString() {
+      this.entrance_documents.forEach(function (element) {
+        console.log(element.name);
+      });
+      return true;
+    },
     getUniversities: function getUniversities(state) {
       var universities = [];
 
@@ -3328,32 +3448,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return universities;
-    },
-    ColorStrip: function ColorStrip() {
-      var color = "#FFFFFF";
-
-      switch (this.academic_program.alias) {
-        case "maestria":
-          color = "#0598BC";
-          break;
-
-        case "doctorado":
-          color = "#FECC50";
-          break;
-
-        case "enrem":
-          color = "#FF384D";
-          break;
-
-        case "imarec":
-          color = "#118943";
-          break;
-      }
-
-      return {
-        backgroundColor: color,
-        height: "1px"
-      };
     },
 
     /*
@@ -4346,7 +4440,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10145,111 +10239,113 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-12" }, [
-    _c("div", { staticClass: "row my-3" }, [
-      _c("div", { staticClass: "form-group col-9 my-auto" }, [
-        _c(
-          "h5",
-          { staticClass: "mt-4 d-block" },
-          [
-            _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
-            _vm._v(" "),
-            _vm.checkUpload() === true
-              ? [
-                  _c("i", [_vm._v("Estado:")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "text-success" }, [_vm._v("Subido")]),
-                ]
-              : [
-                  _c("i", [_vm._v("Estado:")]),
-                  _vm._v(" "),
-                  _c("i", { staticClass: "text-danger" }, [
-                    _vm._v("Sin subir"),
-                  ]),
-                ],
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _vm.isLetterCommitment() === true
-          ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-              _c("strong", [
-                _vm._v(
-                  "\n          Observaciones: Descargar carta\n          "
-                ),
+  return _vm.requiredForAcademicProgram() === true
+    ? _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "row my-3" }, [
+          _c("div", { staticClass: "form-group col-9 my-auto" }, [
+            _c(
+              "h5",
+              { staticClass: "mt-4 d-block" },
+              [
+                _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
                 _vm._v(" "),
-                _vm.alias_academic_program === "maestria" ||
-                _vm.alias_academic_program === "enrem"
-                  ? _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
-                          target: "_blank",
-                        },
-                      },
-                      [_vm._v("dando clic aquí")]
-                    )
-                  : _vm.alias_academic_program === "imarec"
-                  ? _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
-                          target: "_blank",
-                        },
-                      },
-                      [_vm._v("dando clic aquí")]
-                    )
-                  : _c(
-                      "a",
-                      {
-                        attrs: {
-                          href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
-                          target: "_blank",
-                        },
-                      },
-                      [_vm._v("dando clic aquí")]
+                _vm.checkUpload() === true
+                  ? [
+                      _c("i", [_vm._v("Estado:")]),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "text-success" }, [
+                        _vm._v("Subido"),
+                      ]),
+                    ]
+                  : [
+                      _c("i", [_vm._v("Estado:")]),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "text-danger" }, [
+                        _vm._v("Sin subir"),
+                      ]),
+                    ],
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _vm.isLetterCommitment() === true
+              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+                  _c("strong", [
+                    _vm._v(
+                      "\n          Observaciones: Descargar carta\n          "
                     ),
-              ]),
-            ])
-          : _vm.notes !== null
-          ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-              _c("strong", [
-                _vm._v(" Observaciones: "),
-                _c("span", { domProps: { innerHTML: _vm._s(_vm.notes) } }),
-              ]),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-          _c("strong", [_vm._v(" Etiqueta: ")]),
-          _vm._v(" " + _vm._s(_vm.label) + " "),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "my-0 d-block" }, [
-          _c("strong", [_vm._v(" Ejemplo: ")]),
-          _vm._v(" " + _vm._s(_vm.example) + " "),
-        ]),
-      ]),
-      _vm._v(" "),
-      _vm.isIntentionLetter() === true
-        ? _c("div", { staticClass: "form-group col-3 my-auto" }, [
+                    _vm._v(" "),
+                    _vm.alias_academic_program === "maestria" ||
+                    _vm.alias_academic_program === "enrem"
+                      ? _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        )
+                      : _vm.alias_academic_program === "imarec"
+                      ? _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        )
+                      : _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
+                              target: "_blank",
+                            },
+                          },
+                          [_vm._v("dando clic aquí")]
+                        ),
+                  ]),
+                ])
+              : _vm.notes !== null
+              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+                  _c("strong", [
+                    _vm._v(" Observaciones: "),
+                    _c("span", { domProps: { innerHTML: _vm._s(_vm.notes) } }),
+                  ]),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
+              _c("strong", [_vm._v(" Etiqueta: ")]),
+              _vm._v(" " + _vm._s(_vm.label) + "\n      "),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "my-0 d-block" }, [
+              _c("strong", [_vm._v(" Ejemplo: ")]),
+              _vm._v(" " + _vm._s(_vm.example)),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-3 my-auto" }, [
             _vm.checkUpload() === true
               ? _c(
                   "a",
                   {
-                    staticClass: " verArchivo d-block my-2 ml-auto",
+                    staticClass: "verArchivo d-block my-2 ml-auto",
                     attrs: {
                       href: "expediente/" + _vm.location,
                       target: "_blank",
                     },
                   },
-                  [_vm._v(" Ver Archivo")]
+                  [_vm._v("\n        Ver Archivo")]
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.isStudentOrNot() === true
+            _vm.isIntentionLetter() === true
               ? _c(
                   "label",
                   { staticClass: "cargarArchivo d-block ml-auto my-auto" },
@@ -10263,24 +10359,10 @@ var render = function () {
                   ]
                 )
               : _vm._e(),
-          ])
-        : _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true
-              ? _c(
-                  "a",
-                  {
-                    staticClass: " verArchivo d-block my-2 ml-auto",
-                    attrs: {
-                      href: "expediente/" + _vm.location,
-                      target: "_blank",
-                    },
-                  },
-                  [_vm._v(" Ver Archivo")]
-                )
-              : _vm._e(),
           ]),
-    ]),
-  ])
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13093,39 +13175,41 @@ var render = function () {
       _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [
-      _c(
-        "details",
-        [
-          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
-            _vm._v("\n        Requisitos de ingreso\n      "),
-          ]),
+    _vm.toString
+      ? _c("div", { staticClass: "col-12" }, [
+          _c(
+            "details",
+            [
+              _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
+                _vm._v("\n        Requisitos de ingreso\n      "),
+              ]),
+              _vm._v(" "),
+              _c("requisitos-ingreso", {
+                attrs: {
+                  archive_id: _vm.archive_id,
+                  motivation: _vm.motivation,
+                  documentos: _vm.entrance_documents,
+                  user_id: _vm.appliant.id,
+                  viewer_id: _vm.viewer.id,
+                  letters_Commitment: _vm.letters_Commitment,
+                  alias_academic_program: _vm.academic_program.alias,
+                },
+                on: {
+                  "update:motivation": function ($event) {
+                    _vm.motivation = $event
+                  },
+                  "update:documentos": function ($event) {
+                    _vm.entrance_documents = $event
+                  },
+                },
+              }),
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("requisitos-ingreso", {
-            attrs: {
-              archive_id: _vm.archive_id,
-              motivation: _vm.motivation,
-              documentos: _vm.entrance_documents,
-              user_id: _vm.appliant.id,
-              viewer_id: _vm.viewer.id,
-              letters_Commitment: _vm.letters_Commitment,
-              alias_academic_program: _vm.academic_program.alias,
-            },
-            on: {
-              "update:motivation": function ($event) {
-                _vm.motivation = $event
-              },
-              "update:documentos": function ($event) {
-                _vm.entrance_documents = $event
-              },
-            },
-          }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("hr", { staticClass: "my-4 col-12", style: _vm.ColorStrip }),
-    ]),
+          _c("hr", { staticClass: "my-4 col-12", style: _vm.ColorStrip }),
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "col-12" }, [
       _c(
@@ -13143,6 +13227,7 @@ var render = function () {
                   key: language.id,
                   attrs: {
                     index: index + 1,
+                    alias_academic_program: _vm.academic_program.alias,
                     state: language.state,
                     language: language.language,
                     institution: language.institution,
@@ -13227,6 +13312,7 @@ var render = function () {
                     key: experience.id,
                     attrs: {
                       index: index + 1,
+                      alias_academic_program: _vm.academic_program.alias,
                       state: experience.state,
                       institution: experience.institution,
                       working_position: experience.working_position,
@@ -13305,6 +13391,7 @@ var render = function () {
                   key: production.id,
                   attrs: {
                     index: index + 1,
+                    alias_academic_program: _vm.academic_program.alias,
                     state: production.state,
                     type: production.type,
                     title: production.title,
@@ -13361,6 +13448,7 @@ var render = function () {
                   key: humanCapital.id,
                   attrs: {
                     index: index,
+                    alias_academic_program: _vm.academic_program.alias,
                     course_name: humanCapital.course_name,
                     assisted_at: humanCapital.assisted_at,
                     scolarship_level: humanCapital.scolarship_level,

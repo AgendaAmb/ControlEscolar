@@ -6,7 +6,7 @@
     </div>
 
     <div class="form-group col-md-6">
-      <autor-articulo></autor-articulo>
+      <slot></slot>
     </div>
 
     <div class="form-group col-md-6">

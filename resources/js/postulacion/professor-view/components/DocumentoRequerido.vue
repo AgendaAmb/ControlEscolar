@@ -1,19 +1,20 @@
 <template>
-  <div class="col-12">
+  <div v-if="requiredForAcademicProgram()===true" class="col-12">
     <div class="row my-3">
-      
+      <!-- Nombre y notas -->
       <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block"><strong> {{ name }} </strong>
+        <h5 class="mt-4 d-block">
+          <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
           </template>
           <template v-else>
             <i>Estado:</i> <i class="text-danger">Sin subir</i>
-          </template> 
+          </template>
         </h5>
 
-        <!-- We have something in notes and its a letter -->
-        <p v-if="isLetterCommitment() === true" class="mt-3 mb-1 d-block">
+        <!-- Carta Compromiso y manifiesto -->
+        <p v-if="isLetterCommitment()===true" class="mt-3 mb-1 d-block">
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
@@ -38,24 +39,30 @@
               >dando clic aquí</a
             >
           </strong>
-          </p>
+        </p>
 
         <!-- Solo hay algo en notas por lo que se adjunta -->
-        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block"><strong> Observaciones: <span v-html="notes"></span></strong></p>
-        
-        <p class="mt-3 mb-1 d-block"><strong> Etiqueta: </strong> {{ label }} </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }} </p>
+        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block">
+          <strong> Observaciones: <span v-html="notes"></span></strong>
+        </p>
+
+        <p class="mt-3 mb-1 d-block">
+          <strong> Etiqueta: </strong> {{ label }}
+        </p>
+        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
+     
 
-
-      <!-- Es carta de intención  -->
-      <div v-if="isIntentionLetter() === true " class="form-group col-3 my-auto">
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
-        <!-- El profesor podra subir la carta de intencion -->
-         <label
-          v-if="isStudentOrNot() === true"
-          class="cargarArchivo d-block ml-auto my-auto"
+      <div  class="form-group col-3 my-auto">
+        <a
+          v-if="checkUpload() === true"
+          class="verArchivo d-block my-2 ml-auto"
+          :href="'expediente/' + location"
+          target="_blank"
         >
+          Ver Archivo</a
+        >
+        <label v-if="isIntentionLetter() === true" class="cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input
             type="file"
@@ -64,18 +71,11 @@
           />
         </label>
       </div>
-
-      <div v-else class="form-group col-3 my-auto">    
-        <a v-if="checkUpload() === true" class=" verArchivo d-block my-2 ml-auto" :href="'expediente/' + location" target="_blank"> Ver Archivo</a>
-        
-      </div>   
-
     </div>
   </div>
 </template>
 
 <style scoped>
-
 /* 
 
  <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
@@ -124,7 +124,6 @@
   height: 30px;
 }
 </style>
-
 <script>
 export default {
   name: "documento-requerido",
@@ -222,12 +221,13 @@ export default {
       }
     }
   },
+  
 
   
   methods: {
     requiredForAcademicProgram() {
       let res = true;
-
+      // console.log("id: "+this.id+" nombre: "+this.name);
      
       if (this.alias_academic_program === "maestria"  ) {
         switch (this.name) {
@@ -348,9 +348,7 @@ export default {
 
     isLetterCommitment() {
       if (
-        this.name ===
-        "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)"
-      ) {
+        this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {
         return true;
       }
       //return a value
@@ -359,21 +357,38 @@ export default {
 
     isIntentionLetter() {
       //If return 0 is intention letter of professor
-      if (
-        this.name.localeCompare(
-          "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
-        ) == 0
-      ) {
+       
+      if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)")  {
+        console.log(this.name);
         return true;
       }
       return false;
     },
 
-    isStudentOrNot() {
-      if (this.user_id != this.viewer_id) {
+    isProffesor() {
+      let roles = [];
+      axios
+        .post("/controlescolar/solicitud/getRol", {
+          viewer_id: this.viewer_id,
+        })
+        .then((response) => {
+          roles = response.data.roles;
+        })
+        .catch((error) => {
+          roles = error.data.roles;
+        });
+
+        console.log("roles" + roles);
+        if(roles.length > 0){
+          roles.forEach(rol => {
+            if(rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador" ){
+              return true;
+            }
+          });
+        }
+
         return false;
-      }
-      return true;
+
     },
 
     checkUpload() {
