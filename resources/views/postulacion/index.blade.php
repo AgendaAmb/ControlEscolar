@@ -42,5 +42,10 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/intention-letter.js') }}" defer></script>
+
+    {{-- @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') ||  Auth::user()->id === 15641) --}}
+        <script src="{{ asset('js/intention-letter.js') }}" defer></script>
+    {{-- @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
+        <script src="{{ asset('js/professor/professor.js') }}" defer></script> --}}
+
 @endpush

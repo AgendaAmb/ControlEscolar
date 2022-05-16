@@ -293,7 +293,7 @@ export default {
               confirmButtonText: "Acceder a cuenta",
             }).then((result) => {
               if (result.isConfirmed) {
-                window.location.href =
+                
                   // "https://ambiental.uaslp.mx/controlescolar/home";
                   window.location.href = "/controlescolar/home";
               }

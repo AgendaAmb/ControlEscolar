@@ -62,8 +62,9 @@
         >
           Ver Archivo</a
         >
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
-          Subir Documento
+        <!-- <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto"> -->
+          <label class="cargarArchivo d-block ml-auto my-auto"> 
+            Subir Documento
           <input
             type="file"
             class="form-control d-none"
