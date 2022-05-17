@@ -1,19 +1,8 @@
 <template >
   <details class="mb-2">
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h4 class="font-weight-bold">Idioma {{ index }}</h4>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaIdioma"
-          class="btn btn-danger"
-          style="height: 35px; width:100%"
-        >
-          Eliminar Idioma
-        </button>
       </div>
     </summary>
   <div class="row">

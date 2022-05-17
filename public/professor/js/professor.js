@@ -2118,17 +2118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -11648,24 +11637,10 @@ var render = function () {
       "summary",
       { staticClass: "d-flex justify-content-start align-items-center my-2" },
       [
-        _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+        _c("div", { staticClass: "col-12" }, [
           _c("h4", { staticClass: "font-weight-bold" }, [
             _vm._v("Idioma " + _vm._s(_vm.index)),
           ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger",
-              staticStyle: { height: "35px", width: "100%" },
-              on: { click: _vm.eliminaIdioma },
-            },
-            [_vm._v("\n        Eliminar Idioma\n      ")]
-          ),
         ]),
       ]
     ),

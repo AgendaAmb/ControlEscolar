@@ -8,17 +8,27 @@ use App\Models\AcademicArea;
 use App\Models\AcademicComitte;
 use App\Models\AcademicEntity;
 use App\Models\User;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
+
 class AdminController extends Controller
 {
+     /**
+     * Web service de Mi portal.
+     * 
+     * @var \App\Helpers\MiPortalService
+     */
+    private $service;
+
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->service = new MiPortalService;
         parent::__construct();
     }
 
@@ -60,16 +70,16 @@ class AdminController extends Controller
         try {
             $request->validate([
                 'id' => ['required', 'numeric'],
-                'type' => ['required', 'string', 'max:225', 'in:workers,students'],
-                'selected_roles' => ['required', 'array'],
-                'selected_academic_areas' => ['required', 'array'],
-                'selected_academic_entities' => ['required', 'array'],
-                'selected_academic_comittes' => ['required', 'array'],
+                'type' => ['required', 'string', 'max:225'],
+                // 'selected_roles' => ['required', 'array'],
+                // 'selected_academic_areas' => ['required', 'array'],
+                // 'selected_academic_entities' => ['required', 'array'],
+                // 'selected_academic_comittes' => ['required', 'array'],
 
-                'selected_roles.*' => ['required', 'numeric','exists:roles,id'],
-                'selected_academic_areas.*' => ['required', 'numeric','exists:academic_areas,id'],
-                'selected_academic_entities.*' => ['required', 'numeric','exists:academic_entities,id'],
-                'selected_academic_comittes.*' => ['required', 'numeric','exists:academic_comittes,id'],
+                'selected_roles.*' => ['required', 'numeric', 'exists:roles,id'],
+                'selected_academic_areas.*' => ['required', 'numeric', 'exists:academic_areas,id'],
+                'selected_academic_entities.*' => ['required', 'numeric', 'exists:academic_entities,id'],
+                'selected_academic_comittes.*' => ['required', 'numeric', 'exists:academic_comittes,id'],
             ]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error de validacion'], 200);
@@ -106,11 +116,11 @@ class AdminController extends Controller
             return new JsonResponse(['id' => 'Módulo de usuario no registrado en Mi Portal'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
 
         # Crea al usuario.
-        $user = User::create($request->safe()->only('id', 'type'));
-        $user->roles()->syncWithPivotValues($request->safe()->selected_roles, ['model_type' => $request->type]);
-        $user->academicAreas()->syncWithPivotValues($request->safe()->selected_academic_areas, ['user_type' => $request->type]);
-        $user->academicEntities()->syncWithPivotValues($request->safe()->selected_academic_entities, ['user_type' => $request->type]);
-        $user->academicComittes()->syncWithPivotValues($request->safe()->selected_academic_comittes, ['user_type' => $request->type]);
+        $user = User::create($request->only('id', 'type'));
+        $user->roles()->syncWithPivotValues($request->selected_roles, ['model_type' => $request->type]);
+        $user->academicAreas()->syncWithPivotValues($request->selected_academic_areas, ['user_type' => $request->type]);
+        $user->academicEntities()->syncWithPivotValues($request->selected_academic_entities, ['user_type' => $request->type]);
+        $user->academicComittes()->syncWithPivotValues($request->selected_academic_comittes, ['user_type' => $request->type]);
         $user->load(['academicAreas', 'academicEntities', 'academicComittes', 'roles']);
 
         return new JsonResponse($user, JsonResponse::HTTP_CREATED);
@@ -118,40 +128,19 @@ class AdminController extends Controller
 
     public function updateWorker(Request $request)
     {
-        
+
         try {
             $request->validate([
                 'id' => ['required', 'numeric'],
                 'type' => ['required', 'string', 'max:225', 'in:workers,students'],
-                
-                // 'selected_roles' => ['required', 'array', 'min:0', 'max:20'],
-                // 'selected_academic_areas' => ['required', 'array','min:0', 'max:20'],
-                // 'selected_academic_entities' => ['required', 'array','min:0', 'max:20'],
-                // 'selected_academic_comittes' => ['required', 'array','min:0', 'max:20'],
-
-                'selected_roles.*.id' => ['required', 'numeric','exists:roles,id'],
-                'selected_academic_areas.*.id' => ['required', 'numeric','exists:academic_areas,id'],
-                'selected_academic_entities.*id' => ['required', 'numeric','exists:academic_entities,id'],
+                'selected_roles.*' => ['required', 'numeric','exists:roles,id'],
+                'selected_academic_areas.*' => ['required', 'numeric','exists:academic_areas,id'],
+                'selected_academic_entities.*' => ['required', 'numeric','exists:academic_entities,id'],
                 'selected_academic_comittes.*' => ['required', 'numeric','exists:academic_comittes,id'],
-
-                
-                'selected_roles.*.name' => ['required', 'string','max:225'],
-                'selected_academic_areas.*.name' => ['required', 'string','max:225'],
-                'selected_academic_entities.*.name' => ['required', 'string','max:225'],
-                'selected_academic_comittes.*.name' => ['required', 'string','max:225'],
-
-                
-                // 'selected_roles.*' => ['required', 'numeric','exists:roles,id'],
-                // 'selected_academic_areas.*' => ['required', 'numeric','exists:academic_areas,id'],
-                // 'selected_academic_entities.*' => ['required', 'numeric','exists:academic_entities,id'],
-                // 'selected_academic_comittes.*' => ['required', 'numeric','exists:academic_comittes,id'],
             ]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error de validacion'], 200);
         }
-
-        // return new JsonResponse($request, 200);
-
 
         try {
             # Busca al usuario.
@@ -164,55 +153,55 @@ class AdminController extends Controller
 
             # Recolecta el resultado.
             $data = $response->collect();
+            $user_modules = collect($data->first())['user_modules'];
 
-            # Verifica que haya un resultado en la búsqueda.
-            if ($data->count() === 0){
-                return new JsonResponse(['id' => 'No encontrado'], 401);
-            }
-            // return new JsonResponse(['message' => $data->first()], JsonResponse::HTTP_CREATED);
+            $has_control_escolar = false;
+
+
             # Verifica que el usuario pertenezca al módulo.
-            // if (collect($data->first())->where('id', env('MIPORTAL_MODULE_ID'))->count() >= 0) {
-                $selected_roles = [];
-                foreach($request->selected_roles as $value ){
-                    array_push($selected_roles, $value->id);
+            # Caso contrario lo agrega
+            
+            foreach($user_modules as $module){
+                if($module['id'] === intval(env('MIPORTAL_MODULE_ID'))){
+                    $has_control_escolar = true;
                 }
+            }
+            
+            if ($has_control_escolar != true) {
+                // $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_state' ]); //data to save
 
-                $selected_academic_entities = [];
-                foreach($request->selected_roles as $value ){
-                    array_push($selected_academic_entities, $value->id);
+                # ------------------------- Creacion de usuario en portal Agenda Ambiental
+                try {
+                    $userInfo = $request->only('id');
+                    $userInfo['module_id'] = 2; //2 = control escolar
+                    $response = $this->service->miPortalPost('api/UpdateModuleUser', $userInfo); // solo hace registro y avisas si salio bien o mal
+                    $response_data = $response->collect()->toArray();
+                    #No se pudo crear usuario en portal
+                    if ($response_data['message']) {
+                        if ($response_data['message'] != 'Modulo actualizado') {
+                            return new JsonResponse(['message' => $response_data['message']],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                        }
+                    } else {
+                        return new JsonResponse(['message' => $response_data],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                    }
+                } catch (\Exception $e) {
+                    return new JsonResponse(['message' => $e],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                 }
+            }
+            
 
-                $selected_academic_areas = [];
-                foreach($request->selected_roles as $value ){
-                    array_push($selected_academic_areas, $value->id);
-                }
-
-                $selected_academic_comittes = [];
-                foreach($request->selected_roles as $value ){
-                    array_push($selected_academic_comittes, $value->id);
-                }
-
-                $user = User::where('id', $request->id)->first();
-               
-                $user->roles()->syncWithPivotValues($selected_roles, ['model_type' => $request->type]);
-                $user->academicAreas()->syncWithPivotValues($selected_academic_areas, ['user_type' => $request->type]);
-                $user->academicEntities()->syncWithPivotValues($selected_academic_entities, ['user_type' => $request->type]);
-                $user->academicComittes()->syncWithPivotValues($selected_academic_comittes, ['user_type' => $request->type]);
-                $user->save();
-                // $user->load(['academicAreas', 'academicEntities', 'academicComittes', 'roles']);
-                // $user->roles()->syncWithPivotValues($request->safe()->selected_roles, ['model_type' => $request->type]);
-                // $user->academicAreas()->syncWithPivotValues($request->safe()->selected_academic_areas, ['user_type' => $request->type]);
-                // $user->academicEntities()->syncWithPivotValues($request->safe()->selected_academic_entities, ['user_type' => $request->type]);
-                // $user->academicComittes()->syncWithPivotValues($request->safe()->selected_academic_comittes, ['user_type' => $request->type]);
-                // $user->save();
-                // $user->load(['academicAreas', 'academicEntities', 'academicComittes', 'roles']);
-                
-            // }
+            $user = User::where('id', $request->id)->first();
+            $user->roles()->syncWithPivotValues($request->selected_roles, ['model_type' => $request->type]);
+            $user->academicAreas()->syncWithPivotValues($request->selected_academic_areas, ['user_type' => $request->type]);
+            $user->academicEntities()->syncWithPivotValues($request->selected_academic_entities, ['user_type' => $request->type]);
+            $user->academicComittes()->syncWithPivotValues($request->selected_academic_comittes, ['user_type' => $request->type]);
+            // $user->save();
+            $user->load(['academicAreas', 'academicEntities', 'academicComittes', 'roles']);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al hacer los cambios', 'data' => $data], 202);
+            return new JsonResponse(['message' => $e, 'data' => $data], 401);
         }
 
-        return new JsonResponse($data, JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['message' => 'Cambios realizados correctamente', 'user' => $user], JsonResponse::HTTP_CREATED);
     }
 
     //necesita la request y la ruta hacia la api del portal

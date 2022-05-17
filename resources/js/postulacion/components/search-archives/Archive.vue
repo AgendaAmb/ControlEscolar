@@ -50,13 +50,13 @@ export default {
 
     // Fecha inicio postulacion
     announcement_from: {
-      type: Date,
+      type: String,
       default: null,
     },
 
     // Fecha de terminacion postulacion
     announcement_to: {
-      type: Date,
+      type: String,
       default: null,
     },
 

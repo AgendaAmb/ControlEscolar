@@ -159,10 +159,16 @@ export default {
     return {
       active: false,
       id: null,
+      tipousuario: "workers",
       selected_roles: [],
       selected_academic_areas: [],
       selected_academic_entities: [],
       selected_academic_comittes: [],
+
+      selected_roles_id: [],
+      selected_academic_areas_id: [],
+      selected_academic_entities_id: [],
+      selected_academic_comittes_id: [],
     };
   },
 
@@ -189,6 +195,7 @@ export default {
     actualizaLista(name, res, tipo) {
       let lista_selected = [];
       let lista = [];
+      let lista_selected_id = [];
 
       let index = -1;
       switch (tipo) {
@@ -218,7 +225,6 @@ export default {
 
       //Eliminar
       if (!res) {
-
         // console.log('estamos elimiando');
         if (lista_selected.length > 0) {
           //   search in data if the name is checked or not
@@ -252,42 +258,52 @@ export default {
         }
       }
 
+      if (lista_selected.length > 0) {
+        lista_selected.forEach(function (value, i) {
+          lista_selected_id.push(value.id);
+        });
+      }
+
       // console.log("lista selected : ", lista_selected);
 
       if (index >= 0) {
         switch (tipo) {
           case "roles":
             this.selected_roles = lista_selected;
+            this.selected_roles_id = lista_selected_id;
+
             break;
           case "academic_areas":
             this.selected_academic_areas = lista_selected;
-
+            this.selected_academic_areas_id = lista_selected_id;
             break;
           case "academic_entities":
             this.selected_academic_entities = lista_selected;
+            this.selected_academic_entities_id = lista_selected_id;
 
             break;
           case "academic_comittes":
             this.selected_academic_comittes = lista_selected;
+            this.selected_academic_comittes_id = lista_selected_id;
             break;
         }
       }
     },
 
     actualizaUsuario() {
-      console.log("academic areas: ", this.selected_academic_areas);
-      console.log("roles : ", this.selected_roles);
-      console.log("academic entities : ", this.selected_academic_entities);
-      console.log("academic_comittes : ", this.selected_academic_comittes);
+      console.log("academic areas: ", this.selected_academic_areas_id);
+      console.log("roles : ", this.selected_roles_id);
+      console.log("academic entities : ", this.selected_academic_entities_id);
+      console.log("academic_comittes : ", this.selected_academic_comittes_id);
 
       axios
         .post("/controlescolar/admin/updateWorker", {
           id: this.id,
-          type: "workers",
-          selected_roles: this.selected_roles,
-          selected_academic_areas: this.selected_academic_areas,
-          selected_academic_entities: this.selected_academic_entities,
-          selected_academic_comittes: this.selected_academic_comittes,
+          type: this.tipousuario,
+          selected_roles: this.selected_roles_id,
+          selected_academic_areas: this.selected_academic_areas_id,
+          selected_academic_entities: this.selected_academic_entities_id,
+          selected_academic_comittes: this.selected_academic_comittes_id,
         })
         .then((response) => {
           Swal.fire({
@@ -317,10 +333,36 @@ export default {
       "toggleModal",
       (id, roles, academic_areas, academic_entities, academic_comittes) => {
         this.id = id;
-        (this.selected_academic_areas = academic_areas),
-          (this.selected_roles = roles),
-          (this.selected_academic_entities = academic_entities),
-          (this.selected_academic_comittes = academic_comittes);
+
+        if (academic_comittes!=null && academic_comittes.length > 0) {
+          this.selected_academic_comittes = academic_comittes;
+          academic_comittes.forEach((item) => {
+            this.selected_academic_comittes_id.push(item.id);
+          });
+        }
+
+        if (academic_entities!=null && academic_entities.length > 0) {
+          this.selected_academic_entities = academic_entities;
+          academic_entities.forEach((item) => {
+            this.selected_academic_entities_id.push(item.id);
+          });
+        }
+
+        if (roles!=null && roles.length > 0) {
+          this.selected_roles = roles;
+
+          roles.forEach((item) => {
+            this.selected_roles_id.push(item.id);
+          });
+        }
+
+        if (academic_areas!=null &&academic_areas.length > 0) {
+          this.selected_academic_areas = academic_areas;
+          academic_areas.forEach((item) => {
+            this.selected_academic_areas_id.push(item.id);
+          });
+        }
+
         this.show();
         // console.log("selected_roles: ", this.selected_roles);
       }

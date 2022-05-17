@@ -90,6 +90,11 @@ export default {
 
   methods: {
     registraUsuario() {
+         console.log("academic areas: ", this.selected_academic_areas);
+      console.log("roles : ", this.selected_roles);
+      console.log("academic entities : ", this.selected_academic_entities);
+      console.log("academic_comittes : ", this.selected_academic_comittes);
+
         axios.post('/controlescolar/admin/newWorker', {
             id: this.id,
             type: 'workers',

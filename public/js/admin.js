@@ -49684,10 +49684,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       active: false,
       id: null,
+      tipousuario: "workers",
       selected_roles: [],
       selected_academic_areas: [],
       selected_academic_entities: [],
-      selected_academic_comittes: []
+      selected_academic_comittes: [],
+      selected_roles_id: [],
+      selected_academic_areas_id: [],
+      selected_academic_entities_id: [],
+      selected_academic_comittes_id: []
     };
   },
   computed: {// SelectedRoles: {
@@ -49709,6 +49714,7 @@ __webpack_require__.r(__webpack_exports__);
     actualizaLista: function actualizaLista(name, res, tipo) {
       var lista_selected = [];
       var lista = [];
+      var lista_selected_id = [];
       var index = -1;
 
       switch (tipo) {
@@ -49767,6 +49773,12 @@ __webpack_require__.r(__webpack_exports__);
         if (index >= 0) {
           lista_selected.push(lista[index]);
         }
+      }
+
+      if (lista_selected.length > 0) {
+        lista_selected.forEach(function (value, i) {
+          lista_selected_id.push(value.id);
+        });
       } // console.log("lista selected : ", lista_selected);
 
 
@@ -49774,18 +49786,22 @@ __webpack_require__.r(__webpack_exports__);
         switch (tipo) {
           case "roles":
             this.selected_roles = lista_selected;
+            this.selected_roles_id = lista_selected_id;
             break;
 
           case "academic_areas":
             this.selected_academic_areas = lista_selected;
+            this.selected_academic_areas_id = lista_selected_id;
             break;
 
           case "academic_entities":
             this.selected_academic_entities = lista_selected;
+            this.selected_academic_entities_id = lista_selected_id;
             break;
 
           case "academic_comittes":
             this.selected_academic_comittes = lista_selected;
+            this.selected_academic_comittes_id = lista_selected_id;
             break;
         }
       }
@@ -49793,17 +49809,17 @@ __webpack_require__.r(__webpack_exports__);
     actualizaUsuario: function actualizaUsuario() {
       var _this = this;
 
-      console.log("academic areas: ", this.selected_academic_areas);
-      console.log("roles : ", this.selected_roles);
-      console.log("academic entities : ", this.selected_academic_entities);
-      console.log("academic_comittes : ", this.selected_academic_comittes);
+      console.log("academic areas: ", this.selected_academic_areas_id);
+      console.log("roles : ", this.selected_roles_id);
+      console.log("academic entities : ", this.selected_academic_entities_id);
+      console.log("academic_comittes : ", this.selected_academic_comittes_id);
       axios.post("/controlescolar/admin/updateWorker", {
         id: this.id,
-        type: "workers",
-        selected_roles: this.selected_roles,
-        selected_academic_areas: this.selected_academic_areas,
-        selected_academic_entities: this.selected_academic_entities,
-        selected_academic_comittes: this.selected_academic_comittes
+        type: this.tipousuario,
+        selected_roles: this.selected_roles_id,
+        selected_academic_areas: this.selected_academic_areas_id,
+        selected_academic_entities: this.selected_academic_entities_id,
+        selected_academic_comittes: this.selected_academic_comittes_id
       }).then(function (response) {
         Swal.fire({
           title: "El usuario con el id " + _this.id + " ha sido modificado",
@@ -49830,7 +49846,34 @@ __webpack_require__.r(__webpack_exports__);
 
     Event.$on("toggleModal", function (id, roles, academic_areas, academic_entities, academic_comittes) {
       _this2.id = id;
-      _this2.selected_academic_areas = academic_areas, _this2.selected_roles = roles, _this2.selected_academic_entities = academic_entities, _this2.selected_academic_comittes = academic_comittes;
+
+      if (academic_comittes != null && academic_comittes.length > 0) {
+        _this2.selected_academic_comittes = academic_comittes;
+        academic_comittes.forEach(function (item) {
+          _this2.selected_academic_comittes_id.push(item.id);
+        });
+      }
+
+      if (academic_entities != null && academic_entities.length > 0) {
+        _this2.selected_academic_entities = academic_entities;
+        academic_entities.forEach(function (item) {
+          _this2.selected_academic_entities_id.push(item.id);
+        });
+      }
+
+      if (roles != null && roles.length > 0) {
+        _this2.selected_roles = roles;
+        roles.forEach(function (item) {
+          _this2.selected_roles_id.push(item.id);
+        });
+      }
+
+      if (academic_areas != null && academic_areas.length > 0) {
+        _this2.selected_academic_areas = academic_areas;
+        academic_areas.forEach(function (item) {
+          _this2.selected_academic_areas_id.push(item.id);
+        });
+      }
 
       _this2.show(); // console.log("selected_roles: ", this.selected_roles);
 
@@ -49937,6 +49980,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     registraUsuario: function registraUsuario() {
+      console.log("academic areas: ", this.selected_academic_areas);
+      console.log("roles : ", this.selected_roles);
+      console.log("academic entities : ", this.selected_academic_entities);
+      console.log("academic_comittes : ", this.selected_academic_comittes);
       axios.post('/controlescolar/admin/newWorker', {
         id: this.id,
         type: 'workers',

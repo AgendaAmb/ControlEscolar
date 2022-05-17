@@ -169,7 +169,7 @@ class User extends Authenticatable
             'role_id',
             'id',
             'id'
-        )->select('id', 'name');
+        )->withPivot('model_type');
     }
 
     public function getId()
@@ -177,20 +177,36 @@ class User extends Authenticatable
         return $this->id;
     }
 
+    
     /**
      * A model may have multiple academic areas.
      */
+  
     public function academicAreas(): BelongsToMany
     {
-        return $this->belongsToMany(AcademicArea::class);
+        return $this->belongsToMany(AcademicArea::class,
+            'academic_area_user', 
+        )
+        //->whereDate('end_date','>=',Carbon::now()) //anadi esta linea para ver solo los usuarios con cursos vigentes
+        ->withPivot(
+            'user_type',
+        );
     }
+
 
     /**
      * A model may have multiple academic areas.
      */
     public function academicEntities(): BelongsToMany
     {
-        return $this->belongsToMany(AcademicEntity::class);
+        return $this->belongsToMany(AcademicEntity::class,
+        'academic_entity_user', 
+       
+        )
+        //->whereDate('end_date','>=',Carbon::now()) //anadi esta linea para ver solo los usuarios con cursos vigentes
+        ->withPivot(
+            'user_type',
+        );    
     }
 
     /**
@@ -198,8 +214,18 @@ class User extends Authenticatable
      */
     public function academicComittes(): BelongsToMany
     {
-        return $this->belongsToMany(AcademicComitte::class);
+        return $this->belongsToMany(AcademicComitte::class,
+        'academic_comitte_user', 
+       
+        )
+        //->whereDate('end_date','>=',Carbon::now()) //anadi esta linea para ver solo los usuarios con cursos vigentes
+        ->withPivot(
+            'user_type',
+        );    
     }
+
+    // True relations
+    
 
     /**
      * A model may have multiple academic areas.
@@ -249,12 +275,12 @@ class User extends Authenticatable
         foreach ($roles as $role)
         {
             if (is_int($role))
-                $this->roles()->attach($role, ['model_type' => $this->type]);
+                $this->roles()->syncWithPivotValues($role, ['model_type' => $this->type]);
 
             else if(is_string($role))
             {
                 $role_id = Role::where('name', $role)->value('id');
-                $this->roles()->attach($role_id, ['model_type' => $this->type]);
+                $this->roles()->syncWithPivotValues($role_id, ['model_type' => $this->type]);
             }
         }
     }

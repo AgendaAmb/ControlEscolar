@@ -26,7 +26,7 @@ class HomeController extends Controller
             return '<h1>Usuario invalido</h1>';
         }
         
-        // dd($data);
+        // dd($data['user_data']);
 
         return view('home',[ 
             'user' => $usr[0],
