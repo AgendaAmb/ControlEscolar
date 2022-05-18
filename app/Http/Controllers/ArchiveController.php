@@ -180,7 +180,7 @@ class ArchiveController extends Controller
         
         foreach($archives as $k => $archive){
             //El postulante no tiene toda la información
-           if(!$archive->appliant->name){
+           if(!$archive->appliant->nameComplete){
                
                try{
                 $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
@@ -189,36 +189,17 @@ class ArchiveController extends Controller
                }
                
                 if(sizeof($user_data_collect)>0){
-
                     //ArchiveResource create $user_data_collect[0];
                     $user_data = $user_data_collect[0];
                     //Se guarda el nombre del usuario en el modelo
-                    $archive->appliant->setAttribute('name',$user_data['name'].' '.$user_data['middlename'].' '.$user_data['surname']);
-                
-                    //Eliminar mi archivo para produccion
-                    //Descomentar en local
-                    //Quitas a Ulises y a Rodrigo
-                    if($archive->appliant->id == 298428 || $archive->appliant->id == 245241 ){
-                        unset($archives[$k]);
+                    $name =  strtoupper($user_data['name'].' '.$user_data['middlename'].' '.$user_data['surname']);
+                    $nameUpper = strtoupper($request->student_name);
+
+                    if(strcmp($name,$nameUpper) == 0){
+                        array_push($archives_searched,$archive);
                     }
-
-                }else{
-                    //No existe aplicante por lo que no se podra ver expediente
-                    $archive->appliant->setAttribute('name','Usuario invalido');
-                    $archive->id = -1;
-
-                    //Elimina al usuario invalido de la lista
-                    unset($archives[$k]);
                 }
             }
-            
-            $name = strtoupper($archive->appliant->name);
-            $request->student_name = strtoupper($request->student_name);
-            
-            if(strcmp($name,$request->student_name) == 0){
-                array_push($archives_searched,$archive);
-            }
-
         }
         return ArchiveResource::collection($archives_searched);
     }
@@ -290,9 +271,6 @@ class ArchiveController extends Controller
                     //Elimina al usuario invalido de la lista
                     unset($archives[$k]);
                 }
-
-                
-               
            }
         }
         // return new JsonResponse($archives, 200); //Ver info archivos en consola
