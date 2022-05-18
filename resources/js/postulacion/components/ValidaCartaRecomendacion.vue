@@ -28,12 +28,12 @@
     </div>
 
     <div v-else>
-      <!-- <button
+      <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
-        </button> -->
+        </button>
     </div>
   </div>
 </template>
@@ -144,6 +144,20 @@ export default {
       console.log("res: " + res);
       return res;
     },
+    verCartaRecomendacion(){
+        axios
+        .get(
+          "/controlescolar/solicitud/sentEmailRecommendationLetter",
+          request
+        )
+        .then((response) => {
+
+        })
+        .catch((error) => {
+         
+          console.log(error);
+        });
+    },
 
     enviarCorreoCartaRecomendacion() {
       let request;
@@ -169,8 +183,12 @@ export default {
 
       axios
         .post(
-          "/controlescolar/solicitud/sentEmailRecommendationLetter",
-          request
+          "/controlescolar/solicitud/sentEmailRecommendationLetter",{
+            params: {
+              rl_id: this.recommendation_letter['id'],
+              archive_id: this.archive_id
+            }
+          }
         )
         .then((response) => {
           if (response.data == "Exito, el correo ha sido enviado") {

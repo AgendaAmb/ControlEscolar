@@ -84,17 +84,14 @@
             </div>
           </div>
 
-          <div id="relationshipWithCandidate">
+          <div >
             <hr class="d-block" />
             <h2>Relación con el candidato</h2>
-            <div id="RelacionCandidato" class="d-block">
+            <div class="d-block">
               <div class="d-flex flex-column">
                 <label> ¿Desde cuándo conoce al candidato? </label>
                 <input
-                  id="FechaRelacion"
                   type="date"
-                  v-model="timeToKnow"
-
                   value="{{$recommendation_letter->time_to_know}}"
                   class="form-control"
                 />
@@ -103,7 +100,7 @@
                 <textarea 
                   class="form-control" 
                   rows="4" 
-                  v-model="howMeet"
+                  value="{{$recommendation_letter->how_meet}}"
                 />
         
                 <label class="mt-4">
@@ -113,7 +110,7 @@
                 <textarea
                   class="form-control"
                   rows="4"
-                  v-model="kindRelationship"
+                  value="{{$recommendation_letter->kind_relationship}}"
                 />
         
                 <label class="mt-4">
@@ -124,7 +121,7 @@
                 <textarea
                   class="form-control"
                   rows="4"
-                  v-model="experienceWithCandidate"
+                  value="{{$recommendation_letter->experience_with_candidate}}"
                 />
         
                 <label class="mt-4">
@@ -135,7 +132,7 @@
                 <textarea
                   class="form-control"
                   rows="4"
-                  v-model="qualificationStudent"
+                  value="{{$recommendation_letter->qualification_student}}"
                 />
               </div>
             </div>

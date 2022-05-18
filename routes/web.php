@@ -52,7 +52,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     // # Rutas de admin.
-    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 

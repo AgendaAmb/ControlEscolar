@@ -4370,6 +4370,11 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       console.log("res: " + res);
       return res;
     },
+    verCartaRecomendacion: function verCartaRecomendacion() {
+      axios.get("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {})["catch"](function (error) {
+        console.log(error);
+      });
+    },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
       var request; //Ya existe carta de recomendacion
 
@@ -4391,7 +4396,12 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         };
       }
 
-      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {
+      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", {
+        params: {
+          rl_id: this.recommendation_letter['id'],
+          archive_id: this.archive_id
+        }
+      }).then(function (response) {
         if (response.data == "Exito, el correo ha sido enviado") {
           Swal.fire({
             title: "El correo se ha enviado correctamente",
@@ -15318,7 +15328,20 @@ var render = function () {
               [_vm._v("\n      Enviar correo\n    ")]
             ),
           ])
-        : _c("div"),
+        : _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function ($event) {
+                    return _vm.verCartaRecomendacion()
+                  },
+                },
+              },
+              [_vm._v("\n        Ver archivo\n      ")]
+            ),
+          ]),
     ],
     2
   )
