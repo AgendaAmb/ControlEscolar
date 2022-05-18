@@ -135,7 +135,16 @@ class ArchiveController extends Controller
 
     public function archivesProfessor(Request $request)
     {
-     
+        // try{
+        //     $request->validate([
+        //         'student_name' =>  ['required', 'string'],
+        //         'filter[announcement.id]' =>  ['required', 'numeric'],
+        //     ]);
+        // } catch (\Exception $e) {
+            // return new JsonResponse(['message' =>$request->student_name] , 502);
+        // }
+
+
         try {
 
             $archives = QueryBuilder::for(Archive::class)
@@ -166,7 +175,7 @@ class ArchiveController extends Controller
                 array_push($archives_searched,$archive);
             }
         }
-        
+        // return new JsonResponse($archives_searched, 404);
          return ArchiveResource::collection($archives_searched);
     }
 

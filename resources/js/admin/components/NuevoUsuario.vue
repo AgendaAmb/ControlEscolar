@@ -90,7 +90,8 @@ export default {
 
   methods: {
     registraUsuario() {
-         console.log("academic areas: ", this.selected_academic_areas);
+      
+      console.log("academic areas: ", this.selected_academic_areas);
       console.log("roles : ", this.selected_roles);
       console.log("academic entities : ", this.selected_academic_entities);
       console.log("academic_comittes : ", this.selected_academic_comittes);
@@ -103,6 +104,16 @@ export default {
             selected_academic_entities: this.selected_academic_entities,
             selected_academic_comittes: this.selected_academic_comittes
         }).then(response => {
+          Swal.fire({
+              title: "Exito",
+              text: "Se ha agregado un nuevo usuario a la lsita",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            });
+
           console.log(response);
         }).catch(error => {
           console.log(error);

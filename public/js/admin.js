@@ -49992,6 +49992,15 @@ __webpack_require__.r(__webpack_exports__);
         selected_academic_entities: this.selected_academic_entities,
         selected_academic_comittes: this.selected_academic_comittes
       }).then(function (response) {
+        Swal.fire({
+          title: "Exito",
+          text: "Se ha agregado un nuevo usuario a la lsita",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar"
+        });
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -67297,7 +67306,8 @@ var app = new Vue({
     'nuevo-usuario': _components_NuevoUsuario__WEBPACK_IMPORTED_MODULE_1__["default"],
     'editar-usuario': _components_EditarUsuario__WEBPACK_IMPORTED_MODULE_2__["default"],
     'usuarios-ce-row-template': _components_UsuariosCeRowTemplate_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }
+  },
+  methods: {}
 });
 })();
 

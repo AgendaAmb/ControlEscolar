@@ -81,13 +81,13 @@ export default {
           .get("/controlescolar/solicitud/archives/professor", {
             params: {
               student_name: this.student_name,
-              "filter[announcement.id]": this.announcement,
+              // "filter[announcement.id]": this.announcement,
             },
           })
           .then((response) => {
             this.dataLength = response.data.length; // cantidad de articulos
+            console.log('archives.found '+ response.data[0]);
             this.$emit("archives-found", response.data); //actualiza archivos
-            console.log('archives.found '+ response);
           })
           .catch((error) => {
             console.log(error);

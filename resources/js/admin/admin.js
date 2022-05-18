@@ -29,7 +29,8 @@ const app = new Vue({
         roles: roles,
         academic_areas: academic_areas,
         academic_entities: academic_entities,
-        academic_comittes: academic_comittes
+        academic_comittes: academic_comittes,
+       
     },
 
     components: {
@@ -37,5 +38,11 @@ const app = new Vue({
         'nuevo-usuario':NuevoUsuario,
         'editar-usuario':EditarUsuario,
         'usuarios-ce-row-template': UsuariosCeRowTemplate
-    }
+    },
+
+    methods: {
+
+
+        
+    },
 });

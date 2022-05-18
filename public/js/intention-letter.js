@@ -357,16 +357,16 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         //Se hace la busqueda
         axios.get("/controlescolar/solicitud/archives/professor", {
           params: {
-            student_name: this.student_name,
-            "filter[announcement.id]": this.announcement
+            student_name: this.student_name // "filter[announcement.id]": this.announcement,
+
           }
         }).then(function (response) {
           _this.dataLength = response.data.length; // cantidad de articulos
 
+          console.log('archives.found ' + response.data[0]);
+
           _this.$emit("archives-found", response.data); //actualiza archivos
 
-
-          console.log('archives.found ' + response);
         })["catch"](function (error) {
           console.log(error);
           Swal.fire({
