@@ -86,7 +86,7 @@ export default {
           })
           .then((response) => {
             this.dataLength = response.data.length; // cantidad de articulos
-            console.log('archives.found '+ response.data[0]);
+            console.log('archives.found '+ response.data.length);
             this.$emit("archives-found", response.data); //actualiza archivos
           })
           .catch((error) => {

@@ -159,24 +159,68 @@ class ArchiveController extends Controller
         }
 
         $archives_searched = [];
-        foreach($archives as $archive){
-           # Nombre completo del postulante
-            $name = implode(' ', [
-                $archive->appliant->name ?? '',
-                $archive->appliant->middlename ?? '',
-                $archive->appliant->surname ?? '',
-            ]);  
+        // foreach($archives as $archive){
+        //    # Nombre completo del postulante
+        //     $name = implode(' ', [
+        //         $archive->appliant->name ?? '',
+        //         $archive->appliant->middlename ?? '',
+        //         $archive->appliant->surname ?? '',
+        //     ]);  
 
-            //To uppercase the name
-            $name = strtoupper($name);
+        //     //To uppercase the name
+        //     $name = strtoupper($name);
+        //     $request->student_name = strtoupper($request->student_name);
+
+        //     if($name === $request->student_name){
+        //         array_push($archives_searched,$archive);
+        //     }
+        // }
+        // return new JsonResponse($archives_searched, 404);
+         
+        
+        foreach($archives as $k => $archive){
+            //El postulante no tiene toda la información
+           if(!$archive->appliant->name){
+               
+               try{
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
+               }catch (\Exception $e) {
+                   return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+               }
+               
+                if(sizeof($user_data_collect)>0){
+
+                    //ArchiveResource create $user_data_collect[0];
+                    $user_data = $user_data_collect[0];
+                    //Se guarda el nombre del usuario en el modelo
+                    $archive->appliant->setAttribute('name',$user_data['name'].' '.$user_data['middlename'].' '.$user_data['surname']);
+                
+                    //Eliminar mi archivo para produccion
+                    //Descomentar en local
+                    //Quitas a Ulises y a Rodrigo
+                    if($archive->appliant->id == 298428 || $archive->appliant->id == 245241 ){
+                        unset($archives[$k]);
+                    }
+
+                }else{
+                    //No existe aplicante por lo que no se podra ver expediente
+                    $archive->appliant->setAttribute('name','Usuario invalido');
+                    $archive->id = -1;
+
+                    //Elimina al usuario invalido de la lista
+                    unset($archives[$k]);
+                }
+            }
+            
+            $name = strtoupper($archive->appliant->name);
             $request->student_name = strtoupper($request->student_name);
-
-            if($name === $request->student_name){
+            
+            if(strcmp($name,$request->student_name) == 0){
                 array_push($archives_searched,$archive);
             }
+
         }
-        // return new JsonResponse($archives_searched, 404);
-         return ArchiveResource::collection($archives_searched);
+        return ArchiveResource::collection($archives_searched);
     }
 
     /**

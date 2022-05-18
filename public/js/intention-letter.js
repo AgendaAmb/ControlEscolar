@@ -363,7 +363,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         }).then(function (response) {
           _this.dataLength = response.data.length; // cantidad de articulos
 
-          console.log('archives.found ' + response.data[0]);
+          console.log('archives.found ' + response.data.length);
 
           _this.$emit("archives-found", response.data); //actualiza archivos
 
