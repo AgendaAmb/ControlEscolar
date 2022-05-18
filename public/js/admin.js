@@ -50075,19 +50075,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
@@ -50168,6 +50155,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -50258,7 +50247,34 @@ __webpack_require__.r(__webpack_exports__);
      * Envía una notificación para eliminar al trabajador
      */
     eliminaTrabajador: function eliminaTrabajador() {
-      this.$emit("deleteWorker", this.id);
+      var _this = this;
+
+      axios.post("/controlescolar/admin/deleteWorker", {
+        id: this.id,
+        module_id: 2,
+        type: 'workers'
+      }).then(function (response) {
+        Swal.fire({
+          title: "El usuario ha sido eliminado",
+          text: "Podras volver a insertarlo cuando desees",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar"
+        });
+
+        _this.$emit("deleteWorker", _this.id);
+      })["catch"](function (error) {
+        var _Swal$fire;
+
+        Swal.fire((_Swal$fire = {
+          title: "Error al eliminar al usuario",
+          icon: "error"
+        }, _defineProperty(_Swal$fire, "title", error.data.message), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
+
+        console.log(error);
+      });
     }
   }
 });

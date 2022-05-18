@@ -365,6 +365,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 
           _this.$emit("archives-found", response.data); //actualiza archivos
 
+
+          console.log('archives.found ' + response);
         })["catch"](function (error) {
           console.log(error);
           Swal.fire({

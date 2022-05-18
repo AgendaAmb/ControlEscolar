@@ -189,6 +189,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
             Route::post('updateWorker', [AdminController::class, 'updateWorker'])
             ->name('updateWorker');
+
+            Route::post('deleteWorker', [AdminController::class, 'deleteWorker'])
+            ->name('deleteWorker');
     });
 
 

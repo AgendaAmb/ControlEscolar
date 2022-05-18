@@ -94,7 +94,41 @@ export default {
      * Envía una notificación para eliminar al trabajador
      */
     eliminaTrabajador() {
-      this.$emit("deleteWorker", this.id);
+      axios
+        .post(
+          "/controlescolar/admin/deleteWorker",{
+              id: this.id,
+              module_id: 2,
+              type: 'workers'
+          }
+        )
+        .then((response) => {
+            Swal.fire({
+              title: "El usuario ha sido eliminado",
+              text: "Podras volver a insertarlo cuando desees",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            });
+            
+            this.$emit("deleteWorker", this.id);
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error al eliminar al usuario",
+            icon: "error",
+            title: error.data.message,
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Entendido",
+          });
+          // alert('Ha ocurrido un error, intenta mas tarde');
+          console.log(error);
+        });
+
+     
     },
   },
 };
