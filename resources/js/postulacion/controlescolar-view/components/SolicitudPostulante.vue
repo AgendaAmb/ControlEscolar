@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div  class="row">
     <!-- Info postulante -->
     <div class="col-12">
       <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
@@ -309,8 +309,8 @@
       <div class="row mx-2 mb-2 justify-content-center">
         <strong>Cualquier cambio de estado se le informara al estudiante</strong>
       </div>
-      <div class="row mb-4 mx-1 justify-content-center">
-        <div class="col-4">
+      <div class="row my-4 mx-1 justify-content-center">
+        <div class="col-4 justify-content-center">
           <button
             @click="EnviarRevision('Rechazar')"
             class="btn btn-danger"
@@ -319,7 +319,7 @@
             <strong>Rechazar</strong>
           </button>
         </div>
-        <div class="col-4">
+        <div class="col-4 justify-content-center">
           <button
            data-toggle="modal"
             data-target="#ActualizaExpediente"
@@ -329,7 +329,7 @@
             <strong>Corregir</strong>
           </button>
         </div>
-        <div class="col-4">
+        <div class="col-4 align-content-center">
           <button
             @click="EnviarRevision('Aceptar')"
             class="btn btn-success"
@@ -652,6 +652,14 @@ export default {
     },
 
     EnviarRevision(status){
+      let id_status = 1;
+
+      if(status === "Aceptar"){
+        id_status = 5;
+      }else if (status === "Rechazar"){
+        id_status = 6;
+      }
+
       if(status != 'Corregir'){
          Swal.fire({
           title: "¿Estas seguro de realizar el cambio?",
@@ -663,7 +671,38 @@ export default {
           confirmButtonText: "Aceptar",
           cancelButtonText: "Cancelar",
         }).then((result) => {
-
+          if (result.isConfirmed) {
+          axios
+            .post("/controlescolar/solicitud/updateStatusArchive", {
+              
+              // Status id to change the state
+              archive_id: this.archive_id,
+              status : id_status,
+              
+            })
+            .then((response) => {
+              Swal.fire({
+                title: "El expediente del postulante ha sido modificado",
+                text: "Se le informara al alumno de dicha verificación de documentos",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+              }).then((result) => {
+                window.location.href = "/controlescolar/solicitud/";
+              });
+              
+            })
+            .catch((error) => {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error",
+              });
+            });
+        }
         });
       }
       

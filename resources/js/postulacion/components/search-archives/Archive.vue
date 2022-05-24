@@ -134,6 +134,9 @@ export default {
         case 6:
         this.name_status = "Rechazado";
         break;
+        default:
+         this.name_status = "Incompleto";
+          break;
 
     }
   },

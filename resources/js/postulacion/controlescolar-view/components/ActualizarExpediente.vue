@@ -31,7 +31,7 @@
                 <h4>Documentos para actualizar</h4>
                 <ul>
                   <li
-                    v-for="etiqueta in etiquetas"
+                    v-for="etiqueta in required_documents"
                     :key="etiqueta.id"
                     class="form-check"
                   >
@@ -49,14 +49,17 @@
                   </li>
                 </ul>
                 <div class="row my-2 mx-2">
-                    <div class="col-12 my-2 ">
-                         <h4>Deja un mensaje al postulante para que queden mas claras las instrucciones para el cambio</h4>
-                        <textarea
-                            class="form-control"
-                            rows="4"
-                            v-model="instructions"
-                            />
-                    </div>
+                  <div class="col-12 my-2">
+                    <h4>
+                      Deja un mensaje al postulante para que queden mas claras
+                      las instrucciones para el cambio
+                    </h4>
+                    <textarea
+                      class="form-control"
+                      rows="4"
+                      v-model="instructions"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -70,7 +73,7 @@
             style="background-color: #0160ae"
             @click="enviarActualizacion"
           >
-            Registrar
+            Enviar actualizaciones
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cerrar
@@ -85,10 +88,111 @@
 export default {
   name: "actualizar-expediente",
 
-  props: {},
+  props: {
+    required_documents: {
+      type: Array,
+      default: [],
+    },
+
+    alias_academic_program: {
+      type: String,
+      default: "maestria",
+    },
+
+    archive_id: {
+      type: Number,
+      default: null,
+    },
+
+    academic_program: {
+      type: Object,
+      default: null,
+    },
+
+    user_id: {
+      type: Number,
+      default: null,
+    },
+  },
+
+  data() {
+    return {
+      selected_etiquetas: [],
+      instructions: "",
+    };
+  },
 
   methods: {
-    enviarActualizacion() {},
+    enviarActualizacion() {
+      console.log(this.selected_etiquetas);
+      console.log("instructions: " + this.instructions);
+
+      if (
+        this.selected_etiquetas.length > 0 &&
+        this.archive_id != null &&
+        this.user_id != null
+      ) {
+        axios
+          .post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+            selected_etiquetas: this.selected_etiquetas,
+            instructions: this.instructions,
+            academic_program: this.academic_program,
+            archive_id: this.archive_id,
+            user_id: this.user_id,
+          })
+          .then((response) => {
+            Swal.fire({
+              title: "Exito",
+              text: "Se ha enviado un correo al usuario con los cambios a realizar",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Entendido",
+            }).then((result) => {
+                axios
+                  .post("/controlescolar/solicitud/updateStatusArchive", {
+                    // Status id to change the state
+                    archive_id: this.archive_id,
+                    status: 3,
+                  })
+                  .then((response) => {
+                    window.location.href = "/controlescolar/solicitud/";
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    Swal.fire({
+                      title: "Error al actualizar",
+                      showCancelButton: false,
+                      icon: "error",
+                    });
+                  });
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Ups",
+              text: "No fue posible completar la petición, intentelo mas tarde",
+              icon: "error",
+              title: error.data,
+              showCancelButton: true,
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Entendido",
+            });
+            // alert('Ha ocurrido un error, intenta mas tarde');
+            console.log(error);
+          });
+      } else {
+        Swal.fire({
+          title: "Alguno de los datos no es correcto, verifique nuevamente",
+          icon: "error",
+          title: error.data,
+          showCancelButton: true,
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Entendido",
+        });
+      }
+    },
 
     requiredForAcademicProgram() {
       let res = true;
@@ -207,12 +311,6 @@ export default {
 
       return res;
     },
-  },
-
-  data() {
-    return {
-      selected_etiquetas: [],
-    };
   },
 };
 </script>

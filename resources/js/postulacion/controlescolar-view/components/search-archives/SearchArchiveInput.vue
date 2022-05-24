@@ -69,10 +69,10 @@ export default {
   methods: {
     buscaExpediente() {
       //Datos no completos para hacer busqueda
-      if (this.student_name == null) {
+      if (this.student_name == null || this.announcement == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
-          text: "El campo se encuentra vacio, porfavor introduzca el nombre",
+          text: "Alguno de los campos se encuentra vacio",
           icon: "error",
         });
       } else {
@@ -81,11 +81,12 @@ export default {
           .get("/controlescolar/solicitud/archives/professor", {
             params: {
               student_name: this.student_name,
-              "filter[announcement.id]": this.announcement,
+              // "filter[announcement.id]": this.announcement,
             },
           })
           .then((response) => {
             this.dataLength = response.data.length; // cantidad de articulos
+            console.log('archives.found '+ response.data.length);
             this.$emit("archives-found", response.data); //actualiza archivos
           })
           .catch((error) => {

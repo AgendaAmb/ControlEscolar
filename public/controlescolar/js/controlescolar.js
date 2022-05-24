@@ -12,6 +12,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
 //
 //
 //
@@ -97,9 +102,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "actualizar-expediente",
-  props: {},
+  props: {
+    required_documents: {
+      type: Array,
+      "default": []
+    },
+    alias_academic_program: {
+      type: String,
+      "default": "maestria"
+    },
+    archive_id: {
+      type: Number,
+      "default": null
+    },
+    academic_program: {
+      type: Object,
+      "default": null
+    },
+    user_id: {
+      type: Number,
+      "default": null
+    }
+  },
+  data: function data() {
+    return {
+      selected_etiquetas: [],
+      instructions: ""
+    };
+  },
   methods: {
-    enviarActualizacion: function enviarActualizacion() {},
+    enviarActualizacion: function enviarActualizacion() {
+      var _this = this;
+
+      console.log(this.selected_etiquetas);
+      console.log("instructions: " + this.instructions);
+
+      if (this.selected_etiquetas.length > 0 && this.archive_id != null && this.user_id != null) {
+        axios.post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+          selected_etiquetas: this.selected_etiquetas,
+          instructions: this.instructions,
+          academic_program: this.academic_program,
+          archive_id: this.archive_id,
+          user_id: this.user_id
+        }).then(function (response) {
+          Swal.fire({
+            title: "Exito",
+            text: "Se ha enviado un correo al usuario con los cambios a realizar",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Entendido"
+          }).then(function (result) {
+            axios.post("/controlescolar/solicitud/updateStatusArchive", {
+              // Status id to change the state
+              archive_id: _this.archive_id,
+              status: 3
+            }).then(function (response) {
+              window.location.href = "/controlescolar/solicitud/";
+            })["catch"](function (error) {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error"
+              });
+            });
+          });
+        })["catch"](function (error) {
+          var _Swal$fire;
+
+          Swal.fire((_Swal$fire = {
+            title: "Ups",
+            text: "No fue posible completar la petición, intentelo mas tarde",
+            icon: "error"
+          }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
+
+          console.log(error);
+        });
+      } else {
+        var _Swal$fire2;
+
+        Swal.fire((_Swal$fire2 = {
+          title: "Alguno de los datos no es correcto, verifique nuevamente",
+          icon: "error"
+        }, _defineProperty(_Swal$fire2, "title", error.data), _defineProperty(_Swal$fire2, "showCancelButton", true), _defineProperty(_Swal$fire2, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire2, "cancelButtonText", "Entendido"), _Swal$fire2));
+      }
+    },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
       var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
 
@@ -235,11 +324,6 @@ __webpack_require__.r(__webpack_exports__);
 
       return res;
     }
-  },
-  data: function data() {
-    return {
-      selected_etiquetas: []
-    };
   }
 });
 
@@ -561,6 +645,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -599,7 +684,10 @@ __webpack_require__.r(__webpack_exports__);
     archives_recommendation_letters: {
       type: Array
     },
-    errors: Array
+    archive_id: {
+      type: Number,
+      "default": null
+    }
   }
 });
 
@@ -616,6 +704,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -4512,6 +4601,16 @@ __webpack_require__.r(__webpack_exports__);
       this.human_capitals.splice(index, 1);
     },
     EnviarRevision: function EnviarRevision(status) {
+      var _this7 = this;
+
+      var id_status = 1;
+
+      if (status === "Aceptar") {
+        id_status = 5;
+      } else if (status === "Rechazar") {
+        id_status = 6;
+      }
+
       if (status != 'Corregir') {
         Swal.fire({
           title: "¿Estas seguro de realizar el cambio?",
@@ -4522,7 +4621,34 @@ __webpack_require__.r(__webpack_exports__);
           cancelButtonColor: "#d33",
           confirmButtonText: "Aceptar",
           cancelButtonText: "Cancelar"
-        }).then(function (result) {});
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            axios.post("/controlescolar/solicitud/updateStatusArchive", {
+              // Status id to change the state
+              archive_id: _this7.archive_id,
+              status: id_status
+            }).then(function (response) {
+              Swal.fire({
+                title: "El expediente del postulante ha sido modificado",
+                text: "Se le informara al alumno de dicha verificación de documentos",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar"
+              }).then(function (result) {
+                window.location.href = "/controlescolar/solicitud/";
+              });
+            })["catch"](function (error) {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error"
+              });
+            });
+          }
+        });
       }
     }
   }
@@ -4643,8 +4769,15 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       type: Object,
       "default": null
     },
+    archive_id: {
+      type: Number,
+      "default": null
+    },
+    appliant: {
+      type: Object,
+      "default": null
+    },
     index: Number,
-    appliant: Object,
     academic_program: Object,
     errors: Array
   },
@@ -4682,6 +4815,30 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       console.log("res: " + res);
       return res;
     },
+    verCartaRecomendacion: function verCartaRecomendacion() {
+      if (this.recommendation_letter == null || this.appliant == null || this.archive_id == null) {
+        Swal.fire({
+          title: "Ups!",
+          text: "El usuario con la carta de recomendación a ver no existe",
+          icon: "error"
+        });
+      }
+
+      axios.get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+        params: {
+          rl_id: this.recommendation_letter['id'],
+          archive_id: this.archive_id,
+          user_id: this.appliant['id']
+        }
+      }).then(function (response) {})["catch"](function (error) {
+        console.log(error);
+        Swal.fire({
+          title: "Error al hacer busqueda",
+          text: error.response.data,
+          icon: "error"
+        });
+      });
+    },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
       var request; //Ya existe carta de recomendacion
 
@@ -4703,7 +4860,12 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         };
       }
 
-      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {
+      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", {
+        params: {
+          rl_id: this.recommendation_letter['id'],
+          archive_id: this.archive_id
+        }
+      }).then(function (response) {
         if (response.data == "Exito, el correo ha sido enviado") {
           Swal.fire({
             title: "El correo se ha enviado correctamente",
@@ -5370,7 +5532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-4f252fc4] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-4f252fc4] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-4f252fc4] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-4f252fc4] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11050,7 +11212,7 @@ var render = function () {
                       _vm._v(" "),
                       _c(
                         "ul",
-                        _vm._l(_vm.etiquetas, function (etiqueta) {
+                        _vm._l(_vm.required_documents, function (etiqueta) {
                           return _c(
                             "li",
                             { key: etiqueta.id, staticClass: "form-check" },
@@ -11124,10 +11286,10 @@ var render = function () {
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "row my-2 mx-2" }, [
-                        _c("div", { staticClass: "col-12 my-2 " }, [
+                        _c("div", { staticClass: "col-12 my-2" }, [
                           _c("h4", [
                             _vm._v(
-                              "Deja un mensaje al postulante para que queden mas claras las instrucciones para el cambio"
+                              "\n                    Deja un mensaje al postulante para que queden mas claras\n                    las instrucciones para el cambio\n                  "
                             ),
                           ]),
                           _vm._v(" "),
@@ -11172,7 +11334,7 @@ var render = function () {
                     attrs: { id: "submit", type: "submit" },
                     on: { click: _vm.enviarActualizacion },
                   },
-                  [_vm._v("\n          Registrar\n        ")]
+                  [_vm._v("\n          Enviar actualizaciones\n        ")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -11415,9 +11577,9 @@ var render = function () {
                 _c("valida-carta-recomendacion", {
                   attrs: {
                     email: my_email.email,
+                    archive_id: _vm.archive_id,
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
-                    errors: _vm.errors,
                     index: index + 1,
                   },
                 }),
@@ -11440,6 +11602,7 @@ var render = function () {
                   archive_recommendation_letter:
                     _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 1,
                 },
@@ -11456,6 +11619,7 @@ var render = function () {
                 attrs: {
                   email: _vm.emails[0].email,
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 2,
                 },
@@ -11479,6 +11643,7 @@ var render = function () {
                     archive_recommendation_letter:
                       _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
+                    archive_id: _vm.archive_id,
                     academic_program: _vm.academic_program,
                     index: index + 1,
                   },
@@ -11636,20 +11801,18 @@ var render = function () {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.isIntentionLetter() === false
-              ? _c(
-                  "label",
-                  { staticClass: "cargarArchivo d-block ml-auto my-auto" },
-                  [
-                    _vm._v("\n        Subir Documento\n        "),
-                    _c("input", {
-                      staticClass: "form-control d-none",
-                      attrs: { type: "file" },
-                      on: { change: _vm.cargaDocumento },
-                    }),
-                  ]
-                )
-              : _vm._e(),
+            _c(
+              "label",
+              { staticClass: "cargarArchivo d-block ml-auto my-auto" },
+              [
+                _vm._v(" \n          Subir Documento\n        "),
+                _c("input", {
+                  staticClass: "form-control d-none",
+                  attrs: { type: "file" },
+                  on: { change: _vm.cargaDocumento },
+                }),
+              ]
+            ),
           ]),
         ]),
       ])
@@ -15759,8 +15922,8 @@ var render = function () {
       _vm._v(" "),
       _vm._m(9),
       _vm._v(" "),
-      _c("div", { staticClass: "row mb-4 mx-1 justify-content-center" }, [
-        _c("div", { staticClass: "col-4" }, [
+      _c("div", { staticClass: "row my-4 mx-1 justify-content-center" }, [
+        _c("div", { staticClass: "col-4 justify-content-center" }, [
           _c(
             "button",
             {
@@ -15778,7 +15941,7 @@ var render = function () {
         _vm._v(" "),
         _vm._m(10),
         _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "col-4 align-content-center" }, [
           _c(
             "button",
             {
@@ -15951,7 +16114,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
+    return _c("div", { staticClass: "col-4 justify-content-center" }, [
       _c(
         "button",
         {
@@ -16055,7 +16218,20 @@ var render = function () {
               [_vm._v("\n      Enviar correo\n    ")]
             ),
           ])
-        : _c("div"),
+        : _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function ($event) {
+                    return _vm.verCartaRecomendacion()
+                  },
+                },
+              },
+              [_vm._v("\n        Ver archivo\n      ")]
+            ),
+          ]),
     ],
     2
   )

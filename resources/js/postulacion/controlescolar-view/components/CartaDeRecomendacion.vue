@@ -23,9 +23,9 @@
           <!-- No existe carta de recomendacion pero se creara -->
           <valida-carta-recomendacion
             :email="my_email.email"
+            :archive_id="archive_id"
             :appliant="appliant"
             :academic_program="academic_program"
-            :errors="errors"
             :index="index + 1"
           >
           </valida-carta-recomendacion>
@@ -40,6 +40,7 @@
             :recommendation_letter="recommendation_letters[0]"
             :archive_recommendation_letter="archives_recommendation_letters[0]"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
             :index = 1
           >
@@ -51,6 +52,7 @@
           <valida-carta-recomendacion
             :email="emails[0].email"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
             :index = 2
           >
@@ -71,10 +73,9 @@
           <valida-carta-recomendacion
             :email="rl.email_evaluator"
             :recommendation_letter="recommendation_letters[index]"
-            :archive_recommendation_letter="
-              archives_recommendation_letters[index]
-            "
+            :archive_recommendation_letter="archives_recommendation_letters[index]"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
             :index="index + 1"
           >
@@ -133,7 +134,11 @@ export default {
       type: Array,
     },
 
-    errors: Array,
+    archive_id:{
+      type: Number,
+      default: null
+    },
+
   },
 };
 </script>

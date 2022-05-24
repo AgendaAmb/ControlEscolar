@@ -106,7 +106,7 @@ export default {
           }
         })
         .then((response) => {
-          
+            console.log(response.data);
             this.dataLength = response.data.length; // cantidad de articulos
             this.$emit("archives-found", response.data); //actualiza archivos
         })

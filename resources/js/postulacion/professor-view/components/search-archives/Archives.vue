@@ -2,7 +2,7 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th v-for="(column, index) in columns" :key="index">{{column}}</th>
                 </tr>
             </thead>
@@ -31,7 +31,9 @@ export default {
                     'Periodo',
                     'Nombre completo', 
                     'Programa académico',
+                    'Estado',
                     'Expediente'
+                    
                 ];
             }
         }

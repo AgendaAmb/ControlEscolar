@@ -28,12 +28,12 @@
     </div>
 
     <div v-else>
-      <!-- <button
+      <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
-        </button> -->
+        </button>
     </div>
   </div>
 </template>
@@ -103,8 +103,18 @@ export default {
       default: null,
     },
 
+    archive_id:{
+      type:Number,
+      default:null
+    },
+
+    appliant: {
+      type:Object,
+      default:null,
+    },
+
     index: Number,
-    appliant: Object,
+    
     academic_program: Object,
     errors: Array,
   },
@@ -144,6 +154,36 @@ export default {
       console.log("res: " + res);
       return res;
     },
+     verCartaRecomendacion(){
+
+
+       if (this.recommendation_letter == null || this.appliant == null  || this.archive_id == null) {
+         Swal.fire({
+              title: "Ups!",
+              text: "El usuario con la carta de recomendación a ver no existe",
+              icon: "error",
+            });
+      }
+    
+        axios
+          .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+            params: {
+              rl_id: this.recommendation_letter['id'],
+              archive_id: this.archive_id,
+              user_id: this.appliant['id'],
+            },
+          })
+          .then((response) => {
+          })
+          .catch((error) => {
+            console.log(error);
+            Swal.fire({
+              title: "Error al hacer busqueda",
+              text: error.response.data,
+              icon: "error",
+            });
+          });
+    },
 
     enviarCorreoCartaRecomendacion() {
       let request;
@@ -169,8 +209,12 @@ export default {
 
       axios
         .post(
-          "/controlescolar/solicitud/sentEmailRecommendationLetter",
-          request
+          "/controlescolar/solicitud/sentEmailRecommendationLetter",{
+            params: {
+              rl_id: this.recommendation_letter['id'],
+              archive_id: this.archive_id
+            }
+          }
         )
         .then((response) => {
           if (response.data == "Exito, el correo ha sido enviado") {

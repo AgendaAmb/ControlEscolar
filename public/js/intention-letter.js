@@ -144,6 +144,10 @@ __webpack_require__.r(__webpack_exports__);
       case 6:
         this.name_status = "Rechazado";
         break;
+
+      default:
+        this.name_status = "Incompleto";
+        break;
     }
   },
   methods: {
