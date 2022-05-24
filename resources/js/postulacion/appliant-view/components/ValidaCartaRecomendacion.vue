@@ -26,7 +26,7 @@
         Enviar correo
       </button>
     </div>
-
+<!-- 
     <div v-else>
       <button
           @click="verCartaRecomendacion()"
@@ -34,7 +34,7 @@
         >
           Ver archivo
         </button>
-    </div>
+    </div> -->
   </div>
 </template>
 

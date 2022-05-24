@@ -1,8 +1,19 @@
+<script>
+    const user = @json($user);
+    </script>
+
 @extends('layouts.app')
 @section('main')
 
-<h1>Bienvenido</h1>
-<h4>{{$user['name']}} {{$user['middlename']}} {{$user['surname']}} </h4>
-<h5>Clave unica:  {{$user['id']}}</h5>
+<div class="container-fluid">
+    <candidate-data
+    :user = "user"
+    >
+    </candidate-data>
+</div>
 
 @endsection
+
+@push('scripts')
+<script src="{{ asset('js/home.js') }}" defer></script>
+@endpush

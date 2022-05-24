@@ -163,7 +163,8 @@
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva experiencia laboral
+              Selecciona el siguiente botón para agregar una nueva experiencia
+              laboral
             </label>
           </div>
         </div>
@@ -172,7 +173,7 @@
             <button
               @click="agregaExperienciaLaboral"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Experiencia Laboral
             </button>
@@ -210,11 +211,12 @@
         >
         </produccion-cientifica>
 
-         <div class="row align-items-center mb-0 mt-2">
+        <div class="row align-items-center mb-0 mt-2">
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica
+              Selecciona el siguiente botón para agregar una nueva publicación
+              para Producción Científica
             </label>
           </div>
         </div>
@@ -223,13 +225,13 @@
             <button
               @click="agregaProduccionCientifica"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Producción Científica
             </button>
           </div>
         </div>
-            <hr class="d-block" :style="ColorStrip" />
+        <hr class="d-block" :style="ColorStrip" />
 
         <!-- Capital humano subseccion -->
         <h5 class="mt-4 d-block">
@@ -251,7 +253,8 @@
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano
+              Selecciona el siguiente botón para agregar un nuevo curso para
+              Capital Humano
             </label>
           </div>
         </div>
@@ -260,13 +263,12 @@
             <button
               @click="agregaCapitalHumano"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Capital Humano
             </button>
           </div>
         </div>
-        
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -285,6 +287,34 @@
         />
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
+    </div>
+
+    <div class="col-12 align-items-center my-4 mx-2">
+      <div class="row mx-2">
+        <strong>Nota:</strong>
+      </div>
+      <div class="row mx-2">
+        <p>
+          Si has completado todos los campos necesarios y estas conforme con tu
+          información selecciona la opción de enviar expediente para continuar
+          con el proceso<br />
+          <strong>
+            No podras hacer correcciones despues de aceptar sin previo
+            aviso</strong
+          >
+        </p>
+      </div>
+      <div class="row my-2 mx-1">
+        <div class="col-12">
+          <button
+            @click="EnviarExpediente"
+            class="btn btn-success"
+            style="height: 45px; width: 250px"
+          >
+            <strong>Enviar Expediente</strong>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -320,7 +350,7 @@ export default {
     // Documentos personales.
     personal_documents: Array,
 
-    //Documentos curriculares 
+    //Documentos curriculares
     curricular_documents: Array,
 
     // Motivos de ingreso.
@@ -362,8 +392,7 @@ export default {
     viewer: Object,
   },
 
-  computed: {
-  },
+  computed: {},
 
   data() {
     return {
@@ -391,14 +420,13 @@ export default {
   },
 
   methods: {
-
-    getUniversities(state){
+    getUniversities(state) {
       let universities = [];
-      for(let i=0; i<this.Countries.length;i++){
-          if(state === this.Countries[i].name){
-            universities = this.Countries[i].universities;
-            break;
-          }
+      for (let i = 0; i < this.Countries.length; i++) {
+        if (state === this.Countries[i].name) {
+          universities = this.Countries[i].universities;
+          break;
+        }
       }
       return universities;
     },
@@ -594,6 +622,52 @@ export default {
 
     eliminaCapitalHumanoFromList(index) {
       this.human_capitals.splice(index, 1);
+    },
+
+    EnviarExpediente() {
+      Swal.fire({
+        title: "¿Estas seguro que todo esta completo?",
+        text: "Estas a punto de enviar tu expediente, se revisara y se validara, caso contrario te haremos saber de los cambios necesarios",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post("/controlescolar/solicitud/updateStatusArchive", {
+              
+              // Status id to change the state
+              archive_id: this.archive_id,
+              status : 2,
+              
+            })
+            .then((response) => {
+              Swal.fire({
+                title: "Tu expediente ha sido actualizado",
+                text: "Te recomendamos estar al pendiente del correo que registraste con nosotros para cualquier aviso y/o cambio",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+              }).then((result) => {
+                window.location.href = "/controlescolar/home";
+              });
+              
+            })
+            .catch((error) => {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error",
+              });
+            });
+        }
+      });
     },
   },
 };

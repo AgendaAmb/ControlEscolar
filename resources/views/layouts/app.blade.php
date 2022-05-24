@@ -22,7 +22,11 @@
     @stack('scripts')
 </head>
 <body class="d-block mw-100 mx-0">
-    <x-academic-program-header/>
+
+    @if (Auth::user()!=null)
+        <x-academic-program-header/>
+    @endif
+    
     @section('main-content')
     <main id="app"@section('container-class') class="container-fluid" @show> 
         @yield('main') 

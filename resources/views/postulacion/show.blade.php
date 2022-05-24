@@ -15,7 +15,18 @@
     {{-- Img representativa de postulacion --}}
     <img class="img-fluid mt-4 " src="{{ $header_academic_program }}" width="100%" height="300px!important">
 
-    <form v-on:submit.prevent="actualizaSolicitud">
+    @if (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641 )
+        <actualizar-expediente
+        :required_documents="archive.required_documents"
+        :academic_program = "academic_program"
+        :alias_academic_program="academic_program.alias"
+        :user_id="appliant.id"
+        :archive_id="archive.id"
+        >
+        </actualizar-expediente>
+    @endif
+
+
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
             :curricular_documents="archive.curricular_documents" :motivation="archive.motivation"
             :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
@@ -26,7 +37,7 @@
             :recommendation_letters="recommendation_letters"
             :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment">
         </solicitud-postulante>
-    </form>
+
 @endsection
 
 @push('scripts')

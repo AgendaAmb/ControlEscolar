@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 //mix.setPublicPath('./controlescolar/');
 mix.js('resources/js/app.js', 'public/js').vue().sass('resources/sass/app.scss', 'public/css');
 mix.js('resources/js/admin/admin.js', 'public/js').vue();
+mix.js('resources/js/home/home.js', 'public/js').vue();
 
 // Pre-registro
 mix.js('resources/js/pre-registro/preregistro.js', 'public/js').vue();
@@ -20,6 +21,7 @@ mix.js('resources/js/pre-registro/preregistro.js', 'public/js').vue();
 // Vistas postulación
 mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliant.js', 'public/appliant/js').vue();
+mix.js('resources/js/postulacion/appliant-view/appliantUpdateDocuments.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/professor-view/professor.js', 'public/professor/js').vue();
 mix.js('resources/js/postulacion/controlescolar-view/controlescolar.js', 'public/controlescolar/js').vue();
 

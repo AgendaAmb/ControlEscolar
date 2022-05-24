@@ -286,6 +286,61 @@
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
+
+     <div class="col-12 align-items-center my-4 mx-2">
+      <div class="row mx-2 justify-content-center">
+        <strong>Nota:</strong>&nbsp;&nbsp;<span>Al completar la revisión selecciona una de las siguientes opciones segun corresponda:</span>
+      </div>
+      <div class="row mx-2 justify-content-center">
+        <ul class="list-group list-group-flush">
+         
+          <li class="list-group-item">
+            <i class="text-danger">Rechazar</i>&nbsp;&nbsp;<span> No se permitiran cambios </span>
+          </li>
+          <li class="list-group-item">
+            <i class="text-warning">Corregir</i>&nbsp;&nbsp;<span> Alguno o varios de los documentos no son correctos, necesitan ser actulizados </span>
+          </li>
+          <li class="list-group-item">
+            <i class="text-success">Aceptar</i>&nbsp;&nbsp;<span> Todos los documentos son correctos y podra acceder a la siguiente etapa </span>
+          </li>
+          
+        </ul>
+      </div>
+      <div class="row mx-2 mb-2 justify-content-center">
+        <strong>Cualquier cambio de estado se le informara al estudiante</strong>
+      </div>
+      <div class="row mb-4 mx-1 justify-content-center">
+        <div class="col-4">
+          <button
+            @click="EnviarRevision('Rechazar')"
+            class="btn btn-danger"
+            style="height: 45px; width: 150px"
+          >
+            <strong>Rechazar</strong>
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+           data-toggle="modal"
+            data-target="#ActualizaExpediente"
+            class="btn btn-warning"
+            style="height: 45px; width: 150px"
+          >
+            <strong>Corregir</strong>
+          </button>
+        </div>
+        <div class="col-4">
+          <button
+            @click="EnviarRevision('Aceptar')"
+            class="btn btn-success"
+            style="height: 45px; width: 150px"
+          >
+            <strong>Aceptar</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -595,6 +650,24 @@ export default {
     eliminaCapitalHumanoFromList(index) {
       this.human_capitals.splice(index, 1);
     },
+
+    EnviarRevision(status){
+      if(status != 'Corregir'){
+         Swal.fire({
+          title: "¿Estas seguro de realizar el cambio?",
+          text: "Actulizar el expediente por " + status ,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+
+        });
+      }
+      
+    }
   },
 };
 </script>

@@ -18,19 +18,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $s = new MiPortalService;
-        try{
-            $usr = $s->miPortalGet('api/usuarios',['filter[id]' => Auth::user()->id])->collect();
-            $data = $request->session()->all();
-        }catch (\Exception $e) {
-            return '<h1>Usuario invalido</h1>';
-        }
-        
-        // dd($data['user_data']);
-
+        // dd($request->session()->get('user_data'));
         return view('home',[ 
-            'user' => $usr[0],
-            // 'archive' => $archive
+            'user' => $request->session()->get('user_data')
         ]);
     }
 }

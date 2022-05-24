@@ -3943,6 +3943,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3968,7 +3998,7 @@ __webpack_require__.r(__webpack_exports__);
     archive_id: Number,
     // Documentos personales.
     personal_documents: Array,
-    //Documentos curriculares 
+    //Documentos curriculares
     curricular_documents: Array,
     // Motivos de ingreso.
     motivation: String,
@@ -4212,6 +4242,47 @@ __webpack_require__.r(__webpack_exports__);
     },
     eliminaCapitalHumanoFromList: function eliminaCapitalHumanoFromList(index) {
       this.human_capitals.splice(index, 1);
+    },
+    EnviarExpediente: function EnviarExpediente() {
+      var _this7 = this;
+
+      Swal.fire({
+        title: "¿Estas seguro que todo esta completo?",
+        text: "Estas a punto de enviar tu expediente, se revisara y se validara, caso contrario te haremos saber de los cambios necesarios",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.post("/controlescolar/solicitud/updateStatusArchive", {
+            // Status id to change the state
+            archive_id: _this7.archive_id,
+            status: 2
+          }).then(function (response) {
+            Swal.fire({
+              title: "Tu expediente ha sido actualizado",
+              text: "Te recomendamos estar al pendiente del correo que registraste con nosotros para cualquier aviso y/o cambio",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar"
+            }).then(function (result) {
+              window.location.href = "/controlescolar/home";
+            });
+          })["catch"](function (error) {
+            console.log(error);
+            Swal.fire({
+              title: "Error al actualizar",
+              showCancelButton: false,
+              icon: "error"
+            });
+          });
+        }
+      });
     }
   }
 });
@@ -15156,6 +15227,26 @@ var render = function () {
       _vm._v(" "),
       _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
     ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8),
+      _vm._v(" "),
+      _c("div", { staticClass: "row my-2 mx-1" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              staticStyle: { height: "45px", width: "250px" },
+              on: { click: _vm.EnviarExpediente },
+            },
+            [_c("strong", [_vm._v("Enviar Expediente")])]
+          ),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -15198,7 +15289,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar una nueva experiencia laboral\n          "
+            "\n            Selecciona el siguiente botón para agregar una nueva experiencia\n            laboral\n          "
           ),
         ]),
       ]),
@@ -15221,7 +15312,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica\n          "
+            "\n            Selecciona el siguiente botón para agregar una nueva publicación\n            para Producción Científica\n          "
           ),
         ]),
       ]),
@@ -15244,7 +15335,34 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano\n          "
+            "\n            Selecciona el siguiente botón para agregar un nuevo curso para\n            Capital Humano\n          "
+          ),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-2" }, [
+      _c("strong", [_vm._v("Nota:")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-2" }, [
+      _c("p", [
+        _vm._v(
+          "\n        Si has completado todos los campos necesarios y estas conforme con tu\n        información selecciona la opción de enviar expediente para continuar\n        con el proceso"
+        ),
+        _c("br"),
+        _vm._v(" "),
+        _c("strong", [
+          _vm._v(
+            "\n          No podras hacer correcciones despues de aceptar sin previo\n          aviso"
           ),
         ]),
       ]),
@@ -15336,23 +15454,10 @@ var render = function () {
                   },
                 },
               },
-              [_vm._v("\n      Enviar correo\n    ")]
+              [_vm._v("\n        Enviar correo\n      ")]
             ),
           ])
-        : _c("div", [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                on: {
-                  click: function ($event) {
-                    return _vm.verCartaRecomendacion()
-                  },
-                },
-              },
-              [_vm._v("\n        Ver archivo\n      ")]
-            ),
-          ]),
+        : _vm._e(),
     ],
     2
   )

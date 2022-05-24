@@ -10,7 +10,12 @@
         <search-archive-form :academic_programs="academic_programs" v-on:archives-found="updateArchives">
         </search-archive-form>
         <archives>
-            <archive v-for="(archive,index) in archives" :key="archive.id" :index="index + 1" v-bind="archive">
+            <archive 
+                v-for="(archive,index) in archives" 
+                :key="archive.id" 
+                :index="index + 1"
+                v-bind="archive"
+                :status="archive.status">
             </archive>
         </archives>
     {{-- @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))

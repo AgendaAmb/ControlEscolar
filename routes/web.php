@@ -52,7 +52,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     // # Rutas de admin.
-    Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
+    // Route::get('prueba/{id}', [LoginController::class, 'testLogin']);
 
     Route::get('/logout', [Logincontroller::class, 'logout'])->name('logout');
 
@@ -88,6 +88,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
         Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show'); //Vista de expediente pero sin poder modificar archivos
+        Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
+        Route::post('/sentEmailToUpdateDocuments', [ArchiveController::class, 'sentEmailToUpdateDocuments'])->name('sentEmailToUpdateDocuments');
 
         #Appliant
         Route::get('/expediente/{user_id}', [ArchiveController::class,'appliantFile_AppliantView'])->name('ExpedientePostulante'); //Vista de expediente para alumno, rellenar campos
@@ -192,6 +194,11 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
             Route::post('deleteWorker', [AdminController::class, 'deleteWorker'])
             ->name('deleteWorker');
+    });
+
+    Route::prefix('updateDocuments')->name('updateDocuments.')->group(function(){
+        Route::get('/show/{archive_id}/{required_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
+        Route::post('updateStateFromEmail', [ArchiveController::class, 'updateStateFromEmail'])->name('update');
     });
 
 

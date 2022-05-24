@@ -27,7 +27,8 @@ class ArchiveResource extends JsonResource
             'announcement_to' => $this->announcement->to,       //hasta
             'name' => $name,
             'academic_program' => $this->announcement->academicProgram->name ?? '',
-            'location' => route('solicitud.show', $this->id)
+            'location' => route('solicitud.show', $this->id),
+            'status' => $this->status,
         ];
     }
 }

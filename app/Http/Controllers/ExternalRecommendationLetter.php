@@ -339,95 +339,117 @@ class ExternalRecommendationLetter extends Controller
      */
     public function seeAnsweredRecommendationLetter(Request $request)
     {
-        $request->validate([
-            'rl_id' => ['required', 'numeric','exists:recommendation_letter,id'],
-            'archive_id' => ['required', 'numeric','exists:archives,id'],
-        ]);
+        try{
+            $request->validate([
+                'rl_id' => ['required', 'numeric','exists:recommendation_letter,id'],
+                'archive_id' => ['required', 'numeric','exists:archives,id'],
+                'user_id' => ['required', 'numeric','exists:users,id'],
+            ]);
+        }catch (\Exception $e) {
+            return new JsonResponse($e,JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
-        // Se extrae el archivo de postulacion
-        $archive = Archive::where('id', $request->archive_id)->first();
+        try{
+            // Se extrae el archivo de postulacion
+            $archive = Archive::where('id', $request->archive_id)->where('user_id',$request->user_id)->first();
 
-        #Carga de modelos en archivo
-        $archive->loadMissing([
-            'appliant',
-            'announcement.academicProgram',
-            'personalDocuments',
-            'recommendationLetter',
-            'myRecommendationLetter',
-            'entranceDocuments',
-            'intentionLetter',
-            'academicDegrees.requiredDocuments',
-            'appliantLanguages.requiredDocuments',
-            'appliantWorkingExperiences',
-            'scientificProductions.authors',
-            'humanCapitals'
-        ]);
+            #Carga de modelos en archivo
+            $archive->loadMissing([
+                'appliant',
+                'announcement.academicProgram',
+                'personalDocuments',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'entranceDocuments',
+                'intentionLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'humanCapitals'
+            ]);
 
+            //Obtiene la informacion del aplicante 
+            $appliant = $archive->appliant;
 
+        }catch (\Exception $e) {
+            return new JsonResponse('El archivo no existe',JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
-        //Obtiene la informacion del aplicante 
-        $appliant = $archive->appliant;
 
         //Peticion a portal
         try{
             #Peticion a portal (Busca usuario)
             $user_collection =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
+            //Existe el postulante en el portal 
+            if($user_collection){
+                $user_data = $user_collection[0]; //Se retorno solo uno entonces se extrae informacion 
+                //Add data portal to local collection USER
+                $appliant->setAttribute('curp',$user_data['curp']);
+                $appliant->setAttribute('name',$user_data['name']);
+                $appliant->setAttribute('middlename',$user_data['middlename']);
+                $appliant->setAttribute('surname',$user_data['surname']);
+                $appliant->setAttribute('age',$user_data['age']);
+                $appliant->setAttribute('gender',$user_data['gender']);
+                $appliant->setAttribute('birth_country',$user_data['nationality']);
+                $appliant->setAttribute('birth_state',$user_data['residence']);
+                $appliant->setAttribute('residence_country',$user_data['residence']);
+                $appliant->setAttribute('phone_number',$user_data['phone_number']);
+                $appliant->setAttribute('email',$user_data['email']);
+                $appliant->setAttribute('altern_email',$user_data['altern_email']);
+                $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
+                /* Faltaria
+                    Academic degree
+                    // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
+                    Dependencia
+                    // $appliant->setAttribute('dependency',$user_data['dependency']);
+                */
+            }
         }catch (\Exception $e) {
-            return new JsonResponse('Peticion erronea',502);
+            return new JsonResponse('Error en peticion al portal',JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        //Existe el postulante en el portal 
-        if($user_collection){
-            $user_data = $user_collection[0]; //Se retorno solo uno entonces se extrae informacion 
-             //Add data portal to local collection USER
-            $appliant->setAttribute('curp',$user_data['curp']);
-            $appliant->setAttribute('name',$user_data['name']);
-            $appliant->setAttribute('middlename',$user_data['middlename']);
-            $appliant->setAttribute('surname',$user_data['surname']);
-            $appliant->setAttribute('age',$user_data['age']);
-            $appliant->setAttribute('gender',$user_data['gender']);
-            $appliant->setAttribute('birth_country',$user_data['nationality']);
-            $appliant->setAttribute('birth_state',$user_data['residence']);
-            $appliant->setAttribute('residence_country',$user_data['residence']);
-            $appliant->setAttribute('phone_number',$user_data['phone_number']);
-            $appliant->setAttribute('email',$user_data['email']);
-            $appliant->setAttribute('altern_email',$user_data['altern_email']);
-            $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
-            /* Faltaria
-                Academic degree
-                // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
-                Dependencia
-                // $appliant->setAttribute('dependency',$user_data['dependency']);
+        try{
+             // $parts_announcement_date = explode("-", $archive->announcement->to);
+            $date = date('F, Y', strtotime($archive->announcement->to));
 
+            // Get recommendation letter
+            $recommendation_letter = MyRecommendationLetter::where('id', $request->rl_id)->first();
 
-            */
+            //Get parameters to evaluate of rl
+            $parameters = Parameter::all();
+
+            // Get score parameters
+            $score_parameters = ScoreParameter::where('rl_id', $request->rl_id);
+
+            //get custom parameters
+            $custom_parameters = CustomParameter::where('rl_id', $request->rl_id);
+
+            // $recommendation_letter->setAttribute('parameters',$parameters);
+            $recommendation_letter->setAttribute('score_parameters',$score_parameters);
+            $recommendation_letter->setAttribute('custom_parameters',$custom_parameters);
+            // $recommendation_letter->setAttribute('appliant',$appliant);
+            // $recommendation_letter->setAttribute('announcement', $archive->announcement);
+            $recommendation_letter->setAttribute('announcement_date', $date);
+        }catch (\Exception $e) {
+            return new JsonResponse('Error en extraer informacion de la base de datos',JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        // $parts_announcement_date = explode("-", $archive->announcement->to);
-        $date = date('F, Y', strtotime($archive->announcement->to));
-
-        // Get recommendation letter
-        $recommendation_letter = MyRecommendationLetter::where('id', $request->rl_id)->first();
-    
-        //Get parameters to evaluate of rl
-        $parameters = DB::table('parameters_recommendation_letter')->all();
-
-        // Get score parameters
-        $score_parameters = ScoreParameter::where('rl_id', $request->rl_id);
-
-        //get custom parameters
-        $custom_parameters = CustomParameter::where('rl_id', $request->rl_id);
-
-        $recommendation_letter->setAttribute('parameters',$parameters);
-        $recommendation_letter->setAttribute('score_parameters',$score_parameters);
-        $recommendation_letter->setAttribute('custom_parameters',$custom_parameters);
-        $recommendation_letter->setAttribute('appliant',$appliant);
-        $recommendation_letter->setAttribute('announcement', $archive->announcement);
-        $recommendation_letter->setAttribute('announcement_date', $date);
+        // return new JsonResponse($recommendation_letter->toArray(),JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
 
 
-        view()->share('postulacion.recommendationLetter.pdf',$recommendation_letter);
-        $pdf = PDF::loadView('postulacion.recommendationLetter.pdf', ['recommendation_letter' => $recommendation_letter]);
-        return $pdf->download();
+        try{
+            $pdf = PDF::loadView('postulacion.recommendationLetter.pruebapdf');
+            $pdf->loadHTML('<h1>Hola<h1>');
+                    return $pdf->stream();
+
+            // return $pdf->download('CartaRecomendacion_Appliant_'.$appliant->id.'_AnswerBy_'.$recommendation_letter->email_evaluator.'.pdf');
+        }catch (\Exception $e) {
+            return new JsonResponse($e,JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        // return $pdf->stream();
+
+        return new JsonResponse('No se pudo cargar el documento',JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

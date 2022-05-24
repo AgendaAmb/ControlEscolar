@@ -1,6 +1,334 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "actualizar-expediente",
+  props: {
+    required_documents: {
+      type: Array,
+      "default": []
+    },
+    alias_academic_program: {
+      type: String,
+      "default": "maestria"
+    },
+    archive_id: {
+      type: Number,
+      "default": null
+    },
+    academic_program: {
+      type: Object,
+      "default": null
+    },
+    user_id: {
+      type: Number,
+      "default": null
+    }
+  },
+  data: function data() {
+    return {
+      selected_etiquetas: [],
+      instructions: ""
+    };
+  },
+  methods: {
+    enviarActualizacion: function enviarActualizacion() {
+      var _this = this;
+
+      console.log(this.selected_etiquetas);
+      console.log("instructions: " + this.instructions);
+
+      if (this.selected_etiquetas.length > 0 && this.archive_id != null && this.user_id != null) {
+        axios.post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+          selected_etiquetas: this.selected_etiquetas,
+          instructions: this.instructions,
+          academic_program: this.academic_program,
+          archive_id: this.archive_id,
+          user_id: this.user_id
+        }).then(function (response) {
+          Swal.fire({
+            title: "Exito",
+            text: "Se ha enviado un correo al usuario con los cambios a realizar",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Entendido"
+          }).then(function (result) {
+            axios.post("/controlescolar/solicitud/updateStatusArchive", {
+              // Status id to change the state
+              archive_id: _this.archive_id,
+              status: 3
+            }).then(function (response) {
+              window.location.href = "/controlescolar/solicitud/";
+            })["catch"](function (error) {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error"
+              });
+            });
+          });
+        })["catch"](function (error) {
+          var _Swal$fire;
+
+          Swal.fire((_Swal$fire = {
+            title: "Ups",
+            text: "No fue posible completar la petición, intentelo mas tarde",
+            icon: "error"
+          }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
+
+          console.log(error);
+        });
+      } else {
+        var _Swal$fire2;
+
+        Swal.fire((_Swal$fire2 = {
+          title: "Alguno de los datos no es correcto, verifique nuevamente",
+          icon: "error"
+        }, _defineProperty(_Swal$fire2, "title", error.data), _defineProperty(_Swal$fire2, "showCancelButton", true), _defineProperty(_Swal$fire2, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire2, "cancelButtonText", "Entendido"), _Swal$fire2));
+      }
+    },
+    requiredForAcademicProgram: function requiredForAcademicProgram() {
+      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
+
+      if (this.alias_academic_program === "maestria") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } // Documents for imarec
+      else if (this.alias_academic_program === "imarec") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "doctorado") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "enrem") {
+        switch (this.name) {
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)":
+            res = false;
+            break;
+
+          case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
+            res = false;
+            break;
+        }
+      } // return the answer accordin to academic program and name of the required document
+
+
+      return res;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js& ***!
@@ -317,6 +645,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -355,7 +684,10 @@ __webpack_require__.r(__webpack_exports__);
     archives_recommendation_letters: {
       type: Array
     },
-    errors: Array
+    archive_id: {
+      type: Number,
+      "default": null
+    }
   }
 });
 
@@ -3943,6 +4275,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4212,6 +4599,57 @@ __webpack_require__.r(__webpack_exports__);
     },
     eliminaCapitalHumanoFromList: function eliminaCapitalHumanoFromList(index) {
       this.human_capitals.splice(index, 1);
+    },
+    EnviarRevision: function EnviarRevision(status) {
+      var _this7 = this;
+
+      var id_status = 1;
+
+      if (status === "Aceptar") {
+        id_status = 5;
+      } else if (status === "Rechazar") {
+        id_status = 6;
+      }
+
+      if (status != 'Corregir') {
+        Swal.fire({
+          title: "¿Estas seguro de realizar el cambio?",
+          text: "Actulizar el expediente por " + status,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar"
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            axios.post("/controlescolar/solicitud/updateStatusArchive", {
+              // Status id to change the state
+              archive_id: _this7.archive_id,
+              status: id_status
+            }).then(function (response) {
+              Swal.fire({
+                title: "El expediente del postulante ha sido modificado",
+                text: "Se le informara al alumno de dicha verificación de documentos",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar"
+              }).then(function (result) {
+                window.location.href = "/controlescolar/solicitud/";
+              });
+            })["catch"](function (error) {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error"
+              });
+            });
+          }
+        });
+      }
     }
   }
 });
@@ -4331,8 +4769,15 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       type: Object,
       "default": null
     },
+    archive_id: {
+      type: Number,
+      "default": null
+    },
+    appliant: {
+      type: Object,
+      "default": null
+    },
     index: Number,
-    appliant: Object,
     academic_program: Object,
     errors: Array
   },
@@ -4371,8 +4816,27 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       return res;
     },
     verCartaRecomendacion: function verCartaRecomendacion() {
-      axios.get("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {})["catch"](function (error) {
+      if (this.recommendation_letter == null || this.appliant == null || this.archive_id == null) {
+        Swal.fire({
+          title: "Ups!",
+          text: "El usuario con la carta de recomendación a ver no existe",
+          icon: "error"
+        });
+      }
+
+      axios.get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+        params: {
+          rl_id: this.recommendation_letter['id'],
+          archive_id: this.archive_id,
+          user_id: this.appliant['id']
+        }
+      }).then(function (response) {})["catch"](function (error) {
         console.log(error);
+        Swal.fire({
+          title: "Error al hacer busqueda",
+          text: error.response.data,
+          icon: "error"
+        });
       });
     },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
@@ -8991,6 +9455,45 @@ if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAle
 
 /***/ }),
 
+/***/ "./resources/js/postulacion/components/ActualizarExpediente.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/postulacion/components/ActualizarExpediente.vue ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActualizarExpediente.vue?vue&type=template&id=0231a6c2& */ "./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2&");
+/* harmony import */ var _ActualizarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActualizarExpediente.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ActualizarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/postulacion/components/ActualizarExpediente.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/postulacion/components/CapitalHumano.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/postulacion/components/CapitalHumano.vue ***!
@@ -9855,6 +10358,22 @@ component.options.__file = "resources/js/postulacion/components/produccion-cient
 
 /***/ }),
 
+/***/ "./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActualizarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ActualizarExpediente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActualizarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/postulacion/components/CapitalHumano.vue?vue&type=script&lang=js& ***!
@@ -10246,6 +10765,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2& ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActualizarExpediente_vue_vue_type_template_id_0231a6c2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ActualizarExpediente.vue?vue&type=template&id=0231a6c2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2&");
+
+
+/***/ }),
+
 /***/ "./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f& ***!
@@ -10620,6 +11156,236 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ActualizarExpediente.vue?vue&type=template&id=0231a6c2& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "ActualizaExpediente",
+        tabindex: "-1",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true",
+      },
+    },
+    [
+      _c("div", { staticClass: "modal-dialog modal-xl" }, [
+        _c(
+          "div",
+          {
+            staticClass: "px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3",
+            staticStyle: { "background-color": "#8b96a8" },
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.enviarActualizacion.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _c("div", { staticClass: "my-2 col-12" }, [
+                      _c("h4", [_vm._v("Documentos para actualizar")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        _vm._l(_vm.required_documents, function (etiqueta) {
+                          return _c(
+                            "li",
+                            { key: etiqueta.id, staticClass: "form-check" },
+                            [
+                              _vm.requiredForAcademicProgram() === true
+                                ? _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selected_etiquetas,
+                                          expression: "selected_etiquetas",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        value: etiqueta.id,
+                                        checked: Array.isArray(
+                                          _vm.selected_etiquetas
+                                        )
+                                          ? _vm._i(
+                                              _vm.selected_etiquetas,
+                                              etiqueta.id
+                                            ) > -1
+                                          : _vm.selected_etiquetas,
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$a = _vm.selected_etiquetas,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = etiqueta.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selected_etiquetas =
+                                                  $$a.concat([$$v]))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selected_etiquetas = $$a
+                                                  .slice(0, $$i)
+                                                  .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selected_etiquetas = $$c
+                                          }
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "form-check-label" },
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(etiqueta.name) +
+                                            "\n                    "
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row my-2 mx-2" }, [
+                        _c("div", { staticClass: "col-12 my-2" }, [
+                          _c("h4", [
+                            _vm._v(
+                              "\n                    Deja un mensaje al postulante para que queden mas claras\n                    las instrucciones para el cambio\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.instructions,
+                                expression: "instructions",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { rows: "4" },
+                            domProps: { value: _vm.instructions },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.instructions = $event.target.value
+                              },
+                            },
+                          }),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "px-0 my-3 modal-footer justify-content-start" },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    staticStyle: { "background-color": "#0160ae" },
+                    attrs: { id: "submit", type: "submit" },
+                    on: { click: _vm.enviarActualizacion },
+                  },
+                  [_vm._v("\n          Enviar actualizaciones\n        ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                  },
+                  [_vm._v("\n          Cerrar\n        ")]
+                ),
+              ]
+            ),
+          ]
+        ),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h2",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n          Actualizar expediente\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("X")])]
+      ),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/CapitalHumano.vue?vue&type=template&id=5bab204f& ***!
@@ -10811,9 +11577,9 @@ var render = function () {
                 _c("valida-carta-recomendacion", {
                   attrs: {
                     email: my_email.email,
+                    archive_id: _vm.archive_id,
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
-                    errors: _vm.errors,
                     index: index + 1,
                   },
                 }),
@@ -10836,6 +11602,7 @@ var render = function () {
                   archive_recommendation_letter:
                     _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 1,
                 },
@@ -10852,6 +11619,7 @@ var render = function () {
                 attrs: {
                   email: _vm.emails[0].email,
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 2,
                 },
@@ -10875,6 +11643,7 @@ var render = function () {
                     archive_recommendation_letter:
                       _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
+                    archive_id: _vm.archive_id,
                     academic_program: _vm.academic_program,
                     index: index + 1,
                   },
@@ -15145,6 +15914,50 @@ var render = function () {
       _vm._v(" "),
       _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
     ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
+      _vm._m(7),
+      _vm._v(" "),
+      _vm._m(8),
+      _vm._v(" "),
+      _vm._m(9),
+      _vm._v(" "),
+      _c("div", { staticClass: "row my-4 mx-1 justify-content-center" }, [
+        _c("div", { staticClass: "col-4 justify-content-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-danger",
+              staticStyle: { height: "45px", width: "150px" },
+              on: {
+                click: function ($event) {
+                  return _vm.EnviarRevision("Rechazar")
+                },
+              },
+            },
+            [_c("strong", [_vm._v("Rechazar")])]
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(10),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 align-content-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              staticStyle: { height: "45px", width: "150px" },
+              on: {
+                click: function ($event) {
+                  return _vm.EnviarRevision("Aceptar")
+                },
+              },
+            },
+            [_c("strong", [_vm._v("Aceptar")])]
+          ),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -15237,6 +16050,83 @@ var staticRenderFns = [
           ),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-2 justify-content-center" }, [
+      _c("strong", [_vm._v("Nota:")]),
+      _vm._v("  "),
+      _c("span", [
+        _vm._v(
+          "Al completar la revisión selecciona una de las siguientes opciones segun corresponda:"
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-2 justify-content-center" }, [
+      _c("ul", { staticClass: "list-group list-group-flush" }, [
+        _c("li", { staticClass: "list-group-item" }, [
+          _c("i", { staticClass: "text-danger" }, [_vm._v("Rechazar")]),
+          _vm._v("  "),
+          _c("span", [_vm._v(" No se permitiran cambios ")]),
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-group-item" }, [
+          _c("i", { staticClass: "text-warning" }, [_vm._v("Corregir")]),
+          _vm._v("  "),
+          _c("span", [
+            _vm._v(
+              " Alguno o varios de los documentos no son correctos, necesitan ser actulizados "
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "list-group-item" }, [
+          _c("i", { staticClass: "text-success" }, [_vm._v("Aceptar")]),
+          _vm._v("  "),
+          _c("span", [
+            _vm._v(
+              " Todos los documentos son correctos y podra acceder a la siguiente etapa "
+            ),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-2 mb-2 justify-content-center" }, [
+      _c("strong", [
+        _vm._v("Cualquier cambio de estado se le informara al estudiante"),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 justify-content-center" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning",
+          staticStyle: { height: "45px", width: "150px" },
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#ActualizaExpediente",
+          },
+        },
+        [_c("strong", [_vm._v("Corregir")])]
+      ),
     ])
   },
 ]
@@ -28392,7 +29282,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/postulacion/postulacion.js ***!
   \*************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CapitalHumano.vue */ "./resources/js/postulacion/components/CapitalHumano.vue");
 /* harmony import */ var _components_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
 /* harmony import */ var _components_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Expedientes.vue */ "./resources/js/postulacion/components/Expedientes.vue");
@@ -28403,11 +29293,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ProduccionCientifica.vue */ "./resources/js/postulacion/components/ProduccionCientifica.vue");
 /* harmony import */ var _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
 /* harmony import */ var _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/SolicitudPostulante.vue */ "./resources/js/postulacion/components/SolicitudPostulante.vue");
+/* harmony import */ var _components_ActualizarExpediente_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ActualizarExpediente.vue */ "./resources/js/postulacion/components/ActualizarExpediente.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -28428,7 +29320,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_10__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_11__["default"]({
   el: '#app',
   components: {
     CapitalHumano: _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -28440,7 +29332,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_10__["default"]({
     Postulante: _components_Postulante_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     ProduccionCientifica: _components_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     RequisitosIngreso: _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    SolicitudPostulante: _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    SolicitudPostulante: _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    ActualizarExpediente: _components_ActualizarExpediente_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
   data: {
     archive: archiveModel,

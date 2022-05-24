@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Carta Recomendación</title>
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ public_path('css/app.css') }}" rel="stylesheet" type="text/css">
     </head>
     <body class="container-fluid">
         <div id="dataCandidate">
             <!-- Inicio de carta  -->
-            <p class="h1 titleSection">Formulario de recomendación</p>
-            <hr class="d-block titleSection" />
+            <p class="h1 ">Formulario de recomendación</p>
+            <hr class="d-block" />
         
             <!-- datos del candidato 
                 nombre                                      Tiempo de convocatoria
