@@ -5,8 +5,8 @@
  */
 
  import Vue from 'vue';
- import DocumentoRequerido from './components/DocumentoRequerido.vue';
- 
+ import DocumentoRequeridoPorActualizar from './components/DocumentoRequeridoPorActualizar.vue';
+ import ActualizaDocumentos from './components/ActualizaDocumentos.vue';
  window.Vue = require('vue').default;
  
  /**
@@ -21,7 +21,8 @@
      el: '#app',
  
      components: {
-         DocumentoRequerido,
+        DocumentoRequeridoPorActualizar,
+         ActualizaDocumentos,
      },
  
      data: {
@@ -29,7 +30,8 @@
          appliant: appliantModel,
          academic_program: academicProgram,
          header_academic_program: header_academic_program,
-         required_documents:required_documents,
+         required_documents_ids:required_documents_ids,
+         documentos: documentos,
      },
  
      methods: {

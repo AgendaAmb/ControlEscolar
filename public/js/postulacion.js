@@ -4328,8 +4328,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -15916,13 +15914,7 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
-      _vm._m(7),
-      _vm._v(" "),
-      _vm._m(8),
-      _vm._v(" "),
-      _vm._m(9),
-      _vm._v(" "),
-      _c("div", { staticClass: "row my-4 mx-1 justify-content-center" }, [
+      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
         _c("div", { staticClass: "col-4 justify-content-center" }, [
           _c(
             "button",
@@ -15935,12 +15927,16 @@ var render = function () {
                 },
               },
             },
-            [_c("strong", [_vm._v("Rechazar")])]
+            [_c("strong", [_vm._v("No cumple")])]
           ),
         ]),
         _vm._v(" "),
-        _vm._m(10),
-        _vm._v(" "),
+        _vm._m(7),
+      ]),
+      _vm._v(" "),
+      _vm._m(8),
+      _vm._v(" "),
+      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
         _c("div", { staticClass: "col-4 align-content-center" }, [
           _c(
             "button",
@@ -15956,6 +15952,8 @@ var render = function () {
             [_c("strong", [_vm._v("Aceptar")])]
           ),
         ]),
+        _vm._v(" "),
+        _vm._m(9),
       ]),
     ]),
   ])
@@ -16056,12 +16054,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-2 justify-content-center" }, [
-      _c("strong", [_vm._v("Nota:")]),
-      _vm._v("  "),
+    return _c("div", { staticClass: "col-8" }, [
       _c("span", [
         _vm._v(
-          "Al completar la revisión selecciona una de las siguientes opciones segun corresponda:"
+          "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
         ),
       ]),
     ])
@@ -16070,63 +16066,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-2 justify-content-center" }, [
-      _c("ul", { staticClass: "list-group list-group-flush" }, [
-        _c("li", { staticClass: "list-group-item" }, [
-          _c("i", { staticClass: "text-danger" }, [_vm._v("Rechazar")]),
-          _vm._v("  "),
-          _c("span", [_vm._v(" No se permitiran cambios ")]),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "list-group-item" }, [
-          _c("i", { staticClass: "text-warning" }, [_vm._v("Corregir")]),
-          _vm._v("  "),
-          _c("span", [
-            _vm._v(
-              " Alguno o varios de los documentos no son correctos, necesitan ser actulizados "
-            ),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "list-group-item" }, [
-          _c("i", { staticClass: "text-success" }, [_vm._v("Aceptar")]),
-          _vm._v("  "),
-          _c("span", [
-            _vm._v(
-              " Todos los documentos son correctos y podra acceder a la siguiente etapa "
-            ),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mx-2 mb-2 justify-content-center" }, [
-      _c("strong", [
-        _vm._v("Cualquier cambio de estado se le informara al estudiante"),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 justify-content-center" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-warning",
-          staticStyle: { height: "45px", width: "150px" },
-          attrs: {
-            "data-toggle": "modal",
-            "data-target": "#ActualizaExpediente",
+    return _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
+      _c("div", { staticClass: "col-4 justify-content-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-warning",
+            staticStyle: { height: "45px", width: "150px" },
+            attrs: {
+              "data-toggle": "modal",
+              "data-target": "#ActualizaExpediente",
+            },
           },
-        },
-        [_c("strong", [_vm._v("Corregir")])]
-      ),
+          [_c("strong", [_vm._v("Corregir")])]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-8" }, [
+        _c("span", [
+          _vm._v("El postulante necesita modificar uno o varios documentos"),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("span", [
+        _vm._v(
+          "El postulante cumple con todos los requisitos y pasa a la etapa de entrevista"
+        ),
+      ]),
     ])
   },
 ]

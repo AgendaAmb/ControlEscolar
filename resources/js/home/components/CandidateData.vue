@@ -36,16 +36,16 @@ export default {
       }
     },
 
-    created(){
-         Swal.fire({
-            title: "¡El tiempo se agota!",
-            text: 'Te recordamos que el expediente esta por cerrar',
-            icon: "warning",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Enterado",
-          });
-    }
+    // created(){
+    //      Swal.fire({
+    //         title: "¡El tiempo se agota!",
+    //         text: 'Te recordamos que el expediente esta por cerrar',
+    //         icon: "warning",
+    //         showCancelButton: false,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Enterado",
+    //       });
+    // }
 }
 </script>

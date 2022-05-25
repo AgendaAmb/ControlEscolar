@@ -41,11 +41,11 @@
                     Podras actualizar el siguiente enlace hasta que el revisador los acepte en el siguiente enlace
                 </p>
 
-               @foreach ($required_documents as $document)
+               {{-- @foreach ($required_documents as $document)
                    <p>Id documento: {{$document}}</p>
                @endforeach
 
-               <p>Archive id: {{$archive_id}}</p>
+               <p>Archive id: {{$archive_id}}</p> --}}
             </div>
         </div>
 

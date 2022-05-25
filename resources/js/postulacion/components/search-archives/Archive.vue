@@ -132,7 +132,7 @@ export default {
         this.name_status = "Completo";
         break;
         case 6:
-        this.name_status = "Rechazado";
+        this.name_status = "No cumple";
         break;
         default:
          this.name_status = "Incompleto";

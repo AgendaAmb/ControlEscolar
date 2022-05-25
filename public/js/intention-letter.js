@@ -142,7 +142,7 @@ __webpack_require__.r(__webpack_exports__);
         break;
 
       case 6:
-        this.name_status = "Rechazado";
+        this.name_status = "No cumple";
         break;
 
       default:

@@ -308,6 +308,15 @@ class ArchiveController extends Controller
         //     return new JsonResponse(['message' => 'Los datos no son correctos'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         // }
         $required_documents_ids = json_decode($required_documents);
+        $documentos = [];
+        try{
+            foreach($required_documents_ids as $document_id){
+                $documento = RequiredDocument::where('id', $document_id)->first();
+                array_push($documentos, $documento);
+            }
+        }catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No existe alguno de los documentos'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
 
         // dd($required_documents_ids);
 
@@ -356,7 +365,8 @@ class ArchiveController extends Controller
         ->with('appliant', $appliant)
         ->with('academic_program', $academic_program)
         ->with('header_academic_program',$header_academic_program)
-        ->with('required_documents', $required_documents_ids);
+        ->with('required_documents_ids', $required_documents_ids)
+        ->with('documentos', $documentos);
 
     }
 
@@ -654,9 +664,11 @@ class ArchiveController extends Controller
                 'state' => $request->state
             ]);
 
-            // $academic_degree->loadMissing([
-            //     'academicDocuments'
-            // ]);
+            $academic_degree->loadMissing([
+                'requiredDocuments'
+            ]);
+
+            $academic_degree->save();
 
 
         } catch (\Exception $e) {
@@ -770,9 +782,9 @@ class ArchiveController extends Controller
                 'archive_id' => $request->archive_id,
                 'state' => $request->state
             ]);
-            // $appliant_language->loadMissing([
-            //     'languageDocuments'
-            // ]);
+            $appliant_language->loadMissing([
+                'requiredDocuments'
+            ]);
         } catch (\Exception $e) {
             return new JsonResponse('Error al agregar nuevo idioma para el aplicante', 502);
         }

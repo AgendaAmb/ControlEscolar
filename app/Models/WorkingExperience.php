@@ -38,6 +38,7 @@ class WorkingExperience extends Model
      */
     public function requiredDocuments(): BelongsToMany
     {
+        // return $this->belongsToMany(RequiredDocument::class)->withPivot('post_title')->where('type', 'working');
         return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
     }
 

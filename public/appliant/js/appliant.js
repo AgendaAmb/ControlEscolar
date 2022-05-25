@@ -4284,6 +4284,23 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     }
+  },
+  created: function created() {
+    var fechaCierre = '14 de junio 2022';
+
+    if (this.academic_program.alias === "imarec") {
+      fechaCierre = '21 de junio 2022';
+    }
+
+    Swal.fire({
+      title: "Estimado postulante",
+      text: 'Te recordamos que la fecha de cierre de la convocatoria es el próximo ' + fechaCierre + '. ¡Estás a tiempo de completar tu expediente!',
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Enterado"
+    });
   }
 });
 
