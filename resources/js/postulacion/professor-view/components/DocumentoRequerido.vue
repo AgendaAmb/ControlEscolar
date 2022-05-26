@@ -226,6 +226,8 @@ export default {
   
   methods: {
     requiredForAcademicProgram() {
+      console.log(this.name + ': '+ this.alias_academic_program);
+
       let res = true;
       // console.log("id: "+this.id+" nombre: "+this.name);
      
@@ -243,7 +245,7 @@ export default {
           case "9A.- Application DAAD":
             res = false;
             break;
-          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+          case "14.- Propuesta de proyecto avalada por el profesor postulante":
             res = false;
             break;
             case "16.- Proof Experience Document":
@@ -281,7 +283,7 @@ export default {
           case "9A.- Application DAAD":
             res = false;
             break;
-          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+          case "14.- Propuesta de proyecto avalada por el profesor postulante":
             res = false;
             break;
             case "16.- Proof Experience Document":
@@ -326,7 +328,9 @@ export default {
       //Documents for doctorado
       else if (this.alias_academic_program === "enrem"  ) {
         switch (this.name) {
-          
+          // case "14.- Propuesta de proyecto avalada por el profesor postulante":
+          //   res = false;
+          //   break;
           case "5C.- Carta de pasantía":
             res = false;
             break;
