@@ -260,7 +260,11 @@ class ArchiveController extends Controller
     {
         try {
             $request->validate([
-                'selected_etiquetas.*' => ['required', 'numeric', 'exists:required_documents,id'],
+                'selected_personalDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
+                'selected_entranceDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
+                'selected_academicDocuments.*' =>   ['required'],
+                'selected_languageDocuments.*' =>   ['required'],
+                'selected_workingDocuments.*'  =>   ['required'],
                 'instructions' => ['required','nullable', 'string', 'max:225'],
                 'academic_program' => ['required'],
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
@@ -285,7 +289,20 @@ class ArchiveController extends Controller
 
 
             try {
-                Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
+                Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
+                    $request->selected_personalDocuments,
+                    $request->selected_entranceDocuments,
+                    $request->selected_academicDocuments,
+                    $request->selected_languageDocuments,
+                    $request->selected_workingDocuments,
+                    $request->instructions,
+                    $appliant, 
+                    $request->academic_program, 
+                    $request->archive_id,
+                    $url_LogoAA,
+                    $url_ContactoAA 
+                ));
+                // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
                 // Mail::to($appliant['email'])->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
             } catch (\Exception $e) {
                 return new JsonResponse(['message'=>'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -297,63 +314,53 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
     }
 
-    public function showDocumentsFromEmail(Request $request, $archive_id, $required_documents)
+    public function showDocumentsFromEmail(Request $request, $archive_id, $personal_documents, $entrance_documents, $academic_documents, $language_documents, $working_documents )
     {
-        // try {
-        //     $request->validate([
-        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-        //         'required_documents.*' => ['required', 'numeric', 'exists:required_documents,id'],
-        //     ]);
-        // }catch (\Exception $e) {
-        //     return new JsonResponse(['message' => 'Los datos no son correctos'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        // }
-        $required_documents_ids = json_decode($required_documents);
-        $documentos = [];
+        
+        $personal_documents_ids = json_decode($personal_documents);
+        $entrance_documents_ids = json_decode($entrance_documents);
+        $academic_documents_ids = json_decode($academic_documents);
+        $language_documents_ids = json_decode($language_documents);
+        $working_documents_ids  = json_decode($working_documents);
+
+        // dd($personal_documents_ids, $entrance_documents_ids, $academic_documents_ids,$language_documents_ids,$working_documents_ids);
         try{
-            foreach($required_documents_ids as $document_id){
-                $documento = RequiredDocument::where('id', $document_id)->first();
-                array_push($documentos, $documento);
-            }
-        }catch (\Exception $e) {
-            return new JsonResponse(['message' => 'No existe alguno de los documentos'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
-
-        // dd($required_documents_ids);
-
-        try{
-            $archive = Archive::where('id', $archive_id)->first();
-            //Carga modelos de archivo
-            $archive->loadMissing([
-                // Cosas del aplicante
-                'appliant',
-                'announcement.academicProgram',
-                // Documentos y secciones para expedinte
-                'personalDocuments',
-                'requiredDocuments',
-                'curricularDocuments',
-                'entranceDocuments',
-                'intentionLetter',
-                'recommendationLetter',
-                'myRecommendationLetter',
-                'academicDegrees.requiredDocuments',
-                'appliantLanguages.requiredDocuments',
-                'appliantWorkingExperiences',
-                'scientificProductions.authors',
-                'humanCapitals'
-            ]);
-
-            $academic_program = $archive->announcement->academicProgram;
-            $appliant = $archive->appliant;
-            
-            if ($academic_program->name == 'Maestría en ciencias ambientales') {
-                $img = 'PMPCA-SUPERIOR.png';
-            } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
-                $img = 'ENREM-SUPERIOR.png';
-            } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
-                $img = 'IMAREC-SUPERIOR.png';
-            }
+            if($archive_id != null){
+                $archive = Archive::where('id', $archive_id)->first();
+                //Carga modelos de archivo
+                $archive->loadMissing([
+                    // Cosas del aplicante
+                    'appliant',
+                    'announcement.academicProgram',
+                    // Documentos y secciones para expedinte
+                    'personalDocuments',
+                    'requiredDocuments',
+                    'curricularDocuments',
+                    'entranceDocuments',
+                    'intentionLetter',
+                    'recommendationLetter',
+                    'myRecommendationLetter',
+                    'academicDegrees.requiredDocuments',
+                    'appliantLanguages.requiredDocuments',
+                    'appliantWorkingExperiences',
+                    'scientificProductions.authors',
+                    'humanCapitals'
+                ]);
     
-            $header_academic_program =          asset('storage/headers/' . $img);
+                $academic_program = $archive->announcement->academicProgram;
+                $appliant = $archive->appliant;
+
+                if ($academic_program->name === 'Maestría en ciencias ambientales') {
+                    $img = 'PMPCA-SUPERIOR.png';
+                } else if ($academic_program->name === 'Maestría en ciencias ambientales, doble titulación') {
+                    $img = 'ENREM-SUPERIOR.png';
+                } else if ($academic_program->name === 'Maestría Interdisciplinaria en ciudades sostenibles') {
+                    $img = 'IMAREC-SUPERIOR.png';
+                }
+        
+                $header_academic_program =          asset('storage/headers/' . $img);
+
+            }
             
         }catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo extraer la informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -365,8 +372,12 @@ class ArchiveController extends Controller
         ->with('appliant', $appliant)
         ->with('academic_program', $academic_program)
         ->with('header_academic_program',$header_academic_program)
-        ->with('required_documents_ids', $required_documents_ids)
-        ->with('documentos', $documentos);
+        ->with('personal_documents_ids', $personal_documents_ids)
+        ->with('entrance_documents_ids', $entrance_documents_ids)
+        ->with('academic_documents_ids', $academic_documents_ids)
+        ->with('language_documents_ids', $language_documents_ids)
+        ->with('working_documents_ids', $working_documents_ids);
+
 
     }
 

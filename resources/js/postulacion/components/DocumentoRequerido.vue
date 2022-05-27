@@ -227,7 +227,7 @@ export default {
   
   methods: {
     requiredForAcademicProgram() {
-      console.log(this.name + ': '+ this.alias_academic_program);
+      // console.log(this.name + ': '+ this.alias_academic_program);
 
       let res = true;
       // console.log("id: "+this.id+" nombre: "+this.name);

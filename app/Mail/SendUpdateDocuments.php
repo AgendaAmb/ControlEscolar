@@ -10,8 +10,14 @@ use Illuminate\Queue\SerializesModels;
 class SendUpdateDocuments extends Mailable
 {
     use Queueable, SerializesModels;
+        
+    // recieved in this order
+    public $personal_documents;
+    public $entrance_documents;
+    public $academic_documents;
+    public $language_documents;
+    public $working_documents;
 
-    public $required_documents;
     public $instructions;
     public $appliant;
     public $academic_program;
@@ -30,9 +36,24 @@ class SendUpdateDocuments extends Mailable
      * @return void
      */
      
-    public function __construct($required_documents, $instructions, $appliant, $academic_program, $archive_id, $url_LogoAA, $url_ContactoAA)
-    {
-        $this->required_documents = $required_documents;
+    public function __construct(
+        $personal_documents, 
+        $entrance_documents, 
+        $academic_documents, 
+        $language_documents, 
+        $working_documents,
+        $instructions, 
+        $appliant, 
+        $academic_program, 
+        $archive_id, 
+        $url_LogoAA, 
+        $url_ContactoAA
+        ){
+        $this->personal_documents = $personal_documents;
+        $this->entrance_documents = $entrance_documents;
+        $this->academic_documents = $academic_documents;
+        $this->language_documents = $language_documents;
+        $this->working_documents = $working_documents;
         $this->instructions = $instructions;
         $this->appliant = $appliant;
         $this->academic_program = $academic_program;

@@ -1,18 +1,21 @@
 {{-- Document --}}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    
+
 {{-- Header --}}
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </head>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 {{-- Body --}}
+
 <body>
     <header class="container-fluid p-4">
         <div class="row">
             <div class="col-12 my-2">
-                <img src="{{$url_LogoAA}}" alt="Logo Agenda Ambiental" style="width: 100%">
+                <img src="{{ $url_LogoAA }}" alt="Logo Agenda Ambiental" style="width: 100%">
             </div>
         </div>
     </header>
@@ -25,23 +28,26 @@
                     Le enviamos un cordial saludo. <br>
                 </p>
                 <p class="lead">
-                    Le escribimos de nuestro programa de "{{$academic_program['name']}}", debido este correo esta registrado para el expediente correspondiente al nombre de {{$appliant['name'] . ' ' .  $appliant['middlename'] . ' ' . $appliant['surname']}}, del cual se ha revisado los documentos correspondientes y se requiren de algunas modificaciones.<br>
+                    Le escribimos de nuestro programa de "{{ $academic_program['name'] }}", debido este correo esta
+                    registrado para el expediente correspondiente al nombre de
+                    {{ $appliant['name'] . ' ' . $appliant['middlename'] . ' ' . $appliant['surname'] }}, del cual se
+                    ha revisado los documentos correspondientes y se requiren de algunas modificaciones.<br>
                 </p>
-                @if ($instructions != null && $instructions!= "")
+                @if ($instructions != null && $instructions != '')
                     <p class="lead">
                         El revisor ha dejado las siguientes indicaciones de los documentos a corregir
                     </p>
 
                     <p class="lead">
-                        {{$instructions}}
+                        {{ $instructions }}
                     </p>
                 @endif
-                
+
                 <p>
                     Podras actualizar el siguiente enlace hasta que el revisador los acepte en el siguiente enlace
                 </p>
 
-               {{-- @foreach ($required_documents as $document)
+                {{-- @foreach ($required_documents as $document)
                    <p>Id documento: {{$document}}</p>
                @endforeach
 
@@ -54,7 +60,17 @@
         </div> --}}
 
         <div class="row mt-2 mb-2">
-            @component('mail::button', ['url' => route('updateDocuments.show', ['archive_id' => $archive_id, 'required_documents' => json_encode($required_documents)])])
+            @component('mail::button',
+                [
+                    'url' => route('updateDocuments.show', [
+                        'archive_id' => $archive_id,
+                        'personal_documents' => json_encode($personal_documents),
+                        'entrance_documents' => json_encode($entrance_documents),
+                        'academic_documents' => json_encode($academic_documents),
+                        'language_documents' => json_encode($language_documents),
+                        'working_documents'  =>  json_encode($working_documents),
+                    ]),
+                ])
                 Actualizar mis documentos
             @endcomponent
         </div>
@@ -65,9 +81,9 @@
                     Agradecemos su colaboración.
                 </h4>
                 <p><em>
-                    Atentamente. <br>
-                    Control Escolar de Agenda Ambiental.    
-                </em></p>
+                        Atentamente. <br>
+                        Control Escolar de Agenda Ambiental.
+                    </em></p>
             </div>
         </div>
     </div>
@@ -81,8 +97,5 @@
         </div>
     </footer>
 </body>
+
 </html>
-
-
-
-

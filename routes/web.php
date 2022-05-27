@@ -33,7 +33,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -197,10 +197,16 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     Route::prefix('updateDocuments')->name('updateDocuments.')->group(function(){
-        Route::get('/show/{archive_id}/{required_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
+        Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
         Route::post('updateStateFromEmail', [ArchiveController::class, 'updateStateFromEmail'])->name('update');
+        Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
+        Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
+        Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
+        Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
+        // Faltaria la de working aqui y en solicitud tambien
+        Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument_extern'])->name('get_document');
+        Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
     });
-
 
     
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
@@ -218,4 +224,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('seeAnsweredRecommendationLetter', [ExternalRecommendationLetter::class, 'seeAnsweredRecommendationLetter'])->name('seeAnswered');
 
     });
-// });
+});

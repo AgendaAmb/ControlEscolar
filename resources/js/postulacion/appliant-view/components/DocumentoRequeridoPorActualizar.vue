@@ -1,8 +1,8 @@
 <template>
-  <div v-if="isInList()===true" class="col-12">
+  <div v-if="isInList() === true" class="col-12">
     <div class="row my-3">
       <!-- Nombre y notas -->
-      <div class="form-group col-9 my-auto">
+      <div class="form-group col-9 col-md-9 col-xs-7 my-auto">
         <h5 class="mt-4 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
@@ -12,7 +12,7 @@
             <i>Estado:</i> <i class="text-danger">Sin subir</i>
           </template>
         </h5>
-        
+
         <p v-if="notes !== null" class="mt-3 mb-1 d-block">
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
@@ -22,18 +22,19 @@
         </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
-      
 
-      <div class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="location"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
+      <div
+        class="
+          form-group
+          col-3 col-md-3 col-xs-5
+          justify-content-center
+          my-auto
+        "
+      >
+          <a :href="location" v-if="checkUpload() === true"   class="btn btn-primary" style="width:100%" target="_blank">
+            Ver Archivo</a
+          >
+        <label class="btn btn-primary d-block ml-auto my-2">
           Subir Documento
           <input
             type="file"
@@ -46,20 +47,46 @@
   </div>
 </template>
 
+<style scoped>
+.cargarArchivo {
+  background-color: #3490dc;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
+}
+.verArchivo {
+  background-color: #3490dc;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
+}
+</style>
+
 
 <script>
 export default {
   name: "documento-requerido-porActualizar",
 
   props: {
-
-    user_id:{
-      type:Number,
+    user_id: {
+      type: Number,
       default: -1,
     },
 
-    viewer_id:{
-      type:Number,
+    viewer_id: {
+      type: Number,
       default: -1,
     },
 
@@ -68,104 +95,107 @@ export default {
     },
 
     name: {
-      type: String
+      type: String,
     },
 
     notes: {
-      type: String
+      type: String,
     },
 
     label: {
-      type: String
+      type: String,
     },
 
     example: {
-      type: String
+      type: String,
     },
 
     archivo: {
-      type: File      
-    },
-     
-    location: {
-      type: String
-    },
-    
-    letters_Commitment: {
-      type: Array,
-      default: null
+      type: File,
     },
 
-    alias_academic_program:{
+    location: {
+      type: String,
+    },
+
+    letters_Commitment: {
+      type: Array,
+      default: null,
+    },
+
+    alias_academic_program: {
       type: String,
       default: null,
     },
 
-    index_carta:{
+    index_carta: {
       type: Number,
-      default:0,
+      default: 0,
     },
 
-    require_documents_to_update:{
-        type: Array,
-        default: [],
+    require_documents_to_update: {
+      type: Array,
+      default: [],
     },
 
+    type: {
+      type: String,
+      default: [],
+    },
 
-
+    errores: Object
   },
 
   data() {
     return {
-      errores: {},
       datosValidos: {},
-      textStateUpload: '',
-      academiLetterCommitment: '',
+      textStateUpload: "",
+      academiLetterCommitment: "",
     };
   },
 
   computed: {
-
-    Archivo:{ 
-      get () {
+    Archivo: {
+      get() {
         return this.archivo;
       },
-      set (newValue){
-        this.$emit('update:archivo', newValue);
-      }
+      set(newValue) {
+        this.$emit("update:archivo", newValue);
+      },
     },
     Location: {
-      get () {
+      get() {
         return this.location;
       },
-      set (newValue){
-        this.$emit('update:location', newValue);
-      }
+      set(newValue) {
+        this.$emit("update:location", newValue);
+      },
     },
     Errores: {
-      get () {
+      get() {
         return this.errores;
       },
-      set (newValue){
-        this.errores = newValue;
-        this.$emit('update:errores', newValue);
-      }
-    }
-  },
-  
-
-  
-  methods: {
-
-      isInList(){
-          this.require_documents_to_update.forEach(element => {
-              if(element == this.id){
-                  return true;
-              }
-          });
-
-          return false;
+      set(newValue) {
+        this.$emit("update:errores", newValue);
       },
+    },
+  },
+
+  methods: {
+  
+    
+    isInList() {
+      let res = false;
+      this.require_documents_to_update.forEach((element) => {
+        if (element === this.id) {
+          console.log("encontro documento");
+          console.log(this.name);
+          res = true;
+        }
+      });
+
+      return res;
+    },
 
     checkUpload() {
       if (this.location !== null && this.location !== undefined) {
@@ -185,7 +215,7 @@ export default {
         return false;
       }
 
-      this.$emit("enviaDocumento", this, e.target.files[0]);
+      this.$emit("enviaDocumento", this, e.target.files[0], this.type);
     },
   },
 };

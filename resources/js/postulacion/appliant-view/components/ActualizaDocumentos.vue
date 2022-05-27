@@ -9,47 +9,102 @@
       </p>
     </div>
 
-    <div class="col-12 mx-2">
-    <h4 class="display">Documentos academicos</h4>
-    </div>
-
-    <div
-    class="col-12 mx-2"
-      v-for="(grado, index) in academic_degrees"
-      v-bind:key="grado.id"
-      :index="index + 1"
-    >
-      <h4 class="display">Grado Academico {{index + 1}}</h4>
+    <div v-if="personalDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
+      <h4 class="display">Documentos personales</h4>
       <documento-requerido-porActualizar
-        v-for="documento in grado.required_documents"
+        v-for="documento in personal_documents"
         :key="documento.name"
         :archivo.sync="documento.archivo"
         :location.sync="documento.pivot.location"
         :errores.sync="documento.errores"
-        :alias_academic_program="alias_academic_program"
+        :alias_academic_program="academic_program.alias"
+        :require_documents_to_update="personal_documents_ids"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
       </documento-requerido-porActualizar>
     </div>
 
-    <div class="form-group col-12 mx-2 my-4">
-      <button
+    <div v-if="entranceDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
+      <h4 class="display">Documentos de Ingreso</h4>
+      <documento-requerido-porActualizar
+        v-for="documento in entrance_documents"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :alias_academic_program="academic_program.alias"
+        :require_documents_to_update="entrance_documents_ids"
+        v-bind="documento"
+        @enviaDocumento="cargaDocumento"
+      >
+      </documento-requerido-porActualizar>
+    </div>
+
+    <div v-if="academicDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
+      <h4 class="display">Documentos academicos</h4>
+      <div
+        class="col-12 mx-2"
+        v-for="(grado, index) in academic_degrees"
+        v-bind:key="grado.id"
+        :index="index + 1"
+      >
+        <div v-if="academicDegreeIsInList(grado.id)">
+          <h4 class="display">Grado Academico {{ index + 1 }}</h4>
+
+          <documento-requerido-porActualizar
+            v-for="documento in grado.required_documents"
+            :key="documento.name"
+            :archivo.sync="documento.archivo"
+            :location.sync="documento.pivot.location"
+            :errores.sync="documento.errores"
+            :alias_academic_program="academic_program.alias"
+            :require_documents_to_update="selected_academicDocuments"
+            v-bind="documento"
+            @enviaDocumento="cargaDocumento"
+          >
+          </documento-requerido-porActualizar>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row mx-2 my-4">
+      
+
+      <div class="col-12 my-2"> 
+        <h4><strong>Nota:</strong>&nbsp;&nbsp;Si has subido algunos o todos los documentos puedes hacernos saber para revisarlos</h4>
+      </div>
+
+      <div class="col-3">
+        <button
         @click="avisarCambios"
         class="btn btn-success"
-        style="height: 45px; width: 250px"
+        style="height: 45px; width: 100%"
       >
         Informar de cambios
       </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defaultFormat } from 'moment';
+import DocumentoRequeridoPorActualizar from "./DocumentoRequeridoPorActualizar.vue";
+import swal from "sweetalert2";
+window.Swal = swal;
+
 export default {
   name: "actualiza-documentos",
+
+  components: {
+    DocumentoRequeridoPorActualizar,
+  },
+
   props: {
+    /*
+      Models that requiere documents
+    */
+
     // Documentos personales.
     personal_documents: Array,
 
@@ -62,7 +117,33 @@ export default {
     // Lenguas extranjeras del postulante.
     appliant_languages: Array,
 
-    required_documents_ids: {
+    // Experiencias laborales  del postulante.
+    working_experiences: Array,
+
+    /*
+      List of ids for each model that require documents
+    */
+    personal_documents_ids: {
+      type: Array,
+      default: [],
+    },
+
+    entrance_documents_ids: {
+      type: Array,
+      default: [],
+    },
+
+    academic_documents_ids: {
+      type: Array,
+      default: [],
+    },
+
+    language_documents_ids: {
+      type: Array,
+      default: [],
+    },
+
+    working_documents_ids: {
       type: Array,
       default: [],
     },
@@ -82,10 +163,84 @@ export default {
       default: null,
     },
   },
+
+  data() {
+    return {
+      selected_academicDocuments: [],
+      selected_languageDocuments: [],
+      selected_workingDocuments: [],
+      errores:{},
+    };
+  },
+
   methods: {
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+    },
+
+
+    academicDocumentsIdsNotEmpty() {
+      if (this.academic_documents_ids.length > 0) {
+        return true;
+      }
+      return false;
+    },
+
+    academicDegreeIsInList(academic_degree_id) {
+      academic_documents_ids.forEach((element) => {
+        if (element[0] === academic_degree_id) {
+          return true;
+        }
+      });
+      return false;
+    },
+
+    personalDocumentsIdsNotEmpty() {
+      if (this.personal_documents_ids.length > 0) {
+        return true;
+      }
+      return false;
+    },
+
+    entranceDocumentsIdsNotEmpty() {
+      if (this.entrance_documents_ids.length > 0) {
+        return true;
+      }
+      return false;
+    },
+
+    languageDocumentsIdsNotEmpty() {
+      if (this.language_documents_ids.length > 0) {
+        return true;
+      }
+      return false;
+    },
+
+    workingDocumentsIdsNotEmpty() {
+      if (this.working_documents_ids.length > 0) {
+        return true;
+      }
+      return false;
+    },
+
     avisarCambios() {
       axios
-        .post("/controlescolar/solicitud/updateStatusArchive", {
+        .post("/controlescolar/updateDocuments/updateStatusArchive", {
           //   Documentos nuevos
           archive_id: this.archive_id,
           status: 4,
@@ -123,26 +278,26 @@ export default {
       if (type != null) {
         switch (type) {
           case "personal":
-            url = "/controlescolar/solicitud/updateArchivePersonalDocument";
+            url = "/controlescolar/updateDocuments/updateArchivePersonalDocument";
             break;
           case "academic":
             url =
-              "/controlescolar/solicitud/updateAcademicDegreeRequiredDocument";
+              "/controlescolar/updateDocuments/updateAcademicDegreeRequiredDocument";
 
             break;
           case "entrance":
-            url =
-              "/controlescolar/solicitud/updateArchiveEntranceDocument";
+            url = "/controlescolar/updateDocuments/updateArchiveEntranceDocument";
             break;
           case "language":
-            url = "/controlescolar/solicitud/updateAppliantLanguageRequiredDocument";
+            url =
+              "/controlescolar/updateDocuments/updateAppliantLanguageRequiredDocument";
             break;
           // case "working":
           //   break;
-            default:
-              break;
+          default:
+            break;
         }
-      }
+      
       axios({
         method: "post",
         url: url,
@@ -166,11 +321,29 @@ export default {
                 : null,
           };
         });
+      }
     },
   },
 
   created() {
-    console.log(this.documentos);
+    this.academic_documents_ids.forEach((element) => {
+      if (element[1] != null) {
+        console.log("academico:", element[1]);
+        this.selected_academicDocuments.push(element[1]);
+      }
+    });
+    this.language_documents_ids.forEach((element) => {
+      if (element[1] != null) {
+        console.log("languaje:", element[1]);
+        this.selected_languageDocuments.push(element[1]);
+      }
+    });
+    this.working_documents_ids.forEach((element) => {
+      if (element[1] != null) {
+        console.log("working:", element[1]);
+        this.selected_workingDocuments.push(element[1]);
+      }
+    });
   },
 };
 </script>

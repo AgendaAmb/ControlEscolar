@@ -12,8 +12,120 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -103,9 +215,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "actualizar-expediente",
   props: {
+    // Documents to update
     required_documents: {
       type: Array,
       "default": []
+    },
+    personal_documents: {
+      type: Array,
+      "default": []
+    },
+    entrance_documents: {
+      type: Array,
+      "default": []
+    },
+    academic_degrees: {
+      type: Object,
+      "default": null
+    },
+    appliant_languages: {
+      type: Object,
+      "default": null
+    },
+    working_experiences: {
+      type: Object,
+      "default": null
+    },
+    // Information
+    academic_program: {
+      type: Object,
+      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -113,10 +251,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     archive_id: {
       type: Number,
-      "default": null
-    },
-    academic_program: {
-      type: Object,
       "default": null
     },
     user_id: {
@@ -127,6 +261,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       selected_etiquetas: [],
+      selected_personalDocuments: [],
+      selected_academicDocuments: [],
+      selected_entranceDocuments: [],
+      selected_languageDocuments: [],
+      selected_workingDocuments: [],
       instructions: ""
     };
   },
@@ -134,12 +273,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     enviarActualizacion: function enviarActualizacion() {
       var _this = this;
 
-      console.log(this.selected_etiquetas);
+      console.log(this.selected_academicDocuments);
       console.log("instructions: " + this.instructions);
 
-      if (this.selected_etiquetas.length > 0 && this.archive_id != null && this.user_id != null) {
+      if ((this.selected_personalDocuments.length > 0 || this.selected_academicDocuments.length > 0 || this.selected_entranceDocuments.length > 0 || this.selected_languageDocuments.length > 0 || this.selected_workingDocuments.length > 0) && this.archive_id != null && this.user_id != null) {
         axios.post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
-          selected_etiquetas: this.selected_etiquetas,
+          selected_personalDocuments: this.selected_personalDocuments,
+          selected_academicDocuments: this.selected_academicDocuments,
+          selected_entranceDocuments: this.selected_entranceDocuments,
+          selected_languageDocuments: this.selected_languageDocuments,
+          selected_workingDocuments: this.selected_workingDocuments,
           instructions: this.instructions,
           academic_program: this.academic_program,
           archive_id: this.archive_id,
@@ -170,24 +313,70 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           });
         })["catch"](function (error) {
-          var _Swal$fire;
-
-          Swal.fire((_Swal$fire = {
+          Swal.fire({
             title: "Ups",
             text: "No fue posible completar la petición, intentelo mas tarde",
-            icon: "error"
-          }, _defineProperty(_Swal$fire, "title", error.data), _defineProperty(_Swal$fire, "showCancelButton", true), _defineProperty(_Swal$fire, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire, "cancelButtonText", "Entendido"), _Swal$fire)); // alert('Ha ocurrido un error, intenta mas tarde');
-
-          console.log(error);
+            icon: "error",
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Entendido"
+          }); // alert('Ha ocurrido un error, intenta mas tarde');
+          // console.log(error);
         });
       } else {
-        var _Swal$fire2;
-
-        Swal.fire((_Swal$fire2 = {
+        Swal.fire({
           title: "Alguno de los datos no es correcto, verifique nuevamente",
-          icon: "error"
-        }, _defineProperty(_Swal$fire2, "title", error.data), _defineProperty(_Swal$fire2, "showCancelButton", true), _defineProperty(_Swal$fire2, "cancelButtonColor", "#d33"), _defineProperty(_Swal$fire2, "cancelButtonText", "Entendido"), _Swal$fire2));
+          icon: "error",
+          showCancelButton: true,
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Entendido"
+        });
       }
+    },
+    // Solamente los documentos de trabajo se piden para maestria de ENREM
+    // Cuando aumente cambiar a un switch
+    requiereWorkingExperience: function requiereWorkingExperience() {
+      if (this.alias_academic_program === "enrem") {
+        return true;
+      }
+
+      return false;
+    },
+    isPersonalDocument: function isPersonalDocument(etiqueta) {
+      if (etiqueta.type === "personal") {
+        return true;
+      }
+
+      return false;
+    },
+    isAcademicDocument: function isAcademicDocument(etiqueta) {
+      // console.log('nombre: '+etiqueta.name + ': tipo'+ etiqueta.type);
+      if (etiqueta.type === "academic") {
+        return true;
+      }
+
+      return false;
+    },
+    isEntranceDocument: function isEntranceDocument(etiqueta) {
+      if (etiqueta.type === "entrance") {
+        return true;
+      }
+
+      return false;
+    },
+    isLanguageDocument: function isLanguageDocument(etiqueta) {
+      if (etiqueta.type === "language") {
+        return true;
+      }
+
+      return false;
+    },
+    isWorkingDocument: function isWorkingDocument(etiqueta) {
+      if (etiqueta.type === "working") {
+        return true;
+      }
+
+      return false;
     },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
       var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
@@ -913,7 +1102,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      console.log(this.name + ': ' + this.alias_academic_program);
+      // console.log(this.name + ': '+ this.alias_academic_program);
       var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
 
       if (this.alias_academic_program === "maestria") {
@@ -11209,25 +11398,28 @@ var render = function () {
                 },
                 [
                   _c("div", { staticClass: "row my-2 mx-2" }, [
-                    _c("div", { staticClass: "my-2 col-12" }, [
-                      _c("h4", [_vm._v("Documentos para actualizar")]),
+                    _c("div", { staticClass: "my-2 col-4" }, [
+                      _c("h4", [_vm._v("Personales")]),
                       _vm._v(" "),
                       _c(
                         "ul",
+                        { staticClass: "list-group" },
                         _vm._l(_vm.required_documents, function (etiqueta) {
                           return _c(
                             "li",
                             { key: etiqueta.id, staticClass: "form-check" },
                             [
-                              _vm.requiredForAcademicProgram() === true
+                              _vm.requiredForAcademicProgram() === true &&
+                              _vm.isPersonalDocument(etiqueta) === true
                                 ? _c("div", [
                                     _c("input", {
                                       directives: [
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.selected_etiquetas,
-                                          expression: "selected_etiquetas",
+                                          value: _vm.selected_personalDocuments,
+                                          expression:
+                                            "selected_personalDocuments",
                                         },
                                       ],
                                       staticClass: "form-check-input",
@@ -11235,17 +11427,18 @@ var render = function () {
                                       domProps: {
                                         value: etiqueta.id,
                                         checked: Array.isArray(
-                                          _vm.selected_etiquetas
+                                          _vm.selected_personalDocuments
                                         )
                                           ? _vm._i(
-                                              _vm.selected_etiquetas,
+                                              _vm.selected_personalDocuments,
                                               etiqueta.id
                                             ) > -1
-                                          : _vm.selected_etiquetas,
+                                          : _vm.selected_personalDocuments,
                                       },
                                       on: {
                                         change: function ($event) {
-                                          var $$a = _vm.selected_etiquetas,
+                                          var $$a =
+                                              _vm.selected_personalDocuments,
                                             $$el = $event.target,
                                             $$c = $$el.checked ? true : false
                                           if (Array.isArray($$a)) {
@@ -11253,16 +11446,17 @@ var render = function () {
                                               $$i = _vm._i($$a, $$v)
                                             if ($$el.checked) {
                                               $$i < 0 &&
-                                                (_vm.selected_etiquetas =
+                                                (_vm.selected_personalDocuments =
                                                   $$a.concat([$$v]))
                                             } else {
                                               $$i > -1 &&
-                                                (_vm.selected_etiquetas = $$a
-                                                  .slice(0, $$i)
-                                                  .concat($$a.slice($$i + 1)))
+                                                (_vm.selected_personalDocuments =
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1)))
                                             }
                                           } else {
-                                            _vm.selected_etiquetas = $$c
+                                            _vm.selected_personalDocuments = $$c
                                           }
                                         },
                                       },
@@ -11286,38 +11480,547 @@ var render = function () {
                         }),
                         0
                       ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "row my-2 mx-2" }, [
-                        _c("div", { staticClass: "col-12 my-2" }, [
-                          _c("h4", [
-                            _vm._v(
-                              "\n                    Deja un mensaje al postulante para que queden mas claras\n                    las instrucciones para el cambio\n                  "
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.instructions,
-                                expression: "instructions",
-                              },
-                            ],
-                            staticClass: "form-control",
-                            attrs: { rows: "4" },
-                            domProps: { value: _vm.instructions },
-                            on: {
-                              input: function ($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.instructions = $event.target.value
-                              },
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "my-2 col-4" },
+                      [
+                        _c("h4", [_vm._v("Grado(s) academico(s)")]),
+                        _vm._v(" "),
+                        _vm._l(_vm.academic_degrees, function (grado, index) {
+                          return _c(
+                            "ul",
+                            {
+                              key: grado.id,
+                              staticClass: "list-group",
+                              attrs: { index: index + 1 },
                             },
-                          }),
-                        ]),
+                            [
+                              _c("li", { staticClass: "list-inline-item" }, [
+                                _c("span", [
+                                  _c("strong", [
+                                    _vm._v(
+                                      " Grado Academico #" + _vm._s(index) + " "
+                                    ),
+                                  ]),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(
+                                grado.required_documents,
+                                function (etiqueta) {
+                                  return _c(
+                                    "li",
+                                    {
+                                      key: etiqueta.id,
+                                      staticClass: "form-check",
+                                    },
+                                    [
+                                      _vm.requiredForAcademicProgram() ===
+                                        true &&
+                                      _vm.isAcademicDocument(etiqueta) === true
+                                        ? _c("div", [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.selected_academicDocuments,
+                                                  expression:
+                                                    "selected_academicDocuments",
+                                                },
+                                              ],
+                                              staticClass: "form-check-input",
+                                              attrs: { type: "checkbox" },
+                                              domProps: {
+                                                value: [grado.id, etiqueta.id],
+                                                checked: Array.isArray(
+                                                  _vm.selected_academicDocuments
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.selected_academicDocuments,
+                                                      [grado.id, etiqueta.id]
+                                                    ) > -1
+                                                  : _vm.selected_academicDocuments,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.selected_academicDocuments,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = [
+                                                        grado.id,
+                                                        etiqueta.id,
+                                                      ],
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        (_vm.selected_academicDocuments =
+                                                          $$a.concat([$$v]))
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        (_vm.selected_academicDocuments =
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            ))
+                                                    }
+                                                  } else {
+                                                    _vm.selected_academicDocuments =
+                                                      $$c
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "form-check-label",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                      " +
+                                                    _vm._s(etiqueta.name) +
+                                                    "\n                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ])
+                                        : _vm._e(),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          )
+                        }),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "my-2 col-4" }, [
+                      _c("h4", [_vm._v("Ingreso")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(_vm.entrance_documents, function (etiqueta) {
+                          return _c(
+                            "li",
+                            { key: etiqueta.id, staticClass: "form-check" },
+                            [
+                              _vm.requiredForAcademicProgram() === true &&
+                              _vm.isEntranceDocument(etiqueta) === true
+                                ? _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selected_entranceDocuments,
+                                          expression:
+                                            "selected_entranceDocuments",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        value: etiqueta.id,
+                                        checked: Array.isArray(
+                                          _vm.selected_entranceDocuments
+                                        )
+                                          ? _vm._i(
+                                              _vm.selected_entranceDocuments,
+                                              etiqueta.id
+                                            ) > -1
+                                          : _vm.selected_entranceDocuments,
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$a =
+                                              _vm.selected_entranceDocuments,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = etiqueta.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selected_entranceDocuments =
+                                                  $$a.concat([$$v]))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selected_entranceDocuments =
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selected_entranceDocuments = $$c
+                                          }
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "form-check-label" },
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(etiqueta.name) +
+                                            "\n                    "
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "my-2 col-4" },
+                      [
+                        _c("h4", [_vm._v("Lengua(s) Entranjera(s)")]),
+                        _vm._v(" "),
+                        _vm._l(
+                          _vm.appliant_languages,
+                          function (language, index) {
+                            return _c(
+                              "ul",
+                              {
+                                key: language.id,
+                                staticClass: "list-group",
+                                attrs: { index: index + 1 },
+                              },
+                              [
+                                _c("li", { staticClass: "list-inline-item" }, [
+                                  _c("span", [
+                                    _c("strong", [
+                                      _vm._v(
+                                        " Lengua Extranjera #" +
+                                          _vm._s(index) +
+                                          " "
+                                      ),
+                                    ]),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(
+                                  language.required_documents,
+                                  function (etiqueta) {
+                                    return _c(
+                                      "li",
+                                      {
+                                        key: etiqueta.id,
+                                        staticClass: "form-check",
+                                      },
+                                      [
+                                        _vm.requiredForAcademicProgram() ===
+                                          true &&
+                                        _vm.isLanguageDocument(etiqueta) ===
+                                          true
+                                          ? _c("div", [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value:
+                                                      _vm.selected_languageDocuments,
+                                                    expression:
+                                                      "selected_languageDocuments",
+                                                  },
+                                                ],
+                                                staticClass: "form-check-input",
+                                                attrs: { type: "checkbox" },
+                                                domProps: {
+                                                  value: [
+                                                    language.id,
+                                                    etiqueta.id,
+                                                  ],
+                                                  checked: Array.isArray(
+                                                    _vm.selected_languageDocuments
+                                                  )
+                                                    ? _vm._i(
+                                                        _vm.selected_languageDocuments,
+                                                        [
+                                                          language.id,
+                                                          etiqueta.id,
+                                                        ]
+                                                      ) > -1
+                                                    : _vm.selected_languageDocuments,
+                                                },
+                                                on: {
+                                                  change: function ($event) {
+                                                    var $$a =
+                                                        _vm.selected_languageDocuments,
+                                                      $$el = $event.target,
+                                                      $$c = $$el.checked
+                                                        ? true
+                                                        : false
+                                                    if (Array.isArray($$a)) {
+                                                      var $$v = [
+                                                          language.id,
+                                                          etiqueta.id,
+                                                        ],
+                                                        $$i = _vm._i($$a, $$v)
+                                                      if ($$el.checked) {
+                                                        $$i < 0 &&
+                                                          (_vm.selected_languageDocuments =
+                                                            $$a.concat([$$v]))
+                                                      } else {
+                                                        $$i > -1 &&
+                                                          (_vm.selected_languageDocuments =
+                                                            $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                      }
+                                                    } else {
+                                                      _vm.selected_languageDocuments =
+                                                        $$c
+                                                    }
+                                                  },
+                                                },
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "form-check-label",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                      " +
+                                                      _vm._s(etiqueta.name) +
+                                                      "\n                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ])
+                                          : _vm._e(),
+                                      ]
+                                    )
+                                  }
+                                ),
+                              ],
+                              2
+                            )
+                          }
+                        ),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.requiereWorkingExperience() === true
+                      ? _c(
+                          "div",
+                          { staticClass: "my-2 col-4" },
+                          [
+                            _c("h4", [_vm._v("Experiencia(s) Laboral(s)")]),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.working_experiences,
+                              function (working_experience, index) {
+                                return _c(
+                                  "ul",
+                                  {
+                                    key: working_experience.id,
+                                    staticClass: "list-group",
+                                    attrs: { index: index + 1 },
+                                  },
+                                  [
+                                    _c(
+                                      "li",
+                                      { staticClass: "list-inline-item" },
+                                      [
+                                        _c("span", [
+                                          _c("strong", [
+                                            _vm._v(
+                                              " Grado Academico #" +
+                                                _vm._s(index) +
+                                                " "
+                                            ),
+                                          ]),
+                                        ]),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      working_experience.required_documents,
+                                      function (etiqueta) {
+                                        return _c(
+                                          "li",
+                                          {
+                                            key: etiqueta.id,
+                                            staticClass: "form-check",
+                                          },
+                                          [
+                                            _vm.requiredForAcademicProgram() ===
+                                              true &&
+                                            _vm.isWorkingDocument(etiqueta) ===
+                                              true
+                                              ? _c("div", [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.selected_workingDocuments,
+                                                        expression:
+                                                          "selected_workingDocuments",
+                                                      },
+                                                    ],
+                                                    staticClass:
+                                                      "form-check-input",
+                                                    attrs: { type: "checkbox" },
+                                                    domProps: {
+                                                      value: [
+                                                        working_experience.id,
+                                                        etiqueta.id,
+                                                      ],
+                                                      checked: Array.isArray(
+                                                        _vm.selected_workingDocuments
+                                                      )
+                                                        ? _vm._i(
+                                                            _vm.selected_workingDocuments,
+                                                            [
+                                                              working_experience.id,
+                                                              etiqueta.id,
+                                                            ]
+                                                          ) > -1
+                                                        : _vm.selected_workingDocuments,
+                                                    },
+                                                    on: {
+                                                      change: function (
+                                                        $event
+                                                      ) {
+                                                        var $$a =
+                                                            _vm.selected_workingDocuments,
+                                                          $$el = $event.target,
+                                                          $$c = $$el.checked
+                                                            ? true
+                                                            : false
+                                                        if (
+                                                          Array.isArray($$a)
+                                                        ) {
+                                                          var $$v = [
+                                                              working_experience.id,
+                                                              etiqueta.id,
+                                                            ],
+                                                            $$i = _vm._i(
+                                                              $$a,
+                                                              $$v
+                                                            )
+                                                          if ($$el.checked) {
+                                                            $$i < 0 &&
+                                                              (_vm.selected_workingDocuments =
+                                                                $$a.concat([
+                                                                  $$v,
+                                                                ]))
+                                                          } else {
+                                                            $$i > -1 &&
+                                                              (_vm.selected_workingDocuments =
+                                                                $$a
+                                                                  .slice(0, $$i)
+                                                                  .concat(
+                                                                    $$a.slice(
+                                                                      $$i + 1
+                                                                    )
+                                                                  ))
+                                                          }
+                                                        } else {
+                                                          _vm.selected_workingDocuments =
+                                                            $$c
+                                                        }
+                                                      },
+                                                    },
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "form-check-label",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                      " +
+                                                          _vm._s(
+                                                            etiqueta.name
+                                                          ) +
+                                                          "\n                    "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ])
+                                              : _vm._e(),
+                                          ]
+                                        )
+                                      }
+                                    ),
+                                  ],
+                                  2
+                                )
+                              }
+                            ),
+                          ],
+                          2
+                        )
+                      : _vm._e(),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _c("div", { staticClass: "col-12 my-2" }, [
+                      _c("h4", [
+                        _vm._v(
+                          "\n                Deja un mensaje al postulante para que queden mas claras las\n                instrucciones para el cambio\n              "
+                        ),
                       ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.instructions,
+                            expression: "instructions",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "4" },
+                        domProps: { value: _vm.instructions },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.instructions = $event.target.value
+                          },
+                        },
+                      }),
                     ]),
                   ]),
                 ]

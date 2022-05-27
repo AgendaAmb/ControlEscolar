@@ -31,6 +31,25 @@ class FileController extends Controller
         }
     }
 
+    public function viewDocument_extern( $archive_id, $personal_documents, $entrance_documents, $academic_documents, $language_documents, $working_documents,$archive, $type, $name)
+    {
+        try 
+        {
+            # Crea la ruta al archivo.
+            $userPath = implode('/', [$archive,$type,$name]);
+
+            # Obtiene el archivo.
+            $filepath = Storage::path('archives/'.$userPath);
+
+            # Devuelve el archivo.
+            return response()->file($filepath);
+        }
+        catch (Exception $e) 
+        {
+            return abort(502, 'Archivo no encontrado');
+        }
+    }
+
     /**
      * Visualiza un expediente.
      */

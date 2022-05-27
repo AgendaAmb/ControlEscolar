@@ -18,6 +18,11 @@
     @if (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641 )
         <actualizar-expediente
         :required_documents="archive.required_documents"
+        :personal_documents="archive.personal_documents" 
+        :entrance_documents="archive.entrance_documents"
+        :academic_degrees="archive.academic_degrees" 
+        :appliant_languages="archive.appliant_languages"
+        :working_experiences="archive.appliant_working_experiences"
         :academic_program = "academic_program"
         :alias_academic_program="academic_program.alias"
         :user_id="appliant.id"
