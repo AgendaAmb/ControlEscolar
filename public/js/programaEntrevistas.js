@@ -67,6 +67,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -97,6 +107,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'interviews-comite',
+  props: {
+    // Programa academico 
+    academic_program: {
+      type: String,
+      "default": ''
+    },
+    // las entrevistas
+    interviews_ordered: {
+      type: Object,
+      "default": function _default() {
+        return {
+          interviews_ordered: {}
+        };
+      }
+    }
+  },
+  computed: {
+    id: function id() {
+      return 'interviews-' + this.academic_program;
+    },
+    href: function href() {
+      return '#' + this.id;
+    },
+    key: function key() {
+      return 'key-' + this.academic_program;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css& ***!
@@ -115,6 +212,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.interview-program-header[data-v-9617f314] {\r\n    font-family: 'Myriad Pro Bold';\r\n    background-color: #fecc56;\r\n    color: white;\n}\n.appliant[data-v-9617f314] {\r\n    text-transform: capitalize;\n}\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.interview-program-header[data-v-3fcff7c6] {\r\n    font-family: 'Myriad Pro Bold';\r\n    background-color: #fecc56;\r\n    color: white;\n}\n.appliant[data-v-3fcff7c6] {\r\n    text-transform: capitalize;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21661,6 +21782,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_style_index_0_id_3fcff7c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_style_index_0_id_3fcff7c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_style_index_0_id_3fcff7c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -21981,6 +22132,47 @@ component.options.__file = "resources/js/entrevistas-profesor/components/Intervi
 
 /***/ }),
 
+/***/ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/entrevistas-profesor/components/InterviewsComite.vue ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true& */ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true&");
+/* harmony import */ var _InterviewsComite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InterviewsComite.vue?vue&type=script&lang=js& */ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js&");
+/* harmony import */ var _InterviewsComite_vue_vue_type_style_index_0_id_3fcff7c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& */ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _InterviewsComite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "3fcff7c6",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/entrevistas-profesor/components/InterviewsComite.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************!*\
   !*** ./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=script&lang=js& ***!
@@ -21997,6 +22189,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewsComite.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css&":
 /*!********************************************************************************************************************************!*\
   !*** ./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css& ***!
@@ -22006,6 +22214,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_style_index_0_id_9617f314_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=style&index=0&id=9617f314&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&":
+/*!************************************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_style_index_0_id_3fcff7c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=style&index=0&id=3fcff7c6&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -22023,6 +22244,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_template_id_9617f314_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewDay_vue_vue_type_template_id_9617f314_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewDay.vue?vue&type=template&id=9617f314&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewDay.vue?vue&type=template&id=9617f314&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true& ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InterviewsComite_vue_vue_type_template_id_3fcff7c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true&");
 
 
 /***/ }),
@@ -22083,7 +22321,9 @@ var render = function () {
                     _c("th", [_vm._v(" Expediente ")]),
                     _vm._v(" "),
                     !_vm.$root.loggedUserIsAdmin() &&
-                    !_vm.$root.loggedUserIsSchoolControl()
+                    !_vm.$root.loggedUserIsSchoolControl() &&
+                    !_vm.$root.loggedUserIsCoordinador() &&
+                    !_vm.$root.loggedUserIsCA()
                       ? _c("th", [_vm._v(" Rúbrica de evaluación ")])
                       : _c("th", [_vm._v(" Rúbricas de evaluación ")]),
                   ]),
@@ -22118,8 +22358,52 @@ var render = function () {
                         ),
                       ]),
                       _vm._v(" "),
-                      !_vm.$root.loggedUserIsAdmin() &&
-                      !_vm.$root.loggedUserIsSchoolControl()
+                      _vm.$root.loggedUserIsCoordinador()
+                        ? _c(
+                            "td",
+                            [
+                              _vm._l(interview.rubrics, function (rubric) {
+                                return _c(
+                                  "a",
+                                  {
+                                    key: rubric.location,
+                                    staticClass:
+                                      "d-block text-capitalize text-decoration-none",
+                                    attrs: { href: rubric.location },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(rubric.user.name) +
+                                        " " +
+                                        _vm._s(rubric.user.middlename) +
+                                        " " +
+                                        _vm._s(rubric.user.surname) +
+                                        "\n                                    "
+                                    ),
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "d-block text-capitalize text-decoration-none",
+                                  attrs: { href: "#" },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Promedio (working)\n                                    "
+                                  ),
+                                ]
+                              ),
+                            ],
+                            2
+                          )
+                        : !_vm.$root.loggedUserIsAdmin() &&
+                          !_vm.$root.loggedUserIsSchoolControl() &&
+                          !_vm.$root.loggedUserIsCA()
                         ? _c(
                             "td",
                             _vm._l(interview.rubrics, function (rubric) {
@@ -22148,8 +22432,12 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Profesor " +
-                                      _vm._s(rubric.professor) +
+                                    "\n                                        " +
+                                      _vm._s(rubric.user.name) +
+                                      " " +
+                                      _vm._s(rubric.user.middlename) +
+                                      " " +
+                                      _vm._s(rubric.user.surname) +
                                       "\n                                    "
                                   ),
                                 ]
@@ -22171,6 +22459,102 @@ var render = function () {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/entrevistas-profesor/components/InterviewsComite.vue?vue&type=template&id=3fcff7c6&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-10 text-center my-4" }, [
+    _c("h4", { staticClass: "d-block interview-day" }, [
+      _vm._v(" " + _vm._s(_vm.academic_program) + " "),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "table-responsive" }, [
+      _c("table", { staticClass: "table text-center" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.interviews_ordered, function (interview) {
+            return _c("tr", { key: interview.id }, [
+              _c("td", [
+                _vm._v(
+                  _vm._s(interview.start_time + " a " + interview.end_time)
+                ),
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "appliant" }, [
+                _vm._v(_vm._s(interview.appliant)),
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  { attrs: { href: interview.archive_url, target: "_blank" } },
+                  [_vm._v("Ver documentos")]
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._m(1, true),
+            ])
+          }),
+          0
+        ),
+      ]),
+    ]),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "interview-program-header" }, [
+      _c("tr", [
+        _c("th", [_vm._v(" Horario ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Nombre ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Expediente ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" Evaluación promedio ")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "a",
+        { staticClass: "d-block text-decoration-none", attrs: { href: "#" } },
+        [
+          _vm._v(
+            "\n                            Rubrica promedio (TO DO)\n                        "
+          ),
+        ]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -34435,6 +34819,7 @@ var __webpack_exports__ = {};
   \******************************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/InterviewDay.vue */ "./resources/js/entrevistas-profesor/components/InterviewDay.vue");
+/* harmony import */ var _components_InterviewsComite_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/InterviewsComite.vue */ "./resources/js/entrevistas-profesor/components/InterviewsComite.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -34443,6 +34828,7 @@ __webpack_require__.r(__webpack_exports__);
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -34456,7 +34842,8 @@ var app = new Vue({
   el: '#app',
   name: 'professor-interviews',
   components: {
-    InterviewDay: _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    InterviewDay: _components_InterviewDay_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    InterviewsComite: _components_InterviewsComite_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: {
     interviews: interviews,
@@ -34479,12 +34866,34 @@ var app = new Vue({
     },
 
     /**
-     * Determina si el usuario autenticado es administrador.
+     * Determina si el usuario autenticado tiene el rol de control escolar.
      * @param {*} period 
      */
     loggedUserIsSchoolControl: function loggedUserIsSchoolControl() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'control_escolar';
+      });
+      return roles.length > 0;
+    },
+
+    /**
+     * Determina si el usuario autenticado tiene el rol de comite academico.
+     * @param {*} period 
+     */
+    loggedUserIsCA: function loggedUserIsCA() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'comite_academico';
+      });
+      return roles.length > 0;
+    },
+
+    /**
+     * Determina si el usuario autenticado es administrador.
+     * @param {*} period 
+     */
+    loggedUserIsCoordinador: function loggedUserIsCoordinador() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'coordinador';
       });
       return roles.length > 0;
     }

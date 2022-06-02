@@ -14,34 +14,40 @@ const announcement = @json($announcement);
 @section('main')
 <div class="row mt-5 mb-2">
     <div class="col-12">
-        <h1 class="title">Formato de evaluación</h1>
-        <h1 class="sub-title">Maestría y Doctorado</h1>
+        <h1 class="title">Rubrica de evaluación</h1>
+        <h1 v-if="announcement.type === 'doctorado' " class="sub-title">Doctorado</h1>
+        <h1 v-else class="sub-title">Maestría</h1>
     </div>
     <hr class="col-11 hr">
 </div>
 
-<evaluation-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:concepts="basic_concepts">
+<evaluation-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:concepts="basic_concepts"  v-bind:antype="announcement.type" v-bind:id="0">
     <template v-slot:appliant_data>
         <appliant-data v-bind:appliant="appliant" v-bind:announcement="announcement"></appliant-data>
     </template>
 </evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="academic_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="research_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="working_experience_concepts"></evaluation-rubric-section>
-<evaluation-rubric-section v-bind:title="'5. Atributos personales'" v-bind:concepts="personal_attributes_concepts"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="academic_concepts" v-bind:antype="announcement.type" v-bind:id="1"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="research_concepts" v-bind:antype="announcement.type" v-bind:id="2"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="working_experience_concepts"  v-bind:antype="announcement.type" v-bind:id="3"></evaluation-rubric-section>
+<evaluation-rubric-section v-bind:title="'5. Atributos personales'" v-bind:concepts="personal_attributes_concepts"  v-bind:antype="announcement.type" v-bind:id="4"></evaluation-rubric-section>
 
 <div class="form-row mt-2 justify-content-center rubric-section">
     <h4 class="col-11 myriad-bold rubric-section-header mb-3"> 6. Varios </h4>
     <div class="form-group col-lg-11">
         <label> ¿Tienes algún último comentario o aportación que desees agregar para ser considerado en tu evaluación?</label>
-        <textarea v-model="considerations" class="form-control" rows="3"></textarea>
+        <textarea :readonly="$root.r_only()" v-model="considerations" class="form-control" rows="3"></textarea>
     </div>
     <div class="form-group col-lg-11">
         <label> Situaciones o información importante que haya detectado la comisión de evaluación</label>
-        <textarea v-model="additional_information" class="form-control" rows="3"></textarea>
+        <textarea :readonly="$root.r_only()" v-model="additional_information" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="form-group col-lg-11">
+        <label> DICTAMEN DE LA COMISIÓN EVALUADORA</label>
+        <textarea :readonly="$root.r_only()" v-model="dictamen_ce" class="form-control" rows="3"></textarea>
     </div>        
     <hr class="col-11 hr">
-    <div class="form-group col-lg-11 text-right">
+    <div v-if="$root.r_only()"></div>
+    <div v-else class="form-group col-lg-11 text-right">
         <button class="btn btn-primary interview-button" type="button" disabled  v-if="visbleSave">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Guardando...

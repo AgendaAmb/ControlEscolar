@@ -1,5 +1,5 @@
 <template>
-  <a class="row mx-3" @click="showDetails">
+  <a class="row mx-3 card" @click="showDetails">
     <div class="col-7 text-left">
       <h5 class="my-1 appliant"> {{ appliant }} </h5>
       <p class="mt-2 mb-0 detail"> Carta de intención otorgada por: </p>
@@ -18,7 +18,7 @@
 <style scoped>
 .appliant {
   font-family: 'Myriad Pro Bold';
-  color: #fecc56;
+  color: #115089;
   display: block;
   text-transform: capitalize;
 }
@@ -35,6 +35,10 @@ p.detail + p:not(.detail) {
   font-size: 13px;
   color: #115089;
   text-transform: capitalize;
+}
+
+.card{
+  border: 2px solid #115089;
 }
 </style>
 

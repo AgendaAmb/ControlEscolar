@@ -28,36 +28,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(concept) in concepts" :key="concept.id">
+                    <tr v-for="concept in concepts" :key="concept.id">
                         <td class="text-justify concept">{{concept.description}}</td>
                         <td class="text-justify" v-for="detail in detailsFrom(concept)" :key="detail.id">{{detail.text}}</td>
                         <td class="text-justify" v-for="detail_data in researchDetailsFrom(concept)" :key="detail_data.id">
                             <div v-for="(detail, index) in detail_data" :key="index" class="d-block mb-4">
                                 <label :class="labelClassFor(detail)"> {{ labelTextFor(detail) }} </label> 
                                 <div v-for="(choice,index) in detail.choices" :key="index" class="form-check form-check-inline">
-                                    <input :disabled="$root.r_only()" class="form-check-input my-auto" type="radio" v-model="detail.value" :value="choice">
+                                    <input :disabled="!$root.loggedUserIsPNB() && !$root.loggedUserIsAdmin()" class="form-check-input my-auto" type="radio" v-model="detail.value" :value="choice">
                                     <label class="form-check-label"> {{ choice }} </label>
                                 </div>
 
-                                <textarea :readonly="$root.r_only()" v-if="isTextArea(detail)" class="form-control" rows="2" v-model="detail.value"></textarea>
+                                <textarea :readonly="!$root.loggedUserIsPNB() && !$root.loggedUserIsAdmin()" v-if="isTextArea(detail)" class="form-control" rows="2" v-model="detail.value"></textarea>
                             </div>
                         </td>
 
-                        <td class="score"><input :readonly="$root.r_only()" v-model.number="concept.score" type="number"></td>
-                        <td class="notes"><input :readonly="$root.r_only()" v-model="concept.notes" type="text"></td>
+                        <td class="score"><input :readonly="!$root.loggedUserIsPNB() && !$root.loggedUserIsAdmin()" v-model.number="concept.score" type="number"></td>
+                        <td class="notes"><input :readonly="!$root.loggedUserIsPNB() && !$root.loggedUserIsAdmin()" v-model="concept.notes" type="text"></td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Ponderación: {{sectionScore(concepts)}}</td>
-                    </tr>
-                </tfoot>
             </table>
         </div>
         <hr class="col-11 hr">
@@ -65,8 +54,6 @@
 </template>
 
 <script>
-import { interfaceDeclaration } from '@babel/types';
-
 export default {
     name: 'evaluation-rubric-section',
     
@@ -83,15 +70,6 @@ export default {
             default() {
                 return [];
             }
-        },
-
-        id:{
-            type: Number
-        },
-
-        antype:{
-            type: String,
-            default: ''
         }
     },
 
@@ -104,25 +82,6 @@ export default {
                 return [];
 
             return concept.evaluation_concept_details;
-        },
-
-        // Calculo de la ponderacion
-        sectionScore(concepts, id){
-            // Factores de ponderación de los rubros
-            let doctorado = [10,25,30,20,15];
-            let maestria = [15,30,15,25,15];
-
-            let score = 0.0; 
-
-            concepts.forEach(function(concept) {
-                score+=concept.score;
-            });
-
-            score = `${this.antype}` === 'doctorado'?
-                ((score/concepts.length)*doctorado[`${this.id}`])/100:
-                ((score/concepts.length)*maestria[`${this.id}`])/100;
-
-            return score;
         },
 
         researchDetailsFrom(concept){

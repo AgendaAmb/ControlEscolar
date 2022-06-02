@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 use App\Models\User;
 
-class RubricResource extends JsonResource
+class RubricAverageResource extends JsonResource
 {
     /**
      * Gets an user from the main system.
@@ -16,6 +16,7 @@ class RubricResource extends JsonResource
      * @param string $type
      * @return void
      */
+
     private function getMiPortalUser($request, int $id, string $type)
     {
         $miPortal_user = collect($request
@@ -166,10 +167,8 @@ class RubricResource extends JsonResource
         $this->setAnnouncement($request);
 
         return [
-            'user' => $this->user,
             'appliant' => $this->appliant,
             'rubric' => $this->rubric,
-            'announcement' => $this->announcement
         ];
     }
 }

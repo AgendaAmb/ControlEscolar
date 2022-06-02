@@ -143,20 +143,23 @@ class EvaluationRubricObserver
                 'id' => $research_concepts[2],
                 'group' => 'Excelent',
                 'type' => 'textarea',
-                'label' => 'Nombre y título de la ponencia:',
+                'label' => 'Nombre del evento y titulo ponencia',
                 'value' => null,
-            ],[ 
-                'id' => $research_concepts[2],
-                'group' => 'Excelent',
-                'type' => 'radio',
-                'label' => 'Grado académico en el que realizó la tesis',
-                'choices' => ['Nacional','Internacional'],
-                'value' => null,
-            ],[ 
+            ]
+            // ,[ 
+            //     'id' => $research_concepts[2],
+            //     'group' => 'Excelent',
+            //     'type' => 'radio',
+            //     'label' => 'Grado académico en el que realizó la tesis',
+            //     'choices' => ['Nacional','Internacional'],
+            //     'value' => null,
+            // ]
+            ,[ 
                 'id' => $research_concepts[2],
                 'group' => 'Excelent',
                 'type' => 'text',
-                'label' => 'Resultado obtenido:',
+                'label' => 'Resultado de Tesis:',
+                'choices' => ['Licencitura','Maestria'],
                 'value' => null,
             ],[ 
                 'id' => $research_concepts[2],
@@ -175,20 +178,23 @@ class EvaluationRubricObserver
                 'id' => $research_concepts[2],
                 'group' => 'Very_Good',
                 'type' => 'textarea',
-                'label' => 'Nombre y título ponencia:',
+                'label' => 'Nombre del evento y titulo ponencia',
                 'value' => null,
-            ],[ 
-                'id' => $research_concepts[2],
-                'group' => 'Very_Good',
-                'type' => 'radio',
-                'label' => 'Grado académico en el que realizó la tesis',
-                'choices' => ['Nacional','Internacional'],
-                'value' => null,
-            ],[ 
+            ]
+            // ,[ 
+            //     'id' => $research_concepts[2],
+            //     'group' => 'Very_Good',
+            //     'type' => 'radio',
+            //     'label' => 'Grado académico en el que realizó la tesis',
+            //     'choices' => ['Nacional','Internacional'],
+            //     'value' => null,
+            // ]
+            ,[ 
                 'id' => $research_concepts[2],
                 'group' => 'Very_Good',
                 'type' => 'text',
-                'label' => 'Resultado obtenido:',
+                'label' => 'Resultado de Tesis:',
+                'choices' => ['Licencitura','Maestria'],
                 'value' => null,
             ],[ 
                 'id' => $research_concepts[2],
@@ -208,20 +214,23 @@ class EvaluationRubricObserver
                 'id' => $research_concepts[2],
                 'group' => 'Good',
                 'type' => 'textarea',
-                'label' => 'Nombre y título ponencia:',
+                'label' => 'Nombre del evento y titulo ponencia',
                 'value' => null,
-            ],[ 
-                'id' => $research_concepts[2],
-                'group' => 'Good',
-                'type' => 'radio',
-                'label' => 'Grado académico en el que realizó la tesis',
-                'choices' => ['Nacional','Internacional'],
-                'value' => null,
-            ],[ 
+            ]
+            // ,[ 
+            //     'id' => $research_concepts[2],
+            //     'group' => 'Good',
+            //     'type' => 'radio',
+            //     'label' => 'Grado académico en el que realizó la tesis',
+            //     'choices' => ['Nacional','Internacional'],
+            //     'value' => null,
+            // ]
+            ,[ 
                 'id' => $research_concepts[2],
                 'group' => 'Good',
                 'type' => 'text',
-                'label' => 'Resultado obtenido:',
+                'label' => 'Resultado de Tesis:',
+                'choices' => ['Licencitura','Maestria'],
                 'value' => null,
             ],[ 
                 'id' => $research_concepts[2],
@@ -240,7 +249,7 @@ class EvaluationRubricObserver
                 'id' => $research_concepts[2],
                 'group' => 'Goofy',
                 'type' => 'textarea',
-                'label' => 'Nombre y título ponencia:',
+                'label' => 'Nombre del evento y titulo ponencia',
                 'value' => null,
             ],
 
@@ -304,8 +313,10 @@ class EvaluationRubricObserver
             [ 
                 'id' => $research_concepts[3],
                 'group' => 'Good',
-                'type' => 'header',
-                'label' => 'Revista de divulgación científica, programa de radio / televisión o congreso estudiantil'
+                'type' => 'radio',
+                'label' => '',
+                'choices' => ['Revista de divulgación científica','Programa de radio/televisión','Congreso estudiantil'],
+                'value' => null,
             ],[ 
                 'id' => $research_concepts[3],
                 'group' => 'Good',

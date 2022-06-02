@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateEvaluationRubricRequest;
 use App\Http\Resources\RubricResource;
+use App\Http\Resources\RubricAverageResource;
 use App\Models\EvaluationRubric;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EvaluationRubricController extends Controller
 {
@@ -18,10 +20,9 @@ class EvaluationRubricController extends Controller
      */
     public function show(Request $request, EvaluationRubric $evaluationRubric)
     {
-       
         $evaluationRubric->load([
             'archive:id,user_id,user_type,announcement_id',
-            'archive.announcement.academicProgram:id,name',
+            'archive.announcement.academicProgram:id,name,type',
             'basicConcepts.evaluationConceptDetails',
             'academicConcepts.evaluationConceptDetails',
             'researchConcepts.evaluationConceptDetails',
@@ -30,8 +31,51 @@ class EvaluationRubricController extends Controller
         ]);
 
         $rubricResource = new RubricResource($evaluationRubric);
-        
+
+        // return $rubricResource;
+
         return view('entrevistas.rubrica', $rubricResource->toArray($request));
+    }
+    
+    // Muestra la rubrica promedio (Solo el coordinador va a ser capaz de visualizar)
+    public function show_average(Request $request, $grade, $id)
+    {
+        $evaluationRubric = EvaluationRubric::where('archive_id', $id)->first();
+
+        if(!isset($evaluationRubric)){
+            return "No existe rúbrica ";
+        }
+        
+        // Obtiene las rubricas asociadas a un postulante mediante archive_id 
+        $evaluation_rubrics = EvaluationRubric::where('archive_id', $evaluationRubric->archive_id)->get();
+        
+        // Average scores per rubric concept
+        $avg_score = [
+            'num_rubrics' => 0,
+            'basic'     => 0.0, 
+            'academic'  => 0.0,
+            'research'  => 0.0,
+            'exp'       => 0.0,
+            'personal'  => 0.0,
+        ];
+
+        foreach($evaluation_rubrics as $ev){
+            $avg_score['num_rubrics']+=1;
+            $avg_score['basic']+=$ev->getAverageScoreBasicConcepts($grade);
+            $avg_score['academic']+=$ev->getAverageScoreAcademicConcepts($grade);
+            $avg_score['research']+=$ev->getAverageScoreResearchConcepts($grade);
+            $avg_score['exp']+=$ev->getAverageWorkingExperienceConcepts($grade);
+            $avg_score['personal']+=$ev->getAverageWorkingPersonalAttributesConcepts($grade);
+        }
+
+        // Average
+        $avg_score['basic']/=$avg_score['num_rubrics'];
+        $avg_score['academic']/=$avg_score['num_rubrics'];
+        $avg_score['research']/=$avg_score['num_rubrics'];
+        $avg_score['exp']/=$avg_score['num_rubrics'];
+        $avg_score['personal']/=$avg_score['num_rubrics'];
+
+        return $avg_score;
     }
 
     /**
@@ -80,8 +124,7 @@ class EvaluationRubricController extends Controller
         $this->updatePivot($request->personal_attributes_concepts, $evaluationRubric);
 
         
-
-        $evaluationRubric->fill($request->safe()->only('considerations','additional_information'));
+        $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce'));
         $request->state=="send"?$evaluationRubric->isComplete=true:$evaluationRubric->isComplete=false;
         $evaluationRubric->save();
         $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){

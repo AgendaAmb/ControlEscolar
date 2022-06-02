@@ -212,8 +212,12 @@ class CalendarResource extends JsonResource
 
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;
+
         $this->appliants = $archives->filter(
             fn($archive) => $archive->appliant !== null
+        )->filter(
+            // Fitramos solo aquellos donde el status sea igual a 5 (1 en develop) 
+            fn($archive) => $archive->status === 1
         )->map(
             fn($archive) => $this->mapArchiveAppliant($archive, $request)
         )->values()->toArray();
