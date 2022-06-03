@@ -15,7 +15,7 @@
         <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button>
       </div>
     </div>
-    <div v-if="period !== null && isProfessor === false" class="new-interview">
+    <div v-if="period !== null && isSchoolControl === true" class="new-interview">
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
     </div>
 

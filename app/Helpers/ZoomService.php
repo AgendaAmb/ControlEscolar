@@ -29,12 +29,20 @@ class ZoomService
         $key = env('ZOOM_API_KEY', '');
         $secret = env('ZOOM_API_SECRET', '');
 
+        // note : exp tiene que ser igual al de zoom
         $payload = [
             'iss' => $key,
-            'exp' => strtotime('+1 minute'),
+            'exp' => strtotime('+90 minute'),
         ];
 
         return JWT::encode($payload, $secret, 'HS256');
+    }
+    
+
+    // method for get ZOOM_API_URL environment variable.
+    private function retrieveZoomUrl()
+    {
+        return env('ZOOM_API_URL', '');
     }
 
     /**
@@ -43,7 +51,10 @@ class ZoomService
     private function zoomRequest()
     {
         $jwt = $this->zoomToken();
-        return Http::withToken($jwt)->withHeaders(['content-type' => 'application/json']);
+        return Http::withHeaders([
+            'authorization' => 'Bearer ' . $jwt,
+            'content-type' => 'application/json',
+        ]);
     }
 
     /**

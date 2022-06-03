@@ -146,12 +146,39 @@ const app = new Vue({
         },
 
         /**
+         * Determina si el usuario autenticado es coordinador.
+         * @param {*} period 
+         */
+        loggedUserIsCoordinador(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'coordinador';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
+         * Determina si el usuario autenticado es profesor de núcleo básico.
+         * @param {*} period 
+         */
+         loggedUserIsPNB(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'profesor_nb';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
          * Confirma una entrevista.
          */
         confirmInterview(newValue){
+            
             var interview = this.period.interviews.find(interview => {
                 return interview.id === this.selectedInterview.id;
             })
+        
+            // console.log(interview.id);
 
             if (interview !== null) {
                 interview.confirmed = newValue;

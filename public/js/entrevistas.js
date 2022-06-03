@@ -533,8 +533,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.confirmed === true && this.$root.loggedUserIsAdmin();
     },
     isConfirmable: function isConfirmable() {
-      if (this.confirmed === true) return false;
-      return this.$root.loggedUserIsAdmin();
+      // Entrevista ya confimada
+      if (this.confirmed === true) return false; // Validacion de roles
+
+      return this.$root.loggedUserIsSchoolControl() || this.$root.loggedUserIsAdmin();
       /*
       return this.areas.filter(area => {
         return area.professor_name !== false;
@@ -556,7 +558,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     canRemoveUser: function canRemoveUser(area) {
       if (area.professor_name === false) return false;
-      if (this.confirmed === true) return false;
+      if (this.confirmed === true) return false; // Cancelar - solo por el profesor inscrito y el administrador
+
       return this.loggedUserName === area.professor_name || this.$root.loggedUserIsAdmin();
     },
     inscribirUsuario: function inscribirUsuario(index) {
@@ -606,6 +609,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alumno: this.appliant,
         room: this.room
       }).then(function (response) {
+        console.log(response.data);
         _this3.Confirmed = true;
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {});
@@ -782,6 +786,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -2091,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Bold';\r\n  color: #fecc56;\r\n  display: block;\r\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Regular';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  text-transform: capitalize;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Bold';\r\n  color: #115089;\r\n  display: block;\r\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Regular';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  text-transform: capitalize;\n}\n.card[data-v-21c69871]{\r\n  border: 2px solid #115089;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27934,7 +27942,7 @@ var render = function () {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.period !== null && _vm.isProfessor === false
+    _vm.period !== null && _vm.isSchoolControl === true
       ? _c("div", { staticClass: "new-interview" }, [
           _c(
             "button",
@@ -28134,7 +28142,7 @@ var render = function () {
                                       ),
                                     ])
                                   : !_vm.isSuscribed &&
-                                    !_vm.$root.loggedUserIsAdmin()
+                                    _vm.$root.loggedUserIsPNB()
                                   ? _c(
                                       "a",
                                       {
@@ -28244,7 +28252,7 @@ var staticRenderFns = [
         _c(
           "h5",
           { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-          [_vm._v(" Registro de entrevistas ")]
+          [_vm._v(" Registro de entrevistas")]
         ),
         _vm._v(" "),
         _c(
@@ -28341,47 +28349,51 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { staticClass: "row mx-3", on: { click: _vm.showDetails } }, [
-    _c("div", { staticClass: "col-7 text-left" }, [
-      _c("h5", { staticClass: "my-1 appliant" }, [
-        _vm._v(" " + _vm._s(_vm.appliant) + " "),
+  return _c(
+    "a",
+    { staticClass: "row mx-3 card", on: { click: _vm.showDetails } },
+    [
+      _c("div", { staticClass: "col-7 text-left" }, [
+        _c("h5", { staticClass: "my-1 appliant" }, [
+          _vm._v(" " + _vm._s(_vm.appliant) + " "),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+          _vm._v(" Carta de intención otorgada por: "),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "my-0" }, [
+          _vm._v(" " + _vm._s(_vm.professor) + " "),
+        ]),
+        _vm._v(" "),
+        _vm.confirmed
+          ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+              _vm._v(" Enlace de la reunión: "),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.confirmed
+          ? _c("p", { staticClass: "my-0" }, [
+              _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
+                _vm._v(_vm._s(_vm.url)),
+              ]),
+            ])
+          : _vm._e(),
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "mt-2 mb-0 detail" }, [
-        _vm._v(" Carta de intención otorgada por: "),
+      _c("div", { staticClass: "col-5 text-right" }, [
+        _c("p", { staticClass: "my-1 detail" }, [
+          _vm._v(" Sala " + _vm._s(_vm.room) + " "),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "my-1 detail" }, [
+          _vm._v(
+            " " + _vm._s(_vm.start_time) + " - " + _vm._s(_vm.end_time) + " "
+          ),
+        ]),
       ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "my-0" }, [
-        _vm._v(" " + _vm._s(_vm.professor) + " "),
-      ]),
-      _vm._v(" "),
-      _vm.confirmed
-        ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
-            _vm._v(" Enlace de la reunión: "),
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.confirmed
-        ? _c("p", { staticClass: "my-0" }, [
-            _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
-              _vm._v(_vm._s(_vm.url)),
-            ]),
-          ])
-        : _vm._e(),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-5 text-right" }, [
-      _c("p", { staticClass: "my-1 detail" }, [
-        _vm._v(" Sala " + _vm._s(_vm.room) + " "),
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "my-1 detail" }, [
-        _vm._v(
-          " " + _vm._s(_vm.start_time) + " - " + _vm._s(_vm.end_time) + " "
-        ),
-      ]),
-    ]),
-  ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28567,7 +28579,7 @@ var render = function () {
                               _vm._v(
                                 " \n                  " +
                                   _vm._s(appliant.name) +
-                                  " \n                "
+                                  "\n                "
                               ),
                             ]
                           )
@@ -41797,6 +41809,28 @@ var app = new Vue({
     },
 
     /**
+     * Determina si el usuario autenticado es coordinador.
+     * @param {*} period 
+     */
+    loggedUserIsCoordinador: function loggedUserIsCoordinador() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'coordinador';
+      });
+      return roles.length > 0;
+    },
+
+    /**
+     * Determina si el usuario autenticado es profesor de núcleo básico.
+     * @param {*} period 
+     */
+    loggedUserIsPNB: function loggedUserIsPNB() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'profesor_nb';
+      });
+      return roles.length > 0;
+    },
+
+    /**
      * Confirma una entrevista.
      */
     confirmInterview: function confirmInterview(newValue) {
@@ -41804,7 +41838,7 @@ var app = new Vue({
 
       var interview = this.period.interviews.find(function (interview) {
         return interview.id === _this.selectedInterview.id;
-      });
+      }); // console.log(interview.id);
 
       if (interview !== null) {
         interview.confirmed = newValue;

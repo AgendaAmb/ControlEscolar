@@ -1,10 +1,10 @@
-x<template>
+<template>
   <!-- Modal -->
   <div class="modal fade" id="DetalleEntrevista" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog detalle-entrevista" role="document">
       <div class="modal-content">
         <div class="modal-header modal-header-blue text-center">
-          <h5 class="modal-title" id="exampleModalLabel"> Registro de entrevistas </h5>
+          <h5 class="modal-title" id="exampleModalLabel"> Registro de entrevistas</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -34,7 +34,7 @@ x<template>
                     <tr>
                       <td v-for="(area, index) in areas" :key="area.id">
                         <p class="prof-area" v-if="area.professor_name !== false"> {{area.professor_name}} </p>
-                        <a v-else-if="!isSuscribed && !$root.loggedUserIsAdmin()" href="#" @click="inscribirUsuario(index)">
+                        <a v-else-if="!isSuscribed && $root.loggedUserIsPNB()" href="#" @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
                         <a v-if="canRemoveUser(area)" href="#" @click="cancelarRegistro(index)"> 
@@ -169,10 +169,12 @@ export default {
 
     isConfirmable() {
 
+      // Entrevista ya confimada
       if (this.confirmed === true)
         return false;
 
-      return this.$root.loggedUserIsAdmin();
+      // Validacion de roles
+      return this.$root.loggedUserIsSchoolControl()||this.$root.loggedUserIsAdmin(); 
       /*
       return this.areas.filter(area => {
         return area.professor_name !== false;
@@ -203,6 +205,7 @@ export default {
       if (this.confirmed === true)
         return false;
 
+      // Cancelar - solo por el profesor inscrito y el administrador
       return this.loggedUserName === area.professor_name || this.$root.loggedUserIsAdmin();
     },
 
@@ -255,15 +258,16 @@ export default {
     },
 
     confirmaEntrevista(){
+
       if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false)
         return false;
 
       axios.post('/controlescolar/entrevistas/confirmInterview', {
-
         id: this.id,
         alumno:this.appliant,
         room:this.room
       }).then(response => {
+        console.log(response.data);
         this.Confirmed = true;
         $('#DetalleEntrevista').modal('hide');
       }).catch(error => { 

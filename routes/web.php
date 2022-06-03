@@ -142,7 +142,7 @@ Route::prefix('controlescolar')->group(function () {
     });
 
     # Rutas para las entrevistas.
-    Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb'])->name('entrevistas.')->group(function () {
+    Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb|comite_academico|coordinador'])->name('entrevistas.')->group(function () {
 
         # Calendario
         Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
@@ -163,6 +163,8 @@ Route::prefix('controlescolar')->group(function () {
         # Rúbrica de evaluación
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
+            Route::get('/{grade}/{postulante_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
+
             Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
             Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');
         });

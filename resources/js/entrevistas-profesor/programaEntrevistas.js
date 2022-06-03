@@ -9,6 +9,7 @@ const moment = require('moment');
     
 window.Vue = require('vue').default;
 import InterviewDay from './components/InterviewDay.vue';
+import InterviewsComite from './components/InterviewsComite.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,7 +24,8 @@ const app = new Vue({
     name:'professor-interviews',
 
     components: {
-        InterviewDay
+        InterviewDay,
+        InterviewsComite
     },
 
     data: {
@@ -49,12 +51,36 @@ const app = new Vue({
         },
 
         /**
-         * Determina si el usuario autenticado es administrador.
+         * Determina si el usuario autenticado tiene el rol de control escolar.
          * @param {*} period 
          */
          loggedUserIsSchoolControl(){
             var roles = this.loggedUser.roles.filter(role => {
                 return role.name === 'control_escolar';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
+         * Determina si el usuario autenticado tiene el rol de comite academico.
+         * @param {*} period 
+         */
+         loggedUserIsCA(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'comite_academico';
+            });
+    
+            return roles.length > 0;
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+         loggedUserIsCoordinador(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'coordinador';
             });
     
             return roles.length > 0;

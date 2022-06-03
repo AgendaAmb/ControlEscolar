@@ -38,6 +38,6 @@ class SendMeeatingInformationProfesor extends Mailable
      */
     public function build()
     {
-        return $this->view('Correos.MeetingZoomProfesor')->subject('Información de entrevista');
+        return $this->from('pmpca@uaslp.mx', 'TESTING')->view('Correos.MeetingZoomProfesor')->subject('Información de entrevista');
     }
 }

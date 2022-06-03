@@ -32,7 +32,7 @@
                 <select v-model="appliant" class="form-control">
                   <option :value="null" selected>Escoge un postulante </option>
                   <option v-for="appliant in appliants" :key="appliant.id" :value="appliant"> 
-                    {{ appliant.name }} 
+                    {{ appliant.name }}
                   </option>
                 </select>
               </div>

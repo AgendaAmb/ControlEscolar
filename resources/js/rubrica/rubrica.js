@@ -35,9 +35,11 @@ const app = new Vue({
         announcement: announcement,
         considerations: rubric.considerations,
         additional_information: rubric.additional_information,
+        dictamen_ce: rubric.dictamen_ce,
         dataModal: "",
         visbleSave:false,
-        visbleSend:false
+        visbleSend:false,
+        isComplete:rubric.isComplete
     },
 
     components: {
@@ -46,6 +48,49 @@ const app = new Vue({
     },
    
     methods: {
+        /**
+         * Determina si el usuario autenticado es profesor de núcleo básico.
+         * @param {*} period 
+         */
+
+
+        loggedUserIsPNB(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'profesor_nb';
+            });
+    
+            return roles.length > 0;
+        },
+
+
+
+        // Autorizado para modifcar la rubrica 
+        r_only(){
+            var roles1 = this.loggedUser.roles.filter(role => {
+                return role.name === 'profesor_nb';
+            });
+
+            var roles2 = this.loggedUser.roles.filter(role => {
+                return role.name === 'admin';
+            });
+            
+            let flag = (roles1.length + roles2.length < 1) || this.isComplete?true:false;
+
+            return flag;
+        },
+
+        /**
+         * Determina si el usuario autenticado es administrador.
+         * @param {*} period 
+         */
+         loggedUserIsAdmin(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'admin';
+            });
+    
+            return roles.length > 0;
+        },
+
         getConceptData(concepts) {
             return concepts.map(concept => {
                 var concept_data = {
@@ -64,6 +109,7 @@ const app = new Vue({
         guardaRubrica(state) {
             state=="save"?this.visbleSave=true:this.visbleSave=false;
             state=="send"?this.visbleSend=true:this.visbleSend=false;
+
             const rubric_id = this.id;
             const basic_concepts = this.getConceptData(this.basic_concepts);
             const academic_concepts = this.getConceptData(this.academic_concepts);
@@ -72,7 +118,7 @@ const app = new Vue({
             const personal_attributes_concepts = this.getConceptData(this.personal_attributes_concepts);
             
             axios.put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
-                
+
                 state: state,
                 basic_concepts: basic_concepts,
                 academic_concepts: academic_concepts,
@@ -80,7 +126,8 @@ const app = new Vue({
                 working_experience_concepts: working_experience_concepts,
                 personal_attributes_concepts: personal_attributes_concepts,
                 considerations: this.considerations,
-                additional_information: this.additional_information
+                additional_information: this.additional_information,
+                dictamen_ce: this.dictamen_ce
             }).then(response => {
                 this.visbleSave=false,
                 this.visbleSend=false,

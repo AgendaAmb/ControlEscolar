@@ -74,19 +74,25 @@ class ZoomController extends Controller
           * la esta poniendo en utc 5
           Ver tambien que onda el formato en que se esta recibiendo la hora por que no se si esta en formato 24 o 12 
           **/
+
+        // To use Zoom API, we should change time format to yyyy-MM-dd\THH:mm:ss
         
         $star_time=$request->date.'T'.$request->start_time;
         $end=$request->date.'T'.$request->end_time;
-        $FechaStar= Carbon::createFromDate($star_time)->subHour(6);
-        $FechaEnd=Carbon::createFromDate($end)->subHour(6);
-       
-        $Duration= $FechaStar->diffInMinutes($FechaEnd);
-        
 
+        //Ajuste formato y GMT
+        // TODO solo se considera el intervalo de 60 min
+        $FechaStar= new \DateTime($star_time, new \DateTimeZone('America/Mexico_City'));
+        $FechaEnd= new \DateTime($end, new \DateTimeZone('America/Mexico_City'));
+        $duration = (int)$FechaStar->diff($FechaEnd)->i;
+
+
+
+        //Ajuste formato de entrevistas de ZOOM
         $data['type'] = self::MEETING_TYPE_SCHEDULE;
         $data['timezone'] = "America/Mexico_City";
-        $data['start_time'] =  $FechaStar;
-        $data['duration'] = $Duration;
+        $data['start_time'] = $FechaStar->format('Y-m-d\TH:i:s.u');
+        $data['duration'] = $duration;
         $data['topic'] = "Reunion doctorado";
        
         $response =$this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);

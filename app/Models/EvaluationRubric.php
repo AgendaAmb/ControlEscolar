@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Dotenv\Util\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,6 +50,27 @@ class EvaluationRubric extends Model
      * @var string[]
      */
     protected $guarded = [];
+
+
+    // CUSTOM VARIABLES
+
+    // Factores de ponderación de los rubros para DOCTORADO
+    public static $SCORE_DOCTORADO = [
+        'basic'     => 10, 
+        'academic'  => 25,
+        'research'  => 30,
+        'exp'       => 25,
+        'personal'  => 30,
+    ];
+    
+    // Factores de ponderación de los rubros para MAESTRIA
+    public static $SCORE_MAESTRIA = [
+        'basic'     => 15, 
+        'academic'  => 30,
+        'research'  => 15,
+        'exp'       => 25,
+        'personal'  => 15,
+    ];
 
     /**
      * Gets the list of evaluation concepts.
@@ -155,11 +177,15 @@ class EvaluationRubric extends Model
         $filename = implode('/', ['evaluation_rubrics', $this->id]);
         Storage::put($filename, json_encode($details, JSON_PRETTY_PRINT));
     }
+
+
     /**Funcion que regresa el promedio de una rubrica de los datos basicos*/
-    public function getAverageScoreBasicConcepts(): Float
-    {
+    public function getAverageScoreBasicConcepts(String $rubro): float
+    {   
+        
         //Porcentaje del 100 que vale los datos basicos//
-        $BasicConceptsPercentage = 15;
+        $BasicConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['basic']:$this::$SCORE_MAESTRIA['basic'];
+
         $PromedioBC = 0;
         //**Sumatoria de valores  */
         foreach ($this->basicConcepts as $basicC) {
@@ -171,10 +197,10 @@ class EvaluationRubric extends Model
         return $PromedioBC;
     }
     /**Funcion que regresa el promedio de una rubrica de los Datos academicos*/
-    public function getAverageScoreAcademicConcepts(): Float
+    public function getAverageScoreAcademicConcepts(String $rubro): Float
     {
         //Porcentaje del 100 que vale los Datos academicos//
-        $academicConceptsPercentage = 30;
+        $academicConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['academic']:$this::$SCORE_MAESTRIA['academic'];
         $PromedioAc = 0;
         //**Sumatoria de valores  */
         foreach ($this->academicConcepts as $academicC) {
@@ -184,10 +210,10 @@ class EvaluationRubric extends Model
         return $PromedioAc;
     }
      /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
-     public function getAverageScoreResearchConcepts(): Float
+     public function getAverageScoreResearchConcepts(String $rubro): Float
      {
          //Porcentaje del 100 que vale los Datos de investigacion//
-         $researchConceptsPercentage=15;
+         $researchConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['research']:$this::$SCORE_MAESTRIA['research'];
          $PromedioRC = 0;
          //**Sumatoria de valores  */
          foreach ($this->researchConcepts as $ResearchC) {
@@ -197,10 +223,10 @@ class EvaluationRubric extends Model
          return $PromedioRC;
      }
      /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
-     public function getAverageWorkingExperienceConcepts(): Float
+     public function getAverageWorkingExperienceConcepts(String $rubro): Float
      {
          //Porcentaje del 100 que vale los Datos de investigacion//
-         $workingExperienceConceptsPercentage=20;
+         $workingExperienceConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['exp']:$this::$SCORE_MAESTRIA['exp'];
          $PromedioWEC = 0;
          //**Sumatoria de valores  */
          foreach ($this->workingExperienceConcepts as $workingExperienceConcept) {
@@ -211,10 +237,10 @@ class EvaluationRubric extends Model
      }
      
      /**Funcion que regresa el promedio de una rubrica de los Datos de investigacion*/
-     public function getAverageWorkingPersonalAttributesConcepts(): Float
+     public function getAverageWorkingPersonalAttributesConcepts(String $rubro): Float
      {
          //Porcentaje del 100 que vale los Datos de investigacion//
-         $personalAttributesConceptsPerfcentage=15;
+         $personalAttributesConceptsPerfcentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['personal']:$this::$SCORE_MAESTRIA['personal'];;
          $PromedioPEC=0;
          //**Sumatoria de valores  */
          foreach ($this->personalAttributesConcepts as $personalAttributesConcept) {
