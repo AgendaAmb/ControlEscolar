@@ -16,7 +16,7 @@ class CreateAcademicComittesTable extends Migration
     {
         Schema::create('academic_comittes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

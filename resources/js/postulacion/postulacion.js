@@ -16,6 +16,8 @@ import ProduccionCientifica from './components/ProduccionCientifica.vue';
 import RequisitosIngreso from './components/RequisitosIngreso.vue';
 import SolicitudPostulante from './components/SolicitudPostulante.vue';
 import ActualizarExpediente from './components/ActualizarExpediente.vue';
+// import ExpedienteCerrado from './components/ExpedienteCerrado.vue';
+
 
 
 window.Vue = require('vue').default;
@@ -43,6 +45,7 @@ const app = new Vue({
         RequisitosIngreso,
         SolicitudPostulante,
         ActualizarExpediente,
+        // ExpedienteCerrado,
     },
 
     data: {

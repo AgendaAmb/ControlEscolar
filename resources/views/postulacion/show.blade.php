@@ -15,23 +15,16 @@
     {{-- Img representativa de postulacion --}}
     <img class="img-fluid mt-4 " src="{{ $header_academic_program }}" width="100%" height="300px!important">
 
-    @if (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641 )
-        <actualizar-expediente
-        :required_documents="archive.required_documents"
-        :personal_documents="archive.personal_documents" 
-        :entrance_documents="archive.entrance_documents"
-        :academic_degrees="archive.academic_degrees" 
-        :appliant_languages="archive.appliant_languages"
-        :working_experiences="archive.appliant_working_experiences"
-        :academic_program = "academic_program"
-        :alias_academic_program="academic_program.alias"
-        :user_id="appliant.id"
-        :archive_id="archive.id"
-        >
+    @if ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)
+        <actualizar-expediente :required_documents="archive.required_documents"
+            :personal_documents="archive.personal_documents" :entrance_documents="archive.entrance_documents"
+            :academic_degrees="archive.academic_degrees" :appliant_languages="archive.appliant_languages"
+            :working_experiences="archive.appliant_working_experiences" :academic_program="academic_program"
+            :alias_academic_program="academic_program.alias" :user_id="appliant.id" :archive_id="archive.id">
         </actualizar-expediente>
     @endif
 
-
+    {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
             :curricular_documents="archive.curricular_documents" :motivation="archive.motivation"
             :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
@@ -42,18 +35,30 @@
             :recommendation_letters="recommendation_letters"
             :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment">
         </solicitud-postulante>
+    {{-- @else
+        <expediente-cerrado
+        :appliant="appliant"
+        :archive_id="archive.id"
+        >
+        </expediente-cerrado>
+    @endif --}}
+
 
 @endsection
 
 @push('scripts')
 
-    {{-- Tendremos cuatro vistas
+    {{-- Tendremos cinco vistas
         Administrador               Eliminar, agregar, modificar Cerrar expediente      components (postulaion.js)
         Postulante                  Eliminar, agregar, modificar                        appliant-view (appliant.js)
         Coordinador y profesor      Visualizar solamente                                professor-view (proffesor.js)
-        Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) 15641 --}}
+        Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) 15641 
+        Expediente Cerrado          Visualizar para todos los roles anteriores (Cambiar estado solamente )
+        --}}
     {{-- Admin view --}}
-    @if (Auth::user()->hasRole('admin'))
+    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status >= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status > 4))
+        <script src="{{ asset('postulacion/js/close.js') }}" defer></script>
+    @elseif (Auth::user()->hasRole('admin'))
         <script src="{{ asset('js/postulacion.js') }}" defer></script>
         {{-- Professor view --}}
     @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641)

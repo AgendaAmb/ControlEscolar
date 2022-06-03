@@ -12,6 +12,11 @@ class AcademicComitte extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name'
+    ];
+ 
+
     /**
      * The attributes that should be hidden for serialization.
      *

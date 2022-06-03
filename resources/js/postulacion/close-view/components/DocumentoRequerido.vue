@@ -42,7 +42,7 @@
         </p>
 
         <!-- Solo hay algo en notas por lo que se adjunta -->
-        <p v-else-if="isEXANNI" class="mt-3 mb-1 d-block">
+        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block">
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
@@ -51,25 +51,17 @@
         </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
-      
+     
 
-      <div class="form-group col-3 my-auto">
+      <div  class="form-group col-3 my-auto">
         <a
           v-if="checkUpload() === true"
           class="verArchivo d-block my-2 ml-auto"
-          :href="location"
+          :href="'expediente/' + location"
           target="_blank"
         >
           Ver Archivo</a
         >
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
-          Subir Documento
-          <input
-            type="file"
-            class="form-control d-none"
-            @change="cargaDocumento"
-          />
-        </label>
       </div>
     </div>
   </div>
@@ -124,7 +116,6 @@
   height: 30px;
 }
 </style>
-
 <script>
 export default {
   name: "documento-requerido",
@@ -226,7 +217,6 @@ export default {
 
   
   methods: {
-    
     requiredForAcademicProgram() {
       console.log(this.name + ': '+ this.alias_academic_program);
 
@@ -351,7 +341,7 @@ export default {
 
       return res;
     },
-    
+
     isLetterCommitment() {
       if (
         this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {

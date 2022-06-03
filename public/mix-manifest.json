@@ -8,6 +8,7 @@
     "/appliant/js/appliantUpdateDocuments.js": "/appliant/js/appliantUpdateDocuments.js",
     "/professor/js/professor.js": "/professor/js/professor.js",
     "/controlescolar/js/controlescolar.js": "/controlescolar/js/controlescolar.js",
+    "/postulacion/js/close.js": "/postulacion/js/close.js",
     "/js/recommendation-letter.js": "/js/recommendation-letter.js",
     "/js/intention-letter.js": "/js/intention-letter.js",
     "/js/entrevistas.js": "/js/entrevistas.js",

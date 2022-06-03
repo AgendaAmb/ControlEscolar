@@ -5449,7 +5449,7 @@ var render = function () {
                         ),
                   ]),
                 ])
-              : _vm.notes !== null
+              : _vm.isEXANNI
               ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
                   _c("strong", [
                     _vm._v(" Observaciones: "),

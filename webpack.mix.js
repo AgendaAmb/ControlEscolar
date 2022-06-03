@@ -24,6 +24,7 @@ mix.js('resources/js/postulacion/appliant-view/appliant.js', 'public/appliant/js
 mix.js('resources/js/postulacion/appliant-view/appliantUpdateDocuments.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/professor-view/professor.js', 'public/professor/js').vue();
 mix.js('resources/js/postulacion/controlescolar-view/controlescolar.js', 'public/controlescolar/js').vue();
+mix.js('resources/js/postulacion/close-view/close.js', 'public/postulacion/js').vue();
 
 // Carta de recomendacion
 mix.js('resources/js/recommendation-letter/recommendation-letter.js', 'public/js').vue();
