@@ -23,16 +23,19 @@
     <div class="container p-4">
         <div class="row mt-2">
             <div class="col-12">
-                <h1> Estimado(a) postulante:</h1>
+                <h1> Estimado(a) <strong>{{ $appliant['name'] . ' ' . $appliant['middlename'] . ' ' . $appliant['surname'] }}</strong>:</h1>
+                
                 <p class="lead">
-                    Le enviamos un cordial saludo. <br>
+                    Por medio de la presente se le informa que la documentación presentada para el proceso de selección 2022 para el programa de {{$academic_program['name']}} requiere modificación o actualización. A continuación se enlistan los requerimientos: <br>
                 </p>
-                <p class="lead">
-                    Le escribimos de nuestro programa de "{{ $academic_program['name'] }}", debido este correo esta
-                    registrado para el expediente correspondiente al nombre de
-                    {{ $appliant['name'] . ' ' . $appliant['middlename'] . ' ' . $appliant['surname'] }}, del cual se
-                    ha revisado los documentos correspondientes y se requiren de algunas modificaciones.<br>
-                </p>
+                <ul>
+                @foreach ($name_documents as $doc_name)
+                    <li><p class="h4">
+                        {{$doc_name}}
+                        </p></li>
+                @endforeach
+
+                </ul>
                 @if ($instructions != null && $instructions != '')
                     <p class="lead">
                         El revisor ha dejado las siguientes indicaciones de los documentos a corregir
@@ -78,7 +81,7 @@
         <div class="row">
             <div class="col-12">
                 <h4>
-                    Agradecemos su colaboración.
+                    Más informes al correo electrónico: pmpca@uaslp.mx
                 </h4>
                 <p><em>
                         Atentamente. <br>

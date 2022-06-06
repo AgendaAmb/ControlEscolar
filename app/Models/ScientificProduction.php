@@ -90,6 +90,19 @@ class ScientificProduction extends Model
     }
 
     /**
+     * Obtiene las producciones científicas, referentes 
+     * a publicación de reportes técnicos.
+     *
+     */
+    public function scopeReviewsCP($query)
+    {
+        $query->join('reviews_cp', 'reviews_cp.scientific_production_id', '=', 'scientific_productions.id');
+
+        return $query;
+    }
+
+
+    /**
      * Obtiene otros autores de la producción científica.
      */
     public function authors()

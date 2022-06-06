@@ -36,7 +36,7 @@
           <option value="technical_reports">Reportes técnicos</option>
           <option value="working_memories">Memorias de trabajo</option>
           <option value="working_documents">Documentos de trabajo</option>
-          <option value="reviews">Reseñas</option>
+          <option value="reviews_cp">Reseñas</option>
         </select>
       </div>
 
@@ -324,7 +324,7 @@ export default {
         technical_reports: "Reportes técnicos",
         working_documents: "Documentos de trabajo",
         working_memories: "Memorias de trabajo",
-        reviews: "Reseñas",
+        reviews_cp: "Reseñas",
       },
     };
   },
@@ -411,10 +411,10 @@ export default {
           post_title: this.post_title,
         })
         .then((response) => {
-          Object.keys(response.data).forEach((dataKey) => {
-            var event = "update:" + dataKey;
-            this.$emit(event, response.data[dataKey]);
-          });
+          // Object.keys(response.data).forEach((dataKey) => {
+          //   var event = "update:" + dataKey;
+          //   this.$emit(event, response.data[dataKey]);
+          // });
 
            Swal.fire({
             title: "Los datos se han actualizado correctamente",

@@ -53,7 +53,8 @@ class PreRegisterController extends Controller
     public function index()
     {
         return view('pre-registro.index')
-            ->with('academic_programs', $this->academic_programs);
+            ->with('academic_programs', $this->academic_programs)
+            ->with('img_header', asset('storage/headers/logod.png'));
     }
 
     /**

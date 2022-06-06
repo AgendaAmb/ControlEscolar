@@ -33,7 +33,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -210,6 +210,13 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
     });
 
+    Route::prefix('documentsForInterview')->name('documentsForInterview.')->middleware(['auth', 'role:aspirante_local|aspirante_foraneo|aspirante_extranjero'])->group(function(){
+        Route::get('/show/Test/{user_id}', [ArchiveController::class, 'documentsForInterviews'])->name('showTest');
+        Route::get('/show/Presentation&Research/{user_id}', [ArchiveController::class, 'documentsForPresentationResearch'])->name('showPresentationResearch');
+
+    });
+
+
     
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
     Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
@@ -226,4 +233,4 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('seeAnsweredRecommendationLetter', [ExternalRecommendationLetter::class, 'seeAnsweredRecommendationLetter'])->name('seeAnswered');
 
     });
-});
+// });

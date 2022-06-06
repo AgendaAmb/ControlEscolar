@@ -19877,6 +19877,7 @@ var app = new Vue({
   },
   data: {
     academic_programs: academicPrograms,
+    imgHeader: imgHeader,
     selected_academic_program: null
   }
 });

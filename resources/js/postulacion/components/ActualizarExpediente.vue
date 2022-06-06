@@ -221,18 +221,18 @@ export default {
     },
 
     academic_degrees: {
-      type: Object,
-      default: null,
+      type: Array,
+      default: [],
     },
 
     appliant_languages: {
-      type: Object,
-      default: null,
+      type: Array,
+      default: [],
     },
 
     working_experiences: {
-      type: Object,
-      default: null,
+      type: Array,
+      default: [],
     },
 
     // Information

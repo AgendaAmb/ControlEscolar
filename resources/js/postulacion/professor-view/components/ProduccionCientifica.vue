@@ -1,27 +1,43 @@
 <template>
   <details class="mt-1">
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-12">
-        <h5 v-if="tipos[Type] != null" class="font-weight-bold">
-          {{ tipos[Type] + " " + index }}
+      <div class="col-3 col-md-6 ms-5">
+        <h5 v-if="tipos[Type]!=null" class=" font-weight-bold">
+          {{tipos[Type] + ' ' + index}} 
         </h5>
 
-        <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
+        <h5 v-else class="font-weight-bold">
+          Publicación {{index}}
+        </h5>
+      </div>
+      <div class="col-8 col-md-3 col-sm-2"></div>
+
+      <div class="col-1 col-md-3 col-sm-5">
+        <button
+          @click="eliminaProduccionCientifica"
+          class="btn btn-danger"
+          style="height: 35px; width:100%"
+        >
+          Eliminar Publicación
+        </button>
       </div>
     </summary>
 
+   
     <div class="row mx-2">
+
       <div class="form-group col-md-4">
-        <input
-          v-model="Type"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': 'type' in errores }"
-          :readonly="true"
-        />
-        <div v-if="'type' in errores" class="invalid-feedback">
-          {{ errores.type }}
-        </div>
+        <label> Tipo de publicación: </label>
+        <select v-model="Type" class="form-control">
+          <option :value="null" selected>Escoge una opción</option>
+          <option value="articles">Publicación de artículos</option>
+          <option value="published_books">Publicación de libros</option>
+          <option value="published_chapters">Capítulos publicados</option>
+          <option value="technical_reports">Reportes técnicos</option>
+          <option value="working_memories">Memorias de trabajo</option>
+          <option value="working_documents">Documentos de trabajo</option>
+          <option value="reviews_cp">Reseñas</option>
+        </select>
       </div>
 
       <div class="form-group col-md-12">
@@ -33,12 +49,14 @@
         >
           <!-- Otros autores del artículos -->
           <autor-articulo
-            v-for="author in Authors"
+            v-for="(author,index) in Authors"
             v-bind="author"
+            :index="index"
             v-bind:key="author.id"
             :name.sync="author.name"
             @agregaAutor="agregaAutor"
             @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
           >
           </autor-articulo>
         </publicacion-articulo>
@@ -49,6 +67,18 @@
           :nombre-articulo.sync="ArticleName"
           :ano-publicacion.sync="PublishDate"
         >
+        <!-- Otros autores del artículos -->
+          <autor-articulo
+            v-for="(author,index) in Authors"
+            v-bind="author"
+            :index="index"
+            v-bind:key="author.id"
+            :name.sync="author.name"
+            @agregaAutor="agregaAutor"
+            @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
+          >
+          </autor-articulo>
         </publicacion-capitulo>
 
         <publicacion-libro
@@ -56,6 +86,18 @@
           :titulo-libro.sync="Title"
           :ano-publicacion.sync="PublishDate"
         >
+       <!-- Otros autores del artículos -->
+          <autor-articulo
+            v-for="(author,index) in Authors"
+            v-bind="author"
+            :index="index"
+            v-bind:key="author.id"
+            :name.sync="author.name"
+            @agregaAutor="agregaAutor"
+            @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor"
+          >
+          </autor-articulo>
         </publicacion-libro>
 
         <reporte-tecnico
@@ -90,8 +132,33 @@
         >
         </resenia>
       </div>
+
+      <div class="col-12">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de
+            esta forma podremos guardar la información que acabas de compartir
+          </label>
+        </div>
+      <div class="col-12 my-3">
+        <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
+        </div>
+
+        
     </div>
-    <hr class="d-block" :style="ColorStrip" />
+    <documento-requerido
+        v-for="documento in RequiredDocuments"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program"
+        v-bind="documento"
+        @enviaDocumento="cargaDocumento"
+      >
+      </documento-requerido>
+        <hr class="d-block mt-2" :style="ColorStrip" />
+
   </details>
 </template>
 
@@ -125,8 +192,10 @@ export default {
 
   props: {
     //Index
-    index: Number,
-    alias_academic_program:String,
+    index:Number,
+
+    // Documentos requeridos
+    required_documents: Array,
 
     // Id de la producción científica.
     id: Number,
@@ -138,10 +207,7 @@ export default {
     state: String,
 
     // Tipo de producción científica.
-    type: {
-      type: String,
-      default: "ninguno"
-    },
+    type: String,
 
     // Título.
     title: String,
@@ -162,13 +228,18 @@ export default {
     post_title: String,
 
     // Autores de la producción científica.
-    authors: {
-      type:Array,
-      default: [],
-    }
+    authors: Array,
   },
 
   computed: {
+    RequiredDocuments: {
+      get() {
+        return this.required_documents;
+      },
+      set(newVal) {
+        this.$emit("update:required_documents", newVal);
+      },
+    },
     State: {
       get() {
         return this.state;
@@ -253,7 +324,7 @@ export default {
         technical_reports: "Reportes técnicos",
         working_documents: "Documentos de trabajo",
         working_memories: "Memorias de trabajo",
-        reviews: "Reseñas",
+        reviews_cp: "Reseñas",
       },
     };
   },
@@ -266,65 +337,60 @@ export default {
     });
   },
 
-  computed:{
-    ColorStrip: {
-      get() {
-        var color = "#FFFFFF";
-
-        switch (this.alias_academic_program) {
-          case "maestria":
-            color = "#0598BC";
-            break;
-          case "doctorado":
-            color = "#FECC50";
-            break;
-          case "enrem":
-            color = "#FF384D";
-            break;
-          case "imarec":
-            color = "#118943";
-            break;
-        }
-
-        return {
-          backgroundColor: color,
-          height: "1px",
-        };
-      },
-    },
-  },
-
   methods: {
-    guardaProduccionCientifica(evento) {
-      this.enviaProduccionCientifica(evento, "Completo");
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
+    },
+    
+    guardaProduccionCientifica(evento){
+      this.enviaProduccionCientifica(evento, 'Completo');
     },
 
-    eliminaProduccionCientifica() {
-      axios
-        .post("/controlescolar/solicitud/deleteScientificProduction", {
-          id: this.id,
-          archive_id: this.archive_id,
-        })
-        .then((response) => {
-          //Llama al padre para que elimine el item de la lista de experiencia laboral
-          this.$emit("delete-item", this.index - 1);
+     eliminaProduccionCientifica(){
+      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(response =>{
+        
+            //Llama al padre para que elimine el item de la lista de experiencia laboral
+            this.$emit('delete-item',this.index-1);
 
           Swal.fire({
-            title: "Éxito al eliminar Producción cientifica",
-            text: response.data.message, // Imprime el mensaje del controlador
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            confirmButtonText: "Continuar",
-          });
-        })
-        .catch((error) => {
+              title: "Éxito al eliminar Producción cientifica",
+              text: response.data.message, // Imprime el mensaje del controlador
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continuar",
+            });
+
+      }).catch(error=>{
           Swal.fire({
-            title: "Error al eliminar Experiencia laboral",
-            showCancelButton: false,
-            icon: "error",
-          });
-        });
+              title: "Error al eliminar Experiencia laboral",
+              showCancelButton: false,
+              icon: "error",
+            });
+      }); 
     },
 
     enviaProduccionCientifica(evento, estado) {
@@ -345,19 +411,44 @@ export default {
           post_title: this.post_title,
         })
         .then((response) => {
-          Object.keys(response.data).forEach((dataKey) => {
-            var event = "update:" + dataKey;
-            this.$emit(event, response.data[dataKey]);
+          // Object.keys(response.data).forEach((dataKey) => {
+          //   var event = "update:" + dataKey;
+          //   this.$emit(event, response.data[dataKey]);
+          // });
+
+           Swal.fire({
+            title: "Los datos se han actualizado correctamente",
+            text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+            icon: "success",
+            showCancelButton: true,
+            showConfirmButton: false,
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Continuar",
           });
+
         })
         .catch((error) => {
-          Swal.fire({
-            title: "Error al actualizar datos",
-            text: error.response.data,
-            showCancelButton: false,
-            icon: "error",
-          });
+           Swal.fire({
+              title: "Error al actualizar datos",
+              text: error.response.data['message'],
+              showCancelButton: false,
+              icon: "error",
+            });
         });
+    },
+    eliminaAutor(autor){
+       axios
+        .post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
+          id: autor.id,
+          scientific_production_id: this.id,
+          archive_id: this.archive_id,
+          type: this.type,
+          name: autor.Name,
+        })
+        .then((response) => {
+          this.Authors.splice(autor.index, 1);
+        })
+        .catch((error) => {});
     },
 
     agregaAutor(nuevoAutor) {

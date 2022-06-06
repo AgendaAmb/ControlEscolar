@@ -2720,108 +2720,172 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _produccion_cientifica_PublicacionLibro_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./produccion-cientifica/PublicacionLibro.vue */ "./resources/js/postulacion/close-view/components/produccion-cientifica/PublicacionLibro.vue");
 /* harmony import */ var _produccion_cientifica_ReporteTecnico_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./produccion-cientifica/ReporteTecnico.vue */ "./resources/js/postulacion/close-view/components/produccion-cientifica/ReporteTecnico.vue");
 /* harmony import */ var _produccion_cientifica_Resenia_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./produccion-cientifica/Resenia.vue */ "./resources/js/postulacion/close-view/components/produccion-cientifica/Resenia.vue");
-var _name$components$prop;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2831,8 +2895,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_name$components$prop = {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "produccion-cientifica",
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2849,7 +2912,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: {
     //Index
     index: Number,
-    alias_academic_program: String,
+    // Documentos requeridos
+    required_documents: Array,
     // Id de la producción científica.
     id: Number,
     // Id del expediente.
@@ -2857,10 +2921,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // Estado de control
     state: String,
     // Tipo de producción científica.
-    type: {
-      type: String,
-      "default": "ninguno"
-    },
+    type: String,
     // Título.
     title: String,
     // Fecha de publicación.
@@ -2874,12 +2935,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // Nombre de la publicación.
     post_title: String,
     // Autores de la producción científica.
-    authors: {
-      type: Array,
-      "default": []
-    }
+    authors: Array
   },
   computed: {
+    RequiredDocuments: {
+      get: function get() {
+        return this.required_documents;
+      },
+      set: function set(newVal) {
+        this.$emit("update:required_documents", newVal);
+      }
+    },
     State: {
       get: function get() {
         return this.state;
@@ -2963,7 +3029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         technical_reports: "Reportes técnicos",
         working_documents: "Documentos de trabajo",
         working_memories: "Memorias de trabajo",
-        reviews: "Reseñas"
+        reviews_cp: "Reseñas"
       }
     };
   },
@@ -2973,13 +3039,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       scientific_production_id: this.id,
       name: null
     });
-  }
-}, _defineProperty(_name$components$prop, "computed", {
-  ColorStrip: {
-    get: function get() {
+  },
+  methods: {
+    ColorStrip: function ColorStrip() {
       var color = "#FFFFFF";
 
-      switch (this.alias_academic_program) {
+      switch (this.academic_program.alias) {
         case "maestria":
           color = "#0598BC";
           break;
@@ -3001,103 +3066,121 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         backgroundColor: color,
         height: "1px"
       };
+    },
+    guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
+      this.enviaProduccionCientifica(evento, 'Completo');
+    },
+    eliminaProduccionCientifica: function eliminaProduccionCientifica() {
+      var _this = this;
+
+      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
+        id: this.id,
+        archive_id: this.archive_id
+      }).then(function (response) {
+        //Llama al padre para que elimine el item de la lista de experiencia laboral
+        _this.$emit('delete-item', _this.index - 1);
+
+        Swal.fire({
+          title: "Éxito al eliminar Producción cientifica",
+          text: response.data.message,
+          // Imprime el mensaje del controlador
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar"
+        });
+      })["catch"](function (error) {
+        Swal.fire({
+          title: "Error al eliminar Experiencia laboral",
+          showCancelButton: false,
+          icon: "error"
+        });
+      });
+    },
+    enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
+      this.errores = {};
+      axios.post("/controlescolar/solicitud/updateScientificProduction", {
+        id: this.id,
+        archive_id: this.archive_id,
+        state: estado,
+        language: this.language,
+        type: this.type,
+        title: this.title,
+        publish_date: this.publish_date,
+        magazine_name: this.magazine_name,
+        article_name: this.article_name,
+        institution: this.institution,
+        post_title: this.post_title
+      }).then(function (response) {
+        // Object.keys(response.data).forEach((dataKey) => {
+        //   var event = "update:" + dataKey;
+        //   this.$emit(event, response.data[dataKey]);
+        // });
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar"
+        });
+      })["catch"](function (error) {
+        Swal.fire({
+          title: "Error al actualizar datos",
+          text: error.response.data['message'],
+          showCancelButton: false,
+          icon: "error"
+        });
+      });
+    },
+    eliminaAutor: function eliminaAutor(autor) {
+      var _this2 = this;
+
+      axios.post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
+        id: autor.id,
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: autor.Name
+      }).then(function (response) {
+        _this2.Authors.splice(autor.index, 1);
+      })["catch"](function (error) {});
+    },
+    agregaAutor: function agregaAutor(nuevoAutor) {
+      var _this3 = this;
+
+      axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: nuevoAutor.Name
+      }).then(function (response) {
+        Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
+
+        _this3.Authors.push({
+          id: -1,
+          scientific_production_id: _this3.id,
+          name: null
+        });
+      })["catch"](function (error) {});
+    },
+    actualizaAutor: function actualizaAutor(autor) {
+      axios.post("/controlescolar/solicitud/updateScientificProductionAuthor", {
+        id: autor.id,
+        scientific_production_id: this.id,
+        archive_id: this.archive_id,
+        type: this.type,
+        name: autor.Name
+      }).then(function (response) {
+        Object.keys(response.data).forEach(function (dataKey) {
+          var event = "update:" + dataKey;
+          autor.$emit(event, response.data[dataKey]);
+        });
+      })["catch"](function (error) {});
     }
   }
-}), _defineProperty(_name$components$prop, "methods", {
-  guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
-    this.enviaProduccionCientifica(evento, "Completo");
-  },
-  eliminaProduccionCientifica: function eliminaProduccionCientifica() {
-    var _this = this;
-
-    axios.post("/controlescolar/solicitud/deleteScientificProduction", {
-      id: this.id,
-      archive_id: this.archive_id
-    }).then(function (response) {
-      //Llama al padre para que elimine el item de la lista de experiencia laboral
-      _this.$emit("delete-item", _this.index - 1);
-
-      Swal.fire({
-        title: "Éxito al eliminar Producción cientifica",
-        text: response.data.message,
-        // Imprime el mensaje del controlador
-        icon: "success",
-        showCancelButton: false,
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Continuar"
-      });
-    })["catch"](function (error) {
-      Swal.fire({
-        title: "Error al eliminar Experiencia laboral",
-        showCancelButton: false,
-        icon: "error"
-      });
-    });
-  },
-  enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
-    var _this2 = this;
-
-    this.errores = {};
-    axios.post("/controlescolar/solicitud/updateScientificProduction", {
-      id: this.id,
-      archive_id: this.archive_id,
-      state: estado,
-      language: this.language,
-      type: this.type,
-      title: this.title,
-      publish_date: this.publish_date,
-      magazine_name: this.magazine_name,
-      article_name: this.article_name,
-      institution: this.institution,
-      post_title: this.post_title
-    }).then(function (response) {
-      Object.keys(response.data).forEach(function (dataKey) {
-        var event = "update:" + dataKey;
-
-        _this2.$emit(event, response.data[dataKey]);
-      });
-    })["catch"](function (error) {
-      Swal.fire({
-        title: "Error al actualizar datos",
-        text: error.response.data,
-        showCancelButton: false,
-        icon: "error"
-      });
-    });
-  },
-  agregaAutor: function agregaAutor(nuevoAutor) {
-    var _this3 = this;
-
-    axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
-      scientific_production_id: this.id,
-      archive_id: this.archive_id,
-      type: this.type,
-      name: nuevoAutor.Name
-    }).then(function (response) {
-      Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
-
-      _this3.Authors.push({
-        id: -1,
-        scientific_production_id: _this3.id,
-        name: null
-      });
-    })["catch"](function (error) {});
-  },
-  actualizaAutor: function actualizaAutor(autor) {
-    axios.post("/controlescolar/solicitud/updateScientificProductionAuthor", {
-      id: autor.id,
-      scientific_production_id: this.id,
-      archive_id: this.archive_id,
-      type: this.type,
-      name: autor.Name
-    }).then(function (response) {
-      Object.keys(response.data).forEach(function (dataKey) {
-        var event = "update:" + dataKey;
-        autor.$emit(event, response.data[dataKey]);
-      });
-    })["catch"](function (error) {});
-  }
-}), _name$components$prop);
+});
 
 /***/ }),
 
@@ -12913,242 +12996,413 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("details", { staticClass: "mt-1" }, [
-    _c(
-      "summary",
-      { staticClass: "d-flex justify-content-start align-items-center my-2" },
-      [
-        _c("div", { staticClass: "col-12" }, [
-          _vm.tipos[_vm.Type] != null
-            ? _c("h5", { staticClass: "font-weight-bold" }, [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.tipos[_vm.Type] + " " + _vm.index) +
-                    "\n      "
-                ),
-              ])
-            : _c("h5", { staticClass: "font-weight-bold" }, [
-                _vm._v("Publicación " + _vm._s(_vm.index)),
-              ]),
-        ]),
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mx-2" }, [
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.Type,
-              expression: "Type",
-            },
-          ],
-          staticClass: "form-control",
-          class: { "is-invalid": "type" in _vm.errores },
-          attrs: { type: "text", readonly: true },
-          domProps: { value: _vm.Type },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.Type = $event.target.value
-            },
-          },
-        }),
-        _vm._v(" "),
-        "type" in _vm.errores
-          ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("\n        " + _vm._s(_vm.errores.type) + "\n      "),
-            ])
-          : _vm._e(),
-      ]),
-      _vm._v(" "),
+  return _c(
+    "details",
+    { staticClass: "mt-1" },
+    [
       _c(
-        "div",
-        { staticClass: "form-group col-md-12" },
+        "summary",
+        { staticClass: "d-flex justify-content-start align-items-center my-2" },
         [
-          _vm.tipos[_vm.Type] === "Publicación de artículos"
-            ? _c(
-                "publicacion-articulo",
+          _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
+            _vm.tipos[_vm.Type] != null
+              ? _c("h5", { staticClass: " font-weight-bold" }, [
+                  _vm._v(
+                    "\n        " +
+                      _vm._s(_vm.tipos[_vm.Type] + " " + _vm.index) +
+                      " \n      "
+                  ),
+                ])
+              : _c("h5", { staticClass: "font-weight-bold" }, [
+                  _vm._v(
+                    "\n        Publicación " + _vm._s(_vm.index) + "\n      "
+                  ),
+                ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-8 col-md-3 col-sm-2" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1 col-md-3 col-sm-5" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                staticStyle: { height: "35px", width: "100%" },
+                on: { click: _vm.eliminaProduccionCientifica },
+              },
+              [_vm._v("\n        Eliminar Publicación\n      ")]
+            ),
+          ]),
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mx-2" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", [_vm._v(" Tipo de publicación: ")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
                 {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.Type,
+                  expression: "Type",
+                },
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.Type = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+              },
+            },
+            [
+              _c(
+                "option",
+                { attrs: { selected: "" }, domProps: { value: null } },
+                [_vm._v("Escoge una opción")]
+              ),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "articles" } }, [
+                _vm._v("Publicación de artículos"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "published_books" } }, [
+                _vm._v("Publicación de libros"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "published_chapters" } }, [
+                _vm._v("Capítulos publicados"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "technical_reports" } }, [
+                _vm._v("Reportes técnicos"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "working_memories" } }, [
+                _vm._v("Memorias de trabajo"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "working_documents" } }, [
+                _vm._v("Documentos de trabajo"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "reviews_cp" } }, [
+                _vm._v("Reseñas"),
+              ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-12" },
+          [
+            _vm.tipos[_vm.Type] === "Publicación de artículos"
+              ? _c(
+                  "publicacion-articulo",
+                  {
+                    attrs: {
+                      title: _vm.Title,
+                      magazine_name: _vm.MagazineName,
+                      publish_date: _vm.PublishDate,
+                    },
+                    on: {
+                      "update:title": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:magazine_name": function ($event) {
+                        _vm.MagazineName = $event
+                      },
+                      "update:publish_date": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
+                  },
+                  _vm._l(_vm.Authors, function (author, index) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { index: index, name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
+              : _vm.tipos[_vm.Type] === "Capítulos publicados"
+              ? _c(
+                  "publicacion-capitulo",
+                  {
+                    attrs: {
+                      "titulo-capitulo": _vm.Title,
+                      "nombre-articulo": _vm.ArticleName,
+                      "ano-publicacion": _vm.PublishDate,
+                    },
+                    on: {
+                      "update:tituloCapitulo": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:titulo-capitulo": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:nombreArticulo": function ($event) {
+                        _vm.ArticleName = $event
+                      },
+                      "update:nombre-articulo": function ($event) {
+                        _vm.ArticleName = $event
+                      },
+                      "update:anoPublicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                      "update:ano-publicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
+                  },
+                  _vm._l(_vm.Authors, function (author, index) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { index: index, name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
+              : _vm.tipos[_vm.Type] === "Publicación de libros"
+              ? _c(
+                  "publicacion-libro",
+                  {
+                    attrs: {
+                      "titulo-libro": _vm.Title,
+                      "ano-publicacion": _vm.PublishDate,
+                    },
+                    on: {
+                      "update:tituloLibro": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:titulo-libro": function ($event) {
+                        _vm.Title = $event
+                      },
+                      "update:anoPublicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                      "update:ano-publicacion": function ($event) {
+                        _vm.PublishDate = $event
+                      },
+                    },
+                  },
+                  _vm._l(_vm.Authors, function (author, index) {
+                    return _c(
+                      "autor-articulo",
+                      _vm._b(
+                        {
+                          key: author.id,
+                          attrs: { index: index, name: author.name },
+                          on: {
+                            "update:name": function ($event) {
+                              return _vm.$set(author, "name", $event)
+                            },
+                            agregaAutor: _vm.agregaAutor,
+                            actualizaAutor: _vm.actualizaAutor,
+                            eliminaAutor: _vm.eliminaAutor,
+                          },
+                        },
+                        "autor-articulo",
+                        author,
+                        false
+                      )
+                    )
+                  }),
+                  1
+                )
+              : _vm.tipos[_vm.Type] === "Reportes técnicos"
+              ? _c("reporte-tecnico", {
                   attrs: {
                     title: _vm.Title,
-                    magazine_name: _vm.MagazineName,
+                    institution: _vm.Institution,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:magazine_name": function ($event) {
-                      _vm.MagazineName = $event
+                    "update:institution": function ($event) {
+                      _vm.Institution = $event
                     },
                     "update:publish_date": function ($event) {
                       _vm.PublishDate = $event
                     },
                   },
+                })
+              : _vm.tipos[_vm.Type] === "Memorias de trabajo"
+              ? _c("memoria-trabajo", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
+                  },
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                  },
+                })
+              : _vm.tipos[_vm.Type] === "Documentos de trabajo"
+              ? _c("documento-trabajo", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
+                  },
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                  },
+                })
+              : _vm.tipos[_vm.Type] === "Reseñas"
+              ? _c("resenia", {
+                  attrs: {
+                    title: _vm.Title,
+                    post_title: _vm.PostTitle,
+                    publish_date: _vm.PublishDate,
+                  },
+                  on: {
+                    "update:title": function ($event) {
+                      _vm.Title = $event
+                    },
+                    "update:post_title": function ($event) {
+                      _vm.PostTitle = $event
+                    },
+                    "update:publish_date": function ($event) {
+                      _vm.PublishDate = $event
+                    },
+                  },
+                })
+              : _vm._e(),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 my-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: " btn btn-primary",
+              on: { click: _vm.guardaProduccionCientifica },
+            },
+            [_vm._v(" Guardar publicación ")]
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.RequiredDocuments, function (documento) {
+        return _c(
+          "documento-requerido",
+          _vm._b(
+            {
+              key: documento.name,
+              attrs: {
+                archivo: documento.archivo,
+                location: documento.pivot.location,
+                errores: documento.errores,
+                alias_academic_program: _vm.alias_academic_program,
+              },
+              on: {
+                "update:archivo": function ($event) {
+                  return _vm.$set(documento, "archivo", $event)
                 },
-                _vm._l(_vm.Authors, function (author) {
-                  return _c(
-                    "autor-articulo",
-                    _vm._b(
-                      {
-                        key: author.id,
-                        attrs: { name: author.name },
-                        on: {
-                          "update:name": function ($event) {
-                            return _vm.$set(author, "name", $event)
-                          },
-                          agregaAutor: _vm.agregaAutor,
-                          actualizaAutor: _vm.actualizaAutor,
-                        },
-                      },
-                      "autor-articulo",
-                      author,
-                      false
-                    )
-                  )
-                }),
-                1
-              )
-            : _vm.tipos[_vm.Type] === "Capítulos publicados"
-            ? _c("publicacion-capitulo", {
-                attrs: {
-                  "titulo-capitulo": _vm.Title,
-                  "nombre-articulo": _vm.ArticleName,
-                  "ano-publicacion": _vm.PublishDate,
+                "update:location": function ($event) {
+                  return _vm.$set(documento.pivot, "location", $event)
                 },
-                on: {
-                  "update:tituloCapitulo": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:titulo-capitulo": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:nombreArticulo": function ($event) {
-                    _vm.ArticleName = $event
-                  },
-                  "update:nombre-articulo": function ($event) {
-                    _vm.ArticleName = $event
-                  },
-                  "update:anoPublicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                  "update:ano-publicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
+                "update:errores": function ($event) {
+                  return _vm.$set(documento, "errores", $event)
                 },
-              })
-            : _vm.tipos[_vm.Type] === "Publicación de libros"
-            ? _c("publicacion-libro", {
-                attrs: {
-                  "titulo-libro": _vm.Title,
-                  "ano-publicacion": _vm.PublishDate,
-                },
-                on: {
-                  "update:tituloLibro": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:titulo-libro": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:anoPublicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                  "update:ano-publicacion": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Reportes técnicos"
-            ? _c("reporte-tecnico", {
-                attrs: {
-                  title: _vm.Title,
-                  institution: _vm.Institution,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:institution": function ($event) {
-                    _vm.Institution = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Memorias de trabajo"
-            ? _c("memoria-trabajo", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Documentos de trabajo"
-            ? _c("documento-trabajo", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm.tipos[_vm.Type] === "Reseñas"
-            ? _c("resenia", {
-                attrs: {
-                  title: _vm.Title,
-                  post_title: _vm.PostTitle,
-                  publish_date: _vm.PublishDate,
-                },
-                on: {
-                  "update:title": function ($event) {
-                    _vm.Title = $event
-                  },
-                  "update:post_title": function ($event) {
-                    _vm.PostTitle = $event
-                  },
-                  "update:publish_date": function ($event) {
-                    _vm.PublishDate = $event
-                  },
-                },
-              })
-            : _vm._e(),
-        ],
-        1
-      ),
-    ]),
-    _vm._v(" "),
-    _c("hr", { staticClass: "d-block", style: _vm.ColorStrip }),
-  ])
+                enviaDocumento: _vm.cargaDocumento,
+              },
+            },
+            "documento-requerido",
+            documento,
+            false
+          )
+        )
+      }),
+      _vm._v(" "),
+      _c("hr", { staticClass: "d-block mt-2", style: _vm.ColorStrip }),
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [
+      _c("label", [
+        _c("strong", [_vm._v("Nota: ")]),
+        _vm._v(
+          "\n          Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+        ),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 

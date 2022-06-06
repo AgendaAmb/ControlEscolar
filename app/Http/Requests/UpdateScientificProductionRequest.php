@@ -27,11 +27,11 @@ class UpdateScientificProductionRequest extends FormRequest
         return [
             'id' => ['required','exists:scientific_productions,id'],
             'archive_id' => ['required', 'exists:archives,id'],
-            'type' => ['required', 'in:articles,published_books,published_chapters,technical_reports,working_documents,working_memories,reviews'],
+            'type' => ['required', 'in:articles,published_books,published_chapters,technical_reports,working_documents,working_memories,reviews_cp'],
             'state' => ['required', 'in:Incompleto,Completo'],
             'title' => ['nullable', 'required_if:state,Completo','string'],
             'publish_date' => ['nullable', 'required_if:state,Completo','string'],
-            'post_title' => ['nullable', Rule::requiredIf($this->type == 'working_documents' || $this->type === 'working_memories')],
+            'post_title' => ['nullable', Rule::requiredIf($this->type == 'working_documents' || $this->type === 'working_memories' || $this->type === 'reviews_cp')],
             'institution' => ['nullable', Rule::requiredIf($this->type == 'technical_reports')],
             'article_name' => ['nullable', Rule::requiredIf($this->type == 'published_chapters')],
             'magazine_name' => ['nullable', Rule::requiredIf($this->type == 'articles')],

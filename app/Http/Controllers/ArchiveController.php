@@ -146,25 +146,24 @@ class ArchiveController extends Controller
 
 
         foreach ($archives as $k => $archive) {
-            
-                try {
-                    $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
-                } catch (\Exception $e) {
-                    return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
-                }
 
-                if (sizeof($user_data_collect) > 0) {
-                    //ArchiveResource create $user_data_collect[0];
-                    $user_data = $user_data_collect[0];
-                    //Se guarda el nombre del usuario en el modelo
-                    $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                    $nameUpper = strtoupper($request->student_name);
+            try {
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
+            } catch (\Exception $e) {
+                return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+            }
 
-                    if (strcmp($name, $nameUpper) == 0) {
-                        array_push($archives_searched, $archive);
-                    }
+            if (sizeof($user_data_collect) > 0) {
+                //ArchiveResource create $user_data_collect[0];
+                $user_data = $user_data_collect[0];
+                //Se guarda el nombre del usuario en el modelo
+                $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                $nameUpper = strtoupper($request->student_name);
+
+                if (strcmp($name, $nameUpper) == 0) {
+                    array_push($archives_searched, $archive);
                 }
-            
+            }
         }
         return ArchiveResource::collection($archives_searched);
     }
@@ -265,7 +264,7 @@ class ArchiveController extends Controller
                 'selected_academicDocuments.*' =>   ['required'],
                 'selected_languageDocuments.*' =>   ['required'],
                 'selected_workingDocuments.*'  =>   ['required'],
-                'instructions' => ['required','nullable', 'string', 'max:225'],
+                'instructions' => ['required', 'nullable', 'string', 'max:225'],
                 'academic_program' => ['required'],
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
                 'user_id' => ['required', 'numeric', 'exists:users,id']
@@ -277,15 +276,37 @@ class ArchiveController extends Controller
 
             try {
                 $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
-                
+
                 if (sizeof($user_data_collect) > 0) {
                     $appliant = $user_data_collect[0];
                 }
-
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'El usuario no existe'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
             // return new JsonResponse($appliant['email'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+
+            // Encuentra el nombre de cada documento
+            $name_documents = [];
+            foreach ($request->selected_personalDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_entranceDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_academicDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_languageDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_workingDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
 
 
             try {
@@ -295,17 +316,18 @@ class ArchiveController extends Controller
                     $request->selected_academicDocuments,
                     $request->selected_languageDocuments,
                     $request->selected_workingDocuments,
+                    $name_documents,
                     $request->instructions,
-                    $appliant, 
-                    $request->academic_program, 
+                    $appliant,
+                    $request->academic_program,
                     $request->archive_id,
                     $url_LogoAA,
-                    $url_ContactoAA 
+                    $url_ContactoAA
                 ));
                 // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
                 // Mail::to($appliant['email'])->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
             } catch (\Exception $e) {
-                return new JsonResponse(['message'=>'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+                return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -314,42 +336,43 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
     }
 
-    public function showDocumentsFromEmail(Request $request, $archive_id, $personal_documents, $entrance_documents, $academic_documents, $language_documents, $working_documents )
+    public function showDocumentsFromEmail(Request $request, $archive_id, $personal_documents, $entrance_documents, $academic_documents, $language_documents, $working_documents)
     {
-        
-        $personal_documents_ids = json_decode($personal_documents);
-        $entrance_documents_ids = json_decode($entrance_documents);
-        $academic_documents_ids = json_decode($academic_documents);
-        $language_documents_ids = json_decode($language_documents);
-        $working_documents_ids  = json_decode($working_documents);
+
+        try{
+            $personal_documents_ids = json_decode($personal_documents);
+            $entrance_documents_ids = json_decode($entrance_documents);
+            $academic_documents_ids = json_decode($academic_documents);
+            $language_documents_ids = json_decode($language_documents);
+            $working_documents_ids  = json_decode($working_documents);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo decodificar todo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+       
 
         // dd($personal_documents_ids, $entrance_documents_ids, $academic_documents_ids,$language_documents_ids,$working_documents_ids);
-        try{
-            if($archive_id != null){
-                $archive = Archive::where('id', $archive_id)->first();
+        try {
+            if ($archive_id != null) {
+                $archive = Archive::where('id',intval($archive_id) )->first();
                 //Carga modelos de archivo
                 $archive->loadMissing([
-                    // Cosas del aplicante
                     'appliant',
                     'announcement.academicProgram',
-                    // Documentos y secciones para expedinte
                     'personalDocuments',
-                    'requiredDocuments',
-                    'curricularDocuments',
-                    'entranceDocuments',
-                    'intentionLetter',
                     'recommendationLetter',
                     'myRecommendationLetter',
+                    'entranceDocuments',
+                    'intentionLetter',
                     'academicDegrees.requiredDocuments',
                     'appliantLanguages.requiredDocuments',
                     'appliantWorkingExperiences',
                     'scientificProductions.authors',
                     'humanCapitals'
                 ]);
-    
                 $academic_program = $archive->announcement->academicProgram;
                 $appliant = $archive->appliant;
-
+                $img = 'PMPCA-SUPERIOR.png';
+        
                 if ($academic_program->name === 'Maestría en ciencias ambientales') {
                     $img = 'PMPCA-SUPERIOR.png';
                 } else if ($academic_program->name === 'Maestría en ciencias ambientales, doble titulación') {
@@ -359,26 +382,24 @@ class ArchiveController extends Controller
                 }
         
                 $header_academic_program =          asset('storage/headers/' . $img);
-
-            }
-            
-        }catch (\Exception $e) {
-            return new JsonResponse(['message' => 'No se pudo extraer la informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
         
+               
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+       
 
         return view('postulacion.showUpdateDocuments')
-        ->with('archive', $archive)
-        ->with('appliant', $appliant)
-        ->with('academic_program', $academic_program)
-        ->with('header_academic_program',$header_academic_program)
-        ->with('personal_documents_ids', $personal_documents_ids)
-        ->with('entrance_documents_ids', $entrance_documents_ids)
-        ->with('academic_documents_ids', $academic_documents_ids)
-        ->with('language_documents_ids', $language_documents_ids)
-        ->with('working_documents_ids', $working_documents_ids);
-
-
+            ->with('archive', $archive)
+            ->with('appliant', $appliant)
+            ->with('academic_program', $academic_program)
+            ->with('header_academic_program', $header_academic_program)
+            ->with('personal_documents_ids', $personal_documents_ids)
+            ->with('entrance_documents_ids', $entrance_documents_ids)
+            ->with('academic_documents_ids', $academic_documents_ids)
+            ->with('language_documents_ids', $language_documents_ids)
+            ->with('working_documents_ids', $working_documents_ids);
     }
 
     public function appliantFile_AdminView(Request $request, $archiveusr)
@@ -640,7 +661,7 @@ class ArchiveController extends Controller
     }
 
     /*---------------------------------------- ACADEMIC DEGREE  ---------------------------------------- */
-   
+
     public function latestAcademicDegree(Request $request, Archive $archive)
     {
         return new JsonResponse($archive->latestAcademicDegree);
@@ -660,7 +681,7 @@ class ArchiveController extends Controller
 
         return new JsonResponse(['message' => $academic_degree], 200);
     }
-  
+
 
     public function addAcademicDegree(Request $request)
     {
@@ -680,15 +701,13 @@ class ArchiveController extends Controller
             ]);
 
             $academic_degree->save();
-
-
         } catch (\Exception $e) {
             return new JsonResponse('Error al crear registro academico para el usuario', 502);
         }
         //Recibe la información 
         return new JsonResponse(['message' => 'Programa academico agregado, inserta los datos necesarios para continuar con tu postulacion', 'model' => $academic_degree], 200);
     }
-   
+
     public function deleteAcademicDegree(Request $request)
     {
 
@@ -707,7 +726,7 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Programa academico eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'], 200);
     }
 
-    
+
     public function updateAcademicDegreeRequiredDocument(Request $request)
     {
         //FUncion guarda el archivo y actualiza el archivo que se guardo al momento de ver,
@@ -734,7 +753,7 @@ class ArchiveController extends Controller
     }
 
     /*---------------------------------------- WORKING EXPERIENCE  ---------------------------------------- */
-    
+
     public function addWorkingExperience(Request $request)
     {
         $request->validate([
@@ -771,7 +790,7 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Experiencia laboral eliminada correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'], 200);
     }
 
-   
+
     public function updateWorkingExperience(UpdateWorkingExperienceRequest $request)
     {
         WorkingExperience::where('id', $request->id)->update($request->safe()->toArray());
@@ -780,7 +799,7 @@ class ArchiveController extends Controller
     }
 
     /* -------------------------- LANGUAGUES OF APPLIANT --------------------------*/
-   
+
     public function addAppliantLanguage(Request $request)
     {
         $request->validate([
@@ -802,7 +821,7 @@ class ArchiveController extends Controller
         //Recibe la información 
         return new JsonResponse(['message' => 'Idioma agregado, inserta los datos necesarios para continuar con tu postulacion', 'model' => $appliant_language], 200);
     }
-   
+
 
     public function deleteAppliantLanguage(Request $request)
     {
@@ -820,7 +839,7 @@ class ArchiveController extends Controller
         //Recibe la información 
         return new JsonResponse(['message' => 'Idioma eliminado correctamente, podras agregar y rellenar nuevamente los datos si asi lo deseas'], 200);
     }
-    
+
     public function updateAppliantLanguage(UpdateAppliantLanguageRequest $request)
     {
         AppliantLanguage::where('id', $request->id)->update($request->safe()->toArray());
@@ -851,7 +870,7 @@ class ArchiveController extends Controller
     }
 
     /* -------------------------- INVESTIGACIÓN CIENTIFICA DEL APLICANTE --------------------------*/
-    
+
     public function addScientificProduction(Request $request)
     {
         $request->validate([
@@ -873,8 +892,10 @@ class ArchiveController extends Controller
 
     public function updateScientificProduction(UpdateScientificProductionRequest $request)
     {
-        $scipro = ScientificProduction::where('id', $request->id);
-        $type = $scipro->value('type');
+        # Actualiza los datos generales de la producción científica.
+        $scipro = ScientificProduction::where('id', $request->id)
+            ->update($request->safe()->only('state', 'title', 'publish_date', 'type'));
+        $type = $request->type;
 
         # Determina si el tipo de producción científica cambió
         # y borra la producción científica anterior.
@@ -901,15 +922,15 @@ class ArchiveController extends Controller
             case 'working_memories':
                 $upsert_array = ['post_title' => $request->post_title];
                 break;
+            case 'reviews_cp':
+                $upsert_array = ['post_title' => $request->post_title];
+                break;
         }
 
         # Actualiza los datos adicionales de la producción científica.
         if (count($upsert_array) > 0)
             DB::table($request->type)->updateOrInsert($identifiers, $upsert_array);
-
-        # Actualiza los datos generales de la producción científica.
-        ScientificProduction::where('id', $request->id)
-            ->update($request->safe()->only('state', 'title', 'publish_date', 'type'));
+        
 
         return new JsonResponse(
             ScientificProduction::leftJoin(
@@ -931,6 +952,10 @@ class ArchiveController extends Controller
             )->leftJoin(
                 'working_memories',
                 'working_memories.scientific_production_id',
+                'scientific_productions.id'
+            )->leftJoin(
+                'reviews_cp',
+                'reviews_cp.scientific_production_id',
                 'scientific_productions.id'
             )->first()
         );
@@ -1169,7 +1194,7 @@ class ArchiveController extends Controller
             200
         );
     }
-   
+
     public function recommendationLetter(Request $request, $token)
     {
 

@@ -23,10 +23,13 @@
 </head>
 <body class="d-block mw-100 mx-0">
 
-    @if (Auth::user()!=null)
+    {{-- @if (Auth::user()!=null) --}}
         <x-academic-program-header/>
+
+        {{-- @else
+
     @endif
-    
+     --}}
     @section('main-content')
     <main id="app"@section('container-class') class="container-fluid" @show> 
         @yield('main') 

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMeeatingInformation;
 use App\Mail\SendMeeatingInformationProfesor;
+use App\Models\Archive;
 use Carbon\Carbon;
 
 class InterviewController extends Controller
@@ -32,7 +33,7 @@ class InterviewController extends Controller
     {
         //return $request;
         $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-        
+
         // return AcademicProgram::WithInterviewEagerLoads()->get();
         // return $calendar_resource;
 
@@ -54,7 +55,7 @@ class InterviewController extends Controller
         // Profesor nucleo basico
         // Aspirante 
 
-        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar','comite_academico','coordinador']) === true
+        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
             ?   Interview::select('*')
             :   $request->user()->interviews();
 
@@ -175,21 +176,21 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-       
-      
+
+
         $interview2 = Interview::findorFail($request->id);
-        
+
         // foreach ($interview2->evaluationRubrics as $rubric) {
-          
+
         //     $rubric->getAverageScoreBasicConcepts();
         //     $rubric->getAverageScoreAcademicConcepts();
         //     $rubric->getAverageScoreResearchConcepts();
         //     $rubric->getAverageWorkingExperienceConcepts();
         //     $rubric->getAverageWorkingPersonalAttributesConcepts();
-   
+
         // }
 
-    
+
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
 
@@ -208,17 +209,23 @@ class InterviewController extends Controller
             foreach ($interview2->users as $key => $User) {
 
                 if ($User->user_type == "externs" || $User->user_type == "students") {
-                    $this->alumno=$User;
+                    $this->alumno = $User;
+                    $archive = Archive::where('id', $this->alumno->id)->first();
 
-                    Mail::mailer('smtp_pmpca')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($ResponseMeating, $User, $request->room));
+                    //Carga programa academico
+                    $archive->loadMissing([
+                        'announcement.academicProgram',
+                        'appliant',
+                    ]);
+                    Mail::mailer('smtp_pmpca')->to("ulises.uudp@gmail.com")->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room));
                     //Mail::to($User->email)->send(new SendMeeatingInformation($ResponseMeating,$User,$request->room));
                 } else if ($User->user_type == "workers") {
                     /**Obtener al trabajador inscrito en la entrevista */
                     $Trabajador = $Trabajadores->where('id', $User->id)->first();
 
-                   // $User::findorFail($User->id);
-                    
-                    Mail::mailer('smtp_pmpca')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating,$Trabajador,$request->room,$this->alumno));
+                    // $User::findorFail($User->id);
+
+                    Mail::mailer('smtp_pmpca')->to("A298428@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $request->room, $this->alumno));
                     //Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating,$Trabajador,$request->room,$User));
                 }
             }

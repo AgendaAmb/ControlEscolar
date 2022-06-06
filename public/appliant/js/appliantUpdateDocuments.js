@@ -5591,7 +5591,12 @@ var render = function () {
                     {
                       staticClass: "btn btn-primary",
                       staticStyle: { width: "100%" },
-                      attrs: { href: _vm.location, target: "_blank" },
+                      attrs: {
+                        href:
+                          "https://ambiental.uaslp.mx/controlescolar/solicitud/expediente/" +
+                          _vm.location,
+                        target: "_blank",
+                      },
                     },
                     [_vm._v("\n          Ver Archivo")]
                   )

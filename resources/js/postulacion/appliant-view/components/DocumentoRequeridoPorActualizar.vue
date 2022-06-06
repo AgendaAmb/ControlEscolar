@@ -31,7 +31,7 @@
           my-auto
         "
       >
-          <a :href="location" v-if="checkUpload() === true"   class="btn btn-primary" style="width:100%" target="_blank">
+          <a :href="'https://ambiental.uaslp.mx/controlescolar/solicitud/expediente/'+ location" v-if="checkUpload() === true"   class="btn btn-primary" style="width:100%" target="_blank">
             Ver Archivo</a
           >
         <label class="btn btn-primary d-block ml-auto my-2">

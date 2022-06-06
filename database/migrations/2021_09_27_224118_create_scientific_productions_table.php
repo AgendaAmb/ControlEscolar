@@ -80,6 +80,7 @@ class CreateScientificProductionsTable extends Migration
 
             $table->string('post_title');
         });
+        
     }
 
     /**

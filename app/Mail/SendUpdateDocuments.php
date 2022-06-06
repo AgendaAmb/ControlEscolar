@@ -17,6 +17,7 @@ class SendUpdateDocuments extends Mailable
     public $academic_documents;
     public $language_documents;
     public $working_documents;
+    public $name_documents;
 
     public $instructions;
     public $appliant;
@@ -42,6 +43,7 @@ class SendUpdateDocuments extends Mailable
         $academic_documents, 
         $language_documents, 
         $working_documents,
+        $name_documents,
         $instructions, 
         $appliant, 
         $academic_program, 
@@ -54,6 +56,7 @@ class SendUpdateDocuments extends Mailable
         $this->academic_documents = $academic_documents;
         $this->language_documents = $language_documents;
         $this->working_documents = $working_documents;
+        $this->name_documents = $name_documents;
         $this->instructions = $instructions;
         $this->appliant = $appliant;
         $this->academic_program = $academic_program;

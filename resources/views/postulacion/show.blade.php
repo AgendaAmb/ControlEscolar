@@ -35,6 +35,8 @@
             :recommendation_letters="recommendation_letters"
             :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment">
         </solicitud-postulante>
+        {{-- <h1>{{$archive->status}}</h1>
+        <h2>{{ Auth::user()}}</h2> --}}
     {{-- @else
         <expediente-cerrado
         :appliant="appliant"
@@ -56,7 +58,7 @@
         Expediente Cerrado          Visualizar para todos los roles anteriores (Cambiar estado solamente )
         --}}
     {{-- Admin view --}}
-    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status >= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status > 4))
+    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status > 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status > 4))
         <script src="{{ asset('postulacion/js/close.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('admin'))
         <script src="{{ asset('js/postulacion.js') }}" defer></script>

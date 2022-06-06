@@ -3321,7 +3321,7 @@ __webpack_require__.r(__webpack_exports__);
         technical_reports: "Reportes técnicos",
         working_documents: "Documentos de trabajo",
         working_memories: "Memorias de trabajo",
-        reviews: "Reseñas"
+        reviews_cp: "Reseñas"
       }
     };
   },
@@ -3390,8 +3390,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     enviaProduccionCientifica: function enviaProduccionCientifica(evento, estado) {
-      var _this2 = this;
-
       this.errores = {};
       axios.post("/controlescolar/solicitud/updateScientificProduction", {
         id: this.id,
@@ -3406,11 +3404,10 @@ __webpack_require__.r(__webpack_exports__);
         institution: this.institution,
         post_title: this.post_title
       }).then(function (response) {
-        Object.keys(response.data).forEach(function (dataKey) {
-          var event = "update:" + dataKey;
-
-          _this2.$emit(event, response.data[dataKey]);
-        });
+        // Object.keys(response.data).forEach((dataKey) => {
+        //   var event = "update:" + dataKey;
+        //   this.$emit(event, response.data[dataKey]);
+        // });
         Swal.fire({
           title: "Los datos se han actualizado correctamente",
           text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
@@ -3430,7 +3427,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     eliminaAutor: function eliminaAutor(autor) {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
         id: autor.id,
@@ -3439,11 +3436,11 @@ __webpack_require__.r(__webpack_exports__);
         type: this.type,
         name: autor.Name
       }).then(function (response) {
-        _this3.Authors.splice(autor.index, 1);
+        _this2.Authors.splice(autor.index, 1);
       })["catch"](function (error) {});
     },
     agregaAutor: function agregaAutor(nuevoAutor) {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.post("/controlescolar/solicitud/addScientificProductionAuthor", {
         scientific_production_id: this.id,
@@ -3451,11 +3448,11 @@ __webpack_require__.r(__webpack_exports__);
         type: this.type,
         name: nuevoAutor.Name
       }).then(function (response) {
-        Vue.set(_this4.Authors, _this4.Authors.length - 1, response.data);
+        Vue.set(_this3.Authors, _this3.Authors.length - 1, response.data);
 
-        _this4.Authors.push({
+        _this3.Authors.push({
           id: -1,
-          scientific_production_id: _this4.id,
+          scientific_production_id: _this3.id,
           name: null
         });
       })["catch"](function (error) {});
@@ -14221,7 +14218,7 @@ var render = function () {
                 _vm._v("Documentos de trabajo"),
               ]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "reviews" } }, [
+              _c("option", { attrs: { value: "reviews_cp" } }, [
                 _vm._v("Reseñas"),
               ]),
             ]

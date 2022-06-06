@@ -15,17 +15,19 @@ class SendMeeatingInformation extends Mailable
     public $Meeating;
     public $Student;
     public $Room;
+    public $academic_program;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Meeating,$Student,$Room)
+    public function __construct($Meeating,$Student,$academic_program,$Room)
     {
      
         $this->Meeating=$Meeating;
         $this->Student=$Student;
         $this->Room=$Room;
+        $this->academic_program=$academic_program;
     }
 
     /**
