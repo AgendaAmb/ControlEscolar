@@ -339,7 +339,7 @@ class ArchiveController extends Controller
     public function showDocumentsFromEmail(Request $request, $archive_id, $personal_documents, $entrance_documents, $academic_documents, $language_documents, $working_documents)
     {
 
-        try{
+        try {
             $personal_documents_ids = json_decode($personal_documents);
             $entrance_documents_ids = json_decode($entrance_documents);
             $academic_documents_ids = json_decode($academic_documents);
@@ -348,12 +348,12 @@ class ArchiveController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo decodificar todo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-       
+
 
         // dd($personal_documents_ids, $entrance_documents_ids, $academic_documents_ids,$language_documents_ids,$working_documents_ids);
         try {
             if ($archive_id != null) {
-                $archive = Archive::where('id',intval($archive_id) )->first();
+                $archive = Archive::where('id', intval($archive_id))->first();
                 //Carga modelos de archivo
                 $archive->loadMissing([
                     'appliant',
@@ -372,7 +372,7 @@ class ArchiveController extends Controller
                 $academic_program = $archive->announcement->academicProgram;
                 $appliant = $archive->appliant;
                 $img = 'PMPCA-SUPERIOR.png';
-        
+
                 if ($academic_program->name === 'Maestría en ciencias ambientales') {
                     $img = 'PMPCA-SUPERIOR.png';
                 } else if ($academic_program->name === 'Maestría en ciencias ambientales, doble titulación') {
@@ -380,15 +380,13 @@ class ArchiveController extends Controller
                 } else if ($academic_program->name === 'Maestría Interdisciplinaria en ciudades sostenibles') {
                     $img = 'IMAREC-SUPERIOR.png';
                 }
-        
+
                 $header_academic_program =          asset('storage/headers/' . $img);
-        
-               
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-       
+
 
         return view('postulacion.showUpdateDocuments')
             ->with('archive', $archive)
@@ -409,51 +407,58 @@ class ArchiveController extends Controller
             return '<h1>No existe expediente para el postulante</h1>';
         }
 
-        $archiveModel->loadMissing([
-            // Cosas del aplicante
-            'appliant',
-            'announcement.academicProgram',
-            // Documentos y secciones para expedinte
-            'requiredDocuments',
-            'personalDocuments',
-            'curricularDocuments',
-            'entranceDocuments',
-            'intentionLetter',
-            'recommendationLetter',
-            'myRecommendationLetter',
-            'academicDegrees.requiredDocuments',
-            'appliantLanguages.requiredDocuments',
-            'appliantWorkingExperiences',
-            'scientificProductions.authors',
-            'humanCapitals'
-        ]);
+        try {
+            $archiveModel->loadMissing([
+                // Cosas del aplicante
+                'appliant',
+                'announcement.academicProgram',
+                // Documentos y secciones para expedinte
+                'requiredDocuments',
+                'personalDocuments',
+                'curricularDocuments',
+                'entranceDocuments',
+                'intentionLetter',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'humanCapitals'
+            ]);
 
-        $academic_program = $archiveModel->announcement->academicProgram;
+            $academic_program = $archiveModel->announcement->academicProgram;
 
-        //function that returns the info complete in the appliant model
-        $appliant = $this->getDataFromPortalUser($archiveModel->appliant);
+            //function that returns the info complete in the appliant model
+            $appliant = $this->getDataFromPortalUser($archiveModel->appliant);
 
-        #Set the image according to academic program
-        //Doctorado en ciencias ambientales
-        $img = 'DOCTORADO-SUPERIOR.png';
+            #Set the image according to academic program
+            //Doctorado en ciencias ambientales
+            $img = 'DOCTORADO-SUPERIOR.png';
 
-        if ($academic_program->name == 'Maestría en ciencias ambientales') {
-            $img = 'PMPCA-SUPERIOR.png';
-        } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
-            $img = 'ENREM-SUPERIOR.png';
-        } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
-            $img = 'IMAREC-SUPERIOR.png';
+            if ($academic_program->name == 'Maestría en ciencias ambientales') {
+                $img = 'PMPCA-SUPERIOR.png';
+            } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
+                $img = 'ENREM-SUPERIOR.png';
+            } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
+                $img = 'IMAREC-SUPERIOR.png';
+            }
+
+            $header_academic_program =          asset('storage/headers/' . $img);
+            $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
+            $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
+            $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
+
+            $letters_Commitment = [];
+            array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
+            array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
+            array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        $header_academic_program =          asset('storage/headers/' . $img);
-        $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
-        $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
-        $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
 
-        $letters_Commitment = [];
-        array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
-        array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
-        array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
 
         // dd($archiveModel);
 
@@ -523,8 +528,12 @@ class ArchiveController extends Controller
     {
         // return $user_id;
         //User is not a student
+        $holadd = 'hola';
         if ($request->user()->getIsAppliantAttribute() === false) {
-            return back()->withInput();
+            dd('aqui me quede');
+            return '<h1>Mori</h1>';
+
+            // return back()->withInput();
         }
 
         //Is a postulant so we need to show the the file
@@ -532,6 +541,7 @@ class ArchiveController extends Controller
             //deberia de retornar el archivo
             $archiveModel = Archive::where('user_id', $request->user()->id)->first();
         } catch (\Exception $e) {
+            return '<h1>Ayuda</h1>';
             return back()->withInput()->withErrors($e); //Regresa a la pagina donde se encuentra mostando errores
         }
 
@@ -541,55 +551,62 @@ class ArchiveController extends Controller
             return '<h1>No existe expediente para el postulante</h1>';
         }
 
-        //Carga modelos de archivo
-        $archiveModel->loadMissing([
-            // Cosas del aplicante
-            'appliant',
-            'announcement.academicProgram',
-            // Documentos y secciones para expedinte
-            'personalDocuments',
-            'requiredDocuments',
-            'curricularDocuments',
-            'entranceDocuments',
-            'intentionLetter',
-            'recommendationLetter',
-            'myRecommendationLetter',
-            'academicDegrees.requiredDocuments',
-            'appliantLanguages.requiredDocuments',
-            'appliantWorkingExperiences',
-            'scientificProductions.authors',
-            'humanCapitals'
-        ]);
+        try {
+            //Carga modelos de archivo
+            $archiveModel->loadMissing([
+                // Cosas del aplicante
+                'appliant',
+                'announcement.academicProgram',
+                // Documentos y secciones para expedinte
+                'personalDocuments',
+                'requiredDocuments',
+                'curricularDocuments',
+                'entranceDocuments',
+                'intentionLetter',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'humanCapitals'
+            ]);
 
-        $academic_program = $archiveModel->announcement->academicProgram;
+            $academic_program = $archiveModel->announcement->academicProgram;
 
-        //function that returns the info complete in the appliant model
-        $appliant = $this->getDataFromSessionUser($request);
+            //function that returns the info complete in the appliant model
+            $appliant = $this->getDataFromSessionUser($request);
 
 
-        #Set the image according to academic program
-        //Doctorado en ciencias ambientales
-        $img = 'DOCTORADO-SUPERIOR.png';
+            #Set the image according to academic program
+            //Doctorado en ciencias ambientales
+            $img = 'DOCTORADO-SUPERIOR.png';
 
-        if ($academic_program->name == 'Maestría en ciencias ambientales') {
-            $img = 'PMPCA-SUPERIOR.png';
-        } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
-            $img = 'ENREM-SUPERIOR.png';
-        } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
-            $img = 'IMAREC-SUPERIOR.png';
+            if ($academic_program->name == 'Maestría en ciencias ambientales') {
+                $img = 'PMPCA-SUPERIOR.png';
+            } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
+                $img = 'ENREM-SUPERIOR.png';
+            } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
+                $img = 'IMAREC-SUPERIOR.png';
+            }
+
+            $header_academic_program = asset('storage/headers/' . $img);
+
+            $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
+            $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
+            $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
+
+
+            $letters_Commitment = [];
+            array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
+            array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
+            array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        $header_academic_program = asset('storage/headers/' . $img);
 
-        $location_letterCommitment_DCA =    asset('storage/DocumentoExtra/LetterCommitment/DCA.docx');
-        $location_letterCommitment_MCA =    asset('storage/DocumentoExtra/LetterCommitment/MCA.docx');
-        $location_letterCommitment_IMaREC = asset('storage/DocumentoExtra/LetterCommitment/IMaREC.docx');
-
-
-        $letters_Commitment = [];
-        array_push($letters_Commitment, $location_letterCommitment_MCA);    // [0] Maestria en ciencias ambientales, normal y doble titulacion
-        array_push($letters_Commitment, $location_letterCommitment_DCA);    // [1] Doctorado en ciencias
-        array_push($letters_Commitment, $location_letterCommitment_IMaREC); // [2]  ciudades sosteniles
 
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
         // dd($appliant);
@@ -930,7 +947,7 @@ class ArchiveController extends Controller
         # Actualiza los datos adicionales de la producción científica.
         if (count($upsert_array) > 0)
             DB::table($request->type)->updateOrInsert($identifiers, $upsert_array);
-        
+
 
         return new JsonResponse(
             ScientificProduction::leftJoin(
