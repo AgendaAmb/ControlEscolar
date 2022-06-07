@@ -8,7 +8,7 @@
     </div>
 
     <div class="row mx-1">
-      <div class="form-group col-6">
+      <div class="form-group col-12">
         <label> <strong> Programa académico </strong> </label>
         <select v-model="announcement" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
@@ -20,10 +20,6 @@
             {{ academicProgram.name }}
           </option>
         </select>
-      </div>
-      <div class="form-group col-6">
-        <label> <strong> Nombre del estudiante </strong> </label>
-        <input type="text" class="form-control" v-model="student_name" />
       </div>
     </div>
 
@@ -69,7 +65,7 @@ export default {
   methods: {
     buscaExpediente() {
       //Datos no completos para hacer busqueda
-      if (this.student_name == null || this.announcement == null) {
+      if ( this.announcement == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
           text: "Alguno de los campos se encuentra vacio",
@@ -80,8 +76,8 @@ export default {
         axios
           .get("/controlescolar/solicitud/archives/professor", {
             params: {
-              student_name: this.student_name,
-              // "filter[announcement.id]": this.announcement,
+              // student_name: this.student_name,
+              "filter[announcement.id]": this.announcement,
             },
           })
           .then((response) => {

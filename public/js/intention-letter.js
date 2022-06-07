@@ -422,10 +422,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -454,7 +450,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       var _this = this;
 
       //Datos no completos para hacer busqueda
-      if (this.student_name == null || this.announcement == null) {
+      if (this.announcement == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
           text: "Alguno de los campos se encuentra vacio",
@@ -464,8 +460,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         //Se hace la busqueda
         axios.get("/controlescolar/solicitud/archives/professor", {
           params: {
-            student_name: this.student_name // "filter[announcement.id]": this.announcement,
-
+            // student_name: this.student_name,
+            "filter[announcement.id]": this.announcement
           }
         }).then(function (response) {
           _this.dataLength = response.data.length; // cantidad de articulos
@@ -25996,7 +25992,7 @@ var render = function () {
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "row mx-1" }, [
-        _c("div", { staticClass: "form-group col-6" }, [
+        _c("div", { staticClass: "form-group col-12" }, [
           _vm._m(1),
           _vm._v(" "),
           _c(
@@ -26054,36 +26050,10 @@ var render = function () {
             2
           ),
         ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-6" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.student_name,
-                expression: "student_name",
-              },
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.student_name },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.student_name = $event.target.value
-              },
-            },
-          }),
-        ]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row mx-1" }, [
-        _vm._m(3),
+        _vm._m(2),
         _vm._v(" "),
         _vm.dataLength != null
           ? _c("div", { staticClass: "col-3 mx-4" }, [
@@ -26113,12 +26083,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", [_c("strong", [_vm._v(" Programa académico ")])])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v(" Nombre del estudiante ")])])
   },
   function () {
     var _vm = this
