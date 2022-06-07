@@ -153,17 +153,21 @@ class ArchiveController extends Controller
                 return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
             }
 
+           
+
             if (sizeof($user_data_collect) > 0) {
-                //ArchiveResource create $user_data_collect[0];
+
+                 //ArchiveResource create $user_data_collect[0];
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
                 $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                $nameUpper = strtoupper($request->student_name);
+                
+                // $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                // $nameUpper = strtoupper($request->student_name);
 
-                if (strcmp($name, $nameUpper) == 0) {
-                    array_push($archives_searched, $archive);
-                }
+                // if (strcmp($name, $nameUpper) == 0) {
+                //     array_push($archives_searched, $archive);
+                // }
             }
         }
         
