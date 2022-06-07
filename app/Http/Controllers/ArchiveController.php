@@ -142,29 +142,30 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => "No existen archivos para las fechas y modalidad indicada"], 502);
         }
 
-        // $archives_searched = [];
+        $archives_searched = [];
 
 
-        // foreach ($archives as $k => $archive) {
+        foreach ($archives as $k => $archive) {
 
-        //     try {
-        //         $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
-        //     } catch (\Exception $e) {
-        //         return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
-        //     }
+            try {
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
+            } catch (\Exception $e) {
+                return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+            }
 
-        //     if (sizeof($user_data_collect) > 0) {
-        //         //ArchiveResource create $user_data_collect[0];
-        //         $user_data = $user_data_collect[0];
-        //         //Se guarda el nombre del usuario en el modelo
-        //         $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-        //         $nameUpper = strtoupper($request->student_name);
+            if (sizeof($user_data_collect) > 0) {
+                //ArchiveResource create $user_data_collect[0];
+                $user_data = $user_data_collect[0];
+                //Se guarda el nombre del usuario en el modelo
+                $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                $nameUpper = strtoupper($request->student_name);
 
-        //         if (strcmp($name, $nameUpper) == 0) {
-        //             array_push($archives_searched, $archive);
-        //         }
-        //     }
-        // }
+                if (strcmp($name, $nameUpper) == 0) {
+                    array_push($archives_searched, $archive);
+                }
+            }
+        }
         
         return ArchiveResource::collection($archives);
     }
