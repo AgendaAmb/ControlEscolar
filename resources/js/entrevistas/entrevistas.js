@@ -65,6 +65,10 @@ const app = new Vue({
     },
 
     methods:{
+
+        hola(){
+            console.log("hola we");
+        },
         
         /**
          * Actualiza el periodo de entrevistas.

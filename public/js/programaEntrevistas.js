@@ -77,6 +77,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -22345,18 +22358,24 @@ var render = function () {
                         _vm._v(_vm._s(interview.appliant)),
                       ]),
                       _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: interview.archive_url,
-                              target: "_blank",
-                            },
-                          },
-                          [_vm._v("Ver documentos")]
-                        ),
-                      ]),
+                      _vm.$root.loggedUserIsSchoolControl()
+                        ? _c("td", [
+                            _c("a", { attrs: { target: "_blank" } }, [
+                              _vm._v("Ver documentos"),
+                            ]),
+                          ])
+                        : _c("td", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: interview.archive_url,
+                                  target: "_blank",
+                                },
+                              },
+                              [_vm._v("Ver documentos")]
+                            ),
+                          ]),
                       _vm._v(" "),
                       _vm.$root.loggedUserIsCoordinador()
                         ? _c(
@@ -22415,6 +22434,32 @@ var render = function () {
                                   attrs: { href: rubric.location },
                                 },
                                 [_vm._v(" Formato de evaluación")]
+                              )
+                            }),
+                            0
+                          )
+                        : _vm.$root.loggedUserIsSchoolControl()
+                        ? _c(
+                            "td",
+                            _vm._l(interview.rubrics, function (rubric) {
+                              return _c(
+                                "a",
+                                {
+                                  key: rubric.location,
+                                  staticClass:
+                                    "d-block text-capitalize text-decoration-none",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(rubric.user.name) +
+                                      " " +
+                                      _vm._s(rubric.user.middlename) +
+                                      " " +
+                                      _vm._s(rubric.user.surname) +
+                                      "\n                                    "
+                                  ),
+                                ]
                               )
                             }),
                             0

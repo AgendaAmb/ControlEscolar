@@ -414,6 +414,7 @@ class ArchiveController extends Controller
         }
 
         try {
+
             $archiveModel->loadMissing([
                 // Cosas del aplicante
                 'appliant',
@@ -432,7 +433,7 @@ class ArchiveController extends Controller
                 'scientificProductions.authors',
                 'humanCapitals'
             ]);
-
+            
             $academic_program = $archiveModel->announcement->academicProgram;
 
             //function that returns the info complete in the appliant model

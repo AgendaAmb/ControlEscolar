@@ -1,21 +1,16 @@
 <template>
     <div class="col-lg-11">
         <div class="row appliant">
-            <div class="col-lg-4">
-                <p class="d-block mb-0 myriad-light">Nombre: {{ appliant.name }}</p>
-                <p class="d-block mb-0 myriad-light personal_data">Correo electrónico: {{ appliant.email }}</p>
-                <p class="d-block mb-0 myriad-light personal_data">País de nacimiento: {{ appliant.birth_country }}</p>
-                <p class="d-block mb-0 myriad-light personal_data">Estado de nacimiento: {{ appliant.birth_state }}</p>
-                <p class="d-block mb-0 myriad-light personal_data">País de resiencia: {{ appliant.residence_country }}</p>
+            <div class="col-lg-7">
+                <p class="d-block mb-0"> <b> Nombre: </b>{{ appliant.name }}</p>
+                <p class="d-block mb-0 personal_data"> <b>Correo electrónico: </b>{{ appliant.email }}</p>
+                <p class="d-block mb-0 personal_data"> <b> País de nacimiento: </b>{{ appliant.birth_country }}</p>
+                <p class="d-block mb-0 personal_data"> <b> Estado de nacimiento: </b> {{ appliant.birth_state }}</p>
+                <p class="d-block mb-0 personal_data"> <b> País de resiencia: </b>{{ appliant.residence_country }}</p>
                 <!-- <p class="d-block mb-0 myriad-light appliant-residence_state">Ciudad de residencia: {{ appliant.residence_state }}</p> -->
-                <p class="d-block mb-0 myriad-light personal_data">CURP: {{ appliant.curp }}</p>
-                <p class="d-block mb-0 myriad-light personal_data">Estado civil: {{ appliant.marital_state }}</p>
+                <p class="d-block mb-0 myriad-light personal_data"> <b> CURP: </b>{{ appliant.curp }}</p>
+                <p class="d-block mb-0 myriad-light personal_data"> <b> Estado civil: </b>{{ appliant.marital_state }}</p>
                 <!-- <p class="d-block mb-0 myriad-light appliant-address">Dirección: {{ appliant.address }}</p> -->
-            </div>
-            <div class="col-lg-4">
-                <!-- <p class="d-block mb-0 myriad-light personal_data">Manuel Nava #201, ultimo piso</p>
-                <p class="d-block mb-0 myriad-light personal_data ">Col. Universitaria, Cp. 78210</p>
-                <p class="d-block mb-0 myriad-light personal_data">San Luis Potosí, S.L.P. México</p> -->
             </div>
             <div class="col-lg-4">
                 <p class="d-block mb-0 myriad-bold announcement-date"> {{announcement_date}}</p>

@@ -1,17 +1,8 @@
 <script>
 const interviews = @json($interviews);
 const user = @json($user)
-
-let interviewsByCategory = interviews.reduce((group, product) => {
-  const { academic_program } = product;
-  group[academic_program] = group[academic_program] ?? [];
-  group[academic_program].push(product);
-  return group;
-}, {});
-
-console.log(interviewsByCategory);
-
 </script>
+
 @extends('layouts.app')
     
 @section('headerPicture')

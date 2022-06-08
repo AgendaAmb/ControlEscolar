@@ -18,7 +18,7 @@
                         <strong> 
                         Información de entrevista para ingreso a
                         <br>
-                        Doctorado en Ciencias Ambientales 
+                        {{ $academic_program }}
                         <br>
                         Convocatoria 2021-02
                     </strong>
@@ -67,7 +67,7 @@
                 </table>
                 <p>
 
-                <p><strong>Indicaciiones:</strong></p>
+                <p><strong>Indicaciones:</strong></p>
                
                 <ul>
                     <li> Acceder a <a href="https://ambiental.uaslp.mx/Bienvenida" target="_blank" rel="noopener noreferrer">https://ambiental.uaslp.mx/Bienvenida</a></li>
