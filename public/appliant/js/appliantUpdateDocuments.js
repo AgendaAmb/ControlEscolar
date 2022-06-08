@@ -5593,7 +5593,7 @@ var render = function () {
                       staticStyle: { width: "100%" },
                       attrs: {
                         href:
-                          "https://ambiental.uaslp.mx/controlescolar/solicitud/expediente/" +
+                          "/controlescolar/solicitud/expediente/" +
                           _vm.location,
                         target: "_blank",
                       },

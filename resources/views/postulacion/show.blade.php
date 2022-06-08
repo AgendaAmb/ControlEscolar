@@ -21,7 +21,15 @@
             :academic_degrees="archive.academic_degrees" :appliant_languages="archive.appliant_languages"
             :working_experiences="archive.appliant_working_experiences" :academic_program="academic_program"
             :alias_academic_program="academic_program.alias" :user_id="appliant.id" :archive_id="archive.id">
-        </actualizar-expediente>
+        </actualizar-expediente >
+
+        <rechazar-expediente :required_documents="archive.required_documents"
+        :personal_documents="archive.personal_documents" :entrance_documents="archive.entrance_documents"
+        :academic_degrees="archive.academic_degrees" :appliant_languages="archive.appliant_languages"
+        :working_experiences="archive.appliant_working_experiences" :academic_program="academic_program"
+        :alias_academic_program="academic_program.alias" :user_id="appliant.id" :archive_id="archive.id">
+
+        </rechazar-expediente>
     @endif
 
     {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
@@ -58,7 +66,7 @@
         Expediente Cerrado          Visualizar para todos los roles anteriores (Cambiar estado solamente )
         --}}
     {{-- Admin view --}}
-    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status > 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status > 4))
+    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status > 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && ($archive->status >= 5)))
         <script src="{{ asset('postulacion/js/close.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('admin'))
         <script src="{{ asset('js/postulacion.js') }}" defer></script>

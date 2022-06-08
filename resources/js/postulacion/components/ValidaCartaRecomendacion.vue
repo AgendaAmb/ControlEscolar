@@ -28,12 +28,20 @@
     </div>
 
     <div v-else>
-      <button
+       <a
+          class="btn btn-primary"
+          :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/'+archive_id+'/'+recommendation_letter.id"
+          target="_blank"
+        >
+          Ver Archivo</a
+        >
+
+      <!-- <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
-        </button>
+        </button> -->
     </div>
   </div>
 </template>
@@ -163,8 +171,7 @@ export default {
               text: "El usuario con la carta de recomendación a ver no existe",
               icon: "error",
             });
-      }
-    
+      }else{
         axios
           .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
             params: {
@@ -183,6 +190,9 @@ export default {
               icon: "error",
             });
           });
+      }
+    
+        
     },
 
     enviarCorreoCartaRecomendacion() {

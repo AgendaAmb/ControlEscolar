@@ -15,7 +15,9 @@
  import ProduccionCientifica from './components/ProduccionCientifica.vue';
  import RequisitosIngreso from './components/RequisitosIngreso.vue';
  import SolicitudPostulante from './components/SolicitudPostulante.vue';
- import ActalizarExpediente from './components/ActualizarExpediente.vue';
+ import ActualizarExpediente from './components/ActualizarExpediente.vue';
+ import RechazarExpediente from './components/RechazarExpediente.vue';
+
 
  window.Vue = require('vue').default;
  
@@ -41,7 +43,8 @@
          ProduccionCientifica,
          RequisitosIngreso,
          SolicitudPostulante,
-         ActalizarExpediente,
+         ActualizarExpediente,
+         RechazarExpediente,
      },
  
      data: {

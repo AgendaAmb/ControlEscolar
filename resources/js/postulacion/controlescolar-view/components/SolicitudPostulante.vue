@@ -288,37 +288,24 @@
     </div>
 
      <div class="col-12 align-items-center my-4 mx-2">
-      <div class="row mx-2 justify-content-center">
-        <strong>Nota:</strong>&nbsp;&nbsp;<span>Al completar la revisión selecciona una de las siguientes opciones segun corresponda:</span>
-      </div>
-      <div class="row mx-2 justify-content-center">
-        <ul class="list-group list-group-flush">
-         
-          <li class="list-group-item">
-            <i class="text-danger">Rechazar</i>&nbsp;&nbsp;<span> No se permitiran cambios </span>
-          </li>
-          <li class="list-group-item">
-            <i class="text-warning">Corregir</i>&nbsp;&nbsp;<span> Alguno o varios de los documentos no son correctos, necesitan ser actulizados </span>
-          </li>
-          <li class="list-group-item">
-            <i class="text-success">Aceptar</i>&nbsp;&nbsp;<span> Todos los documentos son correctos y podra acceder a la siguiente etapa </span>
-          </li>
-          
-        </ul>
-      </div>
-      <div class="row mx-2 mb-2 justify-content-center">
-        <strong>Cualquier cambio de estado se le informara al estudiante</strong>
-      </div>
-      <div class="row my-4 mx-1 justify-content-center">
+      
+      <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
           <button
             @click="EnviarRevision('Rechazar')"
             class="btn btn-danger"
             style="height: 45px; width: 150px"
           >
-            <strong>Rechazar</strong>
+            <strong>No cumple</strong>
           </button>
         </div>
+
+        <div class="col-8">
+          <span>El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado</span>
+        </div>
+
+      </div>
+      <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
           <button
            data-toggle="modal"
@@ -329,6 +316,13 @@
             <strong>Corregir</strong>
           </button>
         </div>
+
+        <div class="col-8">
+          <span>El postulante necesita modificar uno o varios documentos</span>
+        </div>
+        
+      </div>
+      <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 align-content-center">
           <button
             @click="EnviarRevision('Aceptar')"
@@ -337,6 +331,10 @@
           >
             <strong>Aceptar</strong>
           </button>
+        </div>
+
+        <div class="col-8">
+          <span>El postulante cumple con todos los requisitos y pasa a la etapa de entrevista</span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div
     class="modal fade"
-    id="ActualizaExpediente"
+    id="RechazarExpediente"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -13,7 +13,7 @@
       >
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">
-            Actualizar expediente
+            Expediente que no cumple
           </h2>
           <button
             type="button"
@@ -27,6 +27,9 @@
         <div class="modal-body">
           <form v-on:submit.prevent="enviarActualizacion">
             <div class="row my-2 mx-2">
+                <div class="my-2 col-12">
+                    <h2>Selecciona los documentos que no cumplen con los requisitos para ser aceptados</h2>
+                </div>
               <div class="my-2 col-4">
                 <h4>Personales</h4>
                 <ul class="list-group">
@@ -167,8 +170,7 @@
             <div class="row my-2 mx-2">
               <div class="col-12 my-2">
                 <h4>
-                  Deja un mensaje al postulante para que queden mas claras las
-                  instrucciones para el cambio
+                  Dejar un comentario que solamente control escolar y administración podran observar sobre el por que el aspirante no avanzara a la siguiente etapa
                 </h4>
                 <textarea
                   class="form-control"
@@ -187,7 +189,7 @@
             style="background-color: #0160ae"
             @click="enviarActualizacion"
           >
-            Enviar actualizaciones
+            Actualizar expediente
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Cerrar
@@ -200,7 +202,7 @@
 
 <script>
 export default {
-  name: "actualizar-expediente",
+  name: "rechazar-expediente",
 
   props: {
 
@@ -284,8 +286,20 @@ export default {
         this.archive_id != null &&
         this.user_id != null
       ) {
-        axios
-          .post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+
+          Swal.fire({
+          title: "¿Estas seguro de realizar el cambio?",
+          text: "Actulizar el expediente a que no cumple" ,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+           axios
+          .post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
             selected_personalDocuments: this.selected_personalDocuments,
             selected_academicDocuments: this.selected_academicDocuments,
             selected_entranceDocuments: this.selected_entranceDocuments,
@@ -310,7 +324,7 @@ export default {
                 .post("/controlescolar/solicitud/updateStatusArchive", {
                   // Status id to change the state
                   archive_id: this.archive_id,
-                  status: 3,
+                  status: 6,
                 })
                 .then((response) => {
                   window.location.href = "/controlescolar/solicitud/";
@@ -337,6 +351,10 @@ export default {
             // alert('Ha ocurrido un error, intenta mas tarde');
             // console.log(error);
           });
+        }
+        });
+
+       
       } else {
         Swal.fire({
           title: "Alguno de los datos no es correcto, verifique nuevamente",

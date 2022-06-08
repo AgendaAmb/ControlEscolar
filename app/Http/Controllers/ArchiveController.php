@@ -64,6 +64,7 @@ use Illuminate\Support\Facades\{
 };
 use Nette\Utils\Json;
 use App\Helpers\MiPortalService;
+use App\Mail\SendRejectPostulation;
 use App\Mail\SendUpdateDocuments;
 use Database\Factories\ArchiveFactory;
 # Clases de otros paquetes.
@@ -330,8 +331,93 @@ class ArchiveController extends Controller
                     $url_LogoAA,
                     $url_ContactoAA
                 ));
-                // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
-                // Mail::to($appliant['email'])->send(new SendUpdateDocuments($request->selected_etiquetas,$request->instructions,$appliant, $request->academic_program, $request->archive_id,$url_LogoAA,$url_ContactoAA ));
+               
+            } catch (\Exception $e) {
+                return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
+    }
+
+    public function sentEmailRechazadoPostulacion(Request $request)
+    {
+        try {
+            $request->validate([
+                'selected_personalDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
+                'selected_entranceDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
+                'selected_academicDocuments.*' =>   ['required'],
+                'selected_languageDocuments.*' =>   ['required'],
+                'selected_workingDocuments.*'  =>   ['required'],
+                'instructions' => ['required', 'nullable', 'string', 'max:225'],
+                'academic_program' => ['required'],
+                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+                'user_id' => ['required', 'numeric', 'exists:users,id']
+            ]);
+
+            $appliant = null;
+            $url_LogoAA = asset('/storage/headers/logod.png');
+            $url_ContactoAA = asset('/storage/logos/rtic.png');
+
+            try {
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
+
+                if (sizeof($user_data_collect) > 0) {
+                    $appliant = $user_data_collect[0];
+                }
+            } catch (\Exception $e) {
+                return new JsonResponse(['message' => 'El usuario no existe'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            }
+
+            try{    
+                $archive = Archive::where('id', $request->archive_id)->update(['comments'=>$request->instructions]);
+            } catch (\Exception $e) {
+                return new JsonResponse(['message' => 'El expediente no puede ser actualizado'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            }
+            // return new JsonResponse($appliant['email'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+
+            // Encuentra el nombre de cada documento
+            $name_documents = [];
+            foreach ($request->selected_personalDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_entranceDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_academicDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_languageDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+            foreach ($request->selected_workingDocuments as $doc_id) {
+                $doc = RequiredDocument::where('id', $doc_id)->first();
+                array_push($name_documents, $doc->name);
+            }
+
+
+            try {
+                Mail::to("ulises.uudp@gmail.com")->send(new SendRejectPostulation(
+                    $request->selected_personalDocuments,
+                    $request->selected_entranceDocuments,
+                    $request->selected_academicDocuments,
+                    $request->selected_languageDocuments,
+                    $request->selected_workingDocuments,
+                    $name_documents,
+                    $request->instructions,
+                    $appliant,
+                    $request->academic_program,
+                    $request->archive_id,
+                    $url_LogoAA,
+                    $url_ContactoAA
+                ));
+                
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
@@ -409,7 +495,7 @@ class ArchiveController extends Controller
     public function appliantFile_AdminView(Request $request, $archiveusr)
     {
         $archiveModel = Archive::where('id', $archiveusr)->first();
-        if ($archiveModel == null) {
+        if ($archiveModel === null) {
             return '<h1>No existe expediente para el postulante</h1>';
         }
 
@@ -502,6 +588,7 @@ class ArchiveController extends Controller
         $appliant->setAttribute('phone_number', $user_data['phone_number']);
         $appliant->setAttribute('email', $user_data['email']);
         $appliant->setAttribute('altern_email', $user_data['altern_email']);
+        $appliant->setAttribute('academic_degree', $user_data['academic_degree']);
 
         return $appliant;
     }
@@ -527,6 +614,8 @@ class ArchiveController extends Controller
         $appliant->setAttribute('phone_number', $user_data['phone_number']);
         $appliant->setAttribute('email', $user_data['email']);
         $appliant->setAttribute('altern_email', $user_data['altern_email']);
+        $appliant->setAttribute('academic_degree', $user_data['academic_degree']);
+
         return $appliant;
     }
 

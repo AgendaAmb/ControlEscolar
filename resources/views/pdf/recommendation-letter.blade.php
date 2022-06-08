@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hola</h1>
-    
+{{$data['recommendation_letter']['archive_id']}}
+
+{{-- {{$appliant}} --}}
+
 </body>
 </html>

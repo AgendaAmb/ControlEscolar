@@ -32,6 +32,11 @@ class Archive extends Model
         'deleted_at'
     ];
 
+    protected $fillable = [
+       'comments',
+       'motivation',
+    ];
+
     /**
      * The attributes that aren't mass assignable.
      *

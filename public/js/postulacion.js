@@ -3997,6 +3997,538 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "rechazar-expediente",
+  props: {
+    // Documents to update
+    required_documents: {
+      type: Array,
+      "default": []
+    },
+    personal_documents: {
+      type: Array,
+      "default": []
+    },
+    entrance_documents: {
+      type: Array,
+      "default": []
+    },
+    academic_degrees: {
+      type: Array,
+      "default": []
+    },
+    appliant_languages: {
+      type: Array,
+      "default": []
+    },
+    working_experiences: {
+      type: Array,
+      "default": []
+    },
+    // Information
+    academic_program: {
+      type: Object,
+      "default": null
+    },
+    alias_academic_program: {
+      type: String,
+      "default": "maestria"
+    },
+    archive_id: {
+      type: Number,
+      "default": null
+    },
+    user_id: {
+      type: Number,
+      "default": null
+    }
+  },
+  data: function data() {
+    return {
+      selected_etiquetas: [],
+      selected_personalDocuments: [],
+      selected_academicDocuments: [],
+      selected_entranceDocuments: [],
+      selected_languageDocuments: [],
+      selected_workingDocuments: [],
+      instructions: ""
+    };
+  },
+  methods: {
+    enviarActualizacion: function enviarActualizacion() {
+      var _this = this;
+
+      console.log(this.selected_academicDocuments);
+      console.log("instructions: " + this.instructions);
+
+      if ((this.selected_personalDocuments.length > 0 || this.selected_academicDocuments.length > 0 || this.selected_entranceDocuments.length > 0 || this.selected_languageDocuments.length > 0 || this.selected_workingDocuments.length > 0) && this.archive_id != null && this.user_id != null) {
+        Swal.fire({
+          title: "¿Estas seguro de realizar el cambio?",
+          text: "Actulizar el expediente a que no cumple",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar"
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            axios.post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
+              selected_personalDocuments: _this.selected_personalDocuments,
+              selected_academicDocuments: _this.selected_academicDocuments,
+              selected_entranceDocuments: _this.selected_entranceDocuments,
+              selected_languageDocuments: _this.selected_languageDocuments,
+              selected_workingDocuments: _this.selected_workingDocuments,
+              instructions: _this.instructions,
+              academic_program: _this.academic_program,
+              archive_id: _this.archive_id,
+              user_id: _this.user_id
+            }).then(function (response) {
+              Swal.fire({
+                title: "Exito",
+                text: "Se ha enviado un correo al usuario con los cambios a realizar",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Entendido"
+              }).then(function (result) {
+                axios.post("/controlescolar/solicitud/updateStatusArchive", {
+                  // Status id to change the state
+                  archive_id: _this.archive_id,
+                  status: 6
+                }).then(function (response) {
+                  window.location.href = "/controlescolar/solicitud/";
+                })["catch"](function (error) {
+                  console.log(error);
+                  Swal.fire({
+                    title: "Error al actualizar",
+                    showCancelButton: false,
+                    icon: "error"
+                  });
+                });
+              });
+            })["catch"](function (error) {
+              Swal.fire({
+                title: "Ups",
+                text: "No fue posible completar la petición, intentelo mas tarde",
+                icon: "error",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Entendido"
+              }); // alert('Ha ocurrido un error, intenta mas tarde');
+              // console.log(error);
+            });
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "Alguno de los datos no es correcto, verifique nuevamente",
+          icon: "error",
+          showCancelButton: true,
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Entendido"
+        });
+      }
+    },
+    // Solamente los documentos de trabajo se piden para maestria de ENREM
+    // Cuando aumente cambiar a un switch
+    requiereWorkingExperience: function requiereWorkingExperience() {
+      if (this.alias_academic_program === "enrem") {
+        return true;
+      }
+
+      return false;
+    },
+    isPersonalDocument: function isPersonalDocument(etiqueta) {
+      if (etiqueta.type === "personal") {
+        return true;
+      }
+
+      return false;
+    },
+    isAcademicDocument: function isAcademicDocument(etiqueta) {
+      // console.log('nombre: '+etiqueta.name + ': tipo'+ etiqueta.type);
+      if (etiqueta.type === "academic") {
+        return true;
+      }
+
+      return false;
+    },
+    isEntranceDocument: function isEntranceDocument(etiqueta) {
+      if (etiqueta.type === "entrance") {
+        return true;
+      }
+
+      return false;
+    },
+    isLanguageDocument: function isLanguageDocument(etiqueta) {
+      if (etiqueta.type === "language") {
+        return true;
+      }
+
+      return false;
+    },
+    isWorkingDocument: function isWorkingDocument(etiqueta) {
+      if (etiqueta.type === "working") {
+        return true;
+      }
+
+      return false;
+    },
+    requiredForAcademicProgram: function requiredForAcademicProgram() {
+      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
+
+      if (this.alias_academic_program === "maestria") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } // Documents for imarec
+      else if (this.alias_academic_program === "imarec") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "'14.- Propuesta de proyecto avalada por el profesor postulante'":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "doctorado") {
+        switch (this.name) {
+          case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "9.- Application":
+            res = false;
+            break;
+
+          case "9A.- Application DAAD":
+            res = false;
+            break;
+
+          case "16.- Proof Experience Document":
+            res = false;
+            break;
+
+          case "17.- ConfirmationEMP":
+            res = false;
+            break;
+
+          case "18.- FormatoEuropass":
+            res = false;
+            break;
+        }
+      } //Documents for doctorado
+      else if (this.alias_academic_program === "enrem") {
+        switch (this.name) {
+          case "5C.- Carta de pasantía":
+            res = false;
+            break;
+
+          case "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)":
+            res = false;
+            break;
+
+          case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
+            res = false;
+            break;
+        }
+      } // return the answer accordin to academic program and name of the required document
+
+
+      return res;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
@@ -4174,6 +4706,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/components/CartaDeRecomendacion.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4926,6 +5464,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5010,22 +5556,22 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
           text: "El usuario con la carta de recomendación a ver no existe",
           icon: "error"
         });
-      }
-
-      axios.get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
-        params: {
-          rl_id: this.recommendation_letter['id'],
-          archive_id: this.archive_id,
-          user_id: this.appliant['id']
-        }
-      }).then(function (response) {})["catch"](function (error) {
-        console.log(error);
-        Swal.fire({
-          title: "Error al hacer busqueda",
-          text: error.response.data,
-          icon: "error"
+      } else {
+        axios.get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+          params: {
+            rl_id: this.recommendation_letter['id'],
+            archive_id: this.archive_id,
+            user_id: this.appliant['id']
+          }
+        }).then(function (response) {})["catch"](function (error) {
+          console.log(error);
+          Swal.fire({
+            title: "Error al hacer busqueda",
+            text: error.response.data,
+            icon: "error"
+          });
         });
-      });
+      }
     },
     enviarCorreoCartaRecomendacion: function enviarCorreoCartaRecomendacion() {
       var request; //Ya existe carta de recomendacion
@@ -5768,7 +6314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-0e323dc8] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10115,6 +10661,45 @@ component.options.__file = "resources/js/postulacion/components/ProduccionCienti
 
 /***/ }),
 
+/***/ "./resources/js/postulacion/components/RechazarExpediente.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/postulacion/components/RechazarExpediente.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RechazarExpediente.vue?vue&type=template&id=78189f58& */ "./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58&");
+/* harmony import */ var _RechazarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RechazarExpediente.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _RechazarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/postulacion/components/RechazarExpediente.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/postulacion/components/RequisitosIngreso.vue":
 /*!*******************************************************************!*\
   !*** ./resources/js/postulacion/components/RequisitosIngreso.vue ***!
@@ -10738,6 +11323,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RechazarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RechazarExpediente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RechazarExpediente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************!*\
   !*** ./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=script&lang=js& ***!
@@ -11153,6 +11754,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProduccionCientifica_vue_vue_type_template_id_2eaa5ada___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProduccionCientifica.vue?vue&type=template&id=2eaa5ada& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/ProduccionCientifica.vue?vue&type=template&id=2eaa5ada&");
+
+
+/***/ }),
+
+/***/ "./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RechazarExpediente_vue_vue_type_template_id_78189f58___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RechazarExpediente.vue?vue&type=template&id=78189f58& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58&");
 
 
 /***/ }),
@@ -15899,6 +16517,764 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RechazarExpediente.vue?vue&type=template&id=78189f58& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      attrs: {
+        id: "RechazarExpediente",
+        tabindex: "-1",
+        "aria-labelledby": "exampleModalLabel",
+        "aria-hidden": "true",
+      },
+    },
+    [
+      _c("div", { staticClass: "modal-dialog modal-xl" }, [
+        _c(
+          "div",
+          {
+            staticClass: "px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3",
+            staticStyle: { "background-color": "#8b96a8" },
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.enviarActualizacion.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "my-2 col-4" }, [
+                      _c("h4", [_vm._v("Personales")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(_vm.required_documents, function (etiqueta) {
+                          return _c(
+                            "li",
+                            { key: etiqueta.id, staticClass: "form-check" },
+                            [
+                              _vm.requiredForAcademicProgram() === true &&
+                              _vm.isPersonalDocument(etiqueta) === true
+                                ? _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selected_personalDocuments,
+                                          expression:
+                                            "selected_personalDocuments",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        value: etiqueta.id,
+                                        checked: Array.isArray(
+                                          _vm.selected_personalDocuments
+                                        )
+                                          ? _vm._i(
+                                              _vm.selected_personalDocuments,
+                                              etiqueta.id
+                                            ) > -1
+                                          : _vm.selected_personalDocuments,
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$a =
+                                              _vm.selected_personalDocuments,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = etiqueta.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selected_personalDocuments =
+                                                  $$a.concat([$$v]))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selected_personalDocuments =
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selected_personalDocuments = $$c
+                                          }
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "form-check-label" },
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(etiqueta.name) +
+                                            "\n                    "
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "my-2 col-4" },
+                      [
+                        _c("h4", [_vm._v("Grado(s) academico(s)")]),
+                        _vm._v(" "),
+                        _vm._l(_vm.academic_degrees, function (grado, index) {
+                          return _c(
+                            "ul",
+                            {
+                              key: grado.id,
+                              staticClass: "list-group",
+                              attrs: { index: index + 1 },
+                            },
+                            [
+                              _c("li", { staticClass: "list-inline-item" }, [
+                                _c("span", [
+                                  _c("strong", [
+                                    _vm._v(
+                                      " Grado Academico #" + _vm._s(index) + " "
+                                    ),
+                                  ]),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(
+                                grado.required_documents,
+                                function (etiqueta) {
+                                  return _c(
+                                    "li",
+                                    {
+                                      key: etiqueta.id,
+                                      staticClass: "form-check",
+                                    },
+                                    [
+                                      _vm.requiredForAcademicProgram() ===
+                                        true &&
+                                      _vm.isAcademicDocument(etiqueta) === true
+                                        ? _c("div", [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.selected_academicDocuments,
+                                                  expression:
+                                                    "selected_academicDocuments",
+                                                },
+                                              ],
+                                              staticClass: "form-check-input",
+                                              attrs: { type: "checkbox" },
+                                              domProps: {
+                                                value: [grado.id, etiqueta.id],
+                                                checked: Array.isArray(
+                                                  _vm.selected_academicDocuments
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.selected_academicDocuments,
+                                                      [grado.id, etiqueta.id]
+                                                    ) > -1
+                                                  : _vm.selected_academicDocuments,
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  var $$a =
+                                                      _vm.selected_academicDocuments,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = [
+                                                        grado.id,
+                                                        etiqueta.id,
+                                                      ],
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        (_vm.selected_academicDocuments =
+                                                          $$a.concat([$$v]))
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        (_vm.selected_academicDocuments =
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            ))
+                                                    }
+                                                  } else {
+                                                    _vm.selected_academicDocuments =
+                                                      $$c
+                                                  }
+                                                },
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "form-check-label",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                      " +
+                                                    _vm._s(etiqueta.name) +
+                                                    "\n                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ])
+                                        : _vm._e(),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          )
+                        }),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "my-2 col-4" }, [
+                      _c("h4", [_vm._v("Ingreso")]),
+                      _vm._v(" "),
+                      _c(
+                        "ul",
+                        { staticClass: "list-group" },
+                        _vm._l(_vm.entrance_documents, function (etiqueta) {
+                          return _c(
+                            "li",
+                            { key: etiqueta.id, staticClass: "form-check" },
+                            [
+                              _vm.requiredForAcademicProgram() === true &&
+                              _vm.isEntranceDocument(etiqueta) === true
+                                ? _c("div", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.selected_entranceDocuments,
+                                          expression:
+                                            "selected_entranceDocuments",
+                                        },
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        value: etiqueta.id,
+                                        checked: Array.isArray(
+                                          _vm.selected_entranceDocuments
+                                        )
+                                          ? _vm._i(
+                                              _vm.selected_entranceDocuments,
+                                              etiqueta.id
+                                            ) > -1
+                                          : _vm.selected_entranceDocuments,
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$a =
+                                              _vm.selected_entranceDocuments,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = etiqueta.id,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                (_vm.selected_entranceDocuments =
+                                                  $$a.concat([$$v]))
+                                            } else {
+                                              $$i > -1 &&
+                                                (_vm.selected_entranceDocuments =
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1)))
+                                            }
+                                          } else {
+                                            _vm.selected_entranceDocuments = $$c
+                                          }
+                                        },
+                                      },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "label",
+                                      { staticClass: "form-check-label" },
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(etiqueta.name) +
+                                            "\n                    "
+                                        ),
+                                      ]
+                                    ),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _c(
+                      "div",
+                      { staticClass: "my-2 col-4" },
+                      [
+                        _c("h4", [_vm._v("Lengua(s) Entranjera(s)")]),
+                        _vm._v(" "),
+                        _vm._l(
+                          _vm.appliant_languages,
+                          function (language, index) {
+                            return _c(
+                              "ul",
+                              {
+                                key: language.id,
+                                staticClass: "list-group",
+                                attrs: { index: index + 1 },
+                              },
+                              [
+                                _c("li", { staticClass: "list-inline-item" }, [
+                                  _c("span", [
+                                    _c("strong", [
+                                      _vm._v(
+                                        " Lengua Extranjera #" +
+                                          _vm._s(index) +
+                                          " "
+                                      ),
+                                    ]),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(
+                                  language.required_documents,
+                                  function (etiqueta) {
+                                    return _c(
+                                      "li",
+                                      {
+                                        key: etiqueta.id,
+                                        staticClass: "form-check",
+                                      },
+                                      [
+                                        _vm.requiredForAcademicProgram() ===
+                                          true &&
+                                        _vm.isLanguageDocument(etiqueta) ===
+                                          true
+                                          ? _c("div", [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value:
+                                                      _vm.selected_languageDocuments,
+                                                    expression:
+                                                      "selected_languageDocuments",
+                                                  },
+                                                ],
+                                                staticClass: "form-check-input",
+                                                attrs: { type: "checkbox" },
+                                                domProps: {
+                                                  value: [
+                                                    language.id,
+                                                    etiqueta.id,
+                                                  ],
+                                                  checked: Array.isArray(
+                                                    _vm.selected_languageDocuments
+                                                  )
+                                                    ? _vm._i(
+                                                        _vm.selected_languageDocuments,
+                                                        [
+                                                          language.id,
+                                                          etiqueta.id,
+                                                        ]
+                                                      ) > -1
+                                                    : _vm.selected_languageDocuments,
+                                                },
+                                                on: {
+                                                  change: function ($event) {
+                                                    var $$a =
+                                                        _vm.selected_languageDocuments,
+                                                      $$el = $event.target,
+                                                      $$c = $$el.checked
+                                                        ? true
+                                                        : false
+                                                    if (Array.isArray($$a)) {
+                                                      var $$v = [
+                                                          language.id,
+                                                          etiqueta.id,
+                                                        ],
+                                                        $$i = _vm._i($$a, $$v)
+                                                      if ($$el.checked) {
+                                                        $$i < 0 &&
+                                                          (_vm.selected_languageDocuments =
+                                                            $$a.concat([$$v]))
+                                                      } else {
+                                                        $$i > -1 &&
+                                                          (_vm.selected_languageDocuments =
+                                                            $$a
+                                                              .slice(0, $$i)
+                                                              .concat(
+                                                                $$a.slice(
+                                                                  $$i + 1
+                                                                )
+                                                              ))
+                                                      }
+                                                    } else {
+                                                      _vm.selected_languageDocuments =
+                                                        $$c
+                                                    }
+                                                  },
+                                                },
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "form-check-label",
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                      " +
+                                                      _vm._s(etiqueta.name) +
+                                                      "\n                    "
+                                                  ),
+                                                ]
+                                              ),
+                                            ])
+                                          : _vm._e(),
+                                      ]
+                                    )
+                                  }
+                                ),
+                              ],
+                              2
+                            )
+                          }
+                        ),
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _vm.requiereWorkingExperience() === true
+                      ? _c(
+                          "div",
+                          { staticClass: "my-2 col-4" },
+                          [
+                            _c("h4", [_vm._v("Experiencia(s) Laboral(s)")]),
+                            _vm._v(" "),
+                            _vm._l(
+                              _vm.working_experiences,
+                              function (working_experience, index) {
+                                return _c(
+                                  "ul",
+                                  {
+                                    key: working_experience.id,
+                                    staticClass: "list-group",
+                                    attrs: { index: index + 1 },
+                                  },
+                                  [
+                                    _c(
+                                      "li",
+                                      { staticClass: "list-inline-item" },
+                                      [
+                                        _c("span", [
+                                          _c("strong", [
+                                            _vm._v(
+                                              " Grado Academico #" +
+                                                _vm._s(index) +
+                                                " "
+                                            ),
+                                          ]),
+                                        ]),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(
+                                      working_experience.required_documents,
+                                      function (etiqueta) {
+                                        return _c(
+                                          "li",
+                                          {
+                                            key: etiqueta.id,
+                                            staticClass: "form-check",
+                                          },
+                                          [
+                                            _vm.requiredForAcademicProgram() ===
+                                              true &&
+                                            _vm.isWorkingDocument(etiqueta) ===
+                                              true
+                                              ? _c("div", [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.selected_workingDocuments,
+                                                        expression:
+                                                          "selected_workingDocuments",
+                                                      },
+                                                    ],
+                                                    staticClass:
+                                                      "form-check-input",
+                                                    attrs: { type: "checkbox" },
+                                                    domProps: {
+                                                      value: [
+                                                        working_experience.id,
+                                                        etiqueta.id,
+                                                      ],
+                                                      checked: Array.isArray(
+                                                        _vm.selected_workingDocuments
+                                                      )
+                                                        ? _vm._i(
+                                                            _vm.selected_workingDocuments,
+                                                            [
+                                                              working_experience.id,
+                                                              etiqueta.id,
+                                                            ]
+                                                          ) > -1
+                                                        : _vm.selected_workingDocuments,
+                                                    },
+                                                    on: {
+                                                      change: function (
+                                                        $event
+                                                      ) {
+                                                        var $$a =
+                                                            _vm.selected_workingDocuments,
+                                                          $$el = $event.target,
+                                                          $$c = $$el.checked
+                                                            ? true
+                                                            : false
+                                                        if (
+                                                          Array.isArray($$a)
+                                                        ) {
+                                                          var $$v = [
+                                                              working_experience.id,
+                                                              etiqueta.id,
+                                                            ],
+                                                            $$i = _vm._i(
+                                                              $$a,
+                                                              $$v
+                                                            )
+                                                          if ($$el.checked) {
+                                                            $$i < 0 &&
+                                                              (_vm.selected_workingDocuments =
+                                                                $$a.concat([
+                                                                  $$v,
+                                                                ]))
+                                                          } else {
+                                                            $$i > -1 &&
+                                                              (_vm.selected_workingDocuments =
+                                                                $$a
+                                                                  .slice(0, $$i)
+                                                                  .concat(
+                                                                    $$a.slice(
+                                                                      $$i + 1
+                                                                    )
+                                                                  ))
+                                                          }
+                                                        } else {
+                                                          _vm.selected_workingDocuments =
+                                                            $$c
+                                                        }
+                                                      },
+                                                    },
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "form-check-label",
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                      " +
+                                                          _vm._s(
+                                                            etiqueta.name
+                                                          ) +
+                                                          "\n                    "
+                                                      ),
+                                                    ]
+                                                  ),
+                                                ])
+                                              : _vm._e(),
+                                          ]
+                                        )
+                                      }
+                                    ),
+                                  ],
+                                  2
+                                )
+                              }
+                            ),
+                          ],
+                          2
+                        )
+                      : _vm._e(),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row my-2 mx-2" }, [
+                    _c("div", { staticClass: "col-12 my-2" }, [
+                      _c("h4", [
+                        _vm._v(
+                          "\n                Dejar un comentario que solamente control escolar y administración podran observar sobre el por que el aspirante no avanzara a la siguiente etapa\n              "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.instructions,
+                            expression: "instructions",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { rows: "4" },
+                        domProps: { value: _vm.instructions },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.instructions = $event.target.value
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "px-0 my-3 modal-footer justify-content-start" },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    staticStyle: { "background-color": "#0160ae" },
+                    attrs: { id: "submit", type: "submit" },
+                    on: { click: _vm.enviarActualizacion },
+                  },
+                  [_vm._v("\n          Actualizar expediente\n        ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                  },
+                  [_vm._v("\n          Cerrar\n        ")]
+                ),
+              ]
+            ),
+          ]
+        ),
+      ]),
+    ]
+  )
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h2",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n          Expediente que no cumple\n        ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("X")])]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "my-2 col-12" }, [
+      _c("h2", [
+        _vm._v(
+          "Selecciona los documentos que no cumplen con los requisitos para ser aceptados"
+        ),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4&":
 /*!*****************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/components/RequisitosIngreso.vue?vue&type=template&id=1f9010b4& ***!
@@ -16618,25 +17994,7 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
-      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-        _c("div", { staticClass: "col-4 justify-content-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger",
-              staticStyle: { height: "45px", width: "150px" },
-              on: {
-                click: function ($event) {
-                  return _vm.EnviarRevision("Rechazar")
-                },
-              },
-            },
-            [_c("strong", [_vm._v("No cumple")])]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm._m(7),
-      ]),
+      _vm._m(7),
       _vm._v(" "),
       _vm._m(8),
       _vm._v(" "),
@@ -16758,11 +18116,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("span", [
-        _vm._v(
-          "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
+    return _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
+      _c("div", { staticClass: "col-4 justify-content-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            staticStyle: { height: "45px", width: "150px" },
+            attrs: {
+              "data-toggle": "modal",
+              "data-target": "#RechazarExpediente",
+            },
+          },
+          [_c("strong", [_vm._v("No cumple")])]
         ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-8" }, [
+        _c("span", [
+          _vm._v(
+            "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
+          ),
+        ]),
       ]),
     ])
   },
@@ -16896,16 +18271,19 @@ var render = function () {
           ])
         : _c("div", [
             _c(
-              "button",
+              "a",
               {
                 staticClass: "btn btn-primary",
-                on: {
-                  click: function ($event) {
-                    return _vm.verCartaRecomendacion()
-                  },
+                attrs: {
+                  href:
+                    "/controlescolar/solicitud/seeAnsweredRecommendationLetter/" +
+                    _vm.archive_id +
+                    "/" +
+                    _vm.recommendation_letter.id,
+                  target: "_blank",
                 },
               },
-              [_vm._v("\n        Ver archivo\n      ")]
+              [_vm._v("\n        Ver Archivo")]
             ),
           ]),
     ],
@@ -29958,7 +31336,7 @@ var __webpack_exports__ = {};
   !*** ./resources/js/postulacion/postulacion.js ***!
   \*************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CapitalHumano.vue */ "./resources/js/postulacion/components/CapitalHumano.vue");
 /* harmony import */ var _components_DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/DocumentoRequerido.vue */ "./resources/js/postulacion/components/DocumentoRequerido.vue");
 /* harmony import */ var _components_Expedientes_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Expedientes.vue */ "./resources/js/postulacion/components/Expedientes.vue");
@@ -29970,11 +31348,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/RequisitosIngreso.vue */ "./resources/js/postulacion/components/RequisitosIngreso.vue");
 /* harmony import */ var _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/SolicitudPostulante.vue */ "./resources/js/postulacion/components/SolicitudPostulante.vue");
 /* harmony import */ var _components_ActualizarExpediente_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ActualizarExpediente.vue */ "./resources/js/postulacion/components/ActualizarExpediente.vue");
+/* harmony import */ var _components_RechazarExpediente_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/RechazarExpediente.vue */ "./resources/js/postulacion/components/RechazarExpediente.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -29997,7 +31377,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_11__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_12__["default"]({
   el: '#app',
   components: {
     CapitalHumano: _components_CapitalHumano_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -30010,7 +31390,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_11__["default"]({
     ProduccionCientifica: _components_ProduccionCientifica_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     RequisitosIngreso: _components_RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     SolicitudPostulante: _components_SolicitudPostulante_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    ActualizarExpediente: _components_ActualizarExpediente_vue__WEBPACK_IMPORTED_MODULE_10__["default"] // ExpedienteCerrado,
+    ActualizarExpediente: _components_ActualizarExpediente_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    RechazarExpediente: _components_RechazarExpediente_vue__WEBPACK_IMPORTED_MODULE_11__["default"] // ExpedienteCerrado,
 
   },
   data: {
