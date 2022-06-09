@@ -154,15 +154,15 @@ class ArchiveController extends Controller
                 return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
             }
 
-           
+
 
             if (sizeof($user_data_collect) > 0) {
 
-                 //ArchiveResource create $user_data_collect[0];
+                //ArchiveResource create $user_data_collect[0];
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
                 $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                
+
                 // $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 // $nameUpper = strtoupper($request->student_name);
 
@@ -171,7 +171,7 @@ class ArchiveController extends Controller
                 // }
             }
         }
-        
+
         return ArchiveResource::collection($archives);
     }
 
@@ -331,7 +331,6 @@ class ArchiveController extends Controller
                     $url_LogoAA,
                     $url_ContactoAA
                 ));
-               
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
@@ -371,8 +370,8 @@ class ArchiveController extends Controller
                 return new JsonResponse(['message' => 'El usuario no existe'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
 
-            try{    
-                $archive = Archive::where('id', $request->archive_id)->update(['comments'=>$request->instructions]);
+            try {
+                $archive = Archive::where('id', $request->archive_id)->update(['comments' => $request->instructions]);
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'El expediente no puede ser actualizado'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
@@ -417,7 +416,6 @@ class ArchiveController extends Controller
                     $url_LogoAA,
                     $url_ContactoAA
                 ));
-                
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
@@ -519,7 +517,7 @@ class ArchiveController extends Controller
                 'scientificProductions.authors',
                 'humanCapitals'
             ]);
-            
+
             $academic_program = $archiveModel->announcement->academicProgram;
 
             //function that returns the info complete in the appliant model
@@ -844,13 +842,24 @@ class ArchiveController extends Controller
     {
         //FUncion guarda el archivo y actualiza el archivo que se guardo al momento de ver,
         //Pero hasta que subes el archivo por 2 vez aparece el mensaje que se a guardado con exito
+        try {
+            $request->validate([
+                'index' => ['required', 'numeric'],
+                'id' => ['required', 'numeric'],
+                'archive_id' => ['required', 'numeric'],
+                'requiredDocumentId' => ['required', 'numeric'],
+                'file' => ['required']
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse('Error de validacion', 502);
+        }
 
         $academic_degree = AcademicDegree::find($request->id);
 
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/' . $request->archive_id . '/academicDocuments',
-            $request->requiredDocumentId . '.pdf'
+            $request->requiredDocumentId.'-'.$request->index . '.pdf'
         );
 
         # Asocia los documentos requeridos.
@@ -962,12 +971,25 @@ class ArchiveController extends Controller
 
     public function updateAppliantLanguageRequiredDocument(Request $request)
     {
+
+        try {
+            $request->validate([
+                'index' => ['required', 'numeric'],
+                'id' => ['required', 'numeric'],
+                'archive_id' => ['required', 'numeric'],
+                'requiredDocumentId' => ['required', 'numeric'],
+                'file' => ['required']
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse('Error de validacion', 502);
+        }
+
         $appliant_language = AppliantLanguage::find($request->id);
 
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/' . $request->archive_id . '/laguageDocuments',
-            $request->id . '_' . $request->requiredDocumentId . '.pdf'
+            $request->id . '_' . $request->requiredDocumentId .'-'.$request->index. '.pdf'
         );
 
         # Asocia los documentos requeridos.

@@ -2516,6 +2516,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("index", this.index);
       formData.append("file", file);
       axios({
         method: "post",
@@ -3315,6 +3316,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("index", this.index);
       formData.append("file", file);
       axios({
         method: "post",
@@ -4706,6 +4708,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/controlescolar-view/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/controlescolar-view/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/controlescolar-view/components/CartaDeRecomendacion.vue");
+//
 //
 //
 //

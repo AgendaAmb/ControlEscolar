@@ -1814,6 +1814,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("index", this.index);
       formData.append("file", file);
       axios({
         method: "post",
@@ -2379,6 +2380,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('id', this.id);
       formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
+      formData.append("index", this.index);
       formData.append('file', file);
       axios({
         method: 'post',

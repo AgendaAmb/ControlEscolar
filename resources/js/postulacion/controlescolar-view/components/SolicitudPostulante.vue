@@ -295,6 +295,7 @@
             @click="EnviarRevision('Rechazar')"
             class="btn btn-danger"
             style="height: 45px; width: 150px"
+            
           > -->
           <button
            data-toggle="modal"
