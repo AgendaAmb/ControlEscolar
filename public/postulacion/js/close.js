@@ -286,6 +286,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -324,7 +330,10 @@ __webpack_require__.r(__webpack_exports__);
     archives_recommendation_letters: {
       type: Array
     },
-    errors: Array
+    archive_id: {
+      type: Number,
+      "default": null
+    }
   }
 });
 
@@ -3527,6 +3536,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3888,6 +3898,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3907,6 +3925,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     };
   },
   props: {
+    archive_id: {
+      type: Number,
+      "default": null
+    },
     email: {
       type: String,
       "default": ""
@@ -4687,7 +4709,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-fa19b8c2] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-fa19b8c2] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10399,6 +10421,8 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid mt-2" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _vm.sizeRecommendationLetter() == 0
       ? _c(
           "div",
@@ -10411,9 +10435,9 @@ var render = function () {
                 _c("valida-carta-recomendacion", {
                   attrs: {
                     email: my_email.email,
+                    archive_id: _vm.archive_id,
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
-                    errors: _vm.errors,
                     index: index + 1,
                   },
                 }),
@@ -10436,6 +10460,7 @@ var render = function () {
                   archive_recommendation_letter:
                     _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 1,
                 },
@@ -10452,6 +10477,7 @@ var render = function () {
                 attrs: {
                   email: _vm.emails[0].email,
                   appliant: _vm.appliant,
+                  archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
                   index: 2,
                 },
@@ -10475,6 +10501,7 @@ var render = function () {
                     archive_recommendation_letter:
                       _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
+                    archive_id: _vm.archive_id,
                     academic_program: _vm.academic_program,
                     index: index + 1,
                   },
@@ -10487,7 +10514,23 @@ var render = function () {
         ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mx-3 " }, [
+      _c("strong", [_vm._v("Nota: ")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n         Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación."
+        ),
+        _c("br"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -13967,6 +14010,7 @@ var render = function () {
           _c("carta-recomendacion", {
             attrs: {
               appliant: _vm.appliant,
+              archive_id: _vm.archive_id,
               academic_program: _vm.academic_program,
               recommendation_letters: _vm.recommendation_letters,
               archives_recommendation_letters:
@@ -14072,7 +14116,25 @@ var render = function () {
             ]),
           ],
       _vm._v(" "),
-      _c("div"),
+      _vm.checkUpload() === 1
+        ? _c("div", [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary",
+                attrs: {
+                  href:
+                    "/controlescolar/solicitud/seeAnsweredRecommendationLetter/" +
+                    _vm.archive_id +
+                    "/" +
+                    _vm.recommendation_letter.id,
+                  target: "_blank",
+                },
+              },
+              [_vm._v("\n      Ver Archivo")]
+            ),
+          ])
+        : _vm._e(),
     ],
     2
   )

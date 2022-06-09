@@ -291,8 +291,14 @@
       
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
-          <button
+          <!-- <button
             @click="EnviarRevision('Rechazar')"
+            class="btn btn-danger"
+            style="height: 45px; width: 150px"
+          > -->
+          <button
+           data-toggle="modal"
+            data-target="#RechazarExpediente"
             class="btn btn-danger"
             style="height: 45px; width: 150px"
           >

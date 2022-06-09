@@ -22,14 +22,22 @@
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
       </template>
 
-      <div>
-        <!-- <button
+      <div v-if="checkUpload() === 1">
+       <a
+          class="btn btn-primary"
+          :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/'+archive_id+'/'+recommendation_letter.id"
+          target="_blank"
+        >
+          Ver Archivo</a
+        >
+
+      <!-- <button
           @click="verCartaRecomendacion()"
           class="btn btn-primary"
         >
           Ver archivo
         </button> -->
-      </div>
+    </div>
     </div>
  
 </template>
@@ -84,6 +92,10 @@ export default {
   },
 
   props: {
+    archive_id:{
+      type:Number,
+      default:null
+    },
     email: {
       type: String,
       default: "",

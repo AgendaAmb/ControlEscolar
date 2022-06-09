@@ -852,6 +852,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido-porActualizar",
   props: {
@@ -908,6 +917,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      state: 0,
+      updload_here: false,
       datosValidos: {},
       textStateUpload: "",
       academiLetterCommitment: ""
@@ -955,10 +966,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     checkUpload: function checkUpload() {
       if (this.location !== null && this.location !== undefined) {
-        return true;
+        if (this.updload_here != true) {
+          this.state = 1;
+        } else {
+          this.state = 2;
+        }
       } else {
-        return false;
+        this.state = 0;
       }
+
+      return this.state;
     },
     cargaDocumento: function cargaDocumento(e) {
       var name = e.target.files[0].name;
@@ -972,6 +989,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.$emit("enviaDocumento", this, e.target.files[0], this.type);
+      this.state = 2;
+      this.updload_here = true;
     }
   }
 });
@@ -5536,7 +5555,15 @@ var render = function () {
                 [
                   _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
                   _vm._v(" "),
-                  _vm.checkUpload() === true
+                  _vm.checkUpload() === 2
+                    ? [
+                        _c("i", [_vm._v("Estado:")]),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "text-success" }, [
+                          _vm._v("Documento Nuevo"),
+                        ]),
+                      ]
+                    : _vm.checkUpload() === 1
                     ? [
                         _c("i", [_vm._v("Estado:")]),
                         _vm._v(" "),
@@ -5585,7 +5612,7 @@ var render = function () {
                 "\n        form-group\n        col-3 col-md-3 col-xs-5\n        justify-content-center\n        my-auto\n      ",
             },
             [
-              _vm.checkUpload() === true
+              _vm.checkUpload() > 0
                 ? _c(
                     "a",
                     {
@@ -5598,7 +5625,7 @@ var render = function () {
                         target: "_blank",
                       },
                     },
-                    [_vm._v("\n          Ver Archivo")]
+                    [_vm._v("\n        Ver Archivo")]
                   )
                 : _vm._e(),
               _vm._v(" "),

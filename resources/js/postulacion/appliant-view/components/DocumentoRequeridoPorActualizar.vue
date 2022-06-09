@@ -5,7 +5,10 @@
       <div class="form-group col-9 col-md-9 col-xs-7 my-auto">
         <h5 class="mt-4 d-block">
           <strong> {{ name }} </strong>
-          <template v-if="checkUpload() === true">
+          <template v-if="checkUpload() === 2">
+            <i>Estado:</i> <i class="text-success">Documento Nuevo</i>
+          </template>
+          <template v-else-if="checkUpload() === 1">
             <i>Estado:</i> <i class="text-success">Subido</i>
           </template>
           <template v-else>
@@ -31,9 +34,15 @@
           my-auto
         "
       >
-          <a :href="'/controlescolar/solicitud/expediente/'+ location" v-if="checkUpload() === true"   class="btn btn-primary" style="width:100%" target="_blank">
-            Ver Archivo</a
-          >
+        <a
+          :href="'/controlescolar/solicitud/expediente/' + location"
+          v-if="checkUpload() > 0"
+          class="btn btn-primary"
+          style="width: 100%"
+          target="_blank"
+        >
+          Ver Archivo</a
+        >
         <label class="btn btn-primary d-block ml-auto my-2">
           Subir Documento
           <input
@@ -143,11 +152,13 @@ export default {
       default: [],
     },
 
-    errores: Object
+    errores: Object,
   },
 
   data() {
     return {
+      state: 0,
+      updload_here: false,
       datosValidos: {},
       textStateUpload: "",
       academiLetterCommitment: "",
@@ -182,8 +193,6 @@ export default {
   },
 
   methods: {
-  
-    
     isInList() {
       let res = false;
       this.require_documents_to_update.forEach((element) => {
@@ -199,10 +208,16 @@ export default {
 
     checkUpload() {
       if (this.location !== null && this.location !== undefined) {
-        return true;
+        if (this.updload_here != true) {
+          this.state = 1;
+        } else {
+          this.state = 2;
+        }
       } else {
-        return false;
+        this.state = 0;
       }
+
+      return this.state;
     },
     cargaDocumento(e) {
       var name = e.target.files[0].name;
@@ -216,6 +231,8 @@ export default {
       }
 
       this.$emit("enviaDocumento", this, e.target.files[0], this.type);
+      this.state = 2;
+      this.updload_here =true;
     },
   },
 };

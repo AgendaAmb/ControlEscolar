@@ -5050,6 +5050,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17988,25 +17994,7 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
-      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-        _c("div", { staticClass: "col-4 justify-content-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-danger",
-              staticStyle: { height: "45px", width: "150px" },
-              on: {
-                click: function ($event) {
-                  return _vm.EnviarRevision("Rechazar")
-                },
-              },
-            },
-            [_c("strong", [_vm._v("No cumple")])]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm._m(7),
-      ]),
+      _vm._m(7),
       _vm._v(" "),
       _vm._m(8),
       _vm._v(" "),
@@ -18128,11 +18116,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("span", [
-        _vm._v(
-          "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
+    return _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
+      _c("div", { staticClass: "col-4 justify-content-center" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            staticStyle: { height: "45px", width: "150px" },
+            attrs: {
+              "data-toggle": "modal",
+              "data-target": "#RechazarExpediente",
+            },
+          },
+          [_c("strong", [_vm._v("No cumple")])]
         ),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-8" }, [
+        _c("span", [
+          _vm._v(
+            "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
+          ),
+        ]),
       ]),
     ])
   },
