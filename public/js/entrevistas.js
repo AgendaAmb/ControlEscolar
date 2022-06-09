@@ -84,6 +84,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -327,8 +332,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     muestraEntrevistas: function muestraEntrevistas(date) {
-      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isBefore(this.MinDate)) return false;
-      if (moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).isAfter(this.MaxDate)) return false;
+      console.log(Date.parse(date));
+      console.log(moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD') + " > " + this.MinDate._i + " = ");
+      console.log(Date.parse(date) > Date.parse(this.MinDate._i));
+      console.log(moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD') + " < " + this.MinDate._i + " = ");
+      console.log(Date.parse(date) < Date.parse(this.MaxDate._i)); // Verifica que el dia seleccionado en el calendario es despues del dia minimo 
+      // if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+      //   return false;
+      // if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+      //   return false;
+
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
     },
@@ -544,7 +557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).length > 2;*/
     },
     isRemovable: function isRemovable() {
-      return !this.confirmed && this.$root.loggedUserIsAdmin();
+      return !this.confirmed && (this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl());
     },
     Confirmed: {
       get: function get() {
@@ -27887,6 +27900,15 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", [
+            _c(
+              "h1",
+              {
+                staticClass: "v-cal-header__title mes",
+                staticStyle: { "font-size": "2em" },
+              },
+              [_vm._v(_vm._s(_vm.period.actual_program))]
+            ),
+            _vm._v(" "),
             _c("h1", { staticClass: "v-cal-header__title mes" }, [
               _vm._v(_vm._s(_vm.calendarMonth)),
             ]),
@@ -27923,20 +27945,6 @@ var render = function () {
                 },
               },
               [_vm._v(" Semana ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "v-cal-button",
-                class: _vm.calendarViewButtonClass("day"),
-                on: {
-                  click: function ($event) {
-                    return _vm.switchView("day")
-                  },
-                },
-              },
-              [_vm._v(" Día ")]
             ),
           ]),
         ])
@@ -28003,7 +28011,7 @@ var render = function () {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.IsActive === false
+    _vm.IsActive === false && this.$root.loggedUserIsSchoolControl()
       ? _c("div", { staticClass: "mx-auto" }, [
           _c(
             "button",
@@ -28014,6 +28022,8 @@ var render = function () {
             [_vm._v(" Programar periodo de entrevistas ")]
           ),
         ])
+      : _vm.period === null
+      ? _c("div", [_c("h1", [_vm._v("Periodo de entrevistas cerrado")])])
       : _vm._e(),
   ])
 }
@@ -41736,6 +41746,10 @@ var app = new Vue({
     DetalleEntrevista: _components_DetalleEntrevista_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   methods: {
+    hola: function hola() {
+      console.log("hola we");
+    },
+
     /**
      * Actualiza el periodo de entrevistas.
      * @param {*} period 

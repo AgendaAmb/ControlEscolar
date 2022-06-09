@@ -56,8 +56,8 @@ class InterviewController extends Controller
         // Aspirante 
 
         $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
-            ?   Interview::select('*')
-            :   $request->user()->interviews();
+            ?   Interview::select('*')->where('confirmed', 1)
+            :   $request->user()->interviews()->where('confirmed', 1);
 
         $interview_program_resource = new InterviewProgramResource($interviews);
 
@@ -206,27 +206,36 @@ class InterviewController extends Controller
             /**Traer a los trabajadores del arreglo de sesiones alumno*/
             $Trabajadores = $request->session()->get('workers');
 
-            foreach ($interview2->users as $key => $User) {
+            // Carga el achivo del postulante para obtener el programa academico
+            $archive = null;
 
+            foreach($interview2->users as $key => $User){
                 if ($User->user_type == "externs" || $User->user_type == "students") {
                     $this->alumno = $User;
-                    $archive = Archive::where('id', $this->alumno->id)->first();
+
+                    $archive = Archive::where('user_id', $this->alumno->id)->first();
 
                     //Carga programa academico
                     $archive->loadMissing([
                         'announcement.academicProgram',
                         'appliant',
                     ]);
-                    Mail::mailer('smtp_pmpca')->to("ulises.uudp@gmail.com")->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room));
-                    //Mail::to($User->email)->send(new SendMeeatingInformation($ResponseMeating,$User,$request->room));
+                }
+            }
+
+            foreach ($interview2->users as $key => $User) {
+
+                if ($User->user_type == "externs" || $User->user_type == "students") {
+                    $this->alumno = $User;
+
+                    // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
+                    Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                 } else if ($User->user_type == "workers") {
                     /**Obtener al trabajador inscrito en la entrevista */
                     $Trabajador = $Trabajadores->where('id', $User->id)->first();
 
-                    // $User::findorFail($User->id);
-
-                    Mail::mailer('smtp_pmpca')->to("A298428@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $request->room, $this->alumno));
-                    //Mail::to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating,$Trabajador,$request->room,$User));
+                    // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                    Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                 }
             }
         }

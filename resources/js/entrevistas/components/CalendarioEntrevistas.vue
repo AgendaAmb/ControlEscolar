@@ -6,15 +6,17 @@
         <button :disabled="!isNextAllowed" class="v-cal-button" @click="next"> Sig </button>
       </div>
       <div>
+        <h1 style="font-size: 2em" class="v-cal-header__title mes">{{ period.actual_program }}</h1>
         <h1 class="v-cal-header__title mes">{{ calendarMonth }}</h1>
         <h1 class="d-block v-cal-header__title año">{{ calendarYear }}</h1>
       </div>
       <div class="btn-group" role="group">
         <button class="v-cal-button" @click="switchView('month')" :class="calendarViewButtonClass('month')"> Mes </button>
         <button class="v-cal-button" @click="switchView('week')" :class="calendarViewButtonClass('week')"> Semana </button>
-        <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button>
+        <!-- <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button> -->
       </div>
     </div>
+    
     <div v-if="period !== null && isSchoolControl === true" class="new-interview">
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
     </div>
@@ -39,8 +41,11 @@
           ></interview>
       </div>
     </div>
-    <div v-if="IsActive === false" class="mx-auto">
+    <div v-if="IsActive === false && this.$root.loggedUserIsSchoolControl()" class="mx-auto">
       <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
+    </div>
+    <div v-else-if="period === null">
+      <h1>Periodo de entrevistas cerrado</h1>
     </div>
   </div>
 </template>
@@ -360,11 +365,20 @@ export default {
 
   methods: {
     muestraEntrevistas(date){
-      if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
-        return false;
+      console.log(Date.parse(date));
 
-      if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
-        return false;
+      console.log( moment(date.toLocaleDateString()).format('YYYY-MM-DD') + " > " + this.MinDate._i + " = " );
+      console.log( Date.parse(date) > Date.parse(this.MinDate._i));
+
+      console.log( moment(date.toLocaleDateString()).format('YYYY-MM-DD') + " < " + this.MinDate._i + " = " );
+      console.log( Date.parse(date) < Date.parse(this.MaxDate._i));
+
+      // Verifica que el dia seleccionado en el calendario es despues del dia minimo 
+      // if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
+      //   return false;
+
+      // if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
+      //   return false;
 
       this.$emit("update:date", moment(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment(date);

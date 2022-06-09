@@ -6,6 +6,7 @@ use App\Http\Resources\Calendar\AppliantResource;
 use App\Http\Resources\Calendar\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
+use App\Models\AcademicProgram;
 
 class CalendarResource extends JsonResource
 {
@@ -186,7 +187,10 @@ class CalendarResource extends JsonResource
             return $interview;
         })->toArray();
 
+        $academic_program = AcademicProgram::where('id',$this->period->announcement->academic_program_id)->first();
+
         $this->period = [
+            'actual_program' =>  isset($academic_program)?$academic_program->name:"",
             'id' => $this->period->id,
             'announcement' => $this->period->announcement,
             'start_date' => $this->period->start_date,

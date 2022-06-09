@@ -183,7 +183,7 @@ export default {
     },
 
     isRemovable() {
-      return !this.confirmed && this.$root.loggedUserIsAdmin();
+      return !this.confirmed && (this.$root.loggedUserIsAdmin() || this.$root.loggedUserIsSchoolControl());
     },
 
     Confirmed: {

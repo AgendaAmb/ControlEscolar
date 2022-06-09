@@ -16,18 +16,20 @@ class SendMeeatingInformationProfesor extends Mailable
     public $Student;
     public $Profesor;
     public $Room;
+    public $academic_program;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Meeating,$Profesor,$Room,$Student)
+    public function __construct($Meeating,$Profesor, $academic_program, $Room,$Student)
     {
      
         $this->Meeating=$Meeating;
         $this->Profesor=$Profesor;
         $this->Room=$Room;
         $this->Student=$Student;
+        $this->academic_program=$academic_program;
     }
 
 
@@ -38,6 +40,6 @@ class SendMeeatingInformationProfesor extends Mailable
      */
     public function build()
     {
-        return $this->from('pmpca@uaslp.mx', 'TESTING')->view('Correos.MeetingZoomProfesor')->subject('Información de entrevista');
+        return $this->from('rtic.ambiental@uaslp.mx', 'TESTING - PROFESORES')->view('Correos.MeetingZoomProfesor')->subject('Información de entrevista');
     }
 }
