@@ -223,7 +223,7 @@ class ArchiveController extends Controller
                     //Eliminar mi archivo para produccion
                     //Descomentar en local
                     //Quitas a Ulises y a Rodrigo
-                    if ($archive->appliant->id == 298428 || $archive->appliant->id == 245241) {
+                    if ($archive->appliant->id == 298428 || $archive->appliant->id == 245241 ||$archive->appliant->id == 291395 || $archive->appliant->id == 241294  || $archive->appliant->id == 246441) {
                         unset($archives[$k]);
                     }
                 } else {
@@ -1052,13 +1052,13 @@ class ArchiveController extends Controller
                 $upsert_array = ['institution' => $request->institution];
                 break;
             case 'working_documents':
-                $upsert_array = ['post_title' => $request->post_title];
+                $upsert_array = ['post_title_document' => $request->post_title];
                 break;
             case 'working_memories':
-                $upsert_array = ['post_title' => $request->post_title];
+                $upsert_array = ['post_title_memory' => $request->post_title];
                 break;
             case 'reviews_cp':
-                $upsert_array = ['post_title' => $request->post_title];
+                $upsert_array = ['post_title_review' => $request->post_title];
                 break;
         }
 

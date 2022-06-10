@@ -1,31 +1,31 @@
 <template>
   <div class="row">
     <div class="form-group col-md-4">
-      <label> Título de la reseña: </label>
-      <input type="text" class="form-control" v-model="Title">
+      <label> Título: </label>
+      <input type="text" class="form-control" v-model="Title"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-4">
-      <label> Título de la publicación: </label>
-      <input type="text" class="form-control" v-model="PostTitleReview">
+      <label> Institución a la que se presenta el reporte: </label>
+      <input type="text" class="form-control" v-model="Institution"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-4">
       <label> Fecha de publicación: </label>
-      <input type="date" class="form-control" v-model="PublishDate">
+      <input type="date" class="form-control" v-model="PublishDate"  :readonly='true'>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "resenia",
+  name: "reporte-tecnico",
   props: {
-    // Nombre de la reseña.
+    // Nombre del artículo
     title: String,
 
     // Nombre de la revista.
-    post_title_review: String,
+    institution: String,
 
     // Fecha de publicación.
     publish_date: String,
@@ -40,12 +40,12 @@ export default {
         this.$emit("update:title", newVal);
       },
     },
-    PostTitleReview: {
+    Institution: {
       get() {
-        return this.post_title_review;
+        return this.institution;
       },
       set(newVal) {
-        this.$emit("update:post_title_review", newVal);
+        this.$emit("update:institution", newVal);
       },
     },
     PublishDate: {

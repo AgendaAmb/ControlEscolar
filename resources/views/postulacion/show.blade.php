@@ -74,7 +74,7 @@
     @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641)
         <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
-        <script src="{{ asset('professor/js/professor.js') }}" defer></script>
+        <script src="{{ asset('professor/js/professor-only-rl.js') }}" defer></script>
         {{-- Appliant view --}}
 
         {{-- Control escolar and personal de apoyo view --}}
