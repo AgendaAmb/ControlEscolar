@@ -201,7 +201,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(AcademicEntity::class,
         'academic_entity_user', 
-       
         )
         //->whereDate('end_date','>=',Carbon::now()) //anadi esta linea para ver solo los usuarios con cursos vigentes
         ->withPivot(

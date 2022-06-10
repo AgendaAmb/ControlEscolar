@@ -90,7 +90,7 @@ class PreRegisterController extends Controller
      */
     public function store(Request $request)
     {
-        
+
 
         # -------------------- Validacion
         $casts = [
@@ -101,24 +101,24 @@ class PreRegisterController extends Controller
 
         $request->merge([
             'name' => $casts[$request->name] ?? $request->name,
-            'middlename' => $casts[$request->middlename] ?? $request->middlename, 
-            'surname' =>  $casts[$request->surname] ?? $request->surname, 
+            'middlename' => $casts[$request->middlename] ?? $request->middlename,
+            'surname' =>  $casts[$request->surname] ?? $request->surname,
 
-            'tipo_usuario' => $casts[$request->tipo_usuario] ??$request->tipo_usuario,
+            'tipo_usuario' => $casts[$request->tipo_usuario] ?? $request->tipo_usuario,
             'pertenece_uaslp' => $casts[$request->pertenece_uaslp] ?? null,
-            
+
             'clave_uaslp' => $casts[$request->clave_uaslp] ?? $request->clave_uaslp,
             'directorio_activo' => $casts[$request->directorio_activo] ?? $request->directorio_activo,
 
             'no_curp' => $casts[$request->no_curp] ?? null,
             'is_disabled' => $casts[$request->is_disabled] ?? null,
             'curp' => $casts[$request->curp] ?? $request->curp,
-            
+
             'email' =>  $casts[$request->email] ?? $request->email,
             'altern_email' => $casts[$request->altern_email] ?? $request->altern_email,
             'password' => $casts[$request->password] ?? $request->password,
             'rpassword' => $casts[$request->rpassword] ?? $request->rpassword,
-            
+
             'ocupation' => $casts[$request->ocupation] ?? $request->ocupation,
             'other_gender' => $casts[$request->other_gender] ?? $request->other_gender,
             'other_civic_state' => $casts[$request->other_civic_state] ?? $request->other_civic_state,
@@ -131,15 +131,15 @@ class PreRegisterController extends Controller
         ]);
 
 
-        if($request->curp != null){
+        if ($request->curp != null) {
             $val = Validator::make($request->all(), [
                 'announcement_id' => ['required', 'exists:announcements,id'],
                 'tipo_usuario' => ['required', 'string', 'max:255'],
                 'pertenece_uaslp' => ['required', 'boolean'],
-                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
-                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
-                'email' => ['required', 'string', 'email', 'max:255' ],
-                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
+                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false', 'numeric'],
+                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255'],
                 'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
                 'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
                 'no_curp' => ['required', 'boolean'],
@@ -164,15 +164,15 @@ class PreRegisterController extends Controller
                 'nationality' => ['required', 'same:birth_country'],
                 'residence' => ['required', 'same:residence_country']
             ]);
-        }else{
+        } else {
             $val = Validator::make($request->all(), [
                 'announcement_id' => ['required', 'exists:announcements,id'],
                 'tipo_usuario' => ['required', 'string', 'max:255'],
                 'pertenece_uaslp' => ['required', 'boolean'],
-                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
-                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
-                'email' => ['required', 'string', 'email', 'max:255' ],
-                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
+                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false', 'numeric'],
+                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255'],
                 'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
                 'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
                 'no_curp' => ['required', 'boolean'],
@@ -197,10 +197,8 @@ class PreRegisterController extends Controller
                 'nationality' => ['required', 'same:birth_country'],
                 'residence' => ['required', 'same:residence_country']
             ]);
-            
-
         }
-       
+
 
         // if($request->curp != null){
         //     $request->validate([
@@ -215,81 +213,95 @@ class PreRegisterController extends Controller
         }
 
         # ---------------------------------------------------- Crear Usuario.
-        
+
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_state' ]); //data to save
+        $data = $request->except(['announcement_id', 'civic_state', 'other_civic_state', 'birth_state']); //data to save
 
         // return new JsonResponse(['message' => 'Esto es una prueba para curp', 'curp' => $request->curp], 500);
 
-        
-         # ------------------------- Creacion de usuario en portal Agenda Ambiental
+
+        # ------------------------- Creacion de usuario en portal Agenda Ambiental
         try {
             $data['module_id'] = 2; //2 = control escolar
             $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
-            $response_data = $response->collect()->toArray();
-        } catch (\Exception $e) {
-            return new JsonResponse('Error al crear usuario en Portal Agenda Ambiental', 500);
-        }
-
-        #No se pudo crear usuario en portal
-        if($response_data['message']){
-            if($response_data['message']!='¡Usuario Creado! y/o modulo actualizado'){
-                return new JsonResponse(['message' => $response_data['message']], 500);
+            if ($response != null) {
+                $response_data = $response->collect()->toArray();
+                #No se pudo crear usuario en portal
+                if ($response_data['message']) {
+                    if ($response_data['message'] != '¡Usuario Creado! y/o modulo actualizado') {
+                        return new JsonResponse(['message' => $response_data['message']], 500);
+                    }
+                } else {
+                    return new JsonResponse(['message' => 'Error al crear usuario en Portal'], 500);
+                }
             }
-        }else{
-            return new JsonResponse(['message' => 'Error al crear usuario en Portal'], 500);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La peticion al portal no se pudo completar', 'response_data' => $response_data], 400);
         }
 
-         # ------------------------- Creacion de usuario en control escolar
-         try {
+        try {
+            $user_data =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $response_data['user_id']])->collect();
+            $tipo_usuario = 'students';
+            switch ($user_data[0]['type']) {
+                case 'App\Models\Auth\Extern':
+                    $tipo_usuario = 'externs';
+                    break;
+                case 'App\Models\Auth\Student':
+                    $tipo_usuario = 'students';
+                    break;
+                case 'App\Models\Auth\Worker':
+                    $tipo_usuario = 'workers';
+                    break;
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede asignar un tipo de usuario', 'response_data' => $response_data], 400);
+        }
+
+
+        # ------------------------- Creacion de usuario en control escolar
+        try {
             # Se crea el usuario.
             $user = User::create([
-                'id' => $response_data['user_id'], 
-                'type' => $request->tipo_usuario,
+                'id' => $response_data['user_id'],
+                'type' => $tipo_usuario,
                 'birth_state' => $request->birth_state,
                 'marital_state' => $request->civic_state
             ]);
         } catch (\Exception $e) {
             // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
-            return new JsonResponse($response_data, 502);
-
+            return new JsonResponse(['message' => 'No existe respuesta por parte del portal', 'response_data' => $response_data], 400);
         }
 
-        # ------------- Asigna rol a usuario
-        if ($request->birth_state === 'San Luis Potosi') {
-            $user->assignRole('aspirante_local');
-        } else if ($request->birth_country === 'México') {
-            $user->assignRole('aspirante_foraneo');
-        } else {
-            $user->assignRole('aspirante_extranjero');
+        try {
+            # ------------- Asigna rol a usuario
+            if ($request->birth_state === 'San Luis Potosi') {
+                $user->assignRole('aspirante_local');
+            } else if ($request->birth_country === 'México') {
+                $user->assignRole('aspirante_foraneo');
+            } else {
+                $user->assignRole('aspirante_extranjero');
+            }
+        } catch (\Exception $e) {
+            // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
+            return new JsonResponse(['message' => 'No se pudo asignar un rol al estudiante', 'user' => $user], 400);
         }
 
-        # ------------- Genera el expediente del postulante.
-        $user->archives()->create([
-            'user_type' =>  $request->tipo_usuario,
-            'announcement_id' => $request->announcement_id,
-            'status' => 0,
-        ]);
+        try {
+            # ------------- Genera el expediente del postulante.
+            $user->archives()->create([
+                'user_type' =>  $user->type,
+                'announcement_id' => $request->announcement_id,
+                'status' => 0,
+            ]);
 
-
-        # La petición no pudo llevarse a cabo. Un error de datos por parte del
-        # cliente o del servidor.
-        if ($response->failed()) {
-            // return new JsonResponse($response_data['errors'],200);
-            $response_data['errors']['email_alterno'] = $response_data['errors']['altern_email'] ?? null;
-            $response_data['errors']['first_surname'] = $response_data['errors']['middlename']  ?? null;
-            $response_data['errors']['last_surname'] = $response_data['errors']['surname'] ?? null;
-            $response_data['errors']['birth_country'] = $response_data['errors']['nationality'] ?? null;
-            $response_data['errors']['birth_state'] = $response_data['errors']['residence'] ?? null;
-            $response_data['errors'] = collect($response_data['errors'])
-                ->filter(fn ($val, $key) => $val !== null)
-                ->toArray();
-
-            return new JsonResponse('Aqui ando', JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+            # -------------------- Log In del usuario 
+            $this->loginAfterRegister($user->id, $request); //con esto ya deberia estar autenticado
+        } catch (\Exception $e) {
+            // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
+            return new JsonResponse(['message' => 'Error al crear archivo'], 400);
         }
 
-        # --------------------- Log In del usuario 
-        $this->loginAfterRegister($user->id, $request); //con esto ya deberia estar autenticado
+
 
         # --------------------- Respuesta de éxito.
         return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);
@@ -327,13 +339,12 @@ class PreRegisterController extends Controller
         $users = $professors->merge($appliants)->toArray();
 
 
-        try{
+        try {
             #Peticion a portal (Busca usuario)
             $user_data =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => Auth::user()->id])->collect();
             $request->session()->put('user_data', $user_data[0]);
-            
-        }catch (\Exception $e) {
-            return new JsonResponse('Peticion erronea',502);
+        } catch (\Exception $e) {
+            return new JsonResponse('Peticion erronea', 502);
         }
 
         # Carga modelos si es administrador o profesor
@@ -354,6 +365,5 @@ class PreRegisterController extends Controller
             $request->session()->put('appliants', $miPortal_appliants);
             $request->session()->put('workers', $miPortal_workers);
         }
-        
     }
 }
