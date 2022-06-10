@@ -218,13 +218,8 @@ export default {
       }
 
       axios
-        .post(
-          "/controlescolar/solicitud/sentEmailRecommendationLetter",{
-            params: {
-              rl_id: this.recommendation_letter['id'],
-              archive_id: this.archive_id
-            }
-          }
+         .post(
+          "/controlescolar/solicitud/sentEmailRecommendationLetter",request
         )
         .then((response) => {
           if (response.data == "Exito, el correo ha sido enviado") {

@@ -5596,12 +5596,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         };
       }
 
-      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", {
-        params: {
-          rl_id: this.recommendation_letter['id'],
-          archive_id: this.archive_id
-        }
-      }).then(function (response) {
+      axios.post("/controlescolar/solicitud/sentEmailRecommendationLetter", request).then(function (response) {
         if (response.data == "Exito, el correo ha sido enviado") {
           Swal.fire({
             title: "El correo se ha enviado correctamente",
