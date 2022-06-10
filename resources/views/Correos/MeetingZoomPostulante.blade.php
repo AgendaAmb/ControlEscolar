@@ -36,8 +36,12 @@
 
             <div style="margin: 20px 0;">
                 <table class="table" style="max-width: 600px; margin: 0 auto;">
-                    <p>Estimado(a) <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
-                        Por medio de la presente se le informa que la documentación entregada para el proceso de selección 2022 para el programa de {{ $academic_program }} CUMPLE  con los requisitos estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista) se llevará a cabo:</p>
+                    <p>Estimado(a)
+                        <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
+                        Por medio de la presente se le informa que la documentación entregada para el proceso de
+                        selección 2022 para el programa de {{ $academic_program }} CUMPLE con los requisitos
+                        estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
+                        se llevará a cabo:</p>
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
@@ -82,16 +86,34 @@
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
                         sea ingresado en la plataforma a más tardar el día 19 de junio a las 12:00 h
                     </div>
-                    <div class="row mt-2 mb-2">
-                            Subir ensayo
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                        @component('mail::button',
+                            [
+                                'url' => route('documentsForInterview.showTest', [
+                                    'archive_id' => $archive_id,
+                                ]),
+                            ])
+                            Subir mi ensayo
+                        @endcomponent
+                       
                     </div>
-
                 @elseif ($academic_program === 'Maestría Interdisciplinaria en ciudades sostenibles')
                     <div class="row mt-2">
-                        Dentro de los requisitos, se establece la elaboración PROTOCOLO DE INVESTIGACIÓN Y UNA PRESENTACIÓN, las cuales deberán de ser ingresadas a la  plataforma a más tardar el día 19 de junio  a las 12:00 h
+                        Dentro de los requisitos, se establece la elaboración PROTOCOLO DE INVESTIGACIÓN Y UNA
+                        PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 19 de
+                        junio a las 12:00 h
                     </div>
-                    <div class="row mt-2 mb-2">
-                            Subir ensayo
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+
+                        @component('mail::button',
+                        [
+                            'url' => route('documentsForInterview.showPresentationResearch', [
+                                'archive_id' => $archive_id,
+                            ]),
+                        ])
+                        Subir Presentación
+                    @endcomponent
+                        
                     </div>
                 @endif
 

@@ -147,9 +147,14 @@ export default {
       default: [],
     },
 
-    type: {
+    index_require_documents_to_update: {
+      type: Array,
+      default: null,
+    },
+
+    list_type: {
       type: String,
-      default: [],
+      default: null,
     },
 
     errores: Object,
@@ -162,6 +167,10 @@ export default {
       datosValidos: {},
       textStateUpload: "",
       academiLetterCommitment: "",
+      index: {
+        type: Number,
+        default: -1,
+      },
     };
   },
 
@@ -195,13 +204,34 @@ export default {
   methods: {
     isInList() {
       let res = false;
-      this.require_documents_to_update.forEach((element) => {
-        if (element === this.id) {
-          console.log("encontro documento");
-          console.log(this.name);
-          res = true;
+
+      if (
+        this.list_type != null &&
+        (this.list_type === "academic" ||
+          this.list_type === "language" ||
+          this.list_type === "working")
+      ) {
+
+        console.log(this.list_type);
+        for (let i = 0; i < this.require_documents_to_update.length; i++) {
+          if (this.require_documents_to_update[i] === this.id) {
+            // console.log("encontro documento");
+            console.log(this.name);
+            res = true;
+            if (this.index_require_documents_to_update.length > 0) {
+              this.index = this.index_require_documents_to_update[i];
+            }
+          }
         }
-      });
+      } else {
+        this.require_documents_to_update.forEach((element) => {
+          if (element === this.id) {
+            // console.log("encontro documento");
+            console.log(this.name);
+            res = true;
+          }
+        });
+      }
 
       return res;
     },
@@ -230,9 +260,15 @@ export default {
         return false;
       }
 
-      this.$emit("enviaDocumento", this, e.target.files[0], this.type);
+      this.$emit(
+        "enviaDocumento",
+        this,
+        e.target.files[0],
+        this.list_type,
+        this.index
+      );
       this.state = 2;
-      this.updload_here =true;
+      this.updload_here = true;
     },
   },
 };

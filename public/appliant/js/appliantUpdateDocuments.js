@@ -105,6 +105,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
@@ -169,6 +184,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       selected_academicDocuments: [],
       selected_languageDocuments: [],
       selected_workingDocuments: [],
+      index_selected_academicDocuments: [],
+      index_selected_languageDocuments: [],
+      index_selected_workingDocuments: [],
+      list_type: null,
       errores: {}
     };
   },
@@ -202,12 +221,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       return false;
     },
     academicDegreeIsInList: function academicDegreeIsInList(academic_degree_id) {
+      var res = false;
       academic_documents_ids.forEach(function (element) {
         if (element[0] === academic_degree_id) {
-          return true;
+          console.log('hayyayay');
+          res = true;
         }
       });
-      return false;
+      return res;
     },
     personalDocumentsIdsNotEmpty: function personalDocumentsIdsNotEmpty() {
       if (this.personal_documents_ids.length > 0) {
@@ -261,7 +282,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
         });
       });
     },
-    cargaDocumento: function cargaDocumento(requiredDocument, file, type) {
+    cargaDocumento: function cargaDocumento(requiredDocument, file, type, index) {
       var formData = new FormData();
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
@@ -277,6 +298,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
 
           case "academic":
             url = "/controlescolar/updateDocuments/updateAcademicDegreeRequiredDocument";
+            formData.append("index", index);
             break;
 
           case "entrance":
@@ -285,6 +307,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
 
           case "language":
             url = "/controlescolar/updateDocuments/updateAppliantLanguageRequiredDocument";
+            formData.append("index", index);
             break;
           // case "working":
           //   break;
@@ -293,6 +316,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
             break;
         }
 
+        console.log(url);
+        console.log(index);
         axios({
           method: "post",
           url: url,
@@ -304,12 +329,23 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
         }).then(function (response) {
           requiredDocument.datosValidos.file = "¡Archivo subido exitosamente!";
           requiredDocument.Location = response.data.location;
+          Swal.fire({
+            title: "Documento nuevo agregado",
+            text: "El documento anterior se ha sobreescrito sobre el nuevo ingresado",
+            icon: "success",
+            showCancelButton: true,
+            showConfirmButton: false,
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Continuar"
+          });
         })["catch"](function (error) {
-          var errores = error.response.data["errors"];
-          requiredDocument.Errores = {
-            file: "file" in errores ? errores.file[0] : null,
-            id: "requiredDocumentId" in errores ? errores.requiredDocumentId[0] : null
-          };
+          console.log(error);
+          Swal.fire({
+            title: "Error al subir documento",
+            text: 'Intente mas tarde',
+            showCancelButton: false,
+            icon: "error"
+          });
         });
       }
     }
@@ -318,6 +354,12 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
     var _this = this;
 
     this.academic_documents_ids.forEach(function (element) {
+      if (element[0] != null) {
+        console.log("academico:", element[0]);
+
+        _this.index_selected_academicDocuments.push(element[0]);
+      }
+
       if (element[1] != null) {
         console.log("academico:", element[1]);
 
@@ -325,6 +367,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       }
     });
     this.language_documents_ids.forEach(function (element) {
+      if (element[0] != null) {
+        _this.index_selected_languageDocuments.push(element[0]);
+      }
+
       if (element[1] != null) {
         console.log("languaje:", element[1]);
 
@@ -332,6 +378,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       }
     });
     this.working_documents_ids.forEach(function (element) {
+      if (element[0] != null) {
+        _this.index_selected_workingDocuments.push(element[0]);
+      }
+
       if (element[1] != null) {
         console.log("working:", element[1]);
 
@@ -909,9 +959,13 @@ __webpack_require__.r(__webpack_exports__);
       type: Array,
       "default": []
     },
-    type: {
+    index_require_documents_to_update: {
+      type: Array,
+      "default": null
+    },
+    list_type: {
       type: String,
-      "default": []
+      "default": null
     },
     errores: Object
   },
@@ -921,7 +975,11 @@ __webpack_require__.r(__webpack_exports__);
       updload_here: false,
       datosValidos: {},
       textStateUpload: "",
-      academiLetterCommitment: ""
+      academiLetterCommitment: "",
+      index: {
+        type: Number,
+        "default": -1
+      }
     };
   },
   computed: {
@@ -955,13 +1013,31 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var res = false;
-      this.require_documents_to_update.forEach(function (element) {
-        if (element === _this.id) {
-          console.log("encontro documento");
-          console.log(_this.name);
-          res = true;
+
+      if (this.list_type != null && (this.list_type === "academic" || this.list_type === "language" || this.list_type === "working")) {
+        console.log(this.list_type);
+
+        for (var i = 0; i < this.require_documents_to_update.length; i++) {
+          if (this.require_documents_to_update[i] === this.id) {
+            // console.log("encontro documento");
+            console.log(this.name);
+            res = true;
+
+            if (this.index_require_documents_to_update.length > 0) {
+              this.index = this.index_require_documents_to_update[i];
+            }
+          }
         }
-      });
+      } else {
+        this.require_documents_to_update.forEach(function (element) {
+          if (element === _this.id) {
+            // console.log("encontro documento");
+            console.log(_this.name);
+            res = true;
+          }
+        });
+      }
+
       return res;
     },
     checkUpload: function checkUpload() {
@@ -988,7 +1064,7 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
-      this.$emit("enviaDocumento", this, e.target.files[0], this.type);
+      this.$emit("enviaDocumento", this, e.target.files[0], this.list_type, this.index);
       this.state = 2;
       this.updload_here = true;
     }
@@ -5169,6 +5245,7 @@ var render = function () {
                       errores: documento.errores,
                       alias_academic_program: _vm.academic_program.alias,
                       require_documents_to_update: _vm.personal_documents_ids,
+                      list_type: "personal",
                     },
                     on: {
                       "update:archivo": function ($event) {
@@ -5215,6 +5292,7 @@ var render = function () {
                       errores: documento.errores,
                       alias_academic_program: _vm.academic_program.alias,
                       require_documents_to_update: _vm.entrance_documents_ids,
+                      list_type: "entrance",
                     },
                     on: {
                       "update:archivo": function ($event) {
@@ -5258,12 +5336,12 @@ var render = function () {
                   attrs: { index: index + 1 },
                 },
                 [
-                  _vm.academicDegreeIsInList(grado.id)
+                  _vm.academicDegreeIsInList(grado.id) === true
                     ? _c(
                         "div",
                         [
                           _c("h4", { staticClass: "display" }, [
-                            _vm._v("Grado Academico " + _vm._s(index + 1)),
+                            _vm._v("Grado Academico " + _vm._s(grado.id) + " "),
                           ]),
                           _vm._v(" "),
                           _vm._l(
@@ -5282,6 +5360,9 @@ var render = function () {
                                         _vm.academic_program.alias,
                                       require_documents_to_update:
                                         _vm.selected_academicDocuments,
+                                      list_type: "academic",
+                                      index_require_documents_to_update:
+                                        _vm.index_selected_academicDocuments,
                                     },
                                     on: {
                                       "update:archivo": function ($event) {
@@ -5338,7 +5419,7 @@ var render = function () {
             staticStyle: { height: "45px", width: "100%" },
             on: { click: _vm.avisarCambios },
           },
-          [_vm._v("\n      Informar de cambios\n    ")]
+          [_vm._v("\n        Informar de cambios\n      ")]
         ),
       ]),
     ]),
@@ -5369,7 +5450,7 @@ var staticRenderFns = [
       _c("h4", [
         _c("strong", [_vm._v("Nota:")]),
         _vm._v(
-          "  Si has subido algunos o todos los documentos puedes hacernos saber para revisarlos"
+          "  Si has subido algunos o todos los\n        documentos puedes hacernos saber para revisarlos\n      "
         ),
       ]),
     ])

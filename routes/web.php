@@ -214,9 +214,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     Route::prefix('documentsForInterview')->name('documentsForInterview.')->middleware(['auth', 'role:aspirante_local|aspirante_foraneo|aspirante_extranjero'])->group(function(){
-        Route::get('/show/Test/{user_id}', [ArchiveController::class, 'documentsForInterviews'])->name('showTest');
-        Route::get('/show/Presentation&Research/{user_id}', [ArchiveController::class, 'documentsForPresentationResearch'])->name('showPresentationResearch');
-
+        Route::get('/show/Test/{user_id}', [InterviewController::class, 'documentsForInterview_Test'])->name('showTest');
+        Route::get('/show/Presentation&Research/{user_id}', [InterviewController::class, 'documentsForInterview_PresentationResearch'])->name('showPresentationResearch');
     });
 
 

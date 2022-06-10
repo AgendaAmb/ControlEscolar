@@ -131,38 +131,82 @@ class PreRegisterController extends Controller
         ]);
 
 
-        $val = Validator::make($request->all(), [
-            'announcement_id' => ['required', 'exists:announcements,id'],
-            'tipo_usuario' => ['required', 'string', 'max:255'],
-            'pertenece_uaslp' => ['required', 'boolean'],
-            'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
-            'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
-            'email' => ['required', 'string', 'email', 'max:255' ],
-            'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
-            'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
-            'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
-            'no_curp' => ['required', 'boolean'],
-            'curp' => ['nullable', 'required_if:no_curp,false',  'size:18', $this->curp_pattern,],
-            'name' => ['required', 'string', 'max:255'],
-            'middlename' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
-            'ocupation' => ['required', 'string', 'max:255'],
-            'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
-            'other_gender' => ['nullable', 'required_if:gender,Otro'],
-            'civic_state' => ['required', 'string'],
-            'other_civic_state' => ['nullable', 'required_if:civic_state,Otro'],
-            'birth_country' => ['required', 'string', 'max:255'],
-            'birth_state' => ['required', 'string', 'max:255'],
-            'residence_country' => ['required', 'string', 'max:255'],
-            'zip_code' => ['required', 'numeric'],
-            'phone_number' => ['required', 'numeric'],
-            'is_disabled' => ['required', 'boolean'],
-            'ethnicity' => ['required', 'string', 'max:255'],
-            'disability' => ['nullable', 'required_if:is_disabled,true'],
-            'nationality' => ['required', 'same:birth_country'],
-            'residence' => ['required', 'same:residence_country']
-        ]);
+        if($request->curp != null){
+            $val = Validator::make($request->all(), [
+                'announcement_id' => ['required', 'exists:announcements,id'],
+                'tipo_usuario' => ['required', 'string', 'max:255'],
+                'pertenece_uaslp' => ['required', 'boolean'],
+                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
+                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
+                'email' => ['required', 'string', 'email', 'max:255' ],
+                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
+                'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
+                'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
+                'no_curp' => ['required', 'boolean'],
+                'curp' => ['nullable', 'required_if:no_curp,false'],
+                'name' => ['required', 'string', 'max:255'],
+                'middlename' => ['required', 'string', 'max:255'],
+                'surname' => ['required', 'string', 'max:255'],
+                'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
+                'ocupation' => ['required', 'string', 'max:255'],
+                'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
+                'other_gender' => ['nullable', 'required_if:gender,Otro'],
+                'civic_state' => ['required', 'string'],
+                'other_civic_state' => ['nullable', 'required_if:civic_state,Otro'],
+                'birth_country' => ['required', 'string', 'max:255'],
+                'birth_state' => ['required', 'string', 'max:255'],
+                'residence_country' => ['required', 'string', 'max:255'],
+                'zip_code' => ['required', 'numeric'],
+                'phone_number' => ['required', 'numeric'],
+                'is_disabled' => ['required', 'boolean'],
+                'ethnicity' => ['required', 'string', 'max:255'],
+                'disability' => ['nullable', 'required_if:is_disabled,true'],
+                'nationality' => ['required', 'same:birth_country'],
+                'residence' => ['required', 'same:residence_country']
+            ]);
+        }else{
+            $val = Validator::make($request->all(), [
+                'announcement_id' => ['required', 'exists:announcements,id'],
+                'tipo_usuario' => ['required', 'string', 'max:255'],
+                'pertenece_uaslp' => ['required', 'boolean'],
+                'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false','numeric'],
+                'directorio_activo' => ['nullable', 'required_if:pertenece_uaslp,true', 'prohibited_if:pertenece_uaslp,false', 'string'],            
+                'email' => ['required', 'string', 'email', 'max:255' ],
+                'altern_email' => ['required', 'different:email', 'string', 'email', 'max:255' ],
+                'password' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'string', 'max:255'],
+                'rpassword' => ['nullable', 'required_if:pertenece_uaslp,false', 'prohibited_if:pertenece_uaslp,true', 'same:password', 'string', 'max:255'],
+                'no_curp' => ['required', 'boolean'],
+                'curp' => ['nullable', 'required_if:no_curp,false', 'size:18', $this->curp_pattern],
+                'name' => ['required', 'string', 'max:255'],
+                'middlename' => ['required', 'string', 'max:255'],
+                'surname' => ['required', 'string', 'max:255'],
+                'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
+                'ocupation' => ['required', 'string', 'max:255'],
+                'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
+                'other_gender' => ['nullable', 'required_if:gender,Otro'],
+                'civic_state' => ['required', 'string'],
+                'other_civic_state' => ['nullable', 'required_if:civic_state,Otro'],
+                'birth_country' => ['required', 'string', 'max:255'],
+                'birth_state' => ['required', 'string', 'max:255'],
+                'residence_country' => ['required', 'string', 'max:255'],
+                'zip_code' => ['required', 'numeric'],
+                'phone_number' => ['required', 'numeric'],
+                'is_disabled' => ['required', 'boolean'],
+                'ethnicity' => ['required', 'string', 'max:255'],
+                'disability' => ['nullable', 'required_if:is_disabled,true'],
+                'nationality' => ['required', 'same:birth_country'],
+                'residence' => ['required', 'same:residence_country']
+            ]);
+            
+
+        }
+       
+
+        // if($request->curp != null){
+        //     $request->validate([
+        //         'curp' => ['required', 'size:18', $this->curp_pattern]
+        //     ]);
+        // }
 
 
         #------------------------ Verifica validacion
@@ -174,6 +218,9 @@ class PreRegisterController extends Controller
         
         # -------------------------- Datos a validar en Portal.
         $data = $request->except(['announcement_id','civic_state','other_civic_state','birth_state' ]); //data to save
+
+        // return new JsonResponse(['message' => 'Esto es una prueba para curp', 'curp' => $request->curp], 500);
+
         
          # ------------------------- Creacion de usuario en portal Agenda Ambiental
         try {

@@ -235,7 +235,7 @@ class InterviewController extends Controller
                     $Trabajador = $Trabajadores->where('id', $User->id)->first();
 
                     // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                    Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformation($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                    Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                 }
             }
         }
@@ -266,5 +266,16 @@ class InterviewController extends Controller
         Interview::where('id', $request->id)->delete();
 
         return new JsonResponse(['message' => 'Entrevista eliminada exitosamente'], JsonResponse::HTTP_OK);
+    }
+
+    // Documents for interview
+
+    public function documentsForInterview_Test(Request $request)
+    {
+    }
+
+    public function documentsForInterview_PresentationResearch(Request $request)
+    {
+        # code...
     }
 }
