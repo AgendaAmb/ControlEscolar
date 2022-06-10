@@ -266,7 +266,7 @@ class PreRegisterController extends Controller
 
         # ------------- Genera el expediente del postulante.
         $user->archives()->create([
-            'user_type' => $request->tipo_usuario,
+            'user_type' =>  $request->tipo_usuario,
             'announcement_id' => $request->announcement_id,
             'status' => 0,
         ]);

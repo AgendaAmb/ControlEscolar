@@ -33,8 +33,12 @@ class Archive extends Model
     ];
 
     protected $fillable = [
-       'comments',
-       'motivation',
+        'user_id',
+        'user_type',
+        'comments',
+        'motivation',
+        'announcement_id',
+        'status',
     ];
 
     /**
@@ -51,7 +55,7 @@ class Archive extends Model
      */
     public function scopeWhereAppliantDoesntHaveInterview(Builder $query): Builder
     {
-        return $query->whereHas('appliant', function($subquery){
+        return $query->whereHas('appliant', function ($subquery) {
             $subquery->doesntHave('interviews');
         });
     }
@@ -66,7 +70,7 @@ class Archive extends Model
         return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
     }
 
-    
+
     /**
      * Obtiene los documentos personales requeridos del expediente.
      *
@@ -76,7 +80,7 @@ class Archive extends Model
     {
         return $this->requiredDocuments()->where('type', 'personal');
     }
-    
+
 
     /**
      * Obtiene los documentos personales requeridos del expediente.
@@ -98,7 +102,7 @@ class Archive extends Model
     {
         // /** @var App\Models\User */
         // $user = Auth::user();
-       
+
         // // $query = DB::table('required_documents')->where('type', 'entrance')->get();
 
         // // if($user){
@@ -109,9 +113,8 @@ class Archive extends Model
         // // }
         // return $query->orderBy('required_documents.name');
 
-       $query = $this->requiredDocuments()->where('type', 'entrance');
-       return $query->orderBy('required_documents.name');
-
+        $query = $this->requiredDocuments()->where('type', 'entrance');
+        return $query->orderBy('required_documents.name');
     }
 
     /**
@@ -124,7 +127,7 @@ class Archive extends Model
     {
         return $this->hasMany(ArchiveRequiredDocument::class);
     }
-        
+
     /**
      * Obtiene los documentos requeridos para el ingreso del
      * postulante, al programa académico.
@@ -280,7 +283,7 @@ class Archive extends Model
         ]);
 
         Storage::put($path, $intention_letter_content);
-        
+
         # Establece en la base de datos, la ubicación de la carta
         $this->archiveRequiredDocuments()
             ->whereIsIntentionLetter()
@@ -302,7 +305,7 @@ class Archive extends Model
 
     /**
      * Agrega una carta de recomendación al expediente.
-        * @param object $recommendation_letter
+     * @param object $recommendation_letter
      */
     public function createRecommendationLetter($recommendation_letter_content)
     {
@@ -322,11 +325,11 @@ class Archive extends Model
             ->whereNotNull('location')
             ->whereIsRecommendationLetter()
             ->count();
-            
-            //ya existen las dos cartas de recomendaion
-            if($recommendation_letter_count >= 2){
-                return false;
-            }
+
+        //ya existen las dos cartas de recomendaion
+        if ($recommendation_letter_count >= 2) {
+            return false;
+        }
 
         # Asigna la ruta de la carta de intención y lo guarda en el sistema
         # de archivos.
@@ -338,7 +341,7 @@ class Archive extends Model
             $recommendation_letter_count,
             '.pdf'
         ]);
-        
+
         Storage::put($path, $recommendation_letter_content);
 
         # Guarda la carta de recomendación en la base de datos.
