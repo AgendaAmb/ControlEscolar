@@ -224,19 +224,16 @@ export default {
     // Nombre de la publicación.
     post_title_memory: {
       type: String,
-      default: "",
     },
 
     // Nombre de la publicación.
     post_title_review: {
       type: String,
-      default: "",
     },
 
     // Nombre de la publicación.
     post_title_document: {
       type: String,
-      default: "",
     },
 
     // Autores de la producción científica.

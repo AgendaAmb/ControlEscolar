@@ -193,7 +193,7 @@
         <h5 class="mt-4 d-block">
           <strong> Producción científica (Opcional) </strong>
         </h5>
-        <produccion-cientifica
+         <produccion-cientifica
           v-for="(production, index) in scientific_productions"
           v-bind="production"
           v-bind:key="production.id"
@@ -205,7 +205,9 @@
           :magazine_name.sync="production.magazine_name"
           :article_name.sync="production.article_name"
           :institution.sync="production.institution"
-          :post_title.sync="production.post_title"
+          :post_title_memory.sync="production.post_title_memory"
+          :post_title_document.sync="production.post_title_document"
+          :post_title_review.sync="production.post_title_review"
           :documentos.sync="curricular_documents"
           @delete-item="eliminaProduccionCientificaFromList"
         >

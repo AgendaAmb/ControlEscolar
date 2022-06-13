@@ -1052,13 +1052,13 @@ class ArchiveController extends Controller
                 $upsert_array = ['institution' => $request->institution];
                 break;
             case 'working_documents':
-                $upsert_array = ['post_title_document' => $request->post_title];
+                $upsert_array = ['post_title_document' => $request->post_title_document];
                 break;
             case 'working_memories':
-                $upsert_array = ['post_title_memory' => $request->post_title];
+                $upsert_array = ['post_title_memory' => $request->post_title_memory];
                 break;
             case 'reviews_cp':
-                $upsert_array = ['post_title_review' => $request->post_title];
+                $upsert_array = ['post_title_review' => $request->post_title_review];
                 break;
         }
 

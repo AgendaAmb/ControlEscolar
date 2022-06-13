@@ -20,7 +20,7 @@ class CreateReviewsScientificProduction extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('post_title')->nullable();
+            $table->string('post_title_review')->nullable();
         });
     }
 

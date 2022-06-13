@@ -2,13 +2,11 @@
   <details class="mt-1">
     <summary class="d-flex justify-content-start align-items-center my-2">
       <div class="col-3 col-md-6 ms-5">
-        <h5 v-if="tipos[Type]!=null" class=" font-weight-bold">
-          {{tipos[Type] + ' ' + index}} 
+        <h5 v-if="tipos[Type] != null" class="font-weight-bold">
+          {{ tipos[Type] + " " + index }}
         </h5>
 
-        <h5 v-else class="font-weight-bold">
-          Publicación {{index}}
-        </h5>
+        <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
       </div>
       <div class="col-8 col-md-3 col-sm-2"></div>
 
@@ -16,16 +14,14 @@
         <button
           @click="eliminaProduccionCientifica"
           class="btn btn-danger"
-          style="height: 35px; width:100%"
+          style="height: 35px; width: 100%"
         >
           Eliminar Publicación
         </button>
       </div>
     </summary>
 
-   
     <div class="row mx-2">
-
       <div class="form-group col-md-4">
         <label> Tipo de publicación: </label>
         <select v-model="Type" class="form-control">
@@ -49,7 +45,7 @@
         >
           <!-- Otros autores del artículos -->
           <autor-articulo
-            v-for="(author,index) in Authors"
+            v-for="(author, index) in Authors"
             v-bind="author"
             :index="index"
             v-bind:key="author.id"
@@ -67,9 +63,9 @@
           :nombre-articulo.sync="ArticleName"
           :ano-publicacion.sync="PublishDate"
         >
-        <!-- Otros autores del artículos -->
+          <!-- Otros autores del artículos -->
           <autor-articulo
-            v-for="(author,index) in Authors"
+            v-for="(author, index) in Authors"
             v-bind="author"
             :index="index"
             v-bind:key="author.id"
@@ -86,9 +82,9 @@
           :titulo-libro.sync="Title"
           :ano-publicacion.sync="PublishDate"
         >
-       <!-- Otros autores del artículos -->
+          <!-- Otros autores del artículos -->
           <autor-articulo
-            v-for="(author,index) in Authors"
+            v-for="(author, index) in Authors"
             v-bind="author"
             :index="index"
             v-bind:key="author.id"
@@ -111,7 +107,7 @@
         <memoria-trabajo
           v-else-if="tipos[Type] === 'Memorias de trabajo'"
           :title.sync="Title"
-          :post_title.sync="PostTitle"
+          :post_title_memory.sync="PostTitleMemory"
           :publish_date.sync="PublishDate"
         >
         </memoria-trabajo>
@@ -119,7 +115,7 @@
         <documento-trabajo
           v-else-if="tipos[Type] === 'Documentos de trabajo'"
           :title.sync="Title"
-          :post_title.sync="PostTitle"
+          :post_title_document.sync="PostTitleDocument"
           :publish_date.sync="PublishDate"
         >
         </documento-trabajo>
@@ -127,38 +123,39 @@
         <resenia
           v-else-if="tipos[Type] === 'Reseñas'"
           :title.sync="Title"
-          :post_title.sync="PostTitle"
+          :post_title_review.sync="PostTitleReview"
           :publish_date.sync="PublishDate"
         >
         </resenia>
       </div>
 
       <div class="col-12">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
-          </label>
-        </div>
+        <label>
+          <strong>Nota: </strong>
+          Para poder registrar los cambios en los campos anteriores de la
+          publicación correspondiente es necesario seleccionar el siguiente
+          botón, de esta forma podremos guardar la información que acabas de
+          compartir
+        </label>
+      </div>
       <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class=" btn btn-primary"> Guardar publicación </button>
-        </div>
-
-        
+        <button @click="guardaProduccionCientifica" class="btn btn-primary">
+          Guardar publicación
+        </button>
+      </div>
     </div>
     <documento-requerido
-        v-for="documento in RequiredDocuments"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        :alias_academic_program="alias_academic_program"
-        v-bind="documento"
-        @enviaDocumento="cargaDocumento"
-      >
-      </documento-requerido>
-        <hr class="d-block mt-2" :style="ColorStrip" />
-
+      v-for="documento in RequiredDocuments"
+      :key="documento.name"
+      :archivo.sync="documento.archivo"
+      :location.sync="documento.pivot.location"
+      :errores.sync="documento.errores"
+      :alias_academic_program="alias_academic_program"
+      v-bind="documento"
+      @enviaDocumento="cargaDocumento"
+    >
+    </documento-requerido>
+    <hr class="d-block mt-2" :style="ColorStrip" />
   </details>
 </template>
 
@@ -192,7 +189,7 @@ export default {
 
   props: {
     //Index
-    index:Number,
+    index: Number,
 
     // Documentos requeridos
     required_documents: Array,
@@ -225,7 +222,19 @@ export default {
     institution: String,
 
     // Nombre de la publicación.
-    post_title: String,
+    post_title_memory: {
+      type: String,
+    },
+
+    // Nombre de la publicación.
+    post_title_review: {
+      type: String,
+    },
+
+    // Nombre de la publicación.
+    post_title_document: {
+      type: String,
+    },
 
     // Autores de la producción científica.
     authors: Array,
@@ -296,12 +305,30 @@ export default {
         this.$emit("update:institution", newVal);
       },
     },
-    PostTitle: {
+    PostTitleReview: {
       get() {
-        return this.post_title;
+        return this.post_title_review;
       },
       set(newVal) {
-        this.$emit("update:post_title", newVal);
+        this.$emit("update:post_title_review", newVal);
+      },
+    },
+
+    PostTitleDocument: {
+      get() {
+        return this.post_title_document;
+      },
+      set(newVal) {
+        this.$emit("update:post_title_document", newVal);
+      },
+    },
+
+    PostTitleMemory: {
+      get() {
+        return this.post_title_memory;
+      },
+      set(newVal) {
+        this.$emit("update:post_title_memory", newVal);
       },
     },
     Authors: {
@@ -361,36 +388,37 @@ export default {
         height: "1px",
       };
     },
-    
-    guardaProduccionCientifica(evento){
-      this.enviaProduccionCientifica(evento, 'Completo');
+
+    guardaProduccionCientifica(evento) {
+      this.enviaProduccionCientifica(evento, "Completo");
     },
 
-     eliminaProduccionCientifica(){
-      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
-        id: this.id,
-        archive_id: this.archive_id
-      }).then(response =>{
-        
-            //Llama al padre para que elimine el item de la lista de experiencia laboral
-            this.$emit('delete-item',this.index-1);
+    eliminaProduccionCientifica() {
+      axios
+        .post("/controlescolar/solicitud/deleteScientificProduction", {
+          id: this.id,
+          archive_id: this.archive_id,
+        })
+        .then((response) => {
+          //Llama al padre para que elimine el item de la lista de experiencia laboral
+          this.$emit("delete-item", this.index - 1);
 
           Swal.fire({
-              title: "Éxito al eliminar Producción cientifica",
-              text: response.data.message, // Imprime el mensaje del controlador
-              icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Continuar",
-            });
-
-      }).catch(error=>{
+            title: "Éxito al eliminar Producción cientifica",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+        })
+        .catch((error) => {
           Swal.fire({
-              title: "Error al eliminar Experiencia laboral",
-              showCancelButton: false,
-              icon: "error",
-            });
-      }); 
+            title: "Error al eliminar Experiencia laboral",
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
     },
 
     enviaProduccionCientifica(evento, estado) {
@@ -408,7 +436,9 @@ export default {
           magazine_name: this.magazine_name,
           article_name: this.article_name,
           institution: this.institution,
-          post_title: this.post_title,
+          post_title_review: this.post_title_review,
+          post_title_memory: this.post_title_memory,
+          post_title_document: this.post_title_document,
         })
         .then((response) => {
           // Object.keys(response.data).forEach((dataKey) => {
@@ -416,7 +446,7 @@ export default {
           //   this.$emit(event, response.data[dataKey]);
           // });
 
-           Swal.fire({
+          Swal.fire({
             title: "Los datos se han actualizado correctamente",
             text: "La producción cientifica seleccionada de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
             icon: "success",
@@ -425,19 +455,18 @@ export default {
             cancelButtonColor: "#3085d6",
             cancelButtonText: "Continuar",
           });
-
         })
         .catch((error) => {
-           Swal.fire({
-              title: "Error al actualizar datos",
-              text: error.response.data['message'],
-              showCancelButton: false,
-              icon: "error",
-            });
+          Swal.fire({
+            title: "Error al actualizar datos",
+            text: error.response.data["message"],
+            showCancelButton: false,
+            icon: "error",
+          });
         });
     },
-    eliminaAutor(autor){
-       axios
+    eliminaAutor(autor) {
+      axios
         .post("/controlescolar/solicitud/deleteScientificProductionAuthor", {
           id: autor.id,
           scientific_production_id: this.id,

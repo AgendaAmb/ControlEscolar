@@ -2893,9 +2893,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -2944,7 +2941,17 @@ __webpack_require__.r(__webpack_exports__);
     // Nombre de la institución.
     institution: String,
     // Nombre de la publicación.
-    post_title: String,
+    post_title_memory: {
+      type: String
+    },
+    // Nombre de la publicación.
+    post_title_review: {
+      type: String
+    },
+    // Nombre de la publicación.
+    post_title_document: {
+      type: String
+    },
     // Autores de la producción científica.
     authors: Array
   },
@@ -3013,12 +3020,28 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit("update:institution", newVal);
       }
     },
-    PostTitle: {
+    PostTitleReview: {
       get: function get() {
-        return this.post_title;
+        return this.post_title_review;
       },
       set: function set(newVal) {
-        this.$emit("update:post_title", newVal);
+        this.$emit("update:post_title_review", newVal);
+      }
+    },
+    PostTitleDocument: {
+      get: function get() {
+        return this.post_title_document;
+      },
+      set: function set(newVal) {
+        this.$emit("update:post_title_document", newVal);
+      }
+    },
+    PostTitleMemory: {
+      get: function get() {
+        return this.post_title_memory;
+      },
+      set: function set(newVal) {
+        this.$emit("update:post_title_memory", newVal);
       }
     },
     Authors: {
@@ -3079,17 +3102,17 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     guardaProduccionCientifica: function guardaProduccionCientifica(evento) {
-      this.enviaProduccionCientifica(evento, 'Completo');
+      this.enviaProduccionCientifica(evento, "Completo");
     },
     eliminaProduccionCientifica: function eliminaProduccionCientifica() {
       var _this = this;
 
-      axios.post('/controlescolar/solicitud/deleteScientificProduction', {
+      axios.post("/controlescolar/solicitud/deleteScientificProduction", {
         id: this.id,
         archive_id: this.archive_id
       }).then(function (response) {
         //Llama al padre para que elimine el item de la lista de experiencia laboral
-        _this.$emit('delete-item', _this.index - 1);
+        _this.$emit("delete-item", _this.index - 1);
 
         Swal.fire({
           title: "Éxito al eliminar Producción cientifica",
@@ -3121,7 +3144,9 @@ __webpack_require__.r(__webpack_exports__);
         magazine_name: this.magazine_name,
         article_name: this.article_name,
         institution: this.institution,
-        post_title: this.post_title
+        post_title_review: this.post_title_review,
+        post_title_memory: this.post_title_memory,
+        post_title_document: this.post_title_document
       }).then(function (response) {
         // Object.keys(response.data).forEach((dataKey) => {
         //   var event = "update:" + dataKey;
@@ -3139,7 +3164,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         Swal.fire({
           title: "Error al actualizar datos",
-          text: error.response.data['message'],
+          text: error.response.data["message"],
           showCancelButton: false,
           icon: "error"
         });
@@ -3345,6 +3370,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/close-view/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/close-view/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/close-view/components/CartaDeRecomendacion.vue");
+//
+//
 //
 //
 //
@@ -4164,10 +4191,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-trabajo",
   props: {
-    // Nombre del artículo
+    // Nombre de la reseña.
     title: String,
     // Nombre de la revista.
-    post_title: String,
+    post_title_document: String,
     // Fecha de publicación.
     publish_date: String
   },
@@ -4180,12 +4207,13 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit("update:title", newVal);
       }
     },
-    PostTitle: {
+    PostTitleDocument: {
       get: function get() {
-        return this.post_title;
+        return this.post_title_document;
       },
       set: function set(newVal) {
-        this.$emit("update:post_title", newVal);
+        // console.log('hoja : ' + this.post_title_document);
+        this.$emit("update:post_title_document", newVal);
       }
     },
     PublishDate: {
@@ -4234,10 +4262,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "memoria-trabajo",
   props: {
-    // Nombre del artículo
+    // Nombre de la reseña.
     title: String,
     // Nombre de la revista.
-    post_title: String,
+    post_title_memory: String,
     // Fecha de publicación.
     publish_date: String
   },
@@ -4250,12 +4278,12 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit("update:title", newVal);
       }
     },
-    PostTitle: {
+    PostTitleMemory: {
       get: function get() {
-        return this.post_title;
+        return this.post_title_memory;
       },
       set: function set(newVal) {
-        this.$emit("update:post_title", newVal);
+        this.$emit("update:post_title_memory", newVal);
       }
     },
     PublishDate: {
@@ -4612,7 +4640,7 @@ __webpack_require__.r(__webpack_exports__);
     // Nombre de la reseña.
     title: String,
     // Nombre de la revista.
-    post_title: String,
+    post_title_review: String,
     // Fecha de publicación.
     publish_date: String
   },
@@ -4625,12 +4653,12 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit("update:title", newVal);
       }
     },
-    PostTitle: {
+    PostTitleReview: {
       get: function get() {
-        return this.post_title;
+        return this.post_title_review;
       },
       set: function set(newVal) {
-        this.$emit("update:post_title", newVal);
+        this.$emit("update:post_title_review", newVal);
       }
     },
     PublishDate: {
@@ -13051,17 +13079,15 @@ var render = function () {
         [
           _c("div", { staticClass: "col-3 col-md-6 ms-5" }, [
             _vm.tipos[_vm.Type] != null
-              ? _c("h5", { staticClass: " font-weight-bold" }, [
+              ? _c("h5", { staticClass: "font-weight-bold" }, [
                   _vm._v(
                     "\n        " +
                       _vm._s(_vm.tipos[_vm.Type] + " " + _vm.index) +
-                      " \n      "
+                      "\n      "
                   ),
                 ])
               : _c("h5", { staticClass: "font-weight-bold" }, [
-                  _vm._v(
-                    "\n        Publicación " + _vm._s(_vm.index) + "\n      "
-                  ),
+                  _vm._v("Publicación " + _vm._s(_vm.index)),
                 ]),
           ]),
           _vm._v(" "),
@@ -13324,15 +13350,15 @@ var render = function () {
               ? _c("memoria-trabajo", {
                   attrs: {
                     title: _vm.Title,
-                    post_title: _vm.PostTitle,
+                    post_title_memory: _vm.PostTitleMemory,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:post_title": function ($event) {
-                      _vm.PostTitle = $event
+                    "update:post_title_memory": function ($event) {
+                      _vm.PostTitleMemory = $event
                     },
                     "update:publish_date": function ($event) {
                       _vm.PublishDate = $event
@@ -13343,15 +13369,15 @@ var render = function () {
               ? _c("documento-trabajo", {
                   attrs: {
                     title: _vm.Title,
-                    post_title: _vm.PostTitle,
+                    post_title_document: _vm.PostTitleDocument,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:post_title": function ($event) {
-                      _vm.PostTitle = $event
+                    "update:post_title_document": function ($event) {
+                      _vm.PostTitleDocument = $event
                     },
                     "update:publish_date": function ($event) {
                       _vm.PublishDate = $event
@@ -13362,15 +13388,15 @@ var render = function () {
               ? _c("resenia", {
                   attrs: {
                     title: _vm.Title,
-                    post_title: _vm.PostTitle,
+                    post_title_review: _vm.PostTitleReview,
                     publish_date: _vm.PublishDate,
                   },
                   on: {
                     "update:title": function ($event) {
                       _vm.Title = $event
                     },
-                    "update:post_title": function ($event) {
-                      _vm.PostTitle = $event
+                    "update:post_title_review": function ($event) {
+                      _vm.PostTitleReview = $event
                     },
                     "update:publish_date": function ($event) {
                       _vm.PublishDate = $event
@@ -13388,10 +13414,10 @@ var render = function () {
           _c(
             "button",
             {
-              staticClass: " btn btn-primary",
+              staticClass: "btn btn-primary",
               on: { click: _vm.guardaProduccionCientifica },
             },
-            [_vm._v(" Guardar publicación ")]
+            [_vm._v("\n        Guardar publicación\n      ")]
           ),
         ]),
       ]),
@@ -13442,7 +13468,7 @@ var staticRenderFns = [
       _c("label", [
         _c("strong", [_vm._v("Nota: ")]),
         _vm._v(
-          "\n          Para poder registrar los cambios en los campos anteriores de la publicación correspondiente es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+          "\n        Para poder registrar los cambios en los campos anteriores de la\n        publicación correspondiente es necesario seleccionar el siguiente\n        botón, de esta forma podremos guardar la información que acabas de\n        compartir\n      "
         ),
       ]),
     ])
@@ -13913,7 +13939,6 @@ var render = function () {
                   key: production.id,
                   attrs: {
                     index: index + 1,
-                    alias_academic_program: _vm.academic_program.alias,
                     state: production.state,
                     type: production.type,
                     title: production.title,
@@ -13921,7 +13946,10 @@ var render = function () {
                     magazine_name: production.magazine_name,
                     article_name: production.article_name,
                     institution: production.institution,
-                    post_title: production.post_title,
+                    post_title_memory: production.post_title_memory,
+                    post_title_document: production.post_title_document,
+                    post_title_review: production.post_title_review,
+                    documentos: _vm.curricular_documents,
                   },
                   on: {
                     "update:state": function ($event) {
@@ -13945,8 +13973,17 @@ var render = function () {
                     "update:institution": function ($event) {
                       return _vm.$set(production, "institution", $event)
                     },
-                    "update:post_title": function ($event) {
-                      return _vm.$set(production, "post_title", $event)
+                    "update:post_title_memory": function ($event) {
+                      return _vm.$set(production, "post_title_memory", $event)
+                    },
+                    "update:post_title_document": function ($event) {
+                      return _vm.$set(production, "post_title_document", $event)
+                    },
+                    "update:post_title_review": function ($event) {
+                      return _vm.$set(production, "post_title_review", $event)
+                    },
+                    "update:documentos": function ($event) {
+                      _vm.curricular_documents = $event
                     },
                     "delete-item": _vm.eliminaProduccionCientificaFromList,
                   },
@@ -14248,19 +14285,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.PostTitle,
-            expression: "PostTitle",
+            value: _vm.PostTitleDocument,
+            expression: "PostTitleDocument",
           },
         ],
         staticClass: "form-control",
         attrs: { type: "text", readonly: true },
-        domProps: { value: _vm.PostTitle },
+        domProps: { value: _vm.PostTitleDocument },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.PostTitle = $event.target.value
+            _vm.PostTitleDocument = $event.target.value
           },
         },
       }),
@@ -14351,19 +14388,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.PostTitle,
-            expression: "PostTitle",
+            value: _vm.PostTitleMemory,
+            expression: "PostTitleMemory",
           },
         ],
         staticClass: "form-control",
         attrs: { type: "text", readonly: true },
-        domProps: { value: _vm.PostTitle },
+        domProps: { value: _vm.PostTitleMemory },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.PostTitle = $event.target.value
+            _vm.PostTitleMemory = $event.target.value
           },
         },
       }),
@@ -14856,19 +14893,19 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.PostTitle,
-            expression: "PostTitle",
+            value: _vm.PostTitleReview,
+            expression: "PostTitleReview",
           },
         ],
         staticClass: "form-control",
         attrs: { type: "text", readonly: true },
-        domProps: { value: _vm.PostTitle },
+        domProps: { value: _vm.PostTitleReview },
         on: {
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.PostTitle = $event.target.value
+            _vm.PostTitleReview = $event.target.value
           },
         },
       }),

@@ -68,7 +68,7 @@ class CreateScientificProductionsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('post_title');
+            $table->string('post_title_memory');
         });
 
         Schema::create('working_documents', function (Blueprint $table) {
@@ -78,7 +78,7 @@ class CreateScientificProductionsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('post_title');
+            $table->string('post_title_document');
         });
         
     }

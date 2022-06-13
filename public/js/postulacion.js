@@ -3746,18 +3746,15 @@ __webpack_require__.r(__webpack_exports__);
     institution: String,
     // Nombre de la publicación.
     post_title_memory: {
-      type: String,
-      "default": ""
+      type: String
     },
     // Nombre de la publicación.
     post_title_review: {
-      type: String,
-      "default": ""
+      type: String
     },
     // Nombre de la publicación.
     post_title_document: {
-      type: String,
-      "default": ""
+      type: String
     },
     // Autores de la producción científica.
     authors: Array
@@ -5086,6 +5083,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -5813,6 +5812,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.post_title_document;
       },
       set: function set(newVal) {
+        // console.log('hoja : ' + this.post_title_document);
         this.$emit("update:post_title_document", newVal);
       }
     },
@@ -17872,7 +17872,9 @@ var render = function () {
                     magazine_name: production.magazine_name,
                     article_name: production.article_name,
                     institution: production.institution,
-                    post_title: production.post_title,
+                    post_title_memory: production.post_title_memory,
+                    post_title_document: production.post_title_document,
+                    post_title_review: production.post_title_review,
                     documentos: _vm.curricular_documents,
                   },
                   on: {
@@ -17897,8 +17899,14 @@ var render = function () {
                     "update:institution": function ($event) {
                       return _vm.$set(production, "institution", $event)
                     },
-                    "update:post_title": function ($event) {
-                      return _vm.$set(production, "post_title", $event)
+                    "update:post_title_memory": function ($event) {
+                      return _vm.$set(production, "post_title_memory", $event)
+                    },
+                    "update:post_title_document": function ($event) {
+                      return _vm.$set(production, "post_title_document", $event)
+                    },
+                    "update:post_title_review": function ($event) {
+                      return _vm.$set(production, "post_title_review", $event)
                     },
                     "update:documentos": function ($event) {
                       _vm.curricular_documents = $event

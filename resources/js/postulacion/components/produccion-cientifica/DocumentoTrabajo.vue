@@ -45,6 +45,7 @@ export default {
         return this.post_title_document;
       },
       set(newVal) {
+        // console.log('hoja : ' + this.post_title_document);
         this.$emit("update:post_title_document", newVal);
       },
     },
