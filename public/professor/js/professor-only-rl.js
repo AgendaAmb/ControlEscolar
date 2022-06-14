@@ -499,10 +499,6 @@ __webpack_require__.r(__webpack_exports__);
     location: {
       type: String
     },
-    letters_Commitment: {
-      type: Array,
-      "default": null
-    },
     alias_academic_program: {
       type: String,
       "default": null
@@ -3094,7 +3090,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3211,7 +3206,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/professor-view-only-rl/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/professor-view-only-rl/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/professor-view-only-rl/components/CartaDeRecomendacion.vue");
-//
 //
 //
 //
@@ -13028,7 +13022,6 @@ var render = function () {
               attrs: {
                 user_id: _vm.user_id,
                 viewer_id: _vm.viewer_id,
-                letters_Commitment: _vm.letters_Commitment,
                 alias_academic_program: _vm.alias_academic_program,
                 archivo: documento.archivo,
                 location: documento.pivot.location,
@@ -13097,7 +13090,6 @@ var render = function () {
                   documentos: _vm.entrance_documents,
                   user_id: _vm.appliant.id,
                   viewer_id: _vm.viewer.id,
-                  letters_Commitment: _vm.letters_Commitment,
                   alias_academic_program: _vm.academic_program.alias,
                 },
                 on: {

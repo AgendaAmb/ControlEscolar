@@ -420,16 +420,6 @@ class ExternalRecommendationLetter extends Controller
      */
     public function seeAnsweredRecommendationLetter(Request $request,$archive_id, $rl_id)
     {
-        // try {
-        //     $request->validate([
-        //         'rl_id' => ['required', 'numeric', 'exists:recommendation_letter,id'],
-        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-        //         'user_id' => ['required', 'numeric', 'exists:users,id'],
-        //     ]);
-        // } catch (\Exception $e) {
-        //     return new JsonResponse($e, JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-        // }
-
         // find the archive
         try {
             $archive = Archive::where('id', $archive_id)->first();
@@ -505,6 +495,9 @@ class ExternalRecommendationLetter extends Controller
                 }
             }
 
+            $url_LogoAA = public_path('/storage/headers/logod.png');
+
+
             $data = [
                 'recommendation_letter' => $recommendation_letter,
                 'appliant' => $archive->appliant,
@@ -513,7 +506,8 @@ class ExternalRecommendationLetter extends Controller
                 'announcement_date_msg' => $announcement_date_msg,
                 'score_parameters' => $score_parameters,
                 'custom_parameters' => $custom_parameters,
-                'parameters' => $parameters
+                'parameters' => $parameters,
+                'url_LogoAA' => $url_LogoAA
             ];
 
             $recommendation_letter_pdf = PDF::loadView('pdf.prueba', ["data" => $data])

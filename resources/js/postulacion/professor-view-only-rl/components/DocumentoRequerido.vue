@@ -168,10 +168,7 @@ export default {
       type: String
     },
     
-    letters_Commitment: {
-      type: Array,
-      default: null
-    },
+
 
     alias_academic_program:{
       type: String,

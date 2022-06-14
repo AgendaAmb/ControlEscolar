@@ -77,9 +77,6 @@
         <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
         <script src="{{ asset('professor/js/professor-only-rl.js') }}" defer></script>
-        {{-- Appliant view --}}
-
-        {{-- Control escolar and personal de apoyo view --}}
     @else
         <script src="{{ asset('appliant/js/appliant.js') }}" defer></script>
     @endif

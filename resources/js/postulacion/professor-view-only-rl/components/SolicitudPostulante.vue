@@ -13,7 +13,6 @@
           :documentos.sync="entrance_documents"
           :user_id="appliant.id"
           :viewer_id="viewer.id"
-          :letters_Commitment="letters_Commitment"
           :alias_academic_program="academic_program.alias"
         >
         </requisitos-ingreso>
