@@ -142,7 +142,7 @@ export default {
         }
       }).then(response => {
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;        
+        requiredDocument.location = response.data.location;        
         
       }).catch(error => {
         var errores = error.response.data['errors'];

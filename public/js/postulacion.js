@@ -4700,7 +4700,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;
+        requiredDocument.location = response.data.location;
       })["catch"](function (error) {
         var errores = error.response.data['errors'];
         requiredDocument.Errores = {
@@ -5136,7 +5136,9 @@ __webpack_require__.r(__webpack_exports__);
     appliant: Object,
     letters_Commitment: Array,
     //Persona que esta viendo el expediente
-    viewer: Object
+    viewer: Object,
+    //Estado del expediente
+    status: Number
   },
   computed: {},
   data: function data() {

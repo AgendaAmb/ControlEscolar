@@ -19,7 +19,7 @@ class ArchiveRequiredDocument extends Model
      * @var array
      */
     protected $table = 'archive_required_document';
-
+  
     /**
     * Indicates if the model has timestamps.
     *

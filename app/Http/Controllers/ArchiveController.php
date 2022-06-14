@@ -728,46 +728,107 @@ class ArchiveController extends Controller
 
     public function updateArchivePersonalDocument(Request $request)
     {
-        $archive = Archive::find($request->archive_id);
+        $request->validate([
+            'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            'requiredDocumentId' => ['required', 'numeric', 'exists:required_documents,id'],
+            'file' => ['required']
+        ]);
 
-        # Archivo de la solicitud
+        try{
+            $archive = Archive::find($request->archive_id);
 
-        $ruta = $request->file('file')->storeAs(
-            'archives/' . $request->archive_id . '/personalDocuments',
-            $request->requiredDocumentId . '.pdf'
-        );
+            // $archive->loadMissing([
+            //     'archiveRequiredDocuments',
+            //     'entranceDocuments'
+            // ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+      
 
-        # Asocia los documentos requeridos.
-        $archive->personalDocuments()->detach($request->requiredDocumentId);
-        $archive->personalDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+        // Create the route
+        try{
+            # Archivo de la solicitud
+            $ruta = $request->file('file')->storeAs(
+                'archives/' . $request->archive_id . '/personalDocuments',
+                $request->requiredDocumentId . '.pdf'
+            );
 
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+      
+
+        try{
+            # Asocia los documentos requeridos.
+              # Asocia los documentos requeridos.
+            $archive->personalDocuments()->detach($request->requiredDocumentId);
+            $archive->personalDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+            $required_document = ArchiveRequiredDocument::where([
+                'required_document_id' => $request->requiredDocumentId,
+                'archive_id' => $request->archive_id
+            ])->first();      
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-            $archive->personalDocuments()
-                ->select('required_documents.*', 'archive_required_document.location as location')
-                ->where('id', $request->requiredDocumentId)
-                ->first()
+           ['location' => $required_document->location ], JsonResponse::HTTP_CREATED
         );
     }
 
     public function updateArchiveEntranceDocument(Request $request)
     {
-        $archive = Archive::find($request->archive_id);
 
-        # Archivo de la solicitud
-        $ruta = $request->file('file')->storeAs(
-            'archives/' . $request->archive_id . '/entranceDocuments',
-            $request->requiredDocumentId . '.pdf'
-        );
+        $request->validate([
+            'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            'requiredDocumentId' => ['required', 'numeric', 'exists:required_documents,id'],
+            'file' => ['required']
+        ]);
 
-        # Asocia los documentos requeridos.
-        $archive->entranceDocuments()->detach($request->requiredDocumentId);
-        $archive->entranceDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+        try{
+            $archive = Archive::find($request->archive_id);
+
+            // $archive->loadMissing([
+            //     'archiveRequiredDocuments',
+            //     'entranceDocuments'
+            // ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+      
+
+        // Create the route
+        try{
+            # Archivo de la solicitud
+            $ruta = $request->file('file')->storeAs(
+                'archives/' . $request->archive_id . '/entranceDocuments',
+                $request->requiredDocumentId . '.pdf'
+            );
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+      
+
+        try{
+            # Asocia los documentos requeridos.
+            $archive->entranceDocuments()->detach($request->requiredDocumentId);
+            $archive->entranceDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+            $required_document = ArchiveRequiredDocument::where([
+                'required_document_id' => $request->requiredDocumentId,
+                'archive_id' => $request->archive_id
+            ])->first();      
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-            $archive->entranceDocuments()
-                ->select('required_documents.*', 'archive_required_document.location as location')
-                ->where('id', $request->requiredDocumentId)
-                ->first()
+           ['location' => $required_document->location ], JsonResponse::HTTP_CREATED
         );
     }
 

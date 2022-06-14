@@ -3175,9 +3175,11 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
+        console.log(response.data.location);
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
         requiredDocument.Location = response.data.location;
       })["catch"](function (error) {
+        console.log('se equivoco esta cosa');
         var errores = error.response.data['errors'];
         requiredDocument.Errores = {
           file: 'file' in errores ? errores.file[0] : null,
@@ -3264,6 +3266,7 @@ __webpack_require__.r(__webpack_exports__);
     motivation: String,
     // Documentos de ingreso.
     entrance_documents: Array,
+    // curricular_documents: Array,
     // Programa académico.
     academic_program: Object,
     // Grados académicos del postulante.

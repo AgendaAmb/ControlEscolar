@@ -32,16 +32,18 @@
         </rechazar-expediente>
     @endif
 
+    {{--  :curricular_documents="archive.curricular_documents" --}}
     {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
-            :curricular_documents="archive.curricular_documents" :motivation="archive.motivation"
+            :motivation="archive.motivation"
             :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
             :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
             :appliant_languages="archive.appliant_languages"
             :appliant_working_experiences="archive.appliant_working_experiences"
             :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
             :recommendation_letters="recommendation_letters"
-            :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment">
+            :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment"
+            :status="archive.status">
         </solicitud-postulante>
         {{-- <h1>{{$archive->status}}</h1>
         <h2>{{ Auth::user()}}</h2> --}}

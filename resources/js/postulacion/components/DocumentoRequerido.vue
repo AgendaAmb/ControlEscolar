@@ -403,7 +403,6 @@ export default {
         return false;
       }
     },
-    
     cargaDocumento(e) {
       var name = e.target.files[0].name;
       this.Errores = {};

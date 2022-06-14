@@ -421,6 +421,9 @@ export default {
 
     //Persona que esta viendo el expediente
     viewer: Object,
+
+    //Estado del expediente
+    status: Number,
   },
 
   computed: {

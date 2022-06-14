@@ -61,6 +61,8 @@ export default {
     // Documentos de ingreso.
     entrance_documents: Array,
 
+    // curricular_documents: Array,
+
     // Programa académico.
     academic_program: Object,
 
