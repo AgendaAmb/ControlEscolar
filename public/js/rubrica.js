@@ -67723,6 +67723,189 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
+/* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_0__);
+var _props;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'basic-data-rubric-section',
+  props: (_props = {
+    // Título de la sección.
+    title: {
+      type: String,
+      "default": ''
+    },
+    country: {
+      type: String,
+      "default": ''
+    },
+    university: {
+      type: String,
+      "default": ''
+    },
+    // Conceptos básicos.
+    concepts: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    id: {
+      type: Number
+    },
+    estudio_score: {
+      type: Number
+    },
+    english_score: {
+      type: Number
+    }
+  }, _defineProperty(_props, "estudio_score", {
+    type: Number
+  }), _defineProperty(_props, "exani_score", {
+    type: Number
+  }), _defineProperty(_props, "antype", {
+    type: String,
+    "default": ''
+  }), _props),
+  mounted: function mounted() {
+    console.log(this.antype);
+  },
+  methods: {
+    detailsFrom: function detailsFrom(concept) {
+      if (concept.evaluation_concept_details.length === 0) return [{
+        text: ''
+      }, {
+        text: ''
+      }, {
+        text: ''
+      }, {
+        text: ''
+      }];
+      if (concept.type === 'research') return [];
+      return concept.evaluation_concept_details;
+    },
+    // Calculo de la ponderacion
+    sectionScore: function sectionScore(concepts, id) {
+      // Factores de ponderación de los rubros
+      var doctorado = [10, 25, 30, 20, 15];
+      var maestria = [15, 30, 15, 25, 15];
+      var score = 0.0;
+      concepts.forEach(function (concept) {
+        score += concept.score;
+      });
+      score = "".concat(this.antype) === 'doctorado' ? score / concepts.length * doctorado["".concat(this.id)] / 100 : score / concepts.length * maestria["".concat(this.id)] / 100;
+      return score;
+    },
+    researchDetailsFrom: function researchDetailsFrom(concept) {
+      if (concept.type !== 'research') return {};
+      return concept.evaluation_concept_details;
+    },
+    isHeader: function isHeader(detail) {
+      return detail.type === 'header';
+    },
+    isTextInput: function isTextInput(detail) {
+      return detail.type === 'text';
+    },
+    isTextArea: function isTextArea(detail) {
+      return detail.type === 'textarea';
+    },
+    isRadioInput: function isRadioInput(detail) {
+      return detail.type === 'radio';
+    },
+    labelClassFor: function labelClassFor(detail) {
+      return {
+        'd-block': true,
+        'myriad-regular': !this.isHeader(detail),
+        'myriad-bold': this.isHeader(detail),
+        'text-left': true,
+        'mt-0': true,
+        'mb-1': true
+      };
+    },
+    labelTextFor: function labelTextFor(detail) {
+      if (this.isHeader(detail)) return detail.header;
+      return detail.label;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=script&lang=js& ***!
@@ -67736,6 +67919,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -90003,6 +90196,45 @@ component.options.__file = "resources/js/rubrica/components/AppliantData.vue"
 
 /***/ }),
 
+/***/ "./resources/js/rubrica/components/BasicDataRubricSection.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/rubrica/components/BasicDataRubricSection.vue ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BasicDataRubricSection.vue?vue&type=template&id=37471e10& */ "./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10&");
+/* harmony import */ var _BasicDataRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasicDataRubricSection.vue?vue&type=script&lang=js& */ "./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BasicDataRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/rubrica/components/BasicDataRubricSection.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/rubrica/components/EvaluationRubricSection.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/rubrica/components/EvaluationRubricSection.vue ***!
@@ -90058,6 +90290,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicDataRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BasicDataRubricSection.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicDataRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************!*\
   !*** ./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=script&lang=js& ***!
@@ -90100,6 +90348,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppliantData_vue_vue_type_template_id_0c23c1c3___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppliantData_vue_vue_type_template_id_0c23c1c3___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppliantData.vue?vue&type=template&id=0c23c1c3& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/AppliantData.vue?vue&type=template&id=0c23c1c3&");
+
+
+/***/ }),
+
+/***/ "./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10& ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BasicDataRubricSection_vue_vue_type_template_id_37471e10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BasicDataRubricSection.vue?vue&type=template&id=37471e10& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10&");
 
 
 /***/ }),
@@ -90197,6 +90462,110 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/BasicDataRubricSection.vue?vue&type=template&id=37471e10& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row mt-2 justify-content-center rubric-section" },
+    [
+      _c(
+        "h4",
+        { staticClass: "col-11 myriad-bold rubric-section-header mb-3" },
+        [_vm._v(" " + _vm._s(_vm.title) + " ")]
+      ),
+      _vm._v(" "),
+      _vm._t("appliant_data"),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-11" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _c("tbody", [
+            _c("tr", [
+              _c("td", { staticClass: "text-justify concept" }, [
+                _c("b", [_vm._v(" Lengua extranjera (Ingles): ")]),
+                _vm._v(" " + _vm._s(_vm.english_score)),
+              ]),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "text-justify concept" }, [
+                _c("b", [_vm._v(" EXANI: ")]),
+                _vm._v(_vm._s(_vm.exani_score)),
+              ]),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "text-justify concept" }, [
+                _c("b", [_vm._v(" Universidad de procedencia: ")]),
+                _vm._v(_vm._s(_vm.university)),
+              ]),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "text-justify concept" }, [
+                _c("b", [_vm._v(" Promedio de la licenciatura: ")]),
+                _vm._v(_vm._s(_vm.estudio_score) + " "),
+              ]),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("tfoot", [
+            _c("tr", [
+              _c("td"),
+              _vm._v(" "),
+              _c("td"),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  "Ponderación: " + _vm._s(_vm.sectionScore(_vm.concepts))
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "col-12 hr" }),
+      ]),
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=template&id=4e82781c&":
 /*!*******************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=template&id=4e82781c& ***!
@@ -90226,7 +90595,7 @@ var render = function () {
       _vm._t("appliant_data"),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-11 table-responsive px-0" }, [
-        _c("table", { staticClass: "table rubric-section-body" }, [
+        _c("table", { staticClass: "table table-hover" }, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -90244,7 +90613,7 @@ var render = function () {
                     return _c(
                       "td",
                       { key: detail.id, staticClass: "text-justify" },
-                      [_vm._v(_vm._s(detail.text))]
+                      [_vm._v(_vm._s(detail.text) + "\n                    ")]
                     )
                   }),
                   _vm._v(" "),
@@ -102777,9 +103146,10 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_AppliantData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/AppliantData */ "./resources/js/rubrica/components/AppliantData.vue");
 /* harmony import */ var _components_EvaluationRubricSection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/EvaluationRubricSection */ "./resources/js/rubrica/components/EvaluationRubricSection.vue");
-/* harmony import */ var _syncfusion_ej2_vue_grids__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @syncfusion/ej2-vue-grids */ "./node_modules/@syncfusion/ej2-vue-grids/src/grid/grid.component.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_BasicDataRubricSection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/BasicDataRubricSection */ "./resources/js/rubrica/components/BasicDataRubricSection.vue");
+/* harmony import */ var _syncfusion_ej2_vue_grids__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @syncfusion/ej2-vue-grids */ "./node_modules/@syncfusion/ej2-vue-grids/src/grid/grid.component.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -102789,8 +103159,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
-Vue.use(_syncfusion_ej2_vue_grids__WEBPACK_IMPORTED_MODULE_3__.GridPlugin);
+Vue.use(_syncfusion_ej2_vue_grids__WEBPACK_IMPORTED_MODULE_4__.GridPlugin);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -102803,7 +103174,13 @@ var app = new Vue({
   el: '#app',
   data: {
     id: rubric.id,
+    estudio_score: 0,
+    english_score: 0,
+    exani_score: 0,
+    university: '',
     basic_concepts: rubric.basic_concepts,
+    // TODO va a ser remplazado
+    basicConcepts: basicConcepts,
     academic_concepts: rubric.academic_concepts,
     research_concepts: rubric.research_concepts,
     research_concepts_details: rubric.research_concepts_details,
@@ -102820,9 +103197,56 @@ var app = new Vue({
     visbleSend: false,
     isComplete: rubric.isComplete
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    //Obtemenos el escore de maestria o licencitara segun el caso
+    try {
+      if (this.announcement.type === 'maestría') {
+        this.basicConcepts.academic_degrees.forEach(function (element) {
+          if (element.degree_type === 'Licenciatura') {
+            _this.university = element.university; //Cargar universidad
+
+            if (element.country === 'México') {
+              _this.estudio_score = element.average;
+            } else {
+              _this.estudio_score = 10 / element.max_avg * element.average;
+            }
+          }
+        });
+      } else {
+        this.basicConcepts.academic_degrees.forEach(function (element) {
+          if (element.degree_type === 'Maestría') {
+            _this.university = element.university; //Cargar universidad
+
+            if (element.country === 'México') {
+              _this.estudio_score = element.average;
+            } else {
+              _this.estudio_score = 10 / element.max_avg * element.average;
+            }
+          }
+        });
+      }
+
+      ;
+    } catch (_unused) {
+      this.estudio_score = -1;
+    } // Obtenemos los datos del ingles 
+
+
+    this.basicConcepts.appliant_languages.forEach(function (element) {
+      console.log(element.language);
+
+      if (element.language === 'Inglés') {
+        _this.english_score = element.score;
+      }
+    });
+  },
+  // var = (10/Max_average_sis)Max_average
   components: {
     AppliantData: _components_AppliantData__WEBPACK_IMPORTED_MODULE_0__["default"],
-    EvaluationRubricSection: _components_EvaluationRubricSection__WEBPACK_IMPORTED_MODULE_1__["default"]
+    EvaluationRubricSection: _components_EvaluationRubricSection__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BasicDataRubricSection: _components_BasicDataRubricSection__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   methods: {
     /**
@@ -102869,7 +103293,7 @@ var app = new Vue({
       });
     },
     guardaRubrica: function guardaRubrica(state) {
-      var _this = this;
+      var _this2 = this;
 
       state == "save" ? this.visbleSave = true : this.visbleSave = false;
       state == "send" ? this.visbleSend = true : this.visbleSend = false;
@@ -102879,7 +103303,7 @@ var app = new Vue({
       var research_concepts = this.getConceptData(this.research_concepts);
       var working_experience_concepts = this.getConceptData(this.working_experience_concepts);
       var personal_attributes_concepts = this.getConceptData(this.personal_attributes_concepts);
-      axios__WEBPACK_IMPORTED_MODULE_2___default().put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
+      axios__WEBPACK_IMPORTED_MODULE_3___default().put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
         state: state,
         basic_concepts: basic_concepts,
         academic_concepts: academic_concepts,
@@ -102890,9 +103314,9 @@ var app = new Vue({
         additional_information: this.additional_information,
         dictamen_ce: this.dictamen_ce
       }).then(function (response) {
-        _this.visbleSave = false, _this.visbleSend = false, alert('Tu información se ha guardado con exito.');
+        _this2.visbleSave = false, _this2.visbleSend = false, alert('Tu información se ha guardado con exito.');
       })["catch"](function (error) {
-        _this.visbleSave = false, _this.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. Recuerda llenar todos los campos necesarios');
+        _this2.visbleSave = false, _this2.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. Recuerda llenar todos los campos necesarios');
       });
     }
   }

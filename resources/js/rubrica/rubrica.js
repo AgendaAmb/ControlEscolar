@@ -6,6 +6,7 @@
 
 import AppliantData from './components/AppliantData';
 import EvaluationRubricSection from './components/EvaluationRubricSection';
+import BasicDataRubricSection from './components/BasicDataRubricSection';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 import axios from 'axios';
 
@@ -24,7 +25,12 @@ const app = new Vue({
     el: '#app',
     data: {
         id: rubric.id,
-        basic_concepts: rubric.basic_concepts,
+        estudio_score: 0,
+        english_score: 0,
+        exani_score: 0,
+        university: '',
+        basic_concepts: rubric.basic_concepts, // TODO va a ser remplazado
+        basicConcepts: basicConcepts,
         academic_concepts: rubric.academic_concepts,
         research_concepts: rubric.research_concepts,
         research_concepts_details: rubric.research_concepts_details,
@@ -42,9 +48,51 @@ const app = new Vue({
         isComplete:rubric.isComplete
     },
 
+    mounted() {
+        //Obtemenos el escore de maestria o licencitara segun el caso
+        try{
+            if(this.announcement.type === 'maestría'){
+                this.basicConcepts.academic_degrees.forEach(element => {
+                    if(element.degree_type === 'Licenciatura'){
+                        this.university = element.university;   //Cargar universidad
+                        if(element.country==='México'){
+                            this.estudio_score = element.average;
+                        }else{
+                            this.estudio_score = (10/element.max_avg)*element.average;
+                        }
+                    }
+                });
+            }else{
+                this.basicConcepts.academic_degrees.forEach(element => {
+                    if(element.degree_type === 'Maestría'){
+                        this.university = element.university;   //Cargar universidad
+                        if(element.country==='México'){
+                            this.estudio_score = element.average;
+                        }else{
+                            this.estudio_score = (10/element.max_avg)*element.average;
+                        }
+                    }
+                });
+            };
+        }catch{
+            this.estudio_score = -1;
+        }
+        
+        // Obtenemos los datos del ingles 
+        this.basicConcepts.appliant_languages.forEach(element => {
+            console.log(element.language);
+            if(element.language==='Inglés'){
+                this.english_score = element.score;
+            }
+        });
+    },
+
+    // var = (10/Max_average_sis)Max_average
+ 
     components: {
         AppliantData,
-        EvaluationRubricSection
+        EvaluationRubricSection,
+        BasicDataRubricSection
     },
    
     methods: {
@@ -52,7 +100,6 @@ const app = new Vue({
          * Determina si el usuario autenticado es profesor de núcleo básico.
          * @param {*} period 
          */
-
 
         loggedUserIsPNB(){
             var roles = this.loggedUser.roles.filter(role => {

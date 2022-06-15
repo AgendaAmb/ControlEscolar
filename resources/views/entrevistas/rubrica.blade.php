@@ -3,6 +3,9 @@ const user = @json($user);
 const appliant = @json($appliant);
 const rubric = @json($rubric);
 const announcement = @json($announcement);
+const basicConcepts = @json($basic_concepts);
+
+// console.log(basicConcepts);
 </script>
 
 @extends('layouts.app')
@@ -21,11 +24,12 @@ const announcement = @json($announcement);
     <hr class="col-11 hr">
 </div>
 
-<evaluation-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:concepts="basic_concepts"  v-bind:antype="announcement.type" v-bind:id="0">
+<basic-data-rubric-section v-bind:title="'1.- Datos básicos'" v-bind:university="university" v-bind:country="appliant.birth_country" v-bind:concepts="basic_concepts" v-bind:estudio_score="estudio_score" v-bind:english_score="english_score" v-bind:exani_score="exani_score"  v-bind:antype="announcement.type" v-bind:id="0">
     <template v-slot:appliant_data>
         <appliant-data v-bind:appliant="appliant" v-bind:announcement="announcement"></appliant-data>
     </template>
-</evaluation-rubric-section>
+</basic-data-rubric-section>
+
 <evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="academic_concepts" v-bind:antype="announcement.type" v-bind:id="1"></evaluation-rubric-section>
 <evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="research_concepts" v-bind:antype="announcement.type" v-bind:id="2"></evaluation-rubric-section>
 <evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="working_experience_concepts"  v-bind:antype="announcement.type" v-bind:id="3"></evaluation-rubric-section>
