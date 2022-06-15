@@ -65,11 +65,6 @@ const app = new Vue({
     },
 
     methods:{
-
-        hola(){
-            console.log("hola we");
-        },
-        
         /**
          * Actualiza el periodo de entrevistas.
          * @param {*} period 
@@ -98,13 +93,46 @@ const app = new Vue({
          * @param {*} period 
          */
         interviewDetails(interview) {
+            // Validad ambos casos virtual y presencial 
+            var interview_room = null;
+            if(this.period.modality === 'presencial'){
+                for(let i = 0; i < this.period.rooms.length; i++){
+                    if(this.period.rooms[i].id === interview.room)interview_room = this.period.rooms[i];
+                }
+            }else if(this.period.modality === 'virtual'){
+                for(let i = 0; i < this.period.virtual_rooms.length; i++){
+                    if(this.period.virtual_rooms[i].id === interview.room){
+                        interview_room = this.period.virtual_rooms[i];
+                        break;
+                    }
+                }
+            }else{
+                // Presencial 
+                for(let i = 0; i < this.period.rooms.length; i++){
+                    if(this.period.rooms[i].id === interview.room){
+                        interview_room = this.period.rooms[i];
+                        break;
+                    }
+                }
+                if(interview_room == null){
+                    for(let i = 0; i < this.period.virtual_rooms.length; i++){
+                        if(this.period.virtual_rooms[i].id === interview.room){
+                            interview_room = this.period.virtual_rooms[i];
+                            break;
+                        }
+                    }
+                }
+            }
+
+            console.log(interview_room);
+
             this.selectedInterview = {
                 id: interview.id,
                 appliant: interview.appliant,
                 areas: interview.areas,
                 date: interview.date,
                 professor: interview.professor,
-                room: interview.room,
+                room: interview_room!==null?interview_room.site:"Error",
                 start_time: interview.start_time,
                 end_time: interview.end_time,
                 confirmed: interview.confirmed

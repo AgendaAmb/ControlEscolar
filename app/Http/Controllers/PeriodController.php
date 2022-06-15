@@ -18,8 +18,22 @@ class PeriodController extends Controller
         $data['finished'] = false;
 
         $period = Period::create($data);
-        $period->rooms()->createMany(array_fill(0, $request->num_salas, []));
 
-        return new JsonResponse(['url'=>route('entrevistas.calendario')]);
+        if ($data['modality'] === 'presencial' || $data['modality'] === 'mixta') {
+            // Presencial rooms
+            $period->rooms()->create(['site' => 'Aula']);   //  aula
+            $period->rooms()->create(['site' => 'Sala de videoconferencias']);    //  sala de videoconferencias
+            $period->rooms()->create(['site' => 'Sala de usos multiples']);    //  sala de usos multiples
+        }
+
+        if ($data['modality'] === 'virtual' || $data['modality'] === 'mixta') {
+            $site = "Zoom - Sala ";
+            // Virtual rooms
+            for ($i = 0; $i < 3; $i++) {
+                $period->rooms()->create(['site' => $site . ($i + 1)]);
+            }
+        }
+
+        return new JsonResponse(['url' => route('entrevistas.calendario')]);
     }
 }

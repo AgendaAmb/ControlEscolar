@@ -39,6 +39,7 @@ const announcements = @json($announcements);
         v-bind:period_id="period.id"
         v-bind:date="date"
         v-bind:rooms="period.rooms"
+        v-bind:virtual_rooms="period.virtual_rooms"
         v-on:nuevaentrevista="agregaEntrevista">
     </nueva-entrevista>
 

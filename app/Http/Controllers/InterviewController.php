@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMeeatingInformation;
 use App\Mail\SendMeeatingInformationProfesor;
 use App\Models\Archive;
+use App\Models\Room;
 use Carbon\Carbon;
 
 class InterviewController extends Controller
@@ -176,9 +177,8 @@ class InterviewController extends Controller
      */
     public function confirmInterview(ConfirmInterviewRequest $request)
     {
-
-
         $interview2 = Interview::findorFail($request->id);
+        $int_room  = Room::findorFail($interview2->room_id);
 
         // foreach ($interview2->evaluationRubrics as $rubric) {
 
@@ -190,15 +190,22 @@ class InterviewController extends Controller
 
         // }
 
-
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
 
             //Crear url para la sesion de zoom//
             $ResponseMeating = app(ZoomController::class)->store($interview2);
 
+            // Entrevista presencial o virtual
+            // if(str_contains($int_room->site,'Zoom')?true:false){
+            //     //Crear url para la sesion de zoom//
+            //     $ResponseMeating = app(ZoomController::class)->store($interview2);
+            // }else{
+            //     $ResponseMeating = null;
+            // }
+
             // Actualizacion bandera - entrevista cerrada
-            Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
+            // Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
 
             // TODO AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
             //dd($ResponseMeating['id']);
@@ -209,7 +216,7 @@ class InterviewController extends Controller
             // Carga el achivo del postulante para obtener el programa academico
             $archive = null;
 
-            foreach($interview2->users as $key => $User){
+            foreach ($interview2->users as $key => $User) {
                 if ($User->user_type == "externs" || $User->user_type == "students") {
                     $this->alumno = $User;
 
@@ -233,13 +240,11 @@ class InterviewController extends Controller
                 } else if ($User->user_type == "workers") {
                     /**Obtener al trabajador inscrito en la entrevista */
                     $Trabajador = $Trabajadores->where('id', $User->id)->first();
-
                     // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                     Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                 }
             }
         }
-
 
         return new JsonResponse(['message' => 'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }

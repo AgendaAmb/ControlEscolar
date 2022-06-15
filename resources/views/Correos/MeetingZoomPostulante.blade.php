@@ -86,7 +86,7 @@
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
                         sea ingresado en la plataforma a más tardar el día 19 de junio a las 12:00 h
                     </div>
-                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    {{-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.showTest', [
@@ -96,14 +96,14 @@
                             Subir mi ensayo
                         @endcomponent
                        
-                    </div>
+                    </div> --}}
                 @elseif ($academic_program === 'Maestría Interdisciplinaria en ciudades sostenibles')
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración PROTOCOLO DE INVESTIGACIÓN Y UNA
                         PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 19 de
                         junio a las 12:00 h
                     </div>
-                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    {{-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
                         @component('mail::button',
                         [
@@ -114,7 +114,7 @@
                         Subir Presentación
                     @endcomponent
                         
-                    </div>
+                    </div> --}}
                 @endif
 
                 <p>
