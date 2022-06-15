@@ -1,17 +1,19 @@
 <template>
-  <a class="row mx-3 card" @click="showDetails">
-    <div class="col-7 text-left">
+  <a class="row mx-3 card my-1" @click="showDetails">
+    <div class="col-12 text-left">
       <h5 class="my-1 appliant"> {{ appliant }} </h5>
-      <p class="mt-2 mb-0 detail"> Carta de intención otorgada por: </p>
-      <p class="my-0"> {{ professor }} </p>
-      <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
-      <p class="my-0"  v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p> 
+      <div class="row">
+        <div class="col-6">
+          <p class="mt-1 mb-0 detail"> Carta de intención otorgada por: </p>
+          <p class="my-0"> {{ professor }} </p>
+        </div>
+        <div class="col-6">
+          <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
+          <p class="my-0" v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p>
+        </div>
+      </div>
+      <p class="my-2 detail text-right"> {{ site }} , {{ start_time }} - {{ end_time }}</p>
     </div>
-    <div class="col-5 text-right">
-      <p class="my-1 detail"> Sala {{ room }} </p>
-      <p class="my-1 detail"> {{start_time}} - {{end_time}} </p>
-    </div>
-  
   </a>
 </template>
 
@@ -30,15 +32,20 @@
   display: block;
 }
 
-p.detail + p:not(.detail) {
+p.detail+p:not(.detail) {
   font-family: 'Myriad Pro Bold';
   font-size: 13px;
   color: #115089;
   text-transform: capitalize;
 }
 
-.card{
-  border: 2px solid #115089;
+.card {
+  cursor: hand;
+  text-decoration: none;
+}
+
+.card:hover {
+  border: 1px solid #115089;
 }
 </style>
 
@@ -47,6 +54,10 @@ export default {
   name: "interview",
 
   props: {
+    site: {
+      type: String,
+      default: "Indefinido"
+    },
     // Clave de la entrevista.
     id: {
       type: Number,
@@ -95,7 +106,7 @@ export default {
       default: false
     },
 
-  // Hora de inicio.
+    // Hora de inicio.
     url: {
       type: String,
       default: "Indefinido"
@@ -110,7 +121,7 @@ export default {
   },
 
   methods: {
-    showDetails(){
+    showDetails() {
       this.$root.$emit('show_details', this);
 
       return false;

@@ -11,38 +11,35 @@
         <h1 class="d-block v-cal-header__title año">{{ calendarYear }}</h1>
       </div>
       <div class="btn-group" role="group">
-        <button class="v-cal-button" @click="switchView('month')" :class="calendarViewButtonClass('month')"> Mes </button>
-        <button class="v-cal-button" @click="switchView('week')" :class="calendarViewButtonClass('week')"> Semana </button>
+        <button class="v-cal-button" @click="switchView('month')" :class="calendarViewButtonClass('month')"> Mes
+        </button>
+        <button class="v-cal-button" @click="switchView('week')" :class="calendarViewButtonClass('week')"> Semana
+        </button>
         <!-- <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button> -->
       </div>
     </div>
-    
+
     <div v-if="period !== null && isSchoolControl === true" class="new-interview">
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista"> Nueva Entrevista </button>
     </div>
 
     <div v-if="IsActive" class="calendar-body">
       <div class="v-cal">
-        <component
-          :is="activeView"
-          :class="'v-cal-content--' + activeView"
-          v-bind="activeViewProps"
-          @day-clicked="muestraEntrevistas"
-          ></component>
+        <component :is="activeView" :class="'v-cal-content--' + activeView" v-bind="activeViewProps"
+          @day-clicked="muestraEntrevistas"></component>
         <footer class="v-cal-footer"></footer>
       </div>
       <div class="interview-day">
         <header>
-          <p>{{StringDate}}</p>
+          <p>{{ StringDate }}</p>
         </header>
-        <interview v-for="interview in ActiveDateInterviews" 
-          v-bind="interviewDataFrom(interview)"
-          :key="interview.id"
-          ></interview>
+        <interview v-for="interview in ActiveDateInterviews" v-bind="interviewDataFrom(interview)" :key="interview.id">
+        </interview>
       </div>
     </div>
     <div v-if="IsActive === false && this.$root.loggedUserIsSchoolControl()" class="mx-auto">
-      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de entrevistas </button>
+      <button class="my-3 v-cal-button" data-toggle="modal" data-target="#NuevoPeriodo"> Programar periodo de
+        entrevistas </button>
     </div>
     <div v-else-if="period === null">
       <h1>Periodo de entrevistas cerrado</h1>
@@ -365,14 +362,6 @@ export default {
 
   methods: {
     muestraEntrevistas(date){
-      console.log(Date.parse(date));
-
-      console.log( moment(date.toLocaleDateString()).format('YYYY-MM-DD') + " > " + this.MinDate._i + " = " );
-      console.log( Date.parse(date) > Date.parse(this.MinDate._i));
-
-      console.log( moment(date.toLocaleDateString()).format('YYYY-MM-DD') + " < " + this.MinDate._i + " = " );
-      console.log( Date.parse(date) < Date.parse(this.MaxDate._i));
-
       // Verifica que el dia seleccionado en el calendario es despues del dia minimo 
       // if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
       //   return false;
@@ -415,7 +404,38 @@ export default {
       var start_time = moment(interview.start_time, 'hh:mm:ss').format('hh:mm A');
       var end_time = moment(interview.end_time, 'hh:mm:ss').format('hh:mm A');
 
+      // Validad ambos casos virtual y presencial 
+      var interview_room = null;
+      if(this.period.modality === 'presencial'){
+        for(let i = 0; i < this.period.rooms.length; i++){
+          if(this.period.rooms[i].id === interview.room_id)interview_room = this.period.rooms[i];
+        }
+      }else if(this.period.modality === 'virtual'){
+        for(let i = 0; i < this.period.virtual_rooms.length; i++){
+          if(this.period.virtual_rooms[i].id === interview.room_id){
+            interview_room = this.period.virtual_rooms[i];
+            break;
+          }
+        }
+      }else{
+        // Presencial 
+        for(let i = 0; i < this.period.rooms.length; i++){
+          if(this.period.rooms[i].id === interview.room_id){
+            interview_room = this.period.rooms[i];
+            break;
+          }
+        }
+        if(interview_room == null){
+          for(let i = 0; i < this.period.virtual_rooms.length; i++){
+            if(this.period.virtual_rooms[i].id === interview.room_id){
+              interview_room = this.period.virtual_rooms[i];
+              break;
+            }
+          }
+        }
+      }
       return {
+        'site': interview_room!==null?interview_room.site:"Error",
         'id': interview.id,
         'room': interview.room_id,
         'areas': interview.academic_areas,
@@ -425,7 +445,7 @@ export default {
         'start_time': start_time,
         'end_time': end_time,
         'confirmed': interview.confirmed,
-        'url':interview.url
+        'url':interview.url,
       };
     }
   },

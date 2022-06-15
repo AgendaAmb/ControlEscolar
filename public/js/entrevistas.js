@@ -86,9 +86,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -332,16 +329,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     muestraEntrevistas: function muestraEntrevistas(date) {
-      console.log(Date.parse(date));
-      console.log(moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD') + " > " + this.MinDate._i + " = ");
-      console.log(Date.parse(date) > Date.parse(this.MinDate._i));
-      console.log(moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD') + " < " + this.MinDate._i + " = ");
-      console.log(Date.parse(date) < Date.parse(this.MaxDate._i)); // Verifica que el dia seleccionado en el calendario es despues del dia minimo 
+      // Verifica que el dia seleccionado en el calendario es despues del dia minimo 
       // if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
       //   return false;
       // if (moment(date.toLocaleDateString()).isAfter(this.MaxDate))
       //   return false;
-
       this.$emit("update:date", moment__WEBPACK_IMPORTED_MODULE_0___default()(date.toLocaleDateString()).format('YYYY-MM-DD'));
       this.activeDate = moment__WEBPACK_IMPORTED_MODULE_0___default()(date);
     },
@@ -367,8 +359,42 @@ __webpack_require__.r(__webpack_exports__);
     },
     interviewDataFrom: function interviewDataFrom(interview) {
       var start_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.start_time, 'hh:mm:ss').format('hh:mm A');
-      var end_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.end_time, 'hh:mm:ss').format('hh:mm A');
+      var end_time = moment__WEBPACK_IMPORTED_MODULE_0___default()(interview.end_time, 'hh:mm:ss').format('hh:mm A'); // Validad ambos casos virtual y presencial 
+
+      var interview_room = null;
+
+      if (this.period.modality === 'presencial') {
+        for (var i = 0; i < this.period.rooms.length; i++) {
+          if (this.period.rooms[i].id === interview.room_id) interview_room = this.period.rooms[i];
+        }
+      } else if (this.period.modality === 'virtual') {
+        for (var _i = 0; _i < this.period.virtual_rooms.length; _i++) {
+          if (this.period.virtual_rooms[_i].id === interview.room_id) {
+            interview_room = this.period.virtual_rooms[_i];
+            break;
+          }
+        }
+      } else {
+        // Presencial 
+        for (var _i2 = 0; _i2 < this.period.rooms.length; _i2++) {
+          if (this.period.rooms[_i2].id === interview.room_id) {
+            interview_room = this.period.rooms[_i2];
+            break;
+          }
+        }
+
+        if (interview_room == null) {
+          for (var _i3 = 0; _i3 < this.period.virtual_rooms.length; _i3++) {
+            if (this.period.virtual_rooms[_i3].id === interview.room_id) {
+              interview_room = this.period.virtual_rooms[_i3];
+              break;
+            }
+          }
+        }
+      }
+
       return {
+        'site': interview_room !== null ? interview_room.site : "Error",
         'id': interview.id,
         'room': interview.room_id,
         'areas': interview.academic_areas,
@@ -472,6 +498,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
   props: (_props = {
@@ -497,8 +529,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Número de sala.
     room: {
-      type: Number,
-      "default": -1
+      type: String,
+      "default": "Indefinido"
     },
     // Hora de inicio.
     start_time: {
@@ -843,9 +875,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "interview",
   props: {
+    site: {
+      type: String,
+      "default": "Indefinido"
+    },
     // Clave de la entrevista.
     id: {
       type: Number,
@@ -1002,6 +1045,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nueva-entrevista",
@@ -1014,8 +1073,10 @@ __webpack_require__.r(__webpack_exports__);
     max_date: String,
     // Postulantes.
     appliants: Array,
-    // Salas disponibles.
-    rooms: Array
+    // Salas presenciales disponibles.
+    rooms: Array,
+    // Salas virtuales disponibles.
+    virtual_rooms: Array
   },
   data: function data() {
     return {
@@ -1028,7 +1089,8 @@ __webpack_require__.r(__webpack_exports__);
       end_time: null,
       appliant: null,
       professor: null,
-      room: null
+      room: null,
+      sv: false
     };
   },
   computed: {
@@ -1051,6 +1113,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    selecSV: function selecSV() {
+      this.sv ? this.sv = false : this.sv = true;
+    },
+
     /**
      * Genera la entrevista.
      */
@@ -1169,6 +1235,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nuevo-periodo",
   props: {
@@ -1186,16 +1285,22 @@ __webpack_require__.r(__webpack_exports__);
       start_date: null,
       end_date: null,
       announcement_id: null,
-      num_salas: 1
+      num_salas: 1,
+      modalidad: 'presencial'
     };
   },
   methods: {
+    // loads the modality
+    modalidadSelected: function modalidadSelected(modalidad) {
+      this.modalidad = modalidad;
+    },
     creaPeriodo: function creaPeriodo() {
       axios.post('/controlescolar/entrevistas/periods', {
         start_date: this.start_date,
         end_date: this.end_date,
         num_salas: this.num_salas,
-        announcement_id: this.announcement_id
+        announcement_id: this.announcement_id,
+        modality: this.modalidad
       }).then(function (response) {
         window.location.href = response.data.url;
       })["catch"](function (error) {
@@ -2088,7 +2193,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntfoot > tr > td > button[data-v-659b4636] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntfoot>tr>td>button[data-v-659b4636] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2112,7 +2217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Bold';\r\n  color: #115089;\r\n  display: block;\r\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Regular';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  display: block;\n}\np.detail + p[data-v-21c69871]:not(.detail) {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  text-transform: capitalize;\n}\n.card[data-v-21c69871]{\r\n  border: 2px solid #115089;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.appliant[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Bold';\r\n  color: #115089;\r\n  display: block;\r\n  text-transform: capitalize;\n}\n.detail[data-v-21c69871] {\r\n  font-family: 'Myriad Pro Regular';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  display: block;\n}\np.detail+p[data-v-21c69871]:not(.detail) {\r\n  font-family: 'Myriad Pro Bold';\r\n  font-size: 13px;\r\n  color: #115089;\r\n  text-transform: capitalize;\n}\n.card[data-v-21c69871] {\r\n  cursor: hand;\r\n  text-decoration: none;\n}\n.card[data-v-21c69871]:hover {\r\n  border: 1px solid #115089;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2136,7 +2241,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-34cc71e8], .modal-footer button.btn-primary[data-v-34cc71e8] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-34cc71e8] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-34cc71e8] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-34cc71e8],\r\n.modal-footer button.btn-primary[data-v-34cc71e8] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-34cc71e8] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-34cc71e8] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2160,7 +2265,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-23a19f57], .modal-footer button.btn-primary[data-v-23a19f57] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-23a19f57] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-23a19f57] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-header.modal-header-blue[data-v-23a19f57],\r\n.modal-footer button.btn-primary[data-v-23a19f57] {\r\n  background-color: #115089;\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\n.modal-body label[data-v-23a19f57] {\r\n  color: #115089;\n}\n.modal-footer button.btn-secondary[data-v-23a19f57] {\r\n  color: white;\r\n  font-family: 'Myriad Pro Bold';\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27930,7 +28035,7 @@ var render = function () {
                   },
                 },
               },
-              [_vm._v(" Mes ")]
+              [_vm._v(" Mes\n      ")]
             ),
             _vm._v(" "),
             _c(
@@ -27944,7 +28049,7 @@ var render = function () {
                   },
                 },
               },
-              [_vm._v(" Semana ")]
+              [_vm._v(" Semana\n      ")]
             ),
           ]),
         ])
@@ -28019,7 +28124,7 @@ var render = function () {
               staticClass: "my-3 v-cal-button",
               attrs: { "data-toggle": "modal", "data-target": "#NuevoPeriodo" },
             },
-            [_vm._v(" Programar periodo de entrevistas ")]
+            [_vm._v(" Programar periodo de\n      entrevistas ")]
           ),
         ])
       : _vm.period === null
@@ -28113,7 +28218,7 @@ var render = function () {
                     _c("div", { staticClass: "col-lg-6 my-auto px-0" }, [
                       _c("p", { staticClass: "d-block mt-0 sala" }, [
                         _vm._v(
-                          " Sala " +
+                          " " +
                             _vm._s(_vm.room) +
                             ", " +
                             _vm._s(_vm.start_time) +
@@ -28197,7 +28302,11 @@ var render = function () {
                                       staticClass: "btn btn-primary",
                                       on: { click: _vm.confirmaEntrevista },
                                     },
-                                    [_vm._v(" Confirmar entrevista ")]
+                                    [
+                                      _vm._v(
+                                        " Confirmar\n                        entrevista "
+                                      ),
+                                    ]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -28208,7 +28317,11 @@ var render = function () {
                                       staticClass: "btn btn-primary",
                                       on: { click: _vm.reabreEntrevista },
                                     },
-                                    [_vm._v(" Reabrir entrevista ")]
+                                    [
+                                      _vm._v(
+                                        " Reabrir\n                        entrevista "
+                                      ),
+                                    ]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -28219,7 +28332,11 @@ var render = function () {
                                       staticClass: "btn btn-danger ml-1",
                                       on: { click: _vm.eliminarEntrevista },
                                     },
-                                    [_vm._v(" Cancelar entrevista ")]
+                                    [
+                                      _vm._v(
+                                        " Cancelar\n                        entrevista "
+                                      ),
+                                    ]
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
@@ -28233,7 +28350,7 @@ var render = function () {
                                     "aria-label": "Close",
                                   },
                                 },
-                                [_vm._v(" Cerrar ")]
+                                [_vm._v("\n                        Cerrar ")]
                               ),
                             ]),
                           ]),
@@ -28361,44 +28478,49 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "a",
-    { staticClass: "row mx-3 card", on: { click: _vm.showDetails } },
+    { staticClass: "row mx-3 card my-1", on: { click: _vm.showDetails } },
     [
-      _c("div", { staticClass: "col-7 text-left" }, [
+      _c("div", { staticClass: "col-12 text-left" }, [
         _c("h5", { staticClass: "my-1 appliant" }, [
           _vm._v(" " + _vm._s(_vm.appliant) + " "),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "mt-2 mb-0 detail" }, [
-          _vm._v(" Carta de intención otorgada por: "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-6" }, [
+            _c("p", { staticClass: "mt-1 mb-0 detail" }, [
+              _vm._v(" Carta de intención otorgada por: "),
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "my-0" }, [
+              _vm._v(" " + _vm._s(_vm.professor) + " "),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-6" }, [
+            _vm.confirmed
+              ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+                  _vm._v(" Enlace de la reunión: "),
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.confirmed
+              ? _c("p", { staticClass: "my-0" }, [
+                  _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
+                    _vm._v(_vm._s(_vm.url)),
+                  ]),
+                ])
+              : _vm._e(),
+          ]),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "my-0" }, [
-          _vm._v(" " + _vm._s(_vm.professor) + " "),
-        ]),
-        _vm._v(" "),
-        _vm.confirmed
-          ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
-              _vm._v(" Enlace de la reunión: "),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.confirmed
-          ? _c("p", { staticClass: "my-0" }, [
-              _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
-                _vm._v(_vm._s(_vm.url)),
-              ]),
-            ])
-          : _vm._e(),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-5 text-right" }, [
-        _c("p", { staticClass: "my-1 detail" }, [
-          _vm._v(" Sala " + _vm._s(_vm.room) + " "),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "my-1 detail" }, [
+        _c("p", { staticClass: "my-2 detail text-right" }, [
           _vm._v(
-            " " + _vm._s(_vm.start_time) + " - " + _vm._s(_vm.end_time) + " "
+            " " +
+              _vm._s(_vm.site) +
+              " , " +
+              _vm._s(_vm.start_time) +
+              " - " +
+              _vm._s(_vm.end_time)
           ),
         ]),
       ]),
@@ -28587,7 +28709,7 @@ var render = function () {
                             { key: appliant.id, domProps: { value: appliant } },
                             [
                               _vm._v(
-                                " \n                  " +
+                                "\n                  " +
                                   _vm._s(appliant.name) +
                                   "\n                "
                               ),
@@ -28627,57 +28749,132 @@ var render = function () {
                     }),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-12" }, [
-                    _c("label", [_vm._v(" Número de sala ")]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.room,
-                            expression: "room",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        on: {
-                          change: function ($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function (o) {
-                                return o.selected
-                              })
-                              .map(function (o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.room = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          },
-                        },
-                      },
-                      [
-                        _c(
-                          "option",
-                          {
-                            attrs: { selected: "" },
-                            domProps: { value: null },
-                          },
-                          [_vm._v("Escoge una sala ")]
-                        ),
+                  _vm.sv === false
+                    ? _c("div", { staticClass: "form-group col-12" }, [
+                        _c("label", [_vm._v(" Lugar de la entrevista ")]),
                         _vm._v(" "),
-                        _vm._l(_vm.rooms, function (room, roomNumber) {
-                          return _c(
-                            "option",
-                            { key: room.id, domProps: { value: room } },
-                            [_vm._v(" " + _vm._s(roomNumber + 1) + " ")]
-                          )
-                        }),
-                      ],
-                      2
-                    ),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.room,
+                                expression: "room",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.room = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                            },
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: null },
+                              },
+                              [_vm._v("Escoge una sala ")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.rooms, function (room) {
+                              return _c(
+                                "option",
+                                { key: room.id, domProps: { value: room } },
+                                [_vm._v(" " + _vm._s(room.site) + " ")]
+                              )
+                            }),
+                          ],
+                          2
+                        ),
+                      ])
+                    : _c("div", { staticClass: "form-group col-12" }, [
+                        _c("label", [_vm._v(" Sala virtual de la reunion ")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.room,
+                                expression: "room",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.room = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                            },
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: null },
+                              },
+                              [_vm._v("Escoge una sala ")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.virtual_rooms, function (room) {
+                              return _c(
+                                "option",
+                                { key: room.id, domProps: { value: room } },
+                                [_vm._v(" " + _vm._s(room.site) + " ")]
+                              )
+                            }),
+                          ],
+                          2
+                        ),
+                      ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("div", { staticClass: "form-check form-switch" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "checkbox",
+                          id: "flexSwitchCheckDefault",
+                        },
+                        on: { change: _vm.selecSV },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "flexSwitchCheckDefault" },
+                        },
+                        [_vm._v("Mostrar salas virtuales")]
+                      ),
+                    ]),
                   ]),
                 ]),
               ]
@@ -28787,7 +28984,7 @@ var render = function () {
                 },
               },
               [
-                _c("div", { staticClass: "form-row mt-4 mb-2" }, [
+                _c("div", { staticClass: "form-row mt-2 mb-1" }, [
                   _c("div", { staticClass: "form-group col-6" }, [
                     _c("label", [_vm._v(" Fecha de inicio ")]),
                     _vm._v(" "),
@@ -28841,9 +29038,9 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-row my-2" }, [
-                  _c("div", { staticClass: "form-group col-9" }, [
-                    _c("label", [_vm._v(" Convocatoria: ")]),
+                _c("div", { staticClass: "form-row my-1" }, [
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [_vm._v(" Convocatoria ")]),
                     _vm._v(" "),
                     _c(
                       "select",
@@ -28897,37 +29094,135 @@ var render = function () {
                       2
                     ),
                   ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-9" }, [
-                    _c("label", [_vm._v(" Número de salas ")]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row my-1" }, [
+                  _c("div", { staticClass: "form-group col-12" }, [
+                    _c("label", [_vm._v(" Modalidad ")]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
+                    _c("div", { staticClass: "form-check" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "flexRadioDefault",
+                          id: "flexRadioDefault1",
+                          checked: "",
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.modalidadSelected("presencial")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
                         {
-                          name: "model",
-                          rawName: "v-model.number",
-                          value: _vm.num_salas,
-                          expression: "num_salas",
-                          modifiers: { number: true },
+                          staticClass: "form-check-label",
+                          attrs: { for: "flexRadioDefault1" },
                         },
-                      ],
-                      staticClass: "form-control",
-                      attrs: { type: "number", required: "", min: "1" },
-                      domProps: { value: _vm.num_salas },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.num_salas = _vm._n($event.target.value)
+                        [
+                          _vm._v(
+                            "\n                  Presencial\n                "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "flexRadioDefault",
+                          id: "flexRadioDefault1",
                         },
-                        blur: function ($event) {
-                          return _vm.$forceUpdate()
+                        on: {
+                          change: function ($event) {
+                            return _vm.modalidadSelected("virtual")
+                          },
                         },
-                      },
-                    }),
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "flexRadioDefault1" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                  Virtual\n                "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-check" }, [
+                      _c("input", {
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "radio",
+                          name: "flexRadioDefault",
+                          id: "flexRadioDefault2",
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.modalidadSelected("mixta")
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label radio",
+                          attrs: { for: "flexRadioDefault2" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                  Mixta (Virtual/Presencial)\n                "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _vm.modalidad === "virtual" || _vm.modalidad === "mixta"
+                      ? _c("div", { staticClass: "my-1" }, [
+                          _c("label", [_vm._v(" Número de salas virtuales")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.number",
+                                value: _vm.num_salas,
+                                expression: "num_salas",
+                                modifiers: { number: true },
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "number", required: "", min: "1" },
+                            domProps: { value: _vm.num_salas },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.num_salas = _vm._n($event.target.value)
+                              },
+                              blur: function ($event) {
+                                return _vm.$forceUpdate()
+                              },
+                            },
+                          }),
+                        ])
+                      : _vm._e(),
                   ]),
                 ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row my-1" }),
               ]
             ),
           ]),
@@ -41746,10 +42041,6 @@ var app = new Vue({
     DetalleEntrevista: _components_DetalleEntrevista_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   methods: {
-    hola: function hola() {
-      console.log("hola we");
-    },
-
     /**
      * Actualiza el periodo de entrevistas.
      * @param {*} period 
@@ -41775,13 +42066,47 @@ var app = new Vue({
      * @param {*} period 
      */
     interviewDetails: function interviewDetails(interview) {
+      // Validad ambos casos virtual y presencial 
+      var interview_room = null;
+
+      if (this.period.modality === 'presencial') {
+        for (var i = 0; i < this.period.rooms.length; i++) {
+          if (this.period.rooms[i].id === interview.room) interview_room = this.period.rooms[i];
+        }
+      } else if (this.period.modality === 'virtual') {
+        for (var _i = 0; _i < this.period.virtual_rooms.length; _i++) {
+          if (this.period.virtual_rooms[_i].id === interview.room) {
+            interview_room = this.period.virtual_rooms[_i];
+            break;
+          }
+        }
+      } else {
+        // Presencial 
+        for (var _i2 = 0; _i2 < this.period.rooms.length; _i2++) {
+          if (this.period.rooms[_i2].id === interview.room) {
+            interview_room = this.period.rooms[_i2];
+            break;
+          }
+        }
+
+        if (interview_room == null) {
+          for (var _i3 = 0; _i3 < this.period.virtual_rooms.length; _i3++) {
+            if (this.period.virtual_rooms[_i3].id === interview.room) {
+              interview_room = this.period.virtual_rooms[_i3];
+              break;
+            }
+          }
+        }
+      }
+
+      console.log(interview_room);
       this.selectedInterview = {
         id: interview.id,
         appliant: interview.appliant,
         areas: interview.areas,
         date: interview.date,
         professor: interview.professor,
-        room: interview.room,
+        room: interview_room !== null ? interview_room.site : "Error",
         start_time: interview.start_time,
         end_time: interview.end_time,
         confirmed: interview.confirmed

@@ -24,10 +24,11 @@ class StorePeriodRequest extends FormRequest
     public function rules()
     {
         return [
-            'announcement_id' => ['required','numeric','exists:announcements,id', 'unique:periods,announcement_id'],
-            'start_date' => ['required','date','before:end_date'],
-            'end_date' => ['required','date'],
+            'announcement_id' => ['required', 'numeric', 'exists:announcements,id', 'unique:periods,announcement_id'],
+            'start_date' => ['required', 'date', 'before:end_date'],
+            'end_date' => ['required', 'date'],
             'num_salas' => ['required', 'numeric'],
+            'modality' => ['required', 'string', 'max:255']
         ];
     }
 }

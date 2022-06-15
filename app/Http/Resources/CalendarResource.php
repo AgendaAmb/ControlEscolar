@@ -48,7 +48,7 @@ class CalendarResource extends JsonResource
     private function mapArchiveAppliant($archive, $request)
     {
         return (new AppliantResource(
-            $archive->appliant, 
+            $archive->appliant,
             $archive->intentionLetter->professor ?? []
 
         ))->toArray($request);
@@ -63,8 +63,8 @@ class CalendarResource extends JsonResource
      */
     private function mapAcademicArea($area, $request)
     {
-        $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers'); 
-            
+        $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers');
+
         return [
             'id' => $area['area_id'],
             'name' => $area['area_name'],
@@ -82,7 +82,7 @@ class CalendarResource extends JsonResource
     {
         $this->announcements = $this->map->latestAnnouncement;
     }
-    
+
     /**
      * Sets the available announcements.
      *
@@ -92,7 +92,9 @@ class CalendarResource extends JsonResource
     private function setInterviewAppliant($request, &$interview)
     {
         $interview['appliant'] = $this->getMiPortalUser(
-            $request, $interview['appliant'][0]['id'], 'appliants'
+            $request,
+            $interview['appliant'][0]['id'],
+            'appliants'
         );
     }
 
@@ -110,8 +112,7 @@ class CalendarResource extends JsonResource
             ->get('workers'))
             ->firstWhere('id', $interview['intention_letter_professor']['id']);
 
-        if ($miPortal_worker !== null)
-        {
+        if ($miPortal_worker !== null) {
             $interview['intention_letter_professor'] = [
                 'id' => $miPortal_worker['id'],
                 'type' => $miPortal_worker['user_type'],
@@ -142,8 +143,7 @@ class CalendarResource extends JsonResource
         # Verifica si la cantidad de áreas académicas es igual a 5.
         # En caso de que no sea así, se llena el arreglo de datos con 5
         # áreas académicas vacías.
-        if (count($areas) < 5)
-        {
+        if (count($areas) < 5) {
             $empty_areas = array_fill(0, 5 - count($areas), [
                 'name' => 'Área académica disponible',
                 'professor_name' => false
@@ -165,19 +165,18 @@ class CalendarResource extends JsonResource
     private function setPeriod($request)
     {
         # Filtra el primer periodo no nulo.
-        $this->period = $this->resource->filter(function($academic_program){
+        $this->period = $this->resource->filter(function ($academic_program) {
             return $academic_program->periods->count() > 0;
-        
-        })->map(fn($academic_program) => $academic_program->periods->first())->first();
+        })->map(fn ($academic_program) => $academic_program->periods->first())->first();
 
         # Carga los modelos asociados al periodo y quita las convocatorias.
         if ($this->period === null)
-            return; 
-            
+            return;
+
         $this->announcements = null;
-        $this->period->interviews = $this->period->interviews->filter(function($interview){
+        $this->period->interviews = $this->period->interviews->filter(function ($interview) {
             return $interview->intentionLetterProfessor->count() > 0;
-        })->map(function($interview) use ($request){
+        })->map(function ($interview) use ($request) {
             $interview = $interview->toArray();
 
             $this->setInterviewAppliant($request, $interview);
@@ -187,19 +186,23 @@ class CalendarResource extends JsonResource
             return $interview;
         })->toArray();
 
-        $academic_program = AcademicProgram::where('id',$this->period->announcement->academic_program_id)->first();
+        $academic_program = AcademicProgram::where('id', $this->period->announcement->academic_program_id)->first();
 
         $this->period = [
-            'actual_program' =>  isset($academic_program)?$academic_program->name:"",
+            'actual_program' =>  isset($academic_program) ? $academic_program->name : "",
             'id' => $this->period->id,
             'announcement' => $this->period->announcement,
             'start_date' => $this->period->start_date,
             'end_date' => $this->period->end_date,
             'interviews' => $this->period->interviews,
-            'rooms' => $this->period->rooms,
+            'virtual_rooms' => $this->period->rooms->filter(function ($room) {
+                return str_contains($room->site, 'Zoom') ? $room : false;
+            })->values(),
+            'rooms' => $this->period->rooms->filter(function ($room) {
+                return str_contains($room->site, 'Zoom') ? false : $room;
+            })->values(),
+            'modality' => $this->period->modality
         ];
-
-        $this->period['rooms'] = $this->period['rooms']->toArray();
     }
 
     /**
@@ -212,18 +215,18 @@ class CalendarResource extends JsonResource
     {
         # Verifica que el periodo exista.
         if ($this->period === null)
-            return;//return no se puede
+            return; //return no se puede
 
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;
 
         $this->appliants = $archives->filter(
-            fn($archive) => $archive->appliant !== null
+            fn ($archive) => $archive->appliant !== null
         )->filter(
             // Fitramos solo aquellos donde el status sea igual a 5 (1 en develop) 
-            fn($archive) => $archive->status === 1
+            fn ($archive) => $archive->status === 1
         )->map(
-            fn($archive) => $this->mapArchiveAppliant($archive, $request)
+            fn ($archive) => $this->mapArchiveAppliant($archive, $request)
         )->values()->toArray();
     }
 
