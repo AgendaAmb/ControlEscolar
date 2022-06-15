@@ -72,6 +72,7 @@
         <requisitos-ingreso
           :archive_id="archive_id"
           :motivation.sync="motivation"
+          :exanni_score.sync = "exanii_score"
           :documentos.sync="entrance_documents"
           :user_id.sync="appliant.id"
           :viewer_id.sync="viewer.id"
@@ -302,7 +303,7 @@
            data-toggle="modal"
             data-target="#RechazarExpediente"
             class="btn btn-danger"
-            style="height: 45px; width: 150px"
+            style="height: 45px; width: 150px; color: black;"
           >
             <strong>No cumple</strong>
           </button>
@@ -319,7 +320,7 @@
            data-toggle="modal"
             data-target="#ActualizaExpediente"
             class="btn btn-warning"
-            style="height: 45px; width: 150px"
+            style="height: 45px; width: 150px; color: black;'"
           >
             <strong>Corregir</strong>
           </button>
@@ -330,12 +331,13 @@
         </div>
         
       </div>
+      
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 align-content-center">
           <button
             @click="EnviarRevision('Aceptar')"
             class="btn btn-success"
-            style="height: 45px; width: 150px"
+            style="height: 45px; width: 150px; color: black;"
           >
             <strong>Aceptar</strong>
           </button>
@@ -345,6 +347,24 @@
           <span>El postulante cumple con todos los requisitos y pasa a la etapa de entrevista</span>
         </div>
       </div>
+
+      <div class="row my-2 mx-1 justify-content-center">
+        <div class="col-4 justify-content-center">
+          <button
+          @click="EnviarRevision('Condicionado')"
+            class="btn btn-info"
+            style="height: 45px; width: 150px; color : black;"
+          >
+            <strong>Condicionado</strong>
+          </button>
+        </div>
+
+        <div class="col-8">
+          <span>El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista</span>
+        </div>
+        
+      </div>
+
     </div>
 
   </div>
@@ -386,6 +406,9 @@ export default {
 
     // Motivos de ingreso.
     motivation: String,
+
+    // Exanni score
+    exanni_score: Number,
 
     // Documentos de ingreso.
     entrance_documents: Array,
@@ -667,12 +690,14 @@ export default {
         id_status = 5;
       }else if (status === "Rechazar"){
         id_status = 6;
+      }else if (status === 'Condicionado'){
+        id_status = 7;
       }
 
       if(status != 'Corregir'){
          Swal.fire({
           title: "¿Estas seguro de realizar el cambio?",
-          text: "Actulizar el expediente por " + status ,
+          text: "Actulizar el expediente a " + status.toUpperCase() ,
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",

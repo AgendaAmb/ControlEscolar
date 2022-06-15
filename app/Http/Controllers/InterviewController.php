@@ -209,7 +209,7 @@ class InterviewController extends Controller
             // Carga el achivo del postulante para obtener el programa academico
             $archive = null;
 
-            foreach($interview2->users as $key => $User){
+            foreach ($interview2->users as $key => $User) {
                 if ($User->user_type == "externs" || $User->user_type == "students") {
                     $this->alumno = $User;
 
@@ -270,12 +270,51 @@ class InterviewController extends Controller
 
     // Documents for interview
 
-    public function documentsForInterview_Test(Request $request)
+    public function documentsForInterview(Request $request, $archive_id)
     {
-    }
+        // $request->validate([
+        //     'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        // ]);
 
-    public function documentsForInterview_PresentationResearch(Request $request)
-    {
-        # code...
+
+        try {
+            $archive = Archive::where('id', intval($archive_id))->first();
+            //Carga modelos de archivo
+            $archive->loadMissing([
+                'appliant',
+                'announcement.academicProgram',
+                'personalDocuments',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'entranceDocuments',
+                'intentionLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'humanCapitals'
+            ]);
+            $academic_program = $archive->announcement->academicProgram;
+            $appliant = $archive->appliant;
+            $img = 'PMPCA-SUPERIOR.png';
+
+            if ($academic_program->name === 'Maestría en ciencias ambientales') {
+                $img = 'PMPCA-SUPERIOR.png';
+            } else if ($academic_program->name === 'Maestría en ciencias ambientales, doble titulación') {
+                $img = 'ENREM-SUPERIOR.png';
+            } else if ($academic_program->name === 'Maestría Interdisciplinaria en ciudades sostenibles') {
+                $img = 'IMAREC-SUPERIOR.png';
+            }
+
+            $header_academic_program =          asset('storage/headers/' . $img);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer la informacion del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        return view('entrevistas.showUpdateDocuments')
+        ->with('archive', $archive)
+        ->with('appliant', $appliant)
+        ->with('academic_program', $academic_program)
+        ->with('header_academic_program', $header_academic_program);
     }
 }

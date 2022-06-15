@@ -72,6 +72,18 @@
           />
         </label>
       </div>
+      
+    </div>
+
+    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center">
+      <div  class="col-10">
+        <label> Puntaje obtenido</label>          
+        <input v-model.number="ExanniScore" type="number" class="form-control" >
+      </div>
+
+      <div class="col-2 align-items-center justify-content-center" style="width : 100%">
+          <button @click="actualizaPuntajeExanni" class="btn btn-primary" style="width : 100%"> Guarda puntaje </button>
+      </div>
     </div>
   </div>
 </template>
@@ -182,6 +194,11 @@ export default {
     index_carta:{
       type: Number,
       default:0,
+    },
+
+    exanni_score:{
+      type:Number,
+      default: -1,
     }
   },
 
@@ -220,12 +237,30 @@ export default {
         this.errores = newValue;
         this.$emit('update:errores', newValue);
       }
+    },
+
+    ExanniScore:{
+      get(){
+        return this.exanni_score;
+      },  
+      set(newValue){
+        this.$emit('update:exanni_score', newValue)
+      }
     }
   },
   
 
   
   methods: {
+
+    isEXANNI(){
+      if (this.name === "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)") {
+        return true;
+      }
+      //return a value
+      return false;
+    },
+
     requiredForAcademicProgram() {
       // console.log(this.name + ': '+ this.alias_academic_program);
 
@@ -394,6 +429,36 @@ export default {
 
         return false;
 
+    },
+
+    actualizaPuntajeExanni(){
+ axios.post('/controlescolar/solicitud/updateExanniScore', {
+        archive_id:this.archive_id,
+        exanni_score: this.exanni_score,
+      }).then(response => {
+        Swal.fire({
+              title: "¡Éxito!",
+              text: "La exposición de motivos se ha guardado correctamente",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            });
+        this.Motivation = response.data.motivation;
+      }).catch(error => {
+
+         Swal.fire({
+            title: ":( Error al actualizar exposición de motivos",
+            showCancelButton: false,
+            icon: "error",
+          });
+        var errores = error.response.data['errors'];
+
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
+      });
     },
 
     checkUpload() {

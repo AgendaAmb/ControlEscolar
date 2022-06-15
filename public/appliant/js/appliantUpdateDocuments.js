@@ -120,6 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
@@ -224,7 +225,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       var res = false;
       academic_documents_ids.forEach(function (element) {
         if (element[0] === academic_degree_id) {
-          console.log('hayyayay');
+          console.log("hayyayay");
           res = true;
         }
       });
@@ -342,7 +343,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
           console.log(error);
           Swal.fire({
             title: "Error al subir documento",
-            text: 'Intente mas tarde',
+            text: "Intente mas tarde",
             showCancelButton: false,
             icon: "error"
           });
@@ -5341,7 +5342,7 @@ var render = function () {
                         "div",
                         [
                           _c("h4", { staticClass: "display" }, [
-                            _vm._v("Grado Academico " + _vm._s(grado.id) + " "),
+                            _vm._v("Grado Academico " + _vm._s(grado.id)),
                           ]),
                           _vm._v(" "),
                           _vm._l(
@@ -5435,9 +5436,9 @@ var staticRenderFns = [
         _vm._v("Actualiza tus Documentos"),
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "fs-2" }, [
+      _c("h5", [
         _vm._v(
-          "\n      Podras cambiar los documentos tantas veces quieras mientras que el\n      revisor no apruebe cada uno de estos\n    "
+          "\n      Termina de subir o reemplazar los documentos anteriores segun las instrucciones.\n      Podras hacer cambios mientras el revisor no apruebe o mande mas correcciones.\n    "
         ),
       ]),
     ])
@@ -5447,7 +5448,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12 my-2" }, [
-      _c("h4", [
+      _c("h5", [
         _c("strong", [_vm._v("Nota:")]),
         _vm._v(
           "  Si has subido algunos o todos los\n        documentos puedes hacernos saber para revisarlos\n      "

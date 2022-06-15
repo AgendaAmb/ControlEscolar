@@ -39,6 +39,7 @@ class Archive extends Model
         'motivation',
         'announcement_id',
         'status',
+        'exanii_score',
     ];
 
     /**
@@ -116,6 +117,14 @@ class Archive extends Model
         $query = $this->requiredDocuments()->where('type', 'entrance');
         return $query->orderBy('required_documents.name');
     }
+
+
+    public function interviewDocuments(): BelongsToMany
+    {
+        $query = $this->requiredDocuments()->where('type', 'interview');
+        return $query->orderBy('required_documents.name');
+    }
+
 
     /**
      * Obtiene los documentos requeridos para el ingreso del

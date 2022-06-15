@@ -89,11 +89,11 @@
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
-                                'url' => route('documentsForInterview.showTest', [
+                                'url' => route('documentsForInterview.show', [
                                     'archive_id' => $archive_id,
                                 ]),
                             ])
-                            Subir mi ensayo
+                            Subir Ensayo
                         @endcomponent
                        
                     </div>
@@ -107,7 +107,7 @@
 
                         @component('mail::button',
                         [
-                            'url' => route('documentsForInterview.showPresentationResearch', [
+                            'url' => route('documentsForInterview.show', [
                                 'archive_id' => $archive_id,
                             ]),
                         ])

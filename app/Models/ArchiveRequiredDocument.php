@@ -13,6 +13,10 @@ class ArchiveRequiredDocument extends Model
 {
     use HasFactory;
 
+    // protected $hidden = [
+    //     'status'
+    // ];
+
     /**
      * The attributes that should be hidden for serialization.
      *

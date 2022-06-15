@@ -28,9 +28,13 @@
         :archivo.sync="documento.archivo" 
         :location.sync="documento.pivot.location" 
         :errores.sync="documento.errores"
+        :exanni_score="exanni_score"
         v-bind="documento"
         @enviaDocumento = "cargaDocumento" >
       </documento-requerido>
+
+      
+
     </div>
   </div>
 </template>
@@ -42,6 +46,7 @@ export default {
   props: {
     archive_id: Number,
     motivation: String,
+    exanni_score: Number,
     documentos: Array,
     
     user_id:{

@@ -88,23 +88,27 @@
         table {
             border-collapse: collapse;
             width: 100%;
+            table-layout: fixed;
         }
 
         th,
         td {
             text-align: left;
             padding: 8px;
+            overflow-wrap: break-word;
 
         }
 
         tr:nth-child(even) {
-            background-color: #f2f2f2
+            background-color: #f2f2f2;
+            overflow-wrap: break-word;
         }
 
         th {
             height: 25px;
             background-color: #115089;
             color: white;
+            overflow-wrap: break-word;
         }
 
         p,
@@ -126,7 +130,8 @@
 <body>
     <div class="container">
         <div style="margin: 0px; width:100%; height:150px;">
-            <img src="{{public_path("/images/logod.png")}}" style='width : 100%; height : 100%!important' alt="Encabezado">
+            <img src="{{ public_path('/images/logod.png') }}" style='width : 100%; height : 100%!important'
+                alt="Encabezado">
             {{-- <img src="public/imagenes/logod.png"style='width : 100%; height : 100%!important'> --}}
         </div>
         <div class="row">
@@ -152,7 +157,7 @@
                 <tr>
                     <td style="width:50%">
                         <p><strong>{{ $data['appliant']['name'] }} </strong> </p>
-                        <p>{{ $data['appliant']['academic_degree'] }}  </p>
+                        <p>{{ $data['appliant']['academic_degree'] }} </p>
                         <p>{{ $data['appliant']['birth_country'] }} </p>
                         <p style="margin-top: 5px;">{{ $data['appliant']['phone_number'] }} </p>
                         <p>{{ $data['appliant']['email'] }} </p>
@@ -178,11 +183,11 @@
         <table class="table" style="margin-top: 10px; margin-bottom:10px">
             <thead>
                 <tr>
-                    <th style="width:50%">
+                    <th style="max-width:30%!important;">
                         <h3>Pregunta</h3>
                     </th>
 
-                    <th style="width:50%">
+                    <th  style="max-width:70%;!important">
                         <h3>Respuesta</h3>
                     </th>
                 </tr>
@@ -190,50 +195,51 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="width:50%">
+                    <td style="width:30%!important;">
                         <p style="line-height: 1.5"> ¿Desde cúando conoce al candidato?</p>
-                    </td>
-                    <td>
+                    </td>s
+                    <td   style="max-width:70%;!important">
                         {{ $data['recommendation_letter']['time_to_meet'] }}
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="width:50%">
+                    <td style="width:30%!important;">
                         <p style="line-height: 1.5"> ¿Cómo lo conocio?</p>
                     </td>
-                    <td>
+                    <td   style="max-width:70%;!important">
                         {{ $data['recommendation_letter']['how_meet'] }}
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="width:50%">
-                        <p style="line-height: 1.5"> ¿Que tipo de relación escolar, académica, laboral, etc. ha tenido el candidato con usted?</p>
+                    <td style="width:30%!important;">
+                        <p style="line-height: 1.5"> ¿Que tipo de relación escolar, académica, laboral, etc. ha tenido
+                            el candidato con usted?</p>
                     </td>
-                    <td>
+                    <td   style="max-width:70%;!important">
                         {{ $data['recommendation_letter']['kind_relationship'] }}
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="width:50%">
-                        <p style="line-height: 1.5">  ¿El candidato ha trabajado, estudiado o desempeñado alguna tarea en
+                    <td style="width:30%!important;">
+                        <p style="line-height: 1.5"> ¿El candidato ha trabajado, estudiado o desempeñado alguna tarea en
                             colaboración o directamente para usted? Por favor describa la
                             naturaleza de esas tareas</p>
                     </td>
-                    <td>
+                    <td   style="max-width:70%;!important">
                         {{ $data['recommendation_letter']['experience_with_candidate'] }}
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="width:50%">
-                        <p style="line-height: 1.5"> Si el estudiante tomó algún curso con usted ?n qué lugar quedó de
+                    <td style="width:30%!important;">
+                        <p style="line-height: 1.5"> Si el estudiante tomó algún curso con usted, ¿Qué lugar quedó de
                             acuerdo a su calificación final? (Por ejemplo: 30% superior) ¿Cuál es
                             el número total de estudiantes que está considerando para el cálculo?</p>
                     </td>
-                    <td>
+                    <td   style="max-width:70%;!important">
                         {{ $data['recommendation_letter']['qualification_student'] }}
                     </td>
                 </tr>
@@ -361,7 +367,8 @@
 
             <tr>
                 <td style="width:50%">
-                    <p style="line-height: 1.5"> En síntesis ¿Por qué recomienda al aspirante para ingresar al PMPCA?</p>
+                    <p style="line-height: 1.5"> En síntesis ¿Por qué recomienda al aspirante para ingresar al PMPCA?
+                    </p>
                 </td>
                 <td>
                     {{ $data['recommendation_letter']['why_recommendation'] }}

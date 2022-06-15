@@ -145,6 +145,10 @@ __webpack_require__.r(__webpack_exports__);
         this.name_status = "No cumple";
         break;
 
+      case 7:
+        this.name_status = "Condicionado";
+        break;
+
       default:
         this.name_status = "Incompleto";
         break;
@@ -177,6 +181,10 @@ __webpack_require__.r(__webpack_exports__);
 
         case 6:
           color = "alert alert-danger";
+          break;
+
+        case 7:
+          color = "alert alert-light";
           break;
 
         default:

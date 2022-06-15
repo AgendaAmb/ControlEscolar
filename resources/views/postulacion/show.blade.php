@@ -36,6 +36,7 @@
     {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
             :motivation="archive.motivation"
+            :exanni_score="archive.exanni_score"
             :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
             :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
             :appliant_languages="archive.appliant_languages"

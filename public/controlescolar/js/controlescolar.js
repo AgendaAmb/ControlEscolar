@@ -5086,6 +5086,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5137,7 +5155,9 @@ __webpack_require__.r(__webpack_exports__);
     appliant: Object,
     letters_Commitment: Array,
     //Persona que esta viendo el expediente
-    viewer: Object
+    viewer: Object,
+    //Estado del expediente
+    status: Number
   },
   computed: {},
   data: function data() {
@@ -5365,12 +5385,14 @@ __webpack_require__.r(__webpack_exports__);
         id_status = 5;
       } else if (status === "Rechazar") {
         id_status = 6;
+      } else if (status === 'Condicionado') {
+        id_status = 7;
       }
 
       if (status != 'Corregir') {
         Swal.fire({
           title: "¿Estas seguro de realizar el cambio?",
-          text: "Actulizar el expediente por " + status,
+          text: "Actulizar el expediente a " + status.toUpperCase(),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -18036,7 +18058,7 @@ var render = function () {
             "button",
             {
               staticClass: "btn btn-success",
-              staticStyle: { height: "45px", width: "150px" },
+              staticStyle: { height: "45px", width: "150px", color: "black" },
               on: {
                 click: function ($event) {
                   return _vm.EnviarRevision("Aceptar")
@@ -18048,6 +18070,26 @@ var render = function () {
         ]),
         _vm._v(" "),
         _vm._m(9),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
+        _c("div", { staticClass: "col-4 justify-content-center" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-info",
+              staticStyle: { height: "45px", width: "150px", color: "black" },
+              on: {
+                click: function ($event) {
+                  return _vm.EnviarRevision("Condicionado")
+                },
+              },
+            },
+            [_c("strong", [_vm._v("Condicionado")])]
+          ),
+        ]),
+        _vm._v(" "),
+        _vm._m(10),
       ]),
     ]),
   ])
@@ -18154,7 +18196,7 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "btn btn-danger",
-            staticStyle: { height: "45px", width: "150px" },
+            staticStyle: { height: "45px", width: "150px", color: "black" },
             attrs: {
               "data-toggle": "modal",
               "data-target": "#RechazarExpediente",
@@ -18183,7 +18225,7 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "btn btn-warning",
-            staticStyle: { height: "45px", width: "150px" },
+            staticStyle: { height: "45px", width: "150px", color: "black" },
             attrs: {
               "data-toggle": "modal",
               "data-target": "#ActualizaExpediente",
@@ -18208,6 +18250,18 @@ var staticRenderFns = [
       _c("span", [
         _vm._v(
           "El postulante cumple con todos los requisitos y pasa a la etapa de entrevista"
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("span", [
+        _vm._v(
+          "El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista"
         ),
       ]),
     ])

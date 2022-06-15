@@ -33,7 +33,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -88,6 +88,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
         Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show'); //Vista de expediente pero sin poder modificar archivos
+        
+        Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
         Route::post('/sentEmailToUpdateDocuments', [ArchiveController::class, 'sentEmailToUpdateDocuments'])->name('sentEmailToUpdateDocuments');
         Route::post('/sentEmailRechazadoPostulacion', [ArchiveController::class, 'sentEmailRechazadoPostulacion'])->name('sentEmailRechazado');
@@ -96,6 +98,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/expediente/{user_id}', [ArchiveController::class,'appliantFile_AppliantView'])->name('ExpedientePostulante'); //Vista de expediente para alumno, rellenar campos
 
         # Requisitos de ingreso.
+        Route::post('/updateExanniScore', [ArchiveController::class, 'updateExanniScore']);
         Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']);
         Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
         Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
@@ -214,8 +217,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     Route::prefix('documentsForInterview')->name('documentsForInterview.')->middleware(['auth', 'role:aspirante_local|aspirante_foraneo|aspirante_extranjero'])->group(function(){
-        Route::get('/show/Test/{user_id}', [InterviewController::class, 'documentsForInterview_Test'])->name('showTest');
-        Route::get('/show/Presentation&Research/{user_id}', [InterviewController::class, 'documentsForInterview_PresentationResearch'])->name('showPresentationResearch');
+        Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterview'])->name('show');
+        // Route::get('/show/Test/{user_id}', [InterviewController::class, 'documentsForInterview_Test'])->name('showTest');
+        // Route::get('/show/Presentation&Research/{user_id}', [InterviewController::class, 'documentsForInterview_PresentationResearch'])->name('showPresentationResearch');
     });
 
 
@@ -234,4 +238,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
 
     });
-// });
+});

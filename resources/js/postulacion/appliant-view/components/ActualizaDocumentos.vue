@@ -3,10 +3,10 @@
     <div class="col-12 mx-2 my-2">
       <h1 class="display-5">Actualiza tus Documentos</h1>
 
-      <p class="fs-2">
-        Podras cambiar los documentos tantas veces quieras mientras que el
-        revisor no apruebe cada uno de estos
-      </p>
+      <h5 >
+        Termina de subir o reemplazar los documentos anteriores segun las instrucciones.
+        Podras hacer cambios mientras el revisor no apruebe o mande mas correcciones.
+      </h5>
     </div>
 
     <div
@@ -22,8 +22,7 @@
         :errores.sync="documento.errores"
         :alias_academic_program="academic_program.alias"
         :require_documents_to_update="personal_documents_ids"
-                    :list_type="'personal'"
-
+        :list_type="'personal'"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -43,7 +42,7 @@
         :errores.sync="documento.errores"
         :alias_academic_program="academic_program.alias"
         :require_documents_to_update="entrance_documents_ids"
-                    :list_type="'entrance'"
+        :list_type="'entrance'"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -62,7 +61,7 @@
         :index="index + 1"
       >
         <div v-if="academicDegreeIsInList(grado.id) === true">
-          <h4 class="display">Grado Academico {{grado.id}} </h4>
+          <h4 class="display">Grado Academico {{ grado.id }}</h4>
 
           <documento-requerido-porActualizar
             v-for="documento in grado.required_documents"
@@ -73,7 +72,9 @@
             :alias_academic_program="academic_program.alias"
             :require_documents_to_update="selected_academicDocuments"
             :list_type="'academic'"
-            :index_require_documents_to_update="index_selected_academicDocuments"
+            :index_require_documents_to_update="
+              index_selected_academicDocuments
+            "
             v-bind="documento"
             @enviaDocumento="cargaDocumento"
           >
@@ -84,10 +85,10 @@
 
     <div class="form-group row mx-2 my-4">
       <div class="col-12 my-2">
-        <h4>
+        <h5>
           <strong>Nota:</strong>&nbsp;&nbsp;Si has subido algunos o todos los
           documentos puedes hacernos saber para revisarlos
-        </h4>
+        </h5>
       </div>
 
       <div class="col-3">
@@ -222,11 +223,10 @@ export default {
     },
 
     academicDegreeIsInList(academic_degree_id) {
-      let res =false;
+      let res = false;
       academic_documents_ids.forEach((element) => {
         if (element[0] === academic_degree_id) {
-
-          console.log('hayyayay');
+          console.log("hayyayay");
           res = true;
         }
       });
@@ -307,7 +307,7 @@ export default {
           case "academic":
             url =
               "/controlescolar/updateDocuments/updateAcademicDegreeRequiredDocument";
-              formData.append("index", index);
+            formData.append("index", index);
             break;
           case "entrance":
             url =
@@ -316,7 +316,7 @@ export default {
           case "language":
             url =
               "/controlescolar/updateDocuments/updateAppliantLanguageRequiredDocument";
-              formData.append("index", index);
+            formData.append("index", index);
             break;
           // case "working":
           //   break;
@@ -339,7 +339,7 @@ export default {
             requiredDocument.datosValidos.file =
               "¡Archivo subido exitosamente!";
             requiredDocument.Location = response.data.location;
-               Swal.fire({
+            Swal.fire({
               title: "Documento nuevo agregado",
               text: "El documento anterior se ha sobreescrito sobre el nuevo ingresado",
               icon: "success",
@@ -348,13 +348,12 @@ export default {
               cancelButtonColor: "#3085d6",
               cancelButtonText: "Continuar",
             });
-
           })
           .catch((error) => {
             console.log(error);
-              Swal.fire({
+            Swal.fire({
               title: "Error al subir documento",
-              text: 'Intente mas tarde',
+              text: "Intente mas tarde",
               showCancelButton: false,
               icon: "error",
             });
@@ -366,7 +365,7 @@ export default {
   created() {
     this.academic_documents_ids.forEach((element) => {
       if (element[0] != null) {
-                console.log("academico:", element[0]);
+        console.log("academico:", element[0]);
 
         this.index_selected_academicDocuments.push(element[0]);
       }

@@ -134,6 +134,9 @@ export default {
         case 6:
         this.name_status = "No cumple";
         break;
+        case 7:
+          this.name_status = "Condicionado";
+          break;
         default:
          this.name_status = "Incompleto";
           break;
@@ -163,6 +166,9 @@ export default {
           case 6:
           color = "alert alert-danger";
           break;
+          case 7:
+            color = "alert alert-light";
+            break;
         default:
           color = "alert alert-secondary";
           break;
