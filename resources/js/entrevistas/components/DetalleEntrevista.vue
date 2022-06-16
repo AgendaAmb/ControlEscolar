@@ -48,8 +48,15 @@
                   <tfoot>
                     <tr>
                       <td colspan="5">
-                        <button v-if="isConfirmable" class="btn btn-primary" @click="confirmaEntrevista"> Confirmar
-                          entrevista </button>
+                        <button v-if="isConfirmable && !spinnerVisible" class="btn btn-primary"
+                          @click="confirmaEntrevista"> Confirmar
+                          entrevista
+                        </button>
+                        <button class="btn btn-primary" disabled v-if="spinnerVisible">
+                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+                          </span>
+                          Confirmando entrevista...
+                        </button>
                         <button v-if="isReopenable" class="btn btn-primary" @click="reabreEntrevista"> Reabrir
                           entrevista </button>
                         <button v-if="isRemovable" class="btn btn-danger ml-1" @click="eliminarEntrevista"> Cancelar
@@ -202,6 +209,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      spinnerVisible: false, 
+    }
+  },
+
   methods: {
 
     canRemoveUser(area) {
@@ -264,6 +277,8 @@ export default {
     },
 
     confirmaEntrevista() {
+      //Cambio de botón pa que de vueltitas :v
+      this.spinnerVisible = true;
 
       if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false)
         return false;

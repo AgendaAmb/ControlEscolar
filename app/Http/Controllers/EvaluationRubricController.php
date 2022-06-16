@@ -9,6 +9,7 @@ use App\Models\EvaluationRubric;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Archive;
 
 class EvaluationRubricController extends Controller
 {
@@ -32,8 +33,25 @@ class EvaluationRubricController extends Controller
 
         $rubricResource = new RubricResource($evaluationRubric);
 
-        // return $rubricResource;
+        //! Temporal - obtener los datos basicos del postulante
+        $archiveModel = Archive::where('id', $evaluationRubric->archive_id)->first();
+        if ($archiveModel === null) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+        try {
+            $archiveModel->loadMissing([
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+        
+        $rubricResource['basic_concepts'] = $archiveModel;
 
+        // return $archiveModel;
+        // return $rubricResource;
+    
         return view('entrevistas.rubrica', $rubricResource->toArray($request));
     }
     

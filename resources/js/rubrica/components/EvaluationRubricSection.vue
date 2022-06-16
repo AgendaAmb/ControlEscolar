@@ -3,7 +3,7 @@
         <h4 class="col-11 myriad-bold rubric-section-header mb-3"> {{ title }} </h4>
         <slot name="appliant_data"></slot>
         <div class="col-lg-11 table-responsive px-0">
-            <table class="table rubric-section-body">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th class="concept"></th>
@@ -23,28 +23,39 @@
                             <p class="goofy d-block mb-0"> Deficiente </p>
                             <p class="myriad-light d-block mb-0"> 25 - 0%</p>
                         </th>
-                        <th class="myriad-bold score blue"><p class="d-block mt-0"> Evaluación </p></th>
-                        <th class="myriad-bold notes blue"><p class="d-block mt-0"> Observaciones </p></th>
+                        <th class="myriad-bold score blue">
+                            <p class="d-block mt-0"> Evaluación </p>
+                        </th>
+                        <th class="myriad-bold notes blue">
+                            <p class="d-block mt-0"> Observaciones </p>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(concept) in concepts" :key="concept.id">
                         <td class="text-justify concept">{{concept.description}}</td>
-                        <td class="text-justify" v-for="detail in detailsFrom(concept)" :key="detail.id">{{detail.text}}</td>
-                        <td class="text-justify" v-for="detail_data in researchDetailsFrom(concept)" :key="detail_data.id">
+                        <td class="text-justify" v-for="detail in detailsFrom(concept)" :key="detail.id">{{detail.text}}
+                        </td>
+                        <td class="text-justify" v-for="detail_data in researchDetailsFrom(concept)"
+                            :key="detail_data.id">
                             <div v-for="(detail, index) in detail_data" :key="index" class="d-block mb-4">
-                                <label :class="labelClassFor(detail)"> {{ labelTextFor(detail) }} </label> 
-                                <div v-for="(choice,index) in detail.choices" :key="index" class="form-check form-check-inline">
-                                    <input :disabled="$root.r_only()" class="form-check-input my-auto" type="radio" v-model="detail.value" :value="choice">
+                                <label :class="labelClassFor(detail)"> {{ labelTextFor(detail) }} </label>
+                                <div v-for="(choice,index) in detail.choices" :key="index"
+                                    class="form-check form-check-inline">
+                                    <input :disabled="$root.r_only()" class="form-check-input my-auto" type="radio"
+                                        v-model="detail.value" :value="choice">
                                     <label class="form-check-label"> {{ choice }} </label>
                                 </div>
 
-                                <textarea :readonly="$root.r_only()" v-if="isTextArea(detail)" class="form-control" rows="2" v-model="detail.value"></textarea>
+                                <textarea :readonly="$root.r_only()" v-if="isTextArea(detail)" class="form-control"
+                                    rows="2" v-model="detail.value"></textarea>
                             </div>
                         </td>
 
-                        <td class="score"><input :readonly="$root.r_only()" v-model.number="concept.score" type="number"></td>
-                        <td class="notes"><input :readonly="$root.r_only()" v-model="concept.notes" type="text"></td>
+                        <td class="score"><input :readonly="$root.r_only()" v-model.number="concept.score"
+                                type="number"></td>
+                        <td class="notes"><input :readonly="$root.r_only()"
+                                v-model="concept.notes" type="text"></td>
                     </tr>
                 </tbody>
                 <tfoot>

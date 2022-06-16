@@ -169,7 +169,8 @@ class RubricResource extends JsonResource
             'user' => $this->user,
             'appliant' => $this->appliant,
             'rubric' => $this->rubric,
-            'announcement' => $this->announcement
+            'announcement' => $this->announcement,
+            'basic_concepts' => $this->basic_concepts
         ];
     }
 }

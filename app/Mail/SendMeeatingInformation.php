@@ -12,7 +12,7 @@ class SendMeeatingInformation extends Mailable
     use Queueable, SerializesModels;
 
    
-    public $Meeating;
+    public $Interview;
     public $Student;
     public $Room;
     public $academic_program;
@@ -21,10 +21,10 @@ class SendMeeatingInformation extends Mailable
      *
      * @return void
      */
-    public function __construct($Meeating,$Student,$academic_program,$Room)
+    public function __construct($Interview,$Student,$academic_program,$Room)
     {
      
-        $this->Meeating=$Meeating;
+        $this->Interview=$Interview;
         $this->Student=$Student;
         $this->Room=$Room;
         $this->academic_program=$academic_program;
@@ -37,6 +37,6 @@ class SendMeeatingInformation extends Mailable
      */
     public function build()
     {
-        return $this->from('rtic.ambiental@uaslp.mx', 'TESTING - ALUMNO ')->view('Correos.MeetingZoomPostulante')->subject('Información de entrevista');
+        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->view('Correos.MeetingPostulante')->subject('Información de entrevista');
     }
 }

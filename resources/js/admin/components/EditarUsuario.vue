@@ -291,10 +291,10 @@ export default {
     },
 
     actualizaUsuario() {
-      console.log("academic areas: ", this.selected_academic_areas_id);
-      console.log("roles : ", this.selected_roles_id);
-      console.log("academic entities : ", this.selected_academic_entities_id);
-      console.log("academic_comittes : ", this.selected_academic_comittes_id);
+      // console.log("academic areas: ", this.selected_academic_areas_id);
+      // console.log("roles : ", this.selected_roles_id);
+      // console.log("academic entities : ", this.selected_academic_entities_id);
+      // console.log("academic_comittes : ", this.selected_academic_comittes_id);
 
       axios
         .post("/controlescolar/admin/updateWorker", {
@@ -315,10 +315,10 @@ export default {
             cancelButtonColor: "#d33",
             confirmButtonText: "Aceptar",
           });
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           Swal.fire({
             title: "Error al actualizar",
             showCancelButton: false,
