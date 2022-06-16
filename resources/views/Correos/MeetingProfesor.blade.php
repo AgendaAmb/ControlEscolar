@@ -55,15 +55,10 @@
                             <td>Lugar</td>
                             <td>{{$Room}}</td>
                         </tr>
-                        {{-- <tr>
-                            <td>Enlace para la entrevista</td>
-                            <td>{{ $Meeating['join_url'] }}</td>
-                        </tr> --}}
-                        <tr>
+                         <tr>
                             <td>Modalidad de la entrevista</td>
                             <td>Presencial</td>
                         </tr>
-
                     </tbody>
                 </table>
                 <p>

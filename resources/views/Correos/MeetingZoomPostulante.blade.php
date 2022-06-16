@@ -65,10 +65,10 @@
                             <td>{{ Carbon\Carbon::parse($Meeating['start_time'])->subHour(6)->toTimeString() }}-{{ Carbon\Carbon::createFromDate($Meeating['start_time'])->addMinutes($Meeating['duration'])->subHour(6)->toTimeString() }}
                             </td>
                         </tr>
-                        {{-- <tr>
-                            <td>Modalidad</td>
+                        <tr>
+                            <td>Lugar</td>
                             <td>{{$Room}}</td>
-                        </tr> --}}
+                        </tr>
                         <tr>
                             <td>Enlace para la entrevista</td>
                             <td>{{ $Meeating['join_url'] }}</td>

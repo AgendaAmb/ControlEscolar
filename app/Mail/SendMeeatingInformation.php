@@ -12,7 +12,7 @@ class SendMeeatingInformation extends Mailable
     use Queueable, SerializesModels;
 
    
-    public $Meeating;
+    public $Interview;
     public $Student;
     public $Room;
     public $academic_program;
@@ -22,10 +22,10 @@ class SendMeeatingInformation extends Mailable
      *
      * @return void
      */
-    public function __construct($Meeating,$Student,$academic_program,$Room,$archive_id)
+    public function __construct($Interview,$Student,$academic_program,$Room,$archive_id)
     {
      
-        $this->Meeating=$Meeating;
+        $this->Interview= $Interview;
         $this->Student=$Student;
         $this->Room=$Room;
         $this->academic_program=$academic_program;
