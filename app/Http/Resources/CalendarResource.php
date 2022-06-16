@@ -223,8 +223,8 @@ class CalendarResource extends JsonResource
         $this->appliants = $archives->filter(
             fn ($archive) => $archive->appliant !== null
         )->filter(
-            // Fitramos solo aquellos donde el status sea igual a 5 (1 en develop) 
-            fn ($archive) => $archive->status === 1
+            // Fitramos solo aquellos donde el status sea igual a 5 o 7 
+            fn ($archive) => ($archive->status === 5 || $archive->status === 7)
         )->map(
             fn ($archive) => $this->mapArchiveAppliant($archive, $request)
         )->values()->toArray();
