@@ -49809,10 +49809,10 @@ __webpack_require__.r(__webpack_exports__);
     actualizaUsuario: function actualizaUsuario() {
       var _this = this;
 
-      console.log("academic areas: ", this.selected_academic_areas_id);
-      console.log("roles : ", this.selected_roles_id);
-      console.log("academic entities : ", this.selected_academic_entities_id);
-      console.log("academic_comittes : ", this.selected_academic_comittes_id);
+      // console.log("academic areas: ", this.selected_academic_areas_id);
+      // console.log("roles : ", this.selected_roles_id);
+      // console.log("academic entities : ", this.selected_academic_entities_id);
+      // console.log("academic_comittes : ", this.selected_academic_comittes_id);
       axios.post("/controlescolar/admin/updateWorker", {
         id: this.id,
         type: this.tipousuario,
@@ -49829,10 +49829,9 @@ __webpack_require__.r(__webpack_exports__);
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Aceptar"
-        });
-        console.log(response);
+        }); // console.log(response);
       })["catch"](function (error) {
-        console.log(error);
+        // console.log(error);
         Swal.fire({
           title: "Error al actualizar",
           showCancelButton: false,
@@ -49980,10 +49979,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     registraUsuario: function registraUsuario() {
-      console.log("academic areas: ", this.selected_academic_areas);
-      console.log("roles : ", this.selected_roles);
-      console.log("academic entities : ", this.selected_academic_entities);
-      console.log("academic_comittes : ", this.selected_academic_comittes);
+      // console.log("academic areas: ", this.selected_academic_areas);
+      // console.log("roles : ", this.selected_roles);
+      // console.log("academic entities : ", this.selected_academic_entities);
+      // console.log("academic_comittes : ", this.selected_academic_comittes);
       axios.post('/controlescolar/admin/newWorker', {
         id: this.id,
         type: 'workers',

@@ -67736,10 +67736,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_0__);
-var _props;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -67804,7 +67800,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'basic-data-rubric-section',
-  props: (_props = {
+  props: {
     // Título de la sección.
     title: {
       type: String,
@@ -67833,17 +67829,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     english_score: {
       type: Number
+    },
+    exani_score: {
+      type: Number
+    },
+    antype: {
+      type: String,
+      "default": ''
     }
-  }, _defineProperty(_props, "estudio_score", {
-    type: Number
-  }), _defineProperty(_props, "exani_score", {
-    type: Number
-  }), _defineProperty(_props, "antype", {
-    type: String,
-    "default": ''
-  }), _props),
-  mounted: function mounted() {
-    console.log(this.antype);
+  },
+  mounted: function mounted() {// console.log(this.antype);
   },
   methods: {
     detailsFrom: function detailsFrom(concept) {
@@ -67858,6 +67853,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }];
       if (concept.type === 'research') return [];
       return concept.evaluation_concept_details;
+    },
+    basicScore: function basicScore() {
+      // Factores de ponderación para datos basicos de los rubros
+      var doctorado = 10;
+      var maestria = 15;
+      var score = "".concat(this.antype) === 'doctorado' ? this.estudio_score * doctorado / 10 : this.estudio_score * maestria / 10;
+      return score;
     },
     // Calculo de la ponderacion
     sectionScore: function sectionScore(concepts, id) {
@@ -67919,6 +67921,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -90544,11 +90547,7 @@ var render = function () {
               _vm._v(" "),
               _c("td"),
               _vm._v(" "),
-              _c("td", [
-                _vm._v(
-                  "Ponderación: " + _vm._s(_vm.sectionScore(_vm.concepts))
-                ),
-              ]),
+              _c("td", [_vm._v("Ponderación: " + _vm._s(_vm.basicScore()))]),
             ]),
           ]),
         ]),

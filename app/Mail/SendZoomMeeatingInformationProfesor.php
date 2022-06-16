@@ -7,12 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendMeeatingInformationProfesor extends Mailable
+class SendZoomMeeatingInformationProfesor extends Mailable
 {
     use Queueable, SerializesModels;
 
     
-    public $Interview;
+    public $Meeating;
     public $Student;
     public $Profesor;
     public $Room;
@@ -22,10 +22,10 @@ class SendMeeatingInformationProfesor extends Mailable
      *
      * @return void
      */
-    public function __construct($Interview,$Profesor, $academic_program, $Room,$Student)
+    public function __construct($Meeating,$Profesor, $academic_program, $Room,$Student)
     {
      
-        $this->Interview= $Interview;
+        $this->Meeating=$Meeating;
         $this->Profesor=$Profesor;
         $this->Room=$Room;
         $this->Student=$Student;
@@ -40,6 +40,6 @@ class SendMeeatingInformationProfesor extends Mailable
      */
     public function build()
     {
-        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->view('Correos.MeetingProfesor')->subject('Información de entrevista');
+        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->view('Correos.MeetingZoomProfesor')->subject('Información de entrevista');
     }
 }

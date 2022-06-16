@@ -7,9 +7,12 @@
           <p class="mt-1 mb-0 detail"> Carta de intención otorgada por: </p>
           <p class="my-0"> {{ professor }} </p>
         </div>
-        <div class="col-6">
+        <div v-if="site.includes('Zoom')" class="col-6">
           <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
           <p class="my-0" v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p>
+        </div>
+        <div v-else>
+          <p class="mt-2 mb-0 detail" v-if="confirmed"> Reunión presencial </p>
         </div>
       </div>
       <p class="my-2 detail text-right"> {{ site }} , {{ start_time }} - {{ end_time }}</p>

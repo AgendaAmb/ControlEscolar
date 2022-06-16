@@ -54,7 +54,8 @@
 
                         <td class="score"><input :readonly="$root.r_only()" v-model.number="concept.score"
                                 type="number"></td>
-                        <td class="notes"><input :readonly="$root.r_only()" v-model="concept.notes" type="text"></td>
+                        <td class="notes"><input :readonly="$root.r_only()"
+                                v-model="concept.notes" type="text"></td>
                     </tr>
                 </tbody>
                 <tfoot>

@@ -30,7 +30,7 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>Ponderación: {{sectionScore(concepts)}}</td>
+                        <td>Ponderación: {{ basicScore() }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -102,10 +102,6 @@ export default {
             type: Number
         },
 
-        estudio_score: {
-            type: Number
-        },
-
         exani_score :{
             type: Number
         },
@@ -117,7 +113,8 @@ export default {
     },
 
     mounted() {
-        console.log(this.antype);
+        // console.log(this.antype);
+
     },
 
     methods: {
@@ -129,6 +126,14 @@ export default {
                 return [];
 
             return concept.evaluation_concept_details;
+        },
+
+        basicScore(){
+            // Factores de ponderación para datos basicos de los rubros
+            let doctorado = 10;
+            let maestria = 15;
+            let score = `${this.antype}` === 'doctorado' ? (this.estudio_score * doctorado) / 10 : (this.estudio_score * maestria) / 10;
+            return score;
         },
 
         // Calculo de la ponderacion

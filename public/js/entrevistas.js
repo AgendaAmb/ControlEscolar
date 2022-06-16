@@ -504,6 +504,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
   props: (_props = {
@@ -600,6 +607,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   },
+  data: function data() {
+    return {
+      spinnerVisible: false
+    };
+  },
   methods: {
     canRemoveUser: function canRemoveUser(area) {
       if (area.professor_name === false) return false;
@@ -648,6 +660,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     confirmaEntrevista: function confirmaEntrevista() {
       var _this3 = this;
 
+      //Cambio de botón pa que de vueltitas :v
+      this.spinnerVisible = true;
       if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/confirmInterview', {
         id: this.id,
@@ -831,6 +845,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
 //
 //
 //
@@ -28295,7 +28312,7 @@ var render = function () {
                         _c("tfoot", [
                           _c("tr", [
                             _c("td", { attrs: { colspan: "5" } }, [
-                              _vm.isConfirmable
+                              _vm.isConfirmable && !_vm.spinnerVisible
                                 ? _c(
                                     "button",
                                     {
@@ -28304,7 +28321,30 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        " Confirmar\n                        entrevista "
+                                        " Confirmar\n                        entrevista\n                      "
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.spinnerVisible
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary",
+                                      attrs: { disabled: "" },
+                                    },
+                                    [
+                                      _c("span", {
+                                        staticClass:
+                                          "spinner-border spinner-border-sm",
+                                        attrs: {
+                                          role: "status",
+                                          "aria-hidden": "true",
+                                        },
+                                      }),
+                                      _vm._v(
+                                        "\n                        Confirmando entrevista...\n                      "
                                       ),
                                     ]
                                   )
@@ -28496,21 +28536,29 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-6" }, [
-            _vm.confirmed
-              ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
-                  _vm._v(" Enlace de la reunión: "),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.confirmed
-              ? _c("p", { staticClass: "my-0" }, [
-                  _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
-                    _vm._v(_vm._s(_vm.url)),
-                  ]),
-                ])
-              : _vm._e(),
-          ]),
+          _vm.site.includes("Zoom")
+            ? _c("div", { staticClass: "col-6" }, [
+                _vm.confirmed
+                  ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+                      _vm._v(" Enlace de la reunión: "),
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.confirmed
+                  ? _c("p", { staticClass: "my-0" }, [
+                      _c("a", { attrs: { href: _vm.url, target: "_blank" } }, [
+                        _vm._v(_vm._s(_vm.url)),
+                      ]),
+                    ])
+                  : _vm._e(),
+              ])
+            : _c("div", [
+                _vm.confirmed
+                  ? _c("p", { staticClass: "mt-2 mb-0 detail" }, [
+                      _vm._v(" Reunión presencial "),
+                    ])
+                  : _vm._e(),
+              ]),
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "my-2 detail text-right" }, [
