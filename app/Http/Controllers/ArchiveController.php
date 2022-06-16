@@ -735,7 +735,7 @@ class ArchiveController extends Controller
         Archive::where('id', $request->archive_id)->update(['exanni_score' => $request->exanni_score]);
 
         return new JsonResponse(
-            Archive::select('motivation')->firstWhere('id', $request->archive_id)
+            Archive::select('exanni_score')->firstWhere('id', $request->archive_id)
         );
     }
     

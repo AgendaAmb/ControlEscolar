@@ -1032,6 +1032,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -1311,33 +1319,7 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     actualizaPuntajeExanni: function actualizaPuntajeExanni() {
-      var _this = this;
-
-      axios.post('/controlescolar/solicitud/updateExanniScore', {
-        archive_id: this.archive_id,
-        exanni_score: this.exanni_score
-      }).then(function (response) {
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "La exposición de motivos se ha guardado correctamente",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar"
-        });
-        _this.Motivation = response.data.motivation;
-      })["catch"](function (error) {
-        Swal.fire({
-          title: ":( Error al actualizar exposición de motivos",
-          showCancelButton: false,
-          icon: "error"
-        });
-        var errores = error.response.data['errors'];
-        Object.keys(errores).forEach(function (key) {
-          Vue.set(_this.errores, key, errores[key][0]);
-        });
-      });
+      this.$emit("nuevoPuntajeExanni", this.exanni_score);
     },
     checkUpload: function checkUpload() {
       if (this.location !== null && this.location !== undefined) {
@@ -4670,6 +4652,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4748,6 +4731,36 @@ __webpack_require__.r(__webpack_exports__);
         var errores = error.response.data['errors'];
         Object.keys(errores).forEach(function (key) {
           Vue.set(_this.errores, key, errores[key][0]);
+        });
+      });
+    },
+    nuevoPuntajeExanni: function nuevoPuntajeExanni(puntaje) {
+      var _this2 = this;
+
+      axios.post('/controlescolar/solicitud/updateExanniScore', {
+        archive_id: this.archive_id,
+        exanni_score: this.exanni_score
+      }).then(function (response) {
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "El puntaje se ha guardado correctamente",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar"
+        });
+        _this2.exanni_score = response.data.exanni_score;
+      })["catch"](function (error) {
+        Swal.fire({
+          title: "Error",
+          text: "El puntaje no se pudo guardar correctamente",
+          showCancelButton: false,
+          icon: "error"
+        });
+        var errores = error.response.data['errors'];
+        Object.keys(errores).forEach(function (key) {
+          Vue.set(_this2.errores, key, errores[key][0]);
         });
       });
     },
@@ -6383,7 +6396,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13259,50 +13272,56 @@ var render = function () {
               {
                 staticClass:
                   "row my-1 align-items-center justify-content-center",
+                staticStyle: { height: "75px" },
               },
               [
-                _c("div", { staticClass: "col-10" }, [
-                  _c("label", [_vm._v(" Puntaje obtenido")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model.number",
-                        value: _vm.ExanniScore,
-                        expression: "ExanniScore",
-                        modifiers: { number: true },
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.ExanniScore },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.ExanniScore = _vm._n($event.target.value)
-                      },
-                      blur: function ($event) {
-                        return _vm.$forceUpdate()
-                      },
-                    },
-                  }),
-                ]),
+                _c(
+                  "div",
+                  { staticClass: "col-2 ", staticStyle: { height: "100%" } },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: " d-flex align-items-end" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.ExanniScore,
+                            expression: "ExanniScore",
+                            modifiers: { number: true },
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number" },
+                        domProps: { value: _vm.ExanniScore },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.ExanniScore = _vm._n($event.target.value)
+                          },
+                          blur: function ($event) {
+                            return _vm.$forceUpdate()
+                          },
+                        },
+                      }),
+                    ]),
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
-                    staticClass:
-                      "col-2 align-items-center justify-content-center",
-                    staticStyle: { width: "100%" },
+                    staticClass: "col-2 d-flex align-items-end",
+                    staticStyle: { height: "100%", width: "100%" },
                   },
                   [
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary",
+                        staticClass: "btn btn-primary ",
                         staticStyle: { width: "100%" },
                         on: { click: _vm.actualizaPuntajeExanni },
                       },
@@ -13310,13 +13329,34 @@ var render = function () {
                     ),
                   ]
                 ),
+                _vm._v(" "),
+                _vm._m(1),
               ]
             )
           : _vm._e(),
       ])
     : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex" }, [
+      _c("label", [_vm._v(" Puntaje obtenido")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-8", staticStyle: { height: "100%", width: "100%" } },
+      [_c("input", { staticClass: "w-100", attrs: { type: "hidden" } })]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -17541,6 +17581,10 @@ var render = function () {
                   "update:errores": function ($event) {
                     return _vm.$set(documento, "errores", $event)
                   },
+                  "update:exanni_score": function ($event) {
+                    _vm.exanni_score = $event
+                  },
+                  nuevoPuntajeExanni: _vm.nuevoPuntajeExanni,
                   enviaDocumento: _vm.cargaDocumento,
                 },
               },
@@ -17756,7 +17800,7 @@ var render = function () {
             attrs: {
               archive_id: _vm.archive_id,
               motivation: _vm.motivation,
-              exanni_score: _vm.exanii_score,
+              exanni_score: _vm.exanni_score,
               documentos: _vm.entrance_documents,
               user_id: _vm.appliant.id,
               viewer_id: _vm.viewer.id,
@@ -17768,7 +17812,7 @@ var render = function () {
                 _vm.motivation = $event
               },
               "update:exanni_score": function ($event) {
-                _vm.exanii_score = $event
+                _vm.exanni_score = $event
               },
               "update:documentos": function ($event) {
                 _vm.entrance_documents = $event

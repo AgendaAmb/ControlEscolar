@@ -73,6 +73,7 @@
           :archive_id="archive_id"
           :motivation.sync="motivation"
           :documentos.sync="entrance_documents"
+          :exanni_score.sync="exanni_score"
           :user_id.sync="appliant.id"
           :viewer_id.sync="viewer.id"
           :letters_Commitment.sync="letters_Commitment"
@@ -193,7 +194,7 @@
         <h5 class="mt-4 d-block">
           <strong> Producción científica (Opcional) </strong>
         </h5>
-         <produccion-cientifica
+        <produccion-cientifica
           v-for="(production, index) in scientific_productions"
           v-bind="production"
           v-bind:key="production.id"
@@ -357,6 +358,8 @@ export default {
 
     // Motivos de ingreso.
     motivation: String,
+        exanni_score: Number,
+
 
     // Documentos de ingreso.
     entrance_documents: Array,
@@ -640,11 +643,9 @@ export default {
         if (result.isConfirmed) {
           axios
             .post("/controlescolar/solicitud/updateStatusArchive", {
-              
               // Status id to change the state
               archive_id: this.archive_id,
-              status : 2,
-              
+              status: 2,
             })
             .then((response) => {
               Swal.fire({
@@ -658,7 +659,6 @@ export default {
               }).then((result) => {
                 window.location.href = "/controlescolar/home";
               });
-              
             })
             .catch((error) => {
               console.log(error);
@@ -673,22 +673,24 @@ export default {
     },
   },
 
-   created(){
-     let fechaCierre='14 de junio 2022';
-     if(this.academic_program.alias === "imarec"){
-        fechaCierre = '21 de junio 2022'
-     }
-         Swal.fire({
-            title: "Estimado postulante",
-            text: 'Te recordamos que la fecha de cierre de la convocatoria es el próximo '+fechaCierre+'. ¡Estás a tiempo de completar tu expediente!',
-            icon: "warning",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Enterado",
-          });
+  created() {
+    let fechaCierre = "14 de junio 2022";
+    if (this.academic_program.alias === "imarec") {
+      fechaCierre = "21 de junio 2022";
     }
-
+    Swal.fire({
+      title: "Estimado postulante",
+      text:
+        "Te recordamos que la fecha de cierre de la convocatoria es el próximo " +
+        fechaCierre +
+        ". ¡Estás a tiempo de completar tu expediente!",
+      icon: "warning",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Enterado",
+    });
+  },
 };
 </script>
 

@@ -75,15 +75,23 @@
       
     </div>
 
-    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center">
-      <div  class="col-10">
-        <label> Puntaje obtenido</label>          
-        <input v-model.number="ExanniScore" type="number" class="form-control" >
+    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
+      <div  class="col-2 " style="height:100%;">
+        <div class="d-flex">
+        <label> Puntaje obtenido</label>
+        </div>
+        <div class=" d-flex align-items-end">
+           <input v-model.number="ExanniScore" type="number" class="form-control" >
+           </div>          
+       
       </div>
-
-      <div class="col-2 align-items-center justify-content-center" style="width : 100%">
-          <button @click="actualizaPuntajeExanni" class="btn btn-primary" style="width : 100%"> Guarda puntaje </button>
+       <div class="col-2 d-flex align-items-end"  style="height:100%; width:100%;">
+        <button @click="actualizaPuntajeExanni" class="btn btn-primary " style="width : 100%"> Guarda puntaje </button> 
       </div>
+      <div class="col-8" style="height:100%; width:100%;">
+        <input type="hidden" class="w-100">
+      </div>
+     
     </div>
   </div>
 </template>
@@ -432,33 +440,7 @@ export default {
     },
 
     actualizaPuntajeExanni(){
- axios.post('/controlescolar/solicitud/updateExanniScore', {
-        archive_id:this.archive_id,
-        exanni_score: this.exanni_score,
-      }).then(response => {
-        Swal.fire({
-              title: "¡Éxito!",
-              text: "La exposición de motivos se ha guardado correctamente",
-              icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Aceptar",
-            });
-        this.Motivation = response.data.motivation;
-      }).catch(error => {
-
-         Swal.fire({
-            title: ":( Error al actualizar exposición de motivos",
-            showCancelButton: false,
-            icon: "error",
-          });
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
-      });
+       this.$emit("nuevoPuntajeExanni",this.exanni_score);
     },
 
     checkUpload() {

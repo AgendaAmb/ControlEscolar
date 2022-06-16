@@ -64,6 +64,23 @@
         >
       </div>
     </div>
+
+    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
+      <div  class="col-2 " style="height:100%;">
+        <div class="d-flex">
+        <label> Puntaje obtenido</label>
+        </div>
+        <div class=" d-flex align-items-end">
+           <input v-model.number="ExanniScore" type="number" class="form-control" :readonly="true">
+           </div>          
+      </div>
+       
+      <div class="col-10" style="height:100%; width:100%;">
+        <input type="hidden" class="w-100">
+      </div>
+     
+    </div>
+
   </div>
 </template>
 
@@ -173,6 +190,11 @@ export default {
     index_carta:{
       type: Number,
       default:0,
+    },
+
+     exanni_score:{
+      type:Number,
+      default: -1,
     }
   },
 
@@ -211,12 +233,32 @@ export default {
         this.errores = newValue;
         this.$emit('update:errores', newValue);
       }
+    },
+    ExanniScore:{
+      get(){
+        return this.exanni_score;
+      },  
+      set(newValue){
+        this.$emit('update:exanni_score', newValue)
+      }
     }
   },
   
 
   
   methods: {
+     isEXANNI(){
+      if (this.name === "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)") {
+        return true;
+      }
+      //return a value
+      return false;
+    },
+
+     actualizaPuntajeExanni(){
+       this.$emit("nuevoPuntajeExanni",this.exanni_score);
+    },
+
     requiredForAcademicProgram() {
       console.log(this.name + ': '+ this.alias_academic_program);
 

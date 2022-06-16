@@ -53,6 +53,7 @@
         <requisitos-ingreso
           :archive_id="archive_id"
           :motivation.sync="motivation"
+          :exanni_score.sync = "exanni_score"
           :documentos.sync="entrance_documents"
           :user_id="appliant.id"
           :viewer_id="viewer.id"
@@ -227,6 +228,8 @@ export default {
 
     // Motivos de ingreso.
     motivation: String,
+     // Exanni score
+    exanni_score: Number,
 
     // Documentos de ingreso.
     entrance_documents: Array,

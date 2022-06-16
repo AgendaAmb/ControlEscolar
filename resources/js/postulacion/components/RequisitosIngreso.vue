@@ -28,8 +28,9 @@
         :archivo.sync="documento.archivo" 
         :location.sync="documento.pivot.location" 
         :errores.sync="documento.errores"
-        :exanni_score="exanni_score"
+        :exanni_score.sync="exanni_score"
         v-bind="documento"
+        @nuevoPuntajeExanni = "nuevoPuntajeExanni"
         @enviaDocumento = "cargaDocumento" >
       </documento-requerido>
 
@@ -119,6 +120,37 @@ export default {
 
          Swal.fire({
             title: ":( Error al actualizar exposición de motivos",
+            showCancelButton: false,
+            icon: "error",
+          });
+        var errores = error.response.data['errors'];
+
+        Object.keys(errores).forEach(key => {
+          Vue.set(this.errores, key, errores[key][0]);
+        });
+      });
+    },
+
+    nuevoPuntajeExanni(puntaje){
+        axios.post('/controlescolar/solicitud/updateExanniScore', {
+        archive_id:this.archive_id,
+        exanni_score: this.exanni_score,
+      }).then(response => {
+        Swal.fire({
+              title: "¡Éxito!",
+              text: "El puntaje se ha guardado correctamente",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+            });
+        this.exanni_score = response.data.exanni_score;
+      }).catch(error => {
+
+         Swal.fire({
+            title: "Error",
+            text: "El puntaje no se pudo guardar correctamente",
             showCancelButton: false,
             icon: "error",
           });

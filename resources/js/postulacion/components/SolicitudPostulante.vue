@@ -72,7 +72,7 @@
         <requisitos-ingreso
           :archive_id="archive_id"
           :motivation.sync="motivation"
-          :exanni_score.sync = "exanii_score"
+          :exanni_score.sync = "exanni_score"
           :documentos.sync="entrance_documents"
           :user_id.sync="appliant.id"
           :viewer_id.sync="viewer.id"

@@ -532,6 +532,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -575,6 +595,10 @@ __webpack_require__.r(__webpack_exports__);
     index_carta: {
       type: Number,
       "default": 0
+    },
+    exanni_score: {
+      type: Number,
+      "default": -1
     }
   },
   data: function data() {
@@ -602,6 +626,14 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:location', newValue);
       }
     },
+    ExanniScore: {
+      get: function get() {
+        return this.exanni_score;
+      },
+      set: function set(newValue) {
+        this.$emit('update:exanni_score', newValue);
+      }
+    },
     Errores: {
       get: function get() {
         return this.errores;
@@ -613,6 +645,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    actualizaPuntajeExanni: function actualizaPuntajeExanni() {
+      this.$emit("nuevoPuntajeExanni", this.exanni_score);
+    },
+    isEXANNI: function isEXANNI() {
+      if (this.name === "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)") {
+        return true;
+      } //return a value
+
+
+      return false;
+    },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
       console.log(this.name + ': ' + this.alias_academic_program);
       var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
@@ -1091,7 +1134,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-769291e1] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-769291e1] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-769291e1] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-769291e1] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -5550,7 +5593,7 @@ var render = function () {
                         ),
                   ]),
                 ])
-              : _vm.isEXANNI
+              : _vm.isEXANNI()
               ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
                   _c("strong", [
                     _vm._v(" Observaciones: "),
@@ -5598,10 +5641,98 @@ var render = function () {
               : _vm._e(),
           ]),
         ]),
+        _vm._v(" "),
+        _vm.isEXANNI() === true
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "row my-1 align-items-center justify-content-center",
+                staticStyle: { height: "75px" },
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "col-2 ", staticStyle: { height: "100%" } },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: " d-flex align-items-end" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.ExanniScore,
+                            expression: "ExanniScore",
+                            modifiers: { number: true },
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number" },
+                        domProps: { value: _vm.ExanniScore },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.ExanniScore = _vm._n($event.target.value)
+                          },
+                          blur: function ($event) {
+                            return _vm.$forceUpdate()
+                          },
+                        },
+                      }),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-2 d-flex align-items-end",
+                    staticStyle: { height: "100%", width: "100%" },
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary ",
+                        staticStyle: { width: "100%" },
+                        on: { click: _vm.actualizaPuntajeExanni },
+                      },
+                      [_vm._v(" Guarda puntaje ")]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1),
+              ]
+            )
+          : _vm._e(),
       ])
     : _vm._e()
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex" }, [
+      _c("label", [_vm._v(" Puntaje obtenido")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-8", staticStyle: { height: "100%", width: "100%" } },
+      [_c("input", { staticClass: "w-100", attrs: { type: "hidden" } })]
+    )
+  },
+]
 render._withStripped = true
 
 
