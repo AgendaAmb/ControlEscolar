@@ -15,5 +15,6 @@
     "/js/entrevistas.js": "/js/entrevistas.js",
     "/js/programaEntrevistas.js": "/js/programaEntrevistas.js",
     "/js/rubrica.js": "/js/rubrica.js",
+    "/appliant/js/appliantInterviewUpdateDocuments.js": "/appliant/js/appliantInterviewUpdateDocuments.js",
     "/css/app.css": "/css/app.css"
 }

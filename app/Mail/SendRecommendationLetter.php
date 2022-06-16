@@ -44,6 +44,7 @@ class SendRecommendationLetter extends Mailable
      */
     public function build()
     {
-        return $this->markdown('Correos.recommendation-letter.ShowRecommendationLetter');
+        // return $this->from('rtic.ambiental@uaslp.mx', 'Carta de Recomendación')->view('Correos.recommendation-letter.ShowRecommendationLetter')->subject('Entrega una carta de recomendación a petición de un aspirante');
+        return $this->from('rtic.ambiental@uaslp.mx', 'Carta de Recomendación')->markdown('Correos.recommendation-letter.ShowRecommendationLetter')->subject('Entrega una carta de recomendación a petición de un aspirante');
     }
 }

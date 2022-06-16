@@ -13,7 +13,8 @@
     <main class="container-fluid">
         <div class="row">
             <div style="width: 100%; display: block;margin: 0 auto">
-                <img src="{{ $message->embed('imagenes/logod.png') }}">
+                <img src="{{ asset('imagenes/logod.png');}}">
+                {{-- <img src="{{ $message->embed('imagenes/logod.png') }}"> --}}
             </div>
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -35,17 +36,18 @@
             </div>
 
             <div style="margin: 20px 0;">
+                <p>Estimado(a)
+                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
+                    Por medio de la presente se le informa que la documentación entregada para el proceso de
+                    selección 2022 para el programa de {{ $academic_program }} CUMPLE con los requisitos
+                    estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
+                    se llevará a cabo:</p>
                 <table class="table" style="max-width: 600px; margin: 0 auto;">
-                    <p>Estimado(a)
-                        <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
-                        Por medio de la presente se le informa que la documentación entregada para el proceso de
-                        selección 2022 para el programa de {{ $academic_program }} CUMPLE con los requisitos
-                        estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
-                        se llevará a cabo:</p>
+                    
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
-                            <td></td>
+                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
 
                         </tr>
                         <tr>
@@ -73,7 +75,7 @@
                         </tr> --}}
                         <tr>
                             <td>Modalidad de la entrevista</td>
-                            <td>En línea a través de ZOOM</td>
+                            <td>Presencial</td>
                         </tr>
 
                     </tbody>
@@ -86,7 +88,7 @@
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
                         sea ingresado en la plataforma a más tardar el día 19 de junio a las 12:00 h
                     </div>
-                    {{-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -96,14 +98,14 @@
                             Subir Ensayo
                         @endcomponent
                        
-                    </div> --}}
+                    </div>
                 @elseif ($academic_program === 'Maestría Interdisciplinaria en ciudades sostenibles')
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración PROTOCOLO DE INVESTIGACIÓN Y UNA
                         PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 19 de
                         junio a las 12:00 h
                     </div>
-                    {{-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
                         @component('mail::button',
                         [
@@ -114,12 +116,12 @@
                         Subir Presentación
                     @endcomponent
                         
-                    </div> --}}
+                    </div>
                 @endif
 
                 <p>
 
-                <p><strong>Indicaciiones:</strong></p>
+                <p><strong>Indicaciones:</strong></p>
                 <p>Los aspectos a tomar en cuenta para el desarrollo de la entrevista son los siguientes:</p>
                 <ul>
                     <li> Conocer la información disponible en el sitio web de los PMPCA <a

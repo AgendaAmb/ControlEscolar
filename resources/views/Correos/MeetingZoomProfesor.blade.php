@@ -10,7 +10,9 @@
     <main class="container-fluid">
         <div class="row">
             <div style="width: 100%; display: block;margin: 0 auto">
-                <img src="{{ $message->embed('imagenes/logod.png') }}">
+                
+                <img src="{{ asset('imagenes/logod.png');}}">
+                {{-- <img src="{{ $message->embed('imagenes/logod.png') }}"> --}}
             </div>
             <div class="row justify-content-center">
                 <div class="col-12">

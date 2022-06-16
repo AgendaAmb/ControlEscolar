@@ -216,8 +216,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
     });
 
-    Route::prefix('documentsForInterview')->name('documentsForInterview.')->middleware(['auth', 'role:aspirante_local|aspirante_foraneo|aspirante_extranjero'])->group(function(){
-        Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterview'])->name('show');
+    Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function(){
+        Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterviewShow'])->name('show');
         // Route::get('/show/Test/{user_id}', [InterviewController::class, 'documentsForInterview_Test'])->name('showTest');
         // Route::get('/show/Presentation&Research/{user_id}', [InterviewController::class, 'documentsForInterview_PresentationResearch'])->name('showPresentationResearch');
     });

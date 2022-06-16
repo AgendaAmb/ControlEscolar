@@ -241,11 +241,11 @@ class InterviewController extends Controller
                     $this->alumno = $User;
                     // Envio de correo dependidiendo modalidad de la entrevista
                     if(str_contains($int_room->site,'Zoom')?true:false){
-                        // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
-                        Mail::mailer('smtp')->to($User->email)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
+                        Mail::mailer('smtp')->to("ulises.uudp@gmail.com")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                        // Mail::mailer('smtp')->to($User->email)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                     }else{
-                        // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room));
-                        Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room));
+                        Mail::mailer('smtp')->to("ulises.uudp@gmail.com")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                        // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room));
                     }
                     // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                 } else if ($User->user_type == "workers") {
@@ -253,11 +253,11 @@ class InterviewController extends Controller
                     $Trabajador = $Trabajadores->where('id', $User->id)->first();
                     // Envio de correo dependidiendo modalidad de la entrevista
                     if(str_contains($int_room->site,'Zoom')?true:false){
-                        // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                        Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                        Mail::mailer('smtp')->to("ulises.uudp@gmail.com")->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                        // Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                     }else{
-                        // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                        Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                        Mail::mailer('smtp')->to("ulises.uudp@gmail.com")->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                        // Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
 
                     }
                     // Mail::mailer('smtp')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
@@ -294,7 +294,7 @@ class InterviewController extends Controller
 
     // Documents for interview
 
-    public function documentsForInterview(Request $request, $archive_id)
+    public function documentsForInterviewShow(Request $request, $archive_id)
     {
         // $request->validate([
         //     'archive_id' => ['required', 'numeric', 'exists:archives,id'],

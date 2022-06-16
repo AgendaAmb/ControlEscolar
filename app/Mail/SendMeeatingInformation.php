@@ -12,22 +12,24 @@ class SendMeeatingInformation extends Mailable
     use Queueable, SerializesModels;
 
    
-    public $Interview;
+    public $Meeating;
     public $Student;
     public $Room;
     public $academic_program;
+    public $archive_id;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Interview,$Student,$academic_program,$Room)
+    public function __construct($Meeating,$Student,$academic_program,$Room,$archive_id)
     {
      
-        $this->Interview=$Interview;
+        $this->Meeating=$Meeating;
         $this->Student=$Student;
         $this->Room=$Room;
         $this->academic_program=$academic_program;
+        $this->archive_id= $archive_id;
     }
 
     /**
@@ -37,6 +39,6 @@ class SendMeeatingInformation extends Mailable
      */
     public function build()
     {
-        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->view('Correos.MeetingPostulante')->subject('Información de entrevista');
+        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->markdown('Correos.MeetingPostulante')->subject('Información de entrevista');
     }
 }

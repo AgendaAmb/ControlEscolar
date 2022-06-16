@@ -72,7 +72,9 @@ class SendUpdateDocuments extends Mailable
      */
     public function build()
     {
-        return $this->markdown('Correos.ShowUpdateDocuments');
+        return $this->from('rtic.ambiental@uaslp.mx', 'Actualiza tu documentación')->markdown('Correos.ShowUpdateDocuments')->subject('Resultados de proceso de revisión');
+
+        // return $this->markdown('Correos.ShowUpdateDocuments');
         // return $this->view('Correos.ShowUpdateDocuments');
     }
 }
