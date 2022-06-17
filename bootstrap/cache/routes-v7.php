@@ -84,7 +84,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::kKHQMcIyQdL2StTK',
+            '_route' => 'generated::48IzRFA7yGrulklS',
           ),
           1 => NULL,
           2 => 
@@ -104,7 +104,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::d7ZBAuQjXwXHzIym',
+            '_route' => 'generated::ekGXMhtHNWfhfYGv',
           ),
           1 => NULL,
           2 => 
@@ -144,7 +144,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::HegJyb0H7dnZlcEr',
+            '_route' => 'generated::BlNpwai9zp4mKVoP',
           ),
           1 => NULL,
           2 => 
@@ -800,7 +800,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'updateDocuments.generated::xYaGfvUvm3rPYyFg',
+            '_route' => 'updateDocuments.generated::Zo2g87U32VaJemCT',
           ),
           1 => NULL,
           2 => 
@@ -819,7 +819,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'updateDocuments.generated::Mdp9i7JTk2EcJkuK',
+            '_route' => 'updateDocuments.generated::6nCnVpVwhJLHC2wN',
           ),
           1 => NULL,
           2 => 
@@ -838,7 +838,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'updateDocuments.generated::1dEHRje6occMooH1',
+            '_route' => 'updateDocuments.generated::3bbQGDjDUvQRwFEM',
           ),
           1 => NULL,
           2 => 
@@ -1040,7 +1040,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::MJ8aSrBzZ3S4Xodb',
+            '_route' => 'generated::EiMVaoZYW5KwDTVz',
           ),
           1 => 
           array (
@@ -1151,7 +1151,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::zqXWKDlnQDejmC0U',
+            '_route' => 'solicitud.generated::PRDKj2FdI7znYD1Q',
           ),
           1 => 
           array (
@@ -1172,7 +1172,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::3qVCMTgyrnDwNT7Q',
+            '_route' => 'solicitud.generated::YrSbXJEqVn7G2HLn',
           ),
           1 => 
           array (
@@ -1193,7 +1193,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::Xocts5Me5dDEyCOv',
+            '_route' => 'solicitud.generated::Rd4UCsazihiX3B6y',
           ),
           1 => 
           array (
@@ -1279,7 +1279,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::JuQ9ohaS2UyTfbbo',
+            '_route' => 'solicitud.generated::g6LSop0wjh3I25q0',
           ),
           1 => 
           array (
@@ -1302,7 +1302,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::5Bew3x10mE1J2NSp',
+            '_route' => 'solicitud.generated::Jamw0y3TISYZLARr',
           ),
           1 => 
           array (
@@ -1323,7 +1323,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::78P14dVSbij8r5mt',
+            '_route' => 'solicitud.generated::J2dmtfzDQivwcmui',
           ),
           1 => 
           array (
@@ -1344,7 +1344,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::oy6ZgKha3uoYRwIn',
+            '_route' => 'solicitud.generated::R2z7bFGupCgbYl65',
           ),
           1 => 
           array (
@@ -1365,7 +1365,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::7fPnhcgmtOubIPWX',
+            '_route' => 'solicitud.generated::GfHTSnu4wWygp2FX',
           ),
           1 => 
           array (
@@ -1386,7 +1386,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::mhayR8GsM1NZEscx',
+            '_route' => 'solicitud.generated::2uEo7Wpht7Ct0QQy',
           ),
           1 => 
           array (
@@ -1407,7 +1407,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::HeBBasHKG3N1Mklr',
+            '_route' => 'solicitud.generated::MUeqVpghewn4qv4B',
           ),
           1 => 
           array (
@@ -1428,7 +1428,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::3RBMouQo6It1JQMo',
+            '_route' => 'solicitud.generated::4zMGigF95Exp4xAl',
           ),
           1 => 
           array (
@@ -1449,7 +1449,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::wmuedk3CTyan3q5Y',
+            '_route' => 'solicitud.generated::KI1SaHmlrmaQIbWB',
           ),
           1 => 
           array (
@@ -1470,7 +1470,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::VS1COEyJluX4zjnm',
+            '_route' => 'solicitud.generated::9SGRvFkBVyvCIsGv',
           ),
           1 => 
           array (
@@ -1491,7 +1491,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::lquLg2sX5vxC1Ly3',
+            '_route' => 'solicitud.generated::vZMzDZa246AmgAjF',
           ),
           1 => 
           array (
@@ -1512,7 +1512,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::ihQA75XNmEBtiUtX',
+            '_route' => 'solicitud.generated::cyT2knFEHhz4M2tp',
           ),
           1 => 
           array (
@@ -1533,7 +1533,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::i3MatkHPFy5zi75B',
+            '_route' => 'solicitud.generated::939Lczqw0uvEdceq',
           ),
           1 => 
           array (
@@ -1554,7 +1554,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::T5D03SDg8G6HX59F',
+            '_route' => 'solicitud.generated::kCU0rmszzTqNNEco',
           ),
           1 => 
           array (
@@ -1575,7 +1575,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::u0m1KDgOoxtbHzBi',
+            '_route' => 'solicitud.generated::5clnKRf5XRsLxj7S',
           ),
           1 => 
           array (
@@ -1596,7 +1596,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::bLzrNvr914LFzhxD',
+            '_route' => 'solicitud.generated::QOhXqxqpUwh1SDQQ',
           ),
           1 => 
           array (
@@ -1617,7 +1617,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::IKWKvZqezKXRI6c2',
+            '_route' => 'solicitud.generated::WMS5PIVmJsw3zH5E',
           ),
           1 => 
           array (
@@ -1638,7 +1638,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::hYzpCPRlZGCFgSSq',
+            '_route' => 'solicitud.generated::PKKPODwzJRcdSMut',
           ),
           1 => 
           array (
@@ -1659,7 +1659,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::tmTWnx4cL7fWRT3Q',
+            '_route' => 'solicitud.generated::S94GPap1q4BBHIQG',
           ),
           1 => 
           array (
@@ -1680,7 +1680,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::kOGoq0fpD4I8fXh0',
+            '_route' => 'solicitud.generated::T5JMbZF0lyri2zrq',
           ),
           1 => 
           array (
@@ -1701,7 +1701,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::rp0pVT1qarQ00pGN',
+            '_route' => 'solicitud.generated::svc0MChW7FZWvfSD',
           ),
           1 => 
           array (
@@ -1747,7 +1747,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'solicitud.generated::dwbYUhXXVeAOs02b',
+            '_route' => 'solicitud.generated::0EGqMgKZNiR5gDIf',
           ),
           1 => 
           array (
@@ -2284,7 +2284,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::kKHQMcIyQdL2StTK' => 
+    'generated::48IzRFA7yGrulklS' => 
     array (
       'methods' => 
       array (
@@ -2305,7 +2305,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::kKHQMcIyQdL2StTK',
+        'as' => 'generated::48IzRFA7yGrulklS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2321,7 +2321,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::d7ZBAuQjXwXHzIym' => 
+    'generated::ekGXMhtHNWfhfYGv' => 
     array (
       'methods' => 
       array (
@@ -2338,13 +2338,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:297:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:79:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000574c6a2000000006143ba93";}";s:4:"hash";s:44:"XMKXeQxGcOAlX1iSkZUKbhM0T9Owi3VakKuQzLyrD4w=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"0000000010ed91960000000014042547";}";s:4:"hash";s:44:"zOV3QbN4bfNq0g5x9nGWbjVjTdD1oOZWBcFU0QdHI58=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::d7ZBAuQjXwXHzIym',
+        'as' => 'generated::ekGXMhtHNWfhfYGv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2397,7 +2397,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::HegJyb0H7dnZlcEr' => 
+    'generated::BlNpwai9zp4mKVoP' => 
     array (
       'methods' => 
       array (
@@ -2423,7 +2423,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::HegJyb0H7dnZlcEr',
+        'as' => 'generated::BlNpwai9zp4mKVoP',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2629,7 +2629,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::MJ8aSrBzZ3S4Xodb' => 
+    'generated::EiMVaoZYW5KwDTVz' => 
     array (
       'methods' => 
       array (
@@ -2650,7 +2650,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::MJ8aSrBzZ3S4Xodb',
+        'as' => 'generated::EiMVaoZYW5KwDTVz',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3339,7 +3339,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::zqXWKDlnQDejmC0U' => 
+    'solicitud.generated::PRDKj2FdI7znYD1Q' => 
     array (
       'methods' => 
       array (
@@ -3355,7 +3355,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateMotivation',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateMotivation',
-        'as' => 'solicitud.generated::zqXWKDlnQDejmC0U',
+        'as' => 'solicitud.generated::PRDKj2FdI7znYD1Q',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3376,7 +3376,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::3qVCMTgyrnDwNT7Q' => 
+    'solicitud.generated::YrSbXJEqVn7G2HLn' => 
     array (
       'methods' => 
       array (
@@ -3392,7 +3392,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateArchivePersonalDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateArchivePersonalDocument',
-        'as' => 'solicitud.generated::3qVCMTgyrnDwNT7Q',
+        'as' => 'solicitud.generated::YrSbXJEqVn7G2HLn',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3413,7 +3413,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::Xocts5Me5dDEyCOv' => 
+    'solicitud.generated::Rd4UCsazihiX3B6y' => 
     array (
       'methods' => 
       array (
@@ -3429,7 +3429,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateArchiveEntranceDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateArchiveEntranceDocument',
-        'as' => 'solicitud.generated::Xocts5Me5dDEyCOv',
+        'as' => 'solicitud.generated::Rd4UCsazihiX3B6y',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3450,7 +3450,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::JuQ9ohaS2UyTfbbo' => 
+    'solicitud.generated::g6LSop0wjh3I25q0' => 
     array (
       'methods' => 
       array (
@@ -3467,7 +3467,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@latestAcademicDegree',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@latestAcademicDegree',
-        'as' => 'solicitud.generated::JuQ9ohaS2UyTfbbo',
+        'as' => 'solicitud.generated::g6LSop0wjh3I25q0',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3488,7 +3488,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::5Bew3x10mE1J2NSp' => 
+    'solicitud.generated::Jamw0y3TISYZLARr' => 
     array (
       'methods' => 
       array (
@@ -3504,7 +3504,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addAcademicDegree',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addAcademicDegree',
-        'as' => 'solicitud.generated::5Bew3x10mE1J2NSp',
+        'as' => 'solicitud.generated::Jamw0y3TISYZLARr',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3525,7 +3525,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::3RBMouQo6It1JQMo' => 
+    'solicitud.generated::4zMGigF95Exp4xAl' => 
     array (
       'methods' => 
       array (
@@ -3541,7 +3541,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteAcademicDegree',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteAcademicDegree',
-        'as' => 'solicitud.generated::3RBMouQo6It1JQMo',
+        'as' => 'solicitud.generated::4zMGigF95Exp4xAl',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3562,7 +3562,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::T5D03SDg8G6HX59F' => 
+    'solicitud.generated::kCU0rmszzTqNNEco' => 
     array (
       'methods' => 
       array (
@@ -3578,7 +3578,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegree',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegree',
-        'as' => 'solicitud.generated::T5D03SDg8G6HX59F',
+        'as' => 'solicitud.generated::kCU0rmszzTqNNEco',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3599,7 +3599,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::u0m1KDgOoxtbHzBi' => 
+    'solicitud.generated::5clnKRf5XRsLxj7S' => 
     array (
       'methods' => 
       array (
@@ -3615,7 +3615,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegreeRequiredDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegreeRequiredDocument',
-        'as' => 'solicitud.generated::u0m1KDgOoxtbHzBi',
+        'as' => 'solicitud.generated::5clnKRf5XRsLxj7S',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3636,7 +3636,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::oy6ZgKha3uoYRwIn' => 
+    'solicitud.generated::R2z7bFGupCgbYl65' => 
     array (
       'methods' => 
       array (
@@ -3652,7 +3652,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addWorkingExperience',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addWorkingExperience',
-        'as' => 'solicitud.generated::oy6ZgKha3uoYRwIn',
+        'as' => 'solicitud.generated::R2z7bFGupCgbYl65',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3673,7 +3673,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::VS1COEyJluX4zjnm' => 
+    'solicitud.generated::9SGRvFkBVyvCIsGv' => 
     array (
       'methods' => 
       array (
@@ -3689,7 +3689,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteWorkingExperience',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteWorkingExperience',
-        'as' => 'solicitud.generated::VS1COEyJluX4zjnm',
+        'as' => 'solicitud.generated::9SGRvFkBVyvCIsGv',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3710,7 +3710,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::hYzpCPRlZGCFgSSq' => 
+    'solicitud.generated::PKKPODwzJRcdSMut' => 
     array (
       'methods' => 
       array (
@@ -3726,7 +3726,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateWorkingExperience',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateWorkingExperience',
-        'as' => 'solicitud.generated::hYzpCPRlZGCFgSSq',
+        'as' => 'solicitud.generated::PKKPODwzJRcdSMut',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3747,7 +3747,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::78P14dVSbij8r5mt' => 
+    'solicitud.generated::J2dmtfzDQivwcmui' => 
     array (
       'methods' => 
       array (
@@ -3763,7 +3763,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addAppliantLanguage',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addAppliantLanguage',
-        'as' => 'solicitud.generated::78P14dVSbij8r5mt',
+        'as' => 'solicitud.generated::J2dmtfzDQivwcmui',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3784,7 +3784,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::wmuedk3CTyan3q5Y' => 
+    'solicitud.generated::KI1SaHmlrmaQIbWB' => 
     array (
       'methods' => 
       array (
@@ -3800,7 +3800,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteAppliantLanguage',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteAppliantLanguage',
-        'as' => 'solicitud.generated::wmuedk3CTyan3q5Y',
+        'as' => 'solicitud.generated::KI1SaHmlrmaQIbWB',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3821,7 +3821,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::bLzrNvr914LFzhxD' => 
+    'solicitud.generated::QOhXqxqpUwh1SDQQ' => 
     array (
       'methods' => 
       array (
@@ -3837,7 +3837,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguage',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguage',
-        'as' => 'solicitud.generated::bLzrNvr914LFzhxD',
+        'as' => 'solicitud.generated::QOhXqxqpUwh1SDQQ',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3858,7 +3858,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::IKWKvZqezKXRI6c2' => 
+    'solicitud.generated::WMS5PIVmJsw3zH5E' => 
     array (
       'methods' => 
       array (
@@ -3874,7 +3874,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguageRequiredDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguageRequiredDocument',
-        'as' => 'solicitud.generated::IKWKvZqezKXRI6c2',
+        'as' => 'solicitud.generated::WMS5PIVmJsw3zH5E',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3895,7 +3895,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::7fPnhcgmtOubIPWX' => 
+    'solicitud.generated::GfHTSnu4wWygp2FX' => 
     array (
       'methods' => 
       array (
@@ -3911,7 +3911,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addScientificProduction',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addScientificProduction',
-        'as' => 'solicitud.generated::7fPnhcgmtOubIPWX',
+        'as' => 'solicitud.generated::GfHTSnu4wWygp2FX',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3932,7 +3932,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::lquLg2sX5vxC1Ly3' => 
+    'solicitud.generated::vZMzDZa246AmgAjF' => 
     array (
       'methods' => 
       array (
@@ -3948,7 +3948,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteScientificProduction',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteScientificProduction',
-        'as' => 'solicitud.generated::lquLg2sX5vxC1Ly3',
+        'as' => 'solicitud.generated::vZMzDZa246AmgAjF',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -3969,7 +3969,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::tmTWnx4cL7fWRT3Q' => 
+    'solicitud.generated::S94GPap1q4BBHIQG' => 
     array (
       'methods' => 
       array (
@@ -3985,7 +3985,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateScientificProduction',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateScientificProduction',
-        'as' => 'solicitud.generated::tmTWnx4cL7fWRT3Q',
+        'as' => 'solicitud.generated::S94GPap1q4BBHIQG',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4006,7 +4006,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::mhayR8GsM1NZEscx' => 
+    'solicitud.generated::2uEo7Wpht7Ct0QQy' => 
     array (
       'methods' => 
       array (
@@ -4022,7 +4022,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addScientificProductionAuthor',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addScientificProductionAuthor',
-        'as' => 'solicitud.generated::mhayR8GsM1NZEscx',
+        'as' => 'solicitud.generated::2uEo7Wpht7Ct0QQy',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4043,7 +4043,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::kOGoq0fpD4I8fXh0' => 
+    'solicitud.generated::T5JMbZF0lyri2zrq' => 
     array (
       'methods' => 
       array (
@@ -4059,7 +4059,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateScientificProductionAuthor',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateScientificProductionAuthor',
-        'as' => 'solicitud.generated::kOGoq0fpD4I8fXh0',
+        'as' => 'solicitud.generated::T5JMbZF0lyri2zrq',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4080,7 +4080,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::ihQA75XNmEBtiUtX' => 
+    'solicitud.generated::cyT2knFEHhz4M2tp' => 
     array (
       'methods' => 
       array (
@@ -4096,7 +4096,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteScientificProductionAuthor',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteScientificProductionAuthor',
-        'as' => 'solicitud.generated::ihQA75XNmEBtiUtX',
+        'as' => 'solicitud.generated::cyT2knFEHhz4M2tp',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4117,7 +4117,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::HeBBasHKG3N1Mklr' => 
+    'solicitud.generated::MUeqVpghewn4qv4B' => 
     array (
       'methods' => 
       array (
@@ -4133,7 +4133,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@addHumanCapital',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@addHumanCapital',
-        'as' => 'solicitud.generated::HeBBasHKG3N1Mklr',
+        'as' => 'solicitud.generated::MUeqVpghewn4qv4B',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4154,7 +4154,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::rp0pVT1qarQ00pGN' => 
+    'solicitud.generated::svc0MChW7FZWvfSD' => 
     array (
       'methods' => 
       array (
@@ -4170,7 +4170,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateHumanCapital',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateHumanCapital',
-        'as' => 'solicitud.generated::rp0pVT1qarQ00pGN',
+        'as' => 'solicitud.generated::svc0MChW7FZWvfSD',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4191,7 +4191,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::i3MatkHPFy5zi75B' => 
+    'solicitud.generated::939Lczqw0uvEdceq' => 
     array (
       'methods' => 
       array (
@@ -4207,7 +4207,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@deleteHumanCapital',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@deleteHumanCapital',
-        'as' => 'solicitud.generated::i3MatkHPFy5zi75B',
+        'as' => 'solicitud.generated::939Lczqw0uvEdceq',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -4266,7 +4266,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'solicitud.generated::dwbYUhXXVeAOs02b' => 
+    'solicitud.generated::0EGqMgKZNiR5gDIf' => 
     array (
       'methods' => 
       array (
@@ -4282,7 +4282,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@sentEmailRecommendationLetter',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@sentEmailRecommendationLetter',
-        'as' => 'solicitud.generated::dwbYUhXXVeAOs02b',
+        'as' => 'solicitud.generated::0EGqMgKZNiR5gDIf',
         'namespace' => NULL,
         'prefix' => '/solicitud',
         'where' => 
@@ -5479,7 +5479,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'updateDocuments.generated::xYaGfvUvm3rPYyFg' => 
+    'updateDocuments.generated::Zo2g87U32VaJemCT' => 
     array (
       'methods' => 
       array (
@@ -5494,7 +5494,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateArchiveEntranceDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateArchiveEntranceDocument',
-        'as' => 'updateDocuments.generated::xYaGfvUvm3rPYyFg',
+        'as' => 'updateDocuments.generated::Zo2g87U32VaJemCT',
         'namespace' => NULL,
         'prefix' => '/updateDocuments',
         'where' => 
@@ -5515,7 +5515,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'updateDocuments.generated::Mdp9i7JTk2EcJkuK' => 
+    'updateDocuments.generated::6nCnVpVwhJLHC2wN' => 
     array (
       'methods' => 
       array (
@@ -5530,7 +5530,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegreeRequiredDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAcademicDegreeRequiredDocument',
-        'as' => 'updateDocuments.generated::Mdp9i7JTk2EcJkuK',
+        'as' => 'updateDocuments.generated::6nCnVpVwhJLHC2wN',
         'namespace' => NULL,
         'prefix' => '/updateDocuments',
         'where' => 
@@ -5551,7 +5551,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'updateDocuments.generated::1dEHRje6occMooH1' => 
+    'updateDocuments.generated::3bbQGDjDUvQRwFEM' => 
     array (
       'methods' => 
       array (
@@ -5566,7 +5566,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguageRequiredDocument',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@updateAppliantLanguageRequiredDocument',
-        'as' => 'updateDocuments.generated::1dEHRje6occMooH1',
+        'as' => 'updateDocuments.generated::3bbQGDjDUvQRwFEM',
         'namespace' => NULL,
         'prefix' => '/updateDocuments',
         'where' => 
