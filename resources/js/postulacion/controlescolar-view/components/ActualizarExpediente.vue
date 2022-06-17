@@ -56,7 +56,7 @@
                 <h4>Grado(s) academico(s)</h4>
                 <ul class="list-group" v-for="(grado,index) in academic_degrees" :key="grado.id" :index="index + 1">
                   <li class="list-inline-item" > 
-                    <span><strong> Grado Academico #{{index}} </strong></span>
+                    <span><strong> Grado Academico #{{index + 1}} </strong></span>
                   </li>
                   <li
                     v-for="etiqueta in grado.required_documents"
@@ -112,7 +112,7 @@
                 <h4>Lengua(s) Entranjera(s)</h4>
                 <ul class="list-group" v-for="(language,index) in appliant_languages" :key="language.id" :index="index + 1">
                   <li class="list-inline-item" > 
-                    <span><strong> Lengua Extranjera #{{index}} </strong></span>
+                    <span><strong> Lengua Extranjera #{{index + 1}} </strong></span>
                   </li>
                   <li
                     v-for="etiqueta in language.required_documents"
@@ -140,7 +140,7 @@
                 <h4>Experiencia(s) Laboral(s)</h4>
                 <ul class="list-group" v-for="(working_experience,index) in working_experiences" :key="working_experience.id" :index="index + 1">
                   <li class="list-inline-item" > 
-                    <span><strong> Grado Academico #{{index}} </strong></span>
+                    <span><strong> Experiencia laboral #{{index + 1}} </strong></span>
                   </li>
                   <li
                     v-for="etiqueta in working_experience.required_documents"
@@ -272,6 +272,8 @@ export default {
   methods: {
     enviarActualizacion() {
       console.log(this.selected_academicDocuments);
+            console.log(this.selected_languageDocuments);
+
       console.log("instructions: " + this.instructions);
 
       if (
@@ -326,6 +328,7 @@ export default {
             });
           })
           .catch((error) => {
+            console.log(error.data);
             Swal.fire({
               title: "Ups",
               text: "No fue posible completar la petición, intentelo mas tarde",

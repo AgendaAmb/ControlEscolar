@@ -161,6 +161,7 @@ class Archive extends Model
     }
 
     /**
+     * archive->syncWithPivots()
      * Obtiene el postulante.
      *
      * @return BelongsTo

@@ -274,6 +274,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       console.log(this.selected_academicDocuments);
+      console.log(this.selected_languageDocuments);
       console.log("instructions: " + this.instructions);
 
       if ((this.selected_personalDocuments.length > 0 || this.selected_academicDocuments.length > 0 || this.selected_entranceDocuments.length > 0 || this.selected_languageDocuments.length > 0 || this.selected_workingDocuments.length > 0) && this.archive_id != null && this.user_id != null) {
@@ -313,6 +314,7 @@ __webpack_require__.r(__webpack_exports__);
             });
           });
         })["catch"](function (error) {
+          console.log(error.data);
           Swal.fire({
             title: "Ups",
             text: "No fue posible completar la petición, intentelo mas tarde",
@@ -4812,7 +4814,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LenguaExtranjera_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LenguaExtranjera.vue */ "./resources/js/postulacion/controlescolar-view/components/LenguaExtranjera.vue");
 /* harmony import */ var _RequisitosIngreso_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RequisitosIngreso.vue */ "./resources/js/postulacion/controlescolar-view/components/RequisitosIngreso.vue");
 /* harmony import */ var _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CartaDeRecomendacion.vue */ "./resources/js/postulacion/controlescolar-view/components/CartaDeRecomendacion.vue");
-//
 //
 //
 //
@@ -12247,7 +12248,9 @@ var render = function () {
                                 _c("span", [
                                   _c("strong", [
                                     _vm._v(
-                                      " Grado Academico #" + _vm._s(index) + " "
+                                      " Grado Academico #" +
+                                        _vm._s(index + 1) +
+                                        " "
                                     ),
                                   ]),
                                 ]),
@@ -12461,7 +12464,7 @@ var render = function () {
                                     _c("strong", [
                                       _vm._v(
                                         " Lengua Extranjera #" +
-                                          _vm._s(index) +
+                                          _vm._s(index + 1) +
                                           " "
                                       ),
                                     ]),
@@ -12604,8 +12607,8 @@ var render = function () {
                                         _c("span", [
                                           _c("strong", [
                                             _vm._v(
-                                              " Grado Academico #" +
-                                                _vm._s(index) +
+                                              " Experiencia laboral #" +
+                                                _vm._s(index + 1) +
                                                 " "
                                             ),
                                           ]),

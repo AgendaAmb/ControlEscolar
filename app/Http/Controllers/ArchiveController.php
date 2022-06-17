@@ -223,7 +223,7 @@ class ArchiveController extends Controller
                     //Eliminar mi archivo para produccion
                     //Descomentar en local
                     //Quitas a Ulises y a Rodrigo
-                    if ($archive->appliant->id == 298428 || $archive->appliant->id == 245241 ||$archive->appliant->id == 291395 || $archive->appliant->id == 241294  || $archive->appliant->id == 246441) {
+                    if ($archive->appliant->id == 298428 || $archive->appliant->id == 245241 || $archive->appliant->id == 291395 || $archive->appliant->id == 241294  || $archive->appliant->id == 246441) {
                         unset($archives[$k]);
                     }
                 } else {
@@ -276,68 +276,93 @@ class ArchiveController extends Controller
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
                 'user_id' => ['required', 'numeric', 'exists:users,id']
             ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error de validacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
 
-            $appliant = null;
-            $url_LogoAA = asset('/storage/headers/logod.png');
-            $url_ContactoAA = asset('/storage/logos/rtic.png');
+        $appliant = null;
+        $url_LogoAA = asset('/storage/headers/logod.png');
+        $url_ContactoAA = asset('/storage/logos/rtic.png');
 
-            try {
-                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
+        try {
+            $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
 
-                if (sizeof($user_data_collect) > 0) {
-                    $appliant = $user_data_collect[0];
-                }
-            } catch (\Exception $e) {
-                return new JsonResponse(['message' => 'El usuario no existe'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-            }
-            // return new JsonResponse($appliant['email'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-
-            // Encuentra el nombre de cada documento
-            $name_documents = [];
-            foreach ($request->selected_personalDocuments as $doc_id) {
-                $doc = RequiredDocument::where('id', $doc_id)->first();
-                array_push($name_documents, $doc->name);
-            }
-            foreach ($request->selected_entranceDocuments as $doc_id) {
-                $doc = RequiredDocument::where('id', $doc_id)->first();
-                array_push($name_documents, $doc->name);
-            }
-            foreach ($request->selected_academicDocuments as $doc_id) {
-                $doc = RequiredDocument::where('id', $doc_id)->first();
-                array_push($name_documents, $doc->name);
-            }
-            foreach ($request->selected_languageDocuments as $doc_id) {
-                $doc = RequiredDocument::where('id', $doc_id)->first();
-                array_push($name_documents, $doc->name);
-            }
-            foreach ($request->selected_workingDocuments as $doc_id) {
-                $doc = RequiredDocument::where('id', $doc_id)->first();
-                array_push($name_documents, $doc->name);
-            }
-
-
-            try {
-                // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
-
-                Mail::to($appliant['email'])->send(new SendUpdateDocuments(
-                    $request->selected_personalDocuments,
-                    $request->selected_entranceDocuments,
-                    $request->selected_academicDocuments,
-                    $request->selected_languageDocuments,
-                    $request->selected_workingDocuments,
-                    $name_documents,
-                    $request->instructions,
-                    $appliant,
-                    $request->academic_program,
-                    $request->archive_id,
-                    $url_LogoAA,
-                    $url_ContactoAA
-                ));
-            } catch (\Exception $e) {
-                return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            if (sizeof($user_data_collect) > 0) {
+                $appliant = $user_data_collect[0];
             }
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => 'El usuario no existe'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+        // return new JsonResponse($appliant['email'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        try {
+            // Encuentra el nombre de cada documento
+            $name_documents = [];
+            if (sizeof($request->selected_personalDocuments) > 0) {
+                foreach ($request->selected_personalDocuments as $doc_id) {
+                    $doc = RequiredDocument::where('id', $doc_id)->first();
+                    if ($doc != null) {
+                        array_push($name_documents, $doc->name);
+                    }
+                }
+            }
+            if (sizeof($request->selected_entranceDocuments) > 0) {
+                foreach ($request->selected_entranceDocuments as $doc_id) {
+                    $doc = RequiredDocument::where('id', $doc_id)->first();
+                    if ($doc != null) {
+                        array_push($name_documents, $doc->name);
+                    }
+                }
+            }
+
+
+            if (sizeof($request->selected_academicDocuments) > 0) {
+                foreach ($request->selected_academicDocuments as $doc_id) {
+                    $doc = RequiredDocument::where('id', $doc_id[1])->first();
+                    if ($doc != null) {
+                        array_push($name_documents, $doc->name);
+                    }                }
+            }
+
+            if (sizeof($request->selected_languageDocuments) > 0) {
+                foreach ($request->selected_languageDocuments as $doc_id) {
+                    $doc = RequiredDocument::where('id', $doc_id[1])->first();
+                    if ($doc != null) {
+                        array_push($name_documents, $doc->name);
+                    }                }
+            }
+
+            if (sizeof($request->selected_workingDocuments) > 0) {
+                foreach ($request->selected_workingDocuments as $doc_id) {
+                    $doc = RequiredDocument::where('id', $doc_id[1])->first();
+                    if ($doc != null) {
+                        array_push($name_documents, $doc->name);
+                    }                }
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+
+
+        try {
+            Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
+
+                // Mail::to($appliant['email'])->send(new SendUpdateDocuments(
+                $request->selected_personalDocuments,
+                $request->selected_entranceDocuments,
+                $request->selected_academicDocuments,
+                $request->selected_languageDocuments,
+                $request->selected_workingDocuments,
+                $name_documents,
+                $request->instructions,
+                $appliant,
+                $request->academic_program,
+                $request->archive_id,
+                $url_LogoAA,
+                $url_ContactoAA
+            ));
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
@@ -731,7 +756,7 @@ class ArchiveController extends Controller
     {
         $request->validate([
             'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-            'exanni_score' => ['required', 'numeric', ],
+            'exanni_score' => ['required', 'numeric',],
         ]);
 
         Archive::where('id', $request->archive_id)->update(['exanni_score' => $request->exanni_score]);
@@ -740,7 +765,7 @@ class ArchiveController extends Controller
             Archive::select('exanni_score')->firstWhere('id', $request->archive_id)
         );
     }
-    
+
     public function updateArchiveInterviewDocument(Request $request)
     {
         $request->validate([
@@ -749,44 +774,42 @@ class ArchiveController extends Controller
             'file' => ['required']
         ]);
 
-        try{
+        try {
             $archive = Archive::find($request->archive_id);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-         // Create the route
-         try{
+        // Create the route
+        try {
             # Archivo de la solicitud
             $ruta = $request->file('file')->storeAs(
                 'archives/' . $request->archive_id . '/interviewDocuments',
                 $request->requiredDocumentId . '.pdf'
             );
-
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-      
 
-        try{
+
+        try {
             # Asocia los documentos requeridos.
-              # Asocia los documentos requeridos.
+            # Asocia los documentos requeridos.
             $archive->interviewDocuments()->detach($request->requiredDocumentId);
             $archive->interviewDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
             $required_document = ArchiveRequiredDocument::where([
                 'required_document_id' => $request->requiredDocumentId,
                 'archive_id' => $request->archive_id
-            ])->first();      
-
+            ])->first();
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-           ['location' => $required_document->location ], JsonResponse::HTTP_CREATED
+            ['location' => $required_document->location],
+            JsonResponse::HTTP_CREATED
         );
-      
     }
 
 
@@ -798,43 +821,42 @@ class ArchiveController extends Controller
             'file' => ['required']
         ]);
 
-        try{
+        try {
             $archive = Archive::find($request->archive_id);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-      
+
 
         // Create the route
-        try{
+        try {
             # Archivo de la solicitud
             $ruta = $request->file('file')->storeAs(
                 'archives/' . $request->archive_id . '/personalDocuments',
                 $request->requiredDocumentId . '.pdf'
             );
-
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-      
 
-        try{
+
+        try {
             # Asocia los documentos requeridos.
-              # Asocia los documentos requeridos.
+            # Asocia los documentos requeridos.
             $archive->personalDocuments()->detach($request->requiredDocumentId);
             $archive->personalDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
             $required_document = ArchiveRequiredDocument::where([
                 'required_document_id' => $request->requiredDocumentId,
                 'archive_id' => $request->archive_id
-            ])->first();      
-
+            ])->first();
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-           ['location' => $required_document->location ], JsonResponse::HTTP_CREATED
+            ['location' => $required_document->location],
+            JsonResponse::HTTP_CREATED
         );
     }
 
@@ -847,7 +869,7 @@ class ArchiveController extends Controller
             'file' => ['required']
         ]);
 
-        try{
+        try {
             $archive = Archive::find($request->archive_id);
 
             // $archive->loadMissing([
@@ -857,37 +879,36 @@ class ArchiveController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-      
+
 
         // Create the route
-        try{
+        try {
             # Archivo de la solicitud
             $ruta = $request->file('file')->storeAs(
                 'archives/' . $request->archive_id . '/entranceDocuments',
                 $request->requiredDocumentId . '.pdf'
             );
-
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-      
 
-        try{
+
+        try {
             # Asocia los documentos requeridos.
             $archive->entranceDocuments()->detach($request->requiredDocumentId);
             $archive->entranceDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
             $required_document = ArchiveRequiredDocument::where([
                 'required_document_id' => $request->requiredDocumentId,
                 'archive_id' => $request->archive_id
-            ])->first();      
-
+            ])->first();
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-           ['location' => $required_document->location ], JsonResponse::HTTP_CREATED
+            ['location' => $required_document->location],
+            JsonResponse::HTTP_CREATED
         );
     }
 
@@ -979,7 +1000,7 @@ class ArchiveController extends Controller
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/' . $request->archive_id . '/academicDocuments',
-            $request->requiredDocumentId.'-'.$request->index . '.pdf'
+            $request->requiredDocumentId . '-' . $request->index . '.pdf'
         );
 
         # Asocia los documentos requeridos.
@@ -1109,7 +1130,7 @@ class ArchiveController extends Controller
         # Archivo de la solicitud
         $ruta = $request->file('file')->storeAs(
             'archives/' . $request->archive_id . '/laguageDocuments',
-            $request->id . '_' . $request->requiredDocumentId .'-'.$request->index. '.pdf'
+            $request->id . '_' . $request->requiredDocumentId . '-' . $request->index . '.pdf'
         );
 
         # Asocia los documentos requeridos.
