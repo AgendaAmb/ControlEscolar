@@ -345,9 +345,9 @@ class ArchiveController extends Controller
 
 
         try {
-            Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
+            // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
 
-                // Mail::to($appliant['email'])->send(new SendUpdateDocuments(
+                Mail::to($appliant['email'])->send(new SendUpdateDocuments(
                 $request->selected_personalDocuments,
                 $request->selected_entranceDocuments,
                 $request->selected_academicDocuments,
