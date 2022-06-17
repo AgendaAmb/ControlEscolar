@@ -3,6 +3,8 @@ const user = @json($user);
 const period = @json($period);
 const appliants = @json($appliants);
 const announcements = @json($announcements);
+
+console.log(appliants);
 </script>
 
 @extends('layouts.app')
