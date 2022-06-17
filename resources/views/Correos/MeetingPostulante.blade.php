@@ -65,10 +65,10 @@
                             <td>{{ $Interview->start_time }}-{{ $Interview->end_time }}
                             </td>
                         </tr>
-                        {{-- <tr>
-                            <td>Modalidad</td>
+                        <tr>
+                            <td>Lugar</td>
                             <td>{{$Room}}</td>
-                        </tr> --}}
+                        </tr>
                         {{-- <tr>
                             <td>Enlace para la entrevista</td>
                             <td>{{ $Meeating['join_url'] }}</td>
