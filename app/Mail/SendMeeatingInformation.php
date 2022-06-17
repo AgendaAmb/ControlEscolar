@@ -39,6 +39,13 @@ class SendMeeatingInformation extends Mailable
      */
     public function build()
     {
-        return $this->from('rtic.ambiental@uaslp.mx', 'DETALLES DE ENTREVISTA')->markdown('Correos.MeetingPostulante')->subject('Información de entrevista');
+        $correo = 'rtic.ambiental@uaslp.mx';
+
+        if($this->academic_program['alias'] === 'imarec'){
+            $correo = 'imarec.escolar@uaslp.mx';
+        }else{
+            $correo = 'pmpca@uaslp.mx';
+        }
+        return $this->from($correo, 'DETALLES DE ENTREVISTA')->markdown('Correos.MeetingPostulante')->subject('Información de entrevista');
     }
 }

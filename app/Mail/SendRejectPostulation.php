@@ -72,7 +72,15 @@ class SendRejectPostulation extends Mailable
      */
     public function build()
     {
-        return $this->from('rtic.ambiental@uaslp.mx', 'Resultados de postulación')->markdown('Correos.ShowRejectPostulation')->subject('Estado de posgrado solicitado');
+        $correo = 'rtic.ambiental@uaslp.mx';
+
+        if($this->academic_program['alias'] === 'imarec'){
+            $correo = 'imarec.escolar@uaslp.mx';
+        }else{
+            $correo = 'pmpca@uaslp.mx';
+        }
+
+        return $this->from($correo, 'Resultados de postulación')->markdown('Correos.ShowRejectPostulation')->subject('Estado de posgrado solicitado');
 
         // return $this->markdown('Correos.ShowRejectPostulation');
         // return $this->view('Correos.ShowRejectPostulation');

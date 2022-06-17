@@ -320,7 +320,8 @@ class ArchiveController extends Controller
                     $doc = RequiredDocument::where('id', $doc_id[1])->first();
                     if ($doc != null) {
                         array_push($name_documents, $doc->name);
-                    }                }
+                    }
+                }
             }
 
             if (sizeof($request->selected_languageDocuments) > 0) {
@@ -328,7 +329,8 @@ class ArchiveController extends Controller
                     $doc = RequiredDocument::where('id', $doc_id[1])->first();
                     if ($doc != null) {
                         array_push($name_documents, $doc->name);
-                    }                }
+                    }
+                }
             }
 
             if (sizeof($request->selected_workingDocuments) > 0) {
@@ -336,7 +338,8 @@ class ArchiveController extends Controller
                     $doc = RequiredDocument::where('id', $doc_id[1])->first();
                     if ($doc != null) {
                         array_push($name_documents, $doc->name);
-                    }                }
+                    }
+                }
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -346,23 +349,35 @@ class ArchiveController extends Controller
 
         try {
             // Mail::to("ulises.uudp@gmail.com")->send(new SendUpdateDocuments(
+            $servicio_correo = 'smtp';
+            if ($request->academic_program != null) {
 
-                Mail::to($appliant['email'])->send(new SendUpdateDocuments(
-                $request->selected_personalDocuments,
-                $request->selected_entranceDocuments,
-                $request->selected_academicDocuments,
-                $request->selected_languageDocuments,
-                $request->selected_workingDocuments,
-                $name_documents,
-                $request->instructions,
-                $appliant,
-                $request->academic_program,
-                $request->archive_id,
-                $url_LogoAA,
-                $url_ContactoAA
-            ));
+                // IMAREC
+                if (strcmp($request->academic_program['alias'], 'imarec') === 0) {
+                    $servicio_correo = 'smtp_imarec';
+                } else {
+                    // MCA, MCA doble titulacion, Doctorado
+                    $servicio_correo = 'smtp_pmpca';
+                }
+                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
+
+                Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendUpdateDocuments(
+                    $request->selected_personalDocuments,
+                    $request->selected_entranceDocuments,
+                    $request->selected_academicDocuments,
+                    $request->selected_languageDocuments,
+                    $request->selected_workingDocuments,
+                    $name_documents,
+                    $request->instructions,
+                    $appliant,
+                    $request->academic_program,
+                    $request->archive_id,
+                    $url_LogoAA,
+                    $url_ContactoAA
+                ));
+            }
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
@@ -429,20 +444,33 @@ class ArchiveController extends Controller
 
 
             try {
-                Mail::to($appliant['email'])->send(new SendRejectPostulation(
-                    $request->selected_personalDocuments,
-                    $request->selected_entranceDocuments,
-                    $request->selected_academicDocuments,
-                    $request->selected_languageDocuments,
-                    $request->selected_workingDocuments,
-                    $name_documents,
-                    $request->instructions,
-                    $appliant,
-                    $request->academic_program,
-                    $request->archive_id,
-                    $url_LogoAA,
-                    $url_ContactoAA
-                ));
+                $servicio_correo = 'smtp';
+                if ($request->academic_program != null) {
+
+                    // IMAREC
+                    if (strcmp($request->academic_program['alias'], 'imarec') === 0) {
+                        $servicio_correo = 'smtp_imarec';
+                    } else {
+                        // MCA, MCA doble titulacion, Doctorado
+                        $servicio_correo = 'smtp_pmpca';
+                    }
+                    // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendRejectPostulation(
+
+                    Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendRejectPostulation(
+                        $request->selected_personalDocuments,
+                        $request->selected_entranceDocuments,
+                        $request->selected_academicDocuments,
+                        $request->selected_languageDocuments,
+                        $request->selected_workingDocuments,
+                        $name_documents,
+                        $request->instructions,
+                        $appliant,
+                        $request->academic_program,
+                        $request->archive_id,
+                        $url_LogoAA,
+                        $url_ContactoAA
+                    ));
+                }
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'No se pudo enviar el correo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
@@ -901,6 +929,15 @@ class ArchiveController extends Controller
                 'required_document_id' => $request->requiredDocumentId,
                 'archive_id' => $request->archive_id
             ])->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // Agregar relacion si es carta de intención
+        try {
+            if ($required_document != null && strcmp($required_document->name, '12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)') === 0) {
+                $archive->intentionLetter();
+            }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }

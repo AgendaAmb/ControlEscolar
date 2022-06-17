@@ -69,12 +69,12 @@
         Expediente Cerrado          Visualizar para todos los roles anteriores (Cambiar estado solamente )
         --}}
     {{-- Admin view --}}
-    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status > 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && ($archive->status >= 5)))
+    @if(((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status > 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && ($archive->status  === 5 || $archive->status  === 6 || $archive->status  === 7  )))
         <script src="{{ asset('postulacion/js/close.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('admin'))
         <script src="{{ asset('js/postulacion.js') }}" defer></script>
         {{-- Professor view --}}
-    @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') || Auth::user()->id === 15641)
+    @elseif (Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador') )
         <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
     @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
         <script src="{{ asset('professor/js/professor-only-rl.js') }}" defer></script>
