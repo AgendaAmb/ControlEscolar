@@ -1149,7 +1149,9 @@ __webpack_require__.r(__webpack_exports__);
         end_time: this.end_time,
         room_id: this.room.id
       }).then(function (response) {
+        console.log(response.data);
         var data = response.data;
+        return true;
 
         _this.$emit('nuevaentrevista', {
           id: data.id,

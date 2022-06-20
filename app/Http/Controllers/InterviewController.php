@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Archive;
 use App\Models\Room;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 //Presencial
 use App\Mail\SendMeeatingInformation;
 use App\Mail\SendMeeatingInformationProfesor;
@@ -136,13 +137,28 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
-        $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
-        $interview_model->save();
+        try{
+            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
+            // $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); //Agregaos al usuario a la entrevista
+            // $interview_model->load(['users.roles:name', 'appliant']);
+            $interview_model->confirmed = false;
+            $interview_model->save();
 
-        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); //Agregaos al usuario a la entrevista
-        $interview_model->load(['users.roles:name', 'appliant']);
-        $interview_model->confirmed = false;
-        $interview_model->save();
+            DB::table('interview_user')->insert([
+                'interview_id' => $interview_model->id,
+                'user_type' => $request->user_type,
+                'user_id' => $request->user_id
+            ]);
+
+            return [
+                'interview_id' => $interview_model->id,
+                'user_type' => $request->user_type,
+                'user_id' => $request->user_id
+            ];
+
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al enviar correos de entrevista', 'error' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
 
