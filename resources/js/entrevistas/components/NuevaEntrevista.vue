@@ -179,7 +179,11 @@ export default {
         room_id: this.room.id
 
       }).then(response => {
+        console.log(response.data);
+
         var data = response.data;
+
+        return true
 
         this.$emit('nuevaentrevista', {
           id: data.id,
