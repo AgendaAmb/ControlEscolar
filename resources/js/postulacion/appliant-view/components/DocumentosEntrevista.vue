@@ -35,7 +35,7 @@ import swal from "sweetalert2";
 window.Swal = swal;
 
 export default {
-  name: "actualiza-documentos",
+  name: "documento-entrevista",
 
   components: {
     DocumentoRequeridoEntrevista,

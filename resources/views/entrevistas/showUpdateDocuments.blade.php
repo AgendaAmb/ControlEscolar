@@ -14,7 +14,8 @@
     <documentos-entrevista
         :appliant.sync="appliant" 
         :archive_id.sync="archive.id"
-        :academic_program="academic_program">
+        :academic_program="academic_program"
+        :interview_documents="archive.interview_documents">
     </documentos-entrevista>
 @endsection
 

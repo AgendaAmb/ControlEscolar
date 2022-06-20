@@ -9,30 +9,28 @@
 <body>
     <main class="container-fluid">
         <div class="row">
-            <div style="width: 100%; display: block;margin: 0 auto">
-                
-                <img src="{{ asset('imagenes/logod.png');}}">
+            <div class="col-12">
+                <img src="{{ asset('imagenes/logod.png') }}">
                 {{-- <img src="{{ $message->embed('imagenes/logod.png') }}"> --}}
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <p style="text-align:center;"> 
-                        <strong> 
+
+            <div class="col-12">
+                <p style="text-align:center;">
+                    <strong>
                         Información de entrevista para ingreso a
                         <br>
                         {{ $academic_program['name'] }}
                         <br>
-                        Convocatoria 2021-02
+                        Convocatoria 2022-02
                     </strong>
-                    </p>
-                   
-                </div>
+                </p>
+
             </div>
             <div class="row justify-content-end"style="text-align: right;">
                 San Luis Potosí, S.L.P,&nbsp; {{Carbon\Carbon::parse(Carbon\Carbon::now())->locale('es')->isoFormat('dddd DD MMMM YYYY')}}
             </div>
 
-            <div style="margin: 20px 0;">
+            <div class="container my-4">
                 <p>Estimado Profesor {{$Profesor['middlename'] ." ".$Profesor['surname']." ".$Profesor['name']}}</p>
                 <p>Agredecemos su partición en la entrevista de:</p>
                 <table class="table"  style="max-width: 600px; margin: 0 auto;">
@@ -67,6 +65,9 @@
 
                     </tbody>
                 </table>
+            </div>
+
+            <div class="container">
                 <p>
 
                 <p><strong>Indicaciones:</strong></p>

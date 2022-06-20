@@ -118,11 +118,9 @@ class Archive extends Model
         return $query->orderBy('required_documents.name');
     }
 
-
     public function interviewDocuments(): BelongsToMany
     {
-        $query = $this->requiredDocuments()->where('type', 'interview');
-        return $query->orderBy('required_documents.name');
+        return $this->requiredDocuments();
     }
 
 

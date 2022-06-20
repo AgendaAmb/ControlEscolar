@@ -94,7 +94,7 @@
 
 <script>
 export default {
-  name: "documento-requerido",
+  name: "documento-requerido-entrevista",
 
   props: {
 

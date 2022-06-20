@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "documento-requerido",
+  name: "documento-requerido-entrevista",
   props: {
     id: {
       type: Number
@@ -284,7 +284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "actualiza-documentos",
+  name: "documento-entrevista",
   components: {
     DocumentoRequeridoEntrevista: _DocumentoRequeridoEntrevista_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },

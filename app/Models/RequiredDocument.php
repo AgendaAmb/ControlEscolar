@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RequiredDocument extends Model
 {
     use HasFactory, SoftDeletes;
-   
 
+    protected $table = 'required_documents';
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -92,6 +92,17 @@ class RequiredDocument extends Model
     public static function personalDocumentsId()
     {
         return self::where('type', 'personal')->pluck('id');
+    }
+
+    /**
+     * Obtiene el id de los documentos personales.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function interviewDocumentsId()
+    {
+        return self::where('type', 'interview')->pluck('id');
     }
 
     /**

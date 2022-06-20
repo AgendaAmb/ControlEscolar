@@ -12,30 +12,29 @@
 <body>
     <main class="container-fluid">
         <div class="row">
-            <div style="width: 100%; display: block;margin: 0 auto">
-                <img src="{{ asset('imagenes/logod.png');}}">
+            <div class="col-12">
+                <img src="{{ asset('imagenes/logod.png') }}">
                 {{-- <img src="{{ $message->embed('imagenes/logod.png') }}"> --}}
             </div>
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <p style="text-align:center;">
-                        <strong>
-                            Notificación de entrevista para ingresar a
-                            <br>
-                            {{ $academic_program['name'] }}
-                            <br>
-                            Convocatoria 2022-02
-                        </strong>
-                    </p>
 
-                </div>
+            <div class="col-12">
+                <p style="text-align:center;">
+                    <strong>
+                        Información de entrevista para ingreso a
+                        <br>
+                        {{ $academic_program['name'] }}
+                        <br>
+                        Convocatoria 2022-02
+                    </strong>
+                </p>
+
             </div>
             <div class="row justify-content-end" style="text-align: right;">
                 San Luis Potosí, S.L.P,&nbsp;
                 {{ Carbon\Carbon::parse(Carbon\Carbon::now())->locale('es')->isoFormat('dddd DD MMMM YYYY') }}
             </div>
 
-            <div style="margin: 20px 0;">
+            <div class="container my-4">
                 <p>Estimado(a)
                     <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
@@ -43,7 +42,7 @@
                     estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
                     se llevará a cabo:</p>
 
-                <table class="table" style="max-width: 600px; margin: 0 auto;">
+                <table class="table" style="max-width: 800px; margin: 0 auto;">
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
@@ -80,8 +79,8 @@
 
                     </tbody>
                 </table>
-
-
+            </div>
+                <div class="container">
                 @if ($academic_program['name']  === 'Maestría en ciencias ambientales' || $academic_program['name']  == 'Maestría en ciencias ambientales, doble titulación')
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
