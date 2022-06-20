@@ -157,6 +157,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
         Route::get('calendario2',[InterviewController::class, 'calendario2'])->name('calendario2');
 
+        Route::get('calendario3', [InterviewController::class, 'calendario3'])->name('calendario3');
+
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');
 

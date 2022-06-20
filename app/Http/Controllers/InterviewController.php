@@ -75,6 +75,15 @@ class InterviewController extends Controller
         // return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
+    public function calendario3(Request $request)
+    {
+
+        $service = new MiPortalService;
+        $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
+
+        return $user_data_collect;
+    }
+
 
     /**
      * Devuelve la vista del programa de entrevistas.
