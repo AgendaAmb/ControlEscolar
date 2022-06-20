@@ -138,26 +138,42 @@ class InterviewController extends Controller
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
         try{
-            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
+            // $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
             // $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); //Agregaos al usuario a la entrevista
             // $interview_model->load(['users.roles:name', 'appliant']);
-            $interview_model->confirmed = false;
-            $interview_model->save();
+            // $interview_model->confirmed = false;
+            // $interview_model->save();
 
+            $interview_model= Interview::create([
+                'date' => $request->date,
+                'room_id' => $request->room_id,
+                'start_time' => $request->start_time,
+                'end_time' => $request->end_time,
+                'confirmed' => 0
+            ]);
+
+            // period_id: this.period_id,
+            // user_id: this.appliant.id,
+            // user_type: this.appliant.type,
+            // date: this.date,
+            // start_time: this.start_time,
+            // end_time: this.end_time,
+            // room_id: this.room.id
+            
+            $interview_model->save();
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        try{
             DB::table('interview_user')->insert([
                 'interview_id' => $interview_model->id,
                 'user_type' => $request->user_type,
                 'user_id' => $request->user_id
             ]);
 
-            return [
-                'interview_id' => $interview_model->id,
-                'user_type' => $request->user_type,
-                'user_id' => $request->user_id
-            ];
-
         }catch(\Exception $e){
-            return new JsonResponse(['message' => 'Error al enviar correos de entrevista', 'error' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
