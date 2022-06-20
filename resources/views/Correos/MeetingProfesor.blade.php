@@ -19,7 +19,7 @@
                         <strong> 
                         Información de entrevista para ingreso a
                         <br>
-                        {{ $academic_program }}
+                        {{ $academic_program['name'] }}
                         <br>
                         Convocatoria 2021-02
                     </strong>

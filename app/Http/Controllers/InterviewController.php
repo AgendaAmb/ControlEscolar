@@ -26,6 +26,8 @@ use App\Mail\SendMeeatingInformationProfesor;
 use App\Mail\SendZoomMeeatingInformation;
 use App\Mail\SendZoomMeeatingInformationProfesor;
 
+use App\Helpers\MiPortalService;
+
 class InterviewController extends Controller
 {
     public $alumno;
@@ -44,6 +46,44 @@ class InterviewController extends Controller
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
+
+    public function calendario1(Request $request)
+    {
+        //return $request;
+        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+
+        return AcademicProgram::WithInterviewEagerLoads()->get();
+        // return $calendar_resource;
+
+        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
+    }
+
+    public function calendario2(Request $request)
+    {
+
+        // $service = new MiPortalService;
+        // $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
+
+        // return $user_data_collect;
+
+        //return $request;
+        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+
+        // return AcademicProgram::WithInterviewEagerLoads()->get();
+        return $calendar_resource;
+
+        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
+    }
+
+    public function calendario3(Request $request)
+    {
+
+        $service = new MiPortalService;
+        $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
+
+        return $user_data_collect;
+    }
+
 
     /**
      * Devuelve la vista del programa de entrevistas.
@@ -97,21 +137,46 @@ class InterviewController extends Controller
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
         $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
-        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
+        $interview_model->save();
+
+        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); //Agregaos al usuario a la entrevista
         $interview_model->load(['users.roles:name', 'appliant']);
         $interview_model->confirmed = false;
         $interview_model->save();
 
+        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
+
         # Obtiene los datos del profesor que otorgó la carta de intención, con 
         # base a la información de mi portal.
         $professor = $interview_model->intentionLetterProfessor->first();
-        $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
-        $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+
+        $service = new MiPortalService;
+
+        $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $professor->id])->collect();
+        $miPortal_worker = $miPortal_worker[0];
+        $professor_name = implode(' ', [
+            $miPortal_worker['name'] ?? '',
+            $miPortal_worker['middlename'] ?? '',
+            $miPortal_worker['surname']  ?? ''
+        ]);
+
+        // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
+        // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
 
         # Obtiene los datos del postulante, con base a la información de mi portal.
-        $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
-        $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
 
+        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
+        $miPortal_user = $miPortal_user[0];
+
+        $name = implode(' ', [
+            $miPortal_user['name'] ?? '',
+            $miPortal_user['middlename'] ?? '',
+            $miPortal_user['surname']  ?? ''
+        ]);
+
+            // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
+            // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
+        
         # Devuelve en la respuesta, los datos de los usuarios.
         $appliant = $interview_model->appliant->first()->toArray();
         $appliant['name'] = $name;
@@ -119,6 +184,7 @@ class InterviewController extends Controller
         # Sobreescribe con información nueva.
         unset($interview_model->appliant);
         unset($interview_model->intentionLetterProfessor);
+        
         $interview_model->appliant = $appliant;
         $interview_model->intention_letter_professor = [
             'id' => $miPortal_worker['id'],
@@ -193,7 +259,7 @@ class InterviewController extends Controller
         //     $rubric->getAverageWorkingPersonalAttributesConcepts();
 
         // }
-
+        try{
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
 
@@ -201,15 +267,11 @@ class InterviewController extends Controller
             $ResponseMeating = app(ZoomController::class)->store($interview2);
 
             // Entrevista presencial o virtual
-            if (str_contains($int_room->site, 'Zoom') ? true : false) {
+            if(str_contains($int_room->site,'Zoom')?true:false){
                 //Crear url para la sesion de zoom//
                 $ResponseMeating = app(ZoomController::class)->store($interview2);
-                // Actualizacion bandera - entrevista cerrada
-                Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
-            } else {
+            }else{
                 $ResponseMeating = null;
-                // Actualizacion bandera - entrevista cerrada
-                Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
             }
 
             // TODO AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
@@ -268,15 +330,13 @@ class InterviewController extends Controller
                         $this->alumno = $User;
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
                             Mail::mailer($servicio_correo)->to($User->email)
-                            ->cc($mail_academic_program)  ->cc($mail_academic_program)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
-                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                            ->cc($mail_academic_program)  ->cc($mail_academic_program)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
 
                         } else {
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
-                            Mail::mailer($servicio_correo)  ->cc($mail_academic_program)->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
-                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                            Mail::mailer($servicio_correo)  ->cc($mail_academic_program)->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
 
                         }
 
@@ -286,19 +346,22 @@ class InterviewController extends Controller
                         $Trabajador = $Trabajadores->where('id', $User->id)->first();
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
 
                         } else {
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));    
+                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));    
 
                         }
                     }
                 }
             }
+        }
+            // Actualizacion bandera - entrevista cerrada
+            Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al enviar correos de entrevista', 'error'=>$e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         return new JsonResponse(['message' => 'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
