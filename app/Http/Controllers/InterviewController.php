@@ -26,6 +26,8 @@ use App\Mail\SendMeeatingInformationProfesor;
 use App\Mail\SendZoomMeeatingInformation;
 use App\Mail\SendZoomMeeatingInformationProfesor;
 
+use App\Helpers\MiPortalService;
+
 class InterviewController extends Controller
 {
     public $alumno;
@@ -58,6 +60,12 @@ class InterviewController extends Controller
 
     public function calendario2(Request $request)
     {
+
+        // $service = new MiPortalService;
+        // $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
+
+        // return $user_data_collect;
+
         //return $request;
         $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
 
@@ -216,7 +224,7 @@ class InterviewController extends Controller
         //     $rubric->getAverageWorkingPersonalAttributesConcepts();
 
         // }
-
+        try{
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
 
@@ -227,12 +235,8 @@ class InterviewController extends Controller
             if(str_contains($int_room->site,'Zoom')?true:false){
                 //Crear url para la sesion de zoom//
                 $ResponseMeating = app(ZoomController::class)->store($interview2);
-                // Actualizacion bandera - entrevista cerrada
-                Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
             }else{
                 $ResponseMeating = null;
-                // Actualizacion bandera - entrevista cerrada
-                Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
             }
 
             // TODO AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
@@ -276,30 +280,47 @@ class InterviewController extends Controller
                         $this->alumno = $User;
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if(str_contains($int_room->site,'Zoom')?true:false){
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
-                            Mail::mailer($servicio_correo)->to($User->email)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                            if ($archive->announcement->academicProgram->alias === 'imarec')
+                                Mail::mailer('smtp_imarec')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            else
+                                Mail::mailer('smtp_pmpca')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // Mail::mailer($servicio_correo)->to($User->email)->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
                         }else{
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
-                            Mail::mailer($servicio_correo)->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
+                            if ($archive->announcement->academicProgram->alias === 'imarec')
+                                Mail::mailer('smtp_imarec')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            else
+                                Mail::mailer('smtp_imarec')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // Mail::mailer($servicio_correo)->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram['name'], $request->room, $archive->id));
                         }
-                        // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                     } else if ($User->user_type == "workers") {
                         /**Obtener al trabajador inscrito en la entrevista */
                         $Trabajador = $Trabajadores->where('id', $User->id)->first();
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if(str_contains($int_room->site,'Zoom')?true:false){
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
+                            // Filtrar envio de correos por programa academico
+                            if($archive->announcement->academicProgram->alias === 'imarec')
+                                Mail::mailer('smtp_imarec')->to($User->email)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            else
+                                Mail::mailer('smtp_pmpca')->to($User->email)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            // Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
                         }else{
-                            // Mail::mailer('smtp')->to("A291395@alumnos.uaslp.mx")->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));    
+                            // Filtrar envio de correos por programa academico
+                            if ($archive->announcement->academicProgram->alias === 'imarec')
+                                Mail::mailer('smtp_imarec')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            else
+                                Mail::mailer('smtp_pmpca')->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            // Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram['name'],  $request->room, $this->alumno));    
                         }
                     }
                 }
-
-               
             }
         }
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al enviar correos de entrevista'], JsonResponse::HTTP_OK);
+        }
+
+        // Actualizacion bandera - entrevista cerrada
+        Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $ResponseMeating['join_url']]);
 
         return new JsonResponse(['message' => 'Se ha confirmado la entrevista'], JsonResponse::HTTP_OK);
     }
