@@ -168,6 +168,7 @@ class CalendarResource extends JsonResource
         $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
 
         if ($miPortal_worker[0] !== null) {
+            $interview['intention_letter_professor'] = $miPortal_worker[0];
             $interview['intention_letter_professor'] = [
                 'id' => $miPortal_worker[0]['id'] ?? '',
                 'type' => $miPortal_worker[0]['user_type'] ?? '',
