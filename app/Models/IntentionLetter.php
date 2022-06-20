@@ -10,6 +10,18 @@ class IntentionLetter extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'archive_required_document_id',
+        'user_id',
+        'user_type',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
