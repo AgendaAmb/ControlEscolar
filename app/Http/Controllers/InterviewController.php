@@ -136,6 +136,7 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
+        try{
         $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
         $interview_model->load(['users.roles:name', 'appliant']);
@@ -145,13 +146,36 @@ class InterviewController extends Controller
         # Obtiene los datos del profesor que otorgó la carta de intención, con 
         # base a la información de mi portal.
         $professor = $interview_model->intentionLetterProfessor->first();
-        $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
-        $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+
+        $service = new MiPortalService;
+
+        $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $professor->id])->collect();
+        $miPortal_worker = $miPortal_worker[0];
+        $professor_name = implode(' ', [
+            $miPortal_worker['name'] ?? '',
+            $miPortal_worker['middlename'] ?? '',
+            $miPortal_worker['surname']  ?? ''
+        ]);
+
+        // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
+        // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
 
         # Obtiene los datos del postulante, con base a la información de mi portal.
-        $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
-        $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
 
+        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
+        $miPortal_user = $miPortal_user[0];
+        
+        $name = implode(' ', [
+            $miPortal_user['name'] ?? '',
+            $miPortal_user['middlename'] ?? '',
+            $miPortal_user['surname']  ?? ''
+        ]);
+
+            // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
+            // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
+        } catch (\Exception $e) {
+            return new JsonResponse($e, JsonResponse::HTTP_CREATED);
+        }
         # Devuelve en la respuesta, los datos de los usuarios.
         $appliant = $interview_model->appliant->first()->toArray();
         $appliant['name'] = $name;
