@@ -136,7 +136,6 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
-        try{
         $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
         $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);
         $interview_model->load(['users.roles:name', 'appliant']);
@@ -164,7 +163,7 @@ class InterviewController extends Controller
 
         $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
         $miPortal_user = $miPortal_user[0];
-        
+
         $name = implode(' ', [
             $miPortal_user['name'] ?? '',
             $miPortal_user['middlename'] ?? '',
@@ -173,9 +172,7 @@ class InterviewController extends Controller
 
             // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
             // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
-        } catch (\Exception $e) {
-            return new JsonResponse($e, JsonResponse::HTTP_CREATED);
-        }
+        
         # Devuelve en la respuesta, los datos de los usuarios.
         $appliant = $interview_model->appliant->first()->toArray();
         $appliant['name'] = $name;
@@ -183,6 +180,7 @@ class InterviewController extends Controller
         # Sobreescribe con información nueva.
         unset($interview_model->appliant);
         unset($interview_model->intentionLetterProfessor);
+        
         $interview_model->appliant = $appliant;
         $interview_model->intention_letter_professor = [
             'id' => $miPortal_worker['id'],
