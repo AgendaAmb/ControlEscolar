@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\AcademicProgram;
 use App\Models\Archive;
 use App\Helpers\MiPortalService;
+use App\Models\User;
 
 class CalendarResource extends JsonResource
 {
@@ -20,20 +21,24 @@ class CalendarResource extends JsonResource
      * @param string $type
      * @return void
      */
+
+    // Funcion para obtener los datos de un usuario de basde de datos de mi portal
     private function getMiPortalUser($request, int $id, string $type)
     {
         $service = new MiPortalService;
         $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+
+        $user = User::find($id);
 
         $name = implode(' ', [
             $miPortal_user['name'] ?? '',
             $miPortal_user['middlename'] ?? '',
             $miPortal_user['surname']  ?? ''
         ]);
-
+        
         return [
             'id' => $miPortal_user['id']  ?? '',
-            'type' => $miPortal_user['user_type']  ?? '',
+            'type' => $user->type  ?? '',
             'name' => $name
         ];
     }
@@ -51,6 +56,8 @@ class CalendarResource extends JsonResource
         $miPortal_user = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->user_id])->collect();
         $miPortal_user = $miPortal_user[0];
 
+        $user = User::find($archive->user_id);
+
         $intention_letter_professor  = [
             'id' => '-1',
             'type' => '',
@@ -60,8 +67,12 @@ class CalendarResource extends JsonResource
         if(isset($archive->intentionLetter->user_id)){
             $miPortal_professor = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->intentionLetter->user_id])->collect();
             $miPortal_professor = $miPortal_professor[0];
+
+            // Cargar los datos del profesor 
+            $professor = User::find($archive->intentionLetter->user_id);
+
             $intention_letter_professor['id'] = $miPortal_professor['id'] ?? '';
-            $intention_letter_professor['type'] = $miPortal_professor['user_type'] ?? '';
+            $intention_letter_professor['type'] = $professor->type ?? '';           
             $intention_letter_professor['name'] = implode(' ', [
                 $miPortal_professor['name'] ?? '',
                 $miPortal_professor['middlename'] ?? '',
@@ -71,7 +82,7 @@ class CalendarResource extends JsonResource
 
         return [
             'id' => $miPortal_user['id']  ?? '',
-            'type' => $miPortal_user['user_type']  ?? '',
+            'type' => $user->type ?? '',
             'name' => implode(' ', [
                 $miPortal_user['name'] ?? '',
                 $miPortal_user['middlename'] ?? '',
@@ -79,12 +90,6 @@ class CalendarResource extends JsonResource
             ]),
             'intention_letter_professor' => $intention_letter_professor
         ];
-        
-        return (new AppliantResource(
-            $archive->appliant,
-            $archive->intentionLetter->professor ?? []
-
-        ))->toArray($request);
     }
 
     /**
@@ -96,15 +101,14 @@ class CalendarResource extends JsonResource
      */
     private function mapAcademicArea($area, $request)
     {
-        $miPortal_professor = $this->getMiPortalUser($request, $area['professor_id'], 'workers');
-
         $service = new MiPortalService;
         $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $area['professor_id']])->collect();
+        $miPortal_user = $miPortal_user[0];
 
         $name = implode(' ', [
-            $miPortal_user[0]['name'] ?? '',
-            $miPortal_user[0]['middlename'] ?? '',
-            $miPortal_user[0]['surname']  ?? ''
+            $miPortal_user['name'] ?? '',
+            $miPortal_user['middlename'] ?? '',
+            $miPortal_user['surname']  ?? ''
         ]);
 
         return [
@@ -145,12 +149,6 @@ class CalendarResource extends JsonResource
 
         $interview['appliant'] = $miPortal_user;
         $interview['appliant']['name'] = $name;
-
-        // $interview['appliant'] = $this->getMiPortalUser(
-        //     $request,
-        //     $interview['appliant'][0]['id'],
-        //     'appliants'
-        // );
     }
 
     /**
@@ -164,18 +162,23 @@ class CalendarResource extends JsonResource
         $interview['intention_letter_professor'] = $interview['intention_letter_professor'][0] ?? [];
         $id = $interview['intention_letter_professor']['id'];
 
+        // Recursos para extrer los datos de mi portal  
         $service = new MiPortalService;
         $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        $miPortal_worker = $miPortal_worker[0];
 
-        if ($miPortal_worker[0] !== null) {
-            $interview['intention_letter_professor'] = $miPortal_worker[0];
+        // Se necesita extrar el type 
+        $worker = User::find($id);
+
+        if ($miPortal_worker !== null) {
+            $interview['intention_letter_professor'] = $miPortal_worker;
             $interview['intention_letter_professor'] = [
-                'id' => $miPortal_worker[0]['id'] ?? '',
-                'type' => $miPortal_worker[0]['user_type'] ?? '',
+                'id' => $miPortal_worker['id'] ?? '',
+                'type' => $worker->type ?? '',
                 'name' => implode(' ', [
-                    $miPortal_worker[0]['name'] ?? '',
-                    $miPortal_worker[0]['middlename'] ?? '',
-                    $miPortal_worker[0]['surname'] ?? ''
+                    $miPortal_worker['name'] ?? '',
+                    $miPortal_worker['middlename'] ?? '',
+                    $miPortal_worker['surname'] ?? ''
                 ])
             ];
         }
