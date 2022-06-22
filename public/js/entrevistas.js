@@ -640,8 +640,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cancelarRegistro: function cancelarRegistro(index) {
       var _this2 = this;
 
-      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false) return false;
-      console.log(this.$root.loggedUser);
+      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false) return false; // console.log(this.$root.loggedUser);
+
       axios["delete"]('/controlescolar/entrevistas/interviewUser', {
         data: {
           interview_id: this.id,
@@ -1148,11 +1148,11 @@ __webpack_require__.r(__webpack_exports__);
         start_time: this.start_time,
         end_time: this.end_time,
         room_id: this.room.id
-      };
-      console.log(data);
-      axios.post('/controlescolar/entrevistas/nuevaEntrevista', data).then(function (response) {
-        console.log(response.data); // Actualizar la entrevista en el front
+      }; // console.log(data);
 
+      axios.post('/controlescolar/entrevistas/nuevaEntrevista', data).then(function (response) {
+        // console.log(response.data);
+        // Actualizar la entrevista en el front
         var data = response.data;
 
         _this.$emit('nuevaentrevista', {
@@ -42150,9 +42150,9 @@ var app = new Vue({
             }
           }
         }
-      }
+      } // console.log(interview_room);
 
-      console.log(interview_room);
+
       this.selectedInterview = {
         id: interview.id,
         appliant: interview.appliant,

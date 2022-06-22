@@ -124,7 +124,7 @@ const app = new Vue({
                 }
             }
 
-            console.log(interview_room);
+            // console.log(interview_room);
 
             this.selectedInterview = {
                 id: interview.id,

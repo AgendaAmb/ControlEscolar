@@ -137,53 +137,52 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
-        try{
-            // $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
-            // $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); // Agregamos al profesor a la entrevista
-            // $interview_model->load(['users.roles:name', 'appliant']);
-            // $interview_model->confirmed = false;
-            // $interview_model->save();
+        // try{
+        //     $interview_model= Interview::create([
+        //         'date' => $request->date,
+        //         'room_id' => $request->room_id,
+        //         'start_time' => $request->start_time,
+        //         'end_time' => $request->end_time,
+        //         'confirmed' => 0
+        //     ]);
 
-            $interview_model= Interview::create([
-                'date' => $request->date,
-                'room_id' => $request->room_id,
-                'start_time' => $request->start_time,
-                'end_time' => $request->end_time,
-                'confirmed' => 0
-            ]);
+        //     $interview_model->save();
+        // }catch(\Exception $e){
+        //     return new JsonResponse(['Error' => ' Falló la creación del modelo de entrevista','message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        // }
 
-            // period_id: this.period_id,
-            // user_id: this.appliant.id,
-            // user_type: this.appliant.type,
-            // date: this.date,
-            // start_time: this.start_time,
-            // end_time: this.end_time,
-            // room_id: this.room.id
+        // try{
+        //     DB::table('interview_user')->insert([
+        //         'interview_id' => $interview_model->id,
+        //         'user_type' => $request->user_type,
+        //         'user_id' => $request->user_id
+        //     ]);
             
-            $interview_model->save();
+        // }catch(\Exception $e){
+        //     return new JsonResponse(['Error' => 'Falló la creacion del pivote' , 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        // }
+
+        try{
+            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type')); 
+            $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);  // Agregamos al profesor a la entrevista
+            $interview_model->load(['users.roles:name', 'appliant']); 
+            $interview_model->confirmed = false; 
+            $interview_model->save(); 
+
+            # Obtiene los datos del profesor que otorgó la carta de intención, con base a la información de mi portal.
+            $professor = $interview_model->intentionLetterProfessor->first();
+
         }catch(\Exception $e){
-            return new JsonResponse(['Error' => ' Falló la creación del modelo de entrevista','message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['Error' => 'Falló al insertar datos de la entrevista', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         try{
-            DB::table('interview_user')->insert([
-                'interview_id' => $interview_model->id,
-                'user_type' => $request->user_type,
-                'user_id' => $request->user_id
-            ]);
-            
-        }catch(\Exception $e){
-            return new JsonResponse(['Error' => 'Falló la creacion del pivote' , 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
-        }
+            // ! This part here doesn't work in production, just for testing
+            // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
+            // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+            // !
 
-        // ! JUST FOR TESTING
-        return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
-
-        # Obtiene los datos del profesor que otorgó la carta de intención, con 
-        # base a la información de mi portal.
-        $professor = $interview_model->intentionLetterProfessor->first();
-
-        try{
+            // * Retrieves the worker's information
             $service = new MiPortalService;
             $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $professor->id])->collect();
             $miPortal_worker = $miPortal_worker[0];
@@ -193,9 +192,12 @@ class InterviewController extends Controller
                 $miPortal_worker['surname']  ?? ''
             ]);
 
-            // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
-            // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+            // ! This part here doesn't work on production, just for testing
+            // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
+            // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
+            // !
 
+            // * Retrieves the appliant's information 
             # Obtiene los datos del postulante, con base a la información de mi portal.
             $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
             $miPortal_user = $miPortal_user[0];
@@ -206,30 +208,30 @@ class InterviewController extends Controller
                 $miPortal_user['surname']  ?? ''
             ]);
         }catch(\Exception $e){
-            return new JsonResponse(['Error' => 'Falló al traer los datos deL Portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['Error' => 'Falló al traer los datos del portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
-
-        // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
-        // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
         
-        
-        # Devuelve en la respuesta, los datos de los usuarios.
-        $appliant = $interview_model->appliant->first()->toArray();
-        $appliant['name'] = $name;
+        try{
+            # Devuelve en la respuesta, los datos de los usuarios.
+            $appliant = $interview_model->appliant->first()->toArray();
+            $appliant['name'] = $name;
 
-        # Sobreescribe con información nueva.
-        unset($interview_model->appliant);
-        unset($interview_model->intentionLetterProfessor);
-        
-        $interview_model->appliant = $appliant;
-        $interview_model->intention_letter_professor = [
-            'id' => $miPortal_worker['id'],
-            'type' => $miPortal_worker['user_type'],
-            'name' => $professor_name
-        ];
+            # Sobreescribe con información nueva.
+            unset($interview_model->appliant);
+            unset($interview_model->intentionLetterProfessor);
+            
+            $interview_model->appliant = $appliant;
+            $interview_model->intention_letter_professor = [
+                'id' => $miPortal_worker['id'],
+                'type' => $miPortal_worker['user_type'],
+                'name' => $professor_name
+            ];
 
-        # Establece las áreas académicas de la entrevista.
-        $this->setInterviewAcademicAreas($interview_model);
+            # Establece las áreas académicas de la entrevista.
+            $this->setInterviewAcademicAreas($interview_model);
+        }catch(\Exception $e){
+            return new JsonResponse(['Error' => 'Falló al traer los datos del portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
@@ -287,14 +289,13 @@ class InterviewController extends Controller
         $int_room = Room::findorFail($interview2->room_id);
 
         // foreach ($interview2->evaluationRubrics as $rubric) {
-
         //     $rubric->getAverageScoreBasicConcepts();
         //     $rubric->getAverageScoreAcademicConcepts();
         //     $rubric->getAverageScoreResearchConcepts();
         //     $rubric->getAverageWorkingExperienceConcepts();
         //     $rubric->getAverageWorkingPersonalAttributesConcepts();
-
         // }
+
         try{
         /**Checar si el url es null por si se reabrio el interview */
         if ($interview2->url == null) {
@@ -312,34 +313,34 @@ class InterviewController extends Controller
                 Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
             }
 
-            // TODO AQUI SE DEBE DE ENVIAR UN CORREO A TODOS LOS PROFESORES PARTICIPANTES EN ESTA ENTREVISTA
-            //dd($ResponseMeating['id']);
-
-            /**Traer a los trabajadores del arreglo de sesiones alumno*/
-            $Trabajadores = $request->session()->get('workers');
+            // $Trabajadores = $request->session()->get('workers'); NO FUNCIONA EN PRODUCCIÓN :,V            
 
             // Carga el achivo del postulante para obtener el programa academico
+            $service = new MiPortalService;
             $archive = null;
+            $postulante_data = null;
 
             foreach ($interview2->users as $key => $User) {
-                if ($User->user_type == "externs" || $User->user_type == "students") {
+                if ($User->user_type == "externs" || $User->user_type == "students" || $User->user_type == "Comunidad AA") {
                     $this->alumno = $User;
-
                     $archive = Archive::where('user_id', $this->alumno->id)->first();
-
                     //Carga programa academico
                     $archive->loadMissing([
                         'announcement.academicProgram',
                         'appliant',
                     ]);
-
                     $academic_program =  $archive->announcement->academicProgram;
+                    
+                    // Extraemos los datos del postulante del portal
+                    $postulante_data =  $service->miPortalGet('api/usuarios', ['filter[id]' => $this->alumno->id])->collect();
+                    $postulante_data = $postulante_data[0];
                 }
             }
 
+            // Envio de correos
             foreach ($interview2->users as $key => $User) {
-
                 if ($academic_program != null) {
+                    // Filtro para envio de correos segun dependencia del programa academico
                     $servicio_correo = 'smtp';
                     // IMAREC
                     if (strcmp($academic_program['alias'], 'imarec') === 0) {
@@ -364,36 +365,38 @@ class InterviewController extends Controller
                             break;
                     }
 
-                    if ($User->user_type == "externs" || $User->user_type == "students") {
+                    // Obtenemos el correos del participante
+                    $user_data =  $service->miPortalGet('api/usuarios', ['filter[id]' => $User->id])->collect();
+                    $user_data = $user_data[0];
+                    $user_mail = $user_data['email'];
+                    
+                    if ($User->user_type == "externs" || $User->user_type == "students" || $User->user_type == "Comunidad AA") {
                         $this->alumno = $User;
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                            // Mail::mailer($servicio_correo)->to($User->email)
+                            // Mail::mailer($servicio_correo)->to($user_mail)
                             // ->cc($mail_academic_program)  
-                            // ->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
-                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
 
                         } else {
                             // Mail::mailer($servicio_correo)  
                             // ->cc($mail_academic_program)
-                            // ->to($User->email)->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
-                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $User, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            // ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
 
                         }
-
                         // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                     } else if ($User->user_type == "workers") {
                         /**Obtener al trabajador inscrito en la entrevista */
-                        $Trabajador = $Trabajadores->where('id', $User->id)->first();
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                            // Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
+                            // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
 
                         } else {
-                            // Mail::mailer($servicio_correo)->to($Trabajador['email'])->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));
-                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $this->alumno));    
-
+                            // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                            Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));    
                         }
                     }
                 }

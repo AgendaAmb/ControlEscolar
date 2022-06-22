@@ -177,11 +177,11 @@ export default {
         end_time: this.end_time,
         room_id: this.room.id
       };
-      console.log(data);
+      // console.log(data);
 
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', data  
       ).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         
         // Actualizar la entrevista en el front
         var data = response.data;

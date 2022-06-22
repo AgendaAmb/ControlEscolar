@@ -255,7 +255,7 @@ export default {
       if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false)
         return false;
 
-      console.log(this.$root.loggedUser);
+      // console.log(this.$root.loggedUser);
 
       axios.delete('/controlescolar/entrevistas/interviewUser', {
         data: {
