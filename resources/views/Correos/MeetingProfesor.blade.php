@@ -43,7 +43,7 @@
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
+                            <td>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</td>
 
                         </tr>
 

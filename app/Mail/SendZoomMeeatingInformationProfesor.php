@@ -22,7 +22,7 @@ class SendZoomMeeatingInformationProfesor extends Mailable
      *
      * @return void
      */
-    public function __construct($Meeating,$Profesor, $academic_program, $Room,$Student)
+    public function __construct($Meeating, $Profesor, $academic_program, $Room,$Student)
     {
      
         $this->Meeating=$Meeating;

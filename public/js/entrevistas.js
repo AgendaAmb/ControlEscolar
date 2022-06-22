@@ -640,8 +640,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cancelarRegistro: function cancelarRegistro(index) {
       var _this2 = this;
 
-      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false) return false;
-      console.log(this.$root.loggedUser);
+      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false) return false; // console.log(this.$root.loggedUser);
+
       axios["delete"]('/controlescolar/entrevistas/interviewUser', {
         data: {
           interview_id: this.id,
@@ -1140,7 +1140,7 @@ __webpack_require__.r(__webpack_exports__);
     creaEntrevista: function creaEntrevista() {
       var _this = this;
 
-      axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
+      var data = {
         period_id: this.period_id,
         user_id: this.appliant.id,
         user_type: this.appliant.type,
@@ -1148,10 +1148,12 @@ __webpack_require__.r(__webpack_exports__);
         start_time: this.start_time,
         end_time: this.end_time,
         room_id: this.room.id
-      }).then(function (response) {
-        console.log(response.data);
+      }; // console.log(data);
+
+      axios.post('/controlescolar/entrevistas/nuevaEntrevista', data).then(function (response) {
+        // console.log(response.data);
+        // Actualizar la entrevista en el front
         var data = response.data;
-        return true;
 
         _this.$emit('nuevaentrevista', {
           id: data.id,
@@ -1162,7 +1164,8 @@ __webpack_require__.r(__webpack_exports__);
           appliant: data.appliant,
           intention_letter_professor: data.intention_letter_professor,
           academic_areas: data.academic_areas
-        });
+        }); // Actualizar la información para poder agendar una nueva entrevista
+
 
         _this.id = -1;
         _this.date = '';
@@ -42147,9 +42150,9 @@ var app = new Vue({
             }
           }
         }
-      }
+      } // console.log(interview_room);
 
-      console.log(interview_room);
+
       this.selectedInterview = {
         id: interview.id,
         appliant: interview.appliant,

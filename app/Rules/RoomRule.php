@@ -41,9 +41,9 @@ class RoomRule implements Rule
      * @return bool
      */
     public function passes($attribute, $value)
-    {
-        return Interview::whereHas('room', fn($q) => $q->where('id', $value))
-            ->where('date', $this->date)
+    {   
+        // Verrifica que la entrevistas a crear no coincidad en la misma hora y fecha del mismo dia a ser agendadas
+        return Interview::where('date', $this->date)
             ->where(fn($q) => $q->where('start_time', '>=', $this->start_time)->orWhere('end_time', '<', $this->start_time))
             ->count() === 0;
     }

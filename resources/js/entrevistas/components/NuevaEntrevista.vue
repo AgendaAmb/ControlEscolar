@@ -168,8 +168,7 @@ export default {
      * Genera la entrevista.
      */
     creaEntrevista() {
-
-      axios.post('/controlescolar/entrevistas/nuevaEntrevista', {
+      var data = {
         period_id: this.period_id,
         user_id: this.appliant.id,
         user_type: this.appliant.type,
@@ -177,14 +176,15 @@ export default {
         start_time: this.start_time,
         end_time: this.end_time,
         room_id: this.room.id
+      };
+      // console.log(data);
 
-      }).then(response => {
-        console.log(response.data);
-
+      axios.post('/controlescolar/entrevistas/nuevaEntrevista', data  
+      ).then(response => {
+        // console.log(response.data);
+        
+        // Actualizar la entrevista en el front
         var data = response.data;
-
-        return true
-
         this.$emit('nuevaentrevista', {
           id: data.id,
           date: data.date,
@@ -196,6 +196,7 @@ export default {
           academic_areas: data.academic_areas
         });
 
+        // Actualizar la información para poder agendar una nueva entrevista
         this.id = -1;
         this.date = '';
         this.intention_letter_professor = null;
