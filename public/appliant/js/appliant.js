@@ -4108,6 +4108,8 @@ __webpack_require__.r(__webpack_exports__);
     CartaRecomendacion: _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
+    //interview documemnts
+    interview_documents: Array,
     // Id del expediente.
     archive_id: Number,
     // Documentos personales.

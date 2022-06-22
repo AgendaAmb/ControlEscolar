@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\MiPortalService;
+use App\Models\Announcement;
 use App\Models\Archive;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,9 +19,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->session()->get('user_data'));
-        return view('home',[ 
-            'user' => $request->session()->get('user_data')
-        ]);
+        return view('home')
+        ->with('user', $request->session()->get('user_data'));
     }
 }

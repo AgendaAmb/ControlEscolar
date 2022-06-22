@@ -48,6 +48,8 @@ export default {
   },
 
   props: {
+    //interview documemnts
+    interview_documents:Array,
     // Id del expediente.
     archive_id: Number,
 

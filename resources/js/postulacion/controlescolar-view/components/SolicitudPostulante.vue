@@ -1,5 +1,5 @@
 <template>
-  <div  class="row">
+  <div class="row">
     <!-- Info postulante -->
     <div class="col-12">
       <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
@@ -72,7 +72,7 @@
         <requisitos-ingreso
           :archive_id="archive_id"
           :motivation.sync="motivation"
-          :exanni_score.sync = "exanni_score"
+          :exanni_score.sync="exanni_score"
           :documentos.sync="entrance_documents"
           :user_id.sync="appliant.id"
           :viewer_id.sync="viewer.id"
@@ -164,7 +164,8 @@
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva experiencia laboral
+              Selecciona el siguiente botón para agregar una nueva experiencia
+              laboral
             </label>
           </div>
         </div>
@@ -173,7 +174,7 @@
             <button
               @click="agregaExperienciaLaboral"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Experiencia Laboral
             </button>
@@ -213,11 +214,12 @@
         >
         </produccion-cientifica>
 
-         <div class="row align-items-center mb-0 mt-2">
+        <div class="row align-items-center mb-0 mt-2">
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica
+              Selecciona el siguiente botón para agregar una nueva publicación
+              para Producción Científica
             </label>
           </div>
         </div>
@@ -226,13 +228,13 @@
             <button
               @click="agregaProduccionCientifica"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Producción Científica
             </button>
           </div>
         </div>
-            <hr class="d-block" :style="ColorStrip" />
+        <hr class="d-block" :style="ColorStrip" />
 
         <!-- Capital humano subseccion -->
         <h5 class="mt-4 d-block">
@@ -254,7 +256,8 @@
           <div class="col-12">
             <label>
               <strong>Nota: </strong>
-              Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano
+              Selecciona el siguiente botón para agregar un nuevo curso para
+              Capital Humano
             </label>
           </div>
         </div>
@@ -263,13 +266,12 @@
             <button
               @click="agregaCapitalHumano"
               class="btn btn-success"
-              style="height: 45px; width:250px"
+              style="height: 45px; width: 250px"
             >
               Agregar Capital Humano
             </button>
           </div>
         </div>
-        
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -290,8 +292,7 @@
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
 
-     <div class="col-12 align-items-center my-4 mx-2">
-      
+    <div class="col-12 align-items-center my-4 mx-2">
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
           <!-- <button
@@ -300,24 +301,26 @@
             style="height: 45px; width: 150px"
           > -->
           <button
-           data-toggle="modal"
+            data-toggle="modal"
             data-target="#RechazarExpediente"
             class="btn btn-danger"
-            style="height: 45px; width: 150px; color: black;"
+            style="height: 45px; width: 150px; color: black"
           >
             <strong>No cumple</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span>El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado</span>
+          <span
+            >El postulante no cumple con los requisitos mínimos para el ingreso
+            al Posgrado</span
+          >
         </div>
-
       </div>
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
           <button
-           data-toggle="modal"
+            data-toggle="modal"
             data-target="#ActualizaExpediente"
             class="btn btn-warning"
             style="height: 45px; width: 150px; color: black;'"
@@ -329,44 +332,46 @@
         <div class="col-8">
           <span>El postulante necesita modificar uno o varios documentos</span>
         </div>
-        
       </div>
-      
+
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 align-content-center">
           <button
             @click="EnviarRevision('Aceptar')"
             class="btn btn-success"
-            style="height: 45px; width: 150px; color: black;"
+            style="height: 45px; width: 150px; color: black"
           >
             <strong>Aceptar</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span>El postulante cumple con todos los requisitos y pasa a la etapa de entrevista</span>
+          <span
+            >El postulante cumple con todos los requisitos y pasa a la etapa de
+            entrevista</span
+          >
         </div>
       </div>
 
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
           <button
-          @click="EnviarRevision('Condicionado')"
+            @click="EnviarRevision('Condicionado')"
             class="btn btn-info"
-            style="height: 45px; width: 150px; color : black;"
+            style="height: 45px; width: 150px; color: black"
           >
             <strong>Condicionado</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span>El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista</span>
+          <span
+            >El postulante debera de entregar un documento fuera de tiempo, pero
+            cumple con lo demas solicitado y pasa a la etapa de entrevista</span
+          >
         </div>
-        
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -395,13 +400,15 @@ export default {
   },
 
   props: {
+    //interview documemnts
+    interview_documents: Array,
     // Id del expediente.
     archive_id: Number,
 
     // Documentos personales.
     personal_documents: Array,
 
-    //Documentos curriculares 
+    //Documentos curriculares
     curricular_documents: Array,
 
     // Motivos de ingreso.
@@ -449,8 +456,7 @@ export default {
     status: Number,
   },
 
-  computed: {
-  },
+  computed: {},
 
   data() {
     return {
@@ -478,14 +484,13 @@ export default {
   },
 
   methods: {
-
-    getUniversities(state){
+    getUniversities(state) {
       let universities = [];
-      for(let i=0; i<this.Countries.length;i++){
-          if(state === this.Countries[i].name){
-            universities = this.Countries[i].universities;
-            break;
-          }
+      for (let i = 0; i < this.Countries.length; i++) {
+        if (state === this.Countries[i].name) {
+          universities = this.Countries[i].universities;
+          break;
+        }
       }
       return universities;
     },
@@ -683,64 +688,77 @@ export default {
       this.human_capitals.splice(index, 1);
     },
 
-    EnviarRevision(status){
+    EnviarRevision(status) {
       let id_status = 1;
 
-      if(status === "Aceptar"){
+      if (status === "Aceptar") {
         id_status = 5;
-      }else if (status === "Rechazar"){
+      } else if (status === "Rechazar") {
         id_status = 6;
-      }else if (status === 'Condicionado'){
+      } else if (status === "Condicionado") {
         id_status = 7;
       }
 
-      if(status != 'Corregir'){
-         Swal.fire({
-          title: "¿Estas seguro de realizar el cambio?",
-          text: "Actulizar el expediente a " + status.toUpperCase() ,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar",
-          cancelButtonText: "Cancelar",
-        }).then((result) => {
-          if (result.isConfirmed) {
-          axios
-            .post("/controlescolar/solicitud/updateStatusArchive", {
-              
-              // Status id to change the state
-              archive_id: this.archive_id,
-              status : id_status,
-              
-            })
-            .then((response) => {
-              Swal.fire({
-                title: "El expediente del postulante ha sido modificado",
-                text: "Se le informara al alumno de dicha verificación de documentos",
-                icon: "success",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Aceptar",
-              }).then((result) => {
-                window.location.href = "/controlescolar/solicitud/";
-              });
-              
-            })
-            .catch((error) => {
-              console.log(error);
-              Swal.fire({
-                title: "Error al actualizar",
-                showCancelButton: false,
-                icon: "error",
-              });
+        
+
+      axios
+        .post("/controlescolar/solicitud/whoModifyArchive", {
+          archive_id: this.archive_id,
+        })
+        .then((response) => {
+          if (status != "Corregir") {
+            Swal.fire({
+              title: "¿Estas seguro de realizar el cambio?",
+              text: "Actulizar el expediente a " + status.toUpperCase(),
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Aceptar",
+              cancelButtonText: "Cancelar",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                axios
+                  .post("/controlescolar/solicitud/updateStatusArchive", {
+                    // Status id to change the state
+                    archive_id: this.archive_id,
+                    status: id_status,
+                  })
+                  .then((response) => {
+                    Swal.fire({
+                      title: "El expediente del postulante ha sido modificado",
+                      text: "Se le informara al alumno de dicha verificación de documentos",
+                      icon: "success",
+                      showCancelButton: false,
+                      confirmButtonColor: "#3085d6",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Aceptar",
+                    }).then((result) => {
+                      window.location.href = "/controlescolar/solicitud/";
+                    });
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    Swal.fire({
+                      title: "Error al actualizar",
+                      showCancelButton: false,
+                      icon: "error",
+                    });
+                  });
+              }
             });
-        }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            title: "Error al actualizar",
+            text: "El usuario que esta revisando, no se encuentra en el sistema",
+            showCancelButton: false,
+            icon: "error",
+          });
         });
-      }
-      
-    }
+    },
   },
 };
 </script>

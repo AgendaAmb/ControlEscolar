@@ -44,6 +44,7 @@
             :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
             :recommendation_letters="recommendation_letters"
             :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment"
+            :interview_documents="archive.interview_documents"
             :status="archive.status">
         </solicitud-postulante>
         {{-- <h1>{{$archive->status}}</h1>

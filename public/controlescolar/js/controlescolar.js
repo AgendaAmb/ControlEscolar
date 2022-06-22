@@ -212,6 +212,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "actualizar-expediente",
   props: {
@@ -274,56 +316,66 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       console.log(this.selected_academicDocuments);
-      console.log(this.selected_languageDocuments);
       console.log("instructions: " + this.instructions);
 
       if ((this.selected_personalDocuments.length > 0 || this.selected_academicDocuments.length > 0 || this.selected_entranceDocuments.length > 0 || this.selected_languageDocuments.length > 0 || this.selected_workingDocuments.length > 0) && this.archive_id != null && this.user_id != null) {
-        axios.post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
-          selected_personalDocuments: this.selected_personalDocuments,
-          selected_academicDocuments: this.selected_academicDocuments,
-          selected_entranceDocuments: this.selected_entranceDocuments,
-          selected_languageDocuments: this.selected_languageDocuments,
-          selected_workingDocuments: this.selected_workingDocuments,
-          instructions: this.instructions,
-          academic_program: this.academic_program,
-          archive_id: this.archive_id,
-          user_id: this.user_id
+        axios.post("/controlescolar/solicitud/whoModifyArchive", {
+          archive_id: this.archive_id
         }).then(function (response) {
-          Swal.fire({
-            title: "Exito",
-            text: "Se ha enviado un correo al usuario con los cambios a realizar",
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Entendido"
-          }).then(function (result) {
-            axios.post("/controlescolar/solicitud/updateStatusArchive", {
-              // Status id to change the state
-              archive_id: _this.archive_id,
-              status: 3
-            }).then(function (response) {
-              window.location.href = "/controlescolar/solicitud/";
-            })["catch"](function (error) {
-              console.log(error);
-              Swal.fire({
-                title: "Error al actualizar",
-                showCancelButton: false,
-                icon: "error"
+          axios.post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+            selected_personalDocuments: _this.selected_personalDocuments,
+            selected_academicDocuments: _this.selected_academicDocuments,
+            selected_entranceDocuments: _this.selected_entranceDocuments,
+            selected_languageDocuments: _this.selected_languageDocuments,
+            selected_workingDocuments: _this.selected_workingDocuments,
+            instructions: _this.instructions,
+            academic_program: _this.academic_program,
+            archive_id: _this.archive_id,
+            user_id: _this.user_id
+          }).then(function (response) {
+            Swal.fire({
+              title: "Exito",
+              text: "Se ha enviado un correo al usuario con los cambios a realizar",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Entendido"
+            }).then(function (result) {
+              axios.post("/controlescolar/solicitud/updateStatusArchive", {
+                // Status id to change the state
+                archive_id: _this.archive_id,
+                status: 3
+              }).then(function (response) {
+                window.location.href = "/controlescolar/solicitud/";
+              })["catch"](function (error) {
+                console.log(error);
+                Swal.fire({
+                  title: "Error al actualizar",
+                  showCancelButton: false,
+                  icon: "error"
+                });
               });
             });
+          })["catch"](function (error) {
+            Swal.fire({
+              title: "Ups",
+              text: "No fue posible completar la petición, intentelo mas tarde",
+              icon: "error",
+              showCancelButton: true,
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Entendido"
+            }); // alert('Ha ocurrido un error, intenta mas tarde');
+            // console.log(error);
           });
         })["catch"](function (error) {
-          console.log(error.data);
+          console.log(error);
           Swal.fire({
-            title: "Ups",
-            text: "No fue posible completar la petición, intentelo mas tarde",
-            icon: "error",
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            cancelButtonText: "Entendido"
-          }); // alert('Ha ocurrido un error, intenta mas tarde');
-          // console.log(error);
+            title: "Error al actualizar",
+            text: "El usuario que esta revisando, no se encuentra en el sistema",
+            showCancelButton: false,
+            icon: "error"
+          });
         });
       } else {
         Swal.fire({
@@ -4282,6 +4334,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "rechazar-expediente",
   props: {
@@ -4358,51 +4457,63 @@ __webpack_require__.r(__webpack_exports__);
           cancelButtonText: "Cancelar"
         }).then(function (result) {
           if (result.isConfirmed) {
-            axios.post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
-              selected_personalDocuments: _this.selected_personalDocuments,
-              selected_academicDocuments: _this.selected_academicDocuments,
-              selected_entranceDocuments: _this.selected_entranceDocuments,
-              selected_languageDocuments: _this.selected_languageDocuments,
-              selected_workingDocuments: _this.selected_workingDocuments,
-              instructions: _this.instructions,
-              academic_program: _this.academic_program,
-              archive_id: _this.archive_id,
-              user_id: _this.user_id
+            axios.post("/controlescolar/solicitud/whoModifyArchive", {
+              archive_id: _this.archive_id
             }).then(function (response) {
-              Swal.fire({
-                title: "Exito",
-                text: "Se ha enviado un correo al usuario con los cambios a realizar",
-                icon: "success",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Entendido"
-              }).then(function (result) {
-                axios.post("/controlescolar/solicitud/updateStatusArchive", {
-                  // Status id to change the state
-                  archive_id: _this.archive_id,
-                  status: 6
-                }).then(function (response) {
-                  window.location.href = "/controlescolar/solicitud/";
-                })["catch"](function (error) {
-                  console.log(error);
-                  Swal.fire({
-                    title: "Error al actualizar",
-                    showCancelButton: false,
-                    icon: "error"
+              axios.post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
+                selected_personalDocuments: _this.selected_personalDocuments,
+                selected_academicDocuments: _this.selected_academicDocuments,
+                selected_entranceDocuments: _this.selected_entranceDocuments,
+                selected_languageDocuments: _this.selected_languageDocuments,
+                selected_workingDocuments: _this.selected_workingDocuments,
+                instructions: _this.instructions,
+                academic_program: _this.academic_program,
+                archive_id: _this.archive_id,
+                user_id: _this.user_id
+              }).then(function (response) {
+                Swal.fire({
+                  title: "Exito",
+                  text: "Se ha enviado un correo al usuario con los cambios a realizar",
+                  icon: "success",
+                  showCancelButton: false,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Entendido"
+                }).then(function (result) {
+                  axios.post("/controlescolar/solicitud/updateStatusArchive", {
+                    // Status id to change the state
+                    archive_id: _this.archive_id,
+                    status: 6
+                  }).then(function (response) {
+                    window.location.href = "/controlescolar/solicitud/";
+                  })["catch"](function (error) {
+                    console.log(error);
+                    Swal.fire({
+                      title: "Error al actualizar",
+                      showCancelButton: false,
+                      icon: "error"
+                    });
                   });
                 });
+              })["catch"](function (error) {
+                Swal.fire({
+                  title: "Ups",
+                  text: "No fue posible completar la petición, intentelo mas tarde",
+                  icon: "error",
+                  showCancelButton: true,
+                  cancelButtonColor: "#d33",
+                  cancelButtonText: "Entendido"
+                }); // alert('Ha ocurrido un error, intenta mas tarde');
+                // console.log(error);
               });
             })["catch"](function (error) {
+              console.log(error);
               Swal.fire({
-                title: "Ups",
-                text: "No fue posible completar la petición, intentelo mas tarde",
-                icon: "error",
-                showCancelButton: true,
-                cancelButtonColor: "#d33",
-                cancelButtonText: "Entendido"
-              }); // alert('Ha ocurrido un error, intenta mas tarde');
-              // console.log(error);
+                title: "Error al actualizar",
+                text: "El usuario que esta revisando, no se encuentra en el sistema",
+                showCancelButton: false,
+                icon: "error"
+              });
             });
           }
         });
@@ -5186,6 +5297,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -5207,11 +5323,13 @@ __webpack_require__.r(__webpack_exports__);
     CartaRecomendacion: _CartaDeRecomendacion_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
+    //interview documemnts
+    interview_documents: Array,
     // Id del expediente.
     archive_id: Number,
     // Documentos personales.
     personal_documents: Array,
-    //Documentos curriculares 
+    //Documentos curriculares
     curricular_documents: Array,
     // Motivos de ingreso.
     motivation: String,
@@ -5469,49 +5587,61 @@ __webpack_require__.r(__webpack_exports__);
         id_status = 5;
       } else if (status === "Rechazar") {
         id_status = 6;
-      } else if (status === 'Condicionado') {
+      } else if (status === "Condicionado") {
         id_status = 7;
       }
 
-      if (status != 'Corregir') {
+      axios.post("/controlescolar/solicitud/whoModifyArchive", {
+        archive_id: this.archive_id
+      }).then(function (response) {
+        if (status != "Corregir") {
+          Swal.fire({
+            title: "¿Estas seguro de realizar el cambio?",
+            text: "Actulizar el expediente a " + status.toUpperCase(),
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Aceptar",
+            cancelButtonText: "Cancelar"
+          }).then(function (result) {
+            if (result.isConfirmed) {
+              axios.post("/controlescolar/solicitud/updateStatusArchive", {
+                // Status id to change the state
+                archive_id: _this7.archive_id,
+                status: id_status
+              }).then(function (response) {
+                Swal.fire({
+                  title: "El expediente del postulante ha sido modificado",
+                  text: "Se le informara al alumno de dicha verificación de documentos",
+                  icon: "success",
+                  showCancelButton: false,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Aceptar"
+                }).then(function (result) {
+                  window.location.href = "/controlescolar/solicitud/";
+                });
+              })["catch"](function (error) {
+                console.log(error);
+                Swal.fire({
+                  title: "Error al actualizar",
+                  showCancelButton: false,
+                  icon: "error"
+                });
+              });
+            }
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error);
         Swal.fire({
-          title: "¿Estas seguro de realizar el cambio?",
-          text: "Actulizar el expediente a " + status.toUpperCase(),
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar",
-          cancelButtonText: "Cancelar"
-        }).then(function (result) {
-          if (result.isConfirmed) {
-            axios.post("/controlescolar/solicitud/updateStatusArchive", {
-              // Status id to change the state
-              archive_id: _this7.archive_id,
-              status: id_status
-            }).then(function (response) {
-              Swal.fire({
-                title: "El expediente del postulante ha sido modificado",
-                text: "Se le informara al alumno de dicha verificación de documentos",
-                icon: "success",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Aceptar"
-              }).then(function (result) {
-                window.location.href = "/controlescolar/solicitud/";
-              });
-            })["catch"](function (error) {
-              console.log(error);
-              Swal.fire({
-                title: "Error al actualizar",
-                showCancelButton: false,
-                icon: "error"
-              });
-            });
-          }
+          title: "Error al actualizar",
+          text: "El usuario que esta revisando, no se encuentra en el sistema",
+          showCancelButton: false,
+          icon: "error"
         });
-      }
+      });
     }
   }
 });
@@ -12248,9 +12378,7 @@ var render = function () {
                                 _c("span", [
                                   _c("strong", [
                                     _vm._v(
-                                      " Grado Academico #" +
-                                        _vm._s(index + 1) +
-                                        " "
+                                      " Grado Academico #" + _vm._s(index) + " "
                                     ),
                                   ]),
                                 ]),
@@ -12464,7 +12592,7 @@ var render = function () {
                                     _c("strong", [
                                       _vm._v(
                                         " Lengua Extranjera #" +
-                                          _vm._s(index + 1) +
+                                          _vm._s(index) +
                                           " "
                                       ),
                                     ]),
@@ -12607,8 +12735,8 @@ var render = function () {
                                         _c("span", [
                                           _c("strong", [
                                             _vm._v(
-                                              " Experiencia laboral #" +
-                                                _vm._s(index + 1) +
+                                              " Grado Academico #" +
+                                                _vm._s(index) +
                                                 " "
                                             ),
                                           ]),
@@ -17388,7 +17516,7 @@ var render = function () {
                     _c("div", { staticClass: "col-12 my-2" }, [
                       _c("h4", [
                         _vm._v(
-                          "\n                Dejar un comentario que solamente control escolar y administración podran observar sobre el por que el aspirante no avanzara a la siguiente etapa\n              "
+                          "\n                Dejar un comentario que solamente control escolar y\n                administración podran observar sobre el por que el aspirante\n                no avanzara a la siguiente etapa\n              "
                         ),
                       ]),
                       _vm._v(" "),
@@ -17483,7 +17611,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "my-2 col-12" }, [
       _c("h2", [
         _vm._v(
-          "Selecciona los documentos que no cumplen con los requisitos para ser aceptados"
+          "\n                Selecciona los documentos que no cumplen con los requisitos\n                para ser aceptados\n              "
         ),
       ]),
     ])
@@ -18317,7 +18445,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar una nueva experiencia laboral\n          "
+            "\n            Selecciona el siguiente botón para agregar una nueva experiencia\n            laboral\n          "
           ),
         ]),
       ]),
@@ -18340,7 +18468,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar una nueva publicación para Producción Científica\n          "
+            "\n            Selecciona el siguiente botón para agregar una nueva publicación\n            para Producción Científica\n          "
           ),
         ]),
       ]),
@@ -18363,7 +18491,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n            Selecciona el siguiente botón para agregar un nuevo curso para Capital Humano\n          "
+            "\n            Selecciona el siguiente botón para agregar un nuevo curso para\n            Capital Humano\n          "
           ),
         ]),
       ]),
@@ -18392,7 +18520,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-8" }, [
         _c("span", [
           _vm._v(
-            "El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado"
+            "El postulante no cumple con los requisitos mínimos para el ingreso\n          al Posgrado"
           ),
         ]),
       ]),
@@ -18432,7 +18560,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-8" }, [
       _c("span", [
         _vm._v(
-          "El postulante cumple con todos los requisitos y pasa a la etapa de entrevista"
+          "El postulante cumple con todos los requisitos y pasa a la etapa de\n          entrevista"
         ),
       ]),
     ])
@@ -18444,7 +18572,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-8" }, [
       _c("span", [
         _vm._v(
-          "El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista"
+          "El postulante debera de entregar un documento fuera de tiempo, pero\n          cumple con lo demas solicitado y pasa a la etapa de entrevista"
         ),
       ]),
     ])

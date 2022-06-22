@@ -30,6 +30,7 @@ use App\Models\{
     AcademicArea,
     AcademicDegree,
     AcademicProgram,
+    Announcement,
     AppliantLanguage,
     Archive,
     ArchiveRequiredDocument,
@@ -121,9 +122,19 @@ class ArchiveController extends Controller
 
     public function index(Request $request)
     {
+
+        $announcements = Announcement::idDescending()->get();
+
+        foreach($announcements as $announcement){
+            $academic_program = AcademicProgram::where('id', $announcement->academic_program_id)->first();
+            $announcement->setAttribute('name', $academic_program->name);
+        }
+
+        
         return view('postulacion.index')
             ->with('user', $request->user())
-            ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get());
+            ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get())
+            ->with('announcements', $announcements);
     }
 
     /* -------------------------- ADMIN VIEW FUNCTIONS --------------------------*/
@@ -164,12 +175,10 @@ class ArchiveController extends Controller
                 //Se guarda el nombre del usuario en el modelo
                 $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
 
-                // $name =  strtoupper($user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                // $nameUpper = strtoupper($request->student_name);
-
-                // if (strcmp($name, $nameUpper) == 0) {
-                //     array_push($archives_searched, $archive);
-                // }
+                if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
+                    unset($archives[$k]);
+                }
+                
             }
         }
 
@@ -178,25 +187,31 @@ class ArchiveController extends Controller
 
     public function archives(Request $request)
     {
-        try {
-            $startDate = Carbon::createFromFormat('Y-m-d', $request->date_from)->startOfDay();
-            $endDate = Carbon::createFromFormat('Y-m-d', $request->date_to)->endOfDay();
-        } catch (\Exception $e) {
-            return new JsonResponse('Error al crear la fecha', 200);
-        }
+        // try {
+        //     $startDate = Carbon::createFromFormat('Y-m-d', $request->date_from)->startOfDay();
+        //     $endDate = Carbon::createFromFormat('Y-m-d', $request->date_to)->endOfDay();
+        // } catch (\Exception $e) {
+        //     return new JsonResponse('Error al crear la fecha', 200);
+        // }
 
         // return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$request->date_from .' -- Hasta: '.$request->date_from, 502);
 
-        try {
+        // $request->validate([
+        //     'announcement_id' => ['required', 'numeric',  'exists:announcements,id'],
+        // ]);
 
-            $archives = QueryBuilder::for(Archive::class)
-                ->with('appliant')
-                ->allowedIncludes(['announcement'])
-                ->allowedFilters([
-                    AllowedFilter::exact('announcement.id'),
-                ])
-                ->whereBetween('created_at', [$startDate, $endDate])
-                ->get();
+        // return new JsonResponse(['message' => $request], 502);
+         // $archives = QueryBuilder::for(Archive::class)
+            //     ->with('appliant')
+            //     ->allowedIncludes(['announcement'])
+            //     ->allowedFilters([
+            //         AllowedFilter::exact('announcement.id'),
+            //     ])
+            //     ->whereBetween('created_at', [$startDate, $endDate])
+            //     ->get();
+
+        try {
+            $archives =  Archive::with('appliant')->where('announcement_id', $request->announcement_id)->get();
         } catch (\Exception $e) {
             return new JsonResponse(['message' => "No existen archivos para las fechas y modalidad indicada"], 502);
         }
@@ -224,9 +239,9 @@ class ArchiveController extends Controller
                     //Eliminar mi archivo para produccion
                     //Descomentar en local
                     //Quitas a Ulises y a Rodrigo
-                    if ($archive->appliant->id == 298428 || $archive->appliant->id == 245241 || $archive->appliant->id == 291395 || $archive->appliant->id == 241294  || $archive->appliant->id == 246441) {
-                        unset($archives[$k]);
-                    }
+                    // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
+                    //     unset($archives[$k]);
+                    // }
                 } else {
                     //No existe aplicante por lo que no se podra ver expediente
                     $archive->appliant->setAttribute('name', 'Usuario invalido');
@@ -241,9 +256,31 @@ class ArchiveController extends Controller
         return ArchiveResource::collection($archives);
     }
 
-    public function updateStatusArchive(Request $request)
+    public function whoModifyArchive(Request $request)
     {
 
+        try {
+            $request->validate([
+                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            ]);
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        try{        
+            $update = Archive::where('id', $request->archive_id)->update(['who_check' => $request->session()->get('user_data')['id']]);
+
+            if ($update <= 0) {
+                return new JsonResponse(['message' => 'No se pudo actualizar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+    }
+
+    public function updateStatusArchive(Request $request)
+    {
         try {
             $request->validate([
                 'archive_id' => ['required', 'numeric'],
@@ -619,6 +656,7 @@ class ArchiveController extends Controller
                 'appliantLanguages.requiredDocuments',
                 'appliantWorkingExperiences',
                 'scientificProductions.authors',
+                'interviewDocuments',
                 'humanCapitals'
             ]);
 
@@ -722,22 +760,67 @@ class ArchiveController extends Controller
         return $appliant;
     }
 
-    public function appliantFile_AppliantView(Request $request, $user_id)
+    public function showRegisterArchives(Request $request)
     {
-        // return $user_id;
-        //User is not a student
-        $holadd = 'hola';
-        if ($request->user()->getIsAppliantAttribute() === false) {
-            dd('aqui me quede');
-            return '<h1>Mori</h1>';
+        //Obtiene los archivos para el programa academico a registrarse
+        
+        $archives = Archive::where('user_id',$request->session()->get('user_data')['id'])->get();
+        
+        // El usuario tiene mas de un expediente
+        if(count($archives) > 1){
 
-            // return back()->withInput();
+            foreach($archives as $archive){
+                $archive->loadMissing([
+                    'appliant',
+                    'announcement.academicProgram',
+                ]);
+
+                $academic_program = $archive->announcement->academicProgram;
+    
+                #Set the image according to academic program
+                //Doctorado en ciencias ambientales
+                $img = 'doctorado-01.png';
+    
+                if ($academic_program->name == 'Maestría en ciencias ambientales') {
+                    $img = 'maestria-nacional-01.png';
+                } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
+                    $img = 'maestria-internacional-01.png';
+                } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
+                    $img = 'imarec-01.png';
+                }
+    
+                $header_academic_program = asset('storage/academic-programs/' . $img);
+
+                $archive->setAttribute('header_academic_program', $header_academic_program);
+            
+            }
+            return view('postulacion.showRegisterArchives')
+            ->with('archives', $archives);
+
+            // El estudiante solamente tiene un archivo
         }
 
+        // dd($archives[0]->id);
+        
+        return $this->appliantFile_AppliantView($request, $archives[0]->id);
+        // No existe nada
+        return back();
+
+    }
+
+    public function showCreateNewArchive(Request $request)
+    {
+        return view('postulacion.newArchive')
+        ->with('academic_programs',  AcademicProgram::all());
+    }
+
+
+    public function appliantFile_AppliantView(Request $request, $archive_id)
+    {
         //Is a postulant so we need to show the the file
         try {
             //deberia de retornar el archivo
-            $archiveModel = Archive::where('user_id', $request->user()->id)->first();
+            $archiveModel = Archive::where('id', $archive_id)->first();
         } catch (\Exception $e) {
             return '<h1>Ayuda</h1>';
             return back()->withInput()->withErrors($e); //Regresa a la pagina donde se encuentra mostando errores
@@ -767,6 +850,7 @@ class ArchiveController extends Controller
                 'appliantLanguages.requiredDocuments',
                 'appliantWorkingExperiences',
                 'scientificProductions.authors',
+                'interviewDocuments',
                 'humanCapitals'
             ]);
 

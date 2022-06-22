@@ -93,7 +93,7 @@ class RequiredDocument extends Model
     {
         return self::where('type', 'personal')->pluck('id');
     }
-
+    
     /**
      * Obtiene el id de los documentos personales.
      *

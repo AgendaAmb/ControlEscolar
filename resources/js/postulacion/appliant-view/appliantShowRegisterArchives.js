@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+ import Vue from 'vue';
+ import ProgramasAcademicosRegistrados from './components/ProgramasAcademicosRegistrados.vue';
+
  window.Vue = require('vue').default;
- window.Event = new Vue();
- import CandidateData from './components/CandidateData';
- import { GridPlugin } from '@syncfusion/ej2-vue-grids';
- Vue.use(GridPlugin);
+ 
  /**
   * The following block of code may be used to automatically register your
   * Vue components. It will recursively scan this directory for the Vue
@@ -20,17 +20,16 @@
  const app = new Vue({
      el: '#app',
  
-     data: {
-       user: user,
+     components: {
+         'programas-academicos-registrados': ProgramasAcademicosRegistrados,
      },
  
-     components: {
-         'candidate-data': CandidateData,
+     data: {
+         // Archive with all the ids 
+         archives: archives,
      },
  
      methods: {
  
- 
-         
-     },
- });
+     }
+ });k

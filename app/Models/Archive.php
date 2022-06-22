@@ -40,6 +40,7 @@ class Archive extends Model
         'announcement_id',
         'status',
         'exanii_score',
+        'who_check'
     ];
 
     /**
@@ -101,26 +102,15 @@ class Archive extends Model
      */
     public function entranceDocuments(): BelongsToMany
     {
-        // /** @var App\Models\User */
-        // $user = Auth::user();
-
-        // // $query = DB::table('required_documents')->where('type', 'entrance')->get();
-
-        // // if($user){
-        // //     $intention_letter_visible = $user->isWorker();
-        // //     if ($intention_letter_visible === false){
-        // //         return $query->where('intention_letter', false);
-        // //     }
-        // // }
-        // return $query->orderBy('required_documents.name');
-
         $query = $this->requiredDocuments()->where('type', 'entrance');
         return $query->orderBy('required_documents.name');
     }
 
     public function interviewDocuments(): BelongsToMany
     {
-        return $this->requiredDocuments();
+    //    $query = $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'interview');
+        $query = $this->requiredDocuments()->where('type', 'interview');
+       return $query;
     }
 
 

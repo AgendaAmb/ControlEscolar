@@ -191,6 +191,20 @@
         />
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
+      <details>
+        <summary class="mb-4 font-weight-bold h3">
+         Documentos de entrevista
+        </summary>
+       <documentos-entrevista
+        :appliant.sync="appliant" 
+        :archive_id.sync="archive_id"
+        :academic_program="academic_program"
+        :interview_documents="interview_documents">
+        </documentos-entrevista>
+      </details>
+      <div class="col-12">
+        
+      </div>
     </div>
   </div>
 </template>
@@ -233,6 +247,9 @@ export default {
 
     // Documentos de ingreso.
     entrance_documents: Array,
+
+    //interview documemnts
+    interview_documents:Array,
 
     // Programa académico.
     academic_program: Object,

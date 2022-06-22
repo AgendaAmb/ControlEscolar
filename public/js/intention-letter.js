@@ -314,6 +314,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -324,44 +338,68 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     // Programas académicos.
     academic_programs: {
       type: Array,
-      "default": function _default() {
-        return [];
-      }
+      "default": []
+    },
+    announcements: {
+      type: Array,
+      "default": []
     }
   },
   // Propiedades reactivas.
   data: function data() {
     return {
-      announcement: null,
+      announcementsForAcademicProgram: [],
+      academic_program_selected: null,
+      announcement_selected: null,
       dataLength: null,
       date_to: null,
       date_from: null
     };
   },
+  computed: {
+    AcademicProgramSelect: {
+      get: function get() {
+        return this.academic_program_selected;
+      },
+      set: function set(newVal) {
+        var _this = this;
+
+        this.academic_program_selected = newVal;
+        this.academic_programs_for_periods = [];
+        this.announcementsForAcademicProgram = [];
+        this.announcements.forEach(function (element) {
+          if (newVal === element.name) {
+            console.log('newVal: ' + newVal);
+            console.log('academicProgram: ' + element.name);
+
+            _this.announcementsForAcademicProgram.push(element);
+          }
+        });
+      }
+    }
+  },
   methods: {
     buscaExpedientes: function buscaExpedientes() {
-      var _this = this;
+      var _this2 = this;
 
       //Datos no completos para hacer busqueda
-      if (this.announcement == null || this.date_from == null || this.date_to == null) {
+      if (this.announcement_selected == null || this.academic_program_selected == null) {
         Swal.fire({
-          title: "Error al hacer busqueda",
-          text: 'Alguno de los campos falta por completar, ingresa fecha y programa academico',
+          title: "Ups",
+          text: "Falta alguno de los campos",
           icon: "error"
         });
       } else {
         //Se hace la busqueda
         axios.get("/controlescolar/solicitud/archives", {
           params: {
-            date_from: this.date_from,
-            date_to: this.date_to,
-            "filter[announcement.id]": this.announcement
+            "announcement_id": this.announcement_selected
           }
         }).then(function (response) {
           console.log(response.data);
-          _this.dataLength = response.data.length; // cantidad de articulos
+          _this2.dataLength = response.data.length; // cantidad de articulos
 
-          _this.$emit("archives-found", response.data); //actualiza archivos
+          _this2.$emit("archives-found", response.data); //actualiza archivos
 
         })["catch"](function (error) {
           console.log(error);
@@ -25812,8 +25850,8 @@ var render = function () {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.announcement,
-                  expression: "announcement",
+                  value: _vm.AcademicProgramSelect,
+                  expression: "AcademicProgramSelect",
                 },
               ],
               staticClass: "form-control",
@@ -25827,7 +25865,7 @@ var render = function () {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.announcement = $event.target.multiple
+                  _vm.AcademicProgramSelect = $event.target.multiple
                     ? $$selectedVal
                     : $$selectedVal[0]
                 },
@@ -25840,13 +25878,10 @@ var render = function () {
                 [_vm._v("Escoge una opción")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.academic_programs, function (academicProgram) {
+              _vm._l(_vm.academic_programs, function (academicProgram, index) {
                 return _c(
                   "option",
-                  {
-                    key: academicProgram.id,
-                    domProps: { value: academicProgram.latest_announcement.id },
-                  },
+                  { key: index, domProps: { value: academicProgram.name } },
                   [
                     _vm._v(
                       "\n          " +
@@ -25861,58 +25896,63 @@ var render = function () {
           ),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: " col-6" }, [
+        _c("div", { staticClass: "form-group col-6" }, [
           _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.date_from,
-                    expression: "date_from",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: { type: "date" },
-                domProps: { value: _vm.date_from },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.date_from = $event.target.value
-                  },
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.announcement_selected,
+                  expression: "announcement_selected",
                 },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.date_to,
-                    expression: "date_to",
-                  },
-                ],
-                staticClass: "form-control",
-                attrs: { type: "date" },
-                domProps: { value: _vm.date_to },
-                on: {
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.date_to = $event.target.value
-                  },
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.announcement_selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
                 },
-              }),
-            ]),
-          ]),
+              },
+            },
+            [
+              _c(
+                "option",
+                { attrs: { selected: "" }, domProps: { value: null } },
+                [_vm._v("Escoge una opción")]
+              ),
+              _vm._v(" "),
+              _vm._l(
+                _vm.announcementsForAcademicProgram,
+                function (announcement, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: announcement.id } },
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(announcement.from + " - " + announcement.to) +
+                          "\n        "
+                      ),
+                    ]
+                  )
+                }
+              ),
+            ],
+            2
+          ),
         ]),
       ]),
       _vm._v(" "),
@@ -25940,15 +25980,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col d-block" }, [
-        _c("label", [_c("strong", [_vm._v("Desde")])]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col d-block" }, [
-        _c("label", [_c("strong", [_vm._v("Hasta")])]),
-      ]),
-    ])
+    return _c("label", [_c("strong", [_vm._v(" Periodo ")])])
   },
   function () {
     var _vm = this
@@ -38404,6 +38436,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
   data: {
     auth_user: authUser,
     academic_programs: academicPrograms,
+    announcements: announcements,
     archives: []
   },
   methods: {

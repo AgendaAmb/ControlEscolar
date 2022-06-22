@@ -69,7 +69,7 @@
     <textarea class="form-control" rows="4" v-model="specialSkills"></textarea>
 
     <label class="mt-4">
-      En síntesis ¿Por qué recomienda al aspirante para ingresar al PMPCA?
+      En síntesis ¿Por qué recomienda al aspirante para ingresar al posgrado?
     </label>
     <textarea
       class="form-control"
@@ -81,8 +81,7 @@
     <label class="mt-4">
       <input type="checkbox" v-model="ConfirmSubmit"> 
       Al guardar confirmo que esta información es exacta y veridica y autorizo
-      que sea utilizada en la evaluación del aspirante por el Comité Académico
-      del PMPCA.
+      que sea utilizada en la evaluación del aspirante por el Comité Académico.
     </label>
 
     <label 

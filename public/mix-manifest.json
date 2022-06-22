@@ -6,6 +6,7 @@
     "/js/postulacion.js": "/js/postulacion.js",
     "/appliant/js/appliant.js": "/appliant/js/appliant.js",
     "/appliant/js/appliantUpdateDocuments.js": "/appliant/js/appliantUpdateDocuments.js",
+    "/appliant/js/appliantShowRegisterArchives.js": "/appliant/js/appliantShowRegisterArchives.js",
     "/professor/js/professor.js": "/professor/js/professor.js",
     "/professor/js/professor-only-rl.js": "/professor/js/professor-only-rl.js",
     "/controlescolar/js/controlescolar.js": "/controlescolar/js/controlescolar.js",

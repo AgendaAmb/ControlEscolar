@@ -3641,6 +3641,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3672,6 +3686,8 @@ __webpack_require__.r(__webpack_exports__);
     exanni_score: Number,
     // Documentos de ingreso.
     entrance_documents: Array,
+    //interview documemnts
+    interview_documents: Array,
     // Programa académico.
     academic_program: Object,
     // Grados académicos del postulante.
@@ -14216,6 +14232,35 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
+      _vm._v(" "),
+      _c(
+        "details",
+        [
+          _c("summary", { staticClass: "mb-4 font-weight-bold h3" }, [
+            _vm._v("\n       Documentos de entrevista\n      "),
+          ]),
+          _vm._v(" "),
+          _c("documentos-entrevista", {
+            attrs: {
+              appliant: _vm.appliant,
+              archive_id: _vm.archive_id,
+              academic_program: _vm.academic_program,
+              interview_documents: _vm.interview_documents,
+            },
+            on: {
+              "update:appliant": function ($event) {
+                _vm.appliant = $event
+              },
+              "update:archive_id": function ($event) {
+                _vm.archive_id = $event
+              },
+            },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12" }),
     ]),
   ])
 }

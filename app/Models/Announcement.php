@@ -62,4 +62,9 @@ class Announcement extends Model
     {
         return $this->hasMany(Archive::class);
     }
+
+    public function scopeIdDescending($query)
+    {
+        return $query->orderBy('id', 'DESC');
+    }
 }

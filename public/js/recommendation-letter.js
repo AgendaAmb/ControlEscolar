@@ -2216,7 +2216,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -28850,7 +28849,7 @@ var render = function () {
     _vm._v(" "),
     _c("label", { staticClass: "mt-4" }, [
       _vm._v(
-        "\n    En síntesis ¿Por qué recomienda al aspirante para ingresar al PMPCA?\n  "
+        "\n    En síntesis ¿Por qué recomienda al aspirante para ingresar al posgrado?\n  "
       ),
     ]),
     _vm._v(" "),
@@ -28915,7 +28914,7 @@ var render = function () {
         },
       }),
       _vm._v(
-        " \n    Al guardar confirmo que esta información es exacta y veridica y autorizo\n    que sea utilizada en la evaluación del aspirante por el Comité Académico\n    del PMPCA.\n  "
+        " \n    Al guardar confirmo que esta información es exacta y veridica y autorizo\n    que sea utilizada en la evaluación del aspirante por el Comité Académico.\n  "
       ),
     ]),
     _vm._v(" "),
