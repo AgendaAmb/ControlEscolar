@@ -1,5 +1,6 @@
 <script>
     const academic_programs = @json($academic_programs);
+    // const announcements_register
 </script>
 @extends('layouts.app')
 
@@ -11,7 +12,6 @@
         </academic-program>
     </div>
 
-    <pre-registro :academic_program.sync="selected_academic_program"></pre-registro>
 @endsection
 
 @push('scripts')

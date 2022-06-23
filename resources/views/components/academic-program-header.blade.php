@@ -20,7 +20,7 @@
                     aria-haspopup="true" aria-expanded="false" href="#"> Mis expedientes </a>
                 <div class="dropdown-menu" aria-labelledby="Expedientes">
                     <a class="dropdown-item" href="{{ route('showRegisterArchives') }}"> Ver mis expedientes </a>
-                    {{-- <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a> --}}
+                    <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a>
                 </div>
             </div>
 

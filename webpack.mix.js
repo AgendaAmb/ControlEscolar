@@ -24,6 +24,8 @@ mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliant.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliantUpdateDocuments.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliantShowRegisterArchives.js', 'public/appliant/js').vue();
+mix.js('resources/js/postulacion/appliant-view/appliantNewArchive.js', 'public/appliant/js').vue();
+
 
 mix.js('resources/js/postulacion/professor-view/professor.js', 'public/professor/js').vue();
 mix.js('resources/js/postulacion/professor-view-only-rl/professor-only-rl.js', 'public/professor/js').vue();

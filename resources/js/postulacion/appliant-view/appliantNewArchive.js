@@ -5,7 +5,7 @@
  */
 
  import Vue from 'vue';
- import ProgramasAcademicosRegistrados from './components/ProgramasAcademicosRegistrados.vue';
+ import AcademicProgram from './components/AcademicProgram.vue';
 
  window.Vue = require('vue').default;
  
@@ -21,12 +21,13 @@
      el: '#app',
  
      components: {
-         'academic-program': ProgramasAcademicosRegistrados,
+         'academic-program': AcademicProgram,
      },
  
      data: {
          // Archive with all the ids 
-         archives: archives,
+         academic_programs: academic_programs,
+         selected_academic_program: null,
      },
  
      methods: {
