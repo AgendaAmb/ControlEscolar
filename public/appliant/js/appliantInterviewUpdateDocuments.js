@@ -16828,7 +16828,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   },
   methods: {}
 });
-k;
 })();
 
 /******/ })()
