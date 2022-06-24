@@ -141,9 +141,8 @@ class InterviewController extends Controller
      */
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
-        // try {
-
-        //     $interview_model = Interview::create([
+        // try{
+        //     $interview_model= Interview::create([
         //         'date' => $request->date,
         //         'room_id' => $request->room_id,
         //         'start_time' => $request->start_time,
@@ -151,83 +150,91 @@ class InterviewController extends Controller
         //         'confirmed' => 0
         //     ]);
 
-        //     // period_id: this.period_id,
-        //     // user_id: this.appliant.id,
-        //     // user_type: this.appliant.type,
-        //     // date: this.date,
-        //     // start_time: this.start_time,
-        //     // end_time: this.end_time,
-        //     // room_id: this.room.id
-
         //     $interview_model->save();
-        // } catch (\Exception $e) {
-        //     return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        // }catch(\Exception $e){
+        //     return new JsonResponse(['Error' => ' Falló la creación del modelo de entrevista','message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         // }
 
-        // try {
+        // try{
         //     DB::table('interview_user')->insert([
         //         'interview_id' => $interview_model->id,
         //         'user_type' => $request->user_type,
         //         'user_id' => $request->user_id
         //     ]);
-        // } catch (\Exception $e) {
-        //     return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+
+        // }catch(\Exception $e){
+        //     return new JsonResponse(['Error' => 'Falló la creacion del pivote' , 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         // }
 
-        $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
-        $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]); //Agregaos al usuario a la entrevista
-        $interview_model->load(['users.roles:name', 'appliant']);
-        $interview_model->confirmed = false;
-        $interview_model->save();
+        try {
+            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
+            $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);  // Agregamos al profesor a la entrevista
+            $interview_model->load(['users.roles:name', 'appliant']);
+            $interview_model->confirmed = false;
+            $interview_model->save();
 
-        # Obtiene los datos del profesor que otorgó la carta de intención, con 
-        # base a la información de mi portal.
-        $professor = $interview_model->intentionLetterProfessor->first();
+            # Obtiene los datos del profesor que otorgó la carta de intención, con base a la información de mi portal.
+            $professor = $interview_model->intentionLetterProfessor->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(['Error' => 'Falló al insertar datos de la entrevista', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
 
-        $service = new MiPortalService;
+        try {
+            // ! This part here doesn't work in production, just for testing
+            // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
+            // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+            // !
 
-        $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $professor->id])->collect();
-        $miPortal_worker = $miPortal_worker[0];
-        $professor_name = implode(' ', [
-            $miPortal_worker['name'] ?? '',
-            $miPortal_worker['middlename'] ?? '',
-            $miPortal_worker['surname']  ?? ''
-        ]);
+            // * Retrieves the worker's information
+            $service = new MiPortalService;
+            $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $professor->id])->collect();
+            $miPortal_worker = $miPortal_worker[0];
+            $professor_name = implode(' ', [
+                $miPortal_worker['name'] ?? '',
+                $miPortal_worker['middlename'] ?? '',
+                $miPortal_worker['surname']  ?? ''
+            ]);
 
-        // $miPortal_worker = collect($request->session()->get('workers'))->firstWhere('id', $professor->id);
-        // $professor_name = implode(' ', [$miPortal_worker['name'], $miPortal_worker['middlename'], $miPortal_worker['surname']]);
+            // ! This part here doesn't work on production, just for testing
+            // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
+            // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
+            // !
 
-        # Obtiene los datos del postulante, con base a la información de mi portal.
+            // * Retrieves the appliant's information 
+            # Obtiene los datos del postulante, con base a la información de mi portal.
+            $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
+            $miPortal_user = $miPortal_user[0];
 
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $request->user_id])->collect();
-        $miPortal_user = $miPortal_user[0];
+            $name = implode(' ', [
+                $miPortal_user['name'] ?? '',
+                $miPortal_user['middlename'] ?? '',
+                $miPortal_user['surname']  ?? ''
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['Error' => 'Falló al traer los datos del portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
 
-        $name = implode(' ', [
-            $miPortal_user['name'] ?? '',
-            $miPortal_user['middlename'] ?? '',
-            $miPortal_user['surname']  ?? ''
-        ]);
+        try {
+            # Devuelve en la respuesta, los datos de los usuarios.
+            $appliant = $interview_model->appliant->first()->toArray();
+            $appliant['name'] = $name;
 
-        // $miPortal_user = collect($request->session()->get('appliants'))->firstWhere('id', $request->user_id);
-        // $name = implode(' ', [$miPortal_user['name'], $miPortal_user['middlename'], $miPortal_user['surname']]);
+            # Sobreescribe con información nueva.
+            unset($interview_model->appliant);
+            unset($interview_model->intentionLetterProfessor);
 
-        # Devuelve en la respuesta, los datos de los usuarios.
-        $appliant = $interview_model->appliant->first()->toArray();
-        $appliant['name'] = $name;
+            $interview_model->appliant = $appliant;
+            $interview_model->intention_letter_professor = [
+                'id' => $miPortal_worker['id'],
+                'type' => $miPortal_worker['user_type'],
+                'name' => $professor_name
+            ];
 
-        # Sobreescribe con información nueva.
-        unset($interview_model->appliant);
-        unset($interview_model->intentionLetterProfessor);
-
-        $interview_model->appliant = $appliant;
-        $interview_model->intention_letter_professor = [
-            'id' => $miPortal_worker['id'],
-            'type' => $miPortal_worker['user_type'],
-            'name' => $professor_name
-        ];
-
-        # Establece las áreas académicas de la entrevista.
-        $this->setInterviewAcademicAreas($interview_model);
+            # Establece las áreas académicas de la entrevista.
+            $this->setInterviewAcademicAreas($interview_model);
+        } catch (\Exception $e) {
+            return new JsonResponse(['Error' => 'Falló al traer los datos del portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+        }
 
         return new JsonResponse($interview_model, JsonResponse::HTTP_CREATED);
     }
