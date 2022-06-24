@@ -17,7 +17,7 @@ const basicConcepts = @json($basic_concepts);
 @section('main')
 <div class="row mt-5 mb-2">
     <div class="col-12">
-        <h1 class="title">Rubrica de evaluación</h1>
+        <h1 class="title">Rúbrica de evaluación</h1>
         <h1 v-if="announcement.type === 'doctorado' " class="sub-title">Doctorado</h1>
         <h1 v-else class="sub-title">Maestría</h1>
     </div>

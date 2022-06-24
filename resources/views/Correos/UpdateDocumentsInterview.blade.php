@@ -65,8 +65,8 @@
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración UNA
-                        PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día  de
-                        junio a las 12:00 h
+                        PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a más tardar el día de
+                        junio a las 12:00 hrs.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
@@ -99,8 +99,7 @@
                         que podrían ser su director de tesis o bien que pueden formar parte de su comité tutelar.</li>
                     <li> Además, debe conocer los objetivos del programa de manera explícita. </li>
                 </ul>
-                <p>Favor de confirmar asistencia a la entrevista, al correo <a href="mailto: pmpca@uaslp.mx ">
-                        pmpca@uaslp.mx </a></p>
+                <p>Favor de confirmar asistencia a la entrevista, al correo pmpca@uaslp.mx</p>
                 <p>Saludos cordiales, <br>
                     M.I Maricela Rdz. Díaz de León <br>
                     Coordinación Educativa <br>

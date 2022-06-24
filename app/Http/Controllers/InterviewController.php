@@ -482,7 +482,7 @@ class InterviewController extends Controller
                             return new JsonResponse($e->getMessage(), JsonResponse::HTTP_BAD_GATEWAY); //Ver info archivos en consola
                         }
                         
-                        Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new UpdateDocumentsInterview($User, $academic_program, $archive->id));
+                        Mail::mailer($servicio_correo)->to($user_data['email'])->send(new UpdateDocumentsInterview($User, $academic_program, $archive->id));
                     }
                 }
             }
