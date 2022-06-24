@@ -67998,6 +67998,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'evaluation-rubric-section',
@@ -68023,6 +68049,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    setNumber: function setNumber(event) {
+      console.log(event.target.value);
+      event.target.value = 100;
+    },
     detailsFrom: function detailsFrom(concept) {
       if (concept.evaluation_concept_details.length === 0) return [{
         text: ''
@@ -68064,6 +68094,9 @@ __webpack_require__.r(__webpack_exports__);
     isRadioInput: function isRadioInput(detail) {
       return detail.type === 'radio';
     },
+    isCheckboxInput: function isCheckboxInput(detail) {
+      return detail.type === 'checkbox';
+    },
     labelClassFor: function labelClassFor(detail) {
       return {
         'd-block': true,
@@ -68101,6 +68134,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.personal_data{\n    text-transform: none;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.notes-text{\n    min-height: 15vh;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -89841,6 +89898,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EvaluationRubricSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EvaluationRubricSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EvaluationRubricSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -90251,15 +90338,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _EvaluationRubricSection_vue_vue_type_template_id_4e82781c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EvaluationRubricSection.vue?vue&type=template&id=4e82781c& */ "./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=template&id=4e82781c&");
 /* harmony import */ var _EvaluationRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EvaluationRubricSection.vue?vue&type=script&lang=js& */ "./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _EvaluationRubricSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& */ "./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _EvaluationRubricSection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _EvaluationRubricSection_vue_vue_type_template_id_4e82781c___WEBPACK_IMPORTED_MODULE_0__.render,
   _EvaluationRubricSection_vue_vue_type_template_id_4e82781c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -90334,6 +90423,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AppliantData_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AppliantData.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/AppliantData.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_EvaluationRubricSection_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./EvaluationRubricSection.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/rubrica/components/EvaluationRubricSection.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -90637,51 +90739,167 @@ var render = function () {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._l(detail.choices, function (choice, index) {
-                                return _c(
-                                  "div",
-                                  {
-                                    key: index,
-                                    staticClass: "form-check form-check-inline",
-                                  },
-                                  [
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: detail.value,
-                                          expression: "detail.value",
-                                        },
-                                      ],
-                                      staticClass: "form-check-input my-auto",
-                                      attrs: {
-                                        disabled: _vm.$root.r_only(),
-                                        type: "radio",
-                                      },
-                                      domProps: {
-                                        value: choice,
-                                        checked: _vm._q(detail.value, choice),
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          return _vm.$set(
-                                            detail,
-                                            "value",
-                                            choice
-                                          )
-                                        },
-                                      },
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      { staticClass: "form-check-label" },
-                                      [_vm._v(" " + _vm._s(choice) + " ")]
+                              detail.type === "radio"
+                                ? _c(
+                                    "div",
+                                    _vm._l(
+                                      detail.choices,
+                                      function (choice, index) {
+                                        return _c(
+                                          "div",
+                                          {
+                                            key: index,
+                                            staticClass:
+                                              "form-check form-check-inline",
+                                          },
+                                          [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: detail.value,
+                                                  expression: "detail.value",
+                                                },
+                                              ],
+                                              staticClass:
+                                                "form-check-input my-auto",
+                                              attrs: {
+                                                disabled: _vm.$root.r_only(),
+                                                type: "radio",
+                                              },
+                                              domProps: {
+                                                value: choice,
+                                                checked: _vm._q(
+                                                  detail.value,
+                                                  choice
+                                                ),
+                                              },
+                                              on: {
+                                                change: function ($event) {
+                                                  return _vm.$set(
+                                                    detail,
+                                                    "value",
+                                                    choice
+                                                  )
+                                                },
+                                              },
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "label",
+                                              {
+                                                staticClass: "form-check-label",
+                                              },
+                                              [
+                                                _vm._v(
+                                                  " " + _vm._s(choice) + " "
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        )
+                                      }
                                     ),
-                                  ]
-                                )
-                              }),
+                                    0
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              detail.type === "checkbox"
+                                ? _c(
+                                    "div",
+                                    _vm._l(
+                                      detail.choices,
+                                      function (choice, index) {
+                                        return _c("div", { key: index }, [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: detail.value[index],
+                                                expression:
+                                                  "detail.value[index]",
+                                              },
+                                            ],
+                                            staticClass: "form-check-input",
+                                            attrs: {
+                                              type: "checkbox",
+                                              id: "flexCheckDefault",
+                                            },
+                                            domProps: {
+                                              checked: detail.value[index],
+                                              checked: Array.isArray(
+                                                detail.value[index]
+                                              )
+                                                ? _vm._i(
+                                                    detail.value[index],
+                                                    null
+                                                  ) > -1
+                                                : detail.value[index],
+                                            },
+                                            on: {
+                                              change: function ($event) {
+                                                var $$a = detail.value[index],
+                                                  $$el = $event.target,
+                                                  $$c = $$el.checked
+                                                    ? true
+                                                    : false
+                                                if (Array.isArray($$a)) {
+                                                  var $$v = null,
+                                                    $$i = _vm._i($$a, $$v)
+                                                  if ($$el.checked) {
+                                                    $$i < 0 &&
+                                                      _vm.$set(
+                                                        detail.value,
+                                                        index,
+                                                        $$a.concat([$$v])
+                                                      )
+                                                  } else {
+                                                    $$i > -1 &&
+                                                      _vm.$set(
+                                                        detail.value,
+                                                        index,
+                                                        $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          )
+                                                      )
+                                                  }
+                                                } else {
+                                                  _vm.$set(
+                                                    detail.value,
+                                                    index,
+                                                    $$c
+                                                  )
+                                                }
+                                              },
+                                            },
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass: "form-check-label",
+                                              attrs: {
+                                                for: "flexCheckDefault",
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                        " +
+                                                  _vm._s(choice) +
+                                                  "\n                                    "
+                                              ),
+                                            ]
+                                          ),
+                                        ])
+                                      }
+                                    ),
+                                    0
+                                  )
+                                : _vm._e(),
                               _vm._v(" "),
                               _vm.isTextArea(detail)
                                 ? _c("textarea", {
@@ -90713,8 +90931,7 @@ var render = function () {
                                     },
                                   })
                                 : _vm._e(),
-                            ],
-                            2
+                            ]
                           )
                         }),
                         0
@@ -90733,9 +90950,19 @@ var render = function () {
                           modifiers: { number: true },
                         },
                       ],
-                      attrs: { readonly: _vm.$root.r_only(), type: "number" },
+                      attrs: {
+                        oninput:
+                          "javascript: if(this.value > 100){this.value = 100}else if(this.value < 0)this.value = 0",
+                        readonly: _vm.$root.r_only(),
+                        type: "number",
+                        min: "0",
+                        max: "100",
+                      },
                       domProps: { value: concept.score },
                       on: {
+                        change: function ($event) {
+                          return _vm.setNumber($event)
+                        },
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
@@ -90754,7 +90981,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "notes" }, [
-                    _c("input", {
+                    _c("textarea", {
                       directives: [
                         {
                           name: "model",
@@ -90763,6 +90990,7 @@ var render = function () {
                           expression: "concept.notes",
                         },
                       ],
+                      staticClass: "notes-text",
                       attrs: { readonly: _vm.$root.r_only(), type: "text" },
                       domProps: { value: concept.notes },
                       on: {
@@ -103175,7 +103403,7 @@ var app = new Vue({
     id: rubric.id,
     estudio_score: 0,
     english_score: 0,
-    exani_score: 0,
+    exani_score: basicConcepts.exanni_score,
     university: '',
     basic_concepts: rubric.basic_concepts,
     // TODO va a ser remplazado
@@ -103296,15 +103524,15 @@ var app = new Vue({
 
       state == "save" ? this.visbleSave = true : this.visbleSave = false;
       state == "send" ? this.visbleSend = true : this.visbleSend = false;
-      var rubric_id = this.id;
-      var basic_concepts = this.getConceptData(this.basic_concepts);
+      var rubric_id = this.id; // const basic_concepts = this.getConceptData(this.basic_concepts);
+
       var academic_concepts = this.getConceptData(this.academic_concepts);
       var research_concepts = this.getConceptData(this.research_concepts);
       var working_experience_concepts = this.getConceptData(this.working_experience_concepts);
       var personal_attributes_concepts = this.getConceptData(this.personal_attributes_concepts);
       axios__WEBPACK_IMPORTED_MODULE_3___default().put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
         state: state,
-        basic_concepts: basic_concepts,
+        // basic_concepts: basic_concepts,
         academic_concepts: academic_concepts,
         research_concepts: research_concepts,
         working_experience_concepts: working_experience_concepts,

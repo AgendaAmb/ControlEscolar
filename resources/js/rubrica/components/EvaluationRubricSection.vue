@@ -40,22 +40,41 @@
                             :key="detail_data.id">
                             <div v-for="(detail, index) in detail_data" :key="index" class="d-block mb-4">
                                 <label :class="labelClassFor(detail)"> {{ labelTextFor(detail) }} </label>
-                                <div v-for="(choice,index) in detail.choices" :key="index"
-                                    class="form-check form-check-inline">
-                                    <input :disabled="$root.r_only()" class="form-check-input my-auto" type="radio"
-                                        v-model="detail.value" :value="choice">
-                                    <label class="form-check-label"> {{ choice }} </label>
+                                <!-- En el caso de que sea un radio -->
+                                <div v-if="detail.type === 'radio'">
+                                    <div v-for="(choice,index) in detail.choices" :key="index"
+                                        class="form-check form-check-inline">
+                                        <input :disabled="$root.r_only()" class="form-check-input my-auto" type="radio"
+                                            v-model="detail.value" :value="choice">
+                                        <label class="form-check-label"> {{ choice }} </label>
+                                    </div>
                                 </div>
-
+                                <!-- En el caso de que sea un checkbox -->
+                                <div v-if="detail.type === 'checkbox'">
+                                    <div v-for="(choice,index) in detail.choices" :key="index">
+                                        <input v-model="detail.value[index]"  class="form-check-input" type="checkbox"
+                                            id="flexCheckDefault" :checked="detail.value[index]">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ choice }}
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- En el caso de que sea un textbox -->
                                 <textarea :readonly="$root.r_only()" v-if="isTextArea(detail)" class="form-control"
                                     rows="2" v-model="detail.value"></textarea>
                             </div>
                         </td>
 
-                        <td class="score"><input :readonly="$root.r_only()" v-model.number="concept.score"
-                                type="number"></td>
-                        <td class="notes"><input :readonly="$root.r_only()"
-                                v-model="concept.notes" type="text"></td>
+                        <td class="score">
+                            <input
+                                oninput="javascript: if(this.value > 100){this.value = 100}else if(this.value < 0)this.value = 0"
+                                @change="setNumber($event)" v-model.number="concept.score" :readonly="$root.r_only()"
+                                type="number" min="0" max="100">
+                        </td>
+                        <td class="notes">
+                            <textarea class="notes-text" :readonly="$root.r_only()" v-model="concept.notes"
+                                type="text"></textarea>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -75,8 +94,15 @@
     </div>
 </template>
 
+<style>
+    .notes-text{
+        min-height: 15vh;
+    }
+</style>
+
 <script>
 import { interfaceDeclaration } from '@babel/types';
+import { columnSelectionComplete } from '@syncfusion/ej2-grids';
 
 export default {
     name: 'evaluation-rubric-section',
@@ -107,6 +133,11 @@ export default {
     },
 
     methods: {
+        setNumber(event){
+            console.log(event.target.value);
+            event.target.value = 100;
+        },
+
         detailsFrom(concept){
             if (concept.evaluation_concept_details.length === 0)
                 return [{text:''},{text:''},{text:''},{text:''}];
@@ -157,6 +188,10 @@ export default {
 
         isRadioInput(detail){
             return detail.type === 'radio';
+        },
+
+        isCheckboxInput(detail) {
+            return detail.type === 'checkbox';
         },
 
         labelClassFor(detail){

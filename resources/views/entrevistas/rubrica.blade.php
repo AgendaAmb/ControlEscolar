@@ -30,6 +30,18 @@ const basicConcepts = @json($basic_concepts);
     </template>
 </basic-data-rubric-section>
 
+<div style="font-size: 18px;" class="alert alert-success px-5 mx-3" role="alert">
+    INSTRUCCIONES DE LLENADO:
+    <br>
+    <b>Las Secciones 2, 3, 4 y 5</b>: Comprenden un mecanismo de evaluación que se realiza mediante 4
+    mediciones:
+    Excelente, Muy Bien, Bien y Deficiente. La evaluación se solicita entre un rango porcentual que determina la
+    medición, es importante responder con el porcentaje especifico, acorde al criterio examinado, es decir, si
+    se selecciona una respuesta bien y el criterio es que logró un 37%, esa será la respuesta para capturar en
+    <b>evaluación</b>.
+</div>
+<hr class="col-11 hr">
+
 <evaluation-rubric-section v-bind:title="'2.- Información académica'" v-bind:concepts="academic_concepts" v-bind:antype="announcement.type" v-bind:id="1"></evaluation-rubric-section>
 <evaluation-rubric-section v-bind:title="'3. Experiencia de investigación'" v-bind:concepts="research_concepts" v-bind:antype="announcement.type" v-bind:id="2"></evaluation-rubric-section>
 <evaluation-rubric-section v-bind:title="'4. Experiencia laboral'" v-bind:concepts="working_experience_concepts"  v-bind:antype="announcement.type" v-bind:id="3"></evaluation-rubric-section>
