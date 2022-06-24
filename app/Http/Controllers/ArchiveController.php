@@ -891,7 +891,7 @@ class ArchiveController extends Controller
 
 
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
-        // dd($archiveModel);
+        // dd($appliant);
         //Change for the view of appliant
         return view('postulacion.show')
             ->with('archive', $archiveModel)

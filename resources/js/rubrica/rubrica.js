@@ -27,7 +27,7 @@ const app = new Vue({
         id: rubric.id,
         estudio_score: 0,
         english_score: 0,
-        exani_score: 0,
+        exani_score: basicConcepts.exanni_score,
         university: '',
         basic_concepts: rubric.basic_concepts, // TODO va a ser remplazado
         basicConcepts: basicConcepts,
@@ -158,7 +158,7 @@ const app = new Vue({
             state=="send"?this.visbleSend=true:this.visbleSend=false;
 
             const rubric_id = this.id;
-            const basic_concepts = this.getConceptData(this.basic_concepts);
+            // const basic_concepts = this.getConceptData(this.basic_concepts);
             const academic_concepts = this.getConceptData(this.academic_concepts);
             const research_concepts = this.getConceptData(this.research_concepts);
             const working_experience_concepts = this.getConceptData(this.working_experience_concepts);
@@ -167,7 +167,7 @@ const app = new Vue({
             axios.put('/controlescolar/entrevistas/rubrica/' + rubric_id, {
 
                 state: state,
-                basic_concepts: basic_concepts,
+                // basic_concepts: basic_concepts,
                 academic_concepts: academic_concepts,
                 research_concepts: research_concepts,
                 working_experience_concepts: working_experience_concepts,

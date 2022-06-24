@@ -313,10 +313,10 @@ class EvaluationRubricObserver
             [ 
                 'id' => $research_concepts[3],
                 'group' => 'Good',
-                'type' => 'radio',
-                'label' => '',
+                'type' => 'checkbox',
+                'label' => 'Otro',
                 'choices' => ['Revista de divulgación científica','Programa de radio/televisión','Congreso estudiantil'],
-                'value' => null,
+                'value' => [null, null, null],
             ],[ 
                 'id' => $research_concepts[3],
                 'group' => 'Good',
@@ -353,17 +353,17 @@ class EvaluationRubricObserver
             ],[ 
                 'id' => $research_concepts[4],
                 'group' => 'Excelent',
-                'type' => 'radio',
+                'type' => 'checkbox',
                 'label' => 'b) Trabajo de laboratorio:',
                 'choices' => ['Química','Biológica','SIGyPR','Informático'],
-                'value' => null,
+                'value' => [null, null, null, null],
             ],[ 
                 'id' => $research_concepts[4],
                 'group' => 'Excelent',
-                'type' => 'radio',
+                'type' => 'checkbox',
                 'label' => 'c) Recolección y levantamiento de muestras:',
                 'choices' => ['Biológicas','Serológicas','Entrevista-encuesta','Puntos georreferenciados','Archivos'],
-                'value' => null,
+                'value' => [null, null, null, null, null],
             ],[ 
                 'id' => $research_concepts[4],
                 'group' => 'Excelent',
@@ -392,10 +392,10 @@ class EvaluationRubricObserver
             ],[ 
                 'id' => $research_concepts[4],
                 'group' => 'Very_Good',
-                'type' => 'radio',
+                'type' => 'checkbox',
                 'label' => 'Otros cursos, talleres y/o participaciones',
                 'choices' => ['Talleres participativos','Cartografía participativa','Laboratorio de derechos humanos','Clínica de salud comunitaria'],
-                'value' => null,
+                'value' => [null, null, null, null],
             ],
 
             [ 

@@ -50,7 +50,7 @@ class EvaluationRubricController extends Controller
         $rubricResource['basic_concepts'] = $archiveModel;
 
         // return $archiveModel;
-        // return $rubricResource;
+        // return $rubricResource->toArray($request);
     
         return view('entrevistas.rubrica', $rubricResource->toArray($request));
     }
@@ -135,7 +135,7 @@ class EvaluationRubricController extends Controller
     public function update(UpdateEvaluationRubricRequest $request, EvaluationRubric $evaluationRubric)
     {
        
-        $this->updatePivot($request->basic_concepts, $evaluationRubric);
+        // $this->updatePivot($request->basic_concepts, $evaluationRubric);
         $this->updatePivot($request->academic_concepts, $evaluationRubric);
         $this->updatePivot($request->research_concepts, $evaluationRubric);
         $this->updatePivot($request->working_experience_concepts, $evaluationRubric);

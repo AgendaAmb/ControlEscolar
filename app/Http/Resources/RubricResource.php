@@ -68,7 +68,7 @@ class RubricResource extends JsonResource
     private function setRubric($request)
     {
         $rubric = $this->resource;
-        
+
         $this->rubric = [
             'id' => $rubric->id,
             'interview_id' => $rubric->interview_id,
