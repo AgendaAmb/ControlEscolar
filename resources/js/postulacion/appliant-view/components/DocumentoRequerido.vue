@@ -57,7 +57,7 @@
         <a
           v-if="checkUpload() === true"
           class="verArchivo d-block my-2 ml-auto"
-          :href="location"
+          :href="'solicitud/expediente/'+ location"
           target="_blank"
         >
           Ver Archivo</a

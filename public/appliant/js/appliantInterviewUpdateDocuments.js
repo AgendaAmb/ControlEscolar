@@ -4410,7 +4410,11 @@ var render = function () {
                   "a",
                   {
                     staticClass: "verArchivo d-block my-2 ml-auto",
-                    attrs: { href: _vm.location, target: "_blank" },
+                    attrs: {
+                      href:
+                        "/controlescolar/solicitud/expediente/" + _vm.location,
+                      target: "_blank",
+                    },
                   },
                   [_vm._v("\n        Ver Archivo")]
                 )

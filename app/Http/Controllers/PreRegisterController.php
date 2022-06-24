@@ -250,7 +250,7 @@ class PreRegisterController extends Controller
                     $tipo_usuario = 'students';
                     break;
                 case 'App\Models\Auth\Worker':
-                    $tipo_usuario = 'workers';
+                    $tipo_usuario = 'students';
                     break;
             }
         } catch (\Exception $e) {

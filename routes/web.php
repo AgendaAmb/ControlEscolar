@@ -33,7 +33,7 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
@@ -236,6 +236,7 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
         Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
         Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
+        Route::post('/updateArchiveInterviewDocument', [ArchiveController::class, 'updateArchiveInterviewDocument']);
         // Faltaria la de working aqui y en solicitud tambien
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument_extern'])->name('get_document');
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
@@ -263,4 +264,4 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
 
     });
-});
+// });
