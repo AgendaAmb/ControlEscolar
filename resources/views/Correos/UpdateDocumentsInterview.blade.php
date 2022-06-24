@@ -39,43 +39,11 @@
                     <strong>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</strong>
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
                     selección 2022 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
-                    estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
-                    se llevará a cabo:
+                    estipulados en la convocatoria. 
                 </p>
-                <table class="table" style="max-width: 800px; margin: 0 auto;">
-
-                    <tbody>
-                        <tr>
-                            <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row">Correo electrónico</td>
-                            <td>{{ $Student['email'] }} </td>
-                        </tr>
-                        <tr>
-                            <td>Día de la entrevista</td>
-                            <td>{{ Carbon\Carbon::parse($Interview->date)->locale('es')->isoFormat('DD MMMM YYYY') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Horario de la entrevista</td>
-                            <td>{{ $Interview->start_time }}-{{ $Interview->end_time }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lugar</td>
-                            <td>{{ $Room }}</td>
-                        </tr>
-                        <tr>
-                            <td>Modalidad de la entrevista</td>
-                            <td>Presencial</td>
-                        </tr>
-
-                    </tbody>
-                </table>
             </div>
+
+            
             <div class="container">
                 @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' ||  $academic_program['alias'] == 'enrem')
                     <div class="row mt-2">
@@ -98,7 +66,7 @@
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración UNA
                         PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día  de
-                        25 junio a las 12:00 h
+                        junio a las 12:00 h
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 

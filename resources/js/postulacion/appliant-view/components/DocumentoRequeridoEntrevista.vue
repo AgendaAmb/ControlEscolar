@@ -1,8 +1,9 @@
 <template>
-  <div v-if="requiredForAcademicProgram()===true" class="col-12">
+  <div v-if="requiredForAcademicProgram() === true" class="col-12">
     <div class="row my-3">
 
       <div class="form-group col-9 my-auto">
+        
         <h5 class="mt-4 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
@@ -29,7 +30,7 @@
         >
           Ver Archivo</a
         >
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
+        <label class="cargarArchivo d-block ml-auto my-auto">
           Subir Documento
           <input
             type="file"
@@ -178,25 +179,14 @@ export default {
   methods: {
     
     requiredForAcademicProgram() {
-      console.log(this.name + ': '+ this.alias_academic_program);
+      console.log(this.name + ': '+ this.location);
 
       let res = true;
       // console.log("id: "+this.id+" nombre: "+this.name);
      
-      if (this.alias_academic_program === "maestria"  ) {
+      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec" || this.alias_academic_program === "enrem" ) {
         switch (this.name) {
            case "21.- Presentacion de entrevista (Doctorado)":
-            res = false;
-            break;
-        }
-      }
-      // Documents for imarec
-      else if (this.alias_academic_program === "imarec"  ) {
-        switch (this.name) {
-          case "20.- Ensayo de entrevista (Maestria)":
-            res = false;
-            break;
-            case "21.- Presentacion de entrevista (Doctorado)":
             res = false;
             break;
         }
@@ -209,15 +199,7 @@ export default {
             break;
         }
       }
-
-      //Documents for doctorado
-      else if (this.alias_academic_program === "enrem"  ) {
-        switch (this.name) {
-          case "21.- Presentacion de entrevista (Doctorado)":
-            res = false;
-            break;
-        }
-      }
+     
 
       return res;
     },

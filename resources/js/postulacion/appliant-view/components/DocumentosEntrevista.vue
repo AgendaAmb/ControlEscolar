@@ -1,5 +1,5 @@
 <template>
-  <div class="row my-2">
+  <div   class="row my-2">
     <div class="col-12 mx-2 my-2">
       <h1 class="display-5">Requerimientos para entrevista</h1>
 
@@ -12,7 +12,7 @@
       v-if="interviewDocumentsNotEmpty() === true"
       class="col-12 mx-2 my-4"
     >
-      <h4 class="display">Documentos personales</h4>
+      <h4 class="display">Documentos entrevista</h4>
       <documento-requerido-entrevista
         v-for="documento in interview_documents"
         :key="documento.name"
