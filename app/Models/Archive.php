@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -105,12 +106,17 @@ class Archive extends Model
         $query = $this->requiredDocuments()->where('type', 'entrance');
         return $query->orderBy('required_documents.name');
     }
-
+        
+    /**
+     * Obtiene los documentos requeridos para el ingreso del
+     * postulante, al programa académico.
+     *
+     * @return BelongsToMany
+     */
     public function interviewDocuments(): BelongsToMany
-    {
-    //    $query = $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'interview');
-        $query = $this->requiredDocuments()->where('type', 'interview');
-       return $query;
+    {        
+      $query = $this->requiredDocuments()->where('type', 'interview');
+        return $query->orderBy('required_documents.name');
     }
 
 
