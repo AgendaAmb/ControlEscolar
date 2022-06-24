@@ -435,8 +435,10 @@ class InterviewController extends Controller
 
         try {
             if (count($archives)) {
-                foreach ($archives as $archive) {
+                foreach ($archives as $archive1) {
 
+                    $archive = Archive::where('id', $archive1->id)->first();
+                    
                     //Carga programa academico
                     $archive->loadMissing([
                         'announcement.academicProgram',
