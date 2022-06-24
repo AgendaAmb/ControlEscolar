@@ -191,14 +191,14 @@ export default {
             break;
         }
       }
-      //Documents for doctorado
-      else if (this.alias_academic_program === "doctorado"  ) {
-        switch (this.name) {
-          case "20.- Ensayo de entrevista (Maestria)":
-            res = false;
-            break;
-        }
-      }
+      // //Documents for doctorado
+      // else if (this.alias_academic_program === "doctorado"  ) {
+      //   switch (this.name) {
+      //     case "20.- Ensayo de entrevista (Maestria)":
+      //       res = false;
+      //       break;
+      //   }
+      // }
      
 
       return res;

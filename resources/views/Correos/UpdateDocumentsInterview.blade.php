@@ -76,7 +76,7 @@
                                     'archive_id' => $archive_id,
                                 ]),
                             ])
-                            Subir Presentación
+                            Subir Presentación y ensayo
                         @endcomponent
 
                     </div>
