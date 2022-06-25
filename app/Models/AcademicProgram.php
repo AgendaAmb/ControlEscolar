@@ -81,6 +81,19 @@ class AcademicProgram extends Model
     }
 
     /**
+     * Obtiene la fecha de convocatoria mas reciente
+     *
+     * @return HasMany
+     */
+    public function firstAnnouncement(): HasOne
+    {
+        return $this->hasOne(Announcement::class)
+            ->firstOfMany()
+            ->select('announcements.*', 'academic_programs.name as name')
+            ->join('academic_programs', 'academic_programs.id', 'academic_program_id');
+    }
+
+    /**
      * Obtiene los documentos requeridos del expediente.
      *
      * @return HasMany
