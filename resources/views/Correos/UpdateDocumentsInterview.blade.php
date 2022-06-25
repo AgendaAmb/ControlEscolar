@@ -49,7 +49,7 @@
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
-                        sea ingresado en la plataforma a más tardar el día 19 de junio a las 12:00 h
+                        sea ingresado en la plataforma a más tardar 25 junio a las 11:59 p.m.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
@@ -64,9 +64,7 @@
                     </div>
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row mt-2">
-                        Dentro de los requisitos, se establece la elaboración UNA
-                        PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a más tardar el día de
-                        junio a las 12:00 hrs.
+                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 25 junio a las 11:59 p.m.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
