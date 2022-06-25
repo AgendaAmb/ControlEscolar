@@ -599,6 +599,7 @@ class ArchiveController extends Controller
                     'appliantWorkingExperiences',
                     'scientificProductions.authors',
                     'humanCapitals'
+
                 ]);
                 $academic_program = $archive->announcement->academicProgram;
                 $appliant = $archive->appliant;
@@ -891,7 +892,7 @@ class ArchiveController extends Controller
 
 
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
-        // dd($appliant);
+        dd($archiveModel);
         //Change for the view of appliant
         return view('postulacion.show')
             ->with('archive', $archiveModel)

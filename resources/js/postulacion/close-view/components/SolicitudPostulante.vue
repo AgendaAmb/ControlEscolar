@@ -192,7 +192,7 @@
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
       <details>
-        <summary class="mb-4 font-weight-bold h3">
+        <summary class="mb-2 font-weight-bold h3">
          Documentos de entrevista
         </summary>
        <documentos-entrevista
@@ -202,10 +202,10 @@
         :interview_documents="interview_documents">
         </documentos-entrevista>
       </details>
-      <div class="col-12">
-        
-      </div>
     </div>
+
+          <hr class="my-4 d-block" :style="ColorStrip" />
+
   </div>
 </template>
 
@@ -218,6 +218,7 @@ import ExperienciaLaboral from "./ExperienciaLaboral.vue";
 import LenguaExtranjera from "./LenguaExtranjera.vue";
 import RequisitosIngreso from "./RequisitosIngreso.vue";
 import CartaRecomendacion from "./CartaDeRecomendacion.vue";
+import DocumentosEntrevista from  "./DocumentosEntrevista.vue";
 
 export default {
   name: "solicitud-postulante",
@@ -231,6 +232,7 @@ export default {
     LenguaExtranjera,
     RequisitosIngreso,
     CartaRecomendacion,
+    DocumentosEntrevista,
   },
 
   props: {

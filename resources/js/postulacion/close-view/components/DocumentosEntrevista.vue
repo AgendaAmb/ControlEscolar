@@ -1,18 +1,10 @@
 <template>
   <div class="row my-2">
-    <div class="col-12 mx-2 my-2">
-      <h1 class="display-5">Requerimientos para entrevista</h1>
-
-      <h5 >
-        Para continuar con el proceso de entrevista, sube los siguientes documentos correspondientes al posgrado aplicado 
-      </h5>
-    </div>
 
     <div
       v-if="interviewDocumentsNotEmpty() === true"
-      class="col-12 mx-2 my-4"
+      class="col-12 mx-2 "
     >
-      <h4 class="display">Documentos personales</h4>
       <documento-requerido-entrevista
         v-for="documento in interview_documents"
         :key="documento.name"
