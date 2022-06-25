@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Helpers\MiPortalService;
+
 
 class RubricResource extends JsonResource
 {
@@ -18,10 +20,16 @@ class RubricResource extends JsonResource
      */
     private function getMiPortalUser($request, int $id, string $type)
     {
-        $miPortal_user = collect($request
-            ->session()
-            ->get($type))
-            ->firstWhere('id', $id);
+
+
+        $service = new MiPortalService;
+        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        $miPortal_user = $miPortal_user[0];
+
+        // $miPortal_user = collect($request
+        //     ->session()
+        //     ->get($type))
+        //     ->firstWhere('id', $id);
 
         $name = implode(' ', [$miPortal_user['name'],$miPortal_user['middlename'],$miPortal_user['surname']]);
 
@@ -29,7 +37,7 @@ class RubricResource extends JsonResource
 
         return [
             'id' => $miPortal_user['id'],
-            'type' => $miPortal_user['user_type'],
+            'type' => $user->type,
             'name' => Str::lower($name),
             'curp' => $miPortal_user['curp'],
             'email' => $miPortal_user['email'],
