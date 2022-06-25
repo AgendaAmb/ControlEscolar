@@ -6,7 +6,7 @@
         <select v-model="AcademicProgramSelect" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option
-            v-for="(academicProgram,index) in academic_programs"
+            v-for="(academicProgram, index) in academic_programs"
             :key="index"
             :value="academicProgram.name"
           >
@@ -67,6 +67,14 @@
         {{ dataLength }} <span> Resultados encontrados</span>
       </div>
     </div>
+
+    <div class="row mx-1 my-1 justify-content-center align-items-center">
+      <div class="col-6">
+        <button class="btn btn-primary my-3" style="width:100%;" @click="mandarCorreos">
+          Mandar correos
+        </button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -110,18 +118,15 @@ export default {
       },
 
       set(newVal) {
-         this.academic_program_selected = newVal;
-         
+        this.academic_program_selected = newVal;
+
         this.academic_programs_for_periods = [];
-         this.announcementsForAcademicProgram = [];
-       
+        this.announcementsForAcademicProgram = [];
 
         this.announcements.forEach((element) => {
-        
           if (newVal === element.name) {
-            
-             console.log('newVal: ' + newVal);
-               console.log('academicProgram: ' + element.name);
+            console.log("newVal: " + newVal);
+            console.log("academicProgram: " + element.name);
             this.announcementsForAcademicProgram.push(element);
           }
         });
@@ -130,6 +135,36 @@ export default {
   },
 
   methods: {
+    mandarCorreos() {
+      console.log(this.announcement_selected);
+      axios
+        .post(
+          "/controlescolar/entrevistas/SendMailUpdateOnlyDocumentsForInterview",
+          {
+            announcement_id: this.announcement_selected,
+          }
+        )
+        .then((response) => {
+          Swal.fire({
+            title: "Éxito!",
+            text: "Se envio el correo a todos los postulantes", // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            title: ":( Error ",
+            text: "No se pudieron enviar los correos", // Imprime el mensaje del controlador
+            showCancelButton: false,
+            icon: "error",
+          });
+        });
+    },
+
     buscaExpedientes() {
       //Datos no completos para hacer busqueda
       if (
@@ -146,7 +181,7 @@ export default {
         axios
           .get("/controlescolar/solicitud/archives", {
             params: {
-              "announcement_id": this.announcement_selected,
+              announcement_id: this.announcement_selected,
             },
           })
           .then((response) => {

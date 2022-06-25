@@ -328,6 +328,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -369,8 +377,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         this.announcementsForAcademicProgram = [];
         this.announcements.forEach(function (element) {
           if (newVal === element.name) {
-            console.log('newVal: ' + newVal);
-            console.log('academicProgram: ' + element.name);
+            console.log("newVal: " + newVal);
+            console.log("academicProgram: " + element.name);
 
             _this.announcementsForAcademicProgram.push(element);
           }
@@ -379,6 +387,31 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     }
   },
   methods: {
+    mandarCorreos: function mandarCorreos() {
+      console.log(this.announcement_selected);
+      axios.post("/controlescolar/entrevistas/SendMailUpdateOnlyDocumentsForInterview", {
+        announcement_id: this.announcement_selected
+      }).then(function (response) {
+        Swal.fire({
+          title: "Éxito!",
+          text: "Se envio el correo a todos los postulantes",
+          // Imprime el mensaje del controlador
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar"
+        });
+      })["catch"](function (error) {
+        console.log(error);
+        Swal.fire({
+          title: ":( Error ",
+          text: "No se pudieron enviar los correos",
+          // Imprime el mensaje del controlador
+          showCancelButton: false,
+          icon: "error"
+        });
+      });
+    },
     buscaExpedientes: function buscaExpedientes() {
       var _this2 = this;
 
@@ -393,7 +426,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         //Se hace la busqueda
         axios.get("/controlescolar/solicitud/archives", {
           params: {
-            "announcement_id": this.announcement_selected
+            announcement_id: this.announcement_selected
           }
         }).then(function (response) {
           console.log(response.data);
@@ -25966,6 +25999,27 @@ var render = function () {
             ])
           : _vm._e(),
       ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "row mx-1 my-1 justify-content-center align-items-center",
+        },
+        [
+          _c("div", { staticClass: "col-6" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary my-3",
+                staticStyle: { width: "100%" },
+                on: { click: _vm.mandarCorreos },
+              },
+              [_vm._v("\n        Mandar correos\n      ")]
+            ),
+          ]),
+        ]
+      ),
     ]
   )
 }
