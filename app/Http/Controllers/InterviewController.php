@@ -380,12 +380,12 @@ class InterviewController extends Controller
                                 Mail::mailer($servicio_correo)->to($user_mail)
                                 ->cc($mail_academic_program)  
                                 ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             } else {
                                 Mail::mailer($servicio_correo)  
                                 ->cc($mail_academic_program)
                                 ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             }
                             // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                             try {
