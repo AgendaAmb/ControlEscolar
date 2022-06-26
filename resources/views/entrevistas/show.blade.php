@@ -17,6 +17,7 @@ const user = @json($user)
         <h1 class="d-block año">2022</h1>
     </div>
 </div>
+
 <div v-if="$root.loggedUserIsCA()" v-for="(interviews_ordered, academic_program) in interviews" class="row justify-content-center">
     <interviews-comite v-bind:academic_program="academic_program" 
         v-bind:interviews_ordered="interviews_ordered">

@@ -42,6 +42,7 @@ console.log(appliants);
         v-bind:date="date"
         v-bind:rooms="period.rooms"
         v-bind:virtual_rooms="period.virtual_rooms"
+        v-bind:modality="period.modality"
         v-on:nuevaentrevista="agregaEntrevista">
     </nueva-entrevista>
 

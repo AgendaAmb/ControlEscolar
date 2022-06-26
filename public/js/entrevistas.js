@@ -1147,10 +1147,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nueva-entrevista",
   props: {
+    // Id del periodo.
+    modality: String,
     // Id del periodo.
     period_id: Number,
     // Fecha mínima del inicio del periodo.
@@ -32413,27 +32416,29 @@ var render = function () {
                         ),
                       ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group col-12" }, [
-                    _c("div", { staticClass: "form-check form-switch" }, [
-                      _c("input", {
-                        staticClass: "form-check-input",
-                        attrs: {
-                          type: "checkbox",
-                          id: "flexSwitchCheckDefault",
-                        },
-                        on: { change: _vm.selecSV },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-check-label",
-                          attrs: { for: "flexSwitchCheckDefault" },
-                        },
-                        [_vm._v("Mostrar salas virtuales")]
-                      ),
-                    ]),
-                  ]),
+                  _vm.modality != "presencial"
+                    ? _c("div", { staticClass: "form-group col-12" }, [
+                        _c("div", { staticClass: "form-check form-switch" }, [
+                          _c("input", {
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              id: "flexSwitchCheckDefault",
+                            },
+                            on: { change: _vm.selecSV },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "flexSwitchCheckDefault" },
+                            },
+                            [_vm._v("Mostrar salas virtuales")]
+                          ),
+                        ]),
+                      ])
+                    : _vm._e(),
                 ]),
               ]
             ),
