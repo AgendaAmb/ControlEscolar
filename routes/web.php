@@ -12,6 +12,7 @@ use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\ExternalRecommendationLetter;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 
 /*
@@ -34,6 +35,12 @@ Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
 // Route::prefix('controlescolar')->group(function () {
+    # Ruta de prueba segunda conexion a la base de datos
+    Route::get('/db2', function () {
+        $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
+        return $miPortal_user[0]->id;
+    });
+
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
