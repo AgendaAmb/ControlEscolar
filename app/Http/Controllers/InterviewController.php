@@ -43,41 +43,33 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
-        //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-
-        // return AcademicProgram::WithInterviewEagerLoads()->get();
-        // return $calendar_resource;
+        try{
+            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
     public function calendario1(Request $request)
-    {
-        //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-
+    {   
+        try{
+            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
         return AcademicProgram::WithInterviewEagerLoads()->get();
-        // return $calendar_resource;
-
-        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
     public function calendario2(Request $request)
     {
-
-        // $service = new MiPortalService;
-        // $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
-
-        // return $user_data_collect;
-
-        //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-
-        // return AcademicProgram::WithInterviewEagerLoads()->get();
+        try {
+            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
         return $calendar_resource;
-
-        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
     public function calendario3(Request $request)

@@ -22,11 +22,25 @@ class CalendarResource extends JsonResource
      * @return void
      */
 
+    private $service;
+
+    /**
+     * Construye el serializer
+     *
+     * @param resource
+     * @param App\Models\User $professor
+     */
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+        $this->service = new MiPortalService;
+    }
+
     // Funcion para obtener los datos de un usuario de basde de datos de mi portal
     private function getMiPortalUser($request, int $id, string $type)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        // $service = new MiPortalService;
+        $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
 
         $user = User::find($id);
 
@@ -52,8 +66,8 @@ class CalendarResource extends JsonResource
      */
     private function mapArchiveAppliant($archive, $request)
     {
-        $service = new MiPortalService;
-        $miPortal_user = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->user_id])->collect();
+        // $service = new MiPortalService;
+        $miPortal_user = $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->user_id])->collect();
         $miPortal_user = $miPortal_user[0];
 
         $user = User::find($archive->user_id);
@@ -65,7 +79,7 @@ class CalendarResource extends JsonResource
         ];
 
         if(isset($archive->intentionLetter->user_id)){
-            $miPortal_professor = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->intentionLetter->user_id])->collect();
+            $miPortal_professor = $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->intentionLetter->user_id])->collect();
             $miPortal_professor = $miPortal_professor[0];
 
             // Cargar los datos del profesor 
@@ -101,8 +115,8 @@ class CalendarResource extends JsonResource
      */
     private function mapAcademicArea($area, $request)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $area['professor_id']])->collect();
+        // $service = new MiPortalService;
+        $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $area['professor_id']])->collect();
         $miPortal_user = $miPortal_user[0];
 
         $name = implode(' ', [
@@ -137,8 +151,8 @@ class CalendarResource extends JsonResource
      */
     private function setInterviewAppliant($request, &$interview)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $interview['appliant'][0]['id']])->collect();
+        // $service = new MiPortalService;
+        $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $interview['appliant'][0]['id']])->collect();
         $miPortal_user = $miPortal_user[0];
 
         $user = User::find($interview['appliant'][0]['id']);
@@ -176,8 +190,8 @@ class CalendarResource extends JsonResource
         $id = $interview['intention_letter_professor']['id'];
 
         // Recursos para extrer los datos de mi portal  
-        $service = new MiPortalService;
-        $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        // $service = new MiPortalService;
+        $miPortal_worker =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
         $miPortal_worker = $miPortal_worker[0];
 
         // Se necesita extrar el type con la base de datos de control escolar y no de portal
