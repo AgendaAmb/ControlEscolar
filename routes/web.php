@@ -41,6 +41,12 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         return $miPortal_user[0]->id;
     });
 
+    # Ruta de prueba segunda conexion a la base de datos
+    Route::get('/db3', function () {
+        $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
+        return $miPortal_user[0]->name;
+    });
+
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
         # Página principal.
