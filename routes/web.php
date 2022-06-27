@@ -189,6 +189,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');
 
+        # Programa de entrevistas
+        Route::get('programa2', [InterviewController::class, 'programa2'])->name('programa2');
         
 
         Route::post('SendMailUpdateOnlyDocumentsForInterview', [InterviewController::class, 'SendMailUpdateOnlyDocumentsForInterview'])->name('SendMailUpdateOnlyDocumentsForInterview');

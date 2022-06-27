@@ -110,6 +110,26 @@ class InterviewController extends Controller
         return view('entrevistas.show', $interview_program_resource->toArray($request));
     }
 
+    public function programa2(Request $request)
+    {
+        // Administracion
+        // Control escolar - Ver todo
+        // Comite academico - Ver promedios
+        // Cordinador - Ver todo / no modificar / ver promedio
+        // Profesor nucleo basico
+        // Aspirante 
+
+        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
+            ?   Interview::select('*')->where('confirmed', 1)
+            :   $request->user()->interviews()->where('confirmed', 1);
+
+        $interview_program_resource = new InterviewProgramResource($interviews);
+
+        return $interview_program_resource->toArray($request);
+
+        // return view('entrevistas.show', $interview_program_resource->toArray($request));
+    }
+
     /**
      * Sets the available announcements.
      *

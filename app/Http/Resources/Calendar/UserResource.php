@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Calendar;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class UserResource extends JsonResource
 {
@@ -30,13 +31,16 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $this->id]);         // $miPortal_user[0]->id;
+        $miPortal_user = $miPortal_user[0];
+
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'name' => $this->name,
-            'middlename' => $this->middlename,
-            'surname' => $this->surname,
-            'email' => $this->email,
+            'name' => $miPortal_user->name,
+            'middlename' => $miPortal_user->middlename,
+            'surname' => $miPortal_user->surname,
+            'email' => $miPortal_user->email,
             'roles' => $this->roles,
             'user_type' => $this->user_type,
         ];
