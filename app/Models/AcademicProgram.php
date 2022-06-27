@@ -33,12 +33,22 @@ class AcademicProgram extends Model
     {
         return $query->with('periods', function($query){
 
-            $query->with('announcement.archives.appliant', function($subquery){
-                $subquery->doesntHave('interviews');
-            })->with('interviews.intentionLetterProfessor', function($subquery){
+            // $query->with('announcement.archives.appliant', function($subquery){
+            //     $subquery->doesntHave('interviews');
+            // })->with('interviews.intentionLetterProfessor', function($subquery){
 
-                $subquery->where('archive_intention_letter.user_id', '<>', Auth::id());
+            //     $subquery->where('archive_intention_letter.user_id', '<>', Auth::id());
+            // })->with([
+            //     'announcement.archives.intentionLetter',
+            //     'rooms'
+            // ])->where('finished', false);/*->whereYear('end_date', '<=', date('Y'))
+            // ->whereMonth('end_date', '<=', date('m'))*/;
+
+
+            $query->with('announcement.archives.appliant', function ($subquery) {
+                $subquery->doesntHave('interviews');
             })->with([
+                'interviews.intentionLetterProfessor',
                 'announcement.archives.intentionLetter',
                 'rooms'
             ])->where('finished', false);/*->whereYear('end_date', '<=', date('Y'))
