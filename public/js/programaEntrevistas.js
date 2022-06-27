@@ -90,6 +90,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -131,6 +140,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -22313,21 +22332,19 @@ var render = function () {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "collapse", attrs: { id: _vm.id } }, [
+    _c("div", { staticClass: "collapse show", attrs: { id: _vm.id } }, [
       _c(
         "div",
         { staticClass: "card" },
         _vm._l(_vm.interview_rooms, function (interviews, interview_room) {
           return _c("div", { key: interview_room, staticClass: "card-body" }, [
-            _c("h4", { staticClass: "d-block room-details" }, [
-              _vm._v(" Sala " + _vm._s(interview_room) + " "),
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table text-center" }, [
                 _c("thead", { staticClass: "interview-program-header" }, [
                   _c("tr", [
                     _c("th", [_vm._v(" Horario ")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(" Lugar ")]),
                     _vm._v(" "),
                     _c("th", [_vm._v(" Nombre ")]),
                     _vm._v(" "),
@@ -22337,7 +22354,11 @@ var render = function () {
                     !_vm.$root.loggedUserIsSchoolControl() &&
                     !_vm.$root.loggedUserIsCoordinador() &&
                     !_vm.$root.loggedUserIsCA()
-                      ? _c("th", [_vm._v(" Rúbrica de evaluación ")])
+                      ? _c("th", [
+                          _vm._v(
+                            "\n                                    Rúbrica de evaluación "
+                          ),
+                        ])
                       : _c("th", [_vm._v(" Rúbricas de evaluación ")]),
                   ]),
                 ]),
@@ -22353,6 +22374,8 @@ var render = function () {
                           )
                         ),
                       ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(" " + _vm._s(interview.site) + " ")]),
                       _vm._v(" "),
                       _c("td", { staticClass: "appliant" }, [
                         _vm._v(_vm._s(interview.appliant)),
@@ -22377,7 +22400,8 @@ var render = function () {
                             ),
                           ]),
                       _vm._v(" "),
-                      _vm.$root.loggedUserIsCoordinador()
+                      _vm.$root.loggedUserIsCoordinador() ||
+                      _vm.$root.loggedUserIsAdmin()
                         ? _c(
                             "td",
                             [
@@ -22413,16 +22437,14 @@ var render = function () {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Promedio (working)\n                                    "
+                                    "\n                                        Rúbrica promedio\n                                    "
                                   ),
                                 ]
                               ),
                             ],
                             2
                           )
-                        : !_vm.$root.loggedUserIsAdmin() &&
-                          !_vm.$root.loggedUserIsSchoolControl() &&
-                          !_vm.$root.loggedUserIsCA()
+                        : _vm.$root.loggedUserIsPNB()
                         ? _c(
                             "td",
                             _vm._l(interview.rubrics, function (rubric) {
@@ -22464,32 +22486,7 @@ var render = function () {
                             }),
                             0
                           )
-                        : _c(
-                            "td",
-                            _vm._l(interview.rubrics, function (rubric) {
-                              return _c(
-                                "a",
-                                {
-                                  key: rubric.location,
-                                  staticClass:
-                                    "d-block text-capitalize text-decoration-none",
-                                  attrs: { href: rubric.location },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(rubric.user.name) +
-                                      " " +
-                                      _vm._s(rubric.user.middlename) +
-                                      " " +
-                                      _vm._s(rubric.user.surname) +
-                                      "\n                                    "
-                                  ),
-                                ]
-                              )
-                            }),
-                            0
-                          ),
+                        : _vm._e(),
                     ])
                   }),
                   0
@@ -22545,6 +22542,8 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
+              _c("td", [_vm._v(" " + _vm._s(interview.site) + " ")]),
+              _vm._v(" "),
               _c("td", { staticClass: "appliant" }, [
                 _vm._v(_vm._s(interview.appliant)),
               ]),
@@ -22557,7 +22556,32 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _vm._m(1, true),
+              _c(
+                "td",
+                _vm._l(interview.rubrics, function (rubric) {
+                  return _c(
+                    "a",
+                    {
+                      key: rubric.location,
+                      staticClass:
+                        "d-block text-capitalize text-decoration-none",
+                      attrs: { href: rubric.location },
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(rubric.user.name) +
+                          " " +
+                          _vm._s(rubric.user.middlename) +
+                          " " +
+                          _vm._s(rubric.user.surname) +
+                          "\n                        "
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
             ])
           }),
           0
@@ -22575,28 +22599,14 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v(" Horario ")]),
         _vm._v(" "),
+        _c("td", [_vm._v(" Lugar")]),
+        _vm._v(" "),
         _c("th", [_vm._v(" Nombre ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Expediente ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" Evaluación promedio ")]),
       ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "a",
-        { staticClass: "d-block text-decoration-none", attrs: { href: "#" } },
-        [
-          _vm._v(
-            "\n                            Rubrica promedio (TO DO)\n                        "
-          ),
-        ]
-      ),
     ])
   },
 ]
@@ -34897,6 +34907,17 @@ var app = new Vue({
   methods: {
     StringDate: function StringDate(date) {
       return moment(date).locale('es-MX').format("dddd D \\d\\e MMMM \\d\\e\\l YYYY");
+    },
+
+    /**
+    * Determina si el usuario autenticado es profesor de núcleo básico.
+    * @param {*} period 
+    */
+    loggedUserIsPNB: function loggedUserIsPNB() {
+      var roles = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'profesor_nb';
+      });
+      return roles.length > 0;
     },
 
     /**

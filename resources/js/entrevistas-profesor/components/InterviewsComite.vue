@@ -1,25 +1,35 @@
 <template>
     <div class="col-10 text-center my-4">
-         <h4 class="d-block interview-day"> {{academic_program}} </h4>
-         <div class="table-responsive">
+        <h4 class="d-block interview-day"> {{academic_program}} </h4>
+        <div class="table-responsive">
             <table class="table text-center">
                 <thead class="interview-program-header">
                     <tr>
                         <th> Horario </th>
+                        <td> Lugar</td>
                         <th> Nombre </th>
                         <th> Expediente </th>
                         <th> Evaluación promedio </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="interview in interviews_ordered" :key="interview.id"> 
+                    <tr v-for="interview in interviews_ordered" :key="interview.id">
                         <td>{{interview.start_time + " a " + interview.end_time}}</td>
+                        <td> {{ interview.site }} </td>
                         <td class="appliant">{{interview.appliant}}</td>
-                        <td><a :href="interview.archive_url" target="_blank">Ver documentos</a></td>
+                        <td>
+                            <a :href="interview.archive_url" target="_blank">Ver documentos</a>
+                        </td>
                         <!-- Rubricas -->
-                        <td >
+                        <!-- <td>
                             <a class="d-block text-decoration-none" href="#">
-                                Rubrica promedio (TO DO)
+                                Rubrica promedio
+                            </a>
+                        </td> -->
+                        <td>
+                            <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics"
+                                :key="rubric.location" :href="rubric.location">
+                                {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </td>
                     </tr>

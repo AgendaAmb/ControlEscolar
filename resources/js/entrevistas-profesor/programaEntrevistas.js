@@ -38,6 +38,18 @@ const app = new Vue({
             return moment(date).locale('es-MX').format("dddd D \\d\\e MMMM \\d\\e\\l YYYY");
         },
 
+         /**
+         * Determina si el usuario autenticado es profesor de núcleo básico.
+         * @param {*} period 
+         */
+         loggedUserIsPNB(){
+            var roles = this.loggedUser.roles.filter(role => {
+                return role.name === 'profesor_nb';
+            });
+    
+            return roles.length > 0;
+        },
+
         /**
          * Determina si el usuario autenticado es administrador.
          * @param {*} period 

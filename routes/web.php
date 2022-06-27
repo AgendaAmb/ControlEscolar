@@ -167,11 +167,11 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Calendario
         Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
-        Route::get('calendario1',[InterviewController::class, 'calendario1'])->name('calendario1');
+        // Route::get('calendario1',[InterviewController::class, 'calendario1'])->name('calendario1');
 
-        Route::get('calendario2',[InterviewController::class, 'calendario2'])->name('calendario2');
+        // Route::get('calendario2',[InterviewController::class, 'calendario2'])->name('calendario2');
 
-        Route::get('calendario3', [InterviewController::class, 'calendario3'])->name('calendario3');
+        // Route::get('calendario3', [InterviewController::class, 'calendario3'])->name('calendario3');
 
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');

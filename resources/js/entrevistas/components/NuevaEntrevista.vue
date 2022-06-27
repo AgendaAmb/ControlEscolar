@@ -58,12 +58,13 @@
                 </select>
               </div>
 
-              <div class="form-group col-12">
+              <div v-if="modality != 'presencial'" class="form-group col-12">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" v-on:change="selecSV">
                   <label class="form-check-label" for="flexSwitchCheckDefault">Mostrar salas virtuales</label>
                 </div>
               </div>
+
             </div>
           </form>
         </div>
@@ -100,6 +101,9 @@ export default {
   name: "nueva-entrevista",
 
   props: {
+    // Id del periodo.
+    modality: String,
+
     // Id del periodo.
     period_id: Number,
 

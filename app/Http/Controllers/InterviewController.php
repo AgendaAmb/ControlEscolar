@@ -43,55 +43,43 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
-        //return $request;
         try{
             $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
         }catch(\Exception $e){
-                return new JsonResponse(['Error' => ' Fallo la creacion del calendario','message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
-            }
-
-        // return AcademicProgram::WithInterviewEagerLoads()->get();
-        // return $calendar_resource;
+            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
 
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
     }
 
-    public function calendario1(Request $request)
-    {
-        //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+    // public function calendario1(Request $request)
+    // {   
+    //     try{
+    //         $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+    //     }catch(\Exception $e){
+    //         return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+    //     }
+    //     return AcademicProgram::WithInterviewEagerLoads()->get();
+    // }
 
-        return AcademicProgram::WithInterviewEagerLoads()->get();
-        // return $calendar_resource;
+    // public function calendario2(Request $request)
+    // {
+    //     try {
+    //         $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+    //     } catch (\Exception $e) {
+    //         return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+    //     }
+    //     return $calendar_resource;
+    // }
 
-        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
+    // public function calendario3(Request $request)
+    // {
 
-    public function calendario2(Request $request)
-    {
+    //     $service = new MiPortalService;
+    //     $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
 
-        // $service = new MiPortalService;
-        // $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
-
-        // return $user_data_collect;
-
-        //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-
-        // return AcademicProgram::WithInterviewEagerLoads()->get();
-        return $calendar_resource;
-
-        // return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
-
-    public function calendario3(Request $request)
-    {
-
-        $service = new MiPortalService;
-        $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
-
-        return $user_data_collect;
-    }
+    //     return $user_data_collect;
+    // }
 
 
     /**
@@ -362,13 +350,13 @@ class InterviewController extends Controller
 
                         switch ($servicio_correo) {
                             case 'smtp_imarec':
-                                $mail_academic_program =    'imarec.escolar@uaslp.mx';
+                                $mail_academic_program = 'imarec.escolar@uaslp.mx';
                                 break;
                             case 'smtp_pmpca':
-                                $mail_academic_program =   'pmpca@uaslp.mx';
+                                $mail_academic_program = 'pmpca@uaslp.mx';
                                 break;
                             default:
-                                $mail_academic_program =   'rtic.ambiental@uaslp.mx';
+                                $mail_academic_program = 'rtic.ambiental@uaslp.mx';
                                 break;
                         }
 
@@ -381,15 +369,15 @@ class InterviewController extends Controller
                             $this->alumno = $User;
                             // Envio de correo dependidiendo modalidad de la entrevista
                             if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                                // Mail::mailer($servicio_correo)->to($user_mail)
-                                // ->cc($mail_academic_program)  
-                                // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)->to($user_mail)
+                                ->cc($mail_academic_program)  
+                                ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             } else {
-                                // Mail::mailer($servicio_correo)  
-                                // ->cc($mail_academic_program)
-                                // ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)  
+                                ->cc($mail_academic_program)
+                                ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             }
                             // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                             try {
@@ -408,11 +396,11 @@ class InterviewController extends Controller
                             /**Obtener al trabajador inscrito en la entrevista */
                             // Envio de correo dependidiendo modalidad de la entrevista
                             if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $Trabajador, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                // Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
                             } else {
-                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $Trabajador, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                // Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
                             }
                         }
                     }

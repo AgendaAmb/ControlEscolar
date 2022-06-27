@@ -1,56 +1,65 @@
 <template>
     <div class="col-10 text-center my-4">
-        <a class="d-block interview-day text-decoration-none" data-toggle="collapse" :href="href" aria-expanded="false" :aria-controls="id">
+        <a class="d-block interview-day text-decoration-none" data-toggle="collapse" :href="href" aria-expanded="false"
+            :aria-controls="id">
             <p class="my-0 py-0"> {{interview_date}} </p>
         </a>
-        <div class="collapse" :id="id">
+        <div class="collapse show" :id="id">
             <div class="card">
-                <div v-for="(interviews, interview_room) in interview_rooms" :key="interview_room" class="card-body">    
-                    <h4 class="d-block room-details"> Sala {{interview_room}} </h4>
+                <div v-for="(interviews, interview_room) in interview_rooms" :key="interview_room" class="card-body">
+                    <!-- <h4 class="d-block room-details"> Sala {{interview_room}} </h4> -->
                     <div class="table-responsive">
                         <table class="table text-center">
                             <thead class="interview-program-header">
                                 <tr>
                                     <th> Horario </th>
+                                    <th> Lugar </th>
                                     <th> Nombre </th>
                                     <th> Expediente </th>
-                                    <th v-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl() && !$root.loggedUserIsCoordinador() && !$root.loggedUserIsCA()"> Rúbrica de evaluación </th>
+                                    <th
+                                        v-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl() && !$root.loggedUserIsCoordinador() && !$root.loggedUserIsCA()">
+                                        Rúbrica de evaluación </th>
                                     <th v-else> Rúbricas de evaluación </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="interview in interviews" :key="interview.id"> 
+                                <tr v-for="interview in interviews" :key="interview.id">
                                     <td>{{interview.start_time + " a " + interview.end_time}}</td>
+                                    <td> {{interview.site}} </td>
                                     <td class="appliant">{{interview.appliant}}</td>
 
                                     <!-- Expediente-->
-                                    <td v-if="$root.loggedUserIsSchoolControl()"><a target="_blank">Ver documentos</a></td>
+                                    <td v-if="$root.loggedUserIsSchoolControl()"><a target="_blank">Ver documentos</a>
+                                    </td>
                                     <td v-else><a :href="interview.archive_url" target="_blank">Ver documentos</a></td>
                                     <!-- \Expediente -->
 
                                     <!-- Rubricas -->
-                                    <td v-if="$root.loggedUserIsCoordinador()">
-                                        <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location">
-                                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
+                                    <!-- Coordinador y administración -->
+                                    <td v-if="$root.loggedUserIsCoordinador() || $root.loggedUserIsAdmin()">
+                                        <a class="d-block text-capitalize text-decoration-none"
+                                            v-for="rubric in interview.rubrics" :key="rubric.location"
+                                            :href="rubric.location">
+                                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
+                                            }}
                                         </a>
                                         <a class="d-block text-capitalize text-decoration-none" href="#">
-                                            Promedio (working)
+                                            Rúbrica promedio
                                         </a>
                                     </td>
+
                                     <!-- Profesores -->
-                                    <td v-else-if="!$root.loggedUserIsAdmin() && !$root.loggedUserIsSchoolControl() && !$root.loggedUserIsCA()">
-                                        <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location"> Formato de evaluación</a>
+                                    <td v-else-if="$root.loggedUserIsPNB()">
+                                        <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location"
+                                            :href="rubric.location"> Formato de evaluación</a>
                                     </td>
-
+                                    
+                                    <!-- Control escolar -->
                                     <td v-else-if="$root.loggedUserIsSchoolControl()">
-                                        <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics" :key="rubric.location">
-                                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
-                                        </a>
-                                    </td>
-
-                                    <td v-else>
-                                        <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics" :key="rubric.location" :href="rubric.location">
-                                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
+                                        <a class="d-block text-capitalize text-decoration-none"
+                                            v-for="rubric in interview.rubrics" :key="rubric.location">
+                                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
+                                            }}
                                         </a>
                                     </td>
                                     <!-- \Rubricas -->

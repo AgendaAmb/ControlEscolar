@@ -10,7 +10,7 @@ use App\Models\AcademicProgram;
 use App\Models\Archive;
 use App\Helpers\MiPortalService;
 use App\Models\User;
-
+use Illuminate\Http\JsonResponse;
 class CalendarResource extends JsonResource
 {
     /**
@@ -22,11 +22,28 @@ class CalendarResource extends JsonResource
      * @return void
      */
 
+    private $service;
+
+    /**
+     * Construye el serializer
+     *
+     * @param resource
+     * @param App\Models\User $professor
+     */
+    public function __construct($resource)
+    {
+        parent::__construct($resource);
+        $this->service = new MiPortalService;
+    }
+
     // Funcion para obtener los datos de un usuario de basde de datos de mi portal
     private function getMiPortalUser($request, int $id, string $type)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        try {
+            $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+        }
 
         $user = User::find($id);
 
@@ -52,8 +69,8 @@ class CalendarResource extends JsonResource
      */
     private function mapArchiveAppliant($archive, $request)
     {
-        $service = new MiPortalService;
-        $miPortal_user = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->user_id])->collect();
+        // $service = new MiPortalService;
+        $miPortal_user = $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->user_id])->collect();
         $miPortal_user = $miPortal_user[0];
 
         $user = User::find($archive->user_id);
@@ -65,7 +82,12 @@ class CalendarResource extends JsonResource
         ];
 
         if(isset($archive->intentionLetter->user_id)){
-            $miPortal_professor = $service->miPortalGet('api/usuarios', ['filter[id]' => $archive->intentionLetter->user_id])->collect();
+            try {
+                $miPortal_professor = $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->intentionLetter->user_id])->collect();
+            } catch (\Exception $e) {
+                return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+            }
+
             $miPortal_professor = $miPortal_professor[0];
 
             // Cargar los datos del profesor 
@@ -101,8 +123,12 @@ class CalendarResource extends JsonResource
      */
     private function mapAcademicArea($area, $request)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $area['professor_id']])->collect();
+        try {
+            $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $area['professor_id']])->collect();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+        }
+
         $miPortal_user = $miPortal_user[0];
 
         $name = implode(' ', [
@@ -137,18 +163,34 @@ class CalendarResource extends JsonResource
      */
     private function setInterviewAppliant($request, &$interview)
     {
-        $service = new MiPortalService;
-        $miPortal_user =  $service->miPortalGet('api/usuarios', ['filter[id]' => $interview['appliant'][0]['id']])->collect();
-        $miPortal_user = $miPortal_user[0];
-        
-        $name = implode(' ', [
-            $miPortal_user['name'] ?? '',
-            $miPortal_user['middlename'] ?? '',
-            $miPortal_user['surname']  ?? ''
-        ]);
+        try {
+            $miPortal_user =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $interview['appliant'][0]['id']])->collect();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+        }
 
-        $interview['appliant'] = $miPortal_user;
-        $interview['appliant']['name'] = $name;
+        $miPortal_user = $miPortal_user[0];
+
+        $user = User::find($interview['appliant'][0]['id']);
+        
+        // $name = implode(' ', [
+        //     $miPortal_user['name'] ?? '',
+        //     $miPortal_user['middlename'] ?? '',
+        //     $miPortal_user['surname']  ?? ''
+        // ]);
+
+        // $interview['appliant'] = $miPortal_user;
+        // $interview['appliant']['name'] = $name;
+
+        $interview['appliant'] = [
+            'id' => $miPortal_user['id'] ?? '',
+            'type' => $user->type ?? '',
+            'name' => implode(' ', [
+                $miPortal_user['name'] ?? '',
+                $miPortal_user['middlename'] ?? '',
+                $miPortal_user['surname'] ?? ''
+            ])
+        ];
     }
 
     /**
@@ -160,18 +202,24 @@ class CalendarResource extends JsonResource
     private function setIntentionLetterProfessor($request, &$interview)
     {   
         $interview['intention_letter_professor'] = $interview['intention_letter_professor'][0] ?? [];
+
         $id = $interview['intention_letter_professor']['id'];
 
         // Recursos para extrer los datos de mi portal  
-        $service = new MiPortalService;
-        $miPortal_worker =  $service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        // $service = new MiPortalService;
+
+        try {
+            $miPortal_worker =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $id])->collect();
+        } catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+        }
+
         $miPortal_worker = $miPortal_worker[0];
 
-        // Se necesita extrar el type 
+        // Se necesita extrar el type con la base de datos de control escolar y no de portal
         $worker = User::find($id);
 
         if ($miPortal_worker !== null) {
-            $interview['intention_letter_professor'] = $miPortal_worker;
             $interview['intention_letter_professor'] = [
                 'id' => $miPortal_worker['id'] ?? '',
                 'type' => $worker->type ?? '',
@@ -182,12 +230,6 @@ class CalendarResource extends JsonResource
                 ])
             ];
         }
-        
-        // $miPortal_worker = collect($request
-        //     ->session()
-        //     ->get('workers'))
-        //     ->firstWhere('id', $interview['intention_letter_professor']['id']);
-
     }
 
     /**
@@ -229,7 +271,7 @@ class CalendarResource extends JsonResource
      */
     private function setPeriod($request)
     {
-        # Filtra el primer periodo no nulo.
+        # Filtra el primer periodo no nulo para el programa academico
         $this->period = $this->resource->filter(function ($academic_program) {
             return $academic_program->periods->count() > 0;
         })->map(fn ($academic_program) => $academic_program->periods->first())->first();
@@ -240,13 +282,18 @@ class CalendarResource extends JsonResource
 
         $this->announcements = null;
 
+        // Descarta las entrevistas que no tienen cartas de intencinon
         $this->period->interviews = $this->period->interviews->filter(function ($interview) {
-            return $interview->intentionLetterProfessor->count() > 0;
+            $interview = $interview->toArray();
+            return isset($interview['intention_letter_professor']) && $interview['appliant'][0]['id'];
+        // Para cada entrevista...
         })->map(function ($interview) use ($request) {
             $interview = $interview->toArray();
-
+            // Se incorporan los datos del postulante
             $this->setInterviewAppliant($request, $interview);
+            // Se incorpora los datos del profesor que entrego la carta de intencion al postulante
             $this->setIntentionLetterProfessor($request, $interview);
+            // Se incorporan las areas academicas de la entrevista
             $this->setInterviewAcademicAreas($request, $interview);
 
             return $interview;
@@ -286,10 +333,12 @@ class CalendarResource extends JsonResource
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;
 
-        $this->appliants = $archives->filter(
-            fn ($archive) => $archive->appliant !== null
-        )->filter(
-            // Fitramos solo aquellos donde el status sea igual a 5 o 7 
+        // Verificamos que existan datos del postulante y datos del profesor que otorgo la carta de intención
+        $this->appliants = $archives->filter(function($archive){
+            $archive = $archive->toArray();
+            return $archive['appliant'] != null && $archive['intention_letter'] != null;
+        })->filter(
+            // Fitramos solo aquellos donde el status sea igual a 5 o 7 (Aprovados y excepción)
             fn ($archive) => ($archive->status === 5 || $archive->status === 7)
         )->map(
             fn ($archive) => $this->mapArchiveAppliant($archive, $request)
