@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="row mx-1 my-1 justify-content-center align-items-center">
+    <div v-if="puedeEnviarCorreos() === true" class="row mx-1 my-1 justify-content-center align-items-center">
       <div class="col-6">
         <button class="btn btn-primary my-3" style="width:100%;" @click="mandarCorreos">
           Mandar correos
@@ -97,6 +97,11 @@ export default {
       type: Array,
       default: [],
     },
+
+    user_rol:{
+      type:String,
+      default: null
+    }
   },
 
   // Propiedades reactivas.
@@ -163,6 +168,14 @@ export default {
             icon: "error",
           });
         });
+    },
+
+    puedeEnviarCorreos(){
+      let res = false;
+      if(this.user_rol === 'Administrador'){
+        res = true;
+      }
+      return res;
     },
 
     buscaExpedientes() {
