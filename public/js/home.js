@@ -49469,7 +49469,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
   name: 'candidate-data',
   props: {
     user: {
-      type: Array,
+      type: Object,
       "default": null
     }
   } // created(){

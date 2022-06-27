@@ -44,7 +44,11 @@ class InterviewController extends Controller
     public function calendario(Request $request)
     {
         //return $request;
-        $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        try{
+            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
+        }catch(\Exception $e){
+                return new JsonResponse(['Error' => ' Fallo la creacion del calendario','message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            }
 
         // return AcademicProgram::WithInterviewEagerLoads()->get();
         // return $calendar_resource;
