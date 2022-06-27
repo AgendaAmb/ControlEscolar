@@ -221,7 +221,7 @@ class ArchiveController extends Controller
 
         foreach ($archives as $k => $archive) {
             //El postulante no tiene toda la información
-            if (!$archive->appliant->name) {
+            // if (!$archive->appliant->name) {
 
                 try {
                     $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
@@ -250,7 +250,7 @@ class ArchiveController extends Controller
                     //Elimina al usuario invalido de la lista
                     unset($archives[$k]);
                 }
-            }
+            // }
         }
         // return new JsonResponse($archives, 200); //Ver info archivos en consola
         return ArchiveResource::collection($archives);
