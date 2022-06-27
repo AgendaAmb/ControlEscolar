@@ -69,6 +69,8 @@ class InterviewController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
+
+        // dd($calendar_resource);
         return $calendar_resource;
     }
 
@@ -372,12 +374,12 @@ class InterviewController extends Controller
                                 // Mail::mailer($servicio_correo)->to($user_mail)
                                 // ->cc($mail_academic_program)  
                                 // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             } else {
                                 // Mail::mailer($servicio_correo)  
                                 // ->cc($mail_academic_program)
                                 // ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
                             }
                             // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                             try {
@@ -397,10 +399,10 @@ class InterviewController extends Controller
                             // Envio de correo dependidiendo modalidad de la entrevista
                             if (str_contains($int_room->site, 'Zoom') ? true : false) {
                                 // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
                             } else {
                                 // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                                Mail::mailer($servicio_correo)->to('A291395@alumnos.uaslp.mx')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
                             }
                         }
                     }

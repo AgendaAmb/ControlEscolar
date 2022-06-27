@@ -351,6 +351,10 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     announcements: {
       type: Array,
       "default": []
+    },
+    user_rol: {
+      type: String,
+      "default": null
     }
   },
   // Propiedades reactivas.
@@ -411,6 +415,15 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
           icon: "error"
         });
       });
+    },
+    puedeEnviarCorreos: function puedeEnviarCorreos() {
+      var res = false;
+
+      if (this.user_rol === 'Administrador') {
+        res = true;
+      }
+
+      return res;
     },
     buscaExpedientes: function buscaExpedientes() {
       var _this2 = this;
@@ -26000,26 +26013,28 @@ var render = function () {
           : _vm._e(),
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "row mx-1 my-1 justify-content-center align-items-center",
-        },
-        [
-          _c("div", { staticClass: "col-6" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary my-3",
-                staticStyle: { width: "100%" },
-                on: { click: _vm.mandarCorreos },
-              },
-              [_vm._v("\n        Mandar correos\n      ")]
-            ),
-          ]),
-        ]
-      ),
+      _vm.puedeEnviarCorreos() === true
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "row mx-1 my-1 justify-content-center align-items-center",
+            },
+            [
+              _c("div", { staticClass: "col-6" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary my-3",
+                    staticStyle: { width: "100%" },
+                    on: { click: _vm.mandarCorreos },
+                  },
+                  [_vm._v("\n        Mandar correos\n      ")]
+                ),
+              ]),
+            ]
+          )
+        : _vm._e(),
     ]
   )
 }

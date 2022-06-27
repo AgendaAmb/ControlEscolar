@@ -31,7 +31,7 @@ export default {
 
     props:{
       user: {
-        type: Array,
+        type: Object,
         default: null,
       }
     },
