@@ -333,6 +333,9 @@ class CalendarResource extends JsonResource
         # Toma a los postulantes y filtra los datos del sistema central.
         $archives = $this->period['announcement']->archives;
 
+        // ! TESTING prueba de datos solo 10 para producción
+        $archives = $archives->slice(15);
+
         // Verificamos que existan datos del postulante y datos del profesor que otorgo la carta de intención
         $this->appliants = $archives->filter(function($archive){
             $archive = $archive->toArray();
