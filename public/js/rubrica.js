@@ -103422,7 +103422,8 @@ var app = new Vue({
     dataModal: "",
     visbleSave: false,
     visbleSend: false,
-    isComplete: rubric.isComplete
+    isComplete: rubric.isComplete,
+    rubric_user_id: rubric.rubric_user_id
   },
   mounted: function mounted() {
     var _this = this;
@@ -103493,9 +103494,17 @@ var app = new Vue({
       });
       var roles2 = this.loggedUser.roles.filter(function (role) {
         return role.name === 'admin';
-      });
-      var flag = roles1.length + roles2.length < 1 || this.isComplete ? true : false;
-      return flag;
+      }); // Si es administrador nunca
+
+      if (roles2.length > 0) return false;
+      console.log(this.isComplete ? true : false); // Si ya esta completada obvio que si bby
+
+      if (this.isComplete ? true : false) return true;
+      console.log(this.loggedUser.id + " - " + this.rubric_user_id); // Si no es el dueño obvio que si bby
+
+      if (this.loggedUser.id != this.rubric_user_id) return true; // Default yes
+
+      return false;
     },
 
     /**
@@ -103541,7 +103550,7 @@ var app = new Vue({
         additional_information: this.additional_information,
         dictamen_ce: this.dictamen_ce
       }).then(function (response) {
-        _this2.visbleSave = false, _this2.visbleSend = false, alert('Tu información se ha guardado con exito.');
+        _this2.visbleSave = false, _this2.visbleSend = false, state == "send" ? alert('Tu información se ha enviado correctamente') : alert('Tu información se ha guardado con exito.'), window.location.reload();
       })["catch"](function (error) {
         _this2.visbleSave = false, _this2.visbleSend = false, alert('Lo sentimos tu información no se ha guardado con exito. Recuerda llenar todos los campos necesarios');
       });

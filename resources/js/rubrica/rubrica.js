@@ -45,7 +45,8 @@ const app = new Vue({
         dataModal: "",
         visbleSave:false,
         visbleSend:false,
-        isComplete:rubric.isComplete
+        isComplete:rubric.isComplete,
+        rubric_user_id: rubric.rubric_user_id
     },
 
     mounted() {
@@ -121,9 +122,18 @@ const app = new Vue({
                 return role.name === 'admin';
             });
             
-            let flag = (roles1.length + roles2.length < 1) || this.isComplete?true:false;
+            // Si es administrador nunca
+            if(roles2.length > 0)return false;
+            console.log(this.isComplete?true:false);
+            // Si ya esta completada obvio que si bby
+            if(this.isComplete?true:false)return true;
+            console.log(this.loggedUser.id + " - " + this.rubric_user_id);
+            // Si no es el dueño obvio que si bby
+            if(this.loggedUser.id != this.rubric_user_id)return true;
 
-            return flag;
+            // Default yes
+            return false;
+            
         },
 
         /**
@@ -178,8 +188,8 @@ const app = new Vue({
             }).then(response => {
                 this.visbleSave=false,
                 this.visbleSend=false,
-                alert('Tu información se ha guardado con exito.')
-                
+                state=="send"?alert('Tu información se ha enviado correctamente'):alert('Tu información se ha guardado con exito.'),
+                window.location.reload()
             }).catch(error => {
                 this.visbleSave=false,
                 this.visbleSend=false,

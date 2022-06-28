@@ -143,7 +143,7 @@ class EvaluationRubricController extends Controller
 
         
         $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce'));
-        $request->state=="send"?$evaluationRubric->isComplete=true:$evaluationRubric->isComplete=false;
+        if($request->state=="send")$evaluationRubric->isComplete=true;
         $evaluationRubric->save();
         $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){
             return $concept['evaluation_concept_details'];

@@ -80,6 +80,7 @@ class RubricResource extends JsonResource
         $this->rubric = [
             'id' => $rubric->id,
             'interview_id' => $rubric->interview_id,
+            'rubric_user_id' => $rubric->user_id,
             'considerations' => $rubric->considerations,
             'additional_information' => $rubric->additional_information,
             'dictamen_ce' => $rubric->dictamen_ce,
