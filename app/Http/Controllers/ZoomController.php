@@ -93,7 +93,7 @@ class ZoomController extends Controller
         $data['timezone'] = "America/Mexico_City";
         $data['start_time'] = $FechaStar->format('Y-m-d\TH:i:s.u');
         $data['duration'] = $duration;
-        $data['topic'] = "Reunion doctorado";
+        $data['topic'] = "Entrevista";
        
         $response =$this->zoomService->zoomPost(self::USER_MEETINGS_URL, $data);
     
