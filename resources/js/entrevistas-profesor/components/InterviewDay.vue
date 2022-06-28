@@ -39,7 +39,7 @@
                                     <td v-if="$root.loggedUserIsCoordinador() || $root.loggedUserIsAdmin()">
                                         <a class="d-block text-capitalize text-decoration-none"
                                             v-for="rubric in interview.rubrics" :key="rubric.location"
-                                            :href="rubric.location">
+                                            :href="rubric.location" target="_blank">
                                             {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
                                             }}
                                         </a>
@@ -51,9 +51,9 @@
                                     <!-- Profesores -->
                                     <td v-else-if="$root.loggedUserIsPNB()">
                                         <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location"
-                                            :href="rubric.location"> Formato de evaluación</a>
+                                            :href="rubric.location" target="_blank"> Formato de evaluación</a>
                                     </td>
-                                    
+
                                     <!-- Control escolar -->
                                     <td v-else-if="$root.loggedUserIsSchoolControl()">
                                         <a class="d-block text-capitalize text-decoration-none"
