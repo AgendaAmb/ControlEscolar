@@ -17,12 +17,13 @@ class SendZoomMeeatingInformation extends Mailable
     public $Room;
     public $academic_program;
     public $archive_id;
+    public $url_ContactoAA;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Meeating,$Student,$academic_program,$Room,$archive_id)
+    public function __construct($Meeating,$Student,$academic_program,$Room,$archive_id,$url_ContactoAA)
     {
      
         $this->Meeating=$Meeating;
@@ -30,6 +31,7 @@ class SendZoomMeeatingInformation extends Mailable
         $this->Room=$Room;
         $this->academic_program=$academic_program;
         $this->archive_id= $archive_id;
+        $this->url_ContactoAA=$url_ContactoAA;
     }
 
     /**

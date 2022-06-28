@@ -42,9 +42,9 @@
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista">
         Nueva Entrevista
       </button>
-      <button class="v-cal-button my-3" @click="mandarCorreos">
+      <!-- <button class="v-cal-button my-3" @click="mandarCorreos">
         Mandar correos
-      </button>
+      </button> -->
     </div>
 
     <div v-if="IsActive" class="calendar-body">

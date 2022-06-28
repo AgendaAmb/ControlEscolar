@@ -341,6 +341,7 @@ class InterviewController extends Controller
                 // $service = new MiPortalService;
                 $archive = null;
                 $postulante_data = null;
+                $url_ContactoAA = asset('/storage/logos/rtic.png');
 
                 foreach ($interview2->users as $key => $User) {
                     if ($User->user_type == "externs" || $User->user_type == "students" || $User->user_type == "Comunidad AA") {
@@ -370,9 +371,11 @@ class InterviewController extends Controller
                         $servicio_correo = 'smtp';
                         // IMAREC
                         if (strcmp($academic_program['alias'], 'imarec') === 0) {
+                            $url_LogoAA = asset('/storage/logos/IMAREC.png');
                             $servicio_correo = 'smtp_imarec';
                         } else {
                             // MCA, MCA doble titulacion, Doctorado
+                            $url_LogoAA = asset('/storage/logos/PMPCA.png');
                             $servicio_correo = 'smtp_pmpca';
                         }
 
@@ -406,13 +409,13 @@ class InterviewController extends Controller
                             // if (str_contains($int_room->site, 'Zoom') ? true : false) {
                                 // Mail::mailer($servicio_correo)->to($user_mail)
                                 // ->cc($mail_academic_program)  
-                                // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                            //     Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
+                            //     Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id,$url_LogoAA));
                             // } else {
                                 // Mail::mailer($servicio_correo)  
                                 // ->cc($mail_academic_program)
-                                // ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
-                                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id));
+                                // ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id,$url_LogoAA));
+                                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id,$url_LogoAA));
                             // }
                             // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
                             try {
@@ -431,11 +434,11 @@ class InterviewController extends Controller
                             /**Obtener al trabajador inscrito en la entrevista */
                             // Envio de correo dependidiendo modalidad de la entrevista
                             // if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
+                                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
                             // } else {
-                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
-                            //     Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data));
+                                // Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
+                            //     Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
                             // }
                         }
                     }
@@ -480,15 +483,20 @@ class InterviewController extends Controller
 
                     $academic_program =  $archive->announcement->academicProgram;
                     $User = $archive->appliant;
+                    $url_LogoAA = asset('/storage/logos/rtic.png');
+
 
                     if ($academic_program != null) {
                         $servicio_correo = 'smtp';
                         // IMAREC
                         if (strcmp($academic_program['alias'], 'imarec') === 0) {
                             $servicio_correo = 'smtp_imarec';
+                            $url_LogoAA = asset('/storage/logos/IMAREC.png');
+
                         } else {
                             // MCA, MCA doble titulacion, Doctorado
                             $servicio_correo = 'smtp_pmpca';
+                            $url_LogoAA = asset('/storage/logos/PMPCA.png');
                         }
 
                         try {
@@ -518,7 +526,7 @@ class InterviewController extends Controller
                         try {
                             if ($user_data != null) {
                                 // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new UpdateDocumentsInterview($user_data, $academic_program, $archive->id));
-                                Mail::mailer($servicio_correo)->to($user_data['email'])->send(new UpdateDocumentsInterview($user_data, $academic_program, $archive->id));
+                                Mail::mailer($servicio_correo)->to($user_data['email'])->send(new UpdateDocumentsInterview($user_data, $academic_program, $archive->id,$url_LogoAA ));
                             }
                         } catch (\Exception $e) {
                             return new JsonResponse(['message' => 'No se pudieron crear las relaciones a los archivos', 'errors' => $e->getMessage()], JsonResponse::HTTP_BAD_GATEWAY); //Ver info archivos en consola

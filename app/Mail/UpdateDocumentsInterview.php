@@ -16,16 +16,19 @@ class UpdateDocumentsInterview extends Mailable
     public $academic_program;
     public $archive_id;
     public $mail_academic_program;
+    public $url_ContactoAA;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Student,$academic_program,$archive_id)
+    public function __construct($Student,$academic_program,$archive_id,$url_ContactoAA)
     {
         $this->Student=$Student;
         $this->academic_program=$academic_program;
         $this->archive_id= $archive_id;
+        $this->url_ContactoAA=$url_ContactoAA;
     }
 
     /**

@@ -66,34 +66,38 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>
 
-                <p><strong>Indicaciones:</strong></p>
+                <div class="row mt-2">
+                    <p><strong>Indicaciones:</strong></p>
 
-                <ul>
-                    <li> Acceder a <a href="https://ambiental.uaslp.mx/Bienvenida" target="_blank"
-                            rel="noopener noreferrer">https://ambiental.uaslp.mx/Bienvenida</a></li>
-                    <li> En el menú superior <strong>Entrevista</strong> , submenú <strong>Programa de
-                            entrevista</strong> podrá visualizar el expediente del candidato, ensayo así como la rúbrica
-                    </li>
-
-                </ul>
-
-                <p>Saludos cordiales, <br>
-                    M.I Maricela Rdz. Díaz de León <br>
-                    Coordinación Educativa <br>
-                    Agenda Ambiental de la Universidad Autónoma de San Luis Potosí <br>
-                    Ave. Manuel Nava 201, 2do piso <br>
-                    Zona Universitaria (Entre Facultad de Estomatología y Oficina de Finanzas)78210 San Luis Potosí,
-                    México. <br>
-                    Tels: (444) 8262439 y 2435
-                </p>
-
-
-
-
-                </p>
+                    <ul>
+                        <li> Acceder a <a href="https://ambiental.uaslp.mx/Bienvenida" target="_blank"
+                                rel="noopener noreferrer">https://ambiental.uaslp.mx/Bienvenida</a></li>
+                        <li> En el menú superior <strong>Entrevista</strong> , submenú <strong>Programa de
+                                entrevista</strong> podrá visualizar el expediente del candidato, ensayo así como la rúbrica
+                        </li>
+    
+                    </ul>
+    
+                    <p>Saludos cordiales, <br>
+                        M.I Maricela Rdz. Díaz de León <br>
+                        Coordinación Educativa <br>
+                        Agenda Ambiental de la Universidad Autónoma de San Luis Potosí <br>
+                        Ave. Manuel Nava 201, 2do piso <br>
+                        Zona Universitaria (Entre Facultad de Estomatología y Oficina de Finanzas)78210 San Luis Potosí,
+                        México. <br>
+                        Tels: (444) 8262439 y 2435
+                    </p>
+                </div>
             </div>
         </div>
     </main>
+
+    <footer class="container-fluid p-2">
+        <div class="row">
+            <div class="col-12">
+                <img src="{{ $url_ContactoAA }}" alt="Contacto Agenda Ambiental" style="width: 100;">
+            </div>
+        </div>
+    </footer>
 </body>

@@ -46,7 +46,7 @@
             
             <div class="container">
                 @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' ||  $academic_program['alias'] == 'enrem')
-                    <div class="row mt-2">
+                    <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
                         sea ingresado en la plataforma a más tardar 25 junio a las 11:59 p.m.
@@ -63,7 +63,7 @@
 
                     </div>
                 @elseif ($academic_program['alias'] === 'doctorado')
-                    <div class="row mt-2">
+                    <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 25 junio a las 11:59 p.m.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
@@ -79,40 +79,16 @@
 
                     </div>
                 @endif
-
-                <p>
-
-                <p><strong>Indicaciones:</strong></p>
-                <p>Los aspectos a tomar en cuenta para el desarrollo de la entrevista son los siguientes:</p>
-                <ul>
-                    <li> Conocer la información disponible en el sitio web de los PMPCA <a
-                            href="https://pmpca.uaslp.mx"></a></li>
-                    <li> Demostrar que conoce al menos, el número de áreas que constituyen el posgrado</li>
-                    <li>Estructura y funcionamiento de los seminarios que integran el currículo del mismo. </li>
-                    <li> Conocer alguna tesis desarrollada dentro de cada una de las áreas que solicita ingreso. Las
-                        tesis se consultan en la sección de “Biblioteca” del sitio web.</li>
-                    <li>Presentar la propuesta de proyecto en PPT ante los profesores del Comité de Evaluación. El
-                        tiempo límite para la presentación es de 20 minutos.</li>
-                    <li>Demostrar que conoce las líneas de investigación de profesores del núcleo básico del posgrado,
-                        que podrían ser su director de tesis o bien que pueden formar parte de su comité tutelar.</li>
-                    <li> Además, debe conocer los objetivos del programa de manera explícita. </li>
-                </ul>
-                <p>Favor de confirmar asistencia a la entrevista, al correo pmpca@uaslp.mx</p>
-                <p>Saludos cordiales, <br>
-                    M.I Maricela Rdz. Díaz de León <br>
-                    Coordinación Educativa <br>
-                    Agenda Ambiental de la Universidad Autónoma de San Luis Potosí <br>
-                    Ave. Manuel Nava 201, 2do piso <br>
-                    Zona Universitaria (Entre Facultad de Estomatología y Oficina de Finanzas)78210 San Luis Potosí,
-                    México. <br>
-                    Tels: (444) 8262439 y 2435
-                </p>
-
-
-
-
-                </p>
+                
             </div>
         </div>
     </main>
+
+    <footer class="container-fluid p-2">
+        <div class="row">
+            <div class="col-12">
+                <img src="{{ $url_ContactoAA }}" alt="Contacto Agenda Ambiental" style="width: 100;">
+            </div>
+        </div>
+    </footer>
 </body>

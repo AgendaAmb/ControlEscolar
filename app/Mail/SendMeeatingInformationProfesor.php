@@ -17,12 +17,13 @@ class SendMeeatingInformationProfesor extends Mailable
     public $Profesor;
     public $Room;
     public $academic_program;
+    public $url_ContactoAA;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($Interview,$Profesor, $academic_program, $Room,$Student)
+    public function __construct($Interview,$Profesor, $academic_program, $Room,$Student,$url_ContactoAA)
     {
      
         $this->Interview= $Interview;
@@ -30,6 +31,7 @@ class SendMeeatingInformationProfesor extends Mailable
         $this->Room=$Room;
         $this->Student=$Student;
         $this->academic_program=$academic_program;
+        $this->url_ContactoAA=$url_ContactoAA;
     }
 
 

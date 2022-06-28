@@ -393,9 +393,13 @@ class ArchiveController extends Controller
                 // IMAREC
                 if (strcmp($request->academic_program['alias'], 'imarec') === 0) {
                     $servicio_correo = 'smtp_imarec';
+                    $url_ContactoAA = asset('/storage/logos/IMAREC.png');
+
                 } else {
                     // MCA, MCA doble titulacion, Doctorado
                     $servicio_correo = 'smtp_pmpca';
+                    $url_ContactoAA = asset('/storage/logos/PMPCA.png');
+
                 }
                 // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
 

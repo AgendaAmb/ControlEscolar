@@ -31586,15 +31586,6 @@ var render = function () {
             },
             [_vm._v("\n      Nueva Entrevista\n    ")]
           ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "v-cal-button my-3",
-              on: { click: _vm.mandarCorreos },
-            },
-            [_vm._v("\n      Mandar correos\n    ")]
-          ),
         ])
       : _vm._e(),
     _vm._v(" "),
