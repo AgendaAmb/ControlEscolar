@@ -1094,6 +1094,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -1147,8 +1168,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: '',
-      academiLetterCommitment: ''
+      textStateUpload: "",
+      academiLetterCommitment: ""
     };
   },
   computed: {
@@ -1157,7 +1178,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.archivo;
       },
       set: function set(newValue) {
-        this.$emit('update:archivo', newValue);
+        this.$emit("update:archivo", newValue);
       }
     },
     Location: {
@@ -1165,7 +1186,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.location;
       },
       set: function set(newValue) {
-        this.$emit('update:location', newValue);
+        this.$emit("update:location", newValue);
       }
     },
     Errores: {
@@ -1174,7 +1195,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(newValue) {
         this.errores = newValue;
-        this.$emit('update:errores', newValue);
+        this.$emit("update:errores", newValue);
       }
     },
     ExanniScore: {
@@ -1182,11 +1203,25 @@ __webpack_require__.r(__webpack_exports__);
         return this.exanni_score;
       },
       set: function set(newValue) {
-        this.$emit('update:exanni_score', newValue);
+        this.$emit("update:exanni_score", newValue);
       }
     }
   },
   methods: {
+    bkgCargarArchivo: function bkgCargarArchivo(type) {
+      // console.log(this.language);
+      axios.get("/controlescolar/solicitud/getButtonImage", {
+        params: {
+          type: type
+        }
+      }).then(function (response) {
+        console.log(response.data);
+        return "background-image:url(" + response.data + ");";
+      })["catch"](function (error) {
+        console.log(error);
+        return null;
+      });
+    },
     isEXANNI: function isEXANNI() {
       if (this.name === "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)") {
         return true;
@@ -1345,7 +1380,7 @@ __webpack_require__.r(__webpack_exports__);
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
-        console.log(this.name);
+        // console.log(this.name);
         return true;
       }
 
@@ -1359,8 +1394,7 @@ __webpack_require__.r(__webpack_exports__);
         roles = response.data.roles;
       })["catch"](function (error) {
         roles = error.data.roles;
-      });
-      console.log("roles" + roles);
+      }); // console.log("roles" + roles);
 
       if (roles.length > 0) {
         roles.forEach(function (rol) {
@@ -2614,7 +2648,8 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
       formData.append("index", this.index);
-      formData.append("file", file);
+      formData.append("file", file); // console.log(formData);
+
       axios({
         method: "post",
         url: "/controlescolar/solicitud/updateAcademicDegreeRequiredDocument",
@@ -3032,27 +3067,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3103,6 +3117,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      flag_image: null,
       errores: {},
       mensajesExito: {},
       idiomas: ["Español", "Inglés", "Francés", "Alemán", "Otro"],
@@ -3290,6 +3305,23 @@ __webpack_require__.r(__webpack_exports__);
         height: "1px"
       };
     },
+    getImage: function getImage() {
+      var _this = this;
+
+      // console.log(this.language);
+      axios.get("/controlescolar/solicitud/getFlagImage", {
+        params: {
+          language: this.language
+        }
+      }).then(function (response) {
+        // console.log("aaaaaaaaa" + response.data);
+        _this.flag_image = response.data;
+        console.log(_this.flag_image);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      return true;
+    },
     chooseExam: function chooseExam(evento) {
       var examSelected = this.examNames[evento.target.selectedIndex - 1];
 
@@ -3336,7 +3368,7 @@ __webpack_require__.r(__webpack_exports__);
       this.enviaLenguaExtranjera(evento, "Completo");
     },
     enviaLenguaExtranjera: function enviaLenguaExtranjera(evento, estado) {
-      var _this = this;
+      var _this2 = this;
 
       this.errores = {};
       console.log(this.kind_of_exam);
@@ -3361,7 +3393,7 @@ __webpack_require__.r(__webpack_exports__);
         Object.keys(response.data).forEach(function (dataKey) {
           var event = "update:" + dataKey;
 
-          _this.$emit(event, response.data[dataKey]);
+          _this2.$emit(event, response.data[dataKey]);
         });
         Swal.fire({
           title: "Los datos se han actualizado correctamente",
@@ -3382,14 +3414,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     eliminaIdioma: function eliminaIdioma() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post("/controlescolar/solicitud/deleteAppliantLanguage", {
         id: this.id,
         archive_id: this.archive_id
       }).then(function (response) {
         //Llama al padre para que elimine el item de la lista de experiencia laboral
-        _this2.$emit("delete-item", _this2.index - 1);
+        _this3.$emit("delete-item", _this3.index - 1);
 
         Swal.fire({
           title: "Éxito al eliminar registro",
@@ -5496,7 +5528,7 @@ __webpack_require__.r(__webpack_exports__);
         state: "Incompleto"
       }).then(function (response) {
         Swal.fire({
-          title: "Éxito al agregar nuevo Grado Academico!",
+          title: "¡Éxito al agregar nuevo Grado Académico!",
           text: response.data.message,
           // Imprime el mensaje del controlador
           icon: "success",
@@ -5509,7 +5541,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error.data.message);
         Swal.fire({
-          title: ":( Error al agregar nuevo Grado Academico",
+          title: ":( Error al agregar nuevo Grado Académico",
+          text: response.data.message,
+          // Imprime el mensaje del controlador
           showCancelButton: false,
           icon: "error"
         });
@@ -6528,7 +6562,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\n.cargarArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 100px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 100px;\r\n  height: 40px;\n}\n.verArchivo[data-v-714f2fc7] {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 100px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 100px;\r\n  height: 40px;\n}\r\n\r\n/* .cargarArchivo {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\r\n}\r\n.verArchivo {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\r\n} */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13368,34 +13402,58 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "verArchivo d-block my-2 ml-auto",
-                    attrs: {
-                      href: "expediente/" + _vm.location,
-                      target: "_blank",
-                    },
-                  },
-                  [_vm._v("\n        Ver Archivo")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "cargarArchivo d-block ml-auto my-auto" },
-              [
-                _vm._v(" \n          Subir Documento\n        "),
-                _c("input", {
-                  staticClass: "form-control d-none",
-                  attrs: { type: "file" },
-                  on: { change: _vm.cargaDocumento },
-                }),
-              ]
-            ),
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group col-3 justify-content-center" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "d-flex justify-content-center mt-5",
+                  staticStyle: { height: "50px", width: "100%" },
+                },
+                [
+                  _vm.checkUpload() === true
+                    ? _c("a", {
+                        staticClass: "verArchivo",
+                        staticStyle: { height: "100%" },
+                        attrs: {
+                          href: "expediente/" + _vm.location,
+                          target: "_blank",
+                        },
+                      })
+                    : _vm._e(),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "d-flex justify-content-center",
+                  staticStyle: { height: "50px", width: "100%" },
+                },
+                [
+                  _vm.isIntentionLetter() === false
+                    ? _c(
+                        "label",
+                        {
+                          staticClass: "cargarArchivo",
+                          staticStyle: { height: "100%" },
+                        },
+                        [
+                          _c("input", {
+                            staticClass: "form-control d-none",
+                            staticStyle: { height: "100%" },
+                            attrs: { type: "file" },
+                            on: { change: _vm.cargaDocumento },
+                          }),
+                        ]
+                      )
+                    : _vm._e(),
+                ]
+              ),
+            ]
+          ),
         ]),
         _vm._v(" "),
         _vm.isEXANNI() === true
@@ -13409,11 +13467,11 @@ var render = function () {
               [
                 _c(
                   "div",
-                  { staticClass: "col-2 ", staticStyle: { height: "100%" } },
+                  { staticClass: "col-2", staticStyle: { height: "100%" } },
                   [
                     _vm._m(0),
                     _vm._v(" "),
-                    _c("div", { staticClass: " d-flex align-items-end" }, [
+                    _c("div", { staticClass: "d-flex align-items-end" }, [
                       _c("input", {
                         directives: [
                           {
@@ -13453,11 +13511,11 @@ var render = function () {
                     _c(
                       "button",
                       {
-                        staticClass: "btn btn-primary ",
+                        staticClass: "btn btn-primary",
                         staticStyle: { width: "100%" },
                         on: { click: _vm.actualizaPuntajeExanni },
                       },
-                      [_vm._v(" Guarda puntaje ")]
+                      [_vm._v("\n        Guarda puntaje\n      ")]
                     ),
                   ]
                 ),
@@ -15129,7 +15187,7 @@ var staticRenderFns = [
         _c("label", [
           _c("strong", [_vm._v("Nota: ")]),
           _vm._v(
-            "\n          Para poder registrar los cambios en los campos anteriores del\n          historial académico es necesario seleccionar el siguiente botón, de\n          esta forma podremos guardar la información que acabas de compartir\n        "
+            "\n          Para poder registrar los cambios en los campos anteriores del\n          historial académico es necesario seleccionar el siguiente botón, de\n          esta forma podrás guardar la información que acabas de compartir\n        "
           ),
         ]),
       ]),
@@ -15292,34 +15350,16 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row my-2" },
+      { staticClass: "row my-4 justify-content-center" },
       [
-        _c("div", { staticClass: "form-group col-4 my-auto" }, [
-          _vm.Language === "Alemán"
-            ? _c("img", {
-                staticClass: "d-block mx-auto",
-                attrs: { width: "120px", src: "/storage/emojis/alemania.png" },
-              })
-            : _vm.Language === "Español"
-            ? _c("img", {
-                staticClass: "d-block mx-auto",
-                attrs: { width: "120px", src: "/storage/emojis/mexico.png" },
-              })
-            : _vm.Language === "Inglés"
-            ? _c("img", {
-                staticClass: "d-block mx-auto",
-                attrs: {
-                  width: "120px",
-                  src: "/storage/emojis/inglaterra.png",
-                },
-              })
-            : _vm.Language === "Francés"
-            ? _c("img", {
-                staticClass: "d-block mx-auto",
-                attrs: { width: "120px", src: "/storage/emojis/francia.png" },
-              })
-            : _vm._e(),
-        ]),
+        _vm.getImage() === true
+          ? _c("div", { staticClass: "form-group col-4 my-auto " }, [
+              _c("img", {
+                staticStyle: { width: "80%", height: "80% !important" },
+                attrs: { src: _vm.flag_image },
+              }),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-8" }, [
           _c("div", { staticClass: "row justify-content-end" }, [

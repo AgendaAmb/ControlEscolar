@@ -599,7 +599,7 @@ export default {
         })
         .then((response) => {
           Swal.fire({
-            title: "Éxito al agregar nuevo Grado Academico!",
+            title: "¡Éxito al agregar nuevo Grado Académico!",
             text: response.data.message, // Imprime el mensaje del controlador
             icon: "success",
             showCancelButton: false,
@@ -611,7 +611,8 @@ export default {
         .catch((error) => {
           console.log(error.data.message);
           Swal.fire({
-            title: ":( Error al agregar nuevo Grado Academico",
+            title: ":( Error al agregar nuevo Grado Académico",
+            text: response.data.message, // Imprime el mensaje del controlador
             showCancelButton: false,
             icon: "error",
           });
@@ -698,8 +699,6 @@ export default {
       } else if (status === "Condicionado") {
         id_status = 7;
       }
-
-        
 
       axios
         .post("/controlescolar/solicitud/whoModifyArchive", {

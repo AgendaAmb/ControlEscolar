@@ -301,7 +301,7 @@
             <strong>Nota: </strong>
             Para poder registrar los cambios en los campos anteriores del
             historial académico es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
+            esta forma podrás guardar la información que acabas de compartir
           </label>
         </div>
       </div>
@@ -755,6 +755,8 @@ export default {
       formData.append("requiredDocumentId", requiredDocument.id);
        formData.append("index", this.index);
       formData.append("file", file);
+
+      // console.log(formData);
 
       axios({
         method: "post",

@@ -125,12 +125,12 @@ class ArchiveController extends Controller
 
         $announcements = Announcement::idDescending()->get();
 
-        foreach($announcements as $announcement){
+        foreach ($announcements as $announcement) {
             $academic_program = AcademicProgram::where('id', $announcement->academic_program_id)->first();
             $announcement->setAttribute('name', $academic_program->name);
         }
 
-        
+
         return view('postulacion.index')
             ->with('user', $request->user())
             ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get())
@@ -178,7 +178,6 @@ class ArchiveController extends Controller
                 if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
                     unset($archives[$k]);
                 }
-                
             }
         }
 
@@ -201,14 +200,14 @@ class ArchiveController extends Controller
         // ]);
 
         // return new JsonResponse(['message' => $request], 502);
-         // $archives = QueryBuilder::for(Archive::class)
-            //     ->with('appliant')
-            //     ->allowedIncludes(['announcement'])
-            //     ->allowedFilters([
-            //         AllowedFilter::exact('announcement.id'),
-            //     ])
-            //     ->whereBetween('created_at', [$startDate, $endDate])
-            //     ->get();
+        // $archives = QueryBuilder::for(Archive::class)
+        //     ->with('appliant')
+        //     ->allowedIncludes(['announcement'])
+        //     ->allowedFilters([
+        //         AllowedFilter::exact('announcement.id'),
+        //     ])
+        //     ->whereBetween('created_at', [$startDate, $endDate])
+        //     ->get();
 
         try {
             $archives =  Archive::with('appliant')->where('announcement_id', $request->announcement_id)->get();
@@ -223,33 +222,33 @@ class ArchiveController extends Controller
             //El postulante no tiene toda la información
             // if (!$archive->appliant->name) {
 
-                try {
-                    $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
-                } catch (\Exception $e) {
-                    return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
-                }
+            try {
+                $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
+            } catch (\Exception $e) {
+                return new JsonResponse($e->getMessage(), 200); //Ver info archivos en consola
+            }
 
-                if (sizeof($user_data_collect) > 0) {
+            if (sizeof($user_data_collect) > 0) {
 
-                    //ArchiveResource create $user_data_collect[0];
-                    $user_data = $user_data_collect[0];
-                    //Se guarda el nombre del usuario en el modelo
-                    $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                //ArchiveResource create $user_data_collect[0];
+                $user_data = $user_data_collect[0];
+                //Se guarda el nombre del usuario en el modelo
+                $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
 
-                    //Eliminar mi archivo para produccion
-                    //Descomentar en local
-                    //Quitas a Ulises y a Rodrigo
-                    // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
-                    //     unset($archives[$k]);
-                    // }
-                } else {
-                    //No existe aplicante por lo que no se podra ver expediente
-                    $archive->appliant->setAttribute('name', 'Usuario invalido');
-                    $archive->id = -1;
+                //Eliminar mi archivo para produccion
+                //Descomentar en local
+                //Quitas a Ulises y a Rodrigo
+                // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
+                //     unset($archives[$k]);
+                // }
+            } else {
+                //No existe aplicante por lo que no se podra ver expediente
+                $archive->appliant->setAttribute('name', 'Usuario invalido');
+                $archive->id = -1;
 
-                    //Elimina al usuario invalido de la lista
-                    unset($archives[$k]);
-                }
+                //Elimina al usuario invalido de la lista
+                unset($archives[$k]);
+            }
             // }
         }
         // return new JsonResponse($archives, 200); //Ver info archivos en consola
@@ -263,12 +262,11 @@ class ArchiveController extends Controller
             $request->validate([
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
             ]);
-
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al extraer y modificar el estado del expediente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        try{        
+        try {
             $update = Archive::where('id', $request->archive_id)->update(['who_check' => $request->session()->get('user_data')['id']]);
 
             if ($update <= 0) {
@@ -394,12 +392,10 @@ class ArchiveController extends Controller
                 if (strcmp($request->academic_program['alias'], 'imarec') === 0) {
                     $servicio_correo = 'smtp_imarec';
                     $url_ContactoAA = asset('/storage/logos/IMAREC.png');
-
                 } else {
                     // MCA, MCA doble titulacion, Doctorado
                     $servicio_correo = 'smtp_pmpca';
                     $url_ContactoAA = asset('/storage/logos/PMPCA.png');
-
                 }
                 // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
 
@@ -524,12 +520,10 @@ class ArchiveController extends Controller
                 if (strcmp($request->academic_program['alias'], 'imarec') === 0) {
                     $servicio_correo = 'smtp_imarec';
                     $url_LogoAA = asset('/storage/headers/IMAREC.png');
-
                 } else {
                     // MCA, MCA doble titulacion, Doctorado
                     $servicio_correo = 'smtp_pmpca';
                     $url_LogoAA = asset('/storage/headers/PMPCA.png');
-
                 }
 
                 // CC Mail
@@ -550,22 +544,21 @@ class ArchiveController extends Controller
                 // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendRejectPostulation(
 
                 Mail::mailer($servicio_correo)->to($appliant['email'])
-                ->cc($mail_academic_program)
-                ->send(new SendRejectPostulation(
-                    $request->selected_personalDocuments,
-                    $request->selected_entranceDocuments,
-                    $request->selected_academicDocuments,
-                    $request->selected_languageDocuments,
-                    $request->selected_workingDocuments,
-                    $name_documents,
-                    $request->instructions,
-                    $appliant,
-                    $request->academic_program,
-                    $request->archive_id,
-                    $url_LogoAA,
-                    $url_ContactoAA
-                ));
-
+                    ->cc($mail_academic_program)
+                    ->send(new SendRejectPostulation(
+                        $request->selected_personalDocuments,
+                        $request->selected_entranceDocuments,
+                        $request->selected_academicDocuments,
+                        $request->selected_languageDocuments,
+                        $request->selected_workingDocuments,
+                        $name_documents,
+                        $request->instructions,
+                        $appliant,
+                        $request->academic_program,
+                        $request->archive_id,
+                        $url_LogoAA,
+                        $url_ContactoAA
+                    ));
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo enviar el correo', 'error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -772,24 +765,24 @@ class ArchiveController extends Controller
     public function showRegisterArchives(Request $request)
     {
         //Obtiene los archivos para el programa academico a registrarse
-        
-        $archives = Archive::where('user_id',$request->session()->get('user_data')['id'])->get();
-        
-        // El usuario tiene mas de un expediente
-        if(count($archives) > 1){
 
-            foreach($archives as $archive){
+        $archives = Archive::where('user_id', $request->session()->get('user_data')['id'])->get();
+
+        // El usuario tiene mas de un expediente
+        if (count($archives) > 1) {
+
+            foreach ($archives as $archive) {
                 $archive->loadMissing([
                     'appliant',
                     'announcement.academicProgram',
                 ]);
 
                 $academic_program = $archive->announcement->academicProgram;
-    
+
                 #Set the image according to academic program
                 //Doctorado en ciencias ambientales
                 $img = 'doctorado-01.png';
-    
+
                 if ($academic_program->name == 'Maestría en ciencias ambientales') {
                     $img = 'maestria-nacional-01.png';
                 } else if ($academic_program->name == 'Maestría en ciencias ambientales, doble titulación') {
@@ -797,30 +790,28 @@ class ArchiveController extends Controller
                 } else if ($academic_program->name == 'Maestría Interdisciplinaria en ciudades sostenibles') {
                     $img = 'imarec-01.png';
                 }
-    
+
                 $header_academic_program = asset('storage/academic-programs/' . $img);
 
                 $archive->setAttribute('header_academic_program', $header_academic_program);
-            
             }
             return view('postulacion.showRegisterArchives')
-            ->with('archives', $archives);
+                ->with('archives', $archives);
 
             // El estudiante solamente tiene un archivo
         }
 
         // dd($archives[0]->id);
-        
+
         return $this->appliantFile_AppliantView($request, $archives[0]->id);
         // No existe nada
         return back();
-
     }
 
     public function showCreateNewArchive(Request $request)
     {
         return view('postulacion.newArchive')
-        ->with('academic_programs',  AcademicProgram::all());
+            ->with('academic_programs',  AcademicProgram::all());
     }
 
 
@@ -900,7 +891,7 @@ class ArchiveController extends Controller
 
 
         // $location_letterCommitment = asset('storage/DocumentoExtra/Carta_postulación_NAMC_FINAL.pdf');
-        dd($archiveModel);
+        // dd($archiveModel);
         //Change for the view of appliant
         return view('postulacion.show')
             ->with('archive', $archiveModel)
@@ -1112,7 +1103,6 @@ class ArchiveController extends Controller
     public function updateAcademicDegree(UpdateAcademicDegreeRequest $request)
     {
 
-
         try {
             $academic_degree = AcademicDegree::find($request->id);
             $academic_degree->update($request->safe()->toArray());
@@ -1127,10 +1117,14 @@ class ArchiveController extends Controller
 
     public function addAcademicDegree(Request $request)
     {
-        $request->validate([
-            'archive_id' => ['required', 'numeric'],
-            'state' => ['required', 'string', 'max:255']
-        ]);
+        try {
+            $request->validate([
+                'archive_id' => ['required', 'numeric'],
+                'state' => ['required', 'string', 'max:255']
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Datos erroneos'], 502);
+        }
 
         try {
             $academic_degree = AcademicDegree::create([
@@ -1144,10 +1138,10 @@ class ArchiveController extends Controller
 
             $academic_degree->save();
         } catch (\Exception $e) {
-            return new JsonResponse('Error al crear registro academico para el usuario', 502);
+            return new JsonResponse(['message' => 'Error al crear registro academico para el usuario'], 502);
         }
         //Recibe la información 
-        return new JsonResponse(['message' => 'Programa academico agregado, inserta los datos necesarios para continuar con tu postulacion', 'model' => $academic_degree], 200);
+        return new JsonResponse(['message' => 'Programa académico agregado, inserta los datos necesarios para continuar con tu postulación', 'model' => $academic_degree], 200);
     }
 
     public function deleteAcademicDegree(Request $request)

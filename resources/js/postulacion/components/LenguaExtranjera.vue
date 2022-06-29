@@ -16,33 +16,12 @@
         </button>
       </div>
     </summary>
-    <div class="row my-2">
+    <div class="row my-4 justify-content-center">
       <!-- Datos principales -->
-      <div class="form-group col-4 my-auto">
+      <div v-if="getImage() === true" class="form-group col-4 my-auto ">
         <img
-          v-if="Language === 'Alemán'"
-          class="d-block mx-auto"
-          width="120px"
-          src="/storage/emojis/alemania.png"
-        />
-
-        <img
-          v-else-if="Language === 'Español'"
-          class="d-block mx-auto"
-          width="120px"
-          src="/storage/emojis/mexico.png"
-        />
-        <img
-          v-else-if="Language === 'Inglés'"
-          class="d-block mx-auto"
-          width="120px"
-          src="/storage/emojis/inglaterra.png"
-        />
-        <img
-          v-else-if="Language === 'Francés'"
-          class="d-block mx-auto"
-          width="120px"
-          src="/storage/emojis/francia.png"
+          style="width: 80%; height: 80% !important"
+          :src="flag_image"
         />
       </div>
 
@@ -412,6 +391,7 @@ export default {
 
   data() {
     return {
+      flag_image: null,
       errores: {},
       mensajesExito: {},
       idiomas: ["Español", "Inglés", "Francés", "Alemán", "Otro"],
@@ -601,6 +581,27 @@ export default {
       };
     },
 
+    getImage() {
+     
+      // console.log(this.language);
+      axios
+        .get("/controlescolar/solicitud/getFlagImage", {
+          params: {
+            language: this.language,
+          },
+        })
+        .then((response) => {
+          // console.log("aaaaaaaaa" + response.data);
+          this.flag_image = response.data;
+          console.log(this.flag_image);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      return true;
+    },
+
     chooseExam(evento) {
       let examSelected = this.examNames[evento.target.selectedIndex - 1];
       switch (examSelected) {
@@ -727,7 +728,7 @@ export default {
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
-       formData.append("index", this.index);
+      formData.append("index", this.index);
       formData.append("file", file);
 
       axios({

@@ -10,6 +10,7 @@ use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\ExternalRecommendationLetter;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -105,7 +106,10 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
-        Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');
+        Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');        
+        Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
+        Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
+
 
         #Admin
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');

@@ -2,7 +2,7 @@
   <div v-if="requiredForAcademicProgram()===true" class="col-12">
     <div class="row my-3">
       <!-- Nombre y notas -->
-      <div class="form-group col-9 my-auto">
+      <div class="form-group col-9 my-auto ">
         <h5 class="mt-4 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
@@ -51,25 +51,34 @@
         </p>
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
-      
 
-      <div class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="'solicitud/expediente/'+ location"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto">
-          Subir Documento
-          <input
-            type="file"
-            class="form-control d-none"
-            @change="cargaDocumento"
-          />
-        </label>
+      <!-- Buttons for actions to documents
+       * Upload 
+       * See
+       -->
+      <div class="form-group col-3 justify-content-center">
+        <div class="d-flex justify-content-center mt-5" style="height: 50px; width: 100%">
+          
+            <a
+              v-if="checkUpload() === true"
+              :href="'solicitud/expediente/'+ location"
+              class="verArchivo"
+              style=" height: 100%"
+              target="_blank"
+            ></a>
+          
+        </div>
+
+        <div class="d-flex justify-content-center" style="height: 50px; width: 100%">
+        <label v-if="isIntentionLetter() === false" class="cargarArchivo" style="height: 100%;">
+            <input
+              type="file"
+              class="form-control d-none"
+              style="height: 100%"
+              @change="cargaDocumento"
+            />
+          </label>
+        </div>
       </div>
     </div>
 
@@ -96,53 +105,22 @@
 </template>
 
 <style scoped>
-/* 
 
- <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
-        <label class="cargarArchivo d-block ml-auto my-auto">
-          <input type="file" class="form-control d-none" @change="cargaDocumento">
-        </label>
-        
-        */
-/* .cargarArchivo {
+.cargarArchivo {
   background: url(/storage/archive-buttons/seleccionar.png);
-  background-size: 90px 40px;
+  background-size: 100px 40px;
   background-repeat: no-repeat;
-  width: 90px;
+  width: 100px;
   height: 40px;
 }
 .verArchivo {
   background: url(/storage/archive-buttons/ver.png);
-  background-size: 90px 40px;
+  background-size: 100px 40px;
   background-repeat: no-repeat;
-  width: 90px;
+  width: 100px;
   height: 40px;
-} */
+}
 
-.cargarArchivo {
-  background-color: #3490dc;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  font-weight: bold;
-  color: white;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-.verArchivo {
-  background-color: #3490dc;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
 </style>
 
 <script>
