@@ -185,17 +185,37 @@ class EvaluationRubric extends Model
         
         //Porcentaje del 100 que vale los datos basicos//
         $BasicConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['basic']:$this::$SCORE_MAESTRIA['basic'];
+        $degree_average = 0.0;
 
-        $PromedioBC = 0;
-        //**Sumatoria de valores  */
-        foreach ($this->basicConcepts as $basicC) {
-            $PromedioBC += $basicC->score;
-        }
-        //**Calculo de promedio de Datos basicos */
-        $PromedioBC = (($PromedioBC * $BasicConceptsPercentage) / count($this->basicConcepts)) / 100;
+        // Retorna el promedio del grado academico anterior al que postula 
+        // try{
+        //     $academic_degrees = Archive::find($this->archive_id)->academicDegrees;
+        //     foreach($academic_degrees as $ad){
+        //         if($rubro=="doctorado"){
+        //             if($ad->degree_type=="Maestría")$degree_average = $ad->average;
+        //             break;
+        //         }else{
+        //             if($ad->degree_type=="Licenciatura")$degree_average = $ad->average;
+        //             break;
+        //         }
+        //     }
+        // }catch(\Exception $e){
+        //     return $degree_average;
+        // }
 
-        return $PromedioBC;
+        // $PromedioBC = 0;
+        // //**Sumatoria de valores  */
+        // foreach ($this->basicConcepts as $basicC) {
+        //     $PromedioBC += $basicC->score;
+        // }
+
+        // //**Calculo de promedio de Datos basicos */
+        // $PromedioBC = (($PromedioBC * $BasicConceptsPercentage) / count($this->basicConcepts)) / 100;
+
+        // return $PromedioBC;
+        return $degree_average;
     }
+    
     /**Funcion que regresa el promedio de una rubrica de los Datos academicos*/
     public function getAverageScoreAcademicConcepts(String $rubro): Float
     {

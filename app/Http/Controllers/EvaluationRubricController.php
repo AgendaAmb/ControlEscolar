@@ -58,15 +58,22 @@ class EvaluationRubricController extends Controller
     // Muestra la rubrica promedio (Solo el coordinador va a ser capaz de visualizar)
     public function show_average(Request $request, $grade, $id)
     {
+        // Toma la primera rúbrica de la entrevista
         $evaluationRubric = EvaluationRubric::where('archive_id', $id)->first();
 
+
         if(!isset($evaluationRubric)){
-            return "No existe rúbrica ";
+            return "No existe rúbrica para mostrar";
         }
         
         // Obtiene las rubricas asociadas a un postulante mediante archive_id 
         $evaluation_rubrics = EvaluationRubric::where('archive_id', $evaluationRubric->archive_id)->get();
-        
+
+        // Se verifica que todas las rubricas esten completas antes de calcular
+        foreach ($evaluation_rubrics as $ev) {
+            if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar";
+        }
+
         // Average scores per rubric concept
         $avg_score = [
             'num_rubrics' => 0,

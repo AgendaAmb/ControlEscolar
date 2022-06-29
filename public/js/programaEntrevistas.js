@@ -22412,7 +22412,10 @@ var render = function () {
                                     key: rubric.location,
                                     staticClass:
                                       "d-block text-capitalize text-decoration-none",
-                                    attrs: { href: rubric.location },
+                                    attrs: {
+                                      href: rubric.location,
+                                      target: "_blank",
+                                    },
                                   },
                                   [
                                     _vm._v(
@@ -22453,7 +22456,10 @@ var render = function () {
                                 {
                                   key: rubric.location,
                                   staticClass: "d-block",
-                                  attrs: { href: rubric.location },
+                                  attrs: {
+                                    href: rubric.location,
+                                    target: "_blank",
+                                  },
                                 },
                                 [_vm._v(" Formato de evaluación")]
                               )

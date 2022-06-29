@@ -30,8 +30,8 @@ class NewInterviewUserRequest extends FormRequest
             'user_type' => ['required','string','in:workers'],
             'interview_id' => [
                 'required','numeric','exists:interviews,id', 
-                new UniqueUserInterviewRule($this->user_id, $this->user_type), 
-                new UniqueAreaInterviewRule($this->user_id, $this->user_type)
+                new UniqueUserInterviewRule($this->user_id, $this->user_type) 
+                // new UniqueAreaInterviewRule($this->user_id, $this->user_type)    // Asi se requiere ahorita en 2022
             ],
         ];
     }
