@@ -1,8 +1,8 @@
 <template>
-  <form @submit.prevent="buscaExpedientes" class="d-block">
+  <form @submit.prevent="buscaExpedientes" class="d-block mt-0">
     <div class="row mx-1">
       <div class="form-group col-6">
-        <label> <strong> Programa académico </strong> </label>
+        <label class="h5"> <strong> Programa académico </strong> </label>
         <select v-model="AcademicProgramSelect" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option
@@ -44,7 +44,7 @@
       </div> -->
 
       <div class="form-group col-6">
-        <label> <strong> Periodo </strong> </label>
+        <label class="h5"> <strong> Periodo </strong> </label>
         <select v-model="announcement_selected" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option
@@ -58,17 +58,30 @@
       </div>
     </div>
 
-    <div class="row mx-1">
-      <div class="col-2">
-        <button type="submit" class="btn btn-primary">Buscar</button>
+    <!-- BTN SUBMIT -->
+    <div class="d-flex justify-content-start mx-1">
+      <!-- <div class="col-4">
+        <input type="hidden">
+      </div> -->
+      <div class="col-3 align-items-center" style="height:40px">
+        <button type="submit" class="btn btn-primary" style="height:100%; width:100%;"><label class="h5"><strong>Buscar</strong></label></button>
       </div>
-
-      <div v-if="dataLength != null" class="col mx-3">
-        {{ dataLength }} <span> Resultados encontrados</span>
+      <div class="col-9">
+        <input type="hidden">
       </div>
     </div>
 
-    <!-- <div v-if="puedeEnviarCorreos() === true" class="row mx-1 my-1 justify-content-center align-items-center">
+    <!-- RESULT DATA -->
+    <div class="d-flex justify-content-start mx-1 my-1">
+      
+      <div v-if="dataLength != null" class="col-3 align-items-center d-flex justify-content-start">
+        <label class="h5"><strong>{{ dataLength }} Resultados encontrados</strong></label>
+      </div>
+      <div class="col-9"></div>
+    </div>
+
+    <!-- SEND EMAILS -->
+    <!-- <div v-if="isAdmin === true" class="row mx-1 my-1 justify-content-center align-items-center">
       <div class="col-6">
         <button class="btn btn-primary my-3" style="width:100%;" @click="mandarCorreos">
           Mandar correos
@@ -98,9 +111,9 @@ export default {
       default: [],
     },
 
-    user_rol:{
-      type:String,
-      default: null
+    isAdmin:{
+      type:Boolean,
+      default: false
     }
   },
 
@@ -170,13 +183,13 @@ export default {
         });
     },
 
-    puedeEnviarCorreos(){
-      let res = false;
-      if(this.user_rol === 'Administrador'){
-        res = true;
-      }
-      return res;
-    },
+    // puedeEnviarCorreos(){
+    //   let res = false;
+    //   if(this.user_rol === 'Administrador'){
+    //     res = true;
+    //   }
+    //   return res;
+    // },
 
     buscaExpedientes() {
       //Datos no completos para hacer busqueda

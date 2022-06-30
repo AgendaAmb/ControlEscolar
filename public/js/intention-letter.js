@@ -336,6 +336,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -352,9 +365,9 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       type: Array,
       "default": []
     },
-    user_rol: {
-      type: String,
-      "default": null
+    isAdmin: {
+      type: Boolean,
+      "default": false
     }
   },
   // Propiedades reactivas.
@@ -416,15 +429,13 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         });
       });
     },
-    puedeEnviarCorreos: function puedeEnviarCorreos() {
-      var res = false;
-
-      if (this.user_rol === 'Administrador') {
-        res = true;
-      }
-
-      return res;
-    },
+    // puedeEnviarCorreos(){
+    //   let res = false;
+    //   if(this.user_rol === 'Administrador'){
+    //     res = true;
+    //   }
+    //   return res;
+    // },
     buscaExpedientes: function buscaExpedientes() {
       var _this2 = this;
 
@@ -25876,7 +25887,7 @@ var render = function () {
   return _c(
     "form",
     {
-      staticClass: "d-block",
+      staticClass: "d-block mt-0",
       on: {
         submit: function ($event) {
           $event.preventDefault()
@@ -26002,15 +26013,27 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row mx-1" }, [
-        _vm._m(2),
-        _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex justify-content-start mx-1 my-1" }, [
         _vm.dataLength != null
-          ? _c("div", { staticClass: "col mx-3" }, [
-              _vm._v("\n      " + _vm._s(_vm.dataLength) + " "),
-              _c("span", [_vm._v(" Resultados encontrados")]),
-            ])
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "col-3 align-items-center d-flex justify-content-start",
+              },
+              [
+                _c("label", { staticClass: "h5" }, [
+                  _c("strong", [
+                    _vm._v(_vm._s(_vm.dataLength) + " Resultados encontrados"),
+                  ]),
+                ]),
+              ]
+            )
           : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }),
       ]),
     ]
   )
@@ -26020,24 +26043,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v(" Programa académico ")])])
+    return _c("label", { staticClass: "h5" }, [
+      _c("strong", [_vm._v(" Programa académico ")]),
+    ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [_c("strong", [_vm._v(" Periodo ")])])
+    return _c("label", { staticClass: "h5" }, [
+      _c("strong", [_vm._v(" Periodo ")]),
+    ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
+    return _c("div", { staticClass: "d-flex justify-content-start mx-1" }, [
       _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Buscar")]
+        "div",
+        {
+          staticClass: "col-3 align-items-center",
+          staticStyle: { height: "40px" },
+        },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              staticStyle: { height: "100%", width: "100%" },
+              attrs: { type: "submit" },
+            },
+            [
+              _c("label", { staticClass: "h5" }, [
+                _c("strong", [_vm._v("Buscar")]),
+              ]),
+            ]
+          ),
+        ]
       ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-9" }, [
+        _c("input", { attrs: { type: "hidden" } }),
+      ]),
     ])
   },
 ]

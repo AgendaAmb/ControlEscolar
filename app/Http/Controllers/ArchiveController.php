@@ -130,7 +130,18 @@ class ArchiveController extends Controller
             $announcement->setAttribute('name', $academic_program->name);
         }
 
+        $roles = $request->user()->roles;
+        $isAdmin = false;
 
+        foreach($roles as $rol){
+            if($rol->name === 'admin'){
+                $isAdmin = true;
+            }
+        }
+
+        // $request->user()->setAttribute('isAdmin', $isAdmin);
+
+        // dd($request->user());
         return view('postulacion.index')
             ->with('user', $request->user())
             ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get())

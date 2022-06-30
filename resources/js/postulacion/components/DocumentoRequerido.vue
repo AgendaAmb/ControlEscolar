@@ -54,7 +54,7 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div class="form-group col-3 justify-content-center">
+      <!-- <div class="form-group col-3 justify-content-center">
         <div class="d-flex justify-content-center mt-5" style="height: 50px; width: 100%">
           
             <a
@@ -77,6 +77,26 @@
             />
           </label>
         </div>
+      </div> -->
+
+       <div  class="form-group col-3 my-auto">
+        <a
+          v-if="checkUpload() === true"
+          class="verArchivo d-block my-2 ml-auto"
+          :href="'expediente/' + location"
+          target="_blank"
+        >
+          Ver Archivo</a
+        >
+        <!-- <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto"> -->
+          <label class="cargarArchivo d-block ml-auto my-auto"> 
+            Subir Documento
+          <input
+            type="file"
+            class="form-control d-none"
+            @change="cargaDocumento"
+          />
+        </label>
       </div>
  
     </div>

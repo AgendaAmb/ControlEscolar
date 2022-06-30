@@ -19,7 +19,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // dd( $request->session());
         return view('home')
         ->with('user', $request->session()->get('user_data'));
     }
+   
 }

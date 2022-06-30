@@ -56,7 +56,7 @@
        * Upload 
        * See
        -->
-      <div class="form-group col-3 justify-content-center">
+      <!-- <div class="form-group col-3 justify-content-center">
         <div class="d-flex justify-content-center mt-5" style="height: 50px; width: 100%">
           
             <a
@@ -70,7 +70,7 @@
         </div>
 
         <div class="d-flex justify-content-center" style="height: 50px; width: 100%">
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo" style="height: 100%;">
+        <label v-if="isIntentionLetter() === false" class="cargarArchivo" >
             <input
               type="file"
               class="form-control d-none"
@@ -79,6 +79,26 @@
             />
           </label>
         </div>
+      </div> -->
+
+       <div  class="form-group col-3 my-auto">
+        <a
+          v-if="checkUpload() === true"
+          class="verArchivo d-block my-2 ml-auto"
+          :href="'solicitud/expediente/' + location"
+          target="_blank"
+        >
+          Ver Archivo</a
+        >
+        <!-- <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto"> -->
+          <label class="cargarArchivo d-block ml-auto my-auto"> 
+            Subir Documento
+          <input
+            type="file"
+            class="form-control d-none"
+            @change="cargaDocumento"
+          />
+        </label>
       </div>
     </div>
 
@@ -106,7 +126,7 @@
 
 <style scoped>
 
-.cargarArchivo {
+/* .cargarArchivo {
   background: url(/storage/archive-buttons/seleccionar.png);
   background-size: 100px 40px;
   background-repeat: no-repeat;
@@ -119,6 +139,30 @@
   background-repeat: no-repeat;
   width: 100px;
   height: 40px;
+} */
+.cargarArchivo {
+  background-color: #3490dc;
+  border-radius: 10px;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  color: white;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
+}
+.verArchivo {
+  background-color: #3490dc;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  background-size: 90px 40px;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 30px;
 }
 
 </style>

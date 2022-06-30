@@ -7,30 +7,25 @@
 
             {{-- Inicio disponible para todos --}}
             <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
-            
+
             {{-- Muestra expediente de postulante para subir cambios --}}
 
             {{-- Funciona en produccion --}}
-            {{-- @if (Auth::user()->hasRole('aspirante_extranjero') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_local'))  --}}
+            {{-- @if (Auth::user()->hasRole('aspirante_extranjero') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_local')) --}}
             {{-- funciona para pruebas --}}
-            @if ((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && !Auth::user()->isWorker()) 
-            {{-- Entrevistas organizar --}}
-            <div class="nav-item dropdown">
-                <a id="Expedientes" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" href="#"> Mis expedientes </a>
-                <div class="dropdown-menu" aria-labelledby="Expedientes">
-                    <a class="dropdown-item" href="{{ route('showRegisterArchives') }}"> Ver mis expedientes </a>
-                    <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a>
+            @if ((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && !Auth::user()->isWorker())
+                {{-- Entrevistas organizar --}}
+                <div class="nav-item dropdown">
+                    <a id="Expedientes" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" href="#"> Mis expedientes </a>
+                    <div class="dropdown-menu" aria-labelledby="Expedientes">
+                        <a class="dropdown-item" href="{{ route('showRegisterArchives') }}"> Ver mis expedientes </a>
+                        <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a>
+                    </div>
                 </div>
-            </div>
-
             @endif
 
-            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador') 
-                    || Auth::user()->hasRole('comite_academico')
-                    || Auth::user()->hasRole('coordinador')
-                )
-
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador'))
                 {{-- Expedientes de todos los alumnos --}}
                 <div class="nav-item dropdown">
                     <a id="Postulacion" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
@@ -39,7 +34,10 @@
                         <a class="dropdown-item" href="{{ route('solicitud.index') }}"> Expedientes </a>
                     </div>
                 </div>
+            @endif
 
+            
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('coordinador'))
                 {{-- Entrevistas organizar --}}
                 <div class="nav-item dropdown">
                     <a id="Entrevistas" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
@@ -51,7 +49,12 @@
                     </div>
                 </div>
             @endif
-            
+
+
+            @if (Auth::user()->hasRole('comite_academico'))
+                <a class="nav-link" href="{{ route('ca.index') }}"> Comite Academico </a>
+            @endif
+
 
             {{-- Control por el administrador --}}
             @if (Auth::user()->hasRole('admin'))
@@ -72,5 +75,5 @@
             </div> --}}
 
         </nav>
-        @endauth
+    @endauth
 </header>
