@@ -18,28 +18,17 @@
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
-            <a
-              v-if="
-                alias_academic_program === 'maestria' ||
-                alias_academic_program === 'enrem'"
-              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
-              target="_blank"
-              >dando clic aquí</a
-            >
+            <a v-if="
+            alias_academic_program === 'maestria' ||
+            alias_academic_program === 'enrem'"
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx" target="_blank">dando clic aquí</a>
             <!-- Maestria imarec -->
-            <a
-              v-else-if="alias_academic_program === 'imarec'"
-              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx"
-              target="_blank"
-              >dando clic aquí</a
-            >
+            <a v-else-if="alias_academic_program === 'imarec'"
+              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx" target="_blank">dando clic
+              aquí</a>
             <!-- Doctorado PMPCA  -->
-            <a
-              v-else
-              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx"
-              target="_blank"
-              >dando clic aquí</a
-            >
+            <a v-else href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx" target="_blank">dando clic
+              aquí</a>
           </strong>
         </p>
 
@@ -54,79 +43,53 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <!-- <div class="form-group col-3 justify-content-center">
+      <div class="form-group col-3 justify-content-center">
         <div class="d-flex justify-content-center mt-5" style="height: 50px; width: 100%">
-          
-            <a
-              v-if="checkUpload() === true"
-              :href="'expediente/' + location"
-              class="verArchivo"
-              style=" height: 100%"
-              target="_blank"
-            ></a>
-          
+
+          <a v-if="checkUpload() === true" :href="'expediente/' + location" class="verArchivo" style=" height: 100%"
+            target="_blank"></a>
+
         </div>
 
         <div class="d-flex justify-content-center" style="height: 50px; width: 100%">
-        <label v-if="isIntentionLetter() === false" class="cargarArchivo" style="height: 100%;">
-            <input
-              type="file"
-              class="form-control d-none"
-              style="height: 100%"
-              @change="cargaDocumento"
-            />
+          <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
+          <label v-if="isIntentionLetter() === false" class="cargarArchivo">
+            <input type="file" class="form-control d-none" style="height: 100%" @change="cargaDocumento" />
           </label>
         </div>
-      </div> -->
+      </div>
 
-       <div  class="form-group col-3 my-auto">
+      <!-- <div  class="form-group col-3 my-auto">
         <a
           v-if="checkUpload() === true"
           class="verArchivo d-block my-2 ml-auto"
           :href="'expediente/' + location"
           target="_blank"
         >
-          Ver Archivo</a
+          </a
         >
-        <!-- <label v-if="isIntentionLetter() === false" class="cargarArchivo d-block ml-auto my-auto"> -->
           <label class="cargarArchivo d-block ml-auto my-auto"> 
-            Subir Documento
           <input
             type="file"
             class="form-control d-none"
             @change="cargaDocumento"
           />
         </label>
-      </div>
- 
+      </div> -->
+
     </div>
 
-    <div
-      v-if="isEXANNI() === true"
-      class="row my-1 align-items-center justify-content-center"
-      style="height: 75px"
-    >
+    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
       <div class="col-2" style="height: 100%">
         <div class="d-flex">
           <label> Puntaje obtenido</label>
         </div>
         <div class="d-flex align-items-end">
-          <input
-            v-model.number="ExanniScore"
-            type="number"
-            class="form-control"
-          />
+          <input v-model.number="ExanniScore" type="number" class="form-control" />
         </div>
       </div>
-      <div
-        class="col-2 d-flex align-items-end"
-        style="height: 100%; width: 100%"
-      >
-        <button
-          @click="actualizaPuntajeExanni"
-          class="btn btn-primary"
-          style="width: 100%"
-        >
+      <div class="col-2 d-flex align-items-end" style="height: 100%; width: 100%">
+        <button @click="actualizaPuntajeExanni" class="btn btn-primary" style="width: 100%">
           Guarda puntaje
         </button>
       </div>
@@ -147,18 +110,19 @@
         
         */
 .cargarArchivo {
-  background: url(/storage/archive-buttons/seleccionar.png);
+  background: url(/archive-buttons/seleccionar.png);
   background-size: 100px 40px;
   background-repeat: no-repeat;
-  width: 100px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
 }
+
 .verArchivo {
-  background: url(/storage/archive-buttons/ver.png);
+  background: url(/archive-buttons/ver.png);
   background-size: 100px 40px;
   background-repeat: no-repeat;
-  width: 100px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
 }
 
 /* .cargarArchivo {
@@ -296,7 +260,13 @@ export default {
     },
   },
 
+  created() {
+
+  },
+
   methods: {
+
+
     bkgCargarArchivo(type) {
       // console.log(this.language);
       axios
@@ -306,14 +276,16 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
-          return `background-image:url(` + response.data + `);`;
+          console.log('hola' + response.data);
+          return response.data;
         })
         .catch((error) => {
           console.log(error);
           return null;
         });
     },
+
+
 
     isEXANNI() {
       if (

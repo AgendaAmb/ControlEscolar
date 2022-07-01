@@ -11327,7 +11327,9 @@ var render = function () {
                   {
                     staticClass: "verArchivo d-block my-2 ml-auto",
                     attrs: {
-                      href: "solicitud/expediente/" + _vm.location,
+                      href:
+                        "../../controlescolar/solicitud/expediente/" +
+                        _vm.location,
                       target: "_blank",
                     },
                   },

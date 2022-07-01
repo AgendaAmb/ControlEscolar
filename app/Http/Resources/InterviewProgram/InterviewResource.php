@@ -57,7 +57,9 @@ class InterviewResource extends JsonResource
             'end_time' => $this->end_time,
             'room_id' => $this->room_id,
             'rubrics' => RubricPreviewResource::collection($this->evaluationRubrics),
-            'site' => $room->site ?? 'Sala'
+            'site' => $room->site ?? 'Sala',
+            'type' => $academic_program->type,
+            'average_rubric' => route('entrevistas.rubrica.show_average', ['archive_id' => $archive])
         ];
     }
 }

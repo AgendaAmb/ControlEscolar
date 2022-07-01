@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class RubricAverageResource extends JsonResource
 {
@@ -69,10 +70,20 @@ class RubricAverageResource extends JsonResource
     private function setRubric($request)
     {
         $rubric = $this->resource;
-        
+
+        $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $rubric->user_id]);         // $miPortal_user[0]->id;
+        $miPortal_user = $miPortal_user[0];
+
+        $name = implode(' ', [
+            $miPortal_user->name ?? '',
+            $miPortal_user->middlename ?? '',
+            $miPortal_user->surname  ?? ''
+        ]);
+
         $this->rubric = [
             'id' => $rubric->id,
             'interview_id' => $rubric->interview_id,
+            'user' => $name,
             'considerations' => $rubric->considerations,
             'additional_information' => $rubric->additional_information,
             'dictamen_ce' => $rubric->dictamen_ce,

@@ -43,7 +43,7 @@ class ImageController extends Controller
      */
     public function getButtonImage(Request $request)
     {
-        $location =  null;
+        $location =  asset('/storage/archive-buttons/descargar.png');
         switch ($request->type) {
             case 'descargar':
                 $location =  asset('/storage/archive-buttons/descargar.png');

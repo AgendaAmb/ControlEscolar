@@ -56,11 +56,11 @@ class EvaluationRubricController extends Controller
     }
     
     // Muestra la rubrica promedio (Solo el coordinador va a ser capaz de visualizar)
-    public function show_average(Request $request, $grade, $id)
+    public function show_average(Request $request, $id)
     {
         // Toma la primera rúbrica de la entrevista
         $evaluationRubric = EvaluationRubric::where('archive_id', $id)->first();
-
+        $grade = Archive::find($id)->announcement->academicProgram->type;
 
         if(!isset($evaluationRubric)){
             return "No existe rúbrica para mostrar";
@@ -68,11 +68,11 @@ class EvaluationRubricController extends Controller
         
         // Obtiene las rubricas asociadas a un postulante mediante archive_id 
         $evaluation_rubrics = EvaluationRubric::where('archive_id', $evaluationRubric->archive_id)->get();
-
+        
         // Se verifica que todas las rubricas esten completas antes de calcular
-        foreach ($evaluation_rubrics as $ev) {
-            if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar";
-        }
+        // foreach ($evaluation_rubrics as $ev) {
+        //     if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar.";
+        // }
 
         // Average scores per rubric concept
         $avg_score = [
@@ -82,25 +82,55 @@ class EvaluationRubricController extends Controller
             'research'  => 0.0,
             'exp'       => 0.0,
             'personal'  => 0.0,
+            'rubric_total' => 0.0,
         ];
 
+        $avg_collection = [];
+
+        // Para cada una de las rubricas se calcula el promedio por sección
         foreach($evaluation_rubrics as $ev){
             $avg_score['num_rubrics']+=1;
-            $avg_score['basic']+=$ev->getAverageScoreBasicConcepts($grade);
-            $avg_score['academic']+=$ev->getAverageScoreAcademicConcepts($grade);
-            $avg_score['research']+=$ev->getAverageScoreResearchConcepts($grade);
-            $avg_score['exp']+=$ev->getAverageWorkingExperienceConcepts($grade);
-            $avg_score['personal']+=$ev->getAverageWorkingPersonalAttributesConcepts($grade);
+            $avg_score['basic'] = $ev->getAverageScoreBasicConcepts($grade);
+            $avg_score['academic'] = $ev->getAverageScoreAcademicConcepts($grade);
+            $avg_score['research'] = $ev->getAverageScoreResearchConcepts($grade);
+            $avg_score['exp'] = $ev->getAverageWorkingExperienceConcepts($grade);
+            $avg_score['personal'] = $ev->getAverageWorkingPersonalAttributesConcepts($grade);
+            // Suma del total
+            $avg_score['rubric_total'] = $avg_score['basic'] + $avg_score['academic'] + $avg_score['research'] + $avg_score['exp'] + $avg_score['personal'];
+            array_push($avg_collection, $avg_score);
         }
 
-        // Average
-        $avg_score['basic']/=$avg_score['num_rubrics'];
-        $avg_score['academic']/=$avg_score['num_rubrics'];
-        $avg_score['research']/=$avg_score['num_rubrics'];
-        $avg_score['exp']/=$avg_score['num_rubrics'];
-        $avg_score['personal']/=$avg_score['num_rubrics'];
+        // Se obtienen los datos de cada rubrica
+        $rubrics_collection = RubricAverageResource::collection($evaluation_rubrics);
 
-        return $avg_score;
+        //! Temporal - obtener los datos basicos del postulante
+        $archiveModel = Archive::where('id', $evaluation_rubrics[0]->archive_id)->first();
+        if ($archiveModel === null) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+        try {
+            $archiveModel->loadMissing([
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        $data = [
+            "rubrics" => [],
+            "appliant" => $rubrics_collection[0]->toArray($request)['appliant'],
+            "data" => $archiveModel,
+            "avg_collection" => $avg_collection,
+            "type" => $grade
+        ];
+
+        foreach($rubrics_collection as $rc){
+            array_push($data['rubrics'], $rc->toArray($request)['rubric']);
+        }
+
+        // return $data;
+        return view('entrevistas.rubricaPromedio', $data);
     }
 
     /**

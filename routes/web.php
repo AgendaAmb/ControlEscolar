@@ -40,7 +40,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
 });
 
 
-Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
     # Ruta de prueba segunda conexion a la base de datos
     // Route::get('/db2', function () {
     //     $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
@@ -113,6 +113,7 @@ Route::prefix('controlescolar')->group(function () {
         # Expedientes
         Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');        
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
+        Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
         Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
 
 
@@ -218,7 +219,7 @@ Route::prefix('controlescolar')->group(function () {
         # Rúbrica de evaluación
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
-            Route::get('/{grade}/{postulante_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
+            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
 
             Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
             Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');
@@ -288,4 +289,4 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
 
     });
-});
+// });
