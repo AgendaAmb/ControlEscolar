@@ -104,17 +104,17 @@ export default {
     },
 
     mounted(){
-        console.log(this.scores.length)
-        console.log(this.getPonderacion());
+        // console.log(this.getPonderacion());
+        // console.log(this.scores.length)
     },
 
     methods: {
         getPonderacion(){
             let ponderacion = 0.0;
             scores.forEach(element => {
-                ponderacion = element.rubric_total;
+                ponderacion+=element.rubric_total;
             });
-            return (ponderacion / scores.length).toFixed(2);
+            return (ponderacion/scores.length).toFixed(2);
         }
     },
 }

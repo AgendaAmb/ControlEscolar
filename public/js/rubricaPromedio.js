@@ -67750,15 +67750,14 @@ __webpack_require__.r(__webpack_exports__);
     appliant_details: appliant_details,
     scores: scores
   },
-  mounted: function mounted() {
-    console.log(this.scores.length);
-    console.log(this.getPonderacion());
+  mounted: function mounted() {// console.log(this.getPonderacion());
+    // console.log(this.scores.length)
   },
   methods: {
     getPonderacion: function getPonderacion() {
       var ponderacion = 0.0;
       scores.forEach(function (element) {
-        ponderacion = element.rubric_total;
+        ponderacion += element.rubric_total;
       });
       return (ponderacion / scores.length).toFixed(2);
     }
