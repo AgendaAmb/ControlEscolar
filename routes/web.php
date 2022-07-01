@@ -40,7 +40,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
 });
 
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
     # Ruta de prueba segunda conexion a la base de datos
     // Route::get('/db2', function () {
     //     $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
@@ -288,4 +288,4 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
 
     });
-// });
+});
