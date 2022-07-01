@@ -218,7 +218,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
         # Rúbrica de evaluación
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
-            Route::get('/{grade}/{postulante_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
+            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
 
             Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
             Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');

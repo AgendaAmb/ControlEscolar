@@ -99,6 +99,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -22436,7 +22438,7 @@ var render = function () {
                                 {
                                   staticClass:
                                     "d-block text-capitalize text-decoration-none",
-                                  attrs: { href: "#" },
+                                  attrs: { href: interview.average_rubric },
                                 },
                                 [
                                   _vm._v(

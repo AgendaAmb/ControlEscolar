@@ -63,7 +63,7 @@ class EvaluationRubric extends Model
         'personal'  => 30,
     ];
     
-    // Factores de ponderación de los rubros para MAESTRIA
+    // Factores de ponderación de los rubros para MAESTRÍA
     public static $SCORE_MAESTRIA = [
         'basic'     => 15, 
         'academic'  => 30,
@@ -186,34 +186,37 @@ class EvaluationRubric extends Model
         //Porcentaje del 100 que vale los datos basicos//
         $BasicConceptsPercentage = $rubro==="doctorado"?$this::$SCORE_DOCTORADO['basic']:$this::$SCORE_MAESTRIA['basic'];
         $degree_average = 0.0;
+        $country = "México";
 
         // Retorna el promedio del grado academico anterior al que postula 
-        // try{
-        //     $academic_degrees = Archive::find($this->archive_id)->academicDegrees;
-        //     foreach($academic_degrees as $ad){
-        //         if($rubro=="doctorado"){
-        //             if($ad->degree_type=="Maestría")$degree_average = $ad->average;
-        //             break;
-        //         }else{
-        //             if($ad->degree_type=="Licenciatura")$degree_average = $ad->average;
-        //             break;
-        //         }
-        //     }
-        // }catch(\Exception $e){
-        //     return $degree_average;
-        // }
+        try{
+            $academic_degrees = Archive::find($this->archive_id)->academicDegrees;
+            foreach($academic_degrees as $ad){
+                if($rubro=="doctorado"){
+                    if($ad->degree_type=="Maestría"){
+                        $degree_average = $ad->average;
+                        $country = $ad->country;
+                    }
+                    break;
+                }else{
+                    if($ad->degree_type=="Licenciatura"){
+                        $degree_average = $ad->average;
+                        $country = $ad->country;
+                    }
+                    break;
+                }
+            }
 
-        // $PromedioBC = 0;
-        // //**Sumatoria de valores  */
-        // foreach ($this->basicConcepts as $basicC) {
-        //     $PromedioBC += $basicC->score;
-        // }
+            // Ponderación para extudiante foráneo
+            if($country!="México"){
+                $degree_average = (10/$ad->max_avg) * $ad->average;
+            }
+        }catch(\Exception $e){
+            return $degree_average;
+        }
 
-        // //**Calculo de promedio de Datos basicos */
-        // $PromedioBC = (($PromedioBC * $BasicConceptsPercentage) / count($this->basicConcepts)) / 100;
-
-        // return $PromedioBC;
-        return $degree_average;
+        // (this . estudio_score * doctorado) / 10
+        return ($degree_average * $BasicConceptsPercentage)/10.0;
     }
     
     /**Funcion que regresa el promedio de una rubrica de los Datos academicos*/
