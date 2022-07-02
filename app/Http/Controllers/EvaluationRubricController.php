@@ -10,6 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Archive;
+// use Maatwebsite\Excel\Facades\Excel;
+// use App\Exports\AverageRubricExport;
 
 class EvaluationRubricController extends Controller
 {
@@ -86,6 +88,7 @@ class EvaluationRubricController extends Controller
         ];
 
         $avg_collection = [];
+        $score = 0.0;
 
         // Para cada una de las rubricas se calcula el promedio por sección
         foreach($evaluation_rubrics as $ev){
@@ -97,6 +100,7 @@ class EvaluationRubricController extends Controller
             $avg_score['personal'] = $ev->getAverageWorkingPersonalAttributesConcepts($grade);
             // Suma del total
             $avg_score['rubric_total'] = $avg_score['basic'] + $avg_score['academic'] + $avg_score['research'] + $avg_score['exp'] + $avg_score['personal'];
+            $score+=$avg_score['rubric_total'];
             array_push($avg_collection, $avg_score);
         }
 
@@ -117,6 +121,10 @@ class EvaluationRubricController extends Controller
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
+        // Actualización del rubric score temporal
+        $archiveModel->rubric_score = round($score / count($evaluation_rubrics), 2);
+        $archiveModel->save();
+
         $data = [
             "rubrics" => [],
             "appliant" => $rubrics_collection[0]->toArray($request)['appliant'],
@@ -132,6 +140,12 @@ class EvaluationRubricController extends Controller
         // return $data;
         return view('entrevistas.rubricaPromedio', $data);
     }
+
+    // Exports the average rubric to excel
+    // public function export_average_rubric(Request $request)
+    // {
+    //     return Excel::download(new AverageRubricExport, 'invoices.xlsx');
+    // }
 
     /**
      * Show the form for editing the specified resource.
