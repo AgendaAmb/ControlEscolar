@@ -20,8 +20,8 @@
             <!-- Maestrias PMPCA -->
             <a v-if="
             alias_academic_program === 'maestria' ||
-            alias_academic_program === 'enrem'"
-              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx" target="_blank">dando clic aquí</a>
+            alias_academic_program === 'enrem'" href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+              target="_blank">dando clic aquí</a>
             <!-- Maestria imarec -->
             <a v-else-if="alias_academic_program === 'imarec'"
               href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx" target="_blank">dando clic
@@ -43,40 +43,25 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div class="form-group col-3 justify-content-center">
-        <div class="d-flex justify-content-center mt-5" style="height: 50px; width: 100%">
-
-          <a v-if="checkUpload() === true" :href="'expediente/' + location" class="verArchivo" style=" height: 100%"
-            target="_blank"></a>
-
+      <div class="form-group col-3 align-items-center p-2">
+        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
+          style="max-height: 45px; width: 100%">
+          <label>
+            <a :href="'expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            </a>
+          </label>
         </div>
 
-        <div class="d-flex justify-content-center" style="height: 50px; width: 100%">
+        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+          style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
-          <label v-if="isIntentionLetter() === false" class="cargarArchivo">
-            <input type="file" class="form-control d-none" style="height: 100%" @change="cargaDocumento" />
+          <label>
+            <img :src="images_btn['seleccionar']" alt="" style=" max-height: 45px !important;">
+            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
           </label>
         </div>
       </div>
-
-      <!-- <div  class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="'expediente/' + location"
-          target="_blank"
-        >
-          </a
-        >
-          <label class="cargarArchivo d-block ml-auto my-auto"> 
-          <input
-            type="file"
-            class="form-control d-none"
-            @change="cargaDocumento"
-          />
-        </label>
-      </div> -->
-
     </div>
 
     <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
@@ -100,56 +85,6 @@
   </div>
 </template>
 
-<style scoped>
-/* 
-
- <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
-        <label class="cargarArchivo d-block ml-auto my-auto">
-          <input type="file" class="form-control d-none" @change="cargaDocumento">
-        </label>
-        
-        */
-.cargarArchivo {
-  background: url(/archive-buttons/seleccionar.png);
-  background-size: 100px 40px;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
-.verArchivo {
-  background: url(/archive-buttons/ver.png);
-  background-size: 100px 40px;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-}
-
-/* .cargarArchivo {
-  background-color: #3490dc;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  font-weight: bold;
-  color: white;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-.verArchivo {
-  background-color: #3490dc;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-} */
-</style>
 <script>
 export default {
   name: "documento-requerido",
@@ -158,6 +93,11 @@ export default {
     user_id: {
       type: Number,
       default: -1,
+    },
+
+    images_btn:{
+      type: Array,
+      default: null,
     },
 
     viewer_id: {
@@ -220,6 +160,7 @@ export default {
       datosValidos: {},
       textStateUpload: "",
       academiLetterCommitment: "",
+      images: null,
     };
   },
 
@@ -260,9 +201,19 @@ export default {
     },
   },
 
-  created() {
-
-  },
+  // created() {
+  //   // console.log(this.language);
+  //   axios
+  //     .get("/controlescolar/solicitud/getAllButtonImage")
+  //     .then((response) => {
+  //       // console.log('recibiendo imagenes' + response.data.ver);
+  //       this.images = response.data;
+  //       // console.log('imagenes buttons: ' + this.images.ver);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // },
 
   methods: {
 

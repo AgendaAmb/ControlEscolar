@@ -70,6 +70,7 @@
          :archivo.sync="documento.archivo"
          :location.sync="documento.pivot.location"
          :errores.sync = "documento.errores"
+         :images_btn = "images_btn"
          @enviaDocumento = "cargaDocumento"
          v-bind="documento">
       </documento-requerido>
@@ -85,6 +86,8 @@ export default {
     //v bind for appliant data from control escolar
     // Estado civil.
     marital_state: String,
+
+    images_btn: Array,
 
     //v bind for appliant data from portal
     // Id del expediente

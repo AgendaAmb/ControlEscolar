@@ -114,7 +114,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');        
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
         Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
-        Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
+        Route::get('/getAllButtonImage', [ImageController::class, 'getAllButtonImage'])->name('getAllButtonImage');
 
 
         #Admin

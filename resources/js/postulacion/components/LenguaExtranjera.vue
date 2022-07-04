@@ -7,11 +7,7 @@
       <div class="col-8 col-md-3 col-sm-2"></div>
 
       <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaIdioma"
-          class="btn btn-danger"
-          style="height: 35px; width: 100%"
-        >
+        <button @click="eliminaIdioma" class="btn btn-danger" style="height: 35px; width: 100%">
           Eliminar Idioma
         </button>
       </div>
@@ -19,10 +15,7 @@
     <div class="row my-4 justify-content-center">
       <!-- Datos principales -->
       <div v-if="getImage() === true" class="form-group col-4 my-auto ">
-        <img
-          style="width: 80%; height: 80% !important"
-          :src="flag_image"
-        />
+        <img style="width: 80%; height: 80% !important" :src="flag_image" />
       </div>
 
       <!--
@@ -71,11 +64,7 @@
         <div class="row justify-content-end">
           <div class="form-group col-lg-6 col-md-11 d-none d-md-block">
             <label> Idioma: </label>
-            <select
-              v-model="Language"
-              class="form-control"
-              :class="{ 'is-invalid': 'language' in errores }"
-            >
+            <select v-model="Language" class="form-control" :class="{ 'is-invalid': 'language' in errores }">
               <option value="" selected>Escoge una opción</option>
               <option v-for="idioma in idiomas" :key="idioma" :value="idioma">
                 {{ idioma }}
@@ -89,12 +78,8 @@
 
           <div class="form-group col-lg-6 col-md-11 d-none d-md-block">
             <label> Institución que otorgó el certificado: </label>
-            <input
-              v-model="Institution"
-              type="text"
-              class="form-control"
-              :class="{ 'is-invalid': 'institution' in errores }"
-            />
+            <input v-model="Institution" type="text" class="form-control"
+              :class="{ 'is-invalid': 'institution' in errores }" />
 
             <div v-if="'institution' in errores" class="invalid-feedback">
               {{ errores.institution }}
@@ -103,12 +88,8 @@
 
           <div v-if="isEnglish" class="form-group col-lg-6 col-md-11">
             <label> ¿Qué examen de inglés presentaste? </label>
-            <select
-              v-model="ExamPresented"
-              class="form-control"
-              @change="chooseExam"
-              :class="{ 'is-invalid': 'exam_presented' in errores }"
-            >
+            <select v-model="ExamPresented" class="form-control" @change="chooseExam"
+              :class="{ 'is-invalid': 'exam_presented' in errores }">
               <option value="" selected>Escoge una opción</option>
               <option v-for="exam in examNames" :key="exam" :value="exam">
                 {{ exam }}
@@ -123,11 +104,7 @@
           <div v-if="isEnglish" class="form-group col-lg-6 col-md-11">
             <label> Escoge un tipo de examen </label>
 
-            <select
-              v-model="KindOfExam"
-              class="form-control"
-              :class="{ 'is-invalid': 'exam_presented' in errores }"
-            >
+            <select v-model="KindOfExam" class="form-control" :class="{ 'is-invalid': 'exam_presented' in errores }">
               <option value="" selected>Escoge una opción</option>
               <option v-for="exam in kindOfExamNames" :key="exam" :value="exam">
                 {{ exam }}
@@ -141,12 +118,8 @@
 
           <div class="form-group col-md-6">
             <label> Puntaje obtenido: </label>
-            <input
-              v-model.number="Score"
-              type="number"
-              class="form-control"
-              :class="{ 'is-invalid': 'score' in errores }"
-            />
+            <input v-model.number="Score" type="number" class="form-control"
+              :class="{ 'is-invalid': 'score' in errores }" />
 
             <div v-if="'score' in errores" class="invalid-feedback">
               {{ errores.score }}
@@ -155,12 +128,8 @@
 
           <div class="form-group col-md-6">
             <label> Fecha de aplicación: </label>
-            <input
-              v-model="PresentedAt"
-              type="date"
-              class="form-control"
-              :class="{ 'is-invalid': 'presented_at' in errores }"
-            />
+            <input v-model="PresentedAt" type="date" class="form-control"
+              :class="{ 'is-invalid': 'presented_at' in errores }" />
 
             <div v-if="'presented_at' in errores" class="invalid-feedback">
               {{ errores.presented_at }}
@@ -169,12 +138,8 @@
 
           <div class="form-group d-none d-lg-block col-lg-6">
             <label> Vigencia desde: </label>
-            <input
-              v-model="ValidFrom"
-              type="date"
-              class="form-control"
-              :class="{ 'is-invalid': 'valid_from' in errores }"
-            />
+            <input v-model="ValidFrom" type="date" class="form-control"
+              :class="{ 'is-invalid': 'valid_from' in errores }" />
 
             <div v-if="'valid_from' in errores" class="invalid-feedback">
               {{ errores.valid_from }}
@@ -183,12 +148,8 @@
 
           <div class="form-group d-none d-lg-block col-lg-6">
             <label> Hasta: </label>
-            <input
-              v-model="ValidTo"
-              type="date"
-              class="form-control"
-              :class="{ 'is-invalid': 'valid_to' in errores }"
-            />
+            <input v-model="ValidTo" type="date" class="form-control"
+              :class="{ 'is-invalid': 'valid_to' in errores }" />
 
             <div v-if="'valid_to' in errores" class="invalid-feedback">
               {{ errores.valid_to }}
@@ -199,12 +160,8 @@
 
       <div class="form-group d-lg-none col-md-6">
         <label> Vigencia desde: </label>
-        <input
-          v-model="ValidFrom"
-          type="date"
-          class="form-control"
-          :class="{ 'is-invalid': 'valid_from' in errores }"
-        />
+        <input v-model="ValidFrom" type="date" class="form-control"
+          :class="{ 'is-invalid': 'valid_from' in errores }" />
 
         <div v-if="'valid_from' in errores" class="invalid-feedback">
           {{ errores.valid_from }}
@@ -213,12 +170,7 @@
 
       <div class="form-group d-lg-none col-md-6">
         <label> Hasta: </label>
-        <input
-          v-model="ValidTo"
-          type="date"
-          class="form-control"
-          :class="{ 'is-invalid': 'valid_to' in errores }"
-        />
+        <input v-model="ValidTo" type="date" class="form-control" :class="{ 'is-invalid': 'valid_to' in errores }" />
 
         <div v-if="'valid_to' in errores" class="invalid-feedback">
           {{ errores.valid_to }}
@@ -227,12 +179,8 @@
 
       <div class="form-group col-md-6 col-lg-3">
         <label> Grado de dominio: </label>
-        <input
-          v-model="LanguageDomain"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': 'language_domain' in errores }"
-        />
+        <input v-model="LanguageDomain" type="text" class="form-control"
+          :class="{ 'is-invalid': 'language_domain' in errores }" />
 
         <div v-if="'language_domain' in errores" class="invalid-feedback">
           {{ errores.language_domain }}
@@ -241,12 +189,8 @@
 
       <div class="form-group col-md-6 col-lg-3">
         <label> Nivel conversacional: </label>
-        <input
-          v-model="ConversationalLevel"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': 'writing_level' in errores }"
-        />
+        <input v-model="ConversationalLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': 'writing_level' in errores }" />
 
         <div v-if="'conversational_level' in errores" class="invalid-feedback">
           {{ errores.conversational_level }}
@@ -255,12 +199,8 @@
 
       <div class="form-group col-md-6 col-lg-3">
         <label> Nivel de lectura: </label>
-        <input
-          v-model="ReadingLevel"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': 'reading_level' in errores }"
-        />
+        <input v-model="ReadingLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': 'reading_level' in errores }" />
 
         <div v-if="'reading_level' in errores" class="invalid-feedback">
           {{ errores.reading_level }}
@@ -269,41 +209,30 @@
 
       <div class="form-group col-md-6 col-lg-3">
         <label> Nivel de escritura: </label>
-        <input
-          v-model="WritingLevel"
-          type="text"
-          class="form-control"
-          :class="{ 'is-invalid': 'writing_level' in errores }"
-        />
+        <input v-model="WritingLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': 'writing_level' in errores }" />
         <div v-if="'writing_level' in errores" class="invalid-feedback">
           {{ errores.writing_level }}
         </div>
       </div>
 
-      <div class="col-12">
-        <label>
-          <strong>Nota: </strong>
-          Para poder registrar los cambios en los campos anteriores del idioma
-          correspondiente es necesario seleccionar el siguiente botón, de esta
-          forma podremos guardar la información que acabas de compartir
-        </label>
+      <div class="d-flex justify-content-start mt-4 mb-0"  style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+             <img  @click="actualizaLenguaExtranjera" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+          </div>
+        <div class="col-md-10 col-xs-9 mx-3">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores del idioma
+            correspondiente es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el Idioma actual.</strong></p>
+          </label>
+        </div>
       </div>
 
-      <div class="col-12 mt-0 mb-3">
-        <button @click="actualizaLenguaExtranjera" class="btn btn-primary">
-          Guardar Idioma
-        </button>
-      </div>
 
-      <documento-requerido
-        v-for="documento in Documentos"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        @enviaDocumento="cargaDocumento"
-        v-bind="documento"
-      >
+      <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
+        @enviaDocumento="cargaDocumento" v-bind="documento">
       </documento-requerido>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -338,6 +267,8 @@ export default {
 
     // Id.
     id: Number,
+
+    images_btn: Array,
 
     // Id del expediente.
     archive_id: Number,
@@ -582,7 +513,7 @@ export default {
     },
 
     getImage() {
-     
+
       // console.log(this.language);
       axios
         .get("/controlescolar/solicitud/getFlagImage", {
@@ -623,26 +554,6 @@ export default {
       }
       return false;
     },
-
-    // isTOFEL() {
-    //   if (this.localExamenPresented.toString().localeCompare("TOEFL")) {
-    //     return true;
-    //   }
-    //   return false;
-    // },
-
-    // isiELTS() {
-    //   if (this.localExamenPresented.toString().localeCompare("IELTS")) {
-    //     return true;
-    //   }
-    //   return false;
-    // },
-    // isCAMBRIDGE() {
-    //   if (this.localExamenPresented.toString().localeCompare("CAMBRIDGE")) {
-    //     return true;
-    //   }
-    //   return false;
-    // },
 
     actualizaLenguaExtranjera(evento) {
       this.enviaLenguaExtranjera(evento, "Completo");

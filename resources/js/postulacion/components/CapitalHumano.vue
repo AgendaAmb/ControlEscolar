@@ -35,17 +35,18 @@
       <input type="text" class="form-control" v-model="ScolarshipLevel">
     </div>
 
-    <div class="col-12">
+      <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+             <img  @click="guardaCapitalHumano" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+          </div>
+        <div class="col-md-10 col-xs-9 mx-3">
           <label>
             <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores del capital humano correspondiente es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
+            Para poder guardar los cambios en los campos anteriores del capital humano es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el capital humano actual</strong></p>
           </label>
         </div>
-
-    <div class="col-12 my-3">
-      <button @click="guardaCapitalHumano" class="btn btn-primary"> Guardar curso </button>
-    </div>
+      </div>
+    
   </div>
           <hr class="d-block" :style="ColorStrip" />
 
@@ -60,6 +61,8 @@ export default {
   props: {
     // id del capital humano.
     id: Number,
+
+    images_btn:Array,
 
     //Index
     index: Number,

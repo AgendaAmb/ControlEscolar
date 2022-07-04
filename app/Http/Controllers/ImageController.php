@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\Cast\Object_;
+use stdClass;
 
 class ImageController extends Controller
 {
@@ -63,5 +65,15 @@ class ImageController extends Controller
         }
 
         return $location;
+    }
+
+    public function getAllButtonImage()
+    {
+        $images = new stdClass;
+        $images->descargar =    asset('/storage/archive-buttons/descargar.png');
+        $images->guardar =      asset('/storage/archive-buttons/guardar.png');
+        $images->seleccionar =  asset('/storage/archive-buttons/seleccionar.png');
+        $images->ver =          asset('/storage/archive-buttons/ver.png');
+        return $images;
     }
 }

@@ -3,11 +3,8 @@
     <!-- Info postulante -->
     <div class="col-12">
       <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
-      <postulante
-        v-bind="appliant"
-        :archive_id="archive_id"
-        :documentos.sync="personal_documents"
-      >
+      <postulante v-bind="appliant" :archive_id="archive_id" :images_btn="images_btn"
+        :documentos.sync="personal_documents">
       </postulante>
       <hr class="d-block" :style="ColorStrip" />
     </div>
@@ -15,30 +12,15 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Historial académico</summary>
-        <grado-academico
-          v-for="(grado, index) in academic_degrees"
-          v-bind="grado"
-          v-bind:key="grado.id + index"
-          :index="index + 1"
-          :alias_academic_program.sync="academic_program.alias"
-          :state.sync="grado.state"
-          :cvu.sync="grado.cvu"
-          :knowledge_card.sync="grado.knowledge_card"
-          :digital_signature.sync="grado.digital_signature"
-          :cedula.sync="grado.cedula"
-          :status.sync="grado.status"
-          :degree.sync="grado.degree"
-          :average.sync="grado.average"
-          :min_avg.sync="grado.min_avg"
-          :max_avg.sync="grado.max_avg"
-          :country.sync="grado.country"
-          :university.sync="grado.university"
-          :degree_type.sync="grado.degree_type"
-          :titration_date.sync="grado.titration_date"
-          :required_documents.sync="grado.required_documents"
-          :paises.sync="Countries"
-          @delete-item="eliminaHistorialAcademicoFromList"
-        >
+        <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado" v-bind:key="grado.id + index"
+          :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state"
+          :cvu.sync="grado.cvu" :knowledge_card.sync="grado.knowledge_card"
+          :digital_signature.sync="grado.digital_signature" :cedula.sync="grado.cedula" :status.sync="grado.status"
+          :degree.sync="grado.degree" :average.sync="grado.average" :min_avg.sync="grado.min_avg"
+          :max_avg.sync="grado.max_avg" :country.sync="grado.country" :university.sync="grado.university"
+          :degree_type.sync="grado.degree_type" :titration_date.sync="grado.titration_date"
+          :required_documents.sync="grado.required_documents" :paises.sync="Countries" :images_btn="images_btn"
+          @delete-item="eliminaHistorialAcademicoFromList">
         </grado-academico>
         <div class="row align-items-center mb-0 mt-2">
           <div class="col-12">
@@ -51,11 +33,7 @@
         </div>
         <div class="row align-items-center mt-0">
           <div class="col-12">
-            <button
-              @click="agregaHistorialAcademico"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
+            <button @click="agregaHistorialAcademico" class="btn btn-success" style="height: 45px; width: 250px">
               Agregar Escolaridad
             </button>
           </div>
@@ -69,16 +47,10 @@
         <summary class="mb-4 font-weight-bold h3">
           Requisitos de ingreso
         </summary>
-        <requisitos-ingreso
-          :archive_id="archive_id"
-          :motivation.sync="motivation"
-          :exanni_score.sync="exanni_score"
-          :documentos.sync="entrance_documents"
-          :user_id.sync="appliant.id"
-          :viewer_id.sync="viewer.id"
-          :letters_Commitment.sync="letters_Commitment"
-          :alias_academic_program.sync="academic_program.alias"
-        >
+        <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
+          :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
+          :letters_Commitment.sync="letters_Commitment" :images_btn="images_btn"
+          :alias_academic_program.sync="academic_program.alias">
         </requisitos-ingreso>
       </details>
       <hr class="my-4 col-12" :style="ColorStrip" />
@@ -87,28 +59,15 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Dominio de idiomas</summary>
-        <lengua-extranjera
-          v-for="(language, index) in appliant_languages"
-          v-bind="language"
-          v-bind:key="language.id"
-          :index="index + 1"
-          :alias_academic_program.sync="academic_program.alias"
-          :state.sync="language.state"
-          :language.sync="language.language"
-          :institution.sync="language.institution"
-          :score.sync="language.score"
-          :presented_at.sync="language.presented_at"
-          :valid_from.sync="language.valid_from"
-          :valid_to.sync="language.valid_to"
-          :language_domain.sync="language.language_domain"
-          :conversational_level.sync="language.conversational_level"
-          :reading_level.sync="language.reading_level"
-          :writing_level.sync="language.writing_level"
-          :exam_presented.sync="language.exam_presented"
-          :kind_of_exam.sync="language.kind_of_exam"
-          :documentos.sync="language.required_documents"
-          @delete-item="eliminaLenguaExtranjeraFromList"
-        >
+        <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language" v-bind:key="language.id"
+          :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
+          :language.sync="language.language" :institution.sync="language.institution" :score.sync="language.score"
+          :presented_at.sync="language.presented_at" :valid_from.sync="language.valid_from"
+          :valid_to.sync="language.valid_to" :language_domain.sync="language.language_domain"
+          :conversational_level.sync="language.conversational_level" :reading_level.sync="language.reading_level"
+          :writing_level.sync="language.writing_level" :exam_presented.sync="language.exam_presented"
+          :kind_of_exam.sync="language.kind_of_exam" :documentos.sync="language.required_documents"
+          @delete-item="eliminaLenguaExtranjeraFromList" :images_btn="images_btn">
         </lengua-extranjera>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -121,11 +80,7 @@
         </div>
         <div class="row align-items-center mt-0">
           <div class="col-12">
-            <button
-              @click="agregaLenguaExtranjera"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
+            <button @click="agregaLenguaExtranjera" class="btn btn-success" style="height: 45px; width: 250px">
               Agregar Idioma
             </button>
           </div>
@@ -140,24 +95,15 @@
           Experiencia laboral (Opcional)
         </summary>
 
-        <experiencia-laboral
-          v-for="(experience, index) in appliant_working_experiences"
-          v-bind="experience"
-          v-bind:key="experience.id"
-          :index="index + 1"
-          :state.sync="experience.state"
-          :institution.sync="experience.institution"
-          :working_position.sync="experience.working_position"
-          :from.sync="experience.from"
-          :to.sync="experience.to"
-          :knowledge_area.sync="experience.knowledge_area"
-          :field.sync="experience.field"
-          :working_position_description.sync="
+        <experiencia-laboral v-for="(experience, index) in appliant_working_experiences" v-bind="experience"
+          v-bind:key="experience.id" :index="index + 1" :state.sync="experience.state"
+          :institution.sync="experience.institution" :working_position.sync="experience.working_position"
+          :from.sync="experience.from" :to.sync="experience.to" :knowledge_area.sync="experience.knowledge_area"
+          :field.sync="experience.field" :working_position_description.sync="
             experience.working_position_description
-          "
-          :achievements.sync="experience.achievements"
-          @delete-item="eliminaExperienciaLaboralFromList"
-        >
+          " :achievements.sync="experience.achievements"
+          :images_btn="images_btn"
+           @delete-item="eliminaExperienciaLaboralFromList">
         </experiencia-laboral>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -171,11 +117,7 @@
         </div>
         <div class="row align-items-center mt-0">
           <div class="col-12">
-            <button
-              @click="agregaExperienciaLaboral"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
+            <button @click="agregaExperienciaLaboral" class="btn btn-success" style="height: 45px; width: 250px">
               Agregar Experiencia Laboral
             </button>
           </div>
@@ -194,24 +136,15 @@
         <h5 class="mt-4 d-block">
           <strong> Producción científica (Opcional) </strong>
         </h5>
-        <produccion-cientifica
-          v-for="(production, index) in scientific_productions"
-          v-bind="production"
-          v-bind:key="production.id"
-          :index="index + 1"
-          :state.sync="production.state"
-          :type.sync="production.type"
-          :title.sync="production.title"
-          :publish_date.sync="production.publish_date"
-          :magazine_name.sync="production.magazine_name"
-          :article_name.sync="production.article_name"
-          :institution.sync="production.institution"
-          :post_title_memory.sync="production.post_title_memory"
+        <produccion-cientifica v-for="(production, index) in scientific_productions" v-bind="production"
+          v-bind:key="production.id" :index="index + 1" :state.sync="production.state" :type.sync="production.type"
+          :title.sync="production.title" :publish_date.sync="production.publish_date"
+          :magazine_name.sync="production.magazine_name" :article_name.sync="production.article_name"
+          :institution.sync="production.institution" :post_title_memory.sync="production.post_title_memory"
           :post_title_document.sync="production.post_title_document"
-          :post_title_review.sync="production.post_title_review"
-          :documentos.sync="curricular_documents"
-          @delete-item="eliminaProduccionCientificaFromList"
-        >
+          :post_title_review.sync="production.post_title_review" :documentos.sync="curricular_documents"
+          :images_btn="images_btn"
+          @delete-item="eliminaProduccionCientificaFromList">
         </produccion-cientifica>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -225,11 +158,7 @@
         </div>
         <div class="row align-items-center mt-0">
           <div class="col-12">
-            <button
-              @click="agregaProduccionCientifica"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
+            <button @click="agregaProduccionCientifica" class="btn btn-success" style="height: 45px; width: 250px">
               Agregar Producción Científica
             </button>
           </div>
@@ -240,16 +169,11 @@
         <h5 class="mt-4 d-block">
           <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
         </h5>
-        <capital-humano
-          v-for="(humanCapital, index) in human_capitals"
-          v-bind="humanCapital"
-          v-bind:key="humanCapital.id"
-          :index="index"
-          :course_name.sync="humanCapital.course_name"
-          :assisted_at.sync="humanCapital.assisted_at"
-          :scolarship_level.sync="humanCapital.scolarship_level"
-          @delete-item="eliminaCapitalHumanoFromList"
-        >
+        <capital-humano v-for="(humanCapital, index) in human_capitals" v-bind="humanCapital"
+          v-bind:key="humanCapital.id" :index="index" :course_name.sync="humanCapital.course_name"
+          :assisted_at.sync="humanCapital.assisted_at" :scolarship_level.sync="humanCapital.scolarship_level"
+          :images_btn="images_btn"
+          @delete-item="eliminaCapitalHumanoFromList">
         </capital-humano>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -263,11 +187,7 @@
         </div>
         <div class="row align-items-center mt-0">
           <div class="col-12">
-            <button
-              @click="agregaCapitalHumano"
-              class="btn btn-success"
-              style="height: 45px; width: 250px"
-            >
+            <button @click="agregaCapitalHumano" class="btn btn-success" style="height: 45px; width: 250px">
               Agregar Capital Humano
             </button>
           </div>
@@ -281,13 +201,10 @@
         <summary class="mb-4 font-weight-bold h3">
           Carta de recomendación
         </summary>
-        <carta-recomendacion
-          :appliant="appliant"
-          :archive_id="archive_id"
-          :academic_program="academic_program"
+        <carta-recomendacion :appliant="appliant" :archive_id="archive_id" :academic_program="academic_program"
           :recommendation_letters="recommendation_letters"
-          :archives_recommendation_letters="archives_recommendation_letters"
-        />
+          :images_btn="images_btn"
+          :archives_recommendation_letters="archives_recommendation_letters" />
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -300,31 +217,21 @@
             class="btn btn-danger"
             style="height: 45px; width: 150px"
           > -->
-          <button
-            data-toggle="modal"
-            data-target="#RechazarExpediente"
-            class="btn btn-danger"
-            style="height: 45px; width: 150px; color: black"
-          >
+          <button data-toggle="modal" data-target="#RechazarExpediente" class="btn btn-danger"
+            style="height: 45px; width: 150px; color: black">
             <strong>No cumple</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span
-            >El postulante no cumple con los requisitos mínimos para el ingreso
-            al Posgrado</span
-          >
+          <span>El postulante no cumple con los requisitos mínimos para el ingreso
+            al Posgrado</span>
         </div>
       </div>
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
-          <button
-            data-toggle="modal"
-            data-target="#ActualizaExpediente"
-            class="btn btn-warning"
-            style="height: 45px; width: 150px; color: black;'"
-          >
+          <button data-toggle="modal" data-target="#ActualizaExpediente" class="btn btn-warning"
+            style="height: 45px; width: 150px; color: black;'">
             <strong>Corregir</strong>
           </button>
         </div>
@@ -336,39 +243,29 @@
 
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 align-content-center">
-          <button
-            @click="EnviarRevision('Aceptar')"
-            class="btn btn-success"
-            style="height: 45px; width: 150px; color: black"
-          >
+          <button @click="EnviarRevision('Aceptar')" class="btn btn-success"
+            style="height: 45px; width: 150px; color: black">
             <strong>Aceptar</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span
-            >El postulante cumple con todos los requisitos y pasa a la etapa de
-            entrevista</span
-          >
+          <span>El postulante cumple con todos los requisitos y pasa a la etapa de
+            entrevista</span>
         </div>
       </div>
 
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-4 justify-content-center">
-          <button
-            @click="EnviarRevision('Condicionado')"
-            class="btn btn-info"
-            style="height: 45px; width: 150px; color: black"
-          >
+          <button @click="EnviarRevision('Condicionado')" class="btn btn-info"
+            style="height: 45px; width: 150px; color: black">
             <strong>Condicionado</strong>
           </button>
         </div>
 
         <div class="col-8">
-          <span
-            >El postulante debera de entregar un documento fuera de tiempo, pero
-            cumple con lo demas solicitado y pasa a la etapa de entrevista</span
-          >
+          <span>El postulante debera de entregar un documento fuera de tiempo, pero
+            cumple con lo demas solicitado y pasa a la etapa de entrevista</span>
         </div>
       </div>
     </div>
@@ -458,12 +355,27 @@ export default {
 
   computed: {},
 
+  created() {
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
   data() {
     return {
       Countries: [],
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
+      images_btn: null,
     };
   },
 
