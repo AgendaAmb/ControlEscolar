@@ -375,7 +375,7 @@ export default {
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
-      images_btn: null,
+      images_btn: [],
     };
   },
 

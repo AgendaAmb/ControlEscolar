@@ -26,6 +26,7 @@
             :archive_id="archive_id"
             :appliant="appliant"
             :academic_program="academic_program"
+            :images_btn="images_btn"
             :index="index + 1"
           >
           </valida-carta-recomendacion>
@@ -42,6 +43,7 @@
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
+            :images_btn="images_btn"
             :index = 1
           >
           </valida-carta-recomendacion>
@@ -54,6 +56,7 @@
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
+            :images_btn="images_btn"
             :index = 2
           >
           </valida-carta-recomendacion>
@@ -77,6 +80,7 @@
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
+            :images_btn="images_btn"
             :index="index + 1"
           >
           </valida-carta-recomendacion>
@@ -116,6 +120,11 @@ export default {
   props: {
     //Cartas de recomendacion (tabla a rellenar)
     //Aqui se cambian los correos
+
+    images_btn:{
+      type:Array,
+      default:null,
+    },
 
     appliant: {
       type: Object,

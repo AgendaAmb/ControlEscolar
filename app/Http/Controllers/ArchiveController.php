@@ -197,29 +197,6 @@ class ArchiveController extends Controller
 
     public function archives(Request $request)
     {
-        // try {
-        //     $startDate = Carbon::createFromFormat('Y-m-d', $request->date_from)->startOfDay();
-        //     $endDate = Carbon::createFromFormat('Y-m-d', $request->date_to)->endOfDay();
-        // } catch (\Exception $e) {
-        //     return new JsonResponse('Error al crear la fecha', 200);
-        // }
-
-        // return new JsonResponse("No existen archivos para las fechas y modalidad indicada Desde: " .$request->date_from .' -- Hasta: '.$request->date_from, 502);
-
-        // $request->validate([
-        //     'announcement_id' => ['required', 'numeric',  'exists:announcements,id'],
-        // ]);
-
-        // return new JsonResponse(['message' => $request], 502);
-        // $archives = QueryBuilder::for(Archive::class)
-        //     ->with('appliant')
-        //     ->allowedIncludes(['announcement'])
-        //     ->allowedFilters([
-        //         AllowedFilter::exact('announcement.id'),
-        //     ])
-        //     ->whereBetween('created_at', [$startDate, $endDate])
-        //     ->get();
-
         try {
             $archives =  Archive::with('appliant')->where('announcement_id', $request->announcement_id)->get();
         } catch (\Exception $e) {

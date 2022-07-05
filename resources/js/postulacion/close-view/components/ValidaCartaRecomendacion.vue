@@ -22,52 +22,22 @@
         <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
       </template>
 
-      <div v-if="checkUpload() === 1">
-       <a
-          class="btn btn-primary"
-          :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/'+archive_id+'/'+recommendation_letter.id"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
+      <div v-if="checkUpload() === 1" class="d-flex justify-content-center  my-1" style="max-height: 45px; width: 100%">
 
-      <!-- <button
-          @click="verCartaRecomendacion()"
-          class="btn btn-primary"
-        >
-          Ver archivo
-        </button> -->
+      <label>
+        <a class="btn btn-primary"
+          :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
+          target="_blank" style=" height: 45px; width:100%;">
+          <img :src="images_btn['descargar']" alt="" style="width:100%; max-height: 45px !important;">
+        </a>
+      </label>
+
+
+
     </div>
     </div>
  
 </template>
-
-
-<style scoped>
-/* 
-      Esto va en vista de administrador
-      <div v-else class="form-group col-3 my-auto">
-      <a
-        class="verArchivo d-block my-2 ml-auto"
-        :href="archive_recommendation_letter['location']"
-        target="_blank"
-      > 
-      <img  :src="asset('storage/archive-buttons/seleccionar.png')" >
-      </a>
-    </div>
-    
-    */
-
-/*  v-if="archive_recommendation_letter!=null" */
-.verArchivo {
-  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-</style>
-
 
 <script>
 import swal from "sweetalert2";
@@ -92,6 +62,11 @@ export default {
   },
 
   props: {
+    images_btn:{
+      type:Array,
+      default:null,
+    },
+    
     archive_id:{
       type:Number,
       default:null

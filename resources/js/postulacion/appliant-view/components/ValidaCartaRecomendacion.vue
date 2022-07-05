@@ -2,13 +2,8 @@
   <div class="col-12">
     <strong>Correo No.{{ index }} :</strong>
     <!-- Campo para rellenar el correo -->
-    <input
-      type="text"
-      class="form-control"
-      :class="inputClassFor()"
-      v-model="myEmail"
-      :readonly="checkUpload() === 1"
-    />
+    <input type="text" class="form-control" :class="inputClassFor()" v-model="myEmail"
+      :readonly="checkUpload() === 1" />
 
     <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
     <template v-if="checkUpload() === 1">
@@ -21,49 +16,26 @@
       <i>Estado:</i> <i class="text-danger">No se ha enviado correo</i>
     </template>
 
-    <div v-if="checkUpload() != 1" class="form-group">
-      <button @click="enviarCorreoCartaRecomendacion()" class="btn btn-primary">
-        Enviar correo
-      </button>
+    <div v-if="checkUpload() != 1" class="form-group"  style="width:100%; max-height: 45px !important;">
+      <img  @click="enviarCorreoCartaRecomendacion()" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
     </div>
-<!-- 
-    <div v-else>
-      <button
-          @click="verCartaRecomendacion()"
-          class="btn btn-primary"
-        >
-          Ver archivo
-        </button>
-    </div> -->
+
+
+    <div v-else class="d-flex justify-content-center  my-1" style="max-height: 45px; width: 100%">
+
+      <label>
+        <a class="btn btn-primary"
+          :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
+          target="_blank" style=" height: 45px; width:100%;">
+          <img :src="images_btn['descargar']" alt="" style="width:100%; max-height: 45px !important;">
+        </a>
+      </label>
+
+
+
+    </div>
   </div>
 </template>
-
-
-<style scoped>
-/* 
-      Esto va en vista de administrador
-      <div v-else class="form-group col-3 my-auto">
-      <a
-        class="verArchivo d-block my-2 ml-auto"
-        :href="archive_recommendation_letter['location']"
-        target="_blank"
-      > 
-      <img  :src="asset('storage/archive-buttons/seleccionar.png')" >
-      </a>
-    </div>
-    
-    */
-
-/*  v-if="archive_recommendation_letter!=null" */
-.verArchivo {
-  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-</style>
-
 
 <script>
 import swal from "sweetalert2";
@@ -88,6 +60,13 @@ export default {
   },
 
   props: {
+
+    images_btn: {
+      type: Array,
+      default: null,
+    },
+
+
     email: {
       type: String,
       default: "example@example.com",
@@ -103,8 +82,18 @@ export default {
       default: null,
     },
 
+    archive_id: {
+      type: Number,
+      default: null
+    },
+
+    appliant: {
+      type: Object,
+      default: null,
+    },
+
     index: Number,
-    appliant: Object,
+
     academic_program: Object,
     errors: Array,
   },
@@ -130,28 +119,6 @@ export default {
       };
     },
 
-    verCartaRecomendacion(){
-        axios
-          .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
-            params: {
-              rl_id: this.recommendation_letter['id'],
-              user_id: this.announcement,
-            },
-          })
-          .then((response) => {
-            this.dataLength = response.data.length; // cantidad de articulos
-            this.$emit("archives-found", response.data); //actualiza archivos
-          })
-          .catch((error) => {
-            console.log(error);
-            Swal.fire({
-              title: "Error al hacer busqueda",
-              text: error.response.data,
-              icon: "error",
-            });
-          });
-    },
-
     // -1  : Correo no enviado
     //  0  : En espera de respuesta del externo
     //  1  : Completado
@@ -165,6 +132,38 @@ export default {
       }
       console.log("res: " + res);
       return res;
+    },
+    verCartaRecomendacion() {
+
+
+      if (this.recommendation_letter == null || this.appliant == null || this.archive_id == null) {
+        Swal.fire({
+          title: "Ups!",
+          text: "El usuario con la carta de recomendación a ver no existe",
+          icon: "error",
+        });
+      } else {
+        axios
+          .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
+            params: {
+              rl_id: this.recommendation_letter['id'],
+              archive_id: this.archive_id,
+              user_id: this.appliant['id'],
+            },
+          })
+          .then((response) => {
+          })
+          .catch((error) => {
+            console.log(error);
+            Swal.fire({
+              title: "Error al hacer busqueda",
+              text: error.response.data,
+              icon: "error",
+            });
+          });
+      }
+
+
     },
 
     enviarCorreoCartaRecomendacion() {
@@ -191,8 +190,7 @@ export default {
 
       axios
         .post(
-          "/controlescolar/solicitud/sentEmailRecommendationLetter",
-          request
+          "/controlescolar/solicitud/sentEmailRecommendationLetter", request
         )
         .then((response) => {
           if (response.data == "Exito, el correo ha sido enviado") {

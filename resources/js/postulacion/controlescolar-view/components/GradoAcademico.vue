@@ -1,19 +1,8 @@
 <template>
   <details>
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h4 class="font-weight-bold">Nivel de escolaridad {{ index }}</h4>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaHistorialAcademico"
-          class="btn btn-danger"
-          style="height: 35px; width: 100%"
-        >
-          Eliminar Escolaridad
-        </button>
       </div>
     </summary>
     <div class="my-3 row">
@@ -23,23 +12,12 @@
         Grado, título, etc.
       -->
         <div class="row">
-          <div
-            v-if="alias_academic_program == 'doctorado'"
-            class="form-group col-md-6 col-lg-4"
-          >
+          <div v-if="alias_academic_program == 'doctorado'" class="form-group col-md-6 col-lg-4">
             <label> Nivel de escolaridad: </label>
             <!-- Solo se podra seleccionar para doctorado -->
-            <select
-              v-model="DegreeType"
-              class="form-control"
-              :class="objectForError('degree_type')"
-            >
+            <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
               <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="escolaridad in escolaridades"
-                :key="escolaridad"
-                :value="escolaridad"
-              >
+              <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
                 {{ escolaridad }}
               </option>
             </select>
@@ -51,11 +29,7 @@
           <div v-else class="form-group col-md-6 col-lg-4">
             <label> Nivel de escolaridad: </label>
             <!-- Solo se podra seleccionar para doctorado -->
-            <select
-              v-model="DegreeType"
-              class="form-control"
-              :class="objectForError('degree_type')"
-            >
+            <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
               <option value="Licenciatura" selected>Licenciatura</option>
             </select>
             <div v-if="estaEnError('degree_type')" class="invalid-feedback">
@@ -65,34 +39,18 @@
 
           <div class="form-group col-md-6 col-lg-4">
             <label> Título obtenido: </label>
-            <input
-              v-model="Degree"
-              type="text"
-              class="form-control"
-              :class="objectForError('degree')"
-            />
+            <input v-model="Degree" type="text" class="form-control" :class="objectForError('degree')" />
 
             <div v-if="estaEnError('degree')" class="invalid-feedback">
               {{ errores.degree_type }}
             </div>
           </div>
 
-          <div
-            v-if="alias_academic_program == 'imarec'"
-            class="d-none d-lg-block form-group col-lg-4"
-          >
+          <div v-if="alias_academic_program == 'imarec'" class="d-none d-lg-block form-group col-lg-4">
             <label> Estatus: </label>
-            <select
-              v-model="Status"
-              class="form-control"
-              :class="objectForError('status')"
-            >
+            <select v-model="Status" class="form-control" :class="objectForError('status')">
               <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="estatusEstudio in estatusEstudios_otros"
-                :key="estatusEstudio"
-                :value="estatusEstudio"
-              >
+              <option v-for="estatusEstudio in estatusEstudios_otros" :key="estatusEstudio" :value="estatusEstudio">
                 {{ estatusEstudio }}
               </option>
             </select>
@@ -104,17 +62,9 @@
 
           <div v-else class="d-none d-lg-block form-group col-lg-4">
             <label> Estatus: </label>
-            <select
-              v-model="Status"
-              class="form-control"
-              :class="objectForError('status')"
-            >
+            <select v-model="Status" class="form-control" :class="objectForError('status')">
               <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="estatusEstudio in estatusEstudios_PMPCA"
-                :key="estatusEstudio"
-                :value="estatusEstudio"
-              >
+              <option v-for="estatusEstudio in estatusEstudios_PMPCA" :key="estatusEstudio" :value="estatusEstudio">
                 {{ estatusEstudio }}
               </option>
             </select>
@@ -131,18 +81,9 @@
         <div class="row">
           <div class="form-group col-lg-6">
             <label> País donde realizaste tus estudios: </label>
-            <select
-              v-model="Country"
-              class="form-control"
-              @change="escogePais"
-              :class="objectForError('country')"
-            >
+            <select v-model="Country" class="form-control" @change="escogePais" :class="objectForError('country')">
               <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="PaisEstudio in paises"
-                :key="PaisEstudio.id"
-                :value="PaisEstudio.name"
-              >
+              <option v-for="PaisEstudio in paises" :key="PaisEstudio.id" :value="PaisEstudio.name">
                 {{ PaisEstudio.name }}
               </option>
             </select>
@@ -154,17 +95,9 @@
 
           <div class="form-group col-lg-6">
             <label> Universidad de estudios: </label>
-            <select
-              v-model="University"
-              class="form-control"
-              :class="objectForError('university')"
-            >
+            <select v-model="University" class="form-control" :class="objectForError('university')">
               <option value="" selected>Escoge una opción</option>
-              <option
-                v-for="Universidad in Universidades"
-                :key="Universidad.id"
-                :value="Universidad.name"
-              >
+              <option v-for="Universidad in Universidades" :key="Universidad.id" :value="Universidad.name">
                 {{ Universidad.name }}
               </option>
             </select>
@@ -194,10 +127,7 @@
             <input v-model="TitrationDate" type="date" class="form-control" />
           </div>
 
-          <div
-            v-if="Status === 'Título o grado en proceso'"
-            class="form-group col-md-6"
-          >
+          <div v-if="Status === 'Título o grado en proceso'" class="form-group col-md-6">
             <label> Fecha de presentación de examen: </label>
             <input v-model="TitrationDate" type="date" class="form-control" />
           </div>
@@ -236,18 +166,8 @@
         <div class="row">
           <div class="form-group col-md-6 col-lg-4">
             <label> Promedio obtenido: </label>
-            <input
-              v-if="'average' in errores"
-              v-model.number="Average"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
-              v-model.number="Average"
-              type="number"
-              class="form-control"
-            />
+            <input v-if="'average' in errores" v-model.number="Average" type="number" class="form-control is-invalid" />
+            <input v-else v-model.number="Average" type="number" class="form-control" />
 
             <div v-if="'average' in errores" class="invalid-feedback">
               {{ errores.average }}
@@ -256,18 +176,8 @@
 
           <div class="form-group col-md-6 col-lg-4">
             <label> Calificación mínima: </label>
-            <input
-              v-if="'min_avg' in errores"
-              v-model.number="MinAvg"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
-              v-model.number="MinAvg"
-              type="number"
-              class="form-control"
-            />
+            <input v-if="'min_avg' in errores" v-model.number="MinAvg" type="number" class="form-control is-invalid" />
+            <input v-else v-model.number="MinAvg" type="number" class="form-control" />
 
             <div v-if="'min_avg' in errores" class="invalid-feedback">
               {{ errores.min_avg }}
@@ -276,18 +186,8 @@
 
           <div class="form-group col-md-6 col-lg-4">
             <label> Calificación máxima: </label>
-            <input
-              v-if="'max_avg' in errores"
-              v-model.number="MaxAvg"
-              type="number"
-              class="form-control is-invalid"
-            />
-            <input
-              v-else
-              v-model.number="MaxAvg"
-              type="number"
-              class="form-control"
-            />
+            <input v-if="'max_avg' in errores" v-model.number="MaxAvg" type="number" class="form-control is-invalid" />
+            <input v-else v-model.number="MaxAvg" type="number" class="form-control" />
             <div v-if="'max_avg' in errores" class="invalid-feedback">
               {{ errores.max_avg }}
             </div>
@@ -295,37 +195,23 @@
         </div>
       </div>
 
-      <div class="row align-items-center mt-0 mb-0">
-        <div class="col mx-3">
+      <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+             <img  @click="actualizaHistorialAcademico" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+          </div>
+        <div class="col-md-10 col-xs-9 mx-3">
           <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores del
-            historial académico es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
+            <p><strong>Nota: </strong>
+            Para poder guardar los cambios en los campos anteriores del
+            historial académico es necesario seleccionar el siguiente botón. <strong>Solo se guardara el historial académico actual</strong></p>
           </label>
         </div>
       </div>
-
-      <div class="row align-items-center mt-0 mb-3">
-        <div class="col">
-          <button
-            @click="actualizaHistorialAcademico"
-            class="mx-3 btn btn-primary"
-          >
-            Guardar Historial Academico
-          </button>
-        </div>
-      </div>
-      <documento-requerido
-        v-for="documento in RequiredDocuments"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        :alias_academic_program="alias_academic_program"
-        v-bind="documento"
-        @enviaDocumento="cargaDocumento"
-      >
+     
+      <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name"
+        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
+        @enviaDocumento="cargaDocumento">
       </documento-requerido>
     </div>
     <hr class="d-block" :style="ColorStrip" />
@@ -343,6 +229,8 @@ export default {
   props: {
     //Index de la escolaridad
     index: Number,
+
+    images_btn: Array,
 
     //Alias academic program
     alias_academic_program: String,
@@ -408,8 +296,8 @@ export default {
     required_documents: Array,
 
     universidades: {
-      type:Array,
-      default:null,
+      type: Array,
+      default: null,
     }
   },
 
@@ -753,8 +641,10 @@ export default {
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
-       formData.append("index", this.index);
+      formData.append("index", this.index);
       formData.append("file", file);
+
+      // console.log(formData);
 
       axios({
         method: "post",

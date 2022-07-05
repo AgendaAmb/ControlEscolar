@@ -70,6 +70,7 @@
          :archivo.sync="documento.archivo"
          :location.sync="documento.pivot.location"
          :errores.sync = "documento.errores"
+                  :images_btn = "images_btn"
          @enviaDocumento = "cargaDocumento"
          v-bind="documento">
       </documento-requerido>
@@ -89,6 +90,8 @@ export default {
     //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
+
+    images_btn:Array,
 
     // Curp del postulante
     curp: String,

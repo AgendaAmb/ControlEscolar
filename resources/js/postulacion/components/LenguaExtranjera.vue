@@ -17,49 +17,7 @@
       <div v-if="getImage() === true" class="form-group col-4 my-auto ">
         <img style="width: 80%; height: 80% !important" :src="flag_image" />
       </div>
-
-      <!--
-      Visualización a partir de tamaños medianos o más pequeños.
-    -->
-      <!-- <div class="form-group col-8 d-md-none">
-        <div class="row justify-content-end">
-          <div class="form-group col-11">
-            <label> Idioma: </label>
-            <select
-              v-model="Language"
-              class="form-control"
-              :class="{ 'is-invalid': 'language' in errores }"
-            >
-              <option value="" selected>Escoge una opción</option>
-              <option v-for="idioma in idiomas" :key="idioma" :value="idioma">
-                {{ idioma }}
-              </option>
-            </select>
-
-            <div v-if="'language' in errores" class="invalid-feedback">
-              {{ errores.language }}
-            </div>
-          </div>
-
-          <div class="form-group col-11">
-            <label> Institución que otorgó el certificado: </label>
-            <input
-              v-model="Institution"
-              type="text"
-              class="form-control"
-              :class="{ 'is-invalid': 'institution' in errores }"
-            />
-
-            <div v-if="'institution' in errores" class="invalid-feedback">
-              {{ errores.institution }}
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!--
-      Visualización a partir de tamaños medianos o más grandes.
-    -->
+     
       <div class="form-group col-md-8">
         <div class="row justify-content-end">
           <div class="form-group col-lg-6 col-md-11 d-none d-md-block">
@@ -240,19 +198,6 @@
   </details>
 </template>
 
-
-<!-- Estilos del componente -->
-<style scoped>
-.pais {
-  background-size: auto;
-  background-repeat: no-repeat;
-}
-
-.alemania {
-  background-image: url("/controlescolar/storage/academic-programs/alemania.png");
-}
-</style>
-<!-- Fin estilos -->
 
 <script>
 import DocumentoRequerido from "./DocumentoRequerido.vue";

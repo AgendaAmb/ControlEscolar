@@ -7,6 +7,7 @@
         v-bind="appliant"
         :archive_id="archive_id"
         :documentos.sync="personal_documents"
+        :images_btn="images_btn"
       >
       </postulante>
       <hr class="d-block" :style="ColorStrip" />
@@ -37,6 +38,7 @@
           :titration_date.sync="grado.titration_date"
           :required_documents.sync="grado.required_documents"
           :paises="Countries"
+          :images_btn="images_btn"
           @delete-item="eliminaHistorialAcademicoFromList"
         >
         </grado-academico>
@@ -58,6 +60,7 @@
           :user_id="appliant.id"
           :viewer_id="viewer.id"
           :letters_Commitment="letters_Commitment"
+          :images_btn="images_btn"
           :alias_academic_program="academic_program.alias"
         >
         </requisitos-ingreso>
@@ -86,6 +89,7 @@
           :reading_level.sync="language.reading_level"
           :writing_level.sync="language.writing_level"
           :documentos.sync="language.required_documents"
+          :images_btn="images_btn"
           @delete-item="eliminaLenguaExtranjeraFromList"
         >
         </lengua-extranjera>
@@ -115,6 +119,7 @@
           :field.sync="experience.field"
           :working_position_description.sync="experience.working_position_description"
           :achievements.sync="experience.achievements"
+          :images_btn="images_btn"
           @delete-item="eliminaExperienciaLaboralFromList"
         >
         </experiencia-laboral>
@@ -150,6 +155,7 @@
           :post_title_document.sync="production.post_title_document"
           :post_title_review.sync="production.post_title_review"
           :documentos.sync="curricular_documents"
+          :images_btn="images_btn"
           @delete-item="eliminaProduccionCientificaFromList"
         >
         </produccion-cientifica>
@@ -167,6 +173,7 @@
           :alias_academic_program="academic_program.alias"
           :course_name.sync="humanCapital.course_name"
           :assisted_at.sync="humanCapital.assisted_at"
+          :images_btn="images_btn"
           :scolarship_level.sync="humanCapital.scolarship_level"
           @delete-item="eliminaCapitalHumanoFromList"
         >
@@ -187,6 +194,7 @@
           :archive_id="archive_id"
           :academic_program="academic_program"
           :recommendation_letters="recommendation_letters"
+          :images_btn="images_btn"
           :archives_recommendation_letters="archives_recommendation_letters"
         />
       </details>
@@ -199,6 +207,7 @@
         :appliant.sync="appliant" 
         :archive_id.sync="archive_id"
         :academic_program="academic_program"
+        :images_btn="images_btn"
         :interview_documents="interview_documents">
         </documentos-entrevista>
       </details>
@@ -233,6 +242,20 @@ export default {
     RequisitosIngreso,
     CartaRecomendacion,
     DocumentosEntrevista,
+  },
+
+  created() {
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 
   props: {
@@ -320,6 +343,7 @@ export default {
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
+      images_btn: [],
     };
   },
 

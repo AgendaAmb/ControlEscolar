@@ -1,24 +1,14 @@
 <template>
   <details class="mt-1">
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h5 v-if="tipos[Type] != null" class="font-weight-bold">
           {{ tipos[Type] + " " + index }}
         </h5>
 
         <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
       </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaProduccionCientifica"
-          class="btn btn-danger"
-          style="height: 35px; width: 100%"
-        >
-          Eliminar Publicación
-        </button>
-      </div>
+      
     </summary>
 
     <div class="row mx-2">
@@ -128,23 +118,23 @@
         >
         </resenia>
       </div>
-
-      <div class="col-12">
-        <label>
-          <strong>Nota: </strong>
-          Para poder registrar los cambios en los campos anteriores de la
-          publicación correspondiente es necesario seleccionar el siguiente
-          botón, de esta forma podremos guardar la información que acabas de
-          compartir
-        </label>
-      </div>
-      <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class="btn btn-primary">
-          Guardar publicación
-        </button>
-      </div>
     </div>
-    <documento-requerido
+
+    <div class="d-flex justify-content-start mt-0 mb-1"  style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+             <img  @click="guardaProduccionCientifica" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+          </div>
+        <div class="col-md-10 col-xs-9 mx-3">
+          <label>
+             <p><strong>Nota: </strong>
+              Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente
+              botón.<strong>Solo se guardara la producción científica actual.</strong></p>
+          </label>
+        </div>
+      </div>
+      
+
+    <!-- <documento-requerido
       v-for="documento in RequiredDocuments"
       :key="documento.name"
       :archivo.sync="documento.archivo"
@@ -154,7 +144,7 @@
       v-bind="documento"
       @enviaDocumento="cargaDocumento"
     >
-    </documento-requerido>
+    </documento-requerido> -->
     <hr class="d-block mt-2" :style="ColorStrip" />
   </details>
 </template>
@@ -190,6 +180,8 @@ export default {
   props: {
     //Index
     index: Number,
+
+    images_btn:Array,
 
     // Documentos requeridos
     required_documents: Array,

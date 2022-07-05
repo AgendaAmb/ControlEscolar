@@ -5,215 +5,156 @@
         <h4 class="font-weight-bold">Idioma {{ index }}</h4>
       </div>
     </summary>
-  <div class="row">
-    <h4 class="form-group col-12 my-2"> </h4>
-    
-    <!-- Datos principales -->
-    <div class="form-group col-4 my-auto">
-      <img v-if="Language === 'Alemán'" 
-        class="d-block mx-auto" 
-        width="120px" 
-        src="/storage/emojis/alemania.png">
-      
-      <img v-else-if="Language === 'Español'" 
-        class="d-block mx-auto" 
-        width="120px" 
-        src="/storage/emojis/mexico.png">
-      <img v-else-if="Language === 'Inglés'" class="d-block mx-auto" width="120px" src="/storage/emojis/inglaterra.png">
-      <img v-else-if="Language=== 'Francés'" class="d-block mx-auto" width="120px" src="/storage/emojis/francia.png">
-    </div>
+    <div class="row my-4 justify-content-center">
 
-    <!--
-      Visualización a partir de tamaños medianos o más pequeños.
-    -->
-    <div class="form-group col-8 d-md-none">
-      <div class="row justify-content-end">
-        <div class="form-group col-11">
-          <label> Idioma: </label>
-           <input v-model="Language" type="text" 
-            class="form-control" 
-            :readonly="true">
+      <!-- Imagen de bandera -->
+      <div v-if="getImage() === true" class="form-group col-4 my-auto ">
+        <img style="width: 80%; height: 80% !important" :src="flag_image" />
+      </div>
 
-          <div v-if="'language' in errores" class="invalid-feedback">{{errores.language}}</div>
-        </div>
+      <!-- Forms -->
+      <div class="form-group col-8 d-md-none">
+        <div class="row justify-content-end">
+          <div class="form-group col-11">
+            <label> Idioma: </label>
+            <input v-model="Language" type="text" class="form-control" :readonly="true">
 
-        <div class="form-group col-11">
-          <label> Institución que otorgó el certificado: </label>
-          <input v-model="Institution" type="text" 
-            class="form-control" 
-            :class="{ 'is-invalid': ('institution' in errores) }"
-            :readonly="true">
+            <div v-if="'language' in errores" class="invalid-feedback">{{ errores.language }}</div>
+          </div>
 
-          <div v-if="'institution' in errores" class="invalid-feedback">{{errores.institution}}</div>
+          <div class="form-group col-11">
+            <label> Institución que otorgó el certificado: </label>
+            <input v-model="Institution" type="text" class="form-control"
+              :class="{ 'is-invalid': ('institution' in errores) }" :readonly="true">
+
+            <div v-if="'institution' in errores" class="invalid-feedback">{{ errores.institution }}</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!--
+      <!--
       Visualización a partir de tamaños medianos o más grandes.
     -->
-    <div class="form-group col-md-8">
-      <div class="row justify-content-end">
-        <div class="form-group col-lg-6 d-none d-md-block">
-           <label> Idioma: </label>
-           <input v-model="Language" type="text" 
-            class="form-control" 
-            :readonly="true">
+      <div class="form-group col-md-8">
+        <div class="row justify-content-end">
+          <div class="form-group col-lg-6 d-none d-md-block">
+            <label> Idioma: </label>
+            <input v-model="Language" type="text" class="form-control" :readonly="true">
 
 
-          <div v-if="'language' in errores" class="invalid-feedback">{{errores.language}}</div>
-        </div>
+            <div v-if="'language' in errores" class="invalid-feedback">{{ errores.language }}</div>
+          </div>
 
-        <div class="form-group col-lg-6 d-none d-md-block">
-           <label> Institución que otorgó el certificado: </label>
-          <input v-model="Institution" type="text" 
-            class="form-control" 
-            :class="{ 'is-invalid': ('institution' in errores) }"
-            :readonly="true">
-            <div v-if="'institution' in errores" class="invalid-feedback">{{errores.institution}}</div>
-        </div>
+          <div class="form-group col-lg-6 d-none d-md-block">
+            <label> Institución que otorgó el certificado: </label>
+            <input v-model="Institution" type="text" class="form-control"
+              :class="{ 'is-invalid': ('institution' in errores) }" :readonly="true">
+            <div v-if="'institution' in errores" class="invalid-feedback">{{ errores.institution }}</div>
+          </div>
 
-        <div v-if="Language === 'Inglés'" class="form-group col-md-6">
-          <label> ¿Qué examen de inglés presentaste? </label>
-          <input type="text" class="form-control" :readonly="true">
-        </div>
+          <div v-if="Language === 'Inglés'" class="form-group col-md-6">
+            <label> ¿Qué examen de inglés presentaste? </label>
+            <input type="text" class="form-control" :readonly="true">
+          </div>
 
-        <div v-if="Language === 'Inglés'" class="form-group col-md-6">
-          <label> Escoge un tipo de examen </label>
-          <input type="text" class="form-control" :readonly="true">
-        </div>
+          <div v-if="Language === 'Inglés'" class="form-group col-md-6">
+            <label> Escoge un tipo de examen </label>
+            <input type="text" class="form-control" :readonly="true">
+          </div>
 
-        <div class="form-group col-md-6">
-          <label> Puntaje obtenido: </label>
-          <input v-model.number="Score" type="number" 
-            class="form-control" 
-            :class="{ 'is-invalid': ('score' in errores) }"
-            :readonly="true">
+          <div class="form-group col-md-6">
+            <label> Puntaje obtenido: </label>
+            <input v-model.number="Score" type="number" class="form-control"
+              :class="{ 'is-invalid': ('score' in errores) }" :readonly="true">
 
-            <div v-if="'score' in errores" class="invalid-feedback">{{errores.score}}</div>
-        </div>
+            <div v-if="'score' in errores" class="invalid-feedback">{{ errores.score }}</div>
+          </div>
 
-        <div class="form-group col-md-6">
-          <label> Fecha de aplicación:  </label>
-          <input v-model="PresentedAt" 
-            type="date" 
-            class="form-control" 
-            :class="{ 'is-invalid': ('presented_at' in errores) }"
-            :readonly="true">
+          <div class="form-group col-md-6">
+            <label> Fecha de aplicación: </label>
+            <input v-model="PresentedAt" type="date" class="form-control"
+              :class="{ 'is-invalid': ('presented_at' in errores) }" :readonly="true">
 
-          <div v-if="'presented_at' in errores" class="invalid-feedback">{{errores.presented_at}}</div>
-        </div>
+            <div v-if="'presented_at' in errores" class="invalid-feedback">{{ errores.presented_at }}</div>
+          </div>
 
-        <div class="form-group d-none d-lg-block col-lg-6">
-          <label> Vigencia desde: </label>
-          <input v-model="ValidFrom" 
-            type="date" 
-            class="form-control" :class="{ 'is-invalid': ('valid_from' in errores) }"
-            :readonly="true">
+          <div class="form-group d-none d-lg-block col-lg-6">
+            <label> Vigencia desde: </label>
+            <input v-model="ValidFrom" type="date" class="form-control"
+              :class="{ 'is-invalid': ('valid_from' in errores) }" :readonly="true">
 
-          <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
-        </div>
+            <div v-if="'valid_from' in errores" class="invalid-feedback">{{ errores.valid_from }}</div>
+          </div>
 
-        <div class="form-group d-none d-lg-block col-lg-6">
-          <label> Hasta: </label>
-          <input v-model="ValidTo" 
-            type="date" 
-            class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }"
-            :readonly="true">
+          <div class="form-group d-none d-lg-block col-lg-6">
+            <label> Hasta: </label>
+            <input v-model="ValidTo" type="date" class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }"
+              :readonly="true">
 
-          <div v-if="'valid_to' in errores" class="invalid-feedback">{{errores.valid_to}}</div>
+            <div v-if="'valid_to' in errores" class="invalid-feedback">{{ errores.valid_to }}</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group d-lg-none col-md-6">
-      <label> Vigencia desde: </label>
-      <input v-model="ValidFrom" 
-        type="date" 
-        class="form-control" :class="{ 'is-invalid': ('valid_from' in errores) }"
-        :readonly="true">
+      <div class="form-group d-lg-none col-md-6">
+        <label> Vigencia desde: </label>
+        <input v-model="ValidFrom" type="date" class="form-control" :class="{ 'is-invalid': ('valid_from' in errores) }"
+          :readonly="true">
 
-      <div v-if="'valid_from' in errores" class="invalid-feedback">{{errores.valid_from}}</div>
-    </div>
+        <div v-if="'valid_from' in errores" class="invalid-feedback">{{ errores.valid_from }}</div>
+      </div>
 
-    <div class="form-group d-lg-none col-md-6">
-      <label> Hasta: </label>
-      <input v-model="ValidTo" 
-        type="date" 
-        class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }" 
-        :readonly="true">
+      <div class="form-group d-lg-none col-md-6">
+        <label> Hasta: </label>
+        <input v-model="ValidTo" type="date" class="form-control" :class="{ 'is-invalid': ('valid_to' in errores) }"
+          :readonly="true">
 
-      <div v-if="'valid_to' in errores" class="invalid-feedback">{{errores.valid_to}}</div>
-    </div>
+        <div v-if="'valid_to' in errores" class="invalid-feedback">{{ errores.valid_to }}</div>
+      </div>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Grado de dominio: </label>
-      <input v-model="LanguageDomain" 
-        type="text" 
-        class="form-control" :class="{ 'is-invalid': ('language_domain' in errores) }"
-        :readonly="true">
+      <div class="form-group col-md-6 col-lg-3">
+        <label> Grado de dominio: </label>
+        <input v-model="LanguageDomain" type="text" class="form-control"
+          :class="{ 'is-invalid': ('language_domain' in errores) }" :readonly="true">
 
-      <div v-if="'language_domain' in errores" class="invalid-feedback">{{errores.language_domain}}</div>
-    </div>
+        <div v-if="'language_domain' in errores" class="invalid-feedback">{{ errores.language_domain }}</div>
+      </div>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel conversacional: </label>
-      <input v-model="ConversationalLevel" 
-        type="text" 
-        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }"
-        :readonly="true">
+      <div class="form-group col-md-6 col-lg-3">
+        <label> Nivel conversacional: </label>
+        <input v-model="ConversationalLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': ('writing_level' in errores) }" :readonly="true">
 
-      <div v-if="'conversational_level' in errores" class="invalid-feedback">{{errores.conversational_level}}</div>
-    </div>
+        <div v-if="'conversational_level' in errores" class="invalid-feedback">{{ errores.conversational_level }}</div>
+      </div>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel de lectura: </label>
-      <input v-model="ReadingLevel" 
-        type="text" 
-        class="form-control" :class="{ 'is-invalid': ('reading_level' in errores) }"
-        :readonly="true">
+      <div class="form-group col-md-6 col-lg-3">
+        <label> Nivel de lectura: </label>
+        <input v-model="ReadingLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': ('reading_level' in errores) }" :readonly="true">
 
-      <div v-if="'reading_level' in errores" class="invalid-feedback">{{errores.reading_level}}</div>
-    </div>
+        <div v-if="'reading_level' in errores" class="invalid-feedback">{{ errores.reading_level }}</div>
+      </div>
 
-    <div class="form-group col-md-6 col-lg-3">
-      <label> Nivel de escritura: </label>
-      <input v-model="WritingLevel" 
-        type="text" 
-        class="form-control" :class="{ 'is-invalid': ('writing_level' in errores) }"
-        :readonly="true">
-      <div v-if="'writing_level' in errores" class="invalid-feedback">{{errores.writing_level}}</div>
-    </div>
-        
+      <div class="form-group col-md-6 col-lg-3">
+        <label> Nivel de escritura: </label>
+        <input v-model="WritingLevel" type="text" class="form-control"
+          :class="{ 'is-invalid': ('writing_level' in errores) }" :readonly="true">
+        <div v-if="'writing_level' in errores" class="invalid-feedback">{{ errores.writing_level }}</div>
+      </div>
 
-    <documento-requerido v-for="documento in Documentos" :key="documento.name"
-      :archivo.sync="documento.archivo" 
-      :location.sync="documento.pivot.location" 
-      :errores.sync = "documento.errores"
-      @enviaDocumento = "cargaDocumento" 
-      v-bind="documento">
-    </documento-requerido>
+
+      <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
+        @enviaDocumento="cargaDocumento" v-bind="documento">
+      </documento-requerido>
       <hr class="my-4 d-block" :style="ColorStrip">
-  </div>
-   <hr class="d-block mb-1" :style="ColorStrip">
+    </div>
+    <hr class="d-block mb-1" :style="ColorStrip">
   </details>
 </template>
 
 
-<!-- Estilos del componente -->
-<style scoped>
-
-.pais {
-  background-size: auto;
-  background-repeat: no-repeat;
-}
-
-.alemania {
-  background-image: url('/controlescolar/storage/academic-programs/alemania.png');
-}
-
-</style>
-<!-- Fin estilos -->
 
 <script>
 import DocumentoRequerido from './DocumentoRequerido.vue';
@@ -224,9 +165,11 @@ export default {
   components: { DocumentoRequerido, InputSolicitud },
   props: {
     //Index
-    index:Number,
+    index: Number,
 
-    alias_academic_program:String,
+    alias_academic_program: String,
+
+    images_btn: Array,
 
     // Id.
     id: Number,
@@ -273,6 +216,7 @@ export default {
 
   data() {
     return {
+      flag_image: null,
       errores: {},
       mensajesExito: {},
       idiomas: [
@@ -326,200 +270,121 @@ export default {
     },
 
     State: {
-      get(){
+      get() {
         return this.state;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:state', newVal);
       }
     },
     Language: {
-      get(){
+      get() {
         return this.language;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:language', newVal);
       }
     },
     Institution: {
-      get(){
+      get() {
         return this.institution;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:institution', newVal);
       }
     },
     Score: {
-      get(){
+      get() {
         return this.score;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:score', newVal);
       }
     },
     PresentedAt: {
-      get(){
+      get() {
         return this.presented_at;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:presented_at', newVal);
       }
     },
     ValidFrom: {
-      get(){
+      get() {
         return this.valid_from;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:valid_from', newVal);
       }
     },
     ValidTo: {
-      get(){
+      get() {
         return this.valid_to;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:valid_to', newVal);
       }
     },
     LanguageDomain: {
-      get(){
+      get() {
         return this.language_domain
-      }, 
-      set(newVal){
+      },
+      set(newVal) {
         this.$emit('update:language_domain', newVal);
       }
     },
     ConversationalLevel: {
-      get(){
+      get() {
         return this.conversational_level
-      }, 
-      set(newVal){
+      },
+      set(newVal) {
         this.$emit('update:conversational_level', newVal);
       }
     },
     ReadingLevel: {
-      get(){
+      get() {
         return this.reading_level
-      }, 
-      set(newVal){
+      },
+      set(newVal) {
         this.$emit('update:reading_level', newVal);
       }
     },
     WritingLevel: {
-      get(){
+      get() {
         return this.writing_level;
-      }, 
-      set(newVal){
+      },
+      set(newVal) {
         this.$emit('update:writing_level', newVal);
       }
     },
 
     Documentos: {
-      get(){
+      get() {
         return this.documentos;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:documentos', newVal);
       }
     }
   },
-  methods:{
-
-
-    actualizaLenguaExtranjera(evento){
-      this.enviaLenguaExtranjera(evento, 'Completo');
-    },
-
-    enviaLenguaExtranjera(evento, estado){
-      this.errores = {};
-
-      axios.post('/controlescolar/solicitud/updateAppliantLanguage', {
-        
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        language: this.language,
-        institution: this.institution,
-        score: this.score,
-        presented_at: this.presented_at,
-        valid_from: this.valid_from,
-        valid_to: this.valid_to,
-        language_domain: this.language_domain,
-        conversational_level: this.conversational_level,
-        reading_level: this.reading_level,
-        writing_level: this.writing_level
-
-      }).then(response => {
-        
-        // El resultado fue exitoso.
-        Object.keys(response.data).forEach(dataKey => {
-          var event = 'update:' + dataKey;
-          this.$emit(event, response.data[dataKey]);
+  methods: {
+    getImage() {
+      axios
+        .get("/controlescolar/solicitud/getFlagImage", {
+          params: {
+            language: this.language,
+          },
+        })
+        .then((response) => {
+          // console.log("aaaaaaaaa" + response.data);
+          this.flag_image = response.data;
+          console.log(this.flag_image);
+        })
+        .catch((error) => {
+          console.log(error);
         });
 
-      }).catch(error => {
-        Swal.fire({
-              title: "Error al actualizar datos",
-              text: error.response.data['message'],
-              showCancelButton: false,
-              icon: "error",
-            });
-      });
-    },
-    
-    eliminaIdioma(){
-      axios.post('/controlescolar/solicitud/deleteAppliantLanguage', {
-        id: this.id,
-        archive_id: this.archive_id
-      }).then(response =>{
-        //Llama al padre para que elimine el item de la lista de experiencia laboral
-            this.$emit('delete-item',this.index-1);
-          Swal.fire({
-              title: "Éxito al eliminar registro",
-              text: response.data.message, // Imprime el mensaje del controlador
-              icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Continuar",
-            });
-      }).catch(error=>{
-          Swal.fire({
-              title: "Error al eliminar registro",
-              showCancelButton: false,
-              icon: "error",
-            });
-      }); 
-    },
-
-    cargaDocumento(requiredDocument, file) {
-      
-      var formData = new FormData();
-      formData.append('id', this.id);
-      formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-       formData.append("index", this.index);
-      formData.append('file', file);
-
-      axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/updateAppliantLanguageRequiredDocument',
-        data: formData,
-        headers: {
-          'Accept' : 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;        
-        
-      }).catch(error => {
-        console.log(error);
-        var errores = error.response.data['errors'];
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
-      });
+      return true;
     },
   }
 };

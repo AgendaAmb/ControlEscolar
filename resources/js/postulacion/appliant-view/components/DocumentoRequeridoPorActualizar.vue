@@ -26,62 +26,28 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div
-        class="
-          form-group
-          col-3 col-md-3 col-xs-5
-          justify-content-center
-          my-auto
-        "
-      >
-        <a
-          :href="'/controlescolar/solicitud/expediente/' + location"
-          v-if="checkUpload() > 0"
-          class="btn btn-primary"
-          style="width: 100%"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
-        <label class="btn btn-primary d-block ml-auto my-2">
-          Subir Documento
-          <input
-            type="file"
-            class="form-control d-none"
-            @change="cargaDocumento"
-          />
-        </label>
+      <div class="form-group col-3 align-items-center p-2">
+        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
+          style="max-height: 45px; width: 100%">
+          <label>
+            <a :href="'../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            </a>
+          </label>
+        </div>
+
+        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+          style="max-height:45px !important; width: 100%">
+          <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
+          <label>
+            <img :src="images_btn['seleccionar']" alt="" style=" max-height: 45px !important;">
+            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
+          </label>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.cargarArchivo {
-  background-color: #3490dc;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  font-weight: bold;
-  color: white;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-.verArchivo {
-  background-color: #3490dc;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-</style>
 
 
 <script>
@@ -92,6 +58,11 @@ export default {
     user_id: {
       type: Number,
       default: -1,
+    },
+
+    images_btn:{
+      type:Array,
+      default: [],
     },
 
     viewer_id: {

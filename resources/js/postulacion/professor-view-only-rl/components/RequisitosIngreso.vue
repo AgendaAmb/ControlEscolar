@@ -1,8 +1,6 @@
 <template>
   <div class="col-12">
     <div class="form-row my-4">
-        
-      
       <documento-requerido v-for="documento in Documentos" :key="documento.name"
         :user_id="user_id"
         :viewer_id="viewer_id"
@@ -10,6 +8,7 @@
         :archivo.sync="documento.archivo" 
         :location.sync="documento.pivot.location" 
         :errores.sync="documento.errores"
+        :images_btn="images_btn"
         v-bind="documento"
         @enviaDocumento = "cargaDocumento" >
       </documento-requerido>
@@ -22,29 +21,32 @@ import DocumentoRequerido from "./DocumentoRequerido.vue";
 
 export default {
   props: {
-    archive_id: Number,
+     archive_id: Number,
     motivation: String,
+    exanni_score: Number,
     documentos: Array,
-    
-    user_id:{
-      type:Number,
-      default:-1,
+    images_btn: Array,
+
+    user_id: {
+      type: Number,
+      default: -1,
     },
 
-    viewer_id:{
-      type:Number,
-      default:-1,
+    viewer_id: {
+      type: Number,
+      default: -1,
     },
 
-    letters_Commitment:{
+    letters_Commitment: {
       type: Array,
-      default:null,
+      default: null,
     },
 
     alias_academic_program: {
       type: String,
       default: null,
     }
+
     
   },
   components: { DocumentoRequerido },
@@ -77,21 +79,6 @@ export default {
    
 
   methods:{
-
-    actualizaExposicionMotivos(evento){
-      axios.post('/controlescolar/solicitud/updateMotivation', {
-        archive_id:this.archive_id,
-        motivation: this.motivation,
-      }).then(response => {
-        this.Motivation = response.data.motivation;
-      }).catch(error => {
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
-      });
-    },
 
     cargaDocumento(requiredDocument, file) {
       

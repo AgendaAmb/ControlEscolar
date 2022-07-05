@@ -16,7 +16,9 @@
         :location.sync="documento.pivot.location" 
         :errores.sync="documento.errores"
         :exanni_score.sync="exanni_score"
+        :images_btn="images_btn"
         v-bind="documento"
+        
         @nuevoPuntajeExanni = "nuevoPuntajeExanni"
         @enviaDocumento = "cargaDocumento" >
       </documento-requerido>
@@ -34,6 +36,8 @@ export default {
      // Exanni score
     exanni_score: Number,
     documentos: Array,
+        images_btn: Array,
+
     
     user_id:{
       type:Number,

@@ -18,75 +18,30 @@
         <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div class="form-group col-3 my-auto">
-        <a
-          v-if="checkUpload() === true"
-          class="verArchivo d-block my-2 ml-auto"
-          :href="'expediente/' + location"
-          target="_blank"
-        >
-          Ver Archivo</a
-        >
+      <div class="form-group col-3 align-items-center p-2">
+        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
+          style="max-height: 45px; width: 100%">
+          <label>
+            <a :href="'expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            </a>
+          </label>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
-
-<style scoped>
-/* 
-
- <a v-if="checkUpload() === true" class="verArchivo d-block my-2 ml-auto" :href="location" target="_blank"></a>
-        <label class="cargarArchivo d-block ml-auto my-auto">
-          <input type="file" class="form-control d-none" @change="cargaDocumento">
-        </label>
-        
-        */
-/* .cargarArchivo {
-  background: url(/storage/archive-buttons/seleccionar.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-}
-.verArchivo {
-  background: url(/storage/archive-buttons/ver.png);
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 90px;
-  height: 40px;
-} */
-
-.cargarArchivo {
-  background-color: #3490dc;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  font-weight: bold;
-  color: white;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-.verArchivo {
-  background-color: #3490dc;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  background-size: 90px 40px;
-  background-repeat: no-repeat;
-  width: 70%;
-  height: 30px;
-}
-</style>
 
 <script>
 export default {
   name: "documento-requerido-entrevista",
 
   props: {
+    images_btn: {
+      type: Array,
+    },
+
     id: {
       type: Number,
     },

@@ -395,6 +395,16 @@ export default {
         this.selected_workingDocuments.push(element[1]);
       }
     });
+  
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        this.images_btn = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   },
 };
 </script>

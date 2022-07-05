@@ -214,6 +214,7 @@
         :archivo.sync="documento.archivo"
         :location.sync="documento.pivot.location"
         :errores.sync="documento.errores"
+        :images_btn="images_btn"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -237,6 +238,8 @@ export default {
 
     //Alias academic program
     alias_academic_program: String,
+
+    images_btn: Array,
 
     // Países que el postulante puede escoger.
     paises: Array,

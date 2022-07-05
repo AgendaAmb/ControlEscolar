@@ -1,53 +1,39 @@
 <template>
-<details>
-  <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
-        <h5 class="font-weight-bold"> Capital Humano {{index+1}}</h5>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaCapitalHumano"
-          class="btn btn-danger"
-          style="height: 35px; width:100%"
-        >
-          Eliminar Capital Humano
-        </button>
+  <details>
+    <summary class="d-flex justify-content-start align-items-center my-2">
+      <div class="col-12">
+        <h5 class="font-weight-bold"> Capital Humano {{ index + 1 }}</h5>
       </div>
     </summary>
+    <div class="row mx-2">
+      <div class="form-group col-md-4">
+        <label> Nombre del curso: </label>
+        <input type="text" class="form-control" v-model="CourseName">
+      </div>
 
- 
+      <div class="form-group col-md-4">
+        <label> Fecha: </label>
+        <input type="date" class="form-control" v-model="AssistedAt">
+      </div>
 
-  <div class="row mx-2">
-    <div class="form-group col-md-4">
-      <label> Nombre del curso: </label>
-      <input type="text" class="form-control" v-model="CourseName">
+      <div class="form-group col-md-4">
+        <label> Nivel de escolaridad: </label>
+        <input type="text" class="form-control" v-model="ScolarshipLevel">
+      </div>
     </div>
-
-    <div class="form-group col-md-4">
-      <label> Fecha: </label>
-      <input type="date" class="form-control" v-model="AssistedAt">
+    <div class="d-flex justify-content-start mt-0 mb-1" style="width:100%;">
+      <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+        <img @click="guardaCapitalHumano" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+      </div>
+      <div class="col-md-10 col-xs-9 mx-3">
+        <label>
+          <p><strong>Nota: </strong>
+            Para poder guardar los cambios en los campos anteriores del capital humano es necesario seleccionar el
+            siguiente botón. <strong>Solo se guardara el capital humano actual</strong></p>
+        </label>
+      </div>
     </div>
-
-    <div class="form-group col-md-4">
-      <label> Nivel de escolaridad: </label>
-      <input type="text" class="form-control" v-model="ScolarshipLevel">
-    </div>
-
-    <div class="col-12">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores del capital humano correspondiente es necesario seleccionar el siguiente botón, de
-            esta forma podremos guardar la información que acabas de compartir
-          </label>
-        </div>
-
-    <div class="col-12 my-3">
-      <button @click="guardaCapitalHumano" class="btn btn-primary"> Guardar curso </button>
-    </div>
-  </div>
-          <hr class="d-block" :style="ColorStrip" />
+    <hr class="d-block" :style="ColorStrip" />
 
   </details>
 </template>
@@ -60,6 +46,8 @@ export default {
   props: {
     // id del capital humano.
     id: Number,
+
+    images_btn: Array,
 
     //Index
     index: Number,
@@ -80,7 +68,7 @@ export default {
     scolarship_level: String
   },
 
-  data(){
+  data() {
     return {
       errores: {}
     };
@@ -88,26 +76,26 @@ export default {
 
   computed: {
     CourseName: {
-      get(){
+      get() {
         return this.course_name;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:course_name', newVal);
       }
     },
     AssistedAt: {
-      get(){
+      get() {
         return this.assisted_at;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:assisted_at', newVal);
       }
     },
     ScolarshipLevel: {
-      get(){
+      get() {
         return this.scolarship_level;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:scolarship_level', newVal);
       }
     }
@@ -139,11 +127,11 @@ export default {
     },
 
 
-    guardaCapitalHumano(evento){
+    guardaCapitalHumano(evento) {
       this.enviaCapitalHumano(evento, 'Completo');
     },
-  
-    enviaCapitalHumano(evento, estado){
+
+    enviaCapitalHumano(evento, estado) {
       this.errores = {};
 
       axios.post('/controlescolar/solicitud/updateHumanCapital', {
@@ -161,16 +149,16 @@ export default {
           this.$emit(event, response.data[dataKey]);
         });
 
-         Swal.fire({
-            title: "Los datos se han actualizado correctamente",
-            text: "El capital humano seleccionado de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
-            icon: "success",
-            showCancelButton: true,
-            showConfirmButton: false,
-            cancelButtonColor: "#3085d6",
-            cancelButtonText: "Continuar",
-          });
- 
+        Swal.fire({
+          title: "Los datos se han actualizado correctamente",
+          text: "El capital humano seleccionado de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+          icon: "success",
+          showCancelButton: true,
+          showConfirmButton: false,
+          cancelButtonColor: "#3085d6",
+          cancelButtonText: "Continuar",
+        });
+
       }).catch(error => {
         this.State = 'Incompleto';
         var errores = error.response.data['errors'];
@@ -180,40 +168,40 @@ export default {
         });
 
         Swal.fire({
-              title: "Error al actualizar datos",
-              text: error.response.data['message'],
-              showCancelButton: false,
-              icon: "error",
-            });
+          title: "Error al actualizar datos",
+          text: error.response.data['message'],
+          showCancelButton: false,
+          icon: "error",
+        });
       });
     },
-  
-  
-     eliminaCapitalHumano(){
+
+
+    eliminaCapitalHumano() {
       axios.post('/controlescolar/solicitud/deleteHumanCapital', {
         id: this.id,
         archive_id: this.archive_id
-      }).then(response =>{
-        
-            //Llama al padre para que elimine el item de la lista de experiencia laboral
-            this.$emit('delete-item',this.index-1);
+      }).then(response => {
 
-          Swal.fire({
-              title: "Éxito al eliminar Capital Humano",
-              text: response.data.message, // Imprime el mensaje del controlador
-              icon: "success",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              confirmButtonText: "Continuar",
-            });
+        //Llama al padre para que elimine el item de la lista de experiencia laboral
+        this.$emit('delete-item', this.index - 1);
 
-      }).catch(error=>{
-          Swal.fire({
-              title: "Error al eliminar Capital Humano",
-              showCancelButton: false,
-              icon: "error",
-            });
-      }); 
+        Swal.fire({
+          title: "Éxito al eliminar Capital Humano",
+          text: response.data.message, // Imprime el mensaje del controlador
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continuar",
+        });
+
+      }).catch(error => {
+        Swal.fire({
+          title: "Error al eliminar Capital Humano",
+          showCancelButton: false,
+          icon: "error",
+        });
+      });
     },
   }
 };

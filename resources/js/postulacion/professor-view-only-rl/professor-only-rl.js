@@ -5,14 +5,6 @@
  */
 
  import Vue from 'vue';
- import CapitalHumano from './components/CapitalHumano.vue';
- import DocumentoRequerido from './components/DocumentoRequerido.vue';
- import Expedientes from './components/Expedientes.vue';
- import ExperienciaLaboral from './components/ExperienciaLaboral.vue';
- import GradoAcademico from './components/GradoAcademico.vue';
- import LenguaExtranjera from './components/LenguaExtranjera.vue';
- import Postulante from './components/Postulante.vue';
- import ProduccionCientifica from './components/ProduccionCientifica.vue';
  import RequisitosIngreso from './components/RequisitosIngreso.vue';
  import SolicitudPostulante from './components/SolicitudPostulante.vue';
  
@@ -30,14 +22,7 @@
      el: '#app',
  
      components: {
-         CapitalHumano,
-         DocumentoRequerido,
-         Expedientes,
-         ExperienciaLaboral,
-         GradoAcademico,
-         LenguaExtranjera,
-         Postulante,
-         ProduccionCientifica,
+
          RequisitosIngreso,
          SolicitudPostulante,
      },

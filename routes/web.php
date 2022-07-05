@@ -115,7 +115,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
         Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
         Route::get('/getAllButtonImage', [ImageController::class, 'getAllButtonImage'])->name('getAllButtonImage');
-
+        Route::get('/getImageAcademicProgram', [ImageController::class, 'getImageAcademicProgram'])->name('getImageAcademicProgram');
 
         #Admin
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');

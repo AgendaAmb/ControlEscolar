@@ -50,6 +50,8 @@ export default {
     // id del capital humano.
     id: Number,
 
+    images_btn:Array,
+
     //Index
     index: Number,
 

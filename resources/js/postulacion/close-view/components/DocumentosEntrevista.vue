@@ -12,6 +12,7 @@
         :location.sync="documento.pivot.location"
         :errores.sync="documento.errores"
         :alias_academic_program="academic_program.alias"
+        :images_btn="images_btn"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -37,6 +38,11 @@ export default {
     interview_documents: {
       type: Array,
       default: [],
+    },
+
+    images_btn:{
+      type:Array,
+      default:null,
     },
 
     appliant: {

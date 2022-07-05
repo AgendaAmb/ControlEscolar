@@ -129,22 +129,21 @@
         </resenia>
       </div>
 
-      <div class="col-12">
-        <label>
-          <strong>Nota: </strong>
-          Para poder registrar los cambios en los campos anteriores de la
-          publicación correspondiente es necesario seleccionar el siguiente
-          botón, de esta forma podremos guardar la información que acabas de
-          compartir
-        </label>
+      <div class="d-flex justify-content-start mt-4 mb-0"  style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+             <img  @click="guardaProduccionCientifica" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+          </div>
+        <div class="col-md-10 col-xs-9 mx-3">
+          <label>
+            <strong>Nota: </strong>
+              Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente
+          botón. <p><strong>Solo se guardara la producción científica actual.</strong></p>
+          </label>
+        </div>
       </div>
-      <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class="btn btn-primary">
-          Guardar publicación
-        </button>
-      </div>
+      
     </div>
-    <documento-requerido
+    <!-- <documento-requerido
       v-for="documento in RequiredDocuments"
       :key="documento.name"
       :archivo.sync="documento.archivo"
@@ -154,7 +153,7 @@
       v-bind="documento"
       @enviaDocumento="cargaDocumento"
     >
-    </documento-requerido>
+    </documento-requerido> -->
     <hr class="d-block mt-2" :style="ColorStrip" />
   </details>
 </template>
@@ -190,6 +189,8 @@ export default {
   props: {
     //Index
     index: Number,
+
+    images_btn:Array,
 
     // Documentos requeridos
     required_documents: Array,

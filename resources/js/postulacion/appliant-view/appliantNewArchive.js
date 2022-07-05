@@ -8,6 +8,9 @@
  import AcademicProgram from './components/AcademicProgram.vue';
 
  window.Vue = require('vue').default;
+ import swal from "sweetalert2";
+window.Swal = swal;
+
  
  /**
   * The following block of code may be used to automatically register your
@@ -31,6 +34,17 @@
      },
  
      methods: {
- 
+        nuevoProgramaAcademico(academic_program){
+            this.selected_academic_program = academic_program;
+            Swal.fire({
+                title: "¿Estas seguro de continuar?",
+                text: "Crearas un nuevo expediente para el programa " + academic_program.name , // Imprime el mensaje del controlador
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Continuar",
+                cancelButtonText: "Cerrar",
+              });
+        }
      }
  });

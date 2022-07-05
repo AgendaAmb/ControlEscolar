@@ -85,6 +85,7 @@ export default {
   props: {
     index: Number,
     alias_academic_program:String,
+    images_btn:Array,
     id: Number,
     archive_id:Number,
     state: String,

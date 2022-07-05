@@ -23,10 +23,11 @@
           <!-- No existe carta de recomendacion pero se creara -->
           <valida-carta-recomendacion
             :email="my_email.email"
+            :archive_id="archive_id"
             :appliant="appliant"
             :academic_program="academic_program"
-            :errors="errors"
             :index="index + 1"
+            :images_btn="images_btn"
           >
           </valida-carta-recomendacion>
         </div>
@@ -40,8 +41,12 @@
             :recommendation_letter="recommendation_letters[0]"
             :archive_recommendation_letter="archives_recommendation_letters[0]"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
+                        :images_btn="images_btn"
+
             :index = 1
+            
           >
           </valida-carta-recomendacion>
         </div>
@@ -51,7 +56,10 @@
           <valida-carta-recomendacion
             :email="emails[0].email"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
+                        :images_btn="images_btn"
+
             :index = 2
           >
           </valida-carta-recomendacion>
@@ -71,11 +79,11 @@
           <valida-carta-recomendacion
             :email="rl.email_evaluator"
             :recommendation_letter="recommendation_letters[index]"
-            :archive_recommendation_letter="
-              archives_recommendation_letters[index]
-            "
+            :archive_recommendation_letter="archives_recommendation_letters[index]"
             :appliant="appliant"
+            :archive_id="archive_id"
             :academic_program="academic_program"
+            :images_btn="images_btn"
             :index="index + 1"
           >
           </valida-carta-recomendacion>
@@ -114,7 +122,12 @@ export default {
 
   props: {
     //Cartas de recomendacion (tabla a rellenar)
-    //Aqui se cambian los correos
+    //Aqui se cambian los correos 
+
+    images_btn:{
+      type:Array,
+      default:null,
+    },
 
     appliant: {
       type: Object,
@@ -133,7 +146,11 @@ export default {
       type: Array,
     },
 
-    errors: Array,
+    archive_id:{
+      type: Number,
+      default: null
+    },
+
   },
 };
 </script>

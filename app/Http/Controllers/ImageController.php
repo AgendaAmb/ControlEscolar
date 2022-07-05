@@ -76,4 +76,30 @@ class ImageController extends Controller
         $images->ver =          asset('/storage/archive-buttons/ver.png');
         return $images;
     }
+
+    public function getImageAcademicProgram(Request $request)
+    {
+        $location =  asset('/storage/academic-programs/doctorado-01.png');
+        switch ($request->academic_program) {
+            case 'Doctorado en ciencias ambientales':
+                $location =  asset('/storage/academic-programs/doctorado-01.png');
+                break;
+            case 'Maestría Interdisciplinaria en ciudades sostenibles':
+                $location =  asset('/storage/academic-programs/imarec-01.png');
+                break;
+            case 'Maestría en ciencias ambientales, doble titulación':
+                $location =  asset('/storage/academic-programs/maestria-internacional-01.png');
+                break;
+            case 'Maestría en ciencias ambientales':
+                $location =  asset('/storage/academic-programs/maestria-nacional-01.png');
+                break;
+            default:
+                $location = asset('/storage/academic-programs/doctorado-01.png');
+                break;
+        }
+
+        // dd($request->academic_program);
+
+        return $location;
+    }
 }

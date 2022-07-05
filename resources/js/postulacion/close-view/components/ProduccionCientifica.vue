@@ -1,23 +1,12 @@
 <template>
   <details class="mt-1">
     <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+      <div class="col-12">
         <h5 v-if="tipos[Type] != null" class="font-weight-bold">
           {{ tipos[Type] + " " + index }}
         </h5>
 
         <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
-      </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
-
-      <div class="col-1 col-md-3 col-sm-5">
-        <button
-          @click="eliminaProduccionCientifica"
-          class="btn btn-danger"
-          style="height: 35px; width: 100%"
-        >
-          Eliminar Publicación
-        </button>
       </div>
     </summary>
 
@@ -37,114 +26,53 @@
       </div>
 
       <div class="form-group col-md-12">
-        <publicacion-articulo
-          v-if="tipos[Type] === 'Publicación de artículos'"
-          :title.sync="Title"
-          :magazine_name.sync="MagazineName"
-          :publish_date.sync="PublishDate"
-        >
+        <publicacion-articulo v-if="tipos[Type] === 'Publicación de artículos'" :title.sync="Title"
+          :magazine_name.sync="MagazineName" :publish_date.sync="PublishDate">
           <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
+          <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+            :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor">
           </autor-articulo>
         </publicacion-articulo>
 
-        <publicacion-capitulo
-          v-else-if="tipos[Type] === 'Capítulos publicados'"
-          :titulo-capitulo.sync="Title"
-          :nombre-articulo.sync="ArticleName"
-          :ano-publicacion.sync="PublishDate"
-        >
+        <publicacion-capitulo v-else-if="tipos[Type] === 'Capítulos publicados'" :titulo-capitulo.sync="Title"
+          :nombre-articulo.sync="ArticleName" :ano-publicacion.sync="PublishDate">
           <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
+          <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+            :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor">
           </autor-articulo>
         </publicacion-capitulo>
 
-        <publicacion-libro
-          v-else-if="tipos[Type] === 'Publicación de libros'"
-          :titulo-libro.sync="Title"
-          :ano-publicacion.sync="PublishDate"
-        >
+        <publicacion-libro v-else-if="tipos[Type] === 'Publicación de libros'" :titulo-libro.sync="Title"
+          :ano-publicacion.sync="PublishDate">
           <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
+          <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+            :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+            @eliminaAutor="eliminaAutor">
           </autor-articulo>
         </publicacion-libro>
 
-        <reporte-tecnico
-          v-else-if="tipos[Type] === 'Reportes técnicos'"
-          :title.sync="Title"
-          :institution.sync="Institution"
-          :publish_date.sync="PublishDate"
-        >
+        <reporte-tecnico v-else-if="tipos[Type] === 'Reportes técnicos'" :title.sync="Title"
+          :institution.sync="Institution" :publish_date.sync="PublishDate">
         </reporte-tecnico>
 
-        <memoria-trabajo
-          v-else-if="tipos[Type] === 'Memorias de trabajo'"
-          :title.sync="Title"
-          :post_title_memory.sync="PostTitleMemory"
-          :publish_date.sync="PublishDate"
-        >
+        <memoria-trabajo v-else-if="tipos[Type] === 'Memorias de trabajo'" :title.sync="Title"
+          :post_title_memory.sync="PostTitleMemory" :publish_date.sync="PublishDate">
         </memoria-trabajo>
 
-        <documento-trabajo
-          v-else-if="tipos[Type] === 'Documentos de trabajo'"
-          :title.sync="Title"
-          :post_title_document.sync="PostTitleDocument"
-          :publish_date.sync="PublishDate"
-        >
+        <documento-trabajo v-else-if="tipos[Type] === 'Documentos de trabajo'" :title.sync="Title"
+          :post_title_document.sync="PostTitleDocument" :publish_date.sync="PublishDate">
         </documento-trabajo>
 
-        <resenia
-          v-else-if="tipos[Type] === 'Reseñas'"
-          :title.sync="Title"
-          :post_title_review.sync="PostTitleReview"
-          :publish_date.sync="PublishDate"
-        >
+        <resenia v-else-if="tipos[Type] === 'Reseñas'" :title.sync="Title" :post_title_review.sync="PostTitleReview"
+          :publish_date.sync="PublishDate">
         </resenia>
       </div>
 
-      <div class="col-12">
-        <label>
-          <strong>Nota: </strong>
-          Para poder registrar los cambios en los campos anteriores de la
-          publicación correspondiente es necesario seleccionar el siguiente
-          botón, de esta forma podremos guardar la información que acabas de
-          compartir
-        </label>
-      </div>
-      <div class="col-12 my-3">
-        <button @click="guardaProduccionCientifica" class="btn btn-primary">
-          Guardar publicación
-        </button>
-      </div>
+
     </div>
-    <documento-requerido
+    <!-- <documento-requerido
       v-for="documento in RequiredDocuments"
       :key="documento.name"
       :archivo.sync="documento.archivo"
@@ -154,7 +82,7 @@
       v-bind="documento"
       @enviaDocumento="cargaDocumento"
     >
-    </documento-requerido>
+    </documento-requerido> -->
     <hr class="d-block mt-2" :style="ColorStrip" />
   </details>
 </template>
@@ -193,6 +121,9 @@ export default {
 
     // Documentos requeridos
     required_documents: Array,
+
+    images_btn: Array,
+
 
     // Id de la producción científica.
     id: Number,
@@ -477,7 +408,7 @@ export default {
         .then((response) => {
           this.Authors.splice(autor.index, 1);
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
 
     agregaAutor(nuevoAutor) {
@@ -496,7 +427,7 @@ export default {
             name: null,
           });
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
 
     actualizaAutor(autor) {
@@ -514,7 +445,7 @@ export default {
             autor.$emit(event, response.data[dataKey]);
           });
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
   },
 };
