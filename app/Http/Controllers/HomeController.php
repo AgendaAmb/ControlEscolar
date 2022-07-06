@@ -9,7 +9,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Nette\Utils\Json;
-
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+use App\Models\User;
 class HomeController extends Controller
 {
     /**
@@ -22,6 +25,11 @@ class HomeController extends Controller
         // dd( $request->session());
         return view('home')
         ->with('user', $request->session()->get('user_data'));
+    }
+
+    public function pruebaexcel()
+    {
+        return Excel::download(new UserExport, 'users.xlsx');
     }
    
 }
