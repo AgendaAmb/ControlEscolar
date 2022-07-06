@@ -217,6 +217,9 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
             Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|comite_academico|coordinador'])->name('show_average');
+            
+            // Export rubric to excel
+            Route::get('/promedio/{archive_id}/export', [EvaluationRubricController::class, 'export_rubric'])->middleware(['role:admin|comite_academico|coordinador'])->name('export_rubric');
 
             Route::put('/{evaluationRubric}', [EvaluationRubricController::class, 'update'])->name('update');
             Route::delete('/{evaluationRubric}', [EvaluationRubricController::class, 'destroy'])->name('destroy');

@@ -10,8 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Archive;
-// use Maatwebsite\Excel\Facades\Excel;
-// use App\Exports\AverageRubricExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RubricExport;
 
 class EvaluationRubricController extends Controller
 {
@@ -130,7 +130,8 @@ class EvaluationRubricController extends Controller
             "appliant" => $rubrics_collection[0]->toArray($request)['appliant'],
             "data" => $archiveModel,
             "avg_collection" => $avg_collection,
-            "type" => $grade
+            "type" => $grade,
+            "id" => $id
         ];
 
         foreach($rubrics_collection as $rc){
@@ -139,6 +140,12 @@ class EvaluationRubricController extends Controller
 
         // return $data;
         return view('entrevistas.rubricaPromedio', $data);
+    }
+
+    // Muestra la rubrica promedio (Solo el coordinador va a ser capaz de visualizar)
+    public function export_rubric(Request $request, $id)
+    {
+        return Excel::download(new RubricExport($request,$id), 'rubric.xlsx');
     }
 
     // Exports the average rubric to excel
