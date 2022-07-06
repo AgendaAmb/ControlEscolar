@@ -133,8 +133,8 @@ class ArchiveController extends Controller
         $roles = $request->user()->roles;
         $isAdmin = false;
 
-        foreach($roles as $rol){
-            if($rol->name === 'admin'){
+        foreach ($roles as $rol) {
+            if ($rol->name === 'admin') {
                 $isAdmin = true;
             }
         }
@@ -783,8 +783,8 @@ class ArchiveController extends Controller
 
                 $archive->setAttribute('header_academic_program', $header_academic_program);
             }
-            return view('postulacion.showRegisterArchives')
-                ->with('archives', $archives);
+            // dd($archives);
+            return view('postulacion.showRegisterArchives')->with('archives', $archives);
 
             // El estudiante solamente tiene un archivo
         }
@@ -798,8 +798,53 @@ class ArchiveController extends Controller
 
     public function showCreateNewArchive(Request $request)
     {
+        $academic_programs_student = DB::table('academic_programs as ap')
+            ->rightJoin('announcements as ann', 'ann.academic_program_id', '=', 'ap.id')
+            ->rightJoin('archives as a', 'ann.id', '=', 'a.announcement_id')
+            ->where('a.user_id', '=', $request->session()->get('user_data')['id'])
+            ->select('ap.id')
+            ->get();
+
+            // dd($academic_programs_student);
+
+        $academic_programs_student_ids = [];
+        foreach ($academic_programs_student as $aps) {
+            array_push($academic_programs_student_ids, $aps->id);
+        }
+
+        $academic_programs_to_apply = AcademicProgram::whereNotIn('id', $academic_programs_student_ids)->with('latestAnnouncement')->get();
+        // dd($academic_programs_to_apply);
+
+        // dd($academic_programs_to_apply[0]->latestAnnouncement->id);
         return view('postulacion.newArchive')
-            ->with('academic_programs',  AcademicProgram::all());
+            ->with('academic_programs', $academic_programs_to_apply);
+    }
+
+
+    public function createArchive(Request $request)
+    {
+        $request->validate([
+            'academic_program_id' => ['required', 'numeric', 'exists:academic_programs,id'],
+        ]);
+
+        try {
+            // Found the academic program and the latest Announcement to register the archive 
+            $academicProgram = AcademicProgram::where('id', $request->academic_program_id)->with('latestAnnouncement')->first();
+            $user = User::where('id', $request->session()->get('user_data')['id'])->first();
+
+            # ------------- Genera el expediente del postulante.
+            $user->archives()->create([
+                'user_type' =>  $user->type,
+                'announcement_id' => $academicProgram->latestAnnouncement->id,
+                'status' => 0,
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se pudo crear el archivo para el postulante', 'error'=>$e], 400);
+        }
+
+
+        # --------------------- Respuesta de éxito.
+        return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);
     }
 
 

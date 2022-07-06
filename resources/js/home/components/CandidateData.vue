@@ -2,7 +2,7 @@
     <div class="row my-2 mx-2">
 
       <div class="col-12">
-        <h1 class="display-5">
+        <h1 class="">
           Hola {{user.name}}
         </h1>
         <h1 class="display-5">

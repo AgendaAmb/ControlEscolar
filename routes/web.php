@@ -102,10 +102,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::post('/createArchive', [ArchiveController::class,'createArchive'])->name('createArchive'); //Vista de expediente para alumno, rellenar campos
     });
 
-
     Route::get('/showRegisterArchives', [ArchiveController::class,'showRegisterArchives'])->name('showRegisterArchives'); //Vista de expediente para alumno, rellenar campos
-
-    
 
     # Rutas de las solicitudes académicas.
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
@@ -121,7 +118,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
-        Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show'); //Vista de expediente pero sin poder modificar archivos
+        Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show')->middleware('role:admin|control_escolar');
         
         Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');

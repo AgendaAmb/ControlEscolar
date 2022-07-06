@@ -237,7 +237,7 @@ export default {
 
       this.errores = {};
       var formData = new FormData();
-      formData.append("announcement_id", this.academic_program.id);
+      formData.append("academic_program_id", this.academic_program.id);
       formData.append("tipo_usuario", this.tipo_usuario);
       formData.append("pertenece_uaslp", this.pertenece_uaslp);
       formData.append("email", this.email);

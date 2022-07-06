@@ -3707,66 +3707,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -14699,52 +14639,6 @@ var render = function () {
       _vm._v(" "),
       _c("hr", { staticClass: "my-4 d-block", style: _vm.ColorStrip }),
     ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12 align-items-center my-4 mx-2" }, [
-      _vm._m(7),
-      _vm._v(" "),
-      _vm._m(8),
-      _vm._v(" "),
-      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-        _c("div", { staticClass: "col-4 align-content-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              staticStyle: { height: "45px", width: "150px", color: "black" },
-              on: {
-                click: function ($event) {
-                  return _vm.EnviarRevision("Aceptar")
-                },
-              },
-            },
-            [_c("strong", [_vm._v("Aceptar")])]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm._m(9),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-        _c("div", { staticClass: "col-4 justify-content-center" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-info",
-              staticStyle: { height: "45px", width: "150px", color: "black" },
-              on: {
-                click: function ($event) {
-                  return _vm.EnviarRevision("Condicionado")
-                },
-              },
-            },
-            [_c("strong", [_vm._v("Condicionado")])]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm._m(10),
-      ]),
-    ]),
   ])
 }
 var staticRenderFns = [
@@ -14836,86 +14730,6 @@ var staticRenderFns = [
             "\n            Selecciona el siguiente botón para agregar un nuevo curso para\n            Capital Humano\n          "
           ),
         ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-      _c("div", { staticClass: "col-4 justify-content-center" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-danger",
-            staticStyle: { height: "45px", width: "150px", color: "black" },
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#RechazarExpediente",
-            },
-          },
-          [_c("strong", [_vm._v("No cumple")])]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-8" }, [
-        _c("span", [
-          _vm._v(
-            "El postulante no cumple con los requisitos mínimos para el ingreso\n          al Posgrado"
-          ),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row my-2 mx-1 justify-content-center" }, [
-      _c("div", { staticClass: "col-4 justify-content-center" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-warning",
-            staticStyle: { height: "45px", width: "150px", color: "black" },
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#ActualizaExpediente",
-            },
-          },
-          [_c("strong", [_vm._v("Corregir")])]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-8" }, [
-        _c("span", [
-          _vm._v("El postulante necesita modificar uno o varios documentos"),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("span", [
-        _vm._v(
-          "El postulante cumple con todos los requisitos y pasa a la etapa de\n          entrevista"
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("span", [
-        _vm._v(
-          "El postulante debera de entregar un documento fuera de tiempo, pero\n          cumple con lo demas solicitado y pasa a la etapa de entrevista"
-        ),
       ]),
     ])
   },

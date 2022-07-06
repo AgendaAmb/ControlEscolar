@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Helpers\LoginService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Models\Announcement;
 use App\Models\Archive;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -133,7 +134,7 @@ class PreRegisterController extends Controller
 
         if ($request->curp != null) {
             $val = Validator::make($request->all(), [
-                'announcement_id' => ['required', 'exists:announcements,id'],
+                'academic_program_id' => ['required', 'exists:academic_programs,id'],
                 'tipo_usuario' => ['required', 'string', 'max:255'],
                 'pertenece_uaslp' => ['required', 'boolean'],
                 'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false', 'numeric'],
@@ -166,7 +167,7 @@ class PreRegisterController extends Controller
             ]);
         } else {
             $val = Validator::make($request->all(), [
-                'announcement_id' => ['required', 'exists:announcements,id'],
+                'academic_program_id' => ['required', 'exists:academic_programs,id'],
                 'tipo_usuario' => ['required', 'string', 'max:255'],
                 'pertenece_uaslp' => ['required', 'boolean'],
                 'clave_uaslp' => ['nullable', 'required_if:pertenece_uaslp,true',  'prohibited_if:pertenece_uaslp,false', 'numeric'],
@@ -199,14 +200,6 @@ class PreRegisterController extends Controller
             ]);
         }
 
-
-        // if($request->curp != null){
-        //     $request->validate([
-        //         'curp' => ['required', 'size:18', $this->curp_pattern]
-        //     ]);
-        // }
-
-
         #------------------------ Verifica validacion
         if ($val->fails()) {
             return new JsonResponse($val->errors(), 504);
@@ -215,10 +208,7 @@ class PreRegisterController extends Controller
         # ---------------------------------------------------- Crear Usuario.
 
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['announcement_id', 'civic_state', 'other_civic_state', 'birth_state']); //data to save
-
-        // return new JsonResponse(['message' => 'Esto es una prueba para curp', 'curp' => $request->curp], 500);
-
+        $data = $request->except(['academic_program_id', 'civic_state', 'other_civic_state', 'birth_state']); //data to save
 
         # ------------------------- Creacion de usuario en portal Agenda Ambiental
         try {
@@ -287,10 +277,13 @@ class PreRegisterController extends Controller
         }
 
         try {
+            // Found the academic program and the latest Announcement to register the archive 
+            $academicProgram = AcademicProgram::where('id',$request->academic_program_id)->with('latestAnnouncement')->first();
+            
             # ------------- Genera el expediente del postulante.
             $user->archives()->create([
                 'user_type' =>  $user->type,
-                'announcement_id' => $request->announcement_id,
+                'announcement_id' => $academicProgram->latestAnnouncement->id,
                 'status' => 0,
             ]);
 

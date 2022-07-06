@@ -53001,7 +53001,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row my-2 mx-2" }, [
     _c("div", { staticClass: "col-12" }, [
-      _c("h1", { staticClass: "display-5" }, [
+      _c("h1", {}, [
         _vm._v("\n      Hola " + _vm._s(_vm.user.name) + "\n    "),
       ]),
       _vm._v(" "),

@@ -15860,10 +15860,30 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
   data: {
     // Archive with all the ids 
     academic_programs: academic_programs,
-    selected_academic_program: null
+    selected_academic_program: null,
+    images_btn: []
+  },
+  created: function created() {
+    var _this = this;
+
+    // console.log(this.language);
+    axios.get("/controlescolar/solicitud/getAllButtonImage").then(function (response) {
+      // console.log('recibiendo imagenes' + response.data.ver);
+      _this.images_btn = response.data; // console.log('imagenes buttons: ' + this.images.ver);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   },
   methods: {
+    academicProgramsNotEmpty: function academicProgramsNotEmpty() {
+      if (this.academic_programs.length > 0) {
+        return true;
+      }
+
+      return false;
+    },
     nuevoProgramaAcademico: function nuevoProgramaAcademico(academic_program) {
+      console.log(academic_program);
       this.selected_academic_program = academic_program;
       Swal.fire({
         title: "¿Estas seguro de continuar?",
@@ -15874,6 +15894,22 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Continuar",
         cancelButtonText: "Cerrar"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios.post("/controlescolar/nuevoExpediente/createArchive", {
+            academic_program_id: academic_program.id
+          }).then(function (response) {
+            window.location.href = "/controlescolar/showRegisterArchives";
+          })["catch"](function (error) {
+            console.log(error);
+            Swal.fire({
+              title: "Ups! Algo salio mal",
+              text: "No se pudo crear el expediente",
+              showCancelButton: false,
+              icon: "error"
+            });
+          });
+        }
       });
     }
   }

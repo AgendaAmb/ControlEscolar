@@ -208,67 +208,7 @@
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
-
-    <div class="col-12 align-items-center my-4 mx-2">
-      <div class="row my-2 mx-1 justify-content-center">
-        <div class="col-4 justify-content-center">
-          <!-- <button
-            @click="EnviarRevision('Rechazar')"
-            class="btn btn-danger"
-            style="height: 45px; width: 150px"
-          > -->
-          <button data-toggle="modal" data-target="#RechazarExpediente" class="btn btn-danger"
-            style="height: 45px; width: 150px; color: black">
-            <strong>No cumple</strong>
-          </button>
-        </div>
-
-        <div class="col-8">
-          <span>El postulante no cumple con los requisitos mínimos para el ingreso
-            al Posgrado</span>
-        </div>
-      </div>
-      <div class="row my-2 mx-1 justify-content-center">
-        <div class="col-4 justify-content-center">
-          <button data-toggle="modal" data-target="#ActualizaExpediente" class="btn btn-warning"
-            style="height: 45px; width: 150px; color: black;'">
-            <strong>Corregir</strong>
-          </button>
-        </div>
-
-        <div class="col-8">
-          <span>El postulante necesita modificar uno o varios documentos</span>
-        </div>
-      </div>
-
-      <div class="row my-2 mx-1 justify-content-center">
-        <div class="col-4 align-content-center">
-          <button @click="EnviarRevision('Aceptar')" class="btn btn-success"
-            style="height: 45px; width: 150px; color: black">
-            <strong>Aceptar</strong>
-          </button>
-        </div>
-
-        <div class="col-8">
-          <span>El postulante cumple con todos los requisitos y pasa a la etapa de
-            entrevista</span>
-        </div>
-      </div>
-
-      <div class="row my-2 mx-1 justify-content-center">
-        <div class="col-4 justify-content-center">
-          <button @click="EnviarRevision('Condicionado')" class="btn btn-info"
-            style="height: 45px; width: 150px; color: black">
-            <strong>Condicionado</strong>
-          </button>
-        </div>
-
-        <div class="col-8">
-          <span>El postulante debera de entregar un documento fuera de tiempo, pero
-            cumple con lo demas solicitado y pasa a la etapa de entrevista</span>
-        </div>
-      </div>
-    </div>
+   
   </div>
 </template>
 
