@@ -29,7 +29,7 @@
                                     <td class="appliant">{{interview.appliant}}</td>
 
                                     <!-- Expediente-->
-                                    <td v-if="$root.loggedUserIsSchoolControl()"><a target="_blank">Ver documentos</a>
+                                    <td v-if="$root.loggedUserIsSchoolControl()"><a target="_blank">Ver documentos ca</a>
                                     </td>
                                     <td v-else><a :href="interview.archive_url" target="_blank">Ver documentos</a>
                                     </td>
@@ -44,10 +44,12 @@
                                             {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
                                             }}
                                         </a>
+                                        <hr>
                                         <a class="d-block text-capitalize text-decoration-none"
                                             :href="interview.average_rubric">
                                             Rúbrica promedio
                                         </a>
+                                        <hr>
                                     </td>
 
                                     <!-- Profesores -->
@@ -63,6 +65,12 @@
                                             {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
                                             }}
                                         </a>
+                                        <hr>
+                                        <a class="d-block text-capitalize text-decoration-none"
+                                            :href="interview.average_rubric">
+                                            Rúbrica promedio
+                                        </a>
+                                        <hr>
                                     </td>
                                     <!-- \Rubricas -->
                                 </tr>
