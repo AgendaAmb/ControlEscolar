@@ -60,17 +60,20 @@ class EvaluationRubricController extends Controller
     // Muestra la rubrica promedio (Solo el coordinador va a ser capaz de visualizar)
     public function show_average(Request $request, $id)
     {
-        // Toma la primera rúbrica de la entrevista
-        $evaluationRubric = EvaluationRubric::where('archive_id', $id)->first();
-        $grade = Archive::find($id)->announcement->academicProgram->type;
-
-        if(!isset($evaluationRubric)){
-            return "No existe rúbrica para mostrar";
+        try{
+            // Toma la primera rúbrica de la entrevista
+            $evaluationRubric = EvaluationRubric::where('archive_id', $id)->first();
+            $grade = Archive::find($id)->announcement->academicProgram->type;
+            
+            if(!isset($evaluationRubric)){
+                return "No existe rúbrica para mostrar";
+            }
+            // Obtiene las rubricas asociadas a un postulante mediante archive_id 
+            $evaluation_rubrics = EvaluationRubric::where('archive_id', $evaluationRubric->archive_id)->get();
+        } catch (\Exception $e) {
+            return 'Error 63';
         }
-        
-        // Obtiene las rubricas asociadas a un postulante mediante archive_id 
-        $evaluation_rubrics = EvaluationRubric::where('archive_id', $evaluationRubric->archive_id)->get();
-        
+
         // Se verifica que todas las rubricas esten completas antes de calcular
         foreach ($evaluation_rubrics as $ev) {
             if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar.";
@@ -108,8 +111,12 @@ class EvaluationRubricController extends Controller
             return 'Error en datos de rubricas de rúbricas asociadas';
         }
 
-        // Se obtienen los datos de cada rubrica
-        $rubrics_collection = RubricAverageResource::collection($evaluation_rubrics);
+        try{
+            // Se obtienen los datos de cada rubrica
+            $rubrics_collection = RubricAverageResource::collection($evaluation_rubrics);
+        } catch (\Exception $e) {
+            return 'Error rubric resource';
+        }
 
         //! Temporal - obtener los datos basicos del postulante
         $archiveModel = Archive::where('id', $evaluation_rubrics[0]->archive_id)->first();
