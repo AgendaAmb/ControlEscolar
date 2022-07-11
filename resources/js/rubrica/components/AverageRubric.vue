@@ -42,6 +42,10 @@
                             5.{{ index + 1 }}
                             <!-- {{concept.description}} -->
                         </th>
+                        <th class="table-success">Comentario o aportación</th>
+                        <th class="table-success">Información detectada por la comisión de evaluación
+                        </th>
+                        <th class="table-success">Dictamen de la comisión evaluadora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +77,9 @@
                             :key="index">
                             {{concept.notes}}
                         </th>
+                        <th class="table-success">{{ rubric.considerations }}</th>
+                        <th class="table-success">{{ rubric.additional_information }}</th>
+                        <th class="table-success">{{ rubric.dictamen_ce }}</th>
                     </tr>
                 </tbody>
                 <tfoot>
