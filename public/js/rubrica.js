@@ -103436,6 +103436,10 @@ var app = new Vue({
             _this.university = element.university; //Cargar universidad
 
             if (element.country === 'México') {
+              if (element.average > 10) {
+                element.average = element.average / 10;
+              }
+
               _this.estudio_score = element.average;
             } else {
               _this.estudio_score = 10 / element.max_avg * element.average;
@@ -103448,6 +103452,10 @@ var app = new Vue({
             _this.university = element.university; //Cargar universidad
 
             if (element.country === 'México') {
+              if (element.average > 10) {
+                element.average = element.average / 10;
+              }
+
               _this.estudio_score = element.average;
             } else {
               _this.estudio_score = 10 / element.max_avg * element.average;
