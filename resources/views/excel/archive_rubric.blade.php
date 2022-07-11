@@ -30,6 +30,9 @@
                 5.{{$loop->index + 1}} 
             </th>
             @endforeach
+            <th class="table-success">Comentario o aportación</th>
+            <th class="table-success">Información detectada por la comisión de evaluación</th>
+            <th class="table-success">Dictamen de la comisión evaluadora</th>
         </tr>
     </thead>
     <tbody>
@@ -65,6 +68,9 @@
                 {{$concept['notes']}} 
             </th>
             @endforeach
+            <th> {{ $rubric['considerations'] }} </th>
+            <th> {{ $rubric['additional_information'] }} </th>
+            <th> {{ $rubric['dictamen_ce'] }} </th>
         </tr>
         @endforeach
     </tbody>
