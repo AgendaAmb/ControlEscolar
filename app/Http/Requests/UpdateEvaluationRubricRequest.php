@@ -50,9 +50,9 @@ class UpdateEvaluationRubricRequest extends FormRequest
             'personal_attributes_concepts.*.score' => ['nullable','required_if:state,send','numeric'],
             'personal_attributes_concepts.*.notes' => ['nullable','max:255'],
 
-            'considerations' => ['nullable','required_if:state,send','string','max:255'],
-            'additional_information' => ['nullable','required_if:state,send','string','max:255'],
-            'dictamen_ce' => ['nullable','required_if:state,send','string','max:255'],
+            'considerations' => ['nullable','string','max:255'],
+            'additional_information' => ['nullable','string','max:255'],
+            'dictamen_ce' => ['nullable','string','max:255'],
         ];
     }
 }
