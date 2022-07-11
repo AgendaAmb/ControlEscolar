@@ -75,9 +75,9 @@ class EvaluationRubricController extends Controller
         }
 
         // Se verifica que todas las rubricas esten completas antes de calcular
-        foreach ($evaluation_rubrics as $ev) {
-            if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar.";
-        }
+        // foreach ($evaluation_rubrics as $ev) {
+        //     if($ev->isComplete == 0)return "Aún faltan rúbricas por terminar.";
+        // }
 
         // Average scores per rubric concept
         $avg_score = [

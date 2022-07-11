@@ -20,24 +20,24 @@ class RubricAverageResource extends JsonResource
 
     private function getMiPortalUser($request, int $id, string $type)
     {
-        $miPortal_user = collect($request
-            ->session()
-            ->get($type))
-            ->firstWhere('id', $id);
-
-        $name = implode(' ', [$miPortal_user['name'],$miPortal_user['middlename'],$miPortal_user['surname']]);
+        $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $id]);         // $miPortal_user[0]->id;
+        $miPortal_user = $miPortal_user[0];
 
         $user = User::find($id);
 
         return [
-            'id' => $miPortal_user['id'],
-            'type' => $miPortal_user['user_type'],
-            'name' => Str::lower($name),
-            'curp' => $miPortal_user['curp'],
-            'email' => $miPortal_user['email'],
-            'birth_country' => $miPortal_user['nationality'],
+            'id' => $miPortal_user->id,
+            'type' => $user->type,
+            'name' => implode(' ', [
+                $miPortal_user->name ?? '',
+                $miPortal_user->middlename ?? '',
+                $miPortal_user->surname ?? ''
+            ]),
+            'curp' => $miPortal_user->curp,
+            'email' => $miPortal_user->email,
+            'birth_country' => $miPortal_user->nationality,
             'birth_state' => $user->birth_state,
-            'residence_country' => $miPortal_user['residence'],
+            'residence_country' => $miPortal_user->residence,
             'residence_state' => "",
             'marital_state' => $user->marital_state, 
             "address" => ""
