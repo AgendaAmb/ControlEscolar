@@ -122,7 +122,7 @@ export default {
     // Documentos requeridos
     required_documents: Array,
 
-    images_btn: Array,
+    images_btn: Object,
 
 
     // Id de la producción científica.

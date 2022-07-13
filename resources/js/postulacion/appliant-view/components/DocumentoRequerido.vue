@@ -47,8 +47,8 @@
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
-              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
         </div>
@@ -57,7 +57,7 @@
           style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
-            <img :src="images_btn['seleccionar']" alt="" style=" max-height: 45px !important;">
+            <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
             <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
           </label>
         </div>
@@ -96,8 +96,7 @@ export default {
     },
 
     images_btn:{
-      type: Array,
-      default: null,
+      type: Object,
     },
 
     viewer_id: {
@@ -201,25 +200,11 @@ export default {
     },
   },
 
-  // created() {
-  //   // console.log(this.language);
-  //   axios
-  //     .get("/controlescolar/solicitud/getAllButtonImage")
-  //     .then((response) => {
-  //       // console.log('recibiendo imagenes' + response.data.ver);
-  //       this.images = response.data;
-  //       // console.log('imagenes buttons: ' + this.images.ver);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
 
   methods: {
 
 
     bkgCargarArchivo(type) {
-      // console.log(this.language);
       axios
         .get("/controlescolar/solicitud/getButtonImage", {
           params: {
@@ -227,7 +212,6 @@ export default {
           },
         })
         .then((response) => {
-          console.log('hola' + response.data);
           return response.data;
         })
         .catch((error) => {
@@ -250,10 +234,7 @@ export default {
     },
 
     requiredForAcademicProgram() {
-      // console.log(this.name + ': '+ this.alias_academic_program);
-
       let res = true;
-      // console.log("id: "+this.id+" nombre: "+this.name);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
@@ -390,37 +371,8 @@ export default {
         this.name ===
         "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
       ) {
-        // console.log(this.name);
         return true;
       }
-      return false;
-    },
-
-    isProffesor() {
-      let roles = [];
-      axios
-        .post("/controlescolar/solicitud/getRol", {
-          viewer_id: this.viewer_id,
-        })
-        .then((response) => {
-          roles = response.data.roles;
-        })
-        .catch((error) => {
-          roles = error.data.roles;
-        });
-
-      // console.log("roles" + roles);
-      if (roles.length > 0) {
-        roles.forEach((rol) => {
-          if (
-            rol.toString() === "profesor_nb" ||
-            rol.toString() === "profesor_colaborador"
-          ) {
-            return true;
-          }
-        });
-      }
-
       return false;
     },
 

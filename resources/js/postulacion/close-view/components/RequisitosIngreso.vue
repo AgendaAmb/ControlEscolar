@@ -10,7 +10,6 @@
       <documento-requerido v-for="documento in Documentos" :key="documento.name"
         :user_id="user_id"
         :viewer_id="viewer_id"
-        :letters_Commitment='letters_Commitment'
         :alias_academic_program="alias_academic_program"
         :archivo.sync="documento.archivo" 
         :location.sync="documento.pivot.location" 
@@ -36,7 +35,7 @@ export default {
      // Exanni score
     exanni_score: Number,
     documentos: Array,
-        images_btn: Array,
+        images_btn: Object,
 
     
     user_id:{
@@ -49,10 +48,6 @@ export default {
       default:-1,
     },
 
-    letters_Commitment:{
-      type: Array,
-      default:null,
-    },
 
     alias_academic_program: {
       type: String,

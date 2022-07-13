@@ -30,6 +30,7 @@ use App\Mail\SendZoomMeeatingInformationProfesor;
 use App\Helpers\MiPortalService;
 use App\Mail\UpdateDocumentsInterview;
 use App\Models\Announcement;
+use App\Models\ArchiveRequiredDocument;
 use App\Models\RequiredDocument;
 use App\Models\User;
 
@@ -540,6 +541,50 @@ class InterviewController extends Controller
 
         return new JsonResponse(['message' => 'OK'], JsonResponse::HTTP_OK);
     }
+
+    public function updateArchiveInterviewDocument(Request $request)
+    {
+        $request->validate([
+            'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            'requiredDocumentId' => ['required', 'numeric', 'exists:required_documents,id'],
+            'file' => ['required']
+        ]);
+
+        try {
+            $archive = Archive::find($request->archive_id);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // Create the route
+        try {
+            # Archivo de la solicitud
+            $ruta = $request->file('file')->storeAs(
+                'archives/' . $request->archive_id . '/interviewDocuments',
+                $request->requiredDocumentId . '.pdf'
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        try {
+            $archive->interviewDocuments()->detach($request->requiredDocumentId);
+            $archive->interviewDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+            $required_document = ArchiveRequiredDocument::where([
+                'required_document_id' => $request->requiredDocumentId,
+                'archive_id' => $request->archive_id
+            ])->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede generar la relacion'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        /**Problema al regresar el json, marca un erro en la consulta */
+        return new JsonResponse(
+            ['location' => $required_document->location],
+            JsonResponse::HTTP_CREATED
+        );
+    }
+
 
     /**
      * Confirma una entrevista.

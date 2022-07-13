@@ -36,20 +36,6 @@
 
 
 <style scoped>
-/* 
-      Esto va en vista de administrador
-      <div v-else class="form-group col-3 my-auto">
-      <a
-        class="verArchivo d-block my-2 ml-auto"
-        :href="archive_recommendation_letter['location']"
-        target="_blank"
-      > 
-      <img  :src="asset('storage/archive-buttons/seleccionar.png')" >
-      </a>
-    </div>
-    
-    */
-
 /*  v-if="archive_recommendation_letter!=null" */
 .verArchivo {
   /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */
@@ -90,11 +76,6 @@ export default {
     },
 
     recommendation_letter: {
-      type: Object,
-      default: null,
-    },
-
-    archive_recommendation_letter: {
       type: Object,
       default: null,
     },

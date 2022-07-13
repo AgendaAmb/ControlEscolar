@@ -66,7 +66,7 @@ export default {
 
   data() {
     return {
-      images_btn:[],
+      images_btn:{},
       errores: {},
     };
   },

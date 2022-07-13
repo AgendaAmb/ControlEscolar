@@ -12,15 +12,15 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Historial académico</summary>
-        <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado" v-bind:key="grado.id + index"
-          :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state"
-          :cvu.sync="grado.cvu" :knowledge_card.sync="grado.knowledge_card"
-          :digital_signature.sync="grado.digital_signature" :cedula.sync="grado.cedula" :status.sync="grado.status"
-          :degree.sync="grado.degree" :average.sync="grado.average" :min_avg.sync="grado.min_avg"
-          :max_avg.sync="grado.max_avg" :country.sync="grado.country" :university.sync="grado.university"
-          :degree_type.sync="grado.degree_type" :titration_date.sync="grado.titration_date"
-          :required_documents.sync="grado.required_documents" :paises.sync="Countries" :images_btn="images_btn"
-          @delete-item="eliminaHistorialAcademicoFromList">
+        <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado"
+          v-bind:key="`${index}-${grado.id}-AcademicDegree`" :index="index + 1"
+          :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state" :cvu.sync="grado.cvu"
+          :knowledge_card.sync="grado.knowledge_card" :digital_signature.sync="grado.digital_signature"
+          :cedula.sync="grado.cedula" :status.sync="grado.status" :degree.sync="grado.degree"
+          :average.sync="grado.average" :min_avg.sync="grado.min_avg" :max_avg.sync="grado.max_avg"
+          :country.sync="grado.country" :university.sync="grado.university" :degree_type.sync="grado.degree_type"
+          :titration_date.sync="grado.titration_date" :required_documents.sync="grado.required_documents"
+          :paises.sync="Countries" :images_btn="images_btn" @delete-item="eliminaHistorialAcademicoFromList">
         </grado-academico>
         <div class="row align-items-center mb-0 mt-2">
           <div class="col-12">
@@ -49,7 +49,7 @@
         </summary>
         <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
           :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
-          :letters_Commitment.sync="letters_Commitment" :images_btn="images_btn"
+           :images_btn="images_btn"
           :alias_academic_program.sync="academic_program.alias">
         </requisitos-ingreso>
       </details>
@@ -59,8 +59,9 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Dominio de idiomas</summary>
-        <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language" v-bind:key="language.id"
-          :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
+        <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language"
+          v-bind:key="`${index}-${language.id}-Language`" :index="index + 1"
+          :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
           :language.sync="language.language" :institution.sync="language.institution" :score.sync="language.score"
           :presented_at.sync="language.presented_at" :valid_from.sync="language.valid_from"
           :valid_to.sync="language.valid_to" :language_domain.sync="language.language_domain"
@@ -96,14 +97,13 @@
         </summary>
 
         <experiencia-laboral v-for="(experience, index) in appliant_working_experiences" v-bind="experience"
-          v-bind:key="experience.id" :index="index + 1" :state.sync="experience.state"
+          v-bind:key="`${index}-${experience.id}-$WorkingExperience}`" :index="index + 1" :state.sync="experience.state"
           :institution.sync="experience.institution" :working_position.sync="experience.working_position"
           :from.sync="experience.from" :to.sync="experience.to" :knowledge_area.sync="experience.knowledge_area"
           :field.sync="experience.field" :working_position_description.sync="
             experience.working_position_description
-          " :achievements.sync="experience.achievements"
-          :images_btn="images_btn"
-           @delete-item="eliminaExperienciaLaboralFromList">
+          " :achievements.sync="experience.achievements" :images_btn="images_btn"
+          @delete-item="eliminaExperienciaLaboralFromList">
         </experiencia-laboral>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -137,14 +137,14 @@
           <strong> Producción científica (Opcional) </strong>
         </h5>
         <produccion-cientifica v-for="(production, index) in scientific_productions" v-bind="production"
-          v-bind:key="production.id" :index="index + 1" :state.sync="production.state" :type.sync="production.type"
-          :title.sync="production.title" :publish_date.sync="production.publish_date"
-          :magazine_name.sync="production.magazine_name" :article_name.sync="production.article_name"
-          :institution.sync="production.institution" :post_title_memory.sync="production.post_title_memory"
+          v-bind:key="`${index}-${production.id}-ScientificProduction`" :index="index + 1"
+          :state.sync="production.state" :type.sync="production.type" :title.sync="production.title"
+          :publish_date.sync="production.publish_date" :magazine_name.sync="production.magazine_name"
+          :article_name.sync="production.article_name" :institution.sync="production.institution"
+          :post_title_memory.sync="production.post_title_memory"
           :post_title_document.sync="production.post_title_document"
           :post_title_review.sync="production.post_title_review" :documentos.sync="curricular_documents"
-          :images_btn="images_btn"
-          @delete-item="eliminaProduccionCientificaFromList">
+          :images_btn="images_btn" @delete-item="eliminaProduccionCientificaFromList">
         </produccion-cientifica>
 
         <div class="row align-items-center mb-0 mt-2">
@@ -170,9 +170,9 @@
           <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
         </h5>
         <capital-humano v-for="(humanCapital, index) in human_capitals" v-bind="humanCapital"
-          v-bind:key="humanCapital.id" :index="index" :course_name.sync="humanCapital.course_name"
-          :assisted_at.sync="humanCapital.assisted_at" :scolarship_level.sync="humanCapital.scolarship_level"
-          :images_btn="images_btn"
+          v-bind:key="`${index}-${humanCapital.id}-CapitalHumano`" :index="index"
+          :course_name.sync="humanCapital.course_name" :assisted_at.sync="humanCapital.assisted_at"
+          :scolarship_level.sync="humanCapital.scolarship_level" :images_btn="images_btn"
           @delete-item="eliminaCapitalHumanoFromList">
         </capital-humano>
 
@@ -202,13 +202,36 @@
           Carta de recomendación
         </summary>
         <carta-recomendacion :appliant="appliant" :archive_id="archive_id" :academic_program="academic_program"
-          :recommendation_letters="recommendation_letters"
-          :images_btn="images_btn"
+          :recommendation_letters="recommendation_letters" :images_btn="images_btn"
           :archives_recommendation_letters="archives_recommendation_letters" />
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
-   
+
+    <!-- Cerrar expediente -->
+    <div class="col-12 align-items-center my-4 mx-2">
+      <div class="row mx-1">
+        <p class="mb-0">
+          <strong>Nota:</strong>
+          Si has completado todos los campos necesarios y estas conforme con tu
+          información selecciona la opción de enviar expediente para continuar
+          con el proceso.
+        </p>
+        <p class="mt-0">
+          <strong>
+          No podras hacer correcciones despues de aceptar.</strong>
+        </p>
+      </div>
+
+      <div class="row my-2 mx-1">
+        <div class="col-12">
+          <button @click="EnviarExpediente" class="btn btn-success" style="height: 45px; width: 250px">
+            <strong>Enviar Expediente</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -284,8 +307,6 @@ export default {
     // Postulante de la solicitud.
     appliant: Object,
 
-    letters_Commitment: Array,
-
     //Persona que esta viendo el expediente
     viewer: Object,
 
@@ -296,13 +317,10 @@ export default {
   computed: {},
 
   created() {
-    // console.log(this.language);
     axios
       .get("/controlescolar/solicitud/getAllButtonImage")
       .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
         this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
       })
       .catch((error) => {
         console.log(error);
@@ -315,7 +333,7 @@ export default {
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
-      images_btn: [],
+      images_btn: {},
     };
   },
 
@@ -610,6 +628,50 @@ export default {
           });
         });
     },
+
+    EnviarExpediente() {
+      Swal.fire({
+        title: "¿Estas seguro que todo esta completo?",
+        text: "Estas a punto de enviar tu expediente, se revisara y se validara, caso contrario te haremos saber de los cambios necesarios",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post("/controlescolar/solicitud/updateStatusArchive", {
+              // Status id to change the state
+              archive_id: this.archive_id,
+              status: 2,
+            })
+            .then((response) => {
+              Swal.fire({
+                title: "Tu expediente ha sido actualizado",
+                text: "Te recomendamos estar al pendiente del correo que registraste con nosotros para cualquier aviso y/o cambio",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+              }).then((result) => {
+                window.location.href = "/controlescolar/home";
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                showCancelButton: false,
+                icon: "error",
+              });
+            });
+        }
+      });
+    },
+
   },
 };
 </script>

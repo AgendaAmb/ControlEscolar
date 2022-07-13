@@ -25,19 +25,12 @@ class RecommendationLetter extends Model
      */
     protected $guarded = [];
 
-    
-    // protected $fillable = [
-    //     'location',
-    //     'required_document_id',
-    //     'rl_id',
-    // ];
 
     /**
      * Relacion de clave primaria cn el archivo requerido
      *
      * @var array
      */
-    // protected $primaryKey = ['required_document_id','rl_id'];
 
     /**
      * Indicates if the model's ID is auto-incrementing.

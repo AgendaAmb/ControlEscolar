@@ -45,9 +45,9 @@
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
               target="_blank">
-              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
         </div>
@@ -85,7 +85,7 @@ export default {
     },
 
     images_btn: {
-      type: Array,
+      type: Object,
       default: null,
     },
 
@@ -120,11 +120,6 @@ export default {
 
     location: {
       type: String
-    },
-
-    letters_Commitment: {
-      type: Array,
-      default: null
     },
 
     alias_academic_program: {
@@ -346,32 +341,6 @@ export default {
         return true;
       }
       return false;
-    },
-
-    isProffesor() {
-      let roles = [];
-      axios
-        .post("/controlescolar/solicitud/getRol", {
-          viewer_id: this.viewer_id,
-        })
-        .then((response) => {
-          roles = response.data.roles;
-        })
-        .catch((error) => {
-          roles = error.data.roles;
-        });
-
-      console.log("roles" + roles);
-      if (roles.length > 0) {
-        roles.forEach(rol => {
-          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
-            return true;
-          }
-        });
-      }
-
-      return false;
-
     },
 
     checkUpload() {

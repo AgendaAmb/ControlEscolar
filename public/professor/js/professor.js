@@ -282,10 +282,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -420,53 +416,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -498,10 +447,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     location: {
       type: String
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -700,27 +645,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
         console.log(this.name);
         return true;
-      }
-
-      return false;
-    },
-    isProffesor: function isProffesor() {
-      var roles = [];
-      axios.post("/controlescolar/solicitud/getRol", {
-        viewer_id: this.viewer_id
-      }).then(function (response) {
-        roles = response.data.roles;
-      })["catch"](function (error) {
-        roles = error.data.roles;
-      });
-      console.log("roles" + roles);
-
-      if (roles.length > 0) {
-        roles.forEach(function (rol) {
-          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
-            return true;
-          }
-        });
       }
 
       return false;
@@ -1544,23 +1468,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     Universidades: {
       get: function get() {
-        var pai = this.country;
-        var selected_pais; // console.log(this.universidades);
+        var selected_pais = this.country;
+        var unis = this.universidades;
+        var mispaises = this.paises;
 
-        if (this.universidades === null) {
-          this.paises.forEach(function (pais, indice, array) {
-            if (!pai.toString().localeCompare(pais.name.toString())) {
-              // console.log(pai.toString()  + " " + pais.name.toString()  + " ");
-              selected_pais = pais;
+        if (unis === null && selected_pais != null) {
+          mispaises.forEach(function (pais, indice, array) {
+            if (selected_pais.localeCompare(pais.name.toString()) === 0) {
+              unis = pais.universities;
             }
           });
-          this.universidades = selected_pais.universities; // console.log(selected_pais.universities);
+
+          if (unis != null) {// this.universidades = unis;
+          }
         }
 
-        return this.universidades;
+        return unis;
       },
       set: function set(value) {
-        this.universidades = value;
+        this.$emit("update:universidades", value);
       }
     },
     CVU: {
@@ -3123,7 +3049,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -3137,10 +3062,6 @@ __webpack_require__.r(__webpack_exports__);
     viewer_id: {
       type: Number,
       "default": -1
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -3432,7 +3353,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3482,7 +3402,6 @@ __webpack_require__.r(__webpack_exports__);
     recommendation_letters: Array,
     // Postulante de la solicitud.
     appliant: Object,
-    letters_Commitment: Array,
     //Persona que esta viendo el expediente
     viewer: Object
   },
@@ -3782,20 +3701,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3820,10 +3725,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
       "default": ""
     },
     recommendation_letter: {
-      type: Object,
-      "default": null
-    },
-    archive_recommendation_letter: {
       type: Object,
       "default": null
     },
@@ -4531,30 +4432,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n\r\n <a v-if=\"checkUpload() === true\" class=\"verArchivo d-block my-2 ml-auto\" :href=\"location\" target=\"_blank\"></a>\r\n        <label class=\"cargarArchivo d-block ml-auto my-auto\">\r\n          <input type=\"file\" class=\"form-control d-none\" @change=\"cargaDocumento\">\r\n        </label>\r\n        \r\n        */\r\n/* .cargarArchivo {\r\n  background: url(/storage/archive-buttons/seleccionar.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n}\r\n.verArchivo {\r\n  background: url(/storage/archive-buttons/ver.png);\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\r\n} */\n.cargarArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  border-radius: 10px;\r\n  text-align: center;\r\n  border: none;\r\n  font-weight: bold;\r\n  color: white;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\n.verArchivo[data-v-43e800f2] {\r\n  background-color: #3490dc;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  color: white;\r\n  border-radius: 10px;\r\n  border: none;\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 70%;\r\n  height: 30px;\n}\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2160bb91&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2160bb91&scoped=true&lang=css& ***!
@@ -4596,7 +4473,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* \r\n      Esto va en vista de administrador\r\n      <div v-else class=\"form-group col-3 my-auto\">\r\n      <a\r\n        class=\"verArchivo d-block my-2 ml-auto\"\r\n        :href=\"archive_recommendation_letter['location']\"\r\n        target=\"_blank\"\r\n      > \r\n      <img  :src=\"asset('storage/archive-buttons/seleccionar.png')\" >\r\n      </a>\r\n    </div>\r\n    \r\n    */\r\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-56f784f0] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/*  v-if=\"archive_recommendation_letter!=null\" */\n.verArchivo[data-v-56f784f0] {\r\n  /* background-image: url(/storage/academic-programs/maestria-nacional-01.png); */\r\n  background-size: 90px 40px;\r\n  background-repeat: no-repeat;\r\n  width: 90px;\r\n  height: 40px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4676,36 +4553,6 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_43e800f2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_43e800f2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_43e800f2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -8560,25 +8407,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true& */ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true&");
+/* harmony import */ var _DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=template&id=43e800f2& */ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&");
 /* harmony import */ var _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=script&lang=js& */ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=script&lang=js&");
-/* harmony import */ var _DocumentoRequerido_vue_vue_type_style_index_0_id_43e800f2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& */ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
-;
 
 
 /* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _DocumentoRequerido_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "43e800f2",
+  null,
   null
   
 )
@@ -9687,19 +9532,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&":
-/*!********************************************************************************************************************************************!*\
-  !*** ./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& ***!
-  \********************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_style_index_0_id_43e800f2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=style&index=0&id=43e800f2&scoped=true&lang=css&");
-
-
-/***/ }),
-
 /***/ "./resources/js/postulacion/professor-view/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2160bb91&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************!*\
   !*** ./resources/js/postulacion/professor-view/components/LenguaExtranjera.vue?vue&type=style&index=0&id=2160bb91&scoped=true&lang=css& ***!
@@ -9760,19 +9592,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true&":
-/*!******************************************************************************************************************************!*\
-  !*** ./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true& ***!
-  \******************************************************************************************************************************/
+/***/ "./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2& ***!
+  \******************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DocumentoRequerido_vue_vue_type_template_id_43e800f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DocumentoRequerido.vue?vue&type=template&id=43e800f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&");
 
 
 /***/ }),
@@ -10270,8 +10102,6 @@ var render = function () {
                 attrs: {
                   email: _vm.recommendation_letters[0].email_evaluator,
                   recommendation_letter: _vm.recommendation_letters[0],
-                  archive_recommendation_letter:
-                    _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
                   academic_program: _vm.academic_program,
                   index: 1,
@@ -10309,8 +10139,6 @@ var render = function () {
                   attrs: {
                     email: rl.email_evaluator,
                     recommendation_letter: _vm.recommendation_letters[index],
-                    archive_recommendation_letter:
-                      _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
                     academic_program: _vm.academic_program,
                     index: index + 1,
@@ -10331,10 +10159,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/postulacion/professor-view/components/DocumentoRequerido.vue?vue&type=template&id=43e800f2& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -10438,36 +10266,77 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group col-3 my-auto" }, [
-            _vm.checkUpload() === true
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "verArchivo d-block my-2 ml-auto",
-                    attrs: {
-                      href: "expediente/" + _vm.location,
-                      target: "_blank",
+          _c(
+            "div",
+            { staticClass: "form-group col-3 align-items-center p-2" },
+            [
+              _vm.checkUpload() === true
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "d-flex justify-content-center  my-1",
+                      staticStyle: { "max-height": "45px", width: "100%" },
                     },
-                  },
-                  [_vm._v("\n        Ver Archivo")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isIntentionLetter() === true
-              ? _c(
-                  "label",
-                  { staticClass: "cargarArchivo d-block ml-auto my-auto" },
-                  [
-                    _vm._v("\n        Subir Documento\n        "),
-                    _c("input", {
-                      staticClass: "form-control d-none",
-                      attrs: { type: "file" },
-                      on: { change: _vm.cargaDocumento },
-                    }),
-                  ]
-                )
-              : _vm._e(),
-          ]),
+                    [
+                      _c("label", [
+                        _c(
+                          "a",
+                          {
+                            staticStyle: { height: "45px", width: "100%" },
+                            attrs: {
+                              href:
+                                "../../../controlescolar/solicitud/expediente/" +
+                                _vm.location,
+                              target: "_blank",
+                            },
+                          },
+                          [
+                            _c("img", {
+                              staticStyle: {
+                                width: "100%",
+                                "max-height": "45px !important",
+                              },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
+                            }),
+                          ]
+                        ),
+                      ]),
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isIntentionLetter() === true
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "d-flex justify-content-center my-1",
+                      staticStyle: {
+                        "max-height": "45px !important",
+                        width: "100%",
+                      },
+                    },
+                    [
+                      _c("label", [
+                        _c("img", {
+                          staticStyle: { "max-height": "45px !important" },
+                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control d-none",
+                          staticStyle: {
+                            "max-height": "45px !important",
+                            width: "100%",
+                          },
+                          attrs: { type: "file" },
+                          on: { change: _vm.cargaDocumento },
+                        }),
+                      ]),
+                    ]
+                  )
+                : _vm._e(),
+            ]
+          ),
         ]),
       ])
     : _vm._e()
@@ -13255,7 +13124,6 @@ var render = function () {
                 attrs: {
                   user_id: _vm.user_id,
                   viewer_id: _vm.viewer_id,
-                  letters_Commitment: _vm.letters_Commitment,
                   alias_academic_program: _vm.alias_academic_program,
                   archivo: documento.archivo,
                   location: documento.pivot.location,
@@ -13454,7 +13322,6 @@ var render = function () {
                   documentos: _vm.entrance_documents,
                   user_id: _vm.appliant.id,
                   viewer_id: _vm.viewer.id,
-                  letters_Commitment: _vm.letters_Commitment,
                   alias_academic_program: _vm.academic_program.alias,
                 },
                 on: {
@@ -26942,7 +26809,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_10__["default"]({
     academic_program: academicProgram,
     recommendation_letters: recommendation_letters,
     archives_recommendation_letters: archives_recommendation_letters,
-    letters_Commitment: letters_Commitment,
     viewer: viewer
   },
   methods: {

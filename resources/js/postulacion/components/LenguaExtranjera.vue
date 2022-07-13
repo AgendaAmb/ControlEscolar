@@ -176,7 +176,7 @@
 
       <div class="d-flex justify-content-start mt-4 mb-0"  style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaLenguaExtranjera" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+             <img  @click="actualizaLenguaExtranjera" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
           </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
@@ -213,7 +213,7 @@ export default {
     // Id.
     id: Number,
 
-    images_btn: Array,
+    images_btn: Object,
 
     // Id del expediente.
     archive_id: Number,
@@ -458,8 +458,6 @@ export default {
     },
 
     getImage() {
-
-      // console.log(this.language);
       axios
         .get("/controlescolar/solicitud/getFlagImage", {
           params: {
@@ -467,9 +465,7 @@ export default {
           },
         })
         .then((response) => {
-          // console.log("aaaaaaaaa" + response.data);
           this.flag_image = response.data;
-          console.log(this.flag_image);
         })
         .catch((error) => {
           console.log(error);
@@ -506,7 +502,6 @@ export default {
 
     enviaLenguaExtranjera(evento, estado) {
       this.errores = {};
-      console.log(this.kind_of_exam);
       axios
         .post("/controlescolar/solicitud/updateAppliantLanguage", {
           id: this.id,

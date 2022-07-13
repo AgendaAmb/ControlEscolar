@@ -8,7 +8,7 @@
         </summary>
         <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
           :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
-          :letters_Commitment.sync="letters_Commitment" :images_btn="images_btn"
+          :images_btn="images_btn"
           :alias_academic_program.sync="academic_program.alias">
         </requisitos-ingreso>
       </details>
@@ -75,8 +75,6 @@ export default {
     // Postulante de la solicitud.
     appliant: Object,
 
-    letters_Commitment: Array,
-
     //Persona que esta viendo el expediente
     viewer: Object,
 
@@ -100,7 +98,7 @@ export default {
 
   data() {
     return {
-      images_btn: [],
+      images_btn: {},
     };
   },
 

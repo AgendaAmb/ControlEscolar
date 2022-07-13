@@ -39,8 +39,13 @@ class WorkingExperience extends Model
     public function requiredDocuments(): BelongsToMany
     {
         return $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'working');
-        // return $this->belongsToMany(RequiredDocument::class)->withPivot('location');
     }
+
+    public function academicDocuments()
+    {
+        return  $this->requiredDocuments()->where('type', 'working');
+    }
+
 
     /**
      * Obtiene los documentos requeridos del expediente.

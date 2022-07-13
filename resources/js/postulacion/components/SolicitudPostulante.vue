@@ -12,7 +12,7 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Historial académico</summary>
-        <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado" v-bind:key="grado.id + index"
+        <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado" v-bind:key="`${index}-${grado.id}-AcademicDegree`"
           :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state"
           :cvu.sync="grado.cvu" :knowledge_card.sync="grado.knowledge_card"
           :digital_signature.sync="grado.digital_signature" :cedula.sync="grado.cedula" :status.sync="grado.status"
@@ -48,8 +48,7 @@
           Requisitos de ingreso
         </summary>
         <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
-          :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
-          :letters_Commitment.sync="letters_Commitment" :images_btn="images_btn"
+          :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id" :images_btn="images_btn"
           :alias_academic_program.sync="academic_program.alias">
         </requisitos-ingreso>
       </details>
@@ -59,7 +58,7 @@
     <div class="col-12">
       <details>
         <summary class="mb-4 font-weight-bold h3">Dominio de idiomas</summary>
-        <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language" v-bind:key="language.id"
+        <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language"  v-bind:key="`${index}-${language.id}-Language`"
           :index="index + 1" :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
           :language.sync="language.language" :institution.sync="language.institution" :score.sync="language.score"
           :presented_at.sync="language.presented_at" :valid_from.sync="language.valid_from"
@@ -96,7 +95,7 @@
         </summary>
 
         <experiencia-laboral v-for="(experience, index) in appliant_working_experiences" v-bind="experience"
-          v-bind:key="experience.id" :index="index + 1" :state.sync="experience.state"
+           v-bind:key="`${index}-${experience.id}-$WorkingExperience}`" :index="index + 1" :state.sync="experience.state"
           :institution.sync="experience.institution" :working_position.sync="experience.working_position"
           :from.sync="experience.from" :to.sync="experience.to" :knowledge_area.sync="experience.knowledge_area"
           :field.sync="experience.field" :working_position_description.sync="
@@ -137,7 +136,7 @@
           <strong> Producción científica (Opcional) </strong>
         </h5>
         <produccion-cientifica v-for="(production, index) in scientific_productions" v-bind="production"
-          v-bind:key="production.id" :index="index + 1" :state.sync="production.state" :type.sync="production.type"
+          v-bind:key="`${index}-${production.id}-ScientificProduction`" :index="index + 1" :state.sync="production.state" :type.sync="production.type"
           :title.sync="production.title" :publish_date.sync="production.publish_date"
           :magazine_name.sync="production.magazine_name" :article_name.sync="production.article_name"
           :institution.sync="production.institution" :post_title_memory.sync="production.post_title_memory"
@@ -170,7 +169,7 @@
           <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
         </h5>
         <capital-humano v-for="(humanCapital, index) in human_capitals" v-bind="humanCapital"
-          v-bind:key="humanCapital.id" :index="index" :course_name.sync="humanCapital.course_name"
+           v-bind:key="`${index}-${humanCapital.id}-CapitalHumano`" :index="index" :course_name.sync="humanCapital.course_name"
           :assisted_at.sync="humanCapital.assisted_at" :scolarship_level.sync="humanCapital.scolarship_level"
           :images_btn="images_btn"
           @delete-item="eliminaCapitalHumanoFromList">
@@ -204,7 +203,7 @@
         <carta-recomendacion :appliant="appliant" :archive_id="archive_id" :academic_program="academic_program"
           :recommendation_letters="recommendation_letters"
           :images_btn="images_btn"
-          :archives_recommendation_letters="archives_recommendation_letters" />
+          />
       </details>
       <hr class="my-4 d-block" :style="ColorStrip" />
     </div>
@@ -335,16 +334,11 @@ export default {
     // Capitales humanos del postulante.
     human_capitals: Array,
 
-    //archivos arreglo de {id_archive_required_docuent, id_archive, location}
-    archives_recommendation_letters: Array,
-
     //Cartas de recomendacion Arreglo que contiene correos
     recommendation_letters: Array,
 
     // Postulante de la solicitud.
     appliant: Object,
-
-    letters_Commitment: Array,
 
     //Persona que esta viendo el expediente
     viewer: Object,
@@ -375,7 +369,7 @@ export default {
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
-      images_btn: [],
+      images_btn: {},
     };
   },
 

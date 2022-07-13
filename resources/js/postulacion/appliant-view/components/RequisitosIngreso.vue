@@ -8,7 +8,7 @@
 
       <div class="d-flex justify-content-start mt-4 mb-0"  style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaExposicionMotivos" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+             <img  @click="actualizaExposicionMotivos" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
           </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
@@ -20,7 +20,7 @@
       </div>
 
       <documento-requerido v-for="documento in Documentos" :key="documento.name" :user_id="user_id"
-        :viewer_id="viewer_id" :letters_Commitment='letters_Commitment' :alias_academic_program="alias_academic_program"
+        :viewer_id="viewer_id"  :alias_academic_program="alias_academic_program"
         :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
         :exanni_score.sync="exanni_score" :images_btn="images_btn" v-bind="documento"
         @nuevoPuntajeExanni="nuevoPuntajeExanni" @enviaDocumento="cargaDocumento">
@@ -41,7 +41,7 @@ export default {
     motivation: String,
     exanni_score: Number,
     documentos: Array,
-    images_btn: Array,
+    images_btn: Object,
 
     user_id: {
       type: Number,
@@ -51,11 +51,6 @@ export default {
     viewer_id: {
       type: Number,
       default: -1,
-    },
-
-    letters_Commitment: {
-      type: Array,
-      default: null,
     },
 
     alias_academic_program: {

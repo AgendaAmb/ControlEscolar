@@ -41,8 +41,8 @@ export default {
     },
 
     images_btn:{
-      type:Array,
-      default:null,
+      type:Object,
+      default:{},
     },
 
     appliant: {

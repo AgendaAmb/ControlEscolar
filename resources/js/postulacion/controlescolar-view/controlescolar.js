@@ -53,7 +53,6 @@
          academic_program: academicProgram,
          recommendation_letters: recommendation_letters,
          archives_recommendation_letters: archives_recommendation_letters,
-         letters_Commitment:letters_Commitment,
          viewer:viewer
      },
  

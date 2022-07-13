@@ -202,19 +202,21 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
+      <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaHistorialAcademico" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
-          </div>
+          <img @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt=""
+            style=" max-height: 45px !important;">
+        </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
             <strong>Nota: </strong>
             Para poder guardar los cambios en los campos anteriores del
-            historial académico es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el historial académico</strong></p>
+            historial académico es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el historial
+                académico</strong></p>
           </label>
         </div>
       </div>
-     
+
       <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name"
         :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
         :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
@@ -237,7 +239,7 @@ export default {
     //Index de la escolaridad
     index: Number,
 
-    images_btn: Array,
+    images_btn: Object,
 
     //Alias academic program
     alias_academic_program: String,
@@ -363,13 +365,13 @@ export default {
             }
           });
           if (unis != null) {
-            this.universidades = unis;
+            // this.universidades = unis;
           }
         }
-        return this.universidades;
+        return unis;
       },
       set: function (value) {
-        this.universidades = value;
+        this.$emit("update:universidades", value);
       },
     },
 
@@ -651,7 +653,6 @@ export default {
       formData.append("index", this.index);
       formData.append("file", file);
 
-      // console.log(formData);
 
       axios({
         method: "post",

@@ -130,8 +130,8 @@
 <body>
     <div class="container">
         <div style="margin: 0px; width:100%; height:150px;">
-            <img src="{{ public_path('/images/logod.png') }}" style='width : 100%; height : 100%!important'
-                alt="Encabezado">
+            <img src="{{$data['url_LogoAA']}}" style='width : 100%; height : 100%!important'
+                alt="">
             {{-- <img src="public/imagenes/logod.png"style='width : 100%; height : 100%!important'> --}}
         </div>
         <div class="row">

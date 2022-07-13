@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Cast\Object_;
 use stdClass;
@@ -74,6 +75,7 @@ class ImageController extends Controller
         $images->guardar =      asset('/storage/archive-buttons/guardar.png');
         $images->seleccionar =  asset('/storage/archive-buttons/seleccionar.png');
         $images->ver =          asset('/storage/archive-buttons/ver.png');
+        
         return $images;
     }
 
@@ -97,9 +99,6 @@ class ImageController extends Controller
                 $location = asset('/storage/academic-programs/doctorado-01.png');
                 break;
         }
-
-        // dd($request->academic_program);
-
         return $location;
     }
 }

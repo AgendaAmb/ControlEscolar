@@ -62,8 +62,8 @@ __webpack_require__.r(__webpack_exports__);
       "default": -1
     },
     images_btn: {
-      type: Array,
-      "default": null
+      type: Object,
+      "default": {}
     },
     viewer_id: {
       type: Number,
@@ -89,10 +89,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     location: {
       type: String
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -204,7 +200,7 @@ __webpack_require__.r(__webpack_exports__);
     motivation: String,
     exanni_score: Number,
     documentos: Array,
-    images_btn: Array,
+    images_btn: Object,
     user_id: {
       type: Number,
       "default": -1
@@ -212,10 +208,6 @@ __webpack_require__.r(__webpack_exports__);
     viewer_id: {
       type: Number,
       "default": -1
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -352,7 +344,6 @@ __webpack_require__.r(__webpack_exports__);
     recommendation_letters: Array,
     // Postulante de la solicitud.
     appliant: Object,
-    letters_Commitment: Array,
     //Persona que esta viendo el expediente
     viewer: Object,
     //Estado del expediente
@@ -371,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      images_btn: []
+      images_btn: {}
     };
   }
 });
@@ -648,7 +639,9 @@ var render = function () {
                           {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
-                              href: "expediente/" + _vm.location,
+                              href:
+                                "../../../controlescolar/solicitud/expediente/" +
+                                _vm.location,
                               target: "_blank",
                             },
                           },
@@ -658,7 +651,7 @@ var render = function () {
                                 width: "100%",
                                 "max-height": "45px !important",
                               },
-                              attrs: { src: _vm.images_btn["ver"], alt: "" },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
                             }),
                           ]
                         ),
@@ -680,7 +673,7 @@ var render = function () {
                   _c("label", [
                     _c("img", {
                       staticStyle: { "max-height": "45px !important" },
-                      attrs: { src: _vm.images_btn["seleccionar"], alt: "" },
+                      attrs: { src: _vm.images_btn.seleccionar, alt: "" },
                     }),
                     _vm._v(" "),
                     _c("input", {
@@ -804,7 +797,6 @@ var render = function () {
               documentos: _vm.entrance_documents,
               user_id: _vm.appliant.id,
               viewer_id: _vm.viewer.id,
-              letters_Commitment: _vm.letters_Commitment,
               images_btn: _vm.images_btn,
               alias_academic_program: _vm.academic_program.alias,
             },
@@ -823,12 +815,6 @@ var render = function () {
               },
               "update:viewer_id": function ($event) {
                 return _vm.$set(_vm.viewer, "id", $event)
-              },
-              "update:letters_Commitment": function ($event) {
-                _vm.letters_Commitment = $event
-              },
-              "update:letters_-commitment": function ($event) {
-                _vm.letters_Commitment = $event
               },
               "update:alias_academic_program": function ($event) {
                 return _vm.$set(_vm.academic_program, "alias", $event)
@@ -13110,7 +13096,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
     academic_program: academicProgram,
     recommendation_letters: recommendation_letters,
     archives_recommendation_letters: archives_recommendation_letters,
-    letters_Commitment: letters_Commitment,
     viewer: viewer
   },
   methods: {

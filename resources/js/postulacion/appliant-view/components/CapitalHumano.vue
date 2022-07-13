@@ -37,7 +37,7 @@
 
       <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="guardaCapitalHumano" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+             <img  @click="guardaCapitalHumano" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
           </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
@@ -62,7 +62,7 @@ export default {
     // id del capital humano.
     id: Number,
 
-    images_btn:Array,
+    images_btn:Object,
 
     //Index
     index: Number,

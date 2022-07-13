@@ -37,14 +37,12 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    console.log(this.name);
     axios.get("/controlescolar/solicitud/getImageAcademicProgram", {
       params: {
         academic_program: this.name
       }
     }).then(function (response) {
-      // console.log('recibiendo imagenes' + response.data);
-      _this.program_photo = response.data; // console.log('imagenes buttons: ' + this.images.ver);
+      _this.program_photo = response.data;
     })["catch"](function (error) {
       console.log(error);
     });

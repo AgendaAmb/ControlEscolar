@@ -5,7 +5,6 @@
     const recommendation_letters = @json($recommendation_letters);
     const archives_recommendation_letters = @json($archives_recommendation_letters);
     const header_academic_program = @json($header_academic_program);
-    const letters_Commitment = @json($letters_Commitment);
     const viewer = @json($viewer);
 </script>
 @extends('layouts.app')
@@ -43,7 +42,7 @@
             :appliant_working_experiences="archive.appliant_working_experiences"
             :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
             :recommendation_letters="recommendation_letters"
-            :archives_recommendation_letters="archives_recommendation_letters" :letters_Commitment="letters_Commitment"
+            :archives_recommendation_letters="archives_recommendation_letters" 
             :interview_documents="archive.interview_documents"
             :status="archive.status">
         </solicitud-postulante>

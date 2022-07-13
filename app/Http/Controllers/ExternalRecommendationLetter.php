@@ -6,8 +6,10 @@ use App\Helpers\MiPortalService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRecommendationLetter;
+use App\Mail\SendRecommendationLetter;
 use Illuminate\Support\Facades\{
     DB,
+    Mail,
 };
 use Illuminate\Http\{
     JsonResponse,
@@ -45,6 +47,139 @@ class ExternalRecommendationLetter extends Controller
         $this->service = new MiPortalService;
         parent::__construct();
     }
+
+     /* -------------------------- CARTA DE RECOMENDACION DEL APLICANTE --------------------------*/
+     public function sentEmailRecommendationLetter(Request $request)
+     {
+ 
+         // Variables locales
+         $message = 'Exito, el correo ha sido enviado'; // Mensaje de retorno
+         $my_token = Str::random(20);    //Token para identificar carta recomendacion
+ 
+         //validacion de datos
+         $request->validate([
+             'email' => ['required', 'email', 'max:255'],
+             'academic_program' => ['required'],
+             'appliant' => ['required'],
+             'letter_created' => ['required'],
+             'recommendation_letter' => ['required_if:letter_created,1'] // ya existe carta por lo tanto es requerido
+         ]);
+ 
+         #Se envia correo si todo salio correcto
+         if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
+             $my_token = $request->recommendation_letter['token'];
+             //return json response
+         }
+ 
+         //Imgs to put in the email
+         $url_LogoAA = asset('/storage/headers/logod.png');
+         $url_ContactoAA = asset('/storage/logos/rtic.png');
+ 
+         try {
+             //Email enviado
+             Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token, $url_LogoAA, $url_ContactoAA));
+         } catch (\Exception $e) {
+             return new JsonResponse('Error: ' . $e->getMessage(), 200);
+         }
+ 
+ 
+         //Se busca el archivo por el USER ID
+         $archive = Archive::where('user_id', $request->appliant['id'])->first();
+         $archive->loadMissing([
+             'appliant',
+             'announcement.academicProgram',
+             'personalDocuments',
+             'recommendationLetter',
+             'myRecommendationLetter',
+             'entranceDocuments',
+             'intentionLetter',
+             'academicDegrees.requiredDocuments',
+             'appliantLanguages.requiredDocuments',
+             'appliantWorkingExperiences',
+             'scientificProductions.authors',
+             'humanCapitals'
+         ]);
+ 
+         # Cartas de recomendacion en expediente
+         $num_recommendation_letter_count = $archive->archiveRequiredDocuments()
+             ->whereNotNull('location')
+             ->whereIsRecommendationLetter()
+             ->count();
+ 
+         #Se verifica el numero de cartas de recomendacion ya enviadas por archivo de solicitante
+         if ($num_recommendation_letter_count > 2) {
+             return new JsonResponse('Maximo numero de cartas contestadas, ya no se permiten mas respuestas', 200);
+         }
+ 
+         #Ids para relacion a archive required document table
+         // $required_document_id  = ($num_recommendation_letter_count < 1) ? 19 : 20; //Maximo de dos cartas, por lo tanto sera solo (0,1)
+         $required_document_id = 19;
+ 
+         //Se verifica si ya existe un registro de Carta o se necesita crear
+         if ($request->letter_created == 1) { //ya existe registro de carta
+             $rlsCompare = $archive->myRecommendationLetter;
+             foreach ($archive->myRecommendationLetter as $rl) {
+ 
+                 #Se verifica que no exista el mismo correo para contestar la carta en otra
+                 foreach ($rlsCompare as $rlCompare) {
+                     //carta diferente
+                     if ($rlCompare->id != $rl->id) {
+                         if (strcmp($rlCompare->email_evaluator, $rl->email_evaluator) == 0) {
+                             return new JsonResponse('Correo existente, intente con uno diferente', 200);
+                         }
+                     }
+                 }
+ 
+                 //checa si es el mismo id
+                 if ($rl->id == $request->recommendation_letter['id']) {
+ 
+                     //Si son  diferentes actualizar registro
+                     if (strcmp($rl->email_evaluator, $request->email) != 0) {
+                         $change_email = 1; // el email a cambiado
+                         $rl->email_evaluator = $request->email;
+                         $rl->save();
+                         break;
+                     }
+                 }
+             }
+         } else { //no existe carta
+ 
+             foreach ($archive->myRecommendationLetter as $rl) {
+                 if (strcmp($rl->email_evaluator, $request->email) == 0) {
+                     return new JsonResponse('Correo registrado para otra carta, intente uno diferente', 200);
+                 }
+             }
+ 
+             #SE REQUIERE CREAR CAMPOS EN TABLAS
+             try {
+                 $rl = MyRecommendationLetter::create([
+                     'email_evaluator' => $request->email,
+                     'archive_id' => $archive->id,
+                     'token' => $my_token,  //random token to verify
+                     'answer' => 0 //not answer
+                 ]); //Ahora se espera la respuesta del evaluador
+ 
+                 // Archivo requerido
+                 $archive_rd = ArchiveRequiredDocument::create([
+                     'archive_id' => $archive->id,
+                     'required_document_id' => $required_document_id
+                 ]);
+ 
+                 // Carta de recomendacion (Relacion de carta a archivo requerido)
+                 $archive_rl = RecommendationLetter::create([
+                     'rl_id' => intval($rl->id),
+                     'required_document_id' => intval($archive_rd->id),
+                 ]);
+             } catch (\Exception $e) {
+                 return new JsonResponse('Error al crear la carta de recomendación comuniquese con Agenda Ambiental', 200);
+             }
+         }
+ 
+         return new JsonResponse(
+             ['message' => $message],
+             JsonResponse::HTTP_OK
+         );
+     }
 
     /**
      * Agrega la carta de recomendacion 
@@ -379,6 +514,8 @@ class ExternalRecommendationLetter extends Controller
                 }
             }
 
+            $header_image =    asset('storage/headers/logod.png');
+
             $data = [
                 'recommendation_letter' => $recommendation_letter,
                 'appliant' => $archive->appliant,
@@ -387,7 +524,8 @@ class ExternalRecommendationLetter extends Controller
                 'announcement_date_msg' => $announcement_date_msg,
                 'score_parameters' => $score_parameters,
                 'custom_parameters' => $custom_parameters,
-                'parameters' => $parameters
+                'parameters' => $parameters,
+                'header_image' => $header_image
             ];
 
             $recommendation_letter_pdf = PDF::loadView('pdf.prueba', ["data" => $data])
@@ -418,7 +556,7 @@ class ExternalRecommendationLetter extends Controller
      * Ver Carta de Recomendacion
      * 
      */
-    public function seeAnsweredRecommendationLetter(Request $request,$archive_id, $rl_id)
+    public function seeAnsweredRecommendationLetter(Request $request, $archive_id, $rl_id)
     {
         // find the archive
         try {
@@ -495,9 +633,12 @@ class ExternalRecommendationLetter extends Controller
                 }
             }
 
-            $url_LogoAA = public_path('/storage/headers/logod.png');
+            // $url_LogoAA = public_path('/storage/headers/logod.png');
 
-
+            $url_LogoAA =    asset('storage/headers/logod.png');
+            // $image = base64_encode(file_get_contents($url_LogoAA));
+            // // return new JsonResponse(['image'=>$image], 400); //Ver info archivos en consola
+            // dd($image);
             $data = [
                 'recommendation_letter' => $recommendation_letter,
                 'appliant' => $archive->appliant,
@@ -509,6 +650,8 @@ class ExternalRecommendationLetter extends Controller
                 'parameters' => $parameters,
                 'url_LogoAA' => $url_LogoAA
             ];
+
+            
 
             $recommendation_letter_pdf = PDF::loadView('pdf.prueba', ["data" => $data])
                 ->setOptions([

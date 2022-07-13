@@ -91,7 +91,7 @@ export default {
     // Id del expediente
     archive_id: Number,
 
-    images_btn:Array,
+    images_btn:Object,
 
     // Curp del postulante
     curp: String,

@@ -26,7 +26,6 @@ export default {
     },
     
     created() {
-    console.log(this.name);
     axios
       .get("/controlescolar/solicitud/getImageAcademicProgram",{
         params:{
@@ -34,9 +33,7 @@ export default {
         }
       })
       .then((response) => {
-        // console.log('recibiendo imagenes' + response.data);
         this.program_photo = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
       })
       .catch((error) => {
         console.log(error);

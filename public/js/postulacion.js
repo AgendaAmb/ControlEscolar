@@ -644,7 +644,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     // id del capital humano.
     id: Number,
-    images_btn: Array,
+    images_btn: Object,
     //Index
     index: Number,
     // id del expediente.
@@ -892,12 +892,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "carta-recomendacion",
@@ -915,8 +909,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sizeRecommendationLetter: function sizeRecommendationLetter() {
-      // console.log("archivos" + this.archives_recommendation_letters.length);
-      // console.log("cartas" + this.recommendation_letters.length);
       return this.recommendation_letters.length;
     }
   },
@@ -924,8 +916,8 @@ __webpack_require__.r(__webpack_exports__);
     //Cartas de recomendacion (tabla a rellenar)
     //Aqui se cambian los correos 
     images_btn: {
-      type: Array,
-      "default": null
+      type: Object,
+      "default": {}
     },
     appliant: {
       type: Object
@@ -935,9 +927,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     //recibe los emails de la carta de recomendacion como en un arreglo para comparar
     recommendation_letters: {
-      type: Array
-    },
-    archives_recommendation_letters: {
       type: Array
     },
     archive_id: {
@@ -1055,8 +1044,8 @@ __webpack_require__.r(__webpack_exports__);
       "default": -1
     },
     images_btn: {
-      type: Array,
-      "default": null
+      type: Object,
+      "default": {}
     },
     viewer_id: {
       type: Number,
@@ -1082,10 +1071,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     location: {
       type: String
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -1332,26 +1317,6 @@ __webpack_require__.r(__webpack_exports__);
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
         // console.log(this.name);
         return true;
-      }
-
-      return false;
-    },
-    isProffesor: function isProffesor() {
-      var roles = [];
-      axios.post("/controlescolar/solicitud/getRol", {
-        viewer_id: this.viewer_id
-      }).then(function (response) {
-        roles = response.data.roles;
-      })["catch"](function (error) {
-        roles = error.data.roles;
-      }); // console.log("roles" + roles);
-
-      if (roles.length > 0) {
-        roles.forEach(function (rol) {
-          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
-            return true;
-          }
-        });
       }
 
       return false;
@@ -1658,7 +1623,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "experiencia-laboral",
   props: {
     index: Number,
-    images_btn: Array,
+    images_btn: Object,
     id: Number,
     archive_id: Number,
     state: String,
@@ -2129,7 +2094,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     //Index de la escolaridad
     index: Number,
-    images_btn: Array,
+    images_btn: Object,
     //Alias academic program
     alias_academic_program: String,
     // Países que el postulante puede escoger.
@@ -2231,15 +2196,14 @@ __webpack_require__.r(__webpack_exports__);
             }
           });
 
-          if (unis != null) {
-            this.universidades = unis;
+          if (unis != null) {// this.universidades = unis;
           }
         }
 
-        return this.universidades;
+        return unis;
       },
       set: function set(value) {
-        this.universidades = value;
+        this.$emit("update:universidades", value);
       }
     },
     CVU: {
@@ -2800,7 +2764,7 @@ __webpack_require__.r(__webpack_exports__);
     index: Number,
     // Id.
     id: Number,
-    images_btn: Array,
+    images_btn: Object,
     // Id del expediente.
     archive_id: Number,
     // Estado del idioma.
@@ -3029,15 +2993,12 @@ __webpack_require__.r(__webpack_exports__);
     getImage: function getImage() {
       var _this = this;
 
-      // console.log(this.language);
       axios.get("/controlescolar/solicitud/getFlagImage", {
         params: {
           language: this.language
         }
       }).then(function (response) {
-        // console.log("aaaaaaaaa" + response.data);
         _this.flag_image = response.data;
-        console.log(_this.flag_image);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3074,7 +3035,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.errores = {};
-      console.log(this.kind_of_exam);
       axios.post("/controlescolar/solicitud/updateAppliantLanguage", {
         id: this.id,
         archive_id: this.archive_id,
@@ -3273,7 +3233,7 @@ __webpack_require__.r(__webpack_exports__);
     //v bind for appliant data from control escolar
     // Estado civil.
     marital_state: String,
-    images_btn: Array,
+    images_btn: Object,
     //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
@@ -3557,7 +3517,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     //Index
     index: Number,
-    images_btn: Array,
+    images_btn: Object,
     // Documentos requeridos
     required_documents: Array,
     // Id de la producción científica.
@@ -4493,8 +4453,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4502,7 +4460,7 @@ __webpack_require__.r(__webpack_exports__);
     motivation: String,
     exanni_score: Number,
     documentos: Array,
-    images_btn: Array,
+    images_btn: Object,
     user_id: {
       type: Number,
       "default": -1
@@ -4510,10 +4468,6 @@ __webpack_require__.r(__webpack_exports__);
     viewer_id: {
       type: Number,
       "default": -1
-    },
-    letters_Commitment: {
-      type: Array,
-      "default": null
     },
     alias_academic_program: {
       type: String,
@@ -4928,7 +4882,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4976,13 +4929,10 @@ __webpack_require__.r(__webpack_exports__);
     scientific_productions: Array,
     // Capitales humanos del postulante.
     human_capitals: Array,
-    //archivos arreglo de {id_archive_required_docuent, id_archive, location}
-    archives_recommendation_letters: Array,
     //Cartas de recomendacion Arreglo que contiene correos
     recommendation_letters: Array,
     // Postulante de la solicitud.
     appliant: Object,
-    letters_Commitment: Array,
     //Persona que esta viendo el expediente
     viewer: Object,
     //Estado del expediente
@@ -5006,7 +4956,7 @@ __webpack_require__.r(__webpack_exports__);
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
-      images_btn: []
+      images_btn: {}
     };
   },
   mounted: function mounted() {
@@ -5339,10 +5289,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5363,18 +5309,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
   },
   props: {
     images_btn: {
-      type: Array,
-      "default": null
+      type: Object,
+      "default": {}
     },
     email: {
       type: String,
       "default": "example@example.com"
     },
     recommendation_letter: {
-      type: Object,
-      "default": null
-    },
-    archive_recommendation_letter: {
       type: Object,
       "default": null
     },
@@ -12153,7 +12095,7 @@ var render = function () {
             [
               _c("img", {
                 staticStyle: { "max-height": "45px !important" },
-                attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                attrs: { src: _vm.images_btn.guardar, alt: "" },
                 on: { click: _vm.guardaCapitalHumano },
               }),
             ]
@@ -12245,8 +12187,6 @@ var render = function () {
                 attrs: {
                   email: _vm.recommendation_letters[0].email_evaluator,
                   recommendation_letter: _vm.recommendation_letters[0],
-                  archive_recommendation_letter:
-                    _vm.archives_recommendation_letters[0],
                   appliant: _vm.appliant,
                   archive_id: _vm.archive_id,
                   academic_program: _vm.academic_program,
@@ -12288,8 +12228,6 @@ var render = function () {
                   attrs: {
                     email: rl.email_evaluator,
                     recommendation_letter: _vm.recommendation_letters[index],
-                    archive_recommendation_letter:
-                      _vm.archives_recommendation_letters[index],
                     appliant: _vm.appliant,
                     archive_id: _vm.archive_id,
                     academic_program: _vm.academic_program,
@@ -12454,7 +12392,7 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../controlescolar/solicitud/expediente/" +
+                                "../../../controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },
@@ -12465,7 +12403,7 @@ var render = function () {
                                 width: "100%",
                                 "max-height": "45px !important",
                               },
-                              attrs: { src: _vm.images_btn["ver"], alt: "" },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
                             }),
                           ]
                         ),
@@ -12488,10 +12426,7 @@ var render = function () {
                       _c("label", [
                         _c("img", {
                           staticStyle: { "max-height": "45px !important" },
-                          attrs: {
-                            src: _vm.images_btn["seleccionar"],
-                            alt: "",
-                          },
+                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
                         }),
                         _vm._v(" "),
                         _c("input", {
@@ -13192,7 +13127,7 @@ var render = function () {
             [
               _c("img", {
                 staticStyle: { "max-height": "45px !important" },
-                attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                attrs: { src: _vm.images_btn.guardar, alt: "" },
                 on: { click: _vm.guardaExperienciaLaboral },
               }),
             ]
@@ -14215,7 +14150,7 @@ var render = function () {
               [
                 _c("img", {
                   staticStyle: { "max-height": "45px !important" },
-                  attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                  attrs: { src: _vm.images_btn.guardar, alt: "" },
                   on: { click: _vm.actualizaHistorialAcademico },
                 }),
               ]
@@ -15096,7 +15031,7 @@ var render = function () {
               [
                 _c("img", {
                   staticStyle: { "max-height": "45px !important" },
-                  attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                  attrs: { src: _vm.images_btn.guardar, alt: "" },
                   on: { click: _vm.actualizaLenguaExtranjera },
                 }),
               ]
@@ -15950,7 +15885,7 @@ var render = function () {
             [
               _c("img", {
                 staticStyle: { "max-height": "45px !important" },
-                attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                attrs: { src: _vm.images_btn.guardar, alt: "" },
                 on: { click: _vm.guardaProduccionCientifica },
               }),
             ]
@@ -16815,7 +16750,7 @@ var render = function () {
               [
                 _c("img", {
                   staticStyle: { "max-height": "45px !important" },
-                  attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                  attrs: { src: _vm.images_btn.guardar, alt: "" },
                   on: { click: _vm.actualizaExposicionMotivos },
                 }),
               ]
@@ -16834,7 +16769,6 @@ var render = function () {
                 attrs: {
                   user_id: _vm.user_id,
                   viewer_id: _vm.viewer_id,
-                  letters_Commitment: _vm.letters_Commitment,
                   alias_academic_program: _vm.alias_academic_program,
                   archivo: documento.archivo,
                   location: documento.pivot.location,
@@ -16958,7 +16892,7 @@ var render = function () {
               "grado-academico",
               _vm._b(
                 {
-                  key: grado.id + index,
+                  key: index + "-" + grado.id + "-AcademicDegree",
                   attrs: {
                     index: index + 1,
                     alias_academic_program: _vm.academic_program.alias,
@@ -17080,7 +17014,6 @@ var render = function () {
               documentos: _vm.entrance_documents,
               user_id: _vm.appliant.id,
               viewer_id: _vm.viewer.id,
-              letters_Commitment: _vm.letters_Commitment,
               images_btn: _vm.images_btn,
               alias_academic_program: _vm.academic_program.alias,
             },
@@ -17099,12 +17032,6 @@ var render = function () {
               },
               "update:viewer_id": function ($event) {
                 return _vm.$set(_vm.viewer, "id", $event)
-              },
-              "update:letters_Commitment": function ($event) {
-                _vm.letters_Commitment = $event
-              },
-              "update:letters_-commitment": function ($event) {
-                _vm.letters_Commitment = $event
               },
               "update:alias_academic_program": function ($event) {
                 return _vm.$set(_vm.academic_program, "alias", $event)
@@ -17131,7 +17058,7 @@ var render = function () {
               "lengua-extranjera",
               _vm._b(
                 {
-                  key: language.id,
+                  key: index + "-" + language.id + "-Language",
                   attrs: {
                     index: index + 1,
                     alias_academic_program: _vm.academic_program.alias,
@@ -17244,7 +17171,7 @@ var render = function () {
                 "experiencia-laboral",
                 _vm._b(
                   {
-                    key: experience.id,
+                    key: index + "-" + experience.id + "-$WorkingExperience}",
                     attrs: {
                       index: index + 1,
                       state: experience.state,
@@ -17343,7 +17270,7 @@ var render = function () {
               "produccion-cientifica",
               _vm._b(
                 {
-                  key: production.id,
+                  key: index + "-" + production.id + "-ScientificProduction",
                   attrs: {
                     index: index + 1,
                     state: production.state,
@@ -17432,7 +17359,7 @@ var render = function () {
               "capital-humano",
               _vm._b(
                 {
-                  key: humanCapital.id,
+                  key: index + "-" + humanCapital.id + "-CapitalHumano",
                   attrs: {
                     index: index,
                     course_name: humanCapital.course_name,
@@ -17497,8 +17424,6 @@ var render = function () {
               academic_program: _vm.academic_program,
               recommendation_letters: _vm.recommendation_letters,
               images_btn: _vm.images_btn,
-              archives_recommendation_letters:
-                _vm.archives_recommendation_letters,
             },
           }),
         ],
@@ -17811,7 +17736,7 @@ var render = function () {
             [
               _c("img", {
                 staticStyle: { "max-height": "45px !important" },
-                attrs: { src: _vm.images_btn["guardar"], alt: "" },
+                attrs: { src: _vm.images_btn.guardar, alt: "" },
                 on: {
                   click: function ($event) {
                     return _vm.enviarCorreoCartaRecomendacion()
@@ -17823,7 +17748,7 @@ var render = function () {
         : _c(
             "div",
             {
-              staticClass: "d-flex justify-content-center  my-1",
+              staticClass: "d-flex justify-content-start  my-1",
               staticStyle: { "max-height": "45px", width: "100%" },
             },
             [
@@ -17831,7 +17756,6 @@ var render = function () {
                 _c(
                   "a",
                   {
-                    staticClass: "btn btn-primary",
                     staticStyle: { height: "45px", width: "100%" },
                     attrs: {
                       href:
@@ -17844,11 +17768,8 @@ var render = function () {
                   },
                   [
                     _c("img", {
-                      staticStyle: {
-                        width: "100%",
-                        "max-height": "45px !important",
-                      },
-                      attrs: { src: _vm.images_btn["descargar"], alt: "" },
+                      staticStyle: { "max-height": "45px !important" },
+                      attrs: { src: _vm.images_btn.descargar },
                     }),
                   ]
                 ),
@@ -30969,7 +30890,6 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_12__["default"]({
     academic_program: academicProgram,
     recommendation_letters: recommendation_letters,
     archives_recommendation_letters: archives_recommendation_letters,
-    letters_Commitment: letters_Commitment,
     viewer: viewer
   },
   methods: {

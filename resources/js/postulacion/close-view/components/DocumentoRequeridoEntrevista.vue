@@ -22,8 +22,8 @@
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
-              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
         </div>
@@ -39,7 +39,7 @@ export default {
 
   props: {
     images_btn: {
-      type: Array,
+      type: Object,
     },
 
     id: {

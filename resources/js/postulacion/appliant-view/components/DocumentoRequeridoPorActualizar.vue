@@ -30,7 +30,7 @@
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
               <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
@@ -183,11 +183,8 @@ export default {
           this.list_type === "working")
       ) {
 
-        console.log(this.list_type);
         for (let i = 0; i < this.require_documents_to_update.length; i++) {
           if (this.require_documents_to_update[i] === this.id) {
-            // console.log("encontro documento");
-            console.log(this.name);
             res = true;
             if (this.index_require_documents_to_update.length > 0) {
               this.index = this.index_require_documents_to_update[i];
@@ -197,8 +194,6 @@ export default {
       } else {
         this.require_documents_to_update.forEach((element) => {
           if (element === this.id) {
-            // console.log("encontro documento");
-            console.log(this.name);
             res = true;
           }
         });

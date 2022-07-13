@@ -225,7 +225,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
       var res = false;
       academic_documents_ids.forEach(function (element) {
         if (element[0] === academic_degree_id) {
-          console.log("hayyayay");
           res = true;
         }
       });
@@ -317,8 +316,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
             break;
         }
 
-        console.log(url);
-        console.log(index);
         axios({
           method: "post",
           url: url,
@@ -356,8 +353,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
 
     this.academic_documents_ids.forEach(function (element) {
       if (element[0] != null) {
-        console.log("academico:", element[0]);
-
         _this.index_selected_academicDocuments.push(element[0]);
       }
 
@@ -505,8 +500,7 @@ __webpack_require__.r(__webpack_exports__);
       "default": -1
     },
     images_btn: {
-      type: Array,
-      "default": null
+      type: Object
     },
     viewer_id: {
       type: Number,
@@ -594,28 +588,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  // created() {
-  //   // console.log(this.language);
-  //   axios
-  //     .get("/controlescolar/solicitud/getAllButtonImage")
-  //     .then((response) => {
-  //       // console.log('recibiendo imagenes' + response.data.ver);
-  //       this.images = response.data;
-  //       // console.log('imagenes buttons: ' + this.images.ver);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
   methods: {
     bkgCargarArchivo: function bkgCargarArchivo(type) {
-      // console.log(this.language);
       axios.get("/controlescolar/solicitud/getButtonImage", {
         params: {
           type: type
         }
       }).then(function (response) {
-        console.log('hola' + response.data);
         return response.data;
       })["catch"](function (error) {
         console.log(error);
@@ -631,8 +610,7 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      // console.log(this.name + ': '+ this.alias_academic_program);
-      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
+      var res = true;
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
@@ -780,28 +758,7 @@ __webpack_require__.r(__webpack_exports__);
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
-        // console.log(this.name);
         return true;
-      }
-
-      return false;
-    },
-    isProffesor: function isProffesor() {
-      var roles = [];
-      axios.post("/controlescolar/solicitud/getRol", {
-        viewer_id: this.viewer_id
-      }).then(function (response) {
-        roles = response.data.roles;
-      })["catch"](function (error) {
-        roles = error.data.roles;
-      }); // console.log("roles" + roles);
-
-      if (roles.length > 0) {
-        roles.forEach(function (rol) {
-          if (rol.toString() === "profesor_nb" || rol.toString() === "profesor_colaborador") {
-            return true;
-          }
-        });
       }
 
       return false;
@@ -1005,12 +962,8 @@ __webpack_require__.r(__webpack_exports__);
       var res = false;
 
       if (this.list_type != null && (this.list_type === "academic" || this.list_type === "language" || this.list_type === "working")) {
-        console.log(this.list_type);
-
         for (var i = 0; i < this.require_documents_to_update.length; i++) {
           if (this.require_documents_to_update[i] === this.id) {
-            // console.log("encontro documento");
-            console.log(this.name);
             res = true;
 
             if (this.index_require_documents_to_update.length > 0) {
@@ -1021,8 +974,6 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.require_documents_to_update.forEach(function (element) {
           if (element === _this.id) {
-            // console.log("encontro documento");
-            console.log(_this.name);
             res = true;
           }
         });
@@ -5085,7 +5036,7 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../controlescolar/solicitud/expediente/" +
+                                "../../../controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },
@@ -5096,7 +5047,7 @@ var render = function () {
                                 width: "100%",
                                 "max-height": "45px !important",
                               },
-                              attrs: { src: _vm.images_btn["ver"], alt: "" },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
                             }),
                           ]
                         ),
@@ -5119,10 +5070,7 @@ var render = function () {
                       _c("label", [
                         _c("img", {
                           staticStyle: { "max-height": "45px !important" },
-                          attrs: {
-                            src: _vm.images_btn["seleccionar"],
-                            alt: "",
-                          },
+                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
                         }),
                         _vm._v(" "),
                         _c("input", {
@@ -5337,7 +5285,7 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../controlescolar/solicitud/expediente/" +
+                                "../../../controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },

@@ -87,7 +87,7 @@ export default {
     // Estado civil.
     marital_state: String,
 
-    images_btn: Array,
+    images_btn: Object,
 
     //v bind for appliant data from portal
     // Id del expediente

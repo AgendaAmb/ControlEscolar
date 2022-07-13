@@ -39,14 +39,11 @@
           <valida-carta-recomendacion
             :email="recommendation_letters[0].email_evaluator"
             :recommendation_letter="recommendation_letters[0]"
-            :archive_recommendation_letter="archives_recommendation_letters[0]"
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
-                        :images_btn="images_btn"
-
+            :images_btn="images_btn"
             :index = 1
-            
           >
           </valida-carta-recomendacion>
         </div>
@@ -58,8 +55,7 @@
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
-                        :images_btn="images_btn"
-
+            :images_btn="images_btn"
             :index = 2
           >
           </valida-carta-recomendacion>
@@ -69,7 +65,6 @@
     <!-- CASO 3 -->
     <!-- Ya existen dos correos registrados para carta de recomendacion  -->
     <div class="row " v-else>
-      
         <div
           class="form-group col-6 d-flex"
           v-for="(rl, index) in recommendation_letters"
@@ -79,7 +74,6 @@
           <valida-carta-recomendacion
             :email="rl.email_evaluator"
             :recommendation_letter="recommendation_letters[index]"
-            :archive_recommendation_letter="archives_recommendation_letters[index]"
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
@@ -114,8 +108,6 @@ export default {
 
   methods: {
     sizeRecommendationLetter() {
-      // console.log("archivos" + this.archives_recommendation_letters.length);
-      // console.log("cartas" + this.recommendation_letters.length);
       return this.recommendation_letters.length;
     },
   },
@@ -125,8 +117,8 @@ export default {
     //Aqui se cambian los correos 
 
     images_btn:{
-      type:Array,
-      default:null,
+      type:Object,
+      default:{},
     },
 
     appliant: {
@@ -139,10 +131,6 @@ export default {
 
     //recibe los emails de la carta de recomendacion como en un arreglo para comparar
     recommendation_letters: {
-      type: Array,
-    },
-
-    archives_recommendation_letters: {
       type: Array,
     },
 

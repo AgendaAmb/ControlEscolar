@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\AppliantLanguage;
+use App\Models\RequiredDocument;
 
 class AppliantLanguageObserver
 {
@@ -14,15 +15,8 @@ class AppliantLanguageObserver
      */
     public function created(AppliantLanguage $appliantLanguage)
     {
-        $academic_program = $appliantLanguage->archive->announcement->academicProgram;
-        $role_id = $appliantLanguage->archive->appliant->roles()->first()->id;
-        $language_documents_id = $academic_program
-            ->requiredDocuments()
-            ->wherePivot('role_id', $role_id)
-            ->where('type', 'language')
-            ->pluck('id');
-
-        $appliantLanguage->requiredDocuments()->attach($language_documents_id);
+        $required_documents_ids = RequiredDocument::where('type','language')->pluck('id');
+        $appliantLanguage->requiredDocuments()->attach($required_documents_ids);
     }
 
     /**

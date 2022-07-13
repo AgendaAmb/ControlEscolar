@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\AcademicDegree;
+use App\Models\RequiredDocument;
 
 class AcademicDegreeObserver
 {
@@ -14,15 +15,8 @@ class AcademicDegreeObserver
      */
     public function created(AcademicDegree $academicDegree)
     {
-        $academic_program = $academicDegree->archive->announcement->academicProgram;
-        $role_id = $academicDegree->archive->appliant->roles()->first()->id;
-        $academic_documents_id = $academic_program
-            ->requiredDocuments()
-            ->wherePivot('role_id', $role_id)
-            ->where('type', 'academic')
-            ->pluck('id');
-
-        $academicDegree->requiredDocuments()->attach($academic_documents_id);
+        $required_documents_ids = RequiredDocument::where('type','academic')->pluck('id');
+        $academicDegree->requiredDocuments()->attach($required_documents_ids);
     }
 
     /**

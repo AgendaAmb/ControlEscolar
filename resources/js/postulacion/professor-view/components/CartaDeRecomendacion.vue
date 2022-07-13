@@ -33,7 +33,6 @@
           <valida-carta-recomendacion
             :email="recommendation_letters[0].email_evaluator"
             :recommendation_letter="recommendation_letters[0]"
-            :archive_recommendation_letter="archives_recommendation_letters[0]"
             :appliant="appliant"
             :academic_program="academic_program"
             :index = 1
@@ -66,9 +65,6 @@
           <valida-carta-recomendacion
             :email="rl.email_evaluator"
             :recommendation_letter="recommendation_letters[index]"
-            :archive_recommendation_letter="
-              archives_recommendation_letters[index]
-            "
             :appliant="appliant"
             :academic_program="academic_program"
             :index="index + 1"

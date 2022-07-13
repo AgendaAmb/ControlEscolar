@@ -122,8 +122,8 @@ export default {
     //Aqui se cambian los correos
 
     images_btn:{
-      type:Array,
-      default:null,
+      type:Object,
+      default:{},
     },
 
     appliant: {

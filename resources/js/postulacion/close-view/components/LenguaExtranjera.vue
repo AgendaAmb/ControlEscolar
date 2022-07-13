@@ -169,7 +169,7 @@ export default {
 
     alias_academic_program: String,
 
-    images_btn: Array,
+    images_btn: Object,
 
     // Id.
     id: Number,
@@ -376,9 +376,7 @@ export default {
           },
         })
         .then((response) => {
-          // console.log("aaaaaaaaa" + response.data);
           this.flag_image = response.data;
-          console.log(this.flag_image);
         })
         .catch((error) => {
           console.log(error);

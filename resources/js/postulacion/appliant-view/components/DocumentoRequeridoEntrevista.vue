@@ -25,8 +25,8 @@
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
-              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
         </div>
@@ -35,7 +35,7 @@
           style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
-            <img :src="images_btn['seleccionar']" alt="" style=" max-height: 45px !important;">
+            <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
             <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
           </label>
         </div>
@@ -57,7 +57,7 @@ export default {
     },
 
     images_btn:{
-      type:Array,
+      type:Object,
     },
 
     name: {
@@ -135,29 +135,14 @@ export default {
   methods: {
     
     requiredForAcademicProgram() {
-      console.log(this.name + ': '+ this.location);
-
-      let res = true;
-      // console.log("id: "+this.id+" nombre: "+this.name);
-     
+      let res = true;     
       if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec" || this.alias_academic_program === "enrem" ) {
         switch (this.name) {
            case "21.- Presentacion de entrevista (Doctorado)":
             res = false;
             break;
         }
-      }
-      // //Documents for doctorado
-      // else if (this.alias_academic_program === "doctorado"  ) {
-      //   switch (this.name) {
-      //     case "20.- Ensayo de entrevista (Maestria)":
-      //       res = false;
-      //       break;
-      //   }
-      // }
-     
-
-      return res;
+      }      return res;
     },
     
     checkUpload() {

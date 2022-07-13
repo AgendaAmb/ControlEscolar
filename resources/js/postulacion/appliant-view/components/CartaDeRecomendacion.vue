@@ -58,8 +58,7 @@
             :appliant="appliant"
             :archive_id="archive_id"
             :academic_program="academic_program"
-                        :images_btn="images_btn"
-
+            :images_btn="images_btn"
             :index = 2
           >
           </valida-carta-recomendacion>
@@ -114,8 +113,6 @@ export default {
 
   methods: {
     sizeRecommendationLetter() {
-      // console.log("archivos" + this.archives_recommendation_letters.length);
-      // console.log("cartas" + this.recommendation_letters.length);
       return this.recommendation_letters.length;
     },
   },
@@ -125,8 +122,8 @@ export default {
     //Aqui se cambian los correos 
 
     images_btn:{
-      type:Array,
-      default:null,
+      type:Object,
+      default:{},
     },
 
     appliant: {

@@ -19,7 +19,7 @@
         <grado-academico
           v-for="(grado, index) in academic_degrees"
           v-bind="grado"
-          v-bind:key="grado.id"
+          v-bind:key="`${index}-${grado.id}-AcademicDegree`" 
           :index="index + 1"
           :alias_academic_program="academic_program.alias"
           :state.sync="grado.state"
@@ -74,7 +74,7 @@
         <lengua-extranjera
           v-for="(language, index) in appliant_languages"
           v-bind="language"
-          v-bind:key="language.id"
+          v-bind:key="`${index}-${language.id}-Language`"
           :index="index + 1"
           :alias_academic_program="academic_program.alias"
           :state.sync="language.state"
@@ -107,7 +107,7 @@
         <experiencia-laboral
           v-for="(experience, index) in appliant_working_experiences"
           v-bind="experience"
-          v-bind:key="experience.id"
+           v-bind:key="`${index}-${experience.id}-$WorkingExperience}`"
           :index="index + 1"
           :alias_academic_program="academic_program.alias"
           :state.sync="experience.state"
@@ -142,7 +142,7 @@
          <produccion-cientifica
           v-for="(production, index) in scientific_productions"
           v-bind="production"
-          v-bind:key="production.id"
+          v-bind:key="`${index}-${production.id}-ScientificProduction`"
           :index="index + 1"
           :state.sync="production.state"
           :type.sync="production.type"
@@ -168,7 +168,7 @@
         <capital-humano
           v-for="(humanCapital, index) in human_capitals"
           v-bind="humanCapital"
-          v-bind:key="humanCapital.id"
+          v-bind:key="`${index}-${humanCapital.id}-CapitalHumano`"
           :index="index"
           :alias_academic_program="academic_program.alias"
           :course_name.sync="humanCapital.course_name"
@@ -343,7 +343,8 @@ export default {
       myUniversities: [],
       EnglishExams: [],
       EnglishExamTypes: [],
-      images_btn: [],
+            images_btn:{},
+
     };
   },
 

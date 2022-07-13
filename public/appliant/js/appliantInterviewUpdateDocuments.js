@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
       type: Number
     },
     images_btn: {
-      type: Array
+      type: Object
     },
     name: {
       type: String
@@ -128,8 +128,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      console.log(this.name + ': ' + this.location);
-      var res = true; // console.log("id: "+this.id+" nombre: "+this.name);
+      var res = true;
 
       if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec" || this.alias_academic_program === "enrem") {
         switch (this.name) {
@@ -137,15 +136,7 @@ __webpack_require__.r(__webpack_exports__);
             res = false;
             break;
         }
-      } // //Documents for doctorado
-      // else if (this.alias_academic_program === "doctorado"  ) {
-      //   switch (this.name) {
-      //     case "20.- Ensayo de entrevista (Maestria)":
-      //       res = false;
-      //       break;
-      //   }
-      // }
-
+      }
 
       return res;
     },
@@ -248,7 +239,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
   },
   data: function data() {
     return {
-      images_btn: [],
+      images_btn: {},
       errores: {}
     };
   },
@@ -3964,7 +3955,7 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../controlescolar/solicitud/expediente/" +
+                                "../../../controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },
@@ -3975,7 +3966,7 @@ var render = function () {
                                 width: "100%",
                                 "max-height": "45px !important",
                               },
-                              attrs: { src: _vm.images_btn["ver"], alt: "" },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
                             }),
                           ]
                         ),
@@ -3998,10 +3989,7 @@ var render = function () {
                       _c("label", [
                         _c("img", {
                           staticStyle: { "max-height": "45px !important" },
-                          attrs: {
-                            src: _vm.images_btn["seleccionar"],
-                            alt: "",
-                          },
+                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
                         }),
                         _vm._v(" "),
                         _c("input", {

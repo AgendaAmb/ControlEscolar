@@ -25,7 +25,7 @@ export default {
     motivation: String,
     exanni_score: Number,
     documentos: Array,
-    images_btn: Array,
+    images_btn: Object,
 
     user_id: {
       type: Number,
@@ -35,11 +35,6 @@ export default {
     viewer_id: {
       type: Number,
       default: -1,
-    },
-
-    letters_Commitment: {
-      type: Array,
-      default: null,
     },
 
     alias_academic_program: {

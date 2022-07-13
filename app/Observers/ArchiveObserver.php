@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Archive;
+use App\Models\RequiredDocument;
 
 class ArchiveObserver
 {
@@ -14,48 +15,33 @@ class ArchiveObserver
      */
     public function created(Archive $archive)
     {
-        $academic_program = $archive->announcement->academicProgram;
-        $role_id = $archive->appliant->roles()->first()->id;
-        $personal_documents_id = $academic_program
-            ->requiredDocuments()
-            ->wherePivot('role_id', $role_id)
-            ->where('type', 'personal')
-            ->pluck('id');
-
-        $entrance_documents_id = $academic_program
-            ->requiredDocuments()
-            ->wherePivot('role_id', $role_id)
-            ->where('type', 'entrance')
-            ->pluck('id');
-
-        $curricular_documents_id = $academic_program
-            ->requiredDocuments()
-            ->recommendationLetter()
-            ->pluck('id');
-
+        // Crea modelos que se relacionan al archivos
         $archive->academicDegrees()->createMany([
-            ['state'=>'Incompleto']
+            ['state' => 'Incompleto']
         ]);
-        
+
         $archive->appliantWorkingExperiences()->createMany([
-            ['state'=>'Incompleto']
+            ['state' => 'Incompleto']
         ]);
 
         $archive->scientificProductions()->createMany([
-            ['state'=>'Incompleto']
+            ['state' => 'Incompleto']
         ]);
 
         $archive->appliantLanguages()->createMany([
-            ['state'=>'Incompleto']
+            ['state' => 'Incompleto']
         ]);
 
         $archive->humanCapitals()->createMany([
-            ['state'=>'Incompleto']
+            ['state' => 'Incompleto']
         ]);
 
+        // Archivos que pertenecen al expediente, no cuentan con modelo ya que el expediente lo almacena
+        $personal_documents_id = RequiredDocument::where('type', 'personal')->pluck('id');
+        $entrance_documents_id = RequiredDocument::where('type', 'entrance')->pluck('id');
+
         $archive->personalDocuments()->attach($personal_documents_id);
-        $archive->personalDocuments()->attach($entrance_documents_id);
-        $archive->curricularDocuments()->attach($curricular_documents_id);
+        $archive->entranceDocuments()->attach($entrance_documents_id);
     }
 
     /**
@@ -64,7 +50,9 @@ class ArchiveObserver
      * @param  \App\Models\Archive  $archive
      * @return void
      */
-    public function updated(Archive $archive){}
+    public function updated(Archive $archive)
+    {
+    }
 
     /**
      * Handle the Archive "deleted" event.

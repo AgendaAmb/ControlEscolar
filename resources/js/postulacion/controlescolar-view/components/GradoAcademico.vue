@@ -197,7 +197,7 @@
 
       <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaHistorialAcademico" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+             <img  @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
           </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
@@ -230,7 +230,7 @@ export default {
     //Index de la escolaridad
     index: Number,
 
-    images_btn: Array,
+    images_btn: Object,
 
     //Alias academic program
     alias_academic_program: String,
@@ -356,13 +356,13 @@ export default {
             }
           });
           if (unis != null) {
-            this.universidades = unis;
+            // this.universidades = unis;
           }
         }
-        return this.universidades;
+        return unis;
       },
       set: function (value) {
-        this.universidades = value;
+        this.$emit("update:universidades", value);
       },
     },
 

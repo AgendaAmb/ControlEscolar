@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AcademicDegreeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppliantLanguageController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EvaluationRubricController;
@@ -10,8 +12,12 @@ use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\ExternalRecommendationLetter;
+use App\Http\Controllers\HumanCapitalController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ScientificProductionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WorkingExperienceController;
+use App\Models\HumanCapital;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -108,7 +114,6 @@ Route::prefix('ca')->name('ca.')->group(function () {
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
-        Route::get('/getRol', [ArchiveController::class, 'getRol'])->name('getRol');        
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
         Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
         Route::get('/getAllButtonImage', [ImageController::class, 'getAllButtonImage'])->name('getAllButtonImage');
@@ -118,7 +123,6 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
-        Route::get('/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('show')->middleware('role:admin|control_escolar');
         
         Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
@@ -126,10 +130,8 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::post('/sentEmailRechazadoPostulacion', [ArchiveController::class, 'sentEmailRechazadoPostulacion'])->name('sentEmailRechazado');
         Route::post('/whoModifyArchive', [ArchiveController::class, 'whoModifyArchive'])->name('whoModifyArchive');
 
-
         #Appliant
-        Route::get('/expediente/{archive_id}', [ArchiveController::class,'appliantFile_AppliantView'])->name('ExpedientePostulante'); //Vista de expediente para alumno, rellenar campos
-
+        Route::get('/expediente/{archive}', [ArchiveController::class, 'appliantArchive'])->name('show');
 
         # Requisitos de ingreso.
         Route::post('/updateExanniScore', [ArchiveController::class, 'updateExanniScore']);
@@ -138,47 +140,45 @@ Route::prefix('ca')->name('ca.')->group(function () {
         Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
 
         # Grados académicos.
-        Route::get('/{archive}/latestAcademicDegree', [ArchiveController::class, 'latestAcademicDegree']);
-        Route::post('/addAcademicDegree', [ArchiveController::class, 'addAcademicDegree']);
-        Route::post('/deleteAcademicDegree', [ArchiveController::class, 'deleteAcademicDegree']);
-        Route::post('/updateAcademicDegree', [ArchiveController::class, 'updateAcademicDegree']);
-        Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
+        Route::get('/{archive}/latestAcademicDegree', [AcademicDegreeController::class, 'latestAcademicDegree']);
+        Route::post('/addAcademicDegree', [AcademicDegreeController::class, 'addAcademicDegree']);
+        Route::post('/deleteAcademicDegree', [AcademicDegreeController::class, 'deleteAcademicDegree']);
+        Route::post('/updateAcademicDegree', [AcademicDegreeController::class, 'updateAcademicDegree']);
+        Route::post('/updateAcademicDegreeRequiredDocument', [AcademicDegreeController::class, 'updateAcademicDegreeRequiredDocument']);
 
         # Experiencia laboral.
-        Route::post('/addWorkingExperience', [ArchiveController::class, 'addWorkingExperience']);
-        Route::post('/deleteWorkingExperience', [ArchiveController::class, 'deleteWorkingExperience']);
-        Route::post('/updateWorkingExperience', [ArchiveController::class, 'updateWorkingExperience']);
+        Route::post('/addWorkingExperience', [WorkingExperienceController::class, 'addWorkingExperience']);
+        Route::post('/deleteWorkingExperience', [WorkingExperienceController::class, 'deleteWorkingExperience']);
+        Route::post('/updateWorkingExperience', [WorkingExperienceController::class, 'updateWorkingExperience']);
 
         # Lenguas extranjeras del postulante.
-        Route::post('/addAppliantLanguage', [ArchiveController::class, 'addAppliantLanguage']);
-        Route::post('/deleteAppliantLanguage', [ArchiveController::class, 'deleteAppliantLanguage']);
-        Route::post('/updateAppliantLanguage', [ArchiveController::class, 'updateAppliantLanguage']);
-        Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
+        Route::post('/addAppliantLanguage', [AppliantLanguageController::class, 'addAppliantLanguage']);
+        Route::post('/deleteAppliantLanguage', [AppliantLanguageController::class, 'deleteAppliantLanguage']);
+        Route::post('/updateAppliantLanguage', [AppliantLanguageController::class, 'updateAppliantLanguage']);
+        Route::post('/updateAppliantLanguageRequiredDocument', [AppliantLanguageController::class, 'updateAppliantLanguageRequiredDocument']);
 
         # Producciones científicas.
         //Modelos
-        Route::post('/addScientificProduction', [ArchiveController::class, 'addScientificProduction']);
-        Route::post('/deleteScientificProduction', [ArchiveController::class, 'deleteScientificProduction']);
-        Route::post('/updateScientificProduction', [ArchiveController::class, 'updateScientificProduction']);
+        Route::post('/addScientificProduction', [ScientificProductionController::class, 'addScientificProduction']);
+        Route::post('/deleteScientificProduction', [ScientificProductionController::class, 'deleteScientificProduction']);
+        Route::post('/updateScientificProduction', [ScientificProductionController::class, 'updateScientificProduction']);
         //Autores
-        Route::post('/addScientificProductionAuthor', [ArchiveController::class, 'addScientificProductionAuthor']);
-        Route::post('/updateScientificProductionAuthor', [ArchiveController::class, 'updateScientificProductionAuthor']);
-        Route::post('/deleteScientificProductionAuthor', [ArchiveController::class, 'deleteScientificProductionAuthor']);
+        Route::post('/addScientificProductionAuthor', [ScientificProductionController::class, 'addScientificProductionAuthor']);
+        Route::post('/updateScientificProductionAuthor', [ScientificProductionController::class, 'updateScientificProductionAuthor']);
+        Route::post('/deleteScientificProductionAuthor', [ScientificProductionController::class, 'deleteScientificProductionAuthor']);
 
         # Capital humano.
-        Route::post('/addHumanCapital', [ArchiveController::class, 'addHumanCapital']);
-        Route::post('/updateHumanCapital', [ArchiveController::class, 'updateHumanCapital']);
-        Route::post('/deleteHumanCapital', [ArchiveController::class, 'deleteHumanCapital']);
+        Route::post('/addHumanCapital', [HumanCapitalController::class, 'addHumanCapital']);
+        Route::post('/updateHumanCapital', [HumanCapitalController::class, 'updateHumanCapital']);
+        Route::post('/deleteHumanCapital', [HumanCapitalController::class, 'deleteHumanCapital']);
 
         # Ver y descargar tipos de archivos.
         Route::get('expediente/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');
 
         #Carta de recomendación {invitado-
         # referente hacia un postulante}
-        Route::post('/sentEmailRecommendationLetter', [ArchiveController::class, 'sentEmailRecommendationLetter']);
+        Route::post('/sentEmailRecommendationLetter', [ExternalRecommendationLetter::class, 'sentEmailRecommendationLetter']);
         Route::get('/seeAnsweredRecommendationLetter/{archive_id}/{rl_id}', [ExternalRecommendationLetter::class, 'seeAnsweredRecommendationLetter'])->name('seeAnswered');
-
-        // /{recommendation_letter}/{appliant}/{academic_program}
     });
 
     # Rutas para las entrevistas.
@@ -198,10 +198,8 @@ Route::prefix('ca')->name('ca.')->group(function () {
 
         # Programa de entrevistas
         Route::get('programa2', [InterviewController::class, 'programa2'])->name('programa2');
-        
 
         Route::post('SendMailUpdateOnlyDocumentsForInterview', [InterviewController::class, 'SendMailUpdateOnlyDocumentsForInterview'])->name('SendMailUpdateOnlyDocumentsForInterview');
-
 
         # Entrevistas.
         Route::post('nuevaEntrevista', [InterviewController::class, 'nuevaEntrevista'])->name('nuevaEntrevista');
@@ -256,12 +254,11 @@ Route::prefix('ca')->name('ca.')->group(function () {
 
     Route::prefix('updateDocuments')->name('updateDocuments.')->group(function(){
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
-        Route::post('updateStateFromEmail', [ArchiveController::class, 'updateStateFromEmail'])->name('update');
         Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
         Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
-        Route::post('/updateAcademicDegreeRequiredDocument', [ArchiveController::class, 'updateAcademicDegreeRequiredDocument']);
-        Route::post('/updateAppliantLanguageRequiredDocument', [ArchiveController::class, 'updateAppliantLanguageRequiredDocument']);
-        Route::post('/updateArchiveInterviewDocument', [ArchiveController::class, 'updateArchiveInterviewDocument']);
+        Route::post('/updateAcademicDegreeRequiredDocument', [AcademicDegreeController::class, 'updateAcademicDegreeRequiredDocument']);
+        Route::post('/updateAppliantLanguageRequiredDocument', [AppliantLanguageController::class, 'updateAppliantLanguageRequiredDocument']);
+        Route::post('/updateArchiveInterviewDocument', [InterviewController::class, 'updateArchiveInterviewDocument']);
         // Faltaria la de working aqui y en solicitud tambien
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument_extern'])->name('get_document');
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
@@ -269,8 +266,6 @@ Route::prefix('ca')->name('ca.')->group(function () {
 
     Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function(){
         Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterviewShow'])->name('show');
-        // Route::get('/show/Test/{user_id}', [InterviewController::class, 'documentsForInterview_Test'])->name('showTest');
-        // Route::get('/show/Presentation&Research/{user_id}', [InterviewController::class, 'documentsForInterview_PresentationResearch'])->name('showPresentationResearch');
     });
 
 
@@ -278,12 +273,7 @@ Route::prefix('ca')->name('ca.')->group(function () {
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
     Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
         # El que recive correo recibe la vista
-        
-        //el token se almacena en la tabla de carta de recomendacion, esto permitira tener mayor seguridad sin acceder a la tabla de usuarios 
         Route::get('/show/{token}', [ExternalRecommendationLetter::class, 'recommendationLetter'])->name('show');
-        // Route::get('/{user_id}', [ArchiveController::class, 'recommendationLetter'])->name('recommendationLetter.show');
-        // Route::delete('/recommendationLetter/{id_rl}', [ArchiveController::class, 'deleteRecommendationLetter']) middleware(['auth', 'role:admin|control_escolar']) -> name('recommendationLetter.destroy');
-
         # Al guardar se hace la peticion para almacenar datos
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');

@@ -2,8 +2,7 @@
   <div class="col-12">
     <strong>Correo No.{{ index }} :</strong>
     <!-- Campo para rellenar el correo -->
-    <input type="text" class="form-control" :class="inputClassFor()" v-model="myEmail"
-      :readonly="checkUpload() === 1" />
+    <input type="text" class="form-control" :class="inputClassFor()" v-model="myEmail" :readonly="checkUpload() === 1" />
 
     <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
     <template v-if="checkUpload() === 1">
@@ -17,22 +16,19 @@
     </template>
 
     <div v-if="checkUpload() != 1" class="form-group"  style="width:100%; max-height: 45px !important;">
-      <img  @click="enviarCorreoCartaRecomendacion()" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+      <img  @click="enviarCorreoCartaRecomendacion()" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
     </div>
 
 
-    <div v-else class="d-flex justify-content-center  my-1" style="max-height: 45px; width: 100%">
+    <div v-else class="d-flex justify-content-start  my-1" style="max-height: 45px; width: 100%">
 
       <label>
-        <a class="btn btn-primary"
+        <a
           :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
           target="_blank" style=" height: 45px; width:100%;">
-          <img :src="images_btn['descargar']" alt="" style="width:100%; max-height: 45px !important;">
+          <img :src="images_btn.descargar" style="max-height: 45px !important;">
         </a>
       </label>
-
-
-
     </div>
   </div>
 </template>
@@ -62,8 +58,8 @@ export default {
   props: {
 
     images_btn: {
-      type: Array,
-      default: null,
+      type: Object,
+      default: {},
     },
 
 
@@ -77,10 +73,6 @@ export default {
       default: null,
     },
 
-    archive_recommendation_letter: {
-      type: Object,
-      default: null,
-    },
 
     archive_id: {
       type: Number,
@@ -133,9 +125,8 @@ export default {
       console.log("res: " + res);
       return res;
     },
+    
     verCartaRecomendacion() {
-
-
       if (this.recommendation_letter == null || this.appliant == null || this.archive_id == null) {
         Swal.fire({
           title: "Ups!",

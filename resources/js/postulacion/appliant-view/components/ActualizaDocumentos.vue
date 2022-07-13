@@ -226,7 +226,6 @@ export default {
       let res = false;
       academic_documents_ids.forEach((element) => {
         if (element[0] === academic_degree_id) {
-          console.log("hayyayay");
           res = true;
         }
       });
@@ -324,8 +323,6 @@ export default {
             break;
         }
 
-        console.log(url);
-        console.log(index);
         axios({
           method: "post",
           url: url,
@@ -365,8 +362,6 @@ export default {
   created() {
     this.academic_documents_ids.forEach((element) => {
       if (element[0] != null) {
-        console.log("academico:", element[0]);
-
         this.index_selected_academicDocuments.push(element[0]);
       }
 
