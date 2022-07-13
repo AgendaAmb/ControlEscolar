@@ -101,6 +101,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'interview-day',
   props: {
@@ -22386,7 +22394,7 @@ var render = function () {
                       _vm.$root.loggedUserIsSchoolControl()
                         ? _c("td", [
                             _c("a", { attrs: { target: "_blank" } }, [
-                              _vm._v("Ver documentos"),
+                              _vm._v("Ver documentos ca"),
                             ]),
                           ])
                         : _c("td", [
@@ -22433,6 +22441,8 @@ var render = function () {
                                 )
                               }),
                               _vm._v(" "),
+                              _c("hr"),
+                              _vm._v(" "),
                               _c(
                                 "a",
                                 {
@@ -22446,6 +22456,8 @@ var render = function () {
                                   ),
                                 ]
                               ),
+                              _vm._v(" "),
+                              _c("hr"),
                             ],
                             2
                           )
@@ -22471,28 +22483,48 @@ var render = function () {
                         : _vm.$root.loggedUserIsSchoolControl()
                         ? _c(
                             "td",
-                            _vm._l(interview.rubrics, function (rubric) {
-                              return _c(
+                            [
+                              _vm._l(interview.rubrics, function (rubric) {
+                                return _c(
+                                  "a",
+                                  {
+                                    key: rubric.location,
+                                    staticClass:
+                                      "d-block text-capitalize text-decoration-none",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(rubric.user.name) +
+                                        " " +
+                                        _vm._s(rubric.user.middlename) +
+                                        " " +
+                                        _vm._s(rubric.user.surname) +
+                                        "\n                                    "
+                                    ),
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c("hr"),
+                              _vm._v(" "),
+                              _c(
                                 "a",
                                 {
-                                  key: rubric.location,
                                   staticClass:
                                     "d-block text-capitalize text-decoration-none",
+                                  attrs: { href: interview.average_rubric },
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(rubric.user.name) +
-                                      " " +
-                                      _vm._s(rubric.user.middlename) +
-                                      " " +
-                                      _vm._s(rubric.user.surname) +
-                                      "\n                                    "
+                                    "\n                                        Rúbrica promedio\n                                    "
                                   ),
                                 ]
-                              )
-                            }),
-                            0
+                              ),
+                              _vm._v(" "),
+                              _c("hr"),
+                            ],
+                            2
                           )
                         : _vm._e(),
                     ])

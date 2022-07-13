@@ -210,6 +210,10 @@ class EvaluationRubric extends Model
             // Ponderación para extudiante foráneo
             if($country!="México"){
                 $degree_average = (10/$ad->max_avg) * $ad->average;
+            }else{
+                if($degree_average > 10){                           // Porque ashsss.. la gente jaja
+                    $degree_average/=10;
+                }
             }
         }catch(\Exception $e){
             return $degree_average;

@@ -57,6 +57,9 @@ const app = new Vue({
                     if(element.degree_type === 'Licenciatura'){
                         this.university = element.university;   //Cargar universidad
                         if(element.country==='México'){
+                            if(element.average > 10){
+                                element.average = element.average / 10;
+                            }
                             this.estudio_score = element.average;
                         }else{
                             this.estudio_score = (10/element.max_avg)*element.average;
@@ -68,6 +71,9 @@ const app = new Vue({
                     if(element.degree_type === 'Maestría'){
                         this.university = element.university;   //Cargar universidad
                         if(element.country==='México'){
+                            if(element.average > 10){
+                                element.average = element.average / 10;
+                            }
                             this.estudio_score = element.average;
                         }else{
                             this.estudio_score = (10/element.max_avg)*element.average;

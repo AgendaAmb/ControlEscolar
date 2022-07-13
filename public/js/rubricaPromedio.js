@@ -67740,6 +67740,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -68627,6 +68634,20 @@ var render = function () {
                       )
                     }
                   ),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "table-success" }, [
+                    _vm._v("Comentario o aportación"),
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "table-success" }, [
+                    _vm._v(
+                      "Información detectada por la comisión de evaluación\n                    "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "table-success" }, [
+                    _vm._v("Dictamen de la comisión evaluadora"),
+                  ]),
                 ],
                 2
               ),
@@ -68736,6 +68757,18 @@ var render = function () {
                         )
                       }
                     ),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "table-success" }, [
+                      _vm._v(_vm._s(rubric.considerations)),
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "table-success" }, [
+                      _vm._v(_vm._s(rubric.additional_information)),
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "table-success" }, [
+                      _vm._v(_vm._s(rubric.dictamen_ce)),
+                    ]),
                   ],
                   2
                 )
