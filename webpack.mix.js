@@ -43,4 +43,5 @@ mix.js('resources/js/entrevistas/entrevistas.js', 'public/js').vue();
 mix.js('resources/js/entrevistas-profesor/programaEntrevistas.js', 'public/js').vue();
 mix.js('resources/js/rubrica/rubrica.js', 'public/js').vue();
 mix.js('resources/js/rubrica/rubricaPromedio.js', 'public/js').vue();
+mix.js('resources/js/rubrica/rubricaPromedioCa.js', 'public/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliantInterviewUpdateDocuments.js', 'public/appliant/js').vue();

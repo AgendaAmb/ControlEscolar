@@ -1,10 +1,11 @@
 <script>
 const appliant = @json($appliant);
-const rubrics = @json($rubrics);
-const appliant_details = @json($data);
-const scores = @json($avg_collection);
+const rubric = @json($rubric);
+const scores = @json($scores);
 const type = @json($type);
 const archive_id = @json($id);
+console.log(rubric);
+// console.log(type);
 </script>
 
 @extends('layouts.app')
@@ -23,19 +24,13 @@ const archive_id = @json($id);
     <hr class="col-11 hr">
 </div>
 
-<average-rubric v-bind:rubrics="rubrics" 
-                v-bind:appliant="appliant" 
-                v-bind:appliant_details="appliant_details"
+<average-rubric-ca v-bind:rubric="rubric" 
+                v-bind:appliant="appliant"
                 v-bind:scores="scores">
-</average-rubric>
-
-<div class="row mt-2 justify-content-center">
-    <a href="{{ route('entrevistas.rubrica.export_rubric',['archive_id' => $id]) }}" class="btn btn-success" role="button"><i class="fa fa-download"></i> .xlsx</a>
-</div>
-<br>
+</average-rubric-ca>
 
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/rubricaPromedio.js') }}" defer></script>
+<script src="{{ asset('js/rubricaPromedioCA.js') }}" defer></script>
 @endpush
