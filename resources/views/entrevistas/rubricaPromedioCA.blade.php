@@ -32,5 +32,5 @@ console.log(rubric);
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/rubricaPromedioCA.js') }}" defer></script>
+<script src="{{ asset('js/rubricaPromedioCa.js') }}" defer></script>
 @endpush
