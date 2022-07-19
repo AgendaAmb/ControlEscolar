@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppliantLanguageController;
 use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ComiteAcademicoController;
 use App\Http\Controllers\EvaluationRubricController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
@@ -40,13 +41,16 @@ Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelog
 Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-Route::prefix('ca')->name('ca.')->group(function () {
-    Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
-    ->middleware('auth');
-});
+
 
 
 // Route::prefix('controlescolar')->group(function () {
+
+    Route::prefix('ca')->name('ca.')->group(function () {
+        Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
+        ->middleware('auth');
+    });
+
     # Ruta de prueba segunda conexion a la base de datos
     // Route::get('/db2', function () {
     //     $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
