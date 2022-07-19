@@ -9,39 +9,18 @@
                         <th class="score-category myriad-bold table-secondary">
                             <p class="excelent d-block mb-0"> Nombre del aspirante </p>
                         </th>
-                        <th class="score-category myriad-bold table-secondary">
-                            <p class="very-good d-block mb-0"> Nombre del profesor evaluador</p>
-                        </th>
                         <th class="table-info">Ponderación sección 1</th>
                         <th class="table-info">Ponderación sección 2</th>
                         <th class="table-info">Ponderación sección 3 </th>
                         <th class="table-info">Ponderación sección 4</th>
                         <th class="table-info">Ponderación sección 5</th>
-                        <th class="table-primary">Ponderación de rúbrica </th>
                         <th class="table-success">Ponderación promedio de rúbricas</th>
-                        <!-- <th class="table-secondary" v-for="(concept, index) in rubrics[0].basic_concepts" :key="index"> -->
-                        <!-- 1.{{ index + 1 }}
-                        </th> -->
-                        <th class="table-secondary" v-for="(concept, index) in rubrics[0].academic_concepts"
-                            :key="index">
-                            <!-- {{concept.description}} -->
-                            2.{{ index + 1 }}
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubrics[0].research_concepts"
-                            :key="index">
-                            <!-- {{concept.description}} -->
-                            3.{{ index + 1 }}
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubrics[0].working_experience_concepts"
-                            :key="index">
-                            4.{{ index + 1 }}
-                            <!-- {{concept.description}} -->
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubrics[0].personal_attributes_concepts"
-                            :key="index">
-                            5.{{ index + 1 }}
-                            <!-- {{concept.description}} -->
-                        </th>
+                        <!-- CE -->
+                        <th class="table-info">Comentarios sección 2</th>
+                        <th class="table-info">Comentarios sección 3</th>
+                        <th class="table-info">Comentarios sección 4</th>
+                        <th class="table-info">Comentarios sección 5</th>
+
                         <th class="table-success">Comentario o aportación</th>
                         <th class="table-success">Información detectada por la comisión de evaluación
                         </th>
@@ -49,37 +28,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(rubric, index) in rubrics" :key="index" class="score-category myriad-bold">
+                    <tr>
                         <th class="table-secondary">{{appliant.name}}</th>
-                        <th class="table-secondary">{{rubric.user}}</th>
                         <!-- Ponderaciones -->
-                        <th class="table-info">{{ scores[index].basic.toFixed(2) }}</th>
-                        <th class="table-info">{{ scores[index].academic.toFixed(2) }}</th>
-                        <th class="table-info">{{ scores[index].research.toFixed(2) }}</th>
-                        <th class="table-info">{{ scores[index].exp.toFixed(2) }}</th>
-                        <th class="table-info">{{ scores[index].personal.toFixed(2) }}</th>
-                        <th class="table-primary">{{ scores[index].rubric_total.toFixed(2) }}</th>
-                        <th class="table-success">{{getPonderacion()}}</th>
-                        <!-- <th class="table-secondary" v-for="(concept, index) in rubric.basic_concepts" :key="index">
-                            10
-                        </th> -->
-                        <th class="table-secondary" v-for="(concept, index) in rubric.academic_concepts" :key="index">
-                            {{concept.notes}}
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubric.research_concepts" :key="index">
-                            {{concept.notes}}
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubric.working_experience_concepts"
-                            :key="index">
-                            {{concept.notes}}
-                        </th>
-                        <th class="table-secondary" v-for="(concept, index) in rubric.personal_attributes_concepts"
-                            :key="index">
-                            {{concept.notes}}
-                        </th>
-                        <th class="table-success">{{ rubric.considerations }}</th>
-                        <th class="table-success">{{ rubric.additional_information }}</th>
-                        <th class="table-success">{{ rubric.dictamen_ce }}</th>
+                        <th class="table-info">{{ scores.basic.toFixed(2) }}</th>
+                        <th class="table-info">{{ scores.academic.toFixed(2) }}</th>
+                        <th class="table-info">{{ scores.research.toFixed(2) }}</th>
+                        <th class="table-info">{{ scores.exp.toFixed(2) }}</th>
+                        <th class="table-info">{{ scores.personal.toFixed(2) }}</th>
+                        <th class="table-success">{{scores.rubric_total.toFixed(2)}}</th>
+                        <th class="table-info">{{ rubric.academic_concepts.join("\r\n\n") }}</th>
+                        <th class="table-info">{{ rubric.research_concepts.join("\r\n\n") }}</th>
+                        <th class="table-info">{{ rubric.working_concepts.join("\r\n\n") }}</th>
+                        <th class="table-info">{{ rubric.personal_concepts.join("\r\n\n") }}</th>
+                        <!-- CE -->
+                        <th class="table-success">{{ rubric.considerations.join("\r\n\n") }}</th>
+                        <th class="table-success">{{ rubric.additional_information.join("\r\n\n") }}</th>
+                        <th class="table-success">{{ rubric.dictamen_ce.join("\r\n\n") }}</th>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -101,12 +66,11 @@ import { interfaceDeclaration } from '@babel/types';
 import { columnSelectionComplete } from '@syncfusion/ej2-grids';
 
 export default {
-    name: 'average-rubric ',
+    name: 'average-rubric-ca ',
     
     props: {
-        rubrics,
+        rubric,
         appliant,
-        appliant_details,
         scores
     },
 
@@ -116,13 +80,6 @@ export default {
     },
 
     methods: {
-        getPonderacion(){
-            let ponderacion = 0.0;
-            scores.forEach(element => {
-                ponderacion+=element.rubric_total;
-            });
-            return (ponderacion/scores.length).toFixed(2);
-        }
     },
 }
 </script>
