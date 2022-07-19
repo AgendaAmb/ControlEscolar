@@ -17,6 +17,8 @@ mix.js('resources/js/home/home.js', 'public/js').vue();
 
 // Pre-registro
 mix.js('resources/js/pre-registro/preregistro.js', 'public/js').vue();
+mix.js('resources/js/pre-registro/preRegistroUpdate.js', 'public/js').vue();
+
 
 // Vistas postulación
 mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();

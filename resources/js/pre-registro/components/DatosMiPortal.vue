@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group col-11 col-sm-6 col-lg-5 mb-auto">
+  <div class="form-group col-12 col-sm-6 col-lg-4 mb-auto">
     <label> Ingresa tu correo electrónico </label>
     <input type="search" :class="inputClassFor('correo_registro')" v-model="CorreoRegistro">
     <a class="py-2 btn btn btn-outline-light search-button position-relative d-inline-block" 

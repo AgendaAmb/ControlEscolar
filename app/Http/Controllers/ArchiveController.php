@@ -1,75 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
-# Peticiones
-use App\Http\Requests\{
-    AddScientificProductionAuthorRequest,
-    UpdateAcademicDegreeRequest,
-    UpdateAppliantLanguageRequest,
-    UpdateHumanCapitalRequest,
-    UpdateScientificProductionAuthorRequest,
-    UpdateScientificProductionRequest,
-    UpdateWorkingExperienceRequest,
-    StoreRecommendationLetter,
-    UpdateMailRecommendationLetter,
-};
-
-use Illuminate\Validation\Rule;
-# Resources (respuestas en formato JSON)
-use Illuminate\Support\Str;
-use App\Services\PayUService\Exception;
 use App\Http\Resources\AppliantArchive\ArchiveResource;
-use App\Mail\SendRecommendationLetter;
-use Illuminate\Support\Facades\Auth;
-//convertir blade a pdf
-use Barryvdh\DomPDF\Facade\Pdf;
 
-# Modelos
 use App\Models\{
-    AcademicArea,
-    AcademicDegree,
     AcademicProgram,
     Announcement,
-    AppliantLanguage,
     Archive,
     ArchiveRequiredDocument,
-    Author,
-    CustomParameter,
-    HumanCapital,
     IntentionLetter,
-    MyRecommendationLetter,
-    Parameter,
-    ScientificProduction,
     User,
-    WorkingExperience,
-    RecommendationLetter,
     RequiredDocument,
-    ScoreParameter,
 };
-use FontLib\Table\Type\os2;
-use Illuminate\Auth\Events\Validated;
-# Clases auxiliares de Laravel.
+
 use Illuminate\Http\{
     JsonResponse,
     Request,
-    File
 };
-use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
+
 use Illuminate\Support\Facades\{
     DB,
-    Schema,
-    Cache,
     Mail,
-    Storage
 };
-use Nette\Utils\Json;
+
 use App\Helpers\MiPortalService;
 use App\Mail\SendRejectPostulation;
 use App\Mail\SendUpdateDocuments;
-use Database\Factories\ArchiveFactory;
-# Clases de otros paquetes.
+
 use Spatie\QueryBuilder\{
     AllowedFilter,
     QueryBuilder

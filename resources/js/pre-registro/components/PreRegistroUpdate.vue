@@ -28,7 +28,7 @@
         <div class="modal-body">
           <form v-on:submit.prevent="registraUsuario">
             <!-- Datos para crear la cuenta -->
-            <crear-cuenta
+            <buscar-usuario-portal
               :errores="errores"
               :tipo_usuario.sync="tipo_usuario"
               :pertenece_uaslp.sync="pertenece_uaslp"
@@ -42,11 +42,11 @@
               @uaslpUserUpdated="uaslpUserUpdated"
               @miPortalUserUpdated="miPortalUserUpdated"
             >
-            </crear-cuenta>
+            </buscar-usuario-portal>
 
             <div v-if="tipo_usuario !== null && Readonly">
               <!-- Datos generals -->
-              <datos-personales
+              <actualizar-datos-portal
                 :errores="errores"
                 :tipo_usuario.sync="tipo_usuario"
                 :readonly="Readonly"
@@ -62,6 +62,7 @@
                 :birth_country.sync="birth_country"
                 :birth_state.sync="birth_state"
                 :residence_country.sync="residence_country"
+                :residence_state.sync = "residence_state"
                 :gender.sync="gender"
                 :other_gender.sync="other_gender"
                 :civic_state.sync="civic_state"
@@ -72,7 +73,7 @@
                 :is_disabled.sync="is_disabled"
                 :disability.sync="disability"
               >
-              </datos-personales>
+              </actualizar-datos-portal>
             </div>
             <!-- <button @click="a()">sdfasd</button> -->
           </form>
@@ -84,14 +85,14 @@
 
 
 <script>
-import CrearCuenta from "./CrearCuenta.vue";
-import DatosPersonales from "./DatosPersonales.vue";
+import ActualizarDatosPortal from "./ActualizarDatosPortal.vue";
+import BuscarUsuarioPortal from "./BuscarUsuarioPortal.vue";
 
 import swal from "sweetalert2";
 window.Swal = swal;
 
 export default {
-  components: { CrearCuenta, DatosPersonales },
+  components: { ActualizarDatosPortal, BuscarUsuarioPortal },
   name: "pre-registro",
 
   props: {
@@ -127,6 +128,7 @@ export default {
       birth_country: null,
       birth_state: null,
       residence_country: null,
+      residence_state:null,
       zip_code: null,
       phone_number: null,
       ethnicity: null,
@@ -256,6 +258,7 @@ export default {
       formData.append("birth_country", this.birth_country);
       formData.append("birth_state", this.birth_state);
       formData.append("residence_country", this.residence_country);
+      formData.append("residence_state", this.residence_country);
       formData.append("zip_code", this.zip_code);
       formData.append("phone_number", this.phone_number);
       formData.append("ethnicity", this.ethnicity);

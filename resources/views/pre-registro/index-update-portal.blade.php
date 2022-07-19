@@ -11,9 +11,9 @@
             @@click="selected_academic_program = academic_program">
         </academic-program>
     </div>
-    <pre-registro :academic_program.sync="selected_academic_program"></pre-registro>
+    <pre-registro-update :academic_program.sync="selected_academic_program"></pre-registro-update>
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/preregistro.js') }}" defer></script>
+    <script src="{{ asset('js/preRegistroUpdate.js') }}" defer></script>
 @endpush

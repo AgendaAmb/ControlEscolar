@@ -157,13 +157,13 @@ class PreRegisterController extends Controller
                 'birth_country' => ['required', 'string', 'max:255'],
                 'birth_state' => ['required', 'string', 'max:255'],
                 'residence_country' => ['required', 'string', 'max:255'],
+                'residence_state' => ['required', 'string', 'max:255'],
                 'zip_code' => ['required', 'numeric'],
                 'phone_number' => ['required', 'numeric'],
                 'is_disabled' => ['required', 'boolean'],
                 'ethnicity' => ['required', 'string', 'max:255'],
                 'disability' => ['nullable', 'required_if:is_disabled,true'],
                 'nationality' => ['required', 'same:birth_country'],
-                'residence' => ['required', 'same:residence_country']
             ]);
         } else {
             $val = Validator::make($request->all(), [
@@ -190,13 +190,13 @@ class PreRegisterController extends Controller
                 'birth_country' => ['required', 'string', 'max:255'],
                 'birth_state' => ['required', 'string', 'max:255'],
                 'residence_country' => ['required', 'string', 'max:255'],
+                'residence_state' => ['required', 'string', 'max:255'],
                 'zip_code' => ['required', 'numeric'],
                 'phone_number' => ['required', 'numeric'],
                 'is_disabled' => ['required', 'boolean'],
                 'ethnicity' => ['required', 'string', 'max:255'],
                 'disability' => ['nullable', 'required_if:is_disabled,true'],
                 'nationality' => ['required', 'same:birth_country'],
-                'residence' => ['required', 'same:residence_country']
             ]);
         }
 
@@ -208,7 +208,7 @@ class PreRegisterController extends Controller
         # ---------------------------------------------------- Crear Usuario.
 
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['academic_program_id', 'civic_state', 'other_civic_state', 'birth_state']); //data to save
+        $data = $request->except(['academic_program_id','birth_country']); //data to save
 
         # ------------------------- Creacion de usuario en portal Agenda Ambiental
         try {
