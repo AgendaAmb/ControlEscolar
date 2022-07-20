@@ -9,11 +9,8 @@ const academic_comittes = @json($academic_comittes);
 @extends('layouts.app')
 
 
-@section('headerPicture')
-<img class="img-fluid mt-4" src="{{ asset('storage/headers/DOCTORADO-SUPERIOR.png') }}" width="600px">
-@endsection
-
 @section('main')
+
 <div class="content">
 
     <editar-usuario

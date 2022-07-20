@@ -10,10 +10,13 @@ import UsuariosCe from './components/UsuariosCe';
 import NuevoUsuario from './components/NuevoUsuario';
 import EditarUsuario from './components/EditarUsuario';
 import UsuariosCeRowTemplate from './components/UsuariosCeRowTemplate.vue';
-
+import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue'
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 Vue.use(GridPlugin);
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

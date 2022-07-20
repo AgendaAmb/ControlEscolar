@@ -1,112 +1,56 @@
 <template>
-  <div
-    class="modal fade"
-    :class="{ 'is-active': active }"
-    id="EditaUsuario"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" :class="{ 'is-active': active }" id="EditaUsuario" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div
-        class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3"
-        style="background-color: #8b96a8"
-      >
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">Editar trabajador</h2>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">X</span>
-          </button>
+      <div class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3" style="background-color:#B0BEC5">
+        <div class="modal-header my-2">
+          <h2 class="display-5" id="exampleModalLabel">Editar trabajador</h2>
+          <b-icon data-dismiss="modal" scale="3" aria-label="Close" icon="x-circle"></b-icon>
         </div>
         <div class="modal-body">
           <form v-on:submit.prevent="actualizaUsuario">
             <div class="row">
               <div class="col-md-4">
                 <label> RPE de usuario </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="id"
-                  :readonly="true"
-                />
+                <input type="text" class="form-control" v-model="id" :readonly="true" />
               </div>
             </div>
             <div class="row">
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4>Roles</h4>
-                <checkbox-edit
-                  v-for="(role, index) in roles"
-                  :key="role.id"
-                  :name="role.name"
-                  :id="role.id"
-                  :pivot="role.pivot"
-                  :index="index"
-                  :array_data="selected_roles"
-                  :tipo="'roles'"
-                  @actualizaLista="actualizaLista"
-                ></checkbox-edit>
+                <p class="h3">Roles</p>
+                <checkbox-edit v-for="(role, index) in roles" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_roles" :tipo="'roles'"
+                  @actualizaLista="actualizaLista"></checkbox-edit>
+
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4>Áreas académicas</h4>
-                <checkbox-edit
-                  v-for="(role, index) in academic_areas"
-                  :key="role.id"
-                  :name="role.name"
-                  :id="role.id"
-                  :pivot="role.pivot"
-                  :index="index"
-                  :array_data="selected_academic_areas"
-                  :tipo="'academic_areas'"
-                  @actualizaLista="actualizaLista"
-                ></checkbox-edit>
+                <p class="h3">Áreas académicas</p>
+                <checkbox-edit v-for="(role, index) in academic_areas" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_areas" :tipo="'academic_areas'"
+                  @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4>Entidades académicas</h4>
-                <checkbox-edit
-                  v-for="(role, index) in academic_entities"
-                  :key="role.id"
-                  :name="role.name"
-                  :id="role.id"
-                  :pivot="role.pivot"
-                  :index="index"
-                  :array_data="selected_academic_entities"
-                  :tipo="'academic_entities'"
-                  @actualizaLista="actualizaLista"
-                ></checkbox-edit>
+                <p class="h3">Entidades académicas</p>
+
+                <checkbox-edit v-for="(role, index) in academic_entities" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_entities"
+                  :tipo="'academic_entities'" @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4>Comités académicos</h4>
-                <checkbox-edit
-                  v-for="(role, index) in academic_comittes"
-                  :key="role.id"
-                  :name="role.name"
-                  :id="role.id"
-                  :pivot="role.pivot"
-                  :index="index"
-                  :array_data="selected_academic_comittes"
-                  :tipo="'academic_comittes'"
-                  @actualizaLista="actualizaLista"
-                ></checkbox-edit>
+                <p class="h3">Comités académicos</p>
+                <checkbox-edit v-for="(role, index) in academic_comittes" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_comittes"
+                  :tipo="'academic_comittes'" @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
             </div>
           </form>
         </div>
         <div class="px-0 my-3 modal-footer justify-content-start">
-          <button
-            id="submit"
-            type="submit"
-            class="btn btn-primary"
-            style="background-color: #0160ae"
-            @click="actualizaUsuario"
-          >
+          <button id="submit" type="submit" class="btn btn-primary" style="background-color: #0160ae"
+            @click="actualizaUsuario">
             Guardar Cambios
           </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -333,22 +277,21 @@ export default {
       "toggleModal",
       (id, roles, academic_areas, academic_entities, academic_comittes) => {
         this.id = id;
-
-        if (academic_comittes!=null && academic_comittes.length > 0) {
+        if (academic_comittes != null && academic_comittes.length > 0) {
           this.selected_academic_comittes = academic_comittes;
           academic_comittes.forEach((item) => {
             this.selected_academic_comittes_id.push(item.id);
           });
         }
 
-        if (academic_entities!=null && academic_entities.length > 0) {
+        if (academic_entities != null && academic_entities.length > 0) {
           this.selected_academic_entities = academic_entities;
           academic_entities.forEach((item) => {
             this.selected_academic_entities_id.push(item.id);
           });
         }
 
-        if (roles!=null && roles.length > 0) {
+        if (roles != null && roles.length > 0) {
           this.selected_roles = roles;
 
           roles.forEach((item) => {
@@ -356,7 +299,7 @@ export default {
           });
         }
 
-        if (academic_areas!=null &&academic_areas.length > 0) {
+        if (academic_areas != null && academic_areas.length > 0) {
           this.selected_academic_areas = academic_areas;
           academic_areas.forEach((item) => {
             this.selected_academic_areas_id.push(item.id);
