@@ -2,17 +2,37 @@
   <div class="row align-items-center">
 
     <!-- Tittle and add or asign new data to User -->
-    <div class="container">
-      <div class="row">
-        <div class="col-6 d-flex flex-column my-auto align-items-center">
-          <h3 class="ml-2">Administración de usuarios</h3>
+    <div class="container-fluid">
+
+      <div class="d-flex m-2 justify-content-center">
+        <div class="col-12 ">
+          <p class="display-4">
+            Administración de usuarios
+          </p>
         </div>
-        <div class="col-6 d-flex flex-column my-auto align-items-center">
-          <b-button data-toggle="modal" data-target="#NuevoUsuario" pill variant="outline-success" style="width:75%;"
-            class="align-items-center text-center">
-            <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon> Agregar usuario
+
+      </div>
+
+      <div class="row mx-2" style="height:50px!important;">
+        <b-input-group size="lg" class="col-md-10 col-sm-8" style="height: 100% !important;">
+          <b-form-input style="height: 100% !important;" type="search" v-model="search" placeholder="Buscar RPE">
+          </b-form-input>
+          <b-input-group-append style="height: 100% !important;">
+            <b-btn
+              @click.prevent="toggleModal(item.id, item.roles, item.academic_areas, item.academic_entities, item.academic_comittes)"
+              data-toggle="modal" data-target="#EditaUsuario" variant="outline-primary" style="width:100%;">
+              <b-icon icon="search" aria-hidden="true"></b-icon>
+            </b-btn>
+          </b-input-group-append>
+        </b-input-group>
+
+        <div class="col-md-2 col-sm-4" style="height:100%!important;">
+          <b-button data-toggle="modal" data-target="#NuevoUsuario" pill variant="outline-success"
+            style="width:100%; height: 100% !important;" class="align-items-center text-center">
+            <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
           </b-button>
         </div>
+
       </div>
     </div>
 
@@ -37,8 +57,8 @@
           </b-pagination>
 
           <!-- User table -->
-          <b-table striped hover head-variant="blue" id="my-table" :items="data" :fields="fields" :per-page="perPage"
-            :current-page="currentPage" class="text-center">
+          <b-table striped hover head-variant="blue" id="my-table" :items="filteredList" :fields="fields"
+            :per-page="perPage" :current-page="currentPage" class="text-center">
             <template v-slot:cell(Acciones)="{ item }">
               <div class="row">
                 <div class="col-6 justify-content-center">
@@ -139,13 +159,43 @@ export default {
     academic_comittes: Array,
   },
   computed: {
+
+    filteredList() {
+      let list = [];
+
+      this.data.filter(user => {
+        if (user.id.toString().toLowerCase().includes(this.search.toLowerCase())) {
+          list.push(user);
+        }
+      })
+
+      if (list.length <= 0) {
+        list = this.data;
+      }
+
+      return list;
+    },
+
     rows() {
-      return this.data.length;
+      let list = [];
+
+      this.data.filter(user => {
+        if (user.id.toString().toLowerCase().includes(this.search.toLowerCase())) {
+          list.push(user);
+        }
+      })
+
+      if (list.length <= 0) {
+        list = this.data;
+      }
+
+      return list.length;
     }
   },
 
   data() {
     return {
+      search: '',
       perPage: 10,
       currentPage: 1,
       data: [],

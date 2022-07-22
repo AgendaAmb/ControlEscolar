@@ -272,8 +272,6 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function(){
         Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterviewShow'])->name('show');
     });
-
-
     
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
     Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {

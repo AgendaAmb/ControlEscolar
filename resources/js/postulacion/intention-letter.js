@@ -9,6 +9,13 @@
  import SearchArchiveInput from './components/search-archives/SearchArchiveInput.vue';
  import Archives from './components/search-archives/Archives.vue';
  import Archive from './components/search-archives/Archive.vue';
+ import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue'
+import { GridPlugin } from '@syncfusion/ej2-vue-grids';
+
+Vue.use(GridPlugin);
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
+
 
 window.Vue = require('vue').default;
 

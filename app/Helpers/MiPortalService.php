@@ -104,9 +104,6 @@ class MiPortalService
     {
         $token = $this->requestClientToken();
         return Http::withToken($token)->withHeaders(['content-type' => 'application/json', 'accept' => 'application/json']);
-
-        //$token = $this->requestClientToken();
-        //return Http::withHeaders(['content-type' => 'application/json', 'accept' => 'application/json']);
     }
 
     /**
@@ -118,7 +115,7 @@ class MiPortalService
     public function miPortalGet(string $path, array $query = []): Response
     {
         $request = $this->miPortalRequest()->asForm();
-        return $request->get($this->url . $path, $query);//peticion get como tal
+        return $request->get($this->url . $path, $query);
     }
 
     /**

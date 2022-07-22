@@ -1,5 +1,8 @@
 <template>
   <form @submit.prevent="buscaExpedientes" class="d-block mt-0">
+
+  
+
     <div class="row mx-1">
       <div class="form-group col-6">
         <label class="h5"> <strong> Programa académico </strong> </label>
@@ -14,34 +17,6 @@
           </option>
         </select>
       </div>
-      <!-- 
-      <div class=" col-6">
-        <div class="row">
-          <div class="col d-block">
-            <label><strong>Desde</strong></label>
-          </div>
-          <div class="col d-block">
-            <label><strong>Hasta</strong></label>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col">
-            <input
-              type="date"
-              class='form-control'
-              v-model="date_from"
-            />
-          </div>
-          <div class="col">
-            <input
-              type="date"
-              class='form-control'
-              v-model="date_to"
-            />
-          </div>
-        </div>
-      </div> -->
 
       <div class="form-group col-6">
         <label class="h5"> <strong> Periodo </strong> </label>
