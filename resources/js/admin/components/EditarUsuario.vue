@@ -235,10 +235,17 @@ export default {
     },
 
     actualizaUsuario() {
-      // console.log("academic areas: ", this.selected_academic_areas_id);
-      // console.log("roles : ", this.selected_roles_id);
-      // console.log("academic entities : ", this.selected_academic_entities_id);
-      // console.log("academic_comittes : ", this.selected_academic_comittes_id);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
 
       axios
         .post("/controlescolar/admin/updateWorker", {
@@ -250,24 +257,17 @@ export default {
           selected_academic_comittes: this.selected_academic_comittes_id,
         })
         .then((response) => {
-          Swal.fire({
-            title: "El usuario con el id " + this.id + " ha sido modificado",
-            // text: response.data,
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Aceptar",
-          });
-          // console.log(response);
+          Toast.fire({
+            icon: 'success',
+            title: 'Usuario ' + this.id + " modificado"
+          })
         })
         .catch((error) => {
-          // console.log(error);
-          Swal.fire({
-            title: "Error al actualizar",
-            showCancelButton: false,
-            icon: "error",
-          });
+          Toast.fire({
+            icon: 'warning',
+            title: 'Error al actualizar'
+          })
+
         });
     },
   },

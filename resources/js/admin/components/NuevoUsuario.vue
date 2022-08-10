@@ -16,40 +16,33 @@
             </div>
             <div class="row">
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4> Roles </h4>
-                <div v-for="role in roles" :key="role.id" class="form-check">
-                  <!-- <b-form-checkbox switch v-model="selected_roles" size="lg">
-                    <p class="h5">{{ getName(role.name) }}</p>
-                  </b-form-checkbox> -->
-                  <input class="form-check-input" type="checkbox" :value="role.id" v-model="selected_roles">
-                  <label class="form-check-label"> {{ role.name }} </label>
-                </div>
+                <p class="h3">Roles</p>
+                <checkbox-edit v-for="(role, index) in roles" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_roles" :tipo="'roles'"
+                  @actualizaLista="actualizaLista"></checkbox-edit>
+
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4> Áreas académicas </h4>
-                <div v-for="area in academic_areas" :key="area.id" class="form-check">
-                  <input class="form-check-input" type="checkbox" :value="area.id" v-model="selected_academic_areas">
-                  <label class="form-check-label"> {{ area.name }} </label>
-                </div>
+                <p class="h3">Áreas académicas</p>
+                <checkbox-edit v-for="(role, index) in academic_areas" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_areas" :tipo="'academic_areas'"
+                  @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4> Entidades académicas </h4>
-                <div v-for="entity in academic_entities" :key="entity.id" class="form-check">
-                  <input class="form-check-input" type="checkbox" :value="entity.id"
-                    v-model="selected_academic_entities">
-                  <label class="form-check-label"> {{ entity.name }} </label>
-                </div>
+                <p class="h3">Entidades académicas</p>
+
+                <checkbox-edit v-for="(role, index) in academic_entities" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_entities"
+                  :tipo="'academic_entities'" @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
 
               <div class="mt-5 col-lg-6 col-xl-3">
-                <h4> Comités académicos </h4>
-                <div v-for="comitte in academic_comittes" :key="comitte.id" class="form-check">
-                  <input class="form-check-input" type="checkbox" :value="comitte.id"
-                    v-model="selected_academic_comittes">
-                  <label class="form-check-label"> {{ comitte.name }} </label>
-                </div>
+                <p class="h3">Comités académicos</p>
+                <checkbox-edit v-for="(role, index) in academic_comittes" :key="role.id" :name="role.name" :id="role.id"
+                  :pivot="role.pivot" :index="index" :array_data="selected_academic_comittes"
+                  :tipo="'academic_comittes'" @actualizaLista="actualizaLista"></checkbox-edit>
               </div>
             </div>
           </form>
@@ -66,8 +59,15 @@
 
 
 <script>
+
+import CheckboxEdit from "./CheckboxEdit.vue";
+
 export default {
   name: "nuevo-usuario",
+  components: {
+    CheckboxEdit,
+  },
+
   props: {
     // Roles de usuario.
     roles: Array,
@@ -172,10 +172,18 @@ export default {
 
     registraUsuario() {
 
-      // console.log("academic areas: ", this.selected_academic_areas);
-      // console.log("roles : ", this.selected_roles);
-      // console.log("academic entities : ", this.selected_academic_entities);
-      // console.log("academic_comittes : ", this.selected_academic_comittes);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
+
 
       axios.post('/controlescolar/admin/newWorker', {
         id: this.id,
@@ -185,19 +193,15 @@ export default {
         selected_academic_entities: this.selected_academic_entities,
         selected_academic_comittes: this.selected_academic_comittes
       }).then(response => {
-        Swal.fire({
-          title: "Exito",
-          text: "Se ha agregado un nuevo usuario a la lsita",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar",
-        });
-
-        console.log(response);
+        Toast.fire({
+          icon: 'success',
+          title: 'Usuario agregado'
+        })
       }).catch(error => {
-        console.log(error);
+        Toast.fire({
+          icon: 'error',
+          title: 'El usuario no existe'
+        })
       });
     },
   }

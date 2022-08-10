@@ -70,7 +70,6 @@
                 </div>
                 <div class="col-6 justify-content-center">
 
-
                   <b-button @click="eliminaTrabajador(item.id)" pill variant="outline-danger"
                     class="align-items-center text-center" style="width:100%;">
                     <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Eliminar
@@ -88,7 +87,7 @@
             <template v-slot:cell(Roles)="{ item }">
               <ul>
                 <li v-for="role in item.roles" :key="role.id" class="list-group">
-                  {{ role.name }}
+                  {{ getName(role.name) }}
                 </li>
               </ul>
             </template>
@@ -104,7 +103,7 @@
             <template v-slot:cell(Entidades_Académicas)="{ item }">
               <ul>
                 <li v-for="entity in item.academic_entities" :key="entity.id" class="list-group">
-                  {{ entity.name }}
+                  {{ getName(entity.name) }}
                 </li>
               </ul>
             </template>
@@ -251,39 +250,136 @@ export default {
 
   methods: {
 
-    eliminaTrabajador(id) {
-      axios
-        .post(
-          "/controlescolar/admin/deleteWorker", {
-          id: id,
-          module_id: 2,
-          type: 'workers'
-        }
-        )
-        .then((response) => {
-          Swal.fire({
-            title: "El usuario ha sido eliminado",
-            text: "Podras volver a insertarlo cuando desees",
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Aceptar",
-          });
+    getName(name_to_change) {
+      var name = "";
+      switch (name_to_change) {
+        case 'admin':
+          name = 'Administrador';
+          break;
+        case 'aspirante_extranjero':
+          name = 'Aspirante Extranjero';
+          break;
+        case 'aspirante_foraneo':
+          name = 'Aspirante Foraneo';
+          break;
+        case 'aspirante_local':
+          name = 'Aspirante Local';
+          break;
+        case 'comite_academico':
+          name = 'Comité Academico';
+          break;
+        case 'control_escolar':
+          name = 'Control Escolar';
+          break;
+        case 'coordinador':
+          name = 'Coordinador';
+          break;
+        case 'personal_apoyo':
+          name = 'Personal de Apoyo';
+          break;
+        case 'profesor_colaborador':
+          name = 'Profesor colaborador';
+          break;
+        case 'profesor_nb':
+          name = 'Profesor Nucleo Básico';
+          break;
+        case 'UASLP_FACULTAD DE CIENCIAS QUÍMICAS':
+          name = 'Facultad de Ciencias Químicas';
+          break;
+        case 'UASLP_FACULTAD DE INGENIERÍA':
+          name = 'Faculdata de Ingeniería';
+          break;
+        case 'UASLP_INSTITUTO DE INVESTIGACIÓN DE ZONAS DESÉRTICAS':
+          name = 'Instituto de investigación de zonas desérticas';
+          break;
+        case 'UASLP_FACULTAD DE AGRONOMÍA':
+          name = 'Facultad de Agronomía';
+          break;
+        case 'UASLP_COORDINACIÓN ACADÉMICA REGIÓN ALTIPLANO':
+          name = 'Coordinación Académica (Altiplano)';
+          break;
+        case 'UASLP_CIACYT':
+          name = 'CIACYT';
+          break;
+        case 'UASLP_FACULTAD DE MEDICINA':
+          name = 'Facultad de Medicina';
+          break;
+        case 'UASLP_FACULTAD DE CIENCIAS SOCIALES Y HUMANIDADES':
+          name = 'Facultad de Ciencias Sociales y Humanidades';
+          break;
+        case 'FACULTAD DE PSICOLOGÍA':
+          name = 'Facultad de Psicología';
+          break;
+        case 'UASLP_FACULTAD DE INGENIERÍA':
+          name = 'Administrador';
+          break;
+        case 'UASLP_UNIDAD ACADÉMICA MULTIDISCIPLINARIA ZONA HUASTECA':
+          name = 'Unidad Académica Multidisciplinaria (Huasteca)';
+          break;
+        case 'UASLP_FACULTAD DE DERECHO':
+          name = 'Facultad de Derecho';
+          break;
+        case 'UASLP_FACULTAD DEL HÁBITAT':
+          name = 'Facultad del Hábitad';
+          break;
+        default:
+          name = this.name;
+          break;
+      }
+      return name;
+    },
 
-          this.$emit("deleteWorker", id);
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: "Error al eliminar al usuario",
-            icon: "error",
-            title: error.data.message,
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            cancelButtonText: "Entendido",
-          });
-          // console.log(error);
-        });
+    eliminaTrabajador(id) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
+
+      Swal.fire({
+        title: "¿Segur@ que quieres borrar a este usuario?",
+        text: 'El usuario perdera el acceso al sistema',
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Eliminar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .post(
+              "/controlescolar/admin/deleteWorker", {
+              id: id,
+              module_id: 2,
+              type: 'workers'
+            }
+            )
+            .then((response) => {
+              Toast.fire({
+                icon: 'success',
+                title: 'Usuario eliminado'
+              })
+
+              this.$emit("deleteWorker", id);
+            })
+            .catch((error) => {
+              Toast.fire({
+                icon: 'success',
+                title: 'Usuario agregado',
+                text: error.data.message,
+              })
+            });
+        }
+      });
+
+
 
 
     },
