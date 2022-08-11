@@ -42,7 +42,7 @@ const app = new Vue({
         auth_user: authUser,
         academic_programs: academicPrograms,
         announcements: announcements,
-        archives: []
+        archives_found: []
     },
 
     methods: {
@@ -51,7 +51,7 @@ const app = new Vue({
          * emitido por alguno de los componentes hijos
          */
         updateArchives(archives){
-            Vue.set(this, 'archives', archives);
+            Vue.set(this, 'archives_found', archives);
         }
     }
 });

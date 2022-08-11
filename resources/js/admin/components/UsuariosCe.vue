@@ -17,12 +17,8 @@
         <b-input-group size="lg" class="col-md-10 col-sm-8" style="height: 100% !important;">
           <b-form-input style="height: 100% !important;" type="search" v-model="search" placeholder="Buscar RPE">
           </b-form-input>
-          <b-input-group-append style="height: 100% !important;">
-            <b-btn
-              @click.prevent="toggleModal(item.id, item.roles, item.academic_areas, item.academic_entities, item.academic_comittes)"
-              data-toggle="modal" data-target="#EditaUsuario" variant="outline-primary" style="width:100%;">
+          <b-input-group-append is-text style="height: 100% !important;">
               <b-icon icon="search" aria-hidden="true"></b-icon>
-            </b-btn>
           </b-input-group-append>
         </b-input-group>
 

@@ -12,11 +12,7 @@
     @if (Auth::user()->hasRole('admin') ||  Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('personal_apoyo'))
     <search-archive-form :academic_programs="academic_programs"  :announcements="announcements" :isAdmin="auth_user.isAdmin" v-on:archives-found="updateArchives" >
     </search-archive-form>
-    <archives>
-        <archive v-for="(archive,index) in archives" :key="archive.id" :index="index + 1" v-bind="archive"
-            :status="archive.status">
-        </archive>
-    </archives>
+    <archives :data="archives_found"></archives>
    
     @endif
 @endsection

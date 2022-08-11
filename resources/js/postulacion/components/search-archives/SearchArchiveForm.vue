@@ -1,68 +1,37 @@
 <template>
   <form @submit.prevent="buscaExpedientes" class="d-block mt-0">
+    <div class="row mx-1 align-items-center" style="max-height: 75px;min-height: 50px;">
 
-  
-
-    <div class="row mx-1">
-      <div class="form-group col-6">
+      <!-- SELECT : PROGRAMA ACADEMICO -->
+      <div class="form-group col-5">
         <label class="h5"> <strong> Programa académico </strong> </label>
         <select v-model="AcademicProgramSelect" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
-          <option
-            v-for="(academicProgram, index) in academic_programs"
-            :key="index"
-            :value="academicProgram.name"
-          >
+          <option v-for="(academicProgram, index) in academic_programs" :key="index" :value="academicProgram.name">
             {{ academicProgram.name }}
           </option>
         </select>
       </div>
 
-      <div class="form-group col-6">
+      <!-- SELECT : PERIODO -->
+      <div class="form-group col-5">
         <label class="h5"> <strong> Periodo </strong> </label>
         <select v-model="announcement_selected" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
-          <option
-            v-for="(announcement, index) in announcementsForAcademicProgram"
-            :key="index"
-            :value="announcement.id"
-          >
-            {{ announcement.from + " - " + announcement.to }}
+          <option v-for="(announcement, index) in announcementsForAcademicProgram" :key="index"
+            :value="announcement.id">
+            {{ splitDate(announcement.from) + " - " + splitDate(announcement.to) }}
           </option>
         </select>
       </div>
-    </div>
 
-    <!-- BTN SUBMIT -->
-    <div class="d-flex justify-content-start mx-1">
-      <!-- <div class="col-4">
-        <input type="hidden">
-      </div> -->
-      <div class="col-3 align-items-center" style="height:40px">
-        <button type="submit" class="btn btn-primary" style="height:100%; width:100%;"><label class="h5"><strong>Buscar</strong></label></button>
-      </div>
-      <div class="col-9">
-        <input type="hidden">
+      <div class="form-group col-2 justify-content-center" style="height:100%">
+        <label class="h5"> <strong> Buscar </strong> </label>
+        <b-btn variant="outline-primary" type="submit" style="width:100%; height: 45px!important;">
+          <b-icon icon="search" aria-hidden="true"></b-icon>
+        </b-btn>
       </div>
     </div>
-
-    <!-- RESULT DATA -->
-    <div class="d-flex justify-content-start mx-1 my-1">
-      
-      <div v-if="dataLength != null" class="col-3 align-items-center d-flex justify-content-start">
-        <label class="h5"><strong>{{ dataLength }} Resultados encontrados</strong></label>
-      </div>
-      <div class="col-9"></div>
-    </div>
-
-    <!-- SEND EMAILS -->
-    <!-- <div v-if="isAdmin === true" class="row mx-1 my-1 justify-content-center align-items-center">
-      <div class="col-6">
-        <button class="btn btn-primary my-3" style="width:100%;" @click="mandarCorreos">
-          Mandar correos
-        </button>
-      </div>
-    </div> -->
   </form>
 </template>
 
@@ -86,8 +55,8 @@ export default {
       default: [],
     },
 
-    isAdmin:{
-      type:Boolean,
+    isAdmin: {
+      type: Boolean,
       default: false
     }
   },
@@ -156,6 +125,58 @@ export default {
             icon: "error",
           });
         });
+    },
+
+    splitDate(date) {
+      let date_splited = date.split('-');
+      let month = "";
+      let res = ""; 
+
+      if (date_splited.length > 0) {
+        switch (date_splited[1]) {
+          case '01':
+            month = "Enero";
+            break;
+          case '02':
+            month = "Febrero";
+            break;
+          case '03':
+            month = "Marzo";
+            break;
+          case '04':
+            month = "Abril";
+            break;
+          case '05':
+            month = "Mayo";
+            break;
+          case '06':
+            month = "Junio";
+            break;
+          case '07':
+            month = "Julio";
+            break;
+          case '08':
+            month = "Agosto";
+            break;
+          case '09':
+            month = "Septiembre";
+            break;
+          case '10':
+            month = "Octubre";
+            break;
+          case '11':
+            month = "Noviembre";
+            break;
+          case '12':
+            month = "Diciembre";
+            break;
+        }
+
+        res = month  + ' (' + date_splited[0] + ')';
+      }
+
+      return res;
+
     },
 
     // puedeEnviarCorreos(){
