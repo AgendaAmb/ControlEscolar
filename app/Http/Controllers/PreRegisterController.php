@@ -87,11 +87,14 @@ class PreRegisterController extends Controller
 
 
     /**
-     * Devuelve la vista principal de solicitudes académicas.
+     * @var Boolean
+     * Register user in Control Escolar
+     * Set relation in Portal to log in
+     * Create an empty archive for user according to selected academic program
      */
+
     public function store(Request $request)
     {
-
 
         # -------------------- Validacion
         $casts = [
@@ -157,13 +160,13 @@ class PreRegisterController extends Controller
                 'birth_country' => ['required', 'string', 'max:255'],
                 'birth_state' => ['required', 'string', 'max:255'],
                 'residence_country' => ['required', 'string', 'max:255'],
-                'residence_state' => ['required', 'string', 'max:255'],
                 'zip_code' => ['required', 'numeric'],
                 'phone_number' => ['required', 'numeric'],
                 'is_disabled' => ['required', 'boolean'],
                 'ethnicity' => ['required', 'string', 'max:255'],
                 'disability' => ['nullable', 'required_if:is_disabled,true'],
                 'nationality' => ['required', 'same:birth_country'],
+                'residence' => ['required', 'same:residence_country']
             ]);
         } else {
             $val = Validator::make($request->all(), [
@@ -190,45 +193,54 @@ class PreRegisterController extends Controller
                 'birth_country' => ['required', 'string', 'max:255'],
                 'birth_state' => ['required', 'string', 'max:255'],
                 'residence_country' => ['required', 'string', 'max:255'],
-                'residence_state' => ['required', 'string', 'max:255'],
                 'zip_code' => ['required', 'numeric'],
                 'phone_number' => ['required', 'numeric'],
                 'is_disabled' => ['required', 'boolean'],
                 'ethnicity' => ['required', 'string', 'max:255'],
                 'disability' => ['nullable', 'required_if:is_disabled,true'],
                 'nationality' => ['required', 'same:birth_country'],
+                'residence' => ['required', 'same:residence_country']
             ]);
         }
 
+
         #------------------------ Verifica validacion
         if ($val->fails()) {
-            return new JsonResponse($val->errors(), 504);
+            return new JsonResponse(['message'=> 'Error al validar datos', 'errores' => $val->errors()], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         # ---------------------------------------------------- Crear Usuario.
 
         # -------------------------- Datos a validar en Portal.
-        $data = $request->except(['academic_program_id','birth_country']); //data to save
+        $data = $request->except(['academic_program_id', 'civic_state', 'other_civic_state', 'birth_state']); //data to save
 
         # ------------------------- Creacion de usuario en portal Agenda Ambiental
+
+        /**
+         * Create or update user model in Portal
+         * Set relation to sign in from Portal
+         */
         try {
-            $data['module_id'] = 2; //2 = control escolar
+            $data['module_id'] = 2; 
             $response = $this->service->miPortalPost('api/RegisterExternalUser', $data); // solo hace registro y avisas si salio bien o mal
             if ($response != null) {
                 $response_data = $response->collect()->toArray();
-                #No se pudo crear usuario en portal
                 if ($response_data['message']) {
                     if ($response_data['message'] != '¡Usuario Creado! y/o modulo actualizado') {
-                        return new JsonResponse(['message' => $response_data['message']], 500);
+                        return new JsonResponse(['message' => $response_data['message']], JsonResponse::HTTP_CONFLICT );
                     }
                 } else {
-                    return new JsonResponse(['message' => 'Error al crear usuario en Portal'], 500);
+                    return new JsonResponse(['message' => 'Error al crear usuario en Portal'], JsonResponse::HTTP_CONFLICT);
                 }
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'La peticion al portal no se pudo completar', 'response_data' => $response_data], 400);
         }
 
+        /**
+         * Retrieves the user from Portal
+         * filter the user type to set internal
+         */
         try {
             $user_data =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $response_data['user_id']])->collect();
             $tipo_usuario = 'students';
@@ -244,13 +256,16 @@ class PreRegisterController extends Controller
                     break;
             }
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'No se puede asignar un tipo de usuario', 'response_data' => $response_data], 400);
+            return new JsonResponse(['message' => 'No se puede asignar un tipo de usuario', 'error' => $e->getMessage()], 400);
         }
 
 
         # ------------------------- Creacion de usuario en control escolar
+
+        /**
+         * Create user model in Control Escolar
+         */
         try {
-            # Se crea el usuario.
             $user = User::create([
                 'id' => $response_data['user_id'],
                 'type' => $tipo_usuario,
@@ -258,12 +273,14 @@ class PreRegisterController extends Controller
                 'marital_state' => $request->civic_state
             ]);
         } catch (\Exception $e) {
-            // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
-            return new JsonResponse(['message' => 'No existe respuesta por parte del portal', 'response_data' => $response_data], 400);
+            return new JsonResponse(['message' => 'No existe respuesta por parte del portal', 'error' => $e->getMessage()], 400);
         }
 
+        /**
+         * Set a role to the user created previously
+         */
+
         try {
-            # ------------- Asigna rol a usuario
             if ($request->birth_state === 'San Luis Potosi') {
                 $user->assignRole('aspirante_local');
             } else if ($request->birth_country === 'México') {
@@ -273,13 +290,16 @@ class PreRegisterController extends Controller
             }
         } catch (\Exception $e) {
             // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
-            return new JsonResponse(['message' => 'No se pudo asignar un rol al estudiante', 'user' => $user], 400);
+            return new JsonResponse(['message' => 'No se pudo asignar un rol al estudiante', 'error' => $e->getMessage()], 400);
         }
 
+        /**
+         * Create and set the data to first Archive for User
+         * Log in before
+         */
         try {
-            // Found the academic program and the latest Announcement to register the archive 
-            $academicProgram = AcademicProgram::where('id',$request->academic_program_id)->with('latestAnnouncement')->first();
-            
+            $academicProgram = AcademicProgram::where('id', $request->academic_program_id)->with('latestAnnouncement')->first();
+
             # ------------- Genera el expediente del postulante.
             $user->archives()->create([
                 'user_type' =>  $user->type,
@@ -288,13 +308,10 @@ class PreRegisterController extends Controller
             ]);
 
             # -------------------- Log In del usuario 
-            $this->loginAfterRegister($user->id, $request); //con esto ya deberia estar autenticado
+            $this->loginAfterRegister($user->id, $request); 
         } catch (\Exception $e) {
-            // return new JsonResponse("Error al crear el usuario o ya existe el usuario", 502);
-            return new JsonResponse(['message' => 'Error al crear archivo'], 400);
+            return new JsonResponse(['message' => 'Error al crear archivo', 'error' => $e->getMessage()], 400);
         }
-
-
 
         # --------------------- Respuesta de éxito.
         return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);

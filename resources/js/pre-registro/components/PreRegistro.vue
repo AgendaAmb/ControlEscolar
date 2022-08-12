@@ -1,77 +1,35 @@
 <template>
-  <div
-    class="modal fade"
-    id="Registro"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="Registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div
-        class="modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3 px-2"
-        style="background-color: #8b96a8"
-      >
+      <div class="modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3 px-2" style="background-color: #8b96a8">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Registro</h2>
-          <button
-            style="border-radius: 20px; border:none; color:black; background-color:#8b96a8;"
-            type="button"
-            @click="AcademicProgram = null"
-            class="btn-close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true" style="color:white; font-size: 25px" >X</span>
+          <button style="border-radius: 10px; border:none; color:black; background-color:#8b96a8;" type="button"
+            @click="AcademicProgram = null" class="btn-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color:white; font-size: 25px">X</span>
           </button>
 
         </div>
         <div class="modal-body">
           <form v-on:submit.prevent="registraUsuario">
             <!-- Datos para crear la cuenta -->
-            <crear-cuenta
-              :errores="errores"
-              :tipo_usuario.sync="tipo_usuario"
-              :pertenece_uaslp.sync="pertenece_uaslp"
-              :clave_uaslp.sync="clave_uaslp"
-              :facultad.sync="facultad"
-              :email.sync="email"
-              :email_alterno.sync="email_alterno"
-              :password.sync="password"
-              :rpassword.sync="rpassword"
-              :hasAlternEmail.sync="hasAlternEmail"
-              @uaslpUserUpdated="uaslpUserUpdated"
-              @miPortalUserUpdated="miPortalUserUpdated"
-            >
+            <crear-cuenta :errores="errores" :tipo_usuario.sync="tipo_usuario" :pertenece_uaslp.sync="pertenece_uaslp"
+              :clave_uaslp.sync="clave_uaslp" :facultad.sync="facultad" :email.sync="email"
+              :email_alterno.sync="email_alterno" :password.sync="password" :rpassword.sync="rpassword"
+              :hasAlternEmail.sync="hasAlternEmail" @uaslpUserUpdated="uaslpUserUpdated"
+              @miPortalUserUpdated="miPortalUserUpdated">
             </crear-cuenta>
 
             <div v-if="tipo_usuario !== null && Readonly">
               <!-- Datos generals -->
-              <datos-personales
-                :errores="errores"
-                :tipo_usuario.sync="tipo_usuario"
-                :readonly="Readonly"
-                :countries="countries"
-                :mystates="mystates"
-                :curp.sync="curp"
-                :no_curp.sync="no_curp"
-                :name.sync="name"
-                :first_surname.sync="first_surname"
-                :last_surname.sync="last_surname"
-                :birth_date.sync="birth_date"
-                :ocupation.sync="ocupation"
-                :birth_country.sync="birth_country"
-                :birth_state.sync="birth_state"
-                :residence_country.sync="residence_country"
-                :gender.sync="gender"
-                :other_gender.sync="other_gender"
-                :civic_state.sync="civic_state"
-                :other_civic_state.sync="other_civic_state"
-                :zip_code.sync="zip_code"
-                :phone_number.sync="phone_number"
-                :ethnicity.sync="ethnicity"
-                :is_disabled.sync="is_disabled"
-                :disability.sync="disability"
-              >
+              <datos-personales :errores="errores" :tipo_usuario.sync="tipo_usuario" :readonly="Readonly"
+                :countries="countries" :mystates="mystates" :curp.sync="curp" :no_curp.sync="no_curp" :name.sync="name"
+                :first_surname.sync="first_surname" :last_surname.sync="last_surname" :birth_date.sync="birth_date"
+                :ocupation.sync="ocupation" :birth_country.sync="birth_country" :birth_state.sync="birth_state"
+                :residence_country.sync="residence_country" :gender.sync="gender" :other_gender.sync="other_gender"
+                :civic_state.sync="civic_state" :other_civic_state.sync="other_civic_state" :zip_code.sync="zip_code"
+                :phone_number.sync="phone_number" :ethnicity.sync="ethnicity" :is_disabled.sync="is_disabled"
+                :disability.sync="disability">
               </datos-personales>
             </div>
             <!-- <button @click="a()">sdfasd</button> -->
@@ -155,7 +113,7 @@ export default {
       },
     },
 
-    
+
 
   },
 
@@ -182,7 +140,7 @@ export default {
       // console.log(this.countries.length);
       for (let i = 0; i < this.countries.length; i++) {
         if (this.countries[i].name == this.birth_country) {
-            this.mystates  = this.countries[i].states;
+          this.mystates = this.countries[i].states;
         }
       }
       // console.log(this.mystates);
@@ -202,7 +160,7 @@ export default {
       //emilas
       this.email = user.email;
       this.email_alterno = user.altern_email;
-      
+
       //datos generales
       this.birth_date = user.birth_date
       this.ocupation = user.ocupation;
@@ -211,29 +169,29 @@ export default {
       this.gender = user.gender;
       this.zip_code = Number(user.zip_code);
       this.phone_number = Number(user.phone_number);
-      
+
       //nacionalidad y pais de nacimiento
       this.birth_country = user.nationality;
       this.residence_country = user.residence;
-      
+
       for (let i = 0; i < this.countries.length; i++) {
         if (this.countries[i].name == this.birth_country) {
-            this.mystates  = this.countries[i].states;
+          this.mystates = this.countries[i].states;
         }
       }
 
       this.hasData();
     },
 
-    hasData(){
-      if(this.altern_email!=null){
+    hasData() {
+      if (this.altern_email != null) {
         this.hasAlternEmail = true;
       }
     },
 
     registraUsuario() {
 
-      
+
 
       this.errores = {};
       var formData = new FormData();
@@ -264,13 +222,13 @@ export default {
       if (!this.pertenece_uaslp) {
         formData.append("password", this.password);
         formData.append("rpassword", this.rpassword);
-      }else{
+      } else {
         formData.append("clave_uaslp", Number(this.clave_uaslp));
         formData.append("directorio_activo", this.directorio_activo);
       }
 
       //  console.log("form data no curp: " + formData.get('no_curp'));
-     
+
       axios({
         method: "post",
         url: "/controlescolar/pre-registro",
@@ -281,7 +239,9 @@ export default {
         },
       })
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
+
+          
           if (response.status == 201) {
             Swal.fire({
               title: "Registro exitoso",
@@ -292,15 +252,9 @@ export default {
               cancelButtonColor: "#d33",
               confirmButtonText: "Acceder a cuenta",
             }).then((result) => {
-              if (result.isConfirmed) {
-                
-                  // "https://ambiental.uaslp.mx/controlescolar/home";
-                  window.location.href = "/controlescolar/home";
-              }
+              window.location.href = "/controlescolar/home";
             });
-            // window.location.href = "/controlescolar/home";
-            //window.location.href = this.url + "/controlescolar/home";
-          }else{
+          } else {
             Swal.fire({
               title: "El usuario ya ha sido registrado",
               text: response.data.message,
@@ -310,25 +264,19 @@ export default {
               cancelButtonColor: "#d33",
               confirmButtonText: "Acceder a cuenta",
             }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.href =
-                  // "https://ambiental.uaslp.mx/controlescolar/home";
-                  window.location.href = "/controlescolar/home";
-              }
+              window.location.href = "/controlescolar/home";
             });
           }
         })
         .catch((error) => {
-          console.log(response.data);
-            //alert(error.response.data);
-            Swal.fire({
-              title: "Error al crear usuario",
-              text: response.data,
-              icon: "error",
-              confirmButtonColor: "#cfbaf0",
-              confirmButtonText: "Ok, volver a formulario",
+          console.log(error);
+          Swal.fire({
+            title: "Error al crear usuario",
+            icon: "error",
+            confirmButtonColor: "#cfbaf0",
+            confirmButtonText: "Ok, volver a formulario",
 
-            });
+          });
         });
     },
   },
@@ -338,15 +286,6 @@ export default {
       axios
         .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
         .then((response) => {
-          // if(response.data[1].name === 'Albania'){
-          //     console.log('no es');
-          // }else{
-          //     console.log('si es');
-          // }
-
-          // console.log(response.data[1].states);
-          
-
           this.countries = response.data;
         });
     });

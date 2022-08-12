@@ -1153,48 +1153,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1368,7 +1326,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
           "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        console.log(response.data);
+        console.log(response);
 
         if (response.status == 201) {
           Swal.fire({
@@ -1380,12 +1338,8 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
             cancelButtonColor: "#d33",
             confirmButtonText: "Acceder a cuenta"
           }).then(function (result) {
-            if (result.isConfirmed) {
-              // "https://ambiental.uaslp.mx/controlescolar/home";
-              window.location.href = "/controlescolar/home";
-            }
-          }); // window.location.href = "/controlescolar/home";
-          //window.location.href = this.url + "/controlescolar/home";
+            window.location.href = "/controlescolar/home";
+          });
         } else {
           Swal.fire({
             title: "El usuario ya ha sido registrado",
@@ -1396,18 +1350,13 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
             cancelButtonColor: "#d33",
             confirmButtonText: "Acceder a cuenta"
           }).then(function (result) {
-            if (result.isConfirmed) {
-              window.location.href = // "https://ambiental.uaslp.mx/controlescolar/home";
-              window.location.href = "/controlescolar/home";
-            }
+            window.location.href = "/controlescolar/home";
           });
         }
       })["catch"](function (error) {
-        console.log(response.data); //alert(error.response.data);
-
+        console.log(error);
         Swal.fire({
           title: "Error al crear usuario",
-          text: response.data,
           icon: "error",
           confirmButtonColor: "#cfbaf0",
           confirmButtonText: "Ok, volver a formulario"
@@ -1420,12 +1369,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       var _this = this;
 
       axios.get("https://ambiental.uaslp.mx/apiagenda/api/countries/states").then(function (response) {
-        // if(response.data[1].name === 'Albania'){
-        //     console.log('no es');
-        // }else{
-        //     console.log('si es');
-        // }
-        // console.log(response.data[1].states);
         _this.countries = response.data;
       });
     });
@@ -7372,7 +7315,7 @@ var render = function () {
                 {
                   staticClass: "btn-close",
                   staticStyle: {
-                    "border-radius": "20px",
+                    "border-radius": "10px",
                     border: "none",
                     color: "black",
                     "background-color": "#8b96a8",
