@@ -54,7 +54,7 @@
 
 
             @if (Auth::user()->hasRole('comite_academico'))
-                <a class="nav-link" href="http://ambiental.uaslp.mx:3000/"> Comite Academico </a>
+                <a class="nav-link" href="http://ambiental.uaslp.mx/comiteacademico"> Comite Academico </a>
             @endif
 
 

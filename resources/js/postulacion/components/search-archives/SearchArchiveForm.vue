@@ -36,6 +36,9 @@
         </b-btn>
       </div>
     </div>
+
+    <div class="row align-items-center" :class="{ invisible: !dataNotEmpty() }">
+    </div>
   </form>
 </template>
 
@@ -101,6 +104,15 @@ export default {
   },
 
   methods: {
+    dataNotEmpty() {
+            let res = false;
+            if (this.data.length > 0) {
+                res = true;
+            }
+
+            return res;
+        },
+        
     mandarCorreos() {
       console.log(this.announcement_selected);
       axios
