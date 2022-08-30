@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 
 class AcademicDegreeController extends Controller
 {
+
+    
     
         /*---------------------------------------- ACADEMIC DEGREE  ---------------------------------------- */
         public function latestAcademicDegree(Request $request, Archive $archive)

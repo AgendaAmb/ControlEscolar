@@ -189,6 +189,7 @@
 
 
       <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
+        :alias_academic_program.sync="alias_academic_program"
         :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
         @enviaDocumento="cargaDocumento" v-bind="documento">
       </documento-requerido>
@@ -263,6 +264,7 @@ export default {
 
     // Documentos probatorios.
     documentos: Array,
+    alias_academic_program: String,
   },
 
   data() {

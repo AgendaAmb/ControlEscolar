@@ -12,7 +12,7 @@
 @section('container-class', 'class=container')
 @section('main')
     {{-- Img representativa de postulacion --}}
-    <img class="img-fluid mt-4 " src="{{ $header_academic_program }}" width="100%" height="300px!important">
+    <img class="img-fluid rounded my-0" src="{{ $header_academic_program }}" width="100%" height="300px!important">
 
     @if ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)
         <actualizar-expediente :required_documents="archive.required_documents"

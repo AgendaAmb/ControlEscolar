@@ -1,10 +1,15 @@
 <template>
+
   <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="row my-3">
+    <div class="d-flex align-items-center justify-content-center my-2" style="width:100%;">
+
+      <div class="col-md-1 col-xs-1 text-center">
+        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+      </div>
       <!-- Nombre y notas -->
-      <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block">
-          <strong> {{ name }} </strong>
+      <div class="form-group col-md-10 col-xs-9 my-auto ">
+        <h5 class="mt-2 d-block">
+          <strong> {{  name  }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
           </template>
@@ -14,7 +19,7 @@
         </h5>
 
         <!-- Carta Compromiso y manifiesto -->
-        <p v-if="isLetterCommitment() === true" class="mt-3 mb-1 d-block">
+        <p v-if="isLetterCommitment() === true" class="my-2 d-block">
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
@@ -33,22 +38,23 @@
         </p>
 
         <!-- Solo hay algo en notas por lo que se adjunta -->
-        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block">
+        <p v-else-if="notes !== null" class="my-2 d-block">
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
-        <p class="mt-3 mb-1 d-block">
-          <strong> Etiqueta: </strong> {{ label }}
+        <p class="my-2 d-block">
+          <strong> Etiqueta: </strong> {{  label  }}
         </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
+        <p class="my-2 d-block"><strong> Ejemplo: </strong> {{  example  }}</p>
       </div>
 
-      <div class="form-group col-3 align-items-center p-2">
+      <div class="form-group col-md-1 col-xs-2 align-items-center mx-2 ">
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
-              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
+              target="_blank">
+              <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
             </a>
           </label>
         </div>
@@ -58,31 +64,29 @@
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
             <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
-            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
+            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%"
+              @change="cargaDocumento">
           </label>
         </div>
       </div>
     </div>
 
-    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
-      <div class="col-2" style="height: 100%">
-        <div class="d-flex">
+    <div v-if="isEXANNI() === true" class="form-group col-md-10 col-xs-9 my-auto">
+      <div class="d-flex">
+        <div class="col-xl-4 col-md-6 col-xs-6">
           <label> Puntaje obtenido</label>
-        </div>
-        <div class="d-flex align-items-end">
           <input v-model.number="ExanniScore" type="number" class="form-control" />
         </div>
+        <div class="col-xl-4 col-md-6 col-xs-6">
+          <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn" >
+            <p class="h4">Guardar Puntaje</p>
+          </b-button>
+        </div>
       </div>
-      <div class="col-2 d-flex align-items-end" style="height: 100%; width: 100%">
-        <button @click="actualizaPuntajeExanni" class="btn btn-primary" style="width: 100%">
-          Guarda puntaje
-        </button>
-      </div>
-      <div class="col-8" style="height: 100%; width: 100%">
-        <input type="hidden" class="w-100" />
-      </div>
+    
     </div>
   </div>
+
 </template>
 
 <script>
@@ -95,7 +99,7 @@ export default {
       default: -1,
     },
 
-    images_btn:{
+    images_btn: {
       type: Object,
       default: {},
     },
@@ -147,6 +151,11 @@ export default {
       type: Number,
       default: -1,
     },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {
@@ -160,6 +169,24 @@ export default {
   },
 
   computed: {
+    styleBtn() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        height: '50px',
+      }
+    },
+
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      },
+    },
     Archivo: {
       get() {
         return this.archivo;
@@ -245,14 +272,26 @@ export default {
     },
 
     requiredForAcademicProgram() {
-      // console.log(this.name + ': '+ this.alias_academic_program);
-
       let res = true;
-      // console.log("id: "+this.id+" nombre: "+this.name);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+          case "8B.- Cédula de la maestría":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -281,6 +320,9 @@ export default {
       // Documents for imarec
       else if (this.alias_academic_program === "imarec") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -319,7 +361,24 @@ export default {
       //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5A.- Título de licenciatura o acta de examen":
+            res = false;
+            break;
+          case "6A.- Certificado de materias de la licenciatura":
+            res = false;
+            break;
+
+          case "7A.- Constancia de promedio de la licenciatura.":
+            res = false;
+            break;
+
+          case "8A.- Cédula de la licenciatura":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -363,7 +422,7 @@ export default {
       }
 
       // return the answer accordin to academic program and name of the required document
-
+      console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
 

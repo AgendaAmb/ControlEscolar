@@ -3,6 +3,8 @@
         <img class="ml-auto d-block img-fluid" src="{{ asset('storage/headers/logod.png') }}">
     </a>
     @auth
+     {{-- <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-collapse id="nav-collapse" is-nav> --}}
         <nav class="nav nav-options">
 
             {{-- Inicio disponible para todos --}}
@@ -75,5 +77,7 @@
             </div> --}}
 
         </nav>
+    {{-- </b-collapse>
+</b-navbar> --}}
     @endauth
 </header>

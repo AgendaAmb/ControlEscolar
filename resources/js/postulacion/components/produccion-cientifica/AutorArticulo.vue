@@ -1,13 +1,20 @@
 <template>
-  <div class="form group mb-4">
-    <label class="d-block"> Nombre del autor: </label>
-    <input type="text" :class="ClassObject" v-model="Name">
+  <div class="d-flex align-items-center">
+    <div class="col-10 form group text-start">
+      <label class="d-block"> Nombre del autor: </label>
+      <input type="text" :class="ClassObject" v-model="Name">
+    </div>
+    <div class="col-2">
+      <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline mx-2"><i
+          class="fas fa-user-plus"></i></button>
+      <button v-if="Modifiable" @click="actualizaAutor" class="btn btn-primary d-inline mx-2"><i
+          class="fas fa-user-shield"></i></button>
+      <button v-if="Modifiable" @click="eliminaAutor" class="btn btn-outline-danger d-inline mx-2"><i
+          class="fas fa-minus-circle" style="color:red;"></i></button>
+      <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div>
+    </div>
 
 
-    <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline ml-3"><i class="fas fa-user-plus"></i></button>
-    <button v-if="Modifiable" @click="actualizaAutor" class="btn btn-primary d-inline ml-3"><i class="fas fa-user-shield"></i></button>
-    <button v-if="Modifiable" @click="eliminaAutor" class="btn btn-outline-danger d-inline ml-3" ><i class="fas fa-minus-circle" style="color:red;"></i></button>
-    <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div>
   </div>
 </template>
 
@@ -20,7 +27,7 @@ export default {
     // Id del autor.
     id: Number,
 
-    index:Number,
+    index: Number,
 
     // Id de la producción científica.
     scientific_production_id: Number,
@@ -29,31 +36,31 @@ export default {
     name: String,
   },
 
-  data(){
+  data() {
     return {
       errores: {}
     }
   },
 
-  computed:{
+  computed: {
     ClassObject: {
-      get(){
+      get() {
         return {
-          'form-control d-inline w-50': true,
+          'form-control d-inline': true,
           'is-invalid': 'name' in this.errores
         };
       }
     },
     Name: {
-      get(){
+      get() {
         return this.name;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:name', newVal);
       }
-    }, 
+    },
     Addable: {
-      get(){
+      get() {
         return this.id === -1;
       }
     },
@@ -65,7 +72,7 @@ export default {
   },
 
   methods: {
-    agregaAutor(){
+    agregaAutor() {
       this.errores = {};
 
       if (this.name == null) {
@@ -76,12 +83,12 @@ export default {
       this.$emit('agregaAutor', this);
     },
 
-    eliminaAutor(){
+    eliminaAutor() {
       this.errores = {};
       this.$emit('eliminaAutor', this);
     },
 
-    actualizaAutor(){
+    actualizaAutor() {
       this.errores = {};
 
       if (this.name == null) {

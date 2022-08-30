@@ -4,29 +4,33 @@
 
       <!-- SELECT : PROGRAMA ACADEMICO -->
       <div class="form-group col-5">
-        <label class="h5"> <strong> Programa académico </strong> </label>
+        <label class="h6"> <strong> Programa académico </strong> </label>
         <select v-model="AcademicProgramSelect" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option v-for="(academicProgram, index) in academic_programs" :key="index" :value="academicProgram.name">
-            {{ academicProgram.name }}
+            <p >
+              {{ academicProgram.name }}
+            </p>
           </option>
         </select>
       </div>
 
       <!-- SELECT : PERIODO -->
       <div class="form-group col-5">
-        <label class="h5"> <strong> Periodo </strong> </label>
+        <label class="h6"> <strong> Periodo </strong> </label>
         <select v-model="announcement_selected" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option v-for="(announcement, index) in announcementsForAcademicProgram" :key="index"
             :value="announcement.id">
-            {{ splitDate(announcement.from) + " - " + splitDate(announcement.to) }}
+            <p >
+              {{ splitDate(announcement.from) + " - " + splitDate(announcement.to) }}
+            </p>
           </option>
         </select>
       </div>
 
       <div class="form-group col-2 justify-content-center" style="height:100%">
-        <label class="h5"> <strong> Buscar </strong> </label>
+        <label class="h6"> <strong> Buscar </strong> </label>
         <b-btn variant="outline-primary" type="submit" style="width:100%; height: 45px!important;">
           <b-icon icon="search" aria-hidden="true"></b-icon>
         </b-btn>
@@ -130,7 +134,7 @@ export default {
     splitDate(date) {
       let date_splited = date.split('-');
       let month = "";
-      let res = ""; 
+      let res = "";
 
       if (date_splited.length > 0) {
         switch (date_splited[1]) {
@@ -172,7 +176,7 @@ export default {
             break;
         }
 
-        res = month  + ' (' + date_splited[0] + ')';
+        res = month + ' (' + date_splited[0] + ')';
       }
 
       return res;

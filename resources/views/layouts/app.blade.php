@@ -12,6 +12,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" rel="stylesheet" />
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -22,14 +23,7 @@
     @stack('scripts')
 </head>
 <body class="d-block mw-100 mx-0">
-
-    {{-- @if (Auth::user()!=null) --}}
-        <x-academic-program-header/>
-
-        {{-- @else
-
-    @endif
-     --}}
+    <x-academic-program-header/>
     @section('main-content')
     <main id="app"@section('container-class') class="container-fluid" @show> 
         @yield('main') 

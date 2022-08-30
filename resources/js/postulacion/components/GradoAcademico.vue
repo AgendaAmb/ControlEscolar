@@ -1,19 +1,24 @@
 <template>
   <details>
-    <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-3 col-md-6 ms-5">
+    <summary class="d-flex align-items-center justify-content-between my-1">
+      <div class="col-lg-9 col-md-7 col-ms-6">
         <h4 class="font-weight-bold">Nivel de escolaridad {{ index }}</h4>
       </div>
-      <div class="col-8 col-md-3 col-sm-2"></div>
 
-      <div class="col-1 col-md-3 col-sm-5">
-        <button @click="eliminaHistorialAcademico" class="btn btn-danger" style="height: 35px; width: 100%">
-          Eliminar Escolaridad
-        </button>
+      <div class="col-lg-3 col-md-5 col-sm-6">
+        <b-button @click="eliminaHistorialAcademico" pill class="d-flex justify-content-start align-items-center"
+          variant="danger">
+          <b-icon icon="trash-fill" class="mx-2" font-scale="3"></b-icon>
+          <p class="h4 my-2">Eliminar</p>
+        </b-button>
       </div>
     </summary>
-    <div class="my-3 row">
-      <div class="form-group col-12">
+
+    <div class="d-flex align-items-center my-2">
+      <div class="col-md-1 col-sm-1 text-center">
+        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+      </div>
+      <div class="form-group col-md-11 col-sm-11">
         <!-- 
         Datos generales del estatus de estudio.
         Grado, título, etc.
@@ -201,26 +206,29 @@
           </div>
         </div>
       </div>
-
-      <div class="d-flex justify-content-start mt-0 mb-3"  style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
-          </div>
-        <div class="col-md-10 col-xs-9 mx-3">
-          <label>
-            <strong>Nota: </strong>
-            Para poder guardar los cambios en los campos anteriores del
-            historial académico es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el historial académico</strong></p>
-          </label>
-        </div>
-      </div>
-     
-      <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name"
-        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
-        :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
-        @enviaDocumento="cargaDocumento">
-      </documento-requerido>
     </div>
+
+    <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
+      <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+        <img @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt=""
+          style=" max-height: 45px !important;">
+      </div>
+      <div class="col-md-10 col-xs-9 mx-3">
+        <label>
+          <strong>Nota: </strong>
+          Para poder guardar los cambios en los campos anteriores del
+          historial académico es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el historial
+              académico</strong></p>
+        </label>
+      </div>
+    </div>
+
+    <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name" :archivo.sync="documento.archivo"
+      :location.sync="documento.pivot.location" :errores.sync="documento.errores"
+      :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
+      @enviaDocumento="cargaDocumento">
+    </documento-requerido>
+
     <hr class="d-block" :style="ColorStrip" />
   </details>
 </template>
@@ -305,6 +313,11 @@ export default {
     universidades: {
       type: Array,
       default: null,
+    },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false,
     }
   },
 
@@ -325,31 +338,30 @@ export default {
   },
 
   computed: {
-    ColorStrip: {
-      get() {
-        var color = "#FFFFFF";
+    ColorStrip() {
+      var color = "#FFFFFF";
 
-        switch (this.alias_academic_program) {
-          case "maestria":
-            color = "#0598BC";
-            break;
-          case "doctorado":
-            color = "#FECC50";
-            break;
-          case "enrem":
-            color = "#FF384D";
-            break;
-          case "imarec":
-            color = "#118943";
-            break;
-        }
+      switch (this.alias_academic_program) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
 
-        return {
-          backgroundColor: color,
-          height: "1px",
-        };
-      },
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
     },
+
 
     Universidades: {
       get: function () {
@@ -372,6 +384,16 @@ export default {
         this.$emit("update:universidades", value);
       },
     },
+
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      },
+    },
+
 
     CVU: {
       get() {

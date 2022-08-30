@@ -8,6 +8,7 @@
         :archive_id="archive_id"
         :documentos.sync="personal_documents"
         :images_btn="images_btn"
+        :alias_academic_program.sync="academic_program.alias"
       >
       </postulante>
       <hr class="d-block" :style="ColorStrip" />

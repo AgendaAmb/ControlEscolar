@@ -492,6 +492,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -588,6 +590,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  created: function created() {// console.log(this.alias_academic_program);
+  },
   methods: {
     bkgCargarArchivo: function bkgCargarArchivo(type) {
       axios.get("/controlescolar/solicitud/getButtonImage", {
@@ -614,7 +618,27 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
             res = false;
             break;
 
@@ -649,6 +673,10 @@ __webpack_require__.r(__webpack_exports__);
       } // Documents for imarec
       else if (this.alias_academic_program === "imarec") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -696,7 +724,27 @@ __webpack_require__.r(__webpack_exports__);
       } //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5A.- Título de licenciatura o acta de examen":
+            res = false;
+            break;
+
+          case "6A.- Certificado de materias de la licenciatura":
+            res = false;
+            break;
+
+          case "7A.- Constancia de promedio de la licenciatura.":
+            res = false;
+            break;
+
+          case "8A.- Cédula de la licenciatura":
             res = false;
             break;
 
@@ -745,6 +793,7 @@ __webpack_require__.r(__webpack_exports__);
       } // return the answer accordin to academic program and name of the required document
 
 
+      console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
     isLetterCommitment: function isLetterCommitment() {

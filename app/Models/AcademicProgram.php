@@ -85,7 +85,7 @@ class AcademicProgram extends Model
     public function latestAnnouncement(): HasOne
     {
         return $this->hasOne(Announcement::class)
-            ->latestOfMany()
+            ->latestOfMany('created_at')
             ->select('announcements.*', 'academic_programs.name as name')
             ->join('academic_programs', 'academic_programs.id', 'academic_program_id');
     }

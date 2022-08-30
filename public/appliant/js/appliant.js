@@ -473,6 +473,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -569,6 +571,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  created: function created() {// console.log(this.alias_academic_program);
+  },
   methods: {
     bkgCargarArchivo: function bkgCargarArchivo(type) {
       axios.get("/controlescolar/solicitud/getButtonImage", {
@@ -595,7 +599,27 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
             res = false;
             break;
 
@@ -630,6 +654,10 @@ __webpack_require__.r(__webpack_exports__);
       } // Documents for imarec
       else if (this.alias_academic_program === "imarec") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -677,7 +705,27 @@ __webpack_require__.r(__webpack_exports__);
       } //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
+
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+
+          case "5A.- Título de licenciatura o acta de examen":
+            res = false;
+            break;
+
+          case "6A.- Certificado de materias de la licenciatura":
+            res = false;
+            break;
+
+          case "7A.- Constancia de promedio de la licenciatura.":
+            res = false;
+            break;
+
+          case "8A.- Cédula de la licenciatura":
             res = false;
             break;
 
@@ -726,6 +774,7 @@ __webpack_require__.r(__webpack_exports__);
       } // return the answer accordin to academic program and name of the required document
 
 
+      console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
     isLetterCommitment: function isLetterCommitment() {
@@ -2175,6 +2224,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2222,7 +2272,8 @@ __webpack_require__.r(__webpack_exports__);
       "default": ""
     },
     // Documentos probatorios.
-    documentos: Array
+    documentos: Array,
+    alias_academic_program: String
   },
   data: function data() {
     return {
@@ -2653,6 +2704,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -2688,7 +2740,8 @@ __webpack_require__.r(__webpack_exports__);
     // Correo alterno del postulante.
     altern_email: String,
     // Documentos personales
-    documentos: Array
+    documentos: Array,
+    alias_academic_program: String
   },
   components: {
     DocumentoRequerido: _DocumentoRequerido_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -13016,6 +13069,7 @@ var render = function () {
                 key: documento.name,
                 attrs: {
                   archivo: documento.archivo,
+                  alias_academic_program: _vm.alias_academic_program,
                   location: documento.pivot.location,
                   errores: documento.errores,
                   images_btn: _vm.images_btn,
@@ -13023,6 +13077,9 @@ var render = function () {
                 on: {
                   "update:archivo": function ($event) {
                     return _vm.$set(documento, "archivo", $event)
+                  },
+                  "update:alias_academic_program": function ($event) {
+                    _vm.alias_academic_program = $event
                   },
                   "update:location": function ($event) {
                     return _vm.$set(documento.pivot, "location", $event)
@@ -13452,6 +13509,7 @@ var render = function () {
                   location: documento.pivot.location,
                   errores: documento.errores,
                   images_btn: _vm.images_btn,
+                  alias_academic_program: _vm.alias_academic_program,
                 },
                 on: {
                   "update:archivo": function ($event) {
@@ -13462,6 +13520,9 @@ var render = function () {
                   },
                   "update:errores": function ($event) {
                     return _vm.$set(documento, "errores", $event)
+                  },
+                  "update:alias_academic_program": function ($event) {
+                    _vm.alias_academic_program = $event
                   },
                   enviaDocumento: _vm.cargaDocumento,
                 },
@@ -14069,9 +14130,13 @@ var render = function () {
               attrs: {
                 archive_id: _vm.archive_id,
                 images_btn: _vm.images_btn,
+                alias_academic_program: _vm.academic_program.alias,
                 documentos: _vm.personal_documents,
               },
               on: {
+                "update:alias_academic_program": function ($event) {
+                  return _vm.$set(_vm.academic_program, "alias", $event)
+                },
                 "update:documentos": function ($event) {
                   _vm.personal_documents = $event
                 },

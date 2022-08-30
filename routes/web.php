@@ -44,7 +44,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 
 
-// Route::prefix('controlescolar')->group(function () {
+    // Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')

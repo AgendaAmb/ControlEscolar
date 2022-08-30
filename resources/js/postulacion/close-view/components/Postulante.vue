@@ -70,8 +70,9 @@
          :archivo.sync="documento.archivo"
          :location.sync="documento.pivot.location"
          :errores.sync = "documento.errores"
-                  :images_btn = "images_btn"
+         :images_btn = "images_btn"
          @enviaDocumento = "cargaDocumento"
+         :alias_academic_program.sync="alias_academic_program"
          v-bind="documento">
       </documento-requerido>
     </div>
@@ -131,6 +132,7 @@ export default {
 
     // Documentos personales
     documentos: Array,
+    alias_academic_program: String,
   },
   components: { DocumentoRequerido },
   name: "postulante",

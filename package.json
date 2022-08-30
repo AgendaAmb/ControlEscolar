@@ -28,8 +28,10 @@
     },
     "dependencies": {
         "@syncfusion/ej2-vue-grids": "^19.3.46",
+        "autoprefixer": "10.4.5",
         "bootstrap-vue": "^2.22.0",
         "dhtmlx-scheduler": "^5.3.12",
+        "mdb-vue-ui-kit": "^2.0.0",
         "moment": "^2.29.4",
         "v-calendar": "^2.3.4",
         "vue-event-calendar": "^1.5.2",

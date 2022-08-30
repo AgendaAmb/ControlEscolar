@@ -108,7 +108,7 @@ class ExternalRecommendationLetter extends Controller
  
          #Se verifica el numero de cartas de recomendacion ya enviadas por archivo de solicitante
          if ($num_recommendation_letter_count > 2) {
-             return new JsonResponse('Maximo numero de cartas contestadas, ya no se permiten mas respuestas', 200);
+             return new JsonResponse(['message' =>  'Maximo numero de cartas contestadas, ya no se permiten mas respuestas']  , JsonResponse::HTTP_CONFLICT);
          }
  
          #Ids para relacion a archive required document table
@@ -125,7 +125,7 @@ class ExternalRecommendationLetter extends Controller
                      //carta diferente
                      if ($rlCompare->id != $rl->id) {
                          if (strcmp($rlCompare->email_evaluator, $rl->email_evaluator) == 0) {
-                             return new JsonResponse('Correo existente, intente con uno diferente', 200);
+                             return new JsonResponse(['message' =>  'Correo existente, intente con uno diferente'] , JsonResponse::HTTP_BAD_REQUEST);
                          }
                      }
                  }
@@ -146,7 +146,7 @@ class ExternalRecommendationLetter extends Controller
  
              foreach ($archive->myRecommendationLetter as $rl) {
                  if (strcmp($rl->email_evaluator, $request->email) == 0) {
-                     return new JsonResponse('Correo registrado para otra carta, intente uno diferente', 200);
+                     return new JsonResponse(['message' =>  'Correo registrado para otra carta, intente uno diferente'] , JsonResponse::HTTP_CONFLICT);
                  }
              }
  
@@ -171,7 +171,7 @@ class ExternalRecommendationLetter extends Controller
                      'required_document_id' => intval($archive_rd->id),
                  ]);
              } catch (\Exception $e) {
-                 return new JsonResponse('Error al crear la carta de recomendación comuniquese con Agenda Ambiental', 200);
+                 return new JsonResponse( ['message' =>  'Error al crear la carta de recomendación comuniquese con Agenda Ambiental'], JsonResponse::HTTP_NO_CONTENT);
              }
          }
  
@@ -421,8 +421,6 @@ class ExternalRecommendationLetter extends Controller
                 // $appliant->setAttribute('academic_degree',$user_data['academic_degree']);
                 Dependencia
                 // $appliant->setAttribute('dependency',$user_data['dependency']);
-
-
             */
         }
         $academic_program = $archive->announcement->academicProgram;

@@ -20,7 +20,11 @@ import RechazarExpediente from './components/RechazarExpediente.vue';
 
 // import ExpedienteCerrado from './components/ExpedienteCerrado.vue';
 
+import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue'
 
+Vue.use(BootstrapVue);
+
+Vue.use(BootstrapVueIcons);
 
 window.Vue = require('vue').default;
 

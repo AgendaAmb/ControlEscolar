@@ -6,7 +6,7 @@
           <h2 class="modal-title" id="exampleModalLabel">Registro</h2>
           <button style="border-radius: 10px; border:none; color:black; background-color:#8b96a8;" type="button"
             @click="AcademicProgram = null" class="btn-close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" style="color:white; font-size: 25px">X</span>
+            <!-- <span aria-hidden="true" style="color:white; font-size: 25px">X</span> -->
           </button>
 
         </div>

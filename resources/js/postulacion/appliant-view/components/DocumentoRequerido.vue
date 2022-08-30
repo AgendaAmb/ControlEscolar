@@ -4,7 +4,7 @@
       <!-- Nombre y notas -->
       <div class="form-group col-9 my-auto">
         <h5 class="mt-4 d-block">
-          <strong> {{ name }} </strong>
+          <strong> {{  name  }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
           </template>
@@ -38,16 +38,17 @@
         </p>
 
         <p class="mt-3 mb-1 d-block">
-          <strong> Etiqueta: </strong> {{ label }}
+          <strong> Etiqueta: </strong> {{  label  }}
         </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
+        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{  example  }}</p>
       </div>
 
       <div class="form-group col-3 align-items-center p-2">
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
+              target="_blank">
               <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
@@ -58,7 +59,8 @@
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
             <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
-            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
+            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%"
+              @change="cargaDocumento">
           </label>
         </div>
       </div>
@@ -95,7 +97,7 @@ export default {
       default: -1,
     },
 
-    images_btn:{
+    images_btn: {
       type: Object,
     },
 
@@ -200,6 +202,10 @@ export default {
     },
   },
 
+  created() {
+    // console.log(this.alias_academic_program);
+  },
+
 
   methods: {
 
@@ -238,7 +244,22 @@ export default {
 
       if (this.alias_academic_program === "maestria") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+          case "8B.- Cédula de la maestría":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -267,6 +288,9 @@ export default {
       // Documents for imarec
       else if (this.alias_academic_program === "imarec") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -305,7 +329,24 @@ export default {
       //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5A.- Título de licenciatura o acta de examen":
+            res = false;
+            break;
+          case "6A.- Certificado de materias de la licenciatura":
+            res = false;
+            break;
+
+          case "7A.- Constancia de promedio de la licenciatura.":
+            res = false;
+            break;
+
+          case "8A.- Cédula de la licenciatura":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -349,7 +390,7 @@ export default {
       }
 
       // return the answer accordin to academic program and name of the required document
-
+      console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
 

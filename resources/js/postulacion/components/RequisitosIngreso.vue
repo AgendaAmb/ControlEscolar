@@ -1,32 +1,40 @@
 <template>
-  <div class="col-12">
-    <div class="form-row my-4">
-      <div class="col-12">
+  <div class="d-block">
+    <!-- Exposición de motivos -->
+    <div class="d-flex  justify-content-start align-items-center my-2" style="width: 100%;">
+      <div class="col-md-1 col-sm-1 text-center">
+        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+      </div>
+
+      <div class="col-md-11 col-sm-11">
         <label> Explica los motivos, por los cuales deseas aplicar al programa académico </label>
         <textarea v-model="Motivation" class="form-control" rows="8"></textarea>
       </div>
-
-      <div class="d-flex justify-content-start mt-4 mb-0"  style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="actualizaExposicionMotivos" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
-          </div>
-        <div class="col-md-10 col-xs-9 mx-3">
-          <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón.
-            <p><strong>Solo se guardara la exposición de motivos.</strong></p>
-          </label>
-        </div>
-      </div>
-
-      <documento-requerido v-for="documento in Documentos" :key="documento.name" :user_id="user_id"
-        :viewer_id="viewer_id"  :alias_academic_program="alias_academic_program"
-        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
-        :exanni_score.sync="exanni_score" :images_btn="images_btn" v-bind="documento"
-        @nuevoPuntajeExanni="nuevoPuntajeExanni" @enviaDocumento="cargaDocumento">
-      </documento-requerido>
-
     </div>
+
+    <!-- Guardado de exposición de motivos  -->
+    <div class="d-flex  justify-content-end my-4" style="width:100%;">
+      <div class="col-md-2 col-xs-3 text-end ">
+        <img @click="actualizaExposicionMotivos" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+      </div>
+      <div class="col-md-10 col-xs-9 mx-3">
+        <label>
+          <strong>Nota: </strong>
+          Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón.
+          <p><strong>Solo se guardara la exposición de motivos.</strong></p>
+        </label>
+      </div>
+    </div>
+
+    <!-- Documentos Requisitos ingreso  -->
+    <documento-requerido v-for="documento in Documentos" :key="documento.name" :user_id="user_id" :viewer_id="viewer_id"
+      :alias_academic_program="alias_academic_program" :archivo.sync="documento.archivo"
+      :location.sync="documento.pivot.location" :errores.sync="documento.errores" :exanni_score.sync="exanni_score"
+      :images_btn="images_btn" v-bind="documento" @nuevoPuntajeExanni="nuevoPuntajeExanni"
+      @enviaDocumento="cargaDocumento">
+    </documento-requerido>
+
+
   </div>
 </template>
 
@@ -54,8 +62,12 @@ export default {
     alias_academic_program: {
       type: String,
       default: null,
-    }
+    },
 
+    status_checkBox:{
+      type: Boolean,
+      default: false,
+    }
   },
   components: { DocumentoRequerido },
   name: "requisitos-ingreso",
@@ -74,6 +86,16 @@ export default {
         this.$emit('update:motivation', newVal);
       }
     },
+
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newVal) {
+        this.$emit('update:status_checkBox', newVal);
+      }
+    },
+    
 
     Documentos: {
       get() {

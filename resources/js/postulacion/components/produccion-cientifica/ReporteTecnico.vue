@@ -1,16 +1,16 @@
 <template>
   <div class="row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6 col-sm-12">
       <label> Título: </label>
       <input type="text" class="form-control" v-model="Title">
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <label> Institución a la que se presenta el reporte: </label>
       <input type="text" class="form-control" v-model="Institution">
     </div>
 
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <label> Fecha de publicación: </label>
       <input type="date" class="form-control" v-model="PublishDate">
     </div>

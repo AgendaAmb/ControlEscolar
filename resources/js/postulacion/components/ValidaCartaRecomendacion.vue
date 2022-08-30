@@ -184,7 +184,8 @@ export default {
           "/controlescolar/solicitud/sentEmailRecommendationLetter", request
         )
         .then((response) => {
-          if (response.data == "Exito, el correo ha sido enviado") {
+          console.log('message: ' + response.data.message);
+          if (response.data.message == "Exito, el correo ha sido enviado") {
             Swal.fire({
               title: "El correo se ha enviado correctamente",
               text: "Ahora solo queda esperar a que la persona responda el formulario",
@@ -198,7 +199,7 @@ export default {
             Swal.fire({
               icon: "error",
               title: "Error al enviar carta",
-              text: response.data,
+              text: response.data.message,
               showCancelButton: true,
               cancelButtonColor: "#d33",
               cancelButtonText: "Entendido",
@@ -206,10 +207,12 @@ export default {
           }
         })
         .catch((error) => {
+          console.log('message: ' + error.data.message);
+
           Swal.fire({
             title: "Error al mandar carta de recomendacion",
             icon: "error",
-            title: error.data,
+            title: error.data.message,
             showCancelButton: true,
             cancelButtonColor: "#d33",
             cancelButtonText: "Entendido",

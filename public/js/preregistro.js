@@ -7310,38 +7310,25 @@ var render = function () {
                 [_vm._v("Registro")]
               ),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn-close",
-                  staticStyle: {
-                    "border-radius": "10px",
-                    border: "none",
-                    color: "black",
-                    "background-color": "#8b96a8",
-                  },
-                  attrs: {
-                    type: "button",
-                    "data-dismiss": "modal",
-                    "aria-label": "Close",
-                  },
-                  on: {
-                    click: function ($event) {
-                      _vm.AcademicProgram = null
-                    },
+              _c("button", {
+                staticClass: "btn-close",
+                staticStyle: {
+                  "border-radius": "10px",
+                  border: "none",
+                  color: "black",
+                  "background-color": "#8b96a8",
+                },
+                attrs: {
+                  type: "button",
+                  "data-dismiss": "modal",
+                  "aria-label": "Close",
+                },
+                on: {
+                  click: function ($event) {
+                    _vm.AcademicProgram = null
                   },
                 },
-                [
-                  _c(
-                    "span",
-                    {
-                      staticStyle: { color: "white", "font-size": "25px" },
-                      attrs: { "aria-hidden": "true" },
-                    },
-                    [_vm._v("X")]
-                  ),
-                ]
-              ),
+              }),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [

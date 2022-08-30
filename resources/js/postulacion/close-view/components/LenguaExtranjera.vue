@@ -143,9 +143,8 @@
         <div v-if="'writing_level' in errores" class="invalid-feedback">{{ errores.writing_level }}</div>
       </div>
 
-
       <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
+        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn" :alias_academic_program.sync="alias_academic_program"
         @enviaDocumento="cargaDocumento" v-bind="documento">
       </documento-requerido>
       <hr class="my-4 d-block" :style="ColorStrip">
@@ -211,7 +210,9 @@ export default {
     writing_level: String,
 
     // Documentos probatorios.
-    documentos: Array
+    documentos: Array,
+
+    alias_academic_program:String,
   },
 
   data() {

@@ -1,243 +1,136 @@
 <template>
-  <div
-    class="modal fade"
-    id="ActualizaExpediente"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-xl">
-      <div
-        class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3"
-        style="background-color: #8b96a8"
-      >
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">
-            Actualizar expediente
-          </h2>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">X</span>
-          </button>
+  <b-modal id="ActualizaExpediente" hide-backdrop content-class="shadow" size="xl" title="Cambiar documentos" :style="modalStyle">
+    <div class="col-12">
+      <div class="row my-2">
+        <div class="col-3">
+          <p class="h5">Personales</p>
+          <ul class="list-group">
+            <li v-for="etiqueta in required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isPersonalDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="etiqueta.id"
+                  v-model="selected_personalDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="modal-body">
-          <form v-on:submit.prevent="enviarActualizacion">
-            <div class="row my-2 mx-2">
-              <div class="my-2 col-4">
-                <h4>Personales</h4>
-                <ul class="list-group">
-                  <li
-                    v-for="etiqueta in required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isPersonalDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="etiqueta.id"
-                        v-model="selected_personalDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
+        <!-- Entance docuements -->
+        <div class=" col-3">
+          <p class="h5">Ingreso</p>
+          <ul class="list-group">
+            <li v-for="etiqueta in entrance_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isEntranceDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="etiqueta.id"
+                  v-model="selected_entranceDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
               </div>
-
-              <div class="my-2 col-4">
-                <!-- Academic documents -->
-                <h4>Grado(s) academico(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(grado, index) in academic_degrees"
-                  :key="grado.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Grado Academico #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in grado.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isAcademicDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[grado.id, etiqueta.id]"
-                        v-model="selected_academicDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="my-2 col-4">
-                <!-- Entance docuements -->
-                <h4>Ingreso</h4>
-                <ul class="list-group">
-                  <li
-                    v-for="etiqueta in entrance_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isEntranceDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="etiqueta.id"
-                        v-model="selected_entranceDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="row my-2 mx-2">
-              <!-- Appliant Languages -->
-              <div class="my-2 col-4">
-                <h4>Lengua(s) Entranjera(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(language, index) in appliant_languages"
-                  :key="language.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Lengua Extranjera #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in language.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isLanguageDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[language.id, etiqueta.id]"
-                        v-model="selected_languageDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Working documents -->
-              <div
-                v-if="requiereWorkingExperience() === true"
-                class="my-2 col-4"
-              >
-                <h4>Experiencia(s) Laboral(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(working_experience, index) in working_experiences"
-                  :key="working_experience.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Grado Academico #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in working_experience.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isWorkingDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[working_experience.id, etiqueta.id]"
-                        v-model="selected_workingDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="row my-2 mx-2">
-              <div class="col-12 my-2">
-                <h4>
-                  Deja un mensaje al postulante para que queden mas claras las
-                  instrucciones para el cambio
-                </h4>
-                <textarea
-                  class="form-control"
-                  rows="4"
-                  v-model="instructions"
-                />
-              </div>
-            </div>
-          </form>
+            </li>
+          </ul>
         </div>
-        <div class="px-0 my-3 modal-footer justify-content-start">
-          <button
-            id="submit"
-            type="submit"
-            class="btn btn-primary"
-            style="background-color: #0160ae"
-            @click="enviarActualizacion"
-          >
-            Enviar actualizaciones
-          </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Cerrar
-          </button>
+
+        <div class=" col-3">
+          <!-- Academic documents -->
+          <p class="h5">Grado(s) academico(s)</p>
+          <ul class="list-group" v-for="(grado, index) in academic_degrees" :key="grado.id" :index="index + 1">
+            <li class="list-inline-item">
+              <p class="label"><strong> Grado Academico #{{  index + 1  }} </strong></p>
+            </li>
+            <li v-for="etiqueta in grado.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isAcademicDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[grado.id, etiqueta.id]"
+                  v-model="selected_academicDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Appliant Languages -->
+        <div class="col-3">
+          <p class="h5">Lengua(s) Entranjera(s)</p>
+
+          <ul class="list-group" v-for="(language, index) in appliant_languages" :key="language.id" :index="index + 1">
+            <li class="list-inline-item">
+              <span><strong> Lengua Extranjera #{{  index + 1  }} </strong></span>
+            </li>
+            <li v-for="etiqueta in language.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isLanguageDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[language.id, etiqueta.id]"
+                  v-model="selected_languageDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Working documents -->
+        <div v-if="requiereWorkingExperience() === true" class="col-3">
+          <p class="h5">Experiencia(s) Laboral(s)</p>
+
+          <ul class="list-group" v-for="(working_experience, index) in working_experiences" :key="working_experience.id"
+            :index="index + 1">
+            <li class="list-inline-item">
+              <span><strong> Grado Academico #{{  index + 1  }} </strong></span>
+            </li>
+            <li v-for="etiqueta in working_experience.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isWorkingDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[working_experience.id, etiqueta.id]"
+                  v-model="selected_workingDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="d-block" :style="ColorStrip" />
+
+      <div class="row my-2 mx-2">
+        <div class="col-12 my-2">
+          <textarea class="form-control" rows="4" v-model="instructions" title="¿Por qué este mensaje?"
+            v-b-popover.hover="'Este mensaje sera añadido a un correo que se mandara al postulante para indicar claramente los errores en los documentos seleccionados'"
+            placeholder="Deja instrucciones claras para los documentos indicados" />
         </div>
       </div>
     </div>
-  </div>
+
+    <template #modal-footer="{ enviarActualizacion, cancel }">
+      <!-- Emulate built in modal footer ok and cancel button actions -->
+      <b-button size="sm" variant="success" @click="enviarActualizacion()" :style="styleBtnAccordionSection">
+        <p class="h5">Enviar actualización</p>
+      </b-button>
+      <b-button size="sm" variant="danger" @click="cancel()" :style="styleBtnAccordionSection">
+        <p class="h5">Cancelar</p>
+      </b-button>
+    </template>
+
+  </b-modal>
 </template>
 
 <script>
@@ -308,6 +201,57 @@ export default {
       selected_workingDocuments: [],
       instructions: "",
     };
+  },
+
+  computed: {
+    styleBtnAccordionSection() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        height: '50px'
+      }
+    },
+
+    modalStyle(){
+      return{
+        backgroundColor: "rgba(0,96,175,255)",
+      }
+    },
+
+    btnStyle() {
+      return {
+        height: '50px!important',
+        width: '100%!important',
+        color: 'white'
+      }
+    },
+
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: '3px'
+      };
+    },
   },
 
   methods: {

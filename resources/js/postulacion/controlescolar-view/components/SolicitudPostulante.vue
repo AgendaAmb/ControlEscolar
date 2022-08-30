@@ -4,6 +4,7 @@
     <div class="col-12">
       <h2 class="my-5 d-block font-weight-bold">Datos Personales</h2>
       <postulante v-bind="appliant" :archive_id="archive_id" :images_btn="images_btn"
+        :alias_academic_program.sync="academic_program.alias"
         :documentos.sync="personal_documents">
       </postulante>
       <hr class="d-block" :style="ColorStrip" />

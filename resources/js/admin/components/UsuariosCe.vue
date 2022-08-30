@@ -1,9 +1,7 @@
 <template>
-  <div class="row align-items-center">
+  <div class="container-fluid">
 
     <!-- Tittle and add or asign new data to User -->
-    <div class="container-fluid">
-
       <div class="d-flex m-2 justify-content-center">
         <div class="col-12 ">
           <p class="display-4">
@@ -13,16 +11,16 @@
 
       </div>
 
-      <div class="row mx-2" style="height:50px!important;">
-        <b-input-group size="lg" class="col-md-10 col-sm-8" style="height: 100% !important;">
+      <div class="d-flex" style="height:44px!important;">
+        <b-input-group size="lg" class="col-md-9 col-sm-8" style="height: 100% !important;">
           <b-form-input style="height: 100% !important;" type="search" v-model="search" placeholder="Buscar RPE">
           </b-form-input>
           <b-input-group-append is-text style="height: 100% !important;">
-              <b-icon icon="search" aria-hidden="true"></b-icon>
+            <b-icon icon="search" aria-hidden="true"></b-icon>
           </b-input-group-append>
         </b-input-group>
 
-        <div class="col-md-2 col-sm-4" style="height:100%!important;">
+        <div class="col-md-3 col-sm-4" style="height:100%!important;">
           <b-button data-toggle="modal" data-target="#NuevoUsuario" pill variant="outline-success"
             style="width:100%; height: 100% !important;" class="align-items-center text-center">
             <b-icon icon="person-plus-fill" aria-hidden="true"></b-icon>
@@ -30,9 +28,8 @@
         </div>
 
       </div>
-    </div>
+   
 
-    <div class="container-fluid my-4">
       <div class="col-12">
         <div class="overflow-auto">
 
@@ -60,14 +57,13 @@
                 <div class="col-6 justify-content-center">
                   <b-btn
                     @click.prevent="toggleModal(item.id, item.roles, item.academic_areas, item.academic_entities, item.academic_comittes)"
-                    data-toggle="modal" data-target="#EditaUsuario" pill variant="outline-primary" style="width:100%;">
+                    data-toggle="modal" data-target="#EditaUsuario" pill variant="outline-primary">
                     <b-icon icon="pencil-square" aria-hidden="true"></b-icon> Editar
                   </b-btn>
                 </div>
-                <div class="col-6 justify-content-center">
-
+                <div class="col-6 justify-content-center" >
                   <b-button @click="eliminaTrabajador(item.id)" pill variant="outline-danger"
-                    class="align-items-center text-center" style="width:100%;">
+                    class="align-items-center text-center" >
                     <b-icon icon="x-circle-fill" aria-hidden="true"></b-icon> Eliminar
                   </b-button>
                 </div>
@@ -125,7 +121,6 @@
       </div>
     </div>
 
-  </div>
 </template>
 
 <script>

@@ -1,250 +1,134 @@
 <template>
-  <div
-    class="modal fade"
-    id="RechazarExpediente"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-xl">
-      <div
-        class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3"
-        style="background-color: #8b96a8"
-      >
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLabel">
-            Expediente que no cumple
-          </h2>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">X</span>
-          </button>
+  <b-modal id="RechazarExpediente" hide-backdrop content-class="shadow" size="xl" title="Revisión">
+    <div class="col-12">
+      <div class="row my-2">
+        <!-- DOCUMENTOS PERSONALES -->
+        <div class="col-3">
+          <p class="h5">Personales</p>
+          <ul class="list-group">
+            <li v-for="etiqueta in required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isPersonalDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="etiqueta.id"
+                  v-model="selected_personalDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="modal-body">
-          <form v-on:submit.prevent="enviarActualizacion">
-            <div class="row my-2 mx-2">
-              <div class="my-2 col-12">
-                <h2>
-                  Selecciona los documentos que no cumplen con los requisitos
-                  para ser aceptados
-                </h2>
-              </div>
-              <div class="my-2 col-4">
-                <h4>Personales</h4>
-                <ul class="list-group">
-                  <li
-                    v-for="etiqueta in required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isPersonalDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="etiqueta.id"
-                        v-model="selected_personalDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
 
-              <div class="my-2 col-4">
-                <!-- Academic documents -->
-                <h4>Grado(s) academico(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(grado, index) in academic_degrees"
-                  :key="grado.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Grado Academico #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in grado.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isAcademicDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[grado.id, etiqueta.id]"
-                        v-model="selected_academicDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
+        <!-- DOCUMENTOS DE INGRESO-->
+        <div class=" col-3">
+          <p class="h5">Ingreso</p>
+          <ul class="list-group">
+            <li v-for="etiqueta in entrance_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isEntranceDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="etiqueta.id"
+                  v-model="selected_entranceDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
               </div>
-
-              <div class="my-2 col-4">
-                <!-- Entance docuements -->
-                <h4>Ingreso</h4>
-                <ul class="list-group">
-                  <li
-                    v-for="etiqueta in entrance_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isEntranceDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="etiqueta.id"
-                        v-model="selected_entranceDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="row my-2 mx-2">
-              <!-- Appliant Languages -->
-              <div class="my-2 col-4">
-                <h4>Lengua(s) Entranjera(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(language, index) in appliant_languages"
-                  :key="language.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Lengua Extranjera #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in language.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isLanguageDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[language.id, etiqueta.id]"
-                        v-model="selected_languageDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Working documents -->
-              <div
-                v-if="requiereWorkingExperience() === true"
-                class="my-2 col-4"
-              >
-                <h4>Experiencia(s) Laboral(s)</h4>
-                <ul
-                  class="list-group"
-                  v-for="(working_experience, index) in working_experiences"
-                  :key="working_experience.id"
-                  :index="index + 1"
-                >
-                  <li class="list-inline-item">
-                    <span
-                      ><strong> Grado Academico #{{ index }} </strong></span
-                    >
-                  </li>
-                  <li
-                    v-for="etiqueta in working_experience.required_documents"
-                    :key="etiqueta.id"
-                    class="form-check"
-                  >
-                    <div
-                      v-if="
-                        requiredForAcademicProgram() === true &&
-                        isWorkingDocument(etiqueta) === true
-                      "
-                    >
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        :value="[working_experience.id, etiqueta.id]"
-                        v-model="selected_workingDocuments"
-                      />
-                      <label class="form-check-label">
-                        {{ etiqueta.name }}
-                      </label>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="row my-2 mx-2">
-              <div class="col-12 my-2">
-                <h4>
-                  Dejar un comentario que solamente control escolar y
-                  administración podran observar sobre el por que el aspirante
-                  no avanzara a la siguiente etapa
-                </h4>
-                <textarea
-                  class="form-control"
-                  rows="4"
-                  v-model="instructions"
-                />
-              </div>
-            </div>
-          </form>
+            </li>
+          </ul>
         </div>
-        <div class="px-0 my-3 modal-footer justify-content-start">
-          <button
-            id="submit"
-            type="submit"
-            class="btn btn-primary"
-            style="background-color: #0160ae"
-            @click="enviarActualizacion"
-          >
-            Actualizar expediente
-          </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Cerrar
-          </button>
+
+        <!-- DOCUMENTOS ACADEMICOS -->
+        <div class=" col-3">
+          <p class="h5">Grado(s) academico(s)</p>
+          <ul class="list-group" v-for="(grado, index) in academic_degrees" :key="grado.id" :index="index + 1">
+            <li class="list-inline-item">
+              <p class="label"><strong> Grado Academico #{{  index + 1  }} </strong></p>
+            </li>
+            <li v-for="etiqueta in grado.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isAcademicDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[grado.id, etiqueta.id]"
+                  v-model="selected_academicDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DOCUMENTOS DE LENGUA EXTRANJERA -->
+        <div class="col-3">
+          <p class="h5">Lengua(s) Entranjera(s)</p>
+
+          <ul class="list-group" v-for="(language, index) in appliant_languages" :key="language.id" :index="index + 1">
+            <li class="list-inline-item">
+              <span><strong> Lengua Extranjera #{{  index + 1  }} </strong></span>
+            </li>
+            <li v-for="etiqueta in language.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isLanguageDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[language.id, etiqueta.id]"
+                  v-model="selected_languageDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DOCUMENTOS DE EXPERIENCIA LABORAL -->
+        <div v-if="requiereWorkingExperience() === true" class="col-3">
+          <p class="h5">Experiencia(s) Laboral(s)</p>
+
+          <ul class="list-group" v-for="(working_experience, index) in working_experiences" :key="working_experience.id"
+            :index="index + 1">
+            <li class="list-inline-item">
+              <span><strong> Grado Academico #{{  index + 1  }} </strong></span>
+            </li>
+            <li v-for="etiqueta in working_experience.required_documents" :key="etiqueta.id" class="form-check">
+              <div v-if="
+                requiredForAcademicProgram() === true &&
+                isWorkingDocument(etiqueta) === true
+              ">
+                <input class="form-check-input" type="checkbox" :value="[working_experience.id, etiqueta.id]"
+                  v-model="selected_workingDocuments" />
+                <label class="form-check-label">
+                  {{  etiqueta.name  }}
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-12">
+          <textarea class="form-control" rows="4" v-model="instructions" title="¿Por qué este mensaje?"
+            v-b-popover.hover="' Dejar un comentario que solamente control escolar y administración podran observar sobre el por que el aspirante no avanzara a la siguiente etapa'"
+            placeholder="Deja instrucciones claras para los documentos indicados" />
         </div>
       </div>
     </div>
-  </div>
+    
+    <hr class="d-block" :style="ColorStrip" />
+
+    <template #modal-footer="{ enviarActualizacion, cancel }">
+      <!-- Emulate built in modal footer ok and cancel button actions -->
+      <b-button size="sm" variant="success" @click="enviarActualizacion()" :style="styleBtnAccordionSection">
+        <p class="h5">Guardar estado</p>
+      </b-button>
+      <b-button size="sm" variant="danger" @click="cancel()" :style="styleBtnAccordionSection">
+        <p class="h5">Cancelar</p>
+      </b-button>
+    </template>
+  </b-modal>
 </template>
 
 <script>
@@ -305,6 +189,57 @@ export default {
     },
   },
 
+  computed: {
+    styleBtnAccordionSection() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        height: '50px'
+      }
+    },
+
+    modalStyle(){
+      return{
+        backgroundColor: "rgba(0,96,175,255)",
+      }
+    },
+
+    btnStyle() {
+      return {
+        height: '50px!important',
+        width: '100%!important',
+        color: 'white'
+      }
+    },
+
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.academic_program.alias) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: '3px'
+      };
+    },
+  },
+
   data() {
     return {
       selected_etiquetas: [],
@@ -348,58 +283,58 @@ export default {
               })
               .then((response) => {
                 axios
-              .post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
-                selected_personalDocuments: this.selected_personalDocuments,
-                selected_academicDocuments: this.selected_academicDocuments,
-                selected_entranceDocuments: this.selected_entranceDocuments,
-                selected_languageDocuments: this.selected_languageDocuments,
-                selected_workingDocuments: this.selected_workingDocuments,
-                instructions: this.instructions,
-                academic_program: this.academic_program,
-                archive_id: this.archive_id,
-                user_id: this.user_id,
-              })
-              .then((response) => {
-                Swal.fire({
-                  title: "Exito",
-                  text: "Se ha enviado un correo al usuario con los cambios a realizar",
-                  icon: "success",
-                  showCancelButton: false,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Entendido",
-                }).then((result) => {
-                  axios
-                    .post("/controlescolar/solicitud/updateStatusArchive", {
-                      // Status id to change the state
-                      archive_id: this.archive_id,
-                      status: 6,
-                    })
-                    .then((response) => {
-                      window.location.href = "/controlescolar/solicitud/";
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      Swal.fire({
-                        title: "Error al actualizar",
-                        showCancelButton: false,
-                        icon: "error",
-                      });
+                  .post("/controlescolar/solicitud/sentEmailRechazadoPostulacion", {
+                    selected_personalDocuments: this.selected_personalDocuments,
+                    selected_academicDocuments: this.selected_academicDocuments,
+                    selected_entranceDocuments: this.selected_entranceDocuments,
+                    selected_languageDocuments: this.selected_languageDocuments,
+                    selected_workingDocuments: this.selected_workingDocuments,
+                    instructions: this.instructions,
+                    academic_program: this.academic_program,
+                    archive_id: this.archive_id,
+                    user_id: this.user_id,
+                  })
+                  .then((response) => {
+                    Swal.fire({
+                      title: "Exito",
+                      text: "Se ha enviado un correo al usuario con los cambios a realizar",
+                      icon: "success",
+                      showCancelButton: false,
+                      confirmButtonColor: "#3085d6",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Entendido",
+                    }).then((result) => {
+                      axios
+                        .post("/controlescolar/solicitud/updateStatusArchive", {
+                          // Status id to change the state
+                          archive_id: this.archive_id,
+                          status: 6,
+                        })
+                        .then((response) => {
+                          window.location.href = "/controlescolar/solicitud/";
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                          Swal.fire({
+                            title: "Error al actualizar",
+                            showCancelButton: false,
+                            icon: "error",
+                          });
+                        });
                     });
-                });
-              })
-              .catch((error) => {
-                Swal.fire({
-                  title: "Ups",
-                  text: "No fue posible completar la petición, intentelo mas tarde",
-                  icon: "error",
-                  showCancelButton: true,
-                  cancelButtonColor: "#d33",
-                  cancelButtonText: "Entendido",
-                });
-                // alert('Ha ocurrido un error, intenta mas tarde');
-                // console.log(error);
-              });
+                  })
+                  .catch((error) => {
+                    Swal.fire({
+                      title: "Ups",
+                      text: "No fue posible completar la petición, intentelo mas tarde",
+                      icon: "error",
+                      showCancelButton: true,
+                      cancelButtonColor: "#d33",
+                      cancelButtonText: "Entendido",
+                    });
+                    // alert('Ha ocurrido un error, intenta mas tarde');
+                    // console.log(error);
+                  });
               })
               .catch((error) => {
                 console.log(error);
@@ -410,7 +345,7 @@ export default {
                   icon: "error",
                 });
               });
-            
+
           }
         });
       } else {

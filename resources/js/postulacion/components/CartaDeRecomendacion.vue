@@ -3,14 +3,7 @@
           Si corresponde entonces se ha realizado 
           Si no entonces esta pendiente
          -->
-  <div class="container-fluid mt-2">
-    <div class="row mx-3 ">
-      <strong>Nota: </strong>
-      <p>
-         &nbsp;&nbsp;Ingresa a continuación dos correos válidos de quienes te otorguen las cartas de recomendación.<br />
-      </p>
-    </div>
-
+  <div class="col-12 my-2">
     <!-- CASO 1 -->
     <!-- No existen cartas de recomendacion se crearan por primera vez -->
     <div class="row" v-if="sizeRecommendationLetter() == 0">
