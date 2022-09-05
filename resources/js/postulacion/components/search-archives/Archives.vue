@@ -1,9 +1,7 @@
 <template>
-    <div class="row align-items-center" :class="{ invisible: !dataNotEmpty() }">
-
+    <div class="row align-items-center">
         <!-- Tittle and add or asign new data to User -->
-        <div class="container-fluid">
-
+        <div class="container-fluid" :class="{ invisible: !dataNotEmpty() }">
             <div class="d-flex my-2 justify-content-center user-search" style="height:45px!important;">
                 <b-input-group size="lg" class="col-12" style="height: 100% !important;">
                     <b-form-input style="height: 45px !important;" type="search" v-model="search"
@@ -14,114 +12,123 @@
                     </b-input-group-append>
                 </b-input-group>
             </div>
-        </div>
+            <div class="d-flex my-2 justify-content-center">
+                <div class="col-12">
+                    <div class="overflow-auto">
 
-        <div class="container-fluid my-2">
-            <div class="col-12">
-                <div class="overflow-auto">
-
-                    <b-table striped hover head-variant="blue" id="my-table" :items="filteredList" :fields="fields"
-                        :per-page="perPage" :current-page="currentPage" class="text-center h3">
+                        <b-table striped hover head-variant="blue" id="my-table" :items="filteredList" :fields="fields"
+                            :per-page="perPage" :current-page="currentPage" class="text-center h3">
 
 
-                        <template v-slot:cell(No_Expediente)="{ item }">
-                            <span>
-                                <p class="h6">{{ item.id }}</p>
-                            </span>
-                        </template>
+                            <template v-slot:cell(No_Expediente)="{ item }">
+                                <span>
+                                    <p class="h6">{{  item.id  }}</p>
+                                </span>
+                            </template>
 
-                        <template v-slot:cell(Periodo)="{ item }">
-                            <span v-if="item.academic_program != 'Doctorado en ciencias ambientales'">
-                                <p class="h6">
-                                    {{
-                                            item.announcement_from[0] +
-                                            item.announcement_from[1] +
-                                            item.announcement_from[2] +
-                                            item.announcement_from[3]
-                                    }}
-                                    -
-                                    {{
-                                            item.announcement_to[0] +
-                                            item.announcement_to[1] +
-                                            item.announcement_to[2] +
-                                            item.announcement_to[3]
-                                    }}
-                                </p>
-                            </span>
-                            <span v-else-if="item.announcement_from[6] == 1">
-                                <p class="h6"> {{
-                                        item.announcement_from[0] +
-                                        item.announcement_from[1] +
-                                        item.announcement_from[2] +
-                                        item.announcement_from[3]
-                                }}
-                                    - I
-                                </p>
-
-                            </span>
-
-                            <span v-else>
-                                <p class="h6">
-                                    {{
-                                            item.announcement_from[0] +
-                                            item.announcement_from[1] +
-                                            item.announcement_from[2] +
-                                            item.announcement_from[3]
-                                    }}
-                                    - II
-                                </p>
-
-                            </span>
+                            <template v-slot:cell(Periodo)="{ item }">
+                                <span v-if="item.academic_program != 'Doctorado en ciencias ambientales'">
+                                    <p class="h6">
+                                        {{
+                                         item.announcement_from[0] +
+                                         item.announcement_from[1] +
+                                         item.announcement_from[2] +
+                                         item.announcement_from[3]
 
 
-                        </template>
 
-                        <template v-slot:cell(Nombre)="{ item }">
-                            <span>
-                                <p class="h6">{{ item.name }}</p>
-                            </span>
-                        </template>
+                                        }}
+                                        -
+                                        {{
+                                         item.announcement_to[0] +
+                                         item.announcement_to[1] +
+                                         item.announcement_to[2] +
+                                         item.announcement_to[3]
 
-                        <template v-slot:cell(Programa_Academico)="{ item }">
-                            <span>
-                                <p class="h6">{{ item.academic_program }}</p>
-                            </span>
-                        </template>
 
-                        <template v-slot:cell(Estado)="{ item }">
-                            <div :class="classObjectFor(item.status)" role="alert">
-                                {{ getNameStatus(item.status) }}
-                            </div>
-                        </template>
 
-                        <template v-slot:cell(Expediente)="{ item }">
-                            <a :href="item.location" target="_blank">Ver expediente</a>
-                        </template>
+                                        }}
+                                    </p>
+                                </span>
+                                <span v-else-if="item.announcement_from[6] == 1">
+                                    <p class="h6"> {{
+                                         item.announcement_from[0] +
+                                         item.announcement_from[1] +
+                                         item.announcement_from[2] +
+                                         item.announcement_from[3]
 
-                    </b-table>
 
-                    <!-- Paginatinn bottom -->
-                    <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" class="my-4"
-                        align="fill">
-                        <template #first-text>
-                            <b-icon icon="chevron-double-left" aria-hidden="true"></b-icon>
-                        </template>
-                        <template #prev-text>
-                            <b-icon icon="chevron-left" aria-hidden="true"></b-icon>
-                        </template>
-                        <template #next-text>
-                            <b-icon icon="chevron-right" aria-hidden="true"></b-icon>
-                        </template>
-                        <template #last-text>
-                            <b-icon icon="chevron-double-right" aria-hidden="true"></b-icon>
-                        </template>
-                    </b-pagination>
+
+                                        }}
+                                        - I
+                                    </p>
+
+                                </span>
+
+                                <span v-else>
+                                    <p class="h6">
+                                        {{
+                                         item.announcement_from[0] +
+                                         item.announcement_from[1] +
+                                         item.announcement_from[2] +
+                                         item.announcement_from[3]
+
+
+
+                                        }}
+                                        - II
+                                    </p>
+
+                                </span>
+
+
+                            </template>
+
+                            <template v-slot:cell(Nombre)="{ item }">
+                                <span>
+                                    <p class="h6">{{  item.name  }}</p>
+                                </span>
+                            </template>
+
+                            <template v-slot:cell(Programa_Academico)="{ item }">
+                                <span>
+                                    <p class="h6">{{  item.academic_program  }}</p>
+                                </span>
+                            </template>
+
+                            <template v-slot:cell(Estado)="{ item }">
+                                <div :class="classObjectFor(item.status)" role="alert">
+                                    {{  getNameStatus(item.status)  }}
+                                </div>
+                            </template>
+
+                            <template v-slot:cell(Expediente)="{ item }">
+                                <a :href="item.location" target="_blank">Ver expediente</a>
+                            </template>
+
+                        </b-table>
+
+                        <!-- Paginatinn bottom -->
+                        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" class="my-4"
+                            align="fill">
+                            <template #first-text>
+                                <b-icon icon="chevron-double-left" aria-hidden="true"></b-icon>
+                            </template>
+                            <template #prev-text>
+                                <b-icon icon="chevron-left" aria-hidden="true"></b-icon>
+                            </template>
+                            <template #next-text>
+                                <b-icon icon="chevron-right" aria-hidden="true"></b-icon>
+                            </template>
+                            <template #last-text>
+                                <b-icon icon="chevron-double-right" aria-hidden="true"></b-icon>
+                            </template>
+                        </b-pagination>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <style>

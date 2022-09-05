@@ -1,62 +1,60 @@
 <template>
   <details>
-    <summary class="d-flex align-items-center justify-content-between my-1">
-      <div class="col-lg-9 col-md-7 col-ms-6">
-        <h5 class="font-weight-bold"> Capital Humano {{ index + 1 }}</h5>
-      </div>
-
-      <div class="col-lg-3 col-md-5 col-sm-6">
-        <b-button @click="eliminaCapitalHumano" pill class="d-flex justify-content-start align-items-center"
-          variant="danger">
-          <b-icon icon="trash-fill" class="mx-2" font-scale="3"></b-icon>
-          <p class="h4 my-2">Eliminar</p>
-        </b-button>
-      </div>
+    <!-- Accordion header -->
+    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
+        <div class="col-lg-8 col-md-6 col-xs-12">
+          <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+          <span class="h5 font-weight-bold" style="width:auto!important;">Capital Humano {{ index + 1 }}</span>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12">
+          <b-button @click="eliminaCapitalHumano" pill class="d-flex justify-content-start align-items-center"
+            style="height:45px!important" variant="danger">
+            <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
+            <p class="h5 my-2">Eliminar</p>
+          </b-button>
+        </div>
     </summary>
+    <!-- Accordion -->
+    <b-card-body>
+      <!-- Content -->
+      <div class="d-flex justify-content-start align-items-center my-2" style="width:100%;">
+        <div class="col-md-1 col-sm-1 text-center">
+          <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+        </div>
 
-    <div class="d-flex justify-content-start align-items-center my-2" style="width:100%;">
-      <div class="col-md-1 col-sm-1 text-center">
-        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
-      </div>
+        <div class="col-11">
+          <div class="row my-2">
+            <div class="form-group col-md-4">
+              <label> Nombre del curso: </label>
+              <input type="text" class="form-control" v-model="CourseName">
+            </div>
 
-      <div class="col-11">
-        <div class="row my-2">
-          <div class="form-group col-md-4">
-            <label> Nombre del curso: </label>
-            <input type="text" class="form-control" v-model="CourseName">
-          </div>
+            <div class="form-group col-md-4">
+              <label> Fecha: </label>
+              <input type="date" class="form-control" v-model="AssistedAt">
+            </div>
 
-          <div class="form-group col-md-4">
-            <label> Fecha: </label>
-            <input type="date" class="form-control" v-model="AssistedAt">
-          </div>
-
-          <div class="form-group col-md-4">
-            <label> Nivel de escolaridad: </label>
-            <input type="text" class="form-control" v-model="ScolarshipLevel">
+            <div class="form-group col-md-4">
+              <label> Nivel de escolaridad: </label>
+              <input type="text" class="form-control" v-model="ScolarshipLevel">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-
-
-    <div class="d-flex justify-content-start my-12" style="width:100%;">
-      <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-        <img @click="guardaCapitalHumano" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+      <!-- Save Content -->
+      <div class="d-flex justify-content-start my-12" style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+          <img @click="guardaCapitalHumano" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+        </div>
+        <div class="col-md-10 col-xs-9 mx-3">
+          <label>
+            <strong>Nota: </strong>
+            Para poder guardar los cambios en los campos anteriores del capital humano es necesario seleccionar el
+            siguiente botón. <p><strong>Solo se guardara el capital humano actual</strong></p>
+          </label>
+        </div>
       </div>
-      <div class="col-md-10 col-xs-9 mx-3">
-        <label>
-          <strong>Nota: </strong>
-          Para poder guardar los cambios en los campos anteriores del capital humano es necesario seleccionar el
-          siguiente botón. <p><strong>Solo se guardara el capital humano actual</strong></p>
-        </label>
-      </div>
-    </div>
-
-
-    <hr class="d-block" :style="ColorStrip" />
-
+    </b-card-body>
   </details>
 </template>
 
@@ -101,6 +99,19 @@ export default {
   },
 
   computed: {
+    styleBtnAccordionSection() {
+      var color = "rgba(0,96,175,255)";
+     
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        width: '100%!important',
+        display: 'flex'
+      }
+    },
+
     CourseName: {
       get() {
         return this.course_name;

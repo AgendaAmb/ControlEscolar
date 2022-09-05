@@ -1,15 +1,15 @@
 <template>
 
   <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="d-flex align-items-center justify-content-center my-2" style="width:100%;">
+    <div class="row d-flex align-items-center my-2" style="width:100%;">
 
-      <div class="col-md-1 col-xs-1 text-center">
-        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+      <div class="col-1 col-md-1 col-xs-1 text-center">
+        <b-form-checkbox size="lg" style="transform:scale(1.25)" v-model="StatusCheckBox"></b-form-checkbox>
       </div>
       <!-- Nombre y notas -->
-      <div class="form-group col-md-10 col-xs-9 my-auto ">
+      <div class="form-group col-10 col-md-10 col-xs-9">
         <h5 class="mt-2 d-block">
-          <strong> {{  name  }} </strong>
+          <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
           </template>
@@ -43,12 +43,12 @@
         </p>
 
         <p class="my-2 d-block">
-          <strong> Etiqueta: </strong> {{  label  }}
+          <strong> Etiqueta: </strong> {{ label }}
         </p>
-        <p class="my-2 d-block"><strong> Ejemplo: </strong> {{  example  }}</p>
+        <p class="my-2 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div class="form-group col-md-1 col-xs-2 align-items-center mx-2 ">
+      <div class="form-group col-1 col-md-1 col-xs-2 align-items-center">
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
@@ -59,7 +59,7 @@
           </label>
         </div>
 
-        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center"
           style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
@@ -71,19 +71,21 @@
       </div>
     </div>
 
-    <div v-if="isEXANNI() === true" class="form-group col-md-10 col-xs-9 my-auto">
-      <div class="d-flex">
-        <div class="col-xl-4 col-md-6 col-xs-6">
-          <label> Puntaje obtenido</label>
-          <input v-model.number="ExanniScore" type="number" class="form-control" />
+    <div class="d-flex align-items-center justify-content-start my-2" style="width:100%;">
+      <div v-if="isEXANNI() === true" class="form-group col-12">
+        <div class="d-flex align-items-center justify-content-start my-2">
+          <div class="col-xl-4 col-md-6 col-xs-6">
+            <label> Puntaje obtenido</label>
+            <input v-model.number="ExanniScore" type="number" class="form-control" />
+          </div>
+          <div class="col-xl-4 col-md-6 col-xs-6">
+            <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn">
+              <p class="h4">Guardar Puntaje</p>
+            </b-button>
+          </div>
         </div>
-        <div class="col-xl-4 col-md-6 col-xs-6">
-          <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn" >
-            <p class="h4">Guardar Puntaje</p>
-          </b-button>
-        </div>
+
       </div>
-    
     </div>
   </div>
 
@@ -175,7 +177,7 @@ export default {
         color: 'rgb(244, 244, 244)',
         border: 'none',
         alignItems: 'center',
-        height: '50px',
+        height: '100%',
       }
     },
 
@@ -249,11 +251,11 @@ export default {
           },
         })
         .then((response) => {
-          console.log('hola' + response.data);
+          // console.log('hola' + response.data);
           return response.data;
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           return null;
         });
     },
@@ -422,7 +424,7 @@ export default {
       }
 
       // return the answer accordin to academic program and name of the required document
-      console.log('res: ' + res + ' name: ' + this.name);
+      // console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
 

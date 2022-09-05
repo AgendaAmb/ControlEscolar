@@ -8,8 +8,8 @@
         <select v-model="AcademicProgramSelect" class="form-control">
           <option :value="null" selected>Escoge una opción</option>
           <option v-for="(academicProgram, index) in academic_programs" :key="index" :value="academicProgram.name">
-            <p >
-              {{ academicProgram.name }}
+            <p>
+              {{  academicProgram.name  }}
             </p>
           </option>
         </select>
@@ -22,8 +22,8 @@
           <option :value="null" selected>Escoge una opción</option>
           <option v-for="(announcement, index) in announcementsForAcademicProgram" :key="index"
             :value="announcement.id">
-            <p >
-              {{ splitDate(announcement.from) + " - " + splitDate(announcement.to) }}
+            <p>
+              {{  splitDate(announcement.from) + " - " + splitDate(announcement.to)  }}
             </p>
           </option>
         </select>
@@ -37,8 +37,6 @@
       </div>
     </div>
 
-    <div class="row align-items-center" :class="{ invisible: !dataNotEmpty() }">
-    </div>
   </form>
 </template>
 
@@ -104,15 +102,8 @@ export default {
   },
 
   methods: {
-    dataNotEmpty() {
-            let res = false;
-            if (this.data.length > 0) {
-                res = true;
-            }
+    
 
-            return res;
-        },
-        
     mandarCorreos() {
       console.log(this.announcement_selected);
       axios

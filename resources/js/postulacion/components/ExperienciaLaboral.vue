@@ -1,112 +1,113 @@
 <template>
 
   <details>
-    <summary class="d-flex align-items-center justify-content-between my-1">
-      <div class="col-lg-9 col-md-7 col-ms-6">
-        <h4 class="font-weight-bold">Experiencia Laboral {{ index }}</h4>
-      </div>
-
-      <div class="col-lg-3 col-md-5 col-sm-6">
-        <b-button @click="eliminaExperienciaLaboral" pill class="d-flex justify-content-start align-items-center"
-          variant="danger">
-          <b-icon icon="trash-fill" class="mx-2" font-scale="3"></b-icon>
-          <p class="h4 my-2">Eliminar</p>
-        </b-button>
-      </div>
+    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
+      <div class="col-lg-8 col-md-6 col-xs-12">
+          <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+          <span class="h5 font-weight-bold" style="width:auto!important;"> Experiencia Laboral {{ index }}</span>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-12">
+          <b-button @click="eliminaExperienciaLaboral" pill class="d-flex justify-content-start align-items-center"
+            style="height:45px!important" variant="danger">
+            <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
+            <p class="h5 my-2">Eliminar</p>
+          </b-button>
+        </div>
     </summary>
-
-    <div class="d-flex justify-content-start align-items-center my-2" style="width:100%;">
-      <div class="col-md-1 col-sm-1 text-center">
-        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
-      </div>
-
-      <div class="col-11">
-        <div class="row my-2">
-          <div class="form-group col-md-6">
-            <label> Institución / Empresa: </label>
-            <input v-model="Institution" type="text" :class="classObjectFor('institution')">
-            <div v-if="estaEnError('institution')" class="invalid-feedback">{{ errores.institution }}</div>
-          </div>
-          <div class="form-group col-md-6">
-            <label> En este puesto me desempeñé como: </label>
-            <select v-model="WorkingPosition" :class="classObjectFor('working_position')">
-              <option value="" selected>Escoge una opción</option>
-              <option value="Catedrático"> Catedrático </option>
-              <option value="Investigador"> Investigador </option>
-              <option value="Otro"> Otro </option>
-            </select>
-
-            <div v-if="estaEnError('working_position')" class="invalid-feedback">{{ errores.working_position }}</div>
-          </div>
+    <!-- Accordion -->
+    <b-card-body>
+      <!-- Content -->
+      <div class="d-flex justify-content-start align-items-center my-2" style="width:100%;">
+        <div class="col-md-1 col-sm-1 text-center">
+          <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
         </div>
 
-        <div class="row my-2">
-          <div class="col-12">
-            <p class="h5"><strong> Periodo laboral </strong></p>
+        <div class="col-11">
+          <div class="row my-2">
+            <div class="form-group col-md-6">
+              <label> Institución / Empresa: </label>
+              <input v-model="Institution" type="text" :class="classObjectFor('institution')">
+              <div v-if="estaEnError('institution')" class="invalid-feedback">{{ errores.institution }}</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label> En este puesto me desempeñé como: </label>
+              <select v-model="WorkingPosition" :class="classObjectFor('working_position')">
+                <option value="" selected>Escoge una opción</option>
+                <option value="Catedrático"> Catedrático </option>
+                <option value="Investigador"> Investigador </option>
+                <option value="Otro"> Otro </option>
+              </select>
+
+              <div v-if="estaEnError('working_position')" class="invalid-feedback">{{ errores.working_position }}</div>
+            </div>
           </div>
 
+          <div class="row my-2">
+            <div class="col-12">
+              <p class="h5"><strong> Periodo laboral </strong></p>
+            </div>
 
-          <div class="form-group col-md-6">
-            <label> Desde: </label>
-            <input v-model="From" type="date" :class="classObjectFor('from')">
-            <div v-if="estaEnError('from')" class="invalid-feedback">{{ errores.from }}</div>
+
+            <div class="form-group col-md-6">
+              <label> Desde: </label>
+              <input v-model="From" type="date" :class="classObjectFor('from')">
+              <div v-if="estaEnError('from')" class="invalid-feedback">{{ errores.from }}</div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label> Hasta: </label>
+              <input v-model="To" type="date" :class="classObjectFor('to')">
+              <div v-if="estaEnError('to')" class="invalid-feedback">{{ errores.to }}</div>
+            </div>
           </div>
 
-          <div class="form-group col-md-6">
-            <label> Hasta: </label>
-            <input v-model="To" type="date" :class="classObjectFor('to')">
-            <div v-if="estaEnError('to')" class="invalid-feedback">{{ errores.to }}</div>
+          <div class="row my-2">
+            <div class="form-group col-md-6">
+              <label> Área de conocimiento: </label>
+              <input v-model="KnowledgeArea" type="text" :class="classObjectFor('knowledge_area')">
+
+              <div v-if="estaEnError('knowledge_area')" class="invalid-feedback">{{ errores.knowledge_area }}</div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label> Campo: </label>
+              <input v-model="Field" type="text" :class="classObjectFor('field')">
+
+              <div v-if="estaEnError('field')" class="invalid-feedback">{{ errores.field }}</div>
+            </div>
           </div>
-        </div>
 
-        <div class="row my-2">
-          <div class="form-group col-md-6">
-            <label> Área de conocimiento: </label>
-            <input v-model="KnowledgeArea" type="text" :class="classObjectFor('knowledge_area')">
-
-            <div v-if="estaEnError('knowledge_area')" class="invalid-feedback">{{ errores.knowledge_area }}</div>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label> Campo: </label>
-            <input v-model="Field" type="text" :class="classObjectFor('field')">
-
-            <div v-if="estaEnError('field')" class="invalid-feedback">{{ errores.field }}</div>
-          </div>
-        </div>
-
-        <div class="row my-2">
-          <div class="form-group col-12">
-            <h5><strong> Descripción del puesto: </strong></h5>
-            <textarea rows="5" v-model="WorkingPositionDescription"
-              :class="classObjectFor('working_position_description')"></textarea>
-            <div v-if="estaEnError('working_position_description')" class="invalid-feedback">
-              {{ errores.working_position_description }}</div>
-          </div>
-          <div class="form-group col-12">
-            <h5><strong> Logros: </strong></h5>
-            <textarea rows="5" v-model="Achievements" :class="classObjectFor('achievements')"></textarea>
-            <div v-if="estaEnError('achievements')" class="invalid-feedback">{{ errores.achievements }}</div>
+          <div class="row my-2">
+            <div class="form-group col-12">
+              <h5><strong> Descripción del puesto: </strong></h5>
+              <textarea rows="5" v-model="WorkingPositionDescription"
+                :class="classObjectFor('working_position_description')"></textarea>
+              <div v-if="estaEnError('working_position_description')" class="invalid-feedback">
+                {{ errores.working_position_description }}</div>
+            </div>
+            <div class="form-group col-12">
+              <h5><strong> Logros: </strong></h5>
+              <textarea rows="5" v-model="Achievements" :class="classObjectFor('achievements')"></textarea>
+              <div v-if="estaEnError('achievements')" class="invalid-feedback">{{ errores.achievements }}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="d-flex justify-content-start my-2" style="width:100%;">
-      <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-        <img @click="guardaExperienciaLaboral" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+      <!-- Save Content -->
+      <div class="d-flex justify-content-start my-2" style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+          <img @click="guardaExperienciaLaboral" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+        </div>
+        <div class="col-md-10 col-xs-9 mx-3">
+          <label>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente botón. <p>
+              <strong>Solo se guardara la experiecia laboral actual</strong>
+            </p>
+          </label>
+        </div>
       </div>
-      <div class="col-md-10 col-xs-9 mx-3">
-        <label>
-          <strong>Nota: </strong>
-          Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente botón. <p>
-            <strong>Solo se guardara la experiecia laboral actual</strong>
-          </p>
-        </label>
-      </div>
-    </div>
-
-    <hr class="d-block" :style="ColorStrip" />
+    </b-card-body>
   </details>
 </template>
 
@@ -147,6 +148,19 @@ export default {
   },
 
   computed: {
+    styleBtnAccordionSection() {
+      var color = "rgba(0,96,175,255)";
+     
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        width: '100%!important',
+        display: 'flex'
+      }
+    },
+    
     StatusCheckBox: {
       get() {
         return this.status_checkBox;

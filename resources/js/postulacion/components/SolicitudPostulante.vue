@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-start align-items-center">
+  <div class="row justify-content-start align-items-center mx-4">
 
     <!-- Info postulante -->
     <div class="col-12">
