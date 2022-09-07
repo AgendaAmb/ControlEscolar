@@ -38,30 +38,14 @@ use Illuminate\Support\Facades\DB;
 ##COMENTAR ESTE GRUPO DE RUTAS
 
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
-Route::redirect('controlescolar','pre-registro');//esto soluciona el error 403 (no se porque exactamente XD) 
+Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
-
-
-
-
-    // Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
-        ->middleware('auth');
+            ->middleware('auth');
     });
-
-    # Ruta de prueba segunda conexion a la base de datos
-    // Route::get('/db2', function () {
-    //     $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
-    //     return $miPortal_user[0]->id;
-    // });
-
-    # Ruta de prueba segunda conexion a la base de datos
-    // Route::get('/db3', function () {
-    //     $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => 291395]);
-    //     return $miPortal_user[0]->name;
-    // });
 
     # Rutas de autenticacion.
     Route::name('authenticate.')->group(function () {
@@ -74,7 +58,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
             ->middleware('guest');
 
         // Route::post('/', [LoginController::class, 'LoginPostPreRegister'])->name('login.post.preRegister');
-        Route::get('/auth/{id}',[LoginController::class, 'userFromPortal']);
+        Route::get('/auth/{id}', [LoginController::class, 'userFromPortal']);
 
         Route::post('/register', [LoginController::class, 'register'])->name('register')
             ->middleware('guest');
@@ -108,11 +92,11 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
     Route::prefix('nuevoExpediente')->name('nuevoExpediente.')->middleware(['auth'])->group(function () {
 
-        Route::get('/showCreateNewArchive', [ArchiveController::class,'showCreateNewArchive'])->name('showCreateNewArchive'); //Vista de expediente para alumno, rellenar campos
-        Route::post('/createArchive', [ArchiveController::class,'createArchive'])->name('createArchive'); //Vista de expediente para alumno, rellenar campos
+        Route::get('/showCreateNewArchive', [ArchiveController::class, 'showCreateNewArchive'])->name('showCreateNewArchive'); //Vista de expediente para alumno, rellenar campos
+        Route::post('/createArchive', [ArchiveController::class, 'createArchive'])->name('createArchive'); //Vista de expediente para alumno, rellenar campos
     });
 
-    Route::get('/showRegisterArchives', [ArchiveController::class,'showRegisterArchives'])->name('showRegisterArchives'); //Vista de expediente para alumno, rellenar campos
+    Route::get('/showRegisterArchives', [ArchiveController::class, 'showRegisterArchives'])->name('showRegisterArchives'); //Vista de expediente para alumno, rellenar campos
 
     # Rutas de las solicitudes académicas.
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
@@ -127,7 +111,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
-        
+
         Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
         Route::post('/sentEmailToUpdateDocuments', [ArchiveController::class, 'sentEmailToUpdateDocuments'])->name('sentEmailToUpdateDocuments');
@@ -191,9 +175,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Calendario
         Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
-        Route::get('calendario1',[InterviewController::class, 'calendario1'])->name('calendario1');
+        Route::get('calendario1', [InterviewController::class, 'calendario1'])->name('calendario1');
 
-        Route::get('calendario2',[InterviewController::class, 'calendario2'])->name('calendario2');
+        Route::get('calendario2', [InterviewController::class, 'calendario2'])->name('calendario2');
 
         // Route::get('calendario3', [InterviewController::class, 'calendario3'])->name('calendario3');
 
@@ -220,7 +204,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
             Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|coordinador|control_escolar'])->name('show_average');
             Route::get('/promedio/ca/{archive_id}', [EvaluationRubricController::class, 'show_average_ca'])->middleware(['role:admin|comite_academico'])->name('show_average_ca');
-            
+
             // Export rubric to excel
             Route::get('/promedio/{archive_id}/export', [EvaluationRubricController::class, 'export_rubric'])->middleware(['role:admin|comite_academico|coordinador|control_escolar'])->name('export_rubric');
 
@@ -250,14 +234,14 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('newWorker', [AdminController::class, 'newWorker'])
             ->name('newWorker');
 
-            Route::post('updateWorker', [AdminController::class, 'updateWorker'])
+        Route::post('updateWorker', [AdminController::class, 'updateWorker'])
             ->name('updateWorker');
 
-            Route::post('deleteWorker', [AdminController::class, 'deleteWorker'])
+        Route::post('deleteWorker', [AdminController::class, 'deleteWorker'])
             ->name('deleteWorker');
     });
 
-    Route::prefix('updateDocuments')->name('updateDocuments.')->group(function(){
+    Route::prefix('updateDocuments')->name('updateDocuments.')->group(function () {
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
         Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
         Route::post('/updateArchiveEntranceDoca ument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
@@ -269,17 +253,16 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
     });
 
-    Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function(){
+    Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function () {
         Route::get('/show/{archive_id}', [InterviewController::class, 'documentsForInterviewShow'])->name('show');
     });
-    
+
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
     Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
         # El que recive correo recibe la vista
         Route::get('/show/{token}', [ExternalRecommendationLetter::class, 'recommendationLetter'])->name('show');
         # Al guardar se hace la peticion para almacenar datos
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
-        Route::get('/pruebaPDF',[ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
-
+        Route::get('/pruebaPDF', [ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
 // });
