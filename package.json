@@ -34,6 +34,7 @@
         "mdb-vue-ui-kit": "^2.0.0",
         "moment": "^2.29.4",
         "v-calendar": "^2.3.4",
+        "v-google-translate": "^1.0.0",
         "vue-event-calendar": "^1.5.2",
         "vue-select": "^3.13.0",
         "vue-sweetalert2": "^5.0.2",

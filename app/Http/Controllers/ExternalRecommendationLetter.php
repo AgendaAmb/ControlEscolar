@@ -79,7 +79,7 @@ class ExternalRecommendationLetter extends Controller
              //Email enviado
              Mail::to($request->email)->send(new SendRecommendationLetter($request->email, $request->appliant, $request->academic_program, $my_token, $url_LogoAA, $url_ContactoAA));
          } catch (\Exception $e) {
-             return new JsonResponse('Error: ' . $e->getMessage(), 200);
+             return new JsonResponse(['message' => $e->getMessage()] , 200);
          }
  
  

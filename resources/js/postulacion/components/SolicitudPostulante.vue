@@ -1,6 +1,14 @@
 <template>
-  <div class="row justify-content-start align-items-center mx-4">
-
+  <div class="row justify-content-start align-items-center mx-1">
+    <!-- Google translate element -->
+    <div class="col-12 mt-3">
+      <b-form-group label-cols="1" label-cols-sm="1" label-size="lg" label="Idioma" label-class="p d-flex my-auto align-items-center text-center justify-content-center"
+      label-for="input-sm" label-align-sm="right">
+      <v-google-translate :defaultLanguageCode="defaultLanguageCode" :defaultPageLanguageCode="defaultPageLanguageCode"
+        :fetchBrowserLanguage="false" @select="languageSelectedHandler" id="input-sm" />
+    </b-form-group>
+    </div>
+    
     <!-- Info postulante -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
@@ -44,7 +52,8 @@
             </grado-academico>
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaHistorialAcademico" variant="danger" v-b-popover.hover="'Agregar un nuevo Grado Academico al historial'" title="Inserta otro registro"
+                <b-button pill class="d-flex" @click="agregaHistorialAcademico" variant="danger"
+                  v-b-popover.hover="'Agregar un nuevo Grado Academico al historial'" title="Inserta otro registro"
                   :style="styleBtnAccordionSection">
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
@@ -104,7 +113,8 @@
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaLenguaExtranjera" :style="styleBtnAccordionSection" v-b-popover.hover="'Agregar una nueva lengua al registro'" title="Inserta otro registro">
+                <b-button pill class="d-flex" @click="agregaLenguaExtranjera" :style="styleBtnAccordionSection"
+                  v-b-popover.hover="'Agregar una nueva lengua al registro'" title="Inserta otro registro">
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
                 </b-button>
@@ -116,7 +126,6 @@
       </b-card>
       <hr class="d-block" :style="ColorStrip" />
     </div>
-
     <!-- Experiencia laboral -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
@@ -142,7 +151,8 @@
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaExperienciaLaboral" :style="styleBtnAccordionSection" v-b-popover.hover="'Agregar nueva experiencia laboral al registro'" title="Inserta otro registro">
+                <b-button pill class="d-flex" @click="agregaExperienciaLaboral" :style="styleBtnAccordionSection"
+                  v-b-popover.hover="'Agregar nueva experiencia laboral al registro'" title="Inserta otro registro">
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
                 </b-button>
@@ -220,7 +230,6 @@
       <hr class="d-block" :style="ColorStrip" />
     </div>
 
-
     <!-- Cartas de recomendacion -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
@@ -240,17 +249,15 @@
       <hr class="d-block" :style="ColorStrip" />
     </div>
 
-    <!-- <div class="d-flex justify-content-start align-items-center mb-4">
-      <div class="col-2"></div>
-      <div class="col-8">
-        <b-button style="width:100%; height:75px;" :style="ColorStrip" v-b-modal.ActualizaExpediente pill
-          variant="primary">
+    <div class="d-flex justify-content-start align-items-center mb-4">
+      <div class="col-lg-12">
+        <b-button style="width:100%; height:75px;" v-b-modal.ActualizaExpediente pill variant="primary">
           <p class="h3"> Finalizar revisión </p>
         </b-button>
       </div>
-    </div> -->
+    </div>
 
-    <div class="col-12 align-items-center my-4 ">
+    <!-- <div class="col-12 align-items-center my-4 ">
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
           <b-button v-b-popover.hover="'El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado'"
@@ -281,12 +288,11 @@
           </b-button>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-
 import Postulante from "./Postulante.vue";
 import GradoAcademico from "./GradoAcademico.vue";
 import CapitalHumano from "./CapitalHumano.vue";
@@ -384,6 +390,8 @@ export default {
       EnglishExams: [],
       EnglishExamTypes: [],
       images_btn: {},
+      defaultLanguageCode: "es",
+      defaultPageLanguageCode: "es-MX"
     };
   },
 
@@ -488,6 +496,10 @@ export default {
 
 
   methods: {
+    languageSelectedHandler(info) {
+      console.log(info);
+    },
+    
     getUniversities(state) {
       let universities = [];
       for (let i = 0; i < this.Countries.length; i++) {

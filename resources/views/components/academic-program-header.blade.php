@@ -8,7 +8,7 @@
         <nav class="nav nav-options">
 
             {{-- Inicio disponible para todos --}}
-            <a class="nav-link" href="{{ route('authenticate.home') }}"> Inicio </a>
+            <a class="nav-link" href="{{ route('authenticate.home') }}">Inicio</a>
 
             {{-- Muestra expediente de postulante para subir cambios --}}
 
@@ -19,7 +19,7 @@
                 {{-- Entrevistas organizar --}}
                 <div class="nav-item dropdown">
                     <a id="Expedientes" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" href="#"> Mis expedientes </a>
+                        aria-haspopup="true" aria-expanded="false" href="#">Mis expedientes</a>
                     <div class="dropdown-menu" aria-labelledby="Expedientes">
                         <a class="dropdown-item" href="{{ route('showRegisterArchives') }}"> Ver mis expedientes </a>
                         <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a>
@@ -65,7 +65,7 @@
                 <a class="nav-link" href="{{ route('admin.index') }}"> Administración </a>
             @endif
 
-            <a href="{{ route('logout') }}" class="nav-link">logout</a>
+            <a href="{{ route('logout') }}" class="nav-link">Cerrar sesión</a>
 
             {{-- Cuadro temporal solo para mostrar la informacion del usuario --}}
             {{-- <div>

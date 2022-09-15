@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="ActualizaExpediente" size="xl" title="Revisión">
+  <b-modal id="ActualizaExpedientePrueba" size="xl" title="Revisión">
     <div class="d-flex justify-content-start align-items-center">
       <p class="h3">Elige segun corresponda</p>
     </div>
@@ -150,7 +150,7 @@
 
 <script>
 export default {
-  name: "actualizar-expediente",
+  name: "actualizar-expediente-prueba-nuevo",
 
   props: {
     // Documents to update
