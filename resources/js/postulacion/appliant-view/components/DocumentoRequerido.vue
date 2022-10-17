@@ -368,7 +368,7 @@ export default {
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
-          case "5B.- Título de Maestria o acta de examen":
+          case  "5B.- Título de maestria o acta de examen":
             res = false;
             break;
           case "6B.- Certificado de materias de la maestría":
