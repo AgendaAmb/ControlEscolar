@@ -8,7 +8,14 @@
  window.Event = new Vue();
  import CandidateData from './components/CandidateData';
  import { GridPlugin } from '@syncfusion/ej2-vue-grids';
+ import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue';
+ import { Buffer } from 'buffer'
+ globalThis.Buffer = Buffer
+
+
  Vue.use(GridPlugin);
+ Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
  /**
   * The following block of code may be used to automatically register your
   * Vue components. It will recursively scan this directory for the Vue
@@ -22,6 +29,7 @@
  
      data: {
        user: user,
+       user_roles:user_roles,
      },
  
      components: {

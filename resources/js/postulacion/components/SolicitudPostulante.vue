@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-content-start align-items-center mx-1">
     <!-- Google translate element -->
-    <div class="col-12 mt-3">
+    <div v-if="isENREM() === true" class="col-12 mt-3" >
       <b-form-group label-cols="1" label-cols-sm="1" label-size="lg" label="Idioma" label-class="p d-flex my-auto align-items-center text-center justify-content-center"
       label-for="input-sm" label-align-sm="right">
       <v-google-translate :defaultLanguageCode="defaultLanguageCode" :defaultPageLanguageCode="defaultPageLanguageCode"
@@ -249,15 +249,15 @@
       <hr class="d-block" :style="ColorStrip" />
     </div>
 
-    <div class="d-flex justify-content-start align-items-center mb-4">
+    <!-- <div class="d-flex justify-content-start align-items-center mb-4">
       <div class="col-lg-12">
         <b-button style="width:100%; height:75px;" v-b-modal.ActualizaExpediente pill variant="primary">
           <p class="h3"> Finalizar revisión </p>
         </b-button>
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div class="col-12 align-items-center my-4 ">
+    <div class="col-12 align-items-center my-4 ">
       <div class="row my-2 mx-1 justify-content-center">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
           <b-button v-b-popover.hover="'El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado'"
@@ -288,7 +288,7 @@
           </b-button>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -496,6 +496,14 @@ export default {
 
 
   methods: {
+    isENREM(){
+      let res = false;
+      if(this.academic_program.alias === 'enrem'){
+        res = true;
+      }
+      return res;
+    },
+
     languageSelectedHandler(info) {
       console.log(info);
     },

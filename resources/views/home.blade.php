@@ -1,5 +1,6 @@
 <script>
     const user = @json($user);
+    const user_roles = @json($user_roles);
     </script>
 
 @extends('layouts.app')
@@ -8,6 +9,7 @@
 <div class="container-fluid">
     <candidate-data
     :user = "user"
+    :user_roles = "user_roles"
     >
     </candidate-data>
 </div>

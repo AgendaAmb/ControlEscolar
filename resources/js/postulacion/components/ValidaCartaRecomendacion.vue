@@ -6,14 +6,14 @@
       </div>
       <!-- Nombre y notas -->
       <div class="col-10">
-        <b-form-group label-size="xl" label="Correo"
+        <b-form-group label-size="xl" :label="'Correo ' + index"
           label-for="input-email">
           <b-form-input id="input-email" v-model="myEmail" :readonly="checkUpload() === 1"></b-form-input>
         </b-form-group>
       </div>
     </div>
 
-    <div class="row mt-1">
+    <div class="row mt-0 mb-1">
       <div class="col-12">
 
         <!-- Se corrobora el estado del archivo (cambiar a numerico )-->

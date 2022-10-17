@@ -97,7 +97,8 @@ class ArchiveController extends Controller
                 //ArchiveResource create $user_data_collect[0];
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
-                $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                $archive->appliant->setAttribute('name', $user_data['name'] );
 
                 if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
                     unset($archives[$k]);
@@ -134,7 +135,8 @@ class ArchiveController extends Controller
                 //ArchiveResource create $user_data_collect[0];
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
-                $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
+                $archive->appliant->setAttribute('name', $user_data['name'] );
 
                 //Eliminar mi archivo para produccion
                 //Descomentar en local

@@ -22,9 +22,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd( $request->session());
+        // dd($request->session()->get('user')->roles);
         return view('home')
-        ->with('user', $request->session()->get('user_data'));
+        ->with('user', $request->session()->get('user_data'))
+        ->with('user_roles',$request->session()->get('user')->roles);
     }
 
     public function pruebaexcel()

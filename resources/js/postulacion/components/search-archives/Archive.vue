@@ -115,6 +115,7 @@ export default {
   },
 
   created() {
+
     switch (this.status) {
       case 1:
         this.name_status = "Incompleto";

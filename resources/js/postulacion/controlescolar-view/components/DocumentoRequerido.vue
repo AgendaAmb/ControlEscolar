@@ -249,7 +249,8 @@ export default {
     requiredForAcademicProgram() {
       let res = true;
 
-      if (this.alias_academic_program === "maestria") {
+      // Documents for Maestria en ciencias ambientales and imarec
+      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
         switch (this.name) {
           case "4.- Primera página del pasaporte":
             res = false;
@@ -270,47 +271,6 @@ export default {
             res = false;
             break;
           case "5C.- Carta de pasantía":
-            res = false;
-            break;
-          case "9.- Application":
-            res = false;
-            break;
-          case "9A.- Application DAAD":
-            res = false;
-            break;
-          case "14.- Propuesta de proyecto avalada por el profesor postulante":
-            res = false;
-            break;
-          case "16.- Proof Experience Document":
-            res = false;
-            break;
-          case "17.- ConfirmationEMP":
-            res = false;
-            break;
-          case "18.- FormatoEuropass":
-            res = false;
-            break;
-        }
-      }
-      // Documents for imarec
-      else if (this.alias_academic_program === "imarec") {
-        switch (this.name) {
-          case "4.- Primera página del pasaporte":
-            res = false;
-            break;
-          case "5.- Título de preparatoria":
-            res = false;
-            break;
-          case "5B.- Título de Maestria o acta de examen":
-            res = false;
-            break;
-          case "6B.- Certificado de materias de la maestría":
-            res = false;
-            break;
-          case "7B.- Constancia de promedio de la maestría.":
-            res = false;
-            break;
-          case "8B.- Cédula de la maestría":
             res = false;
             break;
           case "9.- Application":
@@ -384,6 +344,18 @@ export default {
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
           case "5C.- Carta de pasantía":
             res = false;
             break;
@@ -397,7 +369,7 @@ export default {
       }
 
       // return the answer accordin to academic program and name of the required document
-      console.log('res: ' + res + ' name: ' + this.name);
+      // console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
 

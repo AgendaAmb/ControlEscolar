@@ -494,6 +494,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -502,7 +503,8 @@ __webpack_require__.r(__webpack_exports__);
       "default": -1
     },
     images_btn: {
-      type: Object
+      type: Object,
+      "default": {}
     },
     viewer_id: {
       type: Number,
@@ -529,10 +531,6 @@ __webpack_require__.r(__webpack_exports__);
     location: {
       type: String
     },
-    letters_Commitment: {
-      type: Array,
-      "default": null
-    },
     alias_academic_program: {
       type: String,
       "default": null
@@ -544,6 +542,10 @@ __webpack_require__.r(__webpack_exports__);
     exanni_score: {
       type: Number,
       "default": -1
+    },
+    status_checkBox: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -556,6 +558,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    styleBtn: function styleBtn() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        height: '100%'
+      };
+    },
+    StatusCheckBox: {
+      get: function get() {
+        return this.status_checkBox;
+      },
+      set: function set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      }
+    },
     Archivo: {
       get: function get() {
         return this.archivo;
@@ -590,18 +609,31 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {// console.log(this.alias_academic_program);
-  },
+  // created() {
+  //   // console.log(this.language);
+  //   axios
+  //     .get("/controlescolar/solicitud/getAllButtonImage")
+  //     .then((response) => {
+  //       // console.log('recibiendo imagenes' + response.data.ver);
+  //       this.images = response.data;
+  //       // console.log('imagenes buttons: ' + this.images.ver);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // },
   methods: {
     bkgCargarArchivo: function bkgCargarArchivo(type) {
+      // console.log(this.language);
       axios.get("/controlescolar/solicitud/getButtonImage", {
         params: {
           type: type
         }
       }).then(function (response) {
+        // console.log('hola' + response.data);
         return response.data;
       })["catch"](function (error) {
-        console.log(error);
+        // console.log(error);
         return null;
       });
     },
@@ -614,9 +646,9 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
-      var res = true;
+      var res = true; // Documents for Maestria en ciencias ambientales and imarec
 
-      if (this.alias_academic_program === "maestria") {
+      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
         switch (this.name) {
           case "4.- Primera página del pasaporte":
             res = false;
@@ -643,57 +675,6 @@ __webpack_require__.r(__webpack_exports__);
             break;
 
           case "5C.- Carta de pasantía":
-            res = false;
-            break;
-
-          case "9.- Application":
-            res = false;
-            break;
-
-          case "9A.- Application DAAD":
-            res = false;
-            break;
-
-          case "14.- Propuesta de proyecto avalada por el profesor postulante":
-            res = false;
-            break;
-
-          case "16.- Proof Experience Document":
-            res = false;
-            break;
-
-          case "17.- ConfirmationEMP":
-            res = false;
-            break;
-
-          case "18.- FormatoEuropass":
-            res = false;
-            break;
-        }
-      } // Documents for imarec
-      else if (this.alias_academic_program === "imarec") {
-        switch (this.name) {
-          case "4.- Primera página del pasaporte":
-            res = false;
-            break;
-
-          case "5.- Título de preparatoria":
-            res = false;
-            break;
-
-          case "5B.- Título de Maestria o acta de examen":
-            res = false;
-            break;
-
-          case "6B.- Certificado de materias de la maestría":
-            res = false;
-            break;
-
-          case "7B.- Constancia de promedio de la maestría.":
-            res = false;
-            break;
-
-          case "8B.- Cédula de la maestría":
             res = false;
             break;
 
@@ -778,6 +759,22 @@ __webpack_require__.r(__webpack_exports__);
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
+
           case "5C.- Carta de pasantía":
             res = false;
             break;
@@ -791,9 +788,9 @@ __webpack_require__.r(__webpack_exports__);
             break;
         }
       } // return the answer accordin to academic program and name of the required document
+      // console.log('res: ' + res + ' name: ' + this.name);
 
 
-      console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
     isLetterCommitment: function isLetterCommitment() {
@@ -807,6 +804,7 @@ __webpack_require__.r(__webpack_exports__);
     isIntentionLetter: function isIntentionLetter() {
       //If return 0 is intention letter of professor
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
+        // console.log(this.name);
         return true;
       }
 
@@ -4977,259 +4975,260 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _vm.requiredForAcademicProgram() === true
     ? _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "row my-3" }, [
-          _c("div", { staticClass: "form-group col-9 my-auto" }, [
+        _c(
+          "div",
+          {
+            staticClass: "row d-flex align-items-center my-2",
+            staticStyle: { width: "100%" },
+          },
+          [
             _c(
-              "h5",
-              { staticClass: "mt-4 d-block" },
+              "div",
+              { staticClass: "form-group col-11 col-md-11 col-xs-10" },
               [
-                _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
+                _c(
+                  "h5",
+                  { staticClass: "mt-2 d-block" },
+                  [
+                    _c("strong", [_vm._v(" " + _vm._s(_vm.name) + " ")]),
+                    _vm._v(" "),
+                    _vm.checkUpload() === true
+                      ? [
+                          _c("i", [_vm._v("Estado:")]),
+                          _vm._v(" "),
+                          _c("i", { staticClass: "text-success" }, [
+                            _vm._v("Subido"),
+                          ]),
+                        ]
+                      : [
+                          _c("i", [_vm._v("Estado:")]),
+                          _vm._v(" "),
+                          _c("i", { staticClass: "text-danger" }, [
+                            _vm._v("Sin subir"),
+                          ]),
+                        ],
+                  ],
+                  2
+                ),
                 _vm._v(" "),
-                _vm.checkUpload() === true
-                  ? [
-                      _c("i", [_vm._v("Estado:")]),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "text-success" }, [
-                        _vm._v("Subido"),
+                _vm.isLetterCommitment() === true
+                  ? _c("p", { staticClass: "my-2 d-block" }, [
+                      _c("strong", [
+                        _vm._v(
+                          "\n          Observaciones: Descargar carta\n          "
+                        ),
+                        _vm._v(" "),
+                        _vm.alias_academic_program === "maestria" ||
+                        _vm.alias_academic_program === "enrem"
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
+                                  target: "_blank",
+                                },
+                              },
+                              [_vm._v("dando clic aquí")]
+                            )
+                          : _vm.alias_academic_program === "imarec"
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
+                                  target: "_blank",
+                                },
+                              },
+                              [_vm._v("dando clic\n            aquí")]
+                            )
+                          : _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
+                                  target: "_blank",
+                                },
+                              },
+                              [_vm._v("dando clic\n            aquí")]
+                            ),
                       ]),
-                    ]
-                  : [
-                      _c("i", [_vm._v("Estado:")]),
-                      _vm._v(" "),
-                      _c("i", { staticClass: "text-danger" }, [
-                        _vm._v("Sin subir"),
+                    ])
+                  : _vm.notes !== null
+                  ? _c("p", { staticClass: "my-2 d-block" }, [
+                      _c("strong", [
+                        _vm._v(" Observaciones: "),
+                        _c("span", {
+                          domProps: { innerHTML: _vm._s(_vm.notes) },
+                        }),
                       ]),
-                    ],
-              ],
-              2
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("p", { staticClass: "my-2 d-block" }, [
+                  _c("strong", [_vm._v(" Etiqueta: ")]),
+                  _vm._v(" " + _vm._s(_vm.label) + "\n      "),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "my-2 d-block" }, [
+                  _c("strong", [_vm._v(" Ejemplo: ")]),
+                  _vm._v(" " + _vm._s(_vm.example)),
+                ]),
+              ]
             ),
             _vm._v(" "),
-            _vm.isLetterCommitment() === true
-              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-                  _c("strong", [
-                    _vm._v(
-                      "\n          Observaciones: Descargar carta\n          "
-                    ),
-                    _vm._v(" "),
-                    _vm.alias_academic_program === "maestria" ||
-                    _vm.alias_academic_program === "enrem"
-                      ? _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx",
-                              target: "_blank",
-                            },
-                          },
-                          [_vm._v("dando clic aquí")]
-                        )
-                      : _vm.alias_academic_program === "imarec"
-                      ? _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx",
-                              target: "_blank",
-                            },
-                          },
-                          [_vm._v("dando clic\n            aquí")]
-                        )
-                      : _c(
-                          "a",
-                          {
-                            attrs: {
-                              href: "https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx",
-                              target: "_blank",
-                            },
-                          },
-                          [_vm._v("dando clic\n            aquí")]
-                        ),
-                  ]),
-                ])
-              : _vm.notes !== null
-              ? _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-                  _c("strong", [
-                    _vm._v(" Observaciones: "),
-                    _c("span", { domProps: { innerHTML: _vm._s(_vm.notes) } }),
-                  ]),
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
-              _c("strong", [_vm._v(" Etiqueta: ")]),
-              _vm._v(" " + _vm._s(_vm.label) + "\n      "),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "my-0 d-block" }, [
-              _c("strong", [_vm._v(" Ejemplo: ")]),
-              _vm._v(" " + _vm._s(_vm.example)),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group col-3 align-items-center p-2" },
-            [
-              _vm.checkUpload() === true
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "d-flex justify-content-center my-1",
-                      staticStyle: { "max-height": "45px", width: "100%" },
-                    },
-                    [
-                      _c("label", [
-                        _c(
-                          "a",
-                          {
-                            staticStyle: { height: "45px", width: "100%" },
-                            attrs: {
-                              href:
-                                "../../../controlescolar/solicitud/expediente/" +
-                                _vm.location,
-                              target: "_blank",
-                            },
-                          },
-                          [
-                            _c("img", {
-                              staticStyle: {
-                                width: "100%",
-                                "max-height": "45px !important",
-                              },
-                              attrs: { src: _vm.images_btn.ver, alt: "" },
-                            }),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.isIntentionLetter() === false
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "d-flex justify-content-center my-1",
-                      staticStyle: {
-                        "max-height": "45px !important",
-                        width: "100%",
-                      },
-                    },
-                    [
-                      _c("label", [
-                        _c("img", {
-                          staticStyle: { "max-height": "45px !important" },
-                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control d-none",
-                          staticStyle: {
-                            "max-height": "45px !important",
-                            width: "100%",
-                          },
-                          attrs: { type: "file" },
-                          on: { change: _vm.cargaDocumento },
-                        }),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
-            ]
-          ),
-        ]),
-        _vm._v(" "),
-        _vm.isEXANNI() === true
-          ? _c(
+            _c(
               "div",
               {
                 staticClass:
-                  "row my-1 align-items-center justify-content-center",
-                staticStyle: { height: "75px" },
+                  "form-group col-1 col-md-1 col-xs-2 align-items-center",
               },
               [
-                _c(
-                  "div",
-                  { staticClass: "col-2", staticStyle: { height: "100%" } },
-                  [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "d-flex align-items-end" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model.number",
-                            value: _vm.ExanniScore,
-                            expression: "ExanniScore",
-                            modifiers: { number: true },
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.ExanniScore },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.ExanniScore = _vm._n($event.target.value)
-                          },
-                          blur: function ($event) {
-                            return _vm.$forceUpdate()
-                          },
-                        },
-                      }),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "col-2 d-flex align-items-end",
-                    staticStyle: { height: "100%", width: "100%" },
-                  },
-                  [
-                    _c(
-                      "button",
+                _vm.checkUpload() === true
+                  ? _c(
+                      "div",
                       {
-                        staticClass: "btn btn-primary",
-                        staticStyle: { width: "100%" },
-                        on: { click: _vm.actualizaPuntajeExanni },
+                        staticClass: "d-flex justify-content-center my-1",
+                        staticStyle: { "max-height": "45px", width: "100%" },
                       },
-                      [_vm._v("\n        Guarda puntaje\n      ")]
-                    ),
-                  ]
-                ),
+                      [
+                        _c("label", [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: { height: "45px", width: "100%" },
+                              attrs: {
+                                href:
+                                  "../../../controlescolar/solicitud/expediente/" +
+                                  _vm.location,
+                                target: "_blank",
+                              },
+                            },
+                            [
+                              _c("img", {
+                                staticStyle: {
+                                  "max-height": "45px !important",
+                                },
+                                attrs: { src: _vm.images_btn.ver, alt: "" },
+                              }),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _vm._m(1),
+                _vm.isIntentionLetter() === false
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "d-flex justify-content-center",
+                        staticStyle: {
+                          "max-height": "45px !important",
+                          width: "100%",
+                        },
+                      },
+                      [
+                        _c("label", [
+                          _c("img", {
+                            staticStyle: { "max-height": "45px !important" },
+                            attrs: { src: _vm.images_btn.seleccionar, alt: "" },
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control d-none",
+                            staticStyle: {
+                              "max-height": "45px !important",
+                              width: "100%",
+                            },
+                            attrs: { type: "file" },
+                            on: { change: _vm.cargaDocumento },
+                          }),
+                        ]),
+                      ]
+                    )
+                  : _vm._e(),
               ]
-            )
-          : _vm._e(),
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "d-flex align-items-center justify-content-start my-2",
+            staticStyle: { width: "100%" },
+          },
+          [
+            _vm.isEXANNI() === true
+              ? _c("div", { staticClass: "form-group col-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "d-flex align-items-center justify-content-start my-2",
+                    },
+                    [
+                      _c("div", { staticClass: "col-xl-4 col-md-6 col-xs-6" }, [
+                        _c("label", [_vm._v(" Puntaje obtenido")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.ExanniScore,
+                              expression: "ExanniScore",
+                              modifiers: { number: true },
+                            },
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.ExanniScore },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.ExanniScore = _vm._n($event.target.value)
+                            },
+                            blur: function ($event) {
+                              return _vm.$forceUpdate()
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-xl-4 col-md-6 col-xs-6" },
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "d-flex",
+                              style: _vm.styleBtn,
+                              attrs: { pill: "" },
+                              on: { click: _vm.actualizaPuntajeExanni },
+                            },
+                            [
+                              _c("p", { staticClass: "h4" }, [
+                                _vm._v("Guardar Puntaje"),
+                              ]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                    ]
+                  ),
+                ])
+              : _vm._e(),
+          ]
+        ),
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex" }, [
-      _c("label", [_vm._v(" Puntaje obtenido")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-8", staticStyle: { height: "100%", width: "100%" } },
-      [_c("input", { staticClass: "w-100", attrs: { type: "hidden" } })]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

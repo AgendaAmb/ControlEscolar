@@ -175,14 +175,27 @@ export default {
   
   methods: {
     requiredForAcademicProgram() {
-      console.log(this.name + ': '+ this.alias_academic_program);
-
       let res = true;
-      // console.log("id: "+this.id+" nombre: "+this.name);
-     
-      if (this.alias_academic_program === "maestria"  ) {
+
+      // Documents for Maestria en ciencias ambientales and imarec
+      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+          case "8B.- Cédula de la maestría":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -197,45 +210,7 @@ export default {
           case "14.- Propuesta de proyecto avalada por el profesor postulante":
             res = false;
             break;
-            case "16.- Proof Experience Document":
-            res = false;
-            break;
-          case "17.- ConfirmationEMP":
-            res = false;
-            break;
-          case "18.- FormatoEuropass":
-            res = false;
-            break;
-        }
-      }
-      // Documents for imarec
-      else if (this.alias_academic_program === "imarec"  ) {
-        switch (this.name) {
-          case "5.- Título de preparatoria":
-            res = false;
-            break;
-            case "5B.- Título de Maestria o acta de examen":
-            res = false;
-            break;
-             case "6B.- Certificado de materias de la maestría":
-            res = false;
-            break;
-            case "7B.- Constancia de promedio de la maestría.":
-            res = false;
-            break;
-            case "8B.- Cédula de la maestría":
-            res = false;
-            break;
-          case "9.- Application":
-            res = false;
-            break;
-          case "9A.- Application DAAD":
-            res = false;
-            break;
-          case "14.- Propuesta de proyecto avalada por el profesor postulante":
-            res = false;
-            break;
-            case "16.- Proof Experience Document":
+          case "16.- Proof Experience Document":
             res = false;
             break;
           case "17.- ConfirmationEMP":
@@ -247,9 +222,26 @@ export default {
         }
       }
       //Documents for doctorado
-      else if (this.alias_academic_program === "doctorado"  ) {
+      else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
+          case "4.- Primera página del pasaporte":
+            res = false;
+            break;
           case "5.- Título de preparatoria":
+            res = false;
+            break;
+          case "5A.- Título de licenciatura o acta de examen":
+            res = false;
+            break;
+          case "6A.- Certificado de materias de la licenciatura":
+            res = false;
+            break;
+
+          case "7A.- Constancia de promedio de la licenciatura.":
+            res = false;
+            break;
+
+          case "8A.- Cédula de la licenciatura":
             res = false;
             break;
           case "5C.- Carta de pasantía":
@@ -261,8 +253,8 @@ export default {
           case "9A.- Application DAAD":
             res = false;
             break;
-        
-            case "16.- Proof Experience Document":
+
+          case "16.- Proof Experience Document":
             res = false;
             break;
           case "17.- ConfirmationEMP":
@@ -275,11 +267,23 @@ export default {
       }
 
       //Documents for doctorado
-      else if (this.alias_academic_program === "enrem"  ) {
+      else if (this.alias_academic_program === "enrem") {
         switch (this.name) {
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
+          case "5B.- Título de Maestria o acta de examen":
+            res = false;
+            break;
+          case "6B.- Certificado de materias de la maestría":
+            res = false;
+            break;
+          case "7B.- Constancia de promedio de la maestría.":
+            res = false;
+            break;
+          case "8B.- Cédula de la maestría":
+            res = false;
+            break;
           case "5C.- Carta de pasantía":
             res = false;
             break;
@@ -289,16 +293,13 @@ export default {
           case "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros)":
             res = false;
             break;
-           
         }
       }
 
       // return the answer accordin to academic program and name of the required document
-      
-
+      // console.log('res: ' + res + ' name: ' + this.name);
       return res;
     },
-
     isLetterCommitment() {
       if (
         this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {

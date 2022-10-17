@@ -178,6 +178,7 @@ export default {
             this.data.filter(user => {
                 if (user.name.toString().toLowerCase().includes(this.search.toLowerCase())) {
                     list.push(user);
+                    console.log(user.name);
                 }
             })
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\PreRegisterController;
 use App\Http\Controllers\ExternalRecommendationLetter;
 use App\Http\Controllers\HumanCapitalController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\OldDocumentController;
 use App\Http\Controllers\ScientificProductionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkingExperienceController;
@@ -45,6 +46,22 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
             ->middleware('auth');
+    });
+
+    Route::prefix('oldControlEscolar')->name('oldControlEscolar.')->group(function () {
+        Route::get('/listOldDocuments', [OldDocumentController::class, 'listOldDocuments'])->name('listOldDocuments')
+            ->middleware(['auth','role:admin']);
+
+            Route::get('/listOldDocumentsIMAREC', [OldDocumentController::class, 'listOldDocumentsIMAREC'])->name('listOldDocumentsIMAREC')
+            ->middleware(['auth','role:admin']);
+
+            Route::get('/viewOldDocument/{idDocumento}/database/{nameDatabase}', [OldDocumentController::class, 'viewOldDocument'])->name('viewOldDocument')
+            ->middleware(['auth','role:admin']);
+
+
+            Route::get('/viewOldDocumentIMAREC/idSolicitud/{idSolicitud}/idTipoArchivo/{idTipoArchivo}/database/{nameDatabase}', [OldDocumentController::class, 'viewOldDocumentIMAREC'])->name('viewOldDocumentIMAREC')
+            ->middleware(['auth','role:admin']);
+
     });
 
     # Rutas de autenticacion.
