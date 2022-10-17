@@ -1277,7 +1277,7 @@ __webpack_require__.r(__webpack_exports__);
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
-          case "5B.- Título de Maestria o acta de examen":
+          case "5B.- Título de maestria o acta de examen":
             res = false;
             break;
 
