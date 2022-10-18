@@ -91,17 +91,9 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        console.log(response.data.location);
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;        
-        
+        requiredDocument.location = response.data.location;
       }).catch(error => {
-        console.log('se equivoco esta cosa');
-        var errores = error.response.data['errors'];
-        requiredDocument.Errores = { 
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
+        console.log(error);
       });
     },
   }

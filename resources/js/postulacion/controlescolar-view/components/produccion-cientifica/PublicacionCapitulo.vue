@@ -2,21 +2,21 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label> Título del capítulo: </label>
-      <input type="text" class="form-control" v-model="TituloCapitulo">
+      <input type="text" class="form-control" v-model="TituloCapitulo"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-6">
-      <slot></slot>
+      <autor-articulo></autor-articulo>
     </div>
 
     <div class="form-group col-md-6">
       <label> Nombre del artículo: </label>
-      <input type="text" class="form-control" v-model="NombreArticulo">
+      <input type="text" class="form-control" v-model="NombreArticulo"  :readonly='true'>
     </div>
 
     <div class="form-group col-md-6">
       <label> Año de publicación: </label>
-      <input type="text" class="form-control" v-model="AnoPublicacion">
+      <input type="text" class="form-control" v-model="AnoPublicacion"  :readonly='true'>
     </div>
   </div>
 </template>

@@ -1,158 +1,124 @@
 <template>
-  <details class="mt-1">
-    <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-12">
-        <h5 v-if="tipos[Type] != null" class="font-weight-bold">
+  <details>
+    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
+      <div class="col-lg-8 col-md-6 col-xs-12">
+        <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+        <span v-if="tipos[Type] != null" class="h5 font-weight-bold">
           {{ tipos[Type] + " " + index }}
-        </h5>
-
-        <h5 v-else class="font-weight-bold">Publicación {{ index }}</h5>
+        </span>
+        <span v-else class="h5 font-weight-bold">Publicación {{ index }}</span>
       </div>
-      
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <b-button @click="eliminaProduccionCientifica" pill class="d-flex justify-content-start align-items-center"
+          style="height:45px!important" variant="danger">
+          <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
+          <p class="h5 my-2">Eliminar</p>
+        </b-button>
+      </div>
+
     </summary>
 
-    <div class="row mx-2">
-      <div class="form-group col-md-4">
-        <label> Tipo de publicación: </label>
-        <select v-model="Type" class="form-control">
-          <option :value="null" selected>Escoge una opción</option>
-          <option value="articles">Publicación de artículos</option>
-          <option value="published_books">Publicación de libros</option>
-          <option value="published_chapters">Capítulos publicados</option>
-          <option value="technical_reports">Reportes técnicos</option>
-          <option value="working_memories">Memorias de trabajo</option>
-          <option value="working_documents">Documentos de trabajo</option>
-          <option value="reviews_cp">Reseñas</option>
-        </select>
-      </div>
+    <!-- <b-collapse :id="nameAccordion" visible accordion="my-accordion" role="tabpanel"> -->
+    <b-card-body>
+      <div class="d-flex justify-content-start align-items-center col-md-12 col-sm-12 text-start">
 
-      <div class="form-group col-md-12">
-        <publicacion-articulo
-          v-if="tipos[Type] === 'Publicación de artículos'"
-          :title.sync="Title"
-          :magazine_name.sync="MagazineName"
-          :publish_date.sync="PublishDate"
-        >
-          <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
-          </autor-articulo>
-        </publicacion-articulo>
+        <div class="col-md-1 col-sm-1 text-center">
+          <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+        </div>
 
-        <publicacion-capitulo
-          v-else-if="tipos[Type] === 'Capítulos publicados'"
-          :titulo-capitulo.sync="Title"
-          :nombre-articulo.sync="ArticleName"
-          :ano-publicacion.sync="PublishDate"
-        >
-          <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
-          </autor-articulo>
-        </publicacion-capitulo>
+        <div class="col-11">
 
-        <publicacion-libro
-          v-else-if="tipos[Type] === 'Publicación de libros'"
-          :titulo-libro.sync="Title"
-          :ano-publicacion.sync="PublishDate"
-        >
-          <!-- Otros autores del artículos -->
-          <autor-articulo
-            v-for="(author, index) in Authors"
-            v-bind="author"
-            :index="index"
-            v-bind:key="author.id"
-            :name.sync="author.name"
-            @agregaAutor="agregaAutor"
-            @actualizaAutor="actualizaAutor"
-            @eliminaAutor="eliminaAutor"
-          >
-          </autor-articulo>
-        </publicacion-libro>
-
-        <reporte-tecnico
-          v-else-if="tipos[Type] === 'Reportes técnicos'"
-          :title.sync="Title"
-          :institution.sync="Institution"
-          :publish_date.sync="PublishDate"
-        >
-        </reporte-tecnico>
-
-        <memoria-trabajo
-          v-else-if="tipos[Type] === 'Memorias de trabajo'"
-          :title.sync="Title"
-          :post_title_memory.sync="PostTitleMemory"
-          :publish_date.sync="PublishDate"
-        >
-        </memoria-trabajo>
-
-        <documento-trabajo
-          v-else-if="tipos[Type] === 'Documentos de trabajo'"
-          :title.sync="Title"
-          :post_title_document.sync="PostTitleDocument"
-          :publish_date.sync="PublishDate"
-        >
-        </documento-trabajo>
-
-        <resenia
-          v-else-if="tipos[Type] === 'Reseñas'"
-          :title.sync="Title"
-          :post_title_review.sync="PostTitleReview"
-          :publish_date.sync="PublishDate"
-        >
-        </resenia>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-start mt-0 mb-1"  style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-             <img  @click="guardaProduccionCientifica" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+          <!-- Tipo de publicación -->
+          <div class="d-flex justify-content-start my-2" style="width:100%;">
+            <div class="form-group col-md-6">
+              <label>
+                <p class="h5"> Tipo de publicación: </p>
+              </label>
+              <input v-model="Type" class="form-control" :readonly="true">
+            </div>
           </div>
+
+          <!-- Tipos de publicacion -->
+          <div class="col-12">
+            <publicacion-articulo v-if="tipos[Type] === 'Publicación de artículos'" :title.sync="Title"
+              :magazine_name.sync="MagazineName" :publish_date.sync="PublishDate">
+              <!-- Otros autores del artículos -->
+              <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+                :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+                @eliminaAutor="eliminaAutor">
+              </autor-articulo>
+            </publicacion-articulo>
+
+            <publicacion-capitulo v-else-if="tipos[Type] === 'Capítulos publicados'" :titulo-capitulo.sync="Title"
+              :nombre-articulo.sync="ArticleName" :ano-publicacion.sync="PublishDate">
+              <!-- Otros autores del artículos -->
+              <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+                :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+                @eliminaAutor="eliminaAutor">
+              </autor-articulo>
+            </publicacion-capitulo>
+
+            <publicacion-libro v-else-if="tipos[Type] === 'Publicación de libros'" :titulo-libro.sync="Title"
+              :ano-publicacion.sync="PublishDate">
+              <!-- Otros autores del artículos -->
+              <autor-articulo v-for="(author, index) in Authors" v-bind="author" :index="index" v-bind:key="author.id"
+                :name.sync="author.name" @agregaAutor="agregaAutor" @actualizaAutor="actualizaAutor"
+                @eliminaAutor="eliminaAutor">
+              </autor-articulo>
+            </publicacion-libro>
+
+            <reporte-tecnico v-else-if="tipos[Type] === 'Reportes técnicos'" :title.sync="Title"
+              :institution.sync="Institution" :publish_date.sync="PublishDate">
+            </reporte-tecnico>
+
+            <memoria-trabajo v-else-if="tipos[Type] === 'Memorias de trabajo'" :title.sync="Title"
+              :post_title_memory.sync="PostTitleMemory" :publish_date.sync="PublishDate">
+            </memoria-trabajo>
+
+            <documento-trabajo v-else-if="tipos[Type] === 'Documentos de trabajo'" :title.sync="Title"
+              :post_title_document.sync="PostTitleDocument" :publish_date.sync="PublishDate">
+            </documento-trabajo>
+
+            <resenia v-else-if="tipos[Type] === 'Reseñas'" :title.sync="Title" :post_title_review.sync="PostTitleReview"
+              :publish_date.sync="PublishDate">
+            </resenia>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- <div class="d-flex justify-content-start my-2" style="width:100%;">
+        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+          <img @click="guardaProduccionCientifica" :src="images_btn.guardar" alt=""
+            style=" max-height: 45px !important;">
+        </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
-             <p><strong>Nota: </strong>
-              Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente
-              botón.<strong>Solo se guardara la producción científica actual.</strong></p>
+            <strong>Nota: </strong>
+            Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente
+            botón. <p><strong>Solo se guardara la producción científica actual.</strong></p>
           </label>
         </div>
-      </div>
-      
-
-    <!-- <documento-requerido
-      v-for="documento in RequiredDocuments"
-      :key="documento.name"
-      :archivo.sync="documento.archivo"
-      :location.sync="documento.pivot.location"
-      :errores.sync="documento.errores"
-      :alias_academic_program="alias_academic_program"
-      v-bind="documento"
-      @enviaDocumento="cargaDocumento"
-    >
-    </documento-requerido> -->
-    <hr class="d-block mt-2" :style="ColorStrip" />
+      </div> -->
+      <!-- <documento-requerido
+                v-for="documento in RequiredDocuments"
+                :key="documento.name"
+                :archivo.sync="documento.archivo"
+                :location.sync="documento.pivot.location"
+                :errores.sync="documento.errores"
+                :alias_academic_program="alias_academic_program"
+                v-bind="documento"
+                @enviaDocumento="cargaDocumento"
+              >
+              </documento-requerido> -->
+    </b-card-body>
+    <!-- </b-collapse> -->
   </details>
 </template>
 
 
 <script>
 import DocumentoRequerido from "./DocumentoRequerido.vue";
-import InputSolicitud from "./InputSolicitud.vue";
 import AutorArticulo from "./produccion-cientifica/AutorArticulo.vue";
 import DocumentoTrabajo from "./produccion-cientifica/DocumentoTrabajo.vue";
 import MemoriaTrabajo from "./produccion-cientifica/MemoriaTrabajo.vue";
@@ -166,7 +132,6 @@ export default {
   name: "produccion-cientifica",
   components: {
     DocumentoRequerido,
-    InputSolicitud,
     PublicacionArticulo,
     PublicacionCapitulo,
     PublicacionLibro,
@@ -181,7 +146,7 @@ export default {
     //Index
     index: Number,
 
-    images_btn:Object,
+    images_btn: Object,
 
     // Documentos requeridos
     required_documents: Array,
@@ -229,16 +194,87 @@ export default {
     },
 
     // Autores de la producción científica.
-    authors: Array,
+    authors: {
+      type: Array,
+      default: []
+    },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   computed: {
+    styleContainerAccordionSection() {
+      return {
+        border: 'none',
+      }
+    },
+
+    styleHeaderContainerAccordionSection() {
+      return {
+        border: 'none',
+        height: '75px',
+        width: '100%'
+      }
+    },
+
+    styleBtnAccordionSection() {
+      var color = "rgba(0,96,175,255)";
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        width: '100%!important',
+        display: 'flex'
+      }
+    },
+
+    styleAccordionHeaderSection() {
+      var color = "rgba(0,96,175,255)";
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        height: '100%!important',
+        width: '100%!important',
+        borderRadius: '10px',
+      }
+    },
+
+    getIndexAccordionSection() {
+      return 'accordion-pc-' + this.index;
+    },
+
+
+    btnHeaderAccordion: {
+      get() {
+        return {
+          height: '100%!important',
+          width: '100%!important',
+          color: 'white',
+        }
+      }
+    },
+
     RequiredDocuments: {
       get() {
         return this.required_documents;
       },
       set(newVal) {
         this.$emit("update:required_documents", newVal);
+      },
+    },
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
       },
     },
     State: {
@@ -335,6 +371,7 @@ export default {
 
   data() {
     return {
+      nameAccordion: "",
       errores: {},
       tipos: {
         articles: "Publicación de artículos",
@@ -356,7 +393,13 @@ export default {
     });
   },
 
+  created() {
+    this.nameAccordion = 'accordion-pc-' + this.index;
+    console.log(this.nameAccordion);
+  },
+
   methods: {
+
     ColorStrip() {
       var color = "#FFFFFF";
 
@@ -469,7 +512,7 @@ export default {
         .then((response) => {
           this.Authors.splice(autor.index, 1);
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
 
     agregaAutor(nuevoAutor) {
@@ -488,7 +531,7 @@ export default {
             name: null,
           });
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
 
     actualizaAutor(autor) {
@@ -506,7 +549,7 @@ export default {
             autor.$emit(event, response.data[dataKey]);
           });
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
   },
 };

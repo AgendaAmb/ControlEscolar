@@ -139,9 +139,9 @@ export default {
   methods: {
     isIntentionLetter() {
       if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
-        console.log(this.name);
         return true;
       }
+      console.log(this.name);
       return false;
     },
 

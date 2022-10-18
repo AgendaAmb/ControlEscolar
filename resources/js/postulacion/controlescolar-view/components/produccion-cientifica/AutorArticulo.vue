@@ -1,13 +1,11 @@
 <template>
-  <div class="form group mb-4">
+  <div class="col-12 form group mb-4">
     <label class="d-block"> Nombre del autor: </label>
-    <input type="text" :class="ClassObject" v-model="Name">
+    <input type="text" :class="ClassObject" v-model="Name"  :readonly='true'>
 
-
-    <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline ml-3"><i class="fas fa-user-plus"></i></button>
+    <!-- <button v-if="Addable" @click="agregaAutor" class="btn btn-success d-inline ml-3"><i class="fas fa-user-plus"></i></button>
     <button v-if="Modifiable" @click="actualizaAutor" class="btn btn-primary d-inline ml-3"><i class="fas fa-user-shield"></i></button>
-    <button v-if="Modifiable" @click="eliminaAutor" class="btn btn-outline-danger d-inline ml-3" ><i class="fas fa-minus-circle" style="color:red;"></i></button>
-    <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div>
+    <div v-if="'name' in errores" class="invalid-feedback"> Por favor indica el nombre del autor.</div> -->
   </div>
 </template>
 
@@ -19,8 +17,6 @@ export default {
   props: {
     // Id del autor.
     id: Number,
-
-    index:Number,
 
     // Id de la producción científica.
     scientific_production_id: Number,
@@ -74,11 +70,6 @@ export default {
       }
 
       this.$emit('agregaAutor', this);
-    },
-
-    eliminaAutor(){
-      this.errores = {};
-      this.$emit('eliminaAutor', this);
     },
 
     actualizaAutor(){

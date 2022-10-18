@@ -1,9 +1,11 @@
 <template>
+
   <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="row my-3">
-      <!-- Nombre y notas -->
-      <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block">
+    <div class="row d-flex align-items-center my-2" style="width:100%;">
+
+        <!-- Nombre y notas -->
+      <div class="form-group col-11 col-md-11 col-xs-10">
+        <h5 class="mt-2 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
@@ -14,12 +16,14 @@
         </h5>
 
         <!-- Carta Compromiso y manifiesto -->
-        <p v-if="isLetterCommitment() === true" class="mt-3 mb-1 d-block">
+        <p v-if="isLetterCommitment() === true" class="my-2 d-block">
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
-            <a v-if="alias_academic_program === 'maestria' || alias_academic_program === 'enrem'"
-              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx" target="_blank">dando clic aquí</a>
+            <a v-if="
+            alias_academic_program === 'maestria' ||
+            alias_academic_program === 'enrem'" href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+              target="_blank">dando clic aquí</a>
             <!-- Maestria imarec -->
             <a v-else-if="alias_academic_program === 'imarec'"
               href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx" target="_blank">dando clic
@@ -31,46 +35,31 @@
         </p>
 
         <!-- Solo hay algo en notas por lo que se adjunta -->
-        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block">
+        <p v-else-if="notes !== null" class="my-2 d-block">
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
-        <p class="mt-3 mb-1 d-block">
+        <p class="my-2 d-block">
           <strong> Etiqueta: </strong> {{ label }}
         </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
+        <p class="my-2 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
-      <!-- Actions buttons -->
-      <div class="form-group col-3 align-items-center p-2">
+
+      <div class="form-group col-1 col-md-1 col-xs-2 align-items-center">
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
             <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
               target="_blank">
-              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
+              <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
             </a>
           </label>
         </div>
+       
       </div>
     </div>
-    
-    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
-      <div class="col-2 " style="height:100%;">
-        <div class="d-flex">
-          <label> Puntaje obtenido</label>
-        </div>
-        <div class=" d-flex align-items-end">
-          <input v-model.number="ExanniScore" type="number" class="form-control" :readonly="true">
-        </div>
-      </div>
-
-      <div class="col-10" style="height:100%; width:100%;">
-        <input type="hidden" class="w-100">
-      </div>
-
-    </div>
-
   </div>
+
 </template>
 
 <script>
@@ -78,7 +67,6 @@ export default {
   name: "documento-requerido",
 
   props: {
-
     user_id: {
       type: Number,
       default: -1,
@@ -86,7 +74,7 @@ export default {
 
     images_btn: {
       type: Object,
-      default: null,
+      default: {},
     },
 
     viewer_id: {
@@ -99,27 +87,27 @@ export default {
     },
 
     name: {
-      type: String
+      type: String,
     },
 
     notes: {
-      type: String
+      type: String,
     },
 
     label: {
-      type: String
+      type: String,
     },
 
     example: {
-      type: String
+      type: String,
     },
 
     archivo: {
-      type: File
+      type: File,
     },
 
     location: {
-      type: String
+      type: String,
     },
 
     alias_academic_program: {
@@ -135,6 +123,11 @@ export default {
     exanni_score: {
       type: Number,
       default: -1,
+    },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -142,28 +135,46 @@ export default {
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: '',
-      academiLetterCommitment: '',
+      textStateUpload: "",
+      academiLetterCommitment: "",
+      images: null,
     };
   },
 
   computed: {
+    styleBtn() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        height: '100%',
+      }
+    },
 
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      },
+    },
     Archivo: {
       get() {
         return this.archivo;
       },
       set(newValue) {
-        this.$emit('update:archivo', newValue);
-      }
+        this.$emit("update:archivo", newValue);
+      },
     },
     Location: {
       get() {
         return this.location;
       },
       set(newValue) {
-        this.$emit('update:location', newValue);
-      }
+        this.$emit("update:location", newValue);
+      },
     },
     Errores: {
       get() {
@@ -171,32 +182,66 @@ export default {
       },
       set(newValue) {
         this.errores = newValue;
-        this.$emit('update:errores', newValue);
-      }
+        this.$emit("update:errores", newValue);
+      },
     },
+
     ExanniScore: {
       get() {
         return this.exanni_score;
       },
       set(newValue) {
-        this.$emit('update:exanni_score', newValue)
-      }
-    }
+        this.$emit("update:exanni_score", newValue);
+      },
+    },
   },
 
-
+  // created() {
+  //   // console.log(this.language);
+  //   axios
+  //     .get("/controlescolar/solicitud/getAllButtonImage")
+  //     .then((response) => {
+  //       // console.log('recibiendo imagenes' + response.data.ver);
+  //       this.images = response.data;
+  //       // console.log('imagenes buttons: ' + this.images.ver);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // },
 
   methods: {
+
+
+    bkgCargarArchivo(type) {
+      // console.log(this.language);
+      axios
+        .get("/controlescolar/solicitud/getButtonImage", {
+          params: {
+            type: type,
+          },
+        })
+        .then((response) => {
+          // console.log('hola' + response.data);
+          return response.data;
+        })
+        .catch((error) => {
+          // console.log(error);
+          return null;
+        });
+    },
+
+
+
     isEXANNI() {
-      if (this.name === "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)") {
+      if (
+        this.name ===
+        "13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)"
+      ) {
         return true;
       }
       //return a value
       return false;
-    },
-
-    actualizaPuntajeExanni() {
-      this.$emit("nuevoPuntajeExanni", this.exanni_score);
     },
 
     requiredForAcademicProgram() {
@@ -328,7 +373,9 @@ export default {
 
     isLetterCommitment() {
       if (
-        this.name === "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)") {
+        this.name ===
+        "11.- Carta compromiso y de manifestación de lineamientos (firmada y escaneada)"
+      ) {
         return true;
       }
       //return a value
@@ -338,11 +385,18 @@ export default {
     isIntentionLetter() {
       //If return 0 is intention letter of professor
 
-      if (this.name === "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)") {
-        console.log(this.name);
+      if (
+        this.name ===
+        "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
+      ) {
+        // console.log(this.name);
         return true;
       }
       return false;
+    },
+
+    actualizaPuntajeExanni() {
+      this.$emit("nuevoPuntajeExanni", this.exanni_score);
     },
 
     checkUpload() {

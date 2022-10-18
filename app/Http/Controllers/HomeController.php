@@ -22,7 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->session()->get('user')->roles);
+        // dd($request->session()->get('user')->roles[0]->name);
         return view('home')
         ->with('user', $request->session()->get('user_data'))
         ->with('user_roles',$request->session()->get('user')->roles);

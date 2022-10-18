@@ -1,9 +1,14 @@
 <template>
+
   <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="row my-3">
+    <div class="row d-flex align-items-center my-2" style="width:100%;">
+
+      <div class="col-1 col-md-1 col-xs-1 text-center">
+        <b-form-checkbox size="lg" style="transform:scale(1.25)" v-model="StatusCheckBox"></b-form-checkbox>
+      </div>
       <!-- Nombre y notas -->
-      <div class="form-group col-9 my-auto">
-        <h5 class="mt-4 d-block">
+      <div class="form-group col-10 col-md-10 col-xs-9">
+        <h5 class="mt-2 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
             <i>Estado:</i> <i class="text-success">Subido</i>
@@ -14,7 +19,7 @@
         </h5>
 
         <!-- Carta Compromiso y manifiesto -->
-        <p v-if="isLetterCommitment() === true" class="mt-3 mb-1 d-block">
+        <p v-if="isLetterCommitment() === true" class="my-2 d-block">
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
@@ -33,58 +38,56 @@
         </p>
 
         <!-- Solo hay algo en notas por lo que se adjunta -->
-        <p v-else-if="notes !== null" class="mt-3 mb-1 d-block">
+        <p v-else-if="notes !== null" class="my-2 d-block">
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
-        <p class="mt-3 mb-1 d-block">
+        <p class="my-2 d-block">
           <strong> Etiqueta: </strong> {{ label }}
         </p>
-        <p class="my-0 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
+        <p class="my-2 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
-      <div class="form-group col-3 align-items-center p-2">
+      <div class="form-group col-1 col-md-1 col-xs-2 align-items-center">
         <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
             <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
               target="_blank">
-              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
+              <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
             </a>
           </label>
         </div>
 
-        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+        <!-- <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center"
           style="max-height:45px !important; width: 100%">
-          <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
             <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
             <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%"
               @change="cargaDocumento">
           </label>
-        </div>
+        </div> -->
       </div>
     </div>
 
-    <div v-if="isEXANNI() === true" class="row my-1 align-items-center justify-content-center" style="height: 75px">
-      <div class="col-2" style="height: 100%">
-        <div class="d-flex">
-          <label> Puntaje obtenido</label>
+    <!-- <div class="d-flex align-items-center justify-content-start my-2" style="width:100%;">
+      <div v-if="isEXANNI() === true" class="form-group col-12">
+        <div class="d-flex align-items-center justify-content-start my-2">
+          <div class="col-xl-4 col-md-6 col-xs-6">
+            <label> Puntaje obtenido</label>
+            <input v-model.number="ExanniScore" type="number" class="form-control" />
+          </div>
+          <div class="col-xl-4 col-md-6 col-xs-6">
+            <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn">
+              <p class="h4">Guardar Puntaje</p>
+            </b-button>
+          </div>
         </div>
-        <div class="d-flex align-items-end">
-          <input v-model.number="ExanniScore" type="number" class="form-control" />
-        </div>
+
       </div>
-      <div class="col-2 d-flex align-items-end" style="height: 100%; width: 100%">
-        <button @click="actualizaPuntajeExanni" class="btn btn-primary" style="width: 100%">
-          Guarda puntaje
-        </button>
-      </div>
-      <div class="col-8" style="height: 100%; width: 100%">
-        <input type="hidden" class="w-100" />
-      </div>
-    </div>
+    </div> -->
   </div>
+
 </template>
 
 <script>
@@ -149,6 +152,11 @@ export default {
       type: Number,
       default: -1,
     },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {
@@ -162,6 +170,24 @@ export default {
   },
 
   computed: {
+    styleBtn() {
+      return {
+        backgroundColor: "rgba(0,96,175,255)",
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        height: '100%',
+      }
+    },
+
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      },
+    },
     Archivo: {
       get() {
         return this.archivo;
@@ -198,20 +224,6 @@ export default {
     },
   },
 
-  // created() {
-  //   // console.log(this.language);
-  //   axios
-  //     .get("/controlescolar/solicitud/getAllButtonImage")
-  //     .then((response) => {
-  //       // console.log('recibiendo imagenes' + response.data.ver);
-  //       this.images = response.data;
-  //       // console.log('imagenes buttons: ' + this.images.ver);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
-
   methods: {
 
 
@@ -224,11 +236,11 @@ export default {
           },
         })
         .then((response) => {
-          console.log('hola' + response.data);
+          // console.log('hola' + response.data);
           return response.data;
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           return null;
         });
     },

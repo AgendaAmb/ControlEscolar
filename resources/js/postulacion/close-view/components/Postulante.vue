@@ -71,8 +71,8 @@
          :location.sync="documento.pivot.location"
          :errores.sync = "documento.errores"
          :images_btn = "images_btn"
+         :alias_academic_program.sync ="alias_academic_program"
          @enviaDocumento = "cargaDocumento"
-         :alias_academic_program.sync="alias_academic_program"
          v-bind="documento">
       </documento-requerido>
     </div>
@@ -88,11 +88,11 @@ export default {
     // Estado civil.
     marital_state: String,
 
+    images_btn: Object,
+
     //v bind for appliant data from portal
     // Id del expediente
     archive_id: Number,
-
-    images_btn:Object,
 
     // Curp del postulante
     curp: String,
@@ -132,6 +132,7 @@ export default {
 
     // Documentos personales
     documentos: Array,
+
     alias_academic_program: String,
   },
   components: { DocumentoRequerido },

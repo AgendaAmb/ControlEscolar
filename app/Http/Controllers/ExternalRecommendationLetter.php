@@ -49,6 +49,20 @@ class ExternalRecommendationLetter extends Controller
     }
 
      /* -------------------------- CARTA DE RECOMENDACION DEL APLICANTE --------------------------*/
+
+     public function userCanSeeAnswered(Request $request)   
+     {
+        $res = true;
+
+        foreach($request->session()->get('user')->roles as $rol){
+            if($rol->name === 'aspirante_extranjero' || $rol->name === 'aspirante_foraneo'  || $rol->name === 'aspirante_local' ){
+                $res = false;
+                break;
+            }
+        }
+
+        return $res;
+     }
      public function sentEmailRecommendationLetter(Request $request)
      {
  

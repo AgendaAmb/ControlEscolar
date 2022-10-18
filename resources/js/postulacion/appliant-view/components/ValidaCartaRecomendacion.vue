@@ -1,11 +1,10 @@
 <template>
   <div class="col-12">
     <div class="row align-items-center">
-     
+
       <!-- Nombre y notas -->
       <div class="col-12">
-        <b-form-group label-size="xl" :label="'Correo ' + index"
-          label-for="input-email">
+        <b-form-group label-size="xl" :label="'Correo ' + index" label-for="input-email">
           <b-form-input id="input-email" v-model="myEmail" :readonly="checkUpload() === 1"></b-form-input>
         </b-form-group>
       </div>
@@ -30,16 +29,6 @@
         <div v-if="checkUpload() != 1" class="form-group" style="width:100%; max-height: 45px !important;">
           <img @click="enviarCorreoCartaRecomendacion()" :src="images_btn.guardar" alt=""
             style=" max-height: 45px !important;">
-        </div>
-
-        <div v-else class="d-flex justify-content-start  my-1" style="max-height: 45px; width: 100%">
-
-          <label>
-            <a :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
-              target="_blank" style=" height: 45px; width:100%;">
-              <img :src="images_btn.descargar" style="max-height: 45px !important;">
-            </a>
-          </label>
         </div>
       </div>
     </div>

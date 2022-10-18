@@ -1,18 +1,27 @@
 <template>
-  <div class="row my-2">
+  <div class="row justify-content-start align-items-center mx-1">
     <!-- Requisitos de ingreso -->
-    <div class="col-12 my-2">
-      <details>
-        <summary class="mb-4 font-weight-bold h3">
-          Requisitos de ingreso
-        </summary>
-        <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
-          :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
-          :images_btn="images_btn"
-          :alias_academic_program.sync="academic_program.alias">
-        </requisitos-ingreso>
-      </details>
+    <div class="col-12">
+      <b-card no-body class="my-2" :style="styleContainerAccordionSection">
+        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
+          <b-button block v-b-toggle.accordion-3 variant="dark" :style="styleBtnAccordionSection">
+            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+            <p class="h2 my-2">Requisitos de Ingreso</p>
+          </b-button>
+        </b-card-header>
+        <b-collapse id="accordion-3" visible accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <requisitos-ingreso :archive_id.sync="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
+              :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
+              :images_btn="images_btn" :alias_academic_program.sync="academic_program.alias">
+            </requisitos-ingreso>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
     </div>
+
+
+
   </div>
 </template>
 
@@ -27,8 +36,57 @@ export default {
     DocumentoRequerido
   },
 
+  computed:{
+    styleHeaderContainerAccordionSection() {
+      return {
+        border: 'none',
+      }
+    },
+
+    styleBtnAccordionSection() {
+
+      var color = "rgb(215, 219, 221,0.9)";
+
+      color = "#1266f1";
+
+      color = "rgba(0,96,175,255)";
+      // color = "#6092c9";
+
+      // switch (this.academic_program.alias) {
+      //   case "maestria":
+
+      //     color = "rgb(5, 152, 188, 0.75)";
+      //     break;
+      //   case "doctorado":
+      //     color = "rgb(254, 204, 80, 0.75)";
+      //     break;
+      //   case "enrem":
+      //     color = "rgb(255, 56, 77, 0.75)";
+      //     break;
+      //   case "imarec":
+      //     color = "rgb(17, 137, 67,0.75)";
+      //     break;
+      // }
+
+
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        display: 'flex',
+        alignItems: 'center',
+      }
+    },
+    styleContainerAccordionSection() {
+      return {
+        border: 'none',
+      }
+    }
+  },
+
+
   props: {
-   //interview documemnts
+    //interview documemnts
     interview_documents: Array,
     // Id del expediente.
     archive_id: Number,
@@ -82,8 +140,8 @@ export default {
     status: Number,
   },
 
-    created() {
-    // console.log(this.language);
+  created() {
+    console.log(this.entrance_documents);
     axios
       .get("/controlescolar/solicitud/getAllButtonImage")
       .then((response) => {

@@ -1,245 +1,193 @@
 <template>
   <details>
-    <summary class="d-flex justify-content-start align-items-center my-2">
-      <div class="col-12">
-        <h4 class="font-weight-bold">Nivel de escolaridad {{ index }}</h4>
+    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
+      <div class="col-lg-8 col-md-6 col-xs-12">
+        <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+        <span class="h5 font-weight-bold" style="width:auto!important;">Nivel de escolaridad {{ index }}</span>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <b-button @click="eliminaHistorialAcademico" pill class="d-flex justify-content-start align-items-center"
+          style="height:45px!important" variant="danger">
+          <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
+          <p class="h5 my-2">Eliminar</p>
+        </b-button>
       </div>
     </summary>
-    <div class="my-3 row">
-      <div class="form-group col-12">
-        <!-- 
+    <!-- Accordion -->
+    <b-card-body>
+
+      <div class="d-flex align-items-center my-2">
+        
+        <div class="form-group col-12">
+          <!-- 
         Datos generales del estatus de estudio.
         Grado, título, etc.
       -->
-        <div class="row">
-          <div
-            class="form-group col-md-6 col-lg-4"
-          >
-            <label> Nivel de escolaridad: </label>
-            <!-- Solo se podra seleccionar para doctorado -->
-            <input
-              type="text"
-              v-model="DegreeType"
-              class="form-control"
-              :class="objectForError('degree_type')"
-              :readonly="true"
-            />
-          </div>
-        
-          <div class="form-group col-md-6 col-lg-4">
-            <label> Título obtenido: </label>
-            <input
-              v-model="Degree"
-              type="text"
-              class="form-control"
-              :class="objectForError('degree')"
-              :readonly="true"
-            />
-            
-          </div>
-
-          <div
-            class="d-none d-lg-block form-group col-lg-4"
-          >
-            <label> Estatus: </label>
-            <input
-              v-model="Status"
-              type="text"
-              class="form-control"
-              :class="objectForError('status')"
-              :readonly="true"
-            />
-
-            <div v-if="estaEnError('status')" class="invalid-feedback">
-              {{ errores.status }}
+          <div class="row">
+            <div class="form-group col-md-6 col-lg-4">
+              <label> Nivel de escolaridad: </label>
+              <!-- Solo se podra seleccionar para doctorado -->
+              <input type="text" v-model="DegreeType" class="form-control" :class="objectForError('degree_type')"
+                :readonly="true" />
             </div>
+
+            <div class="form-group col-md-6 col-lg-4">
+              <label> Título obtenido: </label>
+              <input v-model="Degree" type="text" class="form-control" :class="objectForError('degree')"
+                :readonly="true" />
+
+            </div>
+
+            <div class="d-none d-lg-block form-group col-lg-4">
+              <label> Estatus: </label>
+              <input v-model="Status" type="text" class="form-control" :class="objectForError('status')"
+                :readonly="true" />
+
+              <div v-if="estaEnError('status')" class="invalid-feedback">
+                {{ errores.status }}
+              </div>
+            </div>
+
           </div>
 
-        </div>
-
-        <!-- 
+          <!-- 
         País de estudios y universidad 
       -->
-        <div class="row">
-          <div class="form-group col-lg-6">
-            <label> País donde realizaste tus estudios: </label>
+          <div class="row">
+            <div class="form-group col-lg-6">
+              <label> País donde realizaste tus estudios: </label>
 
-             <input
-              v-model="Country"
-              type="text"
-              class="form-control"
-              :class="objectForError('country')"
-              :readonly="true"
-            />
-           
-            <div v-if="estaEnError('country')" class="invalid-feedback">
-              {{ errores.country }}
+              <input v-model="Country" type="text" class="form-control" :class="objectForError('country')"
+                :readonly="true" />
+
+              <div v-if="estaEnError('country')" class="invalid-feedback">
+                {{ errores.country }}
+              </div>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label> Universidad de estudios: </label>
+              <input v-model="University" type="text" class="form-control" :class="objectForError('university')"
+                :readonly="true" />
+
+              <div v-if="estaEnError('university')" class="invalid-feedback">
+                {{ errores.university }}
+              </div>
             </div>
           </div>
 
-          <div class="form-group col-lg-6">
-            <label> Universidad de estudios: </label>
-            <input
-              v-model="University"
-              type="text"
-              class="form-control"
-              :class="objectForError('university')"
-              :readonly="true"
-            />
-
-            <div v-if="estaEnError('university')" class="invalid-feedback">
-              {{ errores.university }}
-            </div>
-          </div>
-        </div>
-
-        <!-- 
+          <!-- 
         Datos de obtención de grado/pasantía.
       -->
-        <div class="row" v-if="Status !== ''">
-          <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
-            <label> Número de cédula: </label>
-            <input v-model.number="Cedula" type="number" class="form-control" :readonly="true" />
-          </div>
+          <div class="row" v-if="Status !== ''">
+            <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
+              <label> Número de cédula: </label>
+              <input v-model.number="Cedula" type="number" class="form-control" :readonly="true" />
+            </div>
 
-          <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
-            <label> Fecha de titulación: </label>
-            <input v-model="TitrationDate" type="date" class="form-control"  :readonly="true"/>
-          </div>
+            <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
+              <label> Fecha de titulación: </label>
+              <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
+            </div>
 
-          <div v-if="Status === 'Pasante'" class="form-group col-md-6">
-            <label> Fecha de obtención de pasantía: </label>
-            <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
-          </div>
+            <div v-if="Status === 'Pasante'" class="form-group col-md-6">
+              <label> Fecha de obtención de pasantía: </label>
+              <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
+            </div>
 
-          <div
-            v-if="Status === 'Título o grado en proceso'"
-            class="form-group col-md-6"
-          >
-            <label> Fecha de presentación de examen: </label>
-            <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
+            <div v-if="Status === 'Título o grado en proceso'" class="form-group col-md-6">
+              <label> Fecha de presentación de examen: </label>
+              <input v-model="TitrationDate" type="date" class="form-control" :readonly="true" />
+            </div>
           </div>
-        </div>
-        <!-- 
+          <!-- 
         Pedir CVU, solo en Doctorado
       -->
 
-        <div class="row" v-if="degree_type === 'Maestría'">
-          <div class="form-group col-md-4">
-            <label> Número de CVU CONACYT: </label>
-            <input v-model.number="CVU" type="number" class="form-control" :readonly="true"/>
+          <div class="row" v-if="degree_type === 'Maestría'">
+            <div class="form-group col-md-4">
+              <label> Número de CVU CONACYT: </label>
+              <input v-model.number="CVU" type="number" class="form-control" :readonly="true" />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label> ¿Cuentas con una carta de reconocimiento? </label>
+
+              <input v-model="KnowledgeCard" type="text" class="form-control" :class="objectForError('knowledge_card')"
+                :readonly="true" />
+
+            </div>
+
+            <div class="form-group col-md-4">
+              <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
+
+              <input v-model="DigitalSignature" type="text" class="form-control"
+                :class="objectForError('digital_signature')" :readonly="true" />
+
+
+            </div>
           </div>
-
-          <div class="form-group col-md-4">
-            <label> ¿Cuentas con una carta de reconocimiento? </label>
-
-             <input
-              v-model="KnowledgeCard"
-              type="text"
-              class="form-control"
-              :class="objectForError('knowledge_card')"
-              :readonly="true"
-            />
-            
-          </div>
-
-          <div class="form-group col-md-4">
-            <label> ¿Cuentas con tu firma electrónica del CONACYT? </label>
-
-             <input
-              v-model="DigitalSignature"
-              type="text"
-              class="form-control"
-              :class="objectForError('digital_signature')"
-              :readonly="true"
-            />
-
-           
-          </div>
-        </div>
-        <!-- 
+          <!-- 
         Promedio del postulante
       -->
-        <div class="row">
-          <div class="form-group col-md-6 col-lg-4">
-            <label> Promedio obtenido: </label>
-           
-            <input
-              v-model.number="Average"
-              type="number"
-              class="form-control"
-              :readonly="true"
-            />
+          <div class="row">
+            <div class="form-group col-md-6 col-lg-4">
+              <label> Promedio obtenido: </label>
 
-            <div v-if="'average' in errores" class="invalid-feedback">
-              {{ errores.average }}
+              <input v-model.number="Average" type="number" class="form-control" :readonly="true" />
+
+              <div v-if="'average' in errores" class="invalid-feedback">
+                {{ errores.average }}
+              </div>
             </div>
-          </div>
 
-          <div class="form-group col-md-6 col-lg-4">
-            <label> Calificación mínima: </label>
-            
-            <input
-              v-model.number="MinAvg"
-              type="number"
-              class="form-control"
-              :readonly="true"
-            />
+            <div class="form-group col-md-6 col-lg-4">
+              <label> Calificación mínima: </label>
 
-            <div v-if="'min_avg' in errores" class="invalid-feedback">
-              {{ errores.min_avg }}
+              <input v-model.number="MinAvg" type="number" class="form-control" :readonly="true" />
+
+              <div v-if="'min_avg' in errores" class="invalid-feedback">
+                {{ errores.min_avg }}
+              </div>
             </div>
-          </div>
 
-          <div class="form-group col-md-6 col-lg-4">
-            <label> Calificación máxima: </label>
-            
-            <input
-              
-              v-model.number="MaxAvg"
-              type="number"
-              class="form-control"
-              :readonly="true"
-            />
-            <div v-if="'max_avg' in errores" class="invalid-feedback">
-              {{ errores.max_avg }}
+            <div class="form-group col-md-6 col-lg-4">
+              <label> Calificación máxima: </label>
+
+              <input v-model.number="MaxAvg" type="number" class="form-control" :readonly="true" />
+              <div v-if="'max_avg' in errores" class="invalid-feedback">
+                {{ errores.max_avg }}
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <documento-requerido
-        v-for="documento in RequiredDocuments"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        :images_btn="images_btn"
-        v-bind="documento"
-        @enviaDocumento="cargaDocumento"
-      >
+
+      <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name"
+        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
+        @enviaDocumento="cargaDocumento">
       </documento-requerido>
-    </div>
-    <hr class="d-block" :style="ColorStrip" />
+    </b-card-body>
+
   </details>
 </template>
 
 <script>
 import DocumentoRequerido from "./DocumentoRequerido.vue";
-import InputSolicitud from "./InputSolicitud.vue";
 
 export default {
-  components: { DocumentoRequerido, InputSolicitud },
+  components: { DocumentoRequerido },
   name: "grado-academico",
 
   props: {
     //Index de la escolaridad
     index: Number,
 
+    images_btn: Object,
+
     //Alias academic program
     alias_academic_program: String,
-
-    images_btn: Object,
 
     // Países que el postulante puede escoger.
     paises: Array,
@@ -305,6 +253,11 @@ export default {
       type: Array,
       default: null,
     },
+
+    status_checkBox: {
+      type: Boolean,
+      default: false,
+    }
   },
 
   data: function () {
@@ -312,7 +265,7 @@ export default {
       fechaobtencion: "",
       errores: {},
       datosValidos: {},
-      universidades: [],
+      // universidades: [],
       escolaridades: ["Licenciatura", "Maestría"],
       estatusEstudios_PMPCA: ["Grado obtenido", "Título o grado en proceso"],
       estatusEstudios_otros: [
@@ -324,31 +277,43 @@ export default {
   },
 
   computed: {
-    ColorStrip: {
-      get() {
-        var color = "#FFFFFF";
+    styleBtnAccordionSection() {
+      var color = "rgba(0,96,175,255)";
 
-        switch (this.alias_academic_program) {
-          case "maestria":
-            color = "#0598BC";
-            break;
-          case "doctorado":
-            color = "#FECC50";
-            break;
-          case "enrem":
-            color = "#FF384D";
-            break;
-          case "imarec":
-            color = "#118943";
-            break;
-        }
-
-        return {
-          backgroundColor: color,
-          height: "1px",
-        };
-      },
+      return {
+        backgroundColor: color,
+        color: 'rgb(244, 244, 244)',
+        border: 'none',
+        alignItems: 'center',
+        width: '100%!important',
+        display: 'flex'
+      }
     },
+
+    ColorStrip() {
+      var color = "#FFFFFF";
+
+      switch (this.alias_academic_program) {
+        case "maestria":
+          color = "#0598BC";
+          break;
+        case "doctorado":
+          color = "#FECC50";
+          break;
+        case "enrem":
+          color = "#FF384D";
+          break;
+        case "imarec":
+          color = "#118943";
+          break;
+      }
+
+      return {
+        backgroundColor: color,
+        height: "1px",
+      };
+    },
+
 
     Universidades: {
       get: function () {
@@ -371,6 +336,16 @@ export default {
         this.$emit("update:universidades", value);
       },
     },
+
+    StatusCheckBox: {
+      get() {
+        return this.status_checkBox;
+      },
+      set(newValue) {
+        this.$emit("update:status_checkBox", newValue);
+      },
+    },
+
 
     CVU: {
       get() {
@@ -647,8 +622,10 @@ export default {
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
-       formData.append("index", this.index);
+      formData.append("index", this.index);
       formData.append("file", file);
+
+      // console.log(formData);
 
       axios({
         method: "post",

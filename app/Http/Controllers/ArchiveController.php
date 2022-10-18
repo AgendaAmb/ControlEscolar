@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Resources\AppliantArchive\ArchiveResource;
 
 use App\Models\{
@@ -98,7 +99,7 @@ class ArchiveController extends Controller
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                $archive->appliant->setAttribute('name', $user_data['name'] );
+                $archive->appliant->setAttribute('name', $user_data['name']);
 
                 if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
                     unset($archives[$k]);
@@ -136,7 +137,7 @@ class ArchiveController extends Controller
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                $archive->appliant->setAttribute('name', $user_data['name'] );
+                $archive->appliant->setAttribute('name', $user_data['name']);
 
                 //Eliminar mi archivo para produccion
                 //Descomentar en local
@@ -324,7 +325,8 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Exito'], JsonResponse::HTTP_ACCEPTED);
     }
 
-    public function sentEmailRechazadoPostulacion(Request $request){
+    public function sentEmailRechazadoPostulacion(Request $request)
+    {
         try {
             $request->validate([
                 'selected_personalDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
@@ -471,7 +473,8 @@ class ArchiveController extends Controller
     }
 
 
-    public function getDataFromPortalUser($appliant){
+    public function getDataFromPortalUser($appliant)
+    {
         #Search user in portal
         $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
 
@@ -499,7 +502,8 @@ class ArchiveController extends Controller
 
     /* -------------------------- APPLIANT  --------------------------*/
 
-    public function showRegisterArchives(Request $request){
+    public function showRegisterArchives(Request $request)
+    {
         //Obtiene los archivos para el programa academico a registrarse
 
         $archives = Archive::where('user_id', $request->session()->get('user_data')['id'])->get();
@@ -514,27 +518,27 @@ class ArchiveController extends Controller
                 ]);
 
                 $academic_program = $archive->announcement->academicProgram;
-          
-                 // get the image for the corresponding academic program
-                 $img = 'DOCTORADO-SUPERIOR.png';
-                 switch ($academic_program->name) {
-                     case 'Maestría en ciencias ambientales':
-                         $img = 'PMPCA-SUPERIOR.png';
-                         break;
-                     case 'Maestría en ciencias ambientales, doble titulación':
-                         $img = 'ENREM-SUPERIOR.png';
-                         break;
-                     case 'Maestría Interdisciplinaria en ciudades sostenibles':
-                         $img = 'IMAREC-SUPERIOR.png';
-                         break;
-                     case 'Doctorado en ciencias ambientales':
-                         $img = 'DOCTORADO-SUPERIOR.png';
-                         break;
-                     default:
-                         $img = 'DOCTORADO-SUPERIOR.png';
-                         break;
-                 }
-                 $header_academic_program = asset('storage/headers/' . $img);
+
+                // get the image for the corresponding academic program
+                $img = 'DOCTORADO-SUPERIOR.png';
+                switch ($academic_program->name) {
+                    case 'Maestría en ciencias ambientales':
+                        $img = 'PMPCA-SUPERIOR.png';
+                        break;
+                    case 'Maestría en ciencias ambientales, doble titulación':
+                        $img = 'ENREM-SUPERIOR.png';
+                        break;
+                    case 'Maestría Interdisciplinaria en ciudades sostenibles':
+                        $img = 'IMAREC-SUPERIOR.png';
+                        break;
+                    case 'Doctorado en ciencias ambientales':
+                        $img = 'DOCTORADO-SUPERIOR.png';
+                        break;
+                    default:
+                        $img = 'DOCTORADO-SUPERIOR.png';
+                        break;
+                }
+                $header_academic_program = asset('storage/headers/' . $img);
 
                 $archive->setAttribute('header_academic_program', $header_academic_program);
             }
@@ -781,7 +785,7 @@ class ArchiveController extends Controller
             ->with('working_documents_ids', $working_documents_ids);
     }
 
-   
+
     /*---------------------------------------- PERSONAL DOCUMENTS  ---------------------------------------- */
     public function updateArchivePersonalDocument(Request $request)
     {
@@ -829,7 +833,7 @@ class ArchiveController extends Controller
             JsonResponse::HTTP_CREATED
         );
     }
-    
+
     /*---------------------------------------- ENTRANCE DOCUMENTS  ---------------------------------------- */
     public function updateArchiveEntranceDocument(Request $request)
     {
@@ -842,13 +846,8 @@ class ArchiveController extends Controller
 
         try {
             $archive = Archive::find($request->archive_id);
-
-            // $archive->loadMissing([
-            //     'archiveRequiredDocuments',
-            //     'entranceDocuments'
-            // ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
         }
 
 
@@ -860,7 +859,7 @@ class ArchiveController extends Controller
                 $request->requiredDocumentId . '.pdf'
             );
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
 
@@ -873,7 +872,7 @@ class ArchiveController extends Controller
                 'archive_id' => $request->archive_id
             ])->first();
         } catch (\Exception $e) {
-            return new JsonResponse(['information' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['information' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
         }
 
         // Agregar relacion si es carta de intención
@@ -893,14 +892,13 @@ class ArchiveController extends Controller
                 ]);
             }
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => $e->getMessage()], 400);
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
         }
+
 
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-            ['location' => $required_document->location],
-            JsonResponse::HTTP_CREATED
+            ['location' => $ruta], JsonResponse::HTTP_OK
         );
     }
-
 }

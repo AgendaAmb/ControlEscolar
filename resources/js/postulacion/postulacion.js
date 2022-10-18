@@ -18,16 +18,13 @@ import SolicitudPostulante from './components/SolicitudPostulante.vue';
 import ActualizarExpediente from './components/ActualizarExpediente.vue';
 import ActualizarExpedientePruebaNuevo from './components/ActualizarExpedientePruebaNuevo.vue';
 import RechazarExpediente from './components/RechazarExpediente.vue';
-import VGoogleTranslate from "v-google-translate";
-
-
-// import ExpedienteCerrado from './components/ExpedienteCerrado.vue';
-
+import vGoogleTranslate from "v-google-translate";
 import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue'
-
+import { GridPlugin } from '@syncfusion/ej2-vue-grids';
+Vue.use(GridPlugin);
 Vue.use(BootstrapVue);
-Vue.use(VGoogleTranslate)
 Vue.use(BootstrapVueIcons);
+Vue.use(vGoogleTranslate);
 
 window.Vue = require('vue').default;
 

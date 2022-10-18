@@ -122,26 +122,6 @@
                 </div>
               </div>
 
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
-                <label> Vigencia desde: </label>
-                <input v-model="ValidFrom" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_from' in errores }" />
-
-                <div v-if="'valid_from' in errores" class="invalid-feedback">
-                  {{ errores.valid_from }}
-                </div>
-              </div>
-
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
-                <label> Hasta: </label>
-                <input v-model="ValidTo" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_to' in errores }" />
-
-                <div v-if="'valid_to' in errores" class="invalid-feedback">
-                  {{ errores.valid_to }}
-                </div>
-              </div>
-
             </div>
           </div>
         </div>

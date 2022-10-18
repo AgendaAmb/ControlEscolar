@@ -276,6 +276,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
     //El usuario no necesita estar autentificado (puede ser cualquier persona con la liga)
     Route::prefix('recommendationLetter')->name('recommendationLetter.')->group(function () {
+        Route::get('/userCanSeeAnswered', [ExternalRecommendationLetter::class, 'userCanSeeAnswered'])->name('userCanSeeAnswered');
         # El que recive correo recibe la vista
         Route::get('/show/{token}', [ExternalRecommendationLetter::class, 'recommendationLetter'])->name('show');
         # Al guardar se hace la peticion para almacenar datos
