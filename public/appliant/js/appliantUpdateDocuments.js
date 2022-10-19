@@ -650,10 +650,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
         switch (this.name) {
-          case "4.- Primera página del pasaporte":
-            res = false;
-            break;
-
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -705,10 +701,6 @@ __webpack_require__.r(__webpack_exports__);
       } //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
-          case "4.- Primera página del pasaporte":
-            res = false;
-            break;
-
           case "5.- Título de preparatoria":
             res = false;
             break;

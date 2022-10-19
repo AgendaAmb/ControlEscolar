@@ -32,7 +32,7 @@ class UpdateAcademicDegreeRequest extends FormRequest
             'degree' => ['nullable', 'required_if:state,Completo'],
             'degree_type' => ['nullable', 'required_if:state,Completo', 'in:Licenciatura,Maestría', 'string'],                
             'cvu' => ['nullable', 'required_if:degreeType,Maestría', 'numeric'],
-            'cedula' => ['nullable','required_if:status,Grado obtenido', 'numeric'],
+            'cedula' => ['nullable','required_if:status,Grado obtenido'],
             'country' => ['nullable', 'required_if:state,Completo', 'string'],
             'university' => ['nullable', 'required_if:state,Completo', 'string'],
             'average' => ['nullable', 'required_if:state,Completo', 'numeric'],

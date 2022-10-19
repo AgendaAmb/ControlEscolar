@@ -10,8 +10,8 @@ class OldDocumentController extends Controller
 {
     public function listOldDocumentsIMAREC(Request $request)
     {
-        $min = 5;
-        $max = 10;
+        $min = 10;
+        $max = 25;
         $documents = DB::table('archivos')->where('mimetype','!=','application/pdf')->whereBetween('IdSolicitud', [$min, $max])->get(['idSolicitud','Datos', 'IdTipoArchivo', 'mimetype']);
 
         return $documents;

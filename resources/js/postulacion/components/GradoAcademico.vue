@@ -128,7 +128,7 @@
           <div class="row" v-if="Status !== ''">
             <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
               <label> Número de cédula: </label>
-              <input v-model.number="Cedula" type="number" class="form-control" />
+              <input v-model.number="Cedula" class="form-control" />
             </div>
 
             <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
@@ -265,7 +265,7 @@ export default {
     archive_id: Number,
 
     // Cédula profesional.
-    cedula: Number,
+    cedula: String,
 
     // Título del grado académico.
     degree: String,
@@ -528,7 +528,7 @@ export default {
       set(newVal) {
         delete this.errores["average"];
 
-        if (isNaN(newVal) || newVal.length === 0) {
+        if (isNaN(newVal)) {
           this.errores["average"] =
             "La calificación mínima solo puede ser numérica";
           this.$emit("update:average", 0);
@@ -546,7 +546,7 @@ export default {
       set(newVal) {
         delete this.errores["min_avg"];
 
-        if (isNaN(newVal) || newVal.length === 0) {
+        if (isNaN(newVal)) {
           this.errores["min_avg"] =
             "La calificación mínima solo puede ser numérica";
           this.$emit("update:min_avg", 0);

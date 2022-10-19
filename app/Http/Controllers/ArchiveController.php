@@ -793,28 +793,37 @@ class ArchiveController extends Controller
         try {
             $archive = Archive::find($request->archive_id);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => 'Error al buscar archivo'], 200);
         }
 
-        $archive->loadMissing([
-            'personalDocuments',
-        ]);
 
-        $personal_documents = [];
+        // archive model
+        try {
+            $archive->loadMissing([
+                'personalDocuments',
+                'appliant',
+            ]);
+
+            $appliant = $this->getDataFromPortalUser($archive->appliant);
+            $personal_documents = [];
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 200);
+        }
 
         try {
-            if (strcmp($request->session()->get('user_data')['nationality'], 'México') != 0) {
+            if (strcmp($appliant->residence_country, 'México') != 0) {
+                // if (strcmp($request->session()->get('user_data')['nationality'], 'México') != 0) {
 
                 for ($i = 0; $i < count($archive->personalDocuments); $i++) {
-                    if (strcmp($archive->personalDocuments[$i]->name, '2.- CURP expedido por la RENAPO' != 0) && strcmp($archive->personalDocuments[$i]->name, '3.- INE en ampliación tamaño carta' != 0)) {
-                        array_push($personal_documents,$archive->personalDocuments[$i] );
+                    if (strcmp($archive->personalDocuments[$i]->name, '2.- CURP expedido por la RENAPO')!=0 && strcmp($archive->personalDocuments[$i]->name, '3.- INE en ampliación tamaño carta')!=0) {
+                        array_push($personal_documents, $archive->personalDocuments[$i]);
                     }
                 }
             } else {
                 for ($i = 0; $i < count($archive->personalDocuments); $i++) {
-                    if (strcmp($archive->personalDocuments[$i]->name, '4.- Primera página del pasaporte' != 0)) {
+                    if (strcmp($archive->personalDocuments[$i]->name, '4.- Primera página del pasaporte') != 0) {
                         // unset($archive->personalDocuments[$i]);
-                        array_push($personal_documents,$archive->personalDocuments[$i]);
+                        array_push($personal_documents, $archive->personalDocuments[$i]);
                     }
                 }
             }
@@ -877,32 +886,46 @@ class ArchiveController extends Controller
         try {
             $archive = Archive::find($request->archive_id);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => $e->getMessage()], 200);
         }
 
-        $archive->loadMissing([
-            'entranceDocuments',
-            'academicDegrees.requiredDocuments',
-        ]);
 
-        $local_appliant = true;
+        try {
+            $archive->loadMissing([
+                'entranceDocuments',
+                'academicDegrees.requiredDocuments',
+            ]);
 
-        foreach($archive->academicDegrees as $degree){
-            if (strcmp($degree->country, 'México' != 0)) {
-                $local_appliant = false;
+            $local_appliant = true;
+
+            for ($i = 0; $i < count($archive->academicDegrees); $i++) {
+
+                if ($archive->academicDegrees[$i]->country != null) {
+                    
+                    if (strcmp($archive->academicDegrees[$i]->country , 'México' != 0)) {
+                        $local_appliant = false;
+                    }
+                }
             }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 200);
         }
+
 
         $entrance_documents = [];
 
-        if(!$local_appliant){
-            for ($i = 0; $i < count($archive->entranceDocuments); $i++) {
-                if (strcmp($archive->entranceDocuments[$i]->name, '13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)' != 0) ) {
-                    array_push($entrance_documents,$archive->entrance_documents[$i] );
+        try {
+            if (!$local_appliant) {
+                for ($i = 0; $i < count($archive->entranceDocuments); $i++) {
+                    if (strcmp($archive->entranceDocuments[$i]->name, '13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)')!=0) {
+                        array_push($entrance_documents, $archive->entranceDocuments[$i]);
+                    }
                 }
+            } else {
+                $entrance_documents = $archive->entranceDocuments;
             }
-        }else{
-            $entrance_documents = $archive->entranceDocuments;
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 200);
         }
 
         return $entrance_documents;
@@ -913,7 +936,7 @@ class ArchiveController extends Controller
         try {
             $archive = Archive::find($request->archive_id);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
         }
 
         return $archive->exanni_score;

@@ -84,7 +84,7 @@
           <div class="row" v-if="Status !== ''">
             <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
               <label> Número de cédula: </label>
-              <input v-model.number="Cedula" type="number" class="form-control" :readonly="true" />
+              <input v-model.number="Cedula" class="form-control" :readonly="true" />
             </div>
 
             <div v-if="Status === 'Grado obtenido'" class="form-group col-md-6">
@@ -202,7 +202,7 @@ export default {
     archive_id: Number,
 
     // Cédula profesional.
-    cedula: Number,
+    cedula: String,
 
     // Título del grado académico.
     degree: String,

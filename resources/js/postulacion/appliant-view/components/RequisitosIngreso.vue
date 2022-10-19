@@ -224,7 +224,7 @@ export default {
       }).then(response => {
 
         this.documentos.forEach(documento => {
-          if(documento.id == requiredDocument.id){
+          if(documento.id === requiredDocument.id){
             documento.pivot.location = response.data.location;
           }
         });
