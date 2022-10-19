@@ -119,6 +119,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         # Expedientes
+
+        
+
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');
         Route::get('/getButtonImage', [ImageController::class, 'getButtonImage'])->name('getButtonImage');
         Route::get('/getAllButtonImage', [ImageController::class, 'getAllButtonImage'])->name('getAllButtonImage');
@@ -139,8 +142,14 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::get('/expediente/{archive}', [ArchiveController::class, 'appliantArchive'])->name('show');
 
         # Requisitos de ingreso.
+        
+        Route::get('/getEntranceRequiredDocuments', [ArchiveController::class, 'getEntranceRequiredDocuments'])->name('getEntranceRequiredDocuments');
+        Route::get('/getExanniScore', [ArchiveController::class, 'getExanniScore'])->name('getExanniScore');
         Route::post('/updateExanniScore', [ArchiveController::class, 'updateExanniScore']);
         Route::post('/updateMotivation', [ArchiveController::class, 'updateMotivation']);
+        
+        Route::get('/getPersonalRequiredDocuments', [ArchiveController::class, 'getPersonalRequiredDocuments'])->name('getPersonalRequiredDocuments');
+
         Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
         Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
 

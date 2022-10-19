@@ -787,6 +787,43 @@ class ArchiveController extends Controller
 
 
     /*---------------------------------------- PERSONAL DOCUMENTS  ---------------------------------------- */
+
+    public function getPersonalRequiredDocuments(Request $request)
+    {
+        try {
+            $archive = Archive::find($request->archive_id);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+        }
+
+        $archive->loadMissing([
+            'personalDocuments',
+        ]);
+
+        $personal_documents = [];
+
+        try {
+            if (strcmp($request->session()->get('user_data')['nationality'], 'México') != 0) {
+
+                for ($i = 0; $i < count($archive->personalDocuments); $i++) {
+                    if (strcmp($archive->personalDocuments[$i]->name, '2.- CURP expedido por la RENAPO' != 0) && strcmp($archive->personalDocuments[$i]->name, '3.- INE en ampliación tamaño carta' != 0)) {
+                        array_push($personal_documents,$archive->personalDocuments[$i] );
+                    }
+                }
+            } else {
+                for ($i = 0; $i < count($archive->personalDocuments); $i++) {
+                    if (strcmp($archive->personalDocuments[$i]->name, '4.- Primera página del pasaporte' != 0)) {
+                        // unset($archive->personalDocuments[$i]);
+                        array_push($personal_documents,$archive->personalDocuments[$i]);
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 200);
+        }
+
+        return $personal_documents;
+    }
     public function updateArchivePersonalDocument(Request $request)
     {
         $request->validate([
@@ -835,6 +872,53 @@ class ArchiveController extends Controller
     }
 
     /*---------------------------------------- ENTRANCE DOCUMENTS  ---------------------------------------- */
+    public function getEntranceRequiredDocuments(Request $request)
+    {
+        try {
+            $archive = Archive::find($request->archive_id);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+        }
+
+        $archive->loadMissing([
+            'entranceDocuments',
+            'academicDegrees.requiredDocuments',
+        ]);
+
+        $local_appliant = true;
+
+        foreach($archive->academicDegrees as $degree){
+            if (strcmp($degree->country, 'México' != 0)) {
+                $local_appliant = false;
+            }
+        }
+
+        $entrance_documents = [];
+
+        if(!$local_appliant){
+            for ($i = 0; $i < count($archive->entranceDocuments); $i++) {
+                if (strcmp($archive->entranceDocuments[$i]->name, '13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)' != 0) ) {
+                    array_push($entrance_documents,$archive->entrance_documents[$i] );
+                }
+            }
+        }else{
+            $entrance_documents = $archive->entranceDocuments;
+        }
+
+        return $entrance_documents;
+    }
+
+    public function getExanniScore(Request $request)
+    {
+        try {
+            $archive = Archive::find($request->archive_id);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+        }
+
+        return $archive->exanni_score;
+    }
+
     public function updateArchiveEntranceDocument(Request $request)
     {
 
@@ -898,7 +982,8 @@ class ArchiveController extends Controller
 
         /**Problema al regresar el json, marca un erro en la consulta */
         return new JsonResponse(
-            ['location' => $ruta], JsonResponse::HTTP_OK
+            ['location' => $ruta],
+            JsonResponse::HTTP_OK
         );
     }
 }

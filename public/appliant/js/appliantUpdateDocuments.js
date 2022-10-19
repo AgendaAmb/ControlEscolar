@@ -541,7 +541,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     exanni_score: {
       type: Number,
-      "default": -1
+      "default": 0
     },
     status_checkBox: {
       type: Boolean,

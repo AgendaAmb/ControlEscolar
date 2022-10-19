@@ -31,7 +31,7 @@
 
         <label class="mt-4">
           ¿El candidato ha trabajado, estudiado o desempeñado alguna tarea en
-          colaboración o directamente para usted? Por favor describa la
+          colaboración o directamente para usted?, Por favor describa la
           naturaleza de esas tareas
         </label>
         <textarea
@@ -41,7 +41,7 @@
         />
 
         <label class="mt-4">
-          Si el estudiante tomó algún curso con usted ?n qué lugar quedó de
+          Si el estudiante tomó algún curso con usted ¿Qué lugar quedó de
           acuerdo a su calificación final? (Por ejemplo: 30% superior) ¿Cuál es
           el número total de estudiantes que está considerando para el cálculo?
         </label>

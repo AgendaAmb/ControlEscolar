@@ -1,5 +1,5 @@
 <template>
-  <details>
+  <details open>
     <!-- Accordion header -->
     <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
         <div class="col-lg-8 col-md-6 col-xs-12">

@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-5 col-lg-6 col-xl-3 my-2">
-        <!-- Aqui va la foto -->
+          <!-- Aqui va la foto -->
         </div>
         <div class="form-group col-md-7 col-lg-6 col-xl-9">
           <div class="row">
@@ -66,14 +66,9 @@
 
     <div class="row mt-4">
       <h3>Documentos</h3>
-      <documento-requerido v-for="documento in Documentos" :key="documento.name"
-         :archivo.sync="documento.archivo"
-         :location.sync="documento.pivot.location"
-         :errores.sync = "documento.errores"
-         :images_btn = "images_btn"
-         :alias_academic_program.sync ="alias_academic_program"
-         @enviaDocumento = "cargaDocumento"
-         v-bind="documento">
+      <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
+        :alias_academic_program.sync="alias_academic_program" @enviaDocumento="cargaDocumento" v-bind="documento">
       </documento-requerido>
     </div>
   </div>
@@ -130,8 +125,7 @@ export default {
     // Correo alterno del postulante.
     altern_email: String,
 
-    // Documentos personales
-    documentos: Array,
+
 
     alias_academic_program: String,
   },
@@ -140,18 +134,49 @@ export default {
 
   computed: {
     Documentos: {
-      get(){
+      get() {
         return this.documentos;
       },
-      set(newVal){
+      set(newVal) {
         this.$emit('update:documentos', newVal);
       }
     }
   },
 
-  methods:{
+  data() {
+    return {
+      // Documentos personales
+      documentos: {
+        type: Array,
+        default: null,
+      }
+    }
+  },
+
+  created() {
+    //get personal documents
+    axios
+      .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
+        params: {
+          archive_id: this.archive_id
+        }
+      })
+      .then((response) => {
+        if (response.data != null) {
+          this.documentos = response.data;
+        }
+        console.log(this.documentos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+
+
+  methods: {
     cargaDocumento(requiredDocument, file) {
-      
+
       var formData = new FormData();
       formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
@@ -162,16 +187,16 @@ export default {
         url: '/controlescolar/solicitud/updateArchivePersonalDocument',
         data: formData,
         headers: {
-          'Accept' : 'application/json',
+          'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
         requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;        
-        
+        requiredDocument.Location = response.data.location;
+
       }).catch(error => {
         var errores = error.response.data['errors'];
-        requiredDocument.Errores = { 
+        requiredDocument.Errores = {
           file: 'file' in errores ? errores.file[0] : null,
           id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
         };

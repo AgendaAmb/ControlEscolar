@@ -148,7 +148,7 @@ export default {
 
     exanni_score: {
       type: Number,
-      default: -1,
+      default: 0,
     },
 
     status_checkBox: {

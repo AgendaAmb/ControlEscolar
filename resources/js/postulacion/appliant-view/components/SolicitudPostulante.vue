@@ -21,7 +21,7 @@
         <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <postulante v-bind="appliant" :archive_id="archive_id" :images_btn="images_btn"
-              :documentos.sync="personal_documents" :alias_academic_program.sync="academic_program.alias">
+              :alias_academic_program.sync="academic_program.alias">
             </postulante>
           </b-card-body>
         </b-collapse>
@@ -77,8 +77,8 @@
         </b-card-header>
         <b-collapse id="accordion-3" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" :exanni_score.sync="exanni_score"
-              :documentos.sync="entrance_documents" :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
+            <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation" 
+               :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
               :images_btn="images_btn" :alias_academic_program.sync="academic_program.alias">
             </requisitos-ingreso>
           </b-card-body>
@@ -331,9 +331,7 @@ export default {
 
     // Motivos de ingreso.
     motivation: String,
-
-    // Exanni score
-    exanni_score: Number,
+   
 
     // Documentos de ingreso.
     entrance_documents: Array,

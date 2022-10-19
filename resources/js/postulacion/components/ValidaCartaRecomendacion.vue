@@ -1,14 +1,11 @@
 <template>
   <div class="col-12">
     <div class="row align-items-center">
-      <div class="col-lg-1 col-md-1 col-xs-1 text-center">
-        <b-form-checkbox size="lg" style="transform:scale(1.25)" v-model="StatusCheckBox"></b-form-checkbox>
-      </div>
+
       <!-- Nombre y notas -->
-      <div class="col-10">
-        <b-form-group label-size="xl" :label="'Correo ' + index"
-          label-for="input-email">
-          <b-form-input id="input-email" v-model="myEmail" :readonly="checkUpload() === 1"></b-form-input>
+      <div class="col-12">
+        <b-form-group label-size="xl" :label="'Correo ' + index" label-for="input-email">
+          <b-form-input id="input-email" v-model="myEmail" :readonly="stateRL() === 1"></b-form-input>
         </b-form-group>
       </div>
     </div>
@@ -17,10 +14,10 @@
       <div class="col-12">
 
         <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
-        <template v-if="checkUpload() === 1">
+        <template v-if="stateRL() === 1">
           <i>Estado:</i> <i class="text-success">Completado</i>
         </template>
-        <template v-else-if="checkUpload() === 0">
+        <template v-else-if="stateRL() === 0">
           <i>Estado:</i> <i class="text-warning">Esperando respuesta</i>
         </template>
         <template v-else>
@@ -29,13 +26,11 @@
       </div>
 
       <div class="col-12">
-        <div v-if="checkUpload() != 1" class="form-group" style="width:100%; max-height: 45px !important;">
+        <div v-if="stateRL() != 1" class="form-group" style="width:100%; max-height: 45px !important;">
           <img @click="enviarCorreoCartaRecomendacion()" :src="images_btn.guardar" alt=""
             style=" max-height: 45px !important;">
         </div>
-
         <div v-else class="d-flex justify-content-start  my-1" style="max-height: 45px; width: 100%">
-
           <label>
             <a :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
               target="_blank" style=" height: 45px; width:100%;">
@@ -67,6 +62,8 @@ export default {
         0: false,
         2: false,
       },
+
+      state_rl: -2,
     };
   },
 
@@ -131,6 +128,15 @@ export default {
     },
   },
 
+  created() {
+    if (this.recommendation_letter != null) {
+      if (this.recommendation_letter["email_evaluator"]) {
+        this.state_rl = parseInt(this.recommendation_letter["answer"]); // 0 o 1
+      }
+    }
+  },
+
+
   methods: {
     inputClassFor() {
       return {
@@ -143,15 +149,8 @@ export default {
     //  0  : En espera de respuesta del externo
     //  1  : Completado
 
-    checkUpload() {
-      let res = 2;
-      if (this.recommendation_letter != null) {
-        if (this.recommendation_letter["email_evaluator"]) {
-          res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
-        }
-      }
-      console.log("res: " + res);
-      return res;
+    stateRL() {
+      return this.state_rl;
     },
 
     verCartaRecomendacion() {
@@ -223,6 +222,8 @@ export default {
               cancelButtonColor: "#d33",
               confirmButtonText: "Aceptar",
             });
+            // letter send
+            this.state_rl = 0;
           } else {
             Swal.fire({
               icon: "error",
@@ -233,18 +234,31 @@ export default {
               cancelButtonText: "Entendido",
             });
           }
+
+
         })
         .catch((error) => {
           console.log('message: ' + error.data.message);
+          if (error.data.message == 'No puedes usar correos registrados en esta cuenta') {
+            Swal.fire({
+              title: "Direcciones de correo erroneas",
+              icon: "error",
+              title: error.data.message,
+              showCancelButton: true,
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Entendido",
+            });
+          } else {
+            Swal.fire({
+              title: "Error al mandar correo",
+              icon: "error",
+              title: error.data.message,
+              showCancelButton: true,
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Entendido",
+            });
+          }
 
-          Swal.fire({
-            title: "Error al mandar carta de recomendacion",
-            icon: "error",
-            title: error.data.message,
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            cancelButtonText: "Entendido",
-          });
           // alert('Ha ocurrido un error, intenta mas tarde');
           console.log(error);
         });

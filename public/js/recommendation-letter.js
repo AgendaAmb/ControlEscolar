@@ -29547,7 +29547,7 @@ var render = function () {
         _vm._v(" "),
         _c("label", { staticClass: "mt-4" }, [
           _vm._v(
-            "\n        ¿El candidato ha trabajado, estudiado o desempeñado alguna tarea en\n        colaboración o directamente para usted? Por favor describa la\n        naturaleza de esas tareas\n      "
+            "\n        ¿El candidato ha trabajado, estudiado o desempeñado alguna tarea en\n        colaboración o directamente para usted?, Por favor describa la\n        naturaleza de esas tareas\n      "
           ),
         ]),
         _vm._v(" "),
@@ -29575,7 +29575,7 @@ var render = function () {
         _vm._v(" "),
         _c("label", { staticClass: "mt-4" }, [
           _vm._v(
-            "\n        Si el estudiante tomó algún curso con usted ?n qué lugar quedó de\n        acuerdo a su calificación final? (Por ejemplo: 30% superior) ¿Cuál es\n        el número total de estudiantes que está considerando para el cálculo?\n      "
+            "\n        Si el estudiante tomó algún curso con usted ¿Qué lugar quedó de\n        acuerdo a su calificación final? (Por ejemplo: 30% superior) ¿Cuál es\n        el número total de estudiantes que está considerando para el cálculo?\n      "
           ),
         ]),
         _vm._v(" "),

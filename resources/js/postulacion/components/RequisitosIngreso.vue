@@ -45,8 +45,6 @@ export default {
   props: {
     archive_id: Number,
     motivation: String,
-    exanni_score: Number,
-    documentos: Array,
     images_btn: Object,
 
     user_id: {
@@ -64,7 +62,7 @@ export default {
       default: null,
     },
 
-    status_checkBox:{
+    status_checkBox: {
       type: Boolean,
       default: false,
     }
@@ -74,7 +72,12 @@ export default {
 
   data() {
     return {
-      errores: {}
+      errores: {},
+      exanni_score: 0,
+      documentos: {
+        type: Array,
+        default: null,
+      }
     }
   },
   computed: {
@@ -95,7 +98,7 @@ export default {
         this.$emit('update:status_checkBox', newVal);
       }
     },
-    
+
 
     Documentos: {
       get() {
@@ -105,6 +108,43 @@ export default {
         this.$emit('update:documentos', newVal);
       }
     }
+  },
+
+  created() {
+    //get entrance documents
+    axios
+      .get("/controlescolar/solicitud/getEntranceRequiredDocuments", {
+        params: {
+          archive_id: this.archive_id
+        }
+      })
+      .then((response) => {
+        if (response.data != null) {
+          this.documentos = response.data;
+        }
+
+        console.log(this.documentos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    //get exanni score 
+    axios
+      .get("/controlescolar/solicitud/getExanniScore", {
+        params: {
+          archive_id: this.archive_id
+        }
+      })
+      .then((response) => {
+        if (response.data != null) {
+          this.exanni_score = parseInt(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   },
 
   methods: {
@@ -142,7 +182,7 @@ export default {
     nuevoPuntajeExanni(puntaje) {
       axios.post('/controlescolar/solicitud/updateExanniScore', {
         archive_id: this.archive_id,
-        exanni_score: this.exanni_score,
+        exanni_score: puntaje,
       }).then(response => {
         Swal.fire({
           title: "¡Éxito!",
@@ -162,11 +202,11 @@ export default {
           showCancelButton: false,
           icon: "error",
         });
-        var errores = error.response.data['errors'];
+        // var errores = error.response.data['errors'];
 
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
+        // Object.keys(errores).forEach(key => {
+        //   Vue.set(this.errores, key, errores[key][0]);
+        // });
       });
     },
 
@@ -186,14 +226,24 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        requiredDocument.location = response.data.location;
 
+        this.documentos.forEach(documento => {
+          if(documento.id == requiredDocument.id){
+            documento.pivot.location = response.data.location;
+          }
+        });
+
+        console.log('si se subio');
+        // requiredDocument.location = response.data.location;
       }).catch(error => {
+
+        Swal.fire({
+          title: "Error al subir documento",
+          text: "Recuerda subir solamente archivos en formato PDF",
+          showCancelButton: false,
+          icon: "error",
+        });
         var errores = error.response.data['errors'];
-        requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
       });
     },
   }

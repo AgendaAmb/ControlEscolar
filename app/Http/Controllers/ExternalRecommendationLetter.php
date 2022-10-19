@@ -78,7 +78,18 @@ class ExternalRecommendationLetter extends Controller
              'letter_created' => ['required'],
              'recommendation_letter' => ['required_if:letter_created,1'] // ya existe carta por lo tanto es requerido
          ]);
- 
+
+
+         try {
+            // User not the same
+            if (strcmp($request->email, $request->session()->get('user_data')['email']) == 0 || strcmp($request->email, $request->session()->get('user_data')['altern_email']) == 0) {
+                return new JsonResponse(['message' => 'No puedes usar correos registrados en esta cuenta'] , 200);
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()] , 200);
+        }
+
+
          #Se envia correo si todo salio correcto
          if ($request->letter_created == 1) { //cambia string ya que existe carta de recomendacion
              $my_token = $request->recommendation_letter['token'];

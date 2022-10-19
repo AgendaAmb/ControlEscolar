@@ -1,5 +1,5 @@
 <template >
-  <details>
+  <details open>
     <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
       <div class="col-lg-8 col-md-6 col-xs-12">
           <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
@@ -103,26 +103,6 @@
 
                 <div v-if="'presented_at' in errores" class="invalid-feedback">
                   {{ errores.presented_at }}
-                </div>
-              </div>
-
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
-                <label> Vigencia desde: </label>
-                <input v-model="ValidFrom" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_from' in errores }" />
-
-                <div v-if="'valid_from' in errores" class="invalid-feedback">
-                  {{ errores.valid_from }}
-                </div>
-              </div>
-
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
-                <label> Hasta: </label>
-                <input v-model="ValidTo" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_to' in errores }" />
-
-                <div v-if="'valid_to' in errores" class="invalid-feedback">
-                  {{ errores.valid_to }}
                 </div>
               </div>
 

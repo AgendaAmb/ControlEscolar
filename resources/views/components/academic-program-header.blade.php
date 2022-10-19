@@ -1,5 +1,5 @@
 <header class="mb-5 d-block header">
-    <a class="d-block header-image" href="https://ambiental.uaslp.mx">
+    <a class="d-block header-image" href="">
         <img class="ml-auto d-block img-fluid" src="{{ asset('storage/headers/logod.png') }}">
     </a>
     @auth
@@ -19,10 +19,10 @@
                 {{-- Entrevistas organizar --}}
                 <div class="nav-item dropdown">
                     <a id="Expedientes" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" href="#">Mis expedientes</a>
+                        aria-haspopup="true" aria-expanded="false" href="#">Expedientes</a>
                     <div class="dropdown-menu" aria-labelledby="Expedientes">
-                        <a class="dropdown-item" href="{{ route('showRegisterArchives') }}"> Ver mis expedientes </a>
-                        <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}"> Nuevo </a>
+                        <a class="dropdown-item" href="{{ route('showRegisterArchives') }}">Ver</a>
+                        <a class="dropdown-item" href="{{ route('nuevoExpediente.showCreateNewArchive') }}">Añadir</a>
                     </div>
                 </div>
             @endif
