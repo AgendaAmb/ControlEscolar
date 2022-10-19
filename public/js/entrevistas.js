@@ -541,7 +541,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.Confirmed = true;
         _this3.spinnerVisible = false;
         $('#DetalleEntrevista').modal('hide');
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        _this3.spinnerVisible = false;
+      });
       return false;
     },
     reabreEntrevista: function reabreEntrevista() {
