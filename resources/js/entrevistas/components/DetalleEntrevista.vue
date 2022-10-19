@@ -290,6 +290,7 @@ export default {
       }).then(response => {
         console.log(response.data);
         this.Confirmed = true;
+        this.spinnerVisible = false;
         $('#DetalleEntrevista').modal('hide');
       }).catch(error => {
       });
