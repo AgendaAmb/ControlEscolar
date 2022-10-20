@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
 Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
+
 // Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {

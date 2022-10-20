@@ -145,7 +145,7 @@ const app = new Vue({
          * Elimina una entrevista del calendario.
          * @param {*} period 
          */
-         removeInterview(interview_id) {
+        removeInterview(interview_id) {
             var filtered = this.period.interviews.filter(interview => {
                 return interview.id !== interview_id;
             });
