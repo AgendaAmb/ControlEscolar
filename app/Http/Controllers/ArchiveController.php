@@ -100,10 +100,22 @@ class ArchiveController extends Controller
                 //Se guarda el nombre del usuario en el modelo
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 $archive->appliant->setAttribute('name', $user_data['name']);
+                // Filtrao de nombres
+                if (!str_contains($archive->appliant->name,  $user_data['middlename']) ||!str_contains($archive->appliant->name,  $user_data['surname'])) {
+                    $archive->appliant->name = $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname'];
+                } 
 
-                if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
-                    unset($archives[$k]);
-                }
+                // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
+                //     unset($archives[$k]);
+                // }
+            }
+            else {
+                //No existe aplicante por lo que no se podra ver expediente
+                $archive->appliant->setAttribute('name', 'Usuario invalido');
+                $archive->id = -1;
+
+                //Elimina al usuario invalido de la lista
+                unset($archives[$k]);
             }
         }
 
@@ -138,6 +150,16 @@ class ArchiveController extends Controller
                 //Se guarda el nombre del usuario en el modelo
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 $archive->appliant->setAttribute('name', $user_data['name']);
+                // Filtrao de nombres
+                if (str_contains($archive->appliant->name,  $user_data['middlename'])) {
+
+                }else{
+                    $archive->appliant->name = $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname'];
+                }
+                // if (!str_contains($archive->appliant->name,  $user_data['middlename'])) {
+                //         $archive->appliant->name = 'Esto es una prueba';
+                //     } 
+                
 
                 //Eliminar mi archivo para produccion
                 //Descomentar en local
@@ -811,11 +833,11 @@ class ArchiveController extends Controller
         }
 
         try {
-            if (strcmp($appliant->residence_country, 'México') != 0) {
+            if (strcmp($appliant->birth_country, 'México') != 0) {
                 // if (strcmp($request->session()->get('user_data')['nationality'], 'México') != 0) {
 
                 for ($i = 0; $i < count($archive->personalDocuments); $i++) {
-                    if (strcmp($archive->personalDocuments[$i]->name, '2.- CURP expedido por la RENAPO')!=0 && strcmp($archive->personalDocuments[$i]->name, '3.- INE en ampliación tamaño carta')!=0) {
+                    if (strcmp($archive->personalDocuments[$i]->name, '2.- CURP expedido por la RENAPO') != 0 && strcmp($archive->personalDocuments[$i]->name, '3.- INE en ampliación tamaño carta') != 0) {
                         array_push($personal_documents, $archive->personalDocuments[$i]);
                     }
                 }
@@ -889,21 +911,18 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => $e->getMessage()], 200);
         }
 
-
+        $local_appliant = 0;
         try {
             $archive->loadMissing([
                 'entranceDocuments',
                 'academicDegrees.requiredDocuments',
             ]);
-
-            $local_appliant = true;
-
             for ($i = 0; $i < count($archive->academicDegrees); $i++) {
 
                 if ($archive->academicDegrees[$i]->country != null) {
-                    
-                    if (strcmp($archive->academicDegrees[$i]->country , 'México' != 0)) {
-                        $local_appliant = false;
+
+                    if (strcmp($archive->academicDegrees[$i]->country, 'México') != 0) {
+                        $local_appliant = 1;
                     }
                 }
             }
@@ -913,11 +932,10 @@ class ArchiveController extends Controller
 
 
         $entrance_documents = [];
-
         try {
-            if (!$local_appliant) {
+            if ($local_appliant > 0) {
                 for ($i = 0; $i < count($archive->entranceDocuments); $i++) {
-                    if (strcmp($archive->entranceDocuments[$i]->name, '13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)')!=0) {
+                    if (strcmp($archive->entranceDocuments[$i]->name, '13.- Resultados del EXANI III vigente (no aplica a estudiantes extranjeros, comprobante de pago del examen si no tienen resultados o no lo han presentado)') != 0) {
                         array_push($entrance_documents, $archive->entranceDocuments[$i]);
                     }
                 }
@@ -928,7 +946,26 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => $e->getMessage()], 200);
         }
 
-        return $entrance_documents;
+        $return_entrance_documents = [];
+        // Elimina los repetidos
+        try {
+
+            for ($i = 0; $i < count($entrance_documents); $i++) {
+                $repeat = 0;
+                for ($j = $i + 1; $j < count($entrance_documents); $j++) {
+                    if (strcmp($entrance_documents[$i]->name, $entrance_documents[$j]->name) == 0) {
+                        $repeat = 1;
+                    }
+                }
+                if ($repeat <= 0) {
+                    array_push($return_entrance_documents, $entrance_documents[$i]);
+                }
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()], 200);
+        }
+
+        return $return_entrance_documents;
     }
 
     public function getExanniScore(Request $request)

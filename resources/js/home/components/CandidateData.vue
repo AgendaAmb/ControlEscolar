@@ -46,13 +46,13 @@
         :per-page="perPage" :current-page="currentPage" class="text-center h3">
         <template v-slot:cell(Id_Documento)="{ item }">
           <span>
-            <p class="h6">{{ item.ClaveDocumento }}</p>
+            <p class="h6">{{ item.idSolicitud }}</p>
           </span>
         </template>
 
         <template v-slot:cell(Nombre_Documento)="{ item }">
           <span>
-            <p class="h6">{{ item.Nombre}}</p>
+            <p class="h6">{{ item.IdTipoArchivo}}</p>
           </span>
         </template>fieldsImages
 
@@ -61,10 +61,10 @@
             <a :href="getLinkToDocument(item.ClaveDocumento)" target="_blank">Ver documento</a>
           </span> -->
 
-          <button id="btn-downloand" variant="primary" style="width:100%;height:100%!important"
-            v-on:click="getDocumentToDownloand(item.ClaveDocumento, 'OLD_CONTROL_ESCOLAR')">
+          <b-button id="btn-downloand" variant="primary"
+            v-on:click="getDocumentToDownloandIMAREC(item.idSolicitud, item.IdTipoArchivo, 'IMAREC')">
             <p>Descargar</p>
-          </button>
+          </b-button>
         </template>
       </b-table>
       <!-- Pagination bottom -->
@@ -240,6 +240,10 @@ export default {
     },
 
     getDocumentToDownloandIMAREC(idSolicitud, IdTipoArchivo, nameDatabase) {
+
+      console.log(idSolicitud);
+      console.log(IdTipoArchivo);
+      console.log(nameDatabase);
       axios
         .get("/controlescolar/oldControlEscolar/viewOldDocumentIMAREC/idSolicitud/" + idSolicitud + '/idTipoArchivo/' + IdTipoArchivo + '/database/' + nameDatabase)
         .then((response) => {
@@ -247,17 +251,22 @@ export default {
           // console.log(response.data);
 
           // Transform hexadecimal string to base64 string
-          var hex = response.data.Datos;
+          // var hex = response.data.Datos;
 
-          hex = hex.substring(2, hex.length);
+          // hex = hex.substring(2, hex.length);
 
-          let data_base64 = btoa(String.fromCharCode.apply(null,
-            hex.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
-          );
-          // let data_base64 = btoa(hex.match(/\w{2}/g).map(function(a){return String.fromCharCode(parseInt(a, 16));} ).join(""));
+          // // let data_base64 = btoa(String.fromCharCode.apply(null,
+          // //   hex.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
+          // // );
+          // let binary = '';
+          // for (let i = 0; i < hex.length; i++) {
+          //   binary += String.fromCharCode(hex.charCodeAt(i) & 0xff);
+          // }
+          // // let data_base64 = btoa(hex.match(/\w{2}/g).map(function(a){return String.fromCharCode(parseInt(a, 16));} ).join(""));
+          // let data_base64 = btoa(binary);
+          let data_base64 = response.data.Datos;
 
-
-          console.log(data_base64); //este es ya el base64
+          // c //este es ya el base64
           // if not is an image
           // let data_base64 = this.hexToBase64(response.data.Datos);
           let byteCharacters = atob(data_base64);
@@ -268,9 +277,9 @@ export default {
           let byteArray = new Uint8Array(byteNumber);
           let blob = new Blob([byteArray], { type: response.data.mimetype });
           blob.name = 'Solicitud ' + response.data.IdSolicitud + '  | TipoArchivo ' + response.data.IdTipoArchivo;
-          blob.base64 = response.data.Datos;
+          blob.base64 = data_base64;
           var blobUrl = URL.createObjectURL(blob);
-
+          console.log(blob);
           const link = document.createElement("a");
           link.href = blobUrl;
           link.download = 'Solicitud ' + response.data.IdSolicitud + '  | TipoArchivo ' + response.data.IdTipoArchivo;
@@ -285,6 +294,13 @@ export default {
             })
           );
           document.body.removeChild(link);
+
+          // var a = document.createElement('a');
+          // a.href = "img.png";
+          // a.download = "output.png";
+          // document.body.appendChild(a);
+          // a.click();
+          // document.body.removeChild(a);
 
         })
         .catch((error) => {
