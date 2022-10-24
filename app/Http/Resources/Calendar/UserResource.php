@@ -42,7 +42,8 @@ class UserResource extends JsonResource
             'surname' => $miPortal_user->surname,
             'email' => $miPortal_user->email,
             'roles' => $this->roles,
-            'user_type' => $this->user_type,
+            // 'user_type' => $this->user_type,
+            'user_type' => $this->type
         ];
     }
 }
