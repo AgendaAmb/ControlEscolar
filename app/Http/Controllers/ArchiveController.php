@@ -101,15 +101,14 @@ class ArchiveController extends Controller
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 $archive->appliant->setAttribute('name', $user_data['name']);
                 // Filtrao de nombres
-                if (!str_contains($archive->appliant->name,  $user_data['middlename']) ||!str_contains($archive->appliant->name,  $user_data['surname'])) {
+                if (!str_contains($archive->appliant->name,  $user_data['middlename']) || !str_contains($archive->appliant->name,  $user_data['surname'])) {
                     $archive->appliant->name = $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname'];
-                } 
+                }
 
                 // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
                 //     unset($archives[$k]);
                 // }
-            }
-            else {
+            } else {
                 //No existe aplicante por lo que no se podra ver expediente
                 $archive->appliant->setAttribute('name', 'Usuario invalido');
                 $archive->id = -1;
@@ -149,23 +148,25 @@ class ArchiveController extends Controller
                 $user_data = $user_data_collect[0];
                 //Se guarda el nombre del usuario en el modelo
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
-                $archive->appliant->setAttribute('name', $user_data['name']);
                 // Filtrao de nombres
-                if (str_contains($archive->appliant->name,  $user_data['middlename'])) {
 
-                }else{
-                    $archive->appliant->name = $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname'];
+               
+                // Contiene mas que el middlename
+                // Puede repetirse el middlename e incluir el surname
+                if ($archive->appliant->name != NULL) {
+                    // $name = explode(' ', $archive->appliant->name);
+                    // $archive->appliant->setAttribute('name', $user_data['name'] );
+                    // $archive->appliant->name = $user_data['name'] . ' ' . $name[0] . ' ' . $name[sizeof($name)-1];
+                } else {
+                    // $archive->appliant->setAttribute('name', $middlename[0] . ' - ' . count($middlename));
+                    // $archive->appliant->setAttribute('name',$archive->appliant->name);
+                    $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 }
-                // if (!str_contains($archive->appliant->name,  $user_data['middlename'])) {
-                //         $archive->appliant->name = 'Esto es una prueba';
-                //     } 
-                
 
-                //Eliminar mi archivo para produccion
-                //Descomentar en local
-                //Quitas a Ulises y a Rodrigo
-                // if ($user_data['id'] == 298428 || $user_data['id'] == 245241 || $user_data['id']  == 291395 || $user_data['id']  == 241294  || $user_data['id']  == 246441) {
-                //     unset($archives[$k]);
+                // if (!str_contains(strval($user_data['name']),  strval($user_data['middlename'])) || !str_contains(strval($user_data['name']), strval($user_data['surname']))) {
+                //     $archive->appliant->setAttribute('name', $user_data['middlename']);
+                // } else {
+                //     $archive->appliant->setAttribute('name', $user_data['name']);
                 // }
             } else {
                 //No existe aplicante por lo que no se podra ver expediente
