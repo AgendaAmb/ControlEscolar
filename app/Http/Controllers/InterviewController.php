@@ -31,6 +31,7 @@ use App\Helpers\MiPortalService;
 use App\Mail\UpdateDocumentsInterview;
 use App\Models\Announcement;
 use App\Models\ArchiveRequiredDocument;
+use App\Models\Period;
 use App\Models\RequiredDocument;
 use App\Models\User;
 
@@ -65,25 +66,24 @@ class InterviewController extends Controller
 
     public function calendario2(Request $request)
     {
-        try {
-            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+
+        $active_period = Period::orderBy('created_at', 'desc')
+                            ->where('finished', '!=', '1')
+                            ->with('announcements.archives')
+                            ->first();
+        
+        $active_period->loadMissing('rooms');
+
+        $calendar_resource = new CalendarResource($active_period);
+        
+        return $calendar_resource;
+
+        if(!$active_period){
+            return '<h1>no active periods</h1>';
         }
 
-        // dd($calendar_resource);
-        return $calendar_resource;
+        return $active_period;
     }
-
-    // public function calendario3(Request $request)
-    // {
-
-    //     $service = new MiPortalService;
-    //     $user_data_collect =  $service->miPortalGet('api/usuarios', ['filter[id]' => 291395])->collect();
-
-    //     return $user_data_collect;
-    // }
-
 
     /**
      * Devuelve la vista del programa de entrevistas.
