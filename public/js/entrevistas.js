@@ -31,6 +31,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "calendario-entrevistas",
+  mounted: function mounted() {},
   components: {
     Month: _views_Month__WEBPACK_IMPORTED_MODULE_3__["default"],
     Week: _views_Week__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -38,6 +39,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     Interview: _Interview_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   props: {
+    interviews: {
+      type: Array,
+      "default": {}
+    },
+    announcements: {
+      type: Array,
+      "default": {}
+    },
     // Periodo de entrevistas.
     period: {
       type: Object,
@@ -155,7 +164,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     },
     newEvents: function newEvents() {
       var _this = this;
-      return this.period.interviews.map(function (e) {
+      return this.interviews.map(function (e) {
         return new _Event__WEBPACK_IMPORTED_MODULE_2__["default"](e).bindGetter("displayText", _this.eventDisplay);
       });
     },
@@ -250,7 +259,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
     },
     ActiveDateInterviews: function ActiveDateInterviews() {
       var activeDate = this.ActiveDate.format("YYYY-MM-DD");
-      return this.period.interviews.filter(function (interview) {
+      return this.interviews.filter(function (interview) {
         var interviewDate = moment__WEBPACK_IMPORTED_MODULE_1___default()(interview.date);
         return interviewDate.isSame(activeDate);
       });
@@ -560,9 +569,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     eliminarEntrevista: function eliminarEntrevista() {
       var _this5 = this;
       if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false) return false;
+      console.log("hola");
       axios.post('/controlescolar/entrevistas/deleteInterview', {
         id: this.id
       }).then(function (response) {
+        console.log(response.data);
         _this5.$emit('interview_deleted', _this5.id);
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {});
@@ -794,7 +805,7 @@ __webpack_require__.r(__webpack_exports__);
     // Fecha máxima del inicio del periodo.
     max_date: String,
     // Postulantes.
-    appliants: Array,
+    announcements: Array,
     // Salas presenciales disponibles.
     rooms: Array,
     // Salas virtuales disponibles.
@@ -810,6 +821,7 @@ __webpack_require__.r(__webpack_exports__);
       start_time: null,
       end_time: null,
       appliant: null,
+      selected_program: null,
       professor: null,
       room: null,
       sv: false
@@ -849,12 +861,7 @@ __webpack_require__.r(__webpack_exports__);
         end_time: this.end_time,
         room_id: this.room.id
       };
-      // console.log(data);
-
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', data).then(function (response) {
-        // console.log(response.data);
-
-        // Actualizar la entrevista en el front
         var data = response.data;
         _this.$emit('nuevaentrevista', {
           id: data.id,
@@ -865,7 +872,7 @@ __webpack_require__.r(__webpack_exports__);
           appliant: data.appliant,
           intention_letter_professor: data.intention_letter_professor,
           academic_areas: data.academic_areas
-        });
+        }, _this.selected_program);
 
         // Actualizar la información para poder agendar una nueva entrevista
         _this.id = -1;
@@ -876,7 +883,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.end_time = null;
         _this.appliant = null;
         $('#NuevaEntrevista').modal('hide');
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        console.log("error");
+      });
+      console.log("exito");
     }
   }
 });
@@ -1274,16 +1284,19 @@ var render = function render() {
     on: {
       click: _vm.next
     }
-  }, [_vm._v("\n        Sig\n      ")])]), _vm._v(" "), _c("div", [_c("h1", {
-    staticClass: "v-cal-header__title mes",
-    staticStyle: {
-      "font-size": "2em"
-    }
-  }, [_vm._v("\n        " + _vm._s(_vm.period.actual_program) + "\n      ")]), _vm._v(" "), _c("h1", {
+  }, [_vm._v("\n        Sig\n      ")])]), _vm._v(" "), _c("div", [_vm._l(_vm.announcements, function (item) {
+    return _c("h1", {
+      key: item.id,
+      staticClass: "v-cal-header__title mes",
+      staticStyle: {
+        "font-size": "2em"
+      }
+    }, [_vm._v("\n        " + _vm._s(item.academic_program) + "\n      ")]);
+  }), _vm._v(" "), _c("h1", {
     staticClass: "v-cal-header__title mes"
   }, [_vm._v(_vm._s(_vm.calendarMonth))]), _vm._v(" "), _c("h1", {
     staticClass: "d-block v-cal-header__title año"
-  }, [_vm._v(_vm._s(_vm.calendarYear))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.calendarYear))])], 2), _vm._v(" "), _c("div", {
     staticClass: "btn-group",
     attrs: {
       role: "group"
@@ -1712,6 +1725,41 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group col-12"
+  }, [_c("label", [_vm._v(" Programa academico ")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selected_program,
+      expression: "selected_program"
+    }],
+    staticClass: "form-control",
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selected_program = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, [_c("option", {
+    attrs: {
+      selected: ""
+    },
+    domProps: {
+      value: null
+    }
+  }, [_vm._v("Escoge un programa ")]), _vm._v(" "), _vm._l(_vm.announcements, function (item) {
+    return _c("option", {
+      key: item.id,
+      domProps: {
+        value: item
+      }
+    }, [_vm._v("\n                  " + _vm._s(item.academic_program) + "\n                ")]);
+  })], 2)]), _vm._v(" "), _vm.selected_program != null ? _c("div", {
+    staticClass: "form-group col-12"
   }, [_c("label", [_vm._v(" Postulante ")]), _vm._v(" "), _c("select", {
     directives: [{
       name: "model",
@@ -1738,14 +1786,14 @@ var render = function render() {
     domProps: {
       value: null
     }
-  }, [_vm._v("Escoge un postulante ")]), _vm._v(" "), _vm._l(_vm.appliants, function (appliant) {
+  }, [_vm._v("Escoge un postulante ")]), _vm._v(" "), _vm._l(_vm.selected_program.appliants, function (appliant) {
     return _c("option", {
       key: appliant.id,
       domProps: {
         value: appliant
       }
     }, [_vm._v("\n                  " + _vm._s(appliant.name) + "\n                ")]);
-  })], 2)]), _vm._v(" "), _c("div", {
+  })], 2)]) : _vm._e(), _vm._v(" "), _vm.selected_program != null ? _c("div", {
     staticClass: "form-group col-12"
   }, [_c("label", [_vm._v(" Profesor que otorgó la carta de intención ")]), _vm._v(" "), _c("input", {
     directives: [{
@@ -1768,7 +1816,7 @@ var render = function render() {
         _vm.IntentionLetterProfessor = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _vm.sv === false ? _c("div", {
+  })]) : _vm._e(), _vm._v(" "), _vm.sv === false ? _c("div", {
     staticClass: "form-group col-12"
   }, [_c("label", [_vm._v(" Lugar de la entrevista ")]), _vm._v(" "), _c("select", {
     directives: [{
@@ -44596,9 +44644,9 @@ Vue.use(v_calendar_scheduler__WEBPACK_IMPORTED_MODULE_0__["default"], {
 var app = new Vue({
   el: '#app',
   data: {
-    appliants: appliants,
     loggedUser: user,
     period: period,
+    interviews: interviews,
     date: null,
     selectedInterview: null,
     announcements: announcements
@@ -44615,16 +44663,18 @@ var app = new Vue({
      * @param {*} period 
      */actualizaPeriodo: function actualizaPeriodo(period) {
       if (period.hasOwnProperty('id')) Vue.set(this, 'period', period);
-      Vue.set(this, 'interviews', period.interviews);
+      Vue.set(this, 'interviews', interviews);
     },
+    // ! VA A FALLAR AQUI AL AGREGAR ENTREVISTA
     /**
      * Agrega una nueva entrevista.
      * @param {*} period 
-     */agregaEntrevista: function agregaEntrevista(entrevista) {
-      this.period.interviews.push(entrevista);
-      Vue.set(this, 'appliants', this.appliants.filter(function (appliant) {
+     */
+    agregaEntrevista: function agregaEntrevista(entrevista, selected_program) {
+      this.interviews.push(entrevista);
+      selected_program.appliants = selected_program.appliants.filter(function (appliant) {
         return appliant.id !== entrevista.appliant.id;
-      }));
+      });
     },
     /**
      * Despliega el modal de los detalles de la entrevista.
@@ -44680,10 +44730,9 @@ var app = new Vue({
      * Elimina una entrevista del calendario.
      * @param {*} period 
      */removeInterview: function removeInterview(interview_id) {
-      var filtered = this.period.interviews.filter(function (interview) {
+      this.interviews = this.interviews.filter(function (interview) {
         return interview.id !== interview_id;
       });
-      Vue.set(this.period, 'interviews', filtered);
     },
     /**
      * Determina si el usuario autenticado es administrador.
@@ -44725,7 +44774,7 @@ var app = new Vue({
      * Confirma una entrevista.
      */confirmInterview: function confirmInterview(newValue) {
       var _this = this;
-      var interview = this.period.interviews.find(function (interview) {
+      var interview = this.interviews.find(function (interview) {
         return interview.id === _this.selectedInterview.id;
       });
 

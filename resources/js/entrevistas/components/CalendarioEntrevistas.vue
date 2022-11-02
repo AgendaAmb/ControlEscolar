@@ -1,6 +1,7 @@
 <template>
   <div class="d-flex flex-column">
-    <div v-if="IsActive === true" class="calendar-header">
+    
+    <div v-if="IsActive === true" class="calendar-header">      
       <div class="btn-group" role="group">
         <button :disabled="!isPrevAllowed" class="v-cal-button" @click="prev">
           Prev
@@ -10,8 +11,8 @@
         </button>
       </div>
       <div>
-        <h1 style="font-size: 2em" class="v-cal-header__title mes">
-          {{ period.actual_program }}
+        <h1 v-for="item in announcements" :key="item.id" style="font-size: 2em" class="v-cal-header__title mes">
+          {{ item.academic_program }}
         </h1>
         <h1 class="v-cal-header__title mes">{{ calendarMonth }}</h1>
         <h1 class="d-block v-cal-header__title año">{{ calendarYear }}</h1>
@@ -31,7 +32,6 @@
         >
           Semana
         </button>
-        <!-- <button class="v-cal-button" @click="switchView('day')" :class="calendarViewButtonClass('day')"> Día </button> -->
       </div>
     </div>
 
@@ -42,9 +42,6 @@
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista">
         Nueva Entrevista
       </button>
-      <!-- <button class="v-cal-button my-3" @click="mandarCorreos">
-        Mandar correos
-      </button> -->
     </div>
 
     <div v-if="IsActive" class="calendar-body">
@@ -69,6 +66,7 @@
         </interview>
       </div>
     </div>
+
     <div
       v-if="IsActive === false && this.$root.loggedUserIsSchoolControl()"
       class="mx-auto"
@@ -81,9 +79,11 @@
         Programar periodo de entrevistas
       </button>
     </div>
+
     <div v-else-if="period === null">
       <h1>Periodo de entrevistas cerrado</h1>
     </div>
+
   </div>
 </template>
 
@@ -118,6 +118,9 @@ import Interview from "./Interview.vue";
 export default {
   name: "calendario-entrevistas",
 
+  mounted(){
+  },
+
   components: {
     Month,
     Week,
@@ -126,6 +129,17 @@ export default {
   },
 
   props: {
+
+    interviews:{
+      type: Array,
+      default: {},
+    },
+
+    announcements:{
+      type: Array,
+      default: {},
+    },
+
     // Periodo de entrevistas.
     period: {
       type: Object,
@@ -271,7 +285,7 @@ export default {
     },
 
     newEvents() {
-      return this.period.interviews.map((e) => {
+      return this.interviews.map((e) => {
         return new Event(e).bindGetter("displayText", this.eventDisplay);
       });
     },
@@ -391,7 +405,7 @@ export default {
     ActiveDateInterviews() {
       const activeDate = this.ActiveDate.format("YYYY-MM-DD");
 
-      return this.period.interviews.filter((interview) => {
+      return this.interviews.filter((interview) => {
         const interviewDate = moment(interview.date);
         return interviewDate.isSame(activeDate);
       });

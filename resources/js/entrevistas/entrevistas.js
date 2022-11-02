@@ -49,9 +49,9 @@ Vue.use(VueScheduler, {
 const app = new Vue({
     el: '#app',
     data:{
-        appliants: appliants,
         loggedUser: user,
         period: period,
+        interviews: interviews,
         date: null,
         selectedInterview: null,
         announcements: announcements
@@ -73,19 +73,20 @@ const app = new Vue({
             if (period.hasOwnProperty('id'))
                 Vue.set(this, 'period', period);
                 
-            Vue.set(this, 'interviews', period.interviews);
+            Vue.set(this, 'interviews', interviews);
         },
 
+        // ! VA A FALLAR AQUI AL AGREGAR ENTREVISTA
         /**
          * Agrega una nueva entrevista.
          * @param {*} period 
          */
-        agregaEntrevista(entrevista){
-            this.period.interviews.push(entrevista);
+        agregaEntrevista(entrevista, selected_program){
+            this.interviews.push(entrevista);
 
-            Vue.set(this, 'appliants', this.appliants.filter(appliant => {
-                return appliant.id !== entrevista.appliant.id
-            }));
+            selected_program.appliants = selected_program.appliants.filter(function(appliant) {
+                return appliant.id !== entrevista.appliant.id;
+            });
         },
 
         /**
@@ -146,11 +147,9 @@ const app = new Vue({
          * @param {*} period 
          */
         removeInterview(interview_id) {
-            var filtered = this.period.interviews.filter(interview => {
+            this.interviews = this.interviews.filter(interview => {
                 return interview.id !== interview_id;
-            });
-
-            Vue.set(this.period, 'interviews', filtered);
+            }); 
         },
 
         /**
@@ -206,7 +205,7 @@ const app = new Vue({
          */
         confirmInterview(newValue){
             
-            var interview = this.period.interviews.find(interview => {
+            var interview = this.interviews.find(interview => {
                 return interview.id === this.selectedInterview.id;
             })
         

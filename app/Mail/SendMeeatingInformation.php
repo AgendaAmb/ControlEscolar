@@ -11,7 +11,6 @@ class SendMeeatingInformation extends Mailable
 {
     use Queueable, SerializesModels;
 
-   
     public $Interview;
     public $Student;
     public $Room;
@@ -25,7 +24,6 @@ class SendMeeatingInformation extends Mailable
      */
     public function __construct($Interview,$Student,$academic_program,$Room,$archive_id,$url_ContactoAA)
     {
-     
         $this->Interview= $Interview;
         $this->Student=$Student;
         $this->Room=$Room;
@@ -48,6 +46,7 @@ class SendMeeatingInformation extends Mailable
         }else{
             $correo = 'pmpca@uaslp.mx';
         }
+        
         return $this->from($correo, 'DETALLES DE ENTREVISTA')->markdown('Correos.MeetingPostulante')->subject('Información de entrevista');
     }
 }

@@ -11,6 +11,11 @@
 
 <body>
     <main class="container-fluid">
+        <p>{{ $academic_program['name']}}</p>
+        <p>{{ $Student->name }}</p>
+        <p>{{ $Interview->start_time }}</p>
+        <p>{{ $Room }}</p>
+
         <div class="row">
             <div class="col-12">
                 <img src="{{ asset('imagenes/logod.png') }}">
@@ -36,23 +41,22 @@
 
             <div class="container my-4">
                 <p>Estimado(a)
-                    <strong>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</strong>
+                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
                     selección 2022 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
                     estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
                     se llevará a cabo:
                 </p>
                 <table class="table" style="max-width: 800px; margin: 0 auto;">
-
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</td>
+                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
 
                         </tr>
                         <tr>
                             <td scope="row">Correo electrónico</td>
-                            <td>{{ $Student['email'] }} </td>
+                            <td>{{ $Student->email }} </td>
                         </tr>
                         <tr>
                             <td>Día de la entrevista</td>
@@ -76,7 +80,9 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="container">
+
                 @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' || $academic_program['alias'] == 'enrem')
                     <div class="row mt-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las

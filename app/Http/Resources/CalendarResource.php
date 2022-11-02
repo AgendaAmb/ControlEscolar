@@ -161,23 +161,24 @@ class CalendarResource extends JsonResource
         $announcements = $this->announcements->map(function ($announcement) use ($request){
 
             $AnnouncementArchives = $announcement->archives;
-            // * Load archive´s missing data
+            // * Load archive´s missing data.
             $AnnouncementArchives->loadMissing('appliant', 'intentionLetter');
-
-            // * Filter the archives that have status between 5 and 7 
+            // * Filter the archives that have status between 5 and 7.
             $AnnouncementArchives = $AnnouncementArchives->filter(
                 fn ($archive) => ($archive->status === 5 || $archive->status === 7)
             // * Filter the archives that have appliant and intention letter info.
             )->filter(function($archive){
                 $archive = $archive->toArray();
                 return $archive['appliant'] != null && $archive['intention_letter'] != null;
+            // * Filter the archives that doesn't have interview programed.
+            })->filter(function ($archive) {
+                return count($archive->appliant->interviews) == 0?true:false;
+            // * Filter the archives that doesn't have interview programed.
             })->map(function ($archive) use ($request) {
-
                 // ! Get the user data from the AA database using the second available connection, db2 
                 $UserPortalData = $this->getMiPortalUser($archive->appliant->id);
                 $archive = $archive->toArray();
                 $ILProfessorPortalData = $this->getMiPortalUser($archive['intention_letter']['user_id']);
-
                 return [
                     'id' => $UserPortalData['id'],
                     'type' => $UserPortalData['type'],
@@ -308,6 +309,15 @@ class CalendarResource extends JsonResource
      */
     public function toArray($request)
     {
+        // * Period doesn´t exist
+        if(!isset($this->id)){
+            return [
+                'interviews' => null,
+                'announcements' => null,
+                'user' => (new UserResource($request->user()))->toArray($request),
+                'period' => null
+            ];
+        }
 
         $period_data = $this->setPeriod($request);
         $announcements = $this->setAnnouncements($request);
