@@ -34650,7 +34650,8 @@ var app = new Vue({
     /**
     * Determina si el usuario autenticado es profesor de núcleo básico.
     * @param {*} period 
-    */loggedUserIsPNB: function loggedUserIsPNB() {
+    */
+    loggedUserIsPNB: function loggedUserIsPNB() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'profesor_nb';
       });
@@ -34659,7 +34660,8 @@ var app = new Vue({
     /**
      * Determina si el usuario autenticado es administrador.
      * @param {*} period 
-     */loggedUserIsAdmin: function loggedUserIsAdmin() {
+     */
+    loggedUserIsAdmin: function loggedUserIsAdmin() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'admin';
       });
@@ -34668,7 +34670,8 @@ var app = new Vue({
     /**
      * Determina si el usuario autenticado tiene el rol de control escolar.
      * @param {*} period 
-     */loggedUserIsSchoolControl: function loggedUserIsSchoolControl() {
+     */
+    loggedUserIsSchoolControl: function loggedUserIsSchoolControl() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'control_escolar';
       });
@@ -34677,7 +34680,8 @@ var app = new Vue({
     /**
      * Determina si el usuario autenticado tiene el rol de comite academico.
      * @param {*} period 
-     */loggedUserIsCA: function loggedUserIsCA() {
+     */
+    loggedUserIsCA: function loggedUserIsCA() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'comite_academico';
       });
@@ -34686,7 +34690,8 @@ var app = new Vue({
     /**
      * Determina si el usuario autenticado es administrador.
      * @param {*} period 
-     */loggedUserIsCoordinador: function loggedUserIsCoordinador() {
+     */
+    loggedUserIsCoordinador: function loggedUserIsCoordinador() {
       var roles = this.loggedUser.roles.filter(function (role) {
         return role.name === 'coordinador';
       });

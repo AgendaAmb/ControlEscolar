@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
 Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
+
 // Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {
@@ -189,8 +190,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Ver y descargar tipos de archivos.
         Route::get('expediente/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('get');
 
-        #Carta de recomendación {invitado-
-        # referente hacia un postulante}
+        #Carta de recomendación {invitado - referente hacia un postulante}
         Route::post('/sentEmailRecommendationLetter', [ExternalRecommendationLetter::class, 'sentEmailRecommendationLetter']);
         Route::get('/seeAnsweredRecommendationLetter/{archive_id}/{rl_id}', [ExternalRecommendationLetter::class, 'seeAnsweredRecommendationLetter'])->name('seeAnswered');
     });
@@ -199,13 +199,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb|comite_academico|coordinador'])->name('entrevistas.')->group(function () {
 
         # Calendario
-        Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
-
-        Route::get('calendario1', [InterviewController::class, 'calendario1'])->name('calendario1');
-
-        Route::get('calendario2', [InterviewController::class, 'calendario2'])->name('calendario2');
-
-        // Route::get('calendario3', [InterviewController::class, 'calendario3'])->name('calendario3');
+        Route::get('calendario', [InterviewController::class, 'calendario2'])->name('calendario');
 
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');

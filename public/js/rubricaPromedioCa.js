@@ -65454,6 +65454,7 @@ exports.assertTSParenthesizedType = assertTSParenthesizedType;
 exports.assertTSPropertySignature = assertTSPropertySignature;
 exports.assertTSQualifiedName = assertTSQualifiedName;
 exports.assertTSRestType = assertTSRestType;
+exports.assertTSSatisfiesExpression = assertTSSatisfiesExpression;
 exports.assertTSStringKeyword = assertTSStringKeyword;
 exports.assertTSSymbolKeyword = assertTSSymbolKeyword;
 exports.assertTSThisType = assertTSThisType;
@@ -66449,6 +66450,10 @@ function assertTSAsExpression(node, opts) {
   assert("TSAsExpression", node, opts);
 }
 
+function assertTSSatisfiesExpression(node, opts) {
+  assert("TSSatisfiesExpression", node, opts);
+}
+
 function assertTSTypeAssertion(node, opts) {
   assert("TSTypeAssertion", node, opts);
 }
@@ -67055,6 +67060,7 @@ exports.tSParenthesizedType = exports.tsParenthesizedType = tsParenthesizedType;
 exports.tSPropertySignature = exports.tsPropertySignature = tsPropertySignature;
 exports.tSQualifiedName = exports.tsQualifiedName = tsQualifiedName;
 exports.tSRestType = exports.tsRestType = tsRestType;
+exports.tSSatisfiesExpression = exports.tsSatisfiesExpression = tsSatisfiesExpression;
 exports.tSStringKeyword = exports.tsStringKeyword = tsStringKeyword;
 exports.tSSymbolKeyword = exports.tsSymbolKeyword = tsSymbolKeyword;
 exports.tSThisType = exports.tsThisType = tsThisType;
@@ -68930,6 +68936,14 @@ function tsAsExpression(expression, typeAnnotation) {
   });
 }
 
+function tsSatisfiesExpression(expression, typeAnnotation) {
+  return (0, _validateNode.default)({
+    type: "TSSatisfiesExpression",
+    expression,
+    typeAnnotation
+  });
+}
+
 function tsTypeAssertion(typeAnnotation, expression) {
   return (0, _validateNode.default)({
     type: "TSTypeAssertion",
@@ -70310,6 +70324,12 @@ Object.defineProperty(exports, "TSRestType", ({
   enumerable: true,
   get: function () {
     return _index.tsRestType;
+  }
+}));
+Object.defineProperty(exports, "TSSatisfiesExpression", ({
+  enumerable: true,
+  get: function () {
+    return _index.tsSatisfiesExpression;
   }
 }));
 Object.defineProperty(exports, "TSStringKeyword", ({
@@ -71956,7 +71976,7 @@ defineType("AssignmentExpression", {
       }()
     },
     left: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
     },
     right: {
       validate: (0, _utils.assertNodeType)("Expression")
@@ -72160,7 +72180,7 @@ defineType("ForInStatement", {
   aliases: ["Scopable", "Statement", "For", "BlockParent", "Loop", "ForXStatement"],
   fields: {
     left: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("VariableDeclaration", "LVal") : (0, _utils.assertNodeType)("VariableDeclaration", "Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
     },
     right: {
       validate: (0, _utils.assertNodeType)("Expression")
@@ -72591,7 +72611,7 @@ defineType("ObjectProperty", {
   visitor: ["key", "value", "decorators"],
   aliases: ["UserWhitespacable", "Property", "ObjectMember"],
   validate: function () {
-    const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSNonNullExpression", "TSTypeAssertion");
+    const pattern = (0, _utils.assertNodeType)("Identifier", "Pattern", "TSAsExpression", "TSSatisfiesExpression", "TSNonNullExpression", "TSTypeAssertion");
     const expression = (0, _utils.assertNodeType)("Expression");
     return function (parent, key, node) {
       if (!process.env.BABEL_TYPES_8_BREAKING) return;
@@ -72607,7 +72627,7 @@ defineType("RestElement", {
   deprecatedAlias: "RestProperty",
   fields: Object.assign({}, patternLikeCommon(), {
     argument: {
-      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+      validate: !process.env.BABEL_TYPES_8_BREAKING ? (0, _utils.assertNodeType)("LVal") : (0, _utils.assertNodeType)("Identifier", "ArrayPattern", "ObjectPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
     },
     optional: {
       validate: (0, _utils.assertValueType)("boolean"),
@@ -72758,7 +72778,7 @@ defineType("VariableDeclaration", {
       optional: true
     },
     kind: {
-      validate: (0, _utils.assertOneOf)("var", "let", "const")
+      validate: (0, _utils.assertOneOf)("var", "let", "const", "using")
     },
     declarations: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("VariableDeclarator")))
@@ -72834,7 +72854,7 @@ defineType("AssignmentPattern", {
   aliases: ["Pattern", "PatternLike", "LVal"],
   fields: Object.assign({}, patternLikeCommon(), {
     left: {
-      validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression")
+      validate: (0, _utils.assertNodeType)("Identifier", "ObjectPattern", "ArrayPattern", "MemberExpression", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression")
     },
     right: {
       validate: (0, _utils.assertNodeType)("Expression")
@@ -73077,7 +73097,7 @@ defineType("ForOfStatement", {
         }
 
         const declaration = (0, _utils.assertNodeType)("VariableDeclaration");
-        const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSTypeAssertion", "TSNonNullExpression");
+        const lval = (0, _utils.assertNodeType)("Identifier", "MemberExpression", "ArrayPattern", "ObjectPattern", "TSAsExpression", "TSSatisfiesExpression", "TSTypeAssertion", "TSNonNullExpression");
         return function (node, key, val) {
           if ((0, _is.default)("VariableDeclaration", val)) {
             declaration(node, key, val);
@@ -73105,6 +73125,10 @@ defineType("ImportDeclaration", {
     assertions: {
       optional: true,
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportAttribute")))
+    },
+    module: {
+      optional: true,
+      validate: (0, _utils.assertValueType)("boolean")
     },
     specifiers: {
       validate: (0, _utils.chain)((0, _utils.assertValueType)("array"), (0, _utils.assertEach)((0, _utils.assertNodeType)("ImportSpecifier", "ImportDefaultSpecifier", "ImportNamespaceSpecifier")))
@@ -74997,14 +75021,16 @@ defineType("TSInstantiationExpression", {
     typeParameters: (0, _utils.validateOptionalType)("TSTypeParameterInstantiation")
   }
 });
-defineType("TSAsExpression", {
+const TSTypeExpression = {
   aliases: ["Expression", "LVal", "PatternLike"],
   visitor: ["expression", "typeAnnotation"],
   fields: {
     expression: (0, _utils.validateType)("Expression"),
     typeAnnotation: (0, _utils.validateType)("TSType")
   }
-});
+};
+defineType("TSAsExpression", TSTypeExpression);
+defineType("TSSatisfiesExpression", TSTypeExpression);
 defineType("TSTypeAssertion", {
   aliases: ["Expression", "LVal", "PatternLike"],
   visitor: ["typeAnnotation", "expression"],
@@ -77183,6 +77209,7 @@ exports.isTSParenthesizedType = isTSParenthesizedType;
 exports.isTSPropertySignature = isTSPropertySignature;
 exports.isTSQualifiedName = isTSQualifiedName;
 exports.isTSRestType = isTSRestType;
+exports.isTSSatisfiesExpression = isTSSatisfiesExpression;
 exports.isTSStringKeyword = isTSStringKeyword;
 exports.isTSSymbolKeyword = isTSSymbolKeyword;
 exports.isTSThisType = isTSThisType;
@@ -80735,6 +80762,21 @@ function isTSAsExpression(node, opts) {
   return false;
 }
 
+function isTSSatisfiesExpression(node, opts) {
+  if (!node) return false;
+  const nodeType = node.type;
+
+  if (nodeType === "TSSatisfiesExpression") {
+    if (typeof opts === "undefined") {
+      return true;
+    } else {
+      return (0, _shallowEqual.default)(node, opts);
+    }
+  }
+
+  return false;
+}
+
 function isTSTypeAssertion(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
@@ -80979,7 +81021,7 @@ function isExpression(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
+  if ("ArrayExpression" === nodeType || "AssignmentExpression" === nodeType || "BinaryExpression" === nodeType || "CallExpression" === nodeType || "ConditionalExpression" === nodeType || "FunctionExpression" === nodeType || "Identifier" === nodeType || "StringLiteral" === nodeType || "NumericLiteral" === nodeType || "NullLiteral" === nodeType || "BooleanLiteral" === nodeType || "RegExpLiteral" === nodeType || "LogicalExpression" === nodeType || "MemberExpression" === nodeType || "NewExpression" === nodeType || "ObjectExpression" === nodeType || "SequenceExpression" === nodeType || "ParenthesizedExpression" === nodeType || "ThisExpression" === nodeType || "UnaryExpression" === nodeType || "UpdateExpression" === nodeType || "ArrowFunctionExpression" === nodeType || "ClassExpression" === nodeType || "MetaProperty" === nodeType || "Super" === nodeType || "TaggedTemplateExpression" === nodeType || "TemplateLiteral" === nodeType || "YieldExpression" === nodeType || "AwaitExpression" === nodeType || "Import" === nodeType || "BigIntLiteral" === nodeType || "OptionalMemberExpression" === nodeType || "OptionalCallExpression" === nodeType || "TypeCastExpression" === nodeType || "JSXElement" === nodeType || "JSXFragment" === nodeType || "BindExpression" === nodeType || "DoExpression" === nodeType || "RecordExpression" === nodeType || "TupleExpression" === nodeType || "DecimalLiteral" === nodeType || "ModuleExpression" === nodeType || "TopicReference" === nodeType || "PipelineTopicExpression" === nodeType || "PipelineBareFunction" === nodeType || "PipelinePrimaryTopicReference" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Expression" === node.expectedNode || "Identifier" === node.expectedNode || "StringLiteral" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -81249,7 +81291,7 @@ function isPatternLike(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+  if ("Identifier" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -81264,7 +81306,7 @@ function isLVal(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
+  if ("Identifier" === nodeType || "MemberExpression" === nodeType || "RestElement" === nodeType || "AssignmentPattern" === nodeType || "ArrayPattern" === nodeType || "ObjectPattern" === nodeType || "TSParameterProperty" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSNonNullExpression" === nodeType || nodeType === "Placeholder" && ("Pattern" === node.expectedNode || "Identifier" === node.expectedNode)) {
     if (typeof opts === "undefined") {
       return true;
     } else {
@@ -81639,7 +81681,7 @@ function isTypeScript(node, opts) {
   if (!node) return false;
   const nodeType = node.type;
 
-  if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
+  if ("TSParameterProperty" === nodeType || "TSDeclareFunction" === nodeType || "TSDeclareMethod" === nodeType || "TSQualifiedName" === nodeType || "TSCallSignatureDeclaration" === nodeType || "TSConstructSignatureDeclaration" === nodeType || "TSPropertySignature" === nodeType || "TSMethodSignature" === nodeType || "TSIndexSignature" === nodeType || "TSAnyKeyword" === nodeType || "TSBooleanKeyword" === nodeType || "TSBigIntKeyword" === nodeType || "TSIntrinsicKeyword" === nodeType || "TSNeverKeyword" === nodeType || "TSNullKeyword" === nodeType || "TSNumberKeyword" === nodeType || "TSObjectKeyword" === nodeType || "TSStringKeyword" === nodeType || "TSSymbolKeyword" === nodeType || "TSUndefinedKeyword" === nodeType || "TSUnknownKeyword" === nodeType || "TSVoidKeyword" === nodeType || "TSThisType" === nodeType || "TSFunctionType" === nodeType || "TSConstructorType" === nodeType || "TSTypeReference" === nodeType || "TSTypePredicate" === nodeType || "TSTypeQuery" === nodeType || "TSTypeLiteral" === nodeType || "TSArrayType" === nodeType || "TSTupleType" === nodeType || "TSOptionalType" === nodeType || "TSRestType" === nodeType || "TSNamedTupleMember" === nodeType || "TSUnionType" === nodeType || "TSIntersectionType" === nodeType || "TSConditionalType" === nodeType || "TSInferType" === nodeType || "TSParenthesizedType" === nodeType || "TSTypeOperator" === nodeType || "TSIndexedAccessType" === nodeType || "TSMappedType" === nodeType || "TSLiteralType" === nodeType || "TSExpressionWithTypeArguments" === nodeType || "TSInterfaceDeclaration" === nodeType || "TSInterfaceBody" === nodeType || "TSTypeAliasDeclaration" === nodeType || "TSInstantiationExpression" === nodeType || "TSAsExpression" === nodeType || "TSSatisfiesExpression" === nodeType || "TSTypeAssertion" === nodeType || "TSEnumDeclaration" === nodeType || "TSEnumMember" === nodeType || "TSModuleDeclaration" === nodeType || "TSModuleBlock" === nodeType || "TSImportType" === nodeType || "TSImportEqualsDeclaration" === nodeType || "TSExternalModuleReference" === nodeType || "TSNonNullExpression" === nodeType || "TSExportAssignment" === nodeType || "TSNamespaceExportDeclaration" === nodeType || "TSTypeAnnotation" === nodeType || "TSTypeParameterInstantiation" === nodeType || "TSTypeParameterDeclaration" === nodeType || "TSTypeParameter" === nodeType) {
     if (typeof opts === "undefined") {
       return true;
     } else {

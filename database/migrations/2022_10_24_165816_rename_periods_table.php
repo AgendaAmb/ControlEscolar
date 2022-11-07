@@ -15,7 +15,7 @@ class RenamePeriodsTable extends Migration
     {
         if (Schema::hasTable('periods')) {
             Schema::table('periods', function (Blueprint $table) {
-                // $table->dropForeign(['announcement_id']); 
+                $table->dropForeign(['announcement_id']); 
                 $table->dropColumn('announcement_id');
             });
 
