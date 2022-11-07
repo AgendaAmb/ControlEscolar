@@ -10,8 +10,8 @@ class OldDocumentController extends Controller
 {
     public function listOldDocumentsIMAREC(Request $request)
     {
-        $min = 5;
-        $max = 15;
+        $min = 41;
+        $max = 80;
         $documents = DB::table('archivos')->where('mimetype', '!=', 'application/pdf')->whereBetween('IdSolicitud', [$min, $max])->get(['idSolicitud', 'Datos', 'IdTipoArchivo', 'mimetype']);
         // foreach ($documents as $doc) {
         //     $hex = $doc->Datos;            // and much more hex values as string as in your example

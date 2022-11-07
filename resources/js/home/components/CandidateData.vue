@@ -247,28 +247,8 @@ export default {
       axios
         .get("/controlescolar/oldControlEscolar/viewOldDocumentIMAREC/idSolicitud/" + idSolicitud + '/idTipoArchivo/' + IdTipoArchivo + '/database/' + nameDatabase)
         .then((response) => {
-
-          // console.log(response.data);
-
-          // Transform hexadecimal string to base64 string
-          // var hex = response.data.Datos;
-
-          // hex = hex.substring(2, hex.length);
-
-          // // let data_base64 = btoa(String.fromCharCode.apply(null,
-          // //   hex.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
-          // // );
-          // let binary = '';
-          // for (let i = 0; i < hex.length; i++) {
-          //   binary += String.fromCharCode(hex.charCodeAt(i) & 0xff);
-          // }
-          // // let data_base64 = btoa(hex.match(/\w{2}/g).map(function(a){return String.fromCharCode(parseInt(a, 16));} ).join(""));
-          // let data_base64 = btoa(binary);
+          // retrieve base 64 string
           let data_base64 = response.data.Datos;
-
-          // c //este es ya el base64
-          // if not is an image
-          // let data_base64 = this.hexToBase64(response.data.Datos);
           let byteCharacters = atob(data_base64);
           let byteNumber = new Array(byteCharacters.length);
           for (let i = 0; i < byteCharacters.length; i++) {
