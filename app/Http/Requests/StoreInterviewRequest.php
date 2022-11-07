@@ -35,7 +35,7 @@ class StoreInterviewRequest extends FormRequest
             'date' => ['required','date'],
             'start_time' => ['required','date_format:H:i'],
             'end_time' => ['required','date_format:H:i','after:start_time'],
-            'period_id' => ['required','exists:periods,id','exclude'],
+            'period_id' => ['required','exists:interview_periods,id','exclude'],
             // 'room_id' => ['required','numeric','exists:rooms,id', new RoomRule($this->date, $this->start_time)]
             'room_id' => ['required', 'numeric', 'exists:rooms,id']
         ]; 

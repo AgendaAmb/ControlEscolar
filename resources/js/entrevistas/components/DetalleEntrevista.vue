@@ -318,12 +318,14 @@ export default {
       if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false)
         return false;
 
+      console.log("hola");
+
       axios.post('/controlescolar/entrevistas/deleteInterview', {
         id: this.id
       }).then(response => {
+        console.log(response.data)
         this.$emit('interview_deleted', this.id);
         $('#DetalleEntrevista').modal('hide');
-
       }).catch(error => {
       });
 

@@ -29,16 +29,26 @@
               </div>
 
               <div class="form-group col-12">
+                <label> Programa academico </label>
+                <select v-model="selected_program" class="form-control">
+                  <option :value="null" selected>Escoge un programa </option>
+                  <option v-for="item in announcements" :key="item.id" :value="item">
+                    {{ item.academic_program }}
+                  </option>
+                </select>
+              </div>
+
+              <div v-if="selected_program != null" class="form-group col-12">
                 <label> Postulante </label>
                 <select v-model="appliant" class="form-control">
                   <option :value="null" selected>Escoge un postulante </option>
-                  <option v-for="appliant in appliants" :key="appliant.id" :value="appliant">
+                  <option v-for="appliant in selected_program.appliants" :key="appliant.id" :value="appliant">
                     {{ appliant.name }}
                   </option>
                 </select>
               </div>
 
-              <div class="form-group col-12">
+              <div v-if="selected_program != null" class="form-group col-12">
                 <label> Profesor que otorgó la carta de intención </label>
                 <input v-model="IntentionLetterProfessor" type="text" class="form-control" readonly>
               </div>
@@ -50,6 +60,7 @@
                   <option v-for="room in rooms" :key="room.id" :value="room"> {{ room.site }} </option>
                 </select>
               </div>
+
               <div class="form-group col-12" v-else>
                 <label> Sala virtual de la reunion </label>
                 <select v-model="room" class="form-control">
@@ -114,7 +125,7 @@ export default {
     max_date: String,
 
     // Postulantes.
-    appliants: Array,
+    announcements: Array,
 
     // Salas presenciales disponibles.
     rooms: Array,
@@ -133,6 +144,7 @@ export default {
       start_time: null,
       end_time: null,
       appliant: null,
+      selected_program: null,
       professor: null,
       room: null,
       sv: false
@@ -181,14 +193,11 @@ export default {
         end_time: this.end_time,
         room_id: this.room.id
       };
-      // console.log(data);
 
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', data  
       ).then(response => {
-        // console.log(response.data);
-        
-        // Actualizar la entrevista en el front
         var data = response.data;
+
         this.$emit('nuevaentrevista', {
           id: data.id,
           date: data.date,
@@ -198,7 +207,7 @@ export default {
           appliant: data.appliant,
           intention_letter_professor: data.intention_letter_professor,
           academic_areas: data.academic_areas
-        });
+        },this.selected_program);
 
         // Actualizar la información para poder agendar una nueva entrevista
         this.id = -1;
@@ -211,8 +220,10 @@ export default {
 
         $('#NuevaEntrevista').modal('hide');
       }).catch(error => {
-
+        console.log("error");
       });
+
+      console.log("exito");
     }
   }
 };

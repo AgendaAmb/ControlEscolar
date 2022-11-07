@@ -13,7 +13,7 @@ class DeleteInterviewRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasRole('admin');
+        return $this->user()->hasRole('admin')||$this->user()->hasRole('control_escolar')?true:false;
     }
 
     /**

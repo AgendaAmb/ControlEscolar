@@ -36,14 +36,14 @@
             </div>
 
             <div class="container my-4">
-                <p>Estimado Profesor {{ $Profesor['middlename'] . ' ' . $Profesor['surname'] . ' ' . $Profesor['name'] }}</p>
+                <p>Estimado Profesor {{ $Profesor->middlename . ' ' . $Profesor->surname . ' ' . $Profesor->name }}</p>
                 <p>Agredecemos su partición en la entrevista de:</p>
                 <table class="table" style="max-width: 800px; margin: 0 auto;">
 
                     <tbody>
                         <tr>
                             <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student['middlename'] . ' ' . $Student['surname'] . ' ' . $Student['name'] }}</td>
+                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
 
                         </tr>
 
