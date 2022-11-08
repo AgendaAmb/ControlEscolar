@@ -334,7 +334,7 @@ class PreRegisterController extends Controller
         //    return;
         /** @var User */
         # Carga otros datos que requiere el modelo.
-        $auth_user->load(['academicAreas', 'academicEntities']);
+        $auth_user->load(['academicAreas', 'academicEntities', 'academicComittes']);
 
         # Busca a los postulantes.
         $appliants = User::with(['latestArchive.intentionLetters:archive_intention_letter.user_id,archive_intention_letter.user_type'])

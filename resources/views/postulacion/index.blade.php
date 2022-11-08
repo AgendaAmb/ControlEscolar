@@ -18,5 +18,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/intention-letter.js') }}" defer></script>
+    <script src="{{ asset('js/intention-letter.js') }}" defer></script>
 @endpush

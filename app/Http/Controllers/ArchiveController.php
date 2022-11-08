@@ -52,10 +52,21 @@ class ArchiveController extends Controller
     }
 
     /* -------------------------- DASHBOARD DEL APLICANTE --------------------------*/
+    public function compareStringToFieldList($list, $field, $stringToCompare)
+    {   
+        $res = false;
+        foreach($list as $item){
+            if(strcmp($item,$stringToCompare) == 0){
+                $res = true;
+                break;
+            }
+        }
+        return $res;
+    }
 
     public function index(Request $request)
     {
-
+        $isProfessor = false;
         $announcements = Announcement::idDescending()->get();
 
         foreach ($announcements as $announcement) {
@@ -63,9 +74,52 @@ class ArchiveController extends Controller
             $announcement->setAttribute('name', $academic_program->name);
         }
 
+        foreach ($request->session()->get('user')->roles as $rol) {
+            if (strcmp($rol->name, 'profesor_colaborador') == 0 || strcmp($rol->name, 'profesor_nb') == 0) {
+                $isProfessor = true;
+            }
+        }
+
+        $academic_programs = AcademicProgram::with('latestAnnouncement')->get();
+        $academic_programs_to_pop = [];
+        // Auth user is a professor
+        if ($isProfessor) {
+            // The professor only have one commite Assigned
+            // If not have not have one show everything and the same case for more than 1
+            // This could be change if more academic comittes will add in the future
+            if (count($request->session()->get('user')->academicComittes) < 2) {
+
+                // Check the name of the academic program
+                // this would change if more academic comittes join the system
+                // change for a loop and conditionals if not a switch
+                switch ($request->session()->get('user')->academicComittes[0]->name) {
+                    case "IMaREC":
+                        array_push($academic_programs_to_pop, 'Doctorado en ciencias ambientales');
+                        array_push($academic_programs_to_pop, 'Maestría en ciencias ambientales');
+                        array_push($academic_programs_to_pop, 'Maestría en ciencias ambientales, doble titulación');
+                        break;
+                    case "PMPCA":
+                        array_push($academic_programs_to_pop, 'Maestría Interdisciplinaria en ciudades sostenibles');
+                        break;
+                }
+            }
+
+            // pop the original list
+            // search if each academic program is in the list
+                foreach($academic_programs as $apKey => $ap){
+                    // if the item is in the list delete
+                    if($this->compareStringToFieldList($academic_programs_to_pop,'name',$ap->name) == true){
+                        // remove element from list
+                        unset($academic_programs[$apKey]);
+                    }
+                }
+            
+        }
+
+
         return view('postulacion.index')
             ->with('user', $request->user())
-            ->with('academic_programs', AcademicProgram::with('latestAnnouncement')->get())
+            ->with('academic_programs', $academic_programs)
             ->with('announcements', $announcements);
     }
 
@@ -150,7 +204,7 @@ class ArchiveController extends Controller
                 // $archive->appliant->setAttribute('name', $user_data['name'] . ' ' . $user_data['middlename'] . ' ' . $user_data['surname']);
                 // Filtrao de nombres
 
-               
+
                 // Contiene mas que el middlename
                 // Puede repetirse el middlename e incluir el surname
                 if ($archive->appliant->name != NULL) {

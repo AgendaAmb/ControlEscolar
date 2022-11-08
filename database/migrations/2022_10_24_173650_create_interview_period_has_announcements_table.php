@@ -15,16 +15,13 @@ class CreateInterviewPeriodHasAnnouncementsTable extends Migration
     {
         Schema::create('interview_period_has_announcements', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('interview_period_id');
             $table->unsignedBigInteger('announcement_id');
-
             $table->foreign('interview_period_id')
                 ->references('id')
                 ->on('interview_periods')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
             $table->foreign('announcement_id')
                 ->references('id')
                 ->on('announcements')
