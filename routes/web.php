@@ -199,7 +199,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('entrevistas')->middleware(['auth', 'role:admin|control_escolar|profesor_nb|comite_academico|coordinador'])->name('entrevistas.')->group(function () {
 
         # Calendario
-        Route::get('calendario', [InterviewController::class, 'calendario2'])->name('calendario');
+        Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');

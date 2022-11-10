@@ -309,16 +309,18 @@ class CalendarResource extends JsonResource
      */
     public function toArray($request)
     {
-        // * Period doesn´t exist
-        if(!isset($this->id)){
+        // * Donsn't exist an active period
+        if (!isset($this->id)) {
             return [
                 'interviews' => null,
                 'announcements' => null,
                 'user' => (new UserResource($request->user()))->toArray($request),
-                'period' => null
+                'period' => null,
+                'lastestAnnouncements' => AcademicProgram::all()->loadMissing('latestAnnouncement')
             ];
         }
 
+        // * Data for active period
         $period_data = $this->setPeriod($request);
         $announcements = $this->setAnnouncements($request);
         $this->setInterviews($request);
@@ -327,7 +329,8 @@ class CalendarResource extends JsonResource
             'interviews' => $this->interviews,
             'announcements' => $announcements,
             'user' => (new UserResource($request->user()))->toArray($request),
-            'period' => $period_data
+            'period' => $period_data,
+            'lastestAnnouncements' => null
         ];
     }
 }

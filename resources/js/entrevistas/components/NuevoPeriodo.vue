@@ -15,21 +15,20 @@
             <div class="form-row mt-2 mb-1">
               <div class="form-group col-6">
                 <label> Fecha de inicio </label>
-                <input v-model="start_date" type="date" class="form-control" required>
+                <input v-model="newPeriodForm.start_date" type="date" class="form-control" required>
               </div>
               <div class="form-group col-6">
                 <label> Fecha de fin </label>
-                <input v-model="end_date" type="date" class="form-control" required>
+                <input v-model="newPeriodForm.end_date" type="date" class="form-control" required>
               </div>
             </div>
             <div class="form-row my-1">
               <div class="form-group col-12">
                 <label> Convocatoria </label>
-                <select v-model="announcement_id" class="form-control">
-                  <option :value="null" selected>Escoge una convocatoria </option>
-                  <option v-for="announcement in announcements" :key="announcement.id" :value="announcement.id"> {{
-                      announcement.name
-                  }} </option>
+                <select v-model="newPeriodForm.announcements" class="custom-select" multiple>
+                  <option v-for="announcement in announcements" :key="announcement.id" :value=announcement.id>
+                    {{announcement.name}}
+                  </option>
                 </select>
               </div>
             </div>
@@ -57,9 +56,9 @@
                     Mixta (Virtual/Presencial)
                   </label>
                 </div>
-                <div v-if="modalidad === 'virtual' || modalidad === 'mixta'" class="my-1">
+                <div v-if="newPeriodForm.modalidad === 'virtual' || newPeriodForm.modalidad === 'mixta'" class="my-1">
                   <label> Número de salas virtuales</label>
-                  <input v-model.number="num_salas" type="number" class="form-control" required min="1">
+                  <input v-model.number="newPeriodForm.num_salas" type="number" class="form-control" required min="1">
                 </div>
               </div>
             </div>
@@ -111,12 +110,13 @@ export default {
 
   data() {
     return {
-      event: {},
-      start_date: null,
-      end_date: null,
-      announcement_id: null,
-      num_salas: 1,
-      modalidad: 'presencial'
+      newPeriodForm: {
+        start_date: null,
+        end_date: null,
+        announcements: [],
+        num_salas: null,
+        modality: 'presencial'
+      },
     };
   },
 
@@ -124,17 +124,13 @@ export default {
 
     // loads the modality
     modalidadSelected(modalidad) {
-      this.modalidad = modalidad;
+      this.newPeriodForm.modalidad = modalidad;
     },
 
     creaPeriodo() {
-      axios.post('/controlescolar/entrevistas/periods', {
-        start_date: this.start_date,
-        end_date: this.end_date,
-        num_salas: this.num_salas,
-        announcement_id: this.announcement_id,
-        modality: this.modalidad
-      }).then(response => {
+      console.log(this.newPeriodForm);
+      axios.post('/controlescolar/entrevistas/periods', this.newPeriodForm).then(response => {
+        console.log(response.data);
         window.location.href = response.data.url;
       }).catch(error => {
         console.log(error);

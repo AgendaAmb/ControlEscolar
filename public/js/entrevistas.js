@@ -1388,7 +1388,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "nuevo-periodo",
   props: {
@@ -1402,27 +1401,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      event: {},
-      start_date: null,
-      end_date: null,
-      announcement_id: null,
-      num_salas: 1,
-      modalidad: 'presencial'
+      newPeriodForm: {
+        start_date: null,
+        end_date: null,
+        announcements: [],
+        num_salas: null,
+        modality: 'presencial'
+      }
     };
   },
   methods: {
     // loads the modality
     modalidadSelected: function modalidadSelected(modalidad) {
-      this.modalidad = modalidad;
+      this.newPeriodForm.modalidad = modalidad;
     },
     creaPeriodo: function creaPeriodo() {
-      axios.post('/controlescolar/entrevistas/periods', {
-        start_date: this.start_date,
-        end_date: this.end_date,
-        num_salas: this.num_salas,
-        announcement_id: this.announcement_id,
-        modality: this.modalidad
-      }).then(function (response) {
+      console.log(this.newPeriodForm);
+      axios.post('/controlescolar/entrevistas/periods', this.newPeriodForm).then(function (response) {
+        console.log(response.data);
         window.location.href = response.data.url;
       })["catch"](function (error) {
         console.log(error);
@@ -32806,19 +32802,23 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.start_date,
-                          expression: "start_date",
+                          value: _vm.newPeriodForm.start_date,
+                          expression: "newPeriodForm.start_date",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: { type: "date", required: "" },
-                      domProps: { value: _vm.start_date },
+                      domProps: { value: _vm.newPeriodForm.start_date },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.start_date = $event.target.value
+                          _vm.$set(
+                            _vm.newPeriodForm,
+                            "start_date",
+                            $event.target.value
+                          )
                         },
                       },
                     }),
@@ -32832,19 +32832,23 @@ var render = function () {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.end_date,
-                          expression: "end_date",
+                          value: _vm.newPeriodForm.end_date,
+                          expression: "newPeriodForm.end_date",
                         },
                       ],
                       staticClass: "form-control",
                       attrs: { type: "date", required: "" },
-                      domProps: { value: _vm.end_date },
+                      domProps: { value: _vm.newPeriodForm.end_date },
                       on: {
                         input: function ($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.end_date = $event.target.value
+                          _vm.$set(
+                            _vm.newPeriodForm,
+                            "end_date",
+                            $event.target.value
+                          )
                         },
                       },
                     }),
@@ -32862,11 +32866,12 @@ var render = function () {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.announcement_id,
-                            expression: "announcement_id",
+                            value: _vm.newPeriodForm.announcements,
+                            expression: "newPeriodForm.announcements",
                           },
                         ],
-                        staticClass: "form-control",
+                        staticClass: "custom-select",
+                        attrs: { multiple: "" },
                         on: {
                           change: function ($event) {
                             var $$selectedVal = Array.prototype.filter
@@ -32877,34 +32882,33 @@ var render = function () {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.announcement_id = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                            _vm.$set(
+                              _vm.newPeriodForm,
+                              "announcements",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
                           },
                         },
                       },
-                      [
-                        _c(
+                      _vm._l(_vm.announcements, function (announcement) {
+                        return _c(
                           "option",
                           {
-                            attrs: { selected: "" },
-                            domProps: { value: null },
+                            key: announcement.id,
+                            domProps: { value: announcement.id },
                           },
-                          [_vm._v("Escoge una convocatoria ")]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.announcements, function (announcement) {
-                          return _c(
-                            "option",
-                            {
-                              key: announcement.id,
-                              domProps: { value: announcement.id },
-                            },
-                            [_vm._v(" " + _vm._s(announcement.name) + " ")]
-                          )
-                        }),
-                      ],
-                      2
+                          [
+                            _vm._v(
+                              "\n                  " +
+                                _vm._s(announcement.name) +
+                                "\n                "
+                            ),
+                          ]
+                        )
+                      }),
+                      0
                     ),
                   ]),
                 ]),
@@ -33001,7 +33005,8 @@ var render = function () {
                       ),
                     ]),
                     _vm._v(" "),
-                    _vm.modalidad === "virtual" || _vm.modalidad === "mixta"
+                    _vm.newPeriodForm.modalidad === "virtual" ||
+                    _vm.newPeriodForm.modalidad === "mixta"
                       ? _c("div", { staticClass: "my-1" }, [
                           _c("label", [_vm._v(" Número de salas virtuales")]),
                           _vm._v(" "),
@@ -33010,20 +33015,24 @@ var render = function () {
                               {
                                 name: "model",
                                 rawName: "v-model.number",
-                                value: _vm.num_salas,
-                                expression: "num_salas",
+                                value: _vm.newPeriodForm.num_salas,
+                                expression: "newPeriodForm.num_salas",
                                 modifiers: { number: true },
                               },
                             ],
                             staticClass: "form-control",
                             attrs: { type: "number", required: "", min: "1" },
-                            domProps: { value: _vm.num_salas },
+                            domProps: { value: _vm.newPeriodForm.num_salas },
                             on: {
                               input: function ($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.num_salas = _vm._n($event.target.value)
+                                _vm.$set(
+                                  _vm.newPeriodForm,
+                                  "num_salas",
+                                  _vm._n($event.target.value)
+                                )
                               },
                               blur: function ($event) {
                                 return _vm.$forceUpdate()
@@ -45644,7 +45653,8 @@ var app = new Vue({
     interviews: interviews,
     date: null,
     selectedInterview: null,
-    announcements: announcements
+    announcements: announcements,
+    lastestAnnouncements: lastestAnnouncements
   },
   components: {
     CalendarioEntrevistas: _components_CalendarioEntrevistas_vue__WEBPACK_IMPORTED_MODULE_1__["default"],

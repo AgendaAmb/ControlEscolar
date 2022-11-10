@@ -54,7 +54,8 @@ const app = new Vue({
         interviews: interviews,
         date: null,
         selectedInterview: null,
-        announcements: announcements
+        announcements: announcements,
+        lastestAnnouncements: lastestAnnouncements
     },
 
     components: {

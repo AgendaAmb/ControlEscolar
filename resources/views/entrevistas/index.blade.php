@@ -3,19 +3,22 @@ const user = @json($user);
 const period = @json($period);
 const interviews = @json($interviews);
 const announcements = @json($announcements);
+const lastestAnnouncements = @json($lastestAnnouncements);
+
+console.log(lastestAnnouncements);
 </script>
 
 @extends('layouts.app')
 
 @section('headerPicture')
-<img class="mt-4 img-fluid" src="{{ asset('storage/headers/logod.png') }}" width="600px">
+<img class="mt-4 img-fluid" src="{{ asset('storage/headers/logo.png') }}" width="600px">
 @endsection
 
 @section('main-content')
 
 <main id="app" class="calendar">
 
-    {{--* Modal crear nuevo periodo --}}
+    {{--* Calendario de entrevistas --}}
     <calendario-entrevistas
         v-bind:period="period"
         v-bind:date.sync="date"
@@ -24,13 +27,13 @@ const announcements = @json($announcements);
         v-bind:announcements="announcements">
     </calendario-entrevistas>
 
-    {{--* Modal crear nuevo periodo --}}
+    {{--* Modal crear nuevo periodo de entrevistas--}}
     <nuevo-periodo v-if="period === null" 
         v-on:nuevoperiodo="actualizaPeriodo"
-        v-bind:announcements="announcements">
+        v-bind:announcements="lastestAnnouncements">
     </nuevo-periodo>
 
-    {{--* Modal crear nuevo periodo --}}
+    {{--* Modal programar nueva entrevista --}}
     <nueva-entrevista v-if="period !== null"
         v-bind:min_date="period.start_date"
         v-bind:max_date="period.end_date"
@@ -43,7 +46,7 @@ const announcements = @json($announcements);
         v-on:nuevaentrevista="agregaEntrevista">
     </nueva-entrevista>
 
-    {{--* Modal crear nuevo periodo --}}
+    {{--* Modal detalles de entrevista --}}
     <detalle-entrevista v-if="period !== null" 
         v-bind="selectedInterview"
         v-on:interview_deleted="removeInterview"

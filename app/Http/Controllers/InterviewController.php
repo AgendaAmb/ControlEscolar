@@ -45,47 +45,15 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
-        try{
-            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-        }catch(\Exception $e){
-            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
-
-        return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
-
-    public function calendario1(Request $request)
-    {
         $active_period = Period::orderBy('created_at', 'desc')
         ->where('finished', '!=', '1')
-        ->with('announcements.archives')
-        ->first();
+            ->with('announcements.archives')
+            ->first();
 
         if ($active_period) {
             // * Load missing period data 
             $active_period->loadMissing('rooms');
         }
-
-        $calendar_resource = new CalendarResource($active_period);
-
-        return $calendar_resource;
-
-        return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
-
-    public function calendario2(Request $request)
-    {
-        $active_period = Period::orderBy('created_at', 'desc')
-                            ->where('finished', '!=', '1')
-                            ->with('announcements.archives')
-                            ->first();
-        
-        if($active_period) {
-            // * Load missing period data 
-            $active_period->loadMissing('rooms');
-        }
-
-        // return $active_period;
 
         $calendar_resource = new CalendarResource($active_period);
 
