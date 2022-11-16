@@ -1,41 +1,53 @@
 <template>
-    <div class="col-10 text-center my-4">
-        <h4 class="d-block interview-day"> {{academic_program}} </h4>
-        <div class="table-responsive">
-            <table class="table text-center">
-                <thead class="interview-program-header">
-                    <tr>
-                        <th> Horario </th>
-                        <td> Lugar</td>
-                        <th> Nombre </th>
-                        <th> Expediente </th>
-                        <th> Evaluación promedio </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="interview in interviews_ordered" :key="interview.id">
-                        <td>{{interview.start_time + " a " + interview.end_time}}</td>
-                        <td> {{ interview.site }} </td>
-                        <td class="appliant">{{interview.appliant}}</td>
-                        <td>
-                            <a :href="interview.archive_url" target="_blank">Ver documentos</a>
-                        </td>
-                        <!-- Rubricas -->
-                        <!-- <td>
-                            <a class="d-block text-decoration-none" href="#">
-                                Rubrica promedio
+    <div class="table-responsive">
+        <table class="table text-center">
+            <thead class="interview-program-header">
+                <tr>
+                    <th> Horario </th>
+                    <td> Lugar</td>
+                    <th> Nombre </th>
+                    <th> Expediente </th>
+                    <th> Rubricas </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="interview in interviews_ordered" :key="interview.id">
+                    <td>
+                        {{interview.start_time + " a " + interview.end_time}}
+                    </td>
+                    <td>
+                        {{ interview.site }}
+                    </td>
+                    <td class="appliant">
+                        {{interview.appliant}}
+                    </td>
+                    <td>
+                        <a v-if="!loggedUserIsSchoolControl()" :href="interview.archive_url" target="_blank">Ver documentos</a>
+                        <a v-if="loggedUserIsSchoolControl()" href="#" >Documentos</a>
+                    </td>
+                    <td>
+                        <a class="d-block text-capitalize text-decoration-none" 
+                            v-for="rubric in interview.rubrics"
+                            :key="rubric.location" 
+                            :href="rubric.location"
+                            target="_blank"
+                            >
+                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
+                        </a>
+                        <div v-if="loggedUserIsAdmin() || loggedUserIsCA()">
+                            <hr>
+                            <a
+                                class="d-block text-capitalize text-decoration-none" 
+                                :href="interview.average_rubric"
+                                target="_blank"
+                                >
+                                Rúbrica promedio
                             </a>
-                        </td> -->
-                        <td>
-                            <a class="d-block text-capitalize text-decoration-none" v-for="rubric in interview.rubrics"
-                                :key="rubric.location" :href="rubric.location">
-                                {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
@@ -55,23 +67,62 @@
 export default {
     name: 'interviews-comite',
 
-    props:{
+    mounted(){
+    },
 
-        // Programa academico 
-        academic_program: {
-            type: String,
-            default: ''
+    methods:{
+        loggedUserIsPNB() {
+            var roles = user.roles.filter(role => {
+                return role.name === 'profesor_nb';
+            });
+
+            return roles.length > 0;
         },
 
+        loggedUserIsAdmin() {
+            let roles = user.roles.filter(role => {
+                return role.name === 'admin';
+            });
+
+            return roles.length > 0;
+        },
+
+        loggedUserIsSchoolControl() {
+            var roles = user.roles.filter(role => {
+                return role.name === 'control_escolar';
+            });
+
+            return roles.length > 0;
+        },
+
+        loggedUserIsCA() {
+            var roles = user.roles.filter(role => {
+                return role.name === 'comite_academico';
+            });
+
+            return roles.length > 0;
+        },
+
+        loggedUserIsCoordinador() {
+            var roles = user.roles.filter(role => {
+                return role.name === 'coordinador';
+            });
+
+            return roles.length > 0;
+        }
+    },
+
+    props:{
         // las entrevistas
         interviews_ordered: {
-            type: Object,
+            type: Array,
             default() {
                 return {
-                    interviews_ordered: {}
+                    interviews_ordered: []
                 };
             }
-        }
+        },
+        user
     },
 
     computed: {
@@ -82,10 +133,6 @@ export default {
         href(){
             return '#'+ this.id;
         },
-
-        key(){
-            return 'key-' + this.academic_program; 
-        },
-    }
+    },
 }
 </script>

@@ -19,27 +19,20 @@ class InterviewProgramResource extends JsonResource
     {
         $user_interviews = $this->resource->with([
             'evaluationRubrics' => function($query) use ($request){
+                // * Regresamos todas las entrevistas
                 if ($request->user()->hasRole('admin') || $request->user()->hasRole('coordinador')
                 || $request->user()->hasRole('control_escolar')  || $request->user()->hasRole('comite_academico'))
                     return;
-
+                
+                // * Regresamos las entrevistas solo del profersor nb
                 $query->where('user_id', $request->user()->id)
                     ->where('user_type', $request->user()->user_type);
 
             },'appliant'
         ])->get();
+
         
-        // Informacion ordenada en base date 
-        if($request->user()->hasRole('comite_academico')){
-            // Retormanos la informacion agrupada por programa academico, hacerlo sin collect doesn't work
-            $collection = InterviewResource::collection($user_interviews);
-            $data_formated = collect($collection)->groupBy('academic_program');
-            return $data_formated;
-        }else{
-            return InterviewResource::collection($user_interviews)->groupBy([
-                'date', fn($item) => $item['room_id']
-            ], true);
-        }
+        return InterviewResource::collection($user_interviews);
     }   
 
     /**

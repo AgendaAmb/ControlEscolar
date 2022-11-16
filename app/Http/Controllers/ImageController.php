@@ -32,7 +32,7 @@ class ImageController extends Controller
                 $location =  asset('/storage/emojis/inglaterra.png');
                 break;
             default:
-            $location = null;
+                $location = null;
                 break;
         }
 
