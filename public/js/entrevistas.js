@@ -32896,13 +32896,17 @@ var render = function () {
                         return _c(
                           "option",
                           {
-                            key: announcement.id,
-                            domProps: { value: announcement.id },
+                            key: announcement.latest_announcement.id,
+                            domProps: {
+                              value: announcement.latest_announcement.id,
+                            },
                           },
                           [
                             _vm._v(
                               "\n                  " +
                                 _vm._s(announcement.name) +
+                                " " +
+                                _vm._s(announcement.latest_announcement.id) +
                                 "\n                "
                             ),
                           ]

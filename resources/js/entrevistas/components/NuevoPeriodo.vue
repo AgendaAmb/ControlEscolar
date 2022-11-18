@@ -26,8 +26,8 @@
               <div class="form-group col-12">
                 <label> Convocatoria </label>
                 <select v-model="newPeriodForm.announcements" class="custom-select" multiple>
-                  <option v-for="announcement in announcements" :key="announcement.id" :value=announcement.id>
-                    {{announcement.name}}
+                  <option v-for="announcement in announcements" :key="announcement.latest_announcement.id" :value=announcement.latest_announcement.id>
+                    {{announcement.name}} {{ announcement.latest_announcement.id  }}
                   </option>
                 </select>
               </div>

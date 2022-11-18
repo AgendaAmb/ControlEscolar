@@ -59,7 +59,6 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
             Route::get('/viewOldDocument/{idDocumento}/database/{nameDatabase}', [OldDocumentController::class, 'viewOldDocument'])->name('viewOldDocument')
             ->middleware(['auth','role:admin']);
 
-
             Route::get('/viewOldDocumentIMAREC/idSolicitud/{idSolicitud}/idTipoArchivo/{idTipoArchivo}/database/{nameDatabase}', [OldDocumentController::class, 'viewOldDocumentIMAREC'])->name('viewOldDocumentIMAREC')
             ->middleware(['auth','role:admin']);
 

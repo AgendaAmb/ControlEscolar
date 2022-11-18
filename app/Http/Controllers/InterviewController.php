@@ -46,7 +46,7 @@ class InterviewController extends Controller
     public function calendario(Request $request)
     {
         $active_period = Period::orderBy('created_at', 'desc')
-        ->where('finished', '!=', '1')
+            ->where('finished', '!=', '1')
             ->with('announcements.archives')
             ->first();
 
@@ -99,7 +99,11 @@ class InterviewController extends Controller
             ->with('announcements', $announcements);
     }
 
-
+    /**
+     * Regresa y filtra las entrevistas por announcement seleccionado .
+     *
+     * @return void
+     */
     public function getFilteredInterviews(Request $request){
         $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
             ?   Interview::select('*')->where('confirmed', 1)
