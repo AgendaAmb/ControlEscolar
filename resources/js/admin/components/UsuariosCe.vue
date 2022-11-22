@@ -57,7 +57,7 @@
                 <div class="col-6 justify-content-center">
                   <b-btn
                     @click.prevent="toggleModal(item.id, item.roles, item.academic_areas, item.academic_entities, item.academic_comittes)"
-                    data-toggle="modal" data-target="#EditaUsuario" pill variant="outline-primary">
+                     pill variant="outline-primary">
                     <b-icon icon="pencil-square" aria-hidden="true"></b-icon> Editar
                   </b-btn>
                 </div>
@@ -377,6 +377,8 @@ export default {
 
 
     toggleModal(id, roles, academic_areas, academic_entities, academic_comittes) {
+
+      this.$root.$emit("bv::show::modal", "EditaUsuario");
       Event.$emit('toggleModal', id, roles, academic_areas, academic_entities, academic_comittes);
     },
 

@@ -50,7 +50,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     switch (this.name) {
       case 'admin':
         this.local_name = 'Administrador';
@@ -61,7 +61,7 @@ export default {
       case 'aspirante_foraneo':
         this.local_name = 'Aspirante Foraneo';
         break;
-        case 'aspirante_local':
+      case 'aspirante_local':
         this.local_name = 'Aspirante Local';
         break;
       case 'comite_academico':
@@ -94,7 +94,7 @@ export default {
       case 'UASLP_FACULTAD DE AGRONOMÍA':
         this.local_name = 'Facultad de Agronomía';
         break;
-        case 'UASLP_COORDINACIÓN ACADÉMICA REGIÓN ALTIPLANO':
+      case 'UASLP_COORDINACIÓN ACADÉMICA REGIÓN ALTIPLANO':
         this.local_name = 'Coordinación Académica (Altiplano)';
         break;
       case 'UASLP_CIACYT':
@@ -106,7 +106,7 @@ export default {
       case 'UASLP_FACULTAD DE CIENCIAS SOCIALES Y HUMANIDADES':
         this.local_name = 'Facultad de Ciencias Sociales y Humanidades';
         break;
-        case 'FACULTAD DE PSICOLOGÍA':
+      case 'FACULTAD DE PSICOLOGÍA':
         this.local_name = 'Facultad de Psicología';
         break;
       case 'UASLP_FACULTAD DE INGENIERÍA':
@@ -118,45 +118,37 @@ export default {
       case 'UASLP_FACULTAD DE DERECHO':
         this.local_name = 'Facultad de Derecho';
         break;
-        case 'UASLP_FACULTAD DEL HÁBITAT':
+      case 'UASLP_FACULTAD DEL HÁBITAT':
         this.local_name = 'Facultad del Hábitad';
         break;
       default:
         this.local_name = this.name;
         break;
     }
+
+    let temp = this.name;
+
+    // compare if the checkbox is already selected or not
+    let res = false;
+    this.array_data.forEach(function (value, i) {
+      if (value['name'].toLowerCase() === temp.toLowerCase()) {
+        res = true;
+      }
+    });
+
+    this.check = res;
   },
+
 
   computed: {
     Checked: {
       get() {
-        let first_time = this.first_time;
-        let newVal = this.check;
-        let array = this.array_data ? this.array_data : [];
-        if (first_time <= 0 && array.length > 0) {
-          let name = this.name;
-
-          //   search in data if the name is checked or not
-          array.forEach(function (value, i) {
-            if (value.name.localeCompare(name) === 0) {
-              newVal = true;
-              first_time = 1;
-            }
-          });
-        }
-
-        if (first_time > 0) {
-          // this.$emit("update:first_time", first_time);
-          this.check = newVal;
-          this.first_time = 1;
-          // console.log('name ',this.name,' value:',this.check);
-        }
-
         return this.check;
       },
 
       set(newVal) {
         this.$emit("actualizaLista", this.name, newVal, this.tipo);
+        // console.log('nombre: ' + this.local_name + ' valor: ' + newVal + ' lista: ' + this.tipo);
         this.check = newVal;
         // console.log('name: ', this.name, ' value:', this.check );
       },

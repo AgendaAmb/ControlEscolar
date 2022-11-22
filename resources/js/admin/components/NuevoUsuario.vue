@@ -93,6 +93,13 @@ export default {
   },
 
   methods: {
+
+    actualizaLista(name, res, tipo){
+      console.log(name);
+      console.log(res);
+      console.log(tipo);
+    },
+
     getName(name) {
       let local_name = "";
       switch (name) {

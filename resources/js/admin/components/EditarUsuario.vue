@@ -1,65 +1,64 @@
 <template>
-  <div class="modal fade" :class="{ 'is-active': active }" id="EditaUsuario" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3" style="background-color:#B0BEC5">
-        <div class="modal-header my-2">
-          <h2 class="display-5" id="exampleModalLabel">Editar trabajador</h2>
-          <b-icon data-dismiss="modal" scale="3" aria-label="Close" icon="x-circle"></b-icon>
+
+  <b-modal size="xl" class="modal fade" :class="{ 'is-active': active }" id="EditaUsuario" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" hide-footer title="Editar trabajador">
+    <div class="modal-body">
+      <form v-on:submit.prevent="actualizaUsuario">
+        <div class="row">
+          <div class="col-md-4">
+            <label> RPE de usuario </label>
+            <input type="text" class="form-control" v-model="id" :readonly="true" />
+          </div>
         </div>
-        <div class="modal-body">
-          <form v-on:submit.prevent="actualizaUsuario">
-            <div class="row">
-              <div class="col-md-4">
-                <label> RPE de usuario </label>
-                <input type="text" class="form-control" v-model="id" :readonly="true" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="mt-5 col-lg-6 col-xl-3">
-                <p class="h3">Roles</p>
-                <checkbox-edit v-for="(role, index) in roles" :key="role.id" :name="role.name" :id="role.id"
-                  :pivot="role.pivot" :index="index" :array_data="selected_roles" :tipo="'roles'"
-                  @actualizaLista="actualizaLista"></checkbox-edit>
+        <div class="row">
+          <div class="mt-5 col-lg-6 col-xl-3">
+            <p class="h3">Roles</p>
 
-              </div>
+            <form action="">
+              <checkbox-edit v-for="(role, index) in roles" :key="role.id" :name="role.name" :id="role.id"
+                :pivot="role.pivot" :index="index" :array_data="selected_roles" :tipo="'roles'"
+                @actualizaLista="actualizaLista"></checkbox-edit>
+            </form>
+          </div>
 
-              <div class="mt-5 col-lg-6 col-xl-3">
-                <p class="h3">Áreas académicas</p>
-                <checkbox-edit v-for="(role, index) in academic_areas" :key="role.id" :name="role.name" :id="role.id"
-                  :pivot="role.pivot" :index="index" :array_data="selected_academic_areas" :tipo="'academic_areas'"
-                  @actualizaLista="actualizaLista"></checkbox-edit>
-              </div>
+          <div class="mt-5 col-lg-6 col-xl-3">
+            <p class="h3">Áreas académicas</p>
+            <form action="">
+              <checkbox-edit v-for="(role, index) in academic_areas" :key="role.id" :name="role.name" :id="role.id"
+                :pivot="role.pivot" :index="index" :array_data="selected_academic_areas" :tipo="'academic_areas'"
+                @actualizaLista="actualizaLista"></checkbox-edit>
+            </form>
+          </div>
 
-              <div class="mt-5 col-lg-6 col-xl-3">
-                <p class="h3">Entidades académicas</p>
+          <div class="mt-5 col-lg-6 col-xl-3">
+            <p class="h3">Entidades académicas</p>
+            <form action="">
+              <checkbox-edit v-for="(role, index) in academic_entities" :key="role.id" :name="role.name" :id="role.id"
+                :pivot="role.pivot" :index="index" :array_data="selected_academic_entities" :tipo="'academic_entities'"
+                @actualizaLista="actualizaLista"></checkbox-edit>
+            </form>
+          </div>
 
-                <checkbox-edit v-for="(role, index) in academic_entities" :key="role.id" :name="role.name" :id="role.id"
-                  :pivot="role.pivot" :index="index" :array_data="selected_academic_entities"
-                  :tipo="'academic_entities'" @actualizaLista="actualizaLista"></checkbox-edit>
-              </div>
-
-              <div class="mt-5 col-lg-6 col-xl-3">
-                <p class="h3">Comités académicos</p>
-                <checkbox-edit v-for="(role, index) in academic_comittes" :key="role.id" :name="role.name" :id="role.id"
-                  :pivot="role.pivot" :index="index" :array_data="selected_academic_comittes"
-                  :tipo="'academic_comittes'" @actualizaLista="actualizaLista"></checkbox-edit>
-              </div>
-            </div>
-          </form>
+          <div class="mt-5 col-lg-6 col-xl-3">
+            <p class="h3">Comités académicos</p>
+            <form action="">
+              <checkbox-edit v-for="(role, index) in academic_comittes" :key="role.id" :name="role.name" :id="role.id"
+                :pivot="role.pivot" :index="index" :array_data="selected_academic_comittes" :tipo="'academic_comittes'"
+                @actualizaLista="actualizaLista"></checkbox-edit>
+            </form>
+          </div>
         </div>
-        <div class="px-0 my-3 modal-footer justify-content-start">
-          <button id="submit" type="submit" class="btn btn-primary" style="background-color: #0160ae"
-            @click="actualizaUsuario">
-            Guardar Cambios
-          </button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
-  </div>
+    <div class="px-0 my-3 modal-footer justify-content-start">
+      <button class="btn btn-primary" style="background-color: #0160ae" @click="actualizaUsuario">
+        Guardar Cambios
+      </button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Cerrar
+      </button>
+    </div>
+  </b-modal>
 </template>
 
 
@@ -140,75 +139,85 @@ export default {
       let lista_selected = [];
       let lista = [];
       let lista_selected_id = [];
+      console.log('Actualiza lista nombre: ' + name + ' valor: ' + res + ' lista: ' + tipo);
 
       let index = -1;
       switch (tipo) {
         case "roles":
           lista_selected = this.selected_roles ? this.selected_roles : [];
+          lista_selected_id = this.selected_roles_id ? this.selected_roles_id : [];
           lista = this.roles;
           break;
         case "academic_areas":
-          lista_selected = this.selected_academic_areas
-            ? this.selected_academic_areas
-            : [];
+          lista_selected = this.selected_academic_areas ? this.selected_academic_areas : [];
+          lista_selected_id = this.selected_academic_areas_id ? this.selected_academic_areas_id : [];
           lista = this.academic_areas;
           break;
         case "academic_entities":
-          lista_selected = this.selected_academic_entities
-            ? this.selected_academic_entities
-            : [];
+          lista_selected = this.selected_academic_entities ? this.selected_academic_entities : [];
+          lista_selected_id = this.selected_academic_entities_id ? this.selected_academic_entities_id : [];
           lista = this.academic_entities;
           break;
         case "academic_comittes":
-          lista_selected = this.selected_academic_comittes
-            ? this.selected_academic_comittes
-            : [];
+          lista_selected = this.selected_academic_comittes ? this.selected_academic_comittes : [];
+          lista_selected_id = this.selected_academic_comittes_id ? this.selected_academic_comittes_id : [];
           lista = this.academic_comittes;
           break;
       }
+      console.log("lista_selected : ", lista_selected);
 
       //Eliminar
       if (!res) {
-        // console.log('estamos elimiando');
+
+        // Se recorre la lista de los seleccionados
         if (lista_selected.length > 0) {
-          //   search in data if the name is checked or not
+          //  Busca en la lista el dato indicado
           lista_selected.forEach(function (value, i) {
-            if (value.name.localeCompare(name) === 0) {
-              index = i;
+
+            if (value['name']) {
+              if (value['name'].toLowerCase() === name.toLowerCase()) {
+                index = i;
+                console.log('lo encontre ');
+              }
             }
+
           });
+          // El dato encontrado se elimina de la lista de seleccionados
           if (index >= 0) {
             lista_selected.splice(index, 1);
+            lista_selected_id.splice(index, 1);
           }
         }
+        // Agregar
       } else {
-        //   search in data if the name is checked or not
+
+        //   Buscar en la lista general si existe el nombre seleccionado
         lista.forEach(function (value, i) {
-          if (value.name.localeCompare(name) === 0) {
+          if (value['name'].toLowerCase() === name.toLowerCase()) {
             index = i;
           }
         });
 
-        if (lista_selected.length > 0) {
-          lista_selected.forEach(function (value, i) {
-            if (value.name.localeCompare(lista[index].name) === 0) {
-              index = -1;
-            }
-          });
-        }
+        // El dato recibido se compara con los de toda la lista
 
+        lista_selected.forEach(function (value, i) {
+          // Si se encuentra ya en la lista seleccionada no se agrega
+          if (value['name'].toLowerCase() === name.toLowerCase()) {
+            index = -1;
+          }
+        });
+
+        //Si la posición es entera positiva se agrega a la lista de los seleccionados
         if (index >= 0) {
           lista_selected.push(lista[index]);
+          // lista_selected_id.push(lista[index]['id']);
         }
-      }
-
-      if (lista_selected.length > 0) {
-        lista_selected.forEach(function (value, i) {
-          lista_selected_id.push(value.id);
+        lista_selected_id = [];
+        lista_selected.forEach(function(value,i) {
+            lista_selected_id.push(value['id']);
         });
       }
 
-      // console.log("lista selected : ", lista_selected);
 
       if (index >= 0) {
         switch (tipo) {
@@ -232,9 +241,13 @@ export default {
             break;
         }
       }
+
+
     },
 
     actualizaUsuario() {
+      console.log('id roles');
+      console.log(this.selected_roles_id);
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -276,6 +289,14 @@ export default {
     Event.$on(
       "toggleModal",
       (id, roles, academic_areas, academic_entities, academic_comittes) => {
+        this.selected_roles.length = 0;
+        this.selected_academic_areas.length = 0;
+        this.selected_academic_entities.length = 0;
+        this.selected_academic_comittes.length = 0;
+        this.selected_roles_id.length = 0;
+        this.selected_academic_areas_id.length = 0;
+        this.selected_academic_entities_id.length = 0;
+        this.selected_academic_comittes_id.length = 0;
         this.id = id;
         if (academic_comittes != null && academic_comittes.length > 0) {
           this.selected_academic_comittes = academic_comittes;

@@ -87,7 +87,7 @@ class ArchiveController extends Controller
             // The professor only have one commite Assigned
             // If not have not have one show everything and the same case for more than 1
             // This could be change if more academic comittes will add in the future
-            if (count($request->session()->get('user')->academicComittes) < 2) {
+            if (count($request->session()->get('user')->academicComittes) < 2 && count($request->session()->get('user')->academicComittes) > 0) {
 
                 // Check the name of the academic program
                 // this would change if more academic comittes join the system
