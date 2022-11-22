@@ -289,14 +289,14 @@ export default {
     Event.$on(
       "toggleModal",
       (id, roles, academic_areas, academic_entities, academic_comittes) => {
-        this.selected_roles.length = 0;
-        this.selected_academic_areas.length = 0;
-        this.selected_academic_entities.length = 0;
-        this.selected_academic_comittes.length = 0;
-        this.selected_roles_id.length = 0;
-        this.selected_academic_areas_id.length = 0;
-        this.selected_academic_entities_id.length = 0;
-        this.selected_academic_comittes_id.length = 0;
+        this.selected_roles= [];
+        this.selected_academic_areas= [];
+        this.selected_academic_entities = [];
+        this.selected_academic_comittes = [];
+        this.selected_roles_id = [];
+        this.selected_academic_areas_id= [];
+        this.selected_academic_entities_id = [];
+        this.selected_academic_comittes_id = [];
         this.id = id;
         if (academic_comittes != null && academic_comittes.length > 0) {
           this.selected_academic_comittes = academic_comittes;
