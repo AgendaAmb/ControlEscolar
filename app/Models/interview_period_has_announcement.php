@@ -16,4 +16,17 @@ class interview_period_has_announcement extends Model
      * @var string
      */
     protected $table = 'interview_period_has_announcements';
+
+    protected $fillable = [
+        'interview_period_id',
+        'announcement_id'
+    ];
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function period()
+    {
+        return $this->belongsTo(Period::class, 'interview_period_id', 'id');
+    }
 }

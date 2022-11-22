@@ -96,4 +96,14 @@ class Period extends Model
     {
         return $this->belongsToMany(Announcement::class, 'interview_period_has_announcements', 'interview_period_id', 'announcement_id');
     }
+
+    /**
+     * Obtiene las convocatorias del periodo de entrevistas.
+     *
+     * @return HasMany
+     */
+    public function announcements_relations(): HasMany
+    {
+        return $this->hasMany(interview_period_has_announcement::class, 'interview_period_id', 'id');
+    }
 }

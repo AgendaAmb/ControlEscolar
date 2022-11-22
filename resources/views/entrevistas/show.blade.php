@@ -1,6 +1,9 @@
 <script>
-const interviews = @json($interviews);
-const user = @json($user)
+const user = @json($user);
+const academicPrograms = @json($academic_programs);
+const announcements = @json($announcements);
+
+console.log(user);
 </script>
 
 @extends('layouts.app')
@@ -11,23 +14,27 @@ const user = @json($user)
 @section('id', 'id=entrevistas')
     
 @section('main')
-<div class="row">
-    <div class="col-12 text-center">
-        <h1 class="mes">Entrevistas</h1>
-        <h1 class="d-block año">2022</h1>
-    </div>
+
+<div class="col-12 my-5">
+    <h1 class="mes text-start">Programa de entrevistas</h1>
 </div>
 
-<div v-if="$root.loggedUserIsCA()" v-for="(interviews_ordered, academic_program) in interviews" class="row justify-content-center">
-    <interviews-comite v-bind:academic_program="academic_program" 
-        v-bind:interviews_ordered="interviews_ordered">
+<div class="col-12 my-5">
+    <search-rubric-form 
+        :academic_programs="academic_programs" 
+        :announcements="announcements" 
+        :isAdmin="loggedUserIsAdmin()" 
+        v-on:archives-found="updateArchives"
+        >
+    </search-rubric-form>
+</div>
+
+<div class="row justify-content-center">
+    <interviews-comite 
+        v-bind:interviews_ordered="interviews"
+        v.bind:user="loggedUser"
+        >
     </interviews-comite>
-</div>
-
-<div v-if="!$root.loggedUserIsCA()" v-for="(interview_rooms, interview_date) in interviews" class="row justify-content-center">
-    <interview-day v-bind:interview_date="StringDate(interview_date)" 
-        v-bind:interview_rooms="interview_rooms">
-    </interview-day>
 </div>
 
 @endsection
