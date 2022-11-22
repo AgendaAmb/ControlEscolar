@@ -274,9 +274,9 @@ class InterviewController extends Controller
                         $join_url = "En linea por Teams";
                     }
                     // Actualizacion bandera - entrevista cerrada
-                    // Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $join_url]);
+                    Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $join_url]);
                 } else {
-                    // Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
+                    Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
                 }
 
                 $archive = null;
@@ -286,12 +286,12 @@ class InterviewController extends Controller
 
                 // * Busqueda del postulante
                 foreach ($interview2->users as $key => $User) {
-                    if ($User->user_type == "externs" || $User->user_type == "students" || $User->user_type == "Comunidad AA") {
+                    if ($User->type == "externs" || $User->type == "students" || $User->type == "Comunidad AA") {
                         
                         $this->alumno = $User;
                         $archive = Archive::where('user_id', $this->alumno->id)->first();
 
-                        return new JsonResponse(['message' => $archive], JsonResponse::HTTP_OK);
+                        // return new JsonResponse(['message' => $archive], JsonResponse::HTTP_OK);
                         
                         // * Carga programa academico
                         $archive->loadMissing([
@@ -307,7 +307,7 @@ class InterviewController extends Controller
                     }
                 }
 
-                return new JsonResponse(['message' => 'paso'], JsonResponse::HTTP_OK);
+                // return new JsonResponse(['message' => 'paso'], JsonResponse::HTTP_OK);
 
                 $servicio_correo = 'smtp';
                 $mail_academic_program = 'rtic.ambiental@uaslp.mx';
