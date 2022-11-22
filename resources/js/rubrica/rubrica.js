@@ -41,6 +41,7 @@ const app = new Vue({
         announcement: announcement,
         considerations: rubric.considerations,
         additional_information: rubric.additional_information,
+        dictamen_individual: rubric.dictamen_individual,
         dictamen_ce: rubric.dictamen_ce,
         dataModal: "",
         visbleSave:false,
@@ -190,7 +191,8 @@ const app = new Vue({
                 personal_attributes_concepts: personal_attributes_concepts,
                 considerations: this.considerations,
                 additional_information: this.additional_information,
-                dictamen_ce: this.dictamen_ce
+                dictamen_ce: this.dictamen_ce,
+                dictamen_individual: this.dictamen_individual
             }).then(response => {
                 this.visbleSave=false,
                 this.visbleSend=false,

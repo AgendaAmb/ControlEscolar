@@ -331,7 +331,7 @@ class EvaluationRubricController extends Controller
         $this->updatePivot($request->personal_attributes_concepts, $evaluationRubric);
 
         
-        $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce'));
+        $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce', 'dictamen_individual'));
         if($request->state=="send")$evaluationRubric->isComplete=true;
         $evaluationRubric->save();
         $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){

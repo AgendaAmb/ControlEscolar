@@ -62,7 +62,6 @@ class RubricResource extends JsonResource
     {
         $archive = $this->resource->archive;
         $this->appliant = $this->getMiPortalUser($request, $archive->user_id, 'appliants');
-       
     }   
 
     /**
@@ -84,6 +83,7 @@ class RubricResource extends JsonResource
             'considerations' => $rubric->considerations,
             'additional_information' => $rubric->additional_information,
             'dictamen_ce' => $rubric->dictamen_ce,
+            'dictamen_individual' => $rubric->dictamen_individual,
             'basic_concepts' => $rubric->basicConcepts->toArray(),
             'academic_concepts' => $rubric->academicConcepts->toArray(),
             'research_concepts' => $rubric->researchConcepts->toArray(),

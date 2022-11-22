@@ -51518,7 +51518,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -51578,45 +51577,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/types */ "./node_modules/@babel/types/lib/index.js");
 /* harmony import */ var _babel_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_types__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -51706,7 +51666,7 @@ __webpack_require__.r(__webpack_exports__);
     // Calculo de la ponderacion
     sectionScore: function sectionScore(concepts, id) {
       // Factores de ponderación de los rubros
-      var doctorado = [10, 25, 30, 20, 15];
+      var doctorado = [10, 35, 30, 10, 15];
       var maestria = [15, 30, 15, 25, 15];
       var score = 0.0;
       concepts.forEach(function (concept) {
@@ -74507,7 +74467,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-lg-11" }, [
     _c("div", { staticClass: "row appliant" }, [
-      _c("div", { staticClass: "col-lg-7" }, [
+      _c("div", { staticClass: "col-lg-7 mb-3" }, [
         _c("p", { staticClass: "d-block mb-0" }, [
           _c("b", [_vm._v(" Nombre: ")]),
           _vm._v(_vm._s(_vm.appliant.name)),
@@ -74533,26 +74493,34 @@ var render = function () {
           _vm._v(_vm._s(_vm.appliant.residence_country)),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "d-block mb-0 myriad-light personal_data" }, [
+        _c("p", { staticClass: "d-block mb-0 personal_data" }, [
           _c("b", [_vm._v(" CURP: ")]),
-          _vm._v(_vm._s(_vm.appliant.curp)),
+          _vm._v(" " + _vm._s(_vm.appliant.curp) + " "),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "d-block mb-0 myriad-light personal_data" }, [
+        _c("p", { staticClass: "d-block mb-0 personal_data" }, [
           _c("b", [_vm._v(" Estado civil: ")]),
-          _vm._v(_vm._s(_vm.appliant.marital_state)),
+          _vm._v(" " + _vm._s(_vm.appliant.marital_state) + " "),
         ]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-4" }, [
-        _c("p", { staticClass: "d-block mb-0 myriad-bold announcement-date" }, [
-          _vm._v(" " + _vm._s(_vm.announcement_date)),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "d-block mb-0 myriad-light academic-program" }, [
-          _vm._v(" " + _vm._s(_vm.announcement.academic_program) + " "),
-        ]),
-      ]),
+      _c(
+        "div",
+        { staticClass: "col-lg-5 d-flex flex-column align-items-end" },
+        [
+          _c(
+            "p",
+            { staticClass: "d-block mb-0 myriad-bold announcement-date" },
+            [_vm._v(" " + _vm._s(_vm.announcement_date))]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            { staticClass: "d-block mb-0 myriad-light academic-program" },
+            [_vm._v(" " + _vm._s(_vm.announcement.academic_program) + " ")]
+          ),
+        ]
+      ),
       _vm._v(" "),
       _c("hr", { staticClass: "col-12 hr" }),
     ]),
@@ -74583,7 +74551,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row mt-2 justify-content-center rubric-section" },
+    { staticClass: "row mt-2 mb-2 justify-content-center rubric-section" },
     [
       _c(
         "h4",
@@ -74594,65 +74562,44 @@ var render = function () {
       _vm._t("appliant_data"),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-11" }, [
-        _c("table", { staticClass: "table table-hover" }, [
-          _c("tbody", [
-            _c("tr", [
-              _c("td", { staticClass: "text-justify concept" }, [
-                _c("b", [_vm._v(" Lengua extranjera (Ingles): ")]),
-                _vm._v(" " + _vm._s(_vm.english_score)),
-              ]),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
+        _c("div", { staticClass: "row appliant" }, [
+          _c("div", { staticClass: "col-lg-8 mb-3" }, [
+            _c("p", { staticClass: "d-block mb-0 personal_data" }, [
+              _c("b", [_vm._v(" Lengua extranjera (Ingles): ")]),
+              _vm._v(" " + _vm._s(_vm.english_score) + " "),
             ]),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-justify concept" }, [
-                _c("b", [_vm._v(" EXANI: ")]),
-                _vm._v(_vm._s(_vm.exani_score)),
-              ]),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
+            _c("p", { staticClass: "d-block mb-0 personal_data" }, [
+              _c("b", [_vm._v(" EXANI: ")]),
+              _vm._v(" " + _vm._s(_vm.exani_score) + " "),
             ]),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-justify concept" }, [
-                _c("b", [_vm._v(" Universidad de procedencia: ")]),
-                _vm._v(_vm._s(_vm.university)),
-              ]),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
+            _c("p", { staticClass: "d-block mb-0 personal_data" }, [
+              _c("b", [_vm._v(" Universidad de procedencia: ")]),
+              _vm._v(_vm._s(_vm.university) + " "),
             ]),
             _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-justify concept" }, [
-                _c("b", [_vm._v(" Promedio de la licenciatura: ")]),
-                _vm._v(_vm._s(_vm.estudio_score) + " "),
-              ]),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
+            _c("p", { staticClass: "d-block mb-0 personal_data" }, [
+              _c("b", [_vm._v(" Promedio de la licenciatura: ")]),
+              _vm._v(_vm._s(_vm.estudio_score) + " "),
             ]),
           ]),
           _vm._v(" "),
-          _c("tfoot", [
-            _c("tr", [
-              _c("td"),
-              _vm._v(" "),
-              _c("td"),
-              _vm._v(" "),
-              _c("td", [_vm._v("Ponderación: " + _vm._s(_vm.basicScore()))]),
-            ]),
-          ]),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-lg-4 d-flex flex-column align-items-end justify-content-end mb-3",
+            },
+            [
+              _c("p", { staticClass: "d-block mb-0" }, [
+                _vm._v(" Ponderación: " + _vm._s(_vm.basicScore()) + " "),
+              ]),
+            ]
+          ),
+          _vm._v(" "),
+          _c("hr", { staticClass: "col-12 hr" }),
         ]),
-        _vm._v(" "),
-        _c("hr", { staticClass: "col-12 hr" }),
       ]),
     ],
     2
@@ -104554,6 +104501,7 @@ var app = new Vue({
     announcement: announcement,
     considerations: rubric.considerations,
     additional_information: rubric.additional_information,
+    dictamen_individual: rubric.dictamen_individual,
     dictamen_ce: rubric.dictamen_ce,
     dataModal: "",
     visbleSave: false,
@@ -104692,7 +104640,8 @@ var app = new Vue({
         personal_attributes_concepts: personal_attributes_concepts,
         considerations: this.considerations,
         additional_information: this.additional_information,
-        dictamen_ce: this.dictamen_ce
+        dictamen_ce: this.dictamen_ce,
+        dictamen_individual: this.dictamen_individual
       }).then(function (response) {
         _this2.visbleSave = false, _this2.visbleSend = false, state == "send" ? alert('Tu información se ha enviado correctamente') : alert('Tu información se ha guardado con exito.'), window.location.reload();
       })["catch"](function (error) {

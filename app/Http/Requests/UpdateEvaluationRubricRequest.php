@@ -53,6 +53,7 @@ class UpdateEvaluationRubricRequest extends FormRequest
             'considerations' => ['nullable','string','max:800'],
             'additional_information' => ['nullable','string','max:800'],
             'dictamen_ce' => ['nullable','string','max:800'],
+            'dictamen_individual' => ['nullable', 'string', 'max:800'],
         ];
     }
 }
