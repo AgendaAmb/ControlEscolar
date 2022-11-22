@@ -1,5 +1,6 @@
 <template>
-  <b-modal id="ActualizaExpediente" hide-backdrop content-class="shadow" size="xl" title="Cambiar documentos" :style="modalStyle">
+  <b-modal id="ActualizaExpediente" hide-backdrop content-class="shadow" size="xl" title="Cambiar documentos"
+    :style="modalStyle">
     <div class="col-12">
       <div class="row my-2">
         <div class="col-3">
@@ -13,7 +14,7 @@
                 <input class="form-check-input" type="checkbox" :value="etiqueta.id"
                   v-model="selected_personalDocuments" />
                 <label class="form-check-label">
-                  {{  etiqueta.name  }}
+                  {{ etiqueta.name }}
                 </label>
               </div>
             </li>
@@ -31,7 +32,7 @@
                 <input class="form-check-input" type="checkbox" :value="etiqueta.id"
                   v-model="selected_entranceDocuments" />
                 <label class="form-check-label">
-                  {{  etiqueta.name  }}
+                  {{ etiqueta.name }}
                 </label>
               </div>
             </li>
@@ -43,7 +44,7 @@
           <p class="h5">Grado(s) academico(s)</p>
           <ul class="list-group" v-for="(grado, index) in academic_degrees" :key="grado.id" :index="index + 1">
             <li class="list-inline-item">
-              <p class="label"><strong> Grado Academico #{{  index + 1  }} </strong></p>
+              <p class="label"><strong> Grado Academico #{{ index + 1 }} </strong></p>
             </li>
             <li v-for="etiqueta in grado.required_documents" :key="etiqueta.id" class="form-check">
               <div v-if="
@@ -53,7 +54,7 @@
                 <input class="form-check-input" type="checkbox" :value="[grado.id, etiqueta.id]"
                   v-model="selected_academicDocuments" />
                 <label class="form-check-label">
-                  {{  etiqueta.name  }}
+                  {{ etiqueta.name }}
                 </label>
               </div>
             </li>
@@ -66,7 +67,7 @@
 
           <ul class="list-group" v-for="(language, index) in appliant_languages" :key="language.id" :index="index + 1">
             <li class="list-inline-item">
-              <span><strong> Lengua Extranjera #{{  index + 1  }} </strong></span>
+              <span><strong> Lengua Extranjera #{{ index + 1 }} </strong></span>
             </li>
             <li v-for="etiqueta in language.required_documents" :key="etiqueta.id" class="form-check">
               <div v-if="
@@ -76,7 +77,7 @@
                 <input class="form-check-input" type="checkbox" :value="[language.id, etiqueta.id]"
                   v-model="selected_languageDocuments" />
                 <label class="form-check-label">
-                  {{  etiqueta.name  }}
+                  {{ etiqueta.name }}
                 </label>
               </div>
             </li>
@@ -90,7 +91,7 @@
           <ul class="list-group" v-for="(working_experience, index) in working_experiences" :key="working_experience.id"
             :index="index + 1">
             <li class="list-inline-item">
-              <span><strong> Grado Academico #{{  index + 1  }} </strong></span>
+              <span><strong> Grado Academico #{{ index + 1 }} </strong></span>
             </li>
             <li v-for="etiqueta in working_experience.required_documents" :key="etiqueta.id" class="form-check">
               <div v-if="
@@ -100,7 +101,7 @@
                 <input class="form-check-input" type="checkbox" :value="[working_experience.id, etiqueta.id]"
                   v-model="selected_workingDocuments" />
                 <label class="form-check-label">
-                  {{  etiqueta.name  }}
+                  {{ etiqueta.name }}
                 </label>
               </div>
             </li>
@@ -120,7 +121,7 @@
       </div>
     </div>
 
-    <template #modal-footer="{ enviarActualizacion, cancel }">
+    <template #modal-footer="{ cancel }">
       <!-- Emulate built in modal footer ok and cancel button actions -->
       <b-button size="sm" variant="success" @click="enviarActualizacion()" :style="styleBtnAccordionSection">
         <p class="h5">Enviar actualización</p>
@@ -215,8 +216,8 @@ export default {
       }
     },
 
-    modalStyle(){
-      return{
+    modalStyle() {
+      return {
         backgroundColor: "rgba(0,96,175,255)",
       }
     },
@@ -260,82 +261,89 @@ export default {
       console.log("instructions: " + this.instructions);
 
       if (
-        (this.selected_personalDocuments.length > 0 ||
-          this.selected_academicDocuments.length > 0 ||
-          this.selected_entranceDocuments.length > 0 ||
-          this.selected_languageDocuments.length > 0 ||
-          this.selected_workingDocuments.length > 0) &&
         this.archive_id != null &&
         this.user_id != null
       ) {
-        axios
-          .post("/controlescolar/solicitud/whoModifyArchive", {
-            archive_id: this.archive_id,
-          })
-          .then((response) => {
-            axios
-              .post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
-                selected_personalDocuments: this.selected_personalDocuments,
-                selected_academicDocuments: this.selected_academicDocuments,
-                selected_entranceDocuments: this.selected_entranceDocuments,
-                selected_languageDocuments: this.selected_languageDocuments,
-                selected_workingDocuments: this.selected_workingDocuments,
-                instructions: this.instructions,
-                academic_program: this.academic_program,
-                archive_id: this.archive_id,
-                user_id: this.user_id,
-              })
-              .then((response) => {
-                Swal.fire({
-                  title: "Exito",
-                  text: "Se ha enviado un correo al usuario con los cambios a realizar",
-                  icon: "success",
-                  showCancelButton: false,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Entendido",
-                }).then((result) => {
-                  axios
-                    .post("/controlescolar/solicitud/updateStatusArchive", {
-                      // Status id to change the state
-                      archive_id: this.archive_id,
-                      status: 3,
-                    })
-                    .then((response) => {
-                      window.location.href = "/controlescolar/solicitud/";
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                      Swal.fire({
-                        title: "Error al actualizar",
-                        showCancelButton: false,
-                        icon: "error",
+        Swal.fire({
+          title: "¿Estas seguro de realizar el cambio?",
+          text: "Actualizar el expediente a CORRECCION ",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+
+          axios
+            .post("/controlescolar/solicitud/whoModifyArchive", {
+              archive_id: this.archive_id,
+            })
+            .then((response) => {
+              axios
+                .post("/controlescolar/solicitud/sentEmailToUpdateDocuments", {
+                  selected_personalDocuments: this.selected_personalDocuments,
+                  selected_academicDocuments: this.selected_academicDocuments,
+                  selected_entranceDocuments: this.selected_entranceDocuments,
+                  selected_languageDocuments: this.selected_languageDocuments,
+                  selected_workingDocuments: this.selected_workingDocuments,
+                  instructions: this.instructions,
+                  academic_program: this.academic_program,
+                  archive_id: this.archive_id,
+                  user_id: this.user_id,
+                })
+                .then((response) => {
+                  Swal.fire({
+                    title: "Exito",
+                    text: "Se ha enviado un correo al usuario con los cambios a realizar",
+                    icon: "success",
+                    showCancelButton: false,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Entendido",
+                  }).then((result) => {
+                    axios
+                      .post("/controlescolar/solicitud/updateStatusArchive", {
+                        // Status id to change the state
+                        archive_id: this.archive_id,
+                        status: 3,
+                      })
+                      .then((response) => {
+                        window.location.href = "/controlescolar/solicitud/";
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                        Swal.fire({
+                          title: "Error al actualizar",
+                          showCancelButton: false,
+                          icon: "error",
+                        });
                       });
-                    });
+                  });
+                })
+                .catch((error) => {
+                  Swal.fire({
+                    title: "Ups",
+                    text: "No fue posible completar la petición, intentelo mas tarde",
+                    icon: "error",
+                    showCancelButton: true,
+                    cancelButtonColor: "#d33",
+                    cancelButtonText: "Entendido",
+                  });
+                  // alert('Ha ocurrido un error, intenta mas tarde');
+                  // console.log(error);
                 });
-              })
-              .catch((error) => {
-                Swal.fire({
-                  title: "Ups",
-                  text: "No fue posible completar la petición, intentelo mas tarde",
-                  icon: "error",
-                  showCancelButton: true,
-                  cancelButtonColor: "#d33",
-                  cancelButtonText: "Entendido",
-                });
-                // alert('Ha ocurrido un error, intenta mas tarde');
-                // console.log(error);
+            })
+            .catch((error) => {
+              console.log(error);
+              Swal.fire({
+                title: "Error al actualizar",
+                text: "El usuario que esta revisando, no se encuentra en el sistema",
+                showCancelButton: false,
+                icon: "error",
               });
-          })
-          .catch((error) => {
-            console.log(error);
-            Swal.fire({
-              title: "Error al actualizar",
-              text: "El usuario que esta revisando, no se encuentra en el sistema",
-              showCancelButton: false,
-              icon: "error",
             });
-          });
+        });
       } else {
         Swal.fire({
           title: "Alguno de los datos no es correcto, verifique nuevamente",

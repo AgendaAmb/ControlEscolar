@@ -406,11 +406,11 @@ class ArchiveController extends Controller
     {
         try {
             $request->validate([
-                'selected_personalDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
-                'selected_entranceDocuments.*' =>   ['required', 'numeric', 'exists:required_documents,id'],
-                'selected_academicDocuments.*' =>   ['required'],
-                'selected_languageDocuments.*' =>   ['required'],
-                'selected_workingDocuments.*'  =>   ['required'],
+                'selected_personalDocuments.*' =>   ['nullable', 'required', 'numeric', 'exists:required_documents,id'],
+                'selected_entranceDocuments.*' =>   ['nullable','required', 'numeric', 'exists:required_documents,id'],
+                'selected_academicDocuments.*' =>   ['nullable','required'],
+                'selected_languageDocuments.*' =>   ['nullable','required'],
+                'selected_workingDocuments.*'  =>   ['nullable','required'],
                 'instructions' => ['required', 'nullable', 'string', 'max:225'],
                 'academic_program' => ['required'],
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],

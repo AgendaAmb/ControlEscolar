@@ -119,7 +119,7 @@
     
     <hr class="d-block" :style="ColorStrip" />
 
-    <template #modal-footer="{ enviarActualizacion, cancel }">
+    <template #modal-footer="{  cancel }">
       <!-- Emulate built in modal footer ok and cancel button actions -->
       <b-button size="sm" variant="success" @click="enviarActualizacion()" :style="styleBtnAccordionSection">
         <p class="h5">Guardar estado</p>
@@ -258,17 +258,12 @@ export default {
       console.log("instructions: " + this.instructions);
 
       if (
-        (this.selected_personalDocuments.length > 0 ||
-          this.selected_academicDocuments.length > 0 ||
-          this.selected_entranceDocuments.length > 0 ||
-          this.selected_languageDocuments.length > 0 ||
-          this.selected_workingDocuments.length > 0) &&
         this.archive_id != null &&
         this.user_id != null
       ) {
         Swal.fire({
           title: "¿Estas seguro de realizar el cambio?",
-          text: "Actulizar el expediente a que no cumple",
+          text: "Actulizar el expediente a NO CUMPLE",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
