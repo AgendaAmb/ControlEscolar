@@ -351,7 +351,7 @@ class InterviewController extends Controller
                     $user_data = $user_data[0];
                     $user_mail = $user_data->email;
 
-                    if ($User->user_type == "externs" || $User->user_type == "students" || $User->user_type == "Comunidad AA") {
+                    if ($User->type == "externs" || $User->type == "students" || $User->type == "Comunidad AA") {
                         $this->alumno = $User;
                         // * Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
@@ -378,7 +378,7 @@ class InterviewController extends Controller
                         } catch (\Exception $e) {
                             return new JsonResponse($e->getMessage(), JsonResponse::HTTP_BAD_GATEWAY); //Ver info archivos en consola
                         }
-                    } else if ($User->user_type == "workers") {
+                    } else if ($User->type == "workers") {
                         $this->alumno = $User;
                         /**Obtener al trabajador inscrito en la entrevista */
                         // Envio de correo dependidiendo modalidad de la entrevista
