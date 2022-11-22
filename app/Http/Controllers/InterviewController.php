@@ -45,47 +45,15 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
-        try{
-            $calendar_resource = new CalendarResource(AcademicProgram::WithInterviewEagerLoads()->get());
-        }catch(\Exception $e){
-            return new JsonResponse(['message' => 'Error al cargar el recurso calendario.'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
-
-        return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
-
-    public function calendario1(Request $request)
-    {
         $active_period = Period::orderBy('created_at', 'desc')
-        ->where('finished', '!=', '1')
-        ->with('announcements.archives')
-        ->first();
+            ->where('finished', '!=', '1')
+            ->with('announcements.archives')
+            ->first();
 
         if ($active_period) {
             // * Load missing period data 
             $active_period->loadMissing('rooms');
         }
-
-        $calendar_resource = new CalendarResource($active_period);
-
-        return $calendar_resource;
-
-        return view('entrevistas.index')->with($calendar_resource->toArray($request));
-    }
-
-    public function calendario2(Request $request)
-    {
-        $active_period = Period::orderBy('created_at', 'desc')
-                            ->where('finished', '!=', '1')
-                            ->with('announcements.archives')
-                            ->first();
-        
-        if($active_period) {
-            // * Load missing period data 
-            $active_period->loadMissing('rooms');
-        }
-
-        // return $active_period;
 
         $calendar_resource = new CalendarResource($active_period);
 
@@ -100,42 +68,51 @@ class InterviewController extends Controller
 
     public function programa(Request $request)
     {
-        // Administracion
-        // Control escolar - Ver todo
-        // Comite academico - Ver promedios
-        // Cordinador - Ver todo / no modificar / ver promedio
-        // Profesor nucleo basico
-        // Aspirante 
 
-        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
-            ?   Interview::select('*')->where('confirmed', 1)
-            :   $request->user()->interviews()->where('confirmed', 1);
+        // $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
+        // ?   Interview::select('*')->where('confirmed', 1)
+        // :   $request->user()->interviews()->where('confirmed', 1);
 
-        $interview_program_resource = new InterviewProgramResource($interviews);
-
+        // // * Obtiene los datos de cada entrevista
+        // $interview_program_resource = new InterviewProgramResource($interviews);
         // return $interview_program_resource->toArray($request);
 
-        return view('entrevistas.show', $interview_program_resource->toArray($request));
+        $isProfessor = false;
+        $announcements = Announcement::idDescending()->get();
+
+        foreach ($announcements as $announcement) {
+            $academic_program = AcademicProgram::where('id', $announcement->academic_program_id)->first();
+            $announcement->setAttribute('name', $academic_program->name);
+        }
+
+        foreach ($request->session()->get('user')->roles as $rol) {
+            if (strcmp($rol->name, 'profesor_colaborador') == 0 || strcmp($rol->name, 'profesor_nb') == 0) {
+                $isProfessor = true;
+            }
+        }
+
+        $academic_programs = AcademicProgram::with('latestAnnouncement')->get();
+        
+        return view('entrevistas.show')
+            ->with('user', $request->user())
+            ->with('academic_programs', $academic_programs)
+            ->with('announcements', $announcements);
     }
 
-    public function programa2(Request $request)
-    {
-        // Administracion
-        // Control escolar - Ver todo
-        // Comite academico - Ver promedios
-        // Cordinador - Ver todo / no modificar / ver promedio
-        // Profesor nucleo basico
-        // Aspirante 
-
+    /**
+     * Regresa y filtra las entrevistas por announcement seleccionado .
+     *
+     * @return void
+     */
+    public function getFilteredInterviews(Request $request){
         $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
             ?   Interview::select('*')->where('confirmed', 1)
             :   $request->user()->interviews()->where('confirmed', 1);
 
+        // * Obtiene los datos de cada entrevista
         $interview_program_resource = new InterviewProgramResource($interviews);
 
         return $interview_program_resource->toArray($request);
-
-        // return view('entrevistas.show', $interview_program_resource->toArray($request));
     }
 
     /**
@@ -173,7 +150,10 @@ class InterviewController extends Controller
             # Obtiene los datos del profesor que otorgó la carta de intención, con base a la información de mi portal.
             $professor = $interview_model->intentionLetterProfessor->first();
         } catch (\Exception $e) {
-            return new JsonResponse(['Error' => 'Falló al insertar datos de la entrevista', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse([
+                'Error' => 'Falló al insertar datos de la entrevista', 
+                'message' => $e->getMessage()
+            ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         try {
@@ -197,7 +177,10 @@ class InterviewController extends Controller
                 $miPortal_user['surname']  ?? ''
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['Error' => 'Falló al traer los datos del portal', 'message' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse([
+                'Error' => 'Falló al traer los datos del portal', 
+                'message' => $e->getMessage()
+            ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         try {

@@ -27,22 +27,22 @@ class InterviewResource extends JsonResource
         $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $appliant->id]);         // $miPortal_user[0]->id;
         $miPortal_user = $miPortal_user[0];
 
-        //  aqui batallando :v 
-        if($request->user()->hasRole('comite_academico')){
-            return [
-                'user_id' => $appliant->id,
-                'appliant' => $this->when($appliant !== null, implode(' ', [
-                    $miPortal_user->name,
-                    $miPortal_user->middlename,
-                    $miPortal_user->surname
-                ])),
-                'start_time' => $this->start_time,
-                'end_time' => $this->end_time,
-                'academic_program' => $academic_program->name,
-                'archive_url' => $this->when($archive !== null, route('solicitud.show', $archive)),
-                'site' => $room->site
-            ];
-        }
+        // //  aqui batallando :v 
+        // if($request->user()->hasRole('comite_academico')){
+        //     return [
+        //         'user_id' => $appliant->id,
+        //         'appliant' => $this->when($appliant !== null, implode(' ', [
+        //             $miPortal_user->name,
+        //             $miPortal_user->middlename,
+        //             $miPortal_user->surname
+        //         ])),
+        //         'start_time' => $this->start_time,
+        //         'end_time' => $this->end_time,
+        //         'academic_program' => $academic_program->name,
+        //         'archive_url' => $this->when($archive !== null, route('solicitud.show', $archive)),
+        //         'site' => $room->site
+        //     ];
+        // }
 
         return [
             'id' => $this->id,
