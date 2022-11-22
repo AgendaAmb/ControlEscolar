@@ -290,14 +290,14 @@ class InterviewController extends Controller
                         
                         $this->alumno = $User;
                         $archive = Archive::where('user_id', $this->alumno->id)->first();
+
+                        return new JsonResponse(['message' => $archive], JsonResponse::HTTP_OK);
                         
                         // * Carga programa academico
                         $archive->loadMissing([
                             'announcement.academicProgram',
                             'appliant',
                         ]);
-
-                        return new JsonResponse(['message' => $archive], JsonResponse::HTTP_OK);
 
                         $academic_program =  $archive->announcement->academicProgram;
 
@@ -306,6 +306,8 @@ class InterviewController extends Controller
                         $postulante_data = $postulante_data[0];
                     }
                 }
+
+                return new JsonResponse(['message' => 'paso'], JsonResponse::HTTP_OK);
 
                 $servicio_correo = 'smtp';
                 $mail_academic_program = 'rtic.ambiental@uaslp.mx';
@@ -353,7 +355,8 @@ class InterviewController extends Controller
                         $this->alumno = $User;
                         // * Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
-                            // Mail::mailer($servicio_correo)->to($user_mail)
+                            // Mail::mailer($servicio_correo)
+                            // ->to($user_mail)
                             // ->cc($mail_academic_program)  
                             // ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                             Mail::mailer($servicio_correo)->to('contact.hhmon@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
