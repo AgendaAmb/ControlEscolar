@@ -68,15 +68,6 @@ class InterviewController extends Controller
 
     public function programa(Request $request)
     {
-
-        // $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
-        // ?   Interview::select('*')->where('confirmed', 1)
-        // :   $request->user()->interviews()->where('confirmed', 1);
-
-        // // * Obtiene los datos de cada entrevista
-        // $interview_program_resource = new InterviewProgramResource($interviews);
-        // return $interview_program_resource->toArray($request);
-
         $isProfessor = false;
         $announcements = Announcement::idDescending()->get();
 
@@ -280,12 +271,12 @@ class InterviewController extends Controller
                         $ResponseMeating = app(ZoomController::class)->store($interview2);
                         $join_url = $ResponseMeating['join_url'];
                     }catch(\Exception $e){
-                        $join_url = "En linea por Zoom";
+                        $join_url = "En linea por Teams";
                     }
                     // Actualizacion bandera - entrevista cerrada
-                    Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $join_url]);
+                    // Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $join_url]);
                 } else {
-                    Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
+                    // Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
                 }
 
                 $archive = null;
@@ -299,26 +290,27 @@ class InterviewController extends Controller
                         
                         $this->alumno = $User;
                         $archive = Archive::where('user_id', $this->alumno->id)->first();
-
-                        //Carga programa academico
+                        
+                        // * Carga programa academico
                         $archive->loadMissing([
                             'announcement.academicProgram',
                             'appliant',
                         ]);
 
+                        return new JsonResponse(['message' => $archive], JsonResponse::HTTP_OK);
+
                         $academic_program =  $archive->announcement->academicProgram;
 
-                        // Extraemos los datos del postulante del portal
+                        // * Extraemos los datos del postulante del portal
                         $postulante_data = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $this->alumno->id]);         // $miPortal_user[0]->id;
                         $postulante_data = $postulante_data[0];
                     }
                 }
 
-                // ! Default
                 $servicio_correo = 'smtp';
                 $mail_academic_program = 'rtic.ambiental@uaslp.mx';
                 $url_LogoAA = asset('/storage/logos/rtic.png');
-
+                
                 if ($academic_program != null) {
                     try{
                         // * Filtro para envio de correos segun dependencia del programa academico
@@ -414,8 +406,7 @@ class InterviewController extends Controller
 
         try {
             $archives = Archive::where('announcement_id', $request->announcement_id)->where(function ($q) {
-                $q->where('status', 7)
-                    ->orWhere('status', 5);
+                $q->where('status', 7)->orWhere('status', 5);
             })->get();
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al enviar correos de entrevista', 'error' => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
