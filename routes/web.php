@@ -218,8 +218,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Rúbrica de evaluación
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
-            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|coordinador|control_escolar'])->name('show_average');
-            Route::get('/promedio/ca/{archive_id}', [EvaluationRubricController::class, 'show_average_ca'])->middleware(['role:admin|comite_academico'])->name('show_average_ca');
+            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|coordinador'])->name('show_average');
+            Route::get('/promedio/ca/{archive_id}', [EvaluationRubricController::class, 'show_average_ca'])->middleware(['role:control_escolar|comite_academico'])->name('show_average_ca');
 
             // Export rubric to excel
             Route::get('/promedio/{archive_id}/export', [EvaluationRubricController::class, 'export_rubric'])->middleware(['role:admin|comite_academico|coordinador|control_escolar'])->name('export_rubric');

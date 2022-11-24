@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\DB;
 
 class InterviewResource extends JsonResource
 {
+
+    // * Filter average rubric link by role
+    public function setAverageRubric($request, $archive){
+        $average_rubric_route = null;
+        if( $request->user()->hasAnyRole(['admin','coordinador']) === true){
+            $average_rubric_route = route('entrevistas.rubrica.show_average', ['archive_id' => $archive]);
+        }else if($request->user()->hasAnyRole(['comite_academico', 'control_escolar']) === true){
+            $average_rubric_route = route('entrevistas.rubrica.show_average_ca', ['archive_id' => $archive]);
+        }
+        return $average_rubric_route;
+    }
+
     /**
      * Transform the resource into an array.
      *
@@ -27,22 +39,7 @@ class InterviewResource extends JsonResource
         $miPortal_user = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $appliant->id]);         // $miPortal_user[0]->id;
         $miPortal_user = $miPortal_user[0];
 
-        // //  aqui batallando :v 
-        // if($request->user()->hasRole('comite_academico')){
-        //     return [
-        //         'user_id' => $appliant->id,
-        //         'appliant' => $this->when($appliant !== null, implode(' ', [
-        //             $miPortal_user->name,
-        //             $miPortal_user->middlename,
-        //             $miPortal_user->surname
-        //         ])),
-        //         'start_time' => $this->start_time,
-        //         'end_time' => $this->end_time,
-        //         'academic_program' => $academic_program->name,
-        //         'archive_url' => $this->when($archive !== null, route('solicitud.show', $archive)),
-        //         'site' => $room->site
-        //     ];
-        // }
+
 
         return [
             'id' => $this->id,
@@ -59,7 +56,7 @@ class InterviewResource extends JsonResource
             'rubrics' => RubricPreviewResource::collection($this->evaluationRubrics),
             'site' => $room->site ?? 'Sala',
             'type' => $academic_program->type,
-            'average_rubric' => route('entrevistas.rubrica.show_average', ['archive_id' => $archive])
+            'average_rubric' => $this->setAverageRubric($request,$archive)
         ];
     }
 }
