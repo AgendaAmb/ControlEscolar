@@ -114,6 +114,13 @@ export default {
       type: String,
       default: "Indefinido"
     },
+
+    // dictamen professor
+    dictamen_redactor: {
+      type: String,
+      default: "Indefinido"
+    },
+
     // Áreas académicas.
     areas: {
       type: Array,

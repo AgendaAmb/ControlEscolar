@@ -532,6 +532,7 @@ export default {
         date: this.StringDate,
         appliant: interview.appliant.name.toLowerCase(),
         professor: interview.intention_letter_professor.name.toLowerCase(),
+        dictamen_redactor: interview.dictamen_redactor !== null ? interview.dictamen_redactor: 'Indefinido',
         start_time: start_time,
         end_time: end_time,
         confirmed: interview.confirmed,

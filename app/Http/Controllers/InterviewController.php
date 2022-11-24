@@ -31,6 +31,7 @@ use App\Helpers\MiPortalService;
 use App\Mail\UpdateDocumentsInterview;
 use App\Models\Announcement;
 use App\Models\ArchiveRequiredDocument;
+use App\Models\InterviewRedactor;
 use App\Models\Period;
 use App\Models\RequiredDocument;
 use App\Models\User;
@@ -57,7 +58,25 @@ class InterviewController extends Controller
 
         $calendar_resource = new CalendarResource($active_period);
 
+        // return $calendar_resource;
+
         return view('entrevistas.index')->with($calendar_resource->toArray($request));
+    }
+
+    /**
+     * Devuelve la vista del calendario.
+     * 
+     */
+    public function setRedactor(Request $request){
+        try{
+            InterviewRedactor::updateOrCreate(
+                ['interview_id' => $request->interview_id],
+                ['user_id' => $request->professor_id]
+            );
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => $e->getMessage()], JsonResponse::HTTP_OK);
+        }
+        return new JsonResponse(['message' => 'exito'], JsonResponse::HTTP_OK);
     }
 
     /**

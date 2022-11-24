@@ -479,6 +479,7 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
         date: this.StringDate,
         appliant: interview.appliant.name.toLowerCase(),
         professor: interview.intention_letter_professor.name.toLowerCase(),
+        dictamen_redactor: interview.dictamen_redactor !== null ? interview.dictamen_redactor : 'Indefinido',
         start_time: start_time,
         end_time: end_time,
         confirmed: interview.confirmed,
@@ -501,10 +502,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-var _props;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -591,7 +606,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
-  props: (_props = {
+  props: {
     // Id de la entrevista.
     id: {
       type: Number,
@@ -627,28 +642,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: String,
       "default": "Indefinido"
     },
+    // Hora de fin.
+    dictamen_redactor: {
+      type: String,
+      "default": "Indefinido"
+    },
     // Áreas académicas de las entrevistas.
     areas: {
       type: Array,
       "default": function _default() {
         return [];
       }
+    },
+    // Teachers
+    users: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    },
+    // La entrevista ya fue confirmada.
+    confirmed: {
+      type: Boolean,
+      "default": false
     }
-  }, _defineProperty(_props, "areas", {
-    type: Array,
-    "default": function _default() {
-      return [];
-    }
-  }), _defineProperty(_props, "users", {
-    type: Array,
-    "default": function _default() {
-      return [];
-    }
-  }), _defineProperty(_props, "confirmed", {
-    type: Boolean,
-    "default": false
-  }), _props),
+  },
   computed: {
+    notEmptyAreas: function notEmptyAreas() {
+      var fill_areas = this.areas.filter(function (area) {
+        return area.professor_name !== false;
+      });
+      return fill_areas;
+    },
     loggedUserName: function loggedUserName() {
       var loggedUser = this.$root.loggedUser;
       return (loggedUser.name + " " + loggedUser.middlename + " " + loggedUser.surname).toLowerCase();
@@ -687,10 +712,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      spinnerVisible: false
+      spinnerVisible: false,
+      redactor: null
     };
   },
   methods: {
+    setRedactor: function setRedactor() {
+      var _this = this;
+
+      var data = {
+        interview_id: this.id,
+        professor_id: this.redactor.professor_id
+      };
+      console.log(data);
+      axios.post('/controlescolar/entrevistas/setDictamenRedactor', data).then(function (response) {
+        _this.dictamen_redactor = _this.redactor.professor_name, console.log(response.data);
+      })["catch"](function (error) {});
+    },
     canRemoveUser: function canRemoveUser(area) {
       if (area.professor_name === false) return false;
       if (this.confirmed === true) return false; // Cancelar - solo por el profesor inscrito y el administrador
@@ -698,7 +736,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.loggedUserName === area.professor_name || this.$root.loggedUserIsAdmin();
     },
     inscribirUsuario: function inscribirUsuario(index) {
-      var _this = this;
+      var _this2 = this;
 
       if (confirm('¿Estás segure que deseas participar en esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/interviewUser', {
@@ -709,14 +747,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var result = {
           id: response.data.id,
           name: response.data.name,
-          professor_name: _this.loggedUserName
+          professor_name: _this2.loggedUserName
         };
-        Vue.set(_this.areas, index, result);
+        Vue.set(_this2.areas, index, result);
       })["catch"](function (error) {});
       return false;
     },
     cancelarRegistro: function cancelarRegistro(index) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false) return false; // console.log(this.$root.loggedUser);
 
@@ -727,7 +765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           user_type: this.$root.loggedUser.user_type
         }
       }).then(function (response) {
-        Vue.set(_this2.areas, index, {
+        Vue.set(_this3.areas, index, {
           'id': -1,
           'name': 'Área Académica Disponible',
           'professor_name': false
@@ -736,7 +774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return false;
     },
     confirmaEntrevista: function confirmaEntrevista() {
-      var _this3 = this;
+      var _this4 = this;
 
       //Cambio de botón pa que de vueltitas :v
       this.spinnerVisible = true;
@@ -747,28 +785,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         room: this.room
       }).then(function (response) {
         console.log(response.data);
-        _this3.Confirmed = true;
-        _this3.spinnerVisible = false;
+        _this4.Confirmed = true;
+        _this4.spinnerVisible = false;
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {
-        _this3.spinnerVisible = false;
+        _this4.spinnerVisible = false;
       });
       return false;
     },
     reabreEntrevista: function reabreEntrevista() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (confirm('¿Estás segure que deseas reabrir esta entrevista?') === false) return false;
       axios.post('/controlescolar/entrevistas/reopenInterview', {
         id: this.id
       }).then(function (response) {
-        _this4.Confirmed = false;
+        _this5.Confirmed = false;
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {});
       return false;
     },
     eliminarEntrevista: function eliminarEntrevista() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false) return false;
       console.log("hola");
@@ -777,7 +815,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (response) {
         console.log(response.data);
 
-        _this5.$emit('interview_deleted', _this5.id);
+        _this6.$emit('interview_deleted', _this6.id);
 
         $('#DetalleEntrevista').modal('hide');
       })["catch"](function (error) {});
@@ -1032,6 +1070,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Hora de inicio.
     url: {
+      type: String,
+      "default": "Indefinido"
+    },
+    // dictamen professor
+    dictamen_redactor: {
       type: String,
       "default": "Indefinido"
     },
@@ -31998,99 +32041,169 @@ var render = function () {
                             0
                           ),
                         ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12 mt-4 px-0" }, [
+                      _c(
+                        "p",
+                        {
+                          staticClass: "d-block prof-carta-intencion mb-4",
+                          attrs: { for: "exampleFormControlSelect1" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                Redactor del dictamen general: " +
+                              _vm._s(_vm.dictamen_redactor) +
+                              "\n              "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          { attrs: { for: "exampleFormControlSelect1" } },
+                          [_vm._v("Cambiar redactor ")]
+                        ),
                         _vm._v(" "),
-                        _c("tfoot", [
-                          _c("tr", [
-                            _c("td", { attrs: { colspan: "5" } }, [
-                              _vm.isConfirmable && !_vm.spinnerVisible
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-primary",
-                                      on: { click: _vm.confirmaEntrevista },
-                                    },
-                                    [
-                                      _vm._v(
-                                        " Confirmar\n                        entrevista\n                      "
-                                      ),
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.spinnerVisible
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-primary",
-                                      attrs: { disabled: "" },
-                                    },
-                                    [
-                                      _c("span", {
-                                        staticClass:
-                                          "spinner-border spinner-border-sm",
-                                        attrs: {
-                                          role: "status",
-                                          "aria-hidden": "true",
-                                        },
-                                      }),
-                                      _vm._v(
-                                        "\n                        Confirmando entrevista...\n                      "
-                                      ),
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.isReopenable
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-primary",
-                                      on: { click: _vm.reabreEntrevista },
-                                    },
-                                    [
-                                      _vm._v(
-                                        " Reabrir\n                        entrevista "
-                                      ),
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.isRemovable
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-danger ml-1",
-                                      on: { click: _vm.eliminarEntrevista },
-                                    },
-                                    [
-                                      _vm._v(
-                                        " Cancelar\n                        entrevista "
-                                      ),
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger ml-1",
-                                  attrs: {
-                                    type: "button",
-                                    "data-dismiss": "modal",
-                                    "aria-label": "Close",
-                                  },
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.redactor,
+                                expression: "redactor",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "exampleFormControlSelect1" },
+                            on: {
+                              change: [
+                                function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.redactor = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
                                 },
-                                [_vm._v("\n                        Cerrar ")]
-                              ),
+                                function ($event) {
+                                  return _vm.setRedactor()
+                                },
+                              ],
+                            },
+                          },
+                          [
+                            _c("option", { attrs: { value: "null" } }, [
+                              _vm._v("Selecciona un nuevo redactor"),
                             ]),
-                          ]),
-                        ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.notEmptyAreas, function (area) {
+                              return _c(
+                                "option",
+                                { key: area.id, domProps: { value: area } },
+                                [
+                                  _vm._v(
+                                    " " + _vm._s(area.professor_name) + " "
+                                  ),
+                                ]
+                              )
+                            }),
+                          ],
+                          2
+                        ),
                       ]),
                     ]),
                   ]),
                 ]
               ),
             ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "modal_footer d-flex flex-row align-items-center justify-content-end m-3",
+              },
+              [
+                _vm.isConfirmable && !_vm.spinnerVisible
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: {
+                          disabled: _vm.dictamen_redactor == "Indefinido",
+                        },
+                        on: { click: _vm.confirmaEntrevista },
+                      },
+                      [_vm._v(" \n          Confirmar entrevista\n        ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.spinnerVisible
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { disabled: "" },
+                      },
+                      [
+                        _c("span", {
+                          staticClass: "spinner-border spinner-border-sm",
+                          attrs: { role: "status", "aria-hidden": "true" },
+                        }),
+                        _vm._v(
+                          "\n          Confirmando entrevista...\n        "
+                        ),
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isReopenable
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: { click: _vm.reabreEntrevista },
+                      },
+                      [_vm._v(" Reabrir\n          entrevista ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isRemovable
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger ml-1",
+                        on: { click: _vm.eliminarEntrevista },
+                      },
+                      [_vm._v(" Cancelar\n          entrevista ")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger ml-1",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close",
+                    },
+                  },
+                  [_vm._v("\n          Cerrar\n        ")]
+                ),
+              ]
+            ),
           ]),
         ]
       ),
@@ -45693,7 +45806,8 @@ var app = new Vue({
      * @param {*} period 
      */
     interviewDetails: function interviewDetails(interview) {
-      // Validad ambos casos virtual y presencial 
+      console.log(interview); // Validad ambos casos virtual y presencial 
+
       var interview_room = null;
 
       if (this.period.modality === 'presencial') {
@@ -45724,8 +45838,7 @@ var app = new Vue({
             }
           }
         }
-      } // console.log(interview_room);
-
+      }
 
       this.selectedInterview = {
         id: interview.id,
@@ -45736,8 +45849,10 @@ var app = new Vue({
         room: interview_room !== null ? interview_room.site : "Error",
         start_time: interview.start_time,
         end_time: interview.end_time,
-        confirmed: interview.confirmed
+        confirmed: interview.confirmed,
+        dictamen_redactor: interview.dictamen_redactor
       };
+      console.log(this.selectedInterview);
       $('#DetalleEntrevista').modal('show');
     },
 
@@ -45816,7 +45931,7 @@ var app = new Vue({
    * Jala los datos de los servidores de AA.
    */
   mounted: function mounted() {
-    this.$root.$on('show_details', this.interviewDetails);
+    this.$root.$on('show_details', this.interviewDetails); // console.log(this.interviews)
   }
 });
 })();
