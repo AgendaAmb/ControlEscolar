@@ -32060,68 +32060,74 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { attrs: { for: "exampleFormControlSelect1" } },
-                          [_vm._v("Cambiar redactor ")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.redactor,
-                                expression: "redactor",
-                              },
-                            ],
-                            staticClass: "form-control",
-                            attrs: { id: "exampleFormControlSelect1" },
-                            on: {
-                              change: [
-                                function ($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function (o) {
-                                      return o.selected
-                                    })
-                                    .map(function (o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.redactor = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                },
-                                function ($event) {
-                                  return _vm.setRedactor()
-                                },
-                              ],
-                            },
-                          },
-                          [
-                            _c("option", { attrs: { value: "null" } }, [
-                              _vm._v("Selecciona un nuevo redactor"),
-                            ]),
+                      this.$root.loggedUserIsSchoolControl() ||
+                      this.$root.loggedUserIsAdmin()
+                        ? _c("div", { staticClass: "form-group" }, [
+                            _c(
+                              "label",
+                              { attrs: { for: "exampleFormControlSelect1" } },
+                              [_vm._v("Cambiar redactor ")]
+                            ),
                             _vm._v(" "),
-                            _vm._l(_vm.notEmptyAreas, function (area) {
-                              return _c(
-                                "option",
-                                { key: area.id, domProps: { value: area } },
-                                [
-                                  _vm._v(
-                                    " " + _vm._s(area.professor_name) + " "
-                                  ),
-                                ]
-                              )
-                            }),
-                          ],
-                          2
-                        ),
-                      ]),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.redactor,
+                                    expression: "redactor",
+                                  },
+                                ],
+                                staticClass: "form-control",
+                                attrs: { id: "exampleFormControlSelect1" },
+                                on: {
+                                  change: [
+                                    function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.redactor = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                    function ($event) {
+                                      return _vm.setRedactor()
+                                    },
+                                  ],
+                                },
+                              },
+                              [
+                                _c("option", { attrs: { value: "null" } }, [
+                                  _vm._v("Selecciona un nuevo redactor"),
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.notEmptyAreas, function (area) {
+                                  return _c(
+                                    "option",
+                                    { key: area.id, domProps: { value: area } },
+                                    [
+                                      _vm._v(
+                                        " " + _vm._s(area.professor_name) + " "
+                                      ),
+                                    ]
+                                  )
+                                }),
+                              ],
+                              2
+                            ),
+                          ])
+                        : _vm._e(),
                     ]),
                   ]),
                 ]

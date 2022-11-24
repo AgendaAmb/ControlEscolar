@@ -51,7 +51,7 @@
                 <p class="d-block prof-carta-intencion mb-4" for="exampleFormControlSelect1">
                   Redactor del dictamen general: {{ dictamen_redactor }}
                 </p>
-                <div class="form-group">
+                <div v-if="this.$root.loggedUserIsSchoolControl() || this.$root.loggedUserIsAdmin()" class="form-group">
                   <label for="exampleFormControlSelect1">Cambiar redactor </label>
                   <select 
                     class="form-control" 
