@@ -51871,7 +51871,7 @@ __webpack_require__.r(__webpack_exports__);
     // Calculo de la ponderacion
     sectionScore: function sectionScore(concepts, id) {
       // Factores de ponderación de los rubros
-      var doctorado = [10, 25, 30, 20, 15];
+      var doctorado = [10, 35, 30, 10, 15];
       var maestria = [15, 30, 15, 25, 15];
       var score = 0.0;
       concepts.forEach(function (concept) {
@@ -104491,6 +104491,7 @@ var app = new Vue({
     basic_concepts: rubric.basic_concepts,
     // TODO va a ser remplazado
     basicConcepts: basicConcepts,
+    dictamen_redactor: rubric.dictamen_redactor,
     academic_concepts: rubric.academic_concepts,
     research_concepts: rubric.research_concepts,
     research_concepts_details: rubric.research_concepts_details,
@@ -104512,7 +104513,8 @@ var app = new Vue({
   mounted: function mounted() {
     var _this = this;
 
-    //Obtemenos el escore de maestria o licencitara segun el caso
+    console.log(rubric); //Obtemenos el escore de maestria o licencitara segun el caso
+
     try {
       if (this.announcement.type === 'maestría') {
         this.basicConcepts.academic_degrees.forEach(function (element) {

@@ -59,8 +59,8 @@ const basicConcepts = @json($basic_concepts);
         <label> DICTAMEN INDIVIDUAL DEL EVALUADOR</label>
         <textarea :readonly="$root.r_only()" v-model="dictamen_individual" class="form-control" rows="3"></textarea>
     </div> 
-    <div class="form-group col-lg-11">
-        <label> DICTAMEN DE LA COMISIÓN EVALUADORA</label>
+    <div v-if="rubric_user_id == dictamen_redactor.user_id" class="form-group col-lg-11">
+        <label> DICTAMEN DE LA COMISIÓN EVALUADORA </label>
         <textarea :readonly="$root.r_only()" v-model="dictamen_ce" class="form-control" rows="3"></textarea>
     </div>        
     <hr class="col-11 hr">

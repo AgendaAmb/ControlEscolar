@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Helpers\MiPortalService;
-
+use App\Models\Interview;
 
 class RubricResource extends JsonResource
 {
@@ -75,10 +75,16 @@ class RubricResource extends JsonResource
     private function setRubric($request)
     {
         $rubric = $this->resource;
+        $dictamen_professor = null;
+        
+        try{
+            $dictamen_professor = Interview::firstWhere('id', $rubric->interview_id)->dictamenRedactor;
+        }catch(\Exception $e){}
 
         $this->rubric = [
             'id' => $rubric->id,
             'interview_id' => $rubric->interview_id,
+            'dictamen_redactor' => $dictamen_professor,
             'rubric_user_id' => $rubric->user_id,
             'considerations' => $rubric->considerations,
             'additional_information' => $rubric->additional_information,

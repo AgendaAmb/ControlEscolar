@@ -47,7 +47,7 @@
                                 {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </div>
-                        <div v-if="loggedUserIsAdmin() || loggedUserIsCoordinador()">
+                        <div v-if="!loggedUserIsPNB()">
                             <hr>
                             <a
                                 class="d-block text-capitalize text-decoration-none" 

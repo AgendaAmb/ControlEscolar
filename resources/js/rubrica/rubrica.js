@@ -31,6 +31,7 @@ const app = new Vue({
         university: '',
         basic_concepts: rubric.basic_concepts, // TODO va a ser remplazado
         basicConcepts: basicConcepts,
+        dictamen_redactor: rubric.dictamen_redactor,
         academic_concepts: rubric.academic_concepts,
         research_concepts: rubric.research_concepts,
         research_concepts_details: rubric.research_concepts_details,
@@ -51,6 +52,7 @@ const app = new Vue({
     },
 
     mounted() {
+        console.log(rubric);
         //Obtemenos el escore de maestria o licencitara segun el caso
         try{
             if(this.announcement.type === 'maestría'){
@@ -147,7 +149,7 @@ const app = new Vue({
          * Determina si el usuario autenticado es administrador.
          * @param {*} period 
          */
-         loggedUserIsAdmin(){
+        loggedUserIsAdmin(){
             var roles = this.loggedUser.roles.filter(role => {
                 return role.name === 'admin';
             });

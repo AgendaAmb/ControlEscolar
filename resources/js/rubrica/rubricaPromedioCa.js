@@ -7,7 +7,6 @@
 
 import AverageRubricCa from './components/AverageRubricCa';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
-import axios from 'axios';
 
 window.Vue = require('vue').default;
 Vue.use(GridPlugin);
@@ -31,7 +30,6 @@ const app = new Vue({
     },
 
     mounted() {
-        // console.log(this.scores); 
     },
 
     methods:{

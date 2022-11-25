@@ -45,6 +45,7 @@
                         <th class="table-success">Comentario o aportación</th>
                         <th class="table-success">Información detectada por la comisión de evaluación
                         </th>
+                        <th class="table-success">Dictamen individual</th>
                         <th class="table-success">Dictamen de la comisión evaluadora</th>
                     </tr>
                 </thead>
@@ -79,7 +80,8 @@
                         </th>
                         <th class="table-success">{{ rubric.considerations }}</th>
                         <th class="table-success">{{ rubric.additional_information }}</th>
-                        <th class="table-success">{{ rubric.dictamen_ce }}</th>
+                        <th class="table-success">{{ rubric.dictamen_individual }}</th>
+                        <th class="table-success">{{ rubric.dictamen_general }}</th>
                     </tr>
                 </tbody>
                 <tfoot>
