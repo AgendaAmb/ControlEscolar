@@ -378,9 +378,8 @@ class ArchiveController extends Controller
                     $servicio_correo = 'smtp_pmpca';
                     $url_ContactoAA = asset('/storage/logos/PMPCA.png');
                 }
-                // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
-
-                Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendUpdateDocuments(
+                Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
+                // Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendUpdateDocuments(
                     $request->selected_personalDocuments,
                     $request->selected_entranceDocuments,
                     $request->selected_academicDocuments,

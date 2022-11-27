@@ -27,20 +27,20 @@
       </div>
 
       <div class="form-group col-3 align-items-center p-2">
-        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
+        <div v-if="checkUpload() > 0" class="d-flex justify-content-center  my-1"
           style="max-height: 45px; width: 100%">
           <label>
-            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
-              <img :src="images_btn['ver']" alt="" style="width:100%; max-height: 45px !important;">
+            <a :href="'/controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;" target="_blank">
+              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
             </a>
           </label>
         </div>
 
-        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+        <div class="d-flex justify-content-center my-1"
           style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
-            <img :src="images_btn['seleccionar']" alt="" style=" max-height: 45px !important;">
+            <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
             <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%" @change="cargaDocumento">
           </label>
         </div>
@@ -58,11 +58,6 @@ export default {
     user_id: {
       type: Number,
       default: -1,
-    },
-
-    images_btn:{
-      type:Array,
-      default: [],
     },
 
     viewer_id: {
@@ -131,12 +126,26 @@ export default {
     errores: Object,
   },
 
+  
+  created(){
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        this.images_btn = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  },
+
   data() {
     return {
       state: 0,
       updload_here: false,
       datosValidos: {},
       textStateUpload: "",
+      images_btn: null,
       academiLetterCommitment: "",
       index: {
         type: Number,

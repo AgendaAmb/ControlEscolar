@@ -3,81 +3,43 @@
     <div class="col-12 mx-2 my-2">
       <h1 class="display-5">Actualiza tus Documentos</h1>
 
-      <h5 >
+      <h5>
         Termina de subir o reemplazar los documentos anteriores segun las instrucciones.
         Podras hacer cambios mientras el revisor no apruebe o mande mas correcciones.
       </h5>
     </div>
 
-    <div
-      v-if="personalDocumentsIdsNotEmpty() === true"
-      class="col-12 mx-2 my-4"
-    >
+    <div v-if="personalDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
       <h4 class="display">Documentos personales</h4>
-      <documento-requerido-porActualizar
-        v-for="documento in personal_documents"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        :alias_academic_program="academic_program.alias"
-        :require_documents_to_update="personal_documents_ids"
-        :list_type="'personal'"
-        v-bind="documento"
-        @enviaDocumento="cargaDocumento"
-      >
+      <documento-requerido-porActualizar v-for="documento in personal_documents" :key="documento.name"
+        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
+        :alias_academic_program="academic_program.alias" :require_documents_to_update="personal_documents_ids"
+        :list_type="'personal'" v-bind="documento" @enviaDocumento="cargaDocumento">
       </documento-requerido-porActualizar>
     </div>
 
-    <div
-      v-if="entranceDocumentsIdsNotEmpty() === true"
-      class="col-12 mx-2 my-4"
-    >
+    <div v-if="entranceDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
       <h4 class="display">Documentos de Ingreso</h4>
-      <documento-requerido-porActualizar
-        v-for="documento in entrance_documents"
-        :key="documento.name"
-        :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location"
-        :errores.sync="documento.errores"
-        :alias_academic_program="academic_program.alias"
-        :require_documents_to_update="entrance_documents_ids"
-        :list_type="'entrance'"
-        v-bind="documento"
-        @enviaDocumento="cargaDocumento"
-      >
+      <documento-requerido-porActualizar v-for="documento in entrance_documents" :key="documento.name"
+        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
+        :alias_academic_program="academic_program.alias" :require_documents_to_update="entrance_documents_ids"
+        :list_type="'entrance'" v-bind="documento" @enviaDocumento="cargaDocumento">
       </documento-requerido-porActualizar>
     </div>
 
-    <div
-      v-if="academicDocumentsIdsNotEmpty() === true"
-      class="col-12 mx-2 my-4"
-    >
+    <div v-if="academicDocumentsIdsNotEmpty() === true" class="col-12 mx-2 my-4">
       <h4 class="display">Documentos academicos</h4>
-      <div
-        class="col-12 mx-2"
-        v-for="(grado, index) in academic_degrees"
-        v-bind:key="grado.id"
-        :index="index + 1"
-      >
+      <div class="col-12 mx-2" v-for="(grado, index) in academic_degrees" v-bind:key="grado.id" :index="index + 1">
         <div v-if="academicDegreeIsInList(grado.id) === true">
           <h4 class="display">Grado Academico {{ grado.id }}</h4>
 
-          <documento-requerido-porActualizar
-            v-for="documento in grado.required_documents"
-            :key="documento.name"
-            :archivo.sync="documento.archivo"
-            :location.sync="documento.pivot.location"
-            :errores.sync="documento.errores"
-            :alias_academic_program="academic_program.alias"
-            :require_documents_to_update="selected_academicDocuments"
-            :list_type="'academic'"
+          <documento-requerido-porActualizar v-for="documento in grado.required_documents" :key="documento.name"
+            :archivo.sync="documento.archivo" :location.sync="documento.pivot.location"
+            :errores.sync="documento.errores" :alias_academic_program="academic_program.alias"
+            :require_documents_to_update="selected_academicDocuments" :list_type="'academic'"
             :index_require_documents_to_update="
               index_selected_academicDocuments
-            "
-            v-bind="documento"
-            @enviaDocumento="cargaDocumento"
-          >
+            "  v-bind="documento" @enviaDocumento="cargaDocumento">
           </documento-requerido-porActualizar>
         </div>
       </div>
@@ -92,11 +54,7 @@
       </div>
 
       <div class="col-3">
-        <button
-          @click="avisarCambios"
-          class="btn btn-success"
-          style="height: 45px; width: 100%"
-        >
+        <button @click="avisarCambios" class="btn btn-success" style="height: 45px; width: 100%">
           Informar de cambios
         </button>
       </div>
@@ -390,15 +348,7 @@ export default {
         this.selected_workingDocuments.push(element[1]);
       }
     });
-  
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        this.images_btn = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
 
   },
 };

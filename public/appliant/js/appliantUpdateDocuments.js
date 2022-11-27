@@ -79,48 +79,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
@@ -383,11 +341,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
 
         _this.selected_workingDocuments.push(element[1]);
       }
-    });
-    axios.get("/controlescolar/solicitud/getAllButtonImage").then(function (response) {
-      _this.images_btn = response.data;
-    })["catch"](function (error) {
-      console.log(error);
     });
   }
 });
@@ -900,10 +853,6 @@ __webpack_require__.r(__webpack_exports__);
       type: Number,
       "default": -1
     },
-    images_btn: {
-      type: Array,
-      "default": []
-    },
     viewer_id: {
       type: Number,
       "default": -1
@@ -955,12 +904,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     errores: Object
   },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/controlescolar/solicitud/getAllButtonImage").then(function (response) {
+      _this.images_btn = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
   data: function data() {
     return {
       state: 0,
       updload_here: false,
       datosValidos: {},
       textStateUpload: "",
+      images_btn: null,
       academiLetterCommitment: "",
       index: {
         type: Number,
@@ -996,7 +955,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     isInList: function isInList() {
-      var _this = this;
+      var _this2 = this;
 
       var res = false;
 
@@ -1012,7 +971,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       } else {
         this.require_documents_to_update.forEach(function (element) {
-          if (element === _this.id) {
+          if (element === _this2.id) {
             res = true;
           }
         });
@@ -5310,7 +5269,7 @@ var render = function () {
             "div",
             { staticClass: "form-group col-3 align-items-center p-2" },
             [
-              _vm.checkUpload() === true
+              _vm.checkUpload() > 0
                 ? _c(
                     "div",
                     {
@@ -5325,7 +5284,7 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../../controlescolar/solicitud/expediente/" +
+                                "/controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },
@@ -5336,7 +5295,7 @@ var render = function () {
                                 width: "100%",
                                 "max-height": "45px !important",
                               },
-                              attrs: { src: _vm.images_btn["ver"], alt: "" },
+                              attrs: { src: _vm.images_btn.ver, alt: "" },
                             }),
                           ]
                         ),
@@ -5345,39 +5304,34 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.isIntentionLetter() === false
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "d-flex justify-content-center my-1",
+              _c(
+                "div",
+                {
+                  staticClass: "d-flex justify-content-center my-1",
+                  staticStyle: {
+                    "max-height": "45px !important",
+                    width: "100%",
+                  },
+                },
+                [
+                  _c("label", [
+                    _c("img", {
+                      staticStyle: { "max-height": "45px !important" },
+                      attrs: { src: _vm.images_btn.seleccionar, alt: "" },
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control d-none",
                       staticStyle: {
                         "max-height": "45px !important",
                         width: "100%",
                       },
-                    },
-                    [
-                      _c("label", [
-                        _c("img", {
-                          staticStyle: { "max-height": "45px !important" },
-                          attrs: {
-                            src: _vm.images_btn["seleccionar"],
-                            alt: "",
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control d-none",
-                          staticStyle: {
-                            "max-height": "45px !important",
-                            width: "100%",
-                          },
-                          attrs: { type: "file" },
-                          on: { change: _vm.cargaDocumento },
-                        }),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
+                      attrs: { type: "file" },
+                      on: { change: _vm.cargaDocumento },
+                    }),
+                  ]),
+                ]
+              ),
             ]
           ),
         ]),
