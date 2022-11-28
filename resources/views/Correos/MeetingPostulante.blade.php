@@ -81,7 +81,7 @@
                     <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
-                        sea ingresado en la plataforma.
+                        sea ingresado en la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
@@ -97,7 +97,7 @@
                     </div>
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row my-2">
-                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma.
+                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
