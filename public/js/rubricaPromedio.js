@@ -51589,6 +51589,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -52488,6 +52490,10 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("th", { staticClass: "table-success" }, [
+                    _vm._v("Dictamen individual"),
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "table-success" }, [
                     _vm._v("Dictamen de la comisión evaluadora"),
                   ]),
                 ],
@@ -52609,7 +52615,11 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c("th", { staticClass: "table-success" }, [
-                      _vm._v(_vm._s(rubric.dictamen_ce)),
+                      _vm._v(_vm._s(rubric.dictamen_individual)),
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { staticClass: "table-success" }, [
+                      _vm._v(_vm._s(rubric.dictamen_general)),
                     ]),
                   ],
                   2

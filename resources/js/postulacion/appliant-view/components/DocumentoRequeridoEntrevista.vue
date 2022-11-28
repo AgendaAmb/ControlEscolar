@@ -31,7 +31,7 @@
           </label>
         </div>
 
-        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center my-1"
+        <div class="d-flex justify-content-center my-1"
           style="max-height:45px !important; width: 100%">
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
@@ -56,9 +56,6 @@ export default {
       type: Number,
     },
 
-    images_btn:{
-      type:Object,
-    },
 
     name: {
       type: String
@@ -98,6 +95,7 @@ export default {
       datosValidos: {},
       textStateUpload: '',
       academiLetterCommitment: '',
+      images_btn : null,
     };
   },
 
@@ -130,6 +128,16 @@ export default {
     }
   },
   
+  created() {
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        this.images_btn = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 
   
   methods: {

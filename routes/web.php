@@ -42,7 +42,7 @@ Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelog
 Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-// Route::prefix('controlescolar')->group(function () {
+Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
@@ -195,6 +195,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Calendario
         Route::get('calendario', [InterviewController::class, 'calendario'])->name('calendario');
 
+        Route::post('setDictamenRedactor', [InterviewController::class, 'setRedactor'])->name('setRedactor');
+
         # Programa de entrevistas
         Route::get('programa', [InterviewController::class, 'programa'])->name('programa');
 
@@ -216,8 +218,8 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Rúbrica de evaluación
         Route::prefix('rubrica')->name('rubrica.')->group(function () {
             Route::get('/{evaluationRubric}', [EvaluationRubricController::class, 'show'])->name('show');
-            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|coordinador|control_escolar'])->name('show_average');
-            Route::get('/promedio/ca/{archive_id}', [EvaluationRubricController::class, 'show_average_ca'])->middleware(['role:admin|comite_academico'])->name('show_average_ca');
+            Route::get('/promedio/{archive_id}', [EvaluationRubricController::class, 'show_average'])->middleware(['role:admin|coordinador'])->name('show_average');
+            Route::get('/promedio/ca/{archive_id}', [EvaluationRubricController::class, 'show_average_ca'])->middleware(['role:admin|control_escolar|comite_academico'])->name('show_average_ca');
 
             // Export rubric to excel
             Route::get('/promedio/{archive_id}/export', [EvaluationRubricController::class, 'export_rubric'])->middleware(['role:admin|comite_academico|coordinador|control_escolar'])->name('export_rubric');
@@ -280,4 +282,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         Route::get('/pruebaPDF', [ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
-// });
+});

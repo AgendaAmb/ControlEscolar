@@ -11,11 +11,6 @@
 
 <body>
     <main class="container-fluid">
-        <p>{{ $academic_program['name']}}</p>
-        <p>{{ $Student->name }}</p>
-        <p>{{ $Interview->start_time }}</p>
-        <p>{{ $Room }}</p>
-
         <div class="row">
             <div class="col-12">
                 <img src="{{ asset('imagenes/logod.png') }}">
@@ -82,13 +77,13 @@
             </div>
 
             <div class="container">
-
-                @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' || $academic_program['alias'] == 'enrem')
-                    <div class="row mt-2">
+                @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' ||  $academic_program['alias'] == 'enrem')
+                    <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
-                        sea ingresado en la plataforma a más tardar el día 19 de junio a las 12:00 h
+                        sea ingresado en la plataforma.
                     </div>
+                    
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
@@ -101,10 +96,8 @@
 
                     </div>
                 @elseif ($academic_program['alias'] === 'doctorado')
-                    <div class="row mt-2">
-                        Dentro de los requisitos, se establece la elaboración UNA
-                        PRESENTACIÓN, las cuales deberán de ser ingresadas a la plataforma a más tardar el día de
-                        25 junio a las 12:00 h
+                    <div class="row my-2">
+                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
@@ -114,49 +107,12 @@
                                     'archive_id' => $archive_id,
                                 ]),
                             ])
-                            Subir Presentación
+                            Subir Presentación y Ensayo
                         @endcomponent
 
                     </div>
                 @endif
-
-
-                <div class="row mt-2">
-                    @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' || $academic_program['alias'] == 'enrem')
-                        <p><strong>Indicaciones:</strong></p>
-                        <p>Los aspectos a tomar en cuenta para el desarrollo de la entrevista son los siguientes:</p>
-                        <ul>
-                            <li> Conocer la información disponible en el sitio web de los PMPCA <a
-                                    href="https://pmpca.uaslp.mx"></a></li>
-                            <li> Demostrar que conoce al menos, el número de áreas que constituyen el posgrado</li>
-                            <li>Estructura y funcionamiento de los seminarios que integran el currículo del mismo. </li>
-                            <li> Conocer alguna tesis desarrollada dentro de cada una de las áreas que solicita ingreso.
-                                Las
-                                tesis se consultan en la sección de “Biblioteca” del sitio web.</li>
-                            <li>Presentar la propuesta de proyecto en PPT ante los profesores del Comité de Evaluación.
-                                El
-                                tiempo límite para la presentación es de 20 minutos.</li>
-                            <li>Demostrar que conoce las líneas de investigación de profesores del núcleo básico del
-                                posgrado,
-                                que podrían ser su director de tesis o bien que pueden formar parte de su comité
-                                tutelar.</li>
-                            <li> Además, debe conocer los objetivos del programa de manera explícita. </li>
-                        </ul>
-                        <p>Favor de confirmar asistencia a la entrevista, al correo <a href="mailto: pmpca@uaslp.mx ">
-                                pmpca@uaslp.mx </a></p>
-                        <p>Saludos cordiales, <br>
-                            M.I Maricela Rdz. Díaz de León <br>
-                            Coordinación Educativa <br>
-                            Agenda Ambiental de la Universidad Autónoma de San Luis Potosí <br>
-                            Ave. Manuel Nava 201, 2do piso <br>
-                            Zona Universitaria (Entre Facultad de Estomatología y Oficina de Finanzas)78210 San Luis
-                            Potosí,
-                            México. <br>
-                            Tels: (444) 8262439 y 2435
-                        </p>
-                    @endif
-                </div>
-
+                
             </div>
         </div>
     </main>

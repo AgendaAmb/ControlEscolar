@@ -57,10 +57,10 @@ class EvaluationRubric extends Model
     // Factores de ponderación de los rubros para DOCTORADO
     public static $SCORE_DOCTORADO = [
         'basic'     => 10, 
-        'academic'  => 25,
+        'academic'  => 35,
         'research'  => 30,
-        'exp'       => 25,
-        'personal'  => 30,
+        'exp'       => 10,
+        'personal'  => 15,
     ];
     
     // Factores de ponderación de los rubros para MAESTRÍA

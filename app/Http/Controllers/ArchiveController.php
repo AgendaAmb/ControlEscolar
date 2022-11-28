@@ -20,6 +20,7 @@ use Illuminate\Http\{
 };
 
 use Illuminate\Support\Facades\{
+    Auth,
     DB,
     Mail,
 };
@@ -847,6 +848,9 @@ class ArchiveController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
+        
+        // Auth the user
+        Auth::loginUsingId($appliant->id);
 
 
         return view('postulacion.showUpdateDocuments')

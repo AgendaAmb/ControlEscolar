@@ -65,9 +65,6 @@ __webpack_require__.r(__webpack_exports__);
     id: {
       type: Number
     },
-    images_btn: {
-      type: Object
-    },
     name: {
       type: String
     },
@@ -96,7 +93,8 @@ __webpack_require__.r(__webpack_exports__);
       errores: {},
       datosValidos: {},
       textStateUpload: '',
-      academiLetterCommitment: ''
+      academiLetterCommitment: '',
+      images_btn: null
     };
   },
   computed: {
@@ -125,6 +123,15 @@ __webpack_require__.r(__webpack_exports__);
         this.$emit('update:errores', newValue);
       }
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get("/controlescolar/solicitud/getAllButtonImage").then(function (response) {
+      _this.images_btn = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
   },
   methods: {
     requiredForAcademicProgram: function requiredForAcademicProgram() {
@@ -210,7 +217,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
@@ -239,7 +245,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
   },
   data: function data() {
     return {
-      images_btn: {},
       errores: {}
     };
   },
@@ -299,15 +304,6 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default());
         });
       });
     }
-  },
-  created: function created() {
-    var _this = this;
-
-    axios.get("/controlescolar/solicitud/getAllButtonImage").then(function (response) {
-      _this.images_btn = response.data;
-    })["catch"](function (error) {
-      console.log(error);
-    });
   }
 });
 
@@ -3975,36 +3971,34 @@ var render = function () {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.isIntentionLetter() === false
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "d-flex justify-content-center my-1",
+              _c(
+                "div",
+                {
+                  staticClass: "d-flex justify-content-center my-1",
+                  staticStyle: {
+                    "max-height": "45px !important",
+                    width: "100%",
+                  },
+                },
+                [
+                  _c("label", [
+                    _c("img", {
+                      staticStyle: { "max-height": "45px !important" },
+                      attrs: { src: _vm.images_btn.seleccionar, alt: "" },
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control d-none",
                       staticStyle: {
                         "max-height": "45px !important",
                         width: "100%",
                       },
-                    },
-                    [
-                      _c("label", [
-                        _c("img", {
-                          staticStyle: { "max-height": "45px !important" },
-                          attrs: { src: _vm.images_btn.seleccionar, alt: "" },
-                        }),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control d-none",
-                          staticStyle: {
-                            "max-height": "45px !important",
-                            width: "100%",
-                          },
-                          attrs: { type: "file" },
-                          on: { change: _vm.cargaDocumento },
-                        }),
-                      ]),
-                    ]
-                  )
-                : _vm._e(),
+                      attrs: { type: "file" },
+                      on: { change: _vm.cargaDocumento },
+                    }),
+                  ]),
+                ]
+              ),
             ]
           ),
         ]),
@@ -4057,7 +4051,6 @@ var render = function () {
                       location: documento.pivot.location,
                       errores: documento.errores,
                       alias_academic_program: _vm.academic_program.alias,
-                      images_btn: _vm.images_btn,
                     },
                     on: {
                       "update:archivo": function ($event) {

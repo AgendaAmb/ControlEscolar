@@ -23,10 +23,11 @@ const archive_id = @json($id);
     <hr class="col-11 hr">
 </div>
 
-<average-rubric v-bind:rubrics="rubrics" 
-                v-bind:appliant="appliant" 
-                v-bind:appliant_details="appliant_details"
-                v-bind:scores="scores">
+<average-rubric 
+    v-bind:rubrics="rubrics" 
+    v-bind:appliant="appliant" 
+    v-bind:appliant_details="appliant_details"
+    v-bind:scores="scores">
 </average-rubric>
 
 <div class="row mt-2 justify-content-center">

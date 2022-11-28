@@ -95,6 +95,7 @@ const app = new Vue({
          * @param {*} period 
          */
         interviewDetails(interview) {
+            console.log(interview);
             // Validad ambos casos virtual y presencial 
             var interview_room = null;
             if(this.period.modality === 'presencial'){
@@ -126,8 +127,6 @@ const app = new Vue({
                 }
             }
 
-            // console.log(interview_room);
-
             this.selectedInterview = {
                 id: interview.id,
                 appliant: interview.appliant,
@@ -137,8 +136,11 @@ const app = new Vue({
                 room: interview_room!==null?interview_room.site:"Error",
                 start_time: interview.start_time,
                 end_time: interview.end_time,
-                confirmed: interview.confirmed
+                confirmed: interview.confirmed,
+                dictamen_redactor: interview.dictamen_redactor
             };
+
+            console.log(this.selectedInterview);
 
             $('#DetalleEntrevista').modal('show');
         },
@@ -193,7 +195,7 @@ const app = new Vue({
          * Determina si el usuario autenticado es profesor de núcleo básico.
          * @param {*} period 
          */
-         loggedUserIsPNB(){
+        loggedUserIsPNB(){
             var roles = this.loggedUser.roles.filter(role => {
                 return role.name === 'profesor_nb';
             });
@@ -224,5 +226,6 @@ const app = new Vue({
      */
     mounted() {
         this.$root.$on('show_details', this.interviewDetails);
+        // console.log(this.interviews)
     },
 });

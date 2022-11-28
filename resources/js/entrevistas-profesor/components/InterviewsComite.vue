@@ -22,19 +22,32 @@
                         {{interview.appliant}}
                     </td>
                     <td>
-                        <a v-if="!loggedUserIsSchoolControl()" :href="interview.archive_url" target="_blank">Ver documentos</a>
-                        <a v-if="loggedUserIsSchoolControl()" href="#" >Documentos</a>
+                        <!-- ! Exédientes -->
+                        <a class="d-block text-capitalize text-decoration-none" v-if="!loggedUserIsSchoolControl()" :href="interview.archive_url" target="_blank">Ver documentos</a>
+                        <a class="d-block text-capitalize text-decoration-none" v-if="loggedUserIsSchoolControl()" href="#" >Documentos</a>
                     </td>
                     <td>
-                        <a class="d-block text-capitalize text-decoration-none" 
-                            v-for="rubric in interview.rubrics"
-                            :key="rubric.location" 
-                            :href="rubric.location"
-                            target="_blank"
-                            >
-                            {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
-                        </a>
-                        <div v-if="loggedUserIsAdmin() || loggedUserIsCA()">
+                        <!-- ! Rubricas -->
+                        <div v-if="!loggedUserIsSchoolControl()">
+                            <a class="d-block text-capitalize text-decoration-none" 
+                                v-for="rubric in interview.rubrics"
+                                :key="rubric.location" 
+                                :href="rubric.location"
+                                target="_blank"
+                                >
+                                {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
+                            </a>
+                        </div>
+                        <div v-else>
+                            <a class="d-block text-capitalize text-decoration-none" 
+                                v-for="rubric in interview.rubrics" 
+                                :key="rubric.location"
+                                href="#" 
+                                >
+                                {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
+                            </a>
+                        </div>
+                        <div v-if="!loggedUserIsPNB()">
                             <hr>
                             <a
                                 class="d-block text-capitalize text-decoration-none" 

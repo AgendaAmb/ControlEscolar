@@ -31,6 +31,7 @@ const app = new Vue({
         university: '',
         basic_concepts: rubric.basic_concepts, // TODO va a ser remplazado
         basicConcepts: basicConcepts,
+        dictamen_redactor: rubric.dictamen_redactor,
         academic_concepts: rubric.academic_concepts,
         research_concepts: rubric.research_concepts,
         research_concepts_details: rubric.research_concepts_details,
@@ -41,6 +42,7 @@ const app = new Vue({
         announcement: announcement,
         considerations: rubric.considerations,
         additional_information: rubric.additional_information,
+        dictamen_individual: rubric.dictamen_individual,
         dictamen_ce: rubric.dictamen_ce,
         dataModal: "",
         visbleSave:false,
@@ -50,6 +52,7 @@ const app = new Vue({
     },
 
     mounted() {
+        console.log(rubric);
         //Obtemenos el escore de maestria o licencitara segun el caso
         try{
             if(this.announcement.type === 'maestría'){
@@ -146,7 +149,7 @@ const app = new Vue({
          * Determina si el usuario autenticado es administrador.
          * @param {*} period 
          */
-         loggedUserIsAdmin(){
+        loggedUserIsAdmin(){
             var roles = this.loggedUser.roles.filter(role => {
                 return role.name === 'admin';
             });
@@ -190,7 +193,8 @@ const app = new Vue({
                 personal_attributes_concepts: personal_attributes_concepts,
                 considerations: this.considerations,
                 additional_information: this.additional_information,
-                dictamen_ce: this.dictamen_ce
+                dictamen_ce: this.dictamen_ce,
+                dictamen_individual: this.dictamen_individual
             }).then(response => {
                 this.visbleSave=false,
                 this.visbleSend=false,

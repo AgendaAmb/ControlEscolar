@@ -45,31 +45,49 @@
                       </td>
                     </tr>
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colspan="5">
-                        <button v-if="isConfirmable && !spinnerVisible" class="btn btn-primary"
-                          @click="confirmaEntrevista"> Confirmar
-                          entrevista
-                        </button>
-                        <button class="btn btn-primary" disabled v-if="spinnerVisible">
-                          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
-                          </span>
-                          Confirmando entrevista...
-                        </button>
-                        <button v-if="isReopenable" class="btn btn-primary" @click="reabreEntrevista"> Reabrir
-                          entrevista </button>
-                        <button v-if="isRemovable" class="btn btn-danger ml-1" @click="eliminarEntrevista"> Cancelar
-                          entrevista </button>
-                        <button class="btn btn-danger ml-1" type="button" data-dismiss="modal" aria-label="Close">
-                          Cerrar </button>
-                      </td>
-                    </tr>
-                  </tfoot>
                 </table>
+              </div>
+              <div class="col-12 mt-4 px-0">
+                <p class="d-block prof-carta-intencion mb-4" for="exampleFormControlSelect1">
+                  Redactor del dictamen general: {{ dictamen_redactor }}
+                </p>
+                <div v-if="this.$root.loggedUserIsSchoolControl() || this.$root.loggedUserIsAdmin()" class="form-group">
+                  <label for="exampleFormControlSelect1">Cambiar redactor </label>
+                  <select 
+                    class="form-control" 
+                    id="exampleFormControlSelect1"
+                    v-model="redactor"
+                    @change="setRedactor()"
+                    >
+                    <option value="null">Selecciona un nuevo redactor</option>
+                    <option v-for="area in notEmptyAreas" :key="area.id" :value="area"> {{ area.professor_name }} </option>
+                  </select>
+                </div>
               </div>
             </div>
           </form>
+        </div>
+        <div class="modal_footer d-flex flex-row align-items-center justify-content-end m-3 ">
+          <button 
+            :disabled="dictamen_redactor == 'Indefinido'" 
+            v-if="isConfirmable && !spinnerVisible" 
+            class="btn btn-primary" 
+            @click="confirmaEntrevista"
+            > 
+            Confirmar entrevista
+          </button>
+          <button class="btn btn-primary" disabled v-if="spinnerVisible">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+            </span>
+            Confirmando entrevista...
+          </button>
+          <button v-if="isReopenable" class="btn btn-primary" @click="reabreEntrevista"> Reabrir
+            entrevista </button>
+          <button v-if="isRemovable" class="btn btn-danger ml-1" @click="eliminarEntrevista"> Cancelar
+            entrevista </button>
+          <button class="btn btn-danger ml-1" type="button" data-dismiss="modal" aria-label="Close">
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
@@ -129,12 +147,10 @@ export default {
       default: "Indefinido"
     },
 
-    // Áreas académicas de las entrevistas.
-    areas: {
-      type: Array,
-      default() {
-        return [];
-      }
+    // Hora de fin.
+    dictamen_redactor: {
+      type: String,
+      default: "Indefinido"
     },
 
     // Áreas académicas de las entrevistas.
@@ -158,9 +174,16 @@ export default {
       type: Boolean,
       default: false
     }
+
+
   },
 
   computed: {
+    notEmptyAreas(){
+      var fill_areas = this.areas.filter(area => area.professor_name !== false);
+      return fill_areas;
+    },
+
     loggedUserName() {
       var loggedUser = this.$root.loggedUser;
 
@@ -212,10 +235,24 @@ export default {
   data() {
     return {
       spinnerVisible: false, 
+      redactor: null
     }
   },
 
   methods: {
+
+    setRedactor(){
+      let data = {
+        interview_id: this.id,
+        professor_id: this.redactor.professor_id
+      };
+      console.log(data);
+      axios.post('/controlescolar/entrevistas/setDictamenRedactor', data).then(response => {
+        this.dictamen_redactor = this.redactor.professor_name,
+        console.log(response.data)
+      }).catch(error => {
+      });
+    },
 
     canRemoveUser(area) {
       if (area.professor_name === false)

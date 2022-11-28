@@ -13,6 +13,7 @@ use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\This;
 
 use function PHPSTORM_META\type;
 
@@ -146,7 +147,8 @@ class CalendarResource extends JsonResource
         return [
             'id' => $area['area_id'],
             'name' => $area['area_name'],
-            'professor_name' => Str::lower($name)
+            'professor_name' => Str::lower($name),
+            'professor_id' => $area['professor_id']
         ];
     }
 
@@ -281,9 +283,16 @@ class CalendarResource extends JsonResource
         return $period;
     }
 
+    private function setInterviewRedactor($request, &$interview){
+        if($interview['dictamen_redactor'] != null){
+            $user_data = $this->getMiPortalUser($interview['dictamen_redactor']['user_id']);
+            $interview['dictamen_redactor'] = Str::lower($user_data['name']);
+        }
+    }
+
     private function setInterviews($request){
 
-        $this->interviews->loadMissing('intentionLetterProfessor','academicAreas');
+        $this->interviews->loadMissing('intentionLetterProfessor','academicAreas', 'dictamenRedactor.user');
 
         // * Descarta las entrevistas que no tienen cartas de intención
         $this->interviews = $this->interviews->filter(function ($interview) {
@@ -297,6 +306,8 @@ class CalendarResource extends JsonResource
             $this->setIntentionLetterProfessor($request, $interview);
             // * Se incorporan las areas academicas de la entrevista
             $this->setInterviewAcademicAreas($request, $interview);
+            // * Format datos del redactor 
+            $this->setInterviewRedactor($request, $interview);
             return $interview;
         })->toArray();
     }

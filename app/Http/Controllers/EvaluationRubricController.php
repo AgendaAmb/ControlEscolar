@@ -35,6 +35,8 @@ class EvaluationRubricController extends Controller
 
         $rubricResource = new RubricResource($evaluationRubric);
 
+        // return $rubricResource;
+
         //! Temporal - obtener los datos basicos del postulante
         $archiveModel = Archive::where('id', $evaluationRubric->archive_id)->first();
         if ($archiveModel === null) {
@@ -214,6 +216,8 @@ class EvaluationRubricController extends Controller
         // Se obtienen los datos de cada rúbrica
         $rubrics_collection = RubricAverageResource::collection($evaluation_rubrics);
         
+        // return $rubrics_collection;
+
         // obtener los datos basicos del postulante
         $archiveModel = Archive::where('id', $evaluation_rubrics[0]->archive_id)->first();
         if ($archiveModel === null) {
@@ -235,7 +239,8 @@ class EvaluationRubricController extends Controller
             "working_concepts" => [],
             "research_concepts" => [],
             "personal_concepts" => [],
-            "dictamen_ce" => [],
+            "dictamen_general" => [],
+            "dictamen_individual" => [],
             "considerations" => [],
             "additional_information" => []
         ];
@@ -243,10 +248,10 @@ class EvaluationRubricController extends Controller
         try {
             for ($i = 0; $i < count($rubrics_collection); $i++) {
 
-                array_push($unified_2['dictamen_ce'], $rubrics_collection[$i]->toArray($request)['rubric']['dictamen_ce']);
+                array_push($unified_2['dictamen_individual'], $rubrics_collection[$i]->toArray($request)['rubric']['dictamen_individual']);
+                array_push($unified_2['dictamen_general'], $rubrics_collection[$i]->toArray($request)['rubric']['dictamen_general']);
                 array_push($unified_2['considerations'], $rubrics_collection[$i]->toArray($request)['rubric']['considerations']);
                 array_push($unified_2['additional_information'], $rubrics_collection[$i]->toArray($request)['rubric']['additional_information']);
-
 
                 for ($j = 0; $j < count($rubrics_collection[$i]->toArray($request)['rubric']['basic_concepts']); $j++) {
                     array_push($unified_2['basic_concepts'], $rubrics_collection[$i]->toArray($request)['rubric']['basic_concepts'][$j]['notes']);
@@ -269,7 +274,7 @@ class EvaluationRubricController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return "Error cargando los datos.";
+            dd($e);
         }
 
         $data = [
@@ -331,7 +336,7 @@ class EvaluationRubricController extends Controller
         $this->updatePivot($request->personal_attributes_concepts, $evaluationRubric);
 
         
-        $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce'));
+        $evaluationRubric->fill($request->safe()->only('considerations','additional_information','dictamen_ce', 'dictamen_individual'));
         if($request->state=="send")$evaluationRubric->isComplete=true;
         $evaluationRubric->save();
         $evaluationRubric->researchConceptsDetails = $details = collect($request->research_concepts)->map(function($concept){

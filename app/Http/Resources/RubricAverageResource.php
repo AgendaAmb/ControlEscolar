@@ -56,7 +56,6 @@ class RubricAverageResource extends JsonResource
     {
         $archive = $this->resource->archive;
         $this->appliant = $this->getMiPortalUser($request, $archive->user_id, 'appliants');
-       
     }   
 
     /**
@@ -84,9 +83,10 @@ class RubricAverageResource extends JsonResource
             'id' => $rubric->id,
             'interview_id' => $rubric->interview_id,
             'user' => $name,
-            'considerations' => $rubric->considerations,
-            'additional_information' => $rubric->additional_information,
-            'dictamen_ce' => $rubric->dictamen_ce,
+            'considerations' => $rubric->considerations ?? '',
+            'additional_information' => $rubric->additional_information ?? '',
+            'dictamen_general' => $rubric->dictamen_ce ?? '',
+            'dictamen_individual' => $rubric->dictamen_individual ?? '',
             'basic_concepts' => $rubric->basicConcepts->toArray(),
             'academic_concepts' => $rubric->academicConcepts->toArray(),
             'research_concepts' => $rubric->researchConcepts->toArray(),

@@ -4,8 +4,6 @@ const rubric = @json($rubric);
 const scores = @json($scores);
 const type = @json($type);
 const archive_id = @json($id);
-console.log(rubric);
-// console.log(type);
 </script>
 
 @extends('layouts.app')
@@ -24,9 +22,11 @@ console.log(rubric);
     <hr class="col-11 hr">
 </div>
 
-<average-rubric-ca v-bind:rubric="rubric" 
-                v-bind:appliant="appliant"
-                v-bind:scores="scores">
+<average-rubric-ca
+    v-bind:rubric="rubric" 
+    v-bind:appliant="appliant"
+    v-bind:scores="scores"
+    >
 </average-rubric-ca>
 
 @endsection

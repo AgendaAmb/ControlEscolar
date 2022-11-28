@@ -4,8 +4,6 @@ const appliant = @json($appliant);
 const rubric = @json($rubric);
 const announcement = @json($announcement);
 const basicConcepts = @json($basic_concepts);
-
-// console.log(basicConcepts);
 </script>
 
 @extends('layouts.app')
@@ -54,11 +52,15 @@ const basicConcepts = @json($basic_concepts);
         <textarea :readonly="$root.r_only()" v-model="considerations" class="form-control" rows="3"></textarea>
     </div>
     <div class="form-group col-lg-11">
-        <label> Situaciones o información importante que haya detectado la comisión de evaluación</label>
+        <label> Situaciones o información importante que haya detectado el evaluador durante la entrevista</label>
         <textarea :readonly="$root.r_only()" v-model="additional_information" class="form-control" rows="3"></textarea>
     </div>
     <div class="form-group col-lg-11">
-        <label> DICTAMEN DE LA COMISIÓN EVALUADORA</label>
+        <label> DICTAMEN INDIVIDUAL DEL EVALUADOR</label>
+        <textarea :readonly="$root.r_only()" v-model="dictamen_individual" class="form-control" rows="3"></textarea>
+    </div> 
+    <div v-if="rubric_user_id == dictamen_redactor.user_id" class="form-group col-lg-11">
+        <label> DICTAMEN DE LA COMISIÓN EVALUADORA </label>
         <textarea :readonly="$root.r_only()" v-model="dictamen_ce" class="form-control" rows="3"></textarea>
     </div>        
     <hr class="col-11 hr">
@@ -67,13 +69,12 @@ const basicConcepts = @json($basic_concepts);
         <button class="btn btn-primary interview-button" type="button" disabled  v-if="visbleSave">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Guardando...
-          </button>                                                                                  
-         
+        </button>                                                                                  
         <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('save')" v-if="!visbleSave"> Guardar </button>
         <button class="btn btn-primary interview-button" type="button" disabled  v-if="visbleSend" >
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Enviando...
-          </button>
+        </button>
         <button type="button" class="myriad-bold btn btn-primary interview-button" v-on:click="guardaRubrica('send')" v-if="!visbleSend"> Enviar </button>
     </div>
 </div>

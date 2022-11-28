@@ -24,7 +24,10 @@
                         <th class="table-success">Comentario o aportación</th>
                         <th class="table-success">Información detectada por la comisión de evaluación
                         </th>
-                        <th class="table-success">Dictamen de la comisión evaluadora</th>
+                        <th class="table-success">Dictamen individual
+                        </th>
+                        <th class="table-success">Dictamen general
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +47,8 @@
                         <!-- CE -->
                         <th class="table-success">{{ rubric.considerations.join("\r\n\n") }}</th>
                         <th class="table-success">{{ rubric.additional_information.join("\r\n\n") }}</th>
-                        <th class="table-success">{{ rubric.dictamen_ce.join("\r\n\n") }}</th>
+                        <th class="table-success">{{ rubric.dictamen_individual.join("\r\n\n") }}</th>
+                        <th class="table-success">{{ rubric.dictamen_general.join("\r\n\n") }}</th>
                     </tr>
                 </tbody>
                 <tfoot>

@@ -20,7 +20,6 @@
         :location.sync="documento.pivot.location"
         :errores.sync="documento.errores"
         :alias_academic_program="academic_program.alias"
-        :images_btn="images_btn"
         v-bind="documento"
         @enviaDocumento="cargaDocumento"
       >
@@ -66,7 +65,6 @@ export default {
 
   data() {
     return {
-      images_btn:{},
       errores: {},
     };
   },
@@ -134,15 +132,6 @@ export default {
     },
   },
 
-    created() {
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        this.images_btn = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+   
 };
 </script>

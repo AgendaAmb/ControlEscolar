@@ -151,7 +151,7 @@ export default {
         // Calculo de la ponderacion
         sectionScore(concepts, id){
             // Factores de ponderación de los rubros
-            let doctorado = [10,25,30,20,15];
+            let doctorado = [10,35,30,10,15];
             let maestria = [15,30,15,25,15];
 
             let score = 0.0; 

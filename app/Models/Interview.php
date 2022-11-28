@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Interview extends Model
@@ -41,6 +42,16 @@ class Interview extends Model
     protected $casts = [
         'confirmed' => 'bool'
     ];
+
+    /**
+     * Obtiene el encargado de redactar el dictamen general.
+     *
+     * @return BelongsTo
+     */
+    public function dictamenRedactor(): HasOne
+    {
+        return $this->hasOne(InterviewRedactor::class, 'interview_id','id');
+    }
 
     /**
      * Obtiene los usuarios de la entrevista.
