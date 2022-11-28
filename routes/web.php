@@ -42,7 +42,7 @@ Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelog
 Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
-Route::prefix('controlescolar')->group(function () {
+// Route::prefix('controlescolar')->group(function () {
 
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index')
@@ -282,4 +282,4 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         Route::get('/pruebaPDF', [ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
-});
+// });
