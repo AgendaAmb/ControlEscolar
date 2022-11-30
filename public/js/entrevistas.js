@@ -32060,7 +32060,8 @@ var render = function () {
                         ]
                       ),
                       _vm._v(" "),
-                      this.$root.loggedUserIsSchoolControl() ||
+                      (this.$root.loggedUserIsSchoolControl() &&
+                        _vm.isConfirmable) ||
                       this.$root.loggedUserIsAdmin()
                         ? _c("div", { staticClass: "form-group" }, [
                             _c(
