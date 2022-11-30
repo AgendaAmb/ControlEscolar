@@ -39,11 +39,7 @@ export default {
       type: Array,
       default: [],
     },
-
-    images_btn:{
-      type:Object,
-      default:{},
-    },
+    
 
     appliant: {
       type: Object,
@@ -63,7 +59,7 @@ export default {
 
   data() {
     return {
-     
+     images_btn: {},
       errores: {},
     };
   },
@@ -132,7 +128,17 @@ export default {
   },
 
   created() {
-    
+      // console.log(this.language);
+      axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

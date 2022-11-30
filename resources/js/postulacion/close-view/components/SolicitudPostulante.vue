@@ -1,14 +1,16 @@
 <template>
   <div class="row justify-content-start align-items-center mx-1">
     <!-- Google translate element -->
-    <div v-if="isENREM() === true" class="col-12 mt-3" >
-      <b-form-group label-cols="1" label-cols-sm="1" label-size="lg" label="Idioma" label-class="p d-flex my-auto align-items-center text-center justify-content-center"
-      label-for="input-sm" label-align-sm="right">
-      <v-google-translate :defaultLanguageCode="defaultLanguageCode" :defaultPageLanguageCode="defaultPageLanguageCode"
-        :fetchBrowserLanguage="false" @select="languageSelectedHandler" id="input-sm" />
-    </b-form-group>
+    <div v-if="isENREM() === true" class="col-12 mt-3">
+      <b-form-group label-cols="1" label-cols-sm="1" label-size="lg" label="Idioma"
+        label-class="p d-flex my-auto align-items-center text-center justify-content-center" label-for="input-sm"
+        label-align-sm="right">
+        <v-google-translate :defaultLanguageCode="defaultLanguageCode"
+          :defaultPageLanguageCode="defaultPageLanguageCode" :fetchBrowserLanguage="false"
+          @select="languageSelectedHandler" id="input-sm" />
+      </b-form-group>
     </div>
-    
+
     <!-- Info postulante -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
@@ -247,7 +249,32 @@
         </b-collapse>
       </b-card>
       <hr class="d-block" :style="ColorStrip" />
-    </div>   
+    </div>
+
+
+    <!-- Cartas de recomendacion -->
+    <div class="col-12">
+      <b-card no-body class="my-2" :style="styleContainerAccordionSection">
+        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
+          <b-button block v-b-toggle.accordion-8 variant="dark" :style="styleBtnAccordionSection">
+            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+            <p class="h2 my-2">Documentos de entrevista</p>
+          </b-button>
+        </b-card-header>
+        <b-collapse id="accordion-8" visible accordion="my-accordion" role="tabpanel">
+          <b-card-body>
+            <documentos-entrevista
+            :interview_documents = "interview_documents"
+            :appliant ="appliant"
+            :academic_program="academic_program"
+            :archive_id="archive_id"
+            >
+            </documentos-entrevista>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+      <hr class="d-block" :style="ColorStrip" />
+    </div>
   </div>
 </template>
 
@@ -260,6 +287,8 @@ import ExperienciaLaboral from "./ExperienciaLaboral.vue";
 import LenguaExtranjera from "./LenguaExtranjera.vue";
 import RequisitosIngreso from "./RequisitosIngreso.vue";
 import CartaRecomendacion from "./CartaDeRecomendacion.vue";
+import DocumentoRequeridoVue from "./DocumentoRequerido.vue";
+import DocumentosEntrevista from '../../appliant-view/components/DocumentosEntrevista.vue';
 
 export default {
   name: "solicitud-postulante",
@@ -273,6 +302,8 @@ export default {
     LenguaExtranjera,
     RequisitosIngreso,
     CartaRecomendacion,
+    DocumentoRequeridoVue,
+    DocumentosEntrevista,
   },
 
   props: {
@@ -455,9 +486,9 @@ export default {
 
 
   methods: {
-    isENREM(){
+    isENREM() {
       let res = false;
-      if(this.academic_program.alias === 'enrem'){
+      if (this.academic_program.alias === 'enrem') {
         res = true;
       }
       return res;
@@ -466,7 +497,7 @@ export default {
     languageSelectedHandler(info) {
       console.log(info);
     },
-    
+
     getUniversities(state) {
       let universities = [];
       for (let i = 0; i < this.Countries.length; i++) {
