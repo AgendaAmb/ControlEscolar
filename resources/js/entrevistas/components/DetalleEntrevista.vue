@@ -35,7 +35,7 @@
                     <tr>
                       <td v-for="(area, index) in areas" :key="area.id">
                         <p class="prof-area" v-if="area.professor_name !== false"> {{ area.professor_name }} </p>
-                        <a v-else-if="!isSuscribed && $root.loggedUserIsPNB()" href="#"
+                        <a v-else-if="(!isSuscribed && $root.loggedUserIsPNB() && this.confirmed == false)" href="#"
                           @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
@@ -103,6 +103,10 @@ tfoot>tr>td>button {
 <script>
 export default {
   name: "detalle-entrevista",
+
+  mounted(){
+    this.redactor = null;
+  },
 
   props: {
     // Id de la entrevista.
@@ -240,7 +244,6 @@ export default {
   },
 
   methods: {
-
     setRedactor(){
       let data = {
         interview_id: this.id,
@@ -249,6 +252,7 @@ export default {
       console.log(data);
       axios.post('/controlescolar/entrevistas/setDictamenRedactor', data).then(response => {
         this.dictamen_redactor = this.redactor.professor_name,
+        this.redactor = null,
         console.log(response.data)
       }).catch(error => {
       });

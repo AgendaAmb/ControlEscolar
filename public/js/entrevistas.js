@@ -606,6 +606,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "detalle-entrevista",
+  mounted: function mounted() {
+    this.redactor = null;
+  },
   props: {
     // Id de la entrevista.
     id: {
@@ -726,7 +729,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       console.log(data);
       axios.post('/controlescolar/entrevistas/setDictamenRedactor', data).then(function (response) {
-        _this.dictamen_redactor = _this.redactor.professor_name, console.log(response.data);
+        _this.dictamen_redactor = _this.redactor.professor_name, _this.redactor = null, console.log(response.data);
       })["catch"](function (error) {});
     },
     canRemoveUser: function canRemoveUser(area) {
@@ -32007,7 +32010,8 @@ var render = function () {
                                       ),
                                     ])
                                   : !_vm.isSuscribed &&
-                                    _vm.$root.loggedUserIsPNB()
+                                    _vm.$root.loggedUserIsPNB() &&
+                                    this.confirmed == false
                                   ? _c(
                                       "a",
                                       {
@@ -45813,8 +45817,7 @@ var app = new Vue({
      * @param {*} period 
      */
     interviewDetails: function interviewDetails(interview) {
-      console.log(interview); // Validad ambos casos virtual y presencial 
-
+      // Validad ambos casos virtual y presencial 
       var interview_room = null;
 
       if (this.period.modality === 'presencial') {

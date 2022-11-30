@@ -12,8 +12,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class InterviewRedactor extends Model
 {
-    protected $primaryKey = null;
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'interview_id';
+
+    /**
+     * Indicates if the model's ID is auto-incrementing.
+     *
+     * @var bool
+     */
     public $incrementing = false;
+    
     /**
      * The table associated with the model.
      *

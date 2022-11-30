@@ -95,7 +95,6 @@ const app = new Vue({
          * @param {*} period 
          */
         interviewDetails(interview) {
-            console.log(interview);
             // Validad ambos casos virtual y presencial 
             var interview_room = null;
             if(this.period.modality === 'presencial'){
