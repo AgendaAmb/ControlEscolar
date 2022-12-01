@@ -23,12 +23,13 @@
                     </td>
                     <td>
                         <!-- ! Exédientes -->
-                        <a class="d-block text-capitalize text-decoration-none" v-if="!loggedUserIsSchoolControl()" :href="interview.archive_url" target="_blank">Ver documentos</a>
-                        <a class="d-block text-capitalize text-decoration-none" v-if="loggedUserIsSchoolControl()" href="#" >Documentos</a>
+                        <a class="d-block text-capitalize text-decoration-none" v-if="(loggedUserIsCoordinador() || loggedUserIsAdmin() || loggedUserIsPNB())" :href="interview.archive_url" target="_blank"> Ver documentos</a>
+                        <a class="d-block text-capitalize text-decoration-none" v-else-if="loggedUserIsSchoolControl()" href="#">Documentos 1</a>
+                        <a class="d-block text-capitalize text-decoration-none" v-else href="#">Indefinido</a>
                     </td>
                     <td>
                         <!-- ! Rubricas -->
-                        <div v-if="!loggedUserIsSchoolControl()">
+                        <div v-if="loggedUserIsCoordinador() || loggedUserIsAdmin()">
                             <a class="d-block text-capitalize text-decoration-none" 
                                 v-for="rubric in interview.rubrics"
                                 :key="rubric.location" 
@@ -38,7 +39,7 @@
                                 {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </div>
-                        <div v-else>
+                        <div v-else-if="loggedUserIsSchoolControl()">
                             <a class="d-block text-capitalize text-decoration-none" 
                                 v-for="rubric in interview.rubrics" 
                                 :key="rubric.location"

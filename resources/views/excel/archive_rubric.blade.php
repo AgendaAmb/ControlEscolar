@@ -32,7 +32,8 @@
             @endforeach
             <th class="table-success">Comentario o aportación</th>
             <th class="table-success">Información detectada por la comisión de evaluación</th>
-            <th class="table-success">Dictamen de la comisión evaluadora</th>
+            <th class="table-success">Dictamen invidual</th>
+            <th class="table-success">Dictamen general</th>
         </tr>
     </thead>
     <tbody>
@@ -70,7 +71,8 @@
             @endforeach
             <th> {{ $rubric['considerations'] }} </th>
             <th> {{ $rubric['additional_information'] }} </th>
-            <th> {{ $rubric['dictamen_ce'] }} </th>
+            <th> {{ $rubric['dictamen_individual'] }} </th>
+            <th> {{ $rubric['dictamen_general'] }} </th>
         </tr>
         @endforeach
     </tbody>
