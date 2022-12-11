@@ -5,6 +5,7 @@
     "/js/preregistro.js": "/js/preregistro.js",
     "/js/preRegistroUpdate.js": "/js/preRegistroUpdate.js",
     "/js/postulacion.js": "/js/postulacion.js",
+    "/appliant/js/appliant-doubleDegree.js": "/appliant/js/appliant-doubleDegree.js",
     "/appliant/js/appliant.js": "/appliant/js/appliant.js",
     "/appliant/js/appliantUpdateDocuments.js": "/appliant/js/appliantUpdateDocuments.js",
     "/appliant/js/appliantShowRegisterArchives.js": "/appliant/js/appliantShowRegisterArchives.js",

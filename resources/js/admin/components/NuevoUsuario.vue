@@ -1,4 +1,5 @@
 <template>
+
   <div class="modal fade" id="NuevoUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="px-2 modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3" style="background-color: #B0BEC5">
@@ -94,7 +95,7 @@ export default {
 
   methods: {
 
-    actualizaLista(name, res, tipo){
+    actualizaLista(name, res, tipo) {
       console.log(name);
       console.log(res);
       console.log(tipo);

@@ -1,0 +1,112 @@
+<template>
+
+    <!-- Accordion -->
+    <b-card-body>
+        <div class="form-group">
+            <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label="cho" :value="cho"
+                :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
+        </div>
+    </b-card-body>
+</template>
+  
+<script>
+import CheckboxPersonalize from './CheckboxPersonalize.vue';
+export default {
+    name: "financing-studies",
+
+    components: { CheckboxPersonalize },
+
+    props: {
+        financing_options: {
+            default: null,
+            type: JSON,
+        }
+    },
+
+    data: function () {
+        return {
+            fechaobtencion: "",
+            errores: {},
+            options_financing: ['Self-funded', 'Salary will be paid', 'Goberment Study Grant', 'I intend to apply for a CONACYT or DAAD scholarship', 'I intented to apply for an external scholarship', 'Other'],
+            financing_options_list: [],
+        };
+    },
+
+    created() {
+        if(this.financing_options!= null){
+            this.financing_options_list = Object.keys(this.financing_options).map((key) => [key, this.financing_options[key]]);
+        }
+    },
+
+    computed: {
+        styleBtnAccordionSection() {
+            var color = "rgba(0,96,175,255)";
+
+            return {
+                backgroundColor: color,
+                color: 'rgb(244, 244, 244)',
+                border: 'none',
+                alignItems: 'center',
+                width: '100%!important',
+                display: 'flex'
+            }
+        },
+
+        ColorStrip() {
+            var color = "#FFFFFF";
+
+            switch (this.alias_academic_program) {
+                case "maestria":
+                    color = "#0598BC";
+                    break;
+                case "doctorado":
+                    color = "#FECC50";
+                    break;
+                case "enrem":
+                    color = "#FF384D";
+                    break;
+                case "imarec":
+                    color = "#118943";
+                    break;
+            }
+
+            return {
+                backgroundColor: color,
+                height: "1px",
+            };
+        },
+
+    },
+
+    methods: {
+        actualizaLista(label, value, res) {
+            let index = -1;
+            this.financing_options_list.forEach(function (value, i) {
+
+                if (value != null) {
+                    if (value[0].toLowerCase() === label.toLowerCase()) {
+                        index = i;
+                        console.log('lo encontre ');
+                    }
+                }
+
+            });
+
+
+            if (!res) {
+                // pop
+                // El dato encontrado se elimina de la lista de seleccionados
+                if (index >= 0) {
+                    this.financing_options_list.splice(index, 1);
+                }
+            } else {
+                if (index < 0) {
+                    if (label === 'Other')
+                        this.financing_options_list.push([label, value]);
+                }
+
+            }
+        },
+    },
+};
+</script>

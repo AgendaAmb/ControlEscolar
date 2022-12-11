@@ -23,6 +23,7 @@ mix.js('resources/js/pre-registro/preRegistroUpdate.js', 'public/js').vue();
 // Vistas postulación
 mix.js('resources/js/postulacion/postulacion.js', 'public/js').vue();
 
+mix.js('resources/js/postulacion/appliant-view/doubleDegree/appliant-doubleDegree.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliant.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliantUpdateDocuments.js', 'public/appliant/js').vue();
 mix.js('resources/js/postulacion/appliant-view/appliantShowRegisterArchives.js', 'public/appliant/js').vue();

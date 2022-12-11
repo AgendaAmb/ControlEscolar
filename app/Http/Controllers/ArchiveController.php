@@ -9,6 +9,7 @@ use App\Models\{
     Announcement,
     Archive,
     ArchiveRequiredDocument,
+    EnvironmentRelatedSkills,
     IntentionLetter,
     User,
     RequiredDocument,
@@ -54,10 +55,10 @@ class ArchiveController extends Controller
 
     /* -------------------------- DASHBOARD DEL APLICANTE --------------------------*/
     public function compareStringToFieldList($list, $field, $stringToCompare)
-    {   
+    {
         $res = false;
-        foreach($list as $item){
-            if(strcmp($item,$stringToCompare) == 0){
+        foreach ($list as $item) {
+            if (strcmp($item, $stringToCompare) == 0) {
                 $res = true;
                 break;
             }
@@ -107,14 +108,13 @@ class ArchiveController extends Controller
 
             // pop the original list
             // search if each academic program is in the list
-                foreach($academic_programs as $apKey => $ap){
-                    // if the item is in the list delete
-                    if($this->compareStringToFieldList($academic_programs_to_pop,'name',$ap->name) == true){
-                        // remove element from list
-                        unset($academic_programs[$apKey]);
-                    }
+            foreach ($academic_programs as $apKey => $ap) {
+                // if the item is in the list delete
+                if ($this->compareStringToFieldList($academic_programs_to_pop, 'name', $ap->name) == true) {
+                    // remove element from list
+                    unset($academic_programs[$apKey]);
                 }
-            
+            }
         }
 
 
@@ -380,7 +380,7 @@ class ArchiveController extends Controller
                     $url_ContactoAA = asset('/storage/logos/PMPCA.png');
                 }
                 Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendUpdateDocuments(
-                // Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendUpdateDocuments(
+                    // Mail::mailer($servicio_correo)->to($appliant['email'])->send(new SendUpdateDocuments(
                     $request->selected_personalDocuments,
                     $request->selected_entranceDocuments,
                     $request->selected_academicDocuments,
@@ -407,10 +407,10 @@ class ArchiveController extends Controller
         try {
             $request->validate([
                 'selected_personalDocuments.*' =>   ['nullable', 'required', 'numeric', 'exists:required_documents,id'],
-                'selected_entranceDocuments.*' =>   ['nullable','required', 'numeric', 'exists:required_documents,id'],
-                'selected_academicDocuments.*' =>   ['nullable','required'],
-                'selected_languageDocuments.*' =>   ['nullable','required'],
-                'selected_workingDocuments.*'  =>   ['nullable','required'],
+                'selected_entranceDocuments.*' =>   ['nullable', 'required', 'numeric', 'exists:required_documents,id'],
+                'selected_academicDocuments.*' =>   ['nullable', 'required'],
+                'selected_languageDocuments.*' =>   ['nullable', 'required'],
+                'selected_workingDocuments.*'  =>   ['nullable', 'required'],
                 'instructions' => ['required', 'nullable', 'string', 'max:225'],
                 'academic_program' => ['required'],
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
@@ -684,6 +684,7 @@ class ArchiveController extends Controller
 
     public function appliantArchive(Request $request, $archive_id)
     {
+
         try {
             $archiveModel = Archive::where('id', $archive_id)->first();
         } catch (\Exception $e) {
@@ -692,6 +693,202 @@ class ArchiveController extends Controller
 
         if ($archiveModel == null) {
             return '<h1>No existe expediente para el postulante</h1>';
+        }
+
+
+        
+      
+
+
+       // ENREM add if NOT
+    //    EnvironmentRelatedSkills
+        try {
+            $archiveModel->loadMissing([
+                'enviromentRelatedSkills',
+            ]);
+    
+            if(sizeof($archiveModel->enviromentRelatedSkills) < 1){
+                $archiveModel->enviromentRelatedSkills()->createMany([
+                    [
+                        'message_review' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de enviromentRelatedSkills', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // Reasons to choise
+
+        try {
+            $archiveModel->loadMissing([
+                'reasonsToChoise',
+            ]);
+    
+            if(sizeof($archiveModel->reasonsToChoise) < 1){
+                $archiveModel->reasonsToChoise()->createMany([
+                    [
+                        'first_choise' => null,                  
+                        'reasons_choise' => null,
+                        'others_choises' => null,
+                        'selected_choises' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de reasonsToChoise', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+
+        
+        try {
+            $archiveModel->loadMissing([
+                'address',
+            ]);
+    
+            if(sizeof($archiveModel->address) < 1){
+                // Permanent Address
+                $archiveModel->address()->createMany([
+                    [
+                        'care_of' => null,            
+                        'street' => null,
+                        'number_address' => null,
+                        'city' => null,
+                        'postal_code' => null,
+                        'state_country'=> null,
+                        'telephone' => null,
+                        'mobile_phone' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+
+                // Current Address
+                $archiveModel->address()->createMany([
+                    [
+                        'care_of' => null,            
+                        'street' => null,
+                        'number_address' => null,
+                        'city' => null,
+                        'postal_code' => null,
+                        'state_country'=> null,
+                        'telephone' => null,
+                        'mobile_phone' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de address', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // Secondary education
+
+        try {
+            $archiveModel->loadMissing([
+                'secondaryEducation',
+            ]);
+    
+            if(sizeof($archiveModel->secondaryEducation) < 1){
+                $archiveModel->secondaryEducation()->createMany([
+                    [
+                        'school_certificade' => null,                  
+                        'final_score' => null,
+                        'name_of_institution' => null,
+                        'from' => null,
+                        'to' => null,                  
+                        'city_country' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de secondaryEducation', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // future plans
+        try {
+            $archiveModel->loadMissing([
+                'futurePlans',
+            ]);
+    
+            if(sizeof($archiveModel->futurePlans) < 1){
+                $archiveModel->futurePlans()->createMany([
+                    [
+                        'explain_pursue_future' => null,                  
+                        'pursue_future' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de secondaryEducation', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // fields of interest
+        try {
+            $archiveModel->loadMissing([
+                'fieldsOfInterest',
+            ]);
+    
+            if(sizeof($archiveModel->fieldsOfInterest) < 1){
+                $archiveModel->fieldsOfInterest()->createMany([
+                    [
+                        'research_area_mexico' => null,                  
+                        'research_area_german' => null,
+                        'professor_research_mexico' => null,                  
+                        'professor_research_german' => null,
+                        'elective_modules_PMPCA' => null,                  
+                        'elective_modules_ITT' => null,
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de fieldsOfInterest', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+        // financing studies
+        try {
+            $archiveModel->loadMissing([
+                'financingStudies',
+            ]);
+    
+            if(sizeof($archiveModel->financingStudies) < 1){
+                $archiveModel->financingStudies()->createMany([
+                    [
+                        'financing_options' => null,                  
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de financingStudies', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
+        // financing studies
+        try {
+            $archiveModel->loadMissing([
+                'recommendationLetterEnrem',
+            ]);
+    
+            if(sizeof($archiveModel->recommendationLetterEnrem) < 1){
+                $archiveModel->recommendationLetterEnrem()->createMany([
+                    [
+                        'type' => null, 
+                        'date' => null,  
+                        'title' => null,   
+                        'position' => null,  
+                        'organization' => null,
+                        'telephone' => null,     
+                        'full_name' => null,       
+                        'email' => null,                          
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de recommendationLetterENREM', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         try {
@@ -712,8 +909,17 @@ class ArchiveController extends Controller
                 'appliantWorkingExperiences',
                 'scientificProductions.authors',
                 'interviewDocuments',
-                'humanCapitals'
+                'humanCapitals',
+                'enviromentRelatedSkills',
+                'reasonsToChoise',
+                'address',
+                'secondaryEducation',
+                'futurePlans',
+                'fieldsOfInterest',
+                'financingStudies',
+                'recommendationLetterEnrem'
             ]);
+
 
             $academic_program = $archiveModel->announcement->academicProgram;
 
@@ -848,7 +1054,7 @@ class ArchiveController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-        
+
         // Auth the user
         Auth::loginUsingId($appliant->id);
 

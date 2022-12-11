@@ -45,26 +45,50 @@
 
     {{-- :curricular_documents="archive.curricular_documents" --}}
     {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
-    <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
-        :motivation="archive.motivation" :exanni_score="archive.exanni_score"
-        :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
-        :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
-        :appliant_languages="archive.appliant_languages"
-        :appliant_working_experiences="archive.appliant_working_experiences"
-        :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
-        :recommendation_letters="recommendation_letters"
-        :archives_recommendation_letters="archives_recommendation_letters"
-        :interview_documents="archive.interview_documents" :status="archive.status">
-    </solicitud-postulante>
-    {{-- <h1>{{$archive->status}}</h1>
+
+    @if ($academic_program['alias'] === 'enrem')
+        <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
+            :enviroment_related_skills="archive.enviroment_related_skills"
+            :reasons_to_choise="archive.reasons_to_choise" 
+            :address="archive.address"
+            :motivation="archive.motivation"
+            :secondary_education="archive.secondary_education"
+            :future_plans="archive.future_plans"
+            :fields_of_interest="archive.fields_of_interest"
+            :financing_studies="archive.financing_studies"
+            :recommendation_letter_enrem="archive.recommendation_letter_enrem"
+            :exanni_score="archive.exanni_score" :entrance_documents="archive.entrance_documents" :appliant="appliant"
+            :viewer="viewer" :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
+            :appliant_languages="archive.appliant_languages"
+            :appliant_working_experiences="archive.appliant_working_experiences"
+            :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
+            :recommendation_letters="recommendation_letters"
+            :archives_recommendation_letters="archives_recommendation_letters"
+            :interview_documents="archive.interview_documents" :status="archive.status">
+        </solicitud-postulante>
+    @else
+        <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
+            :motivation="archive.motivation" :exanni_score="archive.exanni_score"
+            :entrance_documents="archive.entrance_documents" :appliant="appliant" :viewer="viewer"
+            :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
+            :appliant_languages="archive.appliant_languages"
+            :appliant_working_experiences="archive.appliant_working_experiences"
+            :scientific_productions="archive.scientific_productions" :human_capitals="archive.human_capitals"
+            :recommendation_letters="recommendation_letters"
+            :archives_recommendation_letters="archives_recommendation_letters"
+            :interview_documents="archive.interview_documents" :status="archive.status">
+        </solicitud-postulante>
+
+        {{-- <h1>{{$archive->status}}</h1>
         <h2>{{ Auth::user()}}</h2> --}}
-    {{-- @else
+        {{-- @else
         <expediente-cerrado
         :appliant="appliant"
         :archive_id="archive.id"
         >
         </expediente-cerrado>
     @endif --}}
+    @endif
 
 
 @endsection
@@ -102,7 +126,11 @@
     @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
         <script src="{{ asset('professor/js/professor-only-rl.js') }}" defer></script>
     @else
-        <script src="{{ asset('appliant/js/appliant.js') }}" defer></script>
+        @if ($academic_program['alias'] === 'enrem')
+            <script src="{{ asset('appliant/js/appliant-doubleDegree.js') }}" defer></script>
+        @else
+            <script src="{{ asset('appliant/js/appliant.js') }}" defer></script>
+        @endif
     @endif
 
 

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Environment\Environment;
 
 class Archive extends Model
 {
@@ -250,6 +251,81 @@ class Archive extends Model
     public function announcement(): BelongsTo
     {
         return $this->belongsTo(Announcement::class);
+    }
+
+    /**
+     * enviroment related skills
+     *
+     * @return HasMany
+     */
+    public function enviromentRelatedSkills(): HasMany
+    {
+        return $this->HasMany(EnvironmentRelatedSkills::class);
+    }
+
+    /**
+     * enviroment related skills
+     *
+     * @return HasMany
+     */
+    public function reasonsToChoise(): HasMany
+    {
+        return $this->HasMany(ReasonsToChoise::class);
+    }
+
+     /**
+      * Address     *
+     * @return HasMany
+     */
+    public function address(): HasMany
+    {
+        return $this->HasMany(Address::class);
+    }
+
+    /**
+      * Address     *
+     * @return HasMany
+     */
+    public function secondaryEducation(): HasMany
+    {
+        return $this->HasMany(SecondaryEducation::class);
+    }
+
+     /**
+      * Future Plans     *
+     * @return HasMany
+     */
+    public function futurePlans(): HasMany
+    {
+        return $this->HasMany(FuturePlans::class);
+    }
+
+     /**
+      * Fields of interest     *
+     * @return HasMany
+     */
+    public function fieldsOfInterest(): HasMany
+    {
+        return $this->HasMany(FieldsOfInterest::class);
+    }
+
+
+    /**
+      * Fields of interest     *
+     * @return HasMany
+     */
+    public function financingStudies(): HasMany
+    {
+        return $this->HasMany(FinancingStudies::class);
+    }
+    
+    /**
+      * Fields of interest     *
+     * @return HasMany
+     */
+    public function recommendationLetterEnrem(): HasMany
+    {
+        return $this->HasMany(RecommendationLetterEnrem::class);
     }
 
     /**
