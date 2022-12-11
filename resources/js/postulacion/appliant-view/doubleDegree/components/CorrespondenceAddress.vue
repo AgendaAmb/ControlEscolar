@@ -1,61 +1,76 @@
 <template>
-  <div class="form-row my-2">
+  <div class="form">
+    <div class="row my-2">
+      <div class="col-12">
+        <p class="h2"><strong>{{ title }}</strong></p>
+      </div>
 
-    <div class="col-12">
-      <p class="h2"><strong>{{ title }}</strong></p>
+      <div class="form-group col-12">
+        <label> Care of (C/O): </label>
+        <input v-model="CareOf" type="text" class="form-control">
+      </div>
+      <div class="form-group col-8">
+        <label> Street: </label>
+        <input v-model="Street" type="text" class="form-control">
+      </div>
+
+      <div class="form-group col-4">
+        <label> Number: </label>
+        <input v-model.number="NumberAddress" type="number" class="form-control">
+      </div>
+
+      <div class="form-group col-6">
+        <label> City: </label>
+        <select v-if="states.length > 0" v-model="City" class="form-control">
+          <option value="" selected>Choose an option</option>
+          <option v-for="state in states" :key="state.id" :value="state.name">
+            {{ state.name }}
+          </option>
+        </select>
+
+        <select v-else v-model="City" class="form-control">
+        </select>
+      </div>
+
+      <div class="form-group col-6">
+        <label> Postal code: </label>
+        <input v-model="PostalCode" type="text" class="form-control">
+      </div>
+
+
+      <div class="form-group col-12">
+        <label> Country: </label>
+        <select v-model="StateCountry" class="form-control" @change="escogePais($event)">
+          <option value="" selected>Choose a country</option>
+          <option v-for="country in countries" :key="country.id" :value="country.name">
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-12">
+        <label> Telephone: </label>
+        <input v-model.number="Telephone" type="number" class="form-control">
+      </div>
+
+      <div class="form-group col-12">
+        <label> Mobile phone: </label>
+        <input v-model.number="MobilePhone" type="number" class="form-control">
+      </div>
     </div>
 
-    <div class="form-group col-12">
-      <label> Care of (C/O): </label>
-      <input v-model="CareOf" type="text" class="form-control">
-    </div>
-    <div class="form-group col-8">
-      <label> Street: </label>
-      <input v-model="Street" type="text" class="form-control">
-    </div>
 
-    <div class="form-group col-4">
-      <label> Number: </label>
-      <input v-model="NumberAddress" type="number" class="form-control">
+    <div class="row my-2 justify-content-start">
+      <div class="col-lg-3 col-sm-4 " style="max-height: 45px !important;">
+        <img @click="updateCorrespondenceAddress" :src="images_btn['guardar']" alt=""
+          style=" max-height: 45px !important;">
+      </div>
+      <div class="col-lg-8 col-sm-3 mx-2">
+        <label>
+          <strong>Note: That's only save address </strong>
+        </label>
+      </div>
     </div>
-
-    <div class="form-group col-6">
-      <label> City: </label>
-      <select v-model="City" class="form-control">
-        <option value="" selected>Escoge un estado</option>
-        <option v-for="state in states" :key="state.id" :value="state.name">
-          {{ state.name }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group col-6">
-      <label> Postal code: </label>
-      <input v-model="PostalCode" type="text" class="form-control">
-    </div>
-
-
-    <div class="form-group col-12">
-      <label> Country: </label>
-      <label> Nationality</label>
-      <select v-model="StateCountry" class="form-control" @change="escogePais">
-        <option value="" selected>Choose a country</option>
-        <option v-for="country in countries" :key="country.id" :value="country.name">
-          {{ country.name }}
-        </option>
-      </select>
-    </div>
-
-    <div class="form-group col-12">
-      <label> Telephone: </label>
-      <input v-model="Telephone" type="text" class="form-control">
-    </div>
-
-    <div class="form-group col-12">
-      <label> Mobile phone: </label>
-      <input v-model="MobilePhone" type="text" class="form-control">
-    </div>
-
   </div>
 </template>
 
@@ -86,6 +101,7 @@ export default {
     telephone: Number,
 
     mobile_phone: Number,
+
   },
 
 
@@ -181,9 +197,10 @@ export default {
       },
       countries: [],
       states: [],
-
+      images_btn: [],
     }
   },
+
 
   created() {
 
@@ -193,18 +210,12 @@ export default {
       this.title = 'Permanent Address';
     }
 
-    //get personal documents
     axios
-      .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
-        params: {
-          archive_id: this.archive_id
-        }
-      })
+      .get("/controlescolar/solicitud/getAllButtonImage")
       .then((response) => {
-        if (response.data != null) {
-          this.documentos = response.data;
-        }
-        console.log(this.documentos);
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
       })
       .catch((error) => {
         console.log(error);
@@ -215,41 +226,58 @@ export default {
 
   methods: {
 
-    escogePais() {
-      Vue.set(
-        this,
-        "states",
-        this.countries[evento.target.selectedIndex - 1].states
-      );
-    },
-
-    cargaDocumento(requiredDocument, file) {
-
-      var formData = new FormData();
+    updateCorrespondenceAddress() {
+      let formData = new FormData();
       formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append('index', this.index);
+      formData.append('care_of', this.care_of);
+      formData.append('street', this.street);
+      formData.append('number_address', this.number_address);
+      formData.append('city', this.city);
+      formData.append('postal_code', this.postal_code);
+      formData.append('state_country', this.state_country);
+      formData.append('telephone', this.telephone);
+      formData.append('mobile_phone', this.mobile_phone);
+
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/updateArchivePersonalDocument',
+        url: '/controlescolar/solicitud/enrem/address/update',
         data: formData,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;
-
+        Swal.fire({
+          title: response.data.message,
+          icon: 'success',
+          text: 'Continue filling others sections',
+          showCancelButton: false,
+        });
       }).catch(error => {
-        var errores = error.response.data['errors'];
-        requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
+        Swal.fire({
+          title: 'Error trying to save information',
+          icon: 'error',
+          text: 'Try later',
+          showCancelButton: false,
+        });
       });
+
+
     },
+
+    escogePais(evento) {
+
+      this.states =   this.countries[evento.target.selectedIndex - 1].states;
+      // Vue.set(
+      //   this,
+      //   "states",
+      //   this.countries[evento.target.selectedIndex - 1].states
+      // );
+    },
+
+
   }
 };
 </script>

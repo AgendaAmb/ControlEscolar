@@ -37,17 +37,18 @@
             <div class="col-12">
                 <label class="h3">Why did you decide to study the ENREM master's degree? (Multiple choice is
                     possible)</label>
-                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho" :value="cho" :id="index"  @actualizaLista="actualizaLista"></checkbox-personalize>
+                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho" :value="cho"
+                    :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
             </div>
         </div>
 
 
         <div class="row justify-content-start my-4" style="width:100%;">
-            <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-                <img @click="updateEnvironmentRelatedSkills" :src="images_btn.guardar" alt=""
+            <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
+                <img @click="updateReasonsToChoise" :src="images_btn.guardar" alt=""
                     style=" max-height: 45px !important;">
             </div>
-            <div class="col-md-10 col-xs-9 mx-3">
+            <div class="col-8">
                 <label>
                     <p><strong>Only save Reasons to Choise</strong></p>
                 </label>
@@ -64,8 +65,7 @@ export default {
     name: "reasons-to-choise",
 
     props: {
-        // Images of buttons
-        images_btn: Array,
+        id: Number,
         // id del expediente.
         archive_id: Number,
         // variables
@@ -92,6 +92,16 @@ export default {
     },
 
     created() {
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
         this.selected_choises_list = Object.keys(this.selected_choises).map((key) => [key, this.selected_choises[key]]);
     },
 
@@ -104,6 +114,7 @@ export default {
             fechaobtencion: "",
             errores: {},
             datosValidos: {},
+            images_btn: [],
 
             booleanChoises: ['Yes', 'No'],
             // universidades: [],
@@ -115,6 +126,7 @@ export default {
                 "Other"
             ],
             selected_choises_list: [],
+
         };
     },
 
@@ -199,7 +211,7 @@ export default {
     methods: {
         // Name is the list 
         // res is the boolean value, push or pop
-        actualizaLista(label, value ,res) {
+        actualizaLista(label, value, res) {
 
             let index = -1;
             this.selected_choises_list.forEach(function (value, i) {
@@ -221,11 +233,11 @@ export default {
                     this.selected_choises_list.splice(index, 1);
                 }
             } else {
-                if(index < 0) {
-                    if(label === 'Other')
-                    this.selected_choises_list.push([label,value]);
+                if (index < 0) {
+                    if (label === 'Other')
+                        this.selected_choises_list.push([label, value]);
                 }
-                
+
             }
         },
 
@@ -247,52 +259,30 @@ export default {
             this.sendEnvironmentRelatedSkills(evento, "Completo");
         },
 
-        sendEnvironmentRelatedSkills(evento, estado) {
-            this.errores = {};
+        updateReasonsToChoise() {
             axios
-                .post("/controlescolar/solicitud/updateAppliantLanguage", {
-                    id: this.id,
+                .post("/controlescolar/solicitud/reasonsToChoise/update", {
+                    id: this.index,
                     archive_id: this.archive_id,
-                    state: estado,
-                    language: this.language,
-                    institution: this.institution,
-                    score: this.score,
-                    presented_at: this.presented_at,
-                    valid_from: this.valid_from,
-                    valid_to: this.valid_to,
-                    language_domain: this.language_domain,
-                    conversational_level: this.conversational_level,
-                    reading_level: this.reading_level,
-                    writing_level: this.writing_level,
-                    kind_of_exam: this.kind_of_exam,
-                    exam_presented: this.exam_presented,
-                })
-                .then((response) => {
-                    // El resultado fue exitoso.
-                    Object.keys(response.data).forEach((dataKey) => {
-                        var event = "update:" + dataKey;
-                        this.$emit(event, response.data[dataKey]);
-                    });
-
+                    first_choise: this.first_choise,
+                    reasons_choise: this.reasons_choise,
+                    other_choises: this.other_choises,
+                    selected_choises: JSON.stringify(this.selected_choises_list)
+                }).then(response => {
                     Swal.fire({
-                        title: "Los datos se han actualizado correctamente",
-                        text: "El idioma seleccionado se ha guardado, podras hacer cambios mientras la postulación este disponible",
-                        icon: "success",
-                        showCancelButton: true,
-                        showConfirmButton: false,
-                        cancelButtonColor: "#3085d6",
-                        cancelButtonText: "Continuar",
-                    });
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Error al actualizar datos",
-                        text: error.response.data["message"],
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
                         showCancelButton: false,
-                        icon: "error",
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
                     });
                 });
-                
         },
 
         selectOrNotDegreeType() {
@@ -312,7 +302,7 @@ export default {
             this.Universidades =
                 this.paises[evento.target.selectedIndex - 1].universities;
         },
-    
+
     },
 };
 </script>

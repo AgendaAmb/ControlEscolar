@@ -15,7 +15,7 @@
     </div>
     <div class="form-group col-6">
       <label> Final score: </label>
-      <input v-model="FinalScore" type="number" class="form-control">
+      <input v-model.number="FinalScore" type="number" class="form-control">
     </div>
 
     <div class="form-group col-12">
@@ -51,6 +51,17 @@
     </div>
 
 
+    <div class="row my-2 justify-content-center">
+      <div class="col-4 " style="max-height: 45px !important;">
+        <img @click="updateSecondaryEducation" :src="images_btn.guardar" alt=""
+          style=" max-height: 45px !important;">
+      </div>
+      <div class="col-8">
+        <label>
+          <strong>Note: That's only save secondary education </strong>
+        </label>
+      </div>
+    </div>
   </div>
 </template>
   
@@ -60,6 +71,11 @@ export default {
 
   name: "secondary-education",
   props: {
+    index:{
+      type:Number,
+      default:0
+    },
+
     archive_id: {
       type: Number,
       default: 0,
@@ -94,6 +110,7 @@ export default {
   data() {
     return {
       countries: [],
+      images_btn:[]
     }
   },
 
@@ -163,17 +180,13 @@ export default {
 
   created() {
     //get personal documents
+   
     axios
-      .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
-        params: {
-          archive_id: this.archive_id
-        }
-      })
+      .get("/controlescolar/solicitud/getAllButtonImage")
       .then((response) => {
-        if (response.data != null) {
-          this.documentos = response.data;
-        }
-        console.log(this.documentos);
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
       })
       .catch((error) => {
         console.log(error);
@@ -183,32 +196,45 @@ export default {
 
 
   methods: {
-    cargaDocumento(requiredDocument, file) {
-
-      var formData = new FormData();
+    updateSecondaryEducation() {
+      let formData = new FormData();
       formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append('index', this.index);
+      formData.append('school_certificade', this.school_certificade);
+      formData.append('final_score', this.final_score);
+      formData.append('name_of_institution', this.name_of_institution);
+      formData.append('from', this.from);
+      formData.append('to', this.to);
+      formData.append('city_country', this.city_country);
+      formData.append('telephone', this.telephone);
+      formData.append('mobile_phone', this.mobile_phone);
+
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/updateArchivePersonalDocument',
+        url: '/controlescolar/solicitud/enrem/secondaryEducation/update',
         data: formData,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;
-
+        Swal.fire({
+          title: response.data.message,
+          icon: 'success',
+          text: 'Continue filling others sections',
+          showCancelButton: false,
+        });
       }).catch(error => {
-        var errores = error.response.data['errors'];
-        requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
+        Swal.fire({
+          title: 'Error trying to save information',
+          icon: 'error',
+          text: 'Try later',
+          showCancelButton: false,
+        });
       });
+
+
     },
   }
 };

@@ -57,6 +57,7 @@
             :fields_of_interest="archive.fields_of_interest"
             :financing_studies="archive.financing_studies"
             :recommendation_letter_enrem="archive.recommendation_letter_enrem"
+            :hear_about_program="archive.hear_about_program"
             :exanni_score="archive.exanni_score" :entrance_documents="archive.entrance_documents" :appliant="appliant"
             :viewer="viewer" :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
             :appliant_languages="archive.appliant_languages"

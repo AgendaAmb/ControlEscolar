@@ -52,6 +52,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="row my-2">
+            <div class="col-4 " style="width:100%; max-height: 45px !important;">
+                <img @click="updateLettersOfRecommendation" :src="images_btn.guardar" alt=""
+                    style=" max-height: 45px !important;">
+            </div>
+            <div class="col-8">
+                <label>
+                    <p><strong>Only save Recommendation Letter</strong></p>
+                </label>
+            </div>
+        </div>
     </b-card-body>
 
 </template>
@@ -61,10 +73,7 @@ export default {
     name: "letters-of-recommendation",
 
     props: {
-        images_btn: {
-            type: Array,
-            default: [],
-        },
+       
         archive_id: {
             type: Number,
             default: 0,
@@ -107,6 +116,7 @@ export default {
         return {
             fechaobtencion: "",
             errores: {},
+            images_btn: [],
             typesRecommendationLetter: [],
             options_financing: ['Self-funded', 'Salary will be paid', 'Goberment Study Grant', 'I intend to apply for a CONACYT or DAAD scholarship', 'I intented to apply for an external scholarship', 'Other'],
         };
@@ -215,12 +225,54 @@ export default {
         },
     },
 
+    created() {
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
 
     methods: {
-        //Funcion para un futuro guardar datos permanentes
-        actualizaHistorialAcademico(evento) {
-            this.enviaHistorialAcademico(evento, "Completo");
+
+        updateLettersOfRecommendation(){
+            axios
+                .post("/controlescolar/solicitud/lettersOfRecommendation/update", {
+                    id: this.index,
+                    archive_id: this.archive_id,
+                    type:this.type,
+                    date:this.date,
+                    title:this.title,
+                    position:this.position,
+                    organization:this.organization,
+                    telephone:this.telephone,
+                    full_name:this.full_name,
+                    exam_presented:this.exam_presented
+                  
+                }).then(response => {
+                    Swal.fire({
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
+                        showCancelButton: false,
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
+                    });
+                });
         },
+        
 
 
 

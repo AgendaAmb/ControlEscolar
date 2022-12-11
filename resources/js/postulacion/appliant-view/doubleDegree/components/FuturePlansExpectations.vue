@@ -25,12 +25,12 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
-            <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
+        <div class="row justify-content-start my-2">
+            <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
                 <img @click="updateFuturePlansExpectations" :src="images_btn.guardar" alt=""
                     style=" max-height: 45px !important;">
             </div>
-            <div class="col-md-10 col-xs-9 mx-3">
+            <div class="col-8">
                 <label>
                     <p><strong>Only save Future plans and expecations</strong></p>
                 </label>
@@ -44,7 +44,6 @@ export default {
     name: "future-plans-expectations",
 
     props: {
-        images_btn: Array,
 
         // id del expediente.
         archive_id: Number,
@@ -63,9 +62,24 @@ export default {
 
     data: function () {
         return {
+            images_btn: [],
             errores: {},
             purpuseFutureList: ['Consulting Services', 'Coorporate Career', 'Development Cooperation', 'Social Oriented Work', 'Research and Investigation', 'Phd Studies', 'Others'],
         };
+    },
+
+    created() {
+        // console.log(this.language);
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     computed: {
@@ -163,38 +177,31 @@ export default {
                 this.paises[evento.target.selectedIndex - 1].universities;
         },
 
-        //Funcion para un futuro guardar datos permanentes
-        updateFuturePlansExpectations(evento) {
-            this.newFuturePlansExpectations(evento, "Completo");
-        },
-
-        newFuturePlansExpectations() {
+        updateFuturePlansExpectations() {
             axios
-                .post("/controlescolar/solicitud/newFuturePlansExpectations", {
-                    id: this.id,
+                .post("/controlescolar/solicitud/futurePlansExpectations/update", {
+                    id: this.index,
                     archive_id: this.archive_id,
-                })
-                .then((response) => {
-                    //Llama al padre para que elimine el item de la lista de experiencia laboral
-                    this.$emit("delete-item", this.index - 1);
+                    pursue_future: this.pursue_future,
+                    explain_pursue_future: this.explain_pursue_future
+
+                }).then(response => {
                     Swal.fire({
-                        title: "Éxito al eliminar registro",
-                        text: response.data.message, // Imprime el mensaje del controlador
-                        icon: "success",
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
                         showCancelButton: false,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Continuar",
                     });
-                })
-                .catch((error) => {
+                }).catch(error => {
                     Swal.fire({
-                        title: "Error al eliminar registro",
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
                         showCancelButton: false,
-                        icon: "error",
                     });
                 });
         },
-       
+
 
         estaEnError(key) {
             return key in this.errores;

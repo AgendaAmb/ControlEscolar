@@ -62,7 +62,7 @@
 
                     <div class="form-group col-lg-4 col-sm-6">
                         <label> Date of exam: </label>
-                        <input v-model="DateOfExam" type="date" class="form-control">
+                        <input v-model="PresentedAt" type="date" class="form-control">
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
 
                     <div class="form-group col-lg-4 col-sm-6">
                         <label> Duration in months: </label>
-                        <input v-model="DurationInMonths" type="numbers" class="form-control">
+                        <input v-model.number="DurationInMonths" type="number" class="form-control">
                     </div>
                 </div>
 
@@ -108,7 +108,7 @@
 
                     <div class="form-group col-lg-4 col-sm-6">
                         <label> Duration in months: </label>
-                        <input v-model="DurationInMonths" type="numbers" class="form-control">
+                        <input v-model.number="DurationInMonths" type="number" class="form-control">
                     </div>
                 </div>
 
@@ -116,8 +116,8 @@
 
                 <div class="row my-2">
                     <div class="col-lg-8 col-sm-12">
-                        <label> City/Country: </label>
-                        <select v-model="Country" class="form-control" @change="escogePais">
+                        <label>Country: </label>
+                        <select v-model="Country" class="form-control">
                             <option value="" selected>Choose a country</option>
                             <option v-for="country in countries" :key="country.id" :value="country.name">
                                 {{ country.name }}
@@ -160,12 +160,12 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-start my-2" style="width:100%;">
-                <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-                    <img @click="actualizaLenguaExtranjera" :src="images_btn.guardar" alt=""
+            <div class="row justify-content-start my-2" >
+                <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
+                    <img @click="updateLanguageSkills" :src="images_btn.guardar" alt=""
                         style=" max-height: 45px !important;">
                 </div>
-                <div class="col-md-10 col-xs-9 mx-3">
+                <div class="col-8">
                     <label>
                         <p class="h4"><strong>This only save Language</strong></p>
                     </label>
@@ -190,6 +190,11 @@ export default {
         // Id del expediente.
         archive_id: Number,
 
+        language: {
+            type: String,
+            default: ""
+        },
+
         exam_presented: {
             type: String,
             default: "",
@@ -200,26 +205,29 @@ export default {
             default: "",
         },
 
-        date_of_exam: {
+        presented_at: {
             type: Date,
             default: null,
         },
 
+        // Dominio del idioma.
+        language_domain: String,
 
+        // Nivel conversacional.
+        conversational_level: String,
+
+        // Nivel de lectura.
+        reading_level: String,
+
+        // Nivel de escritura.
+        writing_level: String,
+
+        // news
         learning_method: {
             type: String,
             default: ""
         },
 
-        alias_academic_program: {
-            type: String,
-            default: ""
-        },
-
-        status_checkBox: {
-            type: Boolean,
-            default: false,
-        },
 
         duration_in_months: {
             type: Number,
@@ -235,20 +243,6 @@ export default {
             type: String,
             default: ""
         },
-
-        // Dominio del idioma.
-        language_domain: String,
-
-        // Nivel conversacional.
-        conversational_level: String,
-
-        // Nivel de lectura.
-        reading_level: String,
-
-        // Nivel de escritura.
-        writing_level: String,
-
-
     },
 
     mounted: function () {
@@ -264,6 +258,7 @@ export default {
 
     data() {
         return {
+            countries:[],
             errores: {},
             idiomas: ["Español", "Inglés", "Francés", "Alemán", "Otro"],
             listExamNames: ["TOEFL", "IELTS academic", "CAMBRIDGE"],
@@ -340,12 +335,12 @@ export default {
             },
         },
 
-        DateOfExam: {
+        PresentedAt: {
             get() {
-                return this.date_of_exam;
+                return this.presented_at;
             },
             set(newVal) {
-                this.$emit("update:date_of_exam", newVal);
+                this.$emit("update:presented_at", newVal);
             },
         },
 
@@ -397,14 +392,10 @@ export default {
         },
         Language: {
             get() {
-                if (this.localLanguage === null) {
-                    this.localLanguage = this.language;
-                }
                 return this.language;
             },
             set(newVal) {
                 this.$emit("update:language", newVal);
-                this.localLanguage = newVal;
             },
         },
         Institution: {
@@ -479,15 +470,6 @@ export default {
                 this.$emit("update:writing_level", newVal);
             },
         },
-
-        Documentos: {
-            get() {
-                return this.documentos;
-            },
-            set(newVal) {
-                this.$emit("update:documentos", newVal);
-            },
-        },
     },
 
     created() {
@@ -505,6 +487,7 @@ export default {
     },
 
     methods: {
+        
         selectedIsSpanish() {
             return true;
         },
@@ -542,53 +525,37 @@ export default {
             return false;
         },
 
-        actualizaLenguaExtranjera(evento) {
-            this.enviaLenguaExtranjera(evento, "Completo");
-        },
 
-        enviaLenguaExtranjera(evento, estado) {
-            this.errores = {};
+        updateLanguageSkills() {
             axios
-                .post("/controlescolar/solicitud/updateAppliantLanguage", {
-                    id: this.id,
+                .post("/controlescolar/solicitud/languageSkills/update", {
+                    id: this.index,
                     archive_id: this.archive_id,
-                    state: estado,
                     language: this.language,
-                    institution: this.institution,
-                    score: this.score,
-                    presented_at: this.presented_at,
-                    valid_from: this.valid_from,
-                    valid_to: this.valid_to,
+                    exam_presented: this.exam_presented,
+                    kind_of_exam: this.kind_of_exam,
+                    date_of_exam: this.date_of_exam,
+                    learning_method: this.learning_method,
+                    country: this.country,
+                    duration_in_months: this.duration_in_months,
+                    overal_grade_score: this.overal_grade_score,
                     language_domain: this.language_domain,
                     conversational_level: this.conversational_level,
                     reading_level: this.reading_level,
-                    writing_level: this.writing_level,
-                    kind_of_exam: this.kind_of_exam,
-                    exam_presented: this.exam_presented,
-                })
-                .then((response) => {
-                    // El resultado fue exitoso.
-                    Object.keys(response.data).forEach((dataKey) => {
-                        var event = "update:" + dataKey;
-                        this.$emit(event, response.data[dataKey]);
-                    });
-
+                    writing_level: this.writing_level
+                }).then(response => {
                     Swal.fire({
-                        title: "Los datos se han actualizado correctamente",
-                        text: "El idioma seleccionado se ha guardado, podras hacer cambios mientras la postulación este disponible",
-                        icon: "success",
-                        showCancelButton: true,
-                        showConfirmButton: false,
-                        cancelButtonColor: "#3085d6",
-                        cancelButtonText: "Continuar",
-                    });
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Error al actualizar datos",
-                        text: error.response.data["message"],
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
                         showCancelButton: false,
-                        icon: "error",
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
                     });
                 });
         },

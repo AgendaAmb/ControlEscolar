@@ -329,6 +329,15 @@ class Archive extends Model
     }
 
     /**
+      * Hear about program     *
+     * @return HasMany
+     */
+    public function hearAboutProgram(): HasMany
+    {
+        return $this->HasMany(HearAboutProgram::class);
+    }
+
+    /**
      * Obtiene el programa académico, al cual corresponde
      * el expediente.
      *

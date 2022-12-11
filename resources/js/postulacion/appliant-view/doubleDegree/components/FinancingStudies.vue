@@ -2,9 +2,21 @@
 
     <!-- Accordion -->
     <b-card-body>
-        <div class="form-group">
+        <div class="form-group row">
             <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label="cho" :value="cho"
                 :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
+        </div>
+
+        <div class="row my-2">
+            <div class="col-4 " style="width:100%; max-height: 45px !important;">
+                <img @click="updateFinancingStudies" :src="images_btn.guardar" alt=""
+                    style=" max-height: 45px !important;">
+            </div>
+            <div class="col-8">
+                <label>
+                    <p><strong>Only save Financing studies</strong></p>
+                </label>
+            </div>
         </div>
     </b-card-body>
 </template>
@@ -25,6 +37,7 @@ export default {
 
     data: function () {
         return {
+            images_btn: [],
             fechaobtencion: "",
             errores: {},
             options_financing: ['Self-funded', 'Salary will be paid', 'Goberment Study Grant', 'I intend to apply for a CONACYT or DAAD scholarship', 'I intented to apply for an external scholarship', 'Other'],
@@ -33,9 +46,20 @@ export default {
     },
 
     created() {
-        if(this.financing_options!= null){
+        if (this.financing_options != null) {
             this.financing_options_list = Object.keys(this.financing_options).map((key) => [key, this.financing_options[key]]);
         }
+
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     computed: {
@@ -79,6 +103,31 @@ export default {
     },
 
     methods: {
+
+        updateFinancingStudies(){
+            axios
+                .post("/controlescolar/solicitud/financingStudies/update", {
+                    id: this.index,
+                    archive_id: this.archive_id,
+                    financing_options:this.financing_options
+                }).then(response => {
+                    Swal.fire({
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
+                        showCancelButton: false,
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
+                    });
+                });
+        },
+
+
         actualizaLista(label, value, res) {
             let index = -1;
             this.financing_options_list.forEach(function (value, i) {

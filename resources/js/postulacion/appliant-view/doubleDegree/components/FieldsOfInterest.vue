@@ -160,12 +160,13 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <input v-model="ElectiveModulesPMPCA" type="text" class="form-control">
+                    <input v-model="ElectiveModulesPMPCAMexico" type="text" class="form-control">
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <input v-model="ElectiveModulesITT" type="text" class="form-control">
+                    <input v-model="ElectiveModulesPMPCAGerman" type="text" class="form-control">
                 </div>
+
             </div>
 
             <div class="row my-1">
@@ -176,11 +177,11 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <input v-model="ProfessorResearchMexico" type="text" class="form-control">
+                    <input v-model="ElectiveModulesITTMexico" type="text" class="form-control">
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <input v-model="ProfessorResearchGermany" type="text" class="form-control">
+                    <input v-model="ElectiveModulesITTGerman" type="text" class="form-control">
                 </div>
             </div>
 
@@ -188,12 +189,12 @@
 
         </div>
 
-        <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
-            <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-                <img @click="updateFuturePlansExpectations" :src="images_btn.guardar" alt=""
+        <div class="row my-2" style="width:100%;">
+            <div class="col-4 " style="width:100%; max-height: 45px !important;">
+                <img @click="updateFieldsOfInterest" :src="images_btn.guardar" alt=""
                     style=" max-height: 45px !important;">
             </div>
-            <div class="col-md-10 col-xs-9 mx-3">
+            <div class="col-8">
                 <label>
                     <p><strong>Only save fiels of interests</strong></p>
                 </label>
@@ -212,15 +213,13 @@ export default {
         //Index de la escolaridad
         archive_id: Number,
 
-        images_btn: Array,
-
-        proyect_idea:{
-            type:String,
+        proyect_idea: {
+            type: String,
             default: ""
         },
 
-        keywords_proyect_idea:{
-            type:String,
+        keywords_proyect_idea: {
+            type: String,
             default: ""
         },
 
@@ -245,12 +244,22 @@ export default {
             default: "",
         },
 
-        elective_modules_PMPCA: {
+        elective_modules_PMPCA_german: {
             type: String,
             default: "",
         },
 
-        elective_modules_ITT: {
+        elective_modules_PMPCA_mexico: {
+            type: String,
+            default: "",
+        },
+
+        elective_modules_ITT_german: {
+            type: String,
+            default: "",
+        },
+
+        elective_modules_ITT_mexico: {
             type: String,
             default: "",
         },
@@ -259,6 +268,7 @@ export default {
 
     data: function () {
         return {
+            images_btn: [],
             errores: {},
             professorsGerman: [
                 'Prof. Dr. Sabine Schlüter',
@@ -279,6 +289,20 @@ export default {
             researchAreaMexico: ['Renewable Natural Resources', 'Enviromental Assessment', 'Enviromental Management', 'Integrated Enviromental Health', 'Prevention and Control'],
             researchAreaGerman: ['NRM focus Land Management', 'NRM focs Regional Management', 'NRM fous Water Management', 'NRM focus Energy Management'],
         };
+    },
+
+    created() {
+        // console.log(this.language);
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
     computed: {
@@ -319,7 +343,7 @@ export default {
             };
         },
 
-        Keywords:{
+        Keywords: {
             get() {
                 return this.keywords_proyect_idea;
             },
@@ -338,7 +362,7 @@ export default {
         },
 
 
-        ProyectIdea:{
+        ProyectIdea: {
             get() {
                 return this.proyect_idea;
             },
@@ -375,73 +399,73 @@ export default {
             },
         },
 
-        ElectiveModulesPMPCA: {
+        ElectiveModulesPMPCAGerman: {
             get() {
-                return this.elective_modules_PMPCA;
+                return this.elective_modules_PMPCA_german;
             },
             set(newVal) {
-                this.$emit("update:elective_modules_PMPCA", newVal);
+                this.$emit("update:elective_modules_PMPCA_german", newVal);
             },
         },
 
-        ElectiveModulesITT: {
+        ElectiveModulesPMPCAMexico: {
             get() {
-                return this.elective_modules_ITT;
+                return this.elective_modules_PMPCA_mexico;
             },
             set(newVal) {
-                this.$emit("update:elective_modules_ITT", newVal);
+                this.$emit("update:elective_modules_PMPCA_mexico", newVal);
+            },
+        },
+
+        ElectiveModulesITTGerman: {
+            get() {
+                return this.elective_modules_ITT_german;
+            },
+            set(newVal) {
+                this.$emit("update:elective_modules_ITT_german", newVal);
+            },
+        },
+
+        ElectiveModulesITTMexico: {
+            get() {
+                return this.elective_modules_ITT_mexico;
+            },
+            set(newVal) {
+                this.$emit("update:elective_modules_ITT_mexico", newVal);
             },
         },
     },
 
 
     methods: {
-
-
-        //Funcion para un futuro guardar datos permanentes
-        updateFuturePlansExpectations(evento) {
-            this.sendFuturePlansExpectations(evento, "Completo");
-        },
-
-        sendFuturePlansExpectations(evento, state) {
-            this.errores = {};
+        updateFieldsOfInterest() {
             axios
-                .post("/controlescolar/solicitud/updateAcademicDegree", {
-                    id: this.id,
+                .post("/controlescolar/solicitud/fieldsOfInterest/update", {
+                    id: this.index,
                     archive_id: this.archive_id,
-                    state: state,
-                    status: this.status,
-                    degree: this.degree,
-                    degree_type: this.degree_type,
-                    cvu: this.cvu,
-                    cedula: this.cedula,
-                    country: this.country,
-                    university: this.university,
-                    average: this.average,
-                    min_avg: this.min_avg,
-                    max_avg: this.max_avg,
-                    knowledge_card: this.knowledge_card,
-                    digital_signature: this.digital_signature,
-                    titration_date: this.titration_date,
-                })
-                .then((response) => {
+                    proyect_idea: this.proyect_idea,
+                    keywords_proyect_idea: this.keywords_proyect_idea,
+                    research_area_mexico: this.research_area_mexico,
+                    research_area_german: this.research_area_german,
+                    professor_research_mexico: this.professor_research_mexico,
+                    professor_research_german: this.professor_research_german,
+                    elective_modules_PMPCA_german: this.elective_modules_PMPCA_german,
+                    elective_modules_PMPCA_mexico:this.elective_modules_PMPCA_mexico,
+                    elective_modules_ITT_german: this.elective_modules_ITT_german,
+                    elective_modules_ITT_mexico : this.elective_modules_ITT_mexico
+                }).then(response => {
                     Swal.fire({
-                        title: "Los datos se han actualizado correctamente",
-                        text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
-                        icon: "success",
-                        showCancelButton: true,
-                        showConfirmButton: false,
-                        cancelButtonColor: "#3085d6",
-                        cancelButtonText: "Continuar",
-                    });
-                })
-                .catch((error) => {
-                    console.log(error.response.data);
-                    Swal.fire({
-                        title: "Error al actualizar datos",
-                        text: error.response.data["message"],
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
                         showCancelButton: false,
-                        icon: "error",
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
                     });
                 });
         },

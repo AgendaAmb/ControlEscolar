@@ -891,6 +891,25 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => 'No se puede extraer la información de recommendationLetterENREM', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
+
+        // financing studies
+        try {
+            $archiveModel->loadMissing([
+                'hearAboutProgram',
+            ]);
+    
+            if(sizeof($archiveModel->hearAboutProgram) < 1){
+                $archiveModel->hearAboutProgram()->createMany([
+                    [
+                        'how_hear' => null,             
+                        'archive_id' => $archive_id
+                    ]
+                ]);    
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'No se puede extraer la información de HearAboutProgram', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+
         try {
             $archiveModel->loadMissing([
                 // Cosas del aplicante
@@ -917,7 +936,8 @@ class ArchiveController extends Controller
                 'futurePlans',
                 'fieldsOfInterest',
                 'financingStudies',
-                'recommendationLetterEnrem'
+                'recommendationLetterEnrem',
+                'hearAboutProgram'
             ]);
 
 

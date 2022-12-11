@@ -13,14 +13,14 @@
             </div>
             <div class="form-group col-md-12">
               <label> Last Name(s): </label>
-              <input v-model="Middlename" type="text" class="form-control" readonly>
+              <input v-model="Surname" type="text" class="form-control" readonly>
             </div>
           </div>
 
           <div class="row my-1">
             <div class="form-group col-lg-4 col-sm-6">
               <label> Gender: </label>
-              <select v-model="Gender" class="form-control" >
+              <select v-model="Gender" class="form-control">
                 <option value="" selected>Escoge una opción</option>
                 <option value="Masculino">Male</option>
                 <option value="Femenino">Female</option>
@@ -43,7 +43,7 @@
 
             <div class="form-group col-lg-4 col-sm-6">
               <label> Nr of children: </label>
-              <input v-model="NoChildren" type="number" class="form-control">
+              <input v-model.number="NoChildren" type="number" class="form-control">
             </div>
           </div>
 
@@ -71,8 +71,8 @@
               <label> Nationality</label>
               <select v-model="Nationality" class="form-control">
                 <option value="" selected>Choose a country</option>
-                <option v-for="country in countries" :key="country.id" :value="country.name">
-                  {{ country.name }}
+                <option v-for="country_na in countries_nationality" :key="country_na.id" :value="country_na.name">
+                  {{ country_na.name }}
                 </option>
               </select>
             </div>
@@ -80,8 +80,7 @@
 
             <div class="form-group col-lg-6">
               <label> Country of residense: </label>
-              <label> Nationality</label>
-              <select v-model="Nationality" class="form-control">
+              <select v-model="ResidenseCountry" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country in countries" :key="country.id" :value="country.name">
                   {{ country.name }}
@@ -106,6 +105,17 @@
               <input v-model="PhoneNumber" type="text" class="form-control" readonly>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-start my-2">
+        <div class="col-lg-3 col-xs-4 align-items-center " style="width:100%; max-height: 45px !important;">
+          <img @click="updatePersonalData" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+        </div>
+        <div class="col-lg-9 col-xs-8 mx-5">
+          <label>
+            <p class="h4"><strong>Save only personal data</strong></p>
+          </label>
         </div>
       </div>
     </div>
@@ -162,11 +172,22 @@ export default {
     // Teléfono de contacto.
     phone_number: String,
 
-    // Variables
-    alias_academic_program: String,
-
     archive_id: Number,
 
+  },
+
+  created() {
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 
 
@@ -312,6 +333,7 @@ export default {
         .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
         .then((response) => {
           this.countries = response.data;
+          this.countries_nationality  = response.data;
         });
     });
   },
@@ -320,10 +342,12 @@ export default {
     return {
       // Documentos personales
       countries: [],
+      countries_nationality: [],
       documentos: {
         type: Array,
         default: null,
-      }
+      },
+      images_btn: []
     }
   },
 
@@ -349,32 +373,30 @@ export default {
 
 
   methods: {
-
-    escogePais() {
-      for (let i = 0; i < this.countries.length; i++) {
-        if (this.countries[i].name == this.birth_country) {
-          this.mystates = this.countries[i].states;
-        }
-      }
-    },
-
-
-    uploadDataAppliant() {
-      let msg = "";
-      let title = "";
-      let icon = "success";
+    updatePersonalData() {
       let formData = new FormData();
+      let title = "";
+      let icon = "";
+      let msg = "";
       formData.append('archive_id', this.archive_id);
+      formData.append('name', this.name);
+      formData.append('middlename', this.middlename);
+      formData.append('surname', this.surname);
       formData.append('gender', this.gender);
       formData.append('marital_state', this.marital_state);
       formData.append('no_children', this.no_children);
       formData.append('birth_date', this.birth_date);
       formData.append('birth_country', this.birth_country);
       formData.append('nationality', this.nationality);
+      formData.append('residense_country', this.residense_country);
+      formData.append('email', this.email);
+      formData.append('altern_email', this.altern_email);
+      formData.append('phone_number', this.phone_number);
+
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/uploadDataAppliant',
+        url: '/controlescolar/solicitud/enrem/appliant',
         data: formData,
         headers: {
           'Accept': 'application/json',
@@ -394,6 +416,14 @@ export default {
         cancelButtonColor: "#d33",
         cancelButtonText: "Entendido",
       });
+    },
+
+
+    uploadDataAppliant() {
+      let msg = "";
+      let title = "";
+      let icon = "success";
+
     },
   }
 };

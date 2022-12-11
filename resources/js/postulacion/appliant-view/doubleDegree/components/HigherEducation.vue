@@ -22,7 +22,7 @@
                     <div class="form-group col-lg-4 col-sm-12">
                         <label> Degree obtained: </label>
                         <!-- Solo se podra seleccionar para doctorado -->
-                        <select v-model="DegreeObtained" class="form-control">
+                        <select v-model="DegreeType" class="form-control">
                             <option value="" selected>Choose an option</option>
                             <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
                                 {{ escolaridad }}
@@ -160,7 +160,7 @@
 
             <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
                 <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-                    <img @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt=""
+                    <img @click="updateHigherEducation" :src="images_btn.guardar" alt=""
                         style=" max-height: 45px !important;">
                 </div>
                 <div class="col-md-10 col-xs-9 mx-3">
@@ -183,16 +183,18 @@ export default {
         //Index de la escolaridad
         index: Number,
 
-        degree_obtained: {
+        degree_type: {
             type: String,
             default: ""
         },
 
+        // new
         date_of_award_of_degree: {
             type: Date,
             default: null,
         },
 
+        // new
         final_grade_average: {
             type: String,
             default: ""
@@ -203,16 +205,13 @@ export default {
             default: ""
         },
 
-        university: {
+
+        country: {
             type: String,
             default: ""
         },
 
-        city_country: {
-            type: String,
-            default: ""
-        },
-
+        // new
         graduation_mode: {
             type: String,
             default: ""
@@ -222,6 +221,7 @@ export default {
             type: String,
             default: ""
         },
+        // new
 
         fill_according_graduation: {
             type: String,
@@ -341,12 +341,12 @@ export default {
             },
         },
 
-        DegreeObtained: {
+        DegreeType: {
             get() {
-                return this.degree_obtained;
+                return this.degree_type;
             },
             set(newVal) {
-                this.$emit("update:degree_obtained", newVal);
+                this.$emit("update:degree_type", newVal);
             },
         },
 
@@ -368,22 +368,22 @@ export default {
             },
         },
 
-        To:{
+        To: {
             get() {
                 return this.to;
             },
             set(newVal) {
                 this.$emit("update:to", newVal);
-            },  
+            },
         },
 
-        From:{
+        From: {
             get() {
                 return this.from;
             },
             set(newVal) {
                 this.$emit("update:from", newVal);
-            },  
+            },
         },
 
 
@@ -400,10 +400,10 @@ export default {
 
         Country: {
             get() {
-                return this.city_country;
+                return this.country;
             },
             set(newVal) {
-                this.$emit("update:city_country", newVal);
+                this.$emit("update:country", newVal);
             },
         },
 
@@ -428,7 +428,7 @@ export default {
 
 
 
-         MinAvg: {
+        MinAvg: {
             get() {
                 return this.min_avg;
             },
@@ -529,43 +529,6 @@ export default {
 
 
     methods: {
-        countryHasValue() {
-            //country is not empty
-            if (this.country != null) {
-                //Find the index
-                this.paises.forEach(function (pais) {
-                    if (pais.name === this.country) {
-                        this.Universidades = pais.universities;
-                    }
-                });
-            }
-
-            return true;
-        },
-
-        selectOrNotDegreeType() {
-            let res = true;
-            let answer = this.alias_academic_program.localCompare("doctorado"); //compare string
-
-            //alias no es doctorado por lo que es una maestria
-            if (answer != 0) {
-                this.degree_type = "Licenciatura"; //Solo licenciatura
-                res = false; //retorno falso
-            }
-
-            return res;
-        },
-
-        escogePais(evento) {
-            this.Universidades =
-                this.paises[evento.target.selectedIndex - 1].universities;
-        },
-
-        //Funcion para un futuro guardar datos permanentes
-        actualizaHistorialAcademico(evento) {
-            this.enviaHistorialAcademico(evento, "Completo");
-        },
-
         eliminaHistorialAcademico() {
             axios
                 .post("/controlescolar/solicitud/deleteAcademicDegree", {
@@ -593,81 +556,41 @@ export default {
                 });
         },
 
-        enviaHistorialAcademico(evento, state) {
-            this.errores = {};
-            axios
-                .post("/controlescolar/solicitud/updateAcademicDegree", {
-                    id: this.id,
-                    archive_id: this.archive_id,
-                    state: state,
-                    status: this.status,
-                    degree: this.degree,
-                    degree_type: this.degree_type,
-                    cvu: this.cvu,
-                    cedula: this.cedula,
-                    country: this.country,
-                    university: this.university,
-                    average: this.average,
-                    min_avg: this.min_avg,
-                    max_avg: this.max_avg,
-                    knowledge_card: this.knowledge_card,
-                    digital_signature: this.digital_signature,
-                    titration_date: this.titration_date,
-                })
-                .then((response) => {
-                    Swal.fire({
-                        title: "Los datos se han actualizado correctamente",
-                        text: "El historial academico de tu registro ha sido modificado, podras hacer cambios mientras la postulación este disponible",
-                        icon: "success",
-                        showCancelButton: true,
-                        showConfirmButton: false,
-                        cancelButtonColor: "#3085d6",
-                        cancelButtonText: "Continuar",
-                    });
-                })
-                .catch((error) => {
-                    console.log(error.response.data);
-                    Swal.fire({
-                        title: "Error al actualizar datos",
-                        text: error.response.data["message"],
-                        showCancelButton: false,
-                        icon: "error",
-                    });
-                });
+        escogePais(evento) {
+            this.Universidades =
+                this.paises[evento.target.selectedIndex - 1].universities;
         },
 
-        cargaDocumento(requiredDocument, file) {
-            var formData = new FormData();
-            formData.append("id", this.id);
-            formData.append("archive_id", this.archive_id);
-            formData.append("requiredDocumentId", requiredDocument.id);
-            formData.append("index", this.index);
-            formData.append("file", file);
-
-            // console.log(formData);
-
-            axios({
-                method: "post",
-                url: "/controlescolar/solicitud/updateAcademicDegreeRequiredDocument",
-                data: formData,
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-                .then((response) => {
-                    requiredDocument.datosValidos.file = "¡Archivo subido exitosamente!";
-                    requiredDocument.Location = response.data.location;
-                })
-                .catch((error) => {
-                    var errores = error.response.data["errors"];
-                    requiredDocument.Errores = {
-                        file: "file" in errores ? errores.file[0] : null,
-                        id:
-                            "requiredDocumentId" in errores
-                                ? errores.requiredDocumentId[0]
-                                : null,
-                    };
+        updateHigherEducation() {
+            axios
+                .post("/controlescolar/solicitud/higherEducation/update", {
+                    id: this.index,
+                    archive_id: this.archive_id,
+                    degree_type: this.degree_type,
+                    degree: this.degree,
+                    date_of_award_of_degree: this.date_of_award_of_degree,
+                    final_grade_average: this.final_grade_average,
+                    university: this.university,
+                    country: this.country,
+                    graduation_mode: this.graduation_mode,
+                    fill_according_graduation: this.fill_according_graduation,
+                    average: this.average,
+                    min_avg: this.min_avg,
+                    max_avg: this.max_avg
+                }).then(response => {
+                    Swal.fire({
+                        title: response.data.message,
+                        icon: 'success',
+                        text: 'Continue filling others sections',
+                        showCancelButton: false,
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error trying to save information',
+                        icon: 'error',
+                        text: 'Try later',
+                        showCancelButton: false,
+                    });
                 });
         },
 

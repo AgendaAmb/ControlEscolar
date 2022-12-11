@@ -36,7 +36,7 @@
 
             <div class="form-group col-md-4">
               <label> Type of experience: </label>
-              <input v-model="TypeOfExperience" type="text" :class="classObjectFor('type_of_experience')">
+              <input v-model="KnowledgeArea" type="text" :class="classObjectFor('type_of_experience')">
               <div v-if="estaEnError('type_of_experience')" class="invalid-feedback">{{ errores.type_of_experience }}
               </div>
             </div>
@@ -58,12 +58,12 @@
           <div class="row my-2">
             <div class="col-lg-8 col-sm-12">
               <label>Organization: </label>
-              <input v-model="Organization" type="text" :class="classObjectFor('organization')">
+              <input v-model="Institution" type="text" :class="classObjectFor('organization')">
               <div v-if="estaEnError('organization')" class="invalid-feedback">{{ errores.organization }}</div>
             </div>
             <div class="col-lg-4 col-sm-12">
-              <label> City/Country: </label>
-              <select v-model="Country" class="form-control" @change="escogePais" >
+              <label>Country:</label>
+              <select v-model="State" class="form-control" @change="escogePais">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country in countries" :key="country.id" :value="country.name">
                   {{ country.name }}
@@ -79,7 +79,7 @@
           <!-- Main responsabilities -->
           <div class="row my-2">
             <label>Main responsabilities: </label>
-            <textarea class="form-control" rows="4" v-model="MainResponsabilities"
+            <textarea class="form-control" rows="4" v-model="WorkingPositionDescription"
               placeholder="Detalla el por que se no se seleccionara al postulante ..." />
           </div>
         </div>
@@ -89,13 +89,13 @@
       <!-- Save Content -->
       <div class="d-flex justify-content-start my-2" style="width:100%;">
         <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="guardaExperienciaLaboral" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+          <img @click="updateWorkingExperiences" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
         </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
-            <strong>Nota: </strong>
-            Para poder registrar los cambios en los campos anteriores es necesario seleccionar el siguiente botón. <p>
-              <strong>Solo se guardara la experiecia laboral actual</strong>
+            <strong>Note: </strong>
+            <p>
+              <strong>This only save working experience</strong>
             </p>
           </label>
         </div>
@@ -146,14 +146,10 @@ export default {
     },
 
     index: {
-      type: Number, 
+      type: Number,
       default: 0,
     },
 
-    images_btn: {
-      type: Array,
-      default: []
-    }
 
 
   },
@@ -161,8 +157,23 @@ export default {
   data() {
     return {
       countries: [],
-      errores: {}
+      errores: {},
+      images_btn: []
     }
+  },
+
+  created() {
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 
   mounted: function () {
@@ -207,7 +218,7 @@ export default {
       }
     },
 
-    TypeOfExperience: {
+    KnowledgeArea: {
       get() {
         return this.knowledge_area;
       },
@@ -226,7 +237,7 @@ export default {
       }
     },
 
-    Organization: {
+    Institution: {
       get() {
         return this.institution;
       },
@@ -235,7 +246,7 @@ export default {
       }
     },
 
-    Country: {
+    State: {
       get() {
         return this.state;
       },
@@ -244,7 +255,7 @@ export default {
       }
     },
 
-    MainResponsabilities: {
+    WorkingPositionDescription: {
       get() {
         return this.working_position_description;
       },
@@ -289,9 +300,6 @@ export default {
       };
     },
 
-    guardaExperienciaLaboral(evento) {
-      this.enviaExperienciaLaboral(evento, 'Completo');
-    },
 
     eliminaExperienciaLaboral() {
       axios.post('/controlescolar/solicitud/deleteWorkingExperience', {
@@ -320,58 +328,33 @@ export default {
       });
     },
 
-    enviaExperienciaLaboral(evento, estado) {
-      this.errores = {};
-
-      axios.post('/controlescolar/solicitud/updateWorkingExperience', {
-
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        institution: this.institution,
-        working_position: this.working_position,
-        from: this.from,
-        to: this.to,
-        knowledge_area: this.knowledge_area,
-        field: this.field,
-        working_position_description: this.working_position_description,
-        achievements: this.achievements
-
-      }).then(response => {
-        this.State = response.data.state;
-        this.Institution = response.data.institution;
-        this.WorkingPosition = response.data.working_position;
-        this.From = response.data.from;
-        this.To = response.data.to;
-        this.KnowledgeArea = response.data.knowledge_area;
-        this.Field = response.data.field;
-        this.working_position = response.data.working_position;
-
-        Swal.fire({
-          title: "Los datos se han actualizado correctamente",
-          text: "La experiencia laboral seleccionada de tu expediente ha sido modificada, podras hacer cambios mientras la postulación este disponible",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Continuar",
+    updateWorkingExperiences() {
+      axios
+        .post("/controlescolar/solicitud/workingExperiences/update", {
+          id: this.index,
+          archive_id: this.archive_id,
+          from: this.from,
+          to: this.to,
+          knowledge_area: this.knowledge_area,
+          working_position: this.working_position,
+          institution: this.institution,
+          state: this.state,
+          working_position_description: this.working_position_description,
+        }).then(response => {
+          Swal.fire({
+            title: response.data.message,
+            icon: 'success',
+            text: 'Continue filling others sections',
+            showCancelButton: false,
+          });
+        }).catch(error => {
+          Swal.fire({
+            title: 'Error trying to save information',
+            icon: 'error',
+            text: 'Try later',
+            showCancelButton: false,
+          });
         });
-
-
-      }).catch(error => {
-        this.State = 'Incompleto';
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
-
-        Swal.fire({
-          title: "Error al actualizar datos",
-          text: error.response.data["message"],
-          showCancelButton: false,
-          icon: "error",
-        });
-      });
     },
 
     estaEnError(key) {

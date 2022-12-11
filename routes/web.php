@@ -4,6 +4,7 @@ use App\Http\Controllers\AcademicDegreeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppliantLanguageController;
 use App\Http\Controllers\ArchiveController;
+use App\Http\Controllers\ArchiveEnremController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ComiteAcademicoController;
 use App\Http\Controllers\EvaluationRubricController;
@@ -118,6 +119,56 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
     # Rutas de las solicitudes académicas.
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
+
+        Route::prefix('enrem')->name('enrem.')->group(function () {
+            Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
+            
+            Route::prefix('address')->name('address.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateAddress'])->name('updateAddress');
+            });
+
+            Route::prefix('secondaryEducation')->name('secondaryEducation.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateSecondaryEducation'])->name('updateSecondaryEducation');
+            });
+
+
+            Route::prefix('higherEducation')->name('higherEducation.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateHigherEducation'])->name('updateHigherEducation');
+            });
+
+            Route::prefix('environmentSkills')->name('environmentSkills.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateEnvironmentSkills'])->name('updateEnvironmentSkills');
+            });
+
+
+            Route::prefix('workingExperiences')->name('workingExperiences.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateWorkingExperiences'])->name('updateWorkingExperiences');
+            });
+
+            Route::prefix('reasonsToChoise')->name('reasonsToChoise.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateReasonsToChoise'])->name('updateReasonsToChoise');
+            });
+            
+            Route::prefix('futurePlansExpectations')->name('futurePlansExpectations.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateFuturePlansExpectations'])->name('updateFuturePlansExpectations');
+            });
+
+            Route::prefix('fieldsOfInterest')->name('fieldsOfInterest.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateFieldsOfInterest'])->name('updateFieldsOfInterest');
+            });
+
+            Route::prefix('financingStudies')->name('financingStudies.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateFinancingStudies'])->name('updateFinancingStudies');
+            });
+
+            Route::prefix('lettersOfRecommendation')->name('lettersOfRecommendation.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateLettersOfRecommendation'])->name('updateLettersOfRecommendation');
+            });
+
+            Route::prefix('hearAboutProgram')->name('hearAboutProgram.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateHearAboutProgram'])->name('updateHearAboutProgram');
+            });
+        });
 
         # Expedientes
         Route::get('/getFlagImage', [ImageController::class, 'getFlagImage'])->name('getFlagImage');

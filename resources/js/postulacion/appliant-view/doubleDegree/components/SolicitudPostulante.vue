@@ -12,8 +12,13 @@
         </b-card-header>
         <b-collapse id="accordion-personal-data" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <personal-data v-bind="appliant" :archive_id="archive_id"
-              :alias_academic_program.sync="academic_program.alias">
+            <personal-data v-bind="appliant" :archive_id="archive_id" :name.sync="appliant.name"
+              :middlename.sync="appliant.middlename" :surname.sync="appliant.surname" :gender.sync="appliant.gender"
+              :marital_state.sync="appliant.civic_state" :no_children.sync="appliant.no_children"
+              :birth_date.sync="appliant.birth_date" :birth_dountry.sync="appliant.birth_country"
+              :nationality.sync="appliant.nationality" :residense_country.sync="appliant.residense_country"
+              :email.sync="appliant.email" :altern_email.sync="appliant.altern_email"
+              :phone_number.sync="appliant.phone_number">
             </personal-data>
           </b-card-body>
         </b-collapse>
@@ -33,9 +38,11 @@
         <b-collapse id="accordion-correspondence-address" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <correspondence-address v-for="(address, index) in address" v-bind="address"
-              v-bind:key="`${index}-${address.id}-CorrespondenceAddress`" :index="index + 1"
-              :archive_id="archive_id" :care_of="address.care_of" :street_and_number="address.street_and_number"
-              :city="address.city" :postal_code="address.postal_code" :state_country="address.state_country">
+              v-bind:key="`${index}-${address.id}-CorrespondenceAddress`" :index="index + 1" :archive_id="archive_id"
+              :care_of.sync="address.care_of" :street.sync="address.street"
+              :number_address.sync="address.number_address" :city.sync="address.city"
+              :postal_code.sync="address.postal_code" :state_country.sync="address.state_country"
+              :telephone.sync="address.telephone" :mobile_phone.sync="address.mobile_phone">
             </correspondence-address>
 
           </b-card-body>
@@ -55,16 +62,11 @@
         </b-card-header>
         <b-collapse id="accordion-secondary-education" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <secondary-education  v-for="(se, index) in secondary_education" v-bind="se"
-              v-bind:key="`${index}-${se.id}-SecondaryEducation`" :index="index + 1"
-              :archive_id="se.archive_id"
-              :school_certificade="se.school_certificade"
-              :final_score="se.final_score"
-              :name_of_institution="se.name_of_institution"
-              :from="se.from"
-              :to="se.to"
-              :city_country="se.city_country"
-              >
+            <secondary-education v-for="(se, index) in secondary_education" v-bind="se"
+              v-bind:key="`${index}-${se.id}-SecondaryEducation`" :index="index + 1" :archive_id="se.archive_id"
+              :school_certificade.sync="se.school_certificade" :final_score.sync="se.final_score"
+              :name_of_institution.sync="se.name_of_institution" :from.sync="se.from" :to.sync="se.to"
+              :city_country.sync="se.city_country">
 
             </secondary-education>
           </b-card-body>
@@ -86,13 +88,12 @@
           <b-card-body>
             <higher-education v-for="(grado, index) in academic_degrees" v-bind="grado"
               v-bind:key="`${index}-${grado.id}-AcademicDegree`" :index="index + 1"
-              :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state" :cvu.sync="grado.cvu"
-              :knowledge_card.sync="grado.knowledge_card" :digital_signature.sync="grado.digital_signature"
-              :cedula.sync="grado.cedula" :status.sync="grado.status" :degree.sync="grado.degree"
+              :final_grade_average.sync="grado.final_grade_average" :graduation_mode.sync="grado.graduation_mode"
+              :fill_according_graduation.sync="grado.fill_according_graduation" :degree.sync="grado.degree"
               :average.sync="grado.average" :min_avg.sync="grado.min_avg" :max_avg.sync="grado.max_avg"
               :country.sync="grado.country" :university.sync="grado.university" :degree_type.sync="grado.degree_type"
-              :titration_date.sync="grado.titration_date" :required_documents.sync="grado.required_documents"
-              :paises.sync="Countries"  @delete-item="eliminaHistorialAcademicoFromList">
+              :date_of_award_of_degree.sync="grado.date_of_award_of_degree" :paises.sync="Countries"
+              @delete-item="eliminaHistorialAcademicoFromList">
 
             </higher-education>
 
@@ -125,15 +126,14 @@
           <b-card-body>
 
             <language-skills v-for="(language, index) in appliant_languages" v-bind="language"
-              v-bind:key="`${index}-${language.id}-Language`" :index="index + 1"
-              :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
-              :language.sync="language.language" :institution.sync="language.institution" :score.sync="language.score"
-              :presented_at.sync="language.presented_at" :valid_from.sync="language.valid_from"
-              :valid_to.sync="language.valid_to" :language_domain.sync="language.language_domain"
+              v-bind:key="`${index}-${language.id}-Language`" :index="index + 1" :id="language.id"
+              :language.sync="language.language" :exam_presented.sync="language.exam_presented"
+              :kind_of_exam.sync="language.kind_of_exam" :presented_at.sync="language.presented_at"
+              :learning_method.sync="language.learning_method" :duration_in_months.sync="language.duration_in_months"
+              :country.sync="language.country" :overal_grade_score.sync="language.overal_grade_score"
+              :language_domain.sync="language.language_domain"
               :conversational_level.sync="language.conversational_level" :reading_level.sync="language.reading_level"
-              :writing_level.sync="language.writing_level" :exam_presented.sync="language.exam_presented"
-              :kind_of_exam.sync="language.kind_of_exam" :documentos.sync="language.required_documents"
-              @delete-item="eliminaLenguaExtranjeraFromList" >
+              :writing_level.sync="language.writing_level" @delete-item="eliminaLenguaExtranjeraFromList">
             </language-skills>
 
             <div class="row align-items-center mt-0">
@@ -151,9 +151,9 @@
       </b-card>
       <hr class="d-block" :style="ColorStrip" />
     </div>
-    
-      <!-- Environment Related Skills -->
-      <div class="col-12">
+
+    <!-- Environment Related Skills -->
+    <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
           <b-button block v-b-toggle.accordion-environment-related-skills variant="dark"
@@ -165,10 +165,8 @@
         <b-collapse id="accordion-environment-related-skills" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <environment-related-skills v-for="(env, index) in enviroment_related_skills" v-bind="env"
-            v-bind:key="`${index}-${env.id}-Environment`" :index="index + 1"
-            :message_review.sync="env.message_review"
-            :archive_id="env.archive_id"
-            :id="env.id"></environment-related-skills>
+              v-bind:key="`${index}-${env.id}-Environment`" :index="index + 1" :message_review.sync="env.message_review"
+              :archive_id="env.archive_id" :id="env.id"></environment-related-skills>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -192,9 +190,7 @@
               :state.sync="experience.state" :institution.sync="experience.institution"
               :working_position.sync="experience.working_position" :from.sync="experience.from" :to.sync="experience.to"
               :knowledge_area.sync="experience.knowledge_area"
-              :working_position_description.sync="
-                experience.working_position_description" 
-                :images_btn="images_btn"
+              :working_position_description.sync="experience.working_position_description"
               @delete-item="eliminaExperienciaLaboralFromList">
 
             </working-experiece>
@@ -227,13 +223,9 @@
         <b-collapse id="accordion-reasons-to-choise" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <reasons-to-choise v-for="(rea, index) in reasons_to_choise" v-bind="rea"
-              v-bind:key="`${index}-${rea.id}-$ReasonsToChoise}`" :index="index + 1"
-              :archive_id="archive_id" :images_btn="images_btn" 
-              :first_choise.sync="rea.first_choise"
-              :reasons_choise.sync="rea.reasons_choise" 
-              :other_choises.sync="rea.other_choises" 
-              :selected_choises.sync="rea.selected_choises"
-              >
+              v-bind:key="`${index}-${rea.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id"
+              :first_choise.sync="rea.first_choise" :reasons_choise.sync="rea.reasons_choise"
+              :other_choises.sync="rea.other_choises" :selected_choises.sync="rea.selected_choises">
             </reasons-to-choise>
           </b-card-body>
         </b-collapse>
@@ -253,13 +245,10 @@
         </b-card-header>
         <b-collapse id="accordion-future-plans" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <future-plans-expectations  v-for="(plansEx, index) in future_plans" v-bind="plansEx"
-              v-bind:key="`${index}-${plansEx.id}-$ReasonsToChoise}`" :index="index + 1"
-              :images_btn="images_btn"
-              :archive_id="archive_id"
+            <future-plans-expectations v-for="(plansEx, index) in future_plans" v-bind="plansEx"
+              v-bind:key="`${index}-${plansEx.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id"
               :pursue_future.sync="plansEx.pursue_future"
-              :explain_pursue_future.sync="plansEx.explain_pursue_future"
-              ></future-plans-expectations>
+              :explain_pursue_future.sync="plansEx.explain_pursue_future"></future-plans-expectations>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -277,19 +266,17 @@
         </b-card-header>
         <b-collapse id="accordion-fields-of-interest" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <fiels-of-interest  v-for="(foi, index) in fields_of_interest" v-bind="foi"
-              v-bind:key="`${index}-${foi.id}-$FieldsOfInterest}`" :index="index + 1"
-              :images_btn="images_btn"
-              :archive_id="archive_id"
-              :keywords_proyect_idea="foi.keywords_proyect_idea"
-              :proyect_idea="foi.proyect_idea"
+            <fiels-of-interest v-for="(foi, index) in fields_of_interest" v-bind="foi"
+              v-bind:key="`${index}-${foi.id}-$FieldsOfInterest}`" :index="index + 1" :archive_id="archive_id"
+              :keywords_proyect_idea.sync="foi.keywords_proyect_idea" :proyect_idea.sync="foi.proyect_idea"
               :research_area_mexico.sync="foi.research_area_mexico"
               :research_area_german.sync="foi.research_area_german"
               :professor_research_german.sync="foi.professor_research_german"
               :professor_research_mexico.sync="foi.professor_research_mexico"
-              :elective_modules_PMPCA.sync="foi.elective_modules_PMPCA"
-              :elective_modules_ITT.sync="foi.elective_module_ITT"
-            ></fiels-of-interest>
+              :elective_modules_PMPCA_mexico.sync="foi.elective_modules_PMPCA_mexico"
+              :elective_modules_PMPCA_german.sync="foi.elective_modules_PMPCA_german"
+              :elective_modules_ITT_mexico.sync="foi.elective_module_ITT_mexico"
+              :elective_modules_ITT_german.sync="foi.elective_module_ITT_german"></fiels-of-interest>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -307,10 +294,9 @@
         </b-card-header>
         <b-collapse id="accordion-financing-studies" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <financing-studies  v-for="(fs, index) in financing_studies" v-bind="fs"
+            <financing-studies v-for="(fs, index) in financing_studies" v-bind="fs"
               v-bind:key="`${index}-${fs.id}-$FinancingStudies`" :index="index + 1"
-              :financing_options.sync="fs.financing_options"
-            ></financing-studies>
+              :financing_options.sync="fs.financing_options"></financing-studies>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -332,17 +318,10 @@
           <b-card-body>
             <letters-of-recommendation v-for="(rl_enrem, index) in recommendation_letter_enrem" v-bind="rl_enrem"
               v-bind:key="`${index}-${rl_enrem.id}-$RecommendationLetterENREM`" :index="index + 1"
-              :archive_id="archive_id"
-              :images_btn="images_btn"
-              :type.sync="rl_enrem.type"
-              :date.sync="rl_enrem.date"
-              :title.sync="rl_enrem.title"
-              :position.sync="rl_enrem.position"
-              :organization.sync="rl_enrem.organization"
-              :telephone.sync="rl_enrem.telephone"
-              :full_name="rl_enrem.full_name"
-              :email="rl_enrem.email"
-              ></letters-of-recommendation>
+              :archive_id="archive_id" :type.sync="rl_enrem.type" :date.sync="rl_enrem.date"
+              :title.sync="rl_enrem.title" :position.sync="rl_enrem.position" :organization.sync="rl_enrem.organization"
+              :telephone.sync="rl_enrem.telephone" :full_name.sync="rl_enrem.full_name"
+              :email.sync="rl_enrem.email"></letters-of-recommendation>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -360,16 +339,16 @@
         </b-card-header>
         <b-collapse id="accordion-hear-about-program" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
-            <hear-about-program 
-            
-            ></hear-about-program>
+            <hear-about-program v-for="(hap, index) in hear_about_program" v-bind="hap"
+              v-bind:key="`${index}-${hap.id}-$HearAboutProgram`" :index="index + 1"
+              :how_hear.sync="hap.how_hear"></hear-about-program>
           </b-card-body>
         </b-collapse>
       </b-card>
       <hr class="d-block" :style="ColorStrip" />
     </div>
 
-  
+
 
     <div class="d-flex justify-content-start align-items-center mb-4">
       <div class="col-lg-12">
@@ -419,32 +398,33 @@ export default {
     CheckboxPersonalize,
   },
   created() {
-        // console.log(this.language);
-        axios
-            .get("/controlescolar/solicitud/getAllButtonImage")
-            .then((response) => {
-                // console.log('recibiendo imagenes' + response.data.ver);
-                this.images_btn = response.data;
-                // console.log('imagenes buttons: ' + this.images.ver);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
+    // console.log(this.language);
+    axios
+      .get("/controlescolar/solicitud/getAllButtonImage")
+      .then((response) => {
+        // console.log('recibiendo imagenes' + response.data.ver);
+        this.images_btn = response.data;
+        // console.log('imagenes buttons: ' + this.images.ver);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 
 
   props: {
-    recommendation_letter_enrem:Array,
-    financing_studies:Array,
-    fields_of_interest:Array,
-    future_plans:Array,
+    hear_about_program: Array,
+    recommendation_letter_enrem: Array,
+    financing_studies: Array,
+    fields_of_interest: Array,
+    future_plans: Array,
     secondary_education: Array,
     address: Array,
-    
-    enviroment_related_skills:Array,
+
+    enviroment_related_skills: Array,
 
     reasons_to_choise: Array,
-    
+
     //interview documemnts
     interview_documents: Array,
     // Id del expediente.
@@ -494,14 +474,10 @@ export default {
     status: Number,
 
     // Correspondence address
-    correspondence_address : Array, 
+    correspondence_address: Array,
 
   },
 
-
-  created() {
-   
-  },
 
   data() {
     return {
