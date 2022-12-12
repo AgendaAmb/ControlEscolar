@@ -87,8 +87,8 @@ export default {
         // default and other (specify)
         selected_choises: {
             default: null,
-            type: JSON,
-        }
+            type: Object
+        },
     },
 
     created() {
@@ -261,12 +261,12 @@ export default {
 
         updateReasonsToChoise() {
             axios
-                .post("/controlescolar/solicitud/reasonsToChoise/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/reasonsToChoise/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     first_choise: this.first_choise,
                     reasons_choise: this.reasons_choise,
-                    other_choises: this.other_choises,
+                    others_choises: this.other_choises,
                     selected_choises: JSON.stringify(this.selected_choises_list)
                 }).then(response => {
                     Swal.fire({

@@ -136,6 +136,11 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
                 Route::post('/update', [ArchiveEnremController::class, 'updateHigherEducation'])->name('updateHigherEducation');
             });
 
+            Route::prefix('languageSkills')->name('languageSkills.')->group(function () {
+                Route::post('/update', [ArchiveEnremController::class, 'updateLanguageSkills'])->name('updateLanguageSkills');
+            });
+
+
             Route::prefix('environmentSkills')->name('environmentSkills.')->group(function () {
                 Route::post('/update', [ArchiveEnremController::class, 'updateEnvironmentSkills'])->name('updateEnvironmentSkills');
             });

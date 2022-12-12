@@ -39,7 +39,7 @@
                     <div class="form-group col-lg-4 col-sm-6">
                         <label>Exam Presented</label>
                         <!-- Solo se podra seleccionar para doctorado -->
-                        <select v-model="ExamPresented" class="form-control">
+                        <select v-model="ExamPresented" class="form-control" @change="putTypesExam">
                             <option value="" selected>Choose an option</option>
                             <option v-for="exName in listExamNames" :key="exName" :value="exName">
                                 {{ exName }}
@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-start my-2" >
+            <div class="row justify-content-start my-2">
                 <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
                     <img @click="updateLanguageSkills" :src="images_btn.guardar" alt=""
                         style=" max-height: 45px !important;">
@@ -258,10 +258,10 @@ export default {
 
     data() {
         return {
-            countries:[],
+            countries: [],
             errores: {},
             idiomas: ["Español", "Inglés", "Francés", "Alemán", "Otro"],
-            listExamNames: ["TOEFL", "IELTS academic", "CAMBRIDGE"],
+            listExamNames: ["TOEFL", "IELTS", "CAMBRIDGE"],
             kindsOfExamsGeneral: ['IBT', 'IELTS', 'FIRST (FCE)', 'ADVANCED (CAE)', 'PROFIENCY (CFE)'],
             listLearningMethodSpanish: ['DELE exam', 'Language School - Courses', 'Semester Abroad in a Spanish Speaking Country', 'Language Courses in School', 'Language Courses at the University', 'Lived in a Spanish Speaking Country'],
             listLearningMethodGerman: ['Exam', 'Semester Abroad in Germany', 'Language Courses'],
@@ -328,10 +328,10 @@ export default {
 
         Country: {
             get() {
-                return this.date_of_exam;
+                return this.country;
             },
             set(newVal) {
-                this.$emit("update:date_of_exam", newVal);
+                this.$emit("update:country", newVal);
             },
         },
 
@@ -487,18 +487,51 @@ export default {
     },
 
     methods: {
-        
+
+        putTypesExam(evento) {
+
+            switch (this.listExamNames[evento.target.selectedIndex - 1]) {
+                case 'TOEFL':
+                    this.kindsOfExamsGeneral = ['IBT'];
+                    break;
+                case 'IELTS':
+                    this.kindsOfExamsGeneral = ['IELTS academic'];
+                    break;
+                case 'CAMBRIDGE':
+                    this.kindsOfExamsGeneral = ['FIRST (FCE)', 'ADVANCED (CAE)', 'PROFIENCY (CFE)'];
+                    break;
+            }
+        },
+
+        escogePais(evento) {
+            Vue.set(
+                this,
+                "universidades",
+                this.countries[evento.target.selectedIndex - 1].universities
+            );
+        },
+
+
         selectedIsSpanish() {
-            return true;
+            if (this.language === 'Spanish') {
+                return true;
+            }
+            return false;
         },
 
         selectedIsGerman() {
-            return true;
+            if (this.language === 'German') {
+                return true;
+            }
+            return false;
         },
 
 
         selectedIsEnglish() {
-            return true;
+            if (this.language === 'English') {
+                return true;
+            }
+            return false;
         },
 
         chooseExam(evento) {
@@ -528,8 +561,8 @@ export default {
 
         updateLanguageSkills() {
             axios
-                .post("/controlescolar/solicitud/languageSkills/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/languageSkills/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     language: this.language,
                     exam_presented: this.exam_presented,

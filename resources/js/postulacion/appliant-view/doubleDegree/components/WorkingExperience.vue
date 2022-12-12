@@ -330,7 +330,7 @@ export default {
 
     updateWorkingExperiences() {
       axios
-        .post("/controlescolar/solicitud/workingExperiences/update", {
+        .post("/controlescolar/solicitud/enrem/workingExperiences/update", {
           id: this.index,
           archive_id: this.archive_id,
           from: this.from,

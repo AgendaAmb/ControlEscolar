@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AcademicDegree;
 use App\Models\Address;
+use App\Models\AppliantLanguage;
 use App\Models\Archive;
 use App\Models\EnvironmentRelatedSkills;
 use App\Models\FieldsOfInterest;
@@ -60,28 +61,26 @@ class ArchiveEnremController extends Controller
         try {
             $request->validate([
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'index' => ['required', 'numeric'],
-
-                'care_of' => ['required', 'string', 'max:255'],
-                'street' => ['required', 'string', 'max:255'],
+                'id' =>['required', 'numeric'],
+                'care_of' => ['required', 'string'],
+                'street' => ['required', 'string'],
                 'number_address' => ['required', 'numeric'],
                 'city' => ['required', 'string', 'max:255'],
                 'state_country' => ['required', 'string', 'max:255'],
                 'telephone' => ['required', 'numeric'],
-                'postal_code' => ['required', 'numeric'],
+                'postal_code' => ['required', 'string', 'max:255'],
                 'mobile_phone' => ['required', 'numeric'],
 
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => 'Error trying to validate data', 'error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
         try {
             $address = Address::find($request->id);
-            $address->update($request->safe()->toArray());
-            $address->save();
+            $address->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to update the selected address'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => 'Error trying to update the selected address', 'error' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
         }
 
         return new JsonResponse(['message' => 'Great! Address update', 'object' => $address], 200);
@@ -92,17 +91,14 @@ class ArchiveEnremController extends Controller
         try {
             $request->validate([
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'index' => ['required', 'numeric'],
+                'id' => ['required', 'numeric'],
 
-                'school_certificade' => ['required', 'string', 'max:255'],
+                'school_certificade' => ['required', 'string'],
                 'final_score' => ['required', 'numeric'],
-                'name_of_institution' => ['required', 'string', 'max:255'],
+                'name_of_institution' => ['required', 'string'],
                 'from' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
                 'to' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
                 'city_country' => ['required', 'string', 'max:255'],
-                'telephone' => ['required', 'numeric'],
-                'mobile_phone' => ['required', 'numeric'],
-
             ]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -110,8 +106,7 @@ class ArchiveEnremController extends Controller
 
         try {
             $secondary_education = SecondaryEducation::find($request->id);
-            $secondary_education->update($request->safe()->toArray());
-            $secondary_education->save();
+            $secondary_education->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Secondary Education'], JsonResponse::HTTP_CONFLICT);
         }
@@ -121,32 +116,33 @@ class ArchiveEnremController extends Controller
 
     public function updateHigherEducation(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
 
-                'degree_type' => ['required', 'string', 'max:255'],
-                'degree' => ['required', 'string', 'max:255'],
-                'date_of_award_of_degree' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
-                'final_grade_average' => ['required', 'string', 'max:255'],
-                'university' => ['required', 'string', 'max:255'],
-                'country' => ['required', 'string', 'max:255'],
-                'graduation_mode' => ['required', 'string', 'max:255'],
-                'fill_according_graduation' => ['required', 'string', 'max:255'],
-                'average' => ['required', 'numeric'],
-                'min_avg' => ['required', 'numeric'],
-                'max_avg' => ['required', 'numeric'],
+        //         'degree_type' => ['required', 'string', 'max:255'],
+        //         'degree' => ['required', 'string', 'max:255'],
+        //         'to' => ['required', 'date', 'before:' . Carbon::now()->toString()],
+        //         'from' => ['required', 'date', 'before:' . Carbon::now()->toString()],
+        //         'date_of_award_of_degree' => ['required', 'date', 'before:' . Carbon::now()->toString()],
+        //         'final_grade_average' => ['required', 'string', 'max:255'],
+        //         'university' => ['required', 'string', 'max:255'],
+        //         'country' => ['required', 'string', 'max:255'],
+        //         'graduation_mode' => ['required', 'string', 'max:255'],
+        //         'fill_according_graduation' => ['required', 'string'],
+        //         'average' => ['required', 'numeric'],
+        //         'min_avg' => ['required', 'numeric'],
+        //         'max_avg' => ['required', 'numeric'],
 
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data in higher education', 'error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $higher_education = AcademicDegree::find($request->id);
-            $higher_education->update($request->safe()->toArray());
-            $higher_education->save();
+            $higher_education->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Higher Education'], JsonResponse::HTTP_CONFLICT);
         }
@@ -161,8 +157,7 @@ class ArchiveEnremController extends Controller
             $request->validate([
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
                 'id' => ['required', 'numeric'],
-
-                'message_review' => ['required', 'string', 'max:255'],
+                'message_review' => ['required', 'string'],
             ]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
@@ -170,10 +165,9 @@ class ArchiveEnremController extends Controller
 
         try {
             $environment = EnvironmentRelatedSkills::find($request->id);
-            $environment->update($request->safe()->toArray());
-            $environment->save();
+            $environment->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to update the selected Higher Education'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => 'Error trying to update the selected  Environment Related Skills'], JsonResponse::HTTP_CONFLICT);
         }
 
         return new JsonResponse(['message' => 'Great! Environment Related Skills update', 'object' => $environment], 200);
@@ -181,27 +175,25 @@ class ArchiveEnremController extends Controller
 
     public function updateWorkingExperiences(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
-                'of' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
-                'from' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
-
-                'knowledge_area' => ['required', 'string', 'max:255'],
-                'working_position' => ['required', 'string', 'max:255'],
-                'institution' => ['required', 'string', 'max:255'],
-                'state' => ['required', 'string', 'max:255'],
-                'working_position_description' => ['required', 'string', 'max:255']
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        // try {
+        //     $request->validate([
+        //         'id' => ['required', 'numeric'],
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'from' => ['required', 'date', 'before:' . Carbon::now()->toString()],
+        //         'to' => ['required', 'date', 'before:' . Carbon::now()->toString()],
+        //         'knowledge_area' => ['required', 'string', 'max:255'],
+        //         'working_position' => ['required', 'string', 'max:255'],
+        //         'institution' => ['required', 'string', 'max:255'],
+        //         'state' => ['required', 'string', 'max:255'],
+        //         'working_position_description' => ['required', 'string']
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data','error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $we = WorkingExperience::find($request->id);
-            $we->update($request->safe()->toArray());
-            $we->save();
+            $we->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Working Experiences'], JsonResponse::HTTP_CONFLICT);
         }
@@ -211,48 +203,79 @@ class ArchiveEnremController extends Controller
 
     public function updateReasonsToChoise(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
-                'first_choise' => ['required', 'string', 'max:255'],
-                'reasons_choise' => ['required', 'string'],
-                'other_choises' => ['required', 'string', 'max:255'],
-                'selected_choises' => ['required', 'json'],
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
+        //         'first_choise' => ['required', 'string', 'max:255'],
+        //         'reasons_choise' => ['required', 'string'],
+        //         'other_choises' => ['required', 'string', 'max:255'],
+        //         'selected_choises' => ['required', 'json'],
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $rea = ReasonsToChoise::find($request->id);
-            $rea->update($request->safe()->toArray());
-            $rea->save();
+            $rea->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to update the selected Reasons to choise'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => 'Error trying to update the selected Reasons to choise', 'error'=> $e->getMessage()], JsonResponse::HTTP_CONFLICT);
         }
 
         return new JsonResponse(['message' => 'Great! Environment Reasons to choise update', 'object' => $rea], 200);
     }
 
+    public function updateLanguageSkills(Request $request)
+    {
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
+        //         'language' => ['required', 'string', 'max:255'],
+        //         'exam_presented' => ['required_if:language,English', 'string', 'max:255', 'nullable'],
+        //         'kind_of_exam' => ['required_if:language,English', 'string', 'max:255' ,'nullable'],
+        //         'date_of_exam' => ['required_if:language,English', 'date', 'before:' . Carbon::now()->toString(), 'nullable'],
+        //         'learning_method' => ['required_if:language,Spanish,German', 'string', 'max:255', 'nullable'],
+        //         'country' => ['required', 'string', 'max:255'],
+        //         'duration_in_months' => ['required_if:language,Spanish,German', 'numeric', 'nullable'],
+        //         'overal_grade_score' => ['required', 'string', 'max:255'],
+        //         'language_domain' => ['required', 'string', 'max:255'],
+        //         'conversational_level' => ['required', 'string', 'max:255'],
+        //         'reading_level' => ['required', 'string', 'max:255'],
+        //         'writing_level' => ['required', 'string', 'max:255'],
+
+        //    ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data' ,'error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
+
+        try {
+            $rea = AppliantLanguage::find($request->id);
+            $rea->update($request->except(['archive_id', 'id']));
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error trying to update the selected Reasons to choise'], JsonResponse::HTTP_CONFLICT);
+        }
+
+        return new JsonResponse(['message' => 'Great! Environment Reasons to choise update', 'object' => $rea], 200);    }
+
 
     public function updateFuturePlansExpectations(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
-                'pursue_future' => ['required', 'string', 'max:255'],
-                'explain_pursue_future' => ['required', 'string'],
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
+        //         'pursue_future' => ['required', 'string', 'max:255'],
+        //         'explain_pursue_future' => ['required', 'string'],
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $fp = FuturePlans::find($request->id);
-            $fp->update($request->safe()->toArray());
-            $fp->save();
+            $fp->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Future plans expectations'], JsonResponse::HTTP_CONFLICT);
         }
@@ -263,29 +286,28 @@ class ArchiveEnremController extends Controller
 
     public function updateFieldsOfInterest(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
-                'research_area_mexico' => ['required', 'string', 'max:255'],
-                'research_area_german' => ['required', 'string', 'max:255'],
-                'professor_research_mexico' => ['required', 'string', 'max:255'],
-                'professor_research_german' => ['required', 'string', 'max:255'],
-                'elective_modules_PMPCA_german' => ['required', 'string'],
-                'elective_modules_PMPCA_mexico' => ['required', 'string'],
-                'elective_modules_ITT_german' => ['required', 'string'],
-                'elective_modules_ITT_mexico' => ['required', 'string'],
-                'proyect_idea' => ['required', 'string'],
-                'keywords_proyect_idea' => ['required', 'string'],
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
+        //         'research_area_mexico' => ['required', 'string', 'max:255'],
+        //         'research_area_german' => ['required', 'string', 'max:255'],
+        //         'professor_research_mexico' => ['required', 'string', 'max:255'],
+        //         'professor_research_german' => ['required', 'string', 'max:255'],
+        //         'elective_modules_PMPCA_german' => ['required', 'string'],
+        //         'elective_modules_PMPCA_mexico' => ['required', 'string'],
+        //         'elective_modules_ITT_german' => ['required', 'string'],
+        //         'elective_modules_ITT_mexico' => ['required', 'string'],
+        //         'proyect_idea' => ['required', 'string'],
+        //         'keywords_proyect_idea' => ['required', 'string'],
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $foi= FieldsOfInterest::find($request->id);
-            $foi->update($request->safe()->toArray());
-            $foi->save();
+            $foi->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Fields of Interest'], JsonResponse::HTTP_CONFLICT);
         }
@@ -295,20 +317,19 @@ class ArchiveEnremController extends Controller
 
     public function updateFinancingStudies(Request $request)
     {
-        try {
-            $request->validate([
-                'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                'id' => ['required', 'numeric'],
-                'financing_options' => ['required', 'json'],
-            ]);
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-        }
+        // try {
+        //     $request->validate([
+        //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+        //         'id' => ['required', 'numeric'],
+        //         'financing_options' => ['required', 'json'],
+        //     ]);
+        // } catch (\Exception $e) {
+        //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        // }
 
         try {
             $fs= FinancingStudies::find($request->id);
-            $fs->update($request->safe()->toArray());
-            $fs->save();
+            $fs->update($request->except(['archive_id', 'id']));
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error trying to update the selected Financing Studies'], JsonResponse::HTTP_CONFLICT);
         }
@@ -319,27 +340,26 @@ class ArchiveEnremController extends Controller
 
         public function updateLettersOfRecommendation(Request $request)
         {
-            try {
-                $request->validate([
-                    'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                    'id' => ['required', 'numeric'],
-                    'type' => ['required', 'string', 'max:255'],
-                    'date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
-                    'title' => ['required', 'string', 'max:255'],
-                    'position' => ['required', 'string', 'max:255'],
-                    'organization' => ['required', 'string', 'max:255'],
-                    'telephone' => ['required', 'integer'],
-                    'full_name' => ['required', 'string'],
-                    'email' => ['required', 'string'],
-                ]);
-            } catch (\Exception $e) {
-                return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-            }
+            // try {
+            //     $request->validate([
+            //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            //         'id' => ['required', 'numeric'],
+            //         'type' => ['required', 'string', 'max:255'],
+            //         'date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
+            //         'title' => ['required', 'string', 'max:255'],
+            //         'position' => ['required', 'string', 'max:255'],
+            //         'organization' => ['required', 'string', 'max:255'],
+            //         'telephone' => ['required', 'integer'],
+            //         'full_name' => ['required', 'string'],
+            //         'email' => ['required', 'string'],
+            //     ]);
+            // } catch (\Exception $e) {
+            //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            // }
     
             try {
                 $rl= RecommendationLetterEnrem::find($request->id);
-                $rl->update($request->safe()->toArray());
-                $rl->save();
+                $rl->update($request->except(['archive_id', 'id']));
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'Error trying to update the selected Recommendation Letter'], JsonResponse::HTTP_CONFLICT);
             }
@@ -350,21 +370,20 @@ class ArchiveEnremController extends Controller
 
         public function updateHearAboutProgram(Request $request)
         {
-            try {
-                $request->validate([
-                    'archive_id' => ['required', 'numeric', 'exists:archives,id'],
-                    'id' => ['required', 'numeric'],
-                    'how_hear' => ['required', 'json'],
+            // try {
+            //     $request->validate([
+            //         'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            //         'id' => ['required', 'numeric'],
+            //         'how_hear' => ['required', 'json'],
                     
-                ]);
-            } catch (\Exception $e) {
-                return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
-            }
+            //     ]);
+            // } catch (\Exception $e) {
+            //     return new JsonResponse(['message' => 'Error trying to validate data' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            // }
     
             try {
                 $rl= HearAboutProgram::find($request->id);
-                $rl->update($request->safe()->toArray());
-                $rl->save();
+                $rl->update($request->except(['archive_id', 'id']));
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'Error trying to update the selected Hear About Program'], JsonResponse::HTTP_CONFLICT);
             }

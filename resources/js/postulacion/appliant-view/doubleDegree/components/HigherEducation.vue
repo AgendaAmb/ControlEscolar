@@ -56,13 +56,15 @@
                 <div class="row my-1">
                     <div class="form-group col-12">
                         <label> Name of institution: </label>
-                        <select v-model="University" class="form-control">
+                        <!-- <select v-model="University" class="form-control">
                             <option value="" selected>Escoge una opción</option>
-                            <option v-for="Universidad in Universidades" :key="Universidad.id"
-                                :value="Universidad.name">
-                                {{ Universidad.name }}
+                            <option v-for="uni in universidades" :key="uni.id" :value="uni.name">
+                                {{ uni.name }}
                             </option>
-                        </select>
+                        </select> -->
+
+                        <input v-model="University" type="text" class="form-control" />
+
                     </div>
                 </div>
 
@@ -97,7 +99,7 @@
                         <label> Graduation mode: </label>
                         <select v-model="GraduationMode" class="form-control">
                             <option value="" selected>Choose an option</option>
-                            <option v-for="gm in GraduationMode" :key="gm" :value="gm">
+                            <option v-for="gm in graduation_mode_list" :key="gm" :value="gm">
                                 {{ gm }}
                             </option>
                         </select>
@@ -181,6 +183,16 @@ export default {
 
     props: {
         //Index de la escolaridad
+        id: {
+            type: Number,
+            default: -1
+        },
+
+        archive_id: {
+            type: Number,
+            default: -1
+        },
+
         index: Number,
 
         degree_type: {
@@ -190,12 +202,22 @@ export default {
 
         // new
         date_of_award_of_degree: {
-            type: Date,
+            type: String,
             default: null,
         },
 
         // new
         final_grade_average: {
+            type: String,
+            default: ""
+        },
+
+        to: {
+            type: String,
+            default: ""
+        },
+
+        from: {
             type: String,
             default: ""
         },
@@ -258,7 +280,7 @@ export default {
             universidades: [],
             escolaridades: ["Bachelor's Degree", "Master's Degree", "Diplom", "Magister", "Specialization"],
             estatusEstudios_PMPCA: ["Grado obtenido", "Título o grado en proceso"],
-            gradiationMode: ['Thesis Investigation - Thesis Title', 'Graduation Courses & Examination - Courses Underta', 'Practical Work - Field & Institution'],
+            graduation_mode_list: ['Thesis Investigation - Thesis Title', 'Graduation Courses & Examination - Courses Underta', 'Practical Work - Field & Institution'],
             estatusEstudios_otros: [
                 "Pasante",
                 "Grado obtenido",
@@ -468,19 +490,19 @@ export default {
 
         MinPassScore: {
             get() {
-                return this.min_avg;
+                return this.average;
             },
             set(newVal) {
-                delete this.errores["min_avg"];
+                delete this.errores["average"];
 
                 if (isNaN(newVal)) {
-                    this.errores["min_avg"] =
+                    this.errores["average"] =
                         "La calificación mínima solo puede ser numérica";
-                    this.$emit("update:min_avg", 0);
+                    this.$emit("update:average", 0);
                     return;
                 }
 
-                this.$emit("update:min_avg", newVal);
+                this.$emit("update:average", newVal);
             },
         },
 
@@ -503,18 +525,16 @@ export default {
         },
     },
 
-    mounted: function () {
-        this.$nextTick(function () {
-            axios
-                .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
-                .then((response) => {
-                    this.countries = response.data;
-                });
-        });
-    },
 
     created() {
         // console.log(this.language);
+
+        axios
+            .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
+            .then((response) => {
+                this.countries = response.data;
+            });
+
         axios
             .get("/controlescolar/solicitud/getAllButtonImage")
             .then((response) => {
@@ -525,6 +545,18 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+
+        if (this.country != null) {
+            this.countries.forEach(function (pais, indice, array) {
+                if (this.country === pais.name) {
+                    Vue.set(
+                        this,
+                        "universidades",
+                        pais.universities
+                    );
+                }
+            });
+        }
     },
 
 
@@ -557,17 +589,22 @@ export default {
         },
 
         escogePais(evento) {
-            this.Universidades =
-                this.paises[evento.target.selectedIndex - 1].universities;
+            Vue.set(
+                this,
+                "universidades",
+                this.countries[evento.target.selectedIndex - 1].universities
+            );
         },
 
         updateHigherEducation() {
             axios
-                .post("/controlescolar/solicitud/higherEducation/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/higherEducation/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     degree_type: this.degree_type,
                     degree: this.degree,
+                    to:this.to,
+                    from:this.from,
                     date_of_award_of_degree: this.date_of_award_of_degree,
                     final_grade_average: this.final_grade_average,
                     university: this.university,

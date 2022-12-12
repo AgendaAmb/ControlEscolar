@@ -41,7 +41,7 @@
             <div class="row my-1">
                 <div class="col-12">
                     <label>Telephone</label>
-                    <input v-model="TelephoneRL" type="number" class="form-control">
+                    <input v-model.number="TelephoneRL" type="number" class="form-control">
                 </div>
             </div>
 
@@ -73,7 +73,10 @@ export default {
     name: "letters-of-recommendation",
 
     props: {
-       
+        id: {
+            type: Number,
+            default: -1,
+        },
         archive_id: {
             type: Number,
             default: 0,
@@ -117,7 +120,7 @@ export default {
             fechaobtencion: "",
             errores: {},
             images_btn: [],
-            typesRecommendationLetter: [],
+            typesRecommendationLetter: ['Academic', 'Professional'],
             options_financing: ['Self-funded', 'Salary will be paid', 'Goberment Study Grant', 'I intend to apply for a CONACYT or DAAD scholarship', 'I intented to apply for an external scholarship', 'Other'],
         };
     },
@@ -244,8 +247,8 @@ export default {
 
         updateLettersOfRecommendation(){
             axios
-                .post("/controlescolar/solicitud/lettersOfRecommendation/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/lettersOfRecommendation/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     type:this.type,
                     date:this.date,
@@ -254,7 +257,7 @@ export default {
                     organization:this.organization,
                     telephone:this.telephone,
                     full_name:this.full_name,
-                    exam_presented:this.exam_presented
+                    email:this.email
                   
                 }).then(response => {
                     Swal.fire({

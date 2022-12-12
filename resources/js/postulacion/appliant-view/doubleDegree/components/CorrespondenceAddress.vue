@@ -81,6 +81,7 @@ export default {
   name: "correspondence-address",
 
   props: {
+    id: Number,
     // Id del expediente
     archive_id: Number,
 
@@ -229,7 +230,7 @@ export default {
     updateCorrespondenceAddress() {
       let formData = new FormData();
       formData.append('archive_id', this.archive_id);
-      formData.append('index', this.index);
+      formData.append('id', this.id);
       formData.append('care_of', this.care_of);
       formData.append('street', this.street);
       formData.append('number_address', this.number_address);

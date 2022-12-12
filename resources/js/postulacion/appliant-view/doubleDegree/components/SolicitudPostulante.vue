@@ -38,7 +38,7 @@
         <b-collapse id="accordion-correspondence-address" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <correspondence-address v-for="(address, index) in address" v-bind="address"
-              v-bind:key="`${index}-${address.id}-CorrespondenceAddress`" :index="index + 1" :archive_id="archive_id"
+              v-bind:key="`${index}-${address.id}-CorrespondenceAddress`" :index="index + 1" :archive_id="archive_id" :id="address.id"
               :care_of.sync="address.care_of" :street.sync="address.street"
               :number_address.sync="address.number_address" :city.sync="address.city"
               :postal_code.sync="address.postal_code" :state_country.sync="address.state_country"
@@ -63,7 +63,7 @@
         <b-collapse id="accordion-secondary-education" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <secondary-education v-for="(se, index) in secondary_education" v-bind="se"
-              v-bind:key="`${index}-${se.id}-SecondaryEducation`" :index="index + 1" :archive_id="se.archive_id"
+              v-bind:key="`${index}-${se.id}-SecondaryEducation`" :index="index + 1" :archive_id="se.archive_id" :id="se.id"
               :school_certificade.sync="se.school_certificade" :final_score.sync="se.final_score"
               :name_of_institution.sync="se.name_of_institution" :from.sync="se.from" :to.sync="se.to"
               :city_country.sync="se.city_country">
@@ -88,9 +88,11 @@
           <b-card-body>
             <higher-education v-for="(grado, index) in academic_degrees" v-bind="grado"
               v-bind:key="`${index}-${grado.id}-AcademicDegree`" :index="index + 1"
+              :id="grado.id" :archive_id="archive_id"
               :final_grade_average.sync="grado.final_grade_average" :graduation_mode.sync="grado.graduation_mode"
               :fill_according_graduation.sync="grado.fill_according_graduation" :degree.sync="grado.degree"
               :average.sync="grado.average" :min_avg.sync="grado.min_avg" :max_avg.sync="grado.max_avg"
+              :to.sync="grado.to" :from.sync="grado.from"
               :country.sync="grado.country" :university.sync="grado.university" :degree_type.sync="grado.degree_type"
               :date_of_award_of_degree.sync="grado.date_of_award_of_degree" :paises.sync="Countries"
               @delete-item="eliminaHistorialAcademicoFromList">
@@ -127,6 +129,7 @@
 
             <language-skills v-for="(language, index) in appliant_languages" v-bind="language"
               v-bind:key="`${index}-${language.id}-Language`" :index="index + 1" :id="language.id"
+              :archive_id="archive_id"
               :language.sync="language.language" :exam_presented.sync="language.exam_presented"
               :kind_of_exam.sync="language.kind_of_exam" :presented_at.sync="language.presented_at"
               :learning_method.sync="language.learning_method" :duration_in_months.sync="language.duration_in_months"
@@ -141,7 +144,7 @@
                 <b-button pill class="d-flex" @click="agregaLenguaExtranjera" :style="styleBtnAccordionSection"
                   v-b-popover.hover="'Agregar una nueva lengua al registro'" title="Inserta otro registro">
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                  <p class="h4 my-2">Agregar</p>
+                  <p class="h4 my-2">Add</p>
                 </b-button>
               </div>
             </div>
@@ -197,7 +200,7 @@
 
             <div class="row align-items-center my-1">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaHistorialAcademico" variant="danger"
+                <b-button pill class="d-flex" @click="agregaExperienciaLaboral" variant="danger"
                   v-b-popover.hover="'Add another register for working experiences'" title="New Register"
                   :style="styleBtnAccordionSection">
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
@@ -223,7 +226,7 @@
         <b-collapse id="accordion-reasons-to-choise" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <reasons-to-choise v-for="(rea, index) in reasons_to_choise" v-bind="rea"
-              v-bind:key="`${index}-${rea.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id"
+              v-bind:key="`${index}-${rea.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id" :id="rea.id"
               :first_choise.sync="rea.first_choise" :reasons_choise.sync="rea.reasons_choise"
               :other_choises.sync="rea.other_choises" :selected_choises.sync="rea.selected_choises">
             </reasons-to-choise>
@@ -246,7 +249,7 @@
         <b-collapse id="accordion-future-plans" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <future-plans-expectations v-for="(plansEx, index) in future_plans" v-bind="plansEx"
-              v-bind:key="`${index}-${plansEx.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id"
+              v-bind:key="`${index}-${plansEx.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id" :id="plansEx.id"
               :pursue_future.sync="plansEx.pursue_future"
               :explain_pursue_future.sync="plansEx.explain_pursue_future"></future-plans-expectations>
           </b-card-body>
@@ -268,6 +271,7 @@
           <b-card-body>
             <fiels-of-interest v-for="(foi, index) in fields_of_interest" v-bind="foi"
               v-bind:key="`${index}-${foi.id}-$FieldsOfInterest}`" :index="index + 1" :archive_id="archive_id"
+              :id="foi.id"
               :keywords_proyect_idea.sync="foi.keywords_proyect_idea" :proyect_idea.sync="foi.proyect_idea"
               :research_area_mexico.sync="foi.research_area_mexico"
               :research_area_german.sync="foi.research_area_german"
@@ -275,8 +279,8 @@
               :professor_research_mexico.sync="foi.professor_research_mexico"
               :elective_modules_PMPCA_mexico.sync="foi.elective_modules_PMPCA_mexico"
               :elective_modules_PMPCA_german.sync="foi.elective_modules_PMPCA_german"
-              :elective_modules_ITT_mexico.sync="foi.elective_module_ITT_mexico"
-              :elective_modules_ITT_german.sync="foi.elective_module_ITT_german"></fiels-of-interest>
+              :elective_modules_ITT_mexico.sync="foi.elective_modules_ITT_mexico"
+              :elective_modules_ITT_german.sync="foi.elective_modules_ITT_german"></fiels-of-interest>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -295,7 +299,7 @@
         <b-collapse id="accordion-financing-studies" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <financing-studies v-for="(fs, index) in financing_studies" v-bind="fs"
-              v-bind:key="`${index}-${fs.id}-$FinancingStudies`" :index="index + 1"
+              v-bind:key="`${index}-${fs.id}-$FinancingStudies`" :index="index + 1" :id="fs.id" :archive_id="archive_id"
               :financing_options.sync="fs.financing_options"></financing-studies>
           </b-card-body>
         </b-collapse>
@@ -317,7 +321,7 @@
         <b-collapse id="accordion-letters-of-recommendation" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <letters-of-recommendation v-for="(rl_enrem, index) in recommendation_letter_enrem" v-bind="rl_enrem"
-              v-bind:key="`${index}-${rl_enrem.id}-$RecommendationLetterENREM`" :index="index + 1"
+              v-bind:key="`${index}-${rl_enrem.id}-$RecommendationLetterENREM`" :index="index + 1" :id="rl_enrem.id"
               :archive_id="archive_id" :type.sync="rl_enrem.type" :date.sync="rl_enrem.date"
               :title.sync="rl_enrem.title" :position.sync="rl_enrem.position" :organization.sync="rl_enrem.organization"
               :telephone.sync="rl_enrem.telephone" :full_name.sync="rl_enrem.full_name"
@@ -340,7 +344,7 @@
         <b-collapse id="accordion-hear-about-program" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <hear-about-program v-for="(hap, index) in hear_about_program" v-bind="hap"
-              v-bind:key="`${index}-${hap.id}-$HearAboutProgram`" :index="index + 1"
+              v-bind:key="`${index}-${hap.id}-$HearAboutProgram`" :index="index + 1" :id="hap.id" :archive_id="archive_id"
               :how_hear.sync="hap.how_hear"></hear-about-program>
           </b-card-body>
         </b-collapse>

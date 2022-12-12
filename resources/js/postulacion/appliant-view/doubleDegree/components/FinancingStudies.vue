@@ -29,9 +29,17 @@ export default {
     components: { CheckboxPersonalize },
 
     props: {
+        id: {
+            type: Number,
+            default: -1,
+        },
+        archive_id: {
+            type: Number,
+            default: 0,
+        },
         financing_options: {
             default: null,
-            type: JSON,
+            type: Object,
         }
     },
 
@@ -106,8 +114,8 @@ export default {
 
         updateFinancingStudies(){
             axios
-                .post("/controlescolar/solicitud/financingStudies/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/financingStudies/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     financing_options:this.financing_options
                 }).then(response => {

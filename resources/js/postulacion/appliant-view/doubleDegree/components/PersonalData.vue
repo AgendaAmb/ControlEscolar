@@ -108,18 +108,22 @@
         </div>
       </div>
 
-      <div class="row justify-content-start my-2">
-        <div class="col-lg-3 col-xs-4 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="updatePersonalData" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
-        </div>
-        <div class="col-lg-9 col-xs-8 mx-5">
-          <label>
-            <p class="h4"><strong>Save only personal data</strong></p>
-          </label>
-        </div>
-      </div>
+      
     </div>
 
+    <!-- <div class="col-12">
+      <div class="row justify-content-start my-2">
+                <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
+                    <img @click="updatePersonalData" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-8">
+                    <label>
+                        <p class="h4"><strong>This only save Personal Information</strong></p>
+                    </label>
+                </div>
+            </div>
+    </div> -->
   </div>
 </template>
 
@@ -343,10 +347,6 @@ export default {
       // Documentos personales
       countries: [],
       countries_nationality: [],
-      documentos: {
-        type: Array,
-        default: null,
-      },
       images_btn: []
     }
   },
@@ -396,7 +396,7 @@ export default {
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/enrem/appliant',
+        url: '/controlescolar/solicitud/enrem/appliant/update',
         data: formData,
         headers: {
           'Accept': 'application/json',

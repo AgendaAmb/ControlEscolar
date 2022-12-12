@@ -36,7 +36,7 @@ export default {
         id: Number,
 
         how_hear: {
-            type:JSON,
+            type:Object,
             default:null
         }
     },
@@ -76,7 +76,7 @@ export default {
                 'From my university',
                 'Other',
             ],
-
+            financing_options_list: [],
 
 
             escolaridades: ["Bachelor's Degree", "Master's Degree", "Diplom", "Magister", "Specialization"],
@@ -134,8 +134,8 @@ export default {
 
         updateHearAboutProgram(){
             axios
-                .post("/controlescolar/solicitud/hearAboutProgram/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/hearAboutProgram/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     how_hear: this.how_hear
                   

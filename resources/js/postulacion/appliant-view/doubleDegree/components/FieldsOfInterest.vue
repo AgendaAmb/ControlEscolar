@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <select v-model="ResearchAreaMexico" class="form-control" :class="objectForError('first_choise')">
+                    <select v-model="ResearchAreaMexico" class="form-control" >
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in researchAreaMexico " :key="item" :value="item">
                             {{ item }}
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <select v-model="ResearchAreaGerman" class="form-control" :class="objectForError('first_choise')">
+                    <select v-model="ResearchAreaGerman" class="form-control">
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in researchAreaMexico " :key="item" :value="item">
                             {{ item }}
@@ -113,14 +113,14 @@
 
             <div class="row my-1">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="">
+                    <label >
                         <p>Professor (Senior Researchers)</p>
                     </label>
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
                     <select v-model="ProfessorResearchMexico" class="form-control"
-                        :class="objectForError('first_choise')">
+                        >
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in professorsMexico " :key="item" :value="item">
                             {{ item }}
@@ -130,7 +130,7 @@
 
                 <div class="col-lg-4 col-sm-6">
                     <select v-model="ProfessorResearchGerman" class="form-control"
-                        :class="objectForError('first_choise')">
+                        >
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in professorsGerman " :key="item" :value="item">
                             {{ item }}
@@ -171,7 +171,7 @@
 
             <div class="row my-1">
                 <div class="col-lg-4 col-sm-12">
-                    <label for="">
+                    <label>
                         <p>Third semester ITT (2 elective modules)</p>
                     </label>
                 </div>
@@ -212,7 +212,7 @@ export default {
     props: {
         //Index de la escolaridad
         archive_id: Number,
-
+        id:Number,
         proyect_idea: {
             type: String,
             default: ""
@@ -440,8 +440,8 @@ export default {
     methods: {
         updateFieldsOfInterest() {
             axios
-                .post("/controlescolar/solicitud/fieldsOfInterest/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/fieldsOfInterest/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     proyect_idea: this.proyect_idea,
                     keywords_proyect_idea: this.keywords_proyect_idea,

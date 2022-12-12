@@ -77,8 +77,8 @@ export default {
         
         updateEnvironmentSkills() {
             axios
-                .post("/controlescolar/solicitud/EnvironmentSkills/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/environmentSkills/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     message_review:this.message_review
                 }).then(response => {

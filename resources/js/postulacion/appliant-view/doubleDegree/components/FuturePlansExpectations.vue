@@ -48,6 +48,8 @@ export default {
         // id del expediente.
         archive_id: Number,
 
+        id:Number,
+
         pursue_future: {
             type: String,
             default: '',
@@ -179,8 +181,8 @@ export default {
 
         updateFuturePlansExpectations() {
             axios
-                .post("/controlescolar/solicitud/futurePlansExpectations/update", {
-                    id: this.index,
+                .post("/controlescolar/solicitud/enrem/futurePlansExpectations/update", {
+                    id: this.id,
                     archive_id: this.archive_id,
                     pursue_future: this.pursue_future,
                     explain_pursue_future: this.explain_pursue_future

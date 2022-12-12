@@ -71,6 +71,12 @@ export default {
 
   name: "secondary-education",
   props: {
+
+    id:{
+      type:Number,
+      default:0
+    },
+
     index:{
       type:Number,
       default:0
@@ -93,11 +99,11 @@ export default {
       default: "",
     },
     from: {
-      type: Date,
+      type: String,
       default: null,
     },
     to: {
-      type: Date,
+      type: String,
       default: null,
     },
     city_country: {
@@ -199,15 +205,13 @@ export default {
     updateSecondaryEducation() {
       let formData = new FormData();
       formData.append('archive_id', this.archive_id);
-      formData.append('index', this.index);
+      formData.append('id', this.id);
       formData.append('school_certificade', this.school_certificade);
       formData.append('final_score', this.final_score);
       formData.append('name_of_institution', this.name_of_institution);
       formData.append('from', this.from);
       formData.append('to', this.to);
       formData.append('city_country', this.city_country);
-      formData.append('telephone', this.telephone);
-      formData.append('mobile_phone', this.mobile_phone);
 
 
       axios({
