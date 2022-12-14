@@ -59,11 +59,27 @@ class AdminController extends Controller
 
         ])->worker()->paginate(10000);
 
+        foreach($workers as $worker){
+           $worker = $this->getDataFromPortalUser($worker);
+        }
         // $students = User::with([
         //     'roles'
         // ])->where('type','students')->paginate(10000);
 
         return new JsonResponse($workers, JsonResponse::HTTP_OK);
+    }
+
+    public function getDataFromPortalUser($worker)
+    {
+        #Search user in portal
+        $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $worker->id])->collect();
+
+        #Save only the first user that the portal get reach
+        $user_data = $user_data_collect[0];
+
+        #Add data of user from portal to the collection in controlescolar
+        $worker->setAttribute('name', ucfirst($user_data['name']).' '.ucfirst($user_data['surname']).' '.ucfirst($user_data['middlename']));
+        return $worker;
     }
 
     /**

@@ -206,9 +206,9 @@ export default {
         },
 
         presented_at: {
-            type: Date,
-            default: null,
-        },
+      type: String,
+      default: null,
+    },
 
         // Dominio del idioma.
         language_domain: String,
@@ -316,6 +316,15 @@ export default {
             };
         },
 
+        LearningMethod: {
+            get() {
+                return this.learning_method;
+            },
+            set(newVal) {
+                this.$emit("update:learning_method", newVal);
+            },
+        },
+
         OveralGradeScore: {
             get() {
                 return this.overal_grade_score;
@@ -350,6 +359,15 @@ export default {
             },
             set(newVal) {
                 this.$emit("update:kind_of_exam", newVal);
+            },
+        },
+
+        DurationInMonths: {
+            get() {
+                return this.duration_in_months;
+            },
+            set(newVal) {
+                this.$emit("update:duration_in_months", newVal);
             },
         },
 
@@ -414,14 +432,7 @@ export default {
                 this.$emit("update:score", newVal);
             },
         },
-        PresentedAt: {
-            get() {
-                return this.presented_at;
-            },
-            set(newVal) {
-                this.$emit("update:presented_at", newVal);
-            },
-        },
+
         ValidFrom: {
             get() {
                 return this.valid_from;

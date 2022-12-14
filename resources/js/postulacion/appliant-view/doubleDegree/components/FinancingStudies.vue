@@ -3,7 +3,7 @@
     <!-- Accordion -->
     <b-card-body>
         <div class="form-group row">
-            <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label="cho" :value="cho"
+            <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label.sync="cho.label" :value.sync="cho.value"
                 :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
         </div>
 
@@ -38,8 +38,8 @@ export default {
             default: 0,
         },
         financing_options: {
-            default: null,
-            type: Object,
+            default: "",
+            type: String,
         }
     },
 
@@ -48,13 +48,24 @@ export default {
             images_btn: [],
             fechaobtencion: "",
             errores: {},
-            options_financing: ['Self-funded', 'Salary will be paid', 'Goberment Study Grant', 'I intend to apply for a CONACYT or DAAD scholarship', 'I intented to apply for an external scholarship', 'Other'],
+            options_financing: [
+                {label: 'Self-funded', value: 'Self-funded'} ,
+                {label: 'Salary will be paid', value: 'Salary will be paid'} ,
+                {label: 'Goberment Study Grant', value: 'Goberment Study Grant'} ,
+                {label: 'I intend to apply for a CONACYT or DAAD scholarship', value: 'I intend to apply for a CONACYT or DAAD scholarship'} ,
+                {label: 'I intented to apply for an external scholarship', value: 'I intented to apply for an external scholarship'} ,
+                {label: 'Other', value: 'Other'} ,
+            ],
             financing_options_list: [],
         };
     },
 
     created() {
         if (this.financing_options != null) {
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                
+            }
             this.financing_options_list = Object.keys(this.financing_options).map((key) => [key, this.financing_options[key]]);
         }
 
@@ -112,12 +123,13 @@ export default {
 
     methods: {
 
-        updateFinancingStudies(){
+        updateFinancingStudies() {
+            console.log(this.financing_options_list);
             axios
                 .post("/controlescolar/solicitud/enrem/financingStudies/update", {
                     id: this.id,
                     archive_id: this.archive_id,
-                    financing_options:this.financing_options
+                    financing_options:JSON.stringify(this.financing_options_list)
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,
@@ -138,31 +150,36 @@ export default {
 
         actualizaLista(label, value, res) {
             let index = -1;
-            this.financing_options_list.forEach(function (value, i) {
 
-                if (value != null) {
+            // no data, insert
+            if (this.financing_options_list.length <= 0 && res) {
+                this.financing_options_list.push([label, value]);
+            } else {
+
+                // data exist, check the index
+                this.financing_options_list.forEach(function (value, i) {
+
                     if (value[0].toLowerCase() === label.toLowerCase()) {
                         index = i;
                         console.log('lo encontre ');
                     }
-                }
+                });
 
-            });
-
-
-            if (!res) {
                 // pop
-                // El dato encontrado se elimina de la lista de seleccionados
-                if (index >= 0) {
-                    this.financing_options_list.splice(index, 1);
-                }
-            } else {
-                if (index < 0) {
-                    if (label === 'Other')
+                if (!res) {
+                    if (index >= 0) {
+                        this.financing_options_list.splice(index, 1);
+                    }
+                    // push
+                } else {
+                    if (index < 0) {
                         this.financing_options_list.push([label, value]);
-                }
+                    }
 
+                }
             }
+
+
         },
     },
 };

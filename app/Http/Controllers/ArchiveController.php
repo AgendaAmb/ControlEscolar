@@ -560,13 +560,13 @@ class ArchiveController extends Controller
         $user_data = $user_data_collect[0];
 
         #Add data of user from portal to the collection in controlescolar
-        $appliant->setAttribute('birth_date', $user_data['birth_date']);
-        $appliant->setAttribute('curp', $user_data['curp']);
         $appliant->setAttribute('name', $user_data['name']);
         $appliant->setAttribute('middlename', $user_data['middlename']);
         $appliant->setAttribute('surname', $user_data['surname']);
-        $appliant->setAttribute('age', $user_data['age']);
         $appliant->setAttribute('gender', $user_data['gender']);
+        $appliant->setAttribute('birth_date', $user_data['birth_date']);
+        $appliant->setAttribute('curp', $user_data['curp']);
+        $appliant->setAttribute('age', $user_data['age']);
         $appliant->setAttribute('birth_country', $user_data['nationality']);
         $appliant->setAttribute('residence_country', $user_data['residence']);
         $appliant->setAttribute('phone_number', $user_data['phone_number']);
@@ -619,13 +619,11 @@ class ArchiveController extends Controller
 
                 $archive->setAttribute('header_academic_program', $header_academic_program);
             }
-            // dd($archives);
             return view('postulacion.showRegisterArchives')->with('archives', $archives);
 
             // El estudiante solamente tiene un archivo
         }
 
-        // dd($archives[0]->id);
 
         return $this->appliantArchive($request, $archives[0]->id);
         // No existe nada
@@ -641,7 +639,6 @@ class ArchiveController extends Controller
             ->select('ap.id')
             ->get();
 
-        // dd($academic_programs_student);
 
         $academic_programs_student_ids = [];
         foreach ($academic_programs_student as $aps) {
@@ -649,9 +646,7 @@ class ArchiveController extends Controller
         }
 
         $academic_programs_to_apply = AcademicProgram::whereNotIn('id', $academic_programs_student_ids)->with('latestAnnouncement')->get();
-        // dd($academic_programs_to_apply);
 
-        // dd($academic_programs_to_apply[0]->latestAnnouncement->id);
         return view('postulacion.newArchive')
             ->with('academic_programs', $academic_programs_to_apply);
     }
@@ -1024,7 +1019,6 @@ class ArchiveController extends Controller
         }
 
 
-        // dd($personal_documents_ids, $entrance_documents_ids, $academic_documents_ids,$language_documents_ids,$working_documents_ids);
         try {
             if ($archive_id != null) {
                 $archive = Archive::where('id', intval($archive_id))->first();

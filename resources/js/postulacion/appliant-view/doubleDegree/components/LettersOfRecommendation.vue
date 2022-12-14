@@ -26,6 +26,14 @@
 
             <div class="row my-1">
                 <div class="col-12">
+                    <label>Title</label>
+                    <input v-model="Title" type="text" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="row my-1">
+                <div class="col-12">
                     <label>Position</label>
                     <input v-model="PositionRL" type="text" class="form-control">
                 </div>
@@ -113,6 +121,10 @@ export default {
             type: String,
             default: "",
         },
+        email:{
+            type:String,
+            default:"",
+        }
     },
 
     data: function () {
@@ -188,6 +200,15 @@ export default {
             },
             set(newVal) {
                 this.$emit('update:full_name', newVal);
+            }
+        },
+
+        Title:{
+            get() {
+                return this.title;
+            },
+            set(newVal) {
+                this.$emit('update:title', newVal);
             }
         },
 

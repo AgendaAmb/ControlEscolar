@@ -24,33 +24,25 @@
 
             <div class="form-group col-md-4">
               <label> From: </label>
-              <input v-model="From" type="date" :class="classObjectFor('from')">
-              <div v-if="estaEnError('from')" class="invalid-feedback">{{ errores.from }}</div>
+              <input v-model="From" type="date" class="form-control">
             </div>
 
             <div class="form-group col-md-4">
               <label> To: </label>
-              <input v-model="To" type="date" :class="classObjectFor('to')">
-              <div v-if="estaEnError('to')" class="invalid-feedback">{{ errores.to }}</div>
+              <input v-model="To" type="date" class="form-control">
             </div>
 
             <div class="form-group col-md-4">
               <label> Type of experience: </label>
-              <input v-model="KnowledgeArea" type="text" :class="classObjectFor('type_of_experience')">
-              <div v-if="estaEnError('type_of_experience')" class="invalid-feedback">{{ errores.type_of_experience }}
-              </div>
+              <input v-model="KnowledgeArea" type="text" class="form-control">
             </div>
-
           </div>
 
           <!-- Position -->
           <div class="row my-2">
             <div class="form-group col-md-12">
               <label>Position: </label>
-              <input v-model="WorkingPosition" type="text" :class="classObjectFor('working_position')">
-              <div v-if="estaEnError('working_position_description')" class="invalid-feedback">{{
-                  errores.working_position
-              }}</div>
+              <input v-model="WorkingPosition" type="text" class="form-control">
             </div>
           </div>
 
@@ -58,8 +50,7 @@
           <div class="row my-2">
             <div class="col-lg-8 col-sm-12">
               <label>Organization: </label>
-              <input v-model="Institution" type="text" :class="classObjectFor('organization')">
-              <div v-if="estaEnError('organization')" class="invalid-feedback">{{ errores.organization }}</div>
+              <input v-model="Institution" type="text" class="form-control">
             </div>
             <div class="col-lg-4 col-sm-12">
               <label>Country:</label>
@@ -70,17 +61,16 @@
                 </option>
               </select>
 
-              <div v-if="estaEnError('country')" class="invalid-feedback">
-                {{ errores.country }}
-              </div>
             </div>
           </div>
 
           <!-- Main responsabilities -->
           <div class="row my-2">
-            <label>Main responsabilities: </label>
-            <textarea class="form-control" rows="4" v-model="WorkingPositionDescription"
-              placeholder="Detalla el por que se no se seleccionara al postulante ..." />
+            <div class="col-12">
+              <label>Main responsabilities: </label>
+              <textarea class="form-control" rows="4" v-model="WorkingPositionDescription"
+                placeholder="Detalla el por que se no se seleccionara al postulante ..." />
+            </div>
           </div>
         </div>
 
@@ -111,12 +101,12 @@ export default {
 
   props: {
     from: {
-      type: Date,
+      type: String,
       default: null,
     },
 
     to: {
-      type: Date,
+      type: String,
       default: null,
     },
 
@@ -149,6 +139,11 @@ export default {
       type: Number,
       default: 0,
     },
+    
+    id:{
+      type:Number,
+      default:0,
+    }
 
 
 
@@ -331,7 +326,7 @@ export default {
     updateWorkingExperiences() {
       axios
         .post("/controlescolar/solicitud/enrem/workingExperiences/update", {
-          id: this.index,
+          id: this.id,
           archive_id: this.archive_id,
           from: this.from,
           to: this.to,

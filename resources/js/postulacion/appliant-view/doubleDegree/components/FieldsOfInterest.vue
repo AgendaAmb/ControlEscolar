@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <select v-model="ResearchAreaMexico" class="form-control" >
+                    <select v-model="ResearchAreaMexico" class="form-control">
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in researchAreaMexico " :key="item" :value="item">
                             {{ item }}
@@ -113,24 +113,22 @@
 
             <div class="row my-1">
                 <div class="col-lg-4 col-sm-12">
-                    <label >
+                    <label>
                         <p>Professor (Senior Researchers)</p>
                     </label>
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <select v-model="ProfessorResearchMexico" class="form-control"
-                        >
+                    <select v-model="ProfessorResearchMexico" class="form-control">
                         <option value="" selected>Choose an option</option>
-                        <option v-for="item in professorsMexico " :key="item" :value="item">
-                            {{ item }}
+                        <option v-for="item in professorsMexico " :key="item.id" :value="item.name">
+                            {{ item.name }}
                         </option>
                     </select>
                 </div>
 
                 <div class="col-lg-4 col-sm-6">
-                    <select v-model="ProfessorResearchGerman" class="form-control"
-                        >
+                    <select v-model="ProfessorResearchGerman" class="form-control">
                         <option value="" selected>Choose an option</option>
                         <option v-for="item in professorsGerman " :key="item" :value="item">
                             {{ item }}
@@ -212,7 +210,7 @@ export default {
     props: {
         //Index de la escolaridad
         archive_id: Number,
-        id:Number,
+        id: Number,
         proyect_idea: {
             type: String,
             default: ""
@@ -282,10 +280,7 @@ export default {
                 "Dr. Rui Costa Pedroso",
                 "Dr. Alexandra Nauditt"
             ],
-            professorsMexico: [
-                "Dr. Rui Costa Pedroso",
-                "Dr. Rui Costa Pedroso1",
-            ],
+            professorsMexico: [],
             researchAreaMexico: ['Renewable Natural Resources', 'Enviromental Assessment', 'Enviromental Management', 'Integrated Enviromental Health', 'Prevention and Control'],
             researchAreaGerman: ['NRM focus Land Management', 'NRM focs Regional Management', 'NRM fous Water Management', 'NRM focus Energy Management'],
         };
@@ -303,6 +298,16 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+
+        axios
+            .get("/controlescolar/admin/workers")
+            .then((response) => {
+                this.professorsMexico = response.data.data;
+                console.log(response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+             });
     },
 
     computed: {
@@ -450,9 +455,9 @@ export default {
                     professor_research_mexico: this.professor_research_mexico,
                     professor_research_german: this.professor_research_german,
                     elective_modules_PMPCA_german: this.elective_modules_PMPCA_german,
-                    elective_modules_PMPCA_mexico:this.elective_modules_PMPCA_mexico,
+                    elective_modules_PMPCA_mexico: this.elective_modules_PMPCA_mexico,
                     elective_modules_ITT_german: this.elective_modules_ITT_german,
-                    elective_modules_ITT_mexico : this.elective_modules_ITT_mexico
+                    elective_modules_ITT_mexico: this.elective_modules_ITT_mexico
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,

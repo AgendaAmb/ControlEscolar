@@ -86,6 +86,7 @@ export default {
       },
 
       set(newVal) {
+        console.log(newVal);
         this.$emit("update:value", newVal);
       },
     },

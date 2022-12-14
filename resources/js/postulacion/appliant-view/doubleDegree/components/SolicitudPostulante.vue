@@ -17,6 +17,7 @@
               :marital_state.sync="appliant.civic_state" :no_children.sync="appliant.no_children"
               :birth_date.sync="appliant.birth_date" :birth_dountry.sync="appliant.birth_country"
               :nationality.sync="appliant.nationality" :residense_country.sync="appliant.residense_country"
+              :birth_state.sync="appliant.birth_state"
               :email.sync="appliant.email" :altern_email.sync="appliant.altern_email"
               :phone_number.sync="appliant.phone_number">
             </personal-data>
@@ -189,7 +190,7 @@
         <b-collapse id="accordion-working-experiences" visible accordion="my-accordion" role="tabpanel">
           <b-card-body>
             <working-experiece v-for="(experience, index) in appliant_working_experiences" v-bind="experience"
-              v-bind:key="`${index}-${experience.id}-$WorkingExperience}`" :index="index + 1"
+              v-bind:key="`${index}-${experience.id}-$WorkingExperience}`" :index="index + 1" :id="experience.id"
               :state.sync="experience.state" :institution.sync="experience.institution"
               :working_position.sync="experience.working_position" :from.sync="experience.from" :to.sync="experience.to"
               :knowledge_area.sync="experience.knowledge_area"

@@ -40,7 +40,7 @@
 
       <div class="form-group col-12">
         <label> Country: </label>
-        <select v-model="StateCountry" class="form-control" @change="escogePais($event)">
+        <select v-model="StateCountry" class="form-control" @change="escogePais">
           <option value="" selected>Choose a country</option>
           <option v-for="country in countries" :key="country.id" :value="country.name">
             {{ country.name }}
@@ -180,15 +180,15 @@ export default {
 
   },
 
-  mounted: function () {
-    this.$nextTick(function () {
-      axios
-        .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
-        .then((response) => {
-          this.countries = response.data;
-        });
-    });
-  },
+  // mounted: function () {
+  //   this.$nextTick(function () {
+  //     axios
+  //       .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
+  //       .then((response) => {
+  //         this.countries = response.data;
+  //       });
+  //   });
+  // },
 
   data() {
     return {
@@ -210,6 +210,20 @@ export default {
     } else {
       this.title = 'Permanent Address';
     }
+
+    axios
+      .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
+      .then((response) => {
+        this.countries = response.data;
+        if (this.state_country != null) {
+          response.data.forEach(element => {
+            // console.log(element.name);
+            if (element.name === this.state_country) {
+              this.states = element.states;
+            }
+          });
+        }
+      });
 
     axios
       .get("/controlescolar/solicitud/getAllButtonImage")
@@ -270,7 +284,7 @@ export default {
 
     escogePais(evento) {
 
-      this.states =   this.countries[evento.target.selectedIndex - 1].states;
+      this.states = this.countries[evento.target.selectedIndex].states;
       // Vue.set(
       //   this,
       //   "states",

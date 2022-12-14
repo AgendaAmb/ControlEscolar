@@ -20,24 +20,24 @@
           <div class="row my-1">
             <div class="form-group col-lg-4 col-sm-6">
               <label> Gender: </label>
-              <select v-model="Gender" class="form-control">
+              <input v-model="Gender" type="text" class="form-control" readonly>
+
+              <!-- <select v-model="Gender" class="form-control">
                 <option value="" selected>Escoge una opción</option>
                 <option value="Masculino">Male</option>
                 <option value="Femenino">Female</option>
                 <option value="Otros">Other</option>
                 <option value="Rather not answer">Rather not answer</option>
-              </select>
+              </select> -->
             </div>
 
             <div class="form-group col-lg-4 col-sm-6">
               <label> Civic State: </label>
               <select v-model="CivicState" class="form-control">
-                <option value="" selected>Escoge una opción</option>
-                <option value="Soltero">Soltero</option>
-                <option value="Casado">Casado</option>
-                <option value="Divorciado">Divorciado</option>
-                <option value="Viudo">Viudo</option>
-                <option value="Otro">Otro</option>
+                <option value="">Choose an option</option>
+                <option v-for="cs in civic_state_list" :key="cs.id" :value="cs.name">
+                  {{ cs.name }}
+                </option>
               </select>
             </div>
 
@@ -51,36 +51,40 @@
           <div class="row my-1">
             <div class="form-group col-xl-6">
               <label> Date of birth </label>
-              <input type="date" class="form-control" v-model="BirthDate" />
+              <input type="date" class="form-control" v-model="BirthDate" readonly />
             </div>
 
 
             <div class="form-group col-lg-6">
               <label> Place of birth: </label>
-              <select v-model="BirthCountry" class="form-control">
+              <input v-model="BirthCountry" type="text" class="form-control" readonly>
+
+              <!-- <select v-model="BirthCountry" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country in countries" :key="country.id" :value="country.name">
                   {{ country.name }}
                 </option>
-              </select>
+              </select> -->
             </div>
           </div>
 
           <div class="row my-1">
             <div class="form-group col-xl-6">
               <label> Nationality</label>
-              <select v-model="Nationality" class="form-control">
+              <input v-model="Nationality" type="text" class="form-control" readonly>
+
+              <!-- <select v-model="Nationality" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country_na in countries_nationality" :key="country_na.id" :value="country_na.name">
                   {{ country_na.name }}
                 </option>
-              </select>
+              </select> -->
             </div>
 
 
             <div class="form-group col-lg-6">
               <label> Country of residense: </label>
-              <select v-model="ResidenseCountry" class="form-control">
+              <select v-model="BirthState" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country in countries" :key="country.id" :value="country.name">
                   {{ country.name }}
@@ -108,23 +112,22 @@
         </div>
       </div>
 
-      
+
     </div>
 
     <div class="col-12">
       <div class="row justify-content-start my-2">
         <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="updatePersonalData" :src="images_btn['guardar']" alt=""
-              style=" max-height: 45px !important;">
+          <img @click="updatePersonalData" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
         </div>
         <div class="col-8">
           <label>
-              <p class="h4"><strong>This only save Personal Information</strong></p>
+            <p class="h4"><strong>This only save Personal Information</strong></p>
           </label>
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
 
@@ -182,10 +185,27 @@ export default {
 
     archive_id: Number,
 
+    birth_state: String,
   },
 
   created() {
-    // console.log(this.language);
+    axios
+      .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
+      .then((response) => {
+        this.countries = response.data;
+        this.countries_nationality = response.data;
+        console.log(this.countries);
+      });
+
+      this.civic_state_list =  [
+        { id: 'Single', name: 'Single' },
+        { id: 'Married', name: 'Married' },
+        { id: 'Divorced', name: 'Divorced' },
+        { id: 'Widower', name: 'Widower' },
+        { id: 'Other', name: 'Other' },
+      ]
+
+
     axios
       .get("/controlescolar/solicitud/getAllButtonImage")
       .then((response) => {
@@ -198,7 +218,7 @@ export default {
       });
   },
 
-  mounted(){
+  mounted() {
     // ! Mounted 
   },
 
@@ -269,16 +289,6 @@ export default {
       }
     },
 
-
-    BirthDate: {
-      get() {
-        return this.birth_date;
-      },
-      set(newVal) {
-        this.$emit('update:birth_date', newVal);
-      }
-    },
-
     BirthCountry: {
       get() {
         return this.birth_country;
@@ -290,19 +300,19 @@ export default {
 
     Nationality: {
       get() {
-        return this.nationality;
-      },
-      set(newVal) {
-        this.$emit('update:nationality', newVal);
-      }
-    },
-
-    ResidenseCountry: {
-      get() {
         return this.residence_country;
       },
       set(newVal) {
         this.$emit('update:residence_country', newVal);
+      }
+    },
+
+    BirthState: {
+      get() {
+        return this.birth_state;
+      },
+      set(newVal) {
+        this.$emit('update:birth_state', newVal);
       }
     },
 
@@ -339,49 +349,20 @@ export default {
 
   },
 
-  mounted: function () {
-    this.$nextTick(function () {
-      axios
-        .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
-        .then((response) => {
-          this.countries = response.data;
-          this.countries_nationality  = response.data;
-        });
-    });
-  },
-
   data() {
     return {
       // Documentos personales
       countries: [],
       countries_nationality: [],
-      images_btn: []
+      images_btn: [],
+      civic_state_list:[],
     }
   },
-
-  // created() {
-    // //get personal documents
-    // axios
-    //   .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
-    //     params: {
-    //       archive_id: this.archive_id
-    //     }
-    //   })
-    //   .then((response) => {
-    //     if (response.data != null) {
-    //       this.documentos = response.data;
-    //     }
-    //     console.log(this.documentos);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  // },
 
   methods: {
 
     // Display the key/value pairs
-    displayFormData(formData){
+    displayFormData(formData) {
       for (var pair of formData.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
       }
@@ -398,6 +379,7 @@ export default {
       formData.append('surname', this.surname);
       formData.append('gender', this.gender);
       formData.append('marital_state', this.marital_state);
+      formData.append('birth_state', this.birth_state);
       formData.append('no_children', this.no_children);
       formData.append('birth_date', this.birth_date);
       formData.append('birth_country', this.birth_country);
@@ -418,27 +400,20 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-        console.log(response.data.message);
+        Swal.fire({
+          title: response.data.message,
+          icon: 'success',
+          text: 'Continue filling others sections',
+          showCancelButton: false,
+        });
       }).catch(error => {
-        console.log(response.data.message);
+        Swal.fire({
+          title: 'Error trying to save information',
+          icon: 'error',
+          text: 'Try later',
+          showCancelButton: false,
+        });
       });
-
-      Swal.fire({
-        title: title,
-        icon: icon,
-        text: msg,
-        showCancelButton: true,
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Entendido",
-      });
-    },
-
-
-    uploadDataAppliant() {
-      let msg = "";
-      let title = "";
-      let icon = "success";
-
     },
   }
 };

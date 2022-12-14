@@ -14,6 +14,7 @@ use App\Models\HearAboutProgram;
 use App\Models\ReasonsToChoise;
 use App\Models\RecommendationLetterEnrem;
 use App\Models\SecondaryEducation;
+use App\Models\User;
 use App\Models\WorkingExperience;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -41,14 +42,16 @@ class ArchiveEnremController extends Controller
                 'no_children' => ['required', 'numeric'],
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'Error al actualizar informacion de appliant en expediente' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+            return new JsonResponse(['message' => 'Error al actualizar informacion de appliant en expediente', 'error' => $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        $archive =  Archive::with('appliant')->firstWhere('id', $request->archive_id);
 
-        $archive->appliant()->save(
-            $request->except(['no_children'])
-        );
+        $archive =  Archive::with('appliant')->firstWhere('id', $request->archive_id);
+        $user = User::where('id',$archive->appliant->id)->first();
+        $user->update($request->only(['marital_state', 'birth_state', 'no_children']));
+        // $archive->appliant()->save(
+        //     $request->except(['no_children'])
+        // );
 
         return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
     }
@@ -335,7 +338,7 @@ class ArchiveEnremController extends Controller
             return new JsonResponse(['message' => 'Error trying to update the selected Financing Studies'], JsonResponse::HTTP_CONFLICT);
         }
 
-        return new JsonResponse(['message' => 'Great! Environment Financing Studies update', 'object' => $fs], 200);
+        return new JsonResponse(['message' => 'Great! Financing Studies update', 'object' => $fs], 200);
 
         }
 
