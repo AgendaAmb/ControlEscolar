@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group col-lg-4 col-sm-6">
-              <label> Nr of children: </label>
+              <label> No. of children: </label>
               <input v-model.number="NoChildren" type="number" class="form-control">
             </div>
           </div>
@@ -111,19 +111,20 @@
       
     </div>
 
-    <!-- <div class="col-12">
+    <div class="col-12">
       <div class="row justify-content-start my-2">
-                <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-                    <img @click="updatePersonalData" :src="images_btn.guardar" alt=""
-                        style=" max-height: 45px !important;">
-                </div>
-                <div class="col-8">
-                    <label>
-                        <p class="h4"><strong>This only save Personal Information</strong></p>
-                    </label>
-                </div>
-            </div>
-    </div> -->
+        <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
+          <img @click="updatePersonalData" :src="images_btn['guardar']" alt=""
+              style=" max-height: 45px !important;">
+        </div>
+        <div class="col-8">
+          <label>
+              <p class="h4"><strong>This only save Personal Information</strong></p>
+          </label>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </template>
 
@@ -148,7 +149,10 @@ export default {
     gender: String,
 
     // civic state
-    marital_state: String,
+    marital_state: {
+      type: String,
+      default: ""
+    },
 
     // Only for double titulation
     // Numero de hijos
@@ -192,6 +196,10 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  mounted(){
+    // ! Mounted 
   },
 
 
@@ -351,7 +359,7 @@ export default {
     }
   },
 
-  created() {
+  // created() {
     // //get personal documents
     // axios
     //   .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
@@ -368,11 +376,17 @@ export default {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-  },
-
-
+  // },
 
   methods: {
+
+    // Display the key/value pairs
+    displayFormData(formData){
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
+    },
+
     updatePersonalData() {
       let formData = new FormData();
       let title = "";
@@ -393,19 +407,20 @@ export default {
       formData.append('altern_email', this.altern_email);
       formData.append('phone_number', this.phone_number);
 
+      // this.displayFormData(formData);
 
       axios({
         method: 'post',
-        url: '/controlescolar/solicitud/enrem/appliant/update',
+        url: '/controlescolar/solicitud/enrem/updatePersonalData',
         data: formData,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data'
         }
       }).then(response => {
-
+        console.log(response.data.message);
       }).catch(error => {
-
+        console.log(response.data.message);
       });
 
       Swal.fire({

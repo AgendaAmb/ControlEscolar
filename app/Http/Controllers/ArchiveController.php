@@ -695,13 +695,8 @@ class ArchiveController extends Controller
             return '<h1>No existe expediente para el postulante</h1>';
         }
 
-
-        
-      
-
-
-       // ENREM add if NOT
-    //    EnvironmentRelatedSkills
+        // ENREM add if NOT
+        // EnvironmentRelatedSkills
         try {
             $archiveModel->loadMissing([
                 'enviromentRelatedSkills',
@@ -943,8 +938,9 @@ class ArchiveController extends Controller
 
             $academic_program = $archiveModel->announcement->academicProgram;
 
-            // Complete appliant information
+            // * Complete appliant information
             $appliant = $this->getDataFromPortalUser($archiveModel->appliant);
+
 
             // get the image for the corresponding academic program
             $img = 'DOCTORADO-SUPERIOR.png';

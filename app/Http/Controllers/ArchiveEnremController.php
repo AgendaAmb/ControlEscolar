@@ -22,7 +22,7 @@ use Illuminate\Http\Request;
 class ArchiveEnremController extends Controller
 {
     public function updatePersonalData(Request $request)
-    {
+    {        
         try {
             $request->validate([
                 'archive_id' => ['required', 'numeric', 'exists:archives,id'],
@@ -39,15 +39,16 @@ class ArchiveEnremController extends Controller
                 'altern_email' => ['required', 'string', 'max:255'],
                 'phone_number' => ['required', 'numeric'],
                 'no_children' => ['required', 'numeric'],
-
             ]);
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al actualizar informacion de appliant en expediente' + $e->getMessage()], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
+        $archive =  Archive::with('appliant')->firstWhere('id', $request->archive_id);
 
-        $archive =  Archive::with('appliant')->where('id', $request->archive_id)->get();
-        $archive->appliant()->save($request);
+        $archive->appliant()->save(
+            $request->except(['no_children'])
+        );
 
         return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
     }

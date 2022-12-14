@@ -121,6 +121,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         Route::prefix('enrem')->name('enrem.')->group(function () {
+            
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
             Route::prefix('address')->name('address.')->group(function () {
