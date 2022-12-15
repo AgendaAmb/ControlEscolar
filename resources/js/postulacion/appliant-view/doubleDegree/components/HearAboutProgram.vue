@@ -3,8 +3,8 @@
     <!-- Accordion -->
     <b-card-body class="row">
         <div class="form-group">
-            <checkbox-personalize v-for="(cho, index) in hear_options" :key="index" :label="cho" :value="cho"
-                :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
+            <checkbox-personalize v-for="(cho, index) in hear_options" :key="index" :label.sync="cho.label" :value.sync="cho.value"
+                :id="index" :array_selected.sync="financing_options_list" @actualizaLista="actualizaLista"></checkbox-personalize>
         </div>
 
         <div class="row justify-content-start my-2">
@@ -36,8 +36,8 @@ export default {
         id: Number,
 
         how_hear: {
-            type:Object,
-            default:null
+            type:String,
+            default:""
         }
     },
 
@@ -53,6 +53,10 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+
+            if (this.how_hear != null ) {
+            this.financing_options_list  = JSON.parse(this.how_hear);
+        }
     },
 
     
@@ -65,20 +69,18 @@ export default {
             datosValidos: {},
             // universidades: [],
             hear_options: [
-                'DAAD Brochure',
-                'CONACYT Information',
-                'Current Student',
-                'Alumni',
-                'Online research (please keyword)',
-                'Media (which)',
-                'Fair or Conference (name and year)',
-                'Master portal pages (name)',
-                'From my university',
-                'Other',
+                 {label: 'DAAD Brochure', value: 'DAAD Brochure'} ,
+                 {label: 'CONACYT Information', value: 'CONACYT Information'} ,
+                 {label: 'Current Student', value: 'Current Student'} ,
+                 {label: 'Alumni', value: 'Alumni'} ,
+                 {label: 'Online research (please keyword)', value: 'Online research (please keyword)'} ,
+                 {label: 'Media (which)', value: 'Media (which)'} ,
+                 {label: 'Fair or Conference (name and year)', value: 'Fair or Conference (name and year)'} ,
+                 {label: 'Master portal pages (name)', value: 'Master portal pages (name)'} ,
+                 {label: 'From my university', value: 'From my university'} ,
+                 {label: 'Other', value: 'Other'} ,
             ],
             financing_options_list: [],
-
-
             escolaridades: ["Bachelor's Degree", "Master's Degree", "Diplom", "Magister", "Specialization"],
             estatusEstudios_PMPCA: ["Grado obtenido", "Título o grado en proceso"],
             gradiationMode: ['Thesis Investigation - Thesis Title', 'Graduation Courses & Examination - Courses Underta', 'Practical Work - Field & Institution'],
@@ -133,11 +135,12 @@ export default {
     methods: {
 
         updateHearAboutProgram(){
+            console.log(this.financing_options_list);
             axios
                 .post("/controlescolar/solicitud/enrem/hearAboutProgram/update", {
                     id: this.id,
                     archive_id: this.archive_id,
-                    how_hear: this.how_hear
+                    how_hear: JSON.stringify(this.financing_options_list)
                   
                 }).then(response => {
                     Swal.fire({
@@ -156,33 +159,38 @@ export default {
                 });
         },
 
-        actualizaLista(label, value, res) {
+       actualizaLista(label, value, res) {
             let index = -1;
-            this.financing_options_list.forEach(function (value, i) {
 
-                if (value != null) {
-                    if (value[0].toLowerCase() === label.toLowerCase()) {
+            // no data, insert
+            if (this.financing_options_list.length <= 0 && res) {
+                this.financing_options_list.push({'label': label, 'value': value});
+            } else {
+
+                // data exist, check the index
+                this.financing_options_list.forEach(function (value, i) {
+
+                    if (value.label.toLowerCase() === label.toLowerCase()) {
                         index = i;
                         console.log('lo encontre ');
                     }
-                }
+                });
 
-            });
-
-
-            if (!res) {
                 // pop
-                // El dato encontrado se elimina de la lista de seleccionados
-                if (index >= 0) {
-                    this.financing_options_list.splice(index, 1);
-                }
-            } else {
-                if (index < 0) {
-                    if (label === 'Other')
-                        this.financing_options_list.push([label, value]);
-                }
+                if (!res) {
+                    if (index >= 0) {
+                        this.financing_options_list.splice(index, 1);
+                    }
+                    // push
+                } else {
+                    if (index < 0) {
+                        this.financing_options_list.push({'label': label, 'value': value});
+                    }
 
+                }
             }
+
+
         },
     },
 };

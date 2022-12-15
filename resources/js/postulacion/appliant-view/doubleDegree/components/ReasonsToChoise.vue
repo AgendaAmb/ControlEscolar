@@ -37,8 +37,8 @@
             <div class="col-12">
                 <label class="h3">Why did you decide to study the ENREM master's degree? (Multiple choice is
                     possible)</label>
-                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho" :value="cho"
-                    :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
+                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho.label" :value="cho.value"
+                    :id="index" :array_selected.sync="selected_choises_list" @actualizaLista="actualizaLista"></checkbox-personalize>
             </div>
         </div>
 
@@ -86,8 +86,8 @@ export default {
 
         // default and other (specify)
         selected_choises: {
-            default: null,
-            type: Object
+            default: "",
+            type: String
         },
     },
 
@@ -102,6 +102,9 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+            if (this.selected_choises != null ) {
+            this.selected_choises_list  = JSON.parse(this.selected_choises);
+        }
         this.selected_choises_list = Object.keys(this.selected_choises).map((key) => [key, this.selected_choises[key]]);
     },
 
@@ -119,11 +122,11 @@ export default {
             booleanChoises: ['Yes', 'No'],
             // universidades: [],
             choises_list: [
-                "Course of study / focus of content",
-                "Studying and living in Mexico and Germany",
-                "Obtain two degree in two years",
-                "Possibility for scholarship",
-                "Other"
+            {label: 'Course of study / focus of content', value: 'Course of study / focus of content'} ,
+            {label: 'Studying and living in Mexico and Germany', value: 'Studying and living in Mexico and Germany'} ,
+            {label: 'Obtain two degree in two years', value: 'Obtain two degree in two years'} ,
+            {label: 'Possibility for scholarship', value: 'Possibility for scholarship'} ,
+            {label: 'Other', value: 'Other'} ,
             ],
             selected_choises_list: [],
 
@@ -211,36 +214,41 @@ export default {
     methods: {
         // Name is the list 
         // res is the boolean value, push or pop
-        actualizaLista(label, value, res) {
-
+        
+       actualizaLista(label, value, res) {
             let index = -1;
-            this.selected_choises_list.forEach(function (value, i) {
 
-                if (value != null) {
-                    if (value[0].toLowerCase() === label.toLowerCase()) {
+            // no data, insert
+            if (this.selected_choises_list.length <= 0 && res) {
+                this.selected_choises_list.push({'label': label, 'value': value});
+            } else {
+
+                // data exist, check the index
+                this.selected_choises_list.forEach(function (value, i) {
+
+                    if (value.label.toLowerCase() === label.toLowerCase()) {
                         index = i;
                         console.log('lo encontre ');
                     }
-                }
+                });
 
-            });
-
-
-            if (!res) {
                 // pop
-                // El dato encontrado se elimina de la lista de seleccionados
-                if (index >= 0) {
-                    this.selected_choises_list.splice(index, 1);
-                }
-            } else {
-                if (index < 0) {
-                    if (label === 'Other')
-                        this.selected_choises_list.push([label, value]);
-                }
+                if (!res) {
+                    if (index >= 0) {
+                        this.selected_choises_list.splice(index, 1);
+                    }
+                    // push
+                } else {
+                    if (index < 0) {
+                        this.selected_choises_list.push({'label': label, 'value': value});
+                    }
 
+                }
             }
-        },
 
+
+        },
+       
         countryHasValue() {
             //country is not empty
             if (this.country != null) {

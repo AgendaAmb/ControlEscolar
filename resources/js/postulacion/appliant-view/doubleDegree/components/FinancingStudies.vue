@@ -4,7 +4,7 @@
     <b-card-body>
         <div class="form-group row">
             <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label.sync="cho.label" :value.sync="cho.value"
-                :id="index" @actualizaLista="actualizaLista"></checkbox-personalize>
+                :id="index" :array_selected.sync="financing_options_list" @actualizaLista="actualizaLista"></checkbox-personalize>
         </div>
 
         <div class="row my-2">
@@ -61,14 +61,6 @@ export default {
     },
 
     created() {
-        if (this.financing_options != null) {
-            for (let index = 0; index < array.length; index++) {
-                const element = array[index];
-                
-            }
-            this.financing_options_list = Object.keys(this.financing_options).map((key) => [key, this.financing_options[key]]);
-        }
-
         axios
             .get("/controlescolar/solicitud/getAllButtonImage")
             .then((response) => {
@@ -79,6 +71,14 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
+
+            console.log(this.financing_options);
+       
+        if (this.financing_options != null ) {
+            this.financing_options_list  = JSON.parse(this.financing_options);
+        }
+
+       
     },
 
     computed: {
@@ -153,13 +153,13 @@ export default {
 
             // no data, insert
             if (this.financing_options_list.length <= 0 && res) {
-                this.financing_options_list.push([label, value]);
+                this.financing_options_list.push({'label': label, 'value': value});
             } else {
 
                 // data exist, check the index
                 this.financing_options_list.forEach(function (value, i) {
 
-                    if (value[0].toLowerCase() === label.toLowerCase()) {
+                    if (value.label.toLowerCase() === label.toLowerCase()) {
                         index = i;
                         console.log('lo encontre ');
                     }
@@ -173,7 +173,7 @@ export default {
                     // push
                 } else {
                     if (index < 0) {
-                        this.financing_options_list.push([label, value]);
+                        this.financing_options_list.push({'label': label, 'value': value});
                     }
 
                 }

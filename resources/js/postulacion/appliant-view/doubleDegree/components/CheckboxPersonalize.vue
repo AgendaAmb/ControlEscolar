@@ -31,24 +31,29 @@ export default {
   props: {
     id: {
       type: Number,
-      default: null,
+      default: 1,
     },
 
     label: {
       type: String,
-      default: null,
+      default: "",
     },
 
     value: {
       type: String,
-      default: null,
+      default: "",
     },
 
 
     index: {
       type: Number,
-      default: null,
+      default: 1,
     },
+
+    array_selected:{
+      type:Array,
+      default:[]
+    }
 
   },
 
@@ -61,6 +66,14 @@ export default {
   },
 
   created() {
+
+    if(this.array_selected.length > 0){
+      this.array_selected.forEach(element => {
+        if(element.label == this.label){
+          this.check = true;
+        }
+      });
+    }
   },
 
   methods: {
@@ -86,7 +99,6 @@ export default {
       },
 
       set(newVal) {
-        console.log(newVal);
         this.$emit("update:value", newVal);
       },
     },
