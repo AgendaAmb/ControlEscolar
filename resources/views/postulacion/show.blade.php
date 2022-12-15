@@ -42,22 +42,15 @@
             :alias_academic_program="academic_program.alias" :user_id="appliant.id" :archive_id="archive.id">
         </rechazar-expediente>
     @endif
-
-    {{-- :curricular_documents="archive.curricular_documents" --}}
-    {{-- @if (((Auth::user()->hasRole('aspirante_local') || Auth::user()->hasRole('aspirante_foraneo') || Auth::user()->hasRole('aspirante_extranjero')) && $archive->status <= 1) || ((Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('admin') || Auth::user()->hasRole('personal_apoyo') || Auth::user()->hasRole('coordinador')) && $archive->status <= 4)) --}}
-
+   
     @if ($academic_program['alias'] === 'enrem')
         <solicitud-postulante :archive_id="archive.id" :personal_documents="archive.personal_documents"
-            :enviroment_related_skills="archive.enviroment_related_skills"
-            :reasons_to_choise="archive.reasons_to_choise" 
-            :address="archive.address"
-            :motivation="archive.motivation"
-            :secondary_education="archive.secondary_education"
-            :future_plans="archive.future_plans"
-            :fields_of_interest="archive.fields_of_interest"
-            :financing_studies="archive.financing_studies"
+            :enviroment_related_skills="archive.enviroment_related_skills" :reasons_to_choise="archive.reasons_to_choise"
+            :address="archive.address" :motivation="archive.motivation"
+            :secondary_education="archive.secondary_education" :future_plans="archive.future_plans"
+            :fields_of_interest="archive.fields_of_interest" :financing_studies="archive.financing_studies"
             :recommendation_letter_enrem="archive.recommendation_letter_enrem"
-            :hear_about_program="archive.hear_about_program"
+            :hear_about_program="archive.hear_about_program" :enrem_documents="archive.enrem_documents"
             :exanni_score="archive.exanni_score" :entrance_documents="archive.entrance_documents" :appliant="appliant"
             :viewer="viewer" :academic_program="academic_program" :academic_degrees="archive.academic_degrees"
             :appliant_languages="archive.appliant_languages"
@@ -79,16 +72,6 @@
             :archives_recommendation_letters="archives_recommendation_letters"
             :interview_documents="archive.interview_documents" :status="archive.status">
         </solicitud-postulante>
-
-        {{-- <h1>{{$archive->status}}</h1>
-        <h2>{{ Auth::user()}}</h2> --}}
-        {{-- @else
-        <expediente-cerrado
-        :appliant="appliant"
-        :archive_id="archive.id"
-        >
-        </expediente-cerrado>
-    @endif --}}
     @endif
 
 
@@ -104,6 +87,9 @@
         Control Escolar             Visualizar y agregar, no modificar ni eliminar      controlescolar-view (controlescolar.js) 15641 
         Expediente Cerrado          Visualizar para todos los roles anteriores (Cambiar estado solamente ) --}}
     {{-- Admin view --}}
+
+
+    {{-- Expediente completo --}}
     @if (((Auth::user()->hasRole('aspirante_local') ||
         Auth::user()->hasRole('aspirante_foraneo') ||
         Auth::user()->hasRole('aspirante_extranjero')) &&
@@ -117,15 +103,27 @@
             ($archive->status === 5 || $archive->status === 6 || $archive->status === 7)) ||
         Auth::user()->hasRole('personal_apoyo'))
         <script src="{{ asset('postulacion/js/close.js') }}" defer></script>
+        {{-- Administrador --}}
     @elseif (Auth::user()->hasRole('admin'))
-        <script src="{{ asset('js/postulacion.js') }}" defer></script>
-        {{-- Professor view --}}
+        @if ($academic_program['alias'] === 'enrem')
+            <script src="{{ asset('appliant/js/appliant-doubleDegree.js') }}" defer></script>
+        @else
+            <script src="{{ asset('js/postulacion.js') }}" defer></script>
+        @endif
+        {{-- Control escolar --}}
     @elseif (Auth::user()->hasRole('control_escolar') ||
         Auth::user()->hasRole('personal_apoyo') ||
         Auth::user()->hasRole('coordinador'))
-        <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
+        {{-- falta definir para sandra solo --}}
+        @if ($academic_program['alias'] === 'enrem')
+            <script src="{{ asset('appliant/js/appliant-doubleDegree.js') }}" defer></script>
+        @else
+            <script src="{{ asset('controlescolar/js/controlescolar.js') }}" defer></script>
+        @endif
+        {{-- Profesores --}}
     @elseif (Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('profesor_nb'))
         <script src="{{ asset('professor/js/professor-only-rl.js') }}" defer></script>
+        {{-- Aspirantes --}}
     @else
         @if ($academic_program['alias'] === 'enrem')
             <script src="{{ asset('appliant/js/appliant-doubleDegree.js') }}" defer></script>

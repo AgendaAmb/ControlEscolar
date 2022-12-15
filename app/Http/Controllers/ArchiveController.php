@@ -677,21 +677,8 @@ class ArchiveController extends Controller
         return new JsonResponse(['message' => 'Éxito'], JsonResponse::HTTP_CREATED);
     }
 
-    public function appliantArchive(Request $request, $archive_id)
+    public function uploadDataIfEmptyForEnrem($archiveModel, $archive_id)
     {
-
-        try {
-            $archiveModel = Archive::where('id', $archive_id)->first();
-        } catch (\Exception $e) {
-            return new JsonResponse(['message' => 'El archivo con el ID ', 'error' => $e], JsonResponse::HTTP_BAD_REQUEST);
-        }
-
-        if ($archiveModel == null) {
-            return '<h1>No existe expediente para el postulante</h1>';
-        }
-
-        // ENREM add if NOT
-        // EnvironmentRelatedSkills
         try {
             $archiveModel->loadMissing([
                 'enviromentRelatedSkills',
@@ -829,8 +816,10 @@ class ArchiveController extends Controller
                         'research_area_german' => null,
                         'professor_research_mexico' => null,                  
                         'professor_research_german' => null,
-                        'elective_modules_PMPCA' => null,                  
-                        'elective_modules_ITT' => null,
+                        'elective_modules_PMPCA_german' => null,            
+                        'elective_modules_PMPCA_mexico' => null,                        
+                        'elective_modules_ITT_german' => null,
+                        'elective_modules_ITT_mexico' => null,
                         'archive_id' => $archive_id
                     ]
                 ]);    
@@ -900,6 +889,39 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => 'No se puede extraer la información de HearAboutProgram', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
+        // enrem documents
+        try{
+            $archiveModel->loadMissing([
+                'enremDocuments',
+            ]);
+    
+            if(sizeof($archiveModel->enremDocuments) < 1){
+                $enrem_documents_id = RequiredDocument::where('type', 'enrem')->pluck('id');
+                $archiveModel->enremDocuments()->attach($enrem_documents_id);
+            }
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La relacion a los documentos de enrem no existe', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
+        }
+    }
+
+    public function appliantArchive(Request $request, $archive_id)
+    {
+
+        try {
+            $archiveModel = Archive::where('id', $archive_id)->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'El archivo con el ID ', 'error' => $e], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        if ($archiveModel == null) {
+            return '<h1>No existe expediente para el postulante</h1>';
+        }
+
+        // ENREM add if NOT
+        // EnvironmentRelatedSkills
+        $this->uploadDataIfEmptyForEnrem($archiveModel,$archive_id);
+
         try {
             $archiveModel->loadMissing([
                 // Cosas del aplicante
@@ -927,7 +949,8 @@ class ArchiveController extends Controller
                 'fieldsOfInterest',
                 'financingStudies',
                 'recommendationLetterEnrem',
-                'hearAboutProgram'
+                'hearAboutProgram',
+                'enremDocuments',
             ]);
 
 
@@ -970,7 +993,7 @@ class ArchiveController extends Controller
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
-        // dd($archiveModel);
+        // dd( $request->session()->get('user')->id);
         return view('postulacion.show')
             ->with('archive', $archiveModel)
             ->with('appliant', $appliant)

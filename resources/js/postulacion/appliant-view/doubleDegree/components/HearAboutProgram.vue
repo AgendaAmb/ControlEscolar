@@ -3,19 +3,22 @@
     <!-- Accordion -->
     <b-card-body class="row">
         <div class="form-group">
-            <checkbox-personalize v-for="(cho, index) in hear_options" :key="index" :label.sync="cho.label" :value.sync="cho.value"
-                :id="index" :array_selected.sync="financing_options_list" @actualizaLista="actualizaLista"></checkbox-personalize>
+            <checkbox-personalize v-for="(cho, index) in hear_options" :key="index" :label.sync="cho.label"
+                :value.sync="cho.value" :id="index" :array_selected.sync="financing_options_list"
+                @actualizaLista="actualizaLista"></checkbox-personalize>
         </div>
 
-        <div class="row justify-content-start my-2">
-            <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-                <img @click="updateHearAboutProgram" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save Future plans and expecations</strong></p>
-                </label>
+        <div class="col-12">
+            <div class="row justify-content-start my-2">
+                <div class="col-lg-2 col-sm-4 align-items-center ">
+                    <img @click="updateHearAboutProgram" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5"><strong>Only save Future plans and expecations</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </b-card-body>
@@ -36,8 +39,8 @@ export default {
         id: Number,
 
         how_hear: {
-            type:String,
-            default:""
+            type: String,
+            default: ""
         }
     },
 
@@ -54,31 +57,31 @@ export default {
                 console.log(error);
             });
 
-            if (this.how_hear != null ) {
-            this.financing_options_list  = JSON.parse(this.how_hear);
+        if (this.how_hear != null) {
+            this.financing_options_list = JSON.parse(this.how_hear);
         }
     },
 
-    
+
 
     data: function () {
         return {
-            images_btn:[],
+            images_btn: [],
             fechaobtencion: "",
             errores: {},
             datosValidos: {},
             // universidades: [],
             hear_options: [
-                 {label: 'DAAD Brochure', value: 'DAAD Brochure'} ,
-                 {label: 'CONACYT Information', value: 'CONACYT Information'} ,
-                 {label: 'Current Student', value: 'Current Student'} ,
-                 {label: 'Alumni', value: 'Alumni'} ,
-                 {label: 'Online research (please keyword)', value: 'Online research (please keyword)'} ,
-                 {label: 'Media (which)', value: 'Media (which)'} ,
-                 {label: 'Fair or Conference (name and year)', value: 'Fair or Conference (name and year)'} ,
-                 {label: 'Master portal pages (name)', value: 'Master portal pages (name)'} ,
-                 {label: 'From my university', value: 'From my university'} ,
-                 {label: 'Other', value: 'Other'} ,
+                { label: 'DAAD Brochure', value: 'DAAD Brochure' },
+                { label: 'CONACYT Information', value: 'CONACYT Information' },
+                { label: 'Current Student', value: 'Current Student' },
+                { label: 'Alumni', value: 'Alumni' },
+                { label: 'Online research (please keyword)', value: 'Online research (please keyword)' },
+                { label: 'Media (which)', value: 'Media (which)' },
+                { label: 'Fair or Conference (name and year)', value: 'Fair or Conference (name and year)' },
+                { label: 'Master portal pages (name)', value: 'Master portal pages (name)' },
+                { label: 'From my university', value: 'From my university' },
+                { label: 'Other', value: 'Other' },
             ],
             financing_options_list: [],
             escolaridades: ["Bachelor's Degree", "Master's Degree", "Diplom", "Magister", "Specialization"],
@@ -134,14 +137,14 @@ export default {
 
     methods: {
 
-        updateHearAboutProgram(){
+        updateHearAboutProgram() {
             console.log(this.financing_options_list);
             axios
                 .post("/controlescolar/solicitud/enrem/hearAboutProgram/update", {
                     id: this.id,
                     archive_id: this.archive_id,
                     how_hear: JSON.stringify(this.financing_options_list)
-                  
+
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,
@@ -159,12 +162,12 @@ export default {
                 });
         },
 
-       actualizaLista(label, value, res) {
+        actualizaLista(label, value, res) {
             let index = -1;
 
             // no data, insert
             if (this.financing_options_list.length <= 0 && res) {
-                this.financing_options_list.push({'label': label, 'value': value});
+                this.financing_options_list.push({ 'label': label, 'value': value });
             } else {
 
                 // data exist, check the index
@@ -184,7 +187,7 @@ export default {
                     // push
                 } else {
                     if (index < 0) {
-                        this.financing_options_list.push({'label': label, 'value': value});
+                        this.financing_options_list.push({ 'label': label, 'value': value });
                     }
 
                 }

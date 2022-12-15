@@ -7,17 +7,19 @@
             <textarea class="form-control" rows="10" v-model="MessageReview" placeholder="..." />
         </div>
 
-        <div class="row justify-content-start my-2" >
-                <div class="col-4" style="width:100%; max-height: 45px !important;">
+        <div class="col-12">
+            <div class="row justify-content-center my-4">
+                <div class="col-lg-2 col-lg-4">
                     <img @click="updateEnvironmentSkills" :src="images_btn.guardar" alt=""
                         style=" max-height: 45px !important;">
                 </div>
-                <div class="col-8">
+                <div class="col-lg-10 col-sm-8">
                     <label>
-                        <p class="h4"><strong>This only save Environment Related Skills</strong></p>
+                        <p class="h5"><strong>This only save Environment Related Skills</strong></p>
                     </label>
                 </div>
             </div>
+        </div>
     </div>
 </template>
   
@@ -44,7 +46,7 @@ export default {
 
     data() {
         return {
-            images_btn:[],
+            images_btn: [],
         };
     },
 
@@ -74,13 +76,13 @@ export default {
     },
 
     methods: {
-        
+
         updateEnvironmentSkills() {
             axios
                 .post("/controlescolar/solicitud/enrem/environmentSkills/update", {
                     id: this.id,
                     archive_id: this.archive_id,
-                    message_review:this.message_review
+                    message_review: this.message_review
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,

@@ -85,6 +85,18 @@ class Archive extends Model
         return $this->requiredDocuments()->where('type', 'personal');
     }
 
+    
+
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function enremDocuments(): BelongsToMany
+    {
+        return $this->requiredDocuments()->where('type', 'enrem');
+    }
+
 
     /**
      * Obtiene los documentos personales requeridos del expediente.

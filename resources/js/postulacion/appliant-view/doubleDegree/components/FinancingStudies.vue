@@ -3,19 +3,22 @@
     <!-- Accordion -->
     <b-card-body>
         <div class="form-group row">
-            <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label.sync="cho.label" :value.sync="cho.value"
-                :id="index" :array_selected.sync="financing_options_list" @actualizaLista="actualizaLista"></checkbox-personalize>
+            <checkbox-personalize v-for="(cho, index) in options_financing" :key="index" :label.sync="cho.label"
+                :value.sync="cho.value" :id="index" :array_selected.sync="financing_options_list"
+                @actualizaLista="actualizaLista"></checkbox-personalize>
         </div>
 
-        <div class="row my-2">
-            <div class="col-4 " style="width:100%; max-height: 45px !important;">
-                <img @click="updateFinancingStudies" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save Financing studies</strong></p>
-                </label>
+        <div class="col-12">
+            <div class="row my-2">
+                <div class="col-lg-2 col-sm-4 ">
+                    <img @click="updateFinancingStudies" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5"><strong>Only save Financing studies</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </b-card-body>
@@ -49,12 +52,12 @@ export default {
             fechaobtencion: "",
             errores: {},
             options_financing: [
-                {label: 'Self-funded', value: 'Self-funded'} ,
-                {label: 'Salary will be paid', value: 'Salary will be paid'} ,
-                {label: 'Goberment Study Grant', value: 'Goberment Study Grant'} ,
-                {label: 'I intend to apply for a CONACYT or DAAD scholarship', value: 'I intend to apply for a CONACYT or DAAD scholarship'} ,
-                {label: 'I intented to apply for an external scholarship', value: 'I intented to apply for an external scholarship'} ,
-                {label: 'Other', value: 'Other'} ,
+                { label: 'Self-funded', value: 'Self-funded' },
+                { label: 'Salary will be paid', value: 'Salary will be paid' },
+                { label: 'Goberment Study Grant', value: 'Goberment Study Grant' },
+                { label: 'I intend to apply for a CONACYT or DAAD scholarship', value: 'I intend to apply for a CONACYT or DAAD scholarship' },
+                { label: 'I intented to apply for an external scholarship', value: 'I intented to apply for an external scholarship' },
+                { label: 'Other', value: 'Other' },
             ],
             financing_options_list: [],
         };
@@ -72,13 +75,13 @@ export default {
                 console.log(error);
             });
 
-            console.log(this.financing_options);
-       
-        if (this.financing_options != null ) {
-            this.financing_options_list  = JSON.parse(this.financing_options);
+        console.log(this.financing_options);
+
+        if (this.financing_options != null) {
+            this.financing_options_list = JSON.parse(this.financing_options);
         }
 
-       
+
     },
 
     computed: {
@@ -129,7 +132,7 @@ export default {
                 .post("/controlescolar/solicitud/enrem/financingStudies/update", {
                     id: this.id,
                     archive_id: this.archive_id,
-                    financing_options:JSON.stringify(this.financing_options_list)
+                    financing_options: JSON.stringify(this.financing_options_list)
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,
@@ -153,7 +156,7 @@ export default {
 
             // no data, insert
             if (this.financing_options_list.length <= 0 && res) {
-                this.financing_options_list.push({'label': label, 'value': value});
+                this.financing_options_list.push({ 'label': label, 'value': value });
             } else {
 
                 // data exist, check the index
@@ -173,7 +176,7 @@ export default {
                     // push
                 } else {
                     if (index < 0) {
-                        this.financing_options_list.push({'label': label, 'value': value});
+                        this.financing_options_list.push({ 'label': label, 'value': value });
                     }
 
                 }

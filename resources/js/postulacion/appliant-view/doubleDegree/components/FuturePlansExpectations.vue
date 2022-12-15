@@ -25,15 +25,17 @@
             </div>
         </div>
 
-        <div class="row justify-content-start my-2">
-            <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-                <img @click="updateFuturePlansExpectations" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save Future plans and expecations</strong></p>
-                </label>
+        <div class="col-12">
+            <div class="row justify-content-start my-2">
+                <div class="col-lg-2 col-sm-4 align-items-center ">
+                    <img @click="updateFuturePlansExpectations" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5"><strong>Only save Future plans and expecations</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </b-card-body>
@@ -48,7 +50,7 @@ export default {
         // id del expediente.
         archive_id: Number,
 
-        id:Number,
+        id: Number,
 
         pursue_future: {
             type: String,

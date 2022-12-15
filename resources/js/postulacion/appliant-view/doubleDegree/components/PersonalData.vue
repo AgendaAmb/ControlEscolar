@@ -117,12 +117,12 @@
 
     <div class="col-12">
       <div class="row justify-content-start my-2">
-        <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
+        <div class="col-lg-2 col-sm-4 align-items-center ">
           <img @click="updatePersonalData" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
         </div>
-        <div class="col-8">
+        <div class="col-lg-10 col-sm-8">
           <label>
-            <p class="h4"><strong>This only save Personal Information</strong></p>
+            <p class="h5"><strong>This only save Personal Information</strong></p>
           </label>
         </div>
       </div>
@@ -152,10 +152,7 @@ export default {
     gender: String,
 
     // civic state
-    marital_state: {
-      type: String,
-      default: ""
-    },
+    marital_state: String,
 
     // Only for double titulation
     // Numero de hijos
@@ -189,6 +186,8 @@ export default {
   },
 
   created() {
+
+    console.log('Marital state: ' + this.marital_state);
     axios
       .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
       .then((response) => {
@@ -196,14 +195,6 @@ export default {
         this.countries_nationality = response.data;
         console.log(this.countries);
       });
-
-      this.civic_state_list =  [
-        { id: 'Single', name: 'Single' },
-        { id: 'Married', name: 'Married' },
-        { id: 'Divorced', name: 'Divorced' },
-        { id: 'Widower', name: 'Widower' },
-        { id: 'Other', name: 'Other' },
-      ]
 
 
     axios
@@ -355,7 +346,13 @@ export default {
       countries: [],
       countries_nationality: [],
       images_btn: [],
-      civic_state_list:[],
+      civic_state_list : [
+        { id: 'Single', name: 'Single' },
+        { id: 'Married', name: 'Married' },
+        { id: 'Divorced', name: 'Divorced' },
+        { id: 'Widower', name: 'Widower' },
+        { id: 'Other', name: 'Other' },
+      ]
     }
   },
 

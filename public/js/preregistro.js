@@ -133,6 +133,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5701,41 +5719,7 @@ var render = function () {
     [
       _c("div", { staticClass: "form-group col-12 mb-3" }, [
         _c("h3", { staticClass: "d-block mb-3" }, [
-          _vm._v(" ¿Eres miembro de la UASLP? "),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.TipoUsuario,
-                expression: "TipoUsuario",
-              },
-            ],
-            staticClass: "form-check-input",
-            attrs: {
-              type: "radio",
-              name: "TipoUsuario",
-              value: "Comunidad UASLP",
-            },
-            domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad UASLP") },
-            on: {
-              click: function ($event) {
-                return _vm.setPerteneceUASLP(true)
-              },
-              change: function ($event) {
-                _vm.TipoUsuario = "Comunidad UASLP"
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(
-              " Si pertenezco a la UASLP, pero No estoy registrado en el portal de Agenda Ambiental"
-            ),
-          ]),
+          _vm._v(" ¿Ya tienes cuenta en el portal de Agenda Ambiental? "),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-check" }, [
@@ -5794,7 +5778,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Ninguno de los anteriores"),
+            _vm._v(" No estoy registrado en el portal de Agenda Ambiental"),
           ]),
         ]),
         _vm._v(" "),

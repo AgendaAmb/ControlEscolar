@@ -93,6 +93,18 @@ class RequiredDocument extends Model
     {
         return self::where('type', 'personal')->pluck('id');
     }
+
+
+    /**
+     * Obtiene el id de los documentos exclusivos para enrem.
+     *
+     * @param  mixed $query
+     * @return array
+     */
+    public static function enremDocumentsId()
+    {
+        return self::where('type', 'enrem')->pluck('id');
+    }
     
     /**
      * Obtiene el id de los documentos personales.

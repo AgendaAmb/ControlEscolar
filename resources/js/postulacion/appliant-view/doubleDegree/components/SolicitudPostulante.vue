@@ -14,7 +14,7 @@
           <b-card-body>
             <personal-data v-bind="appliant" :archive_id="archive_id" :name.sync="appliant.name"
               :middlename.sync="appliant.middlename" :surname.sync="appliant.surname" :gender.sync="appliant.gender"
-              :marital_state.sync="appliant.civic_state" :no_children.sync="appliant.no_children"
+              :marital_state.sync="appliant.marital_state" :no_children.sync="appliant.no_children"
               :birth_date.sync="appliant.birth_date" :birth_dountry.sync="appliant.birth_country"
               :nationality.sync="appliant.nationality" :residense_country.sync="appliant.residense_country"
               :birth_state.sync="appliant.birth_state"
@@ -229,7 +229,7 @@
             <reasons-to-choise v-for="(rea, index) in reasons_to_choise" v-bind="rea"
               v-bind:key="`${index}-${rea.id}-$ReasonsToChoise}`" :index="index + 1" :archive_id="archive_id" :id="rea.id"
               :first_choise.sync="rea.first_choise" :reasons_choise.sync="rea.reasons_choise"
-              :other_choises.sync="rea.other_choises" :selected_choises.sync="rea.selected_choises">
+              :other_choises.sync="rea.others_choises" :selected_choises.sync="rea.selected_choises">
             </reasons-to-choise>
           </b-card-body>
         </b-collapse>
@@ -355,13 +355,24 @@
 
 
 
-    <div class="d-flex justify-content-start align-items-center mb-4">
-      <div class="col-lg-12">
+    <div class="d-flex justify-content-start align-items-center my-4">
 
-        <b-button style="width:100%; height:75px;" @click="EnviarExpediente" variant="primary">
+        
+      <required-document-file-signed v-for="documento in enrem_documents" 
+        :key="documento.name"
+        :id="documento.id"
+        :archivo.sync="documento.archivo" 
+        :location.sync="documento.pivot.location" 
+        :errores.sync="documento.errores"
+        :images_btn="images_btn" 
+        v-bind="documento"
+        :archive_id="archive_id"
+        @enviaDocumento="cargaDocumento">
+      </required-document-file-signed>
+
+        <!-- <b-button style="width:100%; height:75px;" @click="EnviarExpediente" variant="primary">
           <p class="h3"> Send responses </p>
-        </b-button>
-      </div>
+        </b-button> -->
     </div>
   </div>
 </template>
@@ -381,6 +392,7 @@ import FielsOfInterest from './FieldsOfInterest.vue';
 import EnvironmentRelatedSkills from './EnvironmentRelatedSkills.vue';
 import CorrespondenceAddress from './CorrespondenceAddress.vue';
 import CheckboxPersonalize from './CheckboxPersonalize.vue';
+import RequiredDocumentFileSigned from './RequiredDocumentFileSigned.vue';
 
 
 export default {
@@ -401,6 +413,7 @@ export default {
     EnvironmentRelatedSkills,
     CorrespondenceAddress,
     CheckboxPersonalize,
+    RequiredDocumentFileSigned,
   },
   created() {
     // console.log(this.language);
@@ -418,6 +431,7 @@ export default {
 
 
   props: {
+    enrem_documents: Array,
     hear_about_program: Array,
     recommendation_letter_enrem: Array,
     financing_studies: Array,
@@ -597,6 +611,49 @@ export default {
 
 
   methods: {
+
+    cargaDocumento(requiredDocument, file) {
+      var formData = new FormData();
+      formData.append("archive_id", this.archive_id);
+      formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("file", file);
+
+      let url = "/controlescolar/updateDocuments/updateEnremDocument";
+
+        axios({
+          method: "post",
+          url: url,
+          data: formData,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        })
+          .then((response) => {
+
+            Swal.fire({
+                title: "Your upload was successful",
+                text: "You also can check the file",
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            Swal.fire({
+              title: "Something goes wrong",
+              text: "Try later",
+              showCancelButton: false,
+              icon: "error",
+            });
+          });
+   
+    },
+
+
     EnviarExpediente() {
       Swal.fire({
         title: "¿Estas seguro que todo esta completo?",

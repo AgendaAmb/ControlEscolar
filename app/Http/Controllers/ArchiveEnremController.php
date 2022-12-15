@@ -22,6 +22,17 @@ use Illuminate\Http\Request;
 
 class ArchiveEnremController extends Controller
 {
+    public function seeFileAnsweredToSign(Request $request)
+    {
+        // aqui retornara una vista de pdf para el archivo con todos los campos contestados
+        return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
+    }
+    public function updateEnremDocument(Request $request)
+    {
+        // aqui se subira el archivo y retornara una respuesta de exito o error
+        return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
+    }
+    
     public function updatePersonalData(Request $request)
     {        
         try {

@@ -77,17 +77,19 @@
       </div>
 
       <!-- Save Content -->
-      <div class="d-flex justify-content-start my-2" style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="updateWorkingExperiences" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
-        </div>
-        <div class="col-md-10 col-xs-9 mx-3">
-          <label>
-            <strong>Note: </strong>
-            <p>
-              <strong>This only save working experience</strong>
-            </p>
-          </label>
+      <div class="col-12">
+        <div class="row justify-content-start my-2">
+          <div class="col-lg-2 col-sm-4 align-items-center " >
+            <img @click="updateWorkingExperiences" :src="images_btn.guardar" alt=""
+              style=" max-height: 45px !important;">
+          </div>
+          <div class="col-lg-10 col-sm-8">
+            <label>
+              <p class="h5">
+                <strong>This only save working experience</strong>
+              </p>
+            </label>
+          </div>
         </div>
       </div>
     </b-card-body>
@@ -139,10 +141,10 @@ export default {
       type: Number,
       default: 0,
     },
-    
-    id:{
-      type:Number,
-      default:0,
+
+    id: {
+      type: Number,
+      default: 0,
     }
 
 

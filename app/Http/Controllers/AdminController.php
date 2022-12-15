@@ -59,9 +59,7 @@ class AdminController extends Controller
 
         ])->worker()->paginate(10000);
 
-        foreach($workers as $worker){
-           $worker = $this->getDataFromPortalUser($worker);
-        }
+
         // $students = User::with([
         //     'roles'
         // ])->where('type','students')->paginate(10000);
@@ -69,17 +67,56 @@ class AdminController extends Controller
         return new JsonResponse($workers, JsonResponse::HTTP_OK);
     }
 
-    public function getDataFromPortalUser($worker)
+
+    public function getNameWorkers(Request $request)
+    {
+        // Get all workers
+        $workers = User::with([
+            'roles',
+        ])->worker()->get();
+
+        $professors = [];
+        $names = [];
+        // return new JsonResponse($workers[0]->roles[0]->name, JsonResponse::HTTP_OK);
+
+        // filter only professors
+        foreach($workers as $worker){
+            foreach($worker->roles as $rol){
+                if(strcmp($rol->name,'profesor_nb') || strcmp($rol->name,'profesor_colaborador')){
+                    array_push($professors, $worker);
+                    break;
+                }
+            }
+        }
+
+        // retrieve names only
+        try {
+            foreach ($professors as $proffesor) {
+                array_push($names, $this->getDataFromPortalUser($proffesor));
+            }
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
+        }
+
+        // return names
+       
+        return new JsonResponse($names, JsonResponse::HTTP_OK);
+    }
+
+    public function getDataFromPortalUser($proffesor)
     {
         #Search user in portal
-        $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $worker->id])->collect();
+        $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $proffesor->id])->collect();
 
         #Save only the first user that the portal get reach
         $user_data = $user_data_collect[0];
 
         #Add data of user from portal to the collection in controlescolar
-        $worker->setAttribute('name', ucfirst($user_data['name']).' '.ucfirst($user_data['surname']).' '.ucfirst($user_data['middlename']));
-        return $worker;
+        // $worker->setAttribute('name', ucfirst($user_data['name']) . ' ' . ucfirst($user_data['surname']) . ' ' . ucfirst($user_data['middlename']));
+        // return $worker;
+        // $name = strtolower($user_data['name'] . ' ' .$user_data['surname'] . ' ' . $user_data['middlename']);
+        // return ucwords($name);     
+        return (ucfirst($user_data['name']) . ' ' . ucfirst($user_data['surname']) . ' ' .ucfirst($user_data['middlename']));        
     }
 
     /**
@@ -114,7 +151,7 @@ class AdminController extends Controller
         ]);
 
         # Verifica que el usuario se pueda registrar al módulo.
-        if ($response->failed()){
+        if ($response->failed()) {
             return new JsonResponse(['message' => 'El usuario no existe en el sistema, intente con otro diferente'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
 
@@ -132,22 +169,21 @@ class AdminController extends Controller
         }
 
         if ($has_control_escolar != true) {
-             # Registra el módulo del usuario en el sistema central.
-             $post_user_module_response = $this->miPortalService->miPortalPost('api/usuarios/modulos', [
+            # Registra el módulo del usuario en el sistema central.
+            $post_user_module_response = $this->miPortalService->miPortalPost('api/usuarios/modulos', [
                 'module_id' => intval(env('MIPORTAL_MODULE_ID')),
                 'user_id' => $request->id,
                 'user_type' => $request->type,
             ]);
 
             # Verifica que el usuario se pueda registrar al módulo.
-            if ($post_user_module_response->failed()){
+            if ($post_user_module_response->failed()) {
                 return new JsonResponse(['message' => 'Módulo de usuario no registrado en Mi Portal'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
-           
         } else {
             try {
                 $user = User::where('id', $request->id)->first();
-                if($user === null){
+                if ($user === null) {
                     $user = User::create($request->only('id', 'type'));
                 }
                 $user->roles()->syncWithPivotValues($request->selected_roles, ['model_type' => $request->type]);
@@ -156,10 +192,8 @@ class AdminController extends Controller
                 $user->academicComittes()->syncWithPivotValues($request->selected_academic_comittes, ['user_type' => $request->type]);
                 // $user->save();
                 $user->load(['academicAreas', 'academicEntities', 'academicComittes', 'roles']);
-               
             } catch (\Exception $e) {
                 return new JsonResponse(['message' => 'El usuario ya existe en control escolar pero no se pudo actualizar su información'],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-
             }
 
             return new JsonResponse(['message' => 'El usuario ya existia en el sistema pero se actualizo correctamente su información ', 'user' => $user], JsonResponse::HTTP_CREATED);
@@ -216,7 +250,7 @@ class AdminController extends Controller
 
             if ($has_control_escolar != true) {
                 try {
-                     # Registra el módulo del usuario en el sistema central.
+                    # Registra el módulo del usuario en el sistema central.
                     $post_user_module_response = $this->miPortalService->miPortalPost('api/usuarios/modulos', [
                         'module_id' => intval(env('MIPORTAL_MODULE_ID')),
                         'user_id' => $request->id,
@@ -224,10 +258,9 @@ class AdminController extends Controller
                     ]);
 
                     # Verifica que el usuario se pueda registrar al módulo.
-                    if ($post_user_module_response->failed()){
+                    if ($post_user_module_response->failed()) {
                         return new JsonResponse(['message' => 'Módulo de usuario no registrado en Mi Portal'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
                     }
-
                 } catch (\Exception $e) {
                     return new JsonResponse(['message' => $e],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                 }
@@ -256,14 +289,14 @@ class AdminController extends Controller
             'type' => ['required', 'string', 'max:225', 'in:workers,students'],
         ]);
 
-        try{
+        try {
             $response = $this->miPortalService->miPortalPost('api/usuarios/deleteModulo', [
-                        'module_id' => intval(env('MIPORTAL_MODULE_ID')),
-                        'user_id' => $request->id,
-                        'user_type' => $request->type,
+                'module_id' => intval(env('MIPORTAL_MODULE_ID')),
+                'user_id' => $request->id,
+                'user_type' => $request->type,
             ]);
 
-            if ($response->failed()){
+            if ($response->failed()) {
                 return new JsonResponse(['message' => 'Módulo de usuario no registrado en Mi Portal'], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
             }
 
@@ -274,7 +307,6 @@ class AdminController extends Controller
             return new JsonResponse(['message' => 'No se encontro al usuario a eliminar'],  JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         return new JsonResponse(['message' => 'Usuario eliminado'], JsonResponse::HTTP_CREATED);
-
     }
 
     //necesita la request y la ruta hacia la api del portal

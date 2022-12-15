@@ -37,21 +37,23 @@
             <div class="col-12">
                 <label class="h3">Why did you decide to study the ENREM master's degree? (Multiple choice is
                     possible)</label>
-                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho.label" :value="cho.value"
-                    :id="index" :array_selected.sync="selected_choises_list" @actualizaLista="actualizaLista"></checkbox-personalize>
+                <checkbox-personalize v-for="(cho, index) in choises_list" :key="index" :label="cho.label"
+                    :value="cho.value" :id="index" :array_selected.sync="selected_choises_list"
+                    @actualizaLista="actualizaLista"></checkbox-personalize>
             </div>
         </div>
 
-
-        <div class="row justify-content-start my-4" style="width:100%;">
-            <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-                <img @click="updateReasonsToChoise" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save Reasons to Choise</strong></p>
-                </label>
+        <div class="col">
+            <div class="row justify-content-start my-4">
+                <div class="col-lg-2 col-sm-4 align-items-center ">
+                    <img @click="updateReasonsToChoise" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-2">
+                    <label>
+                        <p class="h5"><strong>Only save Reasons to Choise</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </div>
@@ -102,10 +104,9 @@ export default {
             .catch((error) => {
                 console.log(error);
             });
-            if (this.selected_choises != null ) {
-            this.selected_choises_list  = JSON.parse(this.selected_choises);
+        if (this.selected_choises != null) {
+            this.selected_choises_list = JSON.parse(this.selected_choises);
         }
-        this.selected_choises_list = Object.keys(this.selected_choises).map((key) => [key, this.selected_choises[key]]);
     },
 
     components: {
@@ -122,11 +123,11 @@ export default {
             booleanChoises: ['Yes', 'No'],
             // universidades: [],
             choises_list: [
-            {label: 'Course of study / focus of content', value: 'Course of study / focus of content'} ,
-            {label: 'Studying and living in Mexico and Germany', value: 'Studying and living in Mexico and Germany'} ,
-            {label: 'Obtain two degree in two years', value: 'Obtain two degree in two years'} ,
-            {label: 'Possibility for scholarship', value: 'Possibility for scholarship'} ,
-            {label: 'Other', value: 'Other'} ,
+                { label: 'Course of study / focus of content', value: 'Course of study / focus of content' },
+                { label: 'Studying and living in Mexico and Germany', value: 'Studying and living in Mexico and Germany' },
+                { label: 'Obtain two degree in two years', value: 'Obtain two degree in two years' },
+                { label: 'Possibility for scholarship', value: 'Possibility for scholarship' },
+                { label: 'Other', value: 'Other' },
             ],
             selected_choises_list: [],
 
@@ -214,13 +215,13 @@ export default {
     methods: {
         // Name is the list 
         // res is the boolean value, push or pop
-        
-       actualizaLista(label, value, res) {
+
+        actualizaLista(label, value, res) {
             let index = -1;
 
             // no data, insert
             if (this.selected_choises_list.length <= 0 && res) {
-                this.selected_choises_list.push({'label': label, 'value': value});
+                this.selected_choises_list.push({ 'label': label, 'value': value });
             } else {
 
                 // data exist, check the index
@@ -240,7 +241,7 @@ export default {
                     // push
                 } else {
                     if (index < 0) {
-                        this.selected_choises_list.push({'label': label, 'value': value});
+                        this.selected_choises_list.push({ 'label': label, 'value': value });
                     }
 
                 }
@@ -248,7 +249,7 @@ export default {
 
 
         },
-       
+
         countryHasValue() {
             //country is not empty
             if (this.country != null) {

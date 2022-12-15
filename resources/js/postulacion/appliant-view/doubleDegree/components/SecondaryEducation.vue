@@ -50,18 +50,19 @@
         </select>
     </div>
 
-
-    <div class="row my-2 justify-content-center">
-      <div class="col-4 " style="max-height: 45px !important;">
+    <div class="col-12">
+    <div class="row my-2 justify-content-start">
+      <div class="col-lg-2 col-sm-4">
         <img @click="updateSecondaryEducation" :src="images_btn.guardar" alt=""
           style=" max-height: 45px !important;">
       </div>
-      <div class="col-8">
+      <div class="col-lg-10 col-sm-8">
         <label>
-          <strong>Note: That's only save secondary education </strong>
+          <p class="h5"><strong>Note: That's only save secondary education</strong></p>
         </label>
       </div>
     </div>
+  </div>
   </div>
 </template>
   

@@ -121,8 +121,8 @@
                 <div class="col-lg-4 col-sm-6">
                     <select v-model="ProfessorResearchMexico" class="form-control">
                         <option value="" selected>Choose an option</option>
-                        <option v-for="item in professorsMexico " :key="item.id" :value="item.name">
-                            {{ item.name }}
+                        <option v-for="item in professorsMexico " :key="item" :value="item">
+                            {{ item }}
                         </option>
                     </select>
                 </div>
@@ -187,15 +187,17 @@
 
         </div>
 
-        <div class="row my-2" style="width:100%;">
-            <div class="col-4 " style="width:100%; max-height: 45px !important;">
-                <img @click="updateFieldsOfInterest" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save fiels of interests</strong></p>
-                </label>
+        <div class="col-12">
+            <div class="row my-2 ">
+                <div class="col-lg-2 col-sm-4 ">
+                    <img @click="updateFieldsOfInterest" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5"><strong>Only save fiels of interests</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </b-card-body>
@@ -280,7 +282,37 @@ export default {
                 "Dr. Rui Costa Pedroso",
                 "Dr. Alexandra Nauditt"
             ],
-            professorsMexico: [],
+            professorsMexico: [
+                "MA. CATALINA DE LA TORRE ALFARO",
+                "FERNANDO BARRIGA MARTINEZ DIAZ",
+                "JOSE DE JESUS SAAVEDRA MEJIA",
+                "MARICELA DIAZ DE LEON RODRIGUEZ",
+                "JAVIER MARTINEZ FORTANELLI",
+                "ANA CRISTINA TEJEDA CUBILLAS",
+                "HUMBERTO HERNANDEZ REYES",
+                "JUAN ANTONIO AGUERO REYES",
+                "ALFREDO GALARZA AVILA",
+                "SILVIA CONTRERAS ROMERO",
+                "LUIS ARMANDO JACOME BERNAL",
+                "MARIA EUGENIA GARCIA ALMENDAREZ",
+                "ERIKA CHAVEZ GARCIA",
+                "MARCOS SILLER ALGARA",
+                "ISRAEL TORRES RODRIGUEZ",
+                "GUILLERMO JAVIER LARRAGOITIA CASTRO",
+                "ANUSCHKA JOHANNA MARIA 'T HOOFT  VAN",
+                "JOSE LUIS FLORES FLORES",
+                "PAOLA ELIZABETH FLORES DIAZ",
+                "VALENTE SOLIS VAZQUEZ",
+                "LEONARDO ERNESTO MIRELES MARQUEZ",
+                "JUAN CARLOS LOPEZ GARCIA",
+                "LAURA ESPINOSA YAÑEZ",
+                "GUILLERMO REYES ESPINOSA",
+                "PATRICIA MIRANDA JULIO",
+                "GREGORIO FUENTES ALVAREZ",
+                "ISRAEL SOTO RAZO",
+                "CESAR ARTURO HERNANDEZ ILIZALITURRI",
+                "JOSE ARTURO NOVA VAZQUEZ DE"
+            ],
             researchAreaMexico: ['Renewable Natural Resources', 'Enviromental Assessment', 'Enviromental Management', 'Integrated Enviromental Health', 'Prevention and Control'],
             researchAreaGerman: ['NRM focus Land Management', 'NRM focs Regional Management', 'NRM fous Water Management', 'NRM focus Energy Management'],
         };
@@ -299,15 +331,16 @@ export default {
                 console.log(error);
             });
 
-        axios
-            .get("/controlescolar/admin/workers")
-            .then((response) => {
-                this.professorsMexico = response.data.data;
-                console.log(response.data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-             });
+        // implement later, this need to be fix
+        // axios
+        //     .get("/controlescolar/admin/getNameWorkers")
+        //     .then((response) => {
+        //         this.professorsMexico = response.data.data;
+        //         console.log(response.data.data);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
     },
 
     computed: {

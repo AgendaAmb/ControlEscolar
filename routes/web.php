@@ -124,6 +124,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
             
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
+            Route::get('/seeFileAnsweredToSign', [ArchiveEnremController::class, 'seeFileAnsweredToSign'])->name('seeFileAnsweredToSign'); //Vista de expediente para alumno, rellenar campos
+
+
             Route::prefix('address')->name('address.')->group(function () {
                 Route::post('/update', [ArchiveEnremController::class, 'updateAddress'])->name('updateAddress');
             });
@@ -303,6 +306,10 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         # Profesores
         Route::get('workers', [AdminController::class, 'workers'])
             ->name('workers');
+            Route::get('getNameWorkers', [AdminController::class, 'getNameWorkers'])
+            ->name('getNameWorkers');
+
+            
 
         Route::post('newWorker', [AdminController::class, 'newWorker'])
             ->name('newWorker');
@@ -323,7 +330,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('/updateArchiveInterviewDocument', [InterviewController::class, 'updateArchiveInterviewDocument']);
         // Faltaria la de working aqui y en solicitud tambien
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument_extern'])->name('get_document');
-        Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
+        Route::post('/updateEnremDocument', [ArchiveEnremController::class, 'updateEnremDocument'])->name('updateEnremDocument');
     });
 
     Route::prefix('documentsForInterview')->name('documentsForInterview.')->group(function () {

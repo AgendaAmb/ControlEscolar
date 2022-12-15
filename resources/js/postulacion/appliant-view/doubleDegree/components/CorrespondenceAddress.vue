@@ -1,6 +1,6 @@
 <template>
-  <div class="form">
-    <div class="row my-2">
+  <div class="form my-4">
+    <div class="row ">
       <div class="col-12">
         <p class="h2"><strong>{{ title }}</strong></p>
       </div>
@@ -17,6 +17,17 @@
       <div class="form-group col-4">
         <label> Number: </label>
         <input v-model.number="NumberAddress" type="number" class="form-control">
+      </div>
+
+
+      <div class="form-group col-12">
+        <label> Country: </label>
+        <select v-model="StateCountry" class="form-control" @change="escogePais">
+          <option value="" selected>Choose a country</option>
+          <option v-for="country in countries" :key="country.id" :value="country.name">
+            {{ country.name }}
+          </option>
+        </select>
       </div>
 
       <div class="form-group col-6">
@@ -38,15 +49,6 @@
       </div>
 
 
-      <div class="form-group col-12">
-        <label> Country: </label>
-        <select v-model="StateCountry" class="form-control" @change="escogePais">
-          <option value="" selected>Choose a country</option>
-          <option v-for="country in countries" :key="country.id" :value="country.name">
-            {{ country.name }}
-          </option>
-        </select>
-      </div>
 
       <div class="form-group col-12">
         <label> Telephone: </label>
@@ -61,13 +63,13 @@
 
 
     <div class="row my-2 justify-content-start">
-      <div class="col-lg-3 col-sm-4 " style="max-height: 45px !important;">
+      <div class="col-lg-2 col-sm-4">
         <img @click="updateCorrespondenceAddress" :src="images_btn['guardar']" alt=""
           style=" max-height: 45px !important;">
       </div>
-      <div class="col-lg-8 col-sm-3 mx-2">
+      <div class="col-lg-10 col-sm-8">
         <label>
-          <strong>Note: That's only save address </strong>
+          <p class="h5"><strong>Note: That's only save address </strong></p>
         </label>
       </div>
     </div>

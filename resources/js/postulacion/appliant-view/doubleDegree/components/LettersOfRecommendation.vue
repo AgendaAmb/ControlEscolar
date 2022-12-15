@@ -61,15 +61,17 @@
             </div>
         </div>
 
-        <div class="row my-2">
-            <div class="col-4 " style="width:100%; max-height: 45px !important;">
-                <img @click="updateLettersOfRecommendation" :src="images_btn.guardar" alt=""
-                    style=" max-height: 45px !important;">
-            </div>
-            <div class="col-8">
-                <label>
-                    <p><strong>Only save Recommendation Letter</strong></p>
-                </label>
+        <div class="col-12">
+            <div class="row my-2">
+                <div class="col-lg-2 col-sm-4">
+                    <img @click="updateLettersOfRecommendation" :src="images_btn.guardar" alt=""
+                        style=" max-height: 45px !important;">
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5"><strong>Only save Recommendation Letter</strong></p>
+                    </label>
+                </div>
             </div>
         </div>
     </b-card-body>
@@ -121,9 +123,9 @@ export default {
             type: String,
             default: "",
         },
-        email:{
-            type:String,
-            default:"",
+        email: {
+            type: String,
+            default: "",
         }
     },
 
@@ -203,7 +205,7 @@ export default {
             }
         },
 
-        Title:{
+        Title: {
             get() {
                 return this.title;
             },
@@ -250,36 +252,36 @@ export default {
     },
 
     created() {
-    // console.log(this.language);
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+        // console.log(this.language);
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
 
 
     methods: {
 
-        updateLettersOfRecommendation(){
+        updateLettersOfRecommendation() {
             axios
                 .post("/controlescolar/solicitud/enrem/lettersOfRecommendation/update", {
                     id: this.id,
                     archive_id: this.archive_id,
-                    type:this.type,
-                    date:this.date,
-                    title:this.title,
-                    position:this.position,
-                    organization:this.organization,
-                    telephone:this.telephone,
-                    full_name:this.full_name,
-                    email:this.email
-                  
+                    type: this.type,
+                    date: this.date,
+                    title: this.title,
+                    position: this.position,
+                    organization: this.organization,
+                    telephone: this.telephone,
+                    full_name: this.full_name,
+                    email: this.email
+
                 }).then(response => {
                     Swal.fire({
                         title: response.data.message,
@@ -296,7 +298,7 @@ export default {
                     });
                 });
         },
-        
+
 
 
 

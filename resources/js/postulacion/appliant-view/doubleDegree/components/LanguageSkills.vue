@@ -160,15 +160,17 @@
                 </div>
             </div>
 
-            <div class="row justify-content-start my-2">
-                <div class="col-4 align-items-center " style="width:100%; max-height: 45px !important;">
-                    <img @click="updateLanguageSkills" :src="images_btn.guardar" alt=""
-                        style=" max-height: 45px !important;">
-                </div>
-                <div class="col-8">
-                    <label>
-                        <p class="h4"><strong>This only save Language</strong></p>
-                    </label>
+            <div class="col-12">
+                <div class="row justify-content-center my-4">
+                    <div class="col-lg-2 col-sm-4 align-items-center " >
+                        <img @click="updateLanguageSkills" :src="images_btn.guardar" alt=""
+                            style=" max-height: 45px !important;">
+                    </div>
+                    <div class="col-lg-10 col-sm-8">
+                        <label>
+                            <p class="h5"><strong>This only save Language</strong></p>
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -206,9 +208,9 @@ export default {
         },
 
         presented_at: {
-      type: String,
-      default: null,
-    },
+            type: String,
+            default: null,
+        },
 
         // Dominio del idioma.
         language_domain: String,
