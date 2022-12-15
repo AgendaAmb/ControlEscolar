@@ -11,7 +11,8 @@
 
         </div>
         <div class="modal-body">
-          <form v-on:submit.prevent="registraUsuario">
+          <form v-on:submit.prevent="registraUsuario" class="needs-validation">
+
             <!-- Datos para crear la cuenta -->
             <crear-cuenta :errores="errores" :tipo_usuario.sync="tipo_usuario" :pertenece_uaslp.sync="pertenece_uaslp"
               :clave_uaslp.sync="clave_uaslp" :facultad.sync="facultad" :email.sync="email"
@@ -33,6 +34,7 @@
               </datos-personales>
             </div>
             <!-- <button @click="a()">sdfasd</button> -->
+            
           </form>
         </div>
       </div>
