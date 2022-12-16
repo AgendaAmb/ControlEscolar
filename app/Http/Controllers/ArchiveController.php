@@ -941,6 +941,7 @@ class ArchiveController extends Controller
                 'scientificProductions.authors',
                 'interviewDocuments',
                 'humanCapitals',
+                
                 'enviromentRelatedSkills',
                 'reasonsToChoise',
                 'address',
@@ -952,8 +953,7 @@ class ArchiveController extends Controller
                 'hearAboutProgram',
                 'enremDocuments',
             ]);
-
-
+            // dd($archiveModel);
             $academic_program = $archiveModel->announcement->academicProgram;
 
             // * Complete appliant information
@@ -994,6 +994,8 @@ class ArchiveController extends Controller
             return new JsonResponse(['message' => 'No se pudo extraer informacion del archivo', 'error' => $e], JsonResponse::HTTP_SERVICE_UNAVAILABLE);
         }
         // dd( $request->session()->get('user')->id);
+        // dd( $archiveModel);
+
         return view('postulacion.show')
             ->with('archive', $archiveModel)
             ->with('appliant', $appliant)

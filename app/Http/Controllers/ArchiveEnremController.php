@@ -16,17 +16,137 @@ use App\Models\RecommendationLetterEnrem;
 use App\Models\SecondaryEducation;
 use App\Models\User;
 use App\Models\WorkingExperience;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Helpers\MiPortalService;
+
 
 class ArchiveEnremController extends Controller
 {
-    public function seeFileAnsweredToSign(Request $request)
+
+     /**
+     * Web service de Mi portal.
+     * 
+     * @var \App\Helpers\MiPortalService
+     */
+    private $service;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
     {
-        // aqui retornara una vista de pdf para el archivo con todos los campos contestados
-        return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
+        $this->service = new MiPortalService;
+        parent::__construct();
     }
+
+    public function getDataFromPortalUser($appliant)
+    {
+        #Search user in portal
+        $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $appliant->id])->collect();
+
+        #Save only the first user that the portal get reach
+
+        $user_data = $user_data_collect[0];
+
+        #Add data of user from portal to the collection in controlescolar
+        $appliant->setAttribute('name', $user_data['name']);
+        $appliant->setAttribute('middlename', $user_data['middlename']);
+        $appliant->setAttribute('surname', $user_data['surname']);
+        $appliant->setAttribute('gender', $user_data['gender']);
+        $appliant->setAttribute('birth_date', $user_data['birth_date']);
+        $appliant->setAttribute('curp', $user_data['curp']);
+        $appliant->setAttribute('age', $user_data['age']);
+        $appliant->setAttribute('birth_country', $user_data['nationality']);
+        $appliant->setAttribute('residence_country', $user_data['residence']);
+        $appliant->setAttribute('phone_number', $user_data['phone_number']);
+        $appliant->setAttribute('email', $user_data['email']);
+        $appliant->setAttribute('altern_email', $user_data['altern_email']);
+        $appliant->setAttribute('academic_degree', $user_data['academic_degree']);
+
+        return $appliant;
+    }
+
+    public function seeFileAnsweredToSign($archive_id)
+    {
+        // find the archive
+        try {
+            $archive = Archive::where('id', $archive_id)->first();
+            $archive->loadMissing([
+                // Cosas del aplicante
+                'appliant',
+                'announcement.academicProgram',
+                // Documentos y secciones para expedinte
+                'personalDocuments',
+                'requiredDocuments',
+                'curricularDocuments',
+                'entranceDocuments',
+                'intentionLetter',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'interviewDocuments',
+                'humanCapitals',
+                'enviromentRelatedSkills',
+                'reasonsToChoise',
+                'address',
+                'secondaryEducation',
+                'futurePlans',
+                'fieldsOfInterest',
+                'financingStudies',
+                'recommendationLetterEnrem',
+                'hearAboutProgram',
+                'enremDocuments',
+            ]);
+
+        } catch (\Exception $e) {
+            return new JsonResponse('No se pudo extraer informacion del expediente', 200); //Ver info archivos en consola
+        }
+
+        try{
+            $appliant = $this->getDataFromPortalUser($archive->appliant);
+        } catch (\Exception $e) {
+            return new JsonResponse('No se pudo extraer informacion del expediente', 200); //Ver info archivos en consola
+        }
+        // dd($archive);
+        // prepare pdf to export
+        try {
+            $data = [
+                'personal_data' => $archive->appliant,
+                'address' => $archive->address,
+                'secondary_education' => $archive->secondaryEducation,
+                'higher_education' => $archive->academicDegrees,
+                'language_skills' => $archive->appliantLanguages,
+                'enviroment_related_skills' => $archive->enviromentRelatedSkills,
+                'working_experiences' => $archive->appliantWorkingExperiences,
+                'reasons_to_choise' => $archive->reasonsToChoise,
+                'future_plans' => $archive->futurePlans,
+                'fields_of_interest' => $archive->fieldsOfInterest,
+                'financing_studies' => $archive->financingStudies,
+                'recommendation_letter_enrem' => $archive->recommendationLetterEnrem,
+                'hear_about_program' => $archive->hearAboutProgram,
+            ];
+
+            $file = PDF::loadView('pdf.enremFile', ["data" => $data])->setOptions([
+                    'defaultPaperSize' => 'a4',
+                    'isJavaScriptEnabled' => true,
+                    'isFontSubsettingEnabled' =>  true,
+                    'dpi' => 120
+                ]); //opciones para visualizar correctamente el pdf
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        // aqui se vera el pdf de todo el archivo 
+        return $file->stream();
+    }
+
+
     public function updateEnremDocument(Request $request)
     {
         // aqui se subira el archivo y retornara una respuesta de exito o error

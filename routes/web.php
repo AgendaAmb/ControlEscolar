@@ -124,7 +124,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
             
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
-            Route::get('/seeFileAnsweredToSign', [ArchiveEnremController::class, 'seeFileAnsweredToSign'])->name('seeFileAnsweredToSign'); //Vista de expediente para alumno, rellenar campos
+            Route::get('/seeFileAnsweredToSign/{archive_id}', [ArchiveEnremController::class, 'seeFileAnsweredToSign'])->name('seeFileAnsweredToSign'); //Vista de expediente para alumno, rellenar campos
 
 
             Route::prefix('address')->name('address.')->group(function () {

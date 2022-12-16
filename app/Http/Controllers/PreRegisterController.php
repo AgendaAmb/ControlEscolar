@@ -227,7 +227,7 @@ class PreRegisterController extends Controller
                 $response_data = $response->collect()->toArray();
                 if ($response_data['message']) {
                     if ($response_data['message'] != '¡Usuario Creado! y/o modulo actualizado') {
-                        return new JsonResponse(['message' => $response_data['message']], JsonResponse::HTTP_CONFLICT );
+                        return new JsonResponse(['message' => $response_data['message'], 'cosa' => 'aqui muere'], JsonResponse::HTTP_CONFLICT );
                     }
                 } else {
                     return new JsonResponse(['message' => 'Error al crear usuario en Portal'], JsonResponse::HTTP_CONFLICT);

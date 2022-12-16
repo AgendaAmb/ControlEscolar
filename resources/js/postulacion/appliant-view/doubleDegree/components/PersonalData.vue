@@ -2,10 +2,10 @@
   <div class="form-row my-4">
     <div class="col-12">
       <div class="row my-1">
-        <div class="col-sm-6 col-xl-3 align-middle ">
+        <!-- <div class="col-sm-6 col-xl-3 align-middle ">
           <img class="img-fluid rounded" src="https://www.w3schools.com/images/w3schools_green.jpg">
-        </div>
-        <div class="form-group col-sm-6 col-xl-9">
+        </div> -->
+        <div class="form-group col-12">
           <div class="row my-1">
             <div class="form-group col-12">
               <label> First Name(s): </label>
