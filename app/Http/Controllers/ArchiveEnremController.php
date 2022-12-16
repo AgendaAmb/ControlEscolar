@@ -21,7 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Helpers\MiPortalService;
-
+use App\Models\ArchiveRequiredDocument;
 
 class ArchiveEnremController extends Controller
 {
@@ -115,6 +115,9 @@ class ArchiveEnremController extends Controller
         }
         // dd($archive);
         // prepare pdf to export
+        $archive->reasonsToChoise[0]->setAttribute('selected_choises_list', json_decode( $archive->reasonsToChoise[0]->selected_choises));
+
+        // dd( $archive->reasonsToChoise[0]->selected_choises_list);
         try {
             $data = [
                 'personal_data' => $archive->appliant,
@@ -149,6 +152,49 @@ class ArchiveEnremController extends Controller
 
     public function updateEnremDocument(Request $request)
     {
+        $request->validate([
+            'archive_id' => ['required', 'numeric', 'exists:archives,id'],
+            'requiredDocumentId' => ['required', 'numeric', 'exists:required_documents,id'],
+            'file' => ['required']
+        ]);
+
+        try {
+            $archive = Archive::find($request->archive_id);
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'Error al buscar archivo'], JsonResponse::HTTP_CONFLICT);
+        }
+
+
+        // Create the route
+        try {
+            # Archivo de la solicitud
+            $ruta = $request->file('file')->storeAs(
+                'archives/' . $request->archive_id . '/enremDocuments',
+                $request->requiredDocumentId . '.pdf'
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => 'La ruta no se puede generar'], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+
+        try {
+            # Asocia los documentos requeridos.
+            $archive->enremDocuments()->detach($request->requiredDocumentId);
+            $archive->enremDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
+            $required_document = ArchiveRequiredDocument::where([
+                'required_document_id' => $request->requiredDocumentId,
+                'archive_id' => $request->archive_id
+            ])->first();
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => $e->getMessage()], JsonResponse::HTTP_CONFLICT);
+        }
+
+
+        /**Problema al regresar el json, marca un erro en la consulta */
+        return new JsonResponse(
+            ['location' => $ruta],
+            JsonResponse::HTTP_OK
+        );
         // aqui se subira el archivo y retornara una respuesta de exito o error
         return new JsonResponse(['message' => 'Data of appliant section was saved'], JsonResponse::HTTP_ACCEPTED);
     }

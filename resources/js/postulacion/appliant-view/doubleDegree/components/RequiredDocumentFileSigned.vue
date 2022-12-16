@@ -30,11 +30,11 @@
       </div>
 
       <div class="form-group col-lg-3 col-md-3 col-xs-5 align-items-center p-2">
-       
+
         <div class="row my-1">
           <label class="my-1">
-            <a :href="'/controlescolar/solicitud/enrem/seeFileAnsweredToSign/' + archive_id + '/'"
-              target="_blank" style=" height: 45px; width:100%;">
+            <a :href="'/controlescolar/solicitud/enrem/seeFileAnsweredToSign/' + archive_id + '/'" target="_blank"
+              style=" height: 45px; width:100%;">
               <img :src="images_btn.descargar" style="max-height: 45px !important;">
             </a>
           </label>
@@ -49,21 +49,27 @@
         </div>
 
         <div v-if="checkUpload() > 0" class="row my-2">
-          <label for="">
+          <div class="row">
+            <label >
             <p class="h5">See your results</p>
           </label>
+          </div>
           
-          <label>
-            <a :href="'/controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
-              target="_blank">
-              <img :src="images_btn.ver" alt="" style="width:100%; max-height: 45px !important;">
-            </a>
-          </label>
 
-          <label class="my-1">
-            <button style=" max-height: 45px !important;" @click="downloandFile(location)"><img
-                :src="images_btn.descargar" /></button>
-          </label>
+          <div class="row my-1">
+            <label>
+              <a :href="'/controlescolar/solicitud/enrem/expediente/' + location" style=" height: 45px; width:100%;"
+                target="_blank">
+                <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
+              </a>
+            </label>
+          </div>
+
+          <div class="row my-1">
+            <label>
+              <input style=" max-height: 45px !important;" type="image" :src="images_btn.descargar" @click="downloandFile(location)">
+            </label>
+          </div>
         </div>
 
       </div>
@@ -78,7 +84,7 @@ export default {
 
   props: {
     archive_id: {
-      type:Number,
+      type: Number,
     },
 
     id: {

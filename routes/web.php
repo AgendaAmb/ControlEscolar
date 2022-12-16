@@ -121,6 +121,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
         Route::prefix('enrem')->name('enrem.')->group(function () {
+            Route::get('expediente/archives/{archive}/{type}/{name}', [FileController::class, 'viewDocument'])->name('getArchive');
             
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
@@ -324,7 +325,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     Route::prefix('updateDocuments')->name('updateDocuments.')->group(function () {
         Route::get('/show/{archive_id}/{personal_documents}/{entrance_documents}/{academic_documents}/{language_documents}/{working_documents}', [ArchiveController::class, 'showDocumentsFromEmail'])->name('show');
         Route::post('/updateArchivePersonalDocument', [ArchiveController::class, 'updateArchivePersonalDocument']);
-        Route::post('/updateArchiveEntranceDoca ument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
+        Route::post('/updateArchiveEntranceDocument', [ArchiveController::class, 'updateArchiveEntranceDocument']);
         Route::post('/updateAcademicDegreeRequiredDocument', [AcademicDegreeController::class, 'updateAcademicDegreeRequiredDocument']);
         Route::post('/updateAppliantLanguageRequiredDocument', [AppliantLanguageController::class, 'updateAppliantLanguageRequiredDocument']);
         Route::post('/updateArchiveInterviewDocument', [InterviewController::class, 'updateArchiveInterviewDocument']);
