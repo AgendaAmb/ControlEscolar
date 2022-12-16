@@ -258,6 +258,19 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    inputClassForEmail: function inputClassForEmail() {
+      var valid = false;
+
+      if (this.EmailAlterno != null && this.EmailAlterno != '') {
+        valid = true;
+      }
+
+      return {
+        "form-control": true,
+        "is-invalid": !valid,
+        "is-valid": valid
+      };
+    },
     inputClassFor: function inputClassFor(model) {
       return {
         'form-control': true,
@@ -369,6 +382,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -985,9 +1118,132 @@ __webpack_require__.r(__webpack_exports__);
       Vue.set(this, "states", this.countries[evento.target.selectedIndex - 1].states);
     },
     inputClassFor: function inputClassFor(model) {
+      var valid = false;
+
+      switch (model) {
+        case 'curp':
+          console.log(this.NoCurp);
+
+          if (this.NoCurp == false) {
+            if (this.Curp != null && this.Curp != '') {
+              valid = true;
+            }
+          } else {
+            valid = true;
+          }
+
+          break;
+
+        case 'name':
+          if (this.Name != null && this.Name != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'first_surname':
+          if (this.FirstSurname != null && this.FirstSurname != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'last_surname':
+          if (this.LastSurname != null && this.LastSurname != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'birth_date':
+          if (this.BirthDate != null && this.BirthDate != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'ocupation':
+          if (this.Ocupation != null && this.Ocupation != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'gender':
+          if (this.Gender != null && this.Gender != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'civic_state':
+          if (this.CivicState != null && this.CivicState != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'birth_country':
+          if (this.BirthCountry != null && this.BirthCountry != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'birth_state':
+          if (this.BirthState != null && this.BirthState != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'residence_country':
+          if (this.ResidenceCountry != null && this.ResidenceCountry != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'zip_code':
+          if (this.ZipCode != null && this.ZipCode != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'phone_number':
+          if (this.PhoneNumber != null && this.PhoneNumber != '') {
+            valid = true;
+          }
+
+          break;
+
+        case 'ethnicity':
+          // ! Puede ser vacio
+          valid = true;
+          break;
+
+        case 'is_disabled':
+          if (this.IsDisabled != null) {
+            valid = true;
+          }
+
+          break;
+
+        case 'disability':
+          if (this.IsDisabled != null) {
+            if (this.Disability != null && this.Disability != '') {
+              valid = true;
+            }
+          }
+
+          break;
+      }
+
       return {
         "form-control": true,
-        "is-invalid": model in this.errores
+        "is-invalid": !valid,
+        "is-valid": valid
       };
     }
   }
@@ -1110,6 +1366,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/pre-registro/components/DatosPersonales.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
 //
 //
 //
@@ -5878,7 +6136,7 @@ var render = function () {
       _vm._v(" "),
       _vm.hasAlternEmail != false && _vm.TipoUsuario === "Comunidad AA"
         ? _c("div", { class: _vm.EmailClass }, [
-            _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
+            _c("label", [_vm._v(" Ingresa un correo de contacto alterno")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -5889,7 +6147,7 @@ var render = function () {
                   expression: "EmailAlterno",
                 },
               ],
-              class: _vm.inputClassFor("email_alterno"),
+              class: _vm.inputClassForEmail("email_alterno"),
               attrs: { type: "email", readonly: true },
               domProps: { value: _vm.EmailAlterno },
               on: {
@@ -5910,7 +6168,7 @@ var render = function () {
           ])
         : _vm.TipoUsuario != "Ninguno"
         ? _c("div", { class: _vm.EmailClass }, [
-            _c("label", [_vm._v(" Ingresa un correo de contacto alterno ")]),
+            _c("label", [_vm._v(" Ingresa un correo de contacto alterno")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -5921,8 +6179,8 @@ var render = function () {
                   expression: "EmailAlterno",
                 },
               ],
-              class: _vm.inputClassFor("email_alterno"),
-              attrs: { type: "email" },
+              class: _vm.inputClassForEmail("email_alterno"),
+              attrs: { type: "email", required: "" },
               domProps: { value: _vm.EmailAlterno },
               on: {
                 input: function ($event) {
@@ -6270,6 +6528,14 @@ var render = function () {
         },
       }),
       _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
+      _vm._v(" "),
       "name" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
             _vm._v("\n      " + _vm._s(_vm.errores.name) + "\n    "),
@@ -6292,7 +6558,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("first_surname"),
-        attrs: { type: "text", readonly: _vm.readonly },
+        attrs: { type: "text", readonly: _vm.readonly, required: "" },
         domProps: { value: _vm.FirstSurname },
         on: {
           input: function ($event) {
@@ -6303,6 +6569,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "first_surname" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6326,7 +6600,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("last_surname"),
-        attrs: { type: "text", readonly: _vm.readonly },
+        attrs: { type: "text", readonly: _vm.readonly, required: "" },
         domProps: { value: _vm.LastSurname },
         on: {
           input: function ($event) {
@@ -6337,6 +6611,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "last_surname" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6358,7 +6640,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("birth_date"),
-        attrs: { type: "date" },
+        attrs: { type: "date", required: "" },
         domProps: { value: _vm.BirthDate },
         on: {
           input: function ($event) {
@@ -6369,6 +6651,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "birth_date" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6390,7 +6680,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("ocupation"),
-        attrs: { type: "text", readonly: _vm.Readonly },
+        attrs: { type: "text", readonly: _vm.Readonly, required: "" },
         domProps: { value: _vm.Ocupation },
         on: {
           input: function ($event) {
@@ -6401,6 +6691,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "ocupation" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6424,7 +6722,11 @@ var render = function () {
             },
           ],
           class: _vm.inputClassFor("gender"),
-          attrs: { readonly: _vm.Readonly, disabled: _vm.Readonly },
+          attrs: {
+            readonly: _vm.Readonly,
+            disabled: _vm.Readonly,
+            required: "",
+          },
           on: {
             change: function ($event) {
               var $$selectedVal = Array.prototype.filter
@@ -6460,6 +6762,14 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
+      _vm._v(" "),
       "gender" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
             _vm._v("\n      " + _vm._s(_vm.errores.gender) + "\n    "),
@@ -6475,6 +6785,14 @@ var render = function () {
             class: _vm.inputClassFor("other_gender"),
             attrs: { type: "text", readonly: _vm.Readonly },
           }),
+          _vm._v(" "),
+          _c("div", { staticClass: "valid-feedback" }, [
+            _vm._v("\n      Correcto!\n    "),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v("\n      Por favor completa el campo!.\n    "),
+          ]),
           _vm._v(" "),
           "gender" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6499,6 +6817,7 @@ var render = function () {
             },
           ],
           class: _vm.inputClassFor("civic_state"),
+          attrs: { required: "" },
           on: {
             change: function ($event) {
               var $$selectedVal = Array.prototype.filter
@@ -6534,6 +6853,14 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
+      _vm._v(" "),
       "civic_state" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
             _vm._v("\n      " + _vm._s(_vm.errores.civic_state) + "\n    "),
@@ -6567,6 +6894,14 @@ var render = function () {
             },
           }),
           _vm._v(" "),
+          _c("div", { staticClass: "valid-feedback" }, [
+            _vm._v("\n      Correcto!\n    "),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "invalid-feedback" }, [
+            _vm._v("\n      Por favor completa el campo!.\n    "),
+          ]),
+          _vm._v(" "),
           "other_gender" in _vm.errores
             ? _c("div", { staticClass: "invalid-feedback" }, [
                 _vm._v(
@@ -6598,6 +6933,7 @@ var render = function () {
                   },
                 ],
                 class: _vm.inputClassFor("birth_country"),
+                attrs: { required: "" },
                 on: {
                   change: [
                     function ($event) {
@@ -6637,6 +6973,14 @@ var render = function () {
               2
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n        Correcto!\n      "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n        Por favor completa el campo!.\n      "),
+            ]),
+            _vm._v(" "),
             "birth_country" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
@@ -6662,7 +7006,7 @@ var render = function () {
                 },
               ],
               class: _vm.inputClassFor("birth_country"),
-              attrs: { type: "text", readonly: _vm.readonly },
+              attrs: { type: "text", readonly: _vm.readonly, required: "" },
               domProps: { value: _vm.BirthCountry },
               on: {
                 input: function ($event) {
@@ -6673,6 +7017,14 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n        Correcto!\n      "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n        Por favor completa el campo!.\n      "),
+            ]),
             _vm._v(" "),
             "birth_country" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6705,6 +7057,7 @@ var render = function () {
                   },
                 ],
                 class: _vm.inputClassFor("birth_state"),
+                attrs: { required: "" },
                 on: {
                   change: function ($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -6741,6 +7094,14 @@ var render = function () {
               2
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n          Correcto!\n        "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n          Por favor completa el campo!.\n        "),
+            ]),
+            _vm._v(" "),
             "birth_state" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
@@ -6768,6 +7129,7 @@ var render = function () {
                   },
                 ],
                 class: _vm.inputClassFor("birth_state"),
+                attrs: { required: "" },
                 on: {
                   change: function ($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -6804,6 +7166,14 @@ var render = function () {
               2
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n          Correcto!\n        "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n          Por favor completa el campo!.\n        "),
+            ]),
+            _vm._v(" "),
             "birth_state" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
@@ -6833,6 +7203,7 @@ var render = function () {
                   },
                 ],
                 class: _vm.inputClassFor("residence_country"),
+                attrs: { required: "" },
                 on: {
                   change: function ($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -6869,6 +7240,14 @@ var render = function () {
               2
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n        Correcto!\n      "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n        Por favor completa el campo!.\n      "),
+            ]),
+            _vm._v(" "),
             "residence_country" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
                   _vm._v(
@@ -6890,7 +7269,7 @@ var render = function () {
                 },
               ],
               class: _vm.inputClassFor("residence_country"),
-              attrs: { readonly: _vm.readonly },
+              attrs: { readonly: _vm.readonly, required: "" },
               domProps: { value: _vm.ResidenceCountry },
               on: {
                 input: function ($event) {
@@ -6901,6 +7280,14 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _c("div", { staticClass: "valid-feedback" }, [
+              _vm._v("\n        Correcto!\n      "),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v("\n        Por favor completa el campo!.\n      "),
+            ]),
             _vm._v(" "),
             "residence_country" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6928,7 +7315,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("zip_code"),
-        attrs: { type: "number", readonly: _vm.Readonly },
+        attrs: { type: "number", readonly: _vm.Readonly, required: "" },
         domProps: { value: _vm.ZipCode },
         on: {
           input: function ($event) {
@@ -6942,6 +7329,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "zip_code" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -6964,7 +7359,7 @@ var render = function () {
           },
         ],
         class: _vm.inputClassFor("phone_number"),
-        attrs: { type: "number", readonly: _vm.Readonly },
+        attrs: { type: "number", readonly: _vm.Readonly, required: "" },
         domProps: { value: _vm.PhoneNumber },
         on: {
           input: function ($event) {
@@ -6978,6 +7373,14 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "phone_number" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -7035,7 +7438,11 @@ var render = function () {
             },
           ],
           class: _vm.inputClassFor("is_disabled"),
-          attrs: { readonly: _vm.Readonly, disabled: _vm.Readonly },
+          attrs: {
+            readonly: _vm.Readonly,
+            disabled: _vm.Readonly,
+            required: "",
+          },
           on: {
             change: function ($event) {
               var $$selectedVal = Array.prototype.filter
@@ -7062,6 +7469,14 @@ var render = function () {
           ),
         ]
       ),
+      _vm._v(" "),
+      _c("div", { staticClass: "valid-feedback" }, [
+        _vm._v("\n      Correcto!\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "invalid-feedback" }, [
+        _vm._v("\n      Por favor completa el campo!.\n    "),
+      ]),
       _vm._v(" "),
       "is_disabled" in _vm.errores
         ? _c("div", { staticClass: "invalid-feedback" }, [
@@ -7335,6 +7750,7 @@ var render = function () {
               _c(
                 "form",
                 {
+                  staticClass: "needs-validation",
                   on: {
                     submit: function ($event) {
                       $event.preventDefault()

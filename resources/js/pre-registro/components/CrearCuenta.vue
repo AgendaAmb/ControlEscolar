@@ -50,14 +50,14 @@
 
     <!-- Se podra cambiar el correo alterno si no se tiene nada -->
     <div v-if='hasAlternEmail!=false  && TipoUsuario === "Comunidad AA"' :class="EmailClass">
-      <label> Ingresa un correo de contacto alterno </label>
-      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno" :readonly=true>
+      <label> Ingresa un correo de contacto alterno</label>
+      <input type="email" :class="inputClassForEmail('email_alterno')" v-model="EmailAlterno" :readonly=true>
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
     <div v-else-if ="TipoUsuario != 'Ninguno'" :class="EmailClass">
-      <label> Ingresa un correo de contacto alterno </label>
-      <input type="email" :class="inputClassFor('email_alterno')"  v-model="EmailAlterno">
+      <label> Ingresa un correo de contacto alterno</label>
+      <input type="email" :class="inputClassForEmail('email_alterno')"  v-model="EmailAlterno" required>
       <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
     </div>
 
@@ -224,6 +224,20 @@ export default {
   },
 
   methods:{
+    inputClassForEmail(){
+      let valid = false
+
+      if (this.EmailAlterno != null && this.EmailAlterno != '') {
+        valid = true;
+      }
+
+      return {
+        "form-control": true,
+        "is-invalid": !valid,
+        "is-valid": valid
+      };
+    },
+
     inputClassFor(model){
       return {
         'form-control': true,

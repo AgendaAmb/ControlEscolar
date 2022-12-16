@@ -38,6 +38,12 @@
         v-model="Name"
         :readonly="readonly"
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'name' in errores" class="invalid-feedback">
         {{ errores.name }}
       </div>
@@ -52,7 +58,14 @@
         :class="inputClassFor('first_surname')"
         v-model="FirstSurname"
         :readonly="readonly"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'first_surname' in errores" class="invalid-feedback">
         {{ errores.first_surname }}
       </div>
@@ -66,7 +79,14 @@
         :class="inputClassFor('last_surname')"
         v-model="LastSurname"
         :readonly="readonly"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'last_surname' in errores" class="invalid-feedback">
         {{ errores.last_surname }}
       </div>
@@ -79,7 +99,14 @@
         type="date"
         :class="inputClassFor('birth_date')"
         v-model="BirthDate"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'birth_date' in errores" class="invalid-feedback">
         {{ errores.birth_date }}
       </div>
@@ -93,7 +120,14 @@
         :class="inputClassFor('ocupation')"
         v-model="Ocupation"
         :readonly="Readonly"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'ocupation' in errores" class="invalid-feedback">
         {{ errores.ocupation }}
       </div>
@@ -107,6 +141,7 @@
         :class="inputClassFor('gender')"
         :readonly="Readonly"
         :disabled="Readonly"
+        required
       >
         <option value="" selected>Escoge una opción</option>
         <option value="Masculino">Masculino</option>
@@ -114,6 +149,12 @@
         <option value="Otros">Otro</option>
         <option value="No especificar">No especificar</option>
       </select>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'gender' in errores" class="invalid-feedback">
         {{ errores.gender }}
       </div>
@@ -127,6 +168,12 @@
         :class="inputClassFor('other_gender')"
         :readonly="Readonly"
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'gender' in errores" class="invalid-feedback">
         {{ errores.gender }}
       </div>
@@ -135,7 +182,7 @@
     <!-- Estado civil -->
     <div class="col-lg-6 mt-3">
       <label> Estado civil </label>
-      <select v-model="CivicState" :class="inputClassFor('civic_state')">
+      <select v-model="CivicState" :class="inputClassFor('civic_state')" required>
         <option value="" selected>Escoge una opción</option>
         <option value="Soltero">Soltero</option>
         <option value="Casado">Casado</option>
@@ -143,6 +190,12 @@
         <option value="Viudo">Viudo</option>
         <option value="Otro">Otro</option>
       </select>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'civic_state' in errores" class="invalid-feedback">
         {{ errores.civic_state }}
       </div>
@@ -156,6 +209,12 @@
         :class="inputClassFor('other_civic_state')"
         v-model="OtherGender"
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'other_gender' in errores" class="invalid-feedback">
         {{ errores.other_gender }}
       </div>
@@ -172,6 +231,7 @@
           v-model="BirthCountry"
           :class="inputClassFor('birth_country')"
           @change="escogePais"
+          required
         >
           <option value="" selected>Escoge un país</option>
           <option
@@ -182,6 +242,12 @@
             {{ country.name }}
           </option>
         </select>
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+        <div class="invalid-feedback">
+          Por favor completa el campo!.
+        </div>
         <div v-if="'birth_country' in errores" class="invalid-feedback">
           {{ errores.birth_country }}
         </div>
@@ -194,7 +260,14 @@
           v-model="BirthCountry"
           :class="inputClassFor('birth_country')"
           :readonly="readonly"
+          required
         />
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+        <div class="invalid-feedback">
+          Por favor completa el campo!.
+        </div>
         <div v-if="'birth_country' in errores" class="invalid-feedback">
           {{ errores.birth_country }}
         </div>
@@ -206,12 +279,18 @@
       <!-- Se elige pais manualmente -->
       <div v-if="mystates.length <= 0">
           <label class="mt-3"> Estado de nacimiento </label>
-          <select v-model="BirthState" :class="inputClassFor('birth_state')">
+          <select v-model="BirthState" :class="inputClassFor('birth_state')" required>
             <option value="" selected>Escoge un estado</option>
             <option v-for="state in states" :key="state.id" :value="state.name">
               {{ state.name }}
             </option>
           </select>
+          <div class="valid-feedback">
+            Correcto!
+          </div>
+          <div class="invalid-feedback">
+            Por favor completa el campo!.
+          </div>
           <div v-if="'birth_state' in errores" class="invalid-feedback">
           {{ errores.birth_state }}
           </div>
@@ -219,12 +298,18 @@
       <!-- Ya existe un pais -->
       <div v-else>
           <label class="mt-3"> Estado de nacimiento </label>
-          <select v-model="BirthState" :class="inputClassFor('birth_state')">
+          <select v-model="BirthState" :class="inputClassFor('birth_state')" required>
             <option value="" selected>Escoge un estado</option>
             <option v-for="state in mystates" :key="state.id" :value="state.name">
               {{ state.name }}
             </option>
           </select>
+          <div class="valid-feedback">
+            Correcto!
+          </div>
+          <div class="invalid-feedback">
+            Por favor completa el campo!.
+          </div>
           <div v-if="'birth_state' in errores" class="invalid-feedback">
           {{ errores.birth_state }}
           </div>  
@@ -238,6 +323,7 @@
         <select
           v-model="ResidenceCountry"
           :class="inputClassFor('residence_country')"
+          required
         >
           <option value="" selected>Escoge un país</option>
           <option
@@ -248,6 +334,12 @@
             {{ country.name }}
           </option>
         </select>
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+        <div class="invalid-feedback">
+          Por favor completa el campo!.
+        </div>
         <div v-if="'residence_country' in errores" class="invalid-feedback">
           {{ errores.residence_country }}
         </div>
@@ -258,7 +350,14 @@
           v-model="ResidenceCountry"
           :class="inputClassFor('residence_country')"
           :readonly='readonly'
+          required
         />
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+        <div class="invalid-feedback">
+          Por favor completa el campo!.
+        </div>
         <div v-if="'residence_country' in errores" class="invalid-feedback">
           {{ errores.residence_country }}
         </div>
@@ -274,7 +373,14 @@
         :class="inputClassFor('zip_code')"
         v-model.number="ZipCode"
         :readonly="Readonly"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'zip_code' in errores" class="invalid-feedback">
         {{ errores.zip_code }}
       </div>
@@ -288,7 +394,14 @@
         :class="inputClassFor('phone_number')"
         v-model.number="PhoneNumber"
         :readonly="Readonly"
+        required
       />
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'phone_number' in errores" class="invalid-feedback">
         {{ errores.phone_number }}
       </div>
@@ -316,10 +429,17 @@
         :class="inputClassFor('is_disabled')"
         :readonly="Readonly"
         :disabled="Readonly"
+        required
       >
         <option :value="true">Si</option>
         <option :value="false" selected>No</option>
       </select>
+      <div class="valid-feedback">
+        Correcto!
+      </div>
+      <div class="invalid-feedback">
+        Por favor completa el campo!.
+      </div>
       <div v-if="'is_disabled' in errores" class="invalid-feedback">
         {{ errores.is_disabled }}
       </div>
@@ -646,9 +766,118 @@ export default {
     },
 
     inputClassFor(model) {
+      let valid = false
+      switch(model){
+        
+
+        case 'curp':
+          console.log(this.NoCurp);
+          if (this.NoCurp == false) {
+            if (this.Curp != null && this.Curp != '') {
+              valid = true;
+            }
+          }else{
+            valid = true;
+          }
+          break;
+
+        case 'name':
+          if (this.Name != null && this.Name != ''){
+            valid = true;
+          }
+          break;
+
+        case 'first_surname':
+          if (this.FirstSurname != null && this.FirstSurname != '') {
+            valid = true;
+          }
+          break;
+
+        case 'last_surname':
+          if (this.LastSurname != null && this.LastSurname != '' ) {
+            valid = true;
+          }
+          break;
+
+        case 'birth_date':
+          if (this.BirthDate != null && this.BirthDate != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'ocupation':
+          if (this.Ocupation != null && this.Ocupation != '') {
+            valid = true;
+          }
+          break;
+
+        case 'gender':
+          if (this.Gender != null && this.Gender != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'civic_state':
+          if (this.CivicState != null && this.CivicState != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'birth_country':
+          if (this.BirthCountry != null && this.BirthCountry != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'birth_state':
+          if (this.BirthState != null && this.BirthState != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'residence_country':
+          if (this.ResidenceCountry != null && this.ResidenceCountry != '') {
+            valid = true;
+          }
+          break;
+
+        case 'zip_code':
+          if (this.ZipCode != null && this.ZipCode != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'phone_number':
+          if (this.PhoneNumber != null && this.PhoneNumber != '') {
+            valid = true;
+          }
+          break;
+        
+        case 'ethnicity':
+          // ! Puede ser vacio
+          valid = true;
+          break;
+        
+        case 'is_disabled':
+          if (this.IsDisabled != null) {
+            valid = true;
+          }
+          break;
+
+        case 'disability':
+          if (this.IsDisabled != null) {
+            if (this.Disability != null && this.Disability != '') {
+              valid = true;
+            }
+          }
+          break;
+        
+      }
+
       return {
         "form-control": true,
-        "is-invalid": model in this.errores,
+        "is-invalid": !valid,
+        "is-valid": valid
       };
     },
   },
