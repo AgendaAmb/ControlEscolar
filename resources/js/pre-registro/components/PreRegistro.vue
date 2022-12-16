@@ -172,6 +172,13 @@ export default {
       this.zip_code = Number(user.zip_code);
       this.phone_number = Number(user.phone_number);
 
+      // ! Sets the no_curp
+      if (this.curp == null) {
+        this.no_curp = true;
+      } else {
+        this.no_curp = false;
+      }
+
       //nacionalidad y pais de nacimiento
       this.birth_country = user.nationality;
       this.residence_country = user.residence;
