@@ -1538,7 +1538,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default());
       this.ocupation = user.ocupation;
       this.gender = user.gender;
       this.zip_code = Number(user.zip_code);
-      this.phone_number = Number(user.phone_number); //nacionalidad y pais de nacimiento
+      this.phone_number = Number(user.phone_number); // ! Sets the no_curp
+
+      if (this.curp == null) {
+        this.no_curp = true;
+      } else {
+        this.no_curp = false;
+      } //nacionalidad y pais de nacimiento
+
 
       this.birth_country = user.nationality;
       this.residence_country = user.residence;
