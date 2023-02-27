@@ -1,0 +1,27 @@
+header.header {
+  display: block;
+  background-color: #13497D;
+}
+
+header.header a.header-image > img {
+  display: block;
+  margin-left: auto;
+}
+
+header.header nav.nav-options {
+  background-color: gray;
+}
+
+header.header nav.nav-options a.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-family: 'Myriad Pro Bold';
+}
+
+header.header nav.nav-options a.nav-link + .dropdown-menu {
+  color: gray;
+  font-size: 16px;
+  border-radius: 0%;
+}
+/*# sourceMappingURL=main-layout.css.map */

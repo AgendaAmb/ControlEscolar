@@ -1,0 +1,37 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Data table
+@import "../../node_modules/@syncfusion/ej2-vue-grids/styles/material.css";
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Import the default variables
+@import "~v-calendar-scheduler/scss/variables";
+
+// Custom variables.
+$v-cal-days-head-bg: #fecc56 !important;
+$v-cal-days-head-color: white !important; 
+$v-cal-button-border-radius: 15px !important;
+
+// Interview main layout styles.
+@import './main-layout.scss';
+
+// Import styles.
+@import "~v-calendar-scheduler/scss/main";
+
+// Rubric styles.
+@import './rubric.scss';
+
+// Interview styles.
+@import './interviews.scss';
+
+// Interview detail styles.
+@import './interview-detail.scss';
+
+// Recommendation letter styles.
+@import './recommendation-letter.scss';

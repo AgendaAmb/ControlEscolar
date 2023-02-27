@@ -1,0 +1,145 @@
+// Custom styles.
+.calendar {
+    .v-cal {
+        padding: 0 !important;
+    }
+
+    // Interview calendar header
+    .calendar-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 90%;
+    }  
+
+    .new-interview {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+
+        > button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 75%;
+        }
+    }
+
+    // Calendar buttons
+    .v-cal-button {
+        margin-top: auto;
+        margin-bottom: auto;
+        font-family: 'Myriad Pro Regular';
+        font-size: 16px;
+        padding: 3px 25px;
+        background-color: #115089;
+        border-color: #115089;
+        color: white;
+
+        // Active calendar button
+        &.v-cal-button--is-active {
+            background-color: white;
+            color: #115089;
+        }
+
+        &:hover {
+            background-color: white;
+            color: #115089;
+            border-color: #115089;
+        }
+
+        // First calendar button.
+        &:first-of-type {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        // Last calendar button.
+        &:last-of-type {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
+    .calendar-body {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+        
+        .v-cal {
+            display: block;
+            width: 67%;
+        }
+
+        .interview-day {
+            display: block;
+            padding: 0;
+            width: 33%;
+            background-color: white;
+
+            > header {
+                display: block;
+                margin: 0 auto;
+
+                > p {
+                    margin-top: 1px;
+                    padding: 12px 15px 12px 15px;
+                    background-color: #115089;
+                    color: white;
+                    font-size: 16px;
+                    text-align: center;
+
+                    &::first-letter {
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+
+    .v-cal-day__number{
+        color: #115089;
+        font-size: 15px !important;
+        padding: 0 !important;
+        margin-top: 4% !important;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    // Custom styles.
+    .calendar {
+        // Interview calendar header
+        .calendar-header {
+            flex-direction: column;
+
+            .v-cal-button:first-of-type {
+                margin-left: auto;
+                margin-right: none;
+            }
+
+            .v-cal-button:last-of-type {
+                margin-left: none;
+                margin-right: auto;
+            }
+        }  
+
+        .new-interview > button {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .calendar-body {
+            flex-direction: column;
+
+            .v-cal {
+                width: 100%;
+            }
+
+            .interview-day {
+                margin-top: 50px;
+                width: 100%;
+            }
+        }
+    }
+}
