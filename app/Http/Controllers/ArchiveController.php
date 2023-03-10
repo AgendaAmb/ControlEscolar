@@ -65,7 +65,8 @@ class ArchiveController extends Controller
         }
         return $res;
     }
-
+    
+    
     public function index(Request $request)
     {
         $isProfessor = false;
@@ -175,9 +176,31 @@ class ArchiveController extends Controller
 
         return ArchiveResource::collection($archives);
     }
+    //Obtener Programas de la BD
+    public function getPrograms(Request $request){
+        $data = DB::select('CALL SelectPrograms()', array());
+        return $data;
+       
+    }
+    //Obtener Convocatorias de la BD con el id del programa
+    public function getAnnouncements(Request $request){
+        $data = DB::select('CALL SelectAnnouncements(?)', array($request->id));
+        return $data;
+    }
+    //Function to call Records calling a stored procedure from Database : Funcion para llamar un procedimiento almacenado en BD
+    public function getUsersFromAnnouncement(Request $request){
+        $data = DB::select('CALL SelectUsersByAnnouncement(?)', array($request->announcement_id));
+        return $data;
+        /* try{
+        }catch(\Exception $e){
+            return new JsonResponse(['message' => "No se pudo obtener el expediente"], 502);
+        } */
+    }
 
     public function archives(Request $request)
     {
+        //Esto consulta la BD
+        
         try {
             $archives =  Archive::with('appliant')->where('announcement_id', $request->announcement_id)->get();
         } catch (\Exception $e) {
@@ -190,7 +213,7 @@ class ArchiveController extends Controller
         foreach ($archives as $k => $archive) {
             //El postulante no tiene toda la información
             // if (!$archive->appliant->name) {
-
+            $user_data_collect;
             try {
                 $user_data_collect =  $this->service->miPortalGet('api/usuarios', ['filter[id]' => $archive->appliant->id])->collect();
             } catch (\Exception $e) {

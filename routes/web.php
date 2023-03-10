@@ -47,6 +47,10 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 //Comentar linea de abajo para produccion
 Route::prefix('controlescolar')->group(function () { 
 
+    #DB Requests
+    /*
+    * * Consultas a la base de datos a traves del controlador DatabaseController
+    */
 
     Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index') //Ruta para acceder al comite academico
@@ -121,6 +125,7 @@ Route::prefix('controlescolar')->group(function () {
 
     Route::get('/showRegisterArchives', [ArchiveController::class, 'showRegisterArchives'])->name('showRegisterArchives'); //Vista de expediente para alumno, rellenar campos
 
+    
     # Rutas de las solicitudes académicas.
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
@@ -194,6 +199,10 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
+        
+        Route::get('/archives/getPrograms', [ArchiveController::class, 'getPrograms'])->name('getPrograms');
+        Route::get('/archives/getAnnouncements', [ArchiveController::class, 'getAnnouncements'])->name('getAnnouncements');
+        Route::get('/archives/getArchiveUsers', [ArchiveController::class, 'getUsersFromAnnouncement'])->name('getUsersFromAnnouncement');
 
         Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');

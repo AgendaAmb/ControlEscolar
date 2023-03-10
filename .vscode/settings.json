@@ -1,5 +1,27 @@
 {
-    "files.exclude": {
-        "**/.git": false
+  "files.exclude": {
+    "**/.git": false
+  },
+  "favorites.resources": [
+    {
+      "filePath": "resources\\js\\postulacion\\components\\search-archives\\SearchArchiveForm.vue",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Http\\Controllers\\ArchiveController.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Helpers\\MiPortalService.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Models\\Archive.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Models\\User.php",
+      "group": "Default"
     }
+  ]
 }

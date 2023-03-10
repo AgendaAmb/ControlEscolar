@@ -12,6 +12,7 @@
           <option
             v-for="(academicProgram, index) in academic_programs"
             :key="index"
+            :id="academicProgram.id"
             :value="academicProgram.name"
           >
             <p>
@@ -44,10 +45,20 @@
 
       <div class="form-group col-2 justify-content-center" style="height: 100%">
         <label class="h6"> <strong> Buscar </strong> </label>
+
         <b-btn
           variant="outline-primary"
           type="submit"
           style="width: 100%; height: 45px !important"
+        >
+          <b-icon icon="search" aria-hidden="true"></b-icon>
+        </b-btn>
+
+        <label class="h6"> <strong> TestBtn </strong> </label>
+        <b-btn
+          variant="outline-primary"
+          style="width: 100%; height: 45px !important"
+          @click="searchArchives"
         >
           <b-icon icon="search" aria-hidden="true"></b-icon>
         </b-btn>
@@ -58,7 +69,6 @@
 
 <script>
 import swal from "sweetalert2";
-
 window.Swal = swal;
 export default {
   // Nombre del componente
@@ -109,8 +119,8 @@ export default {
 
         this.announcements.forEach((element) => {
           if (newVal === element.name) {
-            console.log("newVal: " + newVal);
-            console.log("academicProgram: " + element.name);
+            //console.log("newVal: " + newVal);
+            //console.log("academicProgram: " + element.name);
             this.announcementsForAcademicProgram.push(element);
           }
         });
@@ -207,19 +217,59 @@ export default {
     //   }
     //   return res;
     // },
-
-    buscaExpedientes() {
-      //Datos no completos para hacer busqueda
+    getDebug(e) {
+      console.log("DEBUG", e);
+    },
+    searchArchives() {
       if (
-        this.announcement_selected == null ||
-        this.academic_program_selected == null
+        this.announcement_selected !== null &&
+        this.academic_program_selected !== null
       ) {
+        //Se hace la busqueda
+
+        axios
+          .get("/controlescolar/solicitud/archives/getArchiveUsers", {
+            /*
+             * ! Revisar ruta de axios para conectar a BD
+             */
+            params: {
+              announcement_id: this.announcement_selected,
+            },
+          })
+          .then((response) => {
+            const { data } = response;
+            console.log("Data from btn: ", data);
+            this.dataLength = data.length; // cantidad de articulos
+            this.$emit("archives-found", {
+              data: data,
+              programName: this.AcademicProgramSelect,
+            }); //actualiza archivos
+          })
+          .catch((error) => {
+            //console.log(error);
+            Swal.fire({
+              title: "Error al hacer busqueda",
+              text: error.response.data,
+              icon: "error",
+            });
+          });
+      } else {
         Swal.fire({
           title: "Ups",
           text: "Falta alguno de los campos",
           icon: "error",
         });
-      } else {
+      }
+
+      return false;
+    },
+
+    buscaExpedientes() {
+      //Datos no completos para hacer busqueda
+      if (
+        this.announcement_selected !== null &&
+        this.academic_program_selected !== null
+      ) {
         //Se hace la busqueda
 
         axios
@@ -227,24 +277,33 @@ export default {
             /*
              * ! Revisar ruta de axios para conectar a BD
              */
-
             params: {
               announcement_id: this.announcement_selected,
             },
           })
           .then((response) => {
-            console.log(response.data);
+            console.log("RESPUESTA BD \n", response);
+            //console.log("Lenght", response.lenght);
             this.dataLength = response.data.length; // cantidad de articulos
-            this.$emit("archives-found", response.data); //actualiza archivos
+            this.$emit("archives-found", {
+              data: response.data,
+              programName: this.AcademicProgramSelect,
+            }); //actualiza archivos
           })
           .catch((error) => {
-            console.log(error);
+            //console.log(error);
             Swal.fire({
               title: "Error al hacer busqueda",
               text: error.response.data,
               icon: "error",
             });
           });
+      } else {
+        Swal.fire({
+          title: "Ups",
+          text: "Falta alguno de los campos",
+          icon: "error",
+        });
       }
 
       return false;
