@@ -22,5 +22,6 @@
     "/js/rubricaPromedio.js": "/js/rubricaPromedio.js",
     "/js/rubricaPromedioCa.js": "/js/rubricaPromedioCa.js",
     "/appliant/js/appliantInterviewUpdateDocuments.js": "/appliant/js/appliantInterviewUpdateDocuments.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/css/bootstrap.min.css": "/css/bootstrap.min.css"
 }

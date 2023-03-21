@@ -46,6 +46,9 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 //Comentar linea de abajo para produccion
 Route::prefix('controlescolar')->group(function () { 
+    #Comite academico
+    Route::get('ca/')->name('comite')->middleware('auth');
+        
 
     #DB Requests
     /*
@@ -135,6 +138,7 @@ Route::prefix('controlescolar')->group(function () {
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
             Route::get('/seeFileAnsweredToSign/{archive_id}', [ArchiveEnremController::class, 'seeFileAnsweredToSign'])->name('seeFileAnsweredToSign'); //Vista de expediente para alumno, rellenar campos
+            Route::get('/getPDF/{archive_id}', [ArchiveEnremController::class, 'getPDF'])->name('getPDF'); //Vista de expediente para alumno, rellenar campos
 
 
             Route::prefix('address')->name('address.')->group(function () {
@@ -360,4 +364,6 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         Route::get('/pruebaPDF', [ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
+
+    
 });

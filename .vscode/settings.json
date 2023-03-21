@@ -22,6 +22,14 @@
     {
       "filePath": "app\\Models\\User.php",
       "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\components\\academic-program-header.blade.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\home.blade.php",
+      "group": "Default"
     }
   ]
 }
