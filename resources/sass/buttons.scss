@@ -5,7 +5,7 @@ a {
   min-height: 45px;
   width: 200px;
   background-color: #fff;
-  color: #0060af;
+  color: rgba(0, 74, 152, 255);
   border-radius: 50px;
   border: 0;
   font-size: 1.2em;
@@ -21,7 +21,7 @@ a {
     color: #ffffff;
   }
   &:hover {
-    background-color: #0060af;
+    background-color: rgba(0, 74, 152, 255);
   }
   &:active {
     transform: scale(0.9);
