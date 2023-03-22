@@ -3,7 +3,7 @@
 //Creamos la ruta para comite enviando el id como props
 $id = Auth::user()->id;
 
-$reference = "ca/?id=" . $id;
+$reference = "/controlescolar/ca/?id=" . $id;
 
 ?>
 

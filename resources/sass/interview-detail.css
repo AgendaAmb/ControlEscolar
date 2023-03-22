@@ -2,9 +2,10 @@
   max-width: 750px;
 }
 
-#DetalleEntrevista .modal-header.modal-header-blue, #DetalleEntrevista .modal-footer button.btn-primary {
+#DetalleEntrevista .modal-header.modal-header-blue,
+#DetalleEntrevista .modal-footer button.btn-primary {
   background-color: #115089;
-  font-family: 'Myriad Pro Bold';
+  font-family: "Myriad Pro Bold";
   color: white;
 }
 
@@ -13,19 +14,25 @@
   font-size: 13px;
   text-transform: capitalize;
   background-color: #115089;
-  font-family: 'Myriad Pro Bold';
+  font-family: "Myriad Pro Bold";
   color: white;
 }
 
-#DetalleEntrevista .modal-body label, #DetalleEntrevista .modal-body .fecha, #DetalleEntrevista .modal-body .sala, #DetalleEntrevista .modal-body .prof-carta-intencion {
+#DetalleEntrevista .modal-body label,
+#DetalleEntrevista .modal-body .fecha,
+#DetalleEntrevista .modal-body .sala,
+#DetalleEntrevista .modal-body .prof-carta-intencion {
   color: #115089;
 }
 
-#DetalleEntrevista .modal-body .fecha, #DetalleEntrevista .modal-body .postulante, #DetalleEntrevista .modal-body .prof-carta-intencion:last-of-type {
-  font-family: 'Myriad Pro Bold';
+#DetalleEntrevista .modal-body .fecha,
+#DetalleEntrevista .modal-body .postulante,
+#DetalleEntrevista .modal-body .prof-carta-intencion:last-of-type {
+  font-family: "Myriad Pro Bold";
 }
 
-#DetalleEntrevista .modal-body .fecha::first-letter, #DetalleEntrevista .modal-body .postulante {
+#DetalleEntrevista .modal-body .fecha::first-letter,
+#DetalleEntrevista .modal-body .postulante {
   text-transform: capitalize;
 }
 
@@ -33,14 +40,15 @@
   color: #fecc56;
 }
 
-#DetalleEntrevista .modal-body .postulante, #DetalleEntrevista .modal-body .prof-carta-intencion:last-of-type {
+#DetalleEntrevista .modal-body .postulante,
+#DetalleEntrevista .modal-body .prof-carta-intencion:last-of-type {
   text-transform: capitalize;
 }
 
 #DetalleEntrevista .registrar-participacion {
   background-color: white;
   color: #115089;
-  font-family: 'Myriad Pro Regular';
+  font-family: "Myriad Pro Regular";
   display: block;
   font-size: 12px;
   text-transform: capitalize;
@@ -50,7 +58,7 @@
 #DetalleEntrevista .prof-area {
   text-transform: capitalize;
   color: #115089;
-  font-family: 'Myriad Pro Regular';
+  font-family: "Myriad Pro Regular";
   text-align: center;
 }
 
@@ -62,6 +70,6 @@
 
 #DetalleEntrevista .modal-footer button.btn-secondary {
   color: white;
-  font-family: 'Myriad Pro Bold';
+  font-family: "Myriad Pro Bold";
 }
 /*# sourceMappingURL=interview-detail.css.map */
