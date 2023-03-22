@@ -30,6 +30,14 @@
     {
       "filePath": "resources\\views\\home.blade.php",
       "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\postulacion\\show.blade.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\js\\postulacion\\appliant-view\\doubleDegree\\components\\RequiredDocumentFileSigned.vue",
+      "group": "Default"
     }
   ]
 }

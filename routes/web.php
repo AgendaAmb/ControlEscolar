@@ -46,19 +46,15 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 //Comentar linea de abajo para produccion
 Route::prefix('controlescolar')->group(function () { 
+    
     #Comite academico
-    Route::get('ca/')->name('comite')->middleware('auth');
+    # Configura la ruta principal de comite academico, si hay un usuario activo
+    Route::get('ca/', [ComiteAcademicoController::class, 'index'])->name('comite')->middleware('auth');
         
-
-    #DB Requests
-    /*
-    * * Consultas a la base de datos a traves del controlador DatabaseController
-    */
-
-    Route::prefix('ca')->name('ca.')->group(function () {
+   /*  Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index') //Ruta para acceder al comite academico
             ->middleware('auth');
-    });
+    }); */
 
     Route::prefix('oldControlEscolar')->name('oldControlEscolar.')->group(function () {
         Route::get('/listOldDocuments', [OldDocumentController::class, 'listOldDocuments'])->name('listOldDocuments')

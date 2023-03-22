@@ -17012,3 +17012,65 @@ main.recommendation-letter table.candidate-analysis > thead > tr > th:first-of-t
     width: 50%;
   }
 }
+
+a {
+  text-decoration: none !important;
+}
+
+.uaslp-btn {
+  min-height: 45px;
+  width: 200px;
+  background-color: #fff;
+  color: #0060af;
+  border-radius: 50px;
+  border: 0;
+  font-size: 1.2em;
+  font-weight: 500 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly !important;
+  cursor: pointer;
+  flex-flow: row nowrap;
+  box-shadow: 5px 5px 19px #c9c9c9, -5px -5px 19px #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.uaslp-btn:hover > * {
+  color: #ffffff;
+}
+.uaslp-btn:hover {
+  background-color: #0060af;
+}
+.uaslp-btn:active {
+  transform: scale(0.9);
+}
+.uaslp-btn * {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly !important;
+}
+.uaslp-btn span:first-of-type {
+  width: 10%;
+}
+.uaslp-btn span:last-of-type {
+  width: 50%;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-flow: column nowrap;
+  min-width: 300px;
+}
+.flex-center * {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+  text-align: center;
+}
+.flex-center * div {
+  min-width: 100% !important;
+}

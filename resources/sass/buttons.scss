@@ -1,0 +1,40 @@
+a {
+  text-decoration: none !important;
+}
+.uaslp-btn {
+  min-height: 45px;
+  width: 200px;
+  background-color: #fff;
+  color: #0060af;
+  border-radius: 50px;
+  border: 0;
+  font-size: 1.2em;
+  font-weight: 500 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly !important;
+  cursor: pointer;
+  flex-flow: row nowrap;
+  box-shadow: 5px 5px 19px #c9c9c9, -5px -5px 19px #ffffff;
+  transition: all 0.3s ease-in-out;
+  &:hover > * {
+    color: #ffffff;
+  }
+  &:hover {
+    background-color: #0060af;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  * {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly !important;
+  }
+  span:first-of-type {
+    width: 10%;
+  }
+  span:last-of-type {
+    width: 50%;
+  }
+}

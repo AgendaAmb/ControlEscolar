@@ -1,0 +1,19 @@
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-flow: column nowrap;
+  min-width: 300px;
+  * {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+    text-align: center;
+  }
+  * div {
+    min-width: 100% !important;
+  }
+}
