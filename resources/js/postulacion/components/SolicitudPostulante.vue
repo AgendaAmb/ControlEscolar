@@ -1,27 +1,63 @@
 <template>
   <div class="row justify-content-start align-items-center mx-1">
     <!-- Google translate element -->
-    <div v-if="isENREM() === true" class="col-12 mt-3" >
-      <b-form-group label-cols="1" label-cols-sm="1" label-size="lg" label="Idioma" label-class="p d-flex my-auto align-items-center text-center justify-content-center"
-      label-for="input-sm" label-align-sm="right">
-      <v-google-translate :defaultLanguageCode="defaultLanguageCode" :defaultPageLanguageCode="defaultPageLanguageCode"
-        :fetchBrowserLanguage="false" @select="languageSelectedHandler" id="input-sm" />
-    </b-form-group>
+    <div v-if="isENREM() === true" class="col-12 mt-3">
+      <b-form-group
+        label-cols="1"
+        label-cols-sm="1"
+        label-size="lg"
+        label="Idioma"
+        label-class="p d-flex my-auto align-items-center text-center justify-content-center"
+        label-for="input-sm"
+        label-align-sm="right"
+      >
+        <v-google-translate
+          :defaultLanguageCode="defaultLanguageCode"
+          :defaultPageLanguageCode="defaultPageLanguageCode"
+          :fetchBrowserLanguage="false"
+          @select="languageSelectedHandler"
+          id="input-sm"
+        />
+      </b-form-group>
     </div>
-    
+
     <!-- Info postulante -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-1 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-1
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Datos personales</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-1"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-            <postulante v-bind="appliant" :archive_id="archive_id" :images_btn="images_btn"
-            :alias_academic_program.sync="academic_program.alias">
+            <postulante
+              v-bind="appliant"
+              :archive_id="archive_id"
+              :images_btn="images_btn"
+              :alias_academic_program.sync="academic_program.alias"
+            >
             </postulante>
           </b-card-body>
         </b-collapse>
@@ -32,29 +68,68 @@
     <!-- Historial academico -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-2 variant="dark" :style="styleBtnAccordionSection">
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-2
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
             <b-icon icon="arrow-up" class="mx-4" font-scale="2"></b-icon>
             <p class="h2 my-2">Historial Académico</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-2"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-            <grado-academico v-for="(grado, index) in academic_degrees" v-bind="grado"
-              v-bind:key="`${index}-${grado.id}-AcademicDegree`" :index="index + 1"
-              :alias_academic_program.sync="academic_program.alias" :state.sync="grado.state" :cvu.sync="grado.cvu"
-              :knowledge_card.sync="grado.knowledge_card" :digital_signature.sync="grado.digital_signature"
-              :cedula.sync="grado.cedula" :status.sync="grado.status" :degree.sync="grado.degree"
-              :average.sync="grado.average" :min_avg.sync="grado.min_avg" :max_avg.sync="grado.max_avg"
-              :country.sync="grado.country" :university.sync="grado.university" :degree_type.sync="grado.degree_type"
-              :titration_date.sync="grado.titration_date" :required_documents.sync="grado.required_documents"
-              :paises.sync="Countries" :images_btn="images_btn" @delete-item="eliminaHistorialAcademicoFromList">
+            <grado-academico
+              v-for="(grado, index) in academic_degrees"
+              v-bind="grado"
+              v-bind:key="`${index}-${grado.id}-AcademicDegree`"
+              :index="index + 1"
+              :alias_academic_program.sync="academic_program.alias"
+              :state.sync="grado.state"
+              :cvu.sync="grado.cvu"
+              :knowledge_card.sync="grado.knowledge_card"
+              :digital_signature.sync="grado.digital_signature"
+              :cedula.sync="grado.cedula"
+              :status.sync="grado.status"
+              :degree.sync="grado.degree"
+              :average.sync="grado.average"
+              :min_avg.sync="grado.min_avg"
+              :max_avg.sync="grado.max_avg"
+              :country.sync="grado.country"
+              :university.sync="grado.university"
+              :degree_type.sync="grado.degree_type"
+              :titration_date.sync="grado.titration_date"
+              :required_documents.sync="grado.required_documents"
+              :paises.sync="Countries"
+              :images_btn="images_btn"
+              @delete-item="eliminaHistorialAcademicoFromList"
+            >
             </grado-academico>
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaHistorialAcademico" variant="danger"
-                  v-b-popover.hover="'Agregar un nuevo Grado Academico al historial'" title="Inserta otro registro"
-                  :style="styleBtnAccordionSection">
+                <b-button
+                  pill
+                  class="d-flex"
+                  @click="agregaHistorialAcademico"
+                  variant="danger"
+                  v-b-popover.hover="
+                    'Agregar un nuevo Grado Academico al historial'
+                  "
+                  title="Inserta otro registro"
+                  :style="styleBtnAccordionSection"
+                >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
                 </b-button>
@@ -69,16 +144,42 @@
     <!-- Requisitos de ingreso -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-3 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-3
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Requisitos de Ingreso</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-3" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-3"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-            <requisitos-ingreso :archive_id="archive_id" :motivation.sync="motivation"  :user_id.sync="appliant.id" :viewer_id.sync="viewer.id"
-              :images_btn="images_btn" :alias_academic_program.sync="academic_program.alias">
+            <requisitos-ingreso
+              :archive_id="archive_id"
+              :motivation.sync="motivation"
+              :user_id.sync="appliant.id"
+              :viewer_id.sync="viewer.id"
+              :images_btn="images_btn"
+              :alias_academic_program.sync="academic_program.alias"
+            >
             </requisitos-ingreso>
           </b-card-body>
         </b-collapse>
@@ -89,37 +190,74 @@
     <!-- Dominio de idiomas -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-4 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-4
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Dominio de idiomas</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-4" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-4"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-
-            <lengua-extranjera v-for="(language, index) in appliant_languages" v-bind="language"
-              v-bind:key="`${index}-${language.id}-Language`" :index="index + 1"
-              :alias_academic_program.sync="academic_program.alias" :state.sync="language.state"
-              :language.sync="language.language" :institution.sync="language.institution" :score.sync="language.score"
-              :presented_at.sync="language.presented_at" :valid_from.sync="language.valid_from"
-              :valid_to.sync="language.valid_to" :language_domain.sync="language.language_domain"
-              :conversational_level.sync="language.conversational_level" :reading_level.sync="language.reading_level"
-              :writing_level.sync="language.writing_level" :exam_presented.sync="language.exam_presented"
-              :kind_of_exam.sync="language.kind_of_exam" :documentos.sync="language.required_documents"
-              @delete-item="eliminaLenguaExtranjeraFromList" :images_btn="images_btn">
+            <lengua-extranjera
+              v-for="(language, index) in appliant_languages"
+              v-bind="language"
+              v-bind:key="`${index}-${language.id}-Language`"
+              :index="index + 1"
+              :alias_academic_program.sync="academic_program.alias"
+              :state.sync="language.state"
+              :language.sync="language.language"
+              :institution.sync="language.institution"
+              :score.sync="language.score"
+              :presented_at.sync="language.presented_at"
+              :valid_from.sync="language.valid_from"
+              :valid_to.sync="language.valid_to"
+              :language_domain.sync="language.language_domain"
+              :conversational_level.sync="language.conversational_level"
+              :reading_level.sync="language.reading_level"
+              :writing_level.sync="language.writing_level"
+              :exam_presented.sync="language.exam_presented"
+              :kind_of_exam.sync="language.kind_of_exam"
+              :documentos.sync="language.required_documents"
+              @delete-item="eliminaLenguaExtranjeraFromList"
+              :images_btn="images_btn"
+            >
             </lengua-extranjera>
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaLenguaExtranjera" :style="styleBtnAccordionSection"
-                  v-b-popover.hover="'Agregar una nueva lengua al registro'" title="Inserta otro registro">
+                <b-button
+                  pill
+                  class="d-flex"
+                  @click="agregaLenguaExtranjera"
+                  :style="styleBtnAccordionSection"
+                  v-b-popover.hover="'Agregar una nueva lengua al registro'"
+                  title="Inserta otro registro"
+                >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
                 </b-button>
               </div>
             </div>
-
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -128,36 +266,72 @@
     <!-- Experiencia laboral -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-5 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-5
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Experiencia laboral (Opcional)</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-5" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-5"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-
-            <experiencia-laboral v-for="(experience, index) in appliant_working_experiences" v-bind="experience"
-              v-bind:key="`${index}-${experience.id}-$WorkingExperience}`" :index="index + 1"
-              :state.sync="experience.state" :institution.sync="experience.institution"
-              :working_position.sync="experience.working_position" :from.sync="experience.from" :to.sync="experience.to"
-              :knowledge_area.sync="experience.knowledge_area" :field.sync="experience.field"
+            <experiencia-laboral
+              v-for="(experience, index) in appliant_working_experiences"
+              v-bind="experience"
+              v-bind:key="`${index}-${experience.id}-$WorkingExperience}`"
+              :index="index + 1"
+              :state.sync="experience.state"
+              :institution.sync="experience.institution"
+              :working_position.sync="experience.working_position"
+              :from.sync="experience.from"
+              :to.sync="experience.to"
+              :knowledge_area.sync="experience.knowledge_area"
+              :field.sync="experience.field"
               :working_position_description.sync="
                 experience.working_position_description
-              " :achievements.sync="experience.achievements" :images_btn="images_btn"
-              @delete-item="eliminaExperienciaLaboralFromList">
+              "
+              :achievements.sync="experience.achievements"
+              :images_btn="images_btn"
+              @delete-item="eliminaExperienciaLaboralFromList"
+            >
             </experiencia-laboral>
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button pill class="d-flex" @click="agregaExperienciaLaboral" :style="styleBtnAccordionSection"
-                  v-b-popover.hover="'Agregar nueva experiencia laboral al registro'" title="Inserta otro registro">
+                <b-button
+                  pill
+                  class="d-flex"
+                  @click="agregaExperienciaLaboral"
+                  :style="styleBtnAccordionSection"
+                  v-b-popover.hover="
+                    'Agregar nueva experiencia laboral al registro'
+                  "
+                  title="Inserta otro registro"
+                >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
                 </b-button>
               </div>
             </div>
-
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -167,13 +341,33 @@
     <!-- Requisitos curriculares -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-6 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-6
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Requisitos curriculares</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-6" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-6"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
             <!-- Produccion cientifica subseccion -->
             <div class="col-lg-12">
@@ -182,19 +376,34 @@
               </p>
             </div>
 
-            <produccion-cientifica v-for="(production, index) in scientific_productions" v-bind="production"
-              v-bind:key="`${index}-${production.id}-ScientificProduction`" :index="index + 1"
-              :state.sync="production.state" :type.sync="production.type" :title.sync="production.title"
-              :publish_date.sync="production.publish_date" :magazine_name.sync="production.magazine_name"
-              :article_name.sync="production.article_name" :institution.sync="production.institution"
+            <produccion-cientifica
+              v-for="(production, index) in scientific_productions"
+              v-bind="production"
+              v-bind:key="`${index}-${production.id}-ScientificProduction`"
+              :index="index + 1"
+              :state.sync="production.state"
+              :type.sync="production.type"
+              :title.sync="production.title"
+              :publish_date.sync="production.publish_date"
+              :magazine_name.sync="production.magazine_name"
+              :article_name.sync="production.article_name"
+              :institution.sync="production.institution"
               :post_title_memory.sync="production.post_title_memory"
               :post_title_document.sync="production.post_title_document"
-              :post_title_review.sync="production.post_title_review" :documentos.sync="curricular_documents"
-              :images_btn="images_btn" @delete-item="eliminaProduccionCientificaFromList">
+              :post_title_review.sync="production.post_title_review"
+              :documentos.sync="curricular_documents"
+              :images_btn="images_btn"
+              @delete-item="eliminaProduccionCientificaFromList"
+            >
             </produccion-cientifica>
 
             <div class="col-lg-12 my-2">
-              <b-button pill class="d-flex" @click="agregaProduccionCientifica" :style="styleBtnAccordionSection">
+              <b-button
+                pill
+                class="d-flex"
+                @click="agregaProduccionCientifica"
+                :style="styleBtnAccordionSection"
+              >
                 <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                 <p class="h4 my-2">Agregar</p>
               </b-button>
@@ -207,22 +416,31 @@
                 <strong> Capital humano (Cursos impartidos) [Opcional] </strong>
               </p>
             </div>
-            <capital-humano v-for="(humanCapital, index) in human_capitals" v-bind="humanCapital"
-              v-bind:key="`${index}-${humanCapital.id}-CapitalHumano`" :index="index"
-              :course_name.sync="humanCapital.course_name" :assisted_at.sync="humanCapital.assisted_at"
-              :scolarship_level.sync="humanCapital.scolarship_level" :images_btn="images_btn"
-              @delete-item="eliminaCapitalHumanoFromList">
+            <capital-humano
+              v-for="(humanCapital, index) in human_capitals"
+              v-bind="humanCapital"
+              v-bind:key="`${index}-${humanCapital.id}-CapitalHumano`"
+              :index="index"
+              :course_name.sync="humanCapital.course_name"
+              :assisted_at.sync="humanCapital.assisted_at"
+              :scolarship_level.sync="humanCapital.scolarship_level"
+              :images_btn="images_btn"
+              @delete-item="eliminaCapitalHumanoFromList"
+            >
             </capital-humano>
 
-
             <div class="col-lg-12 my-2">
-              <b-button pill class="d-flex" @click="agregaCapitalHumano" :style="styleBtnAccordionSection">
+              <b-button
+                pill
+                class="d-flex"
+                @click="agregaCapitalHumano"
+                :style="styleBtnAccordionSection"
+              >
                 <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                 <p class="h4 my-2">Agregar</p>
               </b-button>
             </div>
             <!-- Capital humano subseccion -->
-
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -232,16 +450,41 @@
     <!-- Cartas de recomendacion -->
     <div class="col-12">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
-        <b-card-header header-tag="header" class="p-1" role="tab" :style="styleHeaderContainerAccordionSection">
-          <b-button block v-b-toggle.accordion-7 variant="dark" :style="styleBtnAccordionSection">
-            <b-icon icon="arrow-up" class="mx-4" font-scale="2" style="border:10px"></b-icon>
+        <b-card-header
+          header-tag="header"
+          class="p-1"
+          role="tab"
+          :style="styleHeaderContainerAccordionSection"
+        >
+          <b-button
+            block
+            v-b-toggle.accordion-7
+            variant="dark"
+            :style="styleBtnAccordionSection"
+          >
+            <b-icon
+              icon="arrow-up"
+              class="mx-4"
+              font-scale="2"
+              style="border: 10px"
+            ></b-icon>
             <p class="h2 my-2">Carta de recomendación</p>
           </b-button>
         </b-card-header>
-        <b-collapse id="accordion-7" visible accordion="my-accordion" role="tabpanel">
+        <b-collapse
+          id="accordion-7"
+          visible
+          accordion="my-accordion"
+          role="tabpanel"
+        >
           <b-card-body>
-            <carta-recomendacion :appliant="appliant" :archive_id="archive_id" :academic_program="academic_program"
-              :recommendation_letters="recommendation_letters" :images_btn="images_btn" />
+            <carta-recomendacion
+              :appliant="appliant"
+              :archive_id="archive_id"
+              :academic_program="academic_program"
+              :recommendation_letters="recommendation_letters"
+              :images_btn="images_btn"
+            />
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -256,33 +499,72 @@
       </div>
     </div> -->
 
-    <div class="col-12 align-items-center my-4 ">
+    <div class="col-12 align-items-center my-4">
       <div class="row my-2 mx-1 justify-content-center">
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
-          <b-button v-b-popover.hover="'El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado'"
-            title="¿Qué significa?" v-b-modal.RechazarExpediente pill variant="danger" :style="btnStyle">
+        <div
+          class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
+        >
+          <b-button
+            v-b-popover.hover="
+              'El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado'
+            "
+            title="¿Qué significa?"
+            v-b-modal.RechazarExpediente
+            pill
+            variant="danger"
+            :style="btnStyle"
+          >
             <p class="h3">No cumple</p>
           </b-button>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
-          <b-button v-b-popover.hover="'El postulante necesita modificar uno o varios documentos'"
-            title="¿Qué significa?" v-b-modal.ActualizaExpediente pill variant="warning" :style="btnStyle">
+        <div
+          class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
+        >
+          <b-button
+            v-b-popover.hover="
+              'El postulante necesita modificar uno o varios documentos'
+            "
+            title="¿Qué significa?"
+            v-b-modal.ActualizaExpediente
+            pill
+            variant="warning"
+            :style="btnStyle"
+          >
             <p class="h3">Corregir</p>
           </b-button>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
-          <b-button v-b-popover.hover="'El postulante cumple con todos los requisitos y pasa a la etapa de entrevista'"
-            title="¿Qué significa?" @click="EnviarRevision('Aceptar')" pill variant="success" :style="btnStyle">
+        <div
+          class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
+        >
+          <b-button
+            v-b-popover.hover="
+              'El postulante cumple con todos los requisitos y pasa a la etapa de entrevista'
+            "
+            title="¿Qué significa?"
+            @click="EnviarRevision('Aceptar')"
+            pill
+            variant="success"
+            :style="btnStyle"
+          >
             <p class="h3">Aceptar</p>
           </b-button>
         </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center">
+        <div
+          class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
+        >
           <b-button
-            v-b-popover.hover="'El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista'"
-            title="¿Qué significa?" @click="EnviarRevision('Condicionado')" pill variant="info" :style="btnStyle">
+            v-b-popover.hover="
+              'El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista'
+            "
+            title="¿Qué significa?"
+            @click="EnviarRevision('Condicionado')"
+            pill
+            variant="info"
+            :style="btnStyle"
+          >
             <p class="h3">Condicionado</p>
           </b-button>
         </div>
@@ -367,7 +649,6 @@ export default {
     status: Number,
   },
 
-
   created() {
     // console.log(this.language);
     axios
@@ -390,7 +671,7 @@ export default {
       EnglishExamTypes: [],
       images_btn: {},
       defaultLanguageCode: "es",
-      defaultPageLanguageCode: "es-MX"
+      defaultPageLanguageCode: "es-MX",
     };
   },
 
@@ -414,21 +695,20 @@ export default {
     btnStyle: {
       get() {
         return {
-          height: '75px!important',
-          width: '100%!important',
-          color: 'white'
-        }
-      }
+          height: "75px!important",
+          width: "100%!important",
+          color: "white",
+        };
+      },
     },
 
     styleHeaderContainerAccordionSection() {
       return {
-        border: 'none',
-      }
+        border: "none",
+      };
     },
 
     styleBtnAccordionSection() {
-
       var color = "rgb(215, 219, 221,0.9)";
 
       color = "#1266f1";
@@ -452,14 +732,13 @@ export default {
       //     break;
       // }
 
-
       return {
         backgroundColor: color,
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        display: 'flex',
-        alignItems: 'center',
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        display: "flex",
+        alignItems: "center",
+      };
     },
 
     ColorStrip() {
@@ -482,22 +761,21 @@ export default {
 
       return {
         backgroundColor: color,
-        height: '5px'
+        height: "5px",
       };
     },
 
     styleContainerAccordionSection() {
       return {
-        border: 'none',
-      }
-    }
+        border: "none",
+      };
+    },
   },
 
-
   methods: {
-    isENREM(){
+    isENREM() {
       let res = false;
-      if(this.academic_program.alias === 'enrem'){
+      if (this.academic_program.alias === "enrem") {
         res = true;
       }
       return res;
@@ -506,7 +784,7 @@ export default {
     languageSelectedHandler(info) {
       console.log(info);
     },
-    
+
     getUniversities(state) {
       let universities = [];
       for (let i = 0; i < this.Countries.length; i++) {
@@ -760,4 +1038,3 @@ export default {
   },
 };
 </script>
-

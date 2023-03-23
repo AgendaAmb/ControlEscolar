@@ -298,7 +298,11 @@
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button
+                <button class="uaslp-btn" @click="agregaLenguaExtranjera">
+                  <span class="material-icons">add</span>
+                  <span>Add</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaLenguaExtranjera"
@@ -308,7 +312,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Add</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>

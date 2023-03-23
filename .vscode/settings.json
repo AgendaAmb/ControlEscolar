@@ -38,6 +38,10 @@
     {
       "filePath": "resources\\js\\postulacion\\appliant-view\\doubleDegree\\components\\RequiredDocumentFileSigned.vue",
       "group": "Default"
+    },
+    {
+      "filePath": "resources\\js\\postulacion\\components\\SolicitudPostulante.vue",
+      "group": "Default"
     }
   ]
 }
