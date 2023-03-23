@@ -448,6 +448,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -514,10 +552,10 @@ __webpack_require__.r(__webpack_exports__);
     styleBtn: function styleBtn() {
       return {
         backgroundColor: "rgba(0,96,175,255)",
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        height: '100%'
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        height: "100%"
       };
     },
     StatusCheckBox: {
@@ -4990,7 +5028,7 @@ var render = function () {
                                   target: "_blank",
                                 },
                               },
-                              [_vm._v("dando clic\n            aquí")]
+                              [_vm._v("dando clic aquí")]
                             )
                           : _c(
                               "a",
@@ -5000,7 +5038,7 @@ var render = function () {
                                   target: "_blank",
                                 },
                               },
-                              [_vm._v("dando clic\n            aquí")]
+                              [_vm._v("dando clic aquí")]
                             ),
                       ]),
                     ])
@@ -5017,7 +5055,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("p", { staticClass: "my-2 d-block" }, [
                   _c("strong", [_vm._v(" Etiqueta: ")]),
-                  _vm._v(" " + _vm._s(_vm.label) + "\n      "),
+                  _vm._v(" " + _vm._s(_vm.label)),
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "my-2 d-block" }, [
@@ -5149,27 +5187,24 @@ var render = function () {
                         }),
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-xl-4 col-md-6 col-xs-6" },
-                        [
-                          _c(
-                            "b-button",
-                            {
-                              staticClass: "d-flex",
-                              style: _vm.styleBtn,
-                              attrs: { pill: "" },
-                              on: { click: _vm.actualizaPuntajeExanni },
-                            },
-                            [
-                              _c("p", { staticClass: "h4" }, [
-                                _vm._v("Guardar Puntaje"),
-                              ]),
-                            ]
-                          ),
-                        ],
-                        1
-                      ),
+                      _c("div", { staticClass: "col-xl-4 col-md-6 col-xs-6" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "uaslp-btn",
+                            on: { click: _vm.actualizaPuntajeExanni },
+                          },
+                          [
+                            _c(
+                              "span",
+                              { staticClass: "material-icons-outlined" },
+                              [_vm._v("save")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("Guardar")]),
+                          ]
+                        ),
+                      ]),
                     ]
                   ),
                 ])

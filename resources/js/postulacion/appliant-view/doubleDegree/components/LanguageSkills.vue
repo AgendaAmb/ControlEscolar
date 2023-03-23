@@ -11,7 +11,11 @@
         >
       </div>
       <div class="col-lg-3 col-sm-6">
-        <b-button
+        <button class="uaslp-btn uaslp-red" @click="eliminaIdioma">
+          <span class="material-icons">delete_forever</span>
+          <span>Delete</span>
+        </button>
+        <!-- <b-button
           @click="eliminaIdioma"
           pill
           class="d-flex justify-content-start align-items-center"
@@ -20,7 +24,7 @@
         >
           <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
           <p class="h5 my-2">Eliminar</p>
-        </b-button>
+        </b-button> -->
       </div>
     </summary>
     <b-card-body>

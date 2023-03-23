@@ -119,7 +119,18 @@
             </grado-academico>
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button
+                <button
+                  class="uaslp-btn"
+                  @click="agregaHistorialAcademico"
+                  v-b-popover.hover="
+                    'Agregar un nuevo Grado Academico al historial'
+                  "
+                  title="Inserta otro registro"
+                >
+                  <span class="material-icons">add_circle</span>
+                  <span>Agregar</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaHistorialAcademico"
@@ -132,7 +143,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -245,7 +256,16 @@
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button
+                <button
+                  class="uaslp-btn"
+                  @click="agregaLenguaExtranjera"
+                  v-b-popover.hover="'Agregar una nueva lengua al registro'"
+                  title="Inserta otro registro"
+                >
+                  <span class="material-icons">add_circle</span>
+                  <span>Agregar</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaLenguaExtranjera"
@@ -255,7 +275,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -317,7 +337,18 @@
 
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
-                <b-button
+                <button
+                  class="uaslp-btn"
+                  @click="agregaExperienciaLaboral"
+                  v-b-popover.hover="
+                    'Agregar nueva experiencia laboral al registro'
+                  "
+                  title="Inserta otro registro"
+                >
+                  <span class="material-icons">add_circle</span>
+                  <span>Agregar</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaExperienciaLaboral"
@@ -329,7 +360,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Agregar</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -399,7 +430,7 @@
 
             <div class="col-lg-12 my-2">
               <button class="uaslp-btn" @click="agregaProduccionCientifica">
-                <span class="material-icons-outlined">add_circle</span>
+                <span class="material-icons">add_circle</span>
                 <span>Agregar</span>
               </button>
               <!-- <b-button
@@ -435,7 +466,7 @@
 
             <div class="col-lg-12 my-2">
               <button class="uaslp-btn" @click="agregaCapitalHumano">
-                <span class="material-icons-outlined">add_circle</span>
+                <span class="material-icons">add_circle</span>
                 <span>Agregar</span>
               </button>
               <!-- <b-button
@@ -621,20 +652,6 @@ export default {
 
     //Estado del expediente
     status: Number,
-  },
-
-  created() {
-    // console.log(this.language);
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
 
   data() {

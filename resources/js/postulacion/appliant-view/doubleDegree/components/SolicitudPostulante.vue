@@ -220,7 +220,11 @@
 
             <div class="row align-items-center my-1">
               <div class="col-lg-12">
-                <b-button
+                <button class="uaslp-btn" @click="agregaHistorialAcademico">
+                  <span class="material-icons">add_circle</span>
+                  <span>Add</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaHistorialAcademico"
@@ -233,7 +237,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Add</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -299,7 +303,7 @@
             <div class="row align-items-center mt-0">
               <div class="col-lg-12">
                 <button class="uaslp-btn" @click="agregaLenguaExtranjera">
-                  <span class="material-icons">add</span>
+                  <span class="material-icons">add_circle</span>
                   <span>Add</span>
                 </button>
                 <!-- <b-button
@@ -419,7 +423,11 @@
 
             <div class="row align-items-center my-1">
               <div class="col-lg-12">
-                <b-button
+                <button class="uaslp-btn" @click="agregaExperienciaLaboral">
+                  <span class="material-icons">add_circle</span>
+                  <span>Add</span>
+                </button>
+                <!-- <b-button
                   pill
                   class="d-flex"
                   @click="agregaExperienciaLaboral"
@@ -432,7 +440,7 @@
                 >
                   <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
                   <p class="h4 my-2">Add</p>
-                </b-button>
+                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -807,19 +815,7 @@ export default {
     CheckboxPersonalize,
     RequiredDocumentFileSigned,
   },
-  created() {
-    // console.log(this.language);
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+  
 
   props: {
     enrem_documents: Array,
@@ -894,7 +890,6 @@ export default {
       EnglishExamTypes: [],
       defaultLanguageCode: "es",
       defaultPageLanguageCode: "es-MX",
-      images_btn: [],
     };
   },
 

@@ -12,7 +12,7 @@
       </div>
       <div class="col-lg-2 col-md-4 col-sm-12">
         <button class="uaslp-btn uaslp-red" @click="eliminaExperienciaLaboral">
-          <span class="material-icons-outlined">delete_forever</span>
+          <span class="material-icons">delete_forever</span>
           <span>Delete</span>
         </button>
         <!-- <b-button @click="eliminaExperienciaLaboral" pill class="d-flex justify-content-start align-items-center"
