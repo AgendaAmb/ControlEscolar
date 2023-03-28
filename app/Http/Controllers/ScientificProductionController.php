@@ -75,9 +75,9 @@ class ScientificProductionController extends Controller
         }
 
         # Actualiza los datos adicionales de la producción científica.
-        if (count($upsert_array) > 0)
+        if (count($upsert_array) > 0) {
             DB::table($request->type)->updateOrInsert($identifiers, $upsert_array);
-
+        }
 
         return new JsonResponse(
             ScientificProduction::leftJoin(

@@ -1,5 +1,5 @@
 <template>
-  <div class="row justify-content-start align-items-center mx-1">
+  <div class="row justify-content-start align-items-center mx-1 c-center-nch">
     <!-- Google translate element -->
     <div v-if="isENREM() === true" class="col-12 mt-3">
       <b-form-group
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Info postulante -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -35,6 +35,7 @@
             v-b-toggle.accordion-1
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -42,6 +43,7 @@
               font-scale="2"
               style="border: 10px"
             ></b-icon>
+            <!-- <span class="material-icons">keyboard_arrow_up</span> -->
             <p class="h2 my-2">Datos personales</p>
           </b-button>
         </b-card-header>
@@ -51,7 +53,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <postulante
               v-bind="appliant"
               :archive_id="archive_id"
@@ -66,7 +68,7 @@
     </div>
 
     <!-- Historial academico -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -79,6 +81,7 @@
             v-b-toggle.accordion-2
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon icon="arrow-up" class="mx-4" font-scale="2"></b-icon>
             <p class="h2 my-2">Historial Académico</p>
@@ -90,7 +93,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <grado-academico
               v-for="(grado, index) in academic_degrees"
               v-bind="grado"
@@ -117,7 +120,7 @@
               @delete-item="eliminaHistorialAcademicoFromList"
             >
             </grado-academico>
-            <div class="row align-items-center mt-0">
+            <div class="row align-items-center mt-0 c-center-nch">
               <div class="col-lg-12">
                 <button
                   class="uaslp-btn"
@@ -130,20 +133,6 @@
                   <span class="material-icons">add_circle </span>
                   <span>Agregar</span>
                 </button>
-                <!-- <b-button
-                  pill
-                  class="d-flex"
-                  @click="agregaHistorialAcademico"
-                  variant="danger"
-                  v-b-popover.hover="
-                    'Agregar un nuevo Grado Academico al historial'
-                  "
-                  title="Inserta otro registro"
-                  :style="styleBtnAccordionSection"
-                >
-                  <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                  <p class="h4 my-2">Agregar</p>
-                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -153,7 +142,7 @@
     </div>
 
     <!-- Requisitos de ingreso -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -166,6 +155,7 @@
             v-b-toggle.accordion-3
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -182,7 +172,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <requisitos-ingreso
               :archive_id="archive_id"
               :motivation.sync="motivation"
@@ -199,7 +189,7 @@
     </div>
 
     <!-- Dominio de idiomas -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -212,6 +202,7 @@
             v-b-toggle.accordion-4
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -228,7 +219,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <lengua-extranjera
               v-for="(language, index) in appliant_languages"
               v-bind="language"
@@ -265,17 +256,6 @@
                   <span class="material-icons">add_circle </span>
                   <span>Agregar</span>
                 </button>
-                <!-- <b-button
-                  pill
-                  class="d-flex"
-                  @click="agregaLenguaExtranjera"
-                  :style="styleBtnAccordionSection"
-                  v-b-popover.hover="'Agregar una nueva lengua al registro'"
-                  title="Inserta otro registro"
-                >
-                  <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                  <p class="h4 my-2">Agregar</p>
-                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -284,7 +264,7 @@
       <hr class="d-block" :style="ColorStrip" />
     </div>
     <!-- Experiencia laboral -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -297,6 +277,7 @@
             v-b-toggle.accordion-5
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -313,7 +294,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <experiencia-laboral
               v-for="(experience, index) in appliant_working_experiences"
               v-bind="experience"
@@ -348,19 +329,6 @@
                   <span class="material-icons">add_circle </span>
                   <span>Agregar</span>
                 </button>
-                <!-- <b-button
-                  pill
-                  class="d-flex"
-                  @click="agregaExperienciaLaboral"
-                  :style="styleBtnAccordionSection"
-                  v-b-popover.hover="
-                    'Agregar nueva experiencia laboral al registro'
-                  "
-                  title="Inserta otro registro"
-                >
-                  <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                  <p class="h4 my-2">Agregar</p>
-                </b-button> -->
               </div>
             </div>
           </b-card-body>
@@ -370,7 +338,7 @@
     </div>
 
     <!-- Requisitos curriculares -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -383,6 +351,7 @@
             v-b-toggle.accordion-6
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -399,7 +368,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <!-- Produccion cientifica subseccion -->
             <div class="col-lg-12">
               <p class="h4">
@@ -433,15 +402,6 @@
                 <span class="material-icons">add_circle </span>
                 <span>Agregar</span>
               </button>
-              <!-- <b-button
-                pill
-                class="d-flex"
-                @click="agregaProduccionCientifica"
-                :style="styleBtnAccordionSection"
-              >
-                <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                <p class="h4 my-2">Agregar</p>
-              </b-button> -->
             </div>
 
             <hr class="d-block my-4" :style="ColorStrip" />
@@ -469,15 +429,6 @@
                 <span class="material-icons">add_circle </span>
                 <span>Agregar</span>
               </button>
-              <<!-- b-button
-                pill
-                class="d-flex"
-                @click="agregaCapitalHumano"
-                :style="styleBtnAccordionSection"
-              >
-                <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
-                <p class="h4 my-2">Agregar</p>
-              </b-button> -->
             </div>
             <!-- Capital humano subseccion -->
           </b-card-body>
@@ -487,7 +438,7 @@
     </div>
 
     <!-- Cartas de recomendacion -->
-    <div class="col-12">
+    <div class="col-12 width-85">
       <b-card no-body class="my-2" :style="styleContainerAccordionSection">
         <b-card-header
           header-tag="header"
@@ -500,6 +451,7 @@
             v-b-toggle.accordion-7
             variant="dark"
             :style="styleBtnAccordionSection"
+            class="c-header"
           >
             <b-icon
               icon="arrow-up"
@@ -516,7 +468,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body>
+          <b-card-body class="c-center-nch">
             <carta-recomendacion
               :appliant="appliant"
               :archive_id="archive_id"
@@ -539,73 +491,65 @@
     </div> -->
 
     <div class="col-12 align-items-center my-4">
-      <div class="row my-2 mx-1 justify-content-center">
+      <div class="flex-center flex-row">
         <div
           class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
         >
-          <b-button
+          <button
+            class="uaslp-btn uaslp-red uaslp-reset-box-button"
             v-b-popover.hover="
               'El postulante no cumple con los requisitos mínimos para el ingreso al Posgrado'
             "
             title="¿Qué significa?"
             v-b-modal.RechazarExpediente
-            pill
-            variant="danger"
-            :style="btnStyle"
           >
-            <p class="h3">No cumple</p>
-          </b-button>
+            <span>No cumple</span>
+          </button>
         </div>
 
         <div
           class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
         >
-          <b-button
+          <button
             v-b-popover.hover="
               'El postulante necesita modificar uno o varios documentos'
             "
             title="¿Qué significa?"
             v-b-modal.ActualizaExpediente
-            pill
-            variant="warning"
-            :style="btnStyle"
+            class="uaslp-btn uaslp-yellow uaslp-reset-box-button"
           >
-            <p class="h3">Corregir</p>
-          </b-button>
+            <span>Corregir</span>
+          </button>
         </div>
 
         <div
           class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
         >
-          <b-button
+          <button
             v-b-popover.hover="
               'El postulante cumple con todos los requisitos y pasa a la etapa de entrevista'
             "
             title="¿Qué significa?"
             @click="EnviarRevision('Aceptar')"
-            pill
-            variant="success"
-            :style="btnStyle"
+            class="uaslp-btn uaslp-green uaslp-reset-box-button"
           >
-            <p class="h3">Aceptar</p>
-          </b-button>
+            <span>Aceptar</span>
+          </button>
         </div>
 
         <div
           class="col-xl-3 col-lg-3 col-md-6 col-sm-12 justify-content-center text-center"
         >
-          <b-button
+          <button
             v-b-popover.hover="
               'El postulante debera de entregar un documento fuera de tiempo, pero cumple con lo demas solicitado y pasa a la etapa de entrevista'
             "
             title="¿Qué significa?"
             @click="EnviarRevision('Condicionado')"
-            pill
-            variant="info"
-            :style="btnStyle"
+            class="uaslp-btn uaslp-blue uaslp-reset-box-button"
           >
-            <p class="h3">Condicionado</p>
-          </b-button>
+            <span>Condicionado</span>
+          </button>
         </div>
       </div>
     </div>
@@ -686,20 +630,6 @@ export default {
 
     //Estado del expediente
     status: Number,
-  },
-
-  created() {
-    // console.log(this.language);
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
 
   data() {

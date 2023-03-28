@@ -3,19 +3,19 @@ a {
 }
 .uaslp-btn {
   min-height: 45px;
-  width: 200px;
+  width: 150px;
   background-color: #fff;
   color: rgba(0, 74, 152, 255);
   border-radius: 50px;
   border: 0;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 500 !important;
   display: flex;
   align-items: center;
   justify-content: space-evenly !important;
   cursor: pointer;
   flex-flow: row nowrap;
-  box-shadow: 5px 5px 19px #c9c9c9, -5px -5px 19px #ffffff;
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
   transition: all 0.3s ease-in-out;
   &:hover > * {
     color: #ffffff;
@@ -42,7 +42,7 @@ a {
 .uaslp-red {
   color: white;
   background-color: #e74c3c;
-  box-shadow: 5px 5px 8px #2b2b2b, -5px -5px 8px #474747;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
 
   &:hover {
     background-color: #ffffff;
@@ -50,4 +50,47 @@ a {
   &:hover > * {
     color: #e74c3c;
   }
+}
+
+.uaslp-yellow {
+  color: white;
+  background-color: #fecc50;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+
+  &:hover {
+    background-color: #ffffff;
+  }
+  &:hover > * {
+    color: #fecc50;
+  }
+}
+
+.uaslp-blue {
+  color: white;
+  background-color: #0598bc;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+
+  &:hover {
+    background-color: #ffffff;
+  }
+  &:hover > * {
+    color: #0598bc;
+  }
+}
+
+.uaslp-green {
+  color: white;
+  background-color: #118943;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+
+  &:hover {
+    background-color: #ffffff;
+  }
+  &:hover > * {
+    color: #118943;
+  }
+}
+
+.uaslp-reset-box-button {
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
 }

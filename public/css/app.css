@@ -17025,19 +17025,19 @@ a {
 
 .uaslp-btn {
   min-height: 45px;
-  width: 200px;
+  width: 150px;
   background-color: #fff;
   color: #004a98;
   border-radius: 50px;
   border: 0;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 500 !important;
   display: flex;
   align-items: center;
   justify-content: space-evenly !important;
   cursor: pointer;
   flex-flow: row nowrap;
-  box-shadow: 5px 5px 19px #c9c9c9, -5px -5px 19px #ffffff;
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
   transition: all 0.3s ease-in-out;
 }
 .uaslp-btn:hover > * {
@@ -17064,13 +17064,53 @@ a {
 .uaslp-red {
   color: white;
   background-color: #e74c3c;
-  box-shadow: 5px 5px 8px #2b2b2b, -5px -5px 8px #474747;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
 }
 .uaslp-red:hover {
   background-color: #ffffff;
 }
 .uaslp-red:hover > * {
   color: #e74c3c;
+}
+
+.uaslp-yellow {
+  color: white;
+  background-color: #fecc50;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-yellow:hover {
+  background-color: #ffffff;
+}
+.uaslp-yellow:hover > * {
+  color: #fecc50;
+}
+
+.uaslp-blue {
+  color: white;
+  background-color: #0598bc;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-blue:hover {
+  background-color: #ffffff;
+}
+.uaslp-blue:hover > * {
+  color: #0598bc;
+}
+
+.uaslp-green {
+  color: white;
+  background-color: #118943;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-green:hover {
+  background-color: #ffffff;
+}
+.uaslp-green:hover > * {
+  color: #118943;
+}
+
+.uaslp-reset-box-button {
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
 }
 
 .flex-center {
@@ -17091,4 +17131,47 @@ a {
 }
 .flex-center * div {
   min-width: 100% !important;
+}
+
+.flex-row-custom {
+  flex-flow: row nowrap;
+}
+
+.flex-item-row-child * {
+  gap: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-item-row-child * div {
+  min-width: 100% !important;
+}
+
+.width-70 {
+  width: 70% !important;
+}
+
+.width-85 {
+  width: 85% !important;
+}
+
+.c-center {
+  display: grid;
+  place-items: center;
+}
+.c-center > * {
+  display: grid;
+  place-items: center;
+}
+
+.c-center-nch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+}
+
+.c-header {
+  max-height: 36.5px !important;
 }

@@ -1,24 +1,30 @@
 <template>
-  <details open>
-    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
-        <div class="col-lg-8 col-md-6 col-xs-12">
-          <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
-          <span class="h5 font-weight-bold" style="width:auto!important;">Nivel de escolaridad {{ index }}</span>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-12">
-          <b-button @click="eliminaHistorialAcademico" pill class="d-flex justify-content-start align-items-center"
-            style="height:45px!important" variant="danger">
-            <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
-            <p class="h5 my-2">Eliminar</p>
-          </b-button>
-        </div>
+  <details open class="c-center-nch">
+    <summary
+      class="btn row d-flex align-items-center justify-content-center my-2"
+      :style="styleBtnAccordionSection"
+    >
+      <div class="col-lg-8 col-md-6 col-xs-12">
+        <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+        <span class="h5 font-weight-bold" style="width: auto !important"
+          >Nivel de escolaridad {{ index }}</span
+        >
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button class="uaslp-btn uaslp-red" @click="eliminaHistorialAcademico">
+          <span class="material-icons">delete_forever</span>
+          <span>Eliminar</span>
+        </button>
+      </div>
     </summary>
     <!-- Accordion -->
     <b-card-body>
-
       <div class="d-flex align-items-center my-2">
         <div class="col-md-1 col-sm-1 text-center">
-          <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+          <b-form-checkbox
+            style="transform: scale(1.75)"
+            v-model="StatusCheckBox"
+          ></b-form-checkbox>
         </div>
         <div class="form-group col-md-11 col-sm-11">
           <!-- 
@@ -26,12 +32,23 @@
         Grado, título, etc.
       -->
           <div class="row">
-            <div v-if="alias_academic_program == 'doctorado'" class="form-group col-md-6 col-lg-4">
+            <div
+              v-if="alias_academic_program == 'doctorado'"
+              class="form-group col-md-6 col-lg-4"
+            >
               <label> Nivel de escolaridad: </label>
               <!-- Solo se podra seleccionar para doctorado -->
-              <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
+              <select
+                v-model="DegreeType"
+                class="form-control"
+                :class="objectForError('degree_type')"
+              >
                 <option value="" selected>Escoge una opción</option>
-                <option v-for="escolaridad in escolaridades" :key="escolaridad" :value="escolaridad">
+                <option
+                  v-for="escolaridad in escolaridades"
+                  :key="escolaridad"
+                  :value="escolaridad"
+                >
                   {{ escolaridad }}
                 </option>
               </select>
@@ -43,7 +60,11 @@
             <div v-else class="form-group col-md-6 col-lg-4">
               <label> Nivel de escolaridad: </label>
               <!-- Solo se podra seleccionar para doctorado -->
-              <select v-model="DegreeType" class="form-control" :class="objectForError('degree_type')">
+              <select
+                v-model="DegreeType"
+                class="form-control"
+                :class="objectForError('degree_type')"
+              >
                 <option value="Licenciatura" selected>Licenciatura</option>
               </select>
               <div v-if="estaEnError('degree_type')" class="invalid-feedback">
@@ -53,18 +74,34 @@
 
             <div class="form-group col-md-6 col-lg-4">
               <label> Título obtenido: </label>
-              <input v-model="Degree" type="text" class="form-control" :class="objectForError('degree')" />
+              <input
+                v-model="Degree"
+                type="text"
+                class="form-control"
+                :class="objectForError('degree')"
+              />
 
               <div v-if="estaEnError('degree')" class="invalid-feedback">
                 {{ errores.degree_type }}
               </div>
             </div>
 
-            <div v-if="alias_academic_program == 'imarec'" class="d-none d-lg-block form-group col-lg-4">
+            <div
+              v-if="alias_academic_program == 'imarec'"
+              class="d-none d-lg-block form-group col-lg-4"
+            >
               <label> Estatus: </label>
-              <select v-model="Status" class="form-control" :class="objectForError('status')">
+              <select
+                v-model="Status"
+                class="form-control"
+                :class="objectForError('status')"
+              >
                 <option value="" selected>Escoge una opción</option>
-                <option v-for="estatusEstudio in estatusEstudios_otros" :key="estatusEstudio" :value="estatusEstudio">
+                <option
+                  v-for="estatusEstudio in estatusEstudios_otros"
+                  :key="estatusEstudio"
+                  :value="estatusEstudio"
+                >
                   {{ estatusEstudio }}
                 </option>
               </select>
@@ -76,9 +113,17 @@
 
             <div v-else class="d-none d-lg-block form-group col-lg-4">
               <label> Estatus: </label>
-              <select v-model="Status" class="form-control" :class="objectForError('status')">
+              <select
+                v-model="Status"
+                class="form-control"
+                :class="objectForError('status')"
+              >
                 <option value="" selected>Escoge una opción</option>
-                <option v-for="estatusEstudio in estatusEstudios_PMPCA" :key="estatusEstudio" :value="estatusEstudio">
+                <option
+                  v-for="estatusEstudio in estatusEstudios_PMPCA"
+                  :key="estatusEstudio"
+                  :value="estatusEstudio"
+                >
                   {{ estatusEstudio }}
                 </option>
               </select>
@@ -95,9 +140,18 @@
           <div class="row">
             <div class="form-group col-lg-6">
               <label> País donde realizaste tus estudios: </label>
-              <select v-model="Country" class="form-control" @change="escogePais" :class="objectForError('country')">
+              <select
+                v-model="Country"
+                class="form-control"
+                @change="escogePais"
+                :class="objectForError('country')"
+              >
                 <option value="" selected>Escoge una opción</option>
-                <option v-for="PaisEstudio in paises" :key="PaisEstudio.id" :value="PaisEstudio.name">
+                <option
+                  v-for="PaisEstudio in paises"
+                  :key="PaisEstudio.id"
+                  :value="PaisEstudio.name"
+                >
                   {{ PaisEstudio.name }}
                 </option>
               </select>
@@ -109,9 +163,17 @@
 
             <div class="form-group col-lg-6">
               <label> Universidad de estudios: </label>
-              <select v-model="University" class="form-control" :class="objectForError('university')">
+              <select
+                v-model="University"
+                class="form-control"
+                :class="objectForError('university')"
+              >
                 <option value="" selected>Escoge una opción</option>
-                <option v-for="Universidad in Universidades" :key="Universidad.id" :value="Universidad.name">
+                <option
+                  v-for="Universidad in Universidades"
+                  :key="Universidad.id"
+                  :value="Universidad.name"
+                >
                   {{ Universidad.name }}
                 </option>
               </select>
@@ -141,7 +203,10 @@
               <input v-model="TitrationDate" type="date" class="form-control" />
             </div>
 
-            <div v-if="Status === 'Título o grado en proceso'" class="form-group col-md-6">
+            <div
+              v-if="Status === 'Título o grado en proceso'"
+              class="form-group col-md-6"
+            >
               <label> Fecha de presentación de examen: </label>
               <input v-model="TitrationDate" type="date" class="form-control" />
             </div>
@@ -180,9 +245,18 @@
           <div class="row">
             <div class="form-group col-md-6 col-lg-4">
               <label> Promedio obtenido: </label>
-              <input v-if="'average' in errores" v-model.number="Average" type="number"
-                class="form-control is-invalid" />
-              <input v-else v-model.number="Average" type="number" class="form-control" />
+              <input
+                v-if="'average' in errores"
+                v-model.number="Average"
+                type="number"
+                class="form-control is-invalid"
+              />
+              <input
+                v-else
+                v-model.number="Average"
+                type="number"
+                class="form-control"
+              />
 
               <div v-if="'average' in errores" class="invalid-feedback">
                 {{ errores.average }}
@@ -191,9 +265,18 @@
 
             <div class="form-group col-md-6 col-lg-4">
               <label> Calificación mínima: </label>
-              <input v-if="'min_avg' in errores" v-model.number="MinAvg" type="number"
-                class="form-control is-invalid" />
-              <input v-else v-model.number="MinAvg" type="number" class="form-control" />
+              <input
+                v-if="'min_avg' in errores"
+                v-model.number="MinAvg"
+                type="number"
+                class="form-control is-invalid"
+              />
+              <input
+                v-else
+                v-model.number="MinAvg"
+                type="number"
+                class="form-control"
+              />
 
               <div v-if="'min_avg' in errores" class="invalid-feedback">
                 {{ errores.min_avg }}
@@ -202,9 +285,18 @@
 
             <div class="form-group col-md-6 col-lg-4">
               <label> Calificación máxima: </label>
-              <input v-if="'max_avg' in errores" v-model.number="MaxAvg" type="number"
-                class="form-control is-invalid" />
-              <input v-else v-model.number="MaxAvg" type="number" class="form-control" />
+              <input
+                v-if="'max_avg' in errores"
+                v-model.number="MaxAvg"
+                type="number"
+                class="form-control is-invalid"
+              />
+              <input
+                v-else
+                v-model.number="MaxAvg"
+                type="number"
+                class="form-control"
+              />
               <div v-if="'max_avg' in errores" class="invalid-feedback">
                 {{ errores.max_avg }}
               </div>
@@ -213,28 +305,39 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-start mt-0 mb-3" style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="actualizaHistorialAcademico" :src="images_btn.guardar" alt=""
-            style=" max-height: 45px !important;">
+      <div class="d-flex justify-content-start mt-0 mb-3" style="width: 100%">
+        <div
+          class="col-md-2 col-xs-3 align-items-center"
+          style="width: 100%; max-height: 45px !important"
+        >
+          <button class="uaslp-btn" @click="actualizaHistorialAcademico">
+            <span class="material-icons">delete_forever</span>
+            <span>Eliminar</span>
+          </button>
         </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
             <strong>Nota: </strong>
             Para poder guardar los cambios en los campos anteriores del
-            historial académico es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el historial
-                académico</strong></p>
+            historial académico es necesario seleccionar el siguiente botón.
+            <p><strong>Solo se guardara el historial académico</strong></p>
           </label>
         </div>
       </div>
 
-      <documento-requerido v-for="documento in RequiredDocuments" :key="documento.name"
-        :archivo.sync="documento.archivo" :location.sync="documento.pivot.location" :errores.sync="documento.errores"
-        :alias_academic_program="alias_academic_program" :images_btn="images_btn" v-bind="documento"
-        @enviaDocumento="cargaDocumento">
+      <documento-requerido
+        v-for="documento in RequiredDocuments"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :alias_academic_program="alias_academic_program"
+        :images_btn="images_btn"
+        v-bind="documento"
+        @enviaDocumento="cargaDocumento"
+      >
       </documento-requerido>
     </b-card-body>
-
   </details>
 </template>
 
@@ -323,7 +426,7 @@ export default {
     status_checkBox: {
       type: Boolean,
       default: false,
-    }
+    },
   },
 
   data: function () {
@@ -348,12 +451,12 @@ export default {
 
       return {
         backgroundColor: color,
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        width: '100%!important',
-        display: 'flex'
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        width: "100%!important",
+        display: "flex",
+      };
     },
 
     ColorStrip() {
@@ -379,7 +482,6 @@ export default {
         height: "1px",
       };
     },
-
 
     Universidades: {
       get: function () {
@@ -411,7 +513,6 @@ export default {
         this.$emit("update:status_checkBox", newValue);
       },
     },
-
 
     CVU: {
       get() {

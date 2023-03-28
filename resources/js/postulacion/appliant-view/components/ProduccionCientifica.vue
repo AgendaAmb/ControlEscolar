@@ -16,19 +16,9 @@
           class="uaslp-btn uaslp-red"
           @click="eliminaProduccionCientifica"
         >
-          <span class="material-icons-outlined">delete_forever </span>
+          <span class="material-icons">delete_forever </span>
           <span>Eliminar</span>
         </button>
-        <!-- <b-button
-          @click="eliminaProduccionCientifica"
-          pill
-          class="d-flex justify-content-start align-items-center"
-          style="height: 45px !important"
-          variant="danger"
-        >
-          <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
-          <p class="h5 my-2">Eliminar</p>
-        </b-button> -->
       </div>
     </summary>
 
@@ -157,8 +147,6 @@
           class="col-md-2 col-xs-3 align-items-center"
           style="width: 100%; max-height: 45px !important"
         >
-          <!-- <img @click="guardaProduccionCientifica" :src="images_btn.guardar" alt=""
-            style=" max-height: 45px !important;"> -->
           <button class="uaslp-btn" @click="guardaProduccionCientifica">
             <span class="material-icons-outlined">save</span>
             <span>Guardar</span>
