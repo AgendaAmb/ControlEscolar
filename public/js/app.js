@@ -2063,11 +2063,13 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mdb_vue_ui_kit_css_mdb_min_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mdb-vue-ui-kit/css/mdb.min.css */ "./node_modules/mdb-vue-ui-kit/css/mdb.min.css");
+/* harmony import */ var material_icons_iconfont_material_icons_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! material-icons/iconfont/material-icons.css */ "./node_modules/material-icons/iconfont/material-icons.css");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -6487,6 +6489,73 @@ window.Echo = new Echo({
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/material-icons/iconfont/material-icons.css":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/material-icons/iconfont/material-icons.css ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_icons_woff2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./material-icons.woff2 */ "./node_modules/material-icons/iconfont/material-icons.woff2");
+/* harmony import */ var _material_icons_woff2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_icons_woff2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _material_icons_woff__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./material-icons.woff */ "./node_modules/material-icons/iconfont/material-icons.woff");
+/* harmony import */ var _material_icons_woff__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_icons_woff__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_icons_outlined_woff2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./material-icons-outlined.woff2 */ "./node_modules/material-icons/iconfont/material-icons-outlined.woff2");
+/* harmony import */ var _material_icons_outlined_woff2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_icons_outlined_woff2__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_icons_outlined_woff__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./material-icons-outlined.woff */ "./node_modules/material-icons/iconfont/material-icons-outlined.woff");
+/* harmony import */ var _material_icons_outlined_woff__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_icons_outlined_woff__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _material_icons_round_woff2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./material-icons-round.woff2 */ "./node_modules/material-icons/iconfont/material-icons-round.woff2");
+/* harmony import */ var _material_icons_round_woff2__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_icons_round_woff2__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_icons_round_woff__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./material-icons-round.woff */ "./node_modules/material-icons/iconfont/material-icons-round.woff");
+/* harmony import */ var _material_icons_round_woff__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_icons_round_woff__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _material_icons_sharp_woff2__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./material-icons-sharp.woff2 */ "./node_modules/material-icons/iconfont/material-icons-sharp.woff2");
+/* harmony import */ var _material_icons_sharp_woff2__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_icons_sharp_woff2__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _material_icons_sharp_woff__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./material-icons-sharp.woff */ "./node_modules/material-icons/iconfont/material-icons-sharp.woff");
+/* harmony import */ var _material_icons_sharp_woff__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_icons_sharp_woff__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _material_icons_two_tone_woff2__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./material-icons-two-tone.woff2 */ "./node_modules/material-icons/iconfont/material-icons-two-tone.woff2");
+/* harmony import */ var _material_icons_two_tone_woff2__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_material_icons_two_tone_woff2__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _material_icons_two_tone_woff__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./material-icons-two-tone.woff */ "./node_modules/material-icons/iconfont/material-icons-two-tone.woff");
+/* harmony import */ var _material_icons_two_tone_woff__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_material_icons_two_tone_woff__WEBPACK_IMPORTED_MODULE_11__);
+// Imports
+
+
+
+
+
+
+
+
+
+
+
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_woff2__WEBPACK_IMPORTED_MODULE_2___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_woff__WEBPACK_IMPORTED_MODULE_3___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_outlined_woff2__WEBPACK_IMPORTED_MODULE_4___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_3___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_outlined_woff__WEBPACK_IMPORTED_MODULE_5___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_4___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_round_woff2__WEBPACK_IMPORTED_MODULE_6___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_5___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_round_woff__WEBPACK_IMPORTED_MODULE_7___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_6___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_sharp_woff2__WEBPACK_IMPORTED_MODULE_8___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_7___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_sharp_woff__WEBPACK_IMPORTED_MODULE_9___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_8___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_two_tone_woff2__WEBPACK_IMPORTED_MODULE_10___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_9___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()((_material_icons_two_tone_woff__WEBPACK_IMPORTED_MODULE_11___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face {\n  font-family: \"Material Icons\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"woff\");\n}\n.material-icons {\n  font-family: \"Material Icons\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  line-height: 1;\n  letter-spacing: normal;\n  text-transform: none;\n  display: inline-block;\n  white-space: nowrap;\n  word-wrap: normal;\n  direction: ltr;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  font-feature-settings: \"liga\";\n}\n\n@font-face {\n  font-family: \"Material Icons Outlined\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_3___ + ") format(\"woff\");\n}\n.material-icons-outlined {\n  font-family: \"Material Icons Outlined\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  line-height: 1;\n  letter-spacing: normal;\n  text-transform: none;\n  display: inline-block;\n  white-space: nowrap;\n  word-wrap: normal;\n  direction: ltr;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  font-feature-settings: \"liga\";\n}\n\n@font-face {\n  font-family: \"Material Icons Round\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_4___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_5___ + ") format(\"woff\");\n}\n.material-icons-round {\n  font-family: \"Material Icons Round\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  line-height: 1;\n  letter-spacing: normal;\n  text-transform: none;\n  display: inline-block;\n  white-space: nowrap;\n  word-wrap: normal;\n  direction: ltr;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  font-feature-settings: \"liga\";\n}\n\n@font-face {\n  font-family: \"Material Icons Sharp\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_6___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_7___ + ") format(\"woff\");\n}\n.material-icons-sharp {\n  font-family: \"Material Icons Sharp\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  line-height: 1;\n  letter-spacing: normal;\n  text-transform: none;\n  display: inline-block;\n  white-space: nowrap;\n  word-wrap: normal;\n  direction: ltr;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  font-feature-settings: \"liga\";\n}\n\n@font-face {\n  font-family: \"Material Icons Two Tone\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_8___ + ") format(\"woff2\"), url(" + ___CSS_LOADER_URL_REPLACEMENT_9___ + ") format(\"woff\");\n}\n.material-icons-two-tone {\n  font-family: \"Material Icons Two Tone\";\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  line-height: 1;\n  letter-spacing: normal;\n  text-transform: none;\n  display: inline-block;\n  white-space: nowrap;\n  word-wrap: normal;\n  direction: ltr;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  font-feature-settings: \"liga\";\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/mdb-vue-ui-kit/css/mdb.min.css":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/mdb-vue-ui-kit/css/mdb.min.css ***!
@@ -6584,6 +6653,150 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    // eslint-disable-next-line no-param-reassign
+    options = {};
+  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+
+
+  url = url && url.__esModule ? url.default : url;
+
+  if (typeof url !== "string") {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    // eslint-disable-next-line no-param-reassign
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    // eslint-disable-next-line no-param-reassign
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+
+  return url;
+};
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-outlined.woff":
+/*!***************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-outlined.woff ***!
+  \***************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-outlined.woff?f882956fd323fd322f31c0665e000772";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-outlined.woff2":
+/*!****************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-outlined.woff2 ***!
+  \****************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-outlined.woff2?6f420cf17cc0d7676fadeee43b45bd50";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-round.woff":
+/*!************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-round.woff ***!
+  \************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-round.woff?5d681e2edae8c60630db51d7fbc2907b";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-round.woff2":
+/*!*************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-round.woff2 ***!
+  \*************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-round.woff2?c380809fd3677d7d690354355dc7e66e";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-sharp.woff":
+/*!************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-sharp.woff ***!
+  \************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-sharp.woff?3a4004a46a653d4b2166dd7273dd24bb";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-sharp.woff2":
+/*!*************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-sharp.woff2 ***!
+  \*************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-sharp.woff2?219aa9140e099e6c72ed886f739033e0";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-two-tone.woff":
+/*!***************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-two-tone.woff ***!
+  \***************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-two-tone.woff?3baa5b8f3469222b822d0c748fc81ec7";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons-two-tone.woff2":
+/*!****************************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons-two-tone.woff2 ***!
+  \****************************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons-two-tone.woff2?4ef4218c522f1eb6b5b1d8b7df0385ce";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons.woff":
+/*!******************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons.woff ***!
+  \******************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons.woff?4d73cb90e394b34b767077d75cce0c4c";
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons.woff2":
+/*!*******************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons.woff2 ***!
+  \*******************************************************************/
+/***/ ((module) => {
+
+module.exports = "/fonts/vendor/material-icons/iconmaterial-icons.woff2?0c35d18bf06992036b691da73d635fc4";
 
 /***/ }),
 
@@ -37526,6 +37739,36 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
+
+/***/ }),
+
+/***/ "./node_modules/material-icons/iconfont/material-icons.css":
+/*!*****************************************************************!*\
+  !*** ./node_modules/material-icons/iconfont/material-icons.css ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_material_icons_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./material-icons.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/material-icons/iconfont/material-icons.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_material_icons_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_material_icons_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

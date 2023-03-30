@@ -1,5 +1,8 @@
 <template>
   <div class="row align-items-center">
+    <div class="grid-center">
+      <h1>{{ `${this.programName}` }}</h1>
+    </div>
     <!-- Tittle and add or asign new data to User -->
     <div class="container-fluid" :class="{ invisible: !dataNotEmpty() }">
       <div
@@ -88,13 +91,7 @@
 
               <template v-slot:cell(Nombre)="{ item }">
                 <span>
-                  <p class="h6">{{ item.name }}</p>
-                </span>
-              </template>
-
-              <template v-slot:cell(Programa_Academico)="{ item }">
-                <span>
-                  <p class="h6">{{ item.academic_program }}</p>
+                  <p class="h6">{{ item.name.toUpperCase() }}</p>
                 </span>
               </template>
 
@@ -105,7 +102,11 @@
               </template>
 
               <template v-slot:cell(Expediente)="{ item }">
-                <a :href="item.location" target="_blank">Ver expediente</a>
+                <a
+                  :href="item.location || `solicitud/expediente/${item.id}`"
+                  target="_blank"
+                  >Mostrar expediente</a
+                >
               </template>
             </b-table>
 
@@ -148,16 +149,24 @@ export default {
   // Nombre del componente
   name: "archives",
 
-  mounted() {},
+  mounted() {
+    console.log("Data", this.data);
+    //console.log("Archives component mounted: ", this.data);
+  },
 
   // Propiedas.
   props: {
-    // Columnas de la tabla.
     data: {
-      type: Array,
-      default: [],
+      type: Object,
+      default: {},
     },
 
+    programName: {
+      type: String,
+      default: "",
+    },
+
+    // Columnas de la tabla.
     columns: {
       type: Array,
       default() {
@@ -165,7 +174,6 @@ export default {
           "No. expediente",
           "Periodo",
           "Nombre completo",
-          "Programa académico",
           "Estado",
           "Expediente",
         ];
@@ -175,19 +183,24 @@ export default {
 
   computed: {
     filteredList() {
+      this.programName = this.data.programName;
       let list = [];
+      console.log("Data received", this.data, this);
+      let { data: dataReceived } = this.data;
+      dataReceived.filter((user) => {
+        //console.log("User", user);
+        list.push(user);
 
-      this.data.filter((user) => {
-        if (
-          user.name.toString().toLowerCase().includes(this.search.toLowerCase())
+        /*  if (
+          user.name.toLowerCase().includes(this.search.toLowerCase())
         ) {
           list.push(user);
-          console.log(user.name);
-        }
+          //console.log(user.name);
+        } */
       });
 
       if (list.length <= 0) {
-        list = this.data;
+        list = dataReceived;
       }
 
       return list;
@@ -196,16 +209,17 @@ export default {
     rows() {
       let list = [];
 
-      this.data.filter((user) => {
-        if (
+      this.data.data.filter((user) => {
+        list.push(user);
+        /* if (
           user.name.toString().toLowerCase().includes(this.search.toLowerCase())
         ) {
           list.push(user);
-        }
+        } */
       });
 
       if (list.length <= 0) {
-        list = this.data;
+        list = this.data.data;
       }
 
       return list.length;
@@ -215,7 +229,7 @@ export default {
   methods: {
     dataNotEmpty() {
       let res = false;
-      if (this.data.length > 0) {
+      if (this.data.data.length > 0) {
         res = true;
       }
 
@@ -307,11 +321,7 @@ export default {
           label: "Nombre",
           sortable: true,
         },
-        {
-          key: "Programa_Academico",
-          label: "Programa Académico",
-          sortable: true,
-        },
+
         {
           key: "Estado",
           sortable: false,
@@ -331,3 +341,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.grid-center {
+  margin-top: 30px;
+  display: grid !important;
+  place-items: center !important;
+}
+.grid-center > * {
+  display: grid !important;
+  place-items: center !important;
+}
+</style>

@@ -1,9 +1,7 @@
 <template>
-
   <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="row d-flex align-items-center my-2" style="width:100%;">
-
-        <!-- Nombre y notas -->
+    <div class="row d-flex align-items-center my-2" style="width: 100%">
+      <!-- Nombre y notas -->
       <div class="form-group col-11 col-md-11 col-xs-10">
         <h5 class="mt-2 d-block">
           <strong> {{ name }} </strong>
@@ -20,17 +18,29 @@
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
-            <a v-if="
-            alias_academic_program === 'maestria' ||
-            alias_academic_program === 'enrem'" href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
-              target="_blank">dando clic aquí</a>
+            <a
+              v-if="
+                alias_academic_program === 'maestria' ||
+                alias_academic_program === 'enrem'
+              "
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
             <!-- Maestria imarec -->
-            <a v-else-if="alias_academic_program === 'imarec'"
-              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx" target="_blank">dando clic
-              aquí</a>
+            <a
+              v-else-if="alias_academic_program === 'imarec'"
+              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
             <!-- Doctorado PMPCA  -->
-            <a v-else href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx" target="_blank">dando clic
-              aquí</a>
+            <a
+              v-else
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
           </strong>
         </p>
 
@@ -39,27 +49,33 @@
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
-        <p class="my-2 d-block">
-          <strong> Etiqueta: </strong> {{ label }}
-        </p>
+        <p class="my-2 d-block"><strong> Etiqueta: </strong> {{ label }}</p>
         <p class="my-2 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
       <div class="form-group col-1 col-md-1 col-xs-2 align-items-center">
-        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
-          style="max-height: 45px; width: 100%">
+        <div
+          v-if="checkUpload() === true"
+          class="d-flex justify-content-center my-1"
+          style="max-height: 45px; width: 100%"
+        >
           <label>
-            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
-              target="_blank">
-              <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
+            <a
+              :href="'../../../controlescolar/solicitud/expediente/' + location"
+              style="height: 45px; width: 100%"
+              target="_blank"
+            >
+              <button class="uaslp-btn">
+                <span class="material-icons">adjust</span>
+                <span>Ver</span>
+              </button>
+              <!-- <img :src="images_btn.ver" alt="" style="max-height: 45px !important;"> -->
             </a>
           </label>
         </div>
-       
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -127,8 +143,8 @@ export default {
 
     status_checkBox: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
@@ -145,11 +161,11 @@ export default {
     styleBtn() {
       return {
         backgroundColor: "rgba(0,96,175,255)",
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        height: '100%',
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        height: "100%",
+      };
     },
 
     StatusCheckBox: {
@@ -211,8 +227,6 @@ export default {
   // },
 
   methods: {
-
-
     bkgCargarArchivo(type) {
       // console.log(this.language);
       axios
@@ -231,8 +245,6 @@ export default {
         });
     },
 
-
-
     isEXANNI() {
       if (
         this.name ===
@@ -248,9 +260,11 @@ export default {
       let res = true;
 
       // Documents for Maestria en ciencias ambientales and imarec
-      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
+      if (
+        this.alias_academic_program === "maestria" ||
+        this.alias_academic_program === "imarec"
+      ) {
         switch (this.name) {
-        
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -292,7 +306,6 @@ export default {
       //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
-      
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -338,7 +351,7 @@ export default {
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
-          case  "5B.- Título de maestría o acta de examen":
+          case "5B.- Título de maestría o acta de examen":
             res = false;
             break;
           case "6B.- Certificado de materias de la maestría":

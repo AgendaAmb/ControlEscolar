@@ -1,5 +1,5 @@
 <template>
-  <tr class="text-center">
+  <tr class="text-center grid-center">
     <th scope="row">{{ index }}</th>
     <th
       v-if="academic_program != 'Doctorado en ciencias ambientales'"
@@ -41,14 +41,13 @@
     </th>
 
     <td>{{ name }}</td>
-    <td>{{ academic_program }}</td>
     <td>
       <div :class="classObjectFor('name_status')" role="alert">
         {{ name_status }}
       </div>
     </td>
     <td>
-      <a :href="location" target="_blank"> Ver expediente </a>
+      <a href="location" target="_blank"> Ver expediente </a>
     </td>
   </tr>
 </template>
@@ -65,6 +64,7 @@ export default {
       array_from: null,
       name_status: null,
       errores: {},
+      location: `postulacion/expediente/${this.id}`,
     };
   },
 
@@ -102,20 +102,9 @@ export default {
       type: String,
       default: "",
     },
-
-    academic_program: {
-      type: String,
-      default: "",
-    },
-
-    location: {
-      type: String,
-      default: "",
-    },
   },
 
   created() {
-
     switch (this.status) {
       case 1:
         this.name_status = "Incompleto";
@@ -129,19 +118,18 @@ export default {
       case 4:
         this.name_status = "¡Documentos nuevos!";
         break;
-        case 5:
+      case 5:
         this.name_status = "Completo";
         break;
-        case 6:
+      case 6:
         this.name_status = "No cumple";
         break;
-        case 7:
-          this.name_status = "Condicionado";
-          break;
-        default:
-         this.name_status = "Incompleto";
-          break;
-
+      case 7:
+        this.name_status = "Condicionado";
+        break;
+      default:
+        this.name_status = "Incompleto";
+        break;
     }
   },
 
@@ -164,12 +152,12 @@ export default {
         case 5:
           color = "alert alert-success";
           break;
-          case 6:
+        case 6:
           color = "alert alert-danger";
           break;
-          case 7:
-            color = "alert alert-light";
-            break;
+        case 7:
+          color = "alert alert-light";
+          break;
         default:
           color = "alert alert-secondary";
           break;
@@ -178,5 +166,9 @@ export default {
       return color;
     },
   },
+  mounted() {
+    this.location = `postulacion/expediente/${this.id}`;
+  },
 };
 </script>
+<style scoped></style>

@@ -1,63 +1,83 @@
 <template>
   <details open>
     <!-- Accordion header -->
-    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
-        <div class="col-lg-8 col-md-6 col-xs-12">
-          <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
-          <span class="h5 font-weight-bold" style="width:auto!important;">Capital Humano {{ index + 1 }}</span>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-12">
-          <b-button @click="eliminaCapitalHumano" pill class="d-flex justify-content-start align-items-center"
-            style="height:45px!important" variant="danger">
-            <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
-            <p class="h5 my-2">Eliminar</p>
-          </b-button>
-        </div>
+    <summary
+      class="btn row d-flex align-items-center justify-content-center my-2"
+      :style="styleBtnAccordionSection"
+    >
+      <div class="col-lg-8 col-md-6 col-xs-12">
+        <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+        <span class="h5 font-weight-bold" style="width: auto !important"
+          >Capital Humano {{ index + 1 }}</span
+        >
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button class="uaslp-btn uaslp-red" @click="eliminaCapitalHumano">
+          <span class="material-icons">delete_forever</span>
+          <span>Eliminar</span>
+        </button>
+      </div>
     </summary>
     <!-- Accordion -->
     <b-card-body>
       <!-- Content -->
-      <div class="d-flex justify-content-start align-items-center my-2" style="width:100%;">
+      <div
+        class="d-flex justify-content-start align-items-center my-2"
+        style="width: 100%"
+      >
         <div class="col-md-1 col-sm-1 text-center">
-          <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+          <b-form-checkbox
+            style="transform: scale(1.75)"
+            v-model="StatusCheckBox"
+          ></b-form-checkbox>
         </div>
 
         <div class="col-11">
           <div class="row my-2">
             <div class="form-group col-md-4">
               <label> Nombre del curso: </label>
-              <input type="text" class="form-control" v-model="CourseName">
+              <input type="text" class="form-control" v-model="CourseName" />
             </div>
 
             <div class="form-group col-md-4">
               <label> Fecha: </label>
-              <input type="date" class="form-control" v-model="AssistedAt">
+              <input type="date" class="form-control" v-model="AssistedAt" />
             </div>
 
             <div class="form-group col-md-4">
               <label> Nivel de escolaridad: </label>
-              <input type="text" class="form-control" v-model="ScolarshipLevel">
+              <input
+                type="text"
+                class="form-control"
+                v-model="ScolarshipLevel"
+              />
             </div>
           </div>
         </div>
       </div>
       <!-- Save Content -->
-      <div class="d-flex justify-content-start my-12" style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="guardaCapitalHumano" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+      <div class="d-flex justify-content-start my-12" style="width: 100%">
+        <div
+          class="col-md-2 col-xs-3 align-items-center"
+          style="width: 100%; max-height: 45px !important"
+        >
+          <button class="uaslp-btn" @click="guardaCapitalHumano">
+            <span class="material-icons-outlined">save</span>
+            <span>Guardar</span>
+          </button>
         </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
             <strong>Nota: </strong>
-            Para poder guardar los cambios en los campos anteriores del capital humano es necesario seleccionar el
-            siguiente botón. <p><strong>Solo se guardara el capital humano actual</strong></p>
+            Para poder guardar los cambios en los campos anteriores del capital
+            humano es necesario seleccionar el siguiente botón.
+            <p><strong>Solo se guardara el capital humano actual</strong></p>
           </label>
         </div>
       </div>
     </b-card-body>
   </details>
 </template>
-
 
 <script>
 export default {
@@ -88,28 +108,28 @@ export default {
     scolarship_level: String,
     status_checkBox: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
     return {
-      errores: {}
+      errores: {},
     };
   },
 
   computed: {
     styleBtnAccordionSection() {
       var color = "rgba(0,96,175,255)";
-     
+
       return {
         backgroundColor: color,
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        width: '100%!important',
-        display: 'flex'
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        width: "100%!important",
+        display: "flex",
+      };
     },
 
     CourseName: {
@@ -117,8 +137,8 @@ export default {
         return this.course_name;
       },
       set(newVal) {
-        this.$emit('update:course_name', newVal);
-      }
+        this.$emit("update:course_name", newVal);
+      },
     },
     StatusCheckBox: {
       get() {
@@ -133,17 +153,17 @@ export default {
         return this.assisted_at;
       },
       set(newVal) {
-        this.$emit('update:assisted_at', newVal);
-      }
+        this.$emit("update:assisted_at", newVal);
+      },
     },
     ScolarshipLevel: {
       get() {
         return this.scolarship_level;
       },
       set(newVal) {
-        this.$emit('update:scolarship_level', newVal);
-      }
-    }
+        this.$emit("update:scolarship_level", newVal);
+      },
+    },
   },
 
   methods: {
@@ -171,83 +191,82 @@ export default {
       };
     },
 
-
     guardaCapitalHumano(evento) {
-      this.enviaCapitalHumano(evento, 'Completo');
+      this.enviaCapitalHumano(evento, "Completo");
     },
 
     enviaCapitalHumano(evento, estado) {
       this.errores = {};
 
-      axios.post('/controlescolar/solicitud/updateHumanCapital', {
+      axios
+        .post("/controlescolar/solicitud/updateHumanCapital", {
+          id: this.id,
+          archive_id: this.archive_id,
+          state: estado,
+          course_name: this.course_name,
+          assisted_at: this.assisted_at,
+          scolarship_level: this.scolarship_level,
+        })
+        .then((response) => {
+          Object.keys(response.data).forEach((dataKey) => {
+            var event = "update:" + dataKey;
+            this.$emit(event, response.data[dataKey]);
+          });
 
-        id: this.id,
-        archive_id: this.archive_id,
-        state: estado,
-        course_name: this.course_name,
-        assisted_at: this.assisted_at,
-        scolarship_level: this.scolarship_level,
+          Swal.fire({
+            title: "Los datos se han actualizado correctamente",
+            text: "El capital humano seleccionado de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
+            icon: "success",
+            showCancelButton: true,
+            showConfirmButton: false,
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Continuar",
+          });
+        })
+        .catch((error) => {
+          this.State = "Incompleto";
+          var errores = error.response.data["errors"];
 
-      }).then(response => {
-        Object.keys(response.data).forEach(dataKey => {
-          var event = 'update:' + dataKey;
-          this.$emit(event, response.data[dataKey]);
+          Object.keys(errores).forEach((key) => {
+            Vue.set(this.errores, key, errores[key][0]);
+          });
+
+          Swal.fire({
+            title: "Error al actualizar datos",
+            text: error.response.data["message"],
+            showCancelButton: false,
+            icon: "error",
+          });
         });
-
-        Swal.fire({
-          title: "Los datos se han actualizado correctamente",
-          text: "El capital humano seleccionado de tu expediente ha sido modificado, podras hacer cambios mientras la postulación este disponible",
-          icon: "success",
-          showCancelButton: true,
-          showConfirmButton: false,
-          cancelButtonColor: "#3085d6",
-          cancelButtonText: "Continuar",
-        });
-
-      }).catch(error => {
-        this.State = 'Incompleto';
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
-
-        Swal.fire({
-          title: "Error al actualizar datos",
-          text: error.response.data['message'],
-          showCancelButton: false,
-          icon: "error",
-        });
-      });
     },
-
 
     eliminaCapitalHumano() {
-      axios.post('/controlescolar/solicitud/deleteHumanCapital', {
-        id: this.id,
-        archive_id: this.archive_id
-      }).then(response => {
+      axios
+        .post("/controlescolar/solicitud/deleteHumanCapital", {
+          id: this.id,
+          archive_id: this.archive_id,
+        })
+        .then((response) => {
+          //Llama al padre para que elimine el item de la lista de experiencia laboral
+          this.$emit("delete-item", this.index - 1);
 
-        //Llama al padre para que elimine el item de la lista de experiencia laboral
-        this.$emit('delete-item', this.index - 1);
-
-        Swal.fire({
-          title: "Éxito al eliminar Capital Humano",
-          text: response.data.message, // Imprime el mensaje del controlador
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          confirmButtonText: "Continuar",
+          Swal.fire({
+            title: "Éxito al eliminar Capital Humano",
+            text: response.data.message, // Imprime el mensaje del controlador
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Continuar",
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error al eliminar Capital Humano",
+            showCancelButton: false,
+            icon: "error",
+          });
         });
-
-      }).catch(error => {
-        Swal.fire({
-          title: "Error al eliminar Capital Humano",
-          showCancelButton: false,
-          icon: "error",
-        });
-      });
     },
-  }
+  },
 };
 </script>

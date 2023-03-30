@@ -9,18 +9,28 @@
           <div class="row my-1">
             <div class="form-group col-12">
               <label> First Name(s): </label>
-              <input v-model="Name" type="text" class="form-control" readonly>
+              <input v-model="Name" type="text" class="form-control" readonly />
             </div>
             <div class="form-group col-md-12">
               <label> Last Name(s): </label>
-              <input v-model="Surname" type="text" class="form-control" readonly>
+              <input
+                v-model="Surname"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
           </div>
 
           <div class="row my-1">
             <div class="form-group col-lg-4 col-sm-6">
               <label> Gender: </label>
-              <input v-model="Gender" type="text" class="form-control" readonly>
+              <input
+                v-model="Gender"
+                type="text"
+                class="form-control"
+                readonly
+              />
 
               <!-- <select v-model="Gender" class="form-control">
                 <option value="" selected>Escoge una opción</option>
@@ -35,7 +45,11 @@
               <label> Civic State: </label>
               <select v-model="CivicState" class="form-control">
                 <option value="">Choose an option</option>
-                <option v-for="cs in civic_state_list" :key="cs.id" :value="cs.name">
+                <option
+                  v-for="cs in civic_state_list"
+                  :key="cs.id"
+                  :value="cs.name"
+                >
                   {{ cs.name }}
                 </option>
               </select>
@@ -43,21 +57,33 @@
 
             <div class="form-group col-lg-4 col-sm-6">
               <label> No. of children: </label>
-              <input v-model.number="NoChildren" type="number" class="form-control">
+              <input
+                v-model.number="NoChildren"
+                type="number"
+                class="form-control"
+              />
             </div>
           </div>
-
 
           <div class="row my-1">
             <div class="form-group col-xl-6">
               <label> Date of birth </label>
-              <input type="date" class="form-control" v-model="BirthDate" readonly />
+              <input
+                type="date"
+                class="form-control"
+                v-model="BirthDate"
+                readonly
+              />
             </div>
-
 
             <div class="form-group col-lg-6">
               <label> Place of birth: </label>
-              <input v-model="BirthCountry" type="text" class="form-control" readonly>
+              <input
+                v-model="BirthCountry"
+                type="text"
+                class="form-control"
+                readonly
+              />
 
               <!-- <select v-model="BirthCountry" class="form-control">
                 <option value="" selected>Choose a country</option>
@@ -71,7 +97,12 @@
           <div class="row my-1">
             <div class="form-group col-xl-6">
               <label> Nationality</label>
-              <input v-model="Nationality" type="text" class="form-control" readonly>
+              <input
+                v-model="Nationality"
+                type="text"
+                class="form-control"
+                readonly
+              />
 
               <!-- <select v-model="Nationality" class="form-control">
                 <option value="" selected>Choose a country</option>
@@ -81,12 +112,15 @@
               </select> -->
             </div>
 
-
             <div class="form-group col-lg-6">
               <label> Country of residense: </label>
               <select v-model="BirthState" class="form-control">
                 <option value="" selected>Choose a country</option>
-                <option v-for="country in countries" :key="country.id" :value="country.name">
+                <option
+                  v-for="country in countries"
+                  :key="country.id"
+                  :value="country.name"
+                >
                   {{ country.name }}
                 </option>
               </select>
@@ -96,38 +130,61 @@
           <div class="row my-1">
             <div class="form-group col-lg-6">
               <label> Email: </label>
-              <input v-model="email" type="text" class="form-control" readonly>
+              <input
+                v-model="email"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
 
             <div class="form-group col-lg-6">
               <label> Altern Email: </label>
-              <input v-model="AlternEmail" type="text" class="form-control" readonly>
+              <input
+                v-model="AlternEmail"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
 
             <div class="form-group col-lg-12">
               <label> Phone number: </label>
-              <input v-model="PhoneNumber" type="text" class="form-control" readonly>
+              <input
+                v-model="PhoneNumber"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
 
     <div class="col-12">
       <div class="row justify-content-start my-2">
-        <div class="col-lg-2 col-sm-4 align-items-center ">
-          <img @click="updatePersonalData" :src="images_btn['guardar']" alt="" style=" max-height: 45px !important;">
+        <div class="col-lg-2 col-sm-4 align-items-center">
+          <button class="uaslp-btn" @click="updatePersonalData">
+            <span class="material-icons-outlined">save</span>
+            <span>Guardar</span>
+          </button>
+          <!-- <img
+            @click="updatePersonalData"
+            :src="images_btn['guardar']"
+            alt=""
+            style="max-height: 45px !important"
+          /> -->
         </div>
         <div class="col-lg-10 col-sm-8">
           <label>
-            <p class="h5"><strong>This only save Personal Information</strong></p>
+            <p class="h5">
+              <strong>This only save Personal Information</strong>
+            </p>
           </label>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -137,7 +194,6 @@ window.Swal = swal;
 export default {
   name: "personal-data",
   props: {
-
     // INPUTS
     // Nombre del postulante.
     name: String,
@@ -186,8 +242,7 @@ export default {
   },
 
   created() {
-
-    console.log('Marital state: ' + this.marital_state);
+    console.log("Marital state: " + this.marital_state);
     axios
       .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
       .then((response) => {
@@ -195,7 +250,6 @@ export default {
         this.countries_nationality = response.data;
         console.log(this.countries);
       });
-
 
     axios
       .get("/controlescolar/solicitud/getAllButtonImage")
@@ -210,20 +264,17 @@ export default {
   },
 
   mounted() {
-    // ! Mounted 
+    // ! Mounted
   },
 
-
   computed: {
-
-
     Name: {
       get() {
         return this.name;
       },
       set(newVal) {
-        this.$emit('update:name', newVal);
-      }
+        this.$emit("update:name", newVal);
+      },
     },
 
     Middlename: {
@@ -231,8 +282,8 @@ export default {
         return this.middlename;
       },
       set(newVal) {
-        this.$emit('update:middlename', newVal);
-      }
+        this.$emit("update:middlename", newVal);
+      },
     },
 
     Surname: {
@@ -240,8 +291,8 @@ export default {
         return this.surname;
       },
       set(newVal) {
-        this.$emit('update:surname', newVal);
-      }
+        this.$emit("update:surname", newVal);
+      },
     },
 
     Gender: {
@@ -249,8 +300,8 @@ export default {
         return this.gender;
       },
       set(newVal) {
-        this.$emit('update:gender', newVal);
-      }
+        this.$emit("update:gender", newVal);
+      },
     },
 
     CivicState: {
@@ -258,8 +309,8 @@ export default {
         return this.marital_state;
       },
       set(newVal) {
-        this.$emit('update:marital_state', newVal);
-      }
+        this.$emit("update:marital_state", newVal);
+      },
     },
 
     NoChildren: {
@@ -267,8 +318,8 @@ export default {
         return this.no_children;
       },
       set(newVal) {
-        this.$emit('update:no_children', newVal);
-      }
+        this.$emit("update:no_children", newVal);
+      },
     },
 
     BirthDate: {
@@ -276,8 +327,8 @@ export default {
         return this.birth_date;
       },
       set(newVal) {
-        this.$emit('update:birth_date', newVal);
-      }
+        this.$emit("update:birth_date", newVal);
+      },
     },
 
     BirthCountry: {
@@ -285,8 +336,8 @@ export default {
         return this.birth_country;
       },
       set(newVal) {
-        this.$emit('update:birth_country', newVal);
-      }
+        this.$emit("update:birth_country", newVal);
+      },
     },
 
     Nationality: {
@@ -294,8 +345,8 @@ export default {
         return this.residence_country;
       },
       set(newVal) {
-        this.$emit('update:residence_country', newVal);
-      }
+        this.$emit("update:residence_country", newVal);
+      },
     },
 
     BirthState: {
@@ -303,8 +354,8 @@ export default {
         return this.birth_state;
       },
       set(newVal) {
-        this.$emit('update:birth_state', newVal);
-      }
+        this.$emit("update:birth_state", newVal);
+      },
     },
 
     Email: {
@@ -312,8 +363,8 @@ export default {
         return this.email;
       },
       set(newVal) {
-        this.$emit('update:email', newVal);
-      }
+        this.$emit("update:email", newVal);
+      },
     },
 
     AlternEmail: {
@@ -321,8 +372,8 @@ export default {
         return this.altern_email;
       },
       set(newVal) {
-        this.$emit('update:altern_email', newVal);
-      }
+        this.$emit("update:altern_email", newVal);
+      },
     },
 
     PhoneNumber: {
@@ -330,14 +381,9 @@ export default {
         return this.phone_number;
       },
       set(newVal) {
-        this.$emit('update:phone_number', newVal);
-      }
+        this.$emit("update:phone_number", newVal);
+      },
     },
-
-
-
-
-
   },
 
   data() {
@@ -346,22 +392,21 @@ export default {
       countries: [],
       countries_nationality: [],
       images_btn: [],
-      civic_state_list : [
-        { id: 'Single', name: 'Single' },
-        { id: 'Married', name: 'Married' },
-        { id: 'Divorced', name: 'Divorced' },
-        { id: 'Widower', name: 'Widower' },
-        { id: 'Other', name: 'Other' },
-      ]
-    }
+      civic_state_list: [
+        { id: "Single", name: "Single" },
+        { id: "Married", name: "Married" },
+        { id: "Divorced", name: "Divorced" },
+        { id: "Widower", name: "Widower" },
+        { id: "Other", name: "Other" },
+      ],
+    };
   },
 
   methods: {
-
     // Display the key/value pairs
     displayFormData(formData) {
       for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
+        console.log(pair[0] + ", " + pair[1]);
       }
     },
 
@@ -370,48 +415,50 @@ export default {
       let title = "";
       let icon = "";
       let msg = "";
-      formData.append('archive_id', this.archive_id);
-      formData.append('name', this.name);
-      formData.append('middlename', this.middlename);
-      formData.append('surname', this.surname);
-      formData.append('gender', this.gender);
-      formData.append('marital_state', this.marital_state);
-      formData.append('birth_state', this.birth_state);
-      formData.append('no_children', this.no_children);
-      formData.append('birth_date', this.birth_date);
-      formData.append('birth_country', this.birth_country);
-      formData.append('nationality', this.nationality);
-      formData.append('residense_country', this.residense_country);
-      formData.append('email', this.email);
-      formData.append('altern_email', this.altern_email);
-      formData.append('phone_number', this.phone_number);
+      formData.append("archive_id", this.archive_id);
+      formData.append("name", this.name);
+      formData.append("middlename", this.middlename);
+      formData.append("surname", this.surname);
+      formData.append("gender", this.gender);
+      formData.append("marital_state", this.marital_state);
+      formData.append("birth_state", this.birth_state);
+      formData.append("no_children", this.no_children);
+      formData.append("birth_date", this.birth_date);
+      formData.append("birth_country", this.birth_country);
+      formData.append("nationality", this.nationality);
+      formData.append("residense_country", this.residense_country);
+      formData.append("email", this.email);
+      formData.append("altern_email", this.altern_email);
+      formData.append("phone_number", this.phone_number);
 
       // this.displayFormData(formData);
 
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/enrem/updatePersonalData',
+        method: "post",
+        url: "/controlescolar/solicitud/enrem/updatePersonalData",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
-        Swal.fire({
-          title: response.data.message,
-          icon: 'success',
-          text: 'Continue filling others sections',
-          showCancelButton: false,
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          Swal.fire({
+            title: response.data.message,
+            icon: "success",
+            text: "Continue filling others sections",
+            showCancelButton: false,
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error trying to save information",
+            icon: "error",
+            text: "Try later",
+            showCancelButton: false,
+          });
         });
-      }).catch(error => {
-        Swal.fire({
-          title: 'Error trying to save information',
-          icon: 'error',
-          text: 'Try later',
-          showCancelButton: false,
-        });
-      });
     },
-  }
+  },
 };
 </script>

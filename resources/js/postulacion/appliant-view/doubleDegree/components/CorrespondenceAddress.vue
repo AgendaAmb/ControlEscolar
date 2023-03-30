@@ -1,30 +1,43 @@
 <template>
   <div class="form my-4">
-    <div class="row ">
+    <div class="row">
       <div class="col-12">
-        <p class="h2"><strong>{{ title }}</strong></p>
+        <p class="h2">
+          <strong>{{ title }}</strong>
+        </p>
       </div>
 
       <div class="form-group col-12">
         <label> Care of (C/O): </label>
-        <input v-model="CareOf" type="text" class="form-control">
+        <input v-model="CareOf" type="text" class="form-control" />
       </div>
       <div class="form-group col-8">
         <label> Street: </label>
-        <input v-model="Street" type="text" class="form-control">
+        <input v-model="Street" type="text" class="form-control" />
       </div>
 
       <div class="form-group col-4">
         <label> Number: </label>
-        <input v-model.number="NumberAddress" type="number" class="form-control">
+        <input
+          v-model.number="NumberAddress"
+          type="number"
+          class="form-control"
+        />
       </div>
-
 
       <div class="form-group col-12">
         <label> Country: </label>
-        <select v-model="StateCountry" class="form-control" @change="escogePais">
+        <select
+          v-model="StateCountry"
+          class="form-control"
+          @change="escogePais"
+        >
           <option value="" selected>Choose a country</option>
-          <option v-for="country in countries" :key="country.id" :value="country.name">
+          <option
+            v-for="country in countries"
+            :key="country.id"
+            :value="country.name"
+          >
             {{ country.name }}
           </option>
         </select>
@@ -39,33 +52,37 @@
           </option>
         </select>
 
-        <select v-else v-model="City" class="form-control">
-        </select>
+        <select v-else v-model="City" class="form-control"></select>
       </div>
 
       <div class="form-group col-6">
         <label> Postal code: </label>
-        <input v-model="PostalCode" type="text" class="form-control">
+        <input v-model="PostalCode" type="text" class="form-control" />
       </div>
-
-
 
       <div class="form-group col-12">
         <label> Telephone: </label>
-        <input v-model.number="Telephone" type="number" class="form-control">
+        <input v-model.number="Telephone" type="number" class="form-control" />
       </div>
 
       <div class="form-group col-12">
         <label> Mobile phone: </label>
-        <input v-model.number="MobilePhone" type="number" class="form-control">
+        <input
+          v-model.number="MobilePhone"
+          type="number"
+          class="form-control"
+        />
       </div>
     </div>
 
-
     <div class="row my-2 justify-content-start">
       <div class="col-lg-2 col-sm-4">
-        <img @click="updateCorrespondenceAddress" :src="images_btn['guardar']" alt=""
-          style=" max-height: 45px !important;">
+        <button class="uaslp-btn" @click="updateCorrespondenceAddress">
+          <span class="material-icons-outlined">save</span>
+          <span>Guardar</span>
+        </button>
+        <!-- <img @click="updateCorrespondenceAddress" :src="images_btn['guardar']" alt=""
+          style=" max-height: 45px !important;"> -->
       </div>
       <div class="col-lg-10 col-sm-8">
         <label>
@@ -77,8 +94,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: "correspondence-address",
 
@@ -104,9 +119,7 @@ export default {
     telephone: Number,
 
     mobile_phone: Number,
-
   },
-
 
   computed: {
     CareOf: {
@@ -114,8 +127,8 @@ export default {
         return this.care_of;
       },
       set(newVal) {
-        this.$emit('update:care_of', newVal);
-      }
+        this.$emit("update:care_of", newVal);
+      },
     },
 
     Street: {
@@ -123,16 +136,16 @@ export default {
         return this.street;
       },
       set(newVal) {
-        this.$emit('update:street', newVal);
-      }
+        this.$emit("update:street", newVal);
+      },
     },
     PostalCode: {
       get() {
         return this.postal_code;
       },
       set(newVal) {
-        this.$emit('update:postal_code', newVal);
-      }
+        this.$emit("update:postal_code", newVal);
+      },
     },
 
     NumberAddress: {
@@ -140,8 +153,8 @@ export default {
         return this.number_address;
       },
       set(newVal) {
-        this.$emit('update:number_address', newVal);
-      }
+        this.$emit("update:number_address", newVal);
+      },
     },
 
     City: {
@@ -149,8 +162,8 @@ export default {
         return this.city;
       },
       set(newVal) {
-        this.$emit('update:city', newVal);
-      }
+        this.$emit("update:city", newVal);
+      },
     },
 
     StateCountry: {
@@ -158,8 +171,8 @@ export default {
         return this.state_country;
       },
       set(newVal) {
-        this.$emit('update:state_country', newVal);
-      }
+        this.$emit("update:state_country", newVal);
+      },
     },
 
     Telephone: {
@@ -167,8 +180,8 @@ export default {
         return this.telephone;
       },
       set(newVal) {
-        this.$emit('update:telephone', newVal);
-      }
+        this.$emit("update:telephone", newVal);
+      },
     },
 
     MobilePhone: {
@@ -176,10 +189,9 @@ export default {
         return this.mobile_phone;
       },
       set(newVal) {
-        this.$emit('update:mobile_phone', newVal);
-      }
+        this.$emit("update:mobile_phone", newVal);
+      },
     },
-
   },
 
   // mounted: function () {
@@ -196,21 +208,19 @@ export default {
     return {
       title: {
         type: String,
-        default: ""
+        default: "",
       },
       countries: [],
       states: [],
       images_btn: [],
-    }
+    };
   },
 
-
   created() {
-
     if (this.index && this.index > 1) {
-      this.title = 'Current Address (if different from permanent address)';
+      this.title = "Current Address (if different from permanent address)";
     } else {
-      this.title = 'Permanent Address';
+      this.title = "Permanent Address";
     }
 
     axios
@@ -218,7 +228,7 @@ export default {
       .then((response) => {
         this.countries = response.data;
         if (this.state_country != null) {
-          response.data.forEach(element => {
+          response.data.forEach((element) => {
             // console.log(element.name);
             if (element.name === this.state_country) {
               this.states = element.states;
@@ -239,53 +249,48 @@ export default {
       });
   },
 
-
-
   methods: {
-
     updateCorrespondenceAddress() {
       let formData = new FormData();
-      formData.append('archive_id', this.archive_id);
-      formData.append('id', this.id);
-      formData.append('care_of', this.care_of);
-      formData.append('street', this.street);
-      formData.append('number_address', this.number_address);
-      formData.append('city', this.city);
-      formData.append('postal_code', this.postal_code);
-      formData.append('state_country', this.state_country);
-      formData.append('telephone', this.telephone);
-      formData.append('mobile_phone', this.mobile_phone);
-
+      formData.append("archive_id", this.archive_id);
+      formData.append("id", this.id);
+      formData.append("care_of", this.care_of);
+      formData.append("street", this.street);
+      formData.append("number_address", this.number_address);
+      formData.append("city", this.city);
+      formData.append("postal_code", this.postal_code);
+      formData.append("state_country", this.state_country);
+      formData.append("telephone", this.telephone);
+      formData.append("mobile_phone", this.mobile_phone);
 
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/enrem/address/update',
+        method: "post",
+        url: "/controlescolar/solicitud/enrem/address/update",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
-        Swal.fire({
-          title: response.data.message,
-          icon: 'success',
-          text: 'Continue filling others sections',
-          showCancelButton: false,
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          Swal.fire({
+            title: response.data.message,
+            icon: "success",
+            text: "Continue filling others sections",
+            showCancelButton: false,
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error trying to save information",
+            icon: "error",
+            text: "Try later",
+            showCancelButton: false,
+          });
         });
-      }).catch(error => {
-        Swal.fire({
-          title: 'Error trying to save information',
-          icon: 'error',
-          text: 'Try later',
-          showCancelButton: false,
-        });
-      });
-
-
     },
 
     escogePais(evento) {
-
       this.states = this.countries[evento.target.selectedIndex].states;
       // Vue.set(
       //   this,
@@ -293,8 +298,6 @@ export default {
       //   this.countries[evento.target.selectedIndex - 1].states
       // );
     },
-
-
-  }
+  },
 };
 </script>

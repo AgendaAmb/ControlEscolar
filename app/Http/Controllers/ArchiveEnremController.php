@@ -148,6 +148,86 @@ class ArchiveEnremController extends Controller
         // aqui se vera el pdf de todo el archivo 
         return $file->stream();
     }
+    public function getPDF($archive_id)
+    {
+        // find the archive
+        try {
+            $archive = Archive::where('id', $archive_id)->first();
+            $archive->loadMissing([
+                // Cosas del aplicante
+                'appliant',
+                'announcement.academicProgram',
+                // Documentos y secciones para expedinte
+                'personalDocuments',
+                'requiredDocuments',
+                'curricularDocuments',
+                'entranceDocuments',
+                'intentionLetter',
+                'recommendationLetter',
+                'myRecommendationLetter',
+                'academicDegrees.requiredDocuments',
+                'appliantLanguages.requiredDocuments',
+                'appliantWorkingExperiences',
+                'scientificProductions.authors',
+                'interviewDocuments',
+                'humanCapitals',
+                'enviromentRelatedSkills',
+                'reasonsToChoise',
+                'address',
+                'secondaryEducation',
+                'futurePlans',
+                'fieldsOfInterest',
+                'financingStudies',
+                'recommendationLetterEnrem',
+                'hearAboutProgram',
+                'enremDocuments',
+            ]);
+
+        } catch (\Exception $e) {
+            return new JsonResponse('No se pudo extraer informacion del expediente', 200); //Ver info archivos en consola
+        }
+
+        try{
+            $appliant = $this->getDataFromPortalUser($archive->appliant);
+        } catch (\Exception $e) {
+            return new JsonResponse('No se pudo extraer informacion del expediente', 200); //Ver info archivos en consola
+        }
+        // dd($archive);
+        // prepare pdf to export
+        $archive->reasonsToChoise[0]->setAttribute('selected_choises_list', json_decode( $archive->reasonsToChoise[0]->selected_choises));
+
+        // dd( $archive->reasonsToChoise[0]->selected_choises_list);
+        try {
+            $data = [
+                'personal_data' => $archive->appliant,
+                'address' => $archive->address,
+                'secondary_education' => $archive->secondaryEducation,
+                'higher_education' => $archive->academicDegrees,
+                'language_skills' => $archive->appliantLanguages,
+                'enviroment_related_skills' => $archive->enviromentRelatedSkills,
+                'working_experiences' => $archive->appliantWorkingExperiences,
+                'reasons_to_choise' => $archive->reasonsToChoise,
+                'future_plans' => $archive->futurePlans,
+                'fields_of_interest' => $archive->fieldsOfInterest,
+                'financing_studies' => $archive->financingStudies,
+                'recommendation_letter_enrem' => $archive->recommendationLetterEnrem,
+                'hear_about_program' => $archive->hearAboutProgram,
+            ];
+
+            $file = PDF::loadView('pdf.enremForm', ["data" => $data])->setOptions([
+                    'defaultPaperSize' => 'a4',
+                    'isJavaScriptEnabled' => true,
+                    'isFontSubsettingEnabled' =>  true,
+                    'dpi' => 120,
+                    'enable_remote' => true,
+                ]); //opciones para visualizar correctamente el pdf
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        // aqui se vera el pdf de todo el archivo 
+        return $file->stream();
+    }
 
 
     public function updateEnremDocument(Request $request)

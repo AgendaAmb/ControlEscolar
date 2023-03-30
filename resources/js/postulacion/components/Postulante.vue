@@ -1,79 +1,127 @@
 <template>
-  <div class="form-row my-4">
+  <div class="form-row my-4 c-center">
     <div class="col-12">
       <div class="row">
         <div class="col-md-5 col-lg-6 col-xl-3 my-2">
-        <!-- Aqui va la foto -->
+          <!-- Aqui va la foto -->
         </div>
         <div class="form-group col-md-7 col-lg-6 col-xl-9">
           <div class="row">
             <div class="form-group col-12">
               <label> CURP:</label>
-              <input v-model="curp" type="text" class="form-control" readonly>
+              <input v-model="curp" type="text" class="form-control" readonly />
             </div>
             <div class="form-group col-12">
               <label> Nombre(s): </label>
-              <input v-model="name" type="text" class="form-control" readonly>
+              <input v-model="name" type="text" class="form-control" readonly />
             </div>
             <div class="form-group col-md-6">
               <label> Primer Apellido: </label>
-              <input v-model="middlename" type="text" class="form-control" readonly>
+              <input
+                v-model="middlename"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
             <div class="form-group col-md-6">
               <label> Segundo Apellido: </label>
-              <input v-model="surname" type="text" class="form-control" readonly>
+              <input
+                v-model="surname"
+                type="text"
+                class="form-control"
+                readonly
+              />
             </div>
           </div>
         </div>
         <div class="form-group col-xl-4">
           <label> Fecha de nacimiento </label>
-          <input v-model="birth_date" type="date" class="form-control" readonly>
+          <input
+            v-model="birth_date"
+            type="date"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Género: </label>
-          <input v-model="gender" type="text" class="form-control" readonly>
+          <input v-model="gender" type="text" class="form-control" readonly />
         </div>
         <div class="form-group col-lg-6 col-xl-4">
           <label> Estado civil: </label>
-          <input v-model="marital_state" type="text" class="form-control" readonly>
+          <input
+            v-model="marital_state"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-3">
           <label> País de nacimiento: </label>
-          <input v-model="birth_country" type="text" class="form-control" readonly>
+          <input
+            v-model="birth_country"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-3">
           <label> Estado de nacimiento: </label>
-          <input v-model="birth_state" type="text" class="form-control" readonly>
+          <input
+            v-model="birth_state"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-3">
           <label> País de residencia: </label>
-          <input v-model="residence_country" type="text" class="form-control" readonly>
+          <input
+            v-model="residence_country"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-3">
           <label> Teléfono de contacto: </label>
-          <input v-model="phone_number" type="text" class="form-control" readonly>
+          <input
+            v-model="phone_number"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
         <div class="form-group col-lg-6">
           <label> Correo electrónico: </label>
-          <input v-model="email" type="text" class="form-control" readonly>
+          <input v-model="email" type="text" class="form-control" readonly />
         </div>
         <div class="form-group col-lg-6">
           <label> Correo de contacto alterno: </label>
-          <input v-model="altern_email" type="text" class="form-control" readonly>
+          <input
+            v-model="altern_email"
+            type="text"
+            class="form-control"
+            readonly
+          />
         </div>
       </div>
     </div>
 
     <div class="row mt-4">
       <h3>Documentos</h3>
-      <documento-requerido v-for="documento in Documentos" :key="documento.name"
-         :archivo.sync="documento.archivo"
-         :location.sync="documento.pivot.location"
-         :errores.sync = "documento.errores"
-         :images_btn = "images_btn"
-         :alias_academic_program.sync ="alias_academic_program"
-         @enviaDocumento = "cargaDocumento"
-         v-bind="documento">
+      <documento-requerido
+        v-for="documento in Documentos"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :images_btn="images_btn"
+        :alias_academic_program.sync="alias_academic_program"
+        @enviaDocumento="cargaDocumento"
+        v-bind="documento"
+      >
       </documento-requerido>
     </div>
   </div>
@@ -130,8 +178,6 @@ export default {
     // Correo alterno del postulante.
     altern_email: String,
 
-
-
     alias_academic_program: String,
   },
   components: { DocumentoRequerido },
@@ -143,9 +189,9 @@ export default {
         return this.documentos;
       },
       set(newVal) {
-        this.$emit('update:documentos', newVal);
-      }
-    }
+        this.$emit("update:documentos", newVal);
+      },
+    },
   },
 
   data() {
@@ -154,8 +200,8 @@ export default {
       documentos: {
         type: Array,
         default: null,
-      }
-    }
+      },
+    };
   },
 
   created() {
@@ -163,8 +209,8 @@ export default {
     axios
       .get("/controlescolar/solicitud/getPersonalRequiredDocuments", {
         params: {
-          archive_id: this.archive_id
-        }
+          archive_id: this.archive_id,
+        },
       })
       .then((response) => {
         if (response.data != null) {
@@ -177,36 +223,37 @@ export default {
       });
   },
 
-
-
   methods: {
     cargaDocumento(requiredDocument, file) {
-
       var formData = new FormData();
-      formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append("archive_id", this.archive_id);
+      formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("file", file);
 
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/updateArchivePersonalDocument',
+        method: "post",
+        url: "/controlescolar/solicitud/updateArchivePersonalDocument",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
-        requiredDocument.datosValidos.file = '¡Archivo subido exitosamente!';
-        requiredDocument.Location = response.data.location;
-
-      }).catch(error => {
-        var errores = error.response.data['errors'];
-        requiredDocument.Errores = {
-          file: 'file' in errores ? errores.file[0] : null,
-          id: 'requiredDocumentId' in errores ? errores.requiredDocumentId[0] : null,
-        };
-      });
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          requiredDocument.datosValidos.file = "¡Archivo subido exitosamente!";
+          requiredDocument.Location = response.data.location;
+        })
+        .catch((error) => {
+          var errores = error.response.data["errors"];
+          requiredDocument.Errores = {
+            file: "file" in errores ? errores.file[0] : null,
+            id:
+              "requiredDocumentId" in errores
+                ? errores.requiredDocumentId[0]
+                : null,
+          };
+        });
     },
-  }
+  },
 };
 </script>
