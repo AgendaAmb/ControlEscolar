@@ -120,7 +120,7 @@
               @delete-item="eliminaHistorialAcademicoFromList"
             >
             </grado-academico>
-            <div class="row align-items-center mt-0 c-center-nch">
+            <div class="row align-items-center mt-0 c-center-nch a-start">
               <div class="col-lg-12">
                 <button
                   class="uaslp-btn"
@@ -245,7 +245,7 @@
             >
             </lengua-extranjera>
 
-            <div class="row align-items-center mt-0">
+            <div class="row align-items-center mt-0 a-start">
               <div class="col-lg-12">
                 <button
                   class="uaslp-btn"
@@ -316,7 +316,7 @@
             >
             </experiencia-laboral>
 
-            <div class="row align-items-center mt-0">
+            <div class="row align-items-center mt-0 a-start">
               <div class="col-lg-12">
                 <button
                   class="uaslp-btn"
@@ -397,7 +397,7 @@
             >
             </produccion-cientifica>
 
-            <div class="col-lg-12 my-2">
+            <div class="col-lg-12 my-2 a-start">
               <button class="uaslp-btn" @click="agregaProduccionCientifica">
                 <span class="material-icons">add_circle </span>
                 <span>Agregar</span>
@@ -424,7 +424,7 @@
             >
             </capital-humano>
 
-            <div class="col-lg-12 my-2">
+            <div class="col-lg-12 my-2 a-start">
               <button class="uaslp-btn" @click="agregaCapitalHumano">
                 <span class="material-icons">add_circle </span>
                 <span>Agregar</span>

@@ -112,9 +112,11 @@
       class="d-flex align-items-center justify-content-start my-2 c-center"
       style="width: 100%"
     >
-      <div v-if="isEXANNI() === true" class="form-group col-12">
-        <div class="d-flex align-items-center justify-content-start my-2">
-          <div class="col-xl-4 col-md-6 col-xs-6">
+      <div v-if="isEXANNI() === true" class="form-group col-12 a-start">
+        <div
+          class="d-flex align-items-center justify-content-start my-2 j-start"
+        >
+          <div class="col-xl-4 col-md-6 col-xs-6 t-center">
             <label> Puntaje obtenido</label>
             <input
               v-model.number="ExanniScore"
@@ -122,7 +124,7 @@
               class="form-control"
             />
           </div>
-          <div class="col-xl-4 col-md-6 col-xs-6">
+          <div class="col-xl-4 col-md-6 col-xs-6 a-end">
             <button class="uaslp-btn" @click="actualizaPuntajeExanni">
               <span class="material-icons-outlined">save</span>
               <span>Guardar</span>
