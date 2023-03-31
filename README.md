@@ -1,65 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Control Escolar Proyecto
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Generalidades
 
-## About Laravel
+Bienvenido al proyecto de Control Escolar, con motivos de aprendizaje me tomé la libertad de decidir como escribir este archivo _README.md_ para futuros becarios, por lo que a continuación, escribiré lo restante en inglés, toma en cuenta que siempre está la posibilidad de utilizar un traductor para entenderlo mejor.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### About project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This is a project focused on 4 programs from _Agenda Ambiental_, which is and academic area, there are many roles to evaluate where a view will be at the moment, so this could be change in a future, it it is, read all documentation in here.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### How do I install project?
 
-## Learning Laravel
+This is very important, because in my experience was very hard to install, if you have any problems installing it, ask the last _becario_ they could be helpful for you.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Therefore I will explain what I have to do, when I was installing it.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Firs of all, you need to install all dependencies needed, as NodeJS, Laravel, \* _Laragon_ \*, MySQL, if you are managing Linux, I recommend you to install nvm for Nodejs installation.
 
-## Laravel Sponsors
+Notes:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    * Laragon installs all necesarily dependencias except for node and git.
 
-### Premium Partners
+    * It is important to install php 7.4.* where * is whatever subversion, but I recommend 33 so you should be working on php 7.4.33
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+You see Laragon could be optional, this is because, this project doesn't need necessarily Laragon, just because we only need artisan serve to run project to work local, I only used it for working on Windows because we need to use unix commands and obviusly git, and database. I assume, you know how to install this dependencies so if you are not, prepare yourself to self-learning.
 
-## Contributing
+Once, you have installed all dependencies, next step is to run next commands on your terminal with project folder opened in terminal:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1.  composer update ( _alternatively_: composer install )
+2.  php --ini
+3.  npm install
+4.  php artisan storage:link
 
-## Code of Conduct
+    **Extra:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+        You need to configure your .env, it is important because it contains all credential needed for working, nevertheless I will try to let you as complete as possible, but remember to work in database you should have tables within names inside this document.
 
-## Security Vulnerabilities
+5.  php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+**Optional**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+You can also migrate database from seeds using:
 
+- php artisan migrate --seed
+- php artisan migrate:fresh --seed
+
+---
+
+_Note: This could be working on all projects which use Laravel_
+
+### Running _This_ Project
+
+I need to emphasize on **this** beacause, this extra steps, works only on Laravel-vue project
+
+**Run next commands**
+
+- npm run watch
+- php artisan serve
+
+1. php artisan optimize
+2. composer dump-autoload
+
+You will notice that I write two different lists, this is because, the numbered list it is needed to do in that way.
+
+I suddenly encourage you to do the most long processes which is first the numbered list in that order and simultaneously run the npm command, so this will start running your project as fast as can your computer.
+
+If you have done this steps as I was commenting you, you can start working very easily.
