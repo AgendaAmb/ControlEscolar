@@ -1,6 +1,6 @@
 header.header {
   display: block;
-  background-color: #13497D;
+  background-color: rgba(0, 74, 152, 255);
 }
 
 header.header a.header-image > img {
@@ -9,14 +9,14 @@ header.header a.header-image > img {
 }
 
 header.header nav.nav-options {
-  background-color: gray;
+  background-color: rgb(211, 15, 15);
 }
 
 header.header nav.nav-options a.nav-link {
   text-decoration: none;
   color: white;
   font-size: 18px;
-  font-family: 'Myriad Pro Bold';
+  font-family: "Myriad Pro Bold";
 }
 
 header.header nav.nav-options a.nav-link + .dropdown-menu {

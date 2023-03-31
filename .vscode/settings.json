@@ -1,5 +1,47 @@
 {
-    "files.exclude": {
-        "**/.git": false
+  "files.exclude": {
+    "**/.git": false
+  },
+  "favorites.resources": [
+    {
+      "filePath": "resources\\js\\postulacion\\components\\search-archives\\SearchArchiveForm.vue",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Http\\Controllers\\ArchiveController.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Helpers\\MiPortalService.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Models\\Archive.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "app\\Models\\User.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\components\\academic-program-header.blade.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\home.blade.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\views\\postulacion\\show.blade.php",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\js\\postulacion\\appliant-view\\doubleDegree\\components\\RequiredDocumentFileSigned.vue",
+      "group": "Default"
+    },
+    {
+      "filePath": "resources\\js\\postulacion\\components\\SolicitudPostulante.vue",
+      "group": "Default"
     }
+  ]
 }

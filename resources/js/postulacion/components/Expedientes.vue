@@ -1,7 +1,7 @@
 <template>
   <div class="form-row mt-5">
     <div class="form-group col-md-6">
-      <label> Programas académico: </label>
+      <label> Programa académico: </label>
       <select v-model="academic_program" class="form-control">
         <option :value="null" selected>Escoge una opción</option>
         <option

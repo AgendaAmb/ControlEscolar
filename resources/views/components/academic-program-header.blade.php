@@ -1,12 +1,20 @@
+@auth
+<?php
+//Creamos la ruta para comite enviando el id como props
+$id = Auth::user()->id;
+
+$reference = "/controlescolar/ca/?id=" . $id;
+
+?>
+
 <header class="mb-5 d-block header">
     <a class="d-block header-image" href="">
         <img class="ml-auto d-block img-fluid" src="{{ asset('storage/headers/logod.png') }}">
     </a>
-    @auth
-     {{-- <b-navbar toggleable="lg" type="dark" variant="info">
+    {{-- <b-navbar toggleable="lg" type="dark" variant="info">
         <b-collapse id="nav-collapse" is-nav> --}}
         <nav class="nav nav-options">
-
+            
             {{-- Inicio disponible para todos --}}
             <a class="nav-link" href="{{ route('authenticate.home') }}">Inicio</a>
 
@@ -54,7 +62,8 @@
 
 
             @if (Auth::user()->hasRole('comite_academico'))
-                <a class="nav-link" href="http://ambiental.uaslp.mx/ComiteAcademico"> Comite Academico </a>
+                <!-- <a class="nav-link" href="http://ambiental.uaslp.mx/ComiteAcademico"> Comite Academico </a> -->
+                <a class="nav-link" href={{$reference}}> Comite Academico </a>
             @endif
 
 
@@ -81,3 +90,4 @@
 </b-navbar> --}}
     @endauth
 </header>
+

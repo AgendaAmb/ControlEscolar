@@ -2,8 +2,8 @@
   <form @submit.prevent="buscaExpediente" class="d-block">
     <div class="row mx-3">
       <p class="h5">
-        Ingresa el programa académico y el nombre del alumno del cual deseas ver sus
-        documentos
+        Ingresa el programa académico y el nombre del alumno del cual deseas ver
+        sus documentos
       </p>
     </div>
 
@@ -65,7 +65,7 @@ export default {
   methods: {
     buscaExpediente() {
       //Datos no completos para hacer busqueda
-      if ( this.announcement == null) {
+      if (this.announcement == null) {
         Swal.fire({
           title: "Error al hacer busqueda",
           text: "Alguno de los campos se encuentra vacio",
@@ -82,7 +82,8 @@ export default {
           })
           .then((response) => {
             this.dataLength = response.data.length; // cantidad de articulos
-            console.log('archives.found '+ response.data.length);
+            console.log("archives.found " + response.data.length);
+
             this.$emit("archives-found", response.data); //actualiza archivos
           })
           .catch((error) => {

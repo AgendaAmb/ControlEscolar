@@ -46,12 +46,15 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 //Comentar linea de abajo para produccion
 Route::prefix('controlescolar')->group(function () { 
-
-
-    Route::prefix('ca')->name('ca.')->group(function () {
+    
+    #Comite academico
+    # Configura la ruta principal de comite academico, si hay un usuario activo
+    Route::get('ca/', [ComiteAcademicoController::class, 'index'])->name('comite')->middleware('auth');
+        
+   /*  Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index') //Ruta para acceder al comite academico
             ->middleware('auth');
-    });
+    }); */
 
     Route::prefix('oldControlEscolar')->name('oldControlEscolar.')->group(function () {
         Route::get('/listOldDocuments', [OldDocumentController::class, 'listOldDocuments'])->name('listOldDocuments')
@@ -121,6 +124,7 @@ Route::prefix('controlescolar')->group(function () {
 
     Route::get('/showRegisterArchives', [ArchiveController::class, 'showRegisterArchives'])->name('showRegisterArchives'); //Vista de expediente para alumno, rellenar campos
 
+    
     # Rutas de las solicitudes académicas.
     Route::prefix('solicitud')->name('solicitud.')->middleware(['auth'])->group(function () {
 
@@ -130,6 +134,7 @@ Route::prefix('controlescolar')->group(function () {
             Route::post('/updatePersonalData', [ArchiveEnremController::class, 'updatePersonalData'])->name('updatePersonalData');
             
             Route::get('/seeFileAnsweredToSign/{archive_id}', [ArchiveEnremController::class, 'seeFileAnsweredToSign'])->name('seeFileAnsweredToSign'); //Vista de expediente para alumno, rellenar campos
+            Route::get('/getPDF/{archive_id}', [ArchiveEnremController::class, 'getPDF'])->name('getPDF'); //Vista de expediente para alumno, rellenar campos
 
 
             Route::prefix('address')->name('address.')->group(function () {
@@ -194,6 +199,10 @@ Route::prefix('controlescolar')->group(function () {
         Route::get('/', [ArchiveController::class, 'index'])->middleware(['VerificarPostulante'])->name('index');
         Route::get('/archives', [ArchiveController::class, 'archives'])->name('archives');
         Route::get('/archives/professor', [ArchiveController::class, 'archivesProfessor'])->name('archivesProfessor');
+        
+        Route::get('/archives/getPrograms', [ArchiveController::class, 'getPrograms'])->name('getPrograms');
+        Route::get('/archives/getAnnouncements', [ArchiveController::class, 'getAnnouncements'])->name('getAnnouncements');
+        Route::get('/archives/getArchiveUsers', [ArchiveController::class, 'getUsersFromAnnouncement'])->name('getUsersFromAnnouncement');
 
         Route::get('/interview/{archive}', [ArchiveController::class, 'appliantFile_AdminView'])->name('showInterview'); //Vista de expediente pero sin poder modificar archivos
         Route::post('/updateStatusArchive', [ArchiveController::class, 'updateStatusArchive'])->name('updateStatus');
@@ -351,4 +360,6 @@ Route::prefix('controlescolar')->group(function () {
         Route::post('addRecommendationLetter', [ExternalRecommendationLetter::class, 'addRecommendationLetter'])->name('store');
         Route::get('/pruebaPDF', [ExternalRecommendationLetter::class, 'pruebaPDF'])->name('prueba');
     });
+
+    
 });

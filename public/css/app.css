@@ -16171,14 +16171,14 @@ h3 {
 }
 header.header {
   display: block;
-  background-color: #13497D;
+  background-color: #004a98;
 }
 header.header a.header-image > img {
   display: block;
   margin-left: auto;
 }
 header.header nav.nav-options {
-  background-color: gray;
+  background-color: #00b2e3;
 }
 header.header nav.nav-options a.nav-link {
   text-decoration: none;
@@ -16190,6 +16190,12 @@ header.header nav.nav-options a.nav-link + .dropdown-menu {
   color: gray;
   font-size: 16px;
   border-radius: 0%;
+}
+header.header nav.nav-options .nav-link {
+  transition: all 0.5s ease;
+}
+header.header nav.nav-options .nav-link:hover {
+  transform: scale(1.1);
 }
 
 .v-cal-dialog {
@@ -17011,4 +17017,180 @@ main.recommendation-letter table.candidate-analysis > thead > tr > th:first-of-t
   main.recommendation-letter #FechaRelacion {
     width: 50%;
   }
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.uaslp-btn {
+  min-height: 45px;
+  width: 150px;
+  background-color: #fff;
+  color: #004a98;
+  border-radius: 50px;
+  border: 0;
+  font-size: 1em;
+  font-weight: 500 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly !important;
+  cursor: pointer;
+  flex-flow: row nowrap;
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+.uaslp-btn:hover > * {
+  color: #ffffff;
+}
+.uaslp-btn:hover {
+  background-color: #004a98;
+}
+.uaslp-btn:active {
+  transform: scale(0.9);
+}
+.uaslp-btn * {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly !important;
+}
+.uaslp-btn span:first-of-type {
+  width: 10%;
+}
+.uaslp-btn span:last-of-type {
+  width: 50%;
+}
+
+.uaslp-red {
+  color: white;
+  background-color: #e74c3c;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-red:hover {
+  background-color: #ffffff;
+}
+.uaslp-red:hover > * {
+  color: #e74c3c;
+}
+
+.uaslp-yellow {
+  color: white;
+  background-color: #fecc50;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-yellow:hover {
+  background-color: #ffffff;
+}
+.uaslp-yellow:hover > * {
+  color: #fecc50;
+}
+
+.uaslp-blue {
+  color: white;
+  background-color: #0598bc;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-blue:hover {
+  background-color: #ffffff;
+}
+.uaslp-blue:hover > * {
+  color: #0598bc;
+}
+
+.uaslp-green {
+  color: white;
+  background-color: #118943;
+  box-shadow: 5px 5px 8px #004389, -5px -5px 8px #0051a7;
+}
+.uaslp-green:hover {
+  background-color: #ffffff;
+}
+.uaslp-green:hover > * {
+  color: #118943;
+}
+
+.uaslp-reset-box-button {
+  box-shadow: 5px 5px 19px #c9c9c9, -2.5px -2.5px 5px #ffffff;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-flow: column nowrap;
+  min-width: 300px;
+}
+.flex-center * {
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+  text-align: center;
+}
+.flex-center * div {
+  min-width: 100% !important;
+}
+
+.flex-row-custom {
+  flex-flow: row nowrap;
+}
+
+.flex-item-row-child * {
+  gap: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+.flex-item-row-child * div {
+  min-width: 100% !important;
+}
+
+.width-70 {
+  width: 70% !important;
+}
+
+.width-85 {
+  width: 85% !important;
+}
+
+.c-center {
+  display: grid;
+  place-items: center;
+}
+.c-center > * {
+  display: grid;
+  place-items: center;
+}
+
+.c-center-nch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+}
+
+.c-header {
+  max-height: 36.5px !important;
+}
+
+.a-start {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.a-end {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.j-start {
+  justify-self: flex-start;
+  justify-content: flex-start;
+}
+
+.t-center {
+  text-align: center;
 }

@@ -1,7 +1,7 @@
 <script>
     const user = @json($user);
     const user_roles = @json($user_roles);
-    </script>
+</script>
 
 @extends('layouts.app')
 @section('main')

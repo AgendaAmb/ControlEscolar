@@ -1,40 +1,61 @@
 <template>
   <div class="d-block">
     <!-- Exposición de motivos -->
-    <div class="d-flex  justify-content-start align-items-center my-2" style="width: 100%;">
+    <div
+      class="d-flex justify-content-start align-items-center my-2"
+      style="width: 100%"
+    >
       <div class="col-md-1 col-sm-1 text-center">
-        <b-form-checkbox style="transform: scale(1.75);" v-model="StatusCheckBox"></b-form-checkbox>
+        <b-form-checkbox
+          style="transform: scale(1.75)"
+          v-model="StatusCheckBox"
+        ></b-form-checkbox>
       </div>
 
       <div class="col-md-11 col-sm-11">
-        <label> Explica los motivos, por los cuales deseas aplicar al programa académico </label>
+        <label>
+          Explica los motivos, por los cuales deseas aplicar al programa
+          académico
+        </label>
         <textarea v-model="Motivation" class="form-control" rows="8"></textarea>
       </div>
     </div>
 
     <!-- Guardado de exposición de motivos  -->
-    <div class="d-flex  justify-content-end my-4" style="width:100%;">
-      <div class="col-md-2 col-xs-3 text-end ">
-        <img @click="actualizaExposicionMotivos" :src="images_btn.guardar" alt="" style=" max-height: 45px !important;">
+    <div class="d-flex justify-content-end my-4" style="width: 100%">
+      <div class="col-md-2 col-xs-3 text-end">
+        <button class="uaslp-btn" @click="actualizaExposicionMotivos">
+          <span class="material-icons-outlined">save</span>
+          <span>Guardar</span>
+        </button>
       </div>
       <div class="col-md-10 col-xs-9 mx-3">
         <label>
           <strong>Nota: </strong>
-          Para poder registrar los cambios del campo anterior es necesario seleccionar el siguiente botón.
+          Para poder registrar los cambios del campo anterior es necesario
+          seleccionar el siguiente botón.
           <p><strong>Solo se guardara la exposición de motivos.</strong></p>
         </label>
       </div>
     </div>
 
     <!-- Documentos Requisitos ingreso  -->
-    <documento-requerido v-for="documento in Documentos" :key="documento.name" :user_id="user_id" :viewer_id="viewer_id"
-      :alias_academic_program="alias_academic_program" :archivo.sync="documento.archivo"
-      :location.sync="documento.pivot.location" :errores.sync="documento.errores" :exanni_score.sync="exanni_score"
-      :images_btn="images_btn" v-bind="documento" @nuevoPuntajeExanni="nuevoPuntajeExanni"
-      @enviaDocumento="cargaDocumento">
+    <documento-requerido
+      v-for="documento in Documentos"
+      :key="documento.name"
+      :user_id="user_id"
+      :viewer_id="viewer_id"
+      :alias_academic_program="alias_academic_program"
+      :archivo.sync="documento.archivo"
+      :location.sync="documento.pivot.location"
+      :errores.sync="documento.errores"
+      :exanni_score.sync="exanni_score"
+      :images_btn="images_btn"
+      v-bind="documento"
+      @nuevoPuntajeExanni="nuevoPuntajeExanni"
+      @enviaDocumento="cargaDocumento"
+    >
     </documento-requerido>
-
-
   </div>
 </template>
 
@@ -65,7 +86,7 @@ export default {
     status_checkBox: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   components: { DocumentoRequerido },
   name: "requisitos-ingreso",
@@ -77,8 +98,8 @@ export default {
       documentos: {
         type: Array,
         default: null,
-      }
-    }
+      },
+    };
   },
   computed: {
     Motivation: {
@@ -86,8 +107,8 @@ export default {
         return this.motivation;
       },
       set(newVal) {
-        this.$emit('update:motivation', newVal);
-      }
+        this.$emit("update:motivation", newVal);
+      },
     },
 
     StatusCheckBox: {
@@ -95,19 +116,18 @@ export default {
         return this.status_checkBox;
       },
       set(newVal) {
-        this.$emit('update:status_checkBox', newVal);
-      }
+        this.$emit("update:status_checkBox", newVal);
+      },
     },
-
 
     Documentos: {
       get() {
         return this.documentos;
       },
       set(newVal) {
-        this.$emit('update:documentos', newVal);
-      }
-    }
+        this.$emit("update:documentos", newVal);
+      },
+    },
   },
 
   created() {
@@ -115,8 +135,8 @@ export default {
     axios
       .get("/controlescolar/solicitud/getEntranceRequiredDocuments", {
         params: {
-          archive_id: this.archive_id
-        }
+          archive_id: this.archive_id,
+        },
       })
       .then((response) => {
         if (response.data != null) {
@@ -129,12 +149,12 @@ export default {
         console.log(error);
       });
 
-    //get exanni score 
+    //get exanni score
     axios
       .get("/controlescolar/solicitud/getExanniScore", {
         params: {
-          archive_id: this.archive_id
-        }
+          archive_id: this.archive_id,
+        },
       })
       .then((response) => {
         if (response.data != null) {
@@ -144,108 +164,109 @@ export default {
       .catch((error) => {
         console.log(error);
       });
-
   },
 
   methods: {
-
     actualizaExposicionMotivos(evento) {
-      axios.post('/controlescolar/solicitud/updateMotivation', {
-        archive_id: this.archive_id,
-        motivation: this.motivation,
-      }).then(response => {
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "La exposición de motivos se ha guardado correctamente",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar",
-        });
-        this.Motivation = response.data.motivation;
-      }).catch(error => {
+      axios
+        .post("/controlescolar/solicitud/updateMotivation", {
+          archive_id: this.archive_id,
+          motivation: this.motivation,
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "¡Éxito!",
+            text: "La exposición de motivos se ha guardado correctamente",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Aceptar",
+          });
+          this.Motivation = response.data.motivation;
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: ":( Error al actualizar exposición de motivos",
+            showCancelButton: false,
+            icon: "error",
+          });
+          var errores = error.response.data["errors"];
 
-        Swal.fire({
-          title: ":( Error al actualizar exposición de motivos",
-          showCancelButton: false,
-          icon: "error",
+          Object.keys(errores).forEach((key) => {
+            Vue.set(this.errores, key, errores[key][0]);
+          });
         });
-        var errores = error.response.data['errors'];
-
-        Object.keys(errores).forEach(key => {
-          Vue.set(this.errores, key, errores[key][0]);
-        });
-      });
     },
 
     nuevoPuntajeExanni(puntaje) {
-      axios.post('/controlescolar/solicitud/updateExanniScore', {
-        archive_id: this.archive_id,
-        exanni_score: puntaje,
-      }).then(response => {
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "El puntaje se ha guardado correctamente",
-          icon: "success",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Aceptar",
-        });
-        this.exanni_score = response.data.exanni_score;
-      }).catch(error => {
+      axios
+        .post("/controlescolar/solicitud/updateExanniScore", {
+          archive_id: this.archive_id,
+          exanni_score: puntaje,
+        })
+        .then((response) => {
+          Swal.fire({
+            title: "¡Éxito!",
+            text: "El puntaje se ha guardado correctamente",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Aceptar",
+          });
+          this.exanni_score = response.data.exanni_score;
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error",
+            text: "El puntaje no se pudo guardar correctamente",
+            showCancelButton: false,
+            icon: "error",
+          });
+          // var errores = error.response.data['errors'];
 
-        Swal.fire({
-          title: "Error",
-          text: "El puntaje no se pudo guardar correctamente",
-          showCancelButton: false,
-          icon: "error",
+          // Object.keys(errores).forEach(key => {
+          //   Vue.set(this.errores, key, errores[key][0]);
+          // });
         });
-        // var errores = error.response.data['errors'];
-
-        // Object.keys(errores).forEach(key => {
-        //   Vue.set(this.errores, key, errores[key][0]);
-        // });
-      });
     },
 
     cargaDocumento(requiredDocument, file) {
-
       var formData = new FormData();
-      formData.append('archive_id', this.archive_id);
-      formData.append('requiredDocumentId', requiredDocument.id);
-      formData.append('file', file);
+      formData.append("archive_id", this.archive_id);
+      formData.append("requiredDocumentId", requiredDocument.id);
+      formData.append("file", file);
 
       axios({
-        method: 'post',
-        url: '/controlescolar/solicitud/updateArchiveEntranceDocument',
+        method: "post",
+        url: "/controlescolar/solicitud/updateArchiveEntranceDocument",
         data: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          this.documentos.forEach((documento) => {
+            if (documento.id == requiredDocument.id) {
+              documento.pivot.location = response.data.location;
+            }
+          });
 
-        this.documentos.forEach(documento => {
-          if(documento.id == requiredDocument.id){
-            documento.pivot.location = response.data.location;
-          }
+          console.log("si se subio");
+          // requiredDocument.location = response.data.location;
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Error al subir documento",
+            text: "Recuerda subir solamente archivos en formato PDF",
+            showCancelButton: false,
+            icon: "error",
+          });
+          var errores = error.response.data["errors"];
         });
-
-        console.log('si se subio');
-        // requiredDocument.location = response.data.location;
-      }).catch(error => {
-
-        Swal.fire({
-          title: "Error al subir documento",
-          text: "Recuerda subir solamente archivos en formato PDF",
-          showCancelButton: false,
-          icon: "error",
-        });
-        var errores = error.response.data['errors'];
-      });
     },
-  }
+  },
 };
 </script>

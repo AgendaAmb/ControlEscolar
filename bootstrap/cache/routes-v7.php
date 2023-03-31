@@ -169,7 +169,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'ca.index',
+            '_route' => 'comite',
           ),
           1 => NULL,
           2 => 
@@ -849,6 +849,66 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'solicitud.archivesProfessor',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/controlescolar/solicitud/archives/getPrograms' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'solicitud.getPrograms',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/controlescolar/solicitud/archives/getAnnouncements' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'solicitud.getAnnouncements',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/controlescolar/solicitud/archives/getArchiveUsers' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'solicitud.getUsersFromAnnouncement',
           ),
           1 => NULL,
           2 => 
@@ -2047,7 +2107,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/_debugbar/c(?|lockwork/([^/]++)(*:39)|ache/([^/]++)(?:/([^/]++))?(*:73))|/downloadLetterCommitment/([^/]++)/([^/]++)/([^/]++)(*:133)|/controlescolar/(?|oldControlEscolar/viewOldDocument(?|/([^/]++)/database/([^/]++)(*:223)|IMAREC/idSolicitud/([^/]++)/idTipoArchivo/([^/]++)/database/([^/]++)(*:299))|auth/([^/]++)(*:321)|prueba/([^/]++)(*:344)|solicitud/(?|e(?|nrem/(?|expediente/archives/([^/]++)/([^/]++)/([^/]++)(*:423)|seeFileAnsweredToSign/([^/]++)(*:461))|xpediente/([^/]++)(*:488))|interview/([^/]++)(*:515)|([^/]++)/latestAcademicDegree(*:552)|expediente/archives/([^/]++)/([^/]++)/([^/]++)(*:606)|seeAnsweredRecommendationLetter/([^/]++)/([^/]++)(*:663))|entrevistas/(?|rubrica/(?|([^/]++)(*:706)|promedio/(?|([^/]++)(*:734)|ca/([^/]++)(*:753)|([^/]++)/export(*:776))|([^/]++)(?|(*:796)))|periods/([^/]++)(?|(*:825))|zoom/([^/]++)(?|(*:850)))|updateDocuments/show/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)(?|(*:937)|/archives/([^/]++)/([^/]++)/([^/]++)(*:981))|documentsForInterview/show/([^/]++)(*:1025)|recommendationLetter/show/([^/]++)(*:1068)))/?$}sDu',
+      0 => '{^(?|/_debugbar/c(?|lockwork/([^/]++)(*:39)|ache/([^/]++)(?:/([^/]++))?(*:73))|/downloadLetterCommitment/([^/]++)/([^/]++)/([^/]++)(*:133)|/controlescolar/(?|oldControlEscolar/viewOldDocument(?|/([^/]++)/database/([^/]++)(*:223)|IMAREC/idSolicitud/([^/]++)/idTipoArchivo/([^/]++)/database/([^/]++)(*:299))|auth/([^/]++)(*:321)|prueba/([^/]++)(*:344)|solicitud/(?|e(?|nrem/(?|expediente/archives/([^/]++)/([^/]++)/([^/]++)(*:423)|seeFileAnsweredToSign/([^/]++)(*:461)|getPDF/([^/]++)(*:484))|xpediente/([^/]++)(*:511))|interview/([^/]++)(*:538)|([^/]++)/latestAcademicDegree(*:575)|expediente/archives/([^/]++)/([^/]++)/([^/]++)(*:629)|seeAnsweredRecommendationLetter/([^/]++)/([^/]++)(*:686))|entrevistas/(?|rubrica/(?|([^/]++)(*:729)|promedio/(?|([^/]++)(*:757)|ca/([^/]++)(*:776)|([^/]++)/export(*:799))|([^/]++)(?|(*:819)))|periods/([^/]++)(?|(*:848))|zoom/([^/]++)(?|(*:873)))|updateDocuments/show/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)(?|(*:960)|/archives/([^/]++)/([^/]++)/([^/]++)(*:1004))|documentsForInterview/show/([^/]++)(*:1049)|recommendationLetter/show/([^/]++)(*:1092)))/?$}sDu',
     ),
     3 => 
     array (
@@ -2266,7 +2326,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      488 => 
+      484 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'solicitud.enrem.getPDF',
+          ),
+          1 => 
+          array (
+            0 => 'archive_id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      511 => 
       array (
         0 => 
         array (
@@ -2289,7 +2372,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      515 => 
+      538 => 
       array (
         0 => 
         array (
@@ -2312,7 +2395,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      552 => 
+      575 => 
       array (
         0 => 
         array (
@@ -2335,7 +2418,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      606 => 
+      629 => 
       array (
         0 => 
         array (
@@ -2360,7 +2443,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      663 => 
+      686 => 
       array (
         0 => 
         array (
@@ -2384,7 +2467,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      706 => 
+      729 => 
       array (
         0 => 
         array (
@@ -2407,7 +2490,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      734 => 
+      757 => 
       array (
         0 => 
         array (
@@ -2430,7 +2513,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      753 => 
+      776 => 
       array (
         0 => 
         array (
@@ -2453,7 +2536,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      776 => 
+      799 => 
       array (
         0 => 
         array (
@@ -2476,7 +2559,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      796 => 
+      819 => 
       array (
         0 => 
         array (
@@ -2517,7 +2600,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      825 => 
+      848 => 
       array (
         0 => 
         array (
@@ -2579,7 +2662,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      850 => 
+      873 => 
       array (
         0 => 
         array (
@@ -2641,7 +2724,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      937 => 
+      960 => 
       array (
         0 => 
         array (
@@ -2669,7 +2752,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      981 => 
+      1004 => 
       array (
         0 => 
         array (
@@ -2700,7 +2783,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1025 => 
+      1049 => 
       array (
         0 => 
         array (
@@ -2723,7 +2806,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      1068 => 
+      1092 => 
       array (
         0 => 
         array (
@@ -3145,7 +3228,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'ca.index' => 
+    'comite' => 
     array (
       'methods' => 
       array (
@@ -3162,12 +3245,12 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\ComiteAcademicoController@index',
         'controller' => 'App\\Http\\Controllers\\ComiteAcademicoController@index',
-        'as' => 'ca.index',
         'namespace' => NULL,
-        'prefix' => 'controlescolar/ca',
+        'prefix' => '/controlescolar',
         'where' => 
         array (
         ),
+        'as' => 'comite',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4009,6 +4092,44 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'solicitud.enrem.getPDF' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'controlescolar/solicitud/enrem/getPDF/{archive_id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ArchiveEnremController@getPDF',
+        'controller' => 'App\\Http\\Controllers\\ArchiveEnremController@getPDF',
+        'as' => 'solicitud.enrem.getPDF',
+        'namespace' => NULL,
+        'prefix' => 'controlescolar/solicitud/enrem',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'solicitud.enrem.address.updateAddress' => 
     array (
       'methods' => 
@@ -4700,6 +4821,120 @@ app('router')->setCompiledRoutes(
         'uses' => 'App\\Http\\Controllers\\ArchiveController@archivesProfessor',
         'controller' => 'App\\Http\\Controllers\\ArchiveController@archivesProfessor',
         'as' => 'solicitud.archivesProfessor',
+        'namespace' => NULL,
+        'prefix' => 'controlescolar/solicitud',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'solicitud.getPrograms' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'controlescolar/solicitud/archives/getPrograms',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ArchiveController@getPrograms',
+        'controller' => 'App\\Http\\Controllers\\ArchiveController@getPrograms',
+        'as' => 'solicitud.getPrograms',
+        'namespace' => NULL,
+        'prefix' => 'controlescolar/solicitud',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'solicitud.getAnnouncements' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'controlescolar/solicitud/archives/getAnnouncements',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ArchiveController@getAnnouncements',
+        'controller' => 'App\\Http\\Controllers\\ArchiveController@getAnnouncements',
+        'as' => 'solicitud.getAnnouncements',
+        'namespace' => NULL,
+        'prefix' => 'controlescolar/solicitud',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'solicitud.getUsersFromAnnouncement' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'controlescolar/solicitud/archives/getArchiveUsers',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ArchiveController@getUsersFromAnnouncement',
+        'controller' => 'App\\Http\\Controllers\\ArchiveController@getUsersFromAnnouncement',
+        'as' => 'solicitud.getUsersFromAnnouncement',
         'namespace' => NULL,
         'prefix' => 'controlescolar/solicitud',
         'where' => 

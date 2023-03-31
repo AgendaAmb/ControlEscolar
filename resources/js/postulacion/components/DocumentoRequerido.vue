@@ -1,13 +1,15 @@
 <template>
-
-  <div v-if="requiredForAcademicProgram() === true" class="col-12">
-    <div class="row d-flex align-items-center my-2" style="width:100%;">
-
+  <div v-if="requiredForAcademicProgram() === true" class="col-12 c-center">
+    <div class="row d-flex align-items-center my-2" style="width: 100%">
       <div class="col-1 col-md-1 col-xs-1 text-center">
-        <b-form-checkbox size="lg" style="transform:scale(1.25)" v-model="StatusCheckBox"></b-form-checkbox>
+        <b-form-checkbox
+          size="lg"
+          style="transform: scale(1.25)"
+          v-model="StatusCheckBox"
+        ></b-form-checkbox>
       </div>
       <!-- Nombre y notas -->
-      <div class="form-group col-10 col-md-10 col-xs-9">
+      <div class="form-group col-10 col-md-10 col-xs-9 width-70">
         <h5 class="mt-2 d-block">
           <strong> {{ name }} </strong>
           <template v-if="checkUpload() === true">
@@ -23,17 +25,29 @@
           <strong>
             Observaciones: Descargar carta
             <!-- Maestrias PMPCA -->
-            <a v-if="
-            alias_academic_program === 'maestria' ||
-            alias_academic_program === 'enrem'" href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
-              target="_blank">dando clic aquí</a>
+            <a
+              v-if="
+                alias_academic_program === 'maestria' ||
+                alias_academic_program === 'enrem'
+              "
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
             <!-- Maestria imarec -->
-            <a v-else-if="alias_academic_program === 'imarec'"
-              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx" target="_blank">dando clic
-              aquí</a>
+            <a
+              v-else-if="alias_academic_program === 'imarec'"
+              href="https://ambiental.uaslp.mx/imarec/docs/CartaCompromiso_IMaREC.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
             <!-- Doctorado PMPCA  -->
-            <a v-else href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx" target="_blank">dando clic
-              aquí</a>
+            <a
+              v-else
+              href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx"
+              target="_blank"
+              >dando clic aquí</a
+            >
           </strong>
         </p>
 
@@ -42,53 +56,84 @@
           <strong> Observaciones: <span v-html="notes"></span></strong>
         </p>
 
-        <p class="my-2 d-block">
-          <strong> Etiqueta: </strong> {{ label }}
-        </p>
+        <p class="my-2 d-block"><strong> Etiqueta: </strong> {{ label }}</p>
         <p class="my-2 d-block"><strong> Ejemplo: </strong> {{ example }}</p>
       </div>
 
       <div class="form-group col-1 col-md-1 col-xs-2 align-items-center">
-        <div v-if="checkUpload() === true" class="d-flex justify-content-center  my-1"
-          style="max-height: 45px; width: 100%">
+        <div
+          v-if="checkUpload() === true"
+          class="d-flex justify-content-center my-1"
+          style="max-height: 45px; width: 100%"
+        >
           <label>
-            <a :href="'../../../controlescolar/solicitud/expediente/' + location" style=" height: 45px; width:100%;"
-              target="_blank">
-              <img :src="images_btn.ver" alt="" style="max-height: 45px !important;">
+            <a
+              :href="'../../../controlescolar/solicitud/expediente/' + location"
+              style="height: 45px; width: 100%"
+              target="_blank"
+            >
+              <button class="uaslp-btn">
+                <span class="material-icons">adjust</span>
+                <span>Ver</span>
+              </button>
+              <!-- <img :src="images_btn.ver" alt="" style="max-height: 45px !important;"> -->
             </a>
           </label>
         </div>
 
-        <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center"
-          style="max-height:45px !important; width: 100%">
+        <div
+          v-if="isIntentionLetter() === false"
+          class="d-flex justify-content-center"
+          style="max-height: 45px !important; width: 100%"
+        >
           <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
           <label>
-            <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
-            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%"
-              @change="cargaDocumento">
+            <button class="uaslp-btn" @click="handleDocument">
+              <span class="material-icons-outlined">file_upload</span>
+              <input
+                type="file"
+                ref="fileInput"
+                class="form-control d-none"
+                @change="cargaDocumento"
+              />
+              <span>Subir</span>
+            </button>
+            <!-- <img
+              :src="images_btn.seleccionar"
+              alt=""
+              style="max-height: 45px !important"
+            /> -->
           </label>
         </div>
       </div>
     </div>
 
-    <div class="d-flex align-items-center justify-content-start my-2" style="width:100%;">
-      <div v-if="isEXANNI() === true" class="form-group col-12">
-        <div class="d-flex align-items-center justify-content-start my-2">
-          <div class="col-xl-4 col-md-6 col-xs-6">
+    <div
+      class="d-flex align-items-center justify-content-start my-2 c-center"
+      style="width: 100%"
+    >
+      <div v-if="isEXANNI() === true" class="form-group col-12 a-start">
+        <div
+          class="d-flex align-items-center justify-content-start my-2 j-start"
+        >
+          <div class="col-xl-4 col-md-6 col-xs-6 t-center">
             <label> Puntaje obtenido</label>
-            <input v-model.number="ExanniScore" type="number" class="form-control" />
+            <input
+              v-model.number="ExanniScore"
+              type="number"
+              class="form-control"
+            />
           </div>
-          <div class="col-xl-4 col-md-6 col-xs-6">
-            <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn">
-              <p class="h4">Guardar Puntaje</p>
-            </b-button>
+          <div class="col-xl-4 col-md-6 col-xs-6 a-end">
+            <button class="uaslp-btn" @click="actualizaPuntajeExanni">
+              <span class="material-icons-outlined">save</span>
+              <span>Guardar</span>
+            </button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -156,8 +201,8 @@ export default {
 
     status_checkBox: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   data() {
@@ -174,11 +219,11 @@ export default {
     styleBtn() {
       return {
         backgroundColor: "rgba(0,96,175,255)",
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        height: '100%',
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        height: "100%",
+      };
     },
 
     StatusCheckBox: {
@@ -240,8 +285,9 @@ export default {
   // },
 
   methods: {
-
-
+    handleDocument() {
+      this.$refs.fileInput.click();
+    },
     bkgCargarArchivo(type) {
       // console.log(this.language);
       axios
@@ -260,8 +306,6 @@ export default {
         });
     },
 
-
-
     isEXANNI() {
       if (
         this.name ===
@@ -277,9 +321,11 @@ export default {
       let res = true;
 
       // Documents for Maestria en ciencias ambientales and imarec
-      if (this.alias_academic_program === "maestria" || this.alias_academic_program === "imarec") {
+      if (
+        this.alias_academic_program === "maestria" ||
+        this.alias_academic_program === "imarec"
+      ) {
         switch (this.name) {
-        
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -321,7 +367,6 @@ export default {
       //Documents for doctorado
       else if (this.alias_academic_program === "doctorado") {
         switch (this.name) {
-      
           case "5.- Título de preparatoria":
             res = false;
             break;
@@ -367,7 +412,7 @@ export default {
           // case "14.- Propuesta de proyecto avalada por el profesor postulante":
           //   res = false;
           //   break;
-          case  "5B.- Título de maestría o acta de examen":
+          case "5B.- Título de maestría o acta de examen":
             res = false;
             break;
           case "6B.- Certificado de materias de la maestría":
