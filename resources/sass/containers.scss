@@ -1,0 +1,95 @@
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-flow: column nowrap;
+    min-width: 300px;
+    * {
+        gap: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: center;
+        text-align: center;
+    }
+    * div {
+        min-width: 100% !important;
+    }
+}
+
+.flex-row-custom {
+    flex-flow: row nowrap;
+}
+
+.flex-item-row-child {
+    * {
+        gap: 10px;
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+    }
+    * div {
+        min-width: 100% !important;
+    }
+}
+
+.width-70 {
+    width: 70% !important;
+}
+.width-85 {
+    width: 85% !important;
+}
+
+.c-center {
+    display: grid;
+    place-items: center;
+    > * {
+        display: grid;
+        place-items: center;
+    }
+}
+.c-center-nch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+}
+
+.c-header {
+    max-height: 36.5px !important;
+}
+
+.a-start {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.a-end {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+.j-start {
+    justify-self: flex-start;
+    justify-content: flex-start;
+}
+
+.t-center {
+    text-align: center;
+}
+
+.c-flex-column {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-header {
+    height: clamp(36.5px, 36.5px, 36.5px);
+    * {
+        font-size: 19pt !important;
+        font-weight: bold !important;
+    }
+}

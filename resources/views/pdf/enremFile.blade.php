@@ -159,10 +159,15 @@
 
         }
 
-
+        
         .break-line {
             color: #115089;
             border: 2px solid #115089;
+        }
+        
+        .paragraph{
+            
+            line-height: 20px;
         }
     </style>
 </head>
@@ -182,7 +187,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['personal_data']['name'] }}</p>
+                    <p class="paragraph">{{ $data['personal_data']['name'] }}</p>
                 </td>
             </tr>
 
@@ -192,7 +197,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['middlename'] . ' ' . $data['personal_data']['surnames'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['middlename'] . ' ' . $data['personal_data']['surnames'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -206,7 +211,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['gender'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['gender'] }}</p>
                 </td>
 
                 <td>
@@ -214,7 +219,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['marital_state'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['marital_state'] }}</p>
                 </td>
 
                 <td>
@@ -222,7 +227,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['no_children'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['no_children'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -236,7 +241,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['birth_date'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['birth_date'] }}</p>
                 </td>
 
                 <td>
@@ -244,7 +249,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['birth_state'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['birth_state'] }}</p>
                 </td>
             </tr>
 
@@ -254,7 +259,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['birth_country'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['birth_country'] }}</p>
                 </td>
 
                 <td>
@@ -262,7 +267,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['residence_country'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['residence_country'] }}</p>
                 </td>
             </tr>
 
@@ -273,7 +278,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['email'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['email'] }}</p>
                 </td>
 
                 <td>
@@ -281,7 +286,7 @@
                 </td>
 
                 <td>
-                    <p> {{ $data['personal_data']['altern_email'] }}</p>
+                    <p class="paragraph"> {{ $data['personal_data']['altern_email'] }}</p>
                 </td>
             </tr>
 
@@ -312,7 +317,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['care_of'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['care_of'] }}</p>
                 </td>
             </tr>
 
@@ -322,7 +327,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['street'] . ' ' . $data['address'][0]['number_address'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['street'] . ' ' . $data['address'][0]['number_address'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -335,14 +340,14 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['street'] . ' ' . $data['address'][0]['number_address'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['street'] . ' ' . $data['address'][0]['number_address'] }}</p>
                 </td>
                 <td>
                     <h5>Postal Code:</h5>
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['postal_code'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['postal_code'] }}</p>
                 </td>
 
                 <td>
@@ -350,7 +355,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['state_country'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['state_country'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -363,14 +368,14 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['telephone'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['telephone'] }}</p>
                 </td>
                 <td>
                     <h5>Mobile phone:</h5>
                 </td>
 
                 <td>
-                    <p>{{ $data['address'][0]['mobile_phone'] }}</p>
+                    <p class="paragraph">{{ $data['address'][0]['mobile_phone'] }}</p>
                 </td>
 
             </tr>
@@ -384,7 +389,7 @@
                 <tr id='header-alone'>
                     <th>
                         <h4>Current Address</h4>
-                        <p>If is different from permanent
+                        <p class="paragraph">If is different from permanent
                         <address></address>
                         </p>
                     </th>
@@ -401,7 +406,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['care_of'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['care_of'] }}</p>
                     </td>
                 </tr>
 
@@ -411,7 +416,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['street'] . ' ' . $data['address'][1]['number_address'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['street'] . ' ' . $data['address'][1]['number_address'] }}</p>
                     </td>
                 </tr>
             </tbody>
@@ -424,14 +429,14 @@
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['street'] . ' ' . $data['address'][1]['number_address'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['street'] . ' ' . $data['address'][1]['number_address'] }}</p>
                     </td>
                     <td>
                         <h5>Postal Code:</h5>
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['postal_code'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['postal_code'] }}</p>
                     </td>
 
                     <td>
@@ -439,7 +444,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['state_country'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['state_country'] }}</p>
                     </td>
                 </tr>
             </tbody>
@@ -452,14 +457,14 @@
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['telephone'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['telephone'] }}</p>
                     </td>
                     <td>
                         <h5>Mobile phone:</h5>
                     </td>
 
                     <td>
-                        <p>{{ $data['address'][1]['mobile_phone'] }}</p>
+                        <p class="paragraph">{{ $data['address'][1]['mobile_phone'] }}</p>
                     </td>
 
                 </tr>
@@ -480,7 +485,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['school_certificade'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['school_certificade'] }}</p>
                 </td>
 
                 <td>
@@ -488,7 +493,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['final_score'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['final_score'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -501,7 +506,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['name_of_institution'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['name_of_institution'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -514,7 +519,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['from'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['from'] }}</p>
                 </td>
 
                 <td>
@@ -522,11 +527,11 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['to'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['to'] }}</p>
                 </td>
 
                 <td>
-                    <p>{{ $data['secondary_education'][0]['city_country'] }}</p>
+                    <p class="paragraph">{{ $data['secondary_education'][0]['city_country'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -548,7 +553,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['degree_type'] }}</p>
+                            <p class="paragraph">{{ $item['degree_type'] }}</p>
                         </td>
 
                         <td>
@@ -556,7 +561,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['date_of_award_of_degree'] }}</p>
+                            <p class="paragraph">{{ $item['date_of_award_of_degree'] }}</p>
                         </td>
 
                         <td>
@@ -564,7 +569,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['final_grade_average'] }}</p>
+                            <p class="paragraph">{{ $item['final_grade_average'] }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -578,7 +583,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['degree'] }}</p>
+                            <p class="paragraph">{{ $item['degree'] }}</p>
 
                         </td>
                     </tr>
@@ -588,7 +593,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['university'] }}</p>
+                            <p class="paragraph">{{ $item['university'] }}</p>
 
                         </td>
                     </tr>
@@ -605,7 +610,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['country'] }}</p>
+                            <p class="paragraph">{{ $item['country'] }}</p>
                         </td>
 
                         <td>
@@ -613,7 +618,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['from'] }}</p>
+                            <p class="paragraph">{{ $item['from'] }}</p>
                         </td>
 
                         <td>
@@ -621,7 +626,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['to'] }}</p>
+                            <p class="paragraph">{{ $item['to'] }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -635,7 +640,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['graduation_mode'] }}</p>
+                            <p class="paragraph">{{ $item['graduation_mode'] }}</p>
 
                         </td>
                     </tr>
@@ -645,7 +650,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['fill_according_graduation'] }}</p>
+                            <p class="paragraph">{{ $item['fill_according_graduation'] }}</p>
 
                         </td>
                     </tr>
@@ -662,7 +667,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['min_avg'] }}</p>
+                            <p class="paragraph">{{ $item['min_avg'] }}</p>
                         </td>
 
                         <td>
@@ -670,7 +675,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['average'] }}</p>
+                            <p class="paragraph">{{ $item['average'] }}</p>
                         </td>
 
                         <td>
@@ -678,7 +683,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['max_avg'] }}</p>
+                            <p class="paragraph">{{ $item['max_avg'] }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -714,7 +719,7 @@
                                 </td>
 
                                 <td>
-                                    <p>{{ $item['kind_of_exam'] }}</p>
+                                    <p class="paragraph">{{ $item['kind_of_exam'] }}</p>
                                 </td>
 
                                 <td>
@@ -722,7 +727,7 @@
                                 </td>
 
                                 <td>
-                                    <p>{{ $item['exam_presented'] }}</p>
+                                    <p class="paragraph">{{ $item['exam_presented'] }}</p>
                                 </td>
 
                                 <td>
@@ -730,7 +735,7 @@
                                 </td>
 
                                 <td>
-                                    <p>{{ $item['presented_at'] }}</p>
+                                    <p class="paragraph">{{ $item['presented_at'] }}</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -756,7 +761,7 @@
 
                                 </td>
                                 <td>
-                                    <p>{{ $item['learning_method'] }}</p>
+                                    <p class="paragraph">{{ $item['learning_method'] }}</p>
 
                                 </td>
                             </tr>
@@ -766,7 +771,7 @@
 
                                 </td>
                                 <td>
-                                    <p>{{ $item['duration_in_months'] }}</p>
+                                    <p class="paragraph">{{ $item['duration_in_months'] }}</p>
 
                                 </td>
                             </tr>
@@ -794,7 +799,7 @@
 
                                 </td>
                                 <td>
-                                    <p>{{ $item['learning_method'] }}</p>
+                                    <p class="paragraph">{{ $item['learning_method'] }}</p>
 
                                 </td>
                             </tr>
@@ -804,7 +809,7 @@
 
                                 </td>
                                 <td>
-                                    <p>{{ $item['duration_in_months'] }}</p>
+                                    <p class="paragraph">{{ $item['duration_in_months'] }}</p>
 
                                 </td>
                             </tr>
@@ -824,7 +829,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['country'] }}</p>
+                            <p class="paragraph">{{ $item['country'] }}</p>
 
                         </td>
                     </tr>
@@ -834,7 +839,7 @@
 
                         </td>
                         <td>
-                            <p>{{ $item['overal_grade_score'] }}</p>
+                            <p class="paragraph">{{ $item['overal_grade_score'] }}</p>
 
                         </td>
                     </tr>
@@ -849,25 +854,25 @@
                             <h5>Reading: </h5>
                         </td>
                         <td>
-                            <p>{{ $item['reading_level'] }}</p>
+                            <p class="paragraph">{{ $item['reading_level'] }}</p>
                         </td>
                         <td>
                             <h5>Comprehension: </h5>
                         </td>
                         <td>
-                            <p>{{ $item['language_domain'] }}</p>
+                            <p class="paragraph">{{ $item['language_domain'] }}</p>
                         </td>
                         <td>
                             <h5>Writing: </h5>
                         </td>
                         <td>
-                            <p>{{ $item['writing_level'] }}</p>
+                            <p class="paragraph">{{ $item['writing_level'] }}</p>
                         </td>
                         <td>
                             <h5>Speaking: </h5>
                         </td>
                         <td>
-                            <p>{{ $item['conversational_level'] }}</p>
+                            <p class="paragraph">{{ $item['conversational_level'] }}</p>
                         </td>
                     </tr>
 
@@ -876,8 +881,8 @@
         @endif
     @endforeach
 
-    <div style="page-break-after:always;"></div>
-
+   <!--  <div style="page-break-after:always;"></div>
+ -->
 
     {{-- Environment related skills --}}
     <div class="row" style="margin-top: 5px; margin-bottom:5px;">
@@ -892,7 +897,7 @@
 
                 </td>
                 <td>
-                    <p>{{ $data['enviroment_related_skills'][0]['message_review'] }}</p>
+                    <p class="paragraph" class="paragraph">{{ $data['enviroment_related_skills'][0]['message_review'] }}</p>
 
                 </td>
             </tr>
@@ -913,7 +918,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['from'] }}</p>
+                            <p class="paragraph">{{ $item['from'] }}</p>
                         </td>
 
                         <td>
@@ -921,7 +926,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['to'] }}</p>
+                            <p class="paragraph">{{ $item['to'] }}</p>
                         </td>
 
                         <td>
@@ -929,7 +934,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['knowledge_area'] }}</p>
+                            <p class="paragraph">{{ $item['knowledge_area'] }}</p>
                         </td>
                     </tr>
                 </tbody>
@@ -944,7 +949,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['working_position'] }}</p>
+                            <p class="paragraph">{{ $item['working_position'] }}</p>
                         </td>
 
                     </tr>
@@ -959,7 +964,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['institution'] }}</p>
+                            <p class="paragraph" class="paragraph">{{ $item['institution'] }}</p>
                         </td>
 
                         <td>
@@ -967,7 +972,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['state'] }}</p>
+                            <p class="paragraph">{{ $item['state'] }}</p>
                         </td>
 
                     </tr>
@@ -983,7 +988,7 @@
                         </td>
 
                         <td>
-                            <p>{{ $item['working_position_description'] }}</p>
+                            <p class="paragraph" class="paragraph">{{ $item['working_position_description'] }}</p>
                         </td>
 
                     </tr>
@@ -1009,7 +1014,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['reasons_to_choise'][0]['first_choise'] }}</p>
+                    <p class="paragraph" class="paragraph">{{ $data['reasons_to_choise'][0]['first_choise'] }}</p>
                 </td>
 
             </tr>
@@ -1021,7 +1026,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['reasons_to_choise'][0]['reasons_choise'] }}</p>
+                    <p class="paragraph" class="paragraph">{{ $data['reasons_to_choise'][0]['reasons_choise'] }}</p>
                 </td>
             </tr>
 
@@ -1032,7 +1037,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['reasons_to_choise'][0]['others_choises'] }}</p>
+                    <p class="paragraph">{{ $data['reasons_to_choise'][0]['others_choises'] }}</p>
                 </td>
             </tr>
 
@@ -1051,7 +1056,7 @@
                 <tr>
                     <td>
                         @foreach ($data['reasons_to_choise'][0]['selected_choises_list'] as $item)
-                            <p>{{ $item->value }}</p>
+                            <p class="paragraph">{{ $item->value }}</p>
                         @endforeach
                     </td>
                 </tr>
@@ -1074,7 +1079,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['future_plans'][0]['pursue_future'] }}</p>
+                    <p class="paragraph" class="paragraph">{{ $data['future_plans'][0]['pursue_future'] }}</p>
                 </td>
             </tr>
 
@@ -1085,7 +1090,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['future_plans'][0]['explain_pursue_future'] }}</p>
+                    <p class="paragraph">{{ $data['future_plans'][0]['explain_pursue_future'] }}</p>
                 </td>
             </tr>
         </tbody>
@@ -1100,7 +1105,7 @@
 
 
     <div class="row" style="margin-top: 5px; margin-bottom:5px;">
-        <p> Project idea: </p>
+        <p class="paragraph"> Project idea: </p>
         <label>Identify a potential area of research you want to pursue during your master thesis that matches the areas
             of
             PMPCA and the Master NRM at ITT, your own skills as well as your future professional interest</label>
@@ -1114,7 +1119,7 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['proyect_idea'] }}</p>
+                    <p class="paragraph" class="paragraph">{{ $data['fields_of_interest'][0]['proyect_idea'] }}</p>
                 </td>
             </tr>
 
@@ -1125,13 +1130,13 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['keywords_proyect_idea'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['keywords_proyect_idea'] }}</p>
                 </td>
             </tr>
         </tbody>
     </table>
     <div class="row" style="margin-top: 5px; margin-bottom:5px;">
-        <p> Research Area at both Universities: </p>
+        <p class="paragraph"> Research Area at both Universities: </p>
         <label>In accordance with your research idea and the identified professor (senior
             researcher) for your research idea select a research area from PMPCA and ITT (BOTH) that mostly
             relates.</label>
@@ -1158,11 +1163,11 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['research_area_mexico'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['research_area_mexico'] }}</p>
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['research_area_german'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['research_area_german'] }}</p>
                 </td>
             </tr>
 
@@ -1172,11 +1177,11 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['professor_research_mexico'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['professor_research_mexico'] }}</p>
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['professor_research_german'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['professor_research_german'] }}</p>
                 </td>
             </tr>
 
@@ -1185,7 +1190,7 @@
     </table>
 
     <div class="row" style="margin-top: 5px; margin-bottom:5px;">
-        <p> Elective modules: </p>
+        <p class="paragraph"> Elective modules: </p>
         <label> Refer to the following link: http://www.enrem-master.info/about-enrem/content (Module Catalogue ENREM)
             Which elective modules offered in the ENREM Master program would you take to develop your research
             idea?</label>
@@ -1212,11 +1217,11 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['elective_modules_PMPCA_mexico'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['elective_modules_PMPCA_mexico'] }}</p>
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['elective_modules_PMPCA_german'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['elective_modules_PMPCA_german'] }}</p>
                 </td>
             </tr>
 
@@ -1226,11 +1231,11 @@
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['elective_modules_ITT_mexico'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['elective_modules_ITT_mexico'] }}</p>
                 </td>
 
                 <td>
-                    <p>{{ $data['fields_of_interest'][0]['elective_modules_ITT_german'] }}</p>
+                    <p class="paragraph">{{ $data['fields_of_interest'][0]['elective_modules_ITT_german'] }}</p>
                 </td>
             </tr>
 
@@ -1254,7 +1259,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['type'] }}</p>
+                        <p class="paragraph">{{ $rl['type'] }}</p>
                     </td>
 
                     <td>
@@ -1262,7 +1267,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['date'] }}</p>
+                        <p class="paragraph">{{ $rl['date'] }}</p>
                     </td>
 
                 </tr>
@@ -1277,7 +1282,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['full_name'] }}</p>
+                        <p class="paragraph">{{ $rl['full_name'] }}</p>
                     </td>
                 </tr>
 
@@ -1287,7 +1292,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['title'] }}</p>
+                        <p class="paragraph">{{ $rl['title'] }}</p>
                     </td>
                 </tr>
 
@@ -1297,7 +1302,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['position'] }}</p>
+                        <p class="paragraph">{{ $rl['position'] }}</p>
                     </td>
                 </tr>
 
@@ -1307,7 +1312,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['organization'] }}</p>
+                        <p class="paragraph">{{ $rl['organization'] }}</p>
                     </td>
                 </tr>
 
@@ -1317,7 +1322,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['telephone'] }}</p>
+                        <p class="paragraph">{{ $rl['telephone'] }}</p>
                     </td>
                 </tr>
 
@@ -1327,7 +1332,7 @@
                     </td>
 
                     <td>
-                        <p>{{ $rl['email'] }}</p>
+                        <p class="paragraph">{{ $rl['email'] }}</p>
                     </td>
                 </tr>
             </tbody>
@@ -1358,7 +1363,7 @@
                                 <label>{{ $item->label }}</label>
                             </td>
                             <td>
-                                <p>{{ $item->value }}</p>
+                                <p class="paragraph">{{ $item->value }}</p>
                             </td>
                         </tr>
                     @endif

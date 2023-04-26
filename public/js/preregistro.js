@@ -151,6 +151,76 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -193,7 +263,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.tipo_usuario;
       },
       set: function set(newVal) {
-        this.$emit('update:tipo_usuario', newVal);
+        this.$emit("update:tipo_usuario", newVal);
       }
     },
     PerteneceUaslp: {
@@ -201,7 +271,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.pertenece_uaslp;
       },
       set: function set(newVal) {
-        this.$emit('update:pertenece_uaslp', newVal);
+        this.$emit("update:pertenece_uaslp", newVal);
       }
     },
     Facultad: {
@@ -209,7 +279,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.facultad;
       },
       set: function set(newVal) {
-        this.$emit('update:facultad', newVal);
+        this.$emit("update:facultad", newVal);
       }
     },
     ClaveUaslp: {
@@ -217,7 +287,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.clave_uaslp;
       },
       set: function set(newVal) {
-        this.$emit('update:clave_uaslp', newVal);
+        this.$emit("update:clave_uaslp", newVal);
       }
     },
     Email: {
@@ -225,7 +295,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.email;
       },
       set: function set(newVal) {
-        this.$emit('update:email', newVal);
+        this.$emit("update:email", newVal);
       }
     },
     EmailAlterno: {
@@ -233,7 +303,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.email_alterno;
       },
       set: function set(newVal) {
-        this.$emit('update:email_alterno', newVal);
+        this.$emit("update:email_alterno", newVal);
       }
     },
     Password: {
@@ -241,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.password;
       },
       set: function set(newVal) {
-        this.$emit('update:password', newVal);
+        this.$emit("update:password", newVal);
       }
     },
     RPassword: {
@@ -249,28 +319,28 @@ __webpack_require__.r(__webpack_exports__);
         return this.passwordR;
       },
       set: function set(newVal) {
-        this.$emit('update:rpassword', newVal);
+        this.$emit("update:rpassword", newVal);
       }
     },
     EmailClass: {
       get: function get() {
-        var usuarioRegistrado = this.TipoUsuario === 'Comunidad AA' && this.email === null;
-        usuarioRegistrado |= this.TipoUsuario === 'Comunidad UASLP' && this.email === null;
+        var usuarioRegistrado = this.TipoUsuario === "Comunidad AA" && this.email === null;
+        usuarioRegistrado |= this.TipoUsuario === "Comunidad UASLP" && this.email === null;
         usuarioRegistrado |= this.TipoUsuario === null;
         return {
-          'form-group': true,
-          'col-lg-6': true,
-          'mt-3': this.TipoUsuario === 'Comunidad AA' || this.TipoUsuario === 'Comunidad UASLP',
-          'd-none': usuarioRegistrado || this.TipoUsuario === null
+          "form-group": true,
+          "col-lg-6": true,
+          "mt-3": this.TipoUsuario === "Comunidad AA" || this.TipoUsuario === "Comunidad UASLP",
+          "d-none": usuarioRegistrado || this.TipoUsuario === null
         };
       }
     },
     PasswordClass: {
       get: function get() {
         return {
-          'form-group': true,
-          'col-lg-6': true,
-          'd-none': this.TipoUsuario === 'Comunidad AA' || this.TipoUsuario === 'Comunidad UASLP' || this.TipoUsuario === null
+          "form-group": true,
+          "col-lg-6": true,
+          "d-none": this.TipoUsuario === "Comunidad AA" || this.TipoUsuario === "Comunidad UASLP" || this.TipoUsuario === null
         };
       }
     }
@@ -279,7 +349,7 @@ __webpack_require__.r(__webpack_exports__);
     inputClassForEmail: function inputClassForEmail() {
       var valid = false;
 
-      if (this.EmailAlterno != null && this.EmailAlterno != '') {
+      if (this.EmailAlterno != null && this.EmailAlterno != "") {
         valid = true;
       }
 
@@ -291,8 +361,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     inputClassFor: function inputClassFor(model) {
       return {
-        'form-control': true,
-        'is-invalid': model in this.errores
+        "form-control": true,
+        "is-invalid": model in this.errores
       };
     },
     setPerteneceUASLP: function setPerteneceUASLP(res) {
@@ -1384,6 +1454,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DatosPersonales_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatosPersonales.vue */ "./resources/js/pre-registro/components/DatosPersonales.vue");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5984,7 +6097,9 @@ var render = function () {
     [
       _c("div", { staticClass: "form-group col-12 mb-3" }, [
         _c("h3", { staticClass: "d-block mb-3" }, [
-          _vm._v(" ¿Ya tienes cuenta en el portal de Agenda Ambiental? "),
+          _vm._v(
+            "\n            ¿Ya tienes cuenta en el portal de Agenda Ambiental?\n        "
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-check" }, [
@@ -6015,7 +6130,9 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" Ya estoy registrado en el portal de Agenda Ambiental "),
+            _vm._v(
+              "\n                Ya estoy registrado en el portal de Agenda Ambiental\n            "
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -6043,13 +6160,19 @@ var render = function () {
           }),
           _vm._v(" "),
           _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(" No estoy registrado en el portal de Agenda Ambiental"),
+            _vm._v(
+              "\n                No estoy registrado en el portal de Agenda Ambiental"
+            ),
           ]),
         ]),
         _vm._v(" "),
         "tipo_usuario" in _vm.errores
           ? _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("\n      " + _vm._s(_vm.errores.tipo_usuario) + "\n    "),
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.errores.tipo_usuario) +
+                  "\n        "
+              ),
             ])
           : _vm._e(),
       ]),
@@ -6119,7 +6242,9 @@ var render = function () {
             _vm._v(" "),
             "email" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(" " + _vm._s(_vm.errores.email) + " "),
+                  _vm._v(
+                    "\n            " + _vm._s(_vm.errores.email) + "\n        "
+                  ),
                 ])
               : _vm._e(),
           ])
@@ -6153,7 +6278,11 @@ var render = function () {
             _vm._v(" "),
             "email_alterno" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.errores.email_alterno) +
+                      "\n        "
+                  ),
                 ])
               : _vm._e(),
           ])
@@ -6185,7 +6314,11 @@ var render = function () {
             _vm._v(" "),
             "email_alterno" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(" " + _vm._s(_vm.errores.email_alterno) + " "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.errores.email_alterno) +
+                      "\n        "
+                  ),
                 ])
               : _vm._e(),
           ])
@@ -6219,7 +6352,11 @@ var render = function () {
             _vm._v(" "),
             "password" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(" " + _vm._s(_vm.errores.password) + " "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.errores.password) +
+                      "\n        "
+                  ),
                 ])
               : _vm._e(),
           ])
@@ -6253,7 +6390,11 @@ var render = function () {
             _vm._v(" "),
             "rpassword" in _vm.errores
               ? _c("div", { staticClass: "invalid-feedback" }, [
-                  _vm._v(" " + _vm._s(_vm.errores.rpassword) + " "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.errores.rpassword) +
+                      "\n        "
+                  ),
                 ])
               : _vm._e(),
           ])
@@ -6276,7 +6417,7 @@ var render = function () {
             },
             [
               _c("p", { staticClass: "mt-2" }, [
-                _vm._v("  Puedes crear tu cuenta dando "),
+                _vm._v("Puedes crear tu cuenta dando"),
               ]),
               _vm._v(" "),
               _c(
@@ -6304,7 +6445,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("p", [
       _vm._v(
-        "Para poder inscribirte a cualquier programa académico es necesario crear una cuenta en el Portal de Agenda Ambiental. "
+        "\n            Para poder inscribirte a cualquier programa académico es\n            necesario crear una cuenta en el Portal de Agenda Ambiental.\n            "
       ),
       _c("br"),
     ])
@@ -7750,7 +7891,7 @@ var render = function () {
                   },
                 },
                 [
-                  _c("crear-cuenta", {
+                  _c("CrearCuenta", {
                     attrs: {
                       errores: _vm.errores,
                       tipo_usuario: _vm.tipo_usuario,
@@ -7803,7 +7944,7 @@ var render = function () {
                     ? _c(
                         "div",
                         [
-                          _c("datos-personales", {
+                          _c("DatosPersonales", {
                             attrs: {
                               errores: _vm.errores,
                               tipo_usuario: _vm.tipo_usuario,

@@ -5,7 +5,7 @@
  */
 
 
-import AverageRubricCa from './components/AverageRubricCa';
+import AverageRubricCa from './components/AverageRubricCA';
 import { GridPlugin } from '@syncfusion/ej2-vue-grids';
 
 window.Vue = require('vue').default;

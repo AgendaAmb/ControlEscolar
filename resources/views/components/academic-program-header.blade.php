@@ -1,12 +1,22 @@
+
+
+<?php
+//Creamos la ruta para comite enviando el id como props
+
+
+$reference = "/controlescolar/ca/?id=";
+
+?> 
 <header class="mb-5 d-block header">
     <a class="d-block header-image" href="">
-        <img class="ml-auto d-block img-fluid" src="{{ asset('storage/headers/logod.png') }}">
+        <img class="ml-auto d-block img-fluid " src="{{ asset('storage/headers/logod-nobg.png') }}">
     </a>
     @auth
-     {{-- <b-navbar toggleable="lg" type="dark" variant="info">
+
+    {{-- <b-navbar toggleable="lg" type="dark" variant="info">
         <b-collapse id="nav-collapse" is-nav> --}}
         <nav class="nav nav-options">
-
+            
             {{-- Inicio disponible para todos --}}
             <a class="nav-link" href="{{ route('authenticate.home') }}">Inicio</a>
 
@@ -54,7 +64,8 @@
 
 
             @if (Auth::user()->hasRole('comite_academico'))
-                <a class="nav-link" href="http://ambiental.uaslp.mx/ComiteAcademico"> Comite Academico </a>
+                
+                <a class="nav-link" id="control-href" href="{{$reference}}"> Comite Académico</a>
             @endif
 
 
@@ -81,3 +92,28 @@
 </b-navbar> --}}
     @endauth
 </header>
+
+<?php
+//Creamos la ruta para comite enviando el id como props
+$flag = false;
+if(Auth::user()){
+    $reference = "/controlescolar/ca/?id=". Auth::user()->id;
+    $reference = "https://ambiental.uaslp.mx/ComiteAcademico/"; //Comentar despues de actualizar comite
+    $flag = true;
+}
+
+?>
+
+<script>
+
+    if("{{$flag}}"){
+        setTimeout(() => {
+            let control = document.querySelector("#control-href");
+            if(control != null){
+                control.setAttribute("href", "{{$reference}}" );
+            }
+        }, 200);
+
+    }
+    
+</script>

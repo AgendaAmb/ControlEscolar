@@ -1,26 +1,38 @@
-<template >
+<template>
   <details open>
-    <summary class="btn row d-flex align-items-center justify-content-center my-2" :style="styleBtnAccordionSection">
+    <summary
+      class="btn row d-flex align-items-center justify-content-center my-2"
+      :style="styleBtnAccordionSection"
+    >
       <div class="col-lg-8 col-md-6 col-xs-12">
-          <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
-          <span class="h5 font-weight-bold" style="width:auto!important;">Idioma {{ index + 1 }}</span>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-12">
-          <b-button @click="eliminaIdioma" pill class="d-flex justify-content-start align-items-center"
+        <b-icon icon="arrow-up" class="mx-2" font-scale="2.0"></b-icon>
+        <span class="h5 font-weight-bold" style="width: auto !important"
+          >Idioma {{ index + 1 }}</span
+        >
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-12">
+        <button class="uaslp-btn uaslp-red" @click="eliminaIdioma">
+          <span class="material-icons">delete_forever</span>
+          <span>Delete</span>
+        </button>
+        <!-- <b-button @click="eliminaIdioma" pill class="d-flex justify-content-start align-items-center"
             style="height:45px!important" variant="danger">
             <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
             <p class="h5 my-2">Eliminar</p>
-          </b-button>
-        </div>
+          </b-button> -->
+      </div>
     </summary>
     <b-card-body>
-      <div class="d-flex justify-content-start align-items-center my-2" style="width:100%">
-     
+      <div
+        class="d-flex justify-content-start align-items-center my-2"
+        style="width: 100%"
+      >
         <!-- FORMULARIO PT1 IMAGEN -->
-        <div class="d-flex justify-content-start align-items-center col-md-12 col-sm-12 text-start">
-
+        <div
+          class="d-flex justify-content-start align-items-center col-md-12 col-sm-12 text-start"
+        >
           <!-- IMAGEN -->
-          <div v-if="getImage() === true" class="form-group col-3 my-auto ">
+          <div v-if="getImage() === true" class="form-group col-3 my-auto">
             <img style="width: 80%; height: 80% !important" :src="flag_image" />
           </div>
 
@@ -29,9 +41,17 @@
             <div class="row justify-content-end">
               <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Idioma: </label>
-                <select v-model="Language" class="form-control" :class="{ 'is-invalid': 'language' in errores }">
+                <select
+                  v-model="Language"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'language' in errores }"
+                >
                   <option value="" selected>Escoge una opción</option>
-                  <option v-for="idioma in idiomas" :key="idioma" :value="idioma">
+                  <option
+                    v-for="idioma in idiomas"
+                    :key="idioma"
+                    :value="idioma"
+                  >
                     {{ idioma }}
                   </option>
                 </select>
@@ -43,36 +63,60 @@
 
               <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Institución que otorgó el certificado: </label>
-                <input v-model="Institution" type="text" class="form-control"
-                  :class="{ 'is-invalid': 'institution' in errores }" />
+                <input
+                  v-model="Institution"
+                  type="text"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'institution' in errores }"
+                />
 
                 <div v-if="'institution' in errores" class="invalid-feedback">
                   {{ errores.institution }}
                 </div>
               </div>
 
-              <div v-if="isEnglish() === true" class="form-group col-lg-6 col-md-12 d-none d-md-block">
+              <div
+                v-if="isEnglish() === true"
+                class="form-group col-lg-6 col-md-12 d-none d-md-block"
+              >
                 <label> ¿Qué examen de inglés presentaste? </label>
-                <select v-model="ExamPresented" class="form-control" @change="chooseExam"
-                  :class="{ 'is-invalid': 'exam_presented' in errores }">
+                <select
+                  v-model="ExamPresented"
+                  class="form-control"
+                  @change="chooseExam"
+                  :class="{ 'is-invalid': 'exam_presented' in errores }"
+                >
                   <option value="" selected>Escoge una opción</option>
                   <option v-for="exam in examNames" :key="exam" :value="exam">
                     {{ exam }}
                   </option>
                 </select>
 
-                <div v-if="'exam_presented' in errores" class="invalid-feedback">
+                <div
+                  v-if="'exam_presented' in errores"
+                  class="invalid-feedback"
+                >
                   {{ errores.exam_presented }}
                 </div>
               </div>
 
-              <div v-if="isEnglish() === true" class="form-group col-lg-6 col-md-12 d-none d-md-block">
+              <div
+                v-if="isEnglish() === true"
+                class="form-group col-lg-6 col-md-12 d-none d-md-block"
+              >
                 <label> Escoge un tipo de examen </label>
 
-                <select v-model="KindOfExam" class="form-control"
-                  :class="{ 'is-invalid': 'exam_presented' in errores }">
+                <select
+                  v-model="KindOfExam"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'exam_presented' in errores }"
+                >
                   <option value="" selected>Escoge una opción</option>
-                  <option v-for="exam in kindOfExamNames" :key="exam" :value="exam">
+                  <option
+                    v-for="exam in kindOfExamNames"
+                    :key="exam"
+                    :value="exam"
+                  >
                     {{ exam }}
                   </option>
                 </select>
@@ -82,59 +126,76 @@
                 </div>
               </div>
 
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
+              <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Puntaje obtenido: </label>
-                <input v-model.number="Score" type="number" class="form-control"
-                  :class="{ 'is-invalid': 'score' in errores }" />
+                <input
+                  v-model.number="Score"
+                  type="number"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'score' in errores }"
+                />
 
                 <div v-if="'score' in errores" class="invalid-feedback">
                   {{ errores.score }}
                 </div>
               </div>
 
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
+              <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Fecha de aplicación: </label>
-                <input v-model="PresentedAt" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'presented_at' in errores }" />
+                <input
+                  v-model="PresentedAt"
+                  type="date"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'presented_at' in errores }"
+                />
 
                 <div v-if="'presented_at' in errores" class="invalid-feedback">
                   {{ errores.presented_at }}
                 </div>
               </div>
 
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
+              <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Vigencia desde: </label>
-                <input v-model="ValidFrom" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_from' in errores }" />
+                <input
+                  v-model="ValidFrom"
+                  type="date"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'valid_from' in errores }"
+                />
 
                 <div v-if="'valid_from' in errores" class="invalid-feedback">
                   {{ errores.valid_from }}
                 </div>
               </div>
 
-              <div class="form-group  col-lg-6 col-sm-12 d-none d-md-block">
+              <div class="form-group col-lg-6 col-sm-12 d-none d-md-block">
                 <label> Hasta: </label>
-                <input v-model="ValidTo" type="date" class="form-control"
-                  :class="{ 'is-invalid': 'valid_to' in errores }" />
+                <input
+                  v-model="ValidTo"
+                  type="date"
+                  class="form-control"
+                  :class="{ 'is-invalid': 'valid_to' in errores }"
+                />
 
                 <div v-if="'valid_to' in errores" class="invalid-feedback">
                   {{ errores.valid_to }}
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="col-md-12 col-sm-12 text-start">
         <div class="row justify-content-center">
-
-          <div class="form-group col-sm-12 col-md-12 col-lg-3 ">
+          <div class="form-group col-sm-12 col-md-12 col-lg-3">
             <label> Grado de dominio: </label>
-            <input v-model="LanguageDomain" type="text" class="form-control"
-              :class="{ 'is-invalid': 'language_domain' in errores }" />
+            <input
+              v-model="LanguageDomain"
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': 'language_domain' in errores }"
+            />
 
             <div v-if="'language_domain' in errores" class="invalid-feedback">
               {{ errores.language_domain }}
@@ -143,28 +204,43 @@
 
           <div class="form-group col-sm-12 col-md-12 col-lg-3">
             <label> Nivel conversacional: </label>
-            <input v-model="ConversationalLevel" type="text" class="form-control"
-              :class="{ 'is-invalid': 'writing_level' in errores }" />
+            <input
+              v-model="ConversationalLevel"
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': 'writing_level' in errores }"
+            />
 
-            <div v-if="'conversational_level' in errores" class="invalid-feedback">
+            <div
+              v-if="'conversational_level' in errores"
+              class="invalid-feedback"
+            >
               {{ errores.conversational_level }}
             </div>
           </div>
 
-          <div class="form-group col-sm-12 col-md-12 col-lg-3 ">
+          <div class="form-group col-sm-12 col-md-12 col-lg-3">
             <label> Nivel de lectura: </label>
-            <input v-model="ReadingLevel" type="text" class="form-control"
-              :class="{ 'is-invalid': 'reading_level' in errores }" />
+            <input
+              v-model="ReadingLevel"
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': 'reading_level' in errores }"
+            />
 
             <div v-if="'reading_level' in errores" class="invalid-feedback">
               {{ errores.reading_level }}
             </div>
           </div>
 
-          <div class="form-group col-sm-12 col-md-12 col-lg-3 ">
+          <div class="form-group col-sm-12 col-md-12 col-lg-3">
             <label> Nivel de escritura: </label>
-            <input v-model="WritingLevel" type="text" class="form-control"
-              :class="{ 'is-invalid': 'writing_level' in errores }" />
+            <input
+              v-model="WritingLevel"
+              type="text"
+              class="form-control"
+              :class="{ 'is-invalid': 'writing_level' in errores }"
+            />
             <div v-if="'writing_level' in errores" class="invalid-feedback">
               {{ errores.writing_level }}
             </div>
@@ -172,31 +248,43 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-start my-2" style="width:100%;">
-        <div class="col-md-2 col-xs-3 align-items-center " style="width:100%; max-height: 45px !important;">
-          <img @click="actualizaLenguaExtranjera" :src="images_btn.guardar" alt=""
-            style=" max-height: 45px !important;">
+      <div class="d-flex justify-content-start my-2" style="width: 100%">
+        <div
+          class="col-md-2 col-xs-3 align-items-center"
+          style="width: 100%; max-height: 45px !important"
+        >
+          <img
+            @click="actualizaLenguaExtranjera"
+            :src="images_btn.guardar"
+            alt=""
+            style="max-height: 45px !important"
+          />
         </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
             <strong>Nota: </strong>
             Para poder registrar los cambios en los campos anteriores del idioma
-            correspondiente es necesario seleccionar el siguiente botón. <p><strong>Solo se guardara el Idioma
-                actual.</strong></p>
+            correspondiente es necesario seleccionar el siguiente botón.
+            <p><strong>Solo se guardara el Idioma actual.</strong></p>
           </label>
         </div>
       </div>
 
-
-      <documento-requerido v-for="documento in Documentos" :key="documento.name" :archivo.sync="documento.archivo"
-        :location.sync="documento.pivot.location" :errores.sync="documento.errores" :images_btn="images_btn"
-        :alias_academic_program.sync="alias_academic_program" @enviaDocumento="cargaDocumento" v-bind="documento">
+      <documento-requerido
+        v-for="documento in Documentos"
+        :key="documento.name"
+        :archivo.sync="documento.archivo"
+        :location.sync="documento.pivot.location"
+        :errores.sync="documento.errores"
+        :images_btn="images_btn"
+        :alias_academic_program.sync="alias_academic_program"
+        @enviaDocumento="cargaDocumento"
+        v-bind="documento"
+      >
       </documento-requerido>
-
     </b-card-body>
   </details>
 </template>
-
 
 <script>
 import DocumentoRequerido from "./DocumentoRequerido.vue";
@@ -262,7 +350,7 @@ export default {
 
     alias_academic_program: {
       type: String,
-      default: ""
+      default: "",
     },
 
     status_checkBox: {
@@ -315,12 +403,12 @@ export default {
 
       return {
         backgroundColor: color,
-        color: 'rgb(244, 244, 244)',
-        border: 'none',
-        alignItems: 'center',
-        width: '100%!important',
-        display: 'flex'
-      }
+        color: "rgb(244, 244, 244)",
+        border: "none",
+        alignItems: "center",
+        width: "100%!important",
+        display: "flex",
+      };
     },
 
     ColorStrip() {

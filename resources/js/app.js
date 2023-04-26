@@ -3,5 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-import 'mdb-vue-ui-kit/css/mdb.min.css';
-require('./bootstrap');
+import "mdb-vue-ui-kit/css/mdb.min.css";
+import "material-icons/iconfont/material-icons.css";
+
+require("./bootstrap");

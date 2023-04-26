@@ -1,7 +1,7 @@
 <template>
-  <div class="form-row">
-    <!-- Pregunta al usuario si ya tiene alguna cuenta existente en el sistema. -->
-    <!-- <div class="form-group col-12 mb-3">
+    <div class="form-row">
+        <!-- Pregunta al usuario si ya tiene alguna cuenta existente en el sistema. -->
+        <!-- <div class="form-group col-12 mb-3">
       <h3 class="d-block mb-3"> ¿Eres miembro de la UASLP? </h3>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad UASLP" v-on:click="setPerteneceUASLP(true)">
@@ -20,251 +20,327 @@
       </div>
     </div> -->
 
-    <div class="form-group col-12 mb-3">
-      <h3 class="d-block mb-3"> ¿Ya tienes cuenta en el portal de Agenda Ambiental? </h3>
-     
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Comunidad AA" v-on:click="setPerteneceUASLP(true)">
-        <label class="form-check-label"> Ya estoy registrado en el portal de Agenda Ambiental </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="TipoUsuario" v-model="TipoUsuario" value="Ninguno" v-on:click="setPerteneceUASLP(false)">
-        <label class="form-check-label"> No estoy registrado en el portal de Agenda Ambiental</label>
-      </div>
-      <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
-        {{ errores.tipo_usuario }}
-      </div>
-    </div>
+        <div class="form-group col-12 mb-3">
+            <h3 class="d-block mb-3">
+                ¿Ya tienes cuenta en el portal de Agenda Ambiental?
+            </h3>
 
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="TipoUsuario"
+                    v-model="TipoUsuario"
+                    value="Comunidad AA"
+                    v-on:click="setPerteneceUASLP(true)"
+                />
+                <label class="form-check-label">
+                    Ya estoy registrado en el portal de Agenda Ambiental
+                </label>
+            </div>
+            <div class="form-check">
+                <input
+                    class="form-check-input"
+                    type="radio"
+                    name="TipoUsuario"
+                    v-model="TipoUsuario"
+                    value="Ninguno"
+                    v-on:click="setPerteneceUASLP(false)"
+                />
+                <label class="form-check-label">
+                    No estoy registrado en el portal de Agenda Ambiental</label
+                >
+            </div>
+            <div v-if="'tipo_usuario' in errores" class="invalid-feedback">
+                {{ errores.tipo_usuario }}
+            </div>
+        </div>
 
-    <div class="col-12"></div>
+        <div class="col-12"></div>
 
-    <!-- El usuario es miembro de la comunidad de Agenda Ambiental. -->
-    <datos-mi-portal v-if="TipoUsuario === 'Comunidad AA'"
-      :errores="errores"
-      @miPortalUserUpdated="$emit('miPortalUserUpdated', $event)"
-      :correo_registro.sync="correo_registro">
-    </datos-mi-portal>
-    <div class="col-12"></div>
+        <!-- El usuario es miembro de la comunidad de Agenda Ambiental. -->
+        <datos-mi-portal
+            v-if="TipoUsuario === 'Comunidad AA'"
+            :errores="errores"
+            @miPortalUserUpdated="$emit('miPortalUserUpdated', $event)"
+            :correo_registro.sync="correo_registro"
+        >
+        </datos-mi-portal>
+        <div class="col-12"></div>
 
-    <!-- El usuario es miembro de la UASLP, pero no de AA. -->
-    <datos-uaslp v-if="TipoUsuario === 'Comunidad UASLP'"
-      :errores="errores" 
-      :clave_uaslp.sync="ClaveUaslp" 
-      @uaslpUserUpdated="$emit('uaslpUserUpdated', $event)">
-    </datos-uaslp>
-    <div class="col-12"></div>
+        <!-- El usuario es miembro de la UASLP, pero no de AA. -->
+        <datos-uaslp
+            v-if="TipoUsuario === 'Comunidad UASLP'"
+            :errores="errores"
+            :clave_uaslp.sync="ClaveUaslp"
+            @uaslpUserUpdated="$emit('uaslpUserUpdated', $event)"
+        >
+        </datos-uaslp>
+        <div class="col-12"></div>
 
-    <!-- El usuario no es miembro de ninguno de los 2. -->
-    <!-- <div v-if="TipoUsuario === 'Ninguno'" class="form-group col-12">
+        <!-- El usuario no es miembro de ninguno de los 2. -->
+        <!-- <div v-if="TipoUsuario === 'Ninguno'" class="form-group col-12">
       <h5 class="modal-title mt-3" >Crear cuenta </h5>
     </div> -->
 
-    <div v-if="TipoUsuario != 'Ninguno'" :class="EmailClass">
-      <label> Ingresa un correo electrónico </label>
-      <input type="email" :class="inputClassFor('email')" v-model="Email" :readonly="ClaveUaslp !== null">
-      <div v-if="'email' in errores" class="invalid-feedback"> {{ errores.email}} </div>
-    </div>
+        <div v-if="TipoUsuario != 'Ninguno'" :class="EmailClass">
+            <label> Ingresa un correo electrónico </label>
+            <input
+                type="email"
+                :class="inputClassFor('email')"
+                v-model="Email"
+                :readonly="ClaveUaslp !== null"
+            />
+            <div v-if="'email' in errores" class="invalid-feedback">
+                {{ errores.email }}
+            </div>
+        </div>
 
-    <!-- Se podra cambiar el correo alterno si no se tiene nada -->
-    <div v-if='hasAlternEmail!=false  && TipoUsuario === "Comunidad AA"' :class="EmailClass">
-      <label> Ingresa un correo de contacto alterno</label>
-      <input type="email" :class="inputClassForEmail('email_alterno')" v-model="EmailAlterno" :readonly=true>
-      <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
-    </div>
+        <!-- Se podra cambiar el correo alterno si no se tiene nada -->
+        <div
+            v-if="hasAlternEmail != false && TipoUsuario === 'Comunidad AA'"
+            :class="EmailClass"
+        >
+            <label> Ingresa un correo de contacto alterno</label>
+            <input
+                type="email"
+                :class="inputClassForEmail('email_alterno')"
+                v-model="EmailAlterno"
+                :readonly="true"
+            />
+            <div v-if="'email_alterno' in errores" class="invalid-feedback">
+                {{ errores.email_alterno }}
+            </div>
+        </div>
 
-    <div v-else-if ="TipoUsuario != 'Ninguno'" :class="EmailClass">
-      <label> Ingresa un correo de contacto alterno</label>
-      <input type="email" :class="inputClassForEmail('email_alterno')"  v-model="EmailAlterno" required>
-      <div v-if="'email_alterno' in errores" class="invalid-feedback"> {{ errores.email_alterno}} </div>
-    </div>
+        <div v-else-if="TipoUsuario != 'Ninguno'" :class="EmailClass">
+            <label> Ingresa un correo de contacto alterno</label>
+            <input
+                type="email"
+                :class="inputClassForEmail('email_alterno')"
+                v-model="EmailAlterno"
+                required
+            />
+            <div v-if="'email_alterno' in errores" class="invalid-feedback">
+                {{ errores.email_alterno }}
+            </div>
+        </div>
 
-    <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
-      <label> Contraseña</label>
-      <input type="password" :class="inputClassFor('password')" v-model="Password">
-      <div v-if="'password' in errores" class="invalid-feedback"> {{ errores.password}} </div>
-    </div>
+        <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
+            <label> Contraseña</label>
+            <input
+                type="password"
+                :class="inputClassFor('password')"
+                v-model="Password"
+            />
+            <div v-if="'password' in errores" class="invalid-feedback">
+                {{ errores.password }}
+            </div>
+        </div>
 
-    <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
-      <label> Repite tu Contraseña </label>
-      <input type="password" :class="inputClassFor('rpassword')" v-model="RPassword">
-      <div v-if="'rpassword' in errores" class="invalid-feedback"> {{ errores.rpassword}} </div>
-    </div>
+        <div v-if="TipoUsuario != 'Ninguno'" :class="PasswordClass">
+            <label> Repite tu Contraseña </label>
+            <input
+                type="password"
+                :class="inputClassFor('rpassword')"
+                v-model="RPassword"
+            />
+            <div v-if="'rpassword' in errores" class="invalid-feedback">
+                {{ errores.rpassword }}
+            </div>
+        </div>
 
-    <div v-if="TipoUsuario == 'Ninguno'" class="col-12">
-      <h3>¡Crea tu cuenta en el portal!</h3>
-      <p>Para poder inscribirte a cualquier programa académico es necesario crear una cuenta en el Portal de Agenda Ambiental. <br> </p>
-      
-    </div>
+        <div v-if="TipoUsuario == 'Ninguno'" class="col-12">
+            <h3>¡Crea tu cuenta en el portal!</h3>
+            <p>
+                Para poder inscribirte a cualquier programa académico es
+                necesario crear una cuenta en el Portal de Agenda Ambiental.
+                <br />
+            </p>
+        </div>
 
-    <div v-if="TipoUsuario == 'Ninguno'" class="col-12 d-flex flex-column my-auto align-items-center">
-      <p class="mt-2">  Puedes crear tu cuenta dando </p>
-      <a href="https://ambiental.uaslp.mx/login?Nuevo=1" target="_blank" class="btn btn-light">clic aquí</a> 
+        <div
+            v-if="TipoUsuario == 'Ninguno'"
+            class="col-12 d-flex flex-column my-auto align-items-center"
+        >
+            <p class="mt-2">Puedes crear tu cuenta dando</p>
+            <a
+                href="https://ambiental.uaslp.mx/login?Nuevo=1"
+                target="_blank"
+                class="btn btn-light"
+                >clic aquí</a
+            >
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import DatosMiPortal from './DatosMiPortal.vue';
-import DatosUaslp from './DatosUaslp.vue';
+import DatosMiPortal from "./DatosMiPortal.vue";
+import DatosUaslp from "./DatosUaslp.vue";
 
 export default {
-  components: { DatosMiPortal, DatosUaslp },
-  name: "crear-cuenta",
+    components: { DatosMiPortal, DatosUaslp },
+    name: "crear-cuenta",
 
-  props: {
-    // El usuario pertenece a la comunidad de agenda ambiental.
-    tipo_usuario: String,
-    // El usuario pertenece a la UASLP.
-    pertenece_uaslp: Boolean,
-    // Facultad de adscripción del usuario.
-    facultad: String,
-    // Usuario de la UASLP.
-    clave_uaslp: String,
-    // Email de registro.
-    email: String,
-    // Email de registro alterno.
-    email_alterno: String,
-    // Contraseña de registro.
-    password: String,
-    // Confirmación de la contraseña.
-    rpassword: String,
-    // Errores.
-    errores: Object,
-    //Tienen o no altern email
-    hasAlternEmail: Boolean,
-  },
-
-  data() {
-    return {
-      claveUaslp: null,
-      correo_registro: null,
-    }
-  },
-
-  computed: {
-    TipoUsuario: {
-      get(){
-        return this.tipo_usuario;
-      },
-      set(newVal){
-        this.$emit('update:tipo_usuario', newVal);
-      }
+    props: {
+        // El usuario pertenece a la comunidad de agenda ambiental.
+        tipo_usuario: String,
+        // El usuario pertenece a la UASLP.
+        pertenece_uaslp: Boolean,
+        // Facultad de adscripción del usuario.
+        facultad: String,
+        // Usuario de la UASLP.
+        clave_uaslp: String,
+        // Email de registro.
+        email: String,
+        // Email de registro alterno.
+        email_alterno: String,
+        // Contraseña de registro.
+        password: String,
+        // Confirmación de la contraseña.
+        rpassword: String,
+        // Errores.
+        errores: Object,
+        //Tienen o no altern email
+        hasAlternEmail: Boolean,
     },
 
-    PerteneceUaslp: {
-      get(){
-        return this.pertenece_uaslp;
-      },
-      set(newVal){
-        this.$emit('update:pertenece_uaslp', newVal);
-      }
-    },
-
-    Facultad: {
-      get(){
-        return this.facultad;
-      },
-      set(newVal){
-        this.$emit('update:facultad', newVal);
-      }
-    },
-
-    ClaveUaslp: {
-      get(){
-        return this.clave_uaslp;
-      },
-      set(newVal){
-        this.$emit('update:clave_uaslp', newVal);
-      }
-    },
-
-    Email: {
-      get(){
-        return this.email;
-      },
-      set(newVal){
-        this.$emit('update:email', newVal);
-      }
-    },
-
-    EmailAlterno: {
-      get(){
-        return this.email_alterno;
-      },
-      set(newVal){
-        this.$emit('update:email_alterno', newVal);
-      }
-    },
-    Password: {
-      get(){
-        return this.password;
-      },
-      set(newVal){
-        this.$emit('update:password', newVal);
-      }
-    },
-    RPassword: {
-      get(){
-        return this.passwordR;
-      },
-      set(newVal){
-        this.$emit('update:rpassword', newVal);
-      }
-    },
-
-    EmailClass: {
-      get(){
-        var usuarioRegistrado = this.TipoUsuario === 'Comunidad AA' && this.email === null 
-        usuarioRegistrado |= this.TipoUsuario === 'Comunidad UASLP' && this.email === null;
-        usuarioRegistrado |= this.TipoUsuario === null;
-
+    data() {
         return {
-          'form-group': true,
-          'col-lg-6': true,
-          'mt-3': this.TipoUsuario === 'Comunidad AA' || this.TipoUsuario === 'Comunidad UASLP',
-          'd-none': usuarioRegistrado || this.TipoUsuario === null
+            claveUaslp: null,
+            correo_registro: null,
         };
-      }
     },
 
-    PasswordClass: {
-      get(){
-        return {
-          'form-group': true,
-          'col-lg-6': true,
-          'd-none': this.TipoUsuario === 'Comunidad AA' 
-          || this.TipoUsuario === 'Comunidad UASLP'
-          || this.TipoUsuario === null
-        };
-      }
+    computed: {
+        TipoUsuario: {
+            get() {
+                return this.tipo_usuario;
+            },
+            set(newVal) {
+                this.$emit("update:tipo_usuario", newVal);
+            },
+        },
+
+        PerteneceUaslp: {
+            get() {
+                return this.pertenece_uaslp;
+            },
+            set(newVal) {
+                this.$emit("update:pertenece_uaslp", newVal);
+            },
+        },
+
+        Facultad: {
+            get() {
+                return this.facultad;
+            },
+            set(newVal) {
+                this.$emit("update:facultad", newVal);
+            },
+        },
+
+        ClaveUaslp: {
+            get() {
+                return this.clave_uaslp;
+            },
+            set(newVal) {
+                this.$emit("update:clave_uaslp", newVal);
+            },
+        },
+
+        Email: {
+            get() {
+                return this.email;
+            },
+            set(newVal) {
+                this.$emit("update:email", newVal);
+            },
+        },
+
+        EmailAlterno: {
+            get() {
+                return this.email_alterno;
+            },
+            set(newVal) {
+                this.$emit("update:email_alterno", newVal);
+            },
+        },
+        Password: {
+            get() {
+                return this.password;
+            },
+            set(newVal) {
+                this.$emit("update:password", newVal);
+            },
+        },
+        RPassword: {
+            get() {
+                return this.passwordR;
+            },
+            set(newVal) {
+                this.$emit("update:rpassword", newVal);
+            },
+        },
+
+        EmailClass: {
+            get() {
+                let usuarioRegistrado =
+                    this.TipoUsuario === "Comunidad AA" && this.email === null;
+                usuarioRegistrado |=
+                    this.TipoUsuario === "Comunidad UASLP" &&
+                    this.email === null;
+                usuarioRegistrado |= this.TipoUsuario === null;
+
+                return {
+                    "form-group": true,
+                    "col-lg-6": true,
+                    "mt-3":
+                        this.TipoUsuario === "Comunidad AA" ||
+                        this.TipoUsuario === "Comunidad UASLP",
+                    "d-none": usuarioRegistrado || this.TipoUsuario === null,
+                };
+            },
+        },
+
+        PasswordClass: {
+            get() {
+                return {
+                    "form-group": true,
+                    "col-lg-6": true,
+                    "d-none":
+                        this.TipoUsuario === "Comunidad AA" ||
+                        this.TipoUsuario === "Comunidad UASLP" ||
+                        this.TipoUsuario === null,
+                };
+            },
+        },
     },
-  },
 
-  methods:{
-    inputClassForEmail(){
-      let valid = false
+    methods: {
+        inputClassForEmail() {
+            let valid = false;
 
-      if (this.EmailAlterno != null && this.EmailAlterno != '') {
-        valid = true;
-      }
+            if (this.EmailAlterno != null && this.EmailAlterno != "") {
+                valid = true;
+            }
 
-      return {
-        "form-control": true,
-        "is-invalid": !valid,
-        "is-valid": valid
-      };
+            return {
+                "form-control": true,
+                "is-invalid": !valid,
+                "is-valid": valid,
+            };
+        },
+
+        inputClassFor(model) {
+            return {
+                "form-control": true,
+                "is-invalid": model in this.errores,
+            };
+        },
+        setPerteneceUASLP(res) {
+            this.PerteneceUaslp = res;
+        },
     },
-
-    inputClassFor(model){
-      return {
-        'form-control': true,
-        'is-invalid': model in this.errores
-      }
-    },
-    setPerteneceUASLP(res){
-        this.PerteneceUaslp = res;
-    }
-  }
 };
 </script>

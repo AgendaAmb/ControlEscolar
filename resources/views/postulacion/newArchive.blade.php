@@ -9,7 +9,7 @@
     <div v-if="academicProgramsNotEmpty() === true" class="container mt-3">
         <div class="row my-2 text-center justify-content-center">
             <div class="col-12 mx-2">
-                <p class="display-4"><strong>Escoge un nuevo programa academico</strong></p>
+                <p class="display-4"><strong>Escoge un nuevo programa académico</strong></p>
             </div>
         </div>
         <div class="row my-2 text-center justify-content-center">

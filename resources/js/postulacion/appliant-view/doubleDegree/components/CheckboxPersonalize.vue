@@ -1,12 +1,10 @@
 <template>
-
   <div v-if="isOther() === false" class="row my-2">
     <div class="col-12">
       <b-form-checkbox switch v-model="Checked" size="lg">
         <p class="h5">{{ label }}</p>
       </b-form-checkbox>
     </div>
-
   </div>
 
   <div v-else class="row my-2">
@@ -16,14 +14,16 @@
       </b-form-checkbox>
     </div>
     <div class="col-8">
-      <input v-model="OtherText" type="text" class="form-control" placeholder="">
+      <input
+        v-model="OtherText"
+        type="text"
+        class="form-control"
+        placeholder=""
+      />
     </div>
   </div>
-
-
 </template>
-  
-  
+
 <script>
 export default {
   name: "checkbox-personalize",
@@ -44,17 +44,15 @@ export default {
       default: "",
     },
 
-
     index: {
       type: Number,
       default: 1,
     },
 
-    array_selected:{
-      type:Array,
-      default:[]
-    }
-
+    array_selected: {
+      type: Array,
+      default: [],
+    },
   },
 
   data() {
@@ -66,10 +64,9 @@ export default {
   },
 
   created() {
-
-    if(this.array_selected.length > 0){
-      this.array_selected.forEach(element => {
-        if(element.label == this.label){
+    if (this.array_selected.length > 0) {
+      this.array_selected.forEach((element) => {
+        if (element.label == this.label) {
           this.check = true;
         }
       });
@@ -78,19 +75,19 @@ export default {
 
   methods: {
     isOther() {
-      if (this.label === 'Other'
-        || this.label === 'Online research (please keyword)'
-        || this.label === 'Media (which)'
-        || this.label === 'Fair or Conference (name and year)'
-        || this.label === 'Master portal pages (name)'
-        || this.label === 'From my university'
+      if (
+        this.label === "Other" ||
+        this.label === "Online research (please keyword)" ||
+        this.label === "Media (which)" ||
+        this.label === "Fair or Conference (name and year)" ||
+        this.label === "Master portal pages (name)" ||
+        this.label === "From my university"
       ) {
         return true;
       }
       return false;
-    }
+    },
   },
-
 
   computed: {
     OtherText: {

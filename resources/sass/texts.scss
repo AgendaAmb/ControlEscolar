@@ -1,0 +1,15 @@
+* {
+    font-family: "open sans", sans-serif;
+    text-transform: initial;
+}
+
+.self-start {
+    align-self: flex-start;
+}
+
+.c-title {
+    font-size: 25pt;
+    margin: 0 8dvw;
+    color: $secondary;
+    font-weight: bold;
+}

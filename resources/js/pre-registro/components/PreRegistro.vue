@@ -1,47 +1,90 @@
 <template>
-  <div class="modal fade" id="Registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="Registro"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-xl">
-      <div class="modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3 px-2" style="background-color: #8b96a8">
+      <div
+        class="modal-content px-xl-5 px-lg-5 px-md-4 px-sm-3 px-2"
+        style="background-color: #8b96a8"
+      >
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLabel">Registro</h2>
-          <button style="border-radius: 10px; border:none; color:black; background-color:#8b96a8;" type="button"
-            @click="AcademicProgram = null" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <button
+            style="
+              border-radius: 10px;
+              border: none;
+              color: black;
+              background-color: #8b96a8;
+            "
+            type="button"
+            @click="AcademicProgram = null"
+            class="btn-close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <!-- <span aria-hidden="true" style="color:white; font-size: 25px">X</span> -->
           </button>
-
         </div>
         <div class="modal-body">
           <form v-on:submit.prevent="registraUsuario" class="needs-validation">
-
             <!-- Datos para crear la cuenta -->
-            <crear-cuenta :errores="errores" :tipo_usuario.sync="tipo_usuario" :pertenece_uaslp.sync="pertenece_uaslp"
-              :clave_uaslp.sync="clave_uaslp" :facultad.sync="facultad" :email.sync="email"
-              :email_alterno.sync="email_alterno" :password.sync="password" :rpassword.sync="rpassword"
-              :hasAlternEmail.sync="hasAlternEmail" @uaslpUserUpdated="uaslpUserUpdated"
-              @miPortalUserUpdated="miPortalUserUpdated">
-            </crear-cuenta>
+            <CrearCuenta
+              :errores="errores"
+              :tipo_usuario.sync="tipo_usuario"
+              :pertenece_uaslp.sync="pertenece_uaslp"
+              :clave_uaslp.sync="clave_uaslp"
+              :facultad.sync="facultad"
+              :email.sync="email"
+              :email_alterno.sync="email_alterno"
+              :password.sync="password"
+              :rpassword.sync="rpassword"
+              :hasAlternEmail.sync="hasAlternEmail"
+              @uaslpUserUpdated="uaslpUserUpdated"
+              @miPortalUserUpdated="miPortalUserUpdated"
+            >
+            </CrearCuenta>
 
             <div v-if="tipo_usuario !== null && Readonly">
               <!-- Datos generals -->
-              <datos-personales :errores="errores" :tipo_usuario.sync="tipo_usuario" :readonly="Readonly"
-                :countries="countries" :mystates="mystates" :curp.sync="curp" :no_curp.sync="no_curp" :name.sync="name"
-                :first_surname.sync="first_surname" :last_surname.sync="last_surname" :birth_date.sync="birth_date"
-                :ocupation.sync="ocupation" :birth_country.sync="birth_country" :birth_state.sync="birth_state"
-                :residence_country.sync="residence_country" :gender.sync="gender" :other_gender.sync="other_gender"
-                :civic_state.sync="civic_state" :other_civic_state.sync="other_civic_state" :zip_code.sync="zip_code"
-                :phone_number.sync="phone_number" :ethnicity.sync="ethnicity" :is_disabled.sync="is_disabled"
-                :disability.sync="disability">
-              </datos-personales>
+              <DatosPersonales
+                :errores="errores"
+                :tipo_usuario.sync="tipo_usuario"
+                :readonly="Readonly"
+                :countries="countries"
+                :mystates="mystates"
+                :curp.sync="curp"
+                :no_curp.sync="no_curp"
+                :name.sync="name"
+                :first_surname.sync="first_surname"
+                :last_surname.sync="last_surname"
+                :birth_date.sync="birth_date"
+                :ocupation.sync="ocupation"
+                :birth_country.sync="birth_country"
+                :birth_state.sync="birth_state"
+                :residence_country.sync="residence_country"
+                :gender.sync="gender"
+                :other_gender.sync="other_gender"
+                :civic_state.sync="civic_state"
+                :other_civic_state.sync="other_civic_state"
+                :zip_code.sync="zip_code"
+                :phone_number.sync="phone_number"
+                :ethnicity.sync="ethnicity"
+                :is_disabled.sync="is_disabled"
+                :disability.sync="disability"
+              >
+              </DatosPersonales>
             </div>
             <!-- <button @click="a()">sdfasd</button> -->
-            
           </form>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import CrearCuenta from "./CrearCuenta.vue";
@@ -114,9 +157,6 @@ export default {
         this.$emit("update:academic_program", newValue);
       },
     },
-
-
-
   },
 
   methods: {
@@ -164,7 +204,7 @@ export default {
       this.email_alterno = user.altern_email;
 
       //datos generales
-      this.birth_date = user.birth_date
+      this.birth_date = user.birth_date;
       this.ocupation = user.ocupation;
       this.curp = user.curp;
       this.ocupation = user.ocupation;
@@ -199,9 +239,6 @@ export default {
     },
 
     registraUsuario() {
-
-
-
       this.errores = {};
       var formData = new FormData();
       formData.append("academic_program_id", this.academic_program.id);
@@ -250,7 +287,6 @@ export default {
         .then((response) => {
           console.log(response);
 
-          
           if (response.status == 201) {
             Swal.fire({
               title: "Registro exitoso",
@@ -284,7 +320,6 @@ export default {
             icon: "error",
             confirmButtonColor: "#cfbaf0",
             confirmButtonText: "Ok, volver a formulario",
-
           });
         });
     },

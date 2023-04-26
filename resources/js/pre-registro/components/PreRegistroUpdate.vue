@@ -238,7 +238,7 @@ export default {
       
 
       this.errores = {};
-      var formData = new FormData();
+      let formData = new FormData();
       formData.append("academic_program_id", this.academic_program.id);
       formData.append("tipo_usuario", this.tipo_usuario);
       formData.append("pertenece_uaslp", this.pertenece_uaslp);

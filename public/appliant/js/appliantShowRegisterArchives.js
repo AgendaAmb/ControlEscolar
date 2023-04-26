@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.list-group-item[data-v-b6719272] {\r\n  background-color: #fff;\r\n  border-top: 1px solid #0091b5;\r\n  border-bottom: none;\r\n  border-left-color: #fff;\r\n  border-right-color: #fff;\n}\n.list-group-item[data-v-b6719272]:hover {\r\n  background-color: #0598BC;\r\n  color:#fff;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.list-group-item[data-v-b6719272] {\n  background-color: #fff;\n  border-top: 1px solid #0091b5;\n  border-bottom: none;\n  border-left-color: #fff;\n  border-right-color: #fff;\n}\n.list-group-item[data-v-b6719272]:hover {\n  background-color: #0598BC;\n  color:#fff;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

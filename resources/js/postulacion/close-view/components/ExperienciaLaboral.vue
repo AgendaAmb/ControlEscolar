@@ -7,11 +7,14 @@
         <span class="h5 font-weight-bold" style="width:auto!important;"> Experiencia Laboral {{ index }}</span>
       </div>
       <div class="col-lg-2 col-md-4 col-sm-12">
-        <b-button @click="eliminaExperienciaLaboral" pill class="d-flex justify-content-start align-items-center"
-          style="height:45px!important" variant="danger">
-          <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
-          <p class="h5 my-2">Eliminar</p>
-        </b-button>
+        <button
+                    class="uaslp-btn uaslp-red"
+                    @click="eliminaExperienciaLaboral"
+                >
+                    <span class="material-icons">delete_forever</span>
+                    <span>Eliminar</span>
+                </button>
+        
       </div>
     </summary>
     <!-- Accordion -->

@@ -11,9 +11,11 @@
 
 @section('container-class', 'class=container-fluid')
 @section('main')
-    {{-- Img representativa de postulacion --}}
-    <div class="col-12">
-        <img class="img-fluid rounded" src="{{ $header_academic_program }}">
+    
+
+    <div class="c-center-nch">
+        <h2 class="self-start c-title">{{$academic_program->name}}</h2>
+        <!-- <img class="img-fluid rounded" src="{{ $header_academic_program }}"> -->
     </div>
 
     @if ((Auth::user()->hasRole('control_escolar') ||

@@ -1,18 +1,24 @@
 <template>
   <div class="col-12">
     <div class="row align-items-center">
-
       <!-- Nombre y notas -->
       <div class="col-12">
-        <b-form-group label-size="xl" :label="'Correo ' + index" label-for="input-email">
-          <b-form-input id="input-email" v-model="myEmail" :readonly="stateRL() === 1"></b-form-input>
+        <b-form-group
+          label-size="xl"
+          :label="'Correo ' + index"
+          label-for="input-email"
+        >
+          <b-form-input
+            id="input-email"
+            v-model="myEmail"
+            :readonly="stateRL() === 1"
+          ></b-form-input>
         </b-form-group>
       </div>
     </div>
 
     <div class="row mt-0 mb-1">
       <div class="col-12">
-
         <!-- Se corrobora el estado del archivo (cambiar a numerico )-->
         <template v-if="stateRL() === 1">
           <i>Estado:</i> <i class="text-success">Completado</i>
@@ -26,15 +32,36 @@
       </div>
 
       <div class="col-12">
-        <div v-if="stateRL() != 1" class="form-group" style="width:100%; max-height: 45px !important;">
-          <img @click="enviarCorreoCartaRecomendacion()" :src="images_btn.guardar" alt=""
-            style=" max-height: 45px !important;">
+        <div
+          v-if="stateRL() != 1"
+          class="form-group"
+          style="width: 100%; max-height: 45px !important"
+        >
+          <button class="uaslp-btn" @click="enviarCorreoCartaRecomendacion()">
+            <span class="material-icons-outlined">save</span>
+            <span>Guardar</span>
+          </button>
         </div>
-        <div v-else class="d-flex justify-content-start  my-1" style="max-height: 45px; width: 100%">
+        <div
+          v-else
+          class="d-flex justify-content-start my-1"
+          style="max-height: 45px; width: 100%"
+        >
           <label>
-            <a :href="'/controlescolar/solicitud/seeAnsweredRecommendationLetter/' + archive_id + '/' + recommendation_letter.id"
-              target="_blank" style=" height: 45px; width:100%;">
-              <img :src="images_btn.descargar" style="max-height: 45px !important;">
+            <a
+              :href="
+                '/controlescolar/solicitud/seeAnsweredRecommendationLetter/' +
+                archive_id +
+                '/' +
+                recommendation_letter.id
+              "
+              target="_blank"
+              style="height: 45px; width: 100%"
+            >
+              <button class="uaslp-btn">
+                <span class="material-icons-outlined">file_download</span>
+                <span>Descargar</span>
+              </button>
             </a>
           </label>
         </div>
@@ -68,12 +95,10 @@ export default {
   },
 
   props: {
-
     images_btn: {
       type: Object,
       default: {},
     },
-
 
     email: {
       type: String,
@@ -85,10 +110,9 @@ export default {
       default: null,
     },
 
-
     archive_id: {
       type: Number,
-      default: null
+      default: null,
     },
 
     appliant: {
@@ -103,7 +127,7 @@ export default {
     status_checkBox: {
       type: Boolean,
       default: false,
-    }
+    },
   },
 
   computed: {
@@ -136,7 +160,6 @@ export default {
     }
   },
 
-
   methods: {
     inputClassFor() {
       return {
@@ -154,7 +177,11 @@ export default {
     },
 
     verCartaRecomendacion() {
-      if (this.recommendation_letter == null || this.appliant == null || this.archive_id == null) {
+      if (
+        this.recommendation_letter == null ||
+        this.appliant == null ||
+        this.archive_id == null
+      ) {
         Swal.fire({
           title: "Ups!",
           text: "El usuario con la carta de recomendación a ver no existe",
@@ -162,15 +189,17 @@ export default {
         });
       } else {
         axios
-          .get("/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter", {
-            params: {
-              rl_id: this.recommendation_letter['id'],
-              archive_id: this.archive_id,
-              user_id: this.appliant['id'],
-            },
-          })
-          .then((response) => {
-          })
+          .get(
+            "/controlescolar/recommendationLetter/seeAnsweredRecommendationLetter",
+            {
+              params: {
+                rl_id: this.recommendation_letter["id"],
+                archive_id: this.archive_id,
+                user_id: this.appliant["id"],
+              },
+            }
+          )
+          .then((response) => {})
           .catch((error) => {
             console.log(error);
             Swal.fire({
@@ -180,13 +209,11 @@ export default {
             });
           });
       }
-
-
     },
 
     enviarCorreoCartaRecomendacion() {
       let request;
-
+      console.log(this.emailToSent);
       //Ya existe carta de recomendacion
       if (this.recommendation_letter != null) {
         request = {
@@ -208,10 +235,11 @@ export default {
 
       axios
         .post(
-          "/controlescolar/solicitud/sentEmailRecommendationLetter", request
+          "/controlescolar/solicitud/sentEmailRecommendationLetter",
+          request
         )
         .then((response) => {
-          console.log('message: ' + response.data.message);
+          console.log("message: " + response.data.message);
           if (response.data.message == "Exito, el correo ha sido enviado") {
             Swal.fire({
               title: "El correo se ha enviado correctamente",
@@ -234,12 +262,13 @@ export default {
               cancelButtonText: "Entendido",
             });
           }
-
-
         })
         .catch((error) => {
-          console.log('message: ' + error.data.message);
-          if (error.data.message == 'No puedes usar correos registrados en esta cuenta') {
+          console.log("message: " + error.data.message);
+          if (
+            error.data.message ==
+            "No puedes usar correos registrados en esta cuenta"
+          ) {
             Swal.fire({
               title: "Direcciones de correo erroneas",
               icon: "error",
