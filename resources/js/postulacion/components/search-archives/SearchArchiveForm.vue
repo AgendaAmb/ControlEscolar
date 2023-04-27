@@ -136,7 +136,7 @@ export default {
 
     methods: {
         mandarCorreos() {
-            console.log(this.announcement_selected);
+            //console.log(this.announcement_selected);
             axios
                 .post(
                     "/controlescolar/entrevistas/SendMailUpdateOnlyDocumentsForInterview",
@@ -224,7 +224,7 @@ export default {
         //   return res;
         // },
         getDebug(e) {
-            console.log("DEBUG", e);
+            //console.log("DEBUG", e);
         },
         searchArchives() {
             if (
@@ -244,7 +244,7 @@ export default {
                     })
                     .then((response) => {
                         const { data } = response;
-                        console.log("Data from btn: ", data);
+                        //console.log("Data from btn: ", data);
                         this.dataLength = data.length; // cantidad de articulos
                         this.$emit("archives-found", {
                             data: data,
@@ -253,7 +253,7 @@ export default {
                     })
                     .catch((error) => {
                         //console.log(error);
-                        console.log(this.announcement_selected);
+                        //console.log(this.announcement_selected);
                         Swal.fire({
                             title: "Error al hacer busqueda",
                             text: error.response.data,
@@ -289,7 +289,7 @@ export default {
                         },
                     })
                     .then((response) => {
-                        console.log("RESPUESTA BD \n", response);
+                        //console.log("RESPUESTA BD \n", response);
                         //console.log("Lenght", response.lenght);
                         this.dataLength = response.data.length; // cantidad de articulos
                         this.$emit("archives-found", {
@@ -314,12 +314,6 @@ export default {
             }
 
             return false;
-        },
-        created: () => {
-            console.log("SearchArchives created", "{{$PATH}}");
-        },
-        mounted: () => {
-            console.log("SearchArchives mounted", "{{$PATH}}");
         },
     },
 };

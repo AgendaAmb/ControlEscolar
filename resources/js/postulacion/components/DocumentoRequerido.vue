@@ -74,7 +74,10 @@
                 >
                     <label>
                         <a
-                            :href="'{{$PATH}}/solicitud/expediente/' + location"
+                            :href="
+                                '/controlescolar/solicitud/expediente/' +
+                                location
+                            "
                             style="height: 45px; width: 100%"
                             target="_blank"
                         >
