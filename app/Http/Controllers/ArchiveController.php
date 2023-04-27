@@ -947,7 +947,7 @@ class ArchiveController extends Controller
 
         try {
             $archiveModel->loadMissing([
-                // Cosas del aplicante
+                // Datos del aplicante
                 'appliant',
                 'announcement.academicProgram',
                 // Documentos y secciones para expedinte

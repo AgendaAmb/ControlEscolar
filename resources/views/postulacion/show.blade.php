@@ -136,3 +136,10 @@
 
 
 @endpush
+
+<script>
+
+    
+
+//console.log("{{$PATH}}")
+</script>

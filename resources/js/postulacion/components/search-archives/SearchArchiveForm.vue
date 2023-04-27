@@ -315,6 +315,12 @@ export default {
 
             return false;
         },
+        created: () => {
+            console.log("SearchArchives created", "{{$PATH}}");
+        },
+        mounted: () => {
+            console.log("SearchArchives mounted", "{{$PATH}}");
+        },
     },
 };
 </script>

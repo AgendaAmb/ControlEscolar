@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
 
+$BASE_ROUTE = env('BASE_PATH');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,13 +47,13 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 
 //Comentar linea de abajo para produccion
-//Route::prefix('controlescolar')->group(function () { 
+Route::prefix($BASE_ROUTE)->group(function () { 
     
     #Comite academico
     # Configura la ruta principal de comite academico, si hay un usuario activo
     Route::get('ca/', [ComiteAcademicoController::class, 'index'])->name('comite')->middleware('auth');
         
-   /*  Route::prefix('ca')->name('ca.')->group(function () {
+    /*  Route::prefix('ca')->name('ca.')->group(function () {
         Route::get('/', [ComiteAcademicoController::class, 'index'])->name('index') //Ruta para acceder al comite academico
             ->middleware('auth');
     }); */
@@ -362,4 +364,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     
-//});
+});

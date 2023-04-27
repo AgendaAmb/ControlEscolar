@@ -4,29 +4,29 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue';
-import CapitalHumano from './components/CapitalHumano.vue';
-import DocumentoRequerido from './components/DocumentoRequerido.vue';
-import Expedientes from './components/Expedientes.vue';
-import ExperienciaLaboral from './components/ExperienciaLaboral.vue';
-import GradoAcademico from './components/GradoAcademico.vue';
-import LenguaExtranjera from './components/LenguaExtranjera.vue';
-import Postulante from './components/Postulante.vue';
-import ProduccionCientifica from './components/ProduccionCientifica.vue';
-import RequisitosIngreso from './components/RequisitosIngreso.vue';
-import SolicitudPostulante from './components/SolicitudPostulante.vue';
-import ActualizarExpediente from './components/ActualizarExpediente.vue';
-import ActualizarExpedientePruebaNuevo from './components/ActualizarExpedientePruebaNuevo.vue';
-import RechazarExpediente from './components/RechazarExpediente.vue';
+import Vue from "vue";
+import CapitalHumano from "./components/CapitalHumano.vue";
+import DocumentoRequerido from "./components/DocumentoRequerido.vue";
+import Expedientes from "./components/Expedientes.vue";
+import ExperienciaLaboral from "./components/ExperienciaLaboral.vue";
+import GradoAcademico from "./components/GradoAcademico.vue";
+import LenguaExtranjera from "./components/LenguaExtranjera.vue";
+import Postulante from "./components/Postulante.vue";
+import ProduccionCientifica from "./components/ProduccionCientifica.vue";
+import RequisitosIngreso from "./components/RequisitosIngreso.vue";
+import SolicitudPostulante from "./components/SolicitudPostulante.vue";
+import ActualizarExpediente from "./components/ActualizarExpediente.vue";
+import ActualizarExpedientePruebaNuevo from "./components/ActualizarExpedientePruebaNuevo.vue";
+import RechazarExpediente from "./components/RechazarExpediente.vue";
 import vGoogleTranslate from "v-google-translate";
-import { BootstrapVue,BootstrapVueIcons  } from 'bootstrap-vue'
-import { GridPlugin } from '@syncfusion/ej2-vue-grids';
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+import { GridPlugin } from "@syncfusion/ej2-vue-grids";
 Vue.use(GridPlugin);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(vGoogleTranslate);
 
-window.Vue = require('vue').default;
+window.Vue = require("vue").default;
 
 /**
  * The following block of code may be used to automatically register your
@@ -37,7 +37,7 @@ window.Vue = require('vue').default;
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
 
     components: {
         CapitalHumano,
@@ -62,13 +62,12 @@ const app = new Vue({
         academic_program: academicProgram,
         recommendation_letters: recommendation_letters,
         archives_recommendation_letters: archives_recommendation_letters,
-        viewer:viewer
-       
+        viewer: viewer,
     },
 
     methods: {
-        actualizaSolicitud(){
+        actualizaSolicitud() {
             // console.log('hola');
-        }
-    }
+        },
+    },
 });
