@@ -18,7 +18,7 @@
                     class="uaslp-btn uaslp-red"
                     @click="eliminaProduccionCientifica"
                 >
-                    <span class="material-icons">delete_forever</span>
+                    <font-awesome-icon icon="fa-solid fa-trash-can" />
                     <span>Elimina</span>
                 </button>
             </div>

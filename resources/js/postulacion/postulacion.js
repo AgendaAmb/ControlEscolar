@@ -5,6 +5,7 @@
  */
 
 import Vue from "vue";
+
 import CapitalHumano from "./components/CapitalHumano.vue";
 import DocumentoRequerido from "./components/DocumentoRequerido.vue";
 import Expedientes from "./components/Expedientes.vue";
@@ -21,6 +22,26 @@ import RechazarExpediente from "./components/RechazarExpediente.vue";
 import vGoogleTranslate from "v-google-translate";
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
 import { GridPlugin } from "@syncfusion/ej2-vue-grids";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashCan);
+library.add(faUpload);
+library.add(faDownload);
+library.add(faFloppyDisk);
+library.add(faEye);
+library.add(faCirclePlus);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
 Vue.use(GridPlugin);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);

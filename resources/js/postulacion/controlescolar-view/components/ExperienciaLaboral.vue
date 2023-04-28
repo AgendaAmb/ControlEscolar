@@ -18,7 +18,7 @@
                     class="uaslp-btn uaslp-red"
                     @click="eliminaExperienciaLaboral"
                 >
-                    <span class="material-icons">delete_forever</span>
+                    <font-awesome-icon icon="fa-solid fa-trash-can" />
                     <span>Eliminar</span>
                 </button>
             </div>

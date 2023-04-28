@@ -82,7 +82,7 @@
                             target="_blank"
                         >
                             <button class="uaslp-btn">
-                                <span class="material-icons">adjust</span>
+                                <font-awesome-icon icon="fa-solid fa-eye" />
                                 <span>Ver</span>
                             </button>
                             <!-- <img :src="images_btn.ver" alt="" style="max-height: 45px !important;"> -->
@@ -98,9 +98,7 @@
                     <!-- <label v-if="isIntentionLetter() === false" v-bind:style="{ 'background-image': 'url(require(' + bkgCargarArchivo('seleccionar') + ')); height:100%; width:100%;'}"  > -->
                     <label>
                         <button class="uaslp-btn" @click="handleDocument">
-                            <span class="material-icons-outlined"
-                                >file_upload</span
-                            >
+                            <font-awesome-icon icon="fa-solid fa-upload" />
                             <input
                                 type="file"
                                 ref="fileInput"
@@ -140,7 +138,7 @@
                             class="uaslp-btn"
                             @click="actualizaPuntajeExanni"
                         >
-                            <span class="material-icons-outlined">save</span>
+                            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                             <span>Guardar</span>
                         </button>
                     </div>

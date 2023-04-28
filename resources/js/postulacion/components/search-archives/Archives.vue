@@ -122,10 +122,7 @@
 
                             <template v-slot:cell(Expediente)="{ item }">
                                 <a
-                                    :href="
-                                        item.location ||
-                                        `solicitud/expediente/${item.id}`
-                                    "
+                                    :href="`/controlescolar/solicitud/expediente/${item.id}`"
                                     target="_blank"
                                     >Mostrar expediente</a
                                 >

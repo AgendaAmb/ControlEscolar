@@ -10,7 +10,7 @@
                     class="uaslp-btn uaslp-red"
                     @click="eliminaHistorialAcademico"
                 >
-                    <span class="material-icons">delete_forever</span>
+                    <font-awesome-icon icon="fa-solid fa-trash-can" />
                     <span>Eliminar</span>
                 </button>
         

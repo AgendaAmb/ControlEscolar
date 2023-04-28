@@ -30,7 +30,7 @@
         <div class="d-flex justify-content-end my-4" style="width: 100%">
             <div class="col-md-2 col-xs-3 text-end">
                 <button class="uaslp-btn" @click="actualizaExposicionMotivos">
-                    <span class="material-icons">save</span>
+                    <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                     <span>Guardar</span>
                 </button>
             </div>

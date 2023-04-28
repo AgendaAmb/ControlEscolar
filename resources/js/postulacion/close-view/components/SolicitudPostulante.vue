@@ -128,7 +128,7 @@
                   "
                   title="Inserta otro registro"
                 >
-                  <span class="material-icons">add_circle</span>
+                  <font-awesome-icon icon="fa-solid fa-circle-plus" />
                   <span>Agrega</span>
                 </button>
                 <!-- <b-button
@@ -183,7 +183,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body class="c-center-nch"">
+          <b-card-body class="c-center-nch">
             <requisitos-ingreso
               :archive_id="archive_id"
               :motivation.sync="motivation"
@@ -231,7 +231,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body class="c-center-nch"">
+          <b-card-body class="c-center-nch">
             <lengua-extranjera
               v-for="(language, index) in appliant_languages"
               v-bind="language"
@@ -265,7 +265,7 @@
                   v-b-popover.hover="'Agregar una nueva lengua al registro'"
                   title="Inserta otro registro"
                 >
-                  <span class="material-icons">add_circle</span>
+                  <font-awesome-icon icon="fa-solid fa-circle-plus" />
                   <span>Agrega</span>
                 </button>
                 <!-- <b-button
@@ -316,7 +316,7 @@
           accordion="my-accordion"
           role="tabpanel"
         >
-          <b-card-body class="c-center-nch"">
+          <b-card-body class="c-center-nch">
             <experiencia-laboral
               v-for="(experience, index) in appliant_working_experiences"
               v-bind="experience"
@@ -348,7 +348,7 @@
                   "
                   title="Inserta otro registro"
                 >
-                  <span class="material-icons-outlined">add_circle</span>
+                  <font-awesome-icon icon="fa-solid fa-circle-plus" />
                   <span>Agrega</span>
                 </button>
                 <!-- <b-button
@@ -431,7 +431,7 @@
 
             <div class="col-lg-12 my-2">
               <button class="uaslp-btn" @click="agregaProduccionCientifica">
-                <span class="material-icons-outlined">add_circle</span>
+                <font-awesome-icon icon="fa-solid fa-circle-plus" />
                 <span>Agregar</span>
               </button>
               <!-- <b-button
@@ -467,7 +467,7 @@
 
             <div class="col-lg-12 my-2">
               <button class="uaslp-btn" @click="agregaCapitalHumano">
-                <span class="material-icons-outlined">add_circle</span>
+                <font-awesome-icon icon="fa-solid fa-circle-plus" />
                 <span>Agregar</span>
               </button>
               <!-- <b-button pill class="d-flex" @click="agregaCapitalHumano" :style="styleBtnAccordionSection">

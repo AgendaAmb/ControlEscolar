@@ -16,7 +16,7 @@
                     class="uaslp-btn uaslp-red"
                     @click="eliminaCapitalHumano"
                 >
-                    <span class="material-icons">delete_forever</span>
+                    <font-awesome-icon icon="fa-solid fa-eye" />
                     <span>Eliminar</span>
                 </button>
             </div>

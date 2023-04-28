@@ -148,9 +148,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle
-                                    </span>
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -289,9 +289,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle
-                                    </span>
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -370,9 +370,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle
-                                    </span>
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -462,7 +462,9 @@
                                 class="uaslp-btn"
                                 @click="agregaProduccionCientifica"
                             >
-                                <span class="material-icons">add_circle </span>
+                                <font-awesome-icon
+                                    icon="fa-solid fa-circle-plus"
+                                />
                                 <span>Agregar</span>
                             </button>
                         </div>
@@ -497,7 +499,9 @@
                                 class="uaslp-btn"
                                 @click="agregaCapitalHumano"
                             >
-                                <span class="material-icons">add_circle </span>
+                                <font-awesome-icon
+                                    icon="fa-solid fa-circle-plus"
+                                />
                                 <span>Agregar</span>
                             </button>
                         </div>
@@ -543,7 +547,7 @@
                     accordion="my-accordion"
                     role="tabpanel"
                 >
-                    <b-card-body >
+                    <b-card-body>
                         <carta-recomendacion
                             :appliant="appliant"
                             :archive_id="archive_id"

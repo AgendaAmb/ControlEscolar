@@ -27,6 +27,11 @@
         "vue-template-compiler": "^2.7.7"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.4.0",
+        "@fortawesome/free-brands-svg-icons": "^6.4.0",
+        "@fortawesome/free-regular-svg-icons": "^6.4.0",
+        "@fortawesome/free-solid-svg-icons": "^6.4.0",
+        "@fortawesome/vue-fontawesome": "^2.0.10",
         "@syncfusion/ej2-vue-grids": "^19.3.46",
         "autoprefixer": "10.4.5",
         "bootstrap-vue": "^2.22.0",

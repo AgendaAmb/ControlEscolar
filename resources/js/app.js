@@ -4,6 +4,5 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import "mdb-vue-ui-kit/css/mdb.min.css";
-import "material-icons/iconfont/material-icons.css";
 
 require("./bootstrap");

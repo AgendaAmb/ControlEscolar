@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <button class="uaslp-btn uaslp-red" @click="eliminaIdioma">
-                    <span class="material-icons">delete_forever</span>
+                    <font-awesome-icon icon="fa-solid fa-trash-can" />
                     <span>Delete</span>
                 </button>
             </div>
@@ -306,7 +306,7 @@
                         class="uaslp-btn"
                         @click="actualizaLenguaExtranjera"
                     >
-                        <span class="material-icons">save</span>
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                         <span>Guardar</span>
                     </button>
                 </div>
