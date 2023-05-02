@@ -137,9 +137,9 @@
 
 @endpush
 
-<script>
+<!-- <script>
 
     
 
 //console.log("{{$PATH}}")
-</script>
+</script> -->
