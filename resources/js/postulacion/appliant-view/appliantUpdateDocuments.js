@@ -4,11 +4,33 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue';
-import DocumentoRequeridoPorActualizar from './components/DocumentoRequeridoPorActualizar.vue';
-import DocumentoRequerido from './components/DocumentoRequerido.vue';
-import ActualizaDocumentos from './components/ActualizaDocumentos.vue';
-window.Vue = require('vue').default;
+import Vue from "vue";
+import DocumentoRequeridoPorActualizar from "./components/DocumentoRequeridoPorActualizar.vue";
+import DocumentoRequerido from "./components/DocumentoRequerido.vue";
+import ActualizaDocumentos from "./components/ActualizaDocumentos.vue";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashCan);
+library.add(faUpload);
+library.add(faDownload);
+library.add(faFloppyDisk);
+library.add(faEye);
+library.add(faCirclePlus);
+library.add(faPaperPlane);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
+window.Vue = require("vue").default;
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,16 +41,16 @@ window.Vue = require('vue').default;
  */
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
 
     components: {
-        'documento-requerido-porActualizar': DocumentoRequeridoPorActualizar,
-        'documento-requerido': DocumentoRequerido,
-        'actualiza-documentos': ActualizaDocumentos,
+        "documento-requerido-porActualizar": DocumentoRequeridoPorActualizar,
+        "documento-requerido": DocumentoRequerido,
+        "actualiza-documentos": ActualizaDocumentos,
     },
 
     data: {
-        // Archive with all the ids 
+        // Archive with all the ids
         archive: archiveModel,
 
         // Extra information
@@ -44,7 +66,5 @@ const app = new Vue({
         working_documents_ids: working_documents_ids,
     },
 
-    methods: {
-
-    }
+    methods: {},
 });

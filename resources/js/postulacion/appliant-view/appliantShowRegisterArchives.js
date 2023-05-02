@@ -4,32 +4,52 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
- import Vue from 'vue';
- import ProgramasAcademicosRegistrados from './components/ProgramasAcademicosRegistrados.vue';
+import Vue from "vue";
+import ProgramasAcademicosRegistrados from "./components/ProgramasAcademicosRegistrados.vue";
 
- window.Vue = require('vue').default;
- 
- /**
-  * The following block of code may be used to automatically register your
-  * Vue components. It will recursively scan this directory for the Vue
-  * components and automatically register them with their "basename".
-  *
-  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
-  */
- 
- const app = new Vue({
-     el: '#app',
- 
-     components: {
-         'programas-academicos-registrados': ProgramasAcademicosRegistrados,
-     },
- 
-     data: {
-         // Archive with all the ids 
-         archives: archives,
-     },
- 
-     methods: {
- 
-     }
- });k
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashCan);
+library.add(faUpload);
+library.add(faDownload);
+library.add(faFloppyDisk);
+library.add(faEye);
+library.add(faCirclePlus);
+library.add(faPaperPlane);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
+window.Vue = require("vue").default;
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+const app = new Vue({
+    el: "#app",
+
+    components: {
+        "programas-academicos-registrados": ProgramasAcademicosRegistrados,
+    },
+
+    data: {
+        // Archive with all the ids
+        archives: archives,
+    },
+
+    methods: {},
+});
+k;

@@ -147,9 +147,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle</span
-                                    >
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -288,9 +288,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle</span
-                                    >
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -369,9 +369,9 @@
                                     "
                                     title="Inserta otro registro"
                                 >
-                                    <span class="material-icons"
-                                        >add_circle</span
-                                    >
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
                                     <span>Agregar</span>
                                 </button>
                             </div>
@@ -461,7 +461,9 @@
                                 class="uaslp-btn"
                                 @click="agregaProduccionCientifica"
                             >
-                                <span class="material-icons">add_circle</span>
+                                <font-awesome-icon
+                                    icon="fa-solid fa-circle-plus"
+                                />
                                 <span>Agregar</span>
                             </button>
                         </div>
@@ -496,7 +498,9 @@
                                 class="uaslp-btn"
                                 @click="agregaCapitalHumano"
                             >
-                                <span class="material-icons">add_circle</span>
+                                <font-awesome-icon
+                                    icon="fa-solid fa-circle-plus"
+                                />
                                 <span>Agregar</span>
                             </button>
                         </div>
@@ -561,10 +565,20 @@
         >
             //
             <div class="col-lg-12">
-                <button class="uaslp-btn" @click="EnviarExpediente">
+                <button
+                                    class="uaslp-btn"
+                                    @click="EnviarExpediente"
+                                    
+                                >
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-paper-plane"
+                                    />
+                                    <span>Enviar</span>
+                                </button>
+                <!-- <button class="uaslp-btn" @click="EnviarExpediente">
                     <span class="material-icons-outlined">send</span>
                     <span>Enviar</span>
-                </button>
+                </button> -->
 
                 <!-- <b-button style="width:100%; height:75px;" @click="EnviarExpediente"  variant="primary">
           <p class="h3"> Enviar expediente </p>

@@ -25,17 +25,21 @@
                     <label>
                         <a
                             :href="
-                                '../../../controlescolar/solicitud/expediente/' +
+                                '/controlescolar/solicitud/expediente/' +
                                 location
                             "
                             style="height: 45px; width: 100%"
                             target="_blank"
                         >
-                            <img
+                            <button class="uaslp-btn">
+                                <font-awesome-icon icon="fa-solid fa-eye" />
+                                <span>Ver</span>
+                            </button>
+                            <!-- <img
                                 :src="images_btn.ver"
                                 alt=""
                                 style="width: 100%; max-height: 45px !important"
-                            />
+                            /> -->
                         </a>
                     </label>
                 </div>
@@ -45,11 +49,21 @@
                     style="max-height: 45px !important; width: 100%"
                 >
                     <label>
-                        <img
+                        <button class="uaslp-btn" @click="handleDocument">
+                            <font-awesome-icon icon="fa-solid fa-upload" />
+                            <input
+                                type="file"
+                                ref="fileInput"
+                                class="form-control d-none"
+                                @change="cargaDocumento"
+                            />
+                            <span>Subir</span>
+                        </button>
+                        <!-- <img
                             :src="images_btn.seleccionar"
                             alt=""
                             style="max-height: 45px !important"
-                        />
+                        /> -->
                         <input
                             type="file"
                             class="form-control d-none"
@@ -156,6 +170,9 @@ export default {
     },
 
     methods: {
+        handleDocument() {
+            this.$refs.fileInput.click();
+        },
         isIntentionLetter() {
             if (
                 this.name ===

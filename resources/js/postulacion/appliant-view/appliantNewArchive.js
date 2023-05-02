@@ -4,13 +4,33 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import Vue from 'vue';
-import AcademicProgram from './components/AcademicProgram.vue';
+import Vue from "vue";
+import AcademicProgram from "./components/AcademicProgram.vue";
 
-window.Vue = require('vue').default;
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashCan);
+library.add(faUpload);
+library.add(faDownload);
+library.add(faFloppyDisk);
+library.add(faEye);
+library.add(faCirclePlus);
+library.add(faPaperPlane);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
+window.Vue = require("vue").default;
 import swal from "sweetalert2";
 window.Swal = swal;
-
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,75 +41,75 @@ window.Swal = swal;
  */
 
 const app = new Vue({
-  el: '#app',
+    el: "#app",
 
-  components: {
-    'academic-program': AcademicProgram,
-  },
-
-  data: {
-    // Archive with all the ids 
-    academic_programs: academic_programs,
-    selected_academic_program: null,
-    images_btn:[],
-  },
-
-  created() {
-    // console.log(this.language);
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
-
-  methods: {
-
-    academicProgramsNotEmpty() {
-      if (this.academic_programs.length > 0) {
-        return true;
-      }
-      return false;
+    components: {
+        "academic-program": AcademicProgram,
     },
 
+    data: {
+        // Archive with all the ids
+        academic_programs: academic_programs,
+        selected_academic_program: null,
+        images_btn: [],
+    },
 
-    nuevoProgramaAcademico(academic_program) {
-      console.log(academic_program);
-      this.selected_academic_program = academic_program;
-      Swal.fire({
-        title: "¿Estas seguro de continuar?",
-        text: "Crearas un nuevo expediente para el programa " + academic_program.name, // Imprime el mensaje del controlador
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        confirmButtonText: "Continuar",
-        cancelButtonText: "Cerrar",
-      }).then((result) => {
-        if (result.isConfirmed){
-          axios
-            .post("/controlescolar/nuevoExpediente/createArchive", {
-              academic_program_id: academic_program.id
-            })
+    created() {
+        // console.log(this.language);
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
             .then((response) => {
-              window.location.href = "/controlescolar/showRegisterArchives";
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
             })
             .catch((error) => {
-              console.log(error);
-              Swal.fire({
-                title: "Ups! Algo salio mal",
-                text: "No se pudo crear el expediente",
-                showCancelButton: false,
-                icon: "error",
-              });
+                console.log(error);
             });
-        }
+    },
 
-      });
-    }
-  }
+    methods: {
+        academicProgramsNotEmpty() {
+            if (this.academic_programs.length > 0) {
+                return true;
+            }
+            return false;
+        },
+
+        nuevoProgramaAcademico(academic_program) {
+            console.log(academic_program);
+            this.selected_academic_program = academic_program;
+            Swal.fire({
+                title: "¿Estas seguro de continuar?",
+                text:
+                    "Crearas un nuevo expediente para el programa " +
+                    academic_program.name, // Imprime el mensaje del controlador
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Continuar",
+                cancelButtonText: "Cerrar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios
+                        .post("/controlescolar/nuevoExpediente/createArchive", {
+                            academic_program_id: academic_program.id,
+                        })
+                        .then((response) => {
+                            window.location.href =
+                                "/controlescolar/showRegisterArchives";
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            Swal.fire({
+                                title: "Ups! Algo salio mal",
+                                text: "No se pudo crear el expediente",
+                                showCancelButton: false,
+                                icon: "error",
+                            });
+                        });
+                }
+            });
+        },
+    },
 });

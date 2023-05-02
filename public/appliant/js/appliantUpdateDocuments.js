@@ -486,6 +486,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido",
   props: {
@@ -614,6 +643,9 @@ __webpack_require__.r(__webpack_exports__);
   //     });
   // },
   methods: {
+    handleDocument: function handleDocument() {
+      this.$refs.fileInput.click();
+    },
     bkgCargarArchivo: function bkgCargarArchivo(type) {
       // console.log(this.language);
       axios.get("/controlescolar/solicitud/getButtonImage", {
@@ -5004,7 +5036,7 @@ var render = function () {
                   ? _c("p", { staticClass: "my-2 d-block" }, [
                       _c("strong", [
                         _vm._v(
-                          "\n          Observaciones: Descargar carta\n          "
+                          "\n                    Observaciones: Descargar carta\n                    "
                         ),
                         _vm._v(" "),
                         _vm.alias_academic_program === "maestria" ||
@@ -5045,7 +5077,7 @@ var render = function () {
                   : _vm.notes !== null
                   ? _c("p", { staticClass: "my-2 d-block" }, [
                       _c("strong", [
-                        _vm._v(" Observaciones: "),
+                        _vm._v("\n                    Observaciones: "),
                         _c("span", {
                           domProps: { innerHTML: _vm._s(_vm.notes) },
                         }),
@@ -5055,12 +5087,12 @@ var render = function () {
                 _vm._v(" "),
                 _c("p", { staticClass: "my-2 d-block" }, [
                   _c("strong", [_vm._v(" Etiqueta: ")]),
-                  _vm._v(" " + _vm._s(_vm.label)),
+                  _vm._v(" " + _vm._s(_vm.label) + "\n            "),
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "my-2 d-block" }, [
                   _c("strong", [_vm._v(" Ejemplo: ")]),
-                  _vm._v(" " + _vm._s(_vm.example)),
+                  _vm._v(" " + _vm._s(_vm.example) + "\n            "),
                 ]),
               ]
             ),
@@ -5087,18 +5119,24 @@ var render = function () {
                               staticStyle: { height: "45px", width: "100%" },
                               attrs: {
                                 href:
-                                  "../../../controlescolar/solicitud/expediente/" +
+                                  "/controlescolar/solicitud/expediente/" +
                                   _vm.location,
                                 target: "_blank",
                               },
                             },
                             [
-                              _c("img", {
-                                staticStyle: {
-                                  "max-height": "45px !important",
-                                },
-                                attrs: { src: _vm.images_btn.ver, alt: "" },
-                              }),
+                              _c(
+                                "button",
+                                { staticClass: "uaslp-btn" },
+                                [
+                                  _c("font-awesome-icon", {
+                                    attrs: { icon: "fa-solid fa-eye" },
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("Ver")]),
+                                ],
+                                1
+                              ),
                             ]
                           ),
                         ]),
@@ -5118,10 +5156,28 @@ var render = function () {
                       },
                       [
                         _c("label", [
-                          _c("img", {
-                            staticStyle: { "max-height": "45px !important" },
-                            attrs: { src: _vm.images_btn.seleccionar, alt: "" },
-                          }),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "uaslp-btn",
+                              on: { click: _vm.handleDocument },
+                            },
+                            [
+                              _c("font-awesome-icon", {
+                                attrs: { icon: "fa-solid fa-upload" },
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                ref: "fileInput",
+                                staticClass: "form-control d-none",
+                                attrs: { type: "file" },
+                                on: { change: _vm.cargaDocumento },
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Subir")]),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c("input", {
                             staticClass: "form-control d-none",
