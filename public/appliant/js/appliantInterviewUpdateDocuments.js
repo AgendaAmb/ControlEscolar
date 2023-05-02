@@ -704,6 +704,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "documento-requerido-entrevista",
   props: {
@@ -737,8 +759,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       errores: {},
       datosValidos: {},
-      textStateUpload: '',
-      academiLetterCommitment: '',
+      textStateUpload: "",
+      academiLetterCommitment: "",
       images_btn: null
     };
   },
@@ -748,7 +770,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.archivo;
       },
       set: function set(newValue) {
-        this.$emit('update:archivo', newValue);
+        this.$emit("update:archivo", newValue);
       }
     },
     Location: {
@@ -756,7 +778,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.location;
       },
       set: function set(newValue) {
-        this.$emit('update:location', newValue);
+        this.$emit("update:location", newValue);
       }
     },
     Errores: {
@@ -765,7 +787,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(newValue) {
         this.errores = newValue;
-        this.$emit('update:errores', newValue);
+        this.$emit("update:errores", newValue);
       }
     }
   },
@@ -779,6 +801,9 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    handleDocument: function handleDocument() {
+      this.$refs.fileInput.click();
+    },
     requiredForAcademicProgram: function requiredForAcademicProgram() {
       var res = true;
 
@@ -4568,12 +4593,12 @@ var render = function () {
             _vm._v(" "),
             _c("p", { staticClass: "mt-3 mb-1 d-block" }, [
               _c("strong", [_vm._v(" Etiqueta: ")]),
-              _vm._v(" " + _vm._s(_vm.label) + "\n      "),
+              _vm._v(" " + _vm._s(_vm.label) + "\n            "),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "my-0 d-block" }, [
               _c("strong", [_vm._v(" Ejemplo: ")]),
-              _vm._v(" " + _vm._s(_vm.example)),
+              _vm._v(" " + _vm._s(_vm.example) + "\n            "),
             ]),
           ]),
           _vm._v(" "),
@@ -4596,19 +4621,24 @@ var render = function () {
                             staticStyle: { height: "45px", width: "100%" },
                             attrs: {
                               href:
-                                "../../../controlescolar/solicitud/expediente/" +
+                                "/controlescolar/solicitud/expediente/" +
                                 _vm.location,
                               target: "_blank",
                             },
                           },
                           [
-                            _c("img", {
-                              staticStyle: {
-                                width: "100%",
-                                "max-height": "45px !important",
-                              },
-                              attrs: { src: _vm.images_btn.ver, alt: "" },
-                            }),
+                            _c(
+                              "button",
+                              { staticClass: "uaslp-btn" },
+                              [
+                                _c("font-awesome-icon", {
+                                  attrs: { icon: "fa-solid fa-eye" },
+                                }),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Ver")]),
+                              ],
+                              1
+                            ),
                           ]
                         ),
                       ]),
@@ -4627,20 +4657,32 @@ var render = function () {
                 },
                 [
                   _c("label", [
-                    _c("img", {
-                      staticStyle: { "max-height": "45px !important" },
-                      attrs: { src: _vm.images_btn.seleccionar, alt: "" },
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control d-none",
-                      staticStyle: {
-                        "max-height": "45px !important",
-                        width: "100%",
+                    _c(
+                      "button",
+                      {
+                        staticClass: "uaslp-btn",
+                        on: { click: _vm.handleDocument },
                       },
-                      attrs: { type: "file" },
-                      on: { change: _vm.cargaDocumento },
-                    }),
+                      [
+                        _c("input", {
+                          ref: "fileInput",
+                          staticClass: "form-control d-none",
+                          staticStyle: {
+                            "max-height": "45px !important",
+                            width: "100%",
+                          },
+                          attrs: { type: "file" },
+                          on: { change: _vm.cargaDocumento },
+                        }),
+                        _vm._v(" "),
+                        _c("font-awesome-icon", {
+                          attrs: { icon: "fa-solid fa-upload" },
+                        }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Subir")]),
+                      ],
+                      1
+                    ),
                   ]),
                 ]
               ),

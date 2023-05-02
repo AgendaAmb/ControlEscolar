@@ -1,7 +1,7 @@
 <template>
-    <div class="row justify-content-start align-items-center mx-1">
+    <div class="row justify-content-start align-items-center mx-1 c-center-nch">
         <!-- Info postulante -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -18,6 +18,7 @@
                         v-b-toggle.accordion-personal-data
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -61,7 +62,7 @@
         </div>
 
         <!-- Correspondence Address -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -78,6 +79,7 @@
                         v-b-toggle.accordion-correspondence-address
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -119,7 +121,7 @@
         </div>
 
         <!-- Secondary Education -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -136,6 +138,7 @@
                         v-b-toggle.accordion-secondary-education
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -175,7 +178,7 @@
         </div>
 
         <!-- Higher Education -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -192,6 +195,7 @@
                         v-b-toggle.accordion-higher-education
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -276,7 +280,7 @@
         </div>
 
         <!-- Dominio de idiomas -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -293,6 +297,7 @@
                         v-b-toggle.accordion-language-skills
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -371,7 +376,7 @@
         </div>
 
         <!-- Environment Related Skills -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -388,6 +393,7 @@
                         v-b-toggle.accordion-environment-related-skills
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -421,7 +427,7 @@
         </div>
 
         <!-- Work experiences -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -438,6 +444,7 @@
                         v-b-toggle.accordion-working-experiences
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -511,7 +518,7 @@
         </div>
 
         <!-- Special reasons for your choice of the Master Program -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -528,6 +535,7 @@
                         v-b-toggle.accordion-reasons-to-choise
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -568,7 +576,7 @@
         </div>
 
         <!-- Future Plans and Expectations -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -585,6 +593,7 @@
                         v-b-toggle.accordion-future-plans
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -621,7 +630,7 @@
         </div>
 
         <!-- Fields of interest -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -638,6 +647,7 @@
                         v-b-toggle.accordion-fields-of-interest
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -698,7 +708,7 @@
         </div>
 
         <!-- Financing your studies and stay abroad -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -715,6 +725,7 @@
                         v-b-toggle.accordion-financing-studies
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -750,7 +761,7 @@
         </div>
 
         <!-- Letters of recommendation -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -767,6 +778,7 @@
                         v-b-toggle.accordion-letters-of-recommendation
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
@@ -809,7 +821,7 @@
         </div>
 
         <!-- Letters of recommendation -->
-        <div class="col-12">
+        <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -826,6 +838,7 @@
                         v-b-toggle.accordion-hear-about-program
                         variant="dark"
                         :style="styleBtnAccordionSection"
+                        class="c-header"
                     >
                         <b-icon
                             icon="arrow-up"
