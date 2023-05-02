@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {   
         # Next line is use to declare a global variable in all views using ENV VARIABLE
-        view()->composer('*', function ($view) {
+        /* view()->composer('*', function ($view) {
             $view->with('PATH', env('BASE_PATH'));
-        });
+        }); */
 
         JsonResource::withoutWrapping();
     }
