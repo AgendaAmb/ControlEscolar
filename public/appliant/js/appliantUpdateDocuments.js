@@ -5896,14 +5896,13 @@ var render = function () {
                             on: { click: _vm.actualizaPuntajeExanni },
                           },
                           [
-                            _c(
-                              "span",
-                              { staticClass: "material-icons-outlined" },
-                              [_vm._v("save")]
-                            ),
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "fa-solid fa-floppy-disk" },
+                            }),
                             _vm._v(" "),
                             _c("span", [_vm._v("Guardar")]),
-                          ]
+                          ],
+                          1
                         ),
                       ]),
                     ]

@@ -76,7 +76,6 @@
                         >
                             <button class="uaslp-btn">
                                 <font-awesome-icon icon="fa-solid fa-eye" />
-
                                 <span>Ver</span>
                             </button>
                             <!-- <img
@@ -142,7 +141,8 @@
                             class="uaslp-btn"
                             @click="actualizaPuntajeExanni"
                         >
-                            <span class="material-icons-outlined">save</span>
+                            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+
                             <span>Guardar</span>
                         </button>
                         <!-- <b-button @click="actualizaPuntajeExanni" pill class="d-flex" :style="styleBtn">

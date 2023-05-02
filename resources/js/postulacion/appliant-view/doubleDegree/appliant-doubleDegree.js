@@ -22,6 +22,28 @@ import CheckboxPersonalize from "./components/CheckboxPersonalize.vue";
 import SolicitudPostulante from "./components/SolicitudPostulante.vue";
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
 import { GridPlugin } from "@syncfusion/ej2-vue-grids";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashCan);
+library.add(faUpload);
+library.add(faDownload);
+library.add(faFloppyDisk);
+library.add(faEye);
+library.add(faCirclePlus);
+library.add(faPaperPlane);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.config.productionTip = false;
+
 Vue.use(GridPlugin);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
@@ -36,36 +58,36 @@ window.Vue = require("vue").default;
  */
 
 const app = new Vue({
-  el: "#app",
+    el: "#app",
 
-  components: {
-    SecondaryEducation,
-    WorkingExperiece,
-    ReasonsToChoise,
-    PersonalData,
-    LettersOfRecommendation,
-    LanguageSkills,
-    HigherEducation,
-    HearAboutProgram,
-    FuturePlansExpectations,
-    FinancingStudies,
-    FielsOfInterest,
-    EnvironmentRelatedSkills,
-    CorrespondenceAddress,
-    CheckboxPersonalize,
-    SolicitudPostulante,
-  },
+    components: {
+        SecondaryEducation,
+        WorkingExperiece,
+        ReasonsToChoise,
+        PersonalData,
+        LettersOfRecommendation,
+        LanguageSkills,
+        HigherEducation,
+        HearAboutProgram,
+        FuturePlansExpectations,
+        FinancingStudies,
+        FielsOfInterest,
+        EnvironmentRelatedSkills,
+        CorrespondenceAddress,
+        CheckboxPersonalize,
+        SolicitudPostulante,
+    },
 
-  data: {
-    archive: archiveModel,
-    appliant: appliantModel,
-    academic_program: academicProgram,
-    recommendation_letters: recommendation_letters,
-    archives_recommendation_letters: archives_recommendation_letters,
-    viewer: viewer,
-  },
+    data: {
+        archive: archiveModel,
+        appliant: appliantModel,
+        academic_program: academicProgram,
+        recommendation_letters: recommendation_letters,
+        archives_recommendation_letters: archives_recommendation_letters,
+        viewer: viewer,
+    },
 
-  methods: {
-    actualizaSolicitud() {},
-  },
+    methods: {
+        actualizaSolicitud() {},
+    },
 });

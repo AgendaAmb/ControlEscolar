@@ -1,464 +1,471 @@
 <template>
-  <div class="form-row my-4">
-    <div class="col-12">
-      <div class="row my-1">
-        <!-- <div class="col-sm-6 col-xl-3 align-middle ">
+    <div class="form-row my-4">
+        <div class="col-12">
+            <div class="row my-1">
+                <!-- <div class="col-sm-6 col-xl-3 align-middle ">
           <img class="img-fluid rounded" src="https://www.w3schools.com/images/w3schools_green.jpg">
         </div> -->
-        <div class="form-group col-12">
-          <div class="row my-1">
-            <div class="form-group col-12">
-              <label> First Name(s): </label>
-              <input v-model="Name" type="text" class="form-control" readonly />
-            </div>
-            <div class="form-group col-md-12">
-              <label> Last Name(s): </label>
-              <input
-                v-model="Surname"
-                type="text"
-                class="form-control"
-                readonly
-              />
-            </div>
-          </div>
+                <div class="form-group col-12">
+                    <div class="row my-1">
+                        <div class="form-group col-12">
+                            <label> First Name(s): </label>
+                            <input
+                                v-model="Name"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label> Last Name(s): </label>
+                            <input
+                                v-model="Surname"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                        </div>
+                    </div>
 
-          <div class="row my-1">
-            <div class="form-group col-lg-4 col-sm-6">
-              <label> Gender: </label>
-              <input
-                v-model="Gender"
-                type="text"
-                class="form-control"
-                readonly
-              />
+                    <div class="row my-1">
+                        <div class="form-group col-lg-4 col-sm-6">
+                            <label> Gender: </label>
+                            <input
+                                v-model="Gender"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
 
-              <!-- <select v-model="Gender" class="form-control">
+                            <!-- <select v-model="Gender" class="form-control">
                 <option value="" selected>Escoge una opción</option>
                 <option value="Masculino">Male</option>
                 <option value="Femenino">Female</option>
                 <option value="Otros">Other</option>
                 <option value="Rather not answer">Rather not answer</option>
               </select> -->
-            </div>
+                        </div>
 
-            <div class="form-group col-lg-4 col-sm-6">
-              <label> Civic State: </label>
-              <select v-model="CivicState" class="form-control">
-                <option value="">Choose an option</option>
-                <option
-                  v-for="cs in civic_state_list"
-                  :key="cs.id"
-                  :value="cs.name"
-                >
-                  {{ cs.name }}
-                </option>
-              </select>
-            </div>
+                        <div class="form-group col-lg-4 col-sm-6">
+                            <label> Civic State: </label>
+                            <select v-model="CivicState" class="form-control">
+                                <option value="">Choose an option</option>
+                                <option
+                                    v-for="cs in civic_state_list"
+                                    :key="cs.id"
+                                    :value="cs.name"
+                                >
+                                    {{ cs.name }}
+                                </option>
+                            </select>
+                        </div>
 
-            <div class="form-group col-lg-4 col-sm-6">
-              <label> No. of children: </label>
-              <input
-                v-model.number="NoChildren"
-                type="number"
-                class="form-control"
-              />
-            </div>
-          </div>
+                        <div class="form-group col-lg-4 col-sm-6">
+                            <label> No. of children: </label>
+                            <input
+                                v-model.number="NoChildren"
+                                type="number"
+                                class="form-control"
+                            />
+                        </div>
+                    </div>
 
-          <div class="row my-1">
-            <div class="form-group col-xl-6">
-              <label> Date of birth </label>
-              <input
-                type="date"
-                class="form-control"
-                v-model="BirthDate"
-                readonly
-              />
-            </div>
+                    <div class="row my-1">
+                        <div class="form-group col-xl-6">
+                            <label> Date of birth </label>
+                            <input
+                                type="date"
+                                class="form-control"
+                                v-model="BirthDate"
+                                readonly
+                            />
+                        </div>
 
-            <div class="form-group col-lg-6">
-              <label> Place of birth: </label>
-              <input
-                v-model="BirthCountry"
-                type="text"
-                class="form-control"
-                readonly
-              />
+                        <div class="form-group col-lg-6">
+                            <label> Place of birth: </label>
+                            <input
+                                v-model="BirthCountry"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
 
-              <!-- <select v-model="BirthCountry" class="form-control">
+                            <!-- <select v-model="BirthCountry" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country in countries" :key="country.id" :value="country.name">
                   {{ country.name }}
                 </option>
               </select> -->
-            </div>
-          </div>
+                        </div>
+                    </div>
 
-          <div class="row my-1">
-            <div class="form-group col-xl-6">
-              <label> Nationality</label>
-              <input
-                v-model="Nationality"
-                type="text"
-                class="form-control"
-                readonly
-              />
+                    <div class="row my-1">
+                        <div class="form-group col-xl-6">
+                            <label> Nationality</label>
+                            <input
+                                v-model="Nationality"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
 
-              <!-- <select v-model="Nationality" class="form-control">
+                            <!-- <select v-model="Nationality" class="form-control">
                 <option value="" selected>Choose a country</option>
                 <option v-for="country_na in countries_nationality" :key="country_na.id" :value="country_na.name">
                   {{ country_na.name }}
                 </option>
               </select> -->
-            </div>
+                        </div>
 
-            <div class="form-group col-lg-6">
-              <label> Country of residense: </label>
-              <select v-model="BirthState" class="form-control">
-                <option value="" selected>Choose a country</option>
-                <option
-                  v-for="country in countries"
-                  :key="country.id"
-                  :value="country.name"
-                >
-                  {{ country.name }}
-                </option>
-              </select>
-            </div>
-          </div>
+                        <div class="form-group col-lg-6">
+                            <label> Country of residense: </label>
+                            <select v-model="BirthState" class="form-control">
+                                <option value="" selected>
+                                    Choose a country
+                                </option>
+                                <option
+                                    v-for="country in countries"
+                                    :key="country.id"
+                                    :value="country.name"
+                                >
+                                    {{ country.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
 
-          <div class="row my-1">
-            <div class="form-group col-lg-6">
-              <label> Email: </label>
-              <input
-                v-model="email"
-                type="text"
-                class="form-control"
-                readonly
-              />
-            </div>
+                    <div class="row my-1">
+                        <div class="form-group col-lg-6">
+                            <label> Email: </label>
+                            <input
+                                v-model="email"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                        </div>
 
-            <div class="form-group col-lg-6">
-              <label> Altern Email: </label>
-              <input
-                v-model="AlternEmail"
-                type="text"
-                class="form-control"
-                readonly
-              />
-            </div>
+                        <div class="form-group col-lg-6">
+                            <label> Altern Email: </label>
+                            <input
+                                v-model="AlternEmail"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                        </div>
 
-            <div class="form-group col-lg-12">
-              <label> Phone number: </label>
-              <input
-                v-model="PhoneNumber"
-                type="text"
-                class="form-control"
-                readonly
-              />
+                        <div class="form-group col-lg-12">
+                            <label> Phone number: </label>
+                            <input
+                                v-model="PhoneNumber"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-12">
-      <div class="row justify-content-start my-2">
-        <div class="col-lg-2 col-sm-4 align-items-center">
-          <button class="uaslp-btn" @click="updatePersonalData">
-            <span class="material-icons-outlined">save</span>
-            <span>Guardar</span>
-          </button>
-          <!-- <img
+        <div class="col-12">
+            <div class="row justify-content-start my-2">
+                <div class="col-lg-2 col-sm-4 align-items-center">
+                    <button class="uaslp-btn" @click="updatePersonalData">
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+                        <span>Save</span>
+                    </button>
+                    <!-- <img
             @click="updatePersonalData"
             :src="images_btn['guardar']"
             alt=""
             style="max-height: 45px !important"
           /> -->
+                </div>
+                <div class="col-lg-10 col-sm-8">
+                    <label>
+                        <p class="h5">
+                            <strong>This only save Personal Information</strong>
+                        </p>
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-10 col-sm-8">
-          <label>
-            <p class="h5">
-              <strong>This only save Personal Information</strong>
-            </p>
-          </label>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
 import swal from "sweetalert2";
 window.Swal = swal;
 export default {
-  name: "personal-data",
-  props: {
-    // INPUTS
-    // Nombre del postulante.
-    name: String,
+    name: "personal-data",
+    props: {
+        // INPUTS
+        // Nombre del postulante.
+        name: String,
 
-    // Primer apellido del postulante.
-    middlename: String,
+        // Primer apellido del postulante.
+        middlename: String,
 
-    // Segundo apellido del postulante.
-    surname: String,
+        // Segundo apellido del postulante.
+        surname: String,
 
-    // Género.
-    gender: String,
+        // Género.
+        gender: String,
 
-    // civic state
-    marital_state: String,
+        // civic state
+        marital_state: String,
 
-    // Only for double titulation
-    // Numero de hijos
-    no_children: Number,
+        // Only for double titulation
+        // Numero de hijos
+        no_children: Number,
 
-    // Fecha de nacimiento.
-    birth_date: String,
+        // Fecha de nacimiento.
+        birth_date: String,
 
-    // País de nacimiento.
-    birth_country: String,
+        // País de nacimiento.
+        birth_country: String,
 
-    // Only for double titulation
-    // Nacionalidad
-    nationality: String,
+        // Only for double titulation
+        // Nacionalidad
+        nationality: String,
 
-    // País de residencia.
-    residence_country: String,
+        // País de residencia.
+        residence_country: String,
 
-    // Correo del postulante.
-    email: String,
+        // Correo del postulante.
+        email: String,
 
-    // Correo alterno del postulante.
-    altern_email: String,
+        // Correo alterno del postulante.
+        altern_email: String,
 
-    // Teléfono de contacto.
-    phone_number: String,
+        // Teléfono de contacto.
+        phone_number: String,
 
-    archive_id: Number,
+        archive_id: Number,
 
-    birth_state: String,
-  },
-
-  created() {
-    console.log("Marital state: " + this.marital_state);
-    axios
-      .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
-      .then((response) => {
-        this.countries = response.data;
-        this.countries_nationality = response.data;
-        console.log(this.countries);
-      });
-
-    axios
-      .get("/controlescolar/solicitud/getAllButtonImage")
-      .then((response) => {
-        // console.log('recibiendo imagenes' + response.data.ver);
-        this.images_btn = response.data;
-        // console.log('imagenes buttons: ' + this.images.ver);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
-
-  mounted() {
-    // ! Mounted
-  },
-
-  computed: {
-    Name: {
-      get() {
-        return this.name;
-      },
-      set(newVal) {
-        this.$emit("update:name", newVal);
-      },
+        birth_state: String,
     },
 
-    Middlename: {
-      get() {
-        return this.middlename;
-      },
-      set(newVal) {
-        this.$emit("update:middlename", newVal);
-      },
+    created() {
+        console.log("Marital state: " + this.marital_state);
+        axios
+            .get("https://ambiental.uaslp.mx/apiagenda/api/countries/states")
+            .then((response) => {
+                this.countries = response.data;
+                this.countries_nationality = response.data;
+                console.log(this.countries);
+            });
+
+        axios
+            .get("/controlescolar/solicitud/getAllButtonImage")
+            .then((response) => {
+                // console.log('recibiendo imagenes' + response.data.ver);
+                this.images_btn = response.data;
+                // console.log('imagenes buttons: ' + this.images.ver);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     },
 
-    Surname: {
-      get() {
-        return this.surname;
-      },
-      set(newVal) {
-        this.$emit("update:surname", newVal);
-      },
+    mounted() {
+        // ! Mounted
     },
 
-    Gender: {
-      get() {
-        return this.gender;
-      },
-      set(newVal) {
-        this.$emit("update:gender", newVal);
-      },
-    },
-
-    CivicState: {
-      get() {
-        return this.marital_state;
-      },
-      set(newVal) {
-        this.$emit("update:marital_state", newVal);
-      },
-    },
-
-    NoChildren: {
-      get() {
-        return this.no_children;
-      },
-      set(newVal) {
-        this.$emit("update:no_children", newVal);
-      },
-    },
-
-    BirthDate: {
-      get() {
-        return this.birth_date;
-      },
-      set(newVal) {
-        this.$emit("update:birth_date", newVal);
-      },
-    },
-
-    BirthCountry: {
-      get() {
-        return this.birth_country;
-      },
-      set(newVal) {
-        this.$emit("update:birth_country", newVal);
-      },
-    },
-
-    Nationality: {
-      get() {
-        return this.residence_country;
-      },
-      set(newVal) {
-        this.$emit("update:residence_country", newVal);
-      },
-    },
-
-    BirthState: {
-      get() {
-        return this.birth_state;
-      },
-      set(newVal) {
-        this.$emit("update:birth_state", newVal);
-      },
-    },
-
-    Email: {
-      get() {
-        return this.email;
-      },
-      set(newVal) {
-        this.$emit("update:email", newVal);
-      },
-    },
-
-    AlternEmail: {
-      get() {
-        return this.altern_email;
-      },
-      set(newVal) {
-        this.$emit("update:altern_email", newVal);
-      },
-    },
-
-    PhoneNumber: {
-      get() {
-        return this.phone_number;
-      },
-      set(newVal) {
-        this.$emit("update:phone_number", newVal);
-      },
-    },
-  },
-
-  data() {
-    return {
-      // Documentos personales
-      countries: [],
-      countries_nationality: [],
-      images_btn: [],
-      civic_state_list: [
-        { id: "Single", name: "Single" },
-        { id: "Married", name: "Married" },
-        { id: "Divorced", name: "Divorced" },
-        { id: "Widower", name: "Widower" },
-        { id: "Other", name: "Other" },
-      ],
-    };
-  },
-
-  methods: {
-    // Display the key/value pairs
-    displayFormData(formData) {
-      for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
-    },
-
-    updatePersonalData() {
-      let formData = new FormData();
-      let title = "";
-      let icon = "";
-      let msg = "";
-      formData.append("archive_id", this.archive_id);
-      formData.append("name", this.name);
-      formData.append("middlename", this.middlename);
-      formData.append("surname", this.surname);
-      formData.append("gender", this.gender);
-      formData.append("marital_state", this.marital_state);
-      formData.append("birth_state", this.birth_state);
-      formData.append("no_children", this.no_children);
-      formData.append("birth_date", this.birth_date);
-      formData.append("birth_country", this.birth_country);
-      formData.append("nationality", this.nationality);
-      formData.append("residense_country", this.residense_country);
-      formData.append("email", this.email);
-      formData.append("altern_email", this.altern_email);
-      formData.append("phone_number", this.phone_number);
-
-      // this.displayFormData(formData);
-
-      axios({
-        method: "post",
-        url: "/controlescolar/solicitud/enrem/updatePersonalData",
-        data: formData,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
+    computed: {
+        Name: {
+            get() {
+                return this.name;
+            },
+            set(newVal) {
+                this.$emit("update:name", newVal);
+            },
         },
-      })
-        .then((response) => {
-          Swal.fire({
-            title: response.data.message,
-            icon: "success",
-            text: "Continue filling others sections",
-            showCancelButton: false,
-          });
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: "Error trying to save information",
-            icon: "error",
-            text: "Try later",
-            showCancelButton: false,
-          });
-        });
+
+        Middlename: {
+            get() {
+                return this.middlename;
+            },
+            set(newVal) {
+                this.$emit("update:middlename", newVal);
+            },
+        },
+
+        Surname: {
+            get() {
+                return this.surname;
+            },
+            set(newVal) {
+                this.$emit("update:surname", newVal);
+            },
+        },
+
+        Gender: {
+            get() {
+                return this.gender;
+            },
+            set(newVal) {
+                this.$emit("update:gender", newVal);
+            },
+        },
+
+        CivicState: {
+            get() {
+                return this.marital_state;
+            },
+            set(newVal) {
+                this.$emit("update:marital_state", newVal);
+            },
+        },
+
+        NoChildren: {
+            get() {
+                return this.no_children;
+            },
+            set(newVal) {
+                this.$emit("update:no_children", newVal);
+            },
+        },
+
+        BirthDate: {
+            get() {
+                return this.birth_date;
+            },
+            set(newVal) {
+                this.$emit("update:birth_date", newVal);
+            },
+        },
+
+        BirthCountry: {
+            get() {
+                return this.birth_country;
+            },
+            set(newVal) {
+                this.$emit("update:birth_country", newVal);
+            },
+        },
+
+        Nationality: {
+            get() {
+                return this.residence_country;
+            },
+            set(newVal) {
+                this.$emit("update:residence_country", newVal);
+            },
+        },
+
+        BirthState: {
+            get() {
+                return this.birth_state;
+            },
+            set(newVal) {
+                this.$emit("update:birth_state", newVal);
+            },
+        },
+
+        Email: {
+            get() {
+                return this.email;
+            },
+            set(newVal) {
+                this.$emit("update:email", newVal);
+            },
+        },
+
+        AlternEmail: {
+            get() {
+                return this.altern_email;
+            },
+            set(newVal) {
+                this.$emit("update:altern_email", newVal);
+            },
+        },
+
+        PhoneNumber: {
+            get() {
+                return this.phone_number;
+            },
+            set(newVal) {
+                this.$emit("update:phone_number", newVal);
+            },
+        },
     },
-  },
+
+    data() {
+        return {
+            // Documentos personales
+            countries: [],
+            countries_nationality: [],
+            images_btn: [],
+            civic_state_list: [
+                { id: "Single", name: "Single" },
+                { id: "Married", name: "Married" },
+                { id: "Divorced", name: "Divorced" },
+                { id: "Widower", name: "Widower" },
+                { id: "Other", name: "Other" },
+            ],
+        };
+    },
+
+    methods: {
+        // Display the key/value pairs
+        displayFormData(formData) {
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ", " + pair[1]);
+            }
+        },
+
+        updatePersonalData() {
+            let formData = new FormData();
+            let title = "";
+            let icon = "";
+            let msg = "";
+            formData.append("archive_id", this.archive_id);
+            formData.append("name", this.name);
+            formData.append("middlename", this.middlename);
+            formData.append("surname", this.surname);
+            formData.append("gender", this.gender);
+            formData.append("marital_state", this.marital_state);
+            formData.append("birth_state", this.birth_state);
+            formData.append("no_children", this.no_children);
+            formData.append("birth_date", this.birth_date);
+            formData.append("birth_country", this.birth_country);
+            formData.append("nationality", this.nationality);
+            formData.append("residense_country", this.residense_country);
+            formData.append("email", this.email);
+            formData.append("altern_email", this.altern_email);
+            formData.append("phone_number", this.phone_number);
+
+            // this.displayFormData(formData);
+
+            axios({
+                method: "post",
+                url: "/controlescolar/solicitud/enrem/updatePersonalData",
+                data: formData,
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+                .then((response) => {
+                    Swal.fire({
+                        title: response.data.message,
+                        icon: "success",
+                        text: "Continue filling others sections",
+                        showCancelButton: false,
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Error trying to save information",
+                        icon: "error",
+                        text: "Try later",
+                        showCancelButton: false,
+                    });
+                });
+        },
+    },
 };
 </script>

@@ -12,9 +12,11 @@
       </div>
       <div class="col-lg-2 col-md-4 col-sm-12">
         <button class="uaslp-btn uaslp-red" @click="eliminaHistorialAcademico">
-          <span class="material-icons">delete_forever</span>
-          <span>Delete</span>
-        </button>
+                    <font-awesome-icon icon="fa-solid fa-trash-can" />
+
+                    <span>Borrar</span>
+                </button>
+        
         <!-- <b-button @click="eliminaHistorialAcademico" pill class="d-flex justify-content-start align-items-center"
             style="height:45px!important" variant="danger">
             <b-icon icon="trash-fill" class="mx-2" font-scale="2.5"></b-icon>
@@ -309,12 +311,15 @@
           class="col-md-2 col-xs-3 align-items-center"
           style="width: 100%; max-height: 45px !important"
         >
-          <img
-            @click="actualizaHistorialAcademico"
-            :src="images_btn.guardar"
-            alt=""
-            style="max-height: 45px !important"
-          />
+        <button
+                        class="uaslp-btn"
+                        @click="actualizaHistorialAcademico"
+                    >
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+
+                        <span>Guardar</span>
+                    </button>
+          
         </div>
         <div class="col-md-10 col-xs-9 mx-3">
           <label>
