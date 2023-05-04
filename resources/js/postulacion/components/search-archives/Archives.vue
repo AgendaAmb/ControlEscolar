@@ -23,13 +23,19 @@
                         type="search"
                         v-model="search"
                         placeholder="Buscar nombre"
+                        oninput="this.value = this.value.toUpperCase()"
                     >
                     </b-form-input>
                     <b-input-group-append
                         is-text
                         style="height: 45px !important"
                     >
-                        <b-icon icon="search" aria-hidden="true"></b-icon>
+                        <b-icon
+                            icon="search"
+                            aria-hidden="true"
+                            role="button"
+                            onclick="console.log(this.data)"
+                        ></b-icon>
                     </b-input-group-append>
                 </b-input-group>
             </div>
@@ -209,6 +215,18 @@ export default {
     },
 
     computed: {
+        filterByName() {
+            this.localProgramName = this.programName;
+            let list = [];
+
+            let { data: dataReceived } = this.data;
+            dataReceived.filter((user) =>
+                user.name
+                    .toString()
+                    .toLowerCase()
+                    .includes(this.search.toLowerCase())
+            );
+        },
         filteredList() {
             this.localProgramName = this.programName;
             let list = [];
@@ -216,7 +234,14 @@ export default {
             let { data: dataReceived } = this.data;
             dataReceived.filter((user) => {
                 //console.log("User", user);
-                list.push(user);
+                if (
+                    user.name
+                        .toString()
+                        .toLowerCase()
+                        .includes(this.search.toLowerCase())
+                ) {
+                    list.push(user);
+                }
 
                 /*  if (
           user.name.toLowerCase().includes(this.search.toLowerCase())
@@ -238,11 +263,14 @@ export default {
 
             this.data.data.filter((user) => {
                 list.push(user);
-                /* if (
-          user.name.toString().toLowerCase().includes(this.search.toLowerCase())
-        ) {
-          list.push(user);
-        } */
+                if (
+                    user.name
+                        .toString()
+                        .toLowerCase()
+                        .includes(this.search.toLowerCase())
+                ) {
+                    list.push(user);
+                }
             });
 
             if (list.length <= 0) {
