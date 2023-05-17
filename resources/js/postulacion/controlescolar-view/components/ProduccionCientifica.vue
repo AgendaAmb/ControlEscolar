@@ -455,7 +455,7 @@ export default {
 
     created() {
         this.nameAccordion = "accordion-pc-" + this.index;
-        console.log(this.nameAccordion);
+        //console.log(this.nameAccordion);
     },
 
     methods: {

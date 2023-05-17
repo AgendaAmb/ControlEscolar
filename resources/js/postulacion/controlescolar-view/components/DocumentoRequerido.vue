@@ -89,14 +89,24 @@
                     </label>
                 </div>
 
-                <!-- <div v-if="isIntentionLetter() === false" class="d-flex justify-content-center"
-          style="max-height:45px !important; width: 100%">
-          <label>
-            <img :src="images_btn.seleccionar" alt="" style=" max-height: 45px !important;">
-            <input type="file" class="form-control d-none" style="max-height: 45px !important; width: 100%"
-              @change="cargaDocumento">
-          </label>
-        </div> -->
+                <div
+                    v-if="esProfesorNB && isIntentionLetter()"
+                    class="d-flex justify-content-center"
+                    style="max-height: 45px !important; width: 100%"
+                >
+                    <label>
+                        <button class="uaslp-btn" @click="handleDocument">
+                            <font-awesome-icon icon="fa-solid fa-upload" />
+                            <input
+                                ref="fileInput"
+                                type="file"
+                                class="form-control d-none"
+                                @change="cargaDocumento"
+                            />
+                            <span>Subir</span>
+                        </button>
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -124,6 +134,10 @@ export default {
     name: "documento-requerido",
 
     props: {
+        esProfesorNB: {
+            type: Boolean,
+            default: false,
+        },
         user_id: {
             type: Number,
             default: -1,
@@ -254,8 +268,10 @@ export default {
     },
 
     methods: {
+        handleDocument() {
+            this.$refs.fileInput.click();
+        },
         bkgCargarArchivo(type) {
-            // console.log(this.language);
             axios
                 .get("/controlescolar/solicitud/getButtonImage", {
                     params: {
@@ -263,11 +279,9 @@ export default {
                     },
                 })
                 .then((response) => {
-                    // console.log('hola' + response.data);
                     return response.data;
                 })
                 .catch((error) => {
-                    // console.log(error);
                     return null;
                 });
         },
@@ -403,7 +417,7 @@ export default {
             }
 
             // return the answer accordin to academic program and name of the required document
-            // console.log('res: ' + res + ' name: ' + this.name);
+
             return res;
         },
 
@@ -425,7 +439,6 @@ export default {
                 this.name ===
                 "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
             ) {
-                // console.log(this.name);
                 return true;
             }
             return false;

@@ -170,7 +170,7 @@ export default {
                     res = parseInt(this.recommendation_letter["answer"]); // 0 o 1
                 }
             }
-            console.log("res: " + res);
+            //console.log("res: " + res);
             return res;
         },
 
@@ -237,7 +237,7 @@ export default {
                     request
                 )
                 .then((response) => {
-                    console.log("message: " + response.data.message);
+                    //console.log("message: " + response.data.message);
                     if (
                         response.data.message ==
                         "Exito, el correo ha sido enviado"

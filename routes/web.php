@@ -47,7 +47,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 
 //Comentar linea de abajo para produccion
-//Route::prefix("controlescolar")->group(function () { 
+Route::prefix("controlescolar")->group(function () { 
     
     #Comite academico
     # Configura la ruta principal de comite academico, si hay un usuario activo
@@ -364,4 +364,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     
-//});
+});

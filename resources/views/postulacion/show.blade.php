@@ -14,6 +14,7 @@
     
 
     <div class="c-center-nch">
+        
         <h2 class="self-start c-title">{{$academic_program->name}}</h2>
         <!-- <img class="img-fluid rounded" src="{{ $header_academic_program }}"> -->
     </div>

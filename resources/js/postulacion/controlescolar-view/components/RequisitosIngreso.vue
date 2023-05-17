@@ -60,6 +60,7 @@
             :errores.sync="documento.errores"
             :exanni_score.sync="exanni_score"
             :images_btn="images_btn"
+            :esProfesorNB="esProfesorNB()"
             v-bind="documento"
             @nuevoPuntajeExanni="nuevoPuntajeExanni"
             @enviaDocumento="cargaDocumento"
@@ -78,7 +79,7 @@ export default {
         exanni_score: Number,
         documentos: Array,
         images_btn: Object,
-
+        viewer: Object,
         user_id: {
             type: Number,
             default: -1,
@@ -105,6 +106,7 @@ export default {
     data() {
         return {
             errores: {},
+            profesornb: false,
         };
     },
     computed: {
@@ -137,6 +139,13 @@ export default {
     },
 
     methods: {
+        esProfesorNB() {
+            //Verifica que el usuario sea profesor de nucleo básico y sea coordinador
+            let isPNB = this.viewer.roles.some(
+                (role) => role.name == "profesor_nb"
+            );
+            return isPNB;
+        },
         actualizaExposicionMotivos(evento) {
             axios
                 .post("/controlescolar/solicitud/updateMotivation", {

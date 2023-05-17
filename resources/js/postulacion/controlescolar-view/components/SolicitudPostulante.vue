@@ -208,6 +208,7 @@
                             :alias_academic_program.sync="
                                 academic_program.alias
                             "
+                            :viewer="viewer"
                         >
                         </requisitos-ingreso>
                     </b-card-body>
@@ -862,7 +863,8 @@ export default {
         },
 
         languageSelectedHandler(info) {
-            console.log(info);
+            //console.log(info);
+            return;
         },
 
         getUniversities(state) {

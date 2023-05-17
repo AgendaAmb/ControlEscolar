@@ -25,7 +25,7 @@
 <body class="d-block mw-100 mx-0">
     <x-academic-program-header/>
     @section('main-content')
-    <main id="app"@section('container-class') class="container-fluid" @show> 
+    <main id="app"@section('container-class') class="container-fluid" data-hello="hello world from aa" @show> 
         @yield('main') 
     </main>
     @show

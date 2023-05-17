@@ -28,7 +28,9 @@ class AppServiceProvider extends ServiceProvider
         /* view()->composer('*', function ($view) {
             $view->with('PATH', env('BASE_PATH'));
         }); */
-
+        view()->composer('*', function ($view) {
+            $view->with('roles', []);
+        }); 
         JsonResource::withoutWrapping();
     }
 }
