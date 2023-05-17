@@ -153,7 +153,7 @@ class PreRegisterController extends Controller
                 'surname' => ['required', 'string', 'max:255'],
                 'birth_date' => ['required', 'date', 'before:' . Carbon::now()->toString(),],
                 'ocupation' => ['required', 'string', 'max:255'],
-                'gender' => ['required', 'string', 'in:Masculino,Femenino,Otro,No especificar'],
+                'gender' => ['required', 'string'],
                 'other_gender' => ['nullable', 'required_if:gender,Otro'],
                 'civic_state' => ['required', 'string'],
                 'other_civic_state' => ['nullable', 'required_if:civic_state,Otro'],

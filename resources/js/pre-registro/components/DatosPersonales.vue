@@ -136,6 +136,14 @@
     <!-- Género -->
     <div class="col-lg-6 mt-3">
       <label> Género </label>
+      <input
+        type="text"
+        :class="inputClassFor('gender')"
+        v-model="Gender"
+        :readonly="readonly"
+        required
+      />
+      <!--
       <select
         v-model="Gender"
         :class="inputClassFor('gender')"
@@ -148,7 +156,7 @@
         <option value="Femenino">Femenino</option>
         <option value="Otros">Otro</option>
         <option value="No especificar">No especificar</option>
-      </select>
+      </select>-->
       <div class="valid-feedback">
         Correcto!
       </div>
@@ -161,23 +169,25 @@
     </div>
 
     <!-- Otro género -->
-    <div v-if="Gender === 'Otros'" class="col-lg-6 mt-3">
-      <label> Coloca el otro género </label>
-      <input
-        type="text"
-        :class="inputClassFor('other_gender')"
-        :readonly="Readonly"
-      />
-      <div class="valid-feedback">
-        Correcto!
+    <!--
+      <div v-if="Gender === 'Otros'" class="col-lg-6 mt-3">
+        <label> Coloca el otro género </label>
+        <input
+          type="text"
+          :class="inputClassFor('other_gender')"
+          :readonly="Readonly"
+        />
+        <div class="valid-feedback">
+          Correcto!
+        </div>
+        <div class="invalid-feedback">
+          Por favor completa el campo!.
+        </div>
+        <div v-if="'gender' in errores" class="invalid-feedback">
+          {{ errores.gender }}
+        </div>
       </div>
-      <div class="invalid-feedback">
-        Por favor completa el campo!.
-      </div>
-      <div v-if="'gender' in errores" class="invalid-feedback">
-        {{ errores.gender }}
-      </div>
-    </div>
+    -->
 
     <!-- Estado civil -->
     <div class="col-lg-6 mt-3">
@@ -415,10 +425,11 @@
         :class="inputClassFor('ethnicity')"
         v-model="Ethnicity"
         :readonly="Readonly"
+        required = "false"
       />
-      <div v-if="'ethnicity' in errores" class="invalid-feedback">
+      <!-- <div v-if="'ethnicity' in errores" class="invalid-feedback">
         {{ errores.ethnicity }}
-      </div>
+      </div> -->
     </div>
 
     <!-- El postulante es discapacitado -->
