@@ -42,12 +42,12 @@ use Illuminate\Support\Facades\DB;
 
 
 Route::get('/', [LoginController::class, 'prelogin'])->name('authenticate.prelogin');
-Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD) 
+Route::redirect('controlescolar', 'pre-registro'); //esto soluciona el error 403 (no se porque exactamente XD)
 Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [FileController::class, 'downloadLetterCommitment'])->name('letterCommitment')->middleware(['auth']);
 
 
 //Comentar linea de abajo para produccion
-//Route::prefix("controlescolar")->group(function () { 
+Route::prefix("controlescolar")->group(function () {
     
     #Comite academico
     # Configura la ruta principal de comite academico, si hay un usuario activo
@@ -364,4 +364,4 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
     });
 
     
-//});
+});

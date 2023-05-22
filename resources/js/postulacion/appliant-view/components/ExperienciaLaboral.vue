@@ -191,12 +191,15 @@
                     class="col-md-2 col-xs-3 align-items-center"
                     style="width: 100%; max-height: 45px !important"
                 >
-                    <img
+                    <button
+                        class="uaslp-btn"
                         @click="guardaExperienciaLaboral"
-                        :src="images_btn.guardar"
-                        alt=""
-                        style="max-height: 45px !important"
-                    />
+                    >
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+
+                        <span>Guardar</span>
+                    </button>
+                </div>
                 </div>
                 <div class="col-md-10 col-xs-9 mx-3">
                     <label>

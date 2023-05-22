@@ -44,7 +44,7 @@
                         @click="enviarCorreoCartaRecomendacion()"
                     >
                         <font-awesome-icon icon="fa-solid fa-download" />
-                        <span>Descargar</span>
+                        <span>Guardar</span>
                     </button>
                 </div>
             </div>
