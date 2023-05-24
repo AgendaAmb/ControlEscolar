@@ -41798,11 +41798,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_7__["default"]({
     /*
     Se necesita
     Informacion (en un solo objeto)
-       data: {
+      data: {
         a: this.a
         b: this.b
     }
-          */
+        */
     actualizaRecomendationLetter: function actualizaRecomendationLetter() {
       //tranforma los datos a objetos
       // let aux_score = [];

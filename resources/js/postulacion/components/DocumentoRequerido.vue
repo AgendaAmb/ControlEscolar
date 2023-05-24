@@ -91,7 +91,6 @@
                 </div>
 
                 <div
-                    v-if="isIntentionLetter() === false"
                     class="d-flex justify-content-center"
                     style="max-height: 45px !important; width: 100%"
                 >
