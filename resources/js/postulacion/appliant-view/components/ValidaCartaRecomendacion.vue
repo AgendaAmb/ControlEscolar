@@ -43,7 +43,7 @@
                         class="uaslp-btn"
                         @click="enviarCorreoCartaRecomendacion()"
                     >
-                        <font-awesome-icon icon="fa-solid fa-download" />
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                         <span>Guardar</span>
                     </button>
                 </div>

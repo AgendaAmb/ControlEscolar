@@ -23,7 +23,8 @@
                                 alias_academic_program === 'maestria' ||
                                 alias_academic_program === 'enrem'
                             "
-                            href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_MCA.docx"
+                            :href="archivoUrl" download="CartaCompromiso_MCA.docx"
+
                             target="_blank"
                             >dando clic aquí</a
                         >
@@ -243,6 +244,11 @@ export default {
                 alignItems: "center",
                 height: "100%",
             };
+        },
+
+        
+        archivoUrl() {
+            return '/public/DocumentoExtra/CartaCompromiso_MCA2.docx';
         },
 
         StatusCheckBox: {
