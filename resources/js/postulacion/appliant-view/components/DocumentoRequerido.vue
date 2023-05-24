@@ -23,7 +23,7 @@
                                 alias_academic_program === 'maestria' ||
                                 alias_academic_program === 'enrem'
                             "
-                            :href="archivoUrl" download="CartaCompromiso_MCA.docx"
+                            href="https://ambiental.uaslp.mx/pmpca/storage/Doc/CartaCompromiso_MCA.docx"
 
                             target="_blank"
                             >dando clic aquí</a
@@ -38,7 +38,7 @@
                         <!-- Doctorado PMPCA  -->
                         <a
                             v-else
-                            href="https://ambiental.uaslp.mx/pmpca/docs/CartaCompromiso_DCA.docx"
+                            href="https://ambiental.uaslp.mx/pmpca/storage/Doc/CartaCompromiso_DCA.docx"
                             target="_blank"
                             >dando clic aquí</a
                         >
@@ -244,11 +244,6 @@ export default {
                 alignItems: "center",
                 height: "100%",
             };
-        },
-
-        
-        archivoUrl() {
-            return '/public/DocumentoExtra/CartaCompromiso_MCA2.docx';
         },
 
         StatusCheckBox: {

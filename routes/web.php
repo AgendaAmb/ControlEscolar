@@ -50,6 +50,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
 
 //Comentar linea de abajo para produccion
+
 //Route::prefix("controlescolar")->group(function () {
     
     #Comite academico

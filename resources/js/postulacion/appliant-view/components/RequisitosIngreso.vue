@@ -24,7 +24,7 @@
                 <button class="uaslp-btn" @click="actualizaExposicionMotivos">
                     <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                         
-                    <span>Guardar 2</span>
+                    <span>Guardar</span>
                 </button>
             </div>
             <div class="col-md-10 col-xs-9 mx-3">
