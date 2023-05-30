@@ -73,24 +73,21 @@
 
     <!-- Apellido materno -->
     <div class="col-md-6">
-      <label class="d-block mt-3"> Apellido materno </label>
+      <label class="d-block mt-3">Apellido materno</label>
       <input
         type="text"
         :class="inputClassFor('last_surname')"
         v-model="LastSurname"
         :readonly="readonly"
-        required
       />
-      <div class="valid-feedback">
-        Correcto!
-      </div>
-      <div class="invalid-feedback">
-        Por favor completa el campo!.
+      <!-- <div class="valid-feedback">
+        ¡Correcto!
       </div>
       <div v-if="'last_surname' in errores" class="invalid-feedback">
         {{ errores.last_surname }}
-      </div>
+      </div> -->
     </div>
+
 
     <!-- Fecha de nacimiento -->
     <div class="col-lg-6 mt-3">
@@ -328,7 +325,7 @@
 
     <!-- País de residencia -->
     <div class="col-lg-6 mt-3">
-      <label class="mt-3"> País de residencia </label>
+      <label class="mt-3"> País de residenciaaa </label>
       <div v-if="readonly ===  false">
         <select
           v-model="ResidenceCountry"

@@ -200,7 +200,6 @@
                         <span>Guardar</span>
                     </button>
                 </div>
-                </div>
                 <div class="col-md-10 col-xs-9 mx-3">
                     <label>
                         <strong>Nota: </strong>
@@ -209,8 +208,7 @@
                         <p>
                             <strong
                                 >Solo se guardara la experiecia laboral
-                                actual</strong
-                            >
+                                actual</strong>
                         </p>
                     </label>
                 </div>
