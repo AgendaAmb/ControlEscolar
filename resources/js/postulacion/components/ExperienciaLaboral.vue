@@ -10,7 +10,7 @@
                     class="h5 font-weight-bold"
                     style="width: auto !important"
                 >
-                    Experiencia Laboral {{ index }}</span
+                    Experiencia Laboral{{ index }}</span
                 >
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">
@@ -80,7 +80,7 @@
 
                     <div class="row my-2">
                         <div class="col-12">
-                            <p class="h5"><strong> Periodo laboral </strong></p>
+                            <p class="h5"><strong> Periodo laboral</strong></p>
                         </div>
 
                         <div class="form-group col-md-6">

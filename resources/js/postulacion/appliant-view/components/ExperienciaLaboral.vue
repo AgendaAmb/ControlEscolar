@@ -10,7 +10,7 @@
                     class="h5 font-weight-bold"
                     style="width: auto !important"
                 >
-                    Experiencia Laboral {{ index }}</span
+                    Experiencia Laboral xd{{ index }}</span
                 >
             </div>
             <div class="col-lg-2 col-md-4 col-sm-12">

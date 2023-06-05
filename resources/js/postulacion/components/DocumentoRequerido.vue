@@ -54,7 +54,7 @@
                 <!-- Solo hay algo en notas por lo que se adjunta -->
                 <p v-else-if="notes !== null" class="my-2 d-block">
                     <strong>
-                        Observaciones: <span v-html="notes"></span
+                        ObservacioneS: <span v-html="notes"></span
                     ></strong>
                 </p>
 

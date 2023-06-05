@@ -326,7 +326,7 @@
             <strong>Nota: </strong>
             Para poder guardar los cambios en los campos anteriores del
             historial académico es necesario seleccionar el siguiente botón.
-            <p><strong>Solo se guardara el historial académico</strong></p>
+            <p><strong>Solo se guardara el historial académico 2</strong></p>
           </label>
         </div>
       </div>
