@@ -17,7 +17,7 @@
         </h5>
 
         <p v-if="notes !== null" class="mt-3 mb-1 d-block">
-          <strong> Observaciones: <span v-html="notes"></span></strong>
+          <strong> Observaciones2: <span v-html="notes"></span></strong>
         </p>
 
         <p class="mt-3 mb-1 d-block">

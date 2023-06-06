@@ -177,10 +177,11 @@ export default {
   methods: {
     cargaDocumento(requiredDocument, file) {
 
-      var formData = new FormData();
+      let formData = new FormData();
       formData.append('archive_id', this.archive_id);
       formData.append('requiredDocumentId', requiredDocument.id);
       formData.append('file', file);
+      console.log('Boton presionado, funcion de @cargaDocument0');
 
       axios({
         method: 'post',

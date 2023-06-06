@@ -62,7 +62,6 @@ class AppliantLanguageController extends Controller
    
        public function updateAppliantLanguageRequiredDocument(Request $request)
        {
-   
            try {
                $request->validate([
                    'index' => ['required', 'numeric'],
@@ -74,19 +73,36 @@ class AppliantLanguageController extends Controller
            } catch (\Exception $e) {
                return new JsonResponse('Error de validacion', 502);
            }
-   
+       
            $appliant_language = AppliantLanguage::find($request->id);
-   
+       
            # Archivo de la solicitud
            $ruta = $request->file('file')->storeAs(
                'archives/' . $request->archive_id . '/laguageDocuments',
                $request->id . '_' . $request->requiredDocumentId . '-' . $request->index . '.pdf'
            );
-   
-           # Asocia los documentos requeridos.
-           $appliant_language->requiredDocuments()->detach($request->requiredDocumentId);
+       
+           # Buscar y eliminar el documento anterior si existe
+           $previousDocument = $appliant_language->requiredDocuments()
+               ->where('id', $request->requiredDocumentId)
+               ->first();
+       
+           if ($previousDocument) {
+               Storage::delete($previousDocument->location);
+               $previousDocument->delete();
+       
+               // Imprimir mensaje de eliminación del documento anterior y su nombre
+               $previousDocumentName = $previousDocument->nombre; // Reemplaza 'nombre' con el campo correcto
+               error_log("Se eliminó el documento anterior: " . $previousDocumentName);
+           }
+       
+           # Crear una nueva asociación con el nuevo documento
            $appliant_language->requiredDocuments()->attach($request->requiredDocumentId, ['location' => $ruta]);
-   
+       
+           // Imprimir mensaje de subida del nuevo documento y su nombre
+           $newDocumentName = $request->file('file')->getClientOriginalName();
+           error_log("Se subió el nuevo documento: " . $newDocumentName);
+       
            return new JsonResponse(
                $appliant_language->requiredDocuments()
                    ->select('required_documents.*', 'appliant_language_required_document.location as location')
@@ -94,4 +110,5 @@ class AppliantLanguageController extends Controller
                    ->first()
            );
        }
+       
 }
