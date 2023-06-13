@@ -488,18 +488,19 @@ export default {
             }
         },
         cargaDocumento(e) {
-            var name = e.target.files[0].name;
+            let file = e.target.files[0];
+            let name = file.name;
             this.Errores = {};
 
-            if (!name.endsWith(".pdf")) {
+            if (file.type !== "application/pdf") {
                 this.Errores = {
-                    file: "El archivo debe de contener formato pdf.",
+                    file: "El archivo debe tener formato PDF."
                 };
                 return false;
             }
 
-            this.$emit("enviaDocumento", this, e.target.files[0]);
-        },
+            this.$emit("enviaDocumento", this, file);
+        }
     },
 };
 </script>

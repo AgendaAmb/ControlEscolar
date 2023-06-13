@@ -793,7 +793,7 @@ export default {
         },
 
         cargaDocumento(requiredDocument, file) {
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append("id", this.id);
             formData.append("archive_id", this.archive_id);
             formData.append("requiredDocumentId", requiredDocument.id);
@@ -816,15 +816,14 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    var errores = error.response.data["errors"];
+                    let errores = error.response.data["errors"];
                     requiredDocument.Errores = {
-                        file: "file" in errores ? errores.file[0] : null,
-                        id:
-                            "requiredDocumentId" in errores
-                                ? errores.requiredDocumentId[0]
-                                : null,
+                        file: errores && "file" in errores ? errores.file[0] : null,
+                        id: errores && "requiredDocumentId" in errores ? errores.requiredDocumentId[0] : null,
                     };
                 });
+
+                location.reload();
         },
     },
 };

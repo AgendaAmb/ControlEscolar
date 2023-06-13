@@ -385,7 +385,9 @@ export default {
                 }
             }
             //Documents for doctorado
-            else if (this.alias_academic_program === "doctorado") {
+            else if (
+                this.alias_academic_program === "doctorado"
+            ) {
                 switch (this.name) {
                     case "5.- Título de preparatoria":
                         res = false;

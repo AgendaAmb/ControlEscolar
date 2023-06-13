@@ -14,7 +14,7 @@
         <button class="uaslp-btn uaslp-red" @click="eliminaHistorialAcademico">
                     <font-awesome-icon icon="fa-solid fa-trash-can" />
 
-                    <span>Borrar</span>
+                    <span>Eliminar</span>
                 </button>
         
         <!-- <b-button @click="eliminaHistorialAcademico" pill class="d-flex justify-content-start align-items-center"
@@ -41,6 +41,7 @@
               <!-- Solo se podra seleccionar para doctorado -->
               <select
                 v-model="DegreeType"
+                @change="emitDegreeType"
                 class="form-control"
                 :class="objectForError('degree_type')"
               >
@@ -326,7 +327,7 @@
             <strong>Nota: </strong>
             Para poder guardar los cambios en los campos anteriores del
             historial académico es necesario seleccionar el siguiente botón.
-            <p><strong>Solo se guardara el historial académico 2</strong></p>
+            <p><strong>Solo se guardara el historial académico</strong></p>
           </label>
         </div>
       </div>
@@ -437,6 +438,7 @@ export default {
 
   data: function () {
     return {
+      degreeType: '',
       fechaobtencion: "",
       errores: {},
       datosValidos: {},
@@ -791,12 +793,13 @@ export default {
     },
 
     cargaDocumento(requiredDocument, file) {
-      var formData = new FormData();
+      let formData = new FormData();
       formData.append("id", this.id);
       formData.append("archive_id", this.archive_id);
       formData.append("requiredDocumentId", requiredDocument.id);
       formData.append("index", this.index);
       formData.append("file", file);
+      console.log(formData.archive_id);
 
       // console.log(formData);
 

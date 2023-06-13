@@ -797,6 +797,7 @@ export default {
             formData.append("requiredDocumentId", requiredDocument.id);
             formData.append("index", this.index);
             formData.append("file", file);
+            console.log(formData.requiredDocumentId);
 
             axios({
                 method: "post",
@@ -808,6 +809,7 @@ export default {
                 },
             })
                 .then((response) => {
+                    //console.log(response.data);
                     requiredDocument.datosValidos.file =
                         "¡Archivo subido exitosamente!";
                     requiredDocument.Location = response.data.location;
@@ -820,6 +822,8 @@ export default {
                         id: errores && "requiredDocumentId" in errores ? errores.requiredDocumentId[0] : null,
                     };
                 });
+
+                location.reload();
         }
 
     },

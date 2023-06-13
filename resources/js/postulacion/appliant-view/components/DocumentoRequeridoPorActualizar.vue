@@ -225,12 +225,12 @@ export default {
       return this.state;
     },
     cargaDocumento(e) {
-      var name = e.target.files[0].name;
+      let name = e.target.files[0].name;
       this.Errores = {};
 
-      if (!name.endsWith(".pdf")) {
+      if (!name.endsWith(".pdf") || file.type !== "application/pdf") {
         this.Errores = {
-          file: "El archivo debe de contener formato pdf.",
+          file: "El archivo debe tener formato PDF.",
         };
         return false;
       }
