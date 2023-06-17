@@ -36,7 +36,7 @@
     </div>
 
     <div
-      v-if="period !== null && isSchoolControl === true"
+      v-if="($root.loggedUserIsAdmin() || $root.loggedUserIsSchoolControl()) && period !== null"
       class="new-interview"
     >
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista">
@@ -261,27 +261,15 @@ export default {
     },
 
     isProfessor() {
-      var roles = this.auth_user.roles.filter((role) => {
-        return role.name === "profesor_nb";
-      });
-
-      return roles.length > 0;
+      return this.auth_user.roles.some(role => role.name == 'profesor_nb');
     },
 
     isAdmin() {
-      var roles = this.auth_user.roles.filter((role) => {
-        return role.name === "administrator";
-      });
-
-      return roles.length > 0;
+      return this.auth_user.roles.some(role => role.name == 'admin');
     },
 
     isSchoolControl() {
-      var roles = this.auth_user.roles.filter((role) => {
-        return role.name === "control_escolar";
-      });
-
-      return roles.length > 0;
+      return this.auth_user.roles.some(role => role.name == 'control_escolar');
     },
 
     newEvents() {

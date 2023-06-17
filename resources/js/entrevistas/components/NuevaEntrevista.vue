@@ -173,6 +173,10 @@ export default {
         return this.appliant.intention_letter_professor.name;
       }
     },
+
+  
+
+
   },
 
   methods: {

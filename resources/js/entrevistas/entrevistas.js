@@ -86,7 +86,7 @@ const app = new Vue({
             this.interviews.push(entrevista);
 
             selected_program.appliants = selected_program.appliants.filter(function(appliant) {
-                return appliant.id !== entrevista.appliant.id;
+                return appliant.id;
             });
         },
 
@@ -158,12 +158,8 @@ const app = new Vue({
          * Determina si el usuario autenticado es administrador.
          * @param {*} period 
          */
-        loggedUserIsAdmin(){
-            var roles = this.loggedUser.roles.filter(role => {
-                return role.name === 'admin';
-            });
-    
-            return roles.length > 0;
+        loggedUserIsAdmin() {
+            return this.loggedUser.roles.some(role => role.id === 8);
         },
 
         /**
@@ -171,11 +167,7 @@ const app = new Vue({
          * @param {*} period 
          */
         loggedUserIsSchoolControl(){
-            var roles = this.loggedUser.roles.filter(role => {
-                return role.name === 'control_escolar';
-            });
-    
-            return roles.length > 0;
+            return this.loggedUser.roles.some(role => role.id === 6);
         },
 
         /**
@@ -183,11 +175,7 @@ const app = new Vue({
          * @param {*} period 
          */
         loggedUserIsCoordinador(){
-            var roles = this.loggedUser.roles.filter(role => {
-                return role.name === 'coordinador';
-            });
-    
-            return roles.length > 0;
+            return this.loggedUser.roles.some(role => role.name == 'coordinador');
         },
 
         /**
@@ -195,11 +183,7 @@ const app = new Vue({
          * @param {*} period 
          */
         loggedUserIsPNB(){
-            var roles = this.loggedUser.roles.filter(role => {
-                return role.name === 'profesor_nb';
-            });
-    
-            return roles.length > 0;
+            return this.loggedUser.roles.some(role => role.id === 4);
         },
 
         /**

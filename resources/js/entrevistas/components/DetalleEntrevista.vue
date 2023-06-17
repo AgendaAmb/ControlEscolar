@@ -33,9 +33,9 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td v-for="(area, index) in areas" :key="area.id">
+                      <td v-for="(area, index) in areas" :key="index">
                         <p class="prof-area" v-if="area.professor_name !== false"> {{ area.professor_name }} </p>
-                        <a v-else-if="(!isSuscribed && $root.loggedUserIsPNB() && this.confirmed == false)" href="#"
+                        <a v-else-if="(isSubscribed == false && $root.loggedUserIsSchoolControl() == false && confirmed == false)" href="#"
                           @click="inscribirUsuario(index)">
                           <p> Inscribirme </p>
                         </a>
@@ -51,7 +51,7 @@
                 <p class="d-block prof-carta-intencion mb-4" for="exampleFormControlSelect1">
                   Redactor del dictamen general: {{ dictamen_redactor }}
                 </p>
-                <div v-if="(this.$root.loggedUserIsSchoolControl() && isConfirmable) || this.$root.loggedUserIsAdmin()" class="form-group">
+                <div v-if="($root.loggedUserIsSchoolControl() === true && isConfirmable) || $root.loggedUserIsAdmin() === true" class="form-group">
                   <label for="exampleFormControlSelect1">Cambiar redactor </label>
                   <select 
                     class="form-control" 
@@ -184,23 +184,23 @@ export default {
 
   computed: {
     notEmptyAreas(){
-      var fill_areas = this.areas.filter(area => area.professor_name !== false);
+      let fill_areas = this.areas.filter(area => area.professor_name !== false);
       return fill_areas;
     },
 
     loggedUserName() {
-      var loggedUser = this.$root.loggedUser;
+      let loggedUser = this.$root.loggedUser;
 
       return (loggedUser.name + " " + loggedUser.middlename + " " + loggedUser.surname).toLowerCase();
     },
 
-    isSuscribed() {
-      var loggedUser = this.loggedUserName;
+    isSubscribed() {
+      let loggedUser = this.loggedUserName;
 
-      return this.areas.filter(area => {
-        return area.professor_name === loggedUser;
-
-      }).length > 0;
+      return this.areas.some(area => {
+        console.log("Esta inscrito: " + area.professor_name);
+        return area.professor_name && area.professor_name === loggedUser;
+      });
     },
 
     isReopenable() {
@@ -270,6 +270,9 @@ export default {
     },
 
     inscribirUsuario(index) {
+    if(this.loggedUserName != this.professor )
+    {
+
       if (confirm('¿Estás segure que deseas participar en esta entrevista?') === false)
         return false;
 
@@ -284,16 +287,20 @@ export default {
           name: response.data.name,
           professor_name: this.loggedUserName
         };
+        console.log("Usuario inscrito: " + response.data.name);
 
         Vue.set(this.areas, index, result);
       }).catch(error => {
       });
 
       return false;
+    }
+    else
+      alert('El profesor que otorgó la carta de intención no puede inscribirse a la entrevista');
     },
 
     cancelarRegistro(index) {
-      if (confirm('¿Estás segure que deseas cancelar tu participación en la entrevista?') === false)
+      if (confirm('¿Estás segur(a) que deseas cancelar tu participación en la entrevista?') === false)
         return false;
 
       // console.log(this.$root.loggedUser);
@@ -321,7 +328,7 @@ export default {
       //Cambio de botón pa que de vueltitas :v
       this.spinnerVisible = true;
 
-      if (confirm('¿Estás segure que deseas confirmar esta entrevista?') === false)
+      if (confirm('¿Estás seguro(a) que deseas confirmar esta entrevista?') === false)
         return false;
 
       axios.post('/controlescolar/entrevistas/confirmInterview', {
@@ -341,7 +348,7 @@ export default {
     },
 
     reabreEntrevista() {
-      if (confirm('¿Estás segure que deseas reabrir esta entrevista?') === false)
+      if (confirm('¿Estás seguro(a) que deseas reabrir esta entrevista?') === false)
         return false;
 
       axios.post('/controlescolar/entrevistas/reopenInterview', {
@@ -356,7 +363,7 @@ export default {
     },
 
     eliminarEntrevista() {
-      if (confirm('¿Estás segure que deseas eliminar esta entrevista?') === false)
+      if (confirm('¿Estás seguro(a) que deseas eliminar esta entrevista?') === false)
         return false;
 
       console.log("hola");

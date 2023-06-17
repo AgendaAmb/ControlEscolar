@@ -132,6 +132,7 @@ export default {
 
   methods: {
     showDetails() {
+      console.log(this.$root);
       this.$root.$emit('show_details', this);
 
       return false;
