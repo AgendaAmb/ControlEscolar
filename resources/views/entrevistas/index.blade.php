@@ -4,8 +4,7 @@ const period = @json($period);
 const interviews = @json($interviews);
 const announcements = @json($announcements);
 const lastestAnnouncements = @json($lastestAnnouncements);
-
-console.log(lastestAnnouncements);
+const comite = @json($usersID);
 </script>
 
 @extends('layouts.app')

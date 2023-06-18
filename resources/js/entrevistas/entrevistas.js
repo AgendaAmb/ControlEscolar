@@ -55,7 +55,8 @@ const app = new Vue({
         date: null,
         selectedInterview: null,
         announcements: announcements,
-        lastestAnnouncements: lastestAnnouncements
+        lastestAnnouncements: lastestAnnouncements,
+        comite: comite,
     },
 
     components: {
@@ -138,8 +139,6 @@ const app = new Vue({
                 confirmed: interview.confirmed,
                 dictamen_redactor: interview.dictamen_redactor
             };
-
-            console.log(this.selectedInterview);
 
             $('#DetalleEntrevista').modal('show');
         },

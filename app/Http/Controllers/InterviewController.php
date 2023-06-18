@@ -47,6 +47,17 @@ class InterviewController extends Controller
      */
     public function calendario(Request $request)
     {
+        $users = $request->user();
+        $users2 = DB::table('academic_comitte_user')->get();
+
+        $usersID = array();
+
+        foreach($users2 as $user)
+        {
+            if($user->user_id == $users->id)
+                array_push($usersID, $user);
+        }
+
         $active_period = Period::orderBy('created_at', 'desc')
             ->where('finished', '!=', '1')
             ->with('announcements.archives')
@@ -61,7 +72,11 @@ class InterviewController extends Controller
 
         // return $calendar_resource;
 
-        return view('entrevistas.index')->with($calendar_resource->toArray($request));
+        $calendar_resource = $calendar_resource->toArray($request);
+        $calendar_resource = array_merge($calendar_resource, ['usersID' => $usersID]);
+
+        return view('entrevistas.index')
+        ->with($calendar_resource);
     }
 
     /**
@@ -89,6 +104,7 @@ class InterviewController extends Controller
 
     public function programa(Request $request)
     {
+        
         $isProfessor = false;
         $announcements = Announcement::idDescending()->get();
 
@@ -154,7 +170,7 @@ class InterviewController extends Controller
     public function nuevaEntrevista(StoreInterviewRequest $request)
     {
         try {
-            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type'));
+            $interview_model = Interview::create($request->safe()->except('user_id', 'user_type')  + ['program' => $request->program]);
             $interview_model->users()->attach($request->user_id, ['user_type' => $request->user_type]);  // Agregamos al profesor a la entrevista
             $interview_model->load(['users.roles:name', 'appliant']);
             $interview_model->confirmed = false;

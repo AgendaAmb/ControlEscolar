@@ -42,7 +42,7 @@
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista">
         Nueva Entrevista
       </button>
-    </div>
+    </div>
 
     <div v-if="IsActive" class="calendar-body">
       <div class="v-cal">
@@ -261,15 +261,27 @@ export default {
     },
 
     isProfessor() {
-      return this.auth_user.roles.some(role => role.name == 'profesor_nb');
+      var roles = this.auth_user.roles.filter((role) => {
+        return role.name === "profesor_nb";
+      });
+
+      return roles.length > 0;
     },
 
     isAdmin() {
-      return this.auth_user.roles.some(role => role.name == 'admin');
+      var roles = this.auth_user.roles.filter((role) => {
+        return role.name === "administrator";
+      });
+
+      return roles.length > 0;
     },
 
     isSchoolControl() {
-      return this.auth_user.roles.some(role => role.name == 'control_escolar');
+      var roles = this.auth_user.roles.filter((role) => {
+        return role.name === "control_escolar";
+      });
+
+      return roles.length > 0;
     },
 
     newEvents() {
@@ -392,8 +404,8 @@ export default {
 
     ActiveDateInterviews() {
       const activeDate = this.ActiveDate.format("YYYY-MM-DD");
-
       return this.interviews.filter((interview) => {
+        console.log(interview);
         const interviewDate = moment(interview.date);
         return interviewDate.isSame(activeDate);
       });
@@ -476,6 +488,7 @@ export default {
     },
 
     interviewDataFrom(interview) {
+      console.log(interview);
       var start_time = moment(interview.start_time, "hh:mm:ss").format(
         "hh:mm A"
       );
@@ -525,6 +538,7 @@ export default {
         end_time: end_time,
         confirmed: interview.confirmed,
         url: interview.url,
+        program: interview.program,
       };
     },
   },

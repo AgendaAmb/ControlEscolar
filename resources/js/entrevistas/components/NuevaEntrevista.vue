@@ -195,13 +195,14 @@ export default {
         date: this.date,
         start_time: this.start_time,
         end_time: this.end_time,
-        room_id: this.room.id
+        room_id: this.room.id,
+        program: this.selected_program.academic_program,
       };
 
       axios.post('/controlescolar/entrevistas/nuevaEntrevista', data  
       ).then(response => {
         var data = response.data;
-
+        console.log("response: ",response.data);
         this.$emit('nuevaentrevista', {
           id: data.id,
           date: data.date,
@@ -210,8 +211,9 @@ export default {
           end_time: data.end_time,
           appliant: data.appliant,
           intention_letter_professor: data.intention_letter_professor,
-          academic_areas: data.academic_areas
-        },this.selected_program);
+          academic_areas: data.academic_areas,
+          program: data.program,
+        },);
 
         // Actualizar la información para poder agendar una nueva entrevista
         this.id = -1;

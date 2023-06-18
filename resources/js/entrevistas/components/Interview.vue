@@ -7,6 +7,10 @@
           <p class="mt-1 mb-0 detail"> Carta de intención otorgada por: </p>
           <p class="my-0"> {{ professor }} </p>
         </div>
+        <div class="col-6">
+          <p class="mt-1 mb-0 detail"> Programa académico: </p>
+          <p class="my-0"> {{ program }} </p>
+        </div>
         <div v-if="site.includes('Zoom')" class="col-6">
           <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
           <p class="my-0" v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p>
@@ -81,6 +85,12 @@ export default {
 
     // Profesor que otorgó la carta de intención
     professor: {
+      type: String,
+      default: "Indefinido"
+    },
+
+    //Programa del alumno inscrito
+    program: {
       type: String,
       default: "Indefinido"
     },
