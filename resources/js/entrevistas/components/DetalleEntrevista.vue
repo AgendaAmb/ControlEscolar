@@ -198,7 +198,7 @@ export default {
       let loggedUser = this.loggedUserName;
 
       return this.areas.some(area => {
-        console.log("Esta inscrito: " + area.professor_name);
+        // console.log("Esta inscrito: " + area.professor_name);
         return area.professor_name && area.professor_name === loggedUser;
       });
     },
@@ -249,11 +249,10 @@ export default {
         interview_id: this.id,
         professor_id: this.redactor.professor_id
       };
-      console.log(data);
       axios.post('/controlescolar/entrevistas/setDictamenRedactor', data).then(response => {
         this.dictamen_redactor = this.redactor.professor_name,
-        this.redactor = null,
-        console.log(response.data)
+        this.redactor = null
+        // console.log(response.data)
       }).catch(error => {
       });
     },
@@ -287,7 +286,7 @@ export default {
           name: response.data.name,
           professor_name: this.loggedUserName
         };
-        console.log("Usuario inscrito: " + response.data.name);
+        // console.log("Usuario inscrito: " + response.data.name);
 
         Vue.set(this.areas, index, result);
       }).catch(error => {
@@ -336,7 +335,7 @@ export default {
         alumno: this.appliant,
         room: this.room,
       }).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.Confirmed = true;
         this.spinnerVisible = false;
         $('#DetalleEntrevista').modal('hide');
@@ -366,12 +365,10 @@ export default {
       if (confirm('¿Estás seguro(a) que deseas eliminar esta entrevista?') === false)
         return false;
 
-      console.log("hola");
-
       axios.post('/controlescolar/entrevistas/deleteInterview', {
         id: this.id
       }).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.$emit('interview_deleted', this.id);
         $('#DetalleEntrevista').modal('hide');
       }).catch(error => {

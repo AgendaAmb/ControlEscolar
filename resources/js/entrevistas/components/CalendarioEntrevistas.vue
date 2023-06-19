@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    
-    <div v-if="IsActive === true" class="calendar-header">      
+    <div v-if="IsActive === true" class="calendar-header">
       <div class="btn-group" role="group">
         <button :disabled="!isPrevAllowed" class="v-cal-button" @click="prev">
           Prev
@@ -11,7 +10,12 @@
         </button>
       </div>
       <div>
-        <h1 v-for="item in announcements" :key="item.id" style="font-size: 2em" class="v-cal-header__title mes">
+        <h1
+          v-for="item in announcements"
+          :key="item.id"
+          style="font-size: 2em"
+          class="v-cal-header__title mes"
+        >
           {{ item.academic_program }}
         </h1>
         <h1 class="v-cal-header__title mes">{{ calendarMonth }}</h1>
@@ -36,13 +40,17 @@
     </div>
 
     <div
-      v-if="($root.loggedUserIsAdmin() || $root.loggedUserIsSchoolControl()) && period !== null"
+      v-if="
+        ($root.loggedUserIsAdmin() || $root.loggedUserIsSchoolControl()) &&
+        period !== null
+      "
       class="new-interview"
     >
       <button class="v-cal-button" @click="muestraModalNuevaEntrevista">
         Nueva Entrevista
       </button>
-    </div>
+          
+    </div>
 
     <div v-if="IsActive" class="calendar-body">
       <div class="v-cal">
@@ -83,7 +91,6 @@
     <div v-else-if="period === null">
       <h1>Periodo de entrevistas cerrado</h1>
     </div>
-
   </div>
 </template>
 
@@ -118,8 +125,7 @@ import Interview from "./Interview.vue";
 export default {
   name: "calendario-entrevistas",
 
-  mounted(){
-  },
+  mounted() {},
 
   components: {
     Month,
@@ -129,13 +135,12 @@ export default {
   },
 
   props: {
-
-    interviews:{
+    interviews: {
       type: Array,
       default: {},
     },
 
-    announcements:{
+    announcements: {
       type: Array,
       default: {},
     },
@@ -281,8 +286,8 @@ export default {
         return role.name === "control_escolar";
       });
 
-      return roles.length > 0;
-    },
+      return roles.length > 0;
+    },
 
     newEvents() {
       return this.interviews.map((e) => {
@@ -404,15 +409,54 @@ export default {
 
     ActiveDateInterviews() {
       const activeDate = this.ActiveDate.format("YYYY-MM-DD");
-      return this.interviews.filter((interview) => {
-        console.log(interview);
-        const interviewDate = moment(interview.date);
-        return interviewDate.isSame(activeDate);
-      });
+      const comiteIds = comite.map((item) => item.academic_comitte_id);
+
+      if (comiteIds.includes(1) && comiteIds.includes(2)) {
+        return this.interviews.filter((interview) => {
+          const interviewDate = moment(interview.date);
+          return interviewDate.isSame(activeDate);
+        });
+      } else if (comiteIds.includes(2)) {
+        return this.interviews.filter((interview) => {
+          const interviewDate = moment(interview.date);
+          const program = this.changeComite(interview.program);
+          return (
+            interviewDate.isSame(activeDate) && [1, 2, 3].includes(program)
+          );
+        });
+      } else if (comiteIds.includes(1)) {
+        return this.interviews.filter((interview) => {
+          const interviewDate = moment(interview.date);
+          const program = this.changeComite(interview.program);
+          return interviewDate.isSame(activeDate) && program === 4;
+        });
+      } else {
+        // Otro tipo de comité no especificado, no se muestran entrevistas
+        return [];
+      }
     },
   },
 
   methods: {
+    changeComite(comite) {
+      let academicProgramID = 0;
+      switch (comite) {
+        case "Maestría en ciencias ambientales":
+          academicProgramID = 1;
+          break;
+        case "Doctorado en ciencias ambientales":
+          academicProgramID = 2;
+          break;
+        case "Maestría en ciencias ambientales, doble titulación":
+          academicProgramID = 3;
+          break;
+        case "Maestría Interdisciplinaria en ciudades sostenibles":
+          academicProgramID = 4;
+          break;
+      }
+
+      return academicProgramID;
+    },
     muestraEntrevistas(date) {
       // Verifica que el dia seleccionado en el calendario es despues del dia minimo
       // if (moment(date.toLocaleDateString()).isBefore(this.MinDate))
@@ -433,13 +477,12 @@ export default {
     },
 
     mandarCorreos() {
-
-      console.log(this.period.announcement.id);
+      //console.log(this.period.announcement.id);
       axios
         .post(
           "/controlescolar/entrevistas/SendMailUpdateOnlyDocumentsForInterview",
           {
-            announcement_id: this.period.announcement.id
+            announcement_id: this.period.announcement.id,
           }
         )
         .then((response) => {
@@ -488,7 +531,6 @@ export default {
     },
 
     interviewDataFrom(interview) {
-      console.log(interview);
       var start_time = moment(interview.start_time, "hh:mm:ss").format(
         "hh:mm A"
       );
@@ -525,6 +567,7 @@ export default {
           }
         }
       }
+
       return {
         site: interview_room !== null ? interview_room.site : "Error",
         id: interview.id,
@@ -533,7 +576,10 @@ export default {
         date: this.StringDate,
         appliant: interview.appliant.name.toLowerCase(),
         professor: interview.intention_letter_professor.name.toLowerCase(),
-        dictamen_redactor: interview.dictamen_redactor !== null ? interview.dictamen_redactor: 'Indefinido',
+        dictamen_redactor:
+          interview.dictamen_redactor !== null
+            ? interview.dictamen_redactor
+            : "Indefinido",
         start_time: start_time,
         end_time: end_time,
         confirmed: interview.confirmed,

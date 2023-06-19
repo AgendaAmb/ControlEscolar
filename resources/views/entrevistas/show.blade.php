@@ -3,7 +3,6 @@ const user = @json($user);
 const academicPrograms = @json($academic_programs);
 const announcements = @json($announcements);
 
-console.log(user);
 </script>
 
 @extends('layouts.app')
@@ -23,7 +22,7 @@ console.log(user);
     <search-rubric-form 
         :academic_programs="academic_programs" 
         :announcements="announcements" 
-        :isAdmin="loggedUserIsAdmin()" 
+        :is-Admin="loggedUserIsAdmin()" 
         v-on:archives-found="updateArchives"
         >
     </search-rubric-form>

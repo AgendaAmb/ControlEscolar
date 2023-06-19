@@ -4,7 +4,7 @@
             <thead class="interview-program-header">
                 <tr>
                     <th> Horario </th>
-                    <td> Lugar</td>
+                    <th> Lugar</th>
                     <th> Nombre </th>
                     <th> Expediente </th>
                     <th> Rubricas </th>
@@ -29,17 +29,17 @@
                     </td>
                     <td>
                         <!-- ! Rubricas -->
-                        <div v-if="loggedUserIsCoordinador() || loggedUserIsAdmin()">
+                        <div v-if="!loggedUserIsSchoolControl()">
                             <a class="d-block text-capitalize text-decoration-none" 
                                 v-for="rubric in interview.rubrics"
-                                :key="rubric.location" 
+                                :key="rubric.id" 
                                 :href="rubric.location"
                                 target="_blank"
                                 >
                                 {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </div>
-                        <div v-else-if="loggedUserIsSchoolControl()">
+                        <div v-if="loggedUserIsSchoolControl()">
                             <a class="d-block text-capitalize text-decoration-none" 
                                 v-for="rubric in interview.rubrics" 
                                 :key="rubric.location"
@@ -58,6 +58,7 @@
                                 Rúbrica promedio
                             </a>
                         </div>
+                        
                     </td>
                 </tr>
             </tbody>
@@ -85,8 +86,15 @@ export default {
     },
 
     methods:{
+
+        filteredInterviews(rubrics)
+        {
+            console.log(rubrics);
+            return rubrics;
+        },
+
         loggedUserIsPNB() {
-            var roles = user.roles.filter(role => {
+            let roles = user.roles.filter(role => {
                 return role.name === 'profesor_nb';
             });
 
