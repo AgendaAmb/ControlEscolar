@@ -113,8 +113,12 @@ export default {
       let now = moment();
 
       this.days = [];
+
+      
       let comitelogged = comite;
+           
      
+      console.log(comitelogged);
       do {
         const day = moment(temp);
         let newDay = {
@@ -132,6 +136,9 @@ export default {
                 ) {
                   return [1, 2, 3, 4].includes(this.changeComite(e.program));
                 }
+              
+              } else if (comitelogged.length < 1) {
+                return [1, 2, 3, 4].includes(this.changeComite(e.program));
               } else if (comitelogged[0].academic_comitte_id === 2) {
                 // Comité 2
                 return [1, 2, 3].includes(this.changeComite(e.program));
