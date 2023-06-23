@@ -410,8 +410,9 @@ export default {
     ActiveDateInterviews() {
       const activeDate = this.ActiveDate.format("YYYY-MM-DD");
       const comiteIds = comite.map((item) => item.academic_comitte_id);
+      //console.log('Contenido de ComitesIds', comiteIds);
 
-      if (comiteIds.includes(1) && comiteIds.includes(2)) {
+      if ((comiteIds.includes(1) && comiteIds.includes(2)) || comiteIds.length < 1) {
         return this.interviews.filter((interview) => {
           const interviewDate = moment(interview.date);
           return interviewDate.isSame(activeDate);
