@@ -267,15 +267,17 @@ class CalendarResource extends JsonResource
      */
     private function setPeriod($request)
     {
+        $virtual_rooms = $this->rooms->filter(function ($room) {
+            return str_contains($room->site, 'Zoom') || str_contains($room->site, 'Teams');
+        })->values();
+
         $period = [
             'id' => $this->id,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'virtual_rooms' => $this->rooms->filter(function ($room) {
-                return str_contains($room->site, 'Zoom') ? $room : false;
-            })->values(),
-            'rooms' => $this->rooms->filter(function ($room) {
-                return str_contains($room->site, 'Zoom') ? false : $room;
+            'virtual_rooms' => $virtual_rooms,
+            'rooms' => $this->rooms->filter(function ($room) use ($virtual_rooms) {
+                return !$virtual_rooms->contains($room);
             })->values(),
             'modality' => $this->modality
         ];

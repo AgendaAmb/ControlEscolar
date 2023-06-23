@@ -15,12 +15,15 @@
           <p class="mt-2 mb-0 detail" v-if="confirmed"> Enlace de la reunión: </p>
           <p class="my-0" v-if="confirmed"> <a :href="url" target="_blank">{{ url }}</a> </p>
         </div>
+        <div v-else-if="site.includes('Teams')" class="col-6">
+          <p class="mt-2 mb-0 detail" v-if="confirmed"> Reunión virtual </p>
+        </div>
         <div v-else>
           <p class="mt-2 mb-0 detail" v-if="confirmed"> Reunión presencial </p>
         </div>
       </div>
       <p class="my-2 detail text-right"> {{ site }} , {{ start_time }} - {{ end_time }}</p>
-    </div>
+      </div>
   </a>
 </template>
 
@@ -63,7 +66,7 @@ export default {
   props: {
     site: {
       type: String,
-      default: "Indefinido"
+      default: "No se bro"
     },
     // Clave de la entrevista.
     id: {
@@ -142,6 +145,8 @@ export default {
 
   methods: {
     showDetails() {
+      console.log('El sitio de la reunion es ' + this.site);
+      console.log('se incluye Teams en site? ', this.site.includes('Teams'));
       this.$root.$emit('show_details', this);
 
       return false;

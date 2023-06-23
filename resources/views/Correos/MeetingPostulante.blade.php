@@ -24,56 +24,59 @@
                         <br>
                         {{ $academic_program['name'] }}
                         <br>
-                        Convocatoria 2022-02
+                        Convocatoria 2023-08
                     </strong>
                 </p>
 
             </div>
-            <div class="row justify-content-end" style="text-align: right;">
+            <div class="row my-2 justify-content-end" style="text-align: right; margin-top: 20px; margin-bottom: 20px;">
                 San Luis Potosí, S.L.P,&nbsp;
                 {{ Carbon\Carbon::parse(Carbon\Carbon::now())->locale('es')->isoFormat('dddd DD MMMM YYYY') }}
             </div>
 
-            <div class="container my-4">
+            <div class="container">
                 <p>Estimado(a)
                     <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
+
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
                     selección 2022 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
                     estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
                     se llevará a cabo:
                 </p>
-                <table class="table" style="max-width: 800px; margin: 0 auto;">
-                    <tbody>
-                        <tr>
-                            <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
 
-                        </tr>
+                <div class="container" style="margin-top: 20px; margin-bottom: 20px">
+                    <table class="table" style="max-width: 700px; margin: 0 auto;">
+                        <tbody>
                         <tr>
-                            <td scope="row">Correo electrónico</td>
-                            <td>{{ $Student->email }} </td>
-                        </tr>
-                        <tr>
-                            <td>Día de la entrevista</td>
-                            <td>{{ Carbon\Carbon::parse($Interview->date)->locale('es')->isoFormat('DD MMMM YYYY') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Horario de la entrevista</td>
-                            <td>{{ $Interview->start_time }}-{{ $Interview->end_time }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Lugar</td>
-                            <td>{{ $Room }}</td>
-                        </tr>
-                        <tr>
-                            <td>Modalidad de la entrevista</td>
-                            <td>Presencial</td>
-                        </tr>
+                                <td scope="row" style="padding-left: 1rem; padding-right: 1rem;"><strong>Nombre del aspirante</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
+                            </tr>
+                            <tr>
+                                <td scope="row" style="padding-left: 1rem; padding-right: 1rem;"><strong>Correo electrónico</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Student->email }} </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Día de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Interview->date)->locale('es')->isoFormat('DD MMMM YYYY') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Horario de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Interview->start_time }}-{{ $Interview->end_time }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Modalidad de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">Presencial</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Lugar</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Room }}</td>
+                            </tr>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
             <div class="container">
@@ -84,7 +87,7 @@
                         sea ingresado en la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     
-                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <!-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -93,13 +96,12 @@
                             ])
                             Subir Ensayo
                         @endcomponent
-
-                    </div>
+                    </div> -->
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
-                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <!-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
                         @component('mail::button',
                             [
@@ -110,7 +112,7 @@
                             Subir Presentación y Ensayo
                         @endcomponent
 
-                    </div>
+                    </div> -->
                 @endif
                 
             </div>

@@ -24,50 +24,52 @@
                         <br>
                         {{ $academic_program['name'] }}
                         <br>
-                        Convocatoria 2022-02
+                        Convocatoria 2023-08
                     </strong>
                 </p>
 
             </div>
 
-            <div class="row justify-content-end" style="text-align: right;">
+            <div class="row my-2 justify-content-end" style="text-align: right; margin-top: 20px; margin-bottom: 20px;">
                 San Luis Potosí, S.L.P,&nbsp;
                 {{ Carbon\Carbon::parse(Carbon\Carbon::now())->locale('es')->isoFormat('dddd DD MMMM YYYY') }}
             </div>
 
-            <div class="container my-4">
-                <p>Estimado Profesor {{ $Profesor->middlename . ' ' . $Profesor->surname . ' ' . $Profesor->name }}</p>
-                <p>Agredecemos su partición en la entrevista de:</p>
-                <table class="table" style="max-width: 800px; margin: 0 auto;">
+            <div class="container">
+                <div class="row my-2">
+                    <p>Estimado Profesor {{ $Profesor->middlename . ' ' . $Profesor->surname . ' ' . $Profesor->name }}</p>
+                    <p>Agredecemos su partición en la entrevista de:</p>
+                </div>
 
-                    <tbody>
-                        <tr>
-                            <td scope="row">Nombre del aspirante</td>
-                            <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
+                <div class="container" style="margin-top: 20px; margin-bottom: 20px">
+                    <table class="table" style="max-width: 700px; margin: 0 auto;">
+                        <tbody>
+                            <tr>
+                                <td scope="row" style="padding-left: 1rem; padding-right: 1rem;"><strong>Nombre del aspirante</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Día de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Interview->date)->locale('es')->isoFormat('DD MMMM YYYY') }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Horario de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Interview->start_time }}-{{ $Interview->end_time }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Modalidad de la entrevista</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">Presencial</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Lugar</strong></td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Room }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                        </tr>
-
-                        <tr>
-                            <td>Día de la entrevista</td>
-                            <td>{{ Carbon\Carbon::parse($Interview->date)->locale('es')->isoFormat('DD MMMM YYYY') }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Horario de la entrevista</td>
-                            <td>{{ $Interview->start_time }}-{{ $Interview->end_time }}</td>
-                        </tr>
-                        <tr>
-                            <td>Lugar</td>
-                            <td>{{ $Room }}</td>
-                        </tr>
-                        <tr>
-                            <td>Modalidad de la entrevista</td>
-                            <td>Presencial</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="row mt-2">
+                <div class="row my-2">
                     <p><strong>Indicaciones:</strong></p>
 
                     <ul>

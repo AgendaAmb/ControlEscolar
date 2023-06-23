@@ -26,6 +26,8 @@ use App\Mail\SendMeeatingInformationProfesor;
 //Zoom
 use App\Mail\SendZoomMeeatingInformation;
 use App\Mail\SendZoomMeeatingInformationProfesor;
+//Teams
+use App\Mail\SendTeamsMeeatingInformation;
 
 use App\Helpers\MiPortalService;
 use App\Mail\UpdateDocumentsInterview;
@@ -309,11 +311,16 @@ class InterviewController extends Controller
                         $ResponseMeating = app(ZoomController::class)->store($interview2);
                         $join_url = $ResponseMeating['join_url'];
                     } catch (\Exception $e) {
-                        $join_url = "En linea por Teams";
+                        $join_url = "En linea por Zoom";
                     }
                     // Actualizacion bandera - entrevista cerrada
                     Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => $join_url]);
-                } else {
+                
+                } 
+                elseif (str_contains($int_room->site, 'Teams') ? true : false) {
+                    Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'En linea por Teams']);
+                }
+                else {
                     Interview::where('id', $request->id)->update(['confirmed' => true, 'url' => 'Presencial']);
                 }
 
@@ -390,6 +397,7 @@ class InterviewController extends Controller
 
                     if ($User->type == "externs" || $User->type == "students" || $User->type == "Comunidad AA") {
                         $this->alumno = $User;
+                        echo($int_room->site);
                         // * Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
                             Mail::mailer($servicio_correo)
@@ -397,10 +405,19 @@ class InterviewController extends Controller
                                 ->cc($mail_academic_program)
                                 ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
-                        } else {
+                        } 
+                        else if (str_contains($int_room->site, 'Teams') ? true : false) {
+                            Mail::mailer($servicio_correo)
+                                ->to($user_mail)
+                                ->cc($mail_academic_program)
+                                ->send(new SendTeamsMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
+                            // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
+                        } 
+                        else {
                             Mail::mailer($servicio_correo)
                                 ->cc($mail_academic_program)
-                                ->to($user_mail)->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
+                                ->to($user_mail)
+                                ->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformation($interview2, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                         }
                         // Mail::mailer('smtp')->to($User->email)->send(new SendMeeatingInformation($ResponseMeating, $User, $archive->announcement->academicProgram['name'], $request->room));
@@ -422,7 +439,11 @@ class InterviewController extends Controller
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
                             Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
-                        } else {
+                        } 
+                        elseif (str_contains($int_room->site, 'Teams') ? true : false) {
+                            Mail::mailer($servicio_correo)->to($user_mail)->send(new sendTeamsMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
+                        }
+                        else {
                             Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
                         }

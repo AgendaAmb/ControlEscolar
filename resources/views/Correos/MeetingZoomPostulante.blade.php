@@ -24,7 +24,7 @@
                         <br>
                         {{ $academic_program['name'] }}
                         <br>
-                        Convocatoria 2022-02
+                        Convocatoria 2023-08
                     </strong>
                 </p>
 
@@ -36,9 +36,9 @@
 
             <div class="container my-4">
                 <p>Estimado(a)
-                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
+                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong><br>
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
-                    selección 2022 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
+                    selección 2023 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
                     estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
                     se llevará a cabo:
                 </p>
@@ -46,41 +46,41 @@
                 <table class="table" style="max-width: 800px; margin: 0 auto;">
                     <tbody>
                         <tr>
-                            <td scope="row">Nombre del aspirante</td>
+                            <td scope="row"><strong>Nombre del aspirante</strong></td>
                             <td>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</td>
 
                         </tr>
                         <tr>
-                            <td scope="row">Correo electrónico</td>
+                            <td scope="row"><strong>Correo electrónico</strong></td>
                             <td>{{ $Student->email }} </td>
 
                         </tr>
                         <tr>
-                            <td>Día de la entrevista</td>
+                            <td><strong>Día de la entrevista</strong></td>
                             <td>{{ Carbon\Carbon::parse($Meeating['start_time'])->locale('es')->isoFormat('DD MMMM YYYY') }}
                             </td>
                         </tr>
                         <tr>
-                            <td>Horario de la entrevista</td>
+                            <td><strong>Horario de la entrevista</strong></td>
                             <td>{{ Carbon\Carbon::parse($Meeating['start_time'])->subHour(6)->toTimeString() }}-{{ Carbon\Carbon::createFromDate($Meeating['start_time'])->addMinutes($Meeating['duration'])->subHour(6)->toTimeString() }}
                             </td>
                         </tr>
                         <tr>
-                            <td>Lugar</td>
+                            <td><strong>Lugar</strong></td>
                             <td>{{ $Room }}</td>
                         </tr>
                         <tr>
-                            <td>Enlace para la entrevista</td>
+                            <td><strong>Enlace para la entrevista</strong></td>
                             <td>{{ $Meeating['join_url'] }}</td>
                         </tr>
                         <tr>
-                            <td>Modalidad de la entrevista</td>
+                            <td><strong>Modalidad de la entrevista</strong></td>
                             <td>En línea a través de ZOOM</td>
                         </tr>
 
                     </tbody>
                 </table>
-            </div>
+            </div></br>
             <div class="container">
                 @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' ||  $academic_program['alias'] == 'enrem')
                     <div class="row my-2">
@@ -101,8 +101,9 @@
 
                     </div>
                 @elseif ($academic_program['alias'] === 'doctorado')
+                    </br>
                     <div class="row my-2">
-                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
+                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a más tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
 

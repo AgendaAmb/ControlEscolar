@@ -46,7 +46,7 @@ class Interview extends Model
     /**
      * Obtiene el encargado de redactar el dictamen general.
      *
-     * @return BelongsTo
+     * @return BelongsTo  
      */
     public function dictamenRedactor(): HasOne
     {
