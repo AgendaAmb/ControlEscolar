@@ -80,7 +80,7 @@
             </div>
 
             <div class="container">
-                @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'imarec' ||  $academic_program['alias'] == 'enrem')
+                @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'enrem')
                     <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
                         ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita

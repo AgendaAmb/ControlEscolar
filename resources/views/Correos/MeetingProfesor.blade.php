@@ -76,7 +76,7 @@
                         <li> Acceder a <a href="https://ambiental.uaslp.mx/Bienvenida" target="_blank"
                                 rel="noopener noreferrer">https://ambiental.uaslp.mx/Bienvenida</a></li>
                         <li> En el menú superior <strong>Entrevista</strong> , submenú <strong>Programa de
-                                entrevista</strong> podrá visualizar el expediente del candidato, ensayo así como la rúbrica
+                                entrevista</strong> podrá visualizar el expediente del candidato, así como la rúbrica
                         </li>
     
                     </ul>
