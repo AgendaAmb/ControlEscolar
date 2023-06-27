@@ -36,10 +36,10 @@
 
             <div class="container">
                 <p>Estimado(a)
-                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong>
+                    <strong>{{ $Student->middlename . ' ' . $Student->surname . ' ' . $Student->name }}</strong><br>
 
                     Por medio de la presente se le informa que la documentación entregada para el proceso de
-                    selección 2022 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
+                    selección 2023 para el programa de {{ $academic_program['name'] }} CUMPLE con los requisitos
                     estipulados en la convocatoria. Por lo tanto, se le notifica que la etapa siguiente (entrevista)
                     se llevará a cabo:
                 </p>
@@ -87,7 +87,7 @@
                         sea ingresado en la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     
-                    <!-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -96,13 +96,14 @@
                             ])
                             Subir Ensayo
                         @endcomponent
-                    </div> -->
+                    </div>
+                    
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row my-2">
                         Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
-                    <!-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
 
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -111,8 +112,8 @@
                             ])
                             Subir Presentación y Ensayo
                         @endcomponent
+                    </div>
 
-                    </div> -->
                 @endif
                 
             </div>

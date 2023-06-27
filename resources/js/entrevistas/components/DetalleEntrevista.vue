@@ -272,7 +272,7 @@ export default {
     if(this.loggedUserName != this.professor )
     {
 
-      if (confirm('¿Estás segure que deseas participar en esta entrevista?') === false)
+      if (confirm('¿Estás seguro(a) que deseas participar en esta entrevista?') === false)
         return false;
 
       axios.post('/controlescolar/entrevistas/interviewUser', {
@@ -299,7 +299,7 @@ export default {
     },
 
     cancelarRegistro(index) {
-      if (confirm('¿Estás segur(a) que deseas cancelar tu participación en la entrevista?') === false)
+      if (confirm('¿Estás seguro(a) que deseas cancelar tu participación en la entrevista?') === false)
         return false;
 
       // console.log(this.$root.loggedUser);

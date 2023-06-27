@@ -55,6 +55,7 @@ class InterviewResource extends JsonResource
             'room_id' => $this->room_id,
             'rubrics' => RubricPreviewResource::collection($this->evaluationRubrics),
             'site' => $room->site ?? 'Sala',
+            'academicprogram' => $academic_program->name,
             'type' => $academic_program->type,
             'average_rubric' => $this->setAverageRubric($request,$archive)
         ];

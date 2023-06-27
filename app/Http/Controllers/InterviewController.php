@@ -108,7 +108,7 @@ class InterviewController extends Controller
     {
         
         $isProfessor = false;
-        $announcements = Announcement::idDescending()->get();
+        $announcements = Announcement::orderBy('id', 'desc')->get();
 
         foreach ($announcements as $announcement) {
             $academic_program = AcademicProgram::where('id', $announcement->academic_program_id)->first();
@@ -136,11 +136,29 @@ class InterviewController extends Controller
      */
     public function getFilteredInterviews(Request $request)
     {
-        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
-            ?   Interview::select('*')->where('confirmed', 1)
-            :   $request->user()->interviews()->where('confirmed', 1);
+        $userId = $request->user()->id;
+        $filterDate = '2023-05-01';
 
-        // * Obtiene los datos de cada entrevista
+        $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
+            ? Interview::select('*')->where('confirmed', 1)->where('date', '>=', $filterDate)->orderBy('date', 'desc')
+            : $request->user()->interviews()->where('confirmed', 1)->where('date', '>=', $filterDate)->orderBy('date', 'desc');
+
+        //Coordinador PMPCA
+        if ($userId === 15641) {
+            $interviews->where(function ($query) {
+                $query->where('program', '=', 'Maestría en ciencias ambientales')
+                      ->orWhere('program', '=', 'Doctorado en ciencias ambientales');
+            });
+        }
+
+        //Coordinador IMAREC
+        if ($userId === 24928) {
+            // Agrega el contenido especial para el usuario con ID 11007
+            // Por ejemplo:
+            $interviews->where('program', '=', 'Maestría Interdisciplinaria en ciudades sostenibles');
+        }
+
+        // Obtiene los datos de cada entrevista
         $interview_program_resource = new InterviewProgramResource($interviews);
 
         return $interview_program_resource->toArray($request);
@@ -406,7 +424,7 @@ class InterviewController extends Controller
                                 ->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformation($ResponseMeating, $user_data, $archive->announcement->academicProgram, $request->room, $archive->id, $url_LogoAA));
                         } 
-                        else if (str_contains($int_room->site, 'Teams') ? true : false) {
+                        elseif (str_contains($int_room->site, 'Teams') ? true : false) {
                             Mail::mailer($servicio_correo)
                                 ->to($user_mail)
                                 ->cc($mail_academic_program)
@@ -440,8 +458,8 @@ class InterviewController extends Controller
                             Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
                         } 
-                        elseif (str_contains($int_room->site, 'Teams') ? true : false) {
-                            Mail::mailer($servicio_correo)->to($user_mail)->send(new sendTeamsMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
+                        else if (str_contains($int_room->site, 'Teams') ? true : false) {
+                            Mail::mailer($servicio_correo)->to($user_mail)->send(new sendTeamsMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
                         }
                         else {
                             Mail::mailer($servicio_correo)->to($user_mail)->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));

@@ -3,15 +3,20 @@
         <table class="table text-center">
             <thead class="interview-program-header">
                 <tr>
+                    <th> Fecha </th>
                     <th> Horario </th>
-                    <th> Lugar</th>
+                    <th> Lugar </th>
                     <th> Nombre </th>
+                    <th> Programa academico </th>
                     <th> Expediente </th>
                     <th> Rubricas </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="interview in interviews_ordered" :key="interview.id">
+                    <td>
+                        {{ interview.date }}
+                    </td>
                     <td>
                         {{interview.start_time + " a " + interview.end_time}}
                     </td>
@@ -20,6 +25,9 @@
                     </td>
                     <td class="appliant">
                         {{interview.appliant}}
+                    </td>
+                    <td>
+                        {{ interview.academicprogram }}
                     </td>
                     <td>
                         <!-- ! Exédientes -->
@@ -48,7 +56,7 @@
                                 {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </div>
-                        <div v-if="!loggedUserIsPNB()">
+                        <div v-if="!loggedUserIsPNB() || loggedUserIsCoordinador()">
                             <hr>
                             <a
                                 class="d-block text-capitalize text-decoration-none" 

@@ -50,7 +50,7 @@
 
                             <tr>
                                 <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Día de la entrevista</strong></td>
-                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Meeating['start_time'])->locale('es')->isoFormat('DD MMMM YYYY') }}</td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Meeating['date'])->locale('es')->isoFormat('DD MMMM YYYY') }}</td>
                             </tr>
 
                             <tr>

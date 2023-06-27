@@ -59,7 +59,7 @@
 
                             <tr>
                                 <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Día de la entrevista</strong></td>
-                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Meeating['start_time'])->locale('es')->isoFormat('DD MMMM YYYY') }}</td>
+                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ Carbon\Carbon::parse($Meeating['date'])->locale('es')->isoFormat('DD MMMM YYYY') }}</td>
                             </tr>
 
                             <tr>
@@ -95,7 +95,7 @@
                         sea ingresado en la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
                     
-                    <!-- <div class="row mt-2 mb-2 align-items-center justify-content-center">
+                    <div class="row mt-2 mb-2 align-items-center justify-content-center">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -104,14 +104,14 @@
                             ])
                             Subir Ensayo
                         @endcomponent
-
-                    </div> -->
+                    </div>
+                    
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row">
                         Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
                     </div>
 
-                    <!-- <div class="row align-items-center justify-content-center" style="margin-top: 20px">
+                    <div class="row align-items-center justify-content-center" style="margin-top: 20px">
                         @component('mail::button',
                             [
                                 'url' => route('documentsForInterview.show', [
@@ -120,7 +120,8 @@
                             ])
                             Subir Presentación y Ensayo
                         @endcomponent
-                    </div> -->
+                    </div>
+
                 @endif
                 
             </div>

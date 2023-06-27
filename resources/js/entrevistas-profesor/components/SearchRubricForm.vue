@@ -3,7 +3,7 @@
       <div class="row mx-1 align-items-center" style="max-height: 75px;min-height: 50px;">
 
         <!-- SELECT : PROGRAMA ACADEMICO -->
-        <div class="form-group col-5">
+        <!-- <div class="form-group col-5">
           <label class="h6"> <strong> Programa académico </strong> </label>
           <select v-model="AcademicProgramSelect" class="form-control">
             <option :value="null" selected>Escoge una opción</option>
@@ -13,10 +13,10 @@
               </p>
             </option>
           </select>
-        </div>
+        </div> -->
 
         <!-- SELECT : PERIODO -->
-        <div class="form-group col-5">
+        <!-- <div class="form-group col-5">
           <label class="h6"> <strong> Periodo </strong> </label>
           <select v-model="announcement_selected" class="form-control">
             <option :value="null" selected>Escoge una opción</option>
@@ -27,12 +27,13 @@
               </p>
             </option>
           </select>
-        </div>
+        </div> -->
 
         <div class="form-group col-2 justify-content-center" style="height:100%">
-          <label class="h6"> <strong> Buscar </strong> </label>
+          <label class="h6"> <strong> Presione para ver las entrevistas </strong> </label>
           <b-btn variant="outline-primary" type="submit" style="width:100%; height: 45px!important;">
-            <b-icon icon="search" aria-hidden="true"></b-icon>
+            <b-icon icon="eye" aria-hidden="true"></b-icon>
+            <p>Ver entrevistas</p>
           </b-btn>
         </div>
       </div>
@@ -91,8 +92,8 @@ export default {
 
         this.announcements.forEach((element) => {
           if (newVal === element.name) {
-            console.log("newVal: " + newVal);
-            console.log("academicProgram: " + element.name);
+            // console.log("newVal: " + newVal);
+            // console.log("academicProgram: " + element.name);
             this.announcementsForAcademicProgram.push(element);
           }
         });
@@ -186,13 +187,13 @@ export default {
     },
     buscaExpedientes() {
       //Datos no completos para hacer busqueda
-      if (this.announcement_selected == null ||this.academic_program_selected == null){
-        Swal.fire({
-          title: "Error",
-          text: "Falta alguno de los campos",
-          icon: "error",
-        });
-      }else{
+      // if (this.announcement_selected == null ||this.academic_program_selected == null){
+      //   Swal.fire({
+      //     title: "Error",
+      //     text: "Falta alguno de los campos",
+      //     icon: "error",
+      //   });
+      // }else{
         //Se hace la busqueda
         axios.get("/controlescolar/entrevistas/getFilteredInterviews", {
           params: {
@@ -210,7 +211,7 @@ export default {
             icon: "error",
           });
         });
-      }
+      //}
       return false;
     },
   },
