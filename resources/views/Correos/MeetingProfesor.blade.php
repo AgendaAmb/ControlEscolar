@@ -58,13 +58,29 @@
                                 <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Interview->start_time }}-{{ $Interview->end_time }}</td>
                             </tr>
                             <tr>
-                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Modalidad de la entrevista</strong></td>
-                                <td style="padding-left: 1rem; padding-right: 1rem;">Presencial</td>
+                                @if($Room === 'Teams')
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Modalidad de la entrevista</strong></td>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;">Virtual</td>
+                                @else
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Modalidad de la entrevista</strong></td>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;">Presencial</td>
+                                @endif
                             </tr>
                             <tr>
-                                <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Lugar</strong></td>
-                                <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Room }}</td>
+                                @if($Room === 'Teams')
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Plataforma</strong></td>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Room }}</td>
+                                @else
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Lugar</strong></td>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;">{{ $Room }}</td>
+                                @endif
                             </tr>
+                            @if($Room === 'Teams')
+                                <tr>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><strong>Enlace para la entrevista</strong></td>
+                                    <td style="padding-left: 1rem; padding-right: 1rem;"><a href="http://a.uaslp.mx/Ej2q3JPb">Unirse a la reunión</a></td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -76,7 +92,7 @@
                         <li> Acceder a <a href="https://ambiental.uaslp.mx/Bienvenida" target="_blank"
                                 rel="noopener noreferrer">https://ambiental.uaslp.mx/Bienvenida</a></li>
                         <li> En el menú superior <strong>Entrevista</strong> , submenú <strong>Programa de
-                                entrevista</strong> podrá visualizar el expediente del candidato, así como la rúbrica
+                                entrevista</strong> podrá visualizar el expediente del candidato, así como la rúbrica.
                         </li>
     
                     </ul>

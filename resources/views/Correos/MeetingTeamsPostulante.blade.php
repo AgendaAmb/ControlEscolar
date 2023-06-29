@@ -91,8 +91,12 @@
                 @if ($academic_program['alias'] === 'maestria' || $academic_program['alias'] == 'enrem') 
                     <div class="row">
                         Dentro de los requisitos, se establece la elaboración de un ensayo académico relacionado con las
-                        ciencias ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
-                        sea ingresado en la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
+                        Ciencias Ambientales o bien relacionado con tu posible trabajo de tesis, el cual se le solicita
+                        sea ingresado en la plataforma a mas tardar el día 29 de junio a las 23:59 horas.
+                        <br>
+                        Favor de confirmar entrevista.
+                        <br>
+                        Saludos cordiales.
                     </div>
                     
                     <div class="row mt-2 mb-2 align-items-center justify-content-center">
@@ -108,7 +112,11 @@
                     
                 @elseif ($academic_program['alias'] === 'doctorado')
                     <div class="row">
-                        Dentro de los requisitos, se establece la elaboración UNA PRESENTACIÓN Y ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 30 de Noviembre a las 14:00 hrs.
+                    Dentro de los requisitos, se establece la elaboración de UNA PRESENTACIÓN Y UN ENSAYO, las cuales deberán de ser ingresadas a la plataforma a mas tardar el día 29 de junio a las 23:59 horas.
+                    <br>
+                    Favor de confirmar entrevista.
+                    <br>
+                    Saludos cordiales.
                     </div>
 
                     <div class="row align-items-center justify-content-center" style="margin-top: 20px">
