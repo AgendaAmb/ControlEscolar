@@ -144,7 +144,7 @@ class InterviewController extends Controller
             : $request->user()->interviews()->where('confirmed', 1)->where('date', '>=', $filterDate)->orderBy('date', 'desc');
 
         //Coordinador PMPCA
-        if ($userId === 15641) {
+        if ($userId === 13675) {
             $interviews->where(function ($query) {
                 $query->where('program', '=', 'Maestría en ciencias ambientales')
                       ->orWhere('program', '=', 'Doctorado en ciencias ambientales');
@@ -153,8 +153,6 @@ class InterviewController extends Controller
 
         //Coordinador IMAREC
         if ($userId === 24928) {
-            // Agrega el contenido especial para el usuario con ID 11007
-            // Por ejemplo:
             $interviews->where('program', '=', 'Maestría Interdisciplinaria en ciudades sostenibles');
         }
 
