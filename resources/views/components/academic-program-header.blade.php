@@ -98,7 +98,7 @@ $reference = "/controlescolar/ca/?id=";
 $flag = false;
 if(Auth::user()){
     $reference = "/controlescolar/ca/?id=". Auth::user()->id;
-    $reference = "https://ambiental.uaslp.mx/ComiteAcademico/"; //Comentar despues de actualizar comite
+    // $reference = "https://ambiental.uaslp.mx/ComiteAcademico/"; //Comentar despues de actualizar comite
     $flag = true;
 }
 
