@@ -46,13 +46,13 @@
                     </td>
 
                     <!-- Profesores -->
-                    <td v-else-if="$root.loggedUserIsPNB()">
+                    <td v-if="$root.loggedUserIsPNB()">
                         <a class="d-block" v-for="rubric in interview.rubrics" :key="rubric.location"
-                            :href="rubric.location" target="_blank"> Formato de evaluación</a>
+                            :href="rubric.location" target="_blank">Formato de evaluación</a>
                     </td>
 
                     <!-- Control escolar -->
-                    <td v-else-if="$root.loggedUserIsSchoolControl()">
+                    <td v-if="$root.loggedUserIsSchoolControl()">
                         <a class="d-block text-capitalize text-decoration-none"
                             v-for="rubric in interview.rubrics" :key="rubric.location">
                             {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname
@@ -115,6 +115,6 @@ export default {
         href(){
             return '#'+ this.id;
         }
-    }
+    },
 }
 </script>
