@@ -40,7 +40,7 @@
           </div>
 
           <div class="mt-5 col-lg-6 col-xl-3">
-            <p class="h3">Comités académicos</p>
+            <p class="h3">Programas académicos</p>
             <form action="">
               <checkbox-edit v-for="(role, index) in academic_comittes" :key="role.id" :name="role.name" :id="role.id"
                 :pivot="role.pivot" :index="index" :array_data="selected_academic_comittes" :tipo="'academic_comittes'"

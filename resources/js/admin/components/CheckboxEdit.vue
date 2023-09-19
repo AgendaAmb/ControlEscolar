@@ -51,6 +51,7 @@ export default {
   },
 
   created() {
+    console.log(this.name);
     switch (this.name) {
       case 'admin':
         this.local_name = 'Administrador';
@@ -86,7 +87,7 @@ export default {
         this.local_name = 'Facultad de Ciencias Químicas';
         break;
       case 'UASLP_FACULTAD DE INGENIERÍA':
-        this.local_name = 'Faculdata de Ingeniería';
+        this.local_name = 'Facultad de Ingeniería';
         break;
       case 'UASLP_INSTITUTO DE INVESTIGACIÓN DE ZONAS DESÉRTICAS':
         this.local_name = 'Instituto de investigación de zonas desérticas';

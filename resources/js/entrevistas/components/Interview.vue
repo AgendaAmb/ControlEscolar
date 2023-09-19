@@ -3,10 +3,10 @@
     <div class="col-12 text-left">
       <h5 class="my-1 appliant"> {{ appliant }} </h5>
       <div class="row">
-        <div class="col-6">
+        <!-- <div class="col-6">
           <p class="mt-1 mb-0 detail"> Carta de intención otorgada por: </p>
           <p class="my-0"> {{ professor }} </p>
-        </div>
+        </div> -->
         <div class="col-6">
           <p class="mt-1 mb-0 detail"> Programa académico: </p>
           <p class="my-0"> {{ program }} </p>

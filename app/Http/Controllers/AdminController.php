@@ -38,6 +38,8 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $reolesv = Role::select(['id', 'name'])->get();
+        echo $reolesv;
         return view('admin.index')
             ->with('roles', Role::select(['id', 'name'])->get())
             ->with('academic_areas', AcademicArea::select(['id', 'name'])->get())
