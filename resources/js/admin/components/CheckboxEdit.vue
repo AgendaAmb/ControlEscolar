@@ -1,3 +1,4 @@
+
 <template>
   <div class="col">
     <b-form-checkbox switch v-model="Checked" size="lg">
@@ -38,7 +39,7 @@ export default {
 
     tipo: {
       type: String,
-      default: "roles"
+      default: "roles",
     },
   },
 
@@ -51,7 +52,6 @@ export default {
   },
 
   created() {
-    console.log(this.name);
     switch (this.name) {
       case 'admin':
         this.local_name = 'Administrador';
