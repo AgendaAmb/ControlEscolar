@@ -137,11 +137,11 @@ class InterviewController extends Controller
     public function getFilteredInterviews(Request $request)
     {
         $userId = $request->user()->id;
-        $filterDate = '2023-05-01';
+        // $filterDate = '2023-05-01';
 
         $interviews = $request->user()->hasAnyRole(['admin', 'control_escolar', 'comite_academico', 'coordinador']) === true
-            ? Interview::select('*')->where('confirmed', 1)->where('date', '>=', $filterDate)->where('start_time', '12:00:00')->where('room_id', '221')->orderBy('date', 'desc')
-            : $request->user()->interviews()->where('confirmed', 1)->where('date', '>=', $filterDate)->orderBy('date', 'desc');
+            ? Interview::select('*')->where('confirmed', 1)->where('start_time', '12:00:00')->where('room_id', '221')->orderBy('date', 'desc')
+            : $request->user()->interviews()->where('confirmed', 1)->orderBy('date', 'desc');
 
         //Coordinador PMPCA
         if ($userId === 15641) {

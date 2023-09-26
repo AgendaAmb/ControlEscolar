@@ -49,7 +49,7 @@ $reference = "/controlescolar/ca/?id=";
             @endif
 
             
-            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('coordinador'))
+            @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('control_escolar') || Auth::user()->hasRole('profesor_nb') || Auth::user()->hasRole('profesor_colaborador') || Auth::user()->hasRole('coordinador') || Auth::user()->hasRole('comite_academico'))
                 {{-- Entrevistas organizar --}}
                 <div class="nav-item dropdown">
                     <a id="Entrevistas" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown"

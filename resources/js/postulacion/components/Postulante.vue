@@ -57,7 +57,7 @@
             readonly
           />
         </div>
-        <div class="form-group col-lg-3">
+        <div class="form-group col-lg-6 col-xl-4">
           <label> País de nacimiento: </label>
           <input
             v-model="birth_country"
@@ -66,7 +66,7 @@
             readonly
           />
         </div>
-        <div class="form-group col-lg-3">
+        <div class="form-group col-lg-6 col-xl-4">
           <label> Estado de nacimiento: </label>
           <input
             v-model="birth_state"
@@ -75,16 +75,7 @@
             readonly
           />
         </div>
-        <div class="form-group col-lg-3">
-          <label> País de residencia: </label>
-          <input
-            v-model="residence_country"
-            type="text"
-            class="form-control"
-            readonly
-          />
-        </div>
-        <div class="form-group col-lg-3">
+        <div class="form-group col-lg-6 col-xl-4">
           <label> Teléfono de contacto: </label>
           <input
             v-model="phone_number"
@@ -106,7 +97,86 @@
             readonly
           />
         </div>
+        <h3>Domicilio de residencia</h3>
+        <div class="form-group col-lg-3">
+          <label> Pais: </label>
+          <input
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Estado: </label>
+          <input
+         
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Municipio: </label>
+          <input
+          
+            type="text"
+            class="form-control"
+           
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Codigo Postal: </label>
+          <input
+          
+            type="text"
+            class="form-control"
+          
+          />
+        </div>
       </div>
+      <div class="col-12">
+        <div class="row">
+      <div class="form-group col-lg-3">
+          <label> Calle: </label>
+          <input
+            
+            type="text"
+            class="form-control"
+          
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Numero exterior: </label>
+          <input
+          
+            type="text"
+            class="form-control"
+            
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Numero interior (opcional): </label>
+          <input
+            
+            type="text"
+            class="form-control"
+            
+          />
+        </div>
+        <div class="form-group col-lg-3">
+          <label> Colonia: </label>
+          <input
+            type="text"
+            class="form-control"
+          />
+        </div>
+      </div>
+      </div>
+      <button
+                        class="uaslp-btn"
+                        
+                    >
+                        <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+                        <span>Guardar</span>
+                    </button>
     </div>
 
     <div class="row mt-4">

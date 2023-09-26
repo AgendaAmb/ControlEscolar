@@ -47,7 +47,7 @@
                                 {{ rubric.user.name }} {{ rubric.user.middlename }} {{ rubric.user.surname }}
                             </a>
                         </div>
-                        <div v-if="loggedUserIsSchoolControl()">
+                        <div v-if="loggedUserIsPNB()">
                             <a class="d-block text-capitalize text-decoration-none" 
                                 v-for="rubric in interview.rubrics" 
                                 :key="rubric.location"
