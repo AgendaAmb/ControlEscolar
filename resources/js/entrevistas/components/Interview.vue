@@ -1,7 +1,7 @@
 <template>
   <a class="row mx-3 card my-1" @click="showDetails">
     <div class="col-12 text-left">
-      <h5 class="my-1 appliant"> {{ appliant }} </h5>
+      <!-- <h5 class="my-1 appliant"> {{ appliant }} </h5> -->
       <div class="row">
         <!-- <div class="col-6">
           <p class="mt-1 mb-0 detail"> Carta de intención otorgada por: </p>

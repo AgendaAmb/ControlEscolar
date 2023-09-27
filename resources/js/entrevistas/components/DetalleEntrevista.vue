@@ -15,7 +15,7 @@
             <div class="row mx-3 mt-3">
               <div class="col-lg-6 px-0">
                 <h5 class="d-block fecha"> {{ date }} </h5>
-                <h5 class="d-block postulante mt-3"> {{ appliant }} </h5>
+                <!-- <h5 class="d-block postulante mt-3"> {{ appliant }} </h5> -->
                 <!-- <p class="d-block mt-3 mb-0 prof-carta-intencion"> Carta de intención otorgada por: </p>
                 <p class="d-block mt-0 prof-carta-intencion"> {{ professor }} </p> -->
               </div>
