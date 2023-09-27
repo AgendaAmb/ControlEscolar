@@ -47,6 +47,8 @@
             </div>
         </div>
 
+        <carta-intencion></carta-intencion>
+
         <!-- Documentos Requisitos ingreso  -->
         <documento-requerido
             v-for="documento in Documentos"
@@ -69,6 +71,7 @@
 
 <script>
 import DocumentoRequerido from "./DocumentoRequerido.vue";
+import CartaIntencion from "./CartaDeIntencion.vue";
 
 export default {
     props: {
@@ -96,7 +99,7 @@ export default {
             default: false,
         },
     },
-    components: { DocumentoRequerido },
+    components: { DocumentoRequerido, CartaIntencion },
     name: "requisitos-ingreso",
 
     data() {
@@ -141,21 +144,27 @@ export default {
     created() {
         //get entrance documents
         axios
-            .get("/controlescolar/solicitud/getEntranceRequiredDocuments", {
-                params: {
-                    archive_id: this.archive_id,
-                },
-            })
-            .then((response) => {
-                if (response.data != null) {
-                    this.documentos = response.data;
-                }
+      .get("/controlescolar/solicitud/getEntranceRequiredDocuments", {
+        params: {
+          archive_id: this.archive_id,
+        },
+      })
+      .then((response) => {
+        if (response.data != null) {
+          // Filtra los documentos para excluir el que tiene el nombre específico
+          this.documentos = response.data.filter((documento) => {
+            return (
+              documento.name !==
+              "12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)"
+            );
+          });
+        }
 
-                console.log(this.documentos);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        console.log(this.documentos);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
         //get exanni score
         axios
