@@ -1,42 +1,31 @@
 <template>
-    <div class="row d-flex align-items-center my-2" style="width: 100%">
-        <div class="form-group col-10 col-md-10 col-xs-9 width-100">
-            <p class="my-2 d-block">
-                <strong>
-                    12.- Carta de intención de un profesor del núcleo básico (el
-                    profesor la envía directamente)</strong
-                >
-            </p>
-            <p class="my-2 d-block">
-                Escriba aqui el correo electronico del profesor que enviara la
-                carta de intencion
-            </p>
-        </div>
+    <div class="row d-flex align-items-center my-2" style="width: 100%;padding-left: 150px;">
+    <div class="form-group col-md-7 col-xs-9">
+        <p class="my-2 d-block">
+            <strong>12.- Carta de intención de un profesor del núcleo básico (el profesor la envía directamente)</strong>
+        </p>
+        <p class="my-2 d-block">
+            Escriba aquí el correo electrónico del profesor que enviará la carta de intención
+        </p>
 
         <div class="row">
-            <!-- Email contiene datos genericos con el maximo de cartas permitidas -->
-            <div
-                v-for="(my_email, index) in emails"
-                :key="index"
-                class="form-group col-6"
-            >
-
-                <input type="text" v-model="emailToSent" placeholder="Ingrese la dirección de correo electrónico">
-
-                <!-- Ya existe la carta acorde al indexado -->
-                <label>
-                    <a style="height: 45px; width: 100%" target="_blank">
-                        <button
-                            class="uaslp-btn"
-                            @click="enviarCorreoCartaRecomendacion()"
-                        >
-                            <span>Enviar</span>
-                        </button>
-                    </a>
-                </label>
+            <div v-for="(my_email, index) in emails" :key="index" class="form-group col-12">
+                <input type="text" v-model="emailToSent[index]" placeholder="Ingrese la dirección de correo electrónico" class="form-control form-control-lg">
             </div>
         </div>
     </div>
+
+    <div class="col-md-auto">
+        <label>
+            <a style="height: 45px; width: 100%" target="_blank">
+                <button class="uaslp-btn" @click="enviarCorreoCartaRecomendacion()">
+                    <span>Enviar</span>
+                </button>
+            </a>
+        </label>
+    </div>
+</div>
+
 </template>
 
 <script>
