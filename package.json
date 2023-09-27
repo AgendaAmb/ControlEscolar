@@ -45,6 +45,7 @@
         "v-google-translate": "^1.0.0",
         "vue-event-calendar": "^1.5.2",
         "vue-multiselect": "^2.1.6",
+        "vue-router": "^4.2.5",
         "vue-select": "^3.13.0",
         "vue-sweetalert2": "^5.0.2",
         "vuex": "^3.6.2"

@@ -82,6 +82,11 @@
 
 @push('scripts')
 
+    <script>
+            redireccionar() {
+        window.location.href = `/controlescolar/solicitud/expediente/${this.archive_id}`;
+    }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/v-google-translate/lib/v-google-translate.umd.min.js"></script>
     {{-- Tendremos cinco vistas
         Administrador               Eliminar, agregar, modificar Cerrar expediente      components (postulaion.js)

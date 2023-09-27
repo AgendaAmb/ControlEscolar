@@ -872,7 +872,6 @@
             </b-card>
             <hr class="d-block" :style="ColorStrip" />
         </div>
-
         <div class="d-flex justify-content-start align-items-center my-4">
             <required-document-file-signed
                 v-for="documento in enrem_documents"
@@ -892,7 +891,22 @@
           <p class="h3"> Send responses </p>
         </b-button> -->
         </div>
+        
+    <div class="d-flex justify-content-start align-items-center my-4">
+      <ENREMarchives v-if="mostrarENREMarchives"></ENREMarchives>
     </div>
+        <div class="row my-1 justify-content-end">
+      <div class="col-auto">
+        <label>
+          <button class="uaslp-btn" @click="toggleComponent">
+            <input type="file" ref="fileInput" class="form-control d-none" />
+            <span>{{ buttonText }}</span>
+          </button>
+        </label>
+      </div>
+    </div>
+    </div>
+
 </template>
 
 <script>
@@ -911,6 +925,7 @@ import EnvironmentRelatedSkills from "./EnvironmentRelatedSkills.vue";
 import CorrespondenceAddress from "./CorrespondenceAddress.vue";
 import CheckboxPersonalize from "./CheckboxPersonalize.vue";
 import RequiredDocumentFileSigned from "./RequiredDocumentFileSigned.vue";
+import ENREMarchives from "./ENREMarchives.vue";
 
 export default {
     name: "solicitud-postulante",
@@ -931,6 +946,7 @@ export default {
         CorrespondenceAddress,
         CheckboxPersonalize,
         RequiredDocumentFileSigned,
+        ENREMarchives,
     },
 
     props: {
@@ -1006,6 +1022,8 @@ export default {
             EnglishExamTypes: [],
             defaultLanguageCode: "es",
             defaultPageLanguageCode: "es-MX",
+            mostrarENREMarchives: false,
+            mostrarBotonCerrar: false,
         };
     },
 
@@ -1028,6 +1046,9 @@ export default {
     },
 
     computed: {
+        buttonText() {
+      return this.mostrarBotonCerrar ? "Cerrar" : "Continuar";
+    },
         btnStyle: {
             get() {
                 return {
@@ -1148,6 +1169,10 @@ export default {
                 });
         },
 
+        toggleComponent() {
+      this.mostrarENREMarchives = !this.mostrarENREMarchives;
+      this.mostrarBotonCerrar = !this.mostrarBotonCerrar;
+    },
         EnviarExpediente() {
             Swal.fire({
                 title: "¿Estas seguro que todo esta completo?",
