@@ -325,7 +325,7 @@
 
     <!-- País de residencia -->
     <div class="col-lg-6 mt-3">
-      <label class="mt-3"> País de residenciaaa </label>
+      <label class="mt-3"> País de residencia </label>
       <div v-if="readonly ===  false">
         <select
           v-model="ResidenceCountry"

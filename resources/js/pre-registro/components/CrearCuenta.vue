@@ -32,9 +32,10 @@
                     name="TipoUsuario"
                     v-model="TipoUsuario"
                     value="Comunidad AA"
+                    id="ComunidadAA"
                     v-on:click="setPerteneceUASLP(true)"
                 />
-                <label class="form-check-label">
+                <label class="form-check-label" for="ComunidadAA">
                     Ya estoy registrado en el portal de Agenda Ambiental
                 </label>
             </div>
@@ -45,9 +46,10 @@
                     name="TipoUsuario"
                     v-model="TipoUsuario"
                     value="Ninguno"
+                    id="TipoUsuario"
                     v-on:click="setPerteneceUASLP(false)"
                 />
-                <label class="form-check-label">
+                <label class="form-check-label" for="TipoUsuario">
                     No estoy registrado en el portal de Agenda Ambiental</label
                 >
             </div>

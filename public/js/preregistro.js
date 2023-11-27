@@ -221,6 +221,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6126,6 +6128,7 @@ var render = function () {
               type: "radio",
               name: "TipoUsuario",
               value: "Comunidad AA",
+              id: "ComunidadAA",
             },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Comunidad AA") },
             on: {
@@ -6138,11 +6141,15 @@ var render = function () {
             },
           }),
           _vm._v(" "),
-          _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(
-              "\n                Ya estoy registrado en el portal de Agenda Ambiental\n            "
-            ),
-          ]),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "ComunidadAA" } },
+            [
+              _vm._v(
+                "\n                Ya estoy registrado en el portal de Agenda Ambiental\n            "
+              ),
+            ]
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-check" }, [
@@ -6156,7 +6163,12 @@ var render = function () {
               },
             ],
             staticClass: "form-check-input",
-            attrs: { type: "radio", name: "TipoUsuario", value: "Ninguno" },
+            attrs: {
+              type: "radio",
+              name: "TipoUsuario",
+              value: "Ninguno",
+              id: "TipoUsuario",
+            },
             domProps: { checked: _vm._q(_vm.TipoUsuario, "Ninguno") },
             on: {
               click: function ($event) {
@@ -6168,11 +6180,15 @@ var render = function () {
             },
           }),
           _vm._v(" "),
-          _c("label", { staticClass: "form-check-label" }, [
-            _vm._v(
-              "\n                No estoy registrado en el portal de Agenda Ambiental"
-            ),
-          ]),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "TipoUsuario" } },
+            [
+              _vm._v(
+                "\n                No estoy registrado en el portal de Agenda Ambiental"
+              ),
+            ]
+          ),
         ]),
         _vm._v(" "),
         "tipo_usuario" in _vm.errores
@@ -7265,7 +7281,7 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-6 mt-3" }, [
-      _c("label", { staticClass: "mt-3" }, [_vm._v(" País de residenciaaa ")]),
+      _c("label", { staticClass: "mt-3" }, [_vm._v(" País de residencia ")]),
       _vm._v(" "),
       _vm.readonly === false
         ? _c("div", [
