@@ -1,6 +1,6 @@
 <template>
-  <div class="form-group col-12 col-sm-6 col-lg-4 mb-auto">
-    <label> Ingresa tu correo electrónico </label>
+  <div class="form-group col-12 col-sm-6 col-lg-6 mb-auto">
+    <label> Ingresa tu correo electrónico para buscar tus datos </label>
     <input type="search" :class="inputClassFor('correo_registro')" v-model="CorreoRegistro">
     <a class="py-2 btn btn btn-outline-light search-button position-relative d-inline-block" 
       @click="miPortalUser"
@@ -8,6 +8,7 @@
       data-placement="right" 
       title="Buscar mi información">
       <i class="fas fa-search"></i>
+      <span> Buscar</span>
     </a>
   </div>
 </template>

@@ -398,6 +398,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "datos-mi-portal",
   props: {
@@ -6483,9 +6484,11 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "form-group col-12 col-sm-6 col-lg-4 mb-auto" },
+    { staticClass: "form-group col-12 col-sm-6 col-lg-6 mb-auto" },
     [
-      _c("label", [_vm._v(" Ingresa tu correo electrónico ")]),
+      _c("label", [
+        _vm._v(" Ingresa tu correo electrónico para buscar tus datos "),
+      ]),
       _vm._v(" "),
       _c("input", {
         directives: [
@@ -6521,7 +6524,11 @@ var render = function () {
           },
           on: { click: _vm.miPortalUser },
         },
-        [_c("i", { staticClass: "fas fa-search" })]
+        [
+          _c("i", { staticClass: "fas fa-search" }),
+          _vm._v(" "),
+          _c("span", [_vm._v(" Buscar")]),
+        ]
       ),
     ]
   )
