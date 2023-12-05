@@ -77,7 +77,7 @@ export default {
     isOther() {
       if (
         this.label === "Other" ||
-        this.label === "Online research (please keyword)" ||
+        this.label === "Please provide the keywords" ||
         this.label === "Media (which)" ||
         this.label === "Fair or Conference (name and year)" ||
         this.label === "Master portal pages (name)" ||

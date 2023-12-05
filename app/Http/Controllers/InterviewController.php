@@ -369,7 +369,7 @@ class InterviewController extends Controller
                 }
 
                 // return new JsonResponse(['message' => 'paso'], JsonResponse::HTTP_OK);
-
+                /*
                 $servicio_correo = 'smtp';
                 $mail_academic_program = 'rtic.ambiental@uaslp.mx';
                 $url_LogoAA = asset('/storage/logos/rtic.png');
@@ -403,8 +403,9 @@ class InterviewController extends Controller
                         return new JsonResponse(['message' => 'No se ha configurado el correo'], JsonResponse::HTTP_OK);
                     }
                 }
-
-                // * Envio de correos
+                */
+                // Envio de correos
+                /*
                 foreach ($interview2->users as $key => $User) {
                     // Obtenemos el correos del participante
                     $user_data = DB::connection('portal_real')->select('select * from users where id = :id', ['id' => $User->id]);         // $miPortal_user[0]->id;
@@ -450,7 +451,7 @@ class InterviewController extends Controller
                         }
                     } else if ($User->type == "workers") {
                         $this->alumno = $User;
-                        /**Obtener al trabajador inscrito en la entrevista */
+                        //Obtener al trabajador inscrito en la entrevista 
                         // Envio de correo dependidiendo modalidad de la entrevista
                         if (str_contains($int_room->site, 'Zoom') ? true : false) {
                             Mail::mailer($servicio_correo)->to($user_mail)->send(new SendZoomMeeatingInformationProfesor($ResponseMeating, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data, $url_LogoAA));
@@ -464,7 +465,7 @@ class InterviewController extends Controller
                             // Mail::mailer($servicio_correo)->to('ulises.uudp@gmail.com')->send(new SendMeeatingInformationProfesor($interview2, $user_data, $archive->announcement->academicProgram,  $request->room, $postulante_data,$url_LogoAA));
                         }
                     }
-                }
+                }*/
             }
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Error al enviar correos de entrevista', 'error' => $e->getMessage()], JsonResponse::HTTP_OK);

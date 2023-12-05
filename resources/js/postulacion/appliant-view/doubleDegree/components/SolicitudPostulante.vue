@@ -305,7 +305,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Language Skills</p>
+                        <p class="h2 my-2">Language skills</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse
@@ -322,6 +322,7 @@
                             :index="index + 1"
                             :id="language.id"
                             :archive_id="archive_id"
+                            :language-native.sync="language.languageNative"
                             :language.sync="language.language"
                             :exam_presented.sync="language.exam_presented"
                             :kind_of_exam.sync="language.kind_of_exam"
@@ -401,7 +402,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Environment Related Skills</p>
+                        <p class="h2 my-2">Experience in the environmental sector</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse
@@ -452,7 +453,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Working Experiences</p>
+                        <p class="h2 my-2">Work Experience</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse
@@ -484,7 +485,7 @@
                         </working-experiece>
 
                         <div class="row align-items-center my-1">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 centro">
                                 <button
                                     class="uaslp-btn"
                                     @click="agregaExperienciaLaboral"
@@ -544,8 +545,7 @@
                             style="border: 10px"
                         ></b-icon>
                         <p class="h2 my-2">
-                            Special reasons for your choice of the Master
-                            Program
+                             Master program choice
                         </p>
                     </b-button>
                 </b-card-header>
@@ -655,7 +655,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Fields of interests</p>
+                        <p class="h2 my-2">Project/Research idea</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse
@@ -734,7 +734,7 @@
                             style="border: 10px"
                         ></b-icon>
                         <p class="h2 my-2">
-                            Financing your studies and Stay abroad
+                            Financing Options
                         </p>
                     </b-button>
                 </b-card-header>
@@ -786,7 +786,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Letters of recommendation</p>
+                        <p class="h2 my-2">Information of recomemendation letters</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse
@@ -814,6 +814,31 @@
                             :full_name.sync="rl_enrem.full_name"
                             :email.sync="rl_enrem.email"
                         ></letters-of-recommendation>
+                        <div class="row align-items-center mt-0">
+                            <div class="col-lg-12">
+                                <button
+                                    class="uaslp-btn"
+                                    @click="agregaRecommendationL"
+                                >
+                                    <font-awesome-icon
+                                        icon="fa-solid fa-circle-plus"
+                                    />
+
+                                    <span>Add</span>
+                                </button>
+                                <!-- <b-button
+                  pill
+                  class="d-flex"
+                  @click="agregaLenguaExtranjera"
+                  :style="styleBtnAccordionSection"
+                  v-b-popover.hover="'Agregar una nueva lengua al registro'"
+                  title="Inserta otro registro"
+                >
+                  <b-icon icon="plus-lg" class="mx-2" font-scale="2"></b-icon>
+                  <p class="h4 my-2">Add</p>
+                </b-button> -->
+                            </div>
+                        </div>
                     </b-card-body>
                 </b-collapse>
             </b-card>
@@ -847,7 +872,7 @@
                             style="border: 10px"
                         ></b-icon>
                         <p class="h2 my-2">
-                            How did you hear about this master programme?
+                            How did you hear about this master program?
                         </p>
                     </b-button>
                 </b-card-header>
@@ -1285,8 +1310,8 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: "Éxito al agregar nuevo idioma!",
-                        text: response.data.message, // Imprime el mensaje del controlador
+                        title:"A new language section was added.",
+                        text: "Please fill out the corresponding information.", // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
                         confirmButtonColor: "#3085d6",
@@ -1294,6 +1319,35 @@ export default {
                         //Add new model create to the current list
                     });
                     this.appliant_languages.push(response.data.model);
+
+                    // lenguaAgregado(appliant_languages[appliant_languages.length-1])
+                })
+                .catch((error) => {
+                    console.log(error.data.message);
+                    Swal.fire({
+                        title: ":( Error al agregar nuevo Idioma",
+                        showCancelButton: false,
+                        icon: "error",
+                    });
+                });
+        },
+        agregaRecommendationL() {
+            axios
+                .post("/controlescolar/solicitud/enrem/lettersOfRecommendation/add", {
+                    archive_id: this.archive_id,
+                    state: "Incompleto",
+                })
+                .then((response) => {
+                    Swal.fire({
+                        title:"A new language section was added.",
+                        text: "Please fill out the corresponding information.", // Imprime el mensaje del controlador
+                        icon: "success",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Continuar",
+                        //Add new model create to the current list
+                    });
+                    this.recommendation_letters.push(response.data.model);
 
                     // lenguaAgregado(appliant_languages[appliant_languages.length-1])
                 })

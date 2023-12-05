@@ -4,19 +4,52 @@
       <!-- Nombre y notas -->
       <div class="form-group col-lg-9 col-md-9 col-xs-7 my-auto">
         <h5 class="mt-2">
-          <strong>Everything answer?</strong>
+          <strong>Final instruccions</strong>
         </h5>
+         
+              
+                <div class="form-check">
+                     <input  class="form-check-input" type="checkbox" value="" id="check1"  required
+                     onclick="dowload.disabled = !this.checked">
+                       <label class="form-check-label">
+                          I hereby state that all the above information is true and correct.
+                        </label>
+                </div>
+            
+            
+                <div class="form-check">
+                     <input class="form-check-input" type="checkbox" value="" id="check2"  onclick="boton2.disabled = !this.checked" >
+                       <label class="form-check-label" >
+                           I will regularly check my email address, even the spam file, since all official
+                           communications will be through this medium. 
+                        </label>
+                  </div>
+             
+         
+        <p>If you have finished filling out all the above sections, please: </p>
         <ul>
+         
           <li>
-            <p>Download your archive file</p>
+            <p>1. Download your application file</p>
           </li>
           <li>
-            <p>Sign and scan it to upload again here</p>
+            <p>2. Sign it </p>
           </li>
           <li>
-            <p>You can repeat if something is wrong</p>
+            <p>3. Upload it (someting went wrong,you may try again).</p>
           </li>
+          <li>
+            <p>4. Send the application form with all the required documents in a zip file to the following email
+                  addresses:  
+                  pmpca@uaslp.mx, info-enrem@itt.fh-koeln.de. </p>
+          </li>
+          <li>
+            <p>5. Wait for futher instructions. </p>
+          </li>
+          
+          
         </ul>
+        <p>Thank you for you application, we wish you the best of luck and succes ! </p>
 
         <template v-if="checkUpload() > 0" class="my-1">
           <p>State:</p>
@@ -28,9 +61,9 @@
         </template>
       </div>
       <div
-        class="form-group col-lg-3 col-md-3 col-xs-5 align-items-center p-2 flex-center"
+       class="form-group col-lg-3 col-md-3 col-xs-5 align-items-center p-2 flex-center"
       >
-        <div class="row my-1">
+        <div    class="row my-1">
           <label class="my-1">
             <a
               :href="
@@ -41,17 +74,17 @@
               target="_blank"
               style="height: 45px; width: 100%"
             >
-              <button class="uaslp-btn">
+              <button  class="uaslp-btn" id="dowload" name="dowload" disabled >
                 <font-awesome-icon icon="fa-solid fa-download" />
                 <span>Download</span>
               </button>
             </a>
           </label>
         </div>
-
-        <div class="row my-1">
+       
+        <div  class="row my-1">
           <label>
-            <button class="uaslp-btn" @click="handleDocument">
+            <button class="uaslp-btn" @click="handleDocument" name="boton2" id="boton2" disabled>
               <font-awesome-icon icon="fa-solid fa-upload" />
               <input
                 type="file"
@@ -78,7 +111,7 @@
                 style="height: 45px; width: 100%"
                 target="_blank"
               >
-                <button class="uaslp-btn">
+                <button  class="uaslp-btn">
                   <font-awesome-icon icon="fa-solid fa-eye" />
                   <span>View</span>
                 </button>
@@ -109,9 +142,12 @@
 
 <script>
 
+ 
+
 export default {
 
   name: "required-document-file-signed",
+  
   props: {
     archive_id: {
       type: Number,
@@ -146,10 +182,12 @@ export default {
     },
     errores: Object,
   },
+  
 
   data() {
     return {
       state: 0,
+      check:0,
       /* images_btn: [], */
       datosValidos: {},
       textStateUpload: "",
@@ -190,11 +228,21 @@ export default {
       },
     },
   },
-
+  
   methods: {
+    estaActivo() {
+           
+        },
     handleDocument() {
       this.$refs.fileInput.click();
     },
+    habilita(){
+
+       document.getElementsByName('dowload').disabled = false;
+
+
+    },
+
     downloandFile(location) {
       axios({
         url: location, // File URL Goes Here
@@ -218,6 +266,16 @@ export default {
         this.state = 0;
       }
       return this.state;
+    },
+    checkSelect() {
+      if (document.getElementById('check1').checked && docmument.getElementById('check2').checked)
+       {
+            this.check =1;    
+        }else{
+          this.check =0;
+        }
+        return this.check
+
     },
 
     cargaDocumento(e) {
@@ -243,4 +301,5 @@ export default {
     },
   },
 };
+
 </script>

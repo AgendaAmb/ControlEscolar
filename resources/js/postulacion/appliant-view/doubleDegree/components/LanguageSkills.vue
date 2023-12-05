@@ -30,11 +30,33 @@
         </summary>
         <b-card-body>
             <div class="form-group col-12 my-2">
-                <!-- Kind of languages -->
                 <div class="row my-1">
-                    <div class="col-12">
+                    <div   class="col-12">
+                        <label>Native speaker</label>
+                        <select
+                         v-model="LanguageN" 
+                         class="form-control"
+                         @change="putNativeLenguaje"
+                        >
+                            <option value="" selected>Choose an option</option>
+                            <option
+                                v-for="nativeL in listOfLanguagesNative"
+                                :key="nativeL"
+                                :value="nativeL"
+                            >
+                                {{ nativeL }}
+                            </option>
+                        </select> 
+                       
+                    </div>
+                </div>
+                <!-- Kind of languages -->
+                 <div class="row my-1">
+                    <div   class="col-12">
                         <label>Language</label>
-                        <select v-model="Language" class="form-control">
+                        <select v-model="Language" class="form-control"
+                                            
+                        >
                             <option value="" selected>Choose an option</option>
                             <option
                                 v-for="lan in listOfLanguages"
@@ -45,7 +67,7 @@
                             </option>
                         </select>
                     </div>
-                </div>
+                 </div>
 
                 <!-- English -->
                 <div v-if="selectedIsEnglish() === true" class="row my-2">
@@ -95,8 +117,40 @@
                             class="form-control"
                         />
                     </div>
+                    <div class="row my-2">
+                    <div class="col-lg-8 col-sm-12">
+                        <label>Country: </label>
+                        <select v-model="Country" class="form-control">
+                            <option value="" selected>Choose a country</option>
+                            <option
+                                v-for="country in countries"
+                                :key="country.id"
+                                :value="country.name"
+                            >
+                                {{ country.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <label> Overall grade/score: </label>
+                        <input
+                            v-model="OveralGradeScore"
+                            type="number"
+                            class="form-control"
+                        />
+                    </div>
                 </div>
 
+                </div>
+                <!--Opcion de otro idioma-->
+                <div v-if="selectedIsOther() === true" class="row my-2">
+                    <div class="col-12">
+                        <label class="h4">Examination of Proficiency in Another Language</label>
+                    </div>
+
+                    
+                </div>
                 <!-- Spanish -->
                 <div v-else-if="selectedIsSpanish() === true" class="row my-2">
                     <div class="col-12">
@@ -128,9 +182,34 @@
                             class="form-control"
                         />
                     </div>
+                    <div class="row my-2">
+                    <div class="col-lg-8 col-sm-12">
+                        <label>Country: </label>
+                        <select v-model="Country" class="form-control">
+                            <option value="" selected>Choose a country</option>
+                            <option
+                                v-for="country in countries"
+                                :key="country.id"
+                                :value="country.name"
+                            >
+                                {{ country.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12">
+                        <label> Overall grade/score: </label>
+                        <input
+                            v-model="OveralGradeScore"
+                            type="number"
+                            class="form-control"
+                        />
+                    </div>
                 </div>
 
-                <div v-else class="row my-2">
+                </div>
+
+                <div v-else-if="selectedIsGerman() === true" class="row my-2">
                     <div class="col-12">
                         <label class="h4"
                             >German Proficiency (for non German Appliant)</label
@@ -159,9 +238,7 @@
                             class="form-control"
                         />
                     </div>
-                </div>
-
-                <div class="row my-2">
+                    <div class="row my-2">
                     <div class="col-lg-8 col-sm-12">
                         <label>Country: </label>
                         <select v-model="Country" class="form-control">
@@ -186,6 +263,9 @@
                     </div>
                 </div>
 
+                </div>
+
+              
                 <div class="row my-2">
                     <div class="col-12">
                         <label for="" class="h4">Grade, Levels</label>
@@ -243,7 +323,7 @@
                     <div class="col-lg-10 col-sm-8">
                         <label>
                             <p class="h5">
-                                <strong>This only save Language</strong>
+                                <strong>Note: Only the section´s data will be saved</strong>
                             </p>
                         </label>
                     </div>
@@ -265,6 +345,11 @@ export default {
         archive_id: Number,
 
         language: {
+            type: String,
+            default: "",
+        },
+        
+        languageNative: {
             type: String,
             default: "",
         },
@@ -357,6 +442,10 @@ export default {
                 "Language Courses",
             ],
             listOfLanguages: ["English", "Spanish", "German", "Other"],
+            listOfLanguages1: ["English", "German", "Other"],
+            listOfLanguages2: [ "Spanish", "German", "Other"],
+            listOfLanguages3: ["English", "Spanish","Other"],
+            listOfLanguagesNative: ["English", "Spanish", "German", "Other"],
             kindOfExamNames_TOEFL: ["ITP", "iBT"],
             kindOfExamNames_iELTS: ["IELTS Academic", "IELTS General"],
             kindOfExamNames_CAMBRIDGE: [
@@ -451,6 +540,14 @@ export default {
                 this.$emit("update:kind_of_exam", newVal);
             },
         },
+        LanguageNative: {
+            get() {
+                return this.languageNative;
+            },
+            set(newVal) {
+                this.$emit("update:languageNative", newVal);
+            },
+        },
 
         DurationInMonths: {
             get() {
@@ -467,6 +564,14 @@ export default {
             },
             set(newVal) {
                 this.$emit("update:status_checkBox", newVal);
+            },
+        },
+        LanguageN: {
+            get() {
+                return this.languageNative;
+            },
+            set(newVal) {
+                this.$emit("update:languageNative", newVal);
             },
         },
 
@@ -489,6 +594,7 @@ export default {
                 this.$emit("update:exam_presented", newVal);
             },
         },
+        
 
         State: {
             get() {
@@ -506,6 +612,7 @@ export default {
                 this.$emit("update:language", newVal);
             },
         },
+        
         Institution: {
             get() {
                 return this.institution;
@@ -605,6 +712,26 @@ export default {
                     break;
             }
         },
+        putNativeLenguaje(evento) {
+            switch (this.listOfLanguagesNative[evento.target.selectedIndex - 1]) {
+                case "Spanish":
+                    this.listOfLanguages = ["English", "German", "Other"];
+                    break;
+                case "English":
+                    this.listOfLanguages = ["Spanish", "German", "Other"];
+                    break;
+                case "German":
+                    this.listOfLanguages= [
+                    "Spanish", "English", "Other"
+                    ];
+                    break;
+                case "German":
+                    this.listOfLanguages= [
+                    "English","Spanish","German" , "Other"
+                    ];
+                    break;
+            }
+        },
 
         escogePais(evento) {
             Vue.set(
@@ -620,6 +747,7 @@ export default {
             }
             return false;
         },
+        
 
         selectedIsGerman() {
             if (this.language === "German") {
@@ -634,6 +762,15 @@ export default {
             }
             return false;
         },
+       
+        selectedIsOther() {
+            if (this.language === "Other") {
+                return true;
+            }
+            return false;
+        },
+       
+        
 
         chooseExam(evento) {
             let examSelected = this.examNames[evento.target.selectedIndex - 1];
@@ -649,6 +786,8 @@ export default {
                     break;
             }
         },
+
+       
 
         isEnglish() {
             if (this.localLanguage != null) {
@@ -667,6 +806,7 @@ export default {
                     id: this.id,
                     archive_id: this.archive_id,
                     language: this.language,
+                    native_language: this.languageNative,
                     exam_presented: this.exam_presented,
                     kind_of_exam: this.kind_of_exam,
                     date_of_exam: this.date_of_exam,
@@ -681,9 +821,9 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })
@@ -707,8 +847,8 @@ export default {
                     //Llama al padre para que elimine el item de la lista de experiencia laboral
                     this.$emit("delete-item", this.index - 1);
                     Swal.fire({
-                        title: "Éxito al eliminar registro",
-                        text: response.data.message, // Imprime el mensaje del controlador
+                        title: "The language section was deleted.",
+                        text: "You many add a new language again if needed.", // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
                         confirmButtonColor: "#3085d6",

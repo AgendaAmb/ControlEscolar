@@ -1,4 +1,5 @@
-<template>
+
+ <template>
     <div class="form-row my-4">
         <div class="col-12">
             <div class="row my-1">
@@ -16,15 +17,29 @@
                                 readonly
                             />
                         </div>
-                        <div class="form-group col-md-12">
-                            <label> Last Name(s): </label>
+                           <div class="form-group col-6" >
+                                <label>  Middle Name(s): </label>
+                            <input
+                                v-model="Middlename"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
+                            </div>
+                        
+                            <div class="form-group col-6" >
+                                <label> Last Name(s): </label>
                             <input
                                 v-model="Surname"
                                 type="text"
                                 class="form-control"
                                 readonly
                             />
-                        </div>
+                            </div>
+                            
+                           
+                            
+                       
                     </div>
 
                     <div class="row my-1">
@@ -47,7 +62,7 @@
                         </div>
 
                         <div class="form-group col-lg-4 col-sm-6">
-                            <label> Civic State: </label>
+                            <label> Civil Status: </label>
                             <select v-model="CivicState" class="form-control">
                                 <option value="">Choose an option</option>
                                 <option
@@ -118,19 +133,13 @@
                         </div>
 
                         <div class="form-group col-lg-6">
-                            <label> Country of residense: </label>
-                            <select v-model="BirthState" class="form-control">
-                                <option value="" selected>
-                                    Choose a country
-                                </option>
-                                <option
-                                    v-for="country in countries"
-                                    :key="country.id"
-                                    :value="country.name"
-                                >
-                                    {{ country.name }}
-                                </option>
-                            </select>
+                            <label> Country of residence: </label>
+                            <input
+                                v-model="Residence"
+                                type="text"
+                                class="form-control"
+                                readonly
+                            />
                         </div>
                     </div>
 
@@ -146,7 +155,7 @@
                         </div>
 
                         <div class="form-group col-lg-6">
-                            <label> Altern Email: </label>
+                            <label> Alternative/Backup email: </label>
                             <input
                                 v-model="AlternEmail"
                                 type="text"
@@ -172,10 +181,13 @@
         <div class="col-12">
             <div class="row justify-content-start my-2">
                 <div class="col-lg-2 col-sm-4 align-items-center">
-                    <button class="uaslp-btn" @click="updatePersonalData">
+                    <div class="col-lg-10 col-sm-8">
+                        <button class="uaslp-btn" @click="updatePersonalData">
                         <font-awesome-icon icon="fa-solid fa-floppy-disk" />
                         <span>Save</span>
                     </button>
+                    </div>
+                  
                     <!-- <img
             @click="updatePersonalData"
             :src="images_btn['guardar']"
@@ -185,8 +197,8 @@
                 </div>
                 <div class="col-lg-10 col-sm-8">
                     <label>
-                        <p class="h5">
-                            <strong>This only save Personal Information</strong>
+                        <p class="flexbox h5">
+                            <strong>Note: Only the section´s data will be saved</strong>
                         </p>
                     </label>
                 </div>
@@ -195,6 +207,22 @@
     </div>
 </template>
 
+<style>
+.text-align-center {
+  
+  text-align: center;
+  vertical-align: middle;
+}
+.flexbox {
+  align-items: center;
+  display: flex;
+ 
+  justify-content: center;
+ 
+  
+}
+      
+</style>
 <script>
 import swal from "sweetalert2";
 window.Swal = swal;
@@ -349,6 +377,15 @@ export default {
 
         Nationality: {
             get() {
+                return this.birth_country;
+            },
+            set(newVal) {
+                this.$emit("update:birth_country", newVal);
+            },
+        },
+
+        Residence:{
+            get() {
                 return this.residence_country;
             },
             set(newVal) {
@@ -451,9 +488,9 @@ export default {
             })
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: " Please continue filling  out the other sections",
                         showCancelButton: false,
                     });
                 })

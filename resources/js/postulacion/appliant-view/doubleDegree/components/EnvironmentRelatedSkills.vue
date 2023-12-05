@@ -29,8 +29,7 @@
                     <label>
                         <p class="h5">
                             <strong
-                                >This only save Environment Related
-                                Skills</strong
+                                >Note:Only the section´s data will be saved</strong
                             >
                         </p>
                     </label>
@@ -105,9 +104,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introducec in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

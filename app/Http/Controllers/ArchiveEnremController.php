@@ -16,6 +16,7 @@ use App\Models\RecommendationLetterEnrem;
 use App\Models\SecondaryEducation;
 use App\Models\User;
 use App\Models\WorkingExperience;
+use App\Observers\RecommendationObserver;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -598,6 +599,26 @@ class ArchiveEnremController extends Controller
         return new JsonResponse(['message' => 'Great! Financing Studies update', 'object' => $fs], 200);
 
         }
+        public function addRecommendation(Request $request)
+    {
+        $request->validate([
+            'archive_id' => ['required', 'numeric'],
+            'state' => ['required', 'string', 'max:255']
+        ]);
+
+        try {
+            $recommendation = RecommendationLetterEnrem::create([
+                'archive_id' => $request->archive_id,
+                'state' => $request->state
+            ]);
+        } catch (\Exception $e) {
+            return new JsonResponse('Error al agregar nueva experiencia de trabajo para el aplicante', 502);
+        }
+        //Recibe la información 
+        return new JsonResponse(['message' => 'Experiencia de trabajo agregada, inserta los datos necesarios para continuar con tu postulacion', 'model' => $recommendation], 200);
+    }
+
+        
 
         public function updateLettersOfRecommendation(Request $request)
         {

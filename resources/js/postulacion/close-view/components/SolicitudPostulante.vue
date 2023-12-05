@@ -611,7 +611,7 @@
         </div>
 
         <!-- Cartas de recomendacion -->
-        <div class="col-12 width-85">
+    <div class="col-12 width-85">
             <b-card
                 no-body
                 class="my-2"
@@ -636,7 +636,7 @@
                             font-scale="2"
                             style="border: 10px"
                         ></b-icon>
-                        <p class="h2 my-2">Documentos de entrevista</p>
+        <p class="h2 my-2">Documentos de entrevista</p>
                     </b-button>
                 </b-card-header>
                 <b-collapse

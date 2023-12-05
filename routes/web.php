@@ -188,6 +188,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
 
             Route::prefix('lettersOfRecommendation')->name('lettersOfRecommendation.')->group(function () {
                 Route::post('/update', [ArchiveEnremController::class, 'updateLettersOfRecommendation'])->name('updateLettersOfRecommendation');
+                Route::post('/add', [ArchiveEnremController::class, 'addRecommendation']);
             });
 
             Route::prefix('hearAboutProgram')->name('hearAboutProgram.')->group(function () {
@@ -245,7 +246,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('/deleteAppliantLanguage', [AppliantLanguageController::class, 'deleteAppliantLanguage']);
         Route::post('/updateAppliantLanguage', [AppliantLanguageController::class, 'updateAppliantLanguage']);
         Route::post('/updateAppliantLanguageRequiredDocument', [AppliantLanguageController::class, 'updateAppliantLanguageRequiredDocument']);
-
+       
         # Producciones científicas.
         //Modelos
         Route::post('/addScientificProduction', [ScientificProductionController::class, 'addScientificProduction']);
@@ -255,7 +256,7 @@ Route::get('/downloadLetterCommitment/{folderParent}/{folderType}/{namefile}', [
         Route::post('/addScientificProductionAuthor', [ScientificProductionController::class, 'addScientificProductionAuthor']);
         Route::post('/updateScientificProductionAuthor', [ScientificProductionController::class, 'updateScientificProductionAuthor']);
         Route::post('/deleteScientificProductionAuthor', [ScientificProductionController::class, 'deleteScientificProductionAuthor']);
-
+        
         # Capital humano.
         Route::post('/addHumanCapital', [HumanCapitalController::class, 'addHumanCapital']);
         Route::post('/updateHumanCapital', [HumanCapitalController::class, 'updateHumanCapital']);

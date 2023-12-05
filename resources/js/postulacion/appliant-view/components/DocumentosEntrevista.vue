@@ -6,6 +6,9 @@
       <h5 >
         Para continuar con el proceso de entrevista, sube los siguientes documentos correspondientes al posgrado aplicado 
       </h5>
+      <h5> Sigue el siguiente link 
+        <a href="http://127.0.0.1:8000/controlescolar/documentsForInterview/show/296">Documentos Entrevista</a>
+      </h5>
     </div>
 
     <div

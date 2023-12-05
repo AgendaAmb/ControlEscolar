@@ -1,6 +1,7 @@
 <template>
     <b-card-body>
         <div class="form-group">
+            
             <div class="row my-2">
                 <div class="col-6">
                     <label>Type</label>
@@ -83,6 +84,18 @@
                 </div>
             </div>
         </div>
+        <div class="row my-2">
+                <div class="col-12">
+                    <label>
+                        <p>
+                            Note:This is only to verify the information of 
+                            the person who wrote the letter. Remember the 
+                            actual letters are to be sent with the rest of documents
+                            in a zip file.
+                        </p>
+                    </label>
+                </div>
+            </div>
 
         <div class="col-12">
             <div class="row my-2">
@@ -101,7 +114,7 @@
                 <div class="col-lg-10 col-sm-8">
                     <label>
                         <p class="h5">
-                            <strong>Only save Recommendation Letter</strong>
+                            <strong>Note:Only the section´s data will be saved</strong>
                         </p>
                     </label>
                 </div>
@@ -323,9 +336,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

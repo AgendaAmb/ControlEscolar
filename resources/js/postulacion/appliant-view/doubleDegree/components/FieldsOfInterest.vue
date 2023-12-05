@@ -7,9 +7,9 @@
                         <p>
                             <strong> Project idea: </strong>Identify a potential
                             area of research you want to pursue during your
-                            master thesis that matches the areas of PMPCA and
-                            the Master NRM at ITT, your own skills as well as
-                            your future professional interests
+                            master thesis that matches the areas at PMPCA and
+                            the NRM program at ITT whit your own skills as well as
+                            your future professional interests.
                         </p>
                     </label>
                 </div>
@@ -18,7 +18,7 @@
             <div class="row my-2">
                 <div class="col-12">
                     <label>
-                        <p>Project idea</p>
+                        <p>Potential title/Title of potential research idea</p>
                     </label>
                     <textarea
                         class="form-control"
@@ -32,12 +32,12 @@
             <div class="row my-2">
                 <div class="col-12">
                     <label>
-                        <p>Keywords</p>
+                        <p>Keywords (3)</p>
                     </label>
                     <textarea
                         class="form-control"
                         rows="4"
-                        v-model="Keywords"
+                        v-model="Keywords "
                         placeholder="..."
                     />
                 </div>
@@ -48,7 +48,7 @@
                     <label>
                         <p>
                             <strong> Professor: </strong> Identify two potential
-                            professor or Senior Researchers, one from ITT and
+                            Professor or Senior Researchers, one from ITT and
                             one from PMPCA, who are doing research in a field
                             closely related to your potential research idea
                             (project idea)
@@ -63,7 +63,7 @@
                         <li>
                             <p>
                                 <a
-                                    href="http://ambiental.uaslp.mx/pmpca/"
+                                    href="https://ambiental.uaslp.mx/pmpca/areas/detalles?area=1"
                                     target="_blank"
                                     >PMPCA:</a
                                 >
@@ -117,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="row my-1">
+       <div class="row my-1">
                 <div class="col-lg-4 col-sm-12">
                     <label for="">
                         <p>Research Area</p>
@@ -126,7 +126,7 @@
 
                 <div class="col-lg-4 col-sm-6">
                     <select v-model="ResearchAreaMexico" class="form-control">
-                        <option value="" selected>Choose an option</option>
+                       
                         <option
                             v-for="item in researchAreaMexico"
                             :key="item"
@@ -141,7 +141,7 @@
                     <select v-model="ResearchAreaGerman" class="form-control">
                         <option value="" selected>Choose an option</option>
                         <option
-                            v-for="item in researchAreaMexico"
+                            v-for="item in researchAreaGerman"
                             :key="item"
                             :value="item"
                         >
@@ -150,22 +150,26 @@
                     </select>
                 </div>
             </div>
+            
 
-            <div class="row my-1">
+        <div class="row my-1">
                 <div class="col-lg-4 col-sm-12">
                     <label>
                         <p>Professor (Senior Researchers)</p>
                     </label>
                 </div>
+                
 
-                <div class="col-lg-4 col-sm-6">
+                <div v-if="selectedIsPrevencion() === true" class="col-lg-4 col-sm-6">
                     <select
                         v-model="ProfessorResearchMexico"
                         class="form-control"
+                        name="profesor" 
+                        id="profesor"
                     >
                         <option value="" selected>Choose an option</option>
                         <option
-                            v-for="item in professorsMexico"
+                            v-for="item in profesoresPreventionandControl"
                             :key="item"
                             :value="item"
                         >
@@ -173,8 +177,77 @@
                         </option>
                     </select>
                 </div>
-
-                <div class="col-lg-4 col-sm-6">
+                <div v-else-if="selectedIsRenewable() === true" class="col-lg-4 col-sm-6">
+                    <select
+                        v-model="ProfessorResearchMexico"
+                        class="form-control"
+                    >
+                        <option value="" selected>Choose an option</option>
+                        <option
+                            v-for="item in profesoresRenewableNaturalResources"
+                            :key="item"
+                            :value="item"
+                        >
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div v-else-if="selectedIsEnviromentalA() === true" class="col-lg-4 col-sm-6">
+                    <select
+                        v-model="ProfessorResearchMexico"
+                        class="form-control"
+                    >
+                        <option value="" selected>Choose an option</option>
+                        <option
+                            v-for="item in profesoresEnviromentalAssessment"
+                            :key="item"
+                            :value="item"
+                        >
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div v-else-if="selectedIsEnviromentalM() === true" class="col-lg-4 col-sm-6">
+                    <select
+                        v-model="ProfessorResearchMexico"
+                        class="form-control"
+                    >
+                        <option value="" selected>Choose an option</option>
+                        <option
+                            v-for="item in profesoresEnviromentalManagement"
+                            :key="item"
+                            :value="item"
+                        >
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div v-else-if="selectedIsIntegrated() === true" class="col-lg-4 col-sm-6">
+                    <select
+                        v-model="ProfessorResearchMexico"
+                        class="form-control"
+                    >
+                        <option value="" selected>Choose an option</option>
+                        <option
+                            v-for="item in profesoresIntegratedEnviromentalHealth"
+                            :key="item"
+                            :value="item"
+                        >
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div v-else-if="selectedIsnada() === true" class="col-lg-4 col-sm-6">
+                    <select
+                        v-model="ProfessorResearchMexico"
+                        class="form-control"
+                    >
+                        <option value="" selected>Choose an option</option>
+                        <option value="" >..</option>
+                        
+                    </select>
+                </div>
+                <div  class="col-lg-4 col-sm-6">
                     <select
                         v-model="ProfessorResearchGerman"
                         class="form-control"
@@ -189,6 +262,7 @@
                         </option>
                     </select>
                 </div>
+
             </div>
 
             <div class="row mt-2">
@@ -268,7 +342,7 @@
                 <div class="col-lg-10 col-sm-8">
                     <label>
                         <p class="h5">
-                            <strong>Only save fiels of interests</strong>
+                            <strong>Note:Only the section´s data will be saved</strong>
                         </p>
                     </label>
                 </div>
@@ -352,6 +426,66 @@ export default {
                 "Dr. Rui Costa Pedroso",
                 "Dr. Alexandra Nauditt",
             ],
+            profesoresRenewableNaturalResources:[
+                    "Dra. Gisela Aguilar Benítez",
+                    "Dr. Gregorio Álvarez Fuentes",
+                    "Dr. José Arturo De Nova Vázquez",
+                    "Dr. Héctor Martín Durán García",
+                    "Dr. José Luis Flores Flores",
+                    "Dr. Javier Fortanelli Martínez",
+                     "Dra. Erika García Chávez",
+                    "Dr. Juan Carlos García López",
+                    "Dr. Bertha Irene Juárez Flores",
+                    "Dr. Carlos Alfonso Muñoz Robles",
+                    "Dr. Hugo Magdaleno Ramírez Tobías",
+                    "Dr. Juan Antonio Reyes Agüero",
+                    "Dra. Laura Yáñez Espinosa",
+            ],
+            profesoresEnviromentalAssessment:[
+                   "Dr. Marcos Algara Siller",
+                   "Dr. Alfredo Ávila Galarza",
+                   "Dr. Luis Armando Bernal Jácome",
+                   "Dr. Antonio Cardona Benavides",
+                   "Dr. Guillermo Javier Castro Larragoitia",
+                   "Dr. Israel Razo Soto",
+            ],
+            profesoresEnviromentalManagement:[
+                "Dr. Carlos Contreras Servín",
+                "Dra. María Guadalupe Galindo Mendoza",
+                "Dra. Patricia Julio Miranda",
+                "Dr. Leonardo Ernesto Márquez Mireles",
+                "Dr. Álvaro Gerardo Palacio Aponte",
+                "Dr. Humberto Reyes Hernández",
+                "Dra. Anuschka Van´t Hooft",
+                "Dr. Valente Vázquez Solís",
+            ],
+            profesoresIntegratedEnviromentalHealth:[
+                "Dr. José Antonio Ávalos Lozano",
+                "Dra. Jaqueline Calderón Hernández",
+                "Dra. Virginia Gabriela Cilia López",
+                "Dra. Ana Cristina Cubillas Tejeda",
+                "Dr. Fernando Díaz-Barriga Martínez",
+                "Dra. Gabriela Domínguez Cortinas",
+                "Dr. Guillermo Espinosa Reyes",
+                "Dr. Rogelio Flores Ramírez",
+                "Dra. Donají Josefina González Mille",
+                "Dr. César Ilizaliturri Hernández",
+                "Dr. José de Jesús Mejía Saavedra",
+                "Dr. Francisco Javier Pérez Vázquez",
+                "Dra. Silvia Romero Contreras",
+                "Dr. Moisés Roberto Vallejo Pérez",
+                "Dra. Leticia Guadalupe Yáñez Estrada",
+            ],
+            profesoresPreventionandControl:[
+                "Dra. Ma. Catalina Alfaro de la Torre",
+                "Dr. Roberto Briones Gallardo",
+                "Dra. Candy Carranza Álvarez",
+                "Dra. Elsa Cervantes González",
+                "Dra. Paola Elizabeth Díaz Flores",
+                "Dr. Nahúm Andrés Medellín Castillo",
+                "Dr. Israel Rodríguez Torres",
+                "Dr. Luis Manuel Rosales Colunga",
+            ],
             professorsMexico: [
                 "MA. CATALINA DE LA TORRE ALFARO",
                 "FERNANDO BARRIGA MARTINEZ DIAZ",
@@ -384,6 +518,7 @@ export default {
                 "JOSE ARTURO NOVA VAZQUEZ DE",
             ],
             researchAreaMexico: [
+                 " Choose an option",
                 "Renewable Natural Resources",
                 "Enviromental Assessment",
                 "Enviromental Management",
@@ -581,9 +716,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the  other sections",
                         showCancelButton: false,
                     });
                 })
@@ -600,6 +735,40 @@ export default {
         estaEnError(key) {
             return key in this.errores;
         },
+        selectedIsPrevencion() {
+            if (this.research_area_mexico === "Prevention and Control") {
+                return true;
+            }
+            return false;
+        },
+        selectedIsRenewable() {
+            if (this.research_area_mexico === "Renewable Natural Resources") {
+                return true;
+            }
+            return false;
+        },
+        selectedIsEnviromentalA() {
+            if (this.research_area_mexico === "Enviromental Assessment") {
+                return true;
+            }
+            return false;
+        },
+        selectedIsEnviromentalM() {
+            if (this.research_area_mexico === "Enviromental Management") {
+                return true;
+            }
+            return false;
+        },
+        selectedIsIntegrated() {
+            if (this.research_area_mexico === "Integrated Enviromental Health") {
+                return true;
+            }
+            return false;
+        },
+        selectedIsnada() {
+            return true;
+        },
+        
 
         objectForError(key) {
             return {

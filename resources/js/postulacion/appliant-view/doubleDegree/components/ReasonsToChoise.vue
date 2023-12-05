@@ -37,7 +37,7 @@
             <div class="col-12">
                 <label>
                     <p>
-                        Which other University and Master Program came on your
+                        Which other Universities and Master Programs came on your
                         short list?
                     </p>
                 </label>
@@ -81,7 +81,7 @@
                 <div class="col-lg-10 col-sm-2">
                     <label>
                         <p class="h5">
-                            <strong>Only save Reasons to Choise</strong>
+                            <strong>Note:Only the section´s data will be saved</strong>
                         </p>
                     </label>
                 </div>
@@ -154,20 +154,20 @@ export default {
             // universidades: [],
             choises_list: [
                 {
-                    label: "Course of study / focus of content",
-                    value: "Course of study / focus of content",
+                    label: "Modules / focus of content",
+                    value: "Modules / focus of content",
                 },
                 {
                     label: "Studying and living in Mexico and Germany",
                     value: "Studying and living in Mexico and Germany",
                 },
                 {
-                    label: "Obtain two degree in two years",
-                    value: "Obtain two degree in two years",
+                    label: "Getting two degrees in two years",
+                    value: "Getting two degrees in two years",
                 },
                 {
-                    label: "Possibility for scholarship",
-                    value: "Possibility for scholarship",
+                    label: "Possibility of a scholarship",
+                    value: "Possibility of a scholarship",
                 },
                 { label: "Other", value: "Other" },
             ],
@@ -321,9 +321,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

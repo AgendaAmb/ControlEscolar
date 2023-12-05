@@ -108,7 +108,7 @@
 
                 <div class="row my-1">
                     <div class="form-group col-sm-12 col-lg-4">
-                        <label> City/Country: </label>
+                        <label> Country: </label>
                         <select
                             v-model="Country"
                             class="form-control"
@@ -281,7 +281,7 @@
                 </div>
                 <div class="col-md-10 col-xs-9 mx-3">
                     <label>
-                        <strong>Note:That's only save higher education </strong>
+                        <strong>Note:Only the section´s data will be saved </strong>
                     </label>
                 </div>
             </div>
@@ -400,9 +400,10 @@ export default {
                 "Título o grado en proceso",
             ],
             graduation_mode_list: [
-                "Thesis Investigation - Thesis Title",
-                "Graduation Courses & Examination - Courses Underta",
-                "Practical Work - Field & Institution",
+                "Thesis investigation - Please submit your thesis title in the following/next field.",
+                "Graduation courses & Examination - Please type the name of the courses in the following field.",
+                "Practical Work - Please type the name of the institution in the following field.",
+                "Grade Point Average - Please type your GPA in the following/next field."
             ],
             estatusEstudios_otros: [
                 "Pasante",
@@ -731,9 +732,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

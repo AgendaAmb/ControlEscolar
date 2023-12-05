@@ -26,7 +26,7 @@
                 <div class="col-lg-10 col-sm-8">
                     <label>
                         <p class="h5">
-                            <strong>Only save Financing studies</strong>
+                            <strong>Note:Only the section´s data will be saved</strong>
                         </p>
                     </label>
                 </div>
@@ -64,14 +64,14 @@ export default {
             errores: {},
             options_financing: [
                 { label: "Self-funded", value: "Self-funded" },
-                { label: "Salary will be paid", value: "Salary will be paid" },
+                { label: "I will keep a regular income/salary", value: "I will keep a regular income/salary" },
                 {
-                    label: "Goberment Study Grant",
-                    value: "Goberment Study Grant",
+                    label: "Government Study Grant",
+                    value: "Government Study Grant",
                 },
                 {
-                    label: "I intend to apply for a CONACYT or DAAD scholarship",
-                    value: "I intend to apply for a CONACYT or DAAD scholarship",
+                    label: "I intend to apply for a CONAHCYT or DAAD scholarship",
+                    value: "I intend to apply for a CONAHCYT or DAAD scholarship",
                 },
                 {
                     label: "I intented to apply for an external scholarship",
@@ -157,9 +157,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

@@ -69,6 +69,7 @@
                                 v-model="KnowledgeArea"
                                 type="text"
                                 class="form-control"
+                                placeholder="job,internship,entrepeneurshi,...."
                             />
                         </div>
                     </div>
@@ -124,7 +125,7 @@
                                 class="form-control"
                                 rows="4"
                                 v-model="WorkingPositionDescription"
-                                placeholder="Detalla el por que se no se seleccionara al postulante ..."
+                                placeholder="Detail your main responsibilities at work ..."
                             />
                         </div>
                     </div>
@@ -150,7 +151,7 @@
                         <label>
                             <p class="h5">
                                 <strong
-                                    >This only save working experience</strong
+                                    >Note:Only the section´s data will be saved</strong
                                 >
                             </p>
                         </label>
@@ -405,9 +406,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

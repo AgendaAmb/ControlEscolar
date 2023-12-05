@@ -5,7 +5,7 @@
                 <div class="col-12">
                     <label>
                         <p>
-                            Wich pathh are you planning to pursue in the future?
+                            Wich path are you planning to pursue in the future?
                         </p>
                     </label>
                     <select v-model="PursueFuture" class="form-control">
@@ -53,7 +53,7 @@
                     <label>
                         <p class="h5">
                             <strong
-                                >Only save Future plans and expecations</strong
+                                >Note:Only the section´s data will be saved</strong
                             >
                         </p>
                     </label>
@@ -94,7 +94,7 @@ export default {
                 "Development Cooperation",
                 "Social Oriented Work",
                 "Research and Investigation",
-                "Phd Studies",
+                "PhD Studies",
                 "Others",
             ],
         };
@@ -217,9 +217,9 @@ export default {
                 )
                 .then((response) => {
                     Swal.fire({
-                        title: response.data.message,
+                        title: "The data introduced in this section was saved.",
                         icon: "success",
-                        text: "Continue filling others sections",
+                        text: "Please continue filling out the other sections",
                         showCancelButton: false,
                     });
                 })

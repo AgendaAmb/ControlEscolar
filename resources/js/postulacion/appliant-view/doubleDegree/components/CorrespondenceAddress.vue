@@ -44,7 +44,7 @@
       </div>
 
       <div class="form-group col-6">
-        <label> City: </label>
+        <label> Region: </label>
         <select v-if="states.length > 0" v-model="City" class="form-control">
           <option value="" selected>Choose an option</option>
           <option v-for="state in states" :key="state.id" :value="state.name">
@@ -87,7 +87,7 @@
       <div class="col-lg-10 col-sm-8">
         <label>
           <p class="h5">
-            <strong>Note: That's only save address </strong>
+            <strong>Note:Only the section´s data will be saved </strong>
           </p>
         </label>
       </div>
@@ -276,9 +276,9 @@ export default {
       })
         .then((response) => {
           Swal.fire({
-            title: response.data.message,
+            title: "The data introduced in this section was saved.",
             icon: "success",
-            text: "Continue filling others sections",
+            text: "Please continue filling out the other sections",
             showCancelButton: false,
           });
         })

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class RecommendationLetterEnrem extends Model
 {
@@ -31,6 +32,26 @@ class RecommendationLetterEnrem extends Model
      * @var string[]
      */
     protected $guarded = [];
+
+    /**
+     * Obtiene los documentos requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function requiredDocuments(): BelongsToMany
+    {
+        return $this->belongsToMany(RequiredDocument::class)->withPivot('location')->where('type', 'curricular');
+    }
+    /**
+     * Obtiene los documentos personales requeridos del expediente.
+     *
+     * @return BelongsToMany
+     */
+    public function recommendationDocuments(): BelongsToMany
+    {
+        return $this->requiredDocuments()->where('type', 'curricular');
+    }
+
 
      /**
      * Obtiene los documentos requeridos del expediente.
