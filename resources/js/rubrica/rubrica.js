@@ -132,7 +132,7 @@ const app = new Vue({
             });
             
             // Si es administrador nunca
-            if(roles2.length > 0)return false;
+            if(roles1.length > 0)return false;
             console.log(this.isComplete?true:false);
             // Si ya esta completada obvio que si bby
             if(this.isComplete?true:false)return true;
