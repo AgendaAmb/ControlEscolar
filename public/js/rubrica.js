@@ -104590,7 +104590,14 @@ var app = new Vue({
         return role.name === 'admin';
       }); // Si es administrador nunca
 
+      var roles3 = this.loggedUser.roles.filter(function (role) {
+        return role.name === 'coordinador';
+      });
+
       if (roles1.length > 0) return false;
+      console.log(this.isComplete ? true : false); // Si ya esta completada obvio que si bby
+
+      if (roles3.length > 0) return false;
       console.log(this.isComplete ? true : false); // Si ya esta completada obvio que si bby
 
       if (this.isComplete ? true : false) return true;
