@@ -527,7 +527,7 @@ export default {
             ],
             researchAreaGerman: [
                 "NRM focus Land Management",
-                "NRM focs Regional Management",
+                "NRM focus Regional Management",
                 "NRM focus Water Management",
                 "NRM focus Energy Management",
             ],
