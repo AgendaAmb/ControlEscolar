@@ -1232,7 +1232,7 @@ export default {
                         .catch((error) => {
                             console.log(error);
                             Swal.fire({
-                                title: "Error al actualizar",
+                                title: "Error try again late",
                                 showCancelButton: false,
                                 icon: "error",
                             });
@@ -1276,7 +1276,7 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: "Éxito al agregar nueva experiencia laboral!",
+                        title: "A new section was successfully added. Please continue filling out the required fields",
                         text: response.data.message, // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
@@ -1290,7 +1290,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nueva experiencia laboral",
+                        title: "Error try again late",
                         showCancelButton: false,
                         icon: "error",
                     });
@@ -1325,7 +1325,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nuevo Idioma",
+                        title: "Error try again late",
                         showCancelButton: false,
                         icon: "error",
                     });
@@ -1354,7 +1354,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nuevo Idioma",
+                        title: "Error try again late",
                         showCancelButton: false,
                         icon: "error",
                     });
@@ -1373,7 +1373,7 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: "¡Éxito al agregar nuevo Grado Académico!",
+                        title: "A new section was successfully added. Please continue filling out the required fields",
                         text: response.data.message, // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
@@ -1385,7 +1385,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nuevo Grado Académico",
+                        title: "Error try again late",
                         text: response.data.message, // Imprime el mensaje del controlador
                         showCancelButton: false,
                         icon: "error",
@@ -1419,7 +1419,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nueva producción científica",
+                        title: "Error try again late",
                         showCancelButton: false,
                         icon: "error",
                     });
@@ -1438,7 +1438,7 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: "Éxito al agregar nuevo capital humano!",
+                        title: "A new section was successfully added. Please continue filling out the required fields",
                         text: response.data.message, // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
@@ -1452,7 +1452,7 @@ export default {
                 .catch((error) => {
                     console.log(error.data.message);
                     Swal.fire({
-                        title: ":( Error al agregar nuevo capital humano",
+                        title: "Error try again late",
                         showCancelButton: false,
                         icon: "error",
                     });
@@ -1519,7 +1519,7 @@ export default {
                                     .catch((error) => {
                                         console.log(error);
                                         Swal.fire({
-                                            title: "Error al actualizar",
+                                            title: "Error try again late",
                                             showCancelButton: false,
                                             icon: "error",
                                         });
@@ -1531,7 +1531,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                     Swal.fire({
-                        title: "Error al actualizar",
+                        title: "Error try again late",
                         text: "El usuario que esta revisando, no se encuentra en el sistema",
                         showCancelButton: false,
                         icon: "error",

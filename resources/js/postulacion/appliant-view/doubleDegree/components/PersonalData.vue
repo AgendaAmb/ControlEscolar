@@ -87,7 +87,7 @@
 
                     <div class="row my-1">
                         <div class="form-group col-xl-6">
-                            <label> Date of birth </label>
+                            <label> Date of birth: </label>
                             <input
                                 type="date"
                                 class="form-control"
@@ -498,7 +498,7 @@ export default {
                     Swal.fire({
                         title: "Error trying to save information",
                         icon: "error",
-                        text: "Try later",
+                        text: "Try again later",
                         showCancelButton: false,
                     });
                 });

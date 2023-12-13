@@ -480,7 +480,7 @@
         <tbody>
             <tr>
                 <td>
-                    <h5>School certificade </h5>
+                    <h5>School certificate </h5>
 
                 </td>
 

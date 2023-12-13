@@ -380,7 +380,7 @@ export default {
                 })
                 .catch((error) => {
                     Swal.fire({
-                        title: "Error al eliminar Experiencia laboral",
+                        title: "There was an error trying to delete the section. Please try again later",
                         showCancelButton: false,
                         icon: "error",
                     });
