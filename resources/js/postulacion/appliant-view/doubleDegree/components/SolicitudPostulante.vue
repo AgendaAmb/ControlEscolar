@@ -1405,7 +1405,7 @@ export default {
                 })
                 .then((response) => {
                     Swal.fire({
-                        title: "Éxito al agregar nueva producción científica!",
+                        title: "A new section was successfully added. Please continue filling out the required fields",
                         text: response.data.message, // Imprime el mensaje del controlador
                         icon: "success",
                         showCancelButton: false,
